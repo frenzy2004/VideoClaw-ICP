@@ -31,7 +31,7 @@ describe('Campaign 2 pilot data contracts', () => {
     const approvedClaims = dreamPilot.claimLedger
       .filter((claim) => claim.state === 'approved')
       .map((claim) => claim.copy);
-    const prohibitedClaims = new Set(
+    const prohibitedClaims = new Set<string>(
       dreamPilot.claimLedger
         .filter((claim) => claim.state === 'prohibited')
         .map((claim) => claim.copy),
