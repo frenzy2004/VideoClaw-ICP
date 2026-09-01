@@ -17,6 +17,7 @@ describe('Physical-AI Demo Day Markdown download', () => {
     expect(markdown).toContain('- [ ] Rights and permissions — Record the owner, permitted use, scope, and expiry for every asset.');
     expect(markdown).toContain('## Claim-control checklist');
     expect(markdown).toContain('- [ ] Approved — State only what the approved evidence demonstrates.');
+    expect(markdown).toContain('- [ ] Conditional — Describe a prototype when its status is visible to the audience. A human owner approves the label.');
     expect(markdown).toContain('## 48-hour clock');
     expect(markdown).toContain('Freeze the story, source pack, and claim ledger before capture.');
     expect(markdown).toContain('## 14-day sequence');

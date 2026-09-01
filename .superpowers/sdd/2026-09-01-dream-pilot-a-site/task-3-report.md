@@ -78,3 +78,52 @@ vite build: exit 0
 ## Concerns
 
 No functional concerns. The successful Vite build reports existing `INEFFECTIVE_DYNAMIC_IMPORT` warnings from Vinext entry/shim imports; they do not affect this guide and the build exits successfully.
+
+## Fix Round 1
+
+### Findings addressed
+
+- Markdown claim-control serialization omitted a conditional claim's `condition` text because its checklist formatter used only `requirement` or `copy`.
+- The AI/human approval boundary was duplicated as a local page constant and a route string instead of being owned by `physicalAiGuide`.
+
+### RED
+
+Command:
+
+```text
+pnpm vitest run app/campaign-2-pilot-data.test.ts app/guides/physical-ai-product-demo-before-demo-day/page.test.tsx app/guides/physical-ai-product-demo-before-demo-day/download/route.test.ts
+```
+
+Observed failures:
+
+```text
+physicalAiGuide.approvalBoundary: expected the shared boundary text, received undefined.
+HTML guide: shared boundary was missing from the rendered output.
+Markdown download: the Conditional checklist item omitted "A human owner approves the label.".
+Test Files 3 failed (3)
+Tests 3 failed | 5 passed (8)
+```
+
+### GREEN
+
+The shared `physicalAiGuide.approvalBoundary` value is now consumed by both the HTML guide and Markdown route. Markdown checklist serialization appends `condition` when present.
+
+Focused command output:
+
+```text
+Test Files 3 passed (3)
+Tests 8 passed (8)
+```
+
+### Full verification
+
+```text
+pnpm test && pnpm lint && pnpm typecheck && pnpm build
+Test Files 13 passed (13)
+Tests 62 passed (62)
+eslint: exit 0
+typecheck: Types generated successfully; exit 0
+vite build: exit 0
+```
+
+The build retains the non-blocking Vinext `INEFFECTIVE_DYNAMIC_IMPORT` warnings noted above.

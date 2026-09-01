@@ -2,10 +2,10 @@ import { physicalAiGuide } from '../../../campaign-2-pilot-data';
 
 const filename = 'videoclaw-physical-ai-demo-day-preflight.md';
 
-function checklist(items: readonly { label?: string; state?: string; copy?: string; requirement?: string }[]) {
+function checklist(items: readonly { label?: string; state?: string; copy?: string; requirement?: string; condition?: string }[]) {
   return items.map((item) => {
     const label = item.label ?? (item.state ? `${item.state.charAt(0).toUpperCase()}${item.state.slice(1)}` : 'Control');
-    const detail = item.requirement ?? item.copy;
+    const detail = [item.requirement ?? item.copy, item.condition].filter(Boolean).join(' ');
     return `- [ ] ${label} — ${detail}`;
   }).join('\n');
 }
@@ -40,7 +40,7 @@ export function physicalAiGuideMarkdown() {
     ...physicalAiGuide.activationClock.filter((item) => item.window === '14 days').map((item) => `- ${item.window}: ${item.action}`),
     '',
     '## Approval boundary',
-    'AI can organize approved inputs; a named human owner approves claims, labels, rights, privacy, and release.',
+    physicalAiGuide.approvalBoundary,
     '',
     '## Measurement',
     '| Metric | Evidence | Owner |',

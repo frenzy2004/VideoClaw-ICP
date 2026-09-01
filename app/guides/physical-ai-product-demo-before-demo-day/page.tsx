@@ -12,9 +12,6 @@ export const metadata: Metadata = {
   robots: privateRobots(),
 };
 
-const humanApprovalBoundary =
-  'AI can organize approved inputs; a named human owner approves claims, labels, rights, privacy, and release.';
-
 export default function PhysicalAiDemoDayGuidePage() {
   const fortyEightHourClock = physicalAiGuide.activationClock.filter((item) => item.window === '48 hours');
   const fourteenDaySequence = physicalAiGuide.activationClock.filter((item) => item.window === '14 days');
@@ -117,7 +114,7 @@ export default function PhysicalAiDemoDayGuidePage() {
             <p className="physical-ai-guide-label">APPROVAL BOUNDARY</p>
             <h2 id="approval-title">AI supports the review; people own the release.</h2>
           </div>
-          <p>{humanApprovalBoundary}</p>
+          <p>{physicalAiGuide.approvalBoundary}</p>
           <div className="physical-ai-prompt-list" aria-label="Review prompts">
             {physicalAiGuide.answerPrompts.map((prompt) => <p key={prompt}>{prompt}</p>)}
           </div>

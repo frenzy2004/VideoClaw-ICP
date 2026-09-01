@@ -152,6 +152,7 @@ export const dreamPilot = Object.freeze({
 
 export const physicalAiGuide = Object.freeze({
   directAnswer: 'A physical-AI product demo earns trust when it connects a real founder decision to a visible physical action, a reliable software record, approved evidence, and a clear next step. Before Demo Day, founders should document rights and controls, label prototypes honestly, and review every claim with a human owner.',
+  approvalBoundary: 'AI can organize approved inputs; a named human owner approves claims, labels, rights, privacy, and release.',
   storyStructure: Object.freeze([
     'Founder decision',
     'Physical action',

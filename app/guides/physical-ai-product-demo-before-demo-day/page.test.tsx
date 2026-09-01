@@ -2,6 +2,7 @@ import { cleanup, render, screen, within } from '@testing-library/react';
 import { afterEach, describe, expect, it } from 'vitest';
 import GuidePage, { metadata } from './page';
 import { physicalAiGuide } from '../../campaign-2-pilot-data';
+import { GET } from './download/route';
 
 afterEach(cleanup);
 
@@ -49,5 +50,13 @@ describe('Physical-AI Demo Day guide', () => {
 
     expect(container.querySelectorAll('script[type="application/ld+json"], img, video, iframe, embed, object')).toHaveLength(0);
     expect(container.textContent).not.toMatch(/dream/i);
+  });
+
+  it('uses the shared approval boundary in both the HTML guide and Markdown download', async () => {
+    const sharedBoundary = physicalAiGuide.approvalBoundary ?? 'Shared approval boundary is missing.';
+    render(<GuidePage />);
+
+    expect(screen.getByText(sharedBoundary)).toBeVisible();
+    expect(await GET().text()).toContain(sharedBoundary);
   });
 });

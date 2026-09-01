@@ -47,6 +47,9 @@ describe('Campaign 2 pilot data contracts', () => {
     expect(dreamPilot.searchTerms.length).toBeGreaterThan(0);
     expect(dreamPilot.answerPrompts.length).toBeGreaterThan(0);
     expect(physicalAiGuide.sections.length).toBeGreaterThan(0);
+    expect(physicalAiGuide.approvalBoundary).toBe(
+      'AI can organize approved inputs; a named human owner approves claims, labels, rights, privacy, and release.',
+    );
     expect(Object.isFrozen(dreamPilot.publicFacts)).toBe(true);
     expect(Object.isFrozen(physicalAiGuide.sections)).toBe(true);
   });
