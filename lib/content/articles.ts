@@ -42,8 +42,14 @@ function finding(code: string, message: string, filePath?: string): LibraryFindi
   return { code, message, filePath };
 }
 
+function duplicateKey(field: string, value: string): string {
+  return field === 'title' || field === 'primary_keyword'
+    ? value.trim().replace(/\s+/g, ' ').toLowerCase()
+    : value;
+}
+
 function unsafeHtmlFinding(body: string, filePath: string): LibraryFinding | undefined {
-  if (/<\s*(script|iframe)\b/i.test(body) || /<[^>]+\son[a-z]+\s*=/i.test(body)) {
+  if (/<(?:\/?[a-z][a-z0-9-]*(?:\s|\/|>)|!--|!doctype\b|\?)/i.test(body)) {
     return finding('body.raw_html', 'Raw HTML is not allowed in article Markdown.', filePath);
   }
 }
@@ -72,8 +78,12 @@ export function parseArticleSource(source: string, filePath: string): ArticleRec
 
   const frontmatter = schemaResult.data;
   const findings: LibraryFinding[] = [];
-  const expectedCanonicalPath = `/articles/${frontmatter.slug}`;
+  const expectedCanonicalPath = `/blog/${frontmatter.slug}`;
   const filenameSlug = basename(filePath, '.md');
+  const normalizedFilePath = filePath.replaceAll('\\', '/').replace(/^\.\//, '');
+  const expectedSourcePath = `content/articles/${frontmatter.campaign_id}/${frontmatter.slug}.md`;
+  const sourcePathFromRoot = normalizedFilePath.match(/(?:^|\/)(content\/articles\/.*)$/)?.[1]
+    ?? normalizedFilePath;
 
   if (frontmatter.canonical_path !== expectedCanonicalPath) {
     findings.push(finding('frontmatter.canonical_path', `canonical_path must equal ${expectedCanonicalPath}.`, filePath));
@@ -81,6 +91,14 @@ export function parseArticleSource(source: string, filePath: string): ArticleRec
 
   if (filenameSlug !== frontmatter.slug) {
     findings.push(finding('frontmatter.slug_path_mismatch', `Filename slug ${filenameSlug} must equal frontmatter.slug ${frontmatter.slug}.`, filePath));
+  }
+
+  if (sourcePathFromRoot !== expectedSourcePath) {
+    findings.push(finding(
+      'frontmatter.source_path_mismatch',
+      `Path must match content/articles/<campaign_id>/<slug>.md; expected ${expectedSourcePath}.`,
+      filePath,
+    ));
   }
 
   const rawHtml = unsafeHtmlFinding(parsed.content, filePath);
@@ -114,7 +132,8 @@ export function validateArticleLibrary(records: ArticleRecord[]): LibraryValidat
 
     for (const [field, seen] of values) {
       const value = record.frontmatter[field as keyof Pick<ArticleFrontmatter, 'article_id' | 'slug' | 'title' | 'primary_keyword'>];
-      const previous = seen.get(value);
+      const key = duplicateKey(field, value);
+      const previous = seen.get(key);
       if (previous) {
         findings.push(finding(
           `duplicate.${field}`,
@@ -122,8 +141,21 @@ export function validateArticleLibrary(records: ArticleRecord[]): LibraryValidat
           record.filePath,
         ));
       } else {
-        seen.set(value, record);
+        seen.set(key, record);
       }
+    }
+  }
+
+  if (records.length !== 250) {
+    findings.push(finding('library.total_count', `Article library must contain exactly 250 records; received ${records.length}.`));
+  }
+
+  for (const campaignId of CAMPAIGN_IDS) {
+    if (byCampaign[campaignId] !== 50) {
+      findings.push(finding(
+        'library.campaign_count',
+        `Campaign ${campaignId} must contain exactly 50 records; received ${byCampaign[campaignId]}.`,
+      ));
     }
   }
 
@@ -142,8 +174,7 @@ function aggregateLibraryError(findings: LibraryFinding[]): Error {
   return new Error(`Article library validation failed:\n${findings.map((item) => `${item.filePath ?? 'library'}: ${item.message}`).join('\n')}`);
 }
 
-export function getAllArticles(): ArticleRecord[] {
-  const root = libraryRoot();
+export function getAllArticles(root = libraryRoot()): ArticleRecord[] {
   const records: ArticleRecord[] = [];
   const findings: LibraryFinding[] = [];
 
@@ -166,8 +197,8 @@ export function getAllArticles(): ArticleRecord[] {
   return records.sort((left, right) => left.frontmatter.article_id.localeCompare(right.frontmatter.article_id));
 }
 
-export function getArticleBySlug(slug: string): ArticleRecord | undefined {
-  return getAllArticles().find((article) => article.frontmatter.slug === slug);
+export function getArticleBySlug(slug: string, root = libraryRoot()): ArticleRecord | undefined {
+  return getAllArticles(root).find((article) => article.frontmatter.slug === slug);
 }
 
 function passesPublicationGate(article: ArticleRecord): boolean {
@@ -175,7 +206,16 @@ function passesPublicationGate(article: ArticleRecord): boolean {
   return (
     frontmatter.status === 'publishable'
     && frontmatter.indexing === 'index'
+    && frontmatter.keyword_evidence.provider !== 'pending'
+    && frontmatter.keyword_evidence.observed_at !== null
     && frontmatter.keyword_evidence.validation_status === 'validated'
+    && frontmatter.serp_evidence.provider === 'apify'
+    && frontmatter.serp_evidence.actor === 'apify/google-search-scraper'
+    && frontmatter.serp_evidence.country === 'US'
+    && frontmatter.serp_evidence.language === 'en'
+    && frontmatter.serp_evidence.validation_status === 'observed'
+    && frontmatter.serp_evidence.run_id.length > 0
+    && frontmatter.serp_evidence.dataset_id.length > 0
     && frontmatter.review.seo_checked
     && frontmatter.review.evidence_checked
     && frontmatter.review.editorial_checked
@@ -183,8 +223,8 @@ function passesPublicationGate(article: ArticleRecord): boolean {
   );
 }
 
-export function getPublishableArticles(): ArticleRecord[] {
-  const articles = getAllArticles();
+export function getPublishableArticles(root = libraryRoot()): ArticleRecord[] {
+  const articles = getAllArticles(root);
   if (process.env.NEXT_PUBLIC_VIDEOCLAW_PUBLIC_INDEXING !== 'true') return [];
   return articles.filter(passesPublicationGate);
 }
