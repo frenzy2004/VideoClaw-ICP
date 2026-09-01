@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title description">
+  <title id="title">Five-state live product demo failure response</title>
+  <desc id="description">A sequence showing detection, a threshold decision, plain disclosure, switch to an evidence-equivalent backup, and continuation of the pitch.</desc>
+  <rect width="1200" height="675" rx="32" fill="#08121f"/>
+  <text x="70" y="82" fill="#f8fafc" font-family="Arial, sans-serif" font-size="36" font-weight="700">Live demo failure: controlled handoff</text>
+  <text x="70" y="120" fill="#9fb3c8" font-family="Arial, sans-serif" font-size="18">The technical incident continues off stage; the audience receives an accurate, disclosed fallback.</text>
+  <g font-family="Arial, sans-serif">
+    <rect x="70" y="184" width="190" height="250" rx="20" fill="#10243b" stroke="#38bdf8" stroke-width="2"/>
+    <circle cx="108" cy="226" r="20" fill="#0ea5e9"/>
+    <text x="101" y="233" fill="#ffffff" font-size="19" font-weight="700">1</text>
+    <text x="94" y="282" fill="#f8fafc" font-size="26" font-weight="700">Detect</text>
+    <text x="94" y="320" fill="#cbd5e1" font-size="16">Name the visible</text>
+    <text x="94" y="346" fill="#cbd5e1" font-size="16">failure state.</text>
+    <text x="94" y="392" fill="#7dd3fc" font-size="15">No causal guesses</text>
+
+    <rect x="286" y="184" width="190" height="250" rx="20" fill="#10243b" stroke="#f59e0b" stroke-width="2"/>
+    <circle cx="324" cy="226" r="20" fill="#f59e0b"/>
+    <text x="317" y="233" fill="#07111f" font-size="19" font-weight="700">2</text>
+    <text x="310" y="282" fill="#f8fafc" font-size="26" font-weight="700">Decide</text>
+    <text x="310" y="320" fill="#cbd5e1" font-size="16">Apply the agreed</text>
+    <text x="310" y="346" fill="#cbd5e1" font-size="16">stop threshold.</text>
+    <text x="310" y="392" fill="#fcd34d" font-size="15">One owner calls it</text>
+
+    <rect x="502" y="184" width="190" height="250" rx="20" fill="#10243b" stroke="#a78bfa" stroke-width="2"/>
+    <circle cx="540" cy="226" r="20" fill="#8b5cf6"/>
+    <text x="533" y="233" fill="#ffffff" font-size="19" font-weight="700">3</text>
+    <text x="526" y="282" fill="#f8fafc" font-size="26" font-weight="700">Disclose</text>
+    <text x="526" y="320" fill="#cbd5e1" font-size="16">State the format</text>
+    <text x="526" y="346" fill="#cbd5e1" font-size="16">switch plainly.</text>
+    <text x="526" y="392" fill="#c4b5fd" font-size="15">No blame or spin</text>
+
+    <rect x="718" y="184" width="190" height="250" rx="20" fill="#10243b" stroke="#2dd4bf" stroke-width="2"/>
+    <circle cx="756" cy="226" r="20" fill="#14b8a6"/>
+    <text x="749" y="233" fill="#ffffff" font-size="19" font-weight="700">4</text>
+    <text x="742" y="282" fill="#f8fafc" font-size="26" font-weight="700">Switch</text>
+    <text x="742" y="320" fill="#cbd5e1" font-size="16">Show the same</text>
+    <text x="742" y="346" fill="#cbd5e1" font-size="16">action and result.</text>
+    <text x="742" y="392" fill="#5eead4" font-size="15">Equivalent evidence</text>
+
+    <rect x="934" y="184" width="196" height="250" rx="20" fill="#10243b" stroke="#fb7185" stroke-width="2"/>
+    <circle cx="972" cy="226" r="20" fill="#f43f5e"/>
+    <text x="965" y="233" fill="#ffffff" font-size="19" font-weight="700">5</text>
+    <text x="958" y="282" fill="#f8fafc" font-size="26" font-weight="700">Continue</text>
+    <text x="958" y="320" fill="#cbd5e1" font-size="16">Return to user</text>
+    <text x="958" y="346" fill="#cbd5e1" font-size="16">meaning and CTA.</text>
+    <text x="958" y="392" fill="#fda4af" font-size="15">No apology loop</text>
+
+    <path d="M260 308H286M476 308H502M692 308H718M908 308H934" stroke="#64748b" stroke-width="4"/>
+    <rect x="70" y="486" width="1060" height="114" rx="18" fill="#0b1b2d" stroke="#334155"/>
+    <text x="96" y="527" fill="#f8fafc" font-size="21" font-weight="700">Mandatory stop</text>
+    <text x="96" y="565" fill="#fecdd3" font-size="17">Switch or skip if privacy, rights, product-state, or claim equivalence is broken. Do not use a polished but inaccurate fallback.</text>
+    <text x="70" y="641" fill="#64748b" font-size="14">VideoClaw editorial illustration · owned rights · no third-party marks</text>
+  </g>
+</svg>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title description">
+  <title id="title">Forty-eight-hour investor follow-up swimlane</title>
+  <desc id="description">Three time windows show request capture from zero to four hours, evidence and privacy review from four to twenty-four hours, and response delivery plus next decision from twenty-four to forty-eight hours.</desc>
+  <rect width="1200" height="675" rx="32" fill="#07111f"/>
+  <text x="70" y="78" fill="#f8fafc" font-family="Arial, sans-serif" font-size="36" font-weight="700">Demo Day investor follow-up: 48-hour operating model</text>
+  <text x="70" y="116" fill="#9fb3c8" font-family="Arial, sans-serif" font-size="18">Editorial targets make ownership visible; evidence and privacy gates may require more time.</text>
+  <g font-family="Arial, sans-serif">
+    <rect x="70" y="168" width="330" height="350" rx="22" fill="#10243b" stroke="#38bdf8" stroke-width="2"/>
+    <text x="96" y="211" fill="#7dd3fc" font-size="18" font-weight="700">0–4 HOURS</text>
+    <text x="96" y="249" fill="#f8fafc" font-size="27" font-weight="700">Capture</text>
+    <text x="96" y="293" fill="#cbd5e1" font-size="17">1. Exact request</text>
+    <text x="96" y="329" fill="#cbd5e1" font-size="17">2. Contact + context</text>
+    <text x="96" y="365" fill="#cbd5e1" font-size="17">3. Response owner</text>
+    <text x="96" y="401" fill="#cbd5e1" font-size="17">4. Clarify if needed</text>
+    <rect x="96" y="445" width="278" height="48" rx="12" fill="#0b1b2d"/>
+    <text x="114" y="476" fill="#93c5fd" font-size="15">Outcome: owned request</text>
+
+    <rect x="435" y="168" width="330" height="350" rx="22" fill="#10243b" stroke="#a78bfa" stroke-width="2"/>
+    <text x="461" y="211" fill="#c4b5fd" font-size="18" font-weight="700">4–24 HOURS</text>
+    <text x="461" y="249" fill="#f8fafc" font-size="27" font-weight="700">Clear</text>
+    <text x="461" y="293" fill="#cbd5e1" font-size="17">1. Choose format</text>
+    <text x="461" y="329" fill="#cbd5e1" font-size="17">2. Confirm evidence</text>
+    <text x="461" y="365" fill="#cbd5e1" font-size="17">3. Review privacy + rights</text>
+    <text x="461" y="401" fill="#cbd5e1" font-size="17">4. Mark blockers</text>
+    <rect x="461" y="445" width="278" height="48" rx="12" fill="#0b1b2d"/>
+    <text x="479" y="476" fill="#ddd6fe" font-size="15">Outcome: approved route</text>
+
+    <rect x="800" y="168" width="330" height="350" rx="22" fill="#10243b" stroke="#2dd4bf" stroke-width="2"/>
+    <text x="826" y="211" fill="#5eead4" font-size="18" font-weight="700">24–48 HOURS</text>
+    <text x="826" y="249" fill="#f8fafc" font-size="27" font-weight="700">Respond</text>
+    <text x="826" y="293" fill="#cbd5e1" font-size="17">1. Send smallest asset</text>
+    <text x="826" y="329" fill="#cbd5e1" font-size="17">2. Preserve context</text>
+    <text x="826" y="365" fill="#cbd5e1" font-size="17">3. Set next decision</text>
+    <text x="826" y="401" fill="#cbd5e1" font-size="17">4. Record refresh trigger</text>
+    <rect x="826" y="445" width="278" height="48" rx="12" fill="#0b1b2d"/>
+    <text x="844" y="476" fill="#99f6e4" font-size="15">Outcome: sent or scheduled</text>
+
+    <path d="M400 342H435M765 342H800" stroke="#64748b" stroke-width="5"/>
+    <rect x="70" y="556" width="1060" height="64" rx="16" fill="#0b1b2d" stroke="#334155"/>
+    <text x="96" y="595" fill="#cbd5e1" font-size="16">Do not trade accuracy for the clock: blocked items name the missing source, decision owner, and next date.</text>
+    <text x="70" y="655" fill="#64748b" font-size="14">VideoClaw editorial illustration · owned rights · no third-party marks</text>
+  </g>
+</svg>
