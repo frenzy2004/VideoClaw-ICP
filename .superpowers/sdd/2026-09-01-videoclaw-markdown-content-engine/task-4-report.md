@@ -67,3 +67,38 @@ The final test, typecheck, and lint pass was repeated from an isolated `git chec
 ## Remaining integration dependency
 
 The route intentionally consumes the canonical filesystem library. End-to-end route/build verification therefore remains dependent on the later task supplying the complete validated Markdown library and owned media assets.
+
+## Review fix round 1
+
+Implemented the review amendments without reverting the incremental-loader contract introduced by `41c74eb`:
+
+- Added indexing, evidence-QA, media-QA, and keyword-validation filters. All seven filters compose with AND semantics and expose an explicit no-results state.
+- Passed the exact `NEXT_PUBLIC_VIDEOCLAW_PUBLIC_INDEXING === 'true'` state from the server route. Summary and row wording now distinguish active public indexability from article-level conditional readiness.
+- Calculated structured 250-total and 50-per-campaign advisories on the server and rendered them as non-blocking planning targets. A one-record route test proves the operational page remains available while research is incremental.
+- Added a 250-record fixture proving all 250 body rows render and complete target counts emit no shortfall advisories.
+- Labeled the keyboard-focusable horizontal table scroller as the `Scrollable SEO article inventory` region.
+- Strengthened metadata coverage to assert explicit Googlebot `index: false` and `follow: false` directives.
+- Kept `validateArticleLibrary()` on the server route so its Node filesystem module is not pulled into the client component.
+
+TDD review cycle:
+
+```text
+RED: 4 failed / 4 passed
+Missing accessible scroll region, operational filters, real global-gate state, and incremental target advisories.
+
+GREEN: 8/8 passed
+Includes one-record route coverage, combined-predicate/no-results behavior, and 250-row rendering coverage.
+```
+
+Review-fix verification:
+
+```text
+pnpm test app/seo/content-map/page.test.tsx
+8/8 passed
+
+pnpm run typecheck
+passed
+
+pnpm run lint
+passed
+```

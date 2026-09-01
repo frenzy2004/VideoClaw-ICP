@@ -2,7 +2,11 @@
 
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
-import type { ArticleRecord, CampaignId } from '../../../lib/content/articles';
+import type {
+  ArticleRecord,
+  CampaignId,
+  LibraryAdvisory,
+} from '../../../lib/content/articles';
 import {
   auditArticle,
   isArticlePublishable,
@@ -31,12 +35,15 @@ const SOURCE_REPOSITORY = 'https://github.com/frenzy2004/VideoClaw-ICP/blob/code
 type ContentMapRow = {
   article: ArticleRecord;
   audit: ArticleAudit;
+  articleReady: boolean;
   publishable: boolean;
 };
 
 export type ContentMapProps = {
   existingAssetPaths: string[];
+  globalIndexingEnabled: boolean;
   records: ArticleRecord[];
+  targetAdvisories: LibraryAdvisory[];
 };
 
 function titleCase(value: string): string {
@@ -52,6 +59,10 @@ function scoreClass(score: number): string {
   if (score === 100) return 'is-complete';
   if (score >= 70) return 'is-progressing';
   return 'is-blocked';
+}
+
+function categoryHasBlocker(audit: ArticleAudit, category: AuditCategoryName): boolean {
+  return audit.blockingFindings.some((finding) => finding.category === category);
 }
 
 function QaScores({ audit }: { audit: ArticleAudit }) {
@@ -94,10 +105,19 @@ function WorkflowDiagram() {
   );
 }
 
-export function ContentMap({ existingAssetPaths, records }: ContentMapProps) {
+export function ContentMap({
+  existingAssetPaths,
+  globalIndexingEnabled,
+  records,
+  targetAdvisories,
+}: ContentMapProps) {
   const [campaignFilter, setCampaignFilter] = useState<'all' | CampaignId>('all');
   const [funnelFilter, setFunnelFilter] = useState<'all' | 'top' | 'middle' | 'bottom'>('all');
   const [statusFilter, setStatusFilter] = useState<'all' | 'draft' | 'review' | 'publishable'>('all');
+  const [indexingFilter, setIndexingFilter] = useState<'all' | 'index' | 'noindex'>('all');
+  const [evidenceFilter, setEvidenceFilter] = useState<'all' | 'clear' | 'blocking'>('all');
+  const [mediaFilter, setMediaFilter] = useState<'all' | 'clear' | 'blocking'>('all');
+  const [keywordFilter, setKeywordFilter] = useState<'all' | 'pending_paid_provider' | 'validated'>('all');
 
   const rows = useMemo<ContentMapRow[]>(() => {
     const availableAssets = new Set(existingAssetPaths);
@@ -106,10 +126,11 @@ export function ContentMap({ existingAssetPaths, records }: ContentMapProps) {
       return {
         article,
         audit,
-        publishable: isArticlePublishable(article, audit, true),
+        articleReady: isArticlePublishable(article, audit, true),
+        publishable: isArticlePublishable(article, audit, globalIndexingEnabled),
       };
     });
-  }, [existingAssetPaths, records]);
+  }, [existingAssetPaths, globalIndexingEnabled, records]);
 
   const totals = useMemo(() => ({
     all: rows.length,
@@ -122,12 +143,27 @@ export function ContentMap({ existingAssetPaths, records }: ContentMapProps) {
     publishable: rows.filter((row) => row.publishable).length,
   }), [rows]);
 
-  const filteredRows = useMemo(() => rows.filter(({ article }) => {
+  const filteredRows = useMemo(() => rows.filter(({ article, audit }) => {
     const { frontmatter } = article;
+    const evidenceBlocked = categoryHasBlocker(audit, 'evidence');
+    const mediaBlocked = categoryHasBlocker(audit, 'media');
     return (campaignFilter === 'all' || frontmatter.campaign_id === campaignFilter)
       && (funnelFilter === 'all' || frontmatter.funnel_stage === funnelFilter)
-      && (statusFilter === 'all' || frontmatter.status === statusFilter);
-  }), [campaignFilter, funnelFilter, rows, statusFilter]);
+      && (statusFilter === 'all' || frontmatter.status === statusFilter)
+      && (indexingFilter === 'all' || frontmatter.indexing === indexingFilter)
+      && (evidenceFilter === 'all' || (evidenceFilter === 'blocking' ? evidenceBlocked : !evidenceBlocked))
+      && (mediaFilter === 'all' || (mediaFilter === 'blocking' ? mediaBlocked : !mediaBlocked))
+      && (keywordFilter === 'all' || frontmatter.keyword_evidence.validation_status === keywordFilter);
+  }), [
+    campaignFilter,
+    evidenceFilter,
+    funnelFilter,
+    indexingFilter,
+    keywordFilter,
+    mediaFilter,
+    rows,
+    statusFilter,
+  ]);
 
   return (
     <main className="content-map-page">
@@ -145,6 +181,11 @@ export function ContentMap({ existingAssetPaths, records }: ContentMapProps) {
           This is the operational view of every canonical Markdown article. Counts, QA scores, blockers,
           and publication readiness are calculated from the source records—not typed into this screen.
         </p>
+        <p aria-live="polite">
+          <strong>Global public indexing {globalIndexingEnabled ? 'enabled' : 'disabled'}</strong>
+          {' · '}
+          Article-level readiness is evaluated separately from the active global sitemap gate.
+        </p>
       </section>
 
       <section className="content-map-summary" aria-label="Article library totals">
@@ -153,7 +194,7 @@ export function ContentMap({ existingAssetPaths, records }: ContentMapProps) {
           <strong>{totals.all}</strong>
         </article>
         <article data-testid="content-map-publishable">
-          <span>Publishable records</span>
+          <span>Publicly indexable now</span>
           <strong>{totals.publishable}</strong>
         </article>
         <article data-testid="content-map-pending-keywords">
@@ -174,6 +215,26 @@ export function ContentMap({ existingAssetPaths, records }: ContentMapProps) {
           </article>
         ))}
       </section>
+
+      {targetAdvisories.length > 0 ? (
+        <section className="content-map-inventory" aria-labelledby="content-map-targets-heading">
+          <div className="content-map-inventory-heading">
+            <div>
+              <p className="content-map-kicker">Non-blocking planning targets</p>
+              <h2 id="content-map-targets-heading">Research target advisories</h2>
+            </div>
+            <p>{targetAdvisories.length} target shortfalls</p>
+          </div>
+          <ul className="content-map-findings">
+            {targetAdvisories.map((advisory) => (
+              <li key={advisory.code === 'library.campaign_target' ? `${advisory.code}-${advisory.campaignId}` : advisory.code}>
+                <span>{advisory.code}</span>
+                {advisory.message} {advisory.shortfall} remaining.
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
 
       <WorkflowDiagram />
 
@@ -212,9 +273,46 @@ export function ContentMap({ existingAssetPaths, records }: ContentMapProps) {
               <option value="publishable">Publishable</option>
             </select>
           </label>
+          <label>
+            <span>Indexing</span>
+            <select value={indexingFilter} onChange={(event) => setIndexingFilter(event.target.value as typeof indexingFilter)}>
+              <option value="all">All indexing states</option>
+              <option value="index">Index</option>
+              <option value="noindex">Noindex</option>
+            </select>
+          </label>
+          <label>
+            <span>Evidence QA</span>
+            <select value={evidenceFilter} onChange={(event) => setEvidenceFilter(event.target.value as typeof evidenceFilter)}>
+              <option value="all">All evidence states</option>
+              <option value="clear">Clear</option>
+              <option value="blocking">Blocking</option>
+            </select>
+          </label>
+          <label>
+            <span>Media QA</span>
+            <select value={mediaFilter} onChange={(event) => setMediaFilter(event.target.value as typeof mediaFilter)}>
+              <option value="all">All media states</option>
+              <option value="clear">Clear</option>
+              <option value="blocking">Blocking</option>
+            </select>
+          </label>
+          <label>
+            <span>Keyword validation</span>
+            <select value={keywordFilter} onChange={(event) => setKeywordFilter(event.target.value as typeof keywordFilter)}>
+              <option value="all">All keyword states</option>
+              <option value="pending_paid_provider">Pending paid provider</option>
+              <option value="validated">Validated</option>
+            </select>
+          </label>
         </form>
 
-        <div className="content-map-table-wrap" tabIndex={0}>
+        <div
+          aria-label="Scrollable SEO article inventory"
+          className="content-map-table-wrap"
+          role="region"
+          tabIndex={0}
+        >
           <table aria-label="SEO article inventory">
             <thead>
               <tr>
@@ -228,7 +326,7 @@ export function ContentMap({ existingAssetPaths, records }: ContentMapProps) {
               </tr>
             </thead>
             <tbody>
-              {filteredRows.map(({ article, audit, publishable }) => {
+              {filteredRows.map(({ article, articleReady, audit, publishable }) => {
                 const { frontmatter } = article;
                 const keywordPending = frontmatter.keyword_evidence.validation_status !== 'validated';
                 return (
@@ -246,7 +344,13 @@ export function ContentMap({ existingAssetPaths, records }: ContentMapProps) {
                     <td>
                       <span className={`content-map-badge is-${frontmatter.status}`}>{titleCase(frontmatter.status)}</span>
                       <span>{frontmatter.indexing}</span>
-                      <span>{publishable ? 'Passes publication gate' : 'Held by publication gate'}</span>
+                      <span>
+                        {publishable
+                          ? 'Passes active publication gate'
+                          : articleReady && !globalIndexingEnabled
+                            ? 'Article-level ready · global indexing disabled'
+                            : 'Held by article-level gate'}
+                      </span>
                     </td>
                     <td>
                       <span className={`content-map-badge ${keywordPending ? 'is-pending' : 'is-validated'}`}>
