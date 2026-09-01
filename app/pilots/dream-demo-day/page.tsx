@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import CampaignVideo from '../../campaign-video';
-import { campaignTranscripts } from '../../use-cases/demo-day-founder-content/page';
+import { campaignTranscripts } from '../../campaign-transcripts';
 import {
   DREAM_PILOT_PATH,
   dreamPilot,

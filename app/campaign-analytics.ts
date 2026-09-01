@@ -2,6 +2,7 @@
 
 import {
   formatCampaignEvent,
+  isPermanentlyPrivateCampaignPath,
   sanitizeCampaignEvent,
   type CampaignEventInput,
 } from './campaign-content';
@@ -12,12 +13,17 @@ declare global {
   }
 }
 
-export function campaignAnalyticsSuppressed() {
-  return navigator.globalPrivacyControl === true || navigator.doNotTrack === '1';
+export function campaignAnalyticsSuppressed(pagePath?: string) {
+  return (
+    navigator.globalPrivacyControl === true ||
+    navigator.doNotTrack === '1' ||
+    (typeof window !== 'undefined' && isPermanentlyPrivateCampaignPath(window.location.pathname)) ||
+    (typeof pagePath === 'string' && isPermanentlyPrivateCampaignPath(pagePath))
+  );
 }
 
 export function emitCampaignEvent(input: CampaignEventInput) {
-  if (campaignAnalyticsSuppressed()) return false;
+  if (campaignAnalyticsSuppressed(input.pagePath)) return false;
   const event = sanitizeCampaignEvent(formatCampaignEvent(input));
   if (!event) return false;
 

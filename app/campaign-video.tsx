@@ -2,20 +2,9 @@
 
 import { useEffect, useRef } from 'react';
 import { emitCampaignEvent } from './campaign-analytics';
+import type { Transcript } from './campaign-transcripts';
 
-export type TranscriptCue = {
-  time: string;
-  text: string;
-};
-
-export type Transcript = readonly [
-  TranscriptCue,
-  TranscriptCue,
-  TranscriptCue,
-  TranscriptCue,
-  TranscriptCue,
-  TranscriptCue,
-];
+export type { Transcript } from './campaign-transcripts';
 
 type DemoDayMediaPath = `/media/demo-day/${string}`;
 

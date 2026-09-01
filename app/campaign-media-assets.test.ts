@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { campaignTranscripts } from './use-cases/demo-day-founder-content/page';
+import { campaignTranscripts } from './campaign-transcripts';
 
 const mediaDirectory = join(process.cwd(), 'public/media/demo-day');
 

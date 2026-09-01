@@ -137,4 +137,36 @@ describe('CampaignEventTracker', () => {
 
     expect(dataLayer).toEqual([]);
   });
+
+  it.each([
+    '/pilots/dream-demo-day',
+    '/guides/physical-ai-product-demo-before-demo-day',
+    '/guides/physical-ai-product-demo-before-demo-day/download',
+  ])('does not emit or mirror page and click events on private route %s', (privatePath) => {
+    window.history.replaceState({}, '', privatePath);
+    const events: unknown[] = [];
+    const listener = (event: Event) => events.push((event as CustomEvent).detail);
+    window.addEventListener('videoclaw:analytics', listener);
+
+    render(
+      <>
+        <CampaignEventTracker />
+        <a
+          href="/guides/physical-ai-product-demo-before-demo-day/download"
+          data-vc-event="article_click"
+          data-vc-article-id="physical-ai-demo-day-guide"
+          data-vc-link-id="physical-ai-guide-download"
+          data-vc-placement="guide-body"
+          onClick={(event) => event.preventDefault()}
+        >
+          Download private guide
+        </a>
+      </>,
+    );
+    fireEvent.click(screen.getByRole('link', { name: 'Download private guide' }));
+
+    expect(events).toEqual([]);
+    expect((window as Window & { dataLayer: unknown[] }).dataLayer).toEqual([]);
+    window.removeEventListener('videoclaw:analytics', listener);
+  });
 });

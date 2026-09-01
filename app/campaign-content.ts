@@ -13,8 +13,25 @@ export const CAMPAIGN_URLS = {
   dreamPilot: `${SITE_URL}/pilots/dream-demo-day`,
   physicalAiGuidePath: '/guides/physical-ai-product-demo-before-demo-day',
   physicalAiGuide: `${SITE_URL}/guides/physical-ai-product-demo-before-demo-day`,
+  physicalAiGuideDownloadPath: '/guides/physical-ai-product-demo-before-demo-day/download',
   sourcePackPath: '/#source-pack',
 } as const;
+
+export const PERMANENTLY_PRIVATE_CAMPAIGN_PATHS = Object.freeze([
+  CAMPAIGN_URLS.dreamPilotPath,
+  CAMPAIGN_URLS.physicalAiGuidePath,
+  CAMPAIGN_URLS.physicalAiGuideDownloadPath,
+] as const);
+
+const PERMANENTLY_PRIVATE_CAMPAIGN_PATH_SET = new Set<string>(PERMANENTLY_PRIVATE_CAMPAIGN_PATHS);
+
+export function isPermanentlyPrivateCampaignPath(value: string) {
+  try {
+    return PERMANENTLY_PRIVATE_CAMPAIGN_PATH_SET.has(new URL(value, SITE_URL).pathname);
+  } catch {
+    return false;
+  }
+}
 
 export type CampaignFaq = {
   question: string;
@@ -276,6 +293,7 @@ const SAFE_PAGE_PATHS = new Set<string>([
   CAMPAIGN_URLS.guidePath,
   CAMPAIGN_URLS.dreamPilotPath,
   CAMPAIGN_URLS.physicalAiGuidePath,
+  CAMPAIGN_URLS.physicalAiGuideDownloadPath,
 ]);
 const SAFE_HREF_PATHS = new Set<string>([
   ...SAFE_PAGE_PATHS,

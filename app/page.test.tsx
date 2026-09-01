@@ -38,4 +38,13 @@ describe('private prototype handoff', () => {
     for (const link of sourceLinks) expect(link).toHaveAttribute('data-vc-event', 'article_click');
     expect(container.querySelector('[data-event]')).not.toBeInTheDocument();
   });
+
+  it('keeps account-specific pilot names out of the root prototype', () => {
+    const { container } = render(<Home />);
+
+    for (const accountName of ['Dream', 'ROBOX', 'Qlo']) {
+      expect(screen.queryByText(accountName, { exact: true })).not.toBeInTheDocument();
+    }
+    expect(container.textContent).not.toMatch(/\b(?:dream|robox|qlo)\b/i);
+  });
 });

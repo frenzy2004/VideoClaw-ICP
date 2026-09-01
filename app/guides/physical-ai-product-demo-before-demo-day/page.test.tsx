@@ -42,6 +42,10 @@ describe('Physical-AI Demo Day guide', () => {
     expect(screen.getByRole('heading', { name: 'Measurement' })).toBeVisible();
     expect(screen.getByRole('heading', { name: 'Limitations' })).toBeVisible();
     expect(screen.getByRole('heading', { name: 'Dated sources' })).toBeVisible();
+    expect(screen.getByRole('link', { name: 'FTC Advertising and Marketing Basics' })).toHaveAttribute(
+      'href',
+      'https://www.ftc.gov/business-guidance/advertising-marketing/advertising-marketing-basics',
+    );
     expect(screen.getByRole('heading', { name: 'Change log' })).toBeVisible();
     expect(screen.getByRole('link', { name: 'Download the Markdown preflight' })).toHaveAttribute(
       'href',
@@ -58,5 +62,46 @@ describe('Physical-AI Demo Day guide', () => {
 
     expect(screen.getByText(sharedBoundary)).toBeVisible();
     expect(await GET().text()).toContain(sharedBoundary);
+  });
+
+  it('renders both activation windows in exact milestone order with ISO time values', () => {
+    const { container } = render(<GuidePage />);
+    const clockArticles = container.querySelectorAll('.physical-ai-clock-grid article');
+
+    expect([...clockArticles[0].querySelectorAll('li')].map((item) => item.textContent)).toEqual([
+      '48 hours beforeFreeze the approved story, source pack, claim ledger, and final reviewer.',
+      '24 hours beforeCapture the physical action and software record; then verify labels, rights, and privacy.',
+      '2 hours beforeRun the final playback, caption, backup, and release check without adding new claims.',
+    ]);
+    expect([...clockArticles[1].querySelectorAll('li')].map((item) => item.textContent)).toEqual([
+      'Day 1Send the approved core demo to the primary audience with one next step.',
+      'Day 7Review questions and reuse only the same approved evidence in audience-specific follow-up.',
+      'Day 14Close the sequence by recording qualified actions, corrections, and evidence gaps.',
+    ]);
+    expect([...container.querySelectorAll('time')].map((time) => [time.textContent, time.getAttribute('datetime')])).toEqual([
+      ['48 hours before', 'PT48H'],
+      ['24 hours before', 'PT24H'],
+      ['2 hours before', 'PT2H'],
+      ['Day 1', 'P1D'],
+      ['Day 7', 'P7D'],
+      ['Day 14', 'P14D'],
+      ['Checked 2026-09-01', '2026-09-01'],
+      ['Checked 2026-09-01', '2026-09-01'],
+      ['2026-09-01', '2026-09-01'],
+    ]);
+  });
+
+  it('keeps HTML and Markdown review prompts in shared-data parity', async () => {
+    const { container } = render(<GuidePage />);
+    const htmlPrompts = [...container.querySelectorAll('.physical-ai-prompt-list p')].map((prompt) => prompt.textContent);
+    const markdown = await GET().text();
+    const markdownPromptSection = markdown
+      .split('## Review prompts\n')[1]
+      ?.split('\n\n## ')[0]
+      .split('\n')
+      .filter(Boolean);
+
+    expect(htmlPrompts).toEqual(physicalAiGuide.reviewPrompts);
+    expect(markdownPromptSection).toEqual(physicalAiGuide.reviewPrompts.map((prompt) => `- ${prompt}`));
   });
 });

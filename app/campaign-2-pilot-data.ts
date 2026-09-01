@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
+import { CAMPAIGN_URLS } from './campaign-content';
 
-export const DREAM_PILOT_PATH = '/pilots/dream-demo-day';
-export const PHYSICAL_AI_GUIDE_PATH = '/guides/physical-ai-product-demo-before-demo-day';
+export const DREAM_PILOT_PATH = CAMPAIGN_URLS.dreamPilotPath;
+export const PHYSICAL_AI_GUIDE_PATH = CAMPAIGN_URLS.physicalAiGuidePath;
 
 type PublicFact = Readonly<{
   label: string;
@@ -179,10 +180,44 @@ export const physicalAiGuide = Object.freeze({
     { audience: 'Customer', question: 'What approved evidence shows the workflow is relevant to my operation?' },
   ]),
   activationClock: Object.freeze([
-    { window: '48 hours', action: 'Freeze the story, source pack, and claim ledger before capture.' },
-    { window: '14 days', action: 'Run review, revise approved evidence, and prepare the Demo Day cut.' },
+    {
+      window: '48 hours',
+      label: '48 hours before',
+      dateTime: 'PT48H',
+      action: 'Freeze the approved story, source pack, claim ledger, and final reviewer.',
+    },
+    {
+      window: '48 hours',
+      label: '24 hours before',
+      dateTime: 'PT24H',
+      action: 'Capture the physical action and software record; then verify labels, rights, and privacy.',
+    },
+    {
+      window: '48 hours',
+      label: '2 hours before',
+      dateTime: 'PT2H',
+      action: 'Run the final playback, caption, backup, and release check without adding new claims.',
+    },
+    {
+      window: '14 days',
+      label: 'Day 1',
+      dateTime: 'P1D',
+      action: 'Send the approved core demo to the primary audience with one next step.',
+    },
+    {
+      window: '14 days',
+      label: 'Day 7',
+      dateTime: 'P7D',
+      action: 'Review questions and reuse only the same approved evidence in audience-specific follow-up.',
+    },
+    {
+      window: '14 days',
+      label: 'Day 14',
+      dateTime: 'P14D',
+      action: 'Close the sequence by recording qualified actions, corrections, and evidence gaps.',
+    },
   ]),
-  answerPrompts: Object.freeze([
+  reviewPrompts: Object.freeze([
     'What must the audience see to understand the founder decision?',
     'Which approved record verifies the physical action?',
     'What should happen after the demonstration?',
@@ -194,7 +229,7 @@ export const physicalAiGuide = Object.freeze({
   ]),
   datedSources: Object.freeze([
     { label: 'NIST AI Risk Management Framework', url: 'https://www.nist.gov/itl/ai-risk-management-framework', checkedAt: '2026-09-01' },
-    { label: 'FTC guidance on AI claims', url: 'https://www.ftc.gov/business-guidance/blog/2023/02/keep-your-ai-claims-check', checkedAt: '2026-09-01' },
+    { label: 'FTC Advertising and Marketing Basics', url: 'https://www.ftc.gov/business-guidance/advertising-marketing/advertising-marketing-basics', checkedAt: '2026-09-01' },
   ]),
   sections: Object.freeze([
     'Answer first',

@@ -23,21 +23,21 @@ const workflow = [
 
 const pilotConcepts = [
   {
-    code: 'PILOT 01 · PHYSICAL AI', name: 'Dream',
-    premise: 'Can an AI camera product become clear in one founder-to-device before/after sequence?',
-    sequence: 'Founder → camera setup → vehicle pass → 3D condition record → flagged change',
-    control: 'Clear plates, faces, locations, and evidence wording before use.',
+    code: 'PILOT 01 · PHYSICAL AI', name: 'Physical-world evidence',
+    premise: 'Can a physical-AI product become clear in one founder-to-observation-to-record sequence?',
+    sequence: 'Founder → physical setup → observable action → software record → flagged change',
+    control: 'Clear people, identifiers, locations, and evidence wording before use.',
   },
   {
-    code: 'PILOT 02 · INDUSTRIAL SOFTWARE', name: 'ROBOX',
-    premise: 'Can a technical workcell-design workflow stay precise without collapsing into vague AI copy?',
-    sequence: 'Founder → requirements → layout exploration → simulation guardrail → recommendation',
+    code: 'PILOT 02 · INDUSTRIAL SOFTWARE', name: 'Industrial planning',
+    premise: 'Can a technical planning workflow stay precise without collapsing into vague AI copy?',
+    sequence: 'Founder → requirements → modeled options → validation boundary → recommendation',
     control: 'Label prototype state; never imply production deployment without evidence.',
   },
   {
-    code: 'PILOT 03 · REGULATED WORKFLOW', name: 'Qlo',
+    code: 'PILOT 03 · REGULATED WORKFLOW', name: 'Regulated operations',
     premise: 'Can a regulated B2B workflow be legible using synthetic or explicitly approved data?',
-    sequence: 'Founder → submission → agent coordination → human review → next operational step',
+    sequence: 'Founder → controlled intake → coordinated workflow → human review → next operational step',
     control: 'Remove customer data and avoid unsupported autonomy or compliance claims.',
   },
 ];

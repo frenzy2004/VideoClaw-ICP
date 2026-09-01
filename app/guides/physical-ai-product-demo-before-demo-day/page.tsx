@@ -87,8 +87,8 @@ export default function PhysicalAiDemoDayGuidePage() {
             <h2 id="clock-title">Review while the evidence is still close to the capture</h2>
           </div>
           <div className="physical-ai-clock-grid">
-            <article><h3>48-hour clock</h3><ol>{fortyEightHourClock.map((item) => <li key={item.window}><time>{item.window}</time><p>{item.action}</p></li>)}</ol></article>
-            <article><h3>14-day sequence</h3><ol>{fourteenDaySequence.map((item) => <li key={item.window}><time>{item.window}</time><p>{item.action}</p></li>)}</ol></article>
+            <article><h3>48-hour clock</h3><ol>{fortyEightHourClock.map((item) => <li key={item.label}><time dateTime={item.dateTime}>{item.label}</time><p>{item.action}</p></li>)}</ol></article>
+            <article><h3>14-day sequence</h3><ol>{fourteenDaySequence.map((item) => <li key={item.label}><time dateTime={item.dateTime}>{item.label}</time><p>{item.action}</p></li>)}</ol></article>
           </div>
         </section>
 
@@ -116,7 +116,7 @@ export default function PhysicalAiDemoDayGuidePage() {
           </div>
           <p>{physicalAiGuide.approvalBoundary}</p>
           <div className="physical-ai-prompt-list" aria-label="Review prompts">
-            {physicalAiGuide.answerPrompts.map((prompt) => <p key={prompt}>{prompt}</p>)}
+            {physicalAiGuide.reviewPrompts.map((prompt) => <p key={prompt}>{prompt}</p>)}
           </div>
         </section>
 
@@ -146,7 +146,7 @@ export default function PhysicalAiDemoDayGuidePage() {
             <p className="physical-ai-guide-label">REVIEWED REFERENCES</p>
             <h2 id="sources-title">Dated sources</h2>
           </div>
-          <ul>{physicalAiGuide.datedSources.map((source) => <li key={source.url}><a href={source.url}>{source.label}</a><time>Checked {source.checkedAt}</time></li>)}</ul>
+          <ul>{physicalAiGuide.datedSources.map((source) => <li key={source.url}><a href={source.url}>{source.label}</a><time dateTime={source.checkedAt}>Checked {source.checkedAt}</time></li>)}</ul>
         </section>
 
         <section className="physical-ai-guide-section physical-ai-change-log" aria-labelledby="change-log-title">
@@ -154,7 +154,7 @@ export default function PhysicalAiDemoDayGuidePage() {
             <p className="physical-ai-guide-label">TEMPLATE HISTORY</p>
             <h2 id="change-log-title">Change log</h2>
           </div>
-          <ol>{physicalAiGuide.changeLog.map((entry) => <li key={entry.date}><time>{entry.date}</time><span>{entry.change}</span></li>)}</ol>
+          <ol>{physicalAiGuide.changeLog.map((entry) => <li key={entry.date}><time dateTime={entry.date}>{entry.date}</time><span>{entry.change}</span></li>)}</ol>
         </section>
       </main>
     </div>
