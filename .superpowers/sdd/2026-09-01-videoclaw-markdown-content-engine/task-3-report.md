@@ -35,3 +35,14 @@ Status: complete
 - The complete 250-file content library is intentionally not required by focused tests and was not created in this task.
 - A production build is an integrated later-task gate because `generateStaticParams` correctly consumes the complete library contract.
 - Concurrent Apify evidence, scripts, data, matrices, and content/schema work were not modified or staged.
+
+## Fix round 1 — publishable metadata and CTA review
+
+- Verified the review finding with a complete publishable record and a real temporary owned-media fixture; the prior canonical and Open Graph values were relative.
+- Added an absolute URL resolver rooted at `https://videoclaw.com` without changing global layout metadata.
+- Added positive route coverage proving `index,follow`, absolute canonical, absolute Open Graph URL, and gated Article JSON-LD values.
+- Added negative coverage proving the same individually publishable record remains `noindex,nofollow` with no canonical, Open Graph URL, or JSON-LD while the global indexing flag is off.
+- JSON-LD intentionally contains no image, author URL, `datePublished`, or `dateModified` fields because the article schema does not provide approved values.
+- Removed the generic hard-coded CTA heading and reduced the CTA footer to the article-specific frontmatter label and destination.
+- TDD RED evidence: the positive fixture received relative metadata URLs; the fail-closed object retained an `url: undefined` property; and the generic CTA heading remained visible.
+- GREEN evidence: focused route suite passes 9/9; typecheck and lint pass; scoped whitespace checks pass.

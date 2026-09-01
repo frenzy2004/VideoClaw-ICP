@@ -13,6 +13,12 @@ type ArticleRouteProps = {
   params: Promise<{ slug: string }>;
 };
 
+const VIDEOCLAW_ORIGIN = 'https://videoclaw.com';
+
+function absoluteArticleUrl(canonicalPath: string): string {
+  return new URL(canonicalPath, VIDEOCLAW_ORIGIN).href;
+}
+
 function editorialAssetExists(src: string): boolean {
   if (!src.startsWith('/media/articles/') || src.includes('..')) return false;
   return existsSync(join(process.cwd(), 'public', src.slice(1)));
@@ -35,7 +41,7 @@ function articleJsonLd(article: ArticleRecord) {
     '@type': 'Article',
     headline: frontmatter.title,
     description: frontmatter.description,
-    mainEntityOfPage: `https://videoclaw.com${frontmatter.canonical_path}`,
+    mainEntityOfPage: absoluteArticleUrl(frontmatter.canonical_path),
     author: { '@type': 'Organization', name: 'VideoClaw' },
     publisher: { '@type': 'Organization', name: 'VideoClaw', url: 'https://videoclaw.com/' },
   };
@@ -63,17 +69,18 @@ export async function generateMetadata({ params }: ArticleRouteProps): Promise<M
 
   const { frontmatter } = article;
   const { publishable } = publicationState(article);
+  const canonicalUrl = absoluteArticleUrl(frontmatter.canonical_path);
 
   return {
     title: frontmatter.title,
     description: frontmatter.description,
     robots: { index: publishable, follow: publishable },
-    alternates: publishable ? { canonical: frontmatter.canonical_path } : undefined,
+    alternates: publishable ? { canonical: canonicalUrl } : undefined,
     openGraph: {
       title: frontmatter.title,
       description: frontmatter.description,
       type: 'article',
-      url: publishable ? frontmatter.canonical_path : undefined,
+      ...(publishable ? { url: canonicalUrl } : {}),
     },
   };
 }
@@ -133,9 +140,7 @@ export default async function ArticlePage({ params }: ArticleRouteProps) {
           </div>
         </section>
 
-        <footer className="article-cta">
-          <p>Next action</p>
-          <h2>Turn approved source material into a repeatable video workflow.</h2>
+        <footer className="article-cta" aria-label="Article action">
           {safeNavigationHref(frontmatter.cta.href) ? (
             <Link href={frontmatter.cta.href}>{frontmatter.cta.label}</Link>
           ) : <span className="article-unsafe-link">CTA unavailable.</span>}

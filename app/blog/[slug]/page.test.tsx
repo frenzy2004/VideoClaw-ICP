@@ -1,3 +1,6 @@
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { dirname, join } from 'node:path';
 import { cleanup, render, screen, within } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { ArticleRecord } from '../../../lib/content/articles';
@@ -111,8 +114,51 @@ Use \`approved-source-pack\` as the final handoff state.
 ![Demo Day video preparation sequence](/media/articles/accelerator-demo-day-founder/demo-day-video-checklist.svg)`,
 };
 
+const publishableArticle: ArticleRecord = {
+  ...draftArticle,
+  frontmatter: {
+    ...draftArticle.frontmatter,
+    status: 'publishable',
+    indexing: 'index',
+    keyword_evidence: {
+      provider: 'semrush',
+      country: 'US',
+      observed_at: '2026-09-01',
+      volume: 90,
+      difficulty: 31,
+      cpc: 4.2,
+      intent: 'informational',
+      validation_status: 'validated',
+    },
+    review: {
+      seo_checked: true,
+      evidence_checked: true,
+      editorial_checked: true,
+      media_checked: true,
+      checked_at: '2026-09-01',
+    },
+  },
+  body: `A source-controlled checklist follows [official accelerator guidance](https://www.ycombinator.com/library/6q-how-to-pitch-your-startup).
+
+## Prepare the evidence
+
+${Array.from({ length: 610 }, (_, index) => `evidence${index + 1}`).join(' ')}
+
+## Test the playback path
+
+Use approved source material and a local playback fallback.`,
+};
+
 describe('Markdown article route', () => {
+  let fixtureRoot: string;
+  let cwdSpy: ReturnType<typeof vi.spyOn>;
+
   beforeEach(() => {
+    fixtureRoot = mkdtempSync(join(tmpdir(), 'videoclaw-task3-'));
+    const fixtureAsset = join(fixtureRoot, 'public', draftArticle.frontmatter.media[0].src.slice(1));
+    mkdirSync(dirname(fixtureAsset), { recursive: true });
+    writeFileSync(fixtureAsset, 'owned test fixture');
+    cwdSpy = vi.spyOn(process, 'cwd').mockReturnValue(fixtureRoot);
     vi.mocked(getAllArticles).mockReturnValue([draftArticle]);
     vi.mocked(getArticleBySlug).mockImplementation((slug) => (
       slug === draftArticle.frontmatter.slug ? draftArticle : undefined
@@ -122,6 +168,8 @@ describe('Markdown article route', () => {
 
   afterEach(() => {
     cleanup();
+    cwdSpy.mockRestore();
+    rmSync(fixtureRoot, { recursive: true, force: true });
     vi.clearAllMocks();
     delete process.env.NEXT_PUBLIC_VIDEOCLAW_PUBLIC_INDEXING;
   });
@@ -185,6 +233,66 @@ describe('Markdown article route', () => {
       robots: { index: false, follow: false },
     });
     expect(metadata.alternates).toBeUndefined();
+  });
+
+  it('emits absolute metadata and Article JSON-LD for a fully publishable article', async () => {
+    vi.mocked(getArticleBySlug).mockReturnValue(publishableArticle);
+    process.env.NEXT_PUBLIC_VIDEOCLAW_PUBLIC_INDEXING = 'true';
+
+    const metadata = await generateMetadata({
+      params: Promise.resolve({ slug: publishableArticle.frontmatter.slug }),
+    });
+    expect(metadata).toMatchObject({
+      robots: { index: true, follow: true },
+      alternates: { canonical: 'https://videoclaw.com/blog/demo-day-video-checklist' },
+      openGraph: { url: 'https://videoclaw.com/blog/demo-day-video-checklist' },
+    });
+
+    const page = await ArticlePage({ params: Promise.resolve({ slug: publishableArticle.frontmatter.slug }) });
+    const { container } = render(page);
+    const jsonLdElement = container.querySelector('script[type="application/ld+json"]');
+    expect(jsonLdElement).not.toBeNull();
+
+    const jsonLd = JSON.parse(jsonLdElement?.textContent ?? '{}');
+    expect(jsonLd).toMatchObject({
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: publishableArticle.frontmatter.title,
+      description: publishableArticle.frontmatter.description,
+      mainEntityOfPage: 'https://videoclaw.com/blog/demo-day-video-checklist',
+      author: { '@type': 'Organization', name: 'VideoClaw' },
+      publisher: { '@type': 'Organization', name: 'VideoClaw', url: 'https://videoclaw.com/' },
+    });
+    expect(jsonLd).not.toHaveProperty('image');
+    expect(jsonLd).not.toHaveProperty('datePublished');
+    expect(jsonLd).not.toHaveProperty('dateModified');
+    expect(jsonLd.author).not.toHaveProperty('url');
+  });
+
+  it('keeps a publishable record fail-closed when the global indexing flag is off', async () => {
+    vi.mocked(getArticleBySlug).mockReturnValue(publishableArticle);
+
+    const metadata = await generateMetadata({
+      params: Promise.resolve({ slug: publishableArticle.frontmatter.slug }),
+    });
+    expect(metadata.robots).toEqual({ index: false, follow: false });
+    expect(metadata.alternates).toBeUndefined();
+    expect(metadata.openGraph).not.toHaveProperty('url');
+
+    const page = await ArticlePage({ params: Promise.resolve({ slug: publishableArticle.frontmatter.slug }) });
+    const { container } = render(page);
+    expect(container.querySelector('script[type="application/ld+json"]')).not.toBeInTheDocument();
+    expect(screen.getByText('EDITORIAL REVIEW · NOINDEX')).toBeVisible();
+  });
+
+  it('uses only the article-specific frontmatter CTA copy', async () => {
+    const page = await ArticlePage({ params: Promise.resolve({ slug: draftArticle.frontmatter.slug }) });
+    render(page);
+
+    expect(screen.getByRole('link', { name: draftArticle.frontmatter.cta.label })).toBeVisible();
+    expect(screen.queryByRole('heading', {
+      name: 'Turn approved source material into a repeatable video workflow.',
+    })).not.toBeInTheDocument();
   });
 
   it('uses the Next not-found boundary for an unknown slug', async () => {
