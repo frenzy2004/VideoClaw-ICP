@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Demo Day video risk heatmap</title>
+  <desc id="desc">Eleven numbered production risks are grouped into stop-release, fix-before-event, and editorial-improvement zones.</desc>
+  <rect width="1200" height="675" rx="32" fill="#07111f"/>
+  <text x="70" y="78" fill="#f8fafc" font-family="Arial, sans-serif" font-size="34" font-weight="700">11 Demo Day video risks</text>
+  <text x="70" y="112" fill="#a7b6c8" font-family="Arial, sans-serif" font-size="18">Prioritize by consequence and detectability, not invented incident rates</text>
+  <g font-family="Arial, sans-serif">
+    <rect x="70" y="156" width="330" height="418" rx="22" fill="#451a1a" stroke="#f87171" stroke-width="2"/>
+    <text x="100" y="202" fill="#fecaca" font-size="23" font-weight="700">Stop release</text>
+    <text x="100" y="234" fill="#f8fafc" font-size="17">7 · Unsupported claim</text>
+    <text x="100" y="270" fill="#f8fafc" font-size="17">6 · Sensitive data</text>
+    <text x="100" y="306" fill="#f8fafc" font-size="17">8 · Misleading edit</text>
+    <text x="100" y="342" fill="#f8fafc" font-size="17">10 · No final approval</text>
+    <text x="100" y="392" fill="#fca5a5" font-size="15">Remove, correct, or route</text>
+    <text x="100" y="416" fill="#fca5a5" font-size="15">to an authorized owner.</text>
+    <rect x="435" y="156" width="330" height="418" rx="22" fill="#422006" stroke="#fbbf24" stroke-width="2"/>
+    <text x="465" y="202" fill="#fde68a" font-size="23" font-weight="700">Fix before event</text>
+    <text x="465" y="234" fill="#f8fafc" font-size="17">4 · Weak proof path</text>
+    <text x="465" y="270" fill="#f8fafc" font-size="17">5 · Unreadable screens</text>
+    <text x="465" y="306" fill="#f8fafc" font-size="17">9 · Caption errors</text>
+    <text x="465" y="342" fill="#f8fafc" font-size="17">11 · One playback path</text>
+    <text x="465" y="392" fill="#fcd34d" font-size="15">Rework and repeat the</text>
+    <text x="465" y="416" fill="#fcd34d" font-size="15">real-context delivery test.</text>
+    <rect x="800" y="156" width="330" height="418" rx="22" fill="#083344" stroke="#22d3ee" stroke-width="2"/>
+    <text x="830" y="202" fill="#a5f3fc" font-size="23" font-weight="700">Editorial improvement</text>
+    <text x="830" y="234" fill="#f8fafc" font-size="17">1 · Slow opening</text>
+    <text x="830" y="270" fill="#f8fafc" font-size="17">2 · Too many points</text>
+    <text x="830" y="306" fill="#f8fafc" font-size="17">3 · Mismatched CTA</text>
+    <text x="830" y="356" fill="#67e8f9" font-size="15">Improve the intended decision</text>
+    <text x="830" y="380" fill="#67e8f9" font-size="15">without changing approved facts.</text>
+  </g>
+  <text x="70" y="629" fill="#5eead4" font-family="Arial, sans-serif" font-size="15">VideoClaw editorial illustration · owned asset · no third-party marks</text>
+</svg>

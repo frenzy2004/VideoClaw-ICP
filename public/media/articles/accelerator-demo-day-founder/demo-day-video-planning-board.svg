@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Demo Day video planning board</title>
+  <desc id="desc">Seven connected phases move from story lock to evidence, capture, recording, edit, release, and follow-up. Each phase has a named owner and approval gate.</desc>
+  <rect width="1200" height="675" rx="32" fill="#07111f"/>
+  <text x="72" y="86" fill="#f8fafc" font-family="Arial, sans-serif" font-size="36" font-weight="700">Demo Day video planning board</text>
+  <text x="72" y="124" fill="#9fb2c8" font-family="Arial, sans-serif" font-size="19">One owner and one visible gate at every phase</text>
+  <path d="M120 301 H1080" stroke="#2dd4bf" stroke-width="6" stroke-linecap="round"/>
+  <g font-family="Arial, sans-serif" text-anchor="middle">
+    <g transform="translate(120 301)"><circle r="38" fill="#134e4a" stroke="#5eead4" stroke-width="3"/><text y="7" fill="#fff" font-size="22" font-weight="700">1</text><text y="76" fill="#f8fafc" font-size="17" font-weight="700">Story lock</text><text y="101" fill="#9fb2c8" font-size="14">Founder</text></g>
+    <g transform="translate(280 301)"><circle r="38" fill="#153e75" stroke="#60a5fa" stroke-width="3"/><text y="7" fill="#fff" font-size="22" font-weight="700">2</text><text y="76" fill="#f8fafc" font-size="17" font-weight="700">Evidence lock</text><text y="101" fill="#9fb2c8" font-size="14">Claim owners</text></g>
+    <g transform="translate(440 301)"><circle r="38" fill="#4c1d95" stroke="#c4b5fd" stroke-width="3"/><text y="7" fill="#fff" font-size="22" font-weight="700">3</text><text y="76" fill="#f8fafc" font-size="17" font-weight="700">Capture ready</text><text y="101" fill="#9fb2c8" font-size="14">Product lead</text></g>
+    <g transform="translate(600 301)"><circle r="38" fill="#713f12" stroke="#fbbf24" stroke-width="3"/><text y="7" fill="#fff" font-size="22" font-weight="700">4</text><text y="76" fill="#f8fafc" font-size="17" font-weight="700">Record</text><text y="101" fill="#9fb2c8" font-size="14">Founder</text></g>
+    <g transform="translate(760 301)"><circle r="38" fill="#7f1d1d" stroke="#fca5a5" stroke-width="3"/><text y="7" fill="#fff" font-size="22" font-weight="700">5</text><text y="76" fill="#f8fafc" font-size="17" font-weight="700">Edit review</text><text y="101" fill="#9fb2c8" font-size="14">Editor</text></g>
+    <g transform="translate(920 301)"><circle r="38" fill="#14532d" stroke="#86efac" stroke-width="3"/><text y="7" fill="#fff" font-size="22" font-weight="700">6</text><text y="76" fill="#f8fafc" font-size="17" font-weight="700">Release</text><text y="101" fill="#9fb2c8" font-size="14">Approvers</text></g>
+    <g transform="translate(1080 301)"><circle r="38" fill="#164e63" stroke="#67e8f9" stroke-width="3"/><text y="7" fill="#fff" font-size="22" font-weight="700">7</text><text y="76" fill="#f8fafc" font-size="17" font-weight="700">Follow-up</text><text y="101" fill="#9fb2c8" font-size="14">GTM owner</text></g>
+  </g>
+  <g font-family="Arial, sans-serif">
+    <rect x="72" y="485" width="1056" height="116" rx="18" fill="#0f1e31" stroke="#263b55"/>
+    <text x="102" y="525" fill="#f8fafc" font-size="18" font-weight="700">Gate test</text>
+    <text x="102" y="558" fill="#b9c7d8" font-size="16">Audience → approved claims → clean proof → usable takes → readable cut → tested backup → context-safe reuse</text>
+    <text x="102" y="582" fill="#5eead4" font-size="14">VideoClaw editorial illustration · owned asset · no third-party marks</text>
+  </g>
+</svg>
