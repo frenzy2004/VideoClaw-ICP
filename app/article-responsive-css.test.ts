@@ -7,7 +7,7 @@ const css = readFileSync(join(process.cwd(), 'app/globals.css'), 'utf8');
 describe('article responsive layout', () => {
   it('allows both grid children to shrink within a mobile viewport', () => {
     expect(css).toMatch(
-      /\.article-page \.article-markdown,\s*\.article-page \.article-attribution\s*\{[^}]*min-width:\s*0;/s,
+      /\.article-page \.article-markdown,\s*\.article-page \.article-attribution\s*\{[^}]*min-width:\s*0;/,
     );
   });
 });
