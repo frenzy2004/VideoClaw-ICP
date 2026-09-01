@@ -14,6 +14,48 @@ import {
 const AUTOCOMPLETE_ACTOR = 'automation-lab/google-autocomplete-scraper';
 const SERP_ACTOR = 'apify/google-search-scraper';
 const DEFAULT_MANIFEST = 'data/research/apify/run-manifest.json';
+const MVP_INTENT_REVIEW_RATIONALES = new Map([
+  [
+    'vc-c2-001',
+    'The retained primary SERP connects Demo Day founder preparation with video and product-demo planning, supporting an MVP checklist draft.',
+  ],
+  [
+    'vc-c2-003',
+    'The retained primary SERP directly includes Demo Day pitch mistakes and startup video mistakes, matching the proposed corrective guide.',
+  ],
+  [
+    'vc-c2-006',
+    'The retained primary SERP contains startup investor-pitch video examples and founder discussions, matching the startup pitch-video intent.',
+  ],
+  [
+    'vc-c2-007',
+    'The retained primary SERP contains video-pitch guidance and pitch-format comparisons, matching the application-video comparison draft.',
+  ],
+  [
+    'vc-c2-008',
+    'The retained primary SERP contains founder pitch-video guidance and investor-pitch video tools, matching the how-to draft.',
+  ],
+  [
+    'vc-c2-009',
+    'The retained primary SERP contains a 60-second startup pitch guide and investor pitch-video results, matching the script-template draft.',
+  ],
+  [
+    'vc-c2-013',
+    'The retained primary SERP directly covers live product-demo failures and recovery discussion, matching the failure-response draft.',
+  ],
+  [
+    'vc-c2-021',
+    'The retained primary SERP contains post-Demo-Day founder guidance and Demo Day discussion, matching the post-event action draft.',
+  ],
+  [
+    'vc-c2-026',
+    'The retained primary SERP contains after-Demo-Day guidance and investor follow-up context, matching the investor asset-send draft.',
+  ],
+  [
+    'vc-c2-027',
+    'The retained primary SERP directly includes Demo Day follow-up structure and timing guidance, matching the investor timeline draft.',
+  ],
+]);
 
 function parseArgs(argv) {
   const options = {};
@@ -107,6 +149,39 @@ export function uniqueResearchQueries(articles) {
     }
   }
   return output.slice(0, 200);
+}
+
+export function resolveVerifiedDatasetIds(runs, requestedDatasetIds, label) {
+  if (requestedDatasetIds.length && requestedDatasetIds.length !== runs.length) {
+    throw new Error(`Comma-separated ${label} run and dataset ID counts must match`);
+  }
+
+  return runs.map((run, index) => {
+    const requestedDatasetId = requestedDatasetIds[index];
+    if (requestedDatasetId && requestedDatasetId !== run.defaultDatasetId) {
+      throw new Error(
+        `${label} run ${run.id} default dataset ${run.defaultDatasetId} does not match requested dataset ${requestedDatasetId}`,
+      );
+    }
+    return requestedDatasetId ?? run.defaultDatasetId;
+  });
+}
+
+export function intentReviewForSelection(articleId, selection) {
+  const rationale = MVP_INTENT_REVIEW_RATIONALES.get(articleId);
+  if (
+    rationale
+    && selection.selectionDecision === 'retained_observed_primary'
+    && selection.evidence.organicResults.length > 0
+  ) {
+    return { status: 'approved_for_mvp_draft', rationale };
+  }
+
+  return {
+    status: 'pending_editorial_intent_review',
+    rationale:
+      'This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed.',
+  };
 }
 
 function redact(value, token) {
@@ -260,14 +335,10 @@ async function main() {
     ? await Promise.all(requestedAutocompleteRunIds.map((runId) => getRun(runId, token)))
     : [(await collectAutocomplete(seedQueries, token)).run];
   const requestedAutocompleteDatasetIds = splitOptionList(options['autocomplete-dataset-id']);
-  if (
-    requestedAutocompleteDatasetIds.length
-    && requestedAutocompleteDatasetIds.length !== autocompleteRuns.length
-  ) {
-    throw new Error('Comma-separated autocomplete run and dataset ID counts must match');
-  }
-  const autocompleteDatasetIds = autocompleteRuns.map(
-    (run, index) => requestedAutocompleteDatasetIds[index] ?? run.defaultDatasetId,
+  const autocompleteDatasetIds = resolveVerifiedDatasetIds(
+    autocompleteRuns,
+    requestedAutocompleteDatasetIds,
+    'autocomplete',
   );
   const autocompleteItems = (
     await Promise.all(
@@ -280,11 +351,10 @@ async function main() {
     ? await Promise.all(requestedSerpRunIds.map((runId) => getRun(runId, token)))
     : [(await collectSerps(matrixQueries, token)).run];
   const requestedSerpDatasetIds = splitOptionList(options['serp-dataset-id']);
-  if (requestedSerpDatasetIds.length && requestedSerpDatasetIds.length !== serpRuns.length) {
-    throw new Error('Comma-separated SERP run and dataset ID counts must match');
-  }
-  const serpDatasetIds = serpRuns.map(
-    (run, index) => requestedSerpDatasetIds[index] ?? run.defaultDatasetId,
+  const serpDatasetIds = resolveVerifiedDatasetIds(
+    serpRuns,
+    requestedSerpDatasetIds,
+    'SERP',
   );
   const serpEvidenceGroups = await Promise.all(
     serpRuns.map(async (run, index) => {
@@ -311,6 +381,7 @@ async function main() {
       );
     }
     const { evidence } = selection;
+    const intentReview = intentReviewForSelection(article.articleId, selection);
     return {
       articleId: article.articleId,
       matrixPrimaryKeyword: article.primary,
@@ -322,7 +393,8 @@ async function main() {
         difficulty: null,
         cpc: null,
       },
-      score: rankObservedOpportunity({ ...evidence, relevance: 3 }),
+      intentReview,
+      score: rankObservedOpportunity({ ...evidence, intentReview }),
       evidence,
     };
   });
@@ -330,7 +402,7 @@ async function main() {
   const output = {
     schemaVersion: 1,
     campaign: options.campaign,
-    state: 'observed_serp_evidence',
+    state: 'serp_observed_research_shortlist',
     locale: { country: 'US', language: 'en', device: 'DESKTOP' },
     matrix: options.matrix,
     candidatePool: {
@@ -352,9 +424,11 @@ async function main() {
       })),
     },
     selection: {
+      classification: 'serp_observed_research_shortlist',
+      demandValidationStatus: 'pending_authenticated_keyword_provider',
       count: selected.length,
       rationale:
-        'Each article keeps its matrix primary only when first-page organic evidence exists. Empty primaries are replaced by the strongest observed secondary from the same researched article specification; the decision is recorded. Evidence density is scored transparently, while proprietary demand and difficulty metrics remain pending.',
+        'Each article keeps its matrix primary only when first-page organic evidence exists. Empty primaries are replaced by the secondary with the densest observed SERP features from the same article specification; this automatic choice does not imply editorial ICP fit. Intent review is recorded separately, and proprietary demand and difficulty metrics remain pending.',
       selected,
       notSelected: matrixQueries
         .filter(

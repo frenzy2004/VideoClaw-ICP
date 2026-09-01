@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "campaign": "accelerator-demo-day-founder",
-  "state": "observed_serp_evidence",
+  "state": "serp_observed_research_shortlist",
   "locale": {
     "country": "US",
     "language": "en",
@@ -373,7 +373,7 @@
   },
   "selection": {
     "count": 50,
-    "rationale": "Each article keeps its matrix primary only when first-page organic evidence exists. Empty primaries are replaced by the strongest observed secondary from the same researched article specification; the decision is recorded. Evidence density is scored transparently, while proprietary demand and difficulty metrics remain pending.",
+    "rationale": "Each article keeps its matrix primary only when first-page organic evidence exists. Empty primaries are replaced by the secondary with the densest observed SERP features from the same article specification; this automatic choice does not imply editorial ICP fit. Intent review is recorded separately, and proprietary demand and difficulty metrics remain pending.",
     "selected": [
       {
         "articleId": "vc-c2-001",
@@ -388,15 +388,16 @@
         },
         "score": {
           "query": "Demo Day video planning checklist",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "approved_for_mvp_draft",
           "exactTitleMatches": 0,
           "articleResults": 8,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 2,
-          "evidenceScore": 8,
+          "evidenceScore": 2,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: approved for MVP draft and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 2"
@@ -491,6 +492,10 @@
             "Demo day video planning checklist template",
             "Youtube demo day video planning checklist"
           ]
+        },
+        "intentReview": {
+          "status": "approved_for_mvp_draft",
+          "rationale": "The retained primary SERP connects Demo Day founder preparation with video and product-demo planning, supporting an MVP checklist draft."
         }
       },
       {
@@ -506,15 +511,16 @@
         },
         "score": {
           "query": "founder demo recording checklist",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 7,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 0,
-          "evidenceScore": 6,
+          "evidenceScore": 0,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 0"
@@ -606,6 +612,10 @@
           ],
           "peopleAlsoAsk": [],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -621,15 +631,16 @@
         },
         "score": {
           "query": "Demo Day video mistakes",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "approved_for_mvp_draft",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 1,
           "relatedQueryCount": 2,
-          "evidenceScore": 9,
+          "evidenceScore": 3,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: approved for MVP draft and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 1",
             "Related queries: 2"
@@ -710,6 +721,10 @@
             "Demo day video mistakes reddit",
             "Youtube demo day video mistakes"
           ]
+        },
+        "intentReview": {
+          "status": "approved_for_mvp_draft",
+          "rationale": "The retained primary SERP directly includes Demo Day pitch mistakes and startup video mistakes, matching the proposed corrective guide."
         }
       },
       {
@@ -725,15 +740,16 @@
         },
         "score": {
           "query": "Demo Day video checklist vs pitch checklist",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 4,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 0,
-          "evidenceScore": 6,
+          "evidenceScore": 0,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 0"
@@ -817,6 +833,10 @@
           ],
           "peopleAlsoAsk": [],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -832,15 +852,16 @@
         },
         "score": {
           "query": "Demo Day video readiness scorecard",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 3,
-          "evidenceScore": 9,
+          "evidenceScore": 3,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 3"
@@ -920,6 +941,10 @@
             "AI Readiness Assessment ServiceNow",
             "NARE ServiceNow"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -935,15 +960,16 @@
         },
         "score": {
           "query": "startup pitch video",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "approved_for_mvp_draft",
           "exactTitleMatches": 0,
           "articleResults": 1,
           "videoOrSocialResults": 3,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: approved for MVP draft and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -1041,6 +1067,10 @@
             "Pitch video maker",
             "Elevator pitch video examples"
           ]
+        },
+        "intentReview": {
+          "status": "approved_for_mvp_draft",
+          "rationale": "The retained primary SERP contains startup investor-pitch video examples and founder discussions, matching the startup pitch-video intent."
         }
       },
       {
@@ -1056,15 +1086,16 @@
         },
         "score": {
           "query": "application video vs pitch video",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "approved_for_mvp_draft",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 5,
-          "evidenceScore": 15,
+          "evidenceScore": 9,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: approved for MVP draft and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 5"
@@ -1159,6 +1190,10 @@
             "Pitch video online",
             "Elevator pitch"
           ]
+        },
+        "intentReview": {
+          "status": "approved_for_mvp_draft",
+          "rationale": "The retained primary SERP contains video-pitch guidance and pitch-format comparisons, matching the application-video comparison draft."
         }
       },
       {
@@ -1174,15 +1209,16 @@
         },
         "score": {
           "query": "how to make a founder pitch video",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "approved_for_mvp_draft",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: approved for MVP draft and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -1280,6 +1316,10 @@
             "How to make a pitch",
             "Startup video pitch"
           ]
+        },
+        "intentReview": {
+          "status": "approved_for_mvp_draft",
+          "rationale": "The retained primary SERP contains founder pitch-video guidance and investor-pitch video tools, matching the how-to draft."
         }
       },
       {
@@ -1295,15 +1335,16 @@
         },
         "score": {
           "query": "60 second founder pitch video script",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "approved_for_mvp_draft",
           "exactTitleMatches": 0,
           "articleResults": 1,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: approved for MVP draft and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -1401,13 +1442,17 @@
             "YC demo video examples",
             "YC founder videos"
           ]
+        },
+        "intentReview": {
+          "status": "approved_for_mvp_draft",
+          "rationale": "The retained primary SERP contains a 60-second startup pitch guide and investor pitch-video results, matching the script-template draft."
         }
       },
       {
         "articleId": "vc-c2-010",
         "matrixPrimaryKeyword": "when to use a pitch video",
         "primaryKeyword": "does my startup need a pitch video",
-        "selectionDecision": "replaced_empty_primary_with_observed_secondary",
+        "selectionDecision": "replaced_empty_primary_with_serp_observed_secondary_pending_intent_review",
         "metricValidation": {
           "provider": "pending",
           "volume": null,
@@ -1416,15 +1461,16 @@
         },
         "score": {
           "query": "does my startup need a pitch video",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -1514,6 +1560,10 @@
             "What is a pitch video",
             "Pitch video online"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -1529,15 +1579,16 @@
         },
         "score": {
           "query": "backup product demo",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 3,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -1643,6 +1694,10 @@
             "Rubrik Active Directory backup",
             "Rubrik fsx backup"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -1658,15 +1713,16 @@
         },
         "score": {
           "query": "product demo backup checklist",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 4,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 3,
           "relatedQueryCount": 0,
-          "evidenceScore": 9,
+          "evidenceScore": 3,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 3",
             "Related queries: 0"
@@ -1762,6 +1818,10 @@
             "How to demo a product?"
           ],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -1777,15 +1837,16 @@
         },
         "score": {
           "query": "live product demo failure",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "approved_for_mvp_draft",
           "exactTitleMatches": 0,
           "articleResults": 5,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 0,
-          "evidenceScore": 10,
+          "evidenceScore": 4,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: approved for MVP draft and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 0"
@@ -1874,6 +1935,10 @@
             "What is a product demo video?"
           ],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "approved_for_mvp_draft",
+          "rationale": "The retained primary SERP directly covers live product-demo failures and recovery discussion, matching the failure-response draft."
         }
       },
       {
@@ -1889,15 +1954,16 @@
         },
         "score": {
           "query": "record a backup software demo",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -1995,6 +2061,10 @@
             "Kopia backup",
             "Free backup software for Windows"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -2010,15 +2080,16 @@
         },
         "score": {
           "query": "live demo vs recorded demo",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 1,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -2116,6 +2187,10 @@
             "Demo music app",
             "How to make a demo song"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -2131,15 +2206,16 @@
         },
         "score": {
           "query": "72 hour Demo Day preflight",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 3,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 0,
-          "evidenceScore": 10,
+          "evidenceScore": 4,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 0"
@@ -2228,6 +2304,10 @@
             "What are the 5 P's of srm?"
           ],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -2243,15 +2323,16 @@
         },
         "score": {
           "query": "72 hour Demo Day video preflight checklist",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 0,
           "videoOrSocialResults": 6,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 0,
-          "evidenceScore": 10,
+          "evidenceScore": 4,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 0"
@@ -2348,6 +2429,10 @@
             "What are the legal requirements for pre-flight?"
           ],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -2363,15 +2448,16 @@
         },
         "score": {
           "query": "Demo Day video approval workflow",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -2437,6 +2523,10 @@
             "Demo video download",
             "HowdyGo"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -2452,15 +2542,16 @@
         },
         "score": {
           "query": "Demo Day video data hygiene",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 1,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -2553,6 +2644,10 @@
             "Create x lab",
             "ATDC Atlanta"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -2568,15 +2663,16 @@
         },
         "score": {
           "query": "should we remake our Demo Day video",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 0,
           "videoOrSocialResults": 7,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 0,
-          "evidenceScore": 6,
+          "evidenceScore": 0,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 0"
@@ -2668,6 +2764,10 @@
           ],
           "peopleAlsoAsk": [],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -2683,15 +2783,16 @@
         },
         "score": {
           "query": "what to do after Demo Day",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "approved_for_mvp_draft",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: approved for MVP draft and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -2784,6 +2885,10 @@
             "YC Demo Day Winter 2026",
             "YC Demo Day halted"
           ]
+        },
+        "intentReview": {
+          "status": "approved_for_mvp_draft",
+          "rationale": "The retained primary SERP contains post-Demo-Day founder guidance and Demo Day discussion, matching the post-event action draft."
         }
       },
       {
@@ -2799,15 +2904,16 @@
         },
         "score": {
           "query": "post Demo Day content workflow",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -2908,6 +3014,10 @@
             "YC Demo Day halted",
             "YC Demo Day Spring 2026"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -2923,15 +3033,16 @@
         },
         "score": {
           "query": "post Demo Day narrative template",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 5,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 6,
-          "evidenceScore": 12,
+          "evidenceScore": 6,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 6"
@@ -3030,6 +3141,10 @@
             "YC Demo Day",
             "YC Demo Day slides"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -3045,15 +3160,16 @@
         },
         "score": {
           "query": "14 day post Demo Day content plan",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 4,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 0,
-          "evidenceScore": 6,
+          "evidenceScore": 0,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 0"
@@ -3145,6 +3261,10 @@
           ],
           "peopleAlsoAsk": [],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -3160,15 +3280,16 @@
         },
         "score": {
           "query": "measure post Demo Day content",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -3269,6 +3390,10 @@
             "TechCrunch YC Demo Day halted",
             "Aalto Demo Day"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -3284,15 +3409,16 @@
         },
         "score": {
           "query": "what to send investors after Demo Day",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "approved_for_mvp_draft",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 3,
-          "evidenceScore": 13,
+          "evidenceScore": 7,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: approved for MVP draft and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 3"
@@ -3385,6 +3511,10 @@
             "What to send investors after demo day template",
             "What to send investors after demo day pitch deck"
           ]
+        },
+        "intentReview": {
+          "status": "approved_for_mvp_draft",
+          "rationale": "The retained primary SERP contains after-Demo-Day guidance and investor follow-up context, matching the investor asset-send draft."
         }
       },
       {
@@ -3400,15 +3530,16 @@
         },
         "score": {
           "query": "Demo Day investor follow up timeline",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "approved_for_mvp_draft",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 0,
-          "evidenceScore": 10,
+          "evidenceScore": 4,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: approved for MVP draft and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 0"
@@ -3497,6 +3628,10 @@
             "What is YC demo day like?"
           ],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "approved_for_mvp_draft",
+          "rationale": "The retained primary SERP directly includes Demo Day follow-up structure and timing guidance, matching the investor timeline draft."
         }
       },
       {
@@ -3512,15 +3647,16 @@
         },
         "score": {
           "query": "investor follow up video template",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 3,
-          "evidenceScore": 9,
+          "evidenceScore": 3,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 3"
@@ -3608,13 +3744,17 @@
             "Investor follow up video template pdf",
             "Investor follow up video template powerpoint"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
         "articleId": "vc-c2-029",
         "matrixPrimaryKeyword": "investor follow up video vs email",
         "primaryKeyword": "investor update format comparison",
-        "selectionDecision": "replaced_empty_primary_with_observed_secondary",
+        "selectionDecision": "replaced_empty_primary_with_serp_observed_secondary_pending_intent_review",
         "metricValidation": {
           "provider": "pending",
           "volume": null,
@@ -3623,15 +3763,16 @@
         },
         "score": {
           "query": "investor update format comparison",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 4,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 6,
-          "evidenceScore": 16,
+          "evidenceScore": 10,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 6"
@@ -3735,6 +3876,10 @@
             "Investor report template",
             "Board update template"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -3750,15 +3895,16 @@
         },
         "score": {
           "query": "investor follow up video compliance",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 5,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 0,
-          "evidenceScore": 10,
+          "evidenceScore": 4,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 0"
@@ -3847,6 +3993,10 @@
             "What to include in an investor presentation?"
           ],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -3862,15 +4012,16 @@
         },
         "score": {
           "query": "reuse Demo Day video for launch",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 3,
-          "evidenceScore": 13,
+          "evidenceScore": 7,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 3"
@@ -3963,6 +4114,10 @@
             "Reuse demo day video for launch download",
             "Reuse demo day video for launch 2022"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -3978,15 +4133,16 @@
         },
         "score": {
           "query": "pitch video to launch video workflow",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 0,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -4092,6 +4248,10 @@
             "Technovation past Winners",
             "Technovation World Summit 2026"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -4107,15 +4267,16 @@
         },
         "score": {
           "query": "repurpose pitch video or record new launch video",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 4,
           "videoOrSocialResults": 3,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 0,
-          "evidenceScore": 10,
+          "evidenceScore": 4,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 0"
@@ -4212,6 +4373,10 @@
             "Can you give me an example of content repurposing?"
           ],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -4227,15 +4392,16 @@
         },
         "score": {
           "query": "startup launch asset map",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -4336,6 +4502,10 @@
             "Asset-Map pricing",
             "Asset-Map integrations"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -4351,15 +4521,16 @@
         },
         "score": {
           "query": "measure startup content reuse",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 3,
-          "evidenceScore": 13,
+          "evidenceScore": 7,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 3"
@@ -4460,6 +4631,10 @@
             "Measure startup content reuse reddit",
             "Measure startup content reuse github"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -4475,15 +4650,16 @@
         },
         "score": {
           "query": "Demo Day social clips",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 0,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 2,
-          "evidenceScore": 12,
+          "evidenceScore": 6,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 2"
@@ -4527,13 +4703,17 @@
             "Tech demo day social clips",
             "Demo day social clips download"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
         "articleId": "vc-c2-037",
         "matrixPrimaryKeyword": "turn founder pitch into social clips",
         "primaryKeyword": "repurpose pitch video for LinkedIn",
-        "selectionDecision": "replaced_empty_primary_with_observed_secondary",
+        "selectionDecision": "replaced_empty_primary_with_serp_observed_secondary_pending_intent_review",
         "metricValidation": {
           "provider": "pending",
           "volume": null,
@@ -4542,15 +4722,16 @@
         },
         "score": {
           "query": "repurpose pitch video for LinkedIn",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 6,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 0,
-          "evidenceScore": 10,
+          "evidenceScore": 4,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 0"
@@ -4647,6 +4828,10 @@
             "Which video format is best for LinkedIn?"
           ],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -4662,15 +4847,16 @@
         },
         "score": {
           "query": "founder video clip script template",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 4,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -4763,6 +4949,10 @@
             "Video script template Word Doc",
             "Video script example"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -4778,15 +4968,16 @@
         },
         "score": {
           "query": "social clip copyright and disclosure checklist",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 4,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -4887,6 +5078,10 @@
             "FTC disclosures",
             "FTC social media guidelines"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -4902,15 +5097,16 @@
         },
         "score": {
           "query": "measure founder social video",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 0,
           "videoOrSocialResults": 8,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 2,
-          "evidenceScore": 12,
+          "evidenceScore": 6,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 2"
@@ -5010,6 +5206,10 @@
             "Measure founder social video youtube",
             "Measure founder social video link"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -5025,15 +5225,16 @@
         },
         "score": {
           "query": "what is a startup video source pack",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -5139,6 +5340,10 @@
             "Storyblocks Business license cost",
             "Mixkit Free Music download without copyright"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -5154,15 +5359,16 @@
         },
         "score": {
           "query": "audit a product demo source pack",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 5,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 7,
-          "evidenceScore": 13,
+          "evidenceScore": 7,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 7"
@@ -5262,6 +5468,10 @@
             "Quality audit",
             "System audit"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -5277,15 +5487,16 @@
         },
         "score": {
           "query": "startup video claim ledger",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 1,
           "videoOrSocialResults": 7,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 4,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 4"
@@ -5387,6 +5598,10 @@
             "Startup video claim ledger app",
             "Ledger Recovery Key"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -5402,15 +5617,16 @@
         },
         "score": {
           "query": "product demo evidence mistakes",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 5,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 0,
-          "evidenceScore": 10,
+          "evidenceScore": 4,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 0"
@@ -5507,6 +5723,10 @@
             "What is a demo video?"
           ],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -5522,15 +5742,16 @@
         },
         "score": {
           "query": "download Demo Day video source pack template",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 0,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -5631,6 +5852,10 @@
             "Envato video templates free download",
             "Envato templates free download link"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -5646,15 +5871,16 @@
         },
         "score": {
           "query": "accelerator Demo Day timeline",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 0,
-          "evidenceScore": 10,
+          "evidenceScore": 4,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 0"
@@ -5751,6 +5977,10 @@
             "What is YC demo day like?"
           ],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -5766,15 +5996,16 @@
         },
         "score": {
           "query": "eight week Demo Day content calendar",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -5880,6 +6111,10 @@
             "Free content calendar template",
             "Social media calendar template Excel free Download"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -5895,15 +6130,16 @@
         },
         "score": {
           "query": "Demo Day timeline by accelerator type",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 1,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 1,
           "relatedQueryCount": 2,
-          "evidenceScore": 9,
+          "evidenceScore": 3,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 1",
             "Related queries: 2"
@@ -6000,6 +6236,10 @@
             "Demo day timeline by accelerator type y combinator",
             "Demo day timeline by accelerator type pdf"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -6015,15 +6255,16 @@
         },
         "score": {
           "query": "manage multiple startup event deadlines",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 4,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 0,
-          "evidenceScore": 6,
+          "evidenceScore": 0,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 0"
@@ -6115,6 +6356,10 @@
           ],
           "peopleAlsoAsk": [],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -6130,15 +6375,16 @@
         },
         "score": {
           "query": "prioritize accelerator content deadlines",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 0,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 0,
-          "evidenceScore": 6,
+          "evidenceScore": 0,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 0"
@@ -6230,6 +6476,10 @@
           ],
           "peopleAlsoAsk": [],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       }
     ],
@@ -6834,7 +7084,9 @@
         "query": "startup event content decision",
         "reason": "Retained as a supporting secondary query; the article primary query carries the canonical evidence chain."
       }
-    ]
+    ],
+    "classification": "serp_observed_research_shortlist",
+    "demandValidationStatus": "pending_authenticated_keyword_provider"
   },
   "serpEvidence": [
     {

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "campaign": "newly-funded-founder",
-  "state": "observed_serp_evidence",
+  "state": "serp_observed_research_shortlist",
   "locale": {
     "country": "US",
     "language": "en",
@@ -1045,13 +1045,13 @@
   },
   "selection": {
     "count": 50,
-    "rationale": "Each article keeps its matrix primary only when first-page organic evidence exists. Empty primaries are replaced by the strongest observed secondary from the same researched article specification; the decision is recorded. Evidence density is scored transparently, while proprietary demand and difficulty metrics remain pending.",
+    "rationale": "Each article keeps its matrix primary only when first-page organic evidence exists. Empty primaries are replaced by the secondary with the densest observed SERP features from the same article specification; this automatic choice does not imply editorial ICP fit. Intent review is recorded separately, and proprietary demand and difficulty metrics remain pending.",
     "selected": [
       {
         "articleId": "vc-c1-001",
         "matrixPrimaryKeyword": "startup funding announcement media plan",
         "primaryKeyword": "seed round announcement strategy",
-        "selectionDecision": "replaced_empty_primary_with_observed_secondary",
+        "selectionDecision": "replaced_empty_primary_with_serp_observed_secondary_pending_intent_review",
         "metricValidation": {
           "provider": "pending",
           "volume": null,
@@ -1060,15 +1060,16 @@
         },
         "score": {
           "query": "seed round announcement strategy",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 0,
-          "evidenceScore": 6,
+          "evidenceScore": 0,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 0"
@@ -1160,6 +1161,10 @@
           ],
           "peopleAlsoAsk": [],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -1175,15 +1180,16 @@
         },
         "score": {
           "query": "startup funding announcement checklist",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -1284,6 +1290,10 @@
             "Series A milestones",
             "How do venture capitalists find startups"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -1299,15 +1309,16 @@
         },
         "score": {
           "query": "funding announcement content workflow",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 2,
-          "evidenceScore": 8,
+          "evidenceScore": 2,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 2"
@@ -1402,6 +1413,10 @@
             "Funding announcement content workflow template",
             "Funding announcement content workflow example"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -1417,15 +1432,16 @@
         },
         "score": {
           "query": "startup funding announcement mistakes",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 0,
-          "evidenceScore": 10,
+          "evidenceScore": 4,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 0"
@@ -1514,6 +1530,10 @@
             "What is one of the most common mistakes new business owners make?"
           ],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -1529,15 +1549,16 @@
         },
         "score": {
           "query": "funding announcement media metrics",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 2,
-          "evidenceScore": 8,
+          "evidenceScore": 2,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 2"
@@ -1632,6 +1653,10 @@
             "Funding announcement media metrics template",
             "Funding announcement media metrics examples"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -1647,15 +1672,16 @@
         },
         "score": {
           "query": "post funding founder story outline",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 1,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 3,
           "relatedQueryCount": 8,
-          "evidenceScore": 17,
+          "evidenceScore": 11,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 3",
             "Related queries: 8"
@@ -1760,6 +1786,10 @@
             "How to write a business plan PDF",
             "Sample business plan PDF for startups"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -1775,15 +1805,16 @@
         },
         "score": {
           "query": "founder evidence classification worksheet after funding",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 1,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 7,
-          "evidenceScore": 13,
+          "evidenceScore": 7,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 7"
@@ -1883,6 +1914,10 @@
             "TNFD publications",
             "TNFD sector guidance"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -1898,15 +1933,16 @@
         },
         "score": {
           "query": "technical founder story video",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 1,
           "videoOrSocialResults": 4,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -1999,13 +2035,17 @@
             "Jomakaze",
             "How we write review code in big tech companies"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
         "articleId": "vc-c1-009",
         "matrixPrimaryKeyword": "founder story vs company story after funding",
         "primaryKeyword": "company narrative after funding",
-        "selectionDecision": "replaced_empty_primary_with_observed_secondary",
+        "selectionDecision": "replaced_empty_primary_with_serp_observed_secondary_pending_intent_review",
         "metricValidation": {
           "provider": "pending",
           "volume": null,
@@ -2014,15 +2054,16 @@
         },
         "score": {
           "query": "company narrative after funding",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 5,
-          "evidenceScore": 15,
+          "evidenceScore": 9,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 5"
@@ -2125,6 +2166,10 @@
             "Storytelling techniques for business",
             "Pitch deck examples"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -2140,15 +2185,16 @@
         },
         "score": {
           "query": "founder narrative authenticity checklist",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 1,
           "videoOrSocialResults": 3,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 0,
-          "evidenceScore": 10,
+          "evidenceScore": 4,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 0"
@@ -2245,13 +2291,17 @@
             "How to brand storytelling?"
           ],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
         "articleId": "vc-c1-011",
         "matrixPrimaryKeyword": "startup investor update content",
         "primaryKeyword": "what to include in investor update",
-        "selectionDecision": "replaced_empty_primary_with_observed_secondary",
+        "selectionDecision": "replaced_empty_primary_with_serp_observed_secondary_pending_intent_review",
         "metricValidation": {
           "provider": "pending",
           "volume": null,
@@ -2260,15 +2310,16 @@
         },
         "score": {
           "query": "what to include in investor update",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -2374,6 +2425,10 @@
             "Monthly investor update",
             "Investor update email template"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -2389,15 +2444,16 @@
         },
         "score": {
           "query": "monthly investor update template startup",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -2498,6 +2554,10 @@
             "Update template Minecraft",
             "Investor report template"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -2513,15 +2573,16 @@
         },
         "score": {
           "query": "investor update video for startups",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 0,
           "videoOrSocialResults": 8,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 0,
-          "evidenceScore": 6,
+          "evidenceScore": 0,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 0"
@@ -2613,6 +2674,10 @@
           ],
           "peopleAlsoAsk": [],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -2628,15 +2693,16 @@
         },
         "score": {
           "query": "investor update public vs private content",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -2742,6 +2808,10 @@
             "Private funds vs public funds",
             "Private vs public investment"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -2757,15 +2827,16 @@
         },
         "score": {
           "query": "investor update engagement metrics",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 4,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 3,
           "relatedQueryCount": 2,
-          "evidenceScore": 11,
+          "evidenceScore": 5,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 3",
             "Related queries: 2"
@@ -2864,6 +2935,10 @@
             "Investor update engagement metrics template",
             "Investor update engagement metrics example"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -2879,15 +2954,16 @@
         },
         "score": {
           "query": "recruiting content after funding",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 0,
-          "evidenceScore": 10,
+          "evidenceScore": 4,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 0"
@@ -2984,6 +3060,10 @@
             "What are the three C's of recruitment?"
           ],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -2999,15 +3079,16 @@
         },
         "score": {
           "query": "startup hiring announcement checklist",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 5,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 2,
-          "evidenceScore": 8,
+          "evidenceScore": 2,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 2"
@@ -3102,6 +3183,10 @@
             "Startup hiring announcement checklist template",
             "Startup hiring announcement checklist doc"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -3117,15 +3202,16 @@
         },
         "score": {
           "query": "founder recruiting video startup",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -3223,6 +3309,10 @@
             "Founding Recruiter jobs",
             "Aaron levie why startups win in the ai era"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -3238,15 +3328,16 @@
         },
         "score": {
           "query": "startup recruiting content channels",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 4,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -3352,6 +3443,10 @@
             "Y Combinator",
             "Jobs at startups"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -3367,15 +3462,16 @@
         },
         "score": {
           "query": "recruiting content compliance startup",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -3476,6 +3572,10 @@
             "Perfectly recruiting",
             "AI recruiting agent"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -3491,15 +3591,16 @@
         },
         "score": {
           "query": "newly funded startup category education strategy",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 3,
-          "evidenceScore": 9,
+          "evidenceScore": 3,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 3"
@@ -3595,6 +3696,10 @@
             "Newly funded startup category education strategy examples",
             "Newly funded startup category education strategy 2021"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -3610,15 +3715,16 @@
         },
         "score": {
           "query": "startup category definition page template",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -3719,6 +3825,10 @@
             "Startup templates free download",
             "Financial model for startup Excel"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -3734,15 +3844,16 @@
         },
         "score": {
           "query": "newly funded startup category explainer video",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 1,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -3835,6 +3946,10 @@
             "YC video game",
             "YC video guidelines"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -3850,15 +3965,16 @@
         },
         "score": {
           "query": "category education vs product marketing after funding",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 2,
-          "evidenceScore": 12,
+          "evidenceScore": 6,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 2"
@@ -3966,6 +4082,10 @@
             "Category education vs product marketing after funding salary",
             "Tech product marketing"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -3981,15 +4101,16 @@
         },
         "score": {
           "query": "newly funded startup category education metrics",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 6,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -4090,6 +4211,10 @@
             "Startup funding list",
             "Recently funded startups in USA"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -4105,15 +4230,16 @@
         },
         "score": {
           "query": "newly funded startup product launch proof",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -4214,6 +4340,10 @@
             "Startup loan scheme",
             "Recently funded startups in USA"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -4229,15 +4359,16 @@
         },
         "score": {
           "query": "newly funded startup launch claim checklist",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 1,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -4343,6 +4474,10 @@
             "Startup India registration",
             "Startup India registration fees"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -4358,15 +4493,16 @@
         },
         "score": {
           "query": "post funding startup product demo proof workflow",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 3,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 2,
-          "evidenceScore": 8,
+          "evidenceScore": 2,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 2"
@@ -4461,6 +4597,10 @@
             "Post funding startup product demo proof workflow template",
             "Post funding startup product demo proof workflow reddit"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -4476,15 +4616,16 @@
         },
         "score": {
           "query": "newly funded startup launch claim substantiation",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -4590,6 +4731,10 @@
             "Competition Tribunal",
             "Deceptive marketing practices digest volume 7"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -4605,15 +4750,16 @@
         },
         "score": {
           "query": "post funding product launch proof metrics",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 7,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 2,
-          "evidenceScore": 8,
+          "evidenceScore": 2,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 2"
@@ -4708,6 +4854,10 @@
             "Post funding product launch proof metrics example",
             "Product launch tracking"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -4723,15 +4873,16 @@
         },
         "score": {
           "query": "founder thought leadership strategy",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -4821,6 +4972,10 @@
             "Thought leadership agency",
             "Thought leadership articles"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -4836,15 +4991,16 @@
         },
         "score": {
           "query": "post funding founder thought leadership pillars",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 1,
           "videoOrSocialResults": 3,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -4950,6 +5106,10 @@
             "Thought leadership content examples",
             "Thought leadership strategy"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -4965,15 +5125,16 @@
         },
         "score": {
           "query": "post funding founder interview repurposing workflow",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 3,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 0,
-          "evidenceScore": 6,
+          "evidenceScore": 0,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 0"
@@ -5057,6 +5218,10 @@
           ],
           "peopleAlsoAsk": [],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -5072,15 +5237,16 @@
         },
         "score": {
           "query": "founder thought leadership vs promotion after funding",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 1,
           "videoOrSocialResults": 3,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -5186,6 +5352,10 @@
             "How to increase LinkedIn post reach",
             "LinkedIn organic post specs"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -5201,15 +5371,16 @@
         },
         "score": {
           "query": "post funding founder thought leadership metrics",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -5315,6 +5486,10 @@
             "Thought leadership posts",
             "Thought leadership KPMG"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -5330,15 +5505,16 @@
         },
         "score": {
           "query": "newly funded startup customer proof readiness",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -5439,6 +5615,10 @@
             "Recently Founded startups",
             "Pre Series A startups"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -5454,15 +5634,16 @@
         },
         "score": {
           "query": "newly funded startup case study consent checklist",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 2,
-          "evidenceScore": 8,
+          "evidenceScore": 2,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 2"
@@ -5557,6 +5738,10 @@
             "Newly funded startup case study consent checklist template",
             "Newly funded startup case study consent checklist pdf"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -5572,15 +5757,16 @@
         },
         "score": {
           "query": "post funding customer case study workflow",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 7,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -5681,6 +5867,10 @@
             "Top $100 AWS customers",
             "Amazon case study Assignment"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -5696,15 +5886,16 @@
         },
         "score": {
           "query": "customer testimonial vs case study for startups after funding",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 3,
-          "evidenceScore": 13,
+          "evidenceScore": 7,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 3"
@@ -5805,6 +5996,10 @@
             "Customer testimonial vs case study for startups after funding example",
             "Customer testimonial vs case study for startups after funding pdf"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -5820,15 +6015,16 @@
         },
         "score": {
           "query": "post funding customer proof claims review",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 3,
           "relatedQueryCount": 8,
-          "evidenceScore": 17,
+          "evidenceScore": 11,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 3",
             "Related queries: 8"
@@ -5933,6 +6129,10 @@
             "File a complaint with consumer Protection agency",
             "Financial Ombudsman uk login"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -5948,15 +6148,16 @@
         },
         "score": {
           "query": "startup PR vs owned media",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 0,
-          "evidenceScore": 10,
+          "evidenceScore": 4,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 0"
@@ -6045,6 +6246,10 @@
             "What are the four main types of media?"
           ],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -6060,15 +6265,16 @@
         },
         "score": {
           "query": "funding press release vs founder blog",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 0,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 0,
-          "evidenceScore": 6,
+          "evidenceScore": 0,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 0"
@@ -6136,6 +6342,10 @@
           ],
           "peopleAlsoAsk": [],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -6151,15 +6361,16 @@
         },
         "score": {
           "query": "post funding earned media to owned content workflow",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 2,
-          "evidenceScore": 12,
+          "evidenceScore": 6,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 2"
@@ -6259,6 +6470,10 @@
             "Post funding earned media to owned content workflow example",
             "Post funding earned media to owned content workflow qui"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -6274,15 +6489,16 @@
         },
         "score": {
           "query": "startup PR agency vs content team",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 3,
-          "evidenceScore": 13,
+          "evidenceScore": 7,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 3"
@@ -6383,6 +6599,10 @@
             "Startup pr agency vs content team salary",
             "Startup pr agency vs content team cost"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -6398,15 +6618,16 @@
         },
         "score": {
           "query": "paid earned shared owned media startup",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 6,
-          "evidenceScore": 16,
+          "evidenceScore": 10,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 6"
@@ -6510,13 +6731,17 @@
             "Paid, earned, shared and owned media",
             "PESO Model explained"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
         "articleId": "vc-c1-046",
         "matrixPrimaryKeyword": "30 60 90 day content strategy after startup funding",
         "primaryKeyword": "30 60 90 day marketing plan",
-        "selectionDecision": "replaced_empty_primary_with_observed_secondary",
+        "selectionDecision": "replaced_empty_primary_with_serp_observed_secondary_pending_intent_review",
         "metricValidation": {
           "provider": "pending",
           "volume": null,
@@ -6525,15 +6750,16 @@
         },
         "score": {
           "query": "30 60 90 day marketing plan",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -6639,6 +6865,10 @@
             "30 day marketing plan",
             "30-60-90 day template"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -6654,15 +6884,16 @@
         },
         "score": {
           "query": "first 30 days after funding content plan",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -6768,6 +6999,10 @@
             "Who will pay to rebuild Ukraine",
             "How will Ukraine be rebuilt"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -6783,15 +7018,16 @@
         },
         "score": {
           "query": "60 day post funding media plan",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 4,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 6,
-          "evidenceScore": 16,
+          "evidenceScore": 10,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 6"
@@ -6895,6 +7131,10 @@
             "60 day post funding media plan example",
             "60 day post funding media plan example pdf"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -6910,15 +7150,16 @@
         },
         "score": {
           "query": "90 day startup media measurement",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 4,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 0,
-          "evidenceScore": 10,
+          "evidenceScore": 4,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 0"
@@ -7007,6 +7248,10 @@
             "What is the 30-60-90 rule for a new manager?"
           ],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -7022,15 +7267,16 @@
         },
         "score": {
           "query": "download post funding GTM media plan template",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -7131,6 +7377,10 @@
             "Download post funding gtm media plan template excel",
             "Go-to-market strategy template free download"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       }
     ],
@@ -7735,7 +7985,9 @@
         "query": "download GTM media planning worksheet",
         "reason": "Retained as a supporting secondary query; the article primary query carries the canonical evidence chain."
       }
-    ]
+    ],
+    "classification": "serp_observed_research_shortlist",
+    "demandValidationStatus": "pending_authenticated_keyword_provider"
   },
   "serpEvidence": [
     {

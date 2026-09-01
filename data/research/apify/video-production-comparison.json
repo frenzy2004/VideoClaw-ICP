@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "campaign": "video-production-comparison",
-  "state": "observed_serp_evidence",
+  "state": "serp_observed_research_shortlist",
   "locale": {
     "country": "US",
     "language": "en",
@@ -387,7 +387,7 @@
   },
   "selection": {
     "count": 50,
-    "rationale": "Each article keeps its matrix primary only when first-page organic evidence exists. Empty primaries are replaced by the strongest observed secondary from the same researched article specification; the decision is recorded. Evidence density is scored transparently, while proprietary demand and difficulty metrics remain pending.",
+    "rationale": "Each article keeps its matrix primary only when first-page organic evidence exists. Empty primaries are replaced by the secondary with the densest observed SERP features from the same article specification; this automatic choice does not imply editorial ICP fit. Intent review is recorded separately, and proprietary demand and difficulty metrics remain pending.",
     "selected": [
       {
         "articleId": "vc-c3-001",
@@ -402,15 +402,16 @@
         },
         "score": {
           "query": "video agency vs freelance video editor",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 1,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 2,
-          "evidenceScore": 12,
+          "evidenceScore": 6,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 2"
@@ -494,13 +495,17 @@
             "Video agency vs freelance video editor reddit",
             "Video agency vs freelance video editor salary"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
         "articleId": "vc-c3-002",
         "matrixPrimaryKeyword": "when to hire a video agency",
         "primaryKeyword": "startup production partner",
-        "selectionDecision": "replaced_empty_primary_with_observed_secondary",
+        "selectionDecision": "replaced_empty_primary_with_serp_observed_secondary_pending_intent_review",
         "metricValidation": {
           "provider": "pending",
           "volume": null,
@@ -509,15 +514,16 @@
         },
         "score": {
           "query": "startup production partner",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 4,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -623,6 +629,10 @@
             "Creekmore Marketing",
             "Sage digital marketing"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -638,15 +648,16 @@
         },
         "score": {
           "query": "video agency vs freelancer cost",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 0,
-          "evidenceScore": 10,
+          "evidenceScore": 4,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 0"
@@ -727,6 +738,10 @@
             "How much to charge for a 30 second video edit?"
           ],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -742,15 +757,16 @@
         },
         "score": {
           "query": "startup video partner pre-signing questions",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 7,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -856,6 +872,10 @@
             "Y Combinator application video",
             "The new way to build a startup"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -871,15 +891,16 @@
         },
         "score": {
           "query": "freelance video editor continuity plan",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 4,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 7,
-          "evidenceScore": 17,
+          "evidenceScore": 11,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 7"
@@ -984,6 +1005,10 @@
             "Editing freelance",
             "Freelance editing Reddit"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -999,15 +1024,16 @@
         },
         "score": {
           "query": "startup in house video team annual cost model",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -1113,6 +1139,10 @@
             "How much to charge for video editing beginner",
             "Average cost for videographer for wedding"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -1128,15 +1158,16 @@
         },
         "score": {
           "query": "video editor salary to loaded employer cost",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 1,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -1242,6 +1273,10 @@
             "Film and Video editor salary",
             "Film Editor salary"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -1257,15 +1292,16 @@
         },
         "score": {
           "query": "startup in house video editor hiring readiness",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 1,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 5,
-          "evidenceScore": 11,
+          "evidenceScore": 5,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 5"
@@ -1347,6 +1383,10 @@
             "Video Editor jobs in Thailand",
             "Upwork"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -1362,15 +1402,16 @@
         },
         "score": {
           "query": "startup video team roles",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -1476,6 +1517,10 @@
             "Startup first hires",
             "Startup manager job description"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -1491,15 +1536,16 @@
         },
         "score": {
           "query": "annual video production budget",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 5,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -1597,6 +1643,10 @@
             "Videography pricing template",
             "Video editor rates"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -1612,15 +1662,16 @@
         },
         "score": {
           "query": "what is an AI video agent",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 0,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -1718,6 +1769,10 @@
             "How do I get an AI agent",
             "AI video Agent free"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -1733,15 +1788,16 @@
         },
         "score": {
           "query": "AI video agent vs AI video editor",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 1,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -1839,6 +1895,10 @@
             "AI video agent github",
             "Video agents"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -1854,15 +1914,16 @@
         },
         "score": {
           "query": "AI video agent vs human editor benchmark",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 4,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -1968,6 +2029,10 @@
             "Arena AI image to video generator",
             "Arena AI text to video"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -1983,15 +2048,16 @@
         },
         "score": {
           "query": "AI video agent buyer checklist",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 5,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 7,
-          "evidenceScore": 13,
+          "evidenceScore": 7,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 7"
@@ -2083,13 +2149,17 @@
             "Reality AI",
             "Real estate chatbot"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
         "articleId": "vc-c3-015",
         "matrixPrimaryKeyword": "AI video agent risk assessment",
         "primaryKeyword": "AI video failure modes",
-        "selectionDecision": "replaced_empty_primary_with_observed_secondary",
+        "selectionDecision": "replaced_empty_primary_with_serp_observed_secondary_pending_intent_review",
         "metricValidation": {
           "provider": "pending",
           "volume": null,
@@ -2098,15 +2168,16 @@
         },
         "score": {
           "query": "AI video failure modes",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 4,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -2207,6 +2278,10 @@
             "Threat modeling AI applications",
             "Youtube IBM AI"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -2222,15 +2297,16 @@
         },
         "score": {
           "query": "startup outsource video editing vs build team",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 7,
-          "evidenceScore": 17,
+          "evidenceScore": 11,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 7"
@@ -2335,6 +2411,10 @@
             "Video editing profile",
             "Agency video"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -2350,15 +2430,16 @@
         },
         "score": {
           "query": "video editor employee or contractor",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 0,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 3,
-          "evidenceScore": 13,
+          "evidenceScore": 7,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 3"
@@ -2443,6 +2524,10 @@
             "Video editor employee or contractor salary",
             "Freelance video editor contract template"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -2458,15 +2543,16 @@
         },
         "score": {
           "query": "outsource video production checklist",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 5,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 0,
-          "evidenceScore": 10,
+          "evidenceScore": 4,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 0"
@@ -2563,6 +2649,10 @@
             "What are the key items to include in a pre-production checklist?"
           ],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -2578,15 +2668,16 @@
         },
         "score": {
           "query": "video editing outsourcing transition plan",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 0,
-          "evidenceScore": 10,
+          "evidenceScore": 4,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 0"
@@ -2683,6 +2774,10 @@
             "What is video transition editing?"
           ],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -2698,15 +2793,16 @@
         },
         "score": {
           "query": "hybrid video production model",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 1,
           "relatedQueryCount": 0,
-          "evidenceScore": 7,
+          "evidenceScore": 1,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 1",
             "Related queries: 0"
@@ -2792,6 +2888,10 @@
             "What is a hybrid AI model?"
           ],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -2807,15 +2907,16 @@
         },
         "score": {
           "query": "startup video production model handoff workflow",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 5,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 0,
-          "evidenceScore": 6,
+          "evidenceScore": 0,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 0"
@@ -2907,6 +3008,10 @@
           ],
           "peopleAlsoAsk": [],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -2922,15 +3027,16 @@
         },
         "score": {
           "query": "startup outsourced video file handoff checklist",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 7,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 2,
-          "evidenceScore": 8,
+          "evidenceScore": 2,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 2"
@@ -3025,6 +3131,10 @@
             "Startup outsourced video file handoff checklist template",
             "Startup outsourced video file handoff checklist free"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -3040,15 +3150,16 @@
         },
         "score": {
           "query": "startup video revision workflow across providers",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 5,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 0,
-          "evidenceScore": 6,
+          "evidenceScore": 0,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 0"
@@ -3132,6 +3243,10 @@
           ],
           "peopleAlsoAsk": [],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -3147,15 +3262,16 @@
         },
         "score": {
           "query": "startup video version control for external editors",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 0,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -3253,6 +3369,10 @@
             "Is Unity Version Control free",
             "How to use Unity Version control"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -3268,15 +3388,16 @@
         },
         "score": {
           "query": "lean startup hybrid video production workflow template",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 4,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -3377,6 +3498,10 @@
             "Lean Startup model",
             "Ries 2011 the Lean Startup"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -3392,15 +3517,16 @@
         },
         "score": {
           "query": "startup video approval workflow across production models",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 2,
-          "evidenceScore": 12,
+          "evidenceScore": 6,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 2"
@@ -3500,6 +3626,10 @@
             "Startup video approval workflow across production models example",
             "Approval management software"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -3515,15 +3645,16 @@
         },
         "score": {
           "query": "startup video approval matrix for vendors and AI",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 1,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -3616,6 +3747,10 @@
             "Hebbia AI",
             "Business idea analysis AI"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -3631,15 +3766,16 @@
         },
         "score": {
           "query": "founder video feedback checklist for external editors",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -3745,6 +3881,10 @@
             "Best video editing apps free",
             "Video Maker free download"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -3760,15 +3900,16 @@
         },
         "score": {
           "query": "startup video claims approval across production models",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -3869,6 +4010,10 @@
             "Subquadratic AI",
             "Runway 10m ai builders"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -3884,15 +4029,16 @@
         },
         "score": {
           "query": "AI video human approval controls",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 1,
           "videoOrSocialResults": 3,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 2,
-          "evidenceScore": 12,
+          "evidenceScore": 6,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 2"
@@ -3984,6 +4130,10 @@
             "Trump ai videos",
             "Trump ai duck video"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -3999,15 +4149,16 @@
         },
         "score": {
           "query": "startup video brand consistency across production partners",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 6,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 2,
-          "evidenceScore": 8,
+          "evidenceScore": 2,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 2"
@@ -4102,6 +4253,10 @@
             "Startup video brand consistency across production partners meaning",
             "Startup video brand consistency across production partners examples"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -4117,15 +4272,16 @@
         },
         "score": {
           "query": "startup video brand kit for outsourcing and AI",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -4223,6 +4379,10 @@
             "HubSpot Clip Creator",
             "Best AI for branding design"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -4238,15 +4398,16 @@
         },
         "score": {
           "query": "startup multi format video brand rules for production partners",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 5,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 0,
-          "evidenceScore": 6,
+          "evidenceScore": 0,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 0"
@@ -4338,6 +4499,10 @@
           ],
           "peopleAlsoAsk": [],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -4353,15 +4518,16 @@
         },
         "score": {
           "query": "startup AI video brand QA",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 1,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -4454,6 +4620,10 @@
             "Website QA AI",
             "AI agent for QA testing"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -4469,15 +4639,16 @@
         },
         "score": {
           "query": "startup video partner brand consistency audit",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 5,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 4,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 4"
@@ -4579,6 +4750,10 @@
             "Startup video partner brand consistency audit checklist",
             "Startup video partner brand consistency audit example"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -4594,15 +4769,16 @@
         },
         "score": {
           "query": "startup video production rights checklist across vendors and AI",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 5,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -4703,6 +4879,10 @@
             "List of top AI companies",
             "List of AI companies"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -4718,15 +4898,16 @@
         },
         "score": {
           "query": "startup freelance video copyright ownership",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 0,
           "videoOrSocialResults": 3,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 2,
-          "evidenceScore": 12,
+          "evidenceScore": 6,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 2"
@@ -4818,6 +4999,10 @@
             "Freelance video editor contract template",
             "Upwork"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -4833,15 +5018,16 @@
         },
         "score": {
           "query": "startup AI generated video copyright questions",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 1,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -4931,6 +5117,10 @@
             "AI copyright infringement",
             "Copyright and Artificial Intelligence, Part 1"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -4946,15 +5136,16 @@
         },
         "score": {
           "query": "startup video vendor security checklist",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 9,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 7,
-          "evidenceScore": 17,
+          "evidenceScore": 11,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 7"
@@ -5059,6 +5250,10 @@
             "Vendor requirements Checklist",
             "Vendor dd"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -5074,15 +5269,16 @@
         },
         "score": {
           "query": "startup video source file retention across production models",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -5183,6 +5379,10 @@
             "Azure Video Indexer pricing",
             "Azure AI Video Indexer API"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -5198,15 +5398,16 @@
         },
         "score": {
           "query": "startup video capacity planning by production model",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 1,
           "videoOrSocialResults": 3,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 2,
-          "evidenceScore": 8,
+          "evidenceScore": 2,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 2"
@@ -5293,6 +5494,10 @@
             "Startup video capacity planning by production model example",
             "Capacity planning youtube"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -5308,15 +5513,16 @@
         },
         "score": {
           "query": "startup video turnaround comparison calculator",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 2,
-          "evidenceScore": 8,
+          "evidenceScore": 2,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 2"
@@ -5411,6 +5617,10 @@
             "Startup video turnaround comparison calculator free",
             "Startup video turnaround comparison calculator app"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -5426,15 +5636,16 @@
         },
         "score": {
           "query": "startup video production partner SLA template",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -5535,6 +5746,10 @@
             "Service Level Agreement example PDF",
             "Service Level Agreement template free"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -5550,15 +5765,16 @@
         },
         "score": {
           "query": "startup video revision capacity by production model",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -5651,6 +5867,10 @@
             "GPT-5.6 Sol vs Fable 5",
             "GPT-5.6 Sol, Terra/Luna"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -5666,15 +5886,16 @@
         },
         "score": {
           "query": "scale startup video production",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 4,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 0,
-          "evidenceScore": 6,
+          "evidenceScore": 0,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 0"
@@ -5766,6 +5987,10 @@
           ],
           "peopleAlsoAsk": [],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -5781,15 +6006,16 @@
         },
         "score": {
           "query": "startup video production model selection scorecard",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -5882,6 +6108,10 @@
             "Startup India registration login",
             "Startup India Certificate download PDF"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -5897,15 +6127,16 @@
         },
         "score": {
           "query": "startup video production criteria weighting method",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -6011,6 +6242,10 @@
             "Content creation video",
             "How to become a content creator on TikTok"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -6026,15 +6261,16 @@
         },
         "score": {
           "query": "startup video production model pilot brief",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -6140,6 +6376,10 @@
             "Martini AI video",
             "Application video"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -6155,15 +6395,16 @@
         },
         "score": {
           "query": "startup video vendor operational due diligence",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 6,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -6269,6 +6510,10 @@
             "Vendor due diligence Checklist PDF",
             "Vendor Due Diligence checklist template"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -6284,15 +6529,16 @@
         },
         "score": {
           "query": "video production model quarterly review",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 0,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -6398,6 +6644,10 @@
             "Google Scholar",
             "Journal of Film and Video"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       }
     ],
@@ -7002,7 +7252,9 @@
         "query": "video workflow KPI review",
         "reason": "Retained as a supporting secondary query; the article primary query carries the canonical evidence chain."
       }
-    ]
+    ],
+    "classification": "serp_observed_research_shortlist",
+    "demandValidationStatus": "pending_authenticated_keyword_provider"
   },
   "serpEvidence": [
     {

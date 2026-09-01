@@ -12,6 +12,7 @@ import {
   parseResearchMatrix,
   uniqueResearchQueries,
 } from '../../scripts/research/collect-apify-evidence.mjs';
+import * as evidenceCollector from '../../scripts/research/collect-apify-evidence.mjs';
 
 describe('normalizeAutocompleteItem', () => {
   it('preserves observable discovery provenance', () => {
@@ -56,6 +57,18 @@ describe('normalizeAutocompleteItem', () => {
         scrapedAt: '2026-09-01T00:00:00.000Z',
       }),
     ).toThrow(/US/i);
+  });
+
+  it('rejects observations outside the exact English locale', () => {
+    expect(() =>
+      normalizeAutocompleteItem({
+        keyword: 'demo day video',
+        suggestion: 'vidéo du demo day',
+        country: 'us',
+        language: 'fr',
+        scrapedAt: '2026-09-01T00:00:00.000Z',
+      }),
+    ).toThrow(/English/i);
   });
 });
 
@@ -170,10 +183,30 @@ describe('normalizeSerpItem', () => {
     ).toThrow(/first page/i);
     expect(() => normalizeSerpItem(base, { ...provenance, runId: '' })).toThrow(/runId/i);
   });
+
+  it('rejects first-page US observations outside the exact English locale', () => {
+    expect(() =>
+      normalizeSerpItem(
+        {
+          searchQuery: {
+            term: 'vidéo du demo day',
+            device: 'DESKTOP',
+            page: 1,
+            countryCode: 'US',
+            languageCode: 'fr',
+          },
+          organicResults: [],
+          peopleAlsoAsk: [],
+          relatedQueries: [],
+        },
+        provenance,
+      ),
+    ).toThrow(/English/i);
+  });
 });
 
 describe('rankObservedOpportunity', () => {
-  it('returns an explainable score made only from observed evidence', () => {
+  it('keeps editorial relevance pending and scores only observed evidence', () => {
     const result = rankObservedOpportunity({
       query: 'backup product demo video',
       relevance: 3,
@@ -201,21 +234,42 @@ describe('rankObservedOpportunity', () => {
 
     expect(result).toEqual({
       query: 'backup product demo video',
-      relevance: 3,
+      relevance: null,
+      relevanceStatus: 'pending_editorial_intent_review',
       exactTitleMatches: 0,
       articleResults: 4,
       videoOrSocialResults: 3,
       peopleAlsoAskCount: 4,
       relatedQueryCount: 8,
-      evidenceScore: 18,
+      evidenceScore: 12,
       scoreExplanation: [
-        'ICP relevance: 3/3',
+        'Editorial ICP relevance: pending review and excluded from evidence score',
         'Exact-title saturation: 0/10',
         'People Also Ask questions: 4',
         'Related queries: 8',
       ],
     });
     expect(JSON.stringify(result)).not.toMatch(/volume|difficulty|cpc|traffic|probability/i);
+  });
+
+  it('records an explicit MVP intent approval without adding it to evidence score', () => {
+    const result = rankObservedOpportunity({
+      query: 'startup pitch video',
+      intentReview: {
+        status: 'approved_for_mvp_draft',
+        rationale: 'The retained primary SERP contains startup investor-pitch video results.',
+      },
+      organicResults: [],
+      peopleAlsoAsk: ['How do you make a startup pitch video?'],
+      relatedQueries: ['startup pitch examples'],
+    });
+
+    expect(result.relevance).toBeNull();
+    expect(result.relevanceStatus).toBe('approved_for_mvp_draft');
+    expect(result.evidenceScore).toBe(2);
+    expect(result.scoreExplanation[0]).toBe(
+      'Editorial ICP relevance: approved for MVP draft and excluded from evidence score',
+    );
   });
 
   it('penalizes exact-title saturation and caps observable components', () => {
@@ -234,9 +288,38 @@ describe('rankObservedOpportunity', () => {
       relatedQueries: Array.from({ length: 20 }, (_, index) => `r${index}`),
     });
 
-    expect(result.relevance).toBe(3);
+    expect(result.relevance).toBeNull();
+    expect(result.relevanceStatus).toBe('pending_editorial_intent_review');
     expect(result.exactTitleMatches).toBe(2);
-    expect(result.evidenceScore).toBe(16);
+    expect(result.evidenceScore).toBe(10);
+  });
+});
+
+describe('custom Apify run and dataset provenance', () => {
+  it('exports the run/dataset verifier used by resumed collections', () => {
+    expect(evidenceCollector.resolveVerifiedDatasetIds).toBeTypeOf('function');
+  });
+
+  it('accepts only dataset IDs that match each fetched run default', () => {
+    const runs = [
+      { id: 'run-a', defaultDatasetId: 'dataset-a' },
+      { id: 'run-b', defaultDatasetId: 'dataset-b' },
+    ];
+
+    expect(
+      evidenceCollector.resolveVerifiedDatasetIds(
+        runs,
+        ['dataset-a', 'dataset-b'],
+        'SERP',
+      ),
+    ).toEqual(['dataset-a', 'dataset-b']);
+    expect(() =>
+      evidenceCollector.resolveVerifiedDatasetIds(
+        runs,
+        ['dataset-b', 'dataset-a'],
+        'SERP',
+      ),
+    ).toThrow(/run-a.*dataset-a.*dataset-b/i);
   });
 });
 
@@ -307,7 +390,8 @@ describe('selectObservedArticleQuery', () => {
     ).toEqual({
       matrixPrimaryKeyword: 'broad primary',
       selectedKeyword: 'specific secondary',
-      selectionDecision: 'replaced_empty_primary_with_observed_secondary',
+      selectionDecision:
+        'replaced_empty_primary_with_serp_observed_secondary_pending_intent_review',
       evidence: records[1],
     });
   });
@@ -340,5 +424,60 @@ describe('selectObservedArticleQuery', () => {
         ],
       ),
     ).toBeUndefined();
+  });
+});
+
+describe('committed SERP-observed research shortlist', () => {
+  it('keeps demand metrics pending and limits editorial approval to ten reviewed MVP drafts', async () => {
+    const campaignFiles = [
+      'newly-funded-founder.json',
+      'accelerator-demo-day-founder.json',
+      'video-production-comparison.json',
+      'gtm-content-repurposing-buyer.json',
+      'portfolio-media-platform.json',
+    ];
+    const datasets = await Promise.all(
+      campaignFiles.map(async (filename) =>
+        JSON.parse(await readFile(`data/research/apify/${filename}`, 'utf8')),
+      ),
+    );
+    const selected = datasets.flatMap((dataset) => dataset.selection.selected);
+    const approvedIds = selected
+      .filter(({ intentReview }) => intentReview.status === 'approved_for_mvp_draft')
+      .map(({ articleId }) => articleId)
+      .sort();
+
+    expect(datasets.every(({ state }) => state === 'serp_observed_research_shortlist')).toBe(true);
+    expect(selected).toHaveLength(250);
+    expect(approvedIds).toEqual([
+      'vc-c2-001',
+      'vc-c2-003',
+      'vc-c2-006',
+      'vc-c2-007',
+      'vc-c2-008',
+      'vc-c2-009',
+      'vc-c2-013',
+      'vc-c2-021',
+      'vc-c2-026',
+      'vc-c2-027',
+    ]);
+    expect(
+      selected.filter(
+        ({ intentReview }) => intentReview.status === 'pending_editorial_intent_review',
+      ),
+    ).toHaveLength(240);
+    expect(
+      selected.every(
+        ({ metricValidation, score, intentReview }) =>
+          metricValidation.provider === 'pending'
+          && metricValidation.volume === null
+          && metricValidation.difficulty === null
+          && metricValidation.cpc === null
+          && score.relevance === null
+          && !score.scoreExplanation.some((line: string) => /\d\/3/.test(line))
+          && typeof intentReview.rationale === 'string'
+          && intentReview.rationale.length > 20,
+      ),
+    ).toBe(true);
   });
 });

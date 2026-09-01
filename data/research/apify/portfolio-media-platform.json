@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "campaign": "portfolio-media-platform",
-  "state": "observed_serp_evidence",
+  "state": "serp_observed_research_shortlist",
   "locale": {
     "country": "US",
     "language": "en",
@@ -527,7 +527,7 @@
   },
   "selection": {
     "count": 50,
-    "rationale": "Each article keeps its matrix primary only when first-page organic evidence exists. Empty primaries are replaced by the strongest observed secondary from the same researched article specification; the decision is recorded. Evidence density is scored transparently, while proprietary demand and difficulty metrics remain pending.",
+    "rationale": "Each article keeps its matrix primary only when first-page organic evidence exists. Empty primaries are replaced by the secondary with the densest observed SERP features from the same article specification; this automatic choice does not imply editorial ICP fit. Intent review is recorded separately, and proprietary demand and difficulty metrics remain pending.",
     "selected": [
       {
         "articleId": "vc-c5-001",
@@ -542,15 +542,16 @@
         },
         "score": {
           "query": "portfolio media system for accelerators",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 6,
-          "evidenceScore": 12,
+          "evidenceScore": 6,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 6"
@@ -657,6 +658,10 @@
             "Apm prolaborate",
             "Prolaborate genie"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -672,15 +677,16 @@
         },
         "score": {
           "query": "accelerator cohort operational media readiness",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 1,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 4,
-          "evidenceScore": 10,
+          "evidenceScore": 4,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 4"
@@ -777,6 +783,10 @@
             "Media Innovation Festival 2026",
             "Local News Accelerator"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -792,15 +802,16 @@
         },
         "score": {
           "query": "cohort video content workflow",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 1,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -893,6 +904,10 @@
             "aevyTV video editing cohort reddit",
             "Aevy school video editing course"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -908,15 +923,16 @@
         },
         "score": {
           "query": "accelerator cohort media ownership roles",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 1,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 4,
-          "evidenceScore": 10,
+          "evidenceScore": 4,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 4"
@@ -1013,6 +1029,10 @@
             "Democracy Accelerator",
             "Democratic innovations accelerator program"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -1028,15 +1048,16 @@
         },
         "score": {
           "query": "accelerator cohort media aggregation metrics",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 5,
-          "evidenceScore": 11,
+          "evidenceScore": 5,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 5"
@@ -1142,6 +1163,10 @@
             "Accelerator cohort media aggregation metrics 2022",
             "Google Scholar"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -1157,15 +1182,16 @@
         },
         "score": {
           "query": "portfolio content operations playbook",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 1,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 0,
-          "evidenceScore": 6,
+          "evidenceScore": 0,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 0"
@@ -1257,6 +1283,10 @@
           ],
           "peopleAlsoAsk": [],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -1272,15 +1302,16 @@
         },
         "score": {
           "query": "portfolio company content intake workflow",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 4,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 6,
-          "evidenceScore": 12,
+          "evidenceScore": 6,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 6"
@@ -1379,6 +1410,10 @@
             "Portfolio intake process",
             "Project intake process best practices"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -1394,15 +1429,16 @@
         },
         "score": {
           "query": "accelerator media service delivery model",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 0,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 7,
-          "evidenceScore": 13,
+          "evidenceScore": 7,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 7"
@@ -1502,6 +1538,10 @@
             "Syslo Ventures",
             "Ipi media innovation"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -1517,15 +1557,16 @@
         },
         "score": {
           "query": "cohort content production timeline",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 0,
           "videoOrSocialResults": 3,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 0,
-          "evidenceScore": 6,
+          "evidenceScore": 0,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 0"
@@ -1617,13 +1658,17 @@
           ],
           "peopleAlsoAsk": [],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
         "articleId": "vc-c5-010",
         "matrixPrimaryKeyword": "portfolio content operations dashboard",
         "primaryKeyword": "portfolio media workflow metrics",
-        "selectionDecision": "replaced_empty_primary_with_observed_secondary",
+        "selectionDecision": "replaced_empty_primary_with_serp_observed_secondary_pending_intent_review",
         "metricValidation": {
           "provider": "pending",
           "volume": null,
@@ -1632,15 +1677,16 @@
         },
         "score": {
           "query": "portfolio media workflow metrics",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 7,
-          "evidenceScore": 17,
+          "evidenceScore": 11,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 7"
@@ -1745,6 +1791,10 @@
             "Standard Metrics valuation",
             "Standard Metrics careers"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -1760,15 +1810,16 @@
         },
         "score": {
           "query": "demo day media kit checklist",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -1874,6 +1925,10 @@
             "What is a media kit influencer",
             "Media kit examples PDF"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -1889,15 +1944,16 @@
         },
         "score": {
           "query": "accelerator team demo day media kit template",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 0,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -1998,6 +2054,10 @@
             "Social media kit template",
             "Influencer media kit template free download"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -2013,15 +2073,16 @@
         },
         "score": {
           "query": "demo day media kit workflow",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -2122,6 +2183,10 @@
             "YC Demo Day recording",
             "CREATE-X Demo Day 2026"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -2137,15 +2202,16 @@
         },
         "score": {
           "query": "accelerator team demo day media kit risks",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 1,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 0,
-          "evidenceScore": 6,
+          "evidenceScore": 0,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 0"
@@ -2229,6 +2295,10 @@
           ],
           "peopleAlsoAsk": [],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -2244,15 +2314,16 @@
         },
         "score": {
           "query": "accelerator cohort demo day media kit timeline",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 1,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -2345,6 +2416,10 @@
             "Solo founder accelerator",
             "Accelerator program"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -2360,15 +2435,16 @@
         },
         "score": {
           "query": "founder visibility program for accelerators",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 1,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 0,
-          "evidenceScore": 6,
+          "evidenceScore": 0,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 0"
@@ -2460,6 +2536,10 @@
           ],
           "peopleAlsoAsk": [],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -2475,15 +2555,16 @@
         },
         "score": {
           "query": "portfolio platform founder brand vs company content",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 0,
           "videoOrSocialResults": 3,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 0,
-          "evidenceScore": 10,
+          "evidenceScore": 4,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 0"
@@ -2580,6 +2661,10 @@
             "What are the 7 types of brands?"
           ],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -2595,15 +2680,16 @@
         },
         "score": {
           "query": "founder visibility content workflow",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 2,
-          "evidenceScore": 12,
+          "evidenceScore": 6,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 2"
@@ -2703,6 +2789,10 @@
             "Founder visibility content workflow template",
             "Founder visibility content workflow bynder"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -2718,15 +2808,16 @@
         },
         "score": {
           "query": "accelerator founder social media risk",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 4,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -2835,6 +2926,10 @@
             "Techstars accelerator reddit",
             "Techstars accelerator acceptance rate"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -2850,15 +2945,16 @@
         },
         "score": {
           "query": "accelerator portfolio founder visibility metrics",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 6,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 0,
-          "evidenceScore": 6,
+          "evidenceScore": 0,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 0"
@@ -2950,6 +3046,10 @@
           ],
           "peopleAlsoAsk": [],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -2965,15 +3065,16 @@
         },
         "score": {
           "query": "accelerator content brief template",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 6,
-          "evidenceScore": 12,
+          "evidenceScore": 6,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 6"
@@ -3072,6 +3173,10 @@
             "Build your own copilot solution accelerator",
             "Conversation knowledge mining solution accelerator"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -3087,15 +3192,16 @@
         },
         "score": {
           "query": "portfolio company video source pack checklist",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 0,
-          "evidenceScore": 6,
+          "evidenceScore": 0,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 0"
@@ -3179,6 +3285,10 @@
           ],
           "peopleAlsoAsk": [],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -3194,15 +3304,16 @@
         },
         "score": {
           "query": "master vs modular portfolio content templates",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 1,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -3308,6 +3419,10 @@
             "Student portfolio sample PDF",
             "Student portfolios examples"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -3323,15 +3438,16 @@
         },
         "score": {
           "query": "reusable portfolio content template workflow",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 6,
-          "evidenceScore": 12,
+          "evidenceScore": 6,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 6"
@@ -3422,6 +3538,10 @@
             "Notion paid templates",
             "Portfolio interior design template"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -3437,15 +3557,16 @@
         },
         "score": {
           "query": "accelerator content template selection criteria",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -3546,6 +3667,10 @@
             "EIC Pre Accelerator",
             "EIC Accelerator 2026 dates"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -3561,15 +3686,16 @@
         },
         "score": {
           "query": "portfolio media governance checklist",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -3678,6 +3804,10 @@
             "Practice Standard for project configuration management",
             "Configuration management in project management"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -3693,15 +3823,16 @@
         },
         "score": {
           "query": "portfolio video approval risk register",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 0,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -3802,6 +3933,10 @@
             "Risk register tool",
             "Jira risk Register"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -3817,15 +3952,16 @@
         },
         "score": {
           "query": "accelerator media rights consent workflow",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 3,
           "relatedQueryCount": 3,
-          "evidenceScore": 12,
+          "evidenceScore": 6,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 3",
             "Related queries: 3"
@@ -3925,6 +4061,10 @@
             "Admin consent is required for the permissions requested by this application",
             "Mc1097272"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -3940,15 +4080,16 @@
         },
         "score": {
           "query": "portfolio content approval criteria",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 0,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -4054,6 +4195,10 @@
             "University portfolio examples PDF",
             "USF Architecture portfolio"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -4069,15 +4214,16 @@
         },
         "score": {
           "query": "portfolio media governance scorecard",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 0,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 2,
-          "evidenceScore": 8,
+          "evidenceScore": 2,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 2"
@@ -4180,6 +4326,10 @@
             "Portfolio media governance scorecard example",
             "IIAS website"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -4195,15 +4345,16 @@
         },
         "score": {
           "query": "portfolio media reporting for VC platform teams",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -4304,6 +4455,10 @@
             "Venture capital platforms",
             "Vc platform membership"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -4319,15 +4474,16 @@
         },
         "score": {
           "query": "accelerator content report template",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 0,
-          "evidenceScore": 6,
+          "evidenceScore": 0,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 0"
@@ -4419,6 +4575,10 @@
           ],
           "peopleAlsoAsk": [],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -4434,15 +4594,16 @@
         },
         "score": {
           "query": "portfolio campaign content performance metrics",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 5,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 0,
-          "evidenceScore": 10,
+          "evidenceScore": 4,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 0"
@@ -4539,6 +4700,10 @@
             "What are the 5 key performance indicators in marketing?"
           ],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -4554,15 +4719,16 @@
         },
         "score": {
           "query": "cohort dashboard vs portfolio report",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 3,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 3,
-          "evidenceScore": 13,
+          "evidenceScore": 7,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 3"
@@ -4663,6 +4829,10 @@
             "Cohort dashboard vs portfolio report example",
             "Analytics Accelerator"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -4678,15 +4848,16 @@
         },
         "score": {
           "query": "portfolio media reporting workflow",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 4,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -4800,6 +4971,10 @@
             "Social media manager portfolio template free",
             "Social media manager portfolio Notion"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -4815,15 +4990,16 @@
         },
         "score": {
           "query": "accelerator content program cost model",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 0,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -4929,6 +5105,10 @@
             "Real estate modeling tutor",
             "Best real estate modeling courses"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -4944,15 +5124,16 @@
         },
         "score": {
           "query": "in house vs agency portfolio media operations",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 4,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -5058,6 +5239,10 @@
             "In-house marketing agency",
             "What is in-house marketing"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -5073,15 +5258,16 @@
         },
         "score": {
           "query": "partner capacity planning for cohort content",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 4,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 0,
-          "evidenceScore": 10,
+          "evidenceScore": 4,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 0"
@@ -5178,6 +5364,10 @@
             "Can you provide an example of a cohort analysis?"
           ],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -5193,15 +5383,16 @@
         },
         "score": {
           "query": "portfolio media vendor selection criteria",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 4,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 8,
-          "evidenceScore": 18,
+          "evidenceScore": 12,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 8"
@@ -5307,6 +5498,10 @@
             "Vendor selection process PDF",
             "Vendor selection matrix"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -5322,15 +5517,16 @@
         },
         "score": {
           "query": "accelerator media capacity metrics",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 0,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 2,
           "relatedQueryCount": 0,
-          "evidenceScore": 8,
+          "evidenceScore": 2,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 2",
             "Related queries: 0"
@@ -5425,6 +5621,10 @@
             "What is the capacity of Microsoft Fabric?"
           ],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -5440,15 +5640,16 @@
         },
         "score": {
           "query": "accelerator brand system for portfolio content",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 1,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 2,
-          "evidenceScore": 12,
+          "evidenceScore": 6,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 2"
@@ -5548,6 +5749,10 @@
             "Accelerator brand system for portfolio content template",
             "Accelerator brand system for portfolio content free"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -5563,15 +5768,16 @@
         },
         "score": {
           "query": "accelerator co branding checklist",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 3,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 2,
-          "evidenceScore": 8,
+          "evidenceScore": 2,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 2"
@@ -5666,6 +5872,10 @@
             "Accelerator co branding checklist template",
             "Accelerator co branding checklist free"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -5681,15 +5891,16 @@
         },
         "score": {
           "query": "portfolio company brand governance risks",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 5,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 0,
-          "evidenceScore": 10,
+          "evidenceScore": 4,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 0"
@@ -5786,6 +5997,10 @@
             "What is brand governance?"
           ],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -5801,15 +6016,16 @@
         },
         "score": {
           "query": "accelerator brand rollout workflow",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 0,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 2,
-          "evidenceScore": 8,
+          "evidenceScore": 2,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 2"
@@ -5904,6 +6120,10 @@
             "Accelerator brand rollout workflow template",
             "Accelerator brand rollout workflow agile"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -5919,15 +6139,16 @@
         },
         "score": {
           "query": "accelerator brand consistency metrics",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 5,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 0,
-          "evidenceScore": 10,
+          "evidenceScore": 4,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 0"
@@ -6024,6 +6245,10 @@
             "What are the 5 pillars of brand identity?"
           ],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -6039,15 +6264,16 @@
         },
         "score": {
           "query": "portfolio media pilot checklist",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 2,
-          "evidenceScore": 12,
+          "evidenceScore": 6,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 2"
@@ -6147,6 +6373,10 @@
             "Portfolio media pilot checklist pdf",
             "Portfolio media pilot checklist free"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -6162,15 +6392,16 @@
         },
         "score": {
           "query": "accelerator media pilot timeline",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 1,
           "videoOrSocialResults": 2,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 3,
-          "evidenceScore": 9,
+          "evidenceScore": 3,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 3"
@@ -6266,6 +6497,10 @@
             "Moonshot incubator",
             "Moonshot Challenge"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -6281,15 +6516,16 @@
         },
         "score": {
           "query": "portfolio content pilot workflow",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 1,
           "videoOrSocialResults": 3,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 2,
-          "evidenceScore": 8,
+          "evidenceScore": 2,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 2"
@@ -6384,6 +6620,10 @@
             "Portfolio content pilot workflow template",
             "Portfolio content pilot workflow example"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -6399,15 +6639,16 @@
         },
         "score": {
           "query": "AI media pilot risk controls for accelerators",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 2,
           "videoOrSocialResults": 1,
           "peopleAlsoAskCount": 0,
           "relatedQueryCount": 8,
-          "evidenceScore": 14,
+          "evidenceScore": 8,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 0",
             "Related queries: 8"
@@ -6508,6 +6749,10 @@
             "AI safety conferences",
             "Technical AI safety"
           ]
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       },
       {
@@ -6523,15 +6768,16 @@
         },
         "score": {
           "query": "accelerator media pilot go no go criteria",
-          "relevance": 3,
+          "relevance": null,
+          "relevanceStatus": "pending_editorial_intent_review",
           "exactTitleMatches": 0,
           "articleResults": 1,
           "videoOrSocialResults": 0,
           "peopleAlsoAskCount": 4,
           "relatedQueryCount": 0,
-          "evidenceScore": 10,
+          "evidenceScore": 4,
           "scoreExplanation": [
-            "ICP relevance: 3/3",
+            "Editorial ICP relevance: pending review and excluded from evidence score",
             "Exact-title saturation: 0/10",
             "People Also Ask questions: 4",
             "Related queries: 0"
@@ -6628,6 +6874,10 @@
             "What is an example of an accelerator?"
           ],
           "relatedQueries": []
+        },
+        "intentReview": {
+          "status": "pending_editorial_intent_review",
+          "rationale": "This is a SERP-observed research shortlist entry; editorial ICP and intent fit have not yet been reviewed."
         }
       }
     ],
@@ -7232,7 +7482,9 @@
         "query": "VC platform media rollout decision",
         "reason": "Retained as a supporting secondary query; the article primary query carries the canonical evidence chain."
       }
-    ]
+    ],
+    "classification": "serp_observed_research_shortlist",
+    "demandValidationStatus": "pending_authenticated_keyword_provider"
   },
   "serpEvidence": [
     {
