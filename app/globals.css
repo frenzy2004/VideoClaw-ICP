@@ -1147,6 +1147,8 @@ footer > a:last-child { justify-self: end; }
 .article-page .article-hero h1 { max-width: 1040px; font-size: clamp(2.8rem, 5.2vw, 5.5rem); line-height: 0.99; }
 .article-page .article-description { max-width: 760px; margin: 2rem 0 0; color: var(--muted); font-size: clamp(1.05rem, 1.5vw, 1.3rem); line-height: 1.65; }
 .article-page .article-reading-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(310px, 390px); gap: clamp(3rem, 6vw, 7rem); align-items: start; max-width: 1440px; margin: 0 auto; padding: clamp(4rem, 8vw, 8rem) 4vw; border-bottom: 1px solid var(--ink); }
+.article-page .article-markdown,
+.article-page .article-attribution { min-width: 0; }
 .article-page .article-markdown { width: min(100%, 72ch); font-size: clamp(1rem, 1.25vw, 1.14rem); line-height: 1.78; }
 .article-page .article-markdown > :first-child { margin-top: 0; font-size: 1.16em; }
 .article-page .article-markdown h2 { margin: 3.8rem 0 1.2rem; font-size: clamp(2rem, 3.7vw, 3.6rem); font-weight: 400; letter-spacing: -0.05em; line-height: 1.04; }
