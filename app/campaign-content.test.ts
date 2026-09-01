@@ -131,6 +131,32 @@ describe('campaign content contracts', () => {
     });
   });
 
+  it('carries only stable, allowlisted campaign context fields', () => {
+    expect(
+      formatCampaignEvent({
+        event: 'source_pack_complete',
+        pagePath: '/',
+        timestamp: '2026-09-01T00:00:00.000Z',
+        context: {
+          source_pack_id: 'demo-day-source-pack',
+          source_type: 'mixed',
+          items_total: 8,
+          items_completed: 8,
+        },
+      }),
+    ).toEqual({
+      event: 'source_pack_complete',
+      page_path: '/',
+      timestamp: '2026-09-01T00:00:00.000Z',
+      context: {
+        source_pack_id: 'demo-day-source-pack',
+        source_type: 'mixed',
+        items_total: 8,
+        items_completed: 8,
+      },
+    });
+  });
+
   if (false) {
     // @ts-expect-error Video events require a stable videoId.
     formatCampaignEvent({

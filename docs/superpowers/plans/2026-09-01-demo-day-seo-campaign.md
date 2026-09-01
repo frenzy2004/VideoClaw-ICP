@@ -135,7 +135,7 @@ Expected: all video tests pass.
 
 - [ ] **Step 1: Write a failing rendered-page acceptance test**
 
-Render the page to static markup and assert one H1, the exact alpha URL, a link to `/#source-pack`, all three audience variant labels, visible FAQ answers, and matching `FAQPage`, `BreadcrumbList`, `WebPage`, and `VideoObject` schema types.
+Render the page to static markup and assert one H1, the exact alpha URL, a link to `/#source-pack`, four viewer jobs, three audience variants plus the base prototype, visible FAQ answers, and public-schema contracts limited to `FAQPage`, `BreadcrumbList`, and `WebPage`.
 
 - [ ] **Step 2: Run the route test and verify failure**
 
@@ -178,7 +178,7 @@ Expected: FAIL because the guide route does not exist.
 
 - [ ] **Step 3: Implement the guide and pass tests**
 
-Keep all answer blocks in rendered HTML. Use `Article`, `BreadcrumbList`, and `FAQPage` schema that matches visible text. Do not invent an author biography, customer result, or publication history.
+Keep all answer blocks in rendered HTML. Keep preview JSON-LD absent; the public schema contract is limited to `WebPage`, `BreadcrumbList`, and route-scoped `FAQPage` data that matches visible text. Do not invent an author biography, customer result, or publication history.
 
 - [ ] **Step 4: Verify and commit both route slices**
 
@@ -209,7 +209,7 @@ git commit -m "feat: build demo day campaign routes"
 
 - [ ] **Step 1: Write failing analytics tests**
 
-Render the tracker in jsdom, click a `data-event="alpha_download_click"` link, and assert exactly one `videoclaw:analytics` event and one matching `dataLayer` payload. Dispatch the existing `videoclaw:conversion` event and assert it is normalized once.
+Render the tracker in jsdom, click a `data-vc-event="alpha_download_click"` link, and assert exactly one `videoclaw:analytics` event and one matching `dataLayer` payload. Assert page-view deduplication, query/fragment stripping, and no network, beacon, cookie, or storage side effect.
 
 - [ ] **Step 2: Run tests and verify failure**
 
@@ -219,7 +219,7 @@ Expected: FAIL because the tracker does not exist.
 
 - [ ] **Step 3: Implement analytics and discovery outputs**
 
-Mount the tracker once in `layout.tsx`. Update the source-pack diagnostic to emit `source_pack_complete` at the first transition to eight checks. Correct the two existing download links to the exact alpha URL and link the prototype to the new use-case and guide routes. Keep robots and sitemap empty/noindex unless the production flag is exact.
+Mount the tracker once in `layout.tsx`. Update the source-pack diagnostic to emit `source_pack_complete` at the first transition to eight checks. Correct the two existing access links to the exact alpha URL and link the prototype to the new use-case and guide routes. Keep route metadata, response headers, robots, sitemap, JSON-LD, canonical, and `llms.txt` fail-closed unless the production flag is exact and the publication gate is approved.
 
 - [ ] **Step 4: Run the full verification set and commit**
 

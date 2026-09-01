@@ -43,7 +43,7 @@ Every video uses native controls, `playsInline`, metadata preload, a visible des
 
 `app/campaign-event-tracker.tsx` is the only new client-wide analytics listener. It emits `videoclaw:analytics` browser events and mirrors them to `window.dataLayer` when present. It sends no network request, stores no user identifier, sets no cookie, and keeps no durable browser storage.
 
-`app/campaign-video.tsx` is the reusable client video component. It records play and 90%-complete events while leaving playback under user control.
+`app/campaign-video.tsx` is the reusable client video component. It records the first native play and one native-ended completion per media identity while leaving playback under user control.
 
 ## Measurement contract
 
@@ -60,11 +60,11 @@ Each event includes `event`, `page_path`, and `timestamp`. Link events may inclu
 
 ## SEO, AEO, GEO, and structured data
 
-Each route exports its own title, description, canonical, Open Graph data, and robots policy. The preview remains `noindex, nofollow`. Public indexing becomes possible only when `NEXT_PUBLIC_VIDEOCLAW_PUBLIC_INDEXING=true` is deliberately set for a production build.
+Each route exports its own title, description, Open Graph data, and robots policy. The preview remains `noindex, nofollow`, omits canonical links, omits public JSON-LD, and is excluded from the sitemap and `llms.txt`. Public indexing and production canonicals become possible only when `NEXT_PUBLIC_VIDEOCLAW_PUBLIC_INDEXING=true` is deliberately set for an approved production build.
 
-The use-case page emits `WebPage`, `BreadcrumbList`, `FAQPage`, and truthful `VideoObject` nodes. The guide emits `Article`, `BreadcrumbList`, and `FAQPage`. Structured answers exactly match visible content. Do not add `Product`, `Offer`, `Review`, `AggregateRating`, or outcome claims.
+In an approved public build, the use-case and guide may emit `WebPage`, `BreadcrumbList`, and route-scoped `FAQPage` nodes generated from the same visible FAQ records. Structured answers exactly match visible content. Do not add `Article`, `VideoObject`, `Product`, `Offer`, `Review`, `AggregateRating`, or outcome claims until every required public fact is separately verified.
 
-Add `robots.ts`, `sitemap.ts`, and `public/llms.txt`. The sitemap contains only the two campaign routes and is empty while public indexing is disabled. Production canonicals point to `https://videoclaw.com`, even on a private preview.
+Add `robots.ts`, `sitemap.ts`, and `public/llms.txt`. The sitemap contains only the two campaign routes and is empty while public indexing is disabled. The private `llms.txt` contains only a review-build notice and no campaign inventory.
 
 ## Visual system and accessibility
 
@@ -77,11 +77,11 @@ The deployment is a review build, not a public campaign launch. It must show `PR
 ## Acceptance criteria
 
 - Both exact routes return 200 and render static HTML.
-- Each route has a unique title, description, canonical, one H1, visible direct-answer copy, and matching JSON-LD.
+- Each route has a unique title, description, one H1, and visible direct-answer copy; production-only canonicals and JSON-LD match the visible content.
 - All private preview pages resolve to noindex/nofollow without the explicit production flag.
 - The alpha-access CTA always uses `https://videoclaw.com/alpha/download`.
 - Four local 16:9 campaign videos and their poster images load without external media requests.
 - Analytics events are observable through `videoclaw:analytics` and optional `dataLayer` without a network call.
-- The source-pack diagnostic emits start, completion, and copy events.
+- The source-pack diagnostic emits one completion event on the first transition to eight of eight; start and copy actions remain unreported UI behavior.
 - Tests, lint, and the production build pass.
 - The private preview is deployed and its two campaign routes respond successfully.

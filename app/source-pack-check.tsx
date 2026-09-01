@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { formatCampaignEvent } from './campaign-content';
 
 const checks = [
   ['story', 'Approved story', 'Problem, product mechanism, proof, why now, and next action are agreed.'],
@@ -18,18 +19,33 @@ type CheckKey = (typeof checks)[number][0];
 export default function SourcePackCheck() {
   const [selected, setSelected] = useState<Record<CheckKey, boolean>>(() => Object.fromEntries(checks.map(([key]) => [key, false])) as Record<CheckKey, boolean>);
   const [copied, setCopied] = useState(false);
+  const completionSent = useRef(false);
   const completed = Object.values(selected).filter(Boolean).length;
   const missing = checks.filter(([key]) => !selected[key]);
   const ready = completed === checks.length;
 
   useEffect(() => {
-    window.dispatchEvent(new CustomEvent('videoclaw:conversion', { detail: 'demo_day_page_view' }));
-  }, []);
+    if (completed !== checks.length || completionSent.current) return;
+    completionSent.current = true;
+    window.dispatchEvent(
+      new CustomEvent('videoclaw:analytics', {
+        detail: formatCampaignEvent({
+          event: 'source_pack_complete',
+          pagePath: window.location.pathname,
+          timestamp: new Date().toISOString(),
+          context: {
+            source_pack_id: 'demo-day-source-pack',
+            source_type: 'mixed',
+            items_total: checks.length,
+            items_completed: checks.length,
+          },
+        }),
+      }),
+    );
+  }, [completed]);
 
   function toggle(key: CheckKey) {
-    const firstAction = completed === 0;
     setSelected((current) => ({ ...current, [key]: !current[key] }));
-    if (firstAction) window.dispatchEvent(new CustomEvent('videoclaw:conversion', { detail: 'source_pack_start' }));
   }
 
   async function copyChecklist() {
@@ -37,7 +53,6 @@ export default function SourcePackCheck() {
     try {
       await navigator.clipboard.writeText(`VideoClaw Demo Day source pack\n\n${lines}`);
       setCopied(true);
-      window.dispatchEvent(new CustomEvent('videoclaw:conversion', { detail: 'source_checklist_copy' }));
       window.setTimeout(() => setCopied(false), 1800);
     } catch {
       setCopied(false);
@@ -45,7 +60,14 @@ export default function SourcePackCheck() {
   }
 
   return (
-    <section className="section diagnostic-section" id="source-pack" aria-labelledby="source-title">
+    <section
+      className="section diagnostic-section"
+      id="source-pack"
+      aria-labelledby="source-title"
+      data-vc-source-pack-id="demo-day-source-pack"
+      data-vc-source-type="mixed"
+      data-vc-items-total="8"
+    >
       <div className="section-heading diagnostic-heading">
         <div><p className="card-label">INTERACTIVE SOURCE-PACK DIAGNOSTIC</p><h2 id="source-title">Can your story enter production safely?</h2></div>
         <div className="score" aria-live="polite"><strong>{completed}/{checks.length}</strong><span>{ready ? 'READY FOR HUMAN REVIEW' : 'REQUIREMENTS CONFIRMED'}</span></div>

@@ -1,4 +1,5 @@
 import SourcePackCheck from './source-pack-check';
+import { CAMPAIGN_URLS } from './campaign-content';
 
 const proofPoints = [
   ['01', 'One approved story', 'The same facts anchor every cut, caption, and call to action.'],
@@ -52,30 +53,25 @@ const faqs = [
   { question: 'How fast is delivery?', answer: 'The pilot measures turnaround from source acceptance to approval. Final timing depends on source quality, product complexity, review speed, and the current VideoClaw workflow; no same-day promise is made here.' },
 ];
 
-const faqSchema = {
-  '@context': 'https://schema.org', '@type': 'FAQPage',
-  mainEntity: faqs.map((item) => ({ '@type': 'Question', name: item.question, acceptedAnswer: { '@type': 'Answer', text: item.answer } })),
-};
-
-const breadcrumbSchema = {
-  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'VideoClaw', item: 'https://videoclaw.com/' },
-    { '@type': 'ListItem', position: 2, name: 'Demo Day founder video' },
-  ],
-};
-
 export default function Home() {
   return (
-    <main id="top">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+    <main
+      id="top"
+      data-vc-campaign-id="c2-demo-day"
+      data-vc-page-id="c2-demo-day-prototype"
+      data-vc-page-type="commercial"
+    >
       <div className="review-ribbon">PRIVATE REVIEW PROTOTYPE · NOT A LIVE OFFER</div>
 
       <header className="masthead">
         <a className="wordmark" href="https://videoclaw.com/" aria-label="VideoClaw home">VIDEOCLAW</a>
-        <nav aria-label="Page sections"><a href="#source-pack">Source pack</a><a href="#workflow">Workflow</a><a href="#pilot-lab">Pilot lab</a></nav>
-        <a className="header-cta" href="https://videoclaw.com/download" data-event="download_click">GET THE MAC APP ↗</a>
+        <nav aria-label="Campaign pages and sections">
+          <a href={CAMPAIGN_URLS.useCasePath} data-vc-event="article_click" data-vc-article-id="demo-day-founder-content" data-vc-link-id="home-use-case-nav" data-vc-placement="masthead">USE CASE</a>
+          <a href={CAMPAIGN_URLS.guidePath} data-vc-event="article_click" data-vc-article-id="founder-story-after-demo-day" data-vc-link-id="home-guide-nav" data-vc-placement="masthead">FOUNDER STORY GUIDE</a>
+          <a href="#source-pack">Source pack</a>
+          <a href="#workflow">Workflow</a>
+        </nav>
+        <a className="header-cta" href={CAMPAIGN_URLS.alphaDownload} data-vc-event="alpha_download_click" data-vc-cta-id="masthead-alpha-access" data-vc-placement="masthead">REQUEST PRIVATE-ALPHA MAC ACCESS ↗</a>
       </header>
 
       <section className="hero" aria-labelledby="hero-title">
@@ -86,7 +82,7 @@ export default function Home() {
             <h1 id="hero-title">Demo Day is one moment. Make the founder story keep working.</h1>
             <p className="hero-deck">Turn one approved story and one clean product recording into a forwardable founder-led demo plus investor, customer, and recruiting variants—without changing the underlying claims.</p>
             <div className="hero-actions">
-              <a className="primary-button" href="#source-pack" data-event="source_checklist_open">CHECK YOUR SOURCE PACK</a>
+              <a className="primary-button" href="#source-pack" data-vc-event="article_click" data-vc-article-id="demo-day-source-pack" data-vc-link-id="home-source-pack-hero" data-vc-placement="hero">CHECK YOUR SOURCE PACK</a>
               <a className="text-link" href="#workflow">SEE THE CONTROLLED WORKFLOW ↓</a>
             </div>
           </div>
@@ -140,7 +136,7 @@ export default function Home() {
 
       <section className="closing" aria-labelledby="closing-title">
         <p className="card-label">THE NEXT STEP IS A READINESS CHECK—not a render</p><h2 id="closing-title">Bring the truth. Then make it forwardable.</h2><p>A usable pilot starts with an approved story, clean founder or narration source, honest product proof, cleared evidence, deadline, CTA, restrictions, and a named approver.</p>
-        <div className="hero-actions centered-actions"><a className="primary-button" href="#source-pack" data-event="source_checklist_open">RUN THE SOURCE-PACK CHECK</a><a className="text-link" href="https://videoclaw.com/download" data-event="download_click">EXPLORE VIDEOCLAW ↗</a></div>
+        <div className="hero-actions centered-actions"><a className="primary-button" href="#source-pack" data-vc-event="article_click" data-vc-article-id="demo-day-source-pack" data-vc-link-id="home-source-pack-closing" data-vc-placement="closing">RUN THE SOURCE-PACK CHECK</a><a className="text-link" href={CAMPAIGN_URLS.alphaDownload} data-vc-event="alpha_download_click" data-vc-cta-id="closing-alpha-access" data-vc-placement="closing">REQUEST PRIVATE-ALPHA MAC ACCESS ↗</a></div>
       </section>
 
       <footer><a className="wordmark" href="https://videoclaw.com/">VIDEOCLAW</a><p>Private campaign prototype · US Demo Day continuity pilot · September 2026</p><a href="#top">BACK TO TOP ↑</a></footer>

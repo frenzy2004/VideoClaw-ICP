@@ -33,7 +33,19 @@ export type CampaignEventName =
 type CampaignEventBaseInput = {
   pagePath: string;
   timestamp: string;
+  context?: CampaignEventContext;
 };
+
+export type CampaignEventContext = Partial<{
+  cta_id: string;
+  placement: string;
+  article_id: string;
+  link_id: string;
+  source_pack_id: string;
+  source_type: string;
+  items_total: number;
+  items_completed: number;
+}>;
 
 export type CampaignEventInput =
   | (CampaignEventBaseInput & {
@@ -58,6 +70,7 @@ export type CampaignEvent = {
   timestamp: string;
   href?: string;
   video_id?: string;
+  context?: CampaignEventContext;
 };
 
 export function isPublicIndexingEnabled(value = process.env.NEXT_PUBLIC_VIDEOCLAW_PUBLIC_INDEXING) {
@@ -103,6 +116,7 @@ export function buildBreadcrumbSchema(items: BreadcrumbItem[]) {
 
 export function formatCampaignEvent(input: CampaignEventInput): CampaignEvent {
   const href = 'href' in input ? normalizeSameSiteHref(input.href) : undefined;
+  const context = sanitizeContext(input.context);
 
   return {
     event: input.event,
@@ -110,7 +124,32 @@ export function formatCampaignEvent(input: CampaignEventInput): CampaignEvent {
     timestamp: input.timestamp,
     ...(href ? { href } : {}),
     ...('videoId' in input && input.videoId ? { video_id: input.videoId } : {}),
+    ...(context ? { context } : {}),
   };
+}
+
+function sanitizeContext(context: CampaignEventContext | undefined) {
+  if (!context) return undefined;
+
+  const sanitized: CampaignEventContext = {};
+  const stringKeys = [
+    'cta_id',
+    'placement',
+    'article_id',
+    'link_id',
+    'source_pack_id',
+    'source_type',
+  ] as const;
+  const numberKeys = ['items_total', 'items_completed'] as const;
+
+  for (const key of stringKeys) {
+    if (typeof context[key] === 'string' && context[key]) sanitized[key] = context[key];
+  }
+  for (const key of numberKeys) {
+    if (typeof context[key] === 'number' && Number.isFinite(context[key])) sanitized[key] = context[key];
+  }
+
+  return Object.keys(sanitized).length > 0 ? sanitized : undefined;
 }
 
 function normalizePagePath(value: string) {
