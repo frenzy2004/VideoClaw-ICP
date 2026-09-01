@@ -302,7 +302,86 @@ git add app/seo/content-map app/globals.css
 git commit -m "feat: add SEO content map and attribution workflow"
 ```
 
-### Task 5: Five 50-article campaign libraries and owned editorial media
+### Task 5: Live Apify candidate discovery and US SERP evidence
+
+**Files:**
+- Create: `lib/keywords/apify-evidence.mjs`
+- Create: `lib/keywords/apify-evidence.test.ts`
+- Create: `scripts/research/collect-apify-evidence.mjs`
+- Create: `data/research/apify/run-manifest.json`
+- Create: `data/research/apify/newly-funded-founder.json`
+- Create: `data/research/apify/accelerator-demo-day-founder.json`
+- Create: `data/research/apify/video-production-comparison.json`
+- Create: `data/research/apify/gtm-content-repurposing-buyer.json`
+- Create: `data/research/apify/portfolio-media-platform.json`
+
+**Interfaces:**
+- Consumes: the five 50-opportunity research matrices plus runtime `APIFY_TOKEN`.
+- Produces: `normalizeAutocompleteItem(item)`, `normalizeSerpItem(item, provenance)`, `rankObservedOpportunity(record)`, five normalized candidate/SERP datasets, and a run manifest containing Actor, run, dataset, country, language, and observation timestamps.
+
+- [ ] **Step 1: Write failing evidence-normalization tests**
+
+Use hand-written Apify fixtures and assert that autocomplete output preserves keyword, suggestion, parent, depth, country, language, and scraped timestamp. Assert that SERP output preserves query, US locale, observation time, first-page competitors with positions/domains, People Also Ask questions, related queries, Actor ID, run ID, and dataset ID.
+
+Prove that `rankObservedOpportunity` uses only observable fields and returns this transparent shape:
+
+```ts
+{
+  query: 'backup product demo video',
+  relevance: 3,
+  exactTitleMatches: 0,
+  articleResults: 4,
+  videoOrSocialResults: 3,
+  peopleAlsoAskCount: 4,
+  relatedQueryCount: 8,
+  evidenceScore: 18,
+  scoreExplanation: [
+    'ICP relevance: 3/3',
+    'Exact-title saturation: 0/10',
+    'People Also Ask questions: 4',
+    'Related queries: 8',
+  ],
+}
+```
+
+The score must never include or imply volume, difficulty, CPC, traffic potential, or ranking probability.
+
+- [ ] **Step 2: Run focused tests and verify RED**
+
+Run: `pnpm test lib/keywords/apify-evidence.test.ts`
+
+Expected: FAIL because the evidence normalizer does not exist.
+
+- [ ] **Step 3: Implement normalizers, redaction, and the collection CLI**
+
+The CLI accepts `--campaign`, `--matrix`, and `--out`. It reads `APIFY_TOKEN` from the process environment, never command-line arguments, and throws when missing. It redacts authorization values from errors. It uses `automation-lab/google-autocomplete-scraper` for discovery and Apify-maintained `apify/google-search-scraper` for SERPs.
+
+Autocomplete settings are US/en, ten campaign seeds, depth 1, ten suggestions, and alphabet expansion. SERP settings are US/en desktop, one page per query, unfiltered results off, ads off, lead enrichment off, website content off, and paid AI add-ons off.
+
+- [ ] **Step 4: Expand and normalize at least 100 candidates per campaign**
+
+Combine the matrix primary/secondary queries with autocomplete suggestions. Normalize case and whitespace, remove navigational noise and unrelated celebrity/event meanings, require a campaign-specific anchor, deduplicate, and retain 100–200 candidates for each campaign. Record rejected queries and reasons; do not silently discard ambiguous results.
+
+- [ ] **Step 5: Collect first-page US Google evidence**
+
+Run one SERP request per retained candidate. Persist the first ten organic results, result types, titles, URLs, snippets, People Also Ask questions, related queries, observation time, Actor, run, and dataset IDs. Preserve the raw Apify dataset IDs in `run-manifest.json` so the complete external result can be audited without committing credentials.
+
+- [ ] **Step 6: Select 50 observed opportunities per campaign**
+
+Use ICP relevance, intent fit, exact-title saturation, result composition, PAA/related-query evidence, and the defensible VideoClaw content gap. Keep exactly 50 per campaign, document the selection rationale, and mark every proprietary keyword metric pending. A broad/noisy seed such as `demo day video` may remain research evidence but must not be selected merely because it was a seed.
+
+- [ ] **Step 7: Verify and commit**
+
+Run: `pnpm test lib/keywords/apify-evidence.test.ts && pnpm run typecheck && git grep -n 'apify_api_' -- ':!pnpm-lock.yaml'`
+
+Expected: evidence tests and typecheck pass; credential grep returns no matches.
+
+```bash
+git add lib/keywords/apify-evidence.mjs lib/keywords/apify-evidence.test.ts scripts/research data/research/apify
+git commit -m "research: validate article opportunities with live US SERPs"
+```
+
+### Task 6: Five 50-article campaign libraries and owned editorial media
 
 **Files:**
 - Create: `content/articles/newly-funded-founder/*.md` (50 files)
@@ -376,7 +455,7 @@ git add content/articles content/article-library.test.ts public/media/articles
 git commit -m "content: add five traceable 50-article campaigns"
 ```
 
-### Task 6: Publication gates, sitemap, robots, and library navigation
+### Task 7: Publication gates, sitemap, robots, and library navigation
 
 **Files:**
 - Modify: `app/sitemap.ts`
@@ -412,7 +491,7 @@ git add app
 git commit -m "feat: gate article discovery and add review navigation"
 ```
 
-### Task 7: End-to-end verification and existing Vercel review deployment
+### Task 8: End-to-end verification and existing Vercel review deployment
 
 **Files:**
 - Create: `docs/qa/2026-09-01-markdown-content-engine-verification.md`
