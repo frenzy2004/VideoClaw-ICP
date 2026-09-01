@@ -145,13 +145,7 @@ export const guideSchemaNodes = [webPageSchema, breadcrumbSchema, faqSchema];
 
 export default function GuidePage() {
   return (
-    <main
-      className="guide-page"
-      id="top"
-      data-vc-campaign-id="c2-demo-day"
-      data-vc-page-id="c2-demo-day-guide"
-      data-vc-page-type="article"
-    >
+    <>
       <a className="skip-link" href="#main-content">Skip to main content</a>
       {publicIndexing
         ? guideSchemaNodes.map((node) => (
@@ -177,6 +171,13 @@ export default function GuidePage() {
         <a className="guide-header-link" href={CAMPAIGN_URLS.useCasePath} data-vc-event="article_click" data-vc-article-id="demo-day-use-case" data-vc-link-id="guide-use-case-header" data-vc-placement="masthead">SEE THE CAMPAIGN →</a>
       </header>
 
+      <main
+        className="guide-page"
+        id="top"
+        data-vc-campaign-id="c2-demo-day"
+        data-vc-page-id="c2-demo-day-guide"
+        data-vc-page-type="article"
+      >
       <article className="guide-article" id="main-content" tabIndex={-1}>
         <header className="guide-hero">
           <p className="guide-breadcrumb"><a href={CAMPAIGN_URLS.siteHome}>VideoClaw</a> / Guides / Demo Day</p>
@@ -350,11 +351,12 @@ export default function GuidePage() {
         </section>
       </article>
 
+      </main>
       <footer className="campaign-footer guide-footer" role="contentinfo">
         <a className="wordmark" href={CAMPAIGN_URLS.siteHome}>VIDEOCLAW</a>
         <p>{publicIndexing ? 'US Demo Day founder guide · September 2026' : 'Private editorial preview · US Demo Day content system · September 2026'}</p>
         <a href="#top">BACK TO TOP ↑</a>
       </footer>
-    </main>
+    </>
   );
 }

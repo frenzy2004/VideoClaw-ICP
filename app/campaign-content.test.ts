@@ -91,13 +91,13 @@ describe('campaign content contracts', () => {
         event: 'video_play',
         pagePath: '/use-cases/demo-day-founder-content',
         timestamp: '2026-09-01T00:00:00.000Z',
-        videoId: 'investor-cut',
+        videoId: 'demo-day-investor-prototype',
       }),
     ).toEqual({
       event: 'video_play',
       page_path: '/use-cases/demo-day-founder-content',
       timestamp: '2026-09-01T00:00:00.000Z',
-      video_id: 'investor-cut',
+      video_id: 'demo-day-investor-prototype',
     });
   });
 
@@ -184,16 +184,40 @@ describe('campaign content contracts', () => {
         event: 'video_play',
         page_path: '/use-cases/demo-day-founder-content?email=founder@example.com',
         timestamp: '2026-09-01T00:00:00.000Z',
-        video_id: 'investor-cut',
+        video_id: 'demo-day-investor-prototype',
         full_url: 'https://example.com/private',
       }),
     ).toEqual({
       event: 'video_play',
       page_path: '/use-cases/demo-day-founder-content',
       timestamp: '2026-09-01T00:00:00.000Z',
-      video_id: 'investor-cut',
+      video_id: 'demo-day-investor-prototype',
     });
     expect(sanitizeCampaignEvent({ event: 'unknown' })).toBeUndefined();
+  });
+
+  it('rejects malformed timestamps and unrecognized direct-event identifiers', () => {
+    expect(
+      sanitizeCampaignEvent({
+        event: 'video_play',
+        page_path: '/use-cases/demo-day-founder-content',
+        timestamp: 'founder@example.com',
+        video_id: 'founder-example-com',
+      }),
+    ).toBeUndefined();
+    expect(
+      sanitizeCampaignEvent({
+        event: 'source_pack_complete',
+        page_path: '/',
+        timestamp: '2026-09-01T00:00:00.000Z',
+        context: {
+          source_pack_id: 'account-123456789',
+          source_type: 'phone-60123456789',
+          items_total: 60123456789,
+          items_completed: 60123456789,
+        },
+      }),
+    ).toBeUndefined();
   });
 
   if (false) {

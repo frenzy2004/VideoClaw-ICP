@@ -98,4 +98,43 @@ describe('CampaignEventTracker', () => {
     expect((window as Window & { dataLayer: unknown[] }).dataLayer).toEqual([]);
     window.removeEventListener('videoclaw:analytics', listener);
   });
+
+  it('rejects hostile direct events before the dataLayer boundary', () => {
+    render(<CampaignEventTracker />);
+    const dataLayer = (window as Window & { dataLayer: unknown[] }).dataLayer;
+    dataLayer.length = 0;
+
+    window.dispatchEvent(
+      new CustomEvent('videoclaw:analytics', {
+        detail: {
+          event: 'video_play',
+          page_path: '/use-cases/demo-day-founder-content',
+          timestamp: 'founder@example.com',
+          video_id: 'founder-example-com',
+          full_url: 'https://example.com/private',
+        },
+      }),
+    );
+
+    expect(dataLayer).toEqual([]);
+  });
+
+  it('suppresses page, click, and direct-event mirroring when DNT is enabled', () => {
+    Object.defineProperty(navigator, 'doNotTrack', { configurable: true, value: '1' });
+    render(<CampaignEventTracker />);
+    const dataLayer = (window as Window & { dataLayer: unknown[] }).dataLayer;
+
+    window.dispatchEvent(
+      new CustomEvent('videoclaw:analytics', {
+        detail: {
+          event: 'video_play',
+          page_path: '/use-cases/demo-day-founder-content',
+          timestamp: '2026-09-01T00:00:00.000Z',
+          video_id: 'demo-day-core-prototype',
+        },
+      }),
+    );
+
+    expect(dataLayer).toEqual([]);
+  });
 });

@@ -14,7 +14,8 @@
     "start:next": "next start",
     "start:sites": "vinext start",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
-    "test": "vitest run"
+    "test": "vitest run",
+    "typecheck": "next typegen && tsc --noEmit --incremental false --pretty false"
   },
   "dependencies": {
     "next": "16.2.6",

@@ -26,7 +26,7 @@ describe('CampaignVideo', () => {
   it('renders an accessible native player under user control', () => {
     render(
       <CampaignVideo
-        id="investor-cut"
+        id="demo-day-investor-prototype"
         src="/media/demo-day/investor-16x9.mp4"
         poster="/media/demo-day/investor-poster.jpg"
         title="Investor proof sequence"
@@ -67,7 +67,7 @@ describe('CampaignVideo', () => {
 
     render(
       <CampaignVideo
-        id="investor-cut"
+        id="demo-day-investor-prototype"
         src="/media/demo-day/investor-16x9.mp4"
         poster="/media/demo-day/investor-poster.jpg"
         title="Investor proof sequence"
@@ -87,12 +87,12 @@ describe('CampaignVideo', () => {
       expect.objectContaining({
         event: 'video_play',
         page_path: '/use-cases/demo-day-founder-content',
-        video_id: 'investor-cut',
+        video_id: 'demo-day-investor-prototype',
       }),
       expect.objectContaining({
         event: 'video_complete',
         page_path: '/use-cases/demo-day-founder-content',
-        video_id: 'investor-cut',
+        video_id: 'demo-day-investor-prototype',
       }),
     ]);
 
@@ -106,7 +106,7 @@ describe('CampaignVideo', () => {
 
     const { rerender } = render(
       <CampaignVideo
-        id="investor-cut"
+        id="demo-day-investor-prototype"
         src="/media/demo-day/investor-16x9.mp4"
         poster="/media/demo-day/investor-poster.jpg"
         captionsSrc="/media/demo-day/investor.en.vtt"
@@ -121,7 +121,7 @@ describe('CampaignVideo', () => {
 
     rerender(
       <CampaignVideo
-        id="customer-cut"
+        id="demo-day-customer-prototype"
         src="/media/demo-day/customer-16x9.mp4"
         poster="/media/demo-day/customer-poster.jpg"
         captionsSrc="/media/demo-day/customer.en.vtt"
@@ -135,10 +135,10 @@ describe('CampaignVideo', () => {
     fireEvent.ended(screen.getByLabelText('Customer proof sequence'));
 
     expect(details.map(({ event, video_id: videoId }) => `${event}:${videoId}`)).toEqual([
-      'video_play:investor-cut',
-      'video_complete:investor-cut',
-      'video_play:customer-cut',
-      'video_complete:customer-cut',
+      'video_play:demo-day-investor-prototype',
+      'video_complete:demo-day-investor-prototype',
+      'video_play:demo-day-customer-prototype',
+      'video_complete:demo-day-customer-prototype',
     ]);
 
     window.removeEventListener('videoclaw:analytics', listener);
@@ -152,7 +152,7 @@ describe('CampaignVideo', () => {
 
     render(
       <CampaignVideo
-        id="investor-cut"
+        id="demo-day-investor-prototype"
         src="/media/demo-day/investor-16x9.mp4"
         poster="/media/demo-day/investor-poster.jpg"
         captionsSrc="/media/demo-day/investor.en.vtt"

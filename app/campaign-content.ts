@@ -137,8 +137,11 @@ export function buildBreadcrumbSchema(items: BreadcrumbItem[]): BreadcrumbSchema
 
 export function formatCampaignEvent(input: CampaignEventInput): CampaignEvent {
   const href = 'href' in input ? normalizeSameSiteHref(input.href) : undefined;
-  const context = sanitizeContext(input.context);
-  const videoId = 'videoId' in input ? sanitizeIdentifier(input.videoId) : undefined;
+  const context = sanitizeContext(input.context, input.event).value;
+  const videoId =
+    'videoId' in input && typeof input.videoId === 'string' && SAFE_VIDEO_IDS.has(input.videoId)
+      ? input.videoId
+      : undefined;
 
   return {
     event: input.event,
@@ -155,18 +158,22 @@ export function sanitizeCampaignEvent(value: unknown): CampaignEvent | undefined
   const record = value as Record<string, unknown>;
   if (!isCampaignEventName(record.event)) return undefined;
   if (typeof record.page_path !== 'string' || typeof record.timestamp !== 'string') return undefined;
+  const timestamp = sanitizeTimestamp(record.timestamp);
+  if (!timestamp) return undefined;
 
-  const context =
-    record.context && typeof record.context === 'object'
-      ? (record.context as CampaignEventContext)
-      : undefined;
+  if (record.context !== undefined && (!record.context || typeof record.context !== 'object' || Array.isArray(record.context))) {
+    return undefined;
+  }
+  const contextResult = sanitizeContext(record.context as CampaignEventContext | undefined, record.event);
+  if (!contextResult.valid) return undefined;
+  const context = contextResult.value;
 
   if (record.event === 'video_play' || record.event === 'video_complete') {
-    if (typeof record.video_id !== 'string' || !sanitizeIdentifier(record.video_id)) return undefined;
+    if (typeof record.video_id !== 'string' || !SAFE_VIDEO_IDS.has(record.video_id)) return undefined;
     return formatCampaignEvent({
       event: record.event,
       pagePath: record.page_path,
-      timestamp: record.timestamp,
+      timestamp,
       videoId: record.video_id,
       context,
     });
@@ -176,7 +183,7 @@ export function sanitizeCampaignEvent(value: unknown): CampaignEvent | undefined
     return formatCampaignEvent({
       event: record.event,
       pagePath: record.page_path,
-      timestamp: record.timestamp,
+      timestamp,
       href: typeof record.href === 'string' ? record.href : undefined,
       context,
     });
@@ -185,34 +192,55 @@ export function sanitizeCampaignEvent(value: unknown): CampaignEvent | undefined
   return formatCampaignEvent({
     event: record.event,
     pagePath: record.page_path,
-    timestamp: record.timestamp,
+    timestamp,
     context,
   });
 }
 
-function sanitizeContext(context: CampaignEventContext | undefined) {
-  if (!context) return undefined;
+function sanitizeContext(context: CampaignEventContext | undefined, event: CampaignEventName) {
+  if (!context) {
+    return { valid: event !== 'source_pack_complete', value: undefined };
+  }
 
   const sanitized: CampaignEventContext = {};
-  const stringKeys = [
-    'cta_id',
-    'placement',
-    'article_id',
-    'link_id',
-    'source_pack_id',
-    'source_type',
-  ] as const;
-  const numberKeys = ['items_total', 'items_completed'] as const;
+  const allowedKeys = CONTEXT_KEYS_BY_EVENT[event];
+  let valid = true;
 
-  for (const key of stringKeys) {
+  for (const rawKey of Object.keys(context)) {
+    if (!allowedKeys.has(rawKey as keyof CampaignEventContext)) {
+      valid = false;
+      continue;
+    }
+
+    const key = rawKey as keyof CampaignEventContext;
     const value = context[key];
-    if (typeof value === 'string' && sanitizeIdentifier(value)) sanitized[key] = value;
-  }
-  for (const key of numberKeys) {
-    if (typeof context[key] === 'number' && Number.isFinite(context[key])) sanitized[key] = context[key];
+    if (key === 'items_total' || key === 'items_completed') {
+      if (value === 8) sanitized[key] = value;
+      else valid = false;
+      continue;
+    }
+
+    if (typeof value === 'string' && SAFE_CONTEXT_VALUES[key]?.has(value)) {
+      sanitized[key] = value;
+    } else {
+      valid = false;
+    }
   }
 
-  return Object.keys(sanitized).length > 0 ? sanitized : undefined;
+  if (
+    event === 'source_pack_complete' &&
+    (sanitized.source_pack_id !== 'demo-day-source-pack' ||
+      sanitized.source_type !== 'mixed' ||
+      sanitized.items_total !== 8 ||
+      sanitized.items_completed !== 8)
+  ) {
+    valid = false;
+  }
+
+  return {
+    valid,
+    value: Object.keys(sanitized).length > 0 ? sanitized : undefined,
+  };
 }
 
 function normalizePagePath(value: string) {
@@ -243,10 +271,52 @@ const SAFE_HREF_PATHS = new Set<string>([
   ...SAFE_PAGE_PATHS,
   new URL(CAMPAIGN_URLS.alphaDownload).pathname,
 ]);
-const SAFE_IDENTIFIER = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const SAFE_VIDEO_IDS = new Set([
+  'demo-day-core-prototype',
+  'demo-day-investor-prototype',
+  'demo-day-customer-prototype',
+  'demo-day-recruiting-prototype',
+]);
 
-function sanitizeIdentifier(value: string | undefined) {
-  if (!value || value.length > 80 || !SAFE_IDENTIFIER.test(value)) return undefined;
+const SAFE_CONTEXT_VALUES: Partial<Record<keyof CampaignEventContext, Set<string>>> = {
+  cta_id: new Set(['masthead-alpha-access', 'hero-alpha-access', 'closing-alpha-access', 'guide-alpha-access']),
+  placement: new Set(['masthead', 'hero', 'closing', 'guide-body', 'guide-handoff', 'source-controls']),
+  article_id: new Set([
+    'demo-day-founder-content',
+    'founder-story-after-demo-day',
+    'demo-day-source-pack',
+    'demo-day-use-case',
+  ]),
+  link_id: new Set([
+    'home-use-case-nav',
+    'home-guide-nav',
+    'home-source-pack-hero',
+    'home-source-pack-closing',
+    'guide-use-case-nav',
+    'guide-use-case-header',
+    'guide-source-pack',
+    'guide-use-case',
+    'use-case-guide-nav',
+    'hero-source-pack',
+    'source-controls-check',
+    'closing-source-pack',
+  ]),
+  source_pack_id: new Set(['demo-day-source-pack']),
+  source_type: new Set(['mixed']),
+};
+
+const CONTEXT_KEYS_BY_EVENT: Record<CampaignEventName, Set<keyof CampaignEventContext>> = {
+  page_view: new Set(),
+  video_play: new Set(),
+  video_complete: new Set(),
+  article_click: new Set(['placement', 'article_id', 'link_id']),
+  alpha_download_click: new Set(['placement', 'cta_id']),
+  source_pack_complete: new Set(['source_pack_id', 'source_type', 'items_total', 'items_completed']),
+};
+
+function sanitizeTimestamp(value: string) {
+  const timestamp = new Date(value);
+  if (!Number.isFinite(timestamp.getTime()) || timestamp.toISOString() !== value) return undefined;
   return value;
 }
 

@@ -158,13 +158,7 @@ export const useCaseSchemaNodes = [webPageSchema, breadcrumbSchema, faqSchema];
 
 export default function UseCasePage() {
   return (
-    <main
-      className="campaign-page"
-      id="top"
-      data-vc-campaign-id="c2-demo-day"
-      data-vc-page-id="c2-demo-day-use-case"
-      data-vc-page-type="commercial"
-    >
+    <>
       <a className="skip-link" href="#main-content">Skip to main content</a>
       {publicIndexing
         ? useCaseSchemaNodes.map((node) => (
@@ -200,6 +194,13 @@ export default function UseCasePage() {
         </a>
       </header>
 
+      <main
+        className="campaign-page"
+        id="top"
+        data-vc-campaign-id="c2-demo-day"
+        data-vc-page-id="c2-demo-day-use-case"
+        data-vc-page-type="commercial"
+      >
       <section className="campaign-hero" id="main-content" tabIndex={-1} aria-labelledby="campaign-hero-title">
         <div className="campaign-eyebrow">
           <span>US ACCELERATOR FOUNDERS</span>
@@ -426,11 +427,12 @@ export default function UseCasePage() {
         </div>
       </section>
 
+      </main>
       <footer className="campaign-footer" role="contentinfo">
         <a className="wordmark" href={CAMPAIGN_URLS.siteHome}>VIDEOCLAW</a>
         <p>{publicIndexing ? 'US Demo Day founder content system · September 2026' : 'Private campaign preview · US Demo Day continuity · September 2026'}</p>
         <a href="#top">BACK TO TOP ↑</a>
       </footer>
-    </main>
+    </>
   );
 }

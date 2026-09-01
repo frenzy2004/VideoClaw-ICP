@@ -1,6 +1,10 @@
 'use client';
 
-import { formatCampaignEvent, type CampaignEventInput } from './campaign-content';
+import {
+  formatCampaignEvent,
+  sanitizeCampaignEvent,
+  type CampaignEventInput,
+} from './campaign-content';
 
 declare global {
   interface Navigator {
@@ -14,10 +18,12 @@ export function campaignAnalyticsSuppressed() {
 
 export function emitCampaignEvent(input: CampaignEventInput) {
   if (campaignAnalyticsSuppressed()) return false;
+  const event = sanitizeCampaignEvent(formatCampaignEvent(input));
+  if (!event) return false;
 
   window.dispatchEvent(
     new CustomEvent('videoclaw:analytics', {
-      detail: formatCampaignEvent(input),
+      detail: event,
     }),
   );
   return true;
