@@ -1,4 +1,4 @@
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, render, screen, within } from '@testing-library/react';
 import { afterEach, describe, expect, it } from 'vitest';
 import DossierPage, { metadata } from './page';
 
@@ -21,11 +21,11 @@ describe('Private Dream pilot dossier', () => {
 
     expect(screen.getByText('PRIVATE ACCOUNT DOSSIER · NOINDEX · NON-AFFILIATED')).toBeVisible();
     const sourceLinks = screen.getAllByRole('link', { name: 'Dream public company profile' });
-    expect(sourceLinks).toHaveLength(2);
+    expect(sourceLinks).toHaveLength(3);
     for (const sourceLink of sourceLinks) {
       expect(sourceLink).toHaveAttribute('href', 'https://www.ycombinator.com/companies/dream');
     }
-    expect(screen.getAllByText('Checked 2026-09-01')).toHaveLength(2);
+    expect(screen.getAllByText('Checked 2026-09-01')).toHaveLength(3);
 
     expect(screen.getByRole('heading', { name: 'Selection rationale' })).toBeVisible();
     expect(screen.getByRole('heading', { name: 'Exclusions' })).toBeVisible();
@@ -45,6 +45,23 @@ describe('Private Dream pilot dossier', () => {
     expect(container.querySelectorAll('.dream-claim-ledger tbody tr')).toHaveLength(5);
     expect(container.querySelectorAll('.dream-measurement tbody tr')).toHaveLength(3);
     expect(container.querySelectorAll('.dream-panel details')).toHaveLength(2);
+  });
+
+  it('keeps the factual selection rationale source-linked and dated in place', () => {
+    render(<DossierPage />);
+
+    const selectionRationale = screen.getByRole('region', { name: 'Selection rationale' });
+    const factualClaim = within(selectionRationale).getByText(
+      'The public company profile describes a physical-world computer-vision workflow suitable for a source-controlled Demo Day qualification exercise.',
+    );
+    const factualClaimItem = factualClaim.closest('li');
+
+    expect(factualClaimItem).not.toBeNull();
+    expect(within(factualClaimItem as HTMLElement).getByRole('link', { name: 'Dream public company profile' })).toHaveAttribute(
+      'href',
+      'https://www.ycombinator.com/companies/dream',
+    );
+    expect(within(factualClaimItem as HTMLElement).getByText('Checked 2026-09-01')).toBeVisible();
   });
 
   it('uses only the generic VideoClaw master with the exact non-affiliation boundary', () => {

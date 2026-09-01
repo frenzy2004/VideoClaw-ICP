@@ -19,6 +19,7 @@ const genericVideoCaption =
 
 export default function DreamDemoDayDossierPage() {
   const prohibitedClaims = dreamPilot.claimLedger.filter((claim) => claim.state === 'prohibited');
+  const selectionRationaleSource = dreamPilot.publicFacts[0];
 
   return (
     <div className="dream-dossier" data-vc-page-path={DREAM_PILOT_PATH}>
@@ -47,7 +48,12 @@ export default function DreamDemoDayDossierPage() {
             <h2 id="selection-rationale-title">Selection rationale</h2>
           </div>
           <ul>
-            {dreamPilot.selectionRationale.map((rationale) => <li key={rationale}>{rationale}</li>)}
+            {dreamPilot.selectionRationale.map((rationale, index) => (
+              <li key={rationale}>
+                {rationale}
+                {index === 0 ? <><a href={selectionRationaleSource.sourceUrl}>Dream public company profile</a> <span>Checked {selectionRationaleSource.checkedAt}</span></> : null}
+              </li>
+            ))}
           </ul>
         </section>
 
