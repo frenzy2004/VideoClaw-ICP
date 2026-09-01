@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { ArticleRecord } from '../content/articles';
-import { auditArticle, isArticlePublishable } from './article-audit';
+import { auditArticle, isArticlePublishable, type ArticleAudit } from './article-audit';
 
 const longCopy = Array.from({ length: 610 }, (_, index) => `word${index + 1}`).join(' ');
 
@@ -89,26 +89,58 @@ function articleWith(
     frontmatter?: Partial<ArticleRecord['frontmatter']>;
   } = {},
 ): ArticleRecord {
+  const base = structuredClone(validDraft);
   return {
-    ...validDraft,
+    ...base,
     ...changes,
     frontmatter: {
-      ...validDraft.frontmatter,
+      ...base.frontmatter,
       ...changes.frontmatter,
     },
   };
 }
 
-function findingCodes(article: ArticleRecord, assetExists = () => true): string[] {
-  return auditArticle(article, assetExists).blockingFindings.map((finding) => finding.code);
+const existingImage = () => ({ exists: true, width: 1200, height: 675 });
+
+function approvedArticle(): ArticleRecord {
+  return articleWith({
+    frontmatter: {
+      status: 'publishable',
+      indexing: 'index',
+      keyword_evidence: {
+        provider: 'semrush',
+        country: 'US',
+        observed_at: '2026-09-01',
+        volume: 90,
+        difficulty: 31,
+        cpc: 4.2,
+        intent: 'informational',
+        validation_status: 'validated',
+      },
+      review: {
+        seo_checked: true,
+        evidence_checked: true,
+        editorial_checked: true,
+        media_checked: true,
+        checked_at: '2026-09-01',
+      },
+    },
+  });
+}
+
+function findingCodes(
+  article: ArticleRecord,
+  assetMetadata: (src: string) => boolean | { exists: boolean; width: number | null; height: number | null } = existingImage,
+): string[] {
+  return auditArticle(article, assetMetadata).blockingFindings.map((finding) => finding.code);
 }
 
 describe('VideoClaw editorial QA audit', () => {
   it('gives complete attribution metadata a transparent 100 score', () => {
-    expect(auditArticle(validDraft, () => true).categories.attribution).toMatchObject({
+    expect(auditArticle(validDraft, existingImage).categories.attribution).toMatchObject({
       score: 100,
-      passedChecks: 7,
-      totalChecks: 7,
+      passedChecks: 8,
+      totalChecks: 8,
     });
   });
 
@@ -119,7 +151,7 @@ describe('VideoClaw editorial QA audit', () => {
   });
 
   it('never publishes a draft even when its deterministic audit passes', () => {
-    expect(isArticlePublishable(validDraft, auditArticle(validDraft, () => true), true)).toBe(false);
+    expect(isArticlePublishable(validDraft, auditArticle(validDraft, existingImage), true)).toBe(false);
   });
 
   it.each([
@@ -169,6 +201,31 @@ describe('VideoClaw editorial QA audit', () => {
     expect(findingCodes(articleWith({ body }))).toContain('evidence.external_citation');
   });
 
+  it('does not count H2 headings or external citations inside fenced code', () => {
+    const body = `Opening answer without a citation.\n\n${longCopy}\n\n\`\`\`md\n## Fake heading one\n\n## Fake heading two\n\n[Fake citation](https://www.ycombinator.com/library/6q-how-to-pitch-your-startup)\n\`\`\``;
+
+    expect(findingCodes(articleWith({ body }))).toEqual(expect.arrayContaining([
+      'technical.h2_count',
+      'evidence.external_citation',
+      'evidence.source_citation',
+    ]));
+  });
+
+  it('does not count fenced-code words toward the 600-word requirement', () => {
+    const body = `Opening answer with [official guidance](https://www.ycombinator.com/library/6q-how-to-pitch-your-startup).\n\n## First real heading\n\nShort copy.\n\n## Second real heading\n\n\`\`\`text\n${longCopy}\n\`\`\``;
+
+    expect(findingCodes(articleWith({ body }))).toContain('technical.word_count');
+  });
+
+  it('does not count an external Markdown image as a citation link', () => {
+    const body = `${longCopy}\n\n## First heading\n\nUseful copy.\n\n## Second heading\n\n![Source image](https://www.ycombinator.com/library/6q-how-to-pitch-your-startup)`;
+
+    expect(findingCodes(articleWith({ body }))).toEqual(expect.arrayContaining([
+      'evidence.external_citation',
+      'evidence.source_citation',
+    ]));
+  });
+
   it('blocks media outside the campaign editorial-media directory', () => {
     const media = [{ ...validDraft.frontmatter.media[0], src: '/robots.txt' }];
 
@@ -187,6 +244,31 @@ describe('VideoClaw editorial QA audit', () => {
     expect(findingCodes(articleWith({ frontmatter: { media } }))).toContain('media.rights');
   });
 
+  it.each([
+    ['missing width', { exists: true, width: null, height: 675 }],
+    ['missing height', { exists: true, width: 1200, height: null }],
+    ['zero width', { exists: true, width: 0, height: 675 }],
+  ])('blocks media with %s', (_label, metadata) => {
+    expect(findingCodes(validDraft, () => metadata)).toContain('media.dimensions');
+  });
+
+  it('reports missing SERP discovery context as a real advisory without blocking publication', () => {
+    const serp_evidence = {
+      ...validDraft.frontmatter.serp_evidence,
+      people_also_ask: [],
+      related_queries: [],
+      autocomplete_suggestions: [],
+    };
+    const audit = auditArticle(articleWith({ frontmatter: { serp_evidence } }), existingImage);
+
+    expect(audit.advisoryFindings).toContainEqual(expect.objectContaining({
+      code: 'attribution.discovery_context',
+    }));
+    expect(audit.blockingFindings).not.toContainEqual(expect.objectContaining({
+      code: 'attribution.discovery_context',
+    }));
+  });
+
   it('blocks pending authenticated keyword metrics', () => {
     expect(findingCodes(validDraft)).toEqual(expect.arrayContaining([
       'keyword.provider_pending',
@@ -195,20 +277,19 @@ describe('VideoClaw editorial QA audit', () => {
   });
 
   it('publishes a fully approved article with observed Semrush metrics only when global indexing is true', () => {
-    const approved = articleWith({
+    const approved = approvedArticle();
+    const audit = auditArticle(approved, existingImage);
+
+    expect(audit.blockingFindings).toEqual([]);
+    expect(isArticlePublishable(approved, audit, false)).toBe(false);
+    expect(isArticlePublishable(approved, audit, true)).toBe(true);
+  });
+
+  it('rejects a fabricated empty-blocker audit for an article with pending keyword evidence', () => {
+    const pending = articleWith({
       frontmatter: {
         status: 'publishable',
         indexing: 'index',
-        keyword_evidence: {
-          provider: 'semrush',
-          country: 'US',
-          observed_at: '2026-09-01',
-          volume: 90,
-          difficulty: 31,
-          cpc: 4.2,
-          intent: 'informational',
-          validation_status: 'validated',
-        },
         review: {
           seo_checked: true,
           evidence_checked: true,
@@ -218,10 +299,39 @@ describe('VideoClaw editorial QA audit', () => {
         },
       },
     });
-    const audit = auditArticle(approved, () => true);
+    const fabricated = {
+      ...auditArticle(pending, existingImage),
+      blockingFindings: [],
+    } as ArticleAudit;
 
-    expect(audit.blockingFindings).toEqual([]);
-    expect(isArticlePublishable(approved, audit, false)).toBe(false);
-    expect(isArticlePublishable(approved, audit, true)).toBe(true);
+    expect(isArticlePublishable(pending, fabricated, true)).toBe(false);
+  });
+
+  it('rejects an audit produced for another article record', () => {
+    const first = approvedArticle();
+    const second = approvedArticle();
+
+    expect(isArticlePublishable(second, auditArticle(first, existingImage), true)).toBe(false);
+  });
+
+  it('rechecks the current body and Apify evidence instead of trusting a stale audit', () => {
+    const approved = approvedArticle();
+    const audit = auditArticle(approved, existingImage);
+    approved.body = 'Too short and uncited.';
+    approved.frontmatter.serp_evidence.run_id = '';
+
+    expect(isArticlePublishable(approved, audit, true)).toBe(false);
+  });
+
+  it('rechecks current asset metadata instead of trusting prior availability', () => {
+    const approved = approvedArticle();
+    let available = true;
+    const resolveAsset = () => available
+      ? { exists: true, width: 1200, height: 675 }
+      : { exists: false, width: null, height: null };
+    const audit = auditArticle(approved, resolveAsset);
+    available = false;
+
+    expect(isArticlePublishable(approved, audit, true)).toBe(false);
   });
 });

@@ -43,6 +43,7 @@ export const ARTICLE_AUDIT_BLOCKING_CODES = {
     caption: 'media.caption',
     credit: 'media.credit',
     rights: 'media.rights',
+    dimensions: 'media.dimensions',
   },
   keyword: {
     providerPending: 'keyword.provider_pending',
@@ -51,6 +52,12 @@ export const ARTICLE_AUDIT_BLOCKING_CODES = {
     metricsPending: 'keyword.metrics_pending',
     country: 'keyword.country',
     metricRange: 'keyword.metric_range',
+  },
+} as const;
+
+export const ARTICLE_AUDIT_ADVISORY_CODES = {
+  attribution: {
+    discoveryContext: 'attribution.discovery_context',
   },
 } as const;
 
@@ -75,26 +82,86 @@ export type ArticleAudit = {
   advisoryFindings: ArticleAuditFinding[];
 };
 
-export type AssetExists = (src: string) => boolean;
+export type AssetMetadata = {
+  exists: boolean;
+  width: number | null;
+  height: number | null;
+};
+
+export type AssetMetadataResolver = (
+  src: string,
+  type: ArticleRecord['frontmatter']['media'][number]['type'],
+) => boolean | AssetMetadata;
+
+export type AssetExists = AssetMetadataResolver;
 
 type AuditCheck = {
   passed: boolean;
   code: string;
   message: string;
-  blocking?: boolean;
+  severity?: 'blocking' | 'advisory';
 };
+
+type AuditBinding = {
+  article: ArticleRecord;
+  assetMetadata: AssetMetadataResolver;
+};
+
+const auditBindings = new WeakMap<ArticleAudit, AuditBinding>();
 
 const nonEmpty = (value: string): boolean => value.trim().length > 0;
 const dateOnly = (value: string | null): boolean => value !== null && /^\d{4}-\d{2}-\d{2}$/.test(value);
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-const externalMarkdownLinkPattern = /\[[^\]]+\]\(https?:\/\/[^)\s]+\)/i;
 const unsupportedMarkerPattern = /\b(?:TBD|TODO|lorem ipsum)\b|\[citation needed\]/i;
 
+function markdownOutsideCode(markdown: string): string {
+  const output: string[] = [];
+  let fence: { marker: '`' | '~'; length: number } | undefined;
+
+  for (const line of markdown.split(/\r?\n/)) {
+    if (fence) {
+      const closingFence = new RegExp(`^\\s{0,3}${fence.marker}{${fence.length},}\\s*$`);
+      if (closingFence.test(line)) fence = undefined;
+      output.push('');
+      continue;
+    }
+
+    const openingFence = line.match(/^\s{0,3}(`{3,}|~{3,})/);
+    if (openingFence) {
+      fence = {
+        marker: openingFence[1][0] as '`' | '~',
+        length: openingFence[1].length,
+      };
+      output.push('');
+      continue;
+    }
+
+    if (/^(?: {4}|\t)/.test(line)) {
+      output.push('');
+      continue;
+    }
+
+    output.push(line.replace(/`+[^`]*`+/g, ''));
+  }
+
+  return output.join('\n');
+}
+
+function externalMarkdownLinks(markdown: string): string[] {
+  const links: string[] = [];
+  const linkPattern = /(^|[^!])\[[^\]\n]+\]\((https?:\/\/[^)\s]+)\)/gim;
+
+  for (const match of markdownOutsideCode(markdown).matchAll(linkPattern)) {
+    links.push(match[2]);
+  }
+
+  return links;
+}
+
 function wordCount(markdown: string): number {
-  return markdown
-    .replace(/```[\s\S]*?```/g, ' ')
-    .replace(/`[^`]*`/g, ' ')
-    .replace(/!?(?:\[[^\]]*\])\([^)]*\)/g, ' ')
+  return markdownOutsideCode(markdown)
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
     .replace(/^#{1,6}\s+/gm, '')
     .trim()
     .split(/\s+/)
@@ -118,8 +185,9 @@ function finding(category: AuditCategoryName, check: AuditCheck): ArticleAuditFi
 function technicalChecks(article: ArticleRecord): AuditCheck[] {
   const { frontmatter, body } = article;
   const { titleLength, descriptionLength, minimumH2Headings, minimumWordCount } = ARTICLE_AUDIT_THRESHOLDS;
-  const h2Count = body.match(/^##\s+\S.*$/gm)?.length ?? 0;
-  const hasBodyH1 = /^#\s+\S.*$/m.test(body);
+  const semanticBody = markdownOutsideCode(body);
+  const h2Count = semanticBody.match(/^##\s+\S.*$/gm)?.length ?? 0;
+  const hasBodyH1 = /^#\s+\S.*$/m.test(semanticBody);
 
   return [
     {
@@ -194,12 +262,21 @@ function attributionChecks(article: ArticleRecord): AuditCheck[] {
     { passed: nonEmpty(frontmatter.primary_keyword), code: ARTICLE_AUDIT_BLOCKING_CODES.attribution.primaryKeyword, message: 'Primary keyword attribution is required.' },
     { passed: nonEmpty(frontmatter.competitor_gap), code: ARTICLE_AUDIT_BLOCKING_CODES.attribution.competitorGap, message: 'Competitor-gap attribution is required.' },
     { passed: validSerpProvenance, code: ARTICLE_AUDIT_BLOCKING_CODES.attribution.serpProvenance, message: 'Observed US Apify SERP provenance is required.' },
+    {
+      passed: serp.people_also_ask.length > 0
+        || serp.related_queries.length > 0
+        || serp.autocomplete_suggestions.length > 0,
+      code: ARTICLE_AUDIT_ADVISORY_CODES.attribution.discoveryContext,
+      message: 'No PAA, related-query, or autocomplete discovery context was observed.',
+      severity: 'advisory',
+    },
   ];
 }
 
 function evidenceChecks(article: ArticleRecord): AuditCheck[] {
   const { frontmatter, body } = article;
   const sourceUrls = frontmatter.sources.map((source) => source.url);
+  const citedUrls = externalMarkdownLinks(body);
 
   return [
     {
@@ -219,12 +296,12 @@ function evidenceChecks(article: ArticleRecord): AuditCheck[] {
       message: 'Every source must include a checked date.',
     },
     {
-      passed: externalMarkdownLinkPattern.test(body),
+      passed: citedUrls.length > 0,
       code: ARTICLE_AUDIT_BLOCKING_CODES.evidence.externalCitation,
       message: 'Article body must contain an external Markdown citation link.',
     },
     {
-      passed: sourceUrls.some((url) => body.includes(`](${url})`)),
+      passed: sourceUrls.some((url) => citedUrls.includes(url)),
       code: ARTICLE_AUDIT_BLOCKING_CODES.evidence.sourceCitation,
       message: 'At least one declared source must be cited in the article body.',
     },
@@ -236,7 +313,7 @@ function evidenceChecks(article: ArticleRecord): AuditCheck[] {
   ];
 }
 
-function mediaChecks(article: ArticleRecord, assetExists: AssetExists): AuditCheck[] {
+function mediaChecks(article: ArticleRecord, assetMetadata: AssetMetadataResolver): AuditCheck[] {
   const { media, campaign_id: campaignId } = article.frontmatter;
   const localPrefix = `/media/articles/${campaignId}/`;
   const validLocalPath = (src: string): boolean => src.startsWith(localPrefix)
@@ -244,11 +321,31 @@ function mediaChecks(article: ArticleRecord, assetExists: AssetExists): AuditChe
     && !src.includes('?')
     && !src.includes('#')
     && src.length > localPrefix.length;
+  const resolved = media.map((asset): AssetMetadata => {
+    if (!validLocalPath(asset.src)) return { exists: false, width: null, height: null };
+    const observation = assetMetadata(asset.src, asset.type);
+    if (typeof observation !== 'boolean') return observation;
+    if (!observation) return { exists: false, width: null, height: null };
+
+    // The controlled image renderer declares 1200 × 675. Video assets must
+    // provide measured metadata because their dimensions are not fixed there.
+    return asset.type === 'image'
+      ? { exists: true, width: 1200, height: 675 }
+      : { exists: true, width: null, height: null };
+  });
+  const hasDimensions = (metadata: AssetMetadata): boolean => metadata.exists
+    && metadata.width !== null
+    && Number.isFinite(metadata.width)
+    && metadata.width > 0
+    && metadata.height !== null
+    && Number.isFinite(metadata.height)
+    && metadata.height > 0;
 
   return [
     { passed: media.length > 0, code: ARTICLE_AUDIT_BLOCKING_CODES.media.collection, message: 'At least one editorial media asset is required.' },
     { passed: media.length > 0 && media.every((asset) => validLocalPath(asset.src)), code: ARTICLE_AUDIT_BLOCKING_CODES.media.localPath, message: `Media must use a traversal-free ${localPrefix} path.` },
-    { passed: media.length > 0 && media.every((asset) => validLocalPath(asset.src) && assetExists(asset.src)), code: ARTICLE_AUDIT_BLOCKING_CODES.media.assetMissing, message: 'Every declared media asset must exist.' },
+    { passed: media.length > 0 && resolved.every((metadata) => metadata.exists), code: ARTICLE_AUDIT_BLOCKING_CODES.media.assetMissing, message: 'Every declared media asset must exist.' },
+    { passed: media.length > 0 && resolved.every(hasDimensions), code: ARTICLE_AUDIT_BLOCKING_CODES.media.dimensions, message: 'Every media asset requires positive intrinsic or controlled-render dimensions.' },
     { passed: media.length > 0 && media.every((asset) => nonEmpty(asset.alt)), code: ARTICLE_AUDIT_BLOCKING_CODES.media.alt, message: 'Every media asset requires non-empty alternative text.' },
     { passed: media.length > 0 && media.every((asset) => nonEmpty(asset.caption)), code: ARTICLE_AUDIT_BLOCKING_CODES.media.caption, message: 'Every media asset requires a non-empty caption.' },
     { passed: media.length > 0 && media.every((asset) => nonEmpty(asset.credit)), code: ARTICLE_AUDIT_BLOCKING_CODES.media.credit, message: 'Every media asset requires a non-empty credit.' },
@@ -259,12 +356,13 @@ function mediaChecks(article: ArticleRecord, assetExists: AssetExists): AuditChe
 function keywordChecks(article: ArticleRecord): AuditCheck[] {
   const evidence = article.frontmatter.keyword_evidence;
   const metrics = [evidence.volume, evidence.difficulty, evidence.cpc];
+  const prePublicationProvider = ['semrush', 'ahrefs', 'similarweb'].includes(evidence.provider);
   const rangesValid = (evidence.volume === null || evidence.volume >= 0)
     && (evidence.difficulty === null || (evidence.difficulty >= 0 && evidence.difficulty <= 100))
     && (evidence.cpc === null || evidence.cpc >= 0);
 
   return [
-    { passed: evidence.provider !== 'pending', code: ARTICLE_AUDIT_BLOCKING_CODES.keyword.providerPending, message: 'An authenticated keyword provider is required.' },
+    { passed: prePublicationProvider, code: ARTICLE_AUDIT_BLOCKING_CODES.keyword.providerPending, message: 'An authenticated keyword provider is required.' },
     { passed: evidence.validation_status === 'validated', code: ARTICLE_AUDIT_BLOCKING_CODES.keyword.statusPending, message: 'Keyword evidence must be validated.' },
     { passed: dateOnly(evidence.observed_at), code: ARTICLE_AUDIT_BLOCKING_CODES.keyword.observationMissing, message: 'Keyword evidence requires an authenticated observation date.' },
     { passed: metrics.some((metric) => metric !== null), code: ARTICLE_AUDIT_BLOCKING_CODES.keyword.metricsPending, message: 'At least one authenticated numeric keyword metric is required.' },
@@ -273,12 +371,12 @@ function keywordChecks(article: ArticleRecord): AuditCheck[] {
   ];
 }
 
-export function auditArticle(article: ArticleRecord, assetExists: AssetExists): ArticleAudit {
+export function auditArticle(article: ArticleRecord, assetMetadata: AssetMetadataResolver): ArticleAudit {
   const checks: Record<AuditCategoryName, AuditCheck[]> = {
     technical: technicalChecks(article),
     attribution: attributionChecks(article),
     evidence: evidenceChecks(article),
-    media: mediaChecks(article, assetExists),
+    media: mediaChecks(article, assetMetadata),
     keyword: keywordChecks(article),
   };
   const blockingFindings: ArticleAuditFinding[] = [];
@@ -287,11 +385,11 @@ export function auditArticle(article: ArticleRecord, assetExists: AssetExists): 
   for (const [category, categoryChecks] of Object.entries(checks) as [AuditCategoryName, AuditCheck[]][]) {
     for (const check of categoryChecks) {
       if (check.passed) continue;
-      (check.blocking === false ? advisoryFindings : blockingFindings).push(finding(category, check));
+      (check.severity === 'advisory' ? advisoryFindings : blockingFindings).push(finding(category, check));
     }
   }
 
-  return {
+  const audit: ArticleAudit = {
     label: 'VideoClaw editorial QA',
     categories: {
       technical: scoreChecks(checks.technical),
@@ -303,6 +401,8 @@ export function auditArticle(article: ArticleRecord, assetExists: AssetExists): 
     blockingFindings,
     advisoryFindings,
   };
+  auditBindings.set(audit, { article, assetMetadata });
+  return audit;
 }
 
 export function isArticlePublishable(
@@ -310,9 +410,13 @@ export function isArticlePublishable(
   audit: ArticleAudit,
   globalIndexing: boolean,
 ): boolean {
+  const binding = auditBindings.get(audit);
+  if (!binding || binding.article !== article) return false;
+
+  const currentAudit = auditArticle(article, binding.assetMetadata);
   const { frontmatter } = article;
   return globalIndexing === true
-    && audit.blockingFindings.length === 0
+    && currentAudit.blockingFindings.length === 0
     && frontmatter.status === 'publishable'
     && frontmatter.indexing === 'index'
     && frontmatter.review.seo_checked

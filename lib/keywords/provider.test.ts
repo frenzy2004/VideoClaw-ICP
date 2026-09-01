@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { normalizeKeywordImport } from './provider';
+import { normalizeKeywordImport, normalizeSearchConsoleImport } from './provider';
 
 describe('keyword-provider import normalization', () => {
   it('normalizes an observed Semrush row to the provider-neutral contract', () => {
@@ -148,5 +148,75 @@ describe('keyword-provider import normalization', () => {
       observed_at: '2026-09-01',
       intent: 'informational',
     })).toThrow(/at least one observed metric/i);
+  });
+
+  it('rejects Google Search Console rows from the proprietary pre-publication adapter', () => {
+    expect(() => normalizeKeywordImport({
+      provider: 'gsc',
+      keyword: 'demo day video checklist',
+      country: 'US',
+      observed_at: '2026-09-01',
+      volume: 90,
+      intent: 'informational',
+    })).toThrow(/post-publication/i);
+  });
+});
+
+describe('Google Search Console post-publication normalization', () => {
+  it('normalizes only first-party performance fields', () => {
+    const observation = normalizeSearchConsoleImport({
+      provider: 'gsc',
+      keyword: 'demo day video checklist',
+      country: 'US',
+      observed_at: '2026-09-01',
+      clicks: 12,
+      impressions: 340,
+      ctr: 0.035,
+      position: 8.4,
+    });
+
+    expect(observation).toEqual({
+      provider: 'gsc',
+      keyword: 'demo day video checklist',
+      country: 'US',
+      observedAt: '2026-09-01',
+      clicks: 12,
+      impressions: 340,
+      ctr: 0.035,
+      position: 8.4,
+      validationStatus: 'observed_post_publication',
+    });
+    expect(observation).not.toHaveProperty('volume');
+    expect(observation).not.toHaveProperty('difficulty');
+    expect(observation).not.toHaveProperty('cpc');
+  });
+
+  it('rejects proprietary keyword fields in a Search Console row', () => {
+    const row = {
+      provider: 'gsc',
+      keyword: 'demo day video checklist',
+      country: 'US',
+      observed_at: '2026-09-01',
+      clicks: 12,
+      impressions: 340,
+      ctr: 0.035,
+      position: 8.4,
+      volume: 90,
+    };
+
+    expect(() => normalizeSearchConsoleImport(row)).toThrow();
+  });
+
+  it.each([-0.01, 1.01])('rejects CTR outside the inclusive 0–1 range', (ctr) => {
+    expect(() => normalizeSearchConsoleImport({
+      provider: 'gsc',
+      keyword: 'demo day video checklist',
+      country: 'US',
+      observed_at: '2026-09-01',
+      clicks: 12,
+      impressions: 340,
+      ctr,
+      position: 8.4,
+    })).toThrow(/ctr/i);
   });
 });

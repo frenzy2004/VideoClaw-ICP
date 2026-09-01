@@ -55,7 +55,7 @@ This ordering is a VideoClaw recommendation, not a provider fact. No provider va
 
 The initial adapter normalizes only the shared pre-publication fields used by article frontmatter: provider, keyword, `US`, observation date, volume, difficulty, CPC, intent, and validation status. It preserves missing optional numeric fields as `null`; it never estimates them. A named provider record is rejected unless it has an observation date and at least one observed numeric metric. Pending records are rejected if they contain a date or any numeric metric, including zero.
 
-Google Search Console needs a separate post-publication observation shape for clicks, impressions, CTR, and average position. Those values must never be renamed to volume, difficulty, or CPC merely to fit the pre-publication adapter.
+Google Search Console uses the separate `SearchConsoleObservation` and `normalizeSearchConsoleImport` post-publication contract for clicks, impressions, CTR, and average position. `normalizeKeywordImport` rejects GSC rows, and the Search Console adapter rejects proprietary volume, difficulty, and CPC fields. Those values must never be renamed merely to fit the pre-publication adapter.
 
 ## Credential and rollout gate
 
