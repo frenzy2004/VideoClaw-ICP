@@ -445,8 +445,10 @@ describe('article library validation', () => {
     const first = validRecord();
     const second = distinctRecord();
     second.frontmatter = { ...second.frontmatter, [field]: value } as ArticleRecord['frontmatter'];
+    const result = validateArticleLibrary([first, second]);
 
-    expect(validateArticleLibrary([first, second]).findings).toContainEqual(
+    expect(result.valid).toBe(false);
+    expect(result.findings).toContainEqual(
       expect.objectContaining({ code }),
     );
   });
@@ -474,31 +476,93 @@ describe('article library validation', () => {
     );
   });
 
-  it('rejects an empty library', () => {
-    expect(validateArticleLibrary([])).toMatchObject({
-      valid: false,
-      totals: { all: 0 },
-      findings: expect.arrayContaining([
-        expect.objectContaining({ code: 'library.total_count' }),
-        expect.objectContaining({ code: 'library.campaign_count' }),
+  it('reports an empty library as valid with transparent target shortfalls', () => {
+    expect(validateArticleLibrary([])).toEqual({
+      valid: true,
+      findings: [],
+      totals: {
+        all: 0,
+        byCampaign: {
+          'newly-funded-founder': 0,
+          'accelerator-demo-day-founder': 0,
+          'video-production-comparison': 0,
+          'gtm-content-repurposing-buyer': 0,
+          'portfolio-media-platform': 0,
+        },
+      },
+      advisories: [
+        {
+          code: 'library.total_target',
+          message: 'Article research target is exactly 250 records; currently 0.',
+          target: 250,
+          actual: 0,
+          shortfall: 250,
+        },
+        ...CAMPAIGN_IDS.map((campaignId) => ({
+          code: 'library.campaign_target' as const,
+          message: `Campaign ${campaignId} research target is exactly 50 records; currently 0.`,
+          campaignId,
+          target: 50,
+          actual: 0,
+          shortfall: 50,
+        })),
+      ],
+    });
+  });
+
+  it('reports a one-record library as valid with target shortfalls', () => {
+    expect(validateArticleLibrary([validRecord()])).toMatchObject({
+      valid: true,
+      findings: [],
+      totals: { all: 1 },
+      advisories: expect.arrayContaining([
+        expect.objectContaining({
+          code: 'library.total_target',
+          target: 250,
+          actual: 1,
+          shortfall: 249,
+        }),
+        expect.objectContaining({
+          code: 'library.campaign_target',
+          campaignId: 'newly-funded-founder',
+          target: 50,
+          actual: 1,
+          shortfall: 49,
+        }),
       ]),
     });
   });
 
-  it('rejects a 249-record library', () => {
+  it('reports a 249-record library as valid with only its remaining target shortfalls', () => {
     const result = validateArticleLibrary(syntheticLibrary().slice(0, 249));
 
-    expect(result.valid).toBe(false);
+    expect(result.valid).toBe(true);
+    expect(result.findings).toEqual([]);
     expect(result.totals.all).toBe(249);
-    expect(result.findings).toContainEqual(expect.objectContaining({ code: 'library.total_count' }));
+    expect(result.advisories).toEqual([
+      expect.objectContaining({
+        code: 'library.total_target',
+        target: 250,
+        actual: 249,
+        shortfall: 1,
+      }),
+      expect.objectContaining({
+        code: 'library.campaign_target',
+        campaignId: 'portfolio-media-platform',
+        target: 50,
+        actual: 49,
+        shortfall: 1,
+      }),
+    ]);
   });
 
-  it('rejects a 250-record library with skewed campaign totals', () => {
+  it('reports a skewed 250-record library as valid with campaign target advisories', () => {
     const records = syntheticLibrary();
     records[249].frontmatter.campaign_id = 'newly-funded-founder';
 
     expect(validateArticleLibrary(records)).toMatchObject({
-      valid: false,
+      valid: true,
+      findings: [],
       totals: {
         all: 250,
         byCampaign: {
@@ -506,20 +570,33 @@ describe('article library validation', () => {
           'portfolio-media-platform': 49,
         },
       },
-      findings: expect.arrayContaining([
-        expect.objectContaining({ code: 'library.campaign_count' }),
-      ]),
+      advisories: [
+        expect.objectContaining({
+          code: 'library.campaign_target',
+          campaignId: 'newly-funded-founder',
+          target: 50,
+          actual: 51,
+          shortfall: 0,
+        }),
+        expect.objectContaining({
+          code: 'library.campaign_target',
+          campaignId: 'portfolio-media-platform',
+          target: 50,
+          actual: 49,
+          shortfall: 1,
+        }),
+      ],
     });
   });
 
   it('keeps review drafts out of the publishable loader result', () => {
     const articlesRoot = createTestArticlesRoot();
-    writeSyntheticLibrary(articlesRoot);
+    writeSyntheticLibrary(articlesRoot, 1);
     const priorPublicIndexing = process.env.NEXT_PUBLIC_VIDEOCLAW_PUBLIC_INDEXING;
     process.env.NEXT_PUBLIC_VIDEOCLAW_PUBLIC_INDEXING = 'true';
 
     try {
-      expect(getAllArticles(articlesRoot)).toHaveLength(250);
+      expect(getAllArticles(articlesRoot)).toHaveLength(1);
       expect(getPublishableArticles(articlesRoot)).toEqual([]);
     } finally {
       if (priorPublicIndexing === undefined) {
@@ -530,14 +607,12 @@ describe('article library validation', () => {
     }
   });
 
-  it('validates the complete library before applying the global indexing gate', () => {
+  it('fails closed on malformed input before applying the global indexing gate', () => {
     const articlesRoot = createTestArticlesRoot();
     writeSyntheticLibrary(
       articlesRoot,
-      250,
-      (source, recordIndex) => recordIndex === 0
-        ? source.replace('title: Campaign 1 Article 01 Video Guide\n', '')
-        : source,
+      1,
+      (source) => source.replace('title: Campaign 1 Article 01 Video Guide\n', ''),
     );
     const priorPublicIndexing = process.env.NEXT_PUBLIC_VIDEOCLAW_PUBLIC_INDEXING;
     process.env.NEXT_PUBLIC_VIDEOCLAW_PUBLIC_INDEXING = 'false';
@@ -553,23 +628,22 @@ describe('article library validation', () => {
     }
   });
 
-  it('fails closed when the filesystem library contains only 249 records', () => {
+  it.each([0, 1, 249])('loads an incremental filesystem library containing %i valid records', (count) => {
     const articlesRoot = createTestArticlesRoot();
-    writeSyntheticLibrary(articlesRoot, 249);
+    writeSyntheticLibrary(articlesRoot, count);
 
-    expect(() => getAllArticles(articlesRoot)).toThrow(/exactly 250 records; received 249/i);
+    expect(getAllArticles(articlesRoot)).toHaveLength(count);
   });
 
-  it('publishes only an approved record with authenticated keyword and observed Apify evidence', () => {
+  it('publishes one fully gated article from an incremental library only when global indexing is enabled', () => {
     const articlesRoot = createTestArticlesRoot();
-    writeSyntheticLibrary(articlesRoot, 250, (source, recordIndex) => {
-      if (recordIndex !== 0) return source;
-      return sourceWithPublishableEvidence(source);
-    });
+    writeSyntheticLibrary(articlesRoot, 1, sourceWithPublishableEvidence);
     const priorPublicIndexing = process.env.NEXT_PUBLIC_VIDEOCLAW_PUBLIC_INDEXING;
-    process.env.NEXT_PUBLIC_VIDEOCLAW_PUBLIC_INDEXING = 'true';
+    process.env.NEXT_PUBLIC_VIDEOCLAW_PUBLIC_INDEXING = 'false';
 
     try {
+      expect(getPublishableArticles(articlesRoot)).toEqual([]);
+      process.env.NEXT_PUBLIC_VIDEOCLAW_PUBLIC_INDEXING = 'true';
       expect(getPublishableArticles(articlesRoot).map((record) => record.frontmatter.article_id)).toEqual(['vc-c1-001']);
     } finally {
       if (priorPublicIndexing === undefined) {
@@ -584,6 +658,7 @@ describe('article library validation', () => {
     expect(validateArticleLibrary(syntheticLibrary())).toEqual({
       valid: true,
       findings: [],
+      advisories: [],
       totals: {
         all: 250,
         byCampaign: {

@@ -252,3 +252,69 @@ Output: route types generated and `tsc --noEmit --incremental false --pretty fal
 ### Fix-round concerns
 
 No Task 1 defect or active verification concern remains. Concurrent matrices, Apify data, renderer, keyword/provider work, and scripts were not edited or staged.
+
+---
+
+## Architecture revision — non-blocking research targets
+
+### Scope delivered
+
+- Added exported `LibraryAdvisory` target data to `LibraryValidationResult`, with `target`, `actual`, and non-negative `shortfall` values.
+- Reclassified the 250-record library target as `library.total_target` and each 50-record campaign target as `library.campaign_target` advisories.
+- Kept `valid` derived only from blocking `findings`; duplicates remain invalid while target misses and target excesses are transparent but non-blocking.
+- Kept `getAllArticles` fail-closed for parse, schema, canonical path, raw HTML, evidence, read, and duplicate findings while allowing valid incremental libraries to load.
+- Kept every per-article publication gate and the exact global indexing flag; one fully gated article can publish from a one-record library.
+
+### Covering test names
+
+- `reports an empty library as valid with transparent target shortfalls`
+- `reports a one-record library as valid with target shortfalls`
+- `reports a 249-record library as valid with only its remaining target shortfalls`
+- `reports a skewed 250-record library as valid with campaign target advisories`
+- `reports every campaign total for a valid synthetic 250-record library`
+- `loads an incremental filesystem library containing 0 valid records`
+- `loads an incremental filesystem library containing 1 valid records`
+- `loads an incremental filesystem library containing 249 valid records`
+- `fails closed on malformed input before applying the global indexing gate`
+- `publishes one fully gated article from an incremental library only when global indexing is enabled`
+- duplicate-field tests now also assert that duplicate findings make the result invalid.
+
+### RED evidence
+
+Command: `pnpm test lib/content/articles.test.ts -t "target shortfalls|remaining target|campaign target advisories|incremental filesystem|incremental library|malformed input"`
+
+Output: `8 failed | 1 passed | 49 skipped (58)`. Empty, one-record, 249-record, and skewed libraries remained invalid; filesystem libraries with 0, 1, and 249 records threw count errors; one gated incremental article could not publish. The malformed-input control passed, confirming integrity validation remained active.
+
+A preliminary invocation stopped on a test-only delimiter typo and was corrected before the valid RED above; no production code was changed before the behavioral failures were observed.
+
+### GREEN evidence
+
+Command: `pnpm test lib/content/articles.test.ts -t "target shortfalls|remaining target|campaign target advisories|incremental filesystem|incremental library|malformed input"`
+
+Output: `9 passed | 49 skipped (58)`.
+
+Command: `pnpm test lib/content/articles.test.ts`
+
+Output: `58 passed (58)`.
+
+Project typecheck command: `pnpm run typecheck`
+
+Output: route types generated and `tsc --noEmit --incremental false --pretty false` exited successfully.
+
+Final combined verification: `pnpm test lib/content/articles.test.ts && pnpm run typecheck && pnpm test`
+
+Output: focused Task 1 `58 passed (58)`; route types generated and TypeScript exited successfully; full suite `19 passed (19)` test files and `210 passed (210)` tests. An earlier full-suite invocation caught an out-of-scope renderer cycle between its failing tests and implementation; no renderer file was edited by Task 1.
+
+### Self-review
+
+- Confirmed `getAllArticles` still aggregates only blocking parse/read/library findings and does not silently discard any integrity error.
+- Confirmed advisory ordering is deterministic: total target first, then fixed campaign order.
+- Confirmed target excesses remain visible with their actual value and a zero shortfall, while target misses expose the exact shortfall.
+- Confirmed duplicate tests fail if `valid` stops reflecting blocking findings.
+- Confirmed the incremental publication test fails if either the article gates or global indexing gate is removed.
+- Confirmed the mutation of count advisories back into findings would fail unit, filesystem, and publication tests.
+- Scoped `git diff --check` passed.
+
+### Concerns
+
+No Task 1 concern. Concurrent content-map, renderer, Apify, matrix, data, and scripts work was not edited.

@@ -22,9 +22,22 @@ export type LibraryFinding = {
   filePath?: string;
 };
 
+type TargetAdvisory = {
+  message: string;
+  target: number;
+  actual: number;
+  shortfall: number;
+};
+
+export type LibraryAdvisory = TargetAdvisory & (
+  | { code: 'library.total_target' }
+  | { code: 'library.campaign_target'; campaignId: CampaignId }
+);
+
 export type LibraryValidationResult = {
   valid: boolean;
   findings: LibraryFinding[];
+  advisories: LibraryAdvisory[];
   totals: {
     all: number;
     byCampaign: Record<CampaignId, number>;
@@ -120,6 +133,7 @@ function articleFiles(directory: string): string[] {
 export function validateArticleLibrary(records: ArticleRecord[]): LibraryValidationResult {
   const byCampaign = Object.fromEntries(CAMPAIGN_IDS.map((campaignId) => [campaignId, 0])) as Record<CampaignId, number>;
   const findings: LibraryFinding[] = [];
+  const advisories: LibraryAdvisory[] = [];
   const values = new Map<string, Map<string, ArticleRecord>>([
     ['article_id', new Map()],
     ['slug', new Map()],
@@ -147,21 +161,32 @@ export function validateArticleLibrary(records: ArticleRecord[]): LibraryValidat
   }
 
   if (records.length !== 250) {
-    findings.push(finding('library.total_count', `Article library must contain exactly 250 records; received ${records.length}.`));
+    advisories.push({
+      code: 'library.total_target',
+      message: `Article research target is exactly 250 records; currently ${records.length}.`,
+      target: 250,
+      actual: records.length,
+      shortfall: Math.max(250 - records.length, 0),
+    });
   }
 
   for (const campaignId of CAMPAIGN_IDS) {
     if (byCampaign[campaignId] !== 50) {
-      findings.push(finding(
-        'library.campaign_count',
-        `Campaign ${campaignId} must contain exactly 50 records; received ${byCampaign[campaignId]}.`,
-      ));
+      advisories.push({
+        code: 'library.campaign_target',
+        message: `Campaign ${campaignId} research target is exactly 50 records; currently ${byCampaign[campaignId]}.`,
+        campaignId,
+        target: 50,
+        actual: byCampaign[campaignId],
+        shortfall: Math.max(50 - byCampaign[campaignId], 0),
+      });
     }
   }
 
   return {
     valid: findings.length === 0,
     findings,
+    advisories,
     totals: { all: records.length, byCampaign },
   };
 }
