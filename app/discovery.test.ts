@@ -1,6 +1,6 @@
-import { readFileSync } from 'node:fs';
-import { join } from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
+import nextConfig from '../next.config';
+import { llmsText } from './llms.txt/route';
 import robots from './robots';
 import sitemap from './sitemap';
 
@@ -17,10 +17,25 @@ describe('campaign discovery controls', () => {
     expect(robots()).toEqual({ rules: { userAgent: '*', disallow: '/' } });
     expect(sitemap()).toEqual([]);
 
-    const llms = readFileSync(join(process.cwd(), 'public/llms.txt'), 'utf8');
-    expect(llms).toContain('Private review build');
+    const llms = llmsText(false);
+    expect(llms).toMatch(/private review build/i);
     expect(llms).not.toContain('/use-cases/demo-day-founder-content');
     expect(llms).not.toContain('/guides/founder-story-after-demo-day');
+  });
+
+  it('adds a noindex response header to both the root page and nested routes', async () => {
+    const headers = await nextConfig.headers?.();
+
+    expect(headers).toEqual(expect.arrayContaining([
+      {
+        source: '/',
+        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
+      },
+      {
+        source: '/:path*',
+        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
+      },
+    ]));
   });
 
   it('publishes only the two approved routes when the exact flag is enabled', () => {
@@ -41,5 +56,10 @@ describe('campaign discovery controls', () => {
         priority: 0.9,
       },
     ]);
+
+    const llms = llmsText(true);
+    expect(llms).toContain('https://videoclaw.com/use-cases/demo-day-founder-content');
+    expect(llms).toContain('https://videoclaw.com/guides/founder-story-after-demo-day');
+    expect(llms).not.toMatch(/private|noindex|not approved/i);
   });
 });

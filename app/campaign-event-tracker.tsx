@@ -2,32 +2,21 @@
 
 import { useEffect, useRef } from 'react';
 import {
-  formatCampaignEvent,
+  sanitizeCampaignEvent,
   type CampaignEvent,
   type CampaignEventContext,
 } from './campaign-content';
+import { campaignAnalyticsSuppressed, emitCampaignEvent } from './campaign-analytics';
 
 declare global {
   interface Window {
     dataLayer?: unknown[];
   }
-
-  interface Navigator {
-    globalPrivacyControl?: boolean;
-  }
-}
-
-function analyticsSuppressed() {
-  return navigator.globalPrivacyControl === true || navigator.doNotTrack === '1';
 }
 
 function mirrorToDataLayer(event: CampaignEvent) {
   if (!Array.isArray(window.dataLayer)) return;
   window.dataLayer.push(event);
-}
-
-function emit(event: CampaignEvent) {
-  window.dispatchEvent(new CustomEvent('videoclaw:analytics', { detail: event }));
 }
 
 function contextFromElement(element: HTMLElement): CampaignEventContext {
@@ -43,15 +32,13 @@ export default function CampaignEventTracker() {
   const pageViewSent = useRef(false);
 
   useEffect(() => {
-    const suppressed = analyticsSuppressed();
-
     function handleAnalytics(event: Event) {
-      if (suppressed) return;
-      mirrorToDataLayer((event as CustomEvent<CampaignEvent>).detail);
+      if (campaignAnalyticsSuppressed()) return;
+      const sanitized = sanitizeCampaignEvent((event as CustomEvent<unknown>).detail);
+      if (sanitized) mirrorToDataLayer(sanitized);
     }
 
     function handleClick(event: MouseEvent) {
-      if (suppressed) return;
       const origin = event.target;
       if (!(origin instanceof Element)) return;
       const element = origin.closest<HTMLElement>('[data-vc-event]');
@@ -61,29 +48,24 @@ export default function CampaignEventTracker() {
       if (eventName !== 'article_click' && eventName !== 'alpha_download_click') return;
       const href = element instanceof HTMLAnchorElement ? element.getAttribute('href') ?? undefined : undefined;
 
-      emit(
-        formatCampaignEvent({
-          event: eventName,
-          pagePath: window.location.pathname,
-          timestamp: new Date().toISOString(),
-          href,
-          context: contextFromElement(element),
-        }),
-      );
+      emitCampaignEvent({
+        event: eventName,
+        pagePath: window.location.pathname,
+        timestamp: new Date().toISOString(),
+        href,
+        context: contextFromElement(element),
+      });
     }
 
     window.addEventListener('videoclaw:analytics', handleAnalytics);
     document.addEventListener('click', handleClick);
 
-    if (!suppressed && !pageViewSent.current) {
-      pageViewSent.current = true;
-      emit(
-        formatCampaignEvent({
-          event: 'page_view',
-          pagePath: window.location.pathname,
-          timestamp: new Date().toISOString(),
-        }),
-      );
+    if (!pageViewSent.current) {
+      pageViewSent.current = emitCampaignEvent({
+        event: 'page_view',
+        pagePath: window.location.pathname,
+        timestamp: new Date().toISOString(),
+      });
     }
 
     return () => {

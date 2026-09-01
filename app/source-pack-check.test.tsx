@@ -1,8 +1,13 @@
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import SourcePackCheck from './source-pack-check';
 
 afterEach(cleanup);
+
+beforeEach(() => {
+  Object.defineProperty(navigator, 'globalPrivacyControl', { configurable: true, value: false });
+  Object.defineProperty(navigator, 'doNotTrack', { configurable: true, value: '0' });
+});
 
 describe('SourcePackCheck measurement', () => {
   it('emits one completion only on the first transition to eight of eight', () => {
@@ -14,6 +19,9 @@ describe('SourcePackCheck measurement', () => {
     window.addEventListener('videoclaw:conversion', legacyListener);
 
     const { container } = render(<SourcePackCheck />);
+    expect(screen.getByText(/local checkbox-only readiness aid/i)).toBeVisible();
+    expect(screen.getByText('CONTROLS CHECKED')).toBeVisible();
+    expect(screen.queryByText(/requirements confirmed/i)).not.toBeInTheDocument();
     const checkboxes = screen.getAllByRole('checkbox');
     for (const checkbox of checkboxes.slice(0, 7)) fireEvent.click(checkbox);
     expect(analytics).toHaveLength(0);
@@ -43,5 +51,18 @@ describe('SourcePackCheck measurement', () => {
 
     window.removeEventListener('videoclaw:analytics', analyticsListener);
     window.removeEventListener('videoclaw:conversion', legacyListener);
+  });
+
+  it('does not emit completion analytics when GPC is enabled', () => {
+    Object.defineProperty(navigator, 'globalPrivacyControl', { configurable: true, value: true });
+    const analytics: unknown[] = [];
+    const listener = (event: Event) => analytics.push((event as CustomEvent).detail);
+    window.addEventListener('videoclaw:analytics', listener);
+
+    render(<SourcePackCheck />);
+    for (const checkbox of screen.getAllByRole('checkbox')) fireEvent.click(checkbox);
+
+    expect(analytics).toEqual([]);
+    window.removeEventListener('videoclaw:analytics', listener);
   });
 });

@@ -7,6 +7,8 @@ describe('CampaignEventTracker', () => {
   beforeEach(() => {
     window.history.replaceState({}, '', '/use-cases/demo-day-founder-content?email=founder@example.com');
     Object.defineProperty(window, 'dataLayer', { configurable: true, value: [] });
+    Object.defineProperty(navigator, 'globalPrivacyControl', { configurable: true, value: false });
+    Object.defineProperty(navigator, 'doNotTrack', { configurable: true, value: '0' });
   });
 
   afterEach(() => {
@@ -74,5 +76,26 @@ describe('CampaignEventTracker', () => {
     window.dispatchEvent(new CustomEvent('videoclaw:analytics', { detail: event }));
 
     expect(dataLayer).toEqual([event]);
+  });
+
+  it('suppresses page and click analytics when GPC is enabled', () => {
+    Object.defineProperty(navigator, 'globalPrivacyControl', { configurable: true, value: true });
+    const events: unknown[] = [];
+    const listener = (event: Event) => events.push((event as CustomEvent).detail);
+    window.addEventListener('videoclaw:analytics', listener);
+
+    render(
+      <>
+        <CampaignEventTracker />
+        <a href="https://videoclaw.com/alpha/download" data-vc-event="alpha_download_click" onClick={(event) => event.preventDefault()}>
+          Request access
+        </a>
+      </>,
+    );
+    fireEvent.click(screen.getByRole('link', { name: 'Request access' }));
+
+    expect(events).toEqual([]);
+    expect((window as Window & { dataLayer: unknown[] }).dataLayer).toEqual([]);
+    window.removeEventListener('videoclaw:analytics', listener);
   });
 });

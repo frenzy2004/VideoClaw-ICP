@@ -112,30 +112,36 @@ const workflow = [
   ['05', 'Review before reuse', 'Approve story, product behavior, sensitive data, brand, captions, and CTA before any final public handoff.'],
 ];
 
-const baseTranscript: Transcript = [
-  { time: '00:00–00:07', text: 'Demo Day is one moment. Restrained electronic texture begins.' },
+export const baseTranscript: Transcript = [
+  { time: '00:00–00:07', text: '[Restrained electronic texture] ONE SHOT · 90 SECONDS Demo Day is one moment.' },
   { time: '00:07–00:16', text: '90 seconds. One room. Then the lights come up.' },
-  { time: '00:16–00:25', text: 'A whoosh leads into: But the story does not stop there.' },
+  { time: '00:16–00:25', text: '[Whoosh] But the story does not stop there.' },
   { time: '00:25–00:34', text: 'Your traction. Your team. Your proof.' },
   { time: '00:34–00:41', text: 'Make the founder story keep working.' },
-  { time: '00:41–00:45', text: 'Demo Day is one moment. Keep it working. A resolving tone ends.' },
+  { time: '00:41–00:45', text: '[Resolving tone] Demo Day is one moment. Keep it working.' },
 ];
 
-function transcriptFor(audience: string, emphasis: string): Transcript {
+export function transcriptFor(audienceLine: string, highlight: string, emphasis: string): Transcript {
   return [
     baseTranscript[0],
     baseTranscript[1],
     baseTranscript[2],
-    { ...baseTranscript[3], text: `For the ${audience}: ${emphasis}.` },
+    { ...baseTranscript[3], text: `${audienceLine} [${highlight} highlighted] ${emphasis}.` },
     baseTranscript[4],
     baseTranscript[5],
   ];
 }
 
+export const campaignTranscripts = {
+  base: baseTranscript,
+  investor: transcriptFor('For the investor who wants to see it after the pitch.', 'Traction', 'Your traction'),
+  customer: transcriptFor('For the customer deciding whether to try you.', 'Proof', 'Your proof'),
+  recruiting: transcriptFor('For the person you want on the team.', 'Team', 'Your team'),
+} satisfies Record<string, Transcript>;
+
 const faqSchema = buildFaqSchema(useCaseFaqs);
 const breadcrumbSchema = buildBreadcrumbSchema([
   { name: 'VideoClaw', url: CAMPAIGN_URLS.siteHome },
-  { name: 'Use cases', url: 'https://videoclaw.com/use-cases' },
   { name: 'Demo Day founder content', url: CAMPAIGN_URLS.useCase },
 ]);
 const webPageSchema = {
@@ -146,7 +152,7 @@ const webPageSchema = {
   name: 'Demo Day Founder Content System | VideoClaw',
   description,
   inLanguage: 'en-US',
-};
+} as const;
 
 export const useCaseSchemaNodes = [webPageSchema, breadcrumbSchema, faqSchema];
 
@@ -159,6 +165,7 @@ export default function UseCasePage() {
       data-vc-page-id="c2-demo-day-use-case"
       data-vc-page-type="commercial"
     >
+      <a className="skip-link" href="#main-content">Skip to main content</a>
       {publicIndexing
         ? useCaseSchemaNodes.map((node) => (
             <script
@@ -169,8 +176,10 @@ export default function UseCasePage() {
           ))
         : null}
 
-      <div className="campaign-preview-ribbon">PRIVATE CAMPAIGN PREVIEW · NOINDEX · NOT A LIVE OFFER</div>
-      <header className="campaign-masthead">
+      <div className="campaign-preview-ribbon">
+        {publicIndexing ? 'US DEMO DAY FOUNDER CONTENT SYSTEM' : 'PRIVATE CAMPAIGN PREVIEW · NOINDEX · NOT A LIVE OFFER'}
+      </div>
+      <header className="campaign-masthead" role="banner">
         <a className="wordmark" href={CAMPAIGN_URLS.siteHome} aria-label="VideoClaw home">
           VIDEOCLAW
         </a>
@@ -178,7 +187,7 @@ export default function UseCasePage() {
           <a href="#proof-system">Proof system</a>
           <a href="#viewer-variants">Viewer variants</a>
           <a href="#controlled-workflow">Workflow</a>
-          <a href={CAMPAIGN_URLS.guidePath}>Founder guide</a>
+          <a href={CAMPAIGN_URLS.guidePath} data-vc-event="article_click" data-vc-article-id="founder-story-after-demo-day" data-vc-link-id="use-case-guide-nav" data-vc-placement="masthead">Founder guide</a>
         </nav>
         <a
           className="campaign-header-cta"
@@ -191,7 +200,7 @@ export default function UseCasePage() {
         </a>
       </header>
 
-      <section className="campaign-hero" aria-labelledby="campaign-hero-title">
+      <section className="campaign-hero" id="main-content" tabIndex={-1} aria-labelledby="campaign-hero-title">
         <div className="campaign-eyebrow">
           <span>US ACCELERATOR FOUNDERS</span>
           <span>DEADLINE INSIDE 7–21 DAYS</span>
@@ -265,7 +274,7 @@ export default function UseCasePage() {
           captionsSrc="/media/demo-day/base.en.vtt"
           title="Demo Day continuity story — 45-second overview"
           caption="An abstract, claim-free planning sequence showing why the founder story must keep working after the event."
-          transcript={baseTranscript}
+          transcript={campaignTranscripts.base}
           preload="metadata"
         />
       </section>
@@ -309,8 +318,8 @@ export default function UseCasePage() {
             poster="/media/demo-day/investor-poster.jpg"
             captionsSrc="/media/demo-day/investor.en.vtt"
             title="Investor emphasis — traction"
-            caption="The investor version highlights cleared traction evidence and the next diligence question."
-            transcript={transcriptFor('investor', 'your traction')}
+            caption="A typography prototype that changes scene-four emphasis to traction for investor follow-up."
+            transcript={campaignTranscripts.investor}
           />
           <CampaignVideo
             id="demo-day-customer-prototype"
@@ -318,8 +327,8 @@ export default function UseCasePage() {
             poster="/media/demo-day/customer-poster.jpg"
             captionsSrc="/media/demo-day/customer.en.vtt"
             title="Customer emphasis — proof"
-            caption="The customer version highlights one approved workflow and the proof a buyer can inspect."
-            transcript={transcriptFor('customer', 'your proof')}
+            caption="A typography prototype that changes scene-four emphasis to proof for customer follow-up."
+            transcript={campaignTranscripts.customer}
           />
           <CampaignVideo
             id="demo-day-recruiting-prototype"
@@ -327,8 +336,8 @@ export default function UseCasePage() {
             poster="/media/demo-day/recruiting-poster.jpg"
             captionsSrc="/media/demo-day/recruiting.en.vtt"
             title="Recruiting emphasis — team"
-            caption="The recruiting version highlights the approved mission, hard problem, and team context."
-            transcript={transcriptFor('person you want on the team', 'your team')}
+            caption="A typography prototype that changes scene-four emphasis to the team for recruiting follow-up."
+            transcript={campaignTranscripts.recruiting}
           />
         </div>
       </section>
@@ -375,7 +384,7 @@ export default function UseCasePage() {
         </div>
         <div className="campaign-measurement-copy">
           <p>
-            For each approved pilot, record the source material received, claim ledger, proof sequence, review
+            If the team conducts an approved pilot, record the source material received, claim ledger, proof sequence, review
             rounds, paid-generation cost, human intervention, final approval, and later reuse.
           </p>
           <p>
@@ -417,9 +426,9 @@ export default function UseCasePage() {
         </div>
       </section>
 
-      <footer className="campaign-footer">
+      <footer className="campaign-footer" role="contentinfo">
         <a className="wordmark" href={CAMPAIGN_URLS.siteHome}>VIDEOCLAW</a>
-        <p>Private campaign preview · US Demo Day continuity · September 2026</p>
+        <p>{publicIndexing ? 'US Demo Day founder content system · September 2026' : 'Private campaign preview · US Demo Day continuity · September 2026'}</p>
         <a href="#top">BACK TO TOP ↑</a>
       </footer>
     </main>

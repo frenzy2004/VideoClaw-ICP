@@ -5,6 +5,7 @@ import {
   buildFaqSchema,
   campaignRobots,
   formatCampaignEvent,
+  sanitizeCampaignEvent,
 } from './campaign-content';
 
 describe('campaign content contracts', () => {
@@ -155,6 +156,44 @@ describe('campaign content contracts', () => {
         items_completed: 8,
       },
     });
+  });
+
+  it('replaces unknown paths and removes personal-looking identifiers', () => {
+    expect(
+      formatCampaignEvent({
+        event: 'article_click',
+        pagePath: '/preview/founder@example.com',
+        timestamp: '2026-09-01T00:00:00.000Z',
+        href: '/invite/founder@example.com',
+        context: {
+          cta_id: 'founder@example.com',
+          placement: 'hero',
+        },
+      }),
+    ).toEqual({
+      event: 'article_click',
+      page_path: '/other',
+      timestamp: '2026-09-01T00:00:00.000Z',
+      context: { placement: 'hero' },
+    });
+  });
+
+  it('reconstructs direct browser events from the runtime allowlist', () => {
+    expect(
+      sanitizeCampaignEvent({
+        event: 'video_play',
+        page_path: '/use-cases/demo-day-founder-content?email=founder@example.com',
+        timestamp: '2026-09-01T00:00:00.000Z',
+        video_id: 'investor-cut',
+        full_url: 'https://example.com/private',
+      }),
+    ).toEqual({
+      event: 'video_play',
+      page_path: '/use-cases/demo-day-founder-content',
+      timestamp: '2026-09-01T00:00:00.000Z',
+      video_id: 'investor-cut',
+    });
+    expect(sanitizeCampaignEvent({ event: 'unknown' })).toBeUndefined();
   });
 
   if (false) {

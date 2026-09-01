@@ -22,6 +22,27 @@ export type BreadcrumbItem = {
   url: string;
 };
 
+export type FaqSchema = {
+  '@context': 'https://schema.org';
+  '@type': 'FAQPage';
+  mainEntity: Array<{
+    '@type': 'Question';
+    name: string;
+    acceptedAnswer: { '@type': 'Answer'; text: string };
+  }>;
+};
+
+export type BreadcrumbSchema = {
+  '@context': 'https://schema.org';
+  '@type': 'BreadcrumbList';
+  itemListElement: Array<{
+    '@type': 'ListItem';
+    position: number;
+    name: string;
+    item: string;
+  }>;
+};
+
 export type CampaignEventName =
   | 'page_view'
   | 'video_play'
@@ -86,7 +107,7 @@ export function campaignRobots(value?: string): Metadata['robots'] {
   };
 }
 
-export function buildFaqSchema(faqs: CampaignFaq[]) {
+export function buildFaqSchema(faqs: CampaignFaq[]): FaqSchema {
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -101,7 +122,7 @@ export function buildFaqSchema(faqs: CampaignFaq[]) {
   };
 }
 
-export function buildBreadcrumbSchema(items: BreadcrumbItem[]) {
+export function buildBreadcrumbSchema(items: BreadcrumbItem[]): BreadcrumbSchema {
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -117,15 +138,56 @@ export function buildBreadcrumbSchema(items: BreadcrumbItem[]) {
 export function formatCampaignEvent(input: CampaignEventInput): CampaignEvent {
   const href = 'href' in input ? normalizeSameSiteHref(input.href) : undefined;
   const context = sanitizeContext(input.context);
+  const videoId = 'videoId' in input ? sanitizeIdentifier(input.videoId) : undefined;
 
   return {
     event: input.event,
     page_path: normalizePagePath(input.pagePath),
     timestamp: input.timestamp,
     ...(href ? { href } : {}),
-    ...('videoId' in input && input.videoId ? { video_id: input.videoId } : {}),
+    ...(videoId ? { video_id: videoId } : {}),
     ...(context ? { context } : {}),
   };
+}
+
+export function sanitizeCampaignEvent(value: unknown): CampaignEvent | undefined {
+  if (!value || typeof value !== 'object') return undefined;
+  const record = value as Record<string, unknown>;
+  if (!isCampaignEventName(record.event)) return undefined;
+  if (typeof record.page_path !== 'string' || typeof record.timestamp !== 'string') return undefined;
+
+  const context =
+    record.context && typeof record.context === 'object'
+      ? (record.context as CampaignEventContext)
+      : undefined;
+
+  if (record.event === 'video_play' || record.event === 'video_complete') {
+    if (typeof record.video_id !== 'string' || !sanitizeIdentifier(record.video_id)) return undefined;
+    return formatCampaignEvent({
+      event: record.event,
+      pagePath: record.page_path,
+      timestamp: record.timestamp,
+      videoId: record.video_id,
+      context,
+    });
+  }
+
+  if (record.event === 'article_click' || record.event === 'alpha_download_click') {
+    return formatCampaignEvent({
+      event: record.event,
+      pagePath: record.page_path,
+      timestamp: record.timestamp,
+      href: typeof record.href === 'string' ? record.href : undefined,
+      context,
+    });
+  }
+
+  return formatCampaignEvent({
+    event: record.event,
+    pagePath: record.page_path,
+    timestamp: record.timestamp,
+    context,
+  });
 }
 
 function sanitizeContext(context: CampaignEventContext | undefined) {
@@ -143,7 +205,8 @@ function sanitizeContext(context: CampaignEventContext | undefined) {
   const numberKeys = ['items_total', 'items_completed'] as const;
 
   for (const key of stringKeys) {
-    if (typeof context[key] === 'string' && context[key]) sanitized[key] = context[key];
+    const value = context[key];
+    if (typeof value === 'string' && sanitizeIdentifier(value)) sanitized[key] = value;
   }
   for (const key of numberKeys) {
     if (typeof context[key] === 'number' && Number.isFinite(context[key])) sanitized[key] = context[key];
@@ -154,9 +217,10 @@ function sanitizeContext(context: CampaignEventContext | undefined) {
 
 function normalizePagePath(value: string) {
   try {
-    return new URL(value, SITE_URL).pathname;
+    const pathname = new URL(value, SITE_URL).pathname;
+    return SAFE_PAGE_PATHS.has(pathname) ? pathname : '/other';
   } catch {
-    return '/';
+    return '/other';
   }
 }
 
@@ -166,9 +230,33 @@ function normalizeSameSiteHref(value: string | undefined) {
   try {
     const url = new URL(value, SITE_URL);
     if (url.origin !== SITE_URL) return undefined;
+    if (!SAFE_HREF_PATHS.has(url.pathname)) return undefined;
 
     return /^https?:\/\//i.test(value) ? `${url.origin}${url.pathname}` : url.pathname;
   } catch {
     return undefined;
   }
+}
+
+const SAFE_PAGE_PATHS = new Set<string>(['/', CAMPAIGN_URLS.useCasePath, CAMPAIGN_URLS.guidePath]);
+const SAFE_HREF_PATHS = new Set<string>([
+  ...SAFE_PAGE_PATHS,
+  new URL(CAMPAIGN_URLS.alphaDownload).pathname,
+]);
+const SAFE_IDENTIFIER = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+
+function sanitizeIdentifier(value: string | undefined) {
+  if (!value || value.length > 80 || !SAFE_IDENTIFIER.test(value)) return undefined;
+  return value;
+}
+
+function isCampaignEventName(value: unknown): value is CampaignEventName {
+  return (
+    value === 'page_view' ||
+    value === 'video_play' ||
+    value === 'video_complete' ||
+    value === 'article_click' ||
+    value === 'source_pack_complete' ||
+    value === 'alpha_download_click'
+  );
 }

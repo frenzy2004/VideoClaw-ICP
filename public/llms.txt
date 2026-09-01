@@ -1,5 +1,0 @@
-# VideoClaw campaign preview
-
-Private review build. This campaign is not approved for public indexing, model citation, or production use.
-
-The preview intentionally exposes no public campaign-route inventory or product-claim summary. Use the visible review pages and their claim-safety notes for internal evaluation only.

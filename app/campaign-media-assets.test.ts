@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
+import { campaignTranscripts } from './use-cases/demo-day-founder-content/page';
 
 const mediaDirectory = join(process.cwd(), 'public/media/demo-day');
 
@@ -26,4 +27,18 @@ describe('Demo Day campaign media assets', () => {
     expect(readFileSync(join(mediaDirectory, `${variant}-poster.jpg`)).byteLength).toBeGreaterThan(10_000);
     expect(readFileSync(join(mediaDirectory, `${variant}.en.vtt`), 'utf8')).toMatch(/^WEBVTT/);
   });
+
+  it.each(['base', 'investor', 'customer', 'recruiting'] as const)(
+    '%s visible transcript matches every VTT cue',
+    (variant) => {
+      const captions = readFileSync(join(mediaDirectory, `${variant}.en.vtt`), 'utf8');
+      const cueText = captions
+        .trim()
+        .split(/\n\n/)
+        .slice(1)
+        .map((block) => block.split('\n').slice(1).join(' '));
+
+      expect(campaignTranscripts[variant].map((cue) => cue.text)).toEqual(cueText);
+    },
+  );
 });

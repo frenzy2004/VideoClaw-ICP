@@ -61,9 +61,10 @@ export default function Home() {
       data-vc-page-id="c2-demo-day-prototype"
       data-vc-page-type="commercial"
     >
+      <a className="skip-link" href="#main-content">Skip to main content</a>
       <div className="review-ribbon">PRIVATE REVIEW PROTOTYPE · NOT A LIVE OFFER</div>
 
-      <header className="masthead">
+      <header className="masthead" role="banner">
         <a className="wordmark" href="https://videoclaw.com/" aria-label="VideoClaw home">VIDEOCLAW</a>
         <nav aria-label="Campaign pages and sections">
           <a href={CAMPAIGN_URLS.useCasePath} data-vc-event="article_click" data-vc-article-id="demo-day-founder-content" data-vc-link-id="home-use-case-nav" data-vc-placement="masthead">USE CASE</a>
@@ -74,7 +75,7 @@ export default function Home() {
         <a className="header-cta" href={CAMPAIGN_URLS.alphaDownload} data-vc-event="alpha_download_click" data-vc-cta-id="masthead-alpha-access" data-vc-placement="masthead">REQUEST PRIVATE-ALPHA MAC ACCESS ↗</a>
       </header>
 
-      <section className="hero" aria-labelledby="hero-title">
+      <section className="hero" id="main-content" tabIndex={-1} aria-labelledby="hero-title">
         <div className="hero-kicker"><span>FOR US ACCELERATOR FOUNDERS</span><span>DEADLINE INSIDE 7–21 DAYS</span></div>
         <div className="hero-grid">
           <div className="hero-copy">
@@ -139,7 +140,7 @@ export default function Home() {
         <div className="hero-actions centered-actions"><a className="primary-button" href="#source-pack" data-vc-event="article_click" data-vc-article-id="demo-day-source-pack" data-vc-link-id="home-source-pack-closing" data-vc-placement="closing">RUN THE SOURCE-PACK CHECK</a><a className="text-link" href={CAMPAIGN_URLS.alphaDownload} data-vc-event="alpha_download_click" data-vc-cta-id="closing-alpha-access" data-vc-placement="closing">REQUEST PRIVATE-ALPHA MAC ACCESS ↗</a></div>
       </section>
 
-      <footer><a className="wordmark" href="https://videoclaw.com/">VIDEOCLAW</a><p>Private campaign prototype · US Demo Day continuity pilot · September 2026</p><a href="#top">BACK TO TOP ↑</a></footer>
+      <footer role="contentinfo"><a className="wordmark" href="https://videoclaw.com/">VIDEOCLAW</a><p>Private campaign prototype · US Demo Day continuity pilot · September 2026</p><a href="#top">BACK TO TOP ↑</a></footer>
     </main>
   );
 }

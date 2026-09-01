@@ -14,6 +14,8 @@ const transcript: Transcript = [
 describe('CampaignVideo', () => {
   beforeEach(() => {
     window.history.replaceState({}, '', '/use-cases/demo-day-founder-content');
+    Object.defineProperty(navigator, 'globalPrivacyControl', { configurable: true, value: false });
+    Object.defineProperty(navigator, 'doNotTrack', { configurable: true, value: '0' });
   });
 
   afterEach(() => {
@@ -139,6 +141,31 @@ describe('CampaignVideo', () => {
       'video_complete:customer-cut',
     ]);
 
+    window.removeEventListener('videoclaw:analytics', listener);
+  });
+
+  it('emits no video analytics when GPC is enabled', () => {
+    Object.defineProperty(navigator, 'globalPrivacyControl', { configurable: true, value: true });
+    const details: unknown[] = [];
+    const listener = (event: Event) => details.push((event as CustomEvent).detail);
+    window.addEventListener('videoclaw:analytics', listener);
+
+    render(
+      <CampaignVideo
+        id="investor-cut"
+        src="/media/demo-day/investor-16x9.mp4"
+        poster="/media/demo-day/investor-poster.jpg"
+        captionsSrc="/media/demo-day/investor.en.vtt"
+        title="Investor proof sequence"
+        caption="Investor version."
+        transcript={transcript}
+      />,
+    );
+    const video = screen.getByLabelText('Investor proof sequence');
+    fireEvent.play(video);
+    fireEvent.ended(video);
+
+    expect(details).toEqual([]);
     window.removeEventListener('videoclaw:analytics', listener);
   });
 

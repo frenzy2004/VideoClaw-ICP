@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { formatCampaignEvent } from './campaign-content';
+import { emitCampaignEvent } from './campaign-analytics';
 
 export type TranscriptCue = {
   time: string;
@@ -49,16 +49,12 @@ export default function CampaignVideo({
   }, [id, src]);
 
   function emit(event: 'video_play' | 'video_complete') {
-    window.dispatchEvent(
-      new CustomEvent('videoclaw:analytics', {
-        detail: formatCampaignEvent({
-          event,
-          pagePath: window.location.pathname,
-          timestamp: new Date().toISOString(),
-          videoId: id,
-        }),
-      }),
-    );
+    emitCampaignEvent({
+      event,
+      pagePath: window.location.pathname,
+      timestamp: new Date().toISOString(),
+      videoId: id,
+    });
   }
 
   function handlePlay() {

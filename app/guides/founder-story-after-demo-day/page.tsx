@@ -134,10 +134,9 @@ const webPageSchema = {
   name: title,
   description,
   inLanguage: 'en-US',
-};
+} as const;
 const breadcrumbSchema = buildBreadcrumbSchema([
   { name: 'VideoClaw', url: CAMPAIGN_URLS.siteHome },
-  { name: 'Guides', url: 'https://videoclaw.com/guides' },
   { name: 'Demo Day Video Checklist for Startup Founders', url: CAMPAIGN_URLS.guide },
 ]);
 const faqSchema = buildFaqSchema(guideFaqs);
@@ -153,6 +152,7 @@ export default function GuidePage() {
       data-vc-page-id="c2-demo-day-guide"
       data-vc-page-type="article"
     >
+      <a className="skip-link" href="#main-content">Skip to main content</a>
       {publicIndexing
         ? guideSchemaNodes.map((node) => (
             <script
@@ -163,19 +163,21 @@ export default function GuidePage() {
           ))
         : null}
 
-      <div className="campaign-preview-ribbon">PRIVATE CAMPAIGN PREVIEW · NOINDEX · EDITORIAL REVIEW</div>
-      <header className="guide-masthead">
+      <div className="campaign-preview-ribbon">
+        {publicIndexing ? 'US STARTUP FOUNDER DEMO DAY GUIDE' : 'PRIVATE CAMPAIGN PREVIEW · NOINDEX · EDITORIAL REVIEW'}
+      </div>
+      <header className="guide-masthead" role="banner">
         <a className="wordmark" href={CAMPAIGN_URLS.siteHome} aria-label="VideoClaw home">VIDEOCLAW</a>
         <nav aria-label="Guide navigation">
-          <a href={CAMPAIGN_URLS.useCasePath}>Demo Day use case</a>
+          <a href={CAMPAIGN_URLS.useCasePath} data-vc-event="article_click" data-vc-article-id="demo-day-use-case" data-vc-link-id="guide-use-case-nav" data-vc-placement="masthead">Demo Day use case</a>
           <a href="#source-pack">Eight inputs</a>
           <a href="#preflight">72-hour preflight</a>
           <a href="#faqs">FAQs</a>
         </nav>
-        <a className="guide-header-link" href={CAMPAIGN_URLS.useCasePath}>SEE THE CAMPAIGN →</a>
+        <a className="guide-header-link" href={CAMPAIGN_URLS.useCasePath} data-vc-event="article_click" data-vc-article-id="demo-day-use-case" data-vc-link-id="guide-use-case-header" data-vc-placement="masthead">SEE THE CAMPAIGN →</a>
       </header>
 
-      <article className="guide-article">
+      <article className="guide-article" id="main-content" tabIndex={-1}>
         <header className="guide-hero">
           <p className="guide-breadcrumb"><a href={CAMPAIGN_URLS.siteHome}>VideoClaw</a> / Guides / Demo Day</p>
           <p className="campaign-label">US STARTUP OPERATING GUIDE · REVIEWED 1 SEPTEMBER 2026</p>
@@ -302,7 +304,7 @@ export default function GuidePage() {
             This sequence organizes follow-up; it is not proven to create meetings or funding. Publish only when
             you have one cleared question, one approved answer, and a working next step.
           </p>
-          <div className="guide-table-wrap">
+          <div className="guide-table-wrap" role="region" aria-label="Fourteen-day follow-up sequence; scroll horizontally to see all columns" tabIndex={0}>
             <table className="guide-followup-table">
               <thead><tr><th>Window</th><th>Asset</th><th>Question answered</th><th>One CTA</th></tr></thead>
               <tbody>
@@ -348,9 +350,9 @@ export default function GuidePage() {
         </section>
       </article>
 
-      <footer className="campaign-footer guide-footer">
+      <footer className="campaign-footer guide-footer" role="contentinfo">
         <a className="wordmark" href={CAMPAIGN_URLS.siteHome}>VIDEOCLAW</a>
-        <p>Private editorial preview · US Demo Day content system · September 2026</p>
+        <p>{publicIndexing ? 'US Demo Day founder guide · September 2026' : 'Private editorial preview · US Demo Day content system · September 2026'}</p>
         <a href="#top">BACK TO TOP ↑</a>
       </footer>
     </main>

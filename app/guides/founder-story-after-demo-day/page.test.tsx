@@ -52,7 +52,9 @@ describe('Demo Day video checklist guide', () => {
     expect(schemaText).toContain('FAQPage');
     expect(schemaText).not.toMatch(/Article|Product|Offer|Review|AggregateRating|VideoObject|HowTo/);
     const faqSchema = guideSchemaNodes.find((node) => node['@type'] === 'FAQPage');
-    expect(faqSchema?.mainEntity).toHaveLength(6);
+    expect(faqSchema).toBeDefined();
+    if (!faqSchema || faqSchema['@type'] !== 'FAQPage') throw new Error('FAQ schema missing');
+    expect(faqSchema.mainEntity).toHaveLength(6);
   });
 
   it('uses authoritative program links and the exact bounded product handoff', () => {
@@ -70,6 +72,11 @@ describe('Demo Day video checklist guide', () => {
     expect(accessLinks.length).toBeGreaterThan(0);
     for (const link of accessLinks) expect(link).toHaveAttribute('href', 'https://videoclaw.com/alpha/download');
     expect(container.querySelector('form')).not.toBeInTheDocument();
+
+    for (const link of screen.getAllByRole('link', { name: /Demo Day use case|see the campaign/i })) {
+      expect(link).toHaveAttribute('href', '/use-cases/demo-day-founder-content');
+      expect(link).toHaveAttribute('data-vc-event', 'article_click');
+    }
   });
 
   it('exports fail-closed preview metadata and emits no preview JSON-LD', () => {

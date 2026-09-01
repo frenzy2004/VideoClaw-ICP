@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { formatCampaignEvent } from './campaign-content';
+import { emitCampaignEvent } from './campaign-analytics';
 
 const checks = [
   ['story', 'Approved story', 'Problem, product mechanism, proof, why now, and next action are agreed.'],
@@ -27,21 +27,17 @@ export default function SourcePackCheck() {
   useEffect(() => {
     if (completed !== checks.length || completionSent.current) return;
     completionSent.current = true;
-    window.dispatchEvent(
-      new CustomEvent('videoclaw:analytics', {
-        detail: formatCampaignEvent({
-          event: 'source_pack_complete',
-          pagePath: window.location.pathname,
-          timestamp: new Date().toISOString(),
-          context: {
-            source_pack_id: 'demo-day-source-pack',
-            source_type: 'mixed',
-            items_total: checks.length,
-            items_completed: checks.length,
-          },
-        }),
-      }),
-    );
+    emitCampaignEvent({
+      event: 'source_pack_complete',
+      pagePath: window.location.pathname,
+      timestamp: new Date().toISOString(),
+      context: {
+        source_pack_id: 'demo-day-source-pack',
+        source_type: 'mixed',
+        items_total: checks.length,
+        items_completed: checks.length,
+      },
+    });
   }, [completed]);
 
   function toggle(key: CheckKey) {
@@ -69,9 +65,13 @@ export default function SourcePackCheck() {
       data-vc-items-total="8"
     >
       <div className="section-heading diagnostic-heading">
-        <div><p className="card-label">INTERACTIVE SOURCE-PACK DIAGNOSTIC</p><h2 id="source-title">Can your story enter production safely?</h2></div>
-        <div className="score" aria-live="polite"><strong>{completed}/{checks.length}</strong><span>{ready ? 'READY FOR HUMAN REVIEW' : 'REQUIREMENTS CONFIRMED'}</span></div>
+        <div><p className="card-label">LOCAL SOURCE-PACK DIAGNOSTIC</p><h2 id="source-title">Is your source pack ready for an internal decision?</h2></div>
+        <div className="score" aria-live="polite" aria-atomic="true"><strong>{completed}/{checks.length}</strong><span>CONTROLS CHECKED</span></div>
       </div>
+      <p className="diagnostic-disclosure">
+        This is a local checkbox-only readiness aid. Nothing is uploaded, transmitted, stored, reviewed, or sent
+        for generation. Do not enter or share confidential material here.
+      </p>
       <div className="check-grid">
         {checks.map(([key, label, helper], index) => (
           <label className={`check-card ${selected[key] ? 'checked' : ''}`} key={key}>
@@ -80,8 +80,8 @@ export default function SourcePackCheck() {
           </label>
         ))}
       </div>
-      <div className={`readiness ${ready ? 'ready' : ''}`} aria-live="polite">
-        <div><p className="card-label">READINESS RESULT</p><h3>{ready ? 'Complete enough for source review—not automatic generation.' : `Partial pack · ${missing.length} control${missing.length === 1 ? '' : 's'} unresolved.`}</h3><p>{ready ? 'A human still needs to inspect the files, claim evidence, privacy restrictions, and current VideoClaw capability before setting a paid-generation cap.' : `Resolve next: ${missing.slice(0, 3).map(([, label]) => label).join(', ')}${missing.length > 3 ? ', and the remaining controls' : ''}.`}</p></div>
+      <div className={`readiness ${ready ? 'ready' : ''}`}>
+        <div><p className="card-label">READINESS RESULT</p><h3>{ready ? 'Eight controls checked—now make an internal go/no-go decision.' : `Partial pack · ${missing.length} control${missing.length === 1 ? '' : 's'} unresolved.`}</h3><p>{ready ? 'Completing this checklist does not submit a request, trigger a review, qualify a pilot, or start generation.' : `Resolve next: ${missing.slice(0, 3).map(([, label]) => label).join(', ')}${missing.length > 3 ? ', and the remaining controls' : ''}.`}</p></div>
         <button type="button" onClick={copyChecklist}>{copied ? 'COPIED ✓' : 'COPY THE 8-POINT CHECKLIST'}</button>
       </div>
     </section>

@@ -7,8 +7,12 @@
   },
   "scripts": {
     "dev": "vinext dev",
-    "build": "next build",
+    "build": "vite build",
+    "build:next": "next build",
+    "build:sites": "vite build",
     "start": "vinext start",
+    "start:next": "next start",
+    "start:sites": "vinext start",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "test": "vitest run"
   },

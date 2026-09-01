@@ -30,6 +30,10 @@ describe('Demo Day founder content use-case page', () => {
     );
     expect(container.querySelector('form')).not.toBeInTheDocument();
     expect(container.querySelector('input[type="file"]')).not.toBeInTheDocument();
+
+    const guideLink = screen.getByRole('link', { name: 'Founder guide' });
+    expect(guideLink).toHaveAttribute('href', '/guides/founder-story-after-demo-day');
+    expect(guideLink).toHaveAttribute('data-vc-event', 'article_click');
   });
 
   it('shows four viewer jobs and four local campaign prototypes', () => {
@@ -68,6 +72,8 @@ describe('Demo Day founder content use-case page', () => {
     expect(schemaText).not.toMatch(/Product|Offer|Review|AggregateRating|VideoObject|Article/);
 
     const faqSchema = useCaseSchemaNodes.find((node) => node['@type'] === 'FAQPage');
+    expect(faqSchema).toBeDefined();
+    if (!faqSchema || faqSchema['@type'] !== 'FAQPage') throw new Error('FAQ schema missing');
     expect(faqSchema.mainEntity).toHaveLength(6);
     expect(faqSchema.mainEntity.map((item: { name: string }) => item.name)).toEqual(
       useCaseFaqs.map((faq) => faq.question),
