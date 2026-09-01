@@ -35,7 +35,7 @@ The guide opens with a two-sentence answer and a crawlable checklist. It disting
 
 Use only the already generated and verified local Demo Day campaign videos. Copy the 16:9 base, investor, customer, and recruiting sound versions into `public/media/demo-day/`. Generate static poster frames from those local files.
 
-Every video uses native controls, `playsInline`, metadata preload, a visible descriptive caption, and an accessible label. Autoplay is not used. The first video may preload metadata; supporting variants use `preload="none"`. Video completion at 90% is counted once per player session.
+Every video uses native controls, `playsInline`, metadata preload, a visible descriptive caption, and an accessible label. Autoplay is not used. The first video may preload metadata; supporting variants use `preload="none"`. Video completion is counted once from the native `ended` event; seeking near the end does not count.
 
 ## Shared interfaces
 
@@ -53,12 +53,10 @@ Required event names are:
 - `video_play`
 - `video_complete`
 - `article_click`
-- `source_pack_start`
 - `source_pack_complete`
-- `source_checklist_copy`
 - `alpha_download_click`
 
-Each event includes `event`, `page_path`, and `timestamp`. Link events may include `href`; video events include `video_id`. No personal data is collected.
+Each event includes `event`, `page_path`, and `timestamp`. Link events may include a same-site `href`; video events require `video_id`. Query strings, fragments, external destinations, and personal data are removed before dispatch.
 
 ## SEO, AEO, GEO, and structured data
 
@@ -87,4 +85,3 @@ The deployment is a review build, not a public campaign launch. It must show `PR
 - The source-pack diagnostic emits start, completion, and copy events.
 - Tests, lint, and the production build pass.
 - The private preview is deployed and its two campaign routes respond successfully.
-

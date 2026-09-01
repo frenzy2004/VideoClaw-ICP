@@ -107,7 +107,7 @@ Copy only the four verified 16:9 sound files from `outputs/videoclaw-demo-day-co
 
 - [ ] **Step 2: Write the failing component test**
 
-Render `CampaignVideo` and assert the native player has controls, `playsInline`, the supplied poster and accessible label, and a visible caption. Dispatch `play` and a `timeupdate` at 90% and assert one `videoclaw:analytics` event for each documented video event.
+Render `CampaignVideo` and assert the native player has controls, `playsInline`, the supplied poster and accessible label, and a visible caption. Dispatch `play` and native `ended` events and assert one `videoclaw:analytics` event for each documented video event; seeking near the end must not count as completion.
 
 - [ ] **Step 3: Run the focused test and verify failure**
 
@@ -259,4 +259,3 @@ Use the project’s configured preview hosting. Do not promote to production and
 git add docs/qa/2026-09-01-demo-day-campaign-verification.md
 git commit -m "docs: verify demo day campaign preview"
 ```
-
