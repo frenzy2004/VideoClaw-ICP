@@ -1205,10 +1205,8 @@ footer > a:last-child { justify-self: end; }
 .article-page .article-media figcaption { display: grid; gap: 0.5rem; padding: 1rem; line-height: 1.5; }
 .article-page .article-media figcaption strong { font-weight: 400; }
 .article-page .article-media figcaption span { color: var(--muted); font-family: var(--font-mono), monospace; font-size: 0.65rem; }
-.article-page .article-cta { padding: clamp(4rem, 8vw, 8rem) max(4vw, calc((100vw - 1440px) / 2)); background: var(--green); }
-.article-page .article-cta > p { font-family: var(--font-mono), monospace; font-size: 0.66rem; letter-spacing: 0.09em; text-transform: uppercase; }
-.article-page .article-cta h2 { max-width: 760px; margin: 0; font-size: clamp(2rem, 3.5vw, 3.8rem); font-weight: 400; letter-spacing: -0.05em; line-height: 1.06; }
-.article-page .article-cta > a { display: inline-block; margin-top: 2.2rem; padding: 0.95rem 1.1rem; border: 1px solid var(--ink); background: var(--ink); color: var(--paper); font-family: var(--font-mono), monospace; font-size: 0.7rem; letter-spacing: 0.06em; text-decoration: none; }
+.article-page .article-cta { padding: clamp(2rem, 4vw, 3.5rem) max(4vw, calc((100vw - 1440px) / 2)); background: var(--green); }
+.article-page .article-cta > a { display: inline-block; padding: 0.95rem 1.1rem; border: 1px solid var(--ink); background: var(--ink); color: var(--paper); font-family: var(--font-mono), monospace; font-size: 0.7rem; letter-spacing: 0.06em; text-decoration: none; }
 .article-page .article-cta > a:hover { background: var(--paper); color: var(--ink); }
 
 @media (max-width: 1040px) {
