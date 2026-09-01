@@ -31,11 +31,14 @@ describe('Campaign 2 pilot data contracts', () => {
     const approvedClaims = dreamPilot.claimLedger
       .filter((claim) => claim.state === 'approved')
       .map((claim) => claim.copy);
-    const prohibitedClaims = dreamPilot.claimLedger
-      .filter((claim) => claim.state === 'prohibited')
-      .map((claim) => claim.copy);
+    const prohibitedClaims = new Set(
+      dreamPilot.claimLedger
+        .filter((claim) => claim.state === 'prohibited')
+        .map((claim) => claim.copy),
+    );
+    const overlappingClaims = approvedClaims.filter((claim) => prohibitedClaims.has(claim));
 
-    expect(approvedClaims).not.toEqual(expect.arrayContaining(prohibitedClaims));
+    expect(overlappingClaims).toEqual([]);
   });
 
   it('provides immutable templates for the private dossier and generic guide', () => {
