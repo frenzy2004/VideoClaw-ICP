@@ -42,7 +42,7 @@ description: A practical system for turning a startup funding announcement into 
 slug: funding-announcement-video-strategy
 status: draft
 indexing: noindex
-canonical_path: /articles/funding-announcement-video-strategy
+canonical_path: /blog/funding-announcement-video-strategy
 competitor_gap: Existing results explain press releases but not a source-controlled multi-audience video workflow.
 keyword_evidence:
   provider: pending
@@ -53,6 +53,25 @@ keyword_evidence:
   cpc: null
   intent: informational
   validation_status: pending_paid_provider
+serp_evidence:
+  provider: apify
+  actor: apify/google-search-scraper
+  query: startup announcement video strategy
+  country: US
+  language: en
+  observed_at: 2026-09-01
+  run_id: apify-run-id
+  dataset_id: apify-dataset-id
+  organic_result_count: 10
+  top_competitors:
+    - position: 1
+      title: Ranking page title
+      url: https://example.com/ranking-page
+      domain: example.com
+  people_also_ask: []
+  related_queries: []
+  autocomplete_suggestions: []
+  validation_status: observed
 sources:
   - title: Source title
     url: https://example.com/source
@@ -80,6 +99,8 @@ related_articles: []
 Allowed `funnel_stage` values are `top`, `middle`, and `bottom`. Allowed `search_intent` values are `informational`, `commercial`, `transactional`, and `navigational`. Allowed `status` values are `draft`, `review`, and `publishable`. Allowed `indexing` values are `noindex` and `index`.
 
 `keyword_evidence.provider` is `pending`, `semrush`, `ahrefs`, `similarweb`, or `gsc`. Numeric keyword fields remain `null` until observed from an authenticated provider. Scraped SERPs, autocomplete suggestions, social posts, or generated estimates must never be labeled as search volume or keyword difficulty.
+
+`serp_evidence` is required in the article-selection release. It records live US Google evidence gathered through Apify, including the exact query, observation date, Actor, run and dataset identifiers, ranking competitors, People Also Ask questions, related queries, and autocomplete suggestions. Apify evidence validates that the query and competitive result set were observed; it does not validate proprietary search volume, keyword difficulty, CPC, or traffic potential.
 
 ## Article body contract
 
@@ -110,7 +131,7 @@ export function getPublishableArticles(): ArticleRecord[];
 export function validateArticleLibrary(records: ArticleRecord[]): LibraryValidationResult;
 ```
 
-`app/articles/[slug]/page.tsx` renders statically generated pages from those records. It uses async route params, `generateStaticParams`, and `generateMetadata`. Metadata includes the title, description, robots, canonical only when indexable, Open Graph data, and `Article` JSON-LD only when the article is publishable and indexing is globally enabled.
+`app/blog/[slug]/page.tsx` renders statically generated pages from those records. It uses async route params, `generateStaticParams`, and `generateMetadata`. Metadata includes the title, description, robots, canonical only when indexable, Open Graph data, and `Article` JSON-LD only when the article is publishable and indexing is globally enabled.
 
 Markdown supports paragraphs, H2–H4, lists, tables, blockquotes, links, inline code, fenced code, and local images. Raw HTML is disabled. External links receive safe attributes. Article media uses `next/image` with explicit dimensions or a controlled local editorial illustration component.
 
@@ -164,7 +185,7 @@ Third-party photography or logos are not downloaded or republished without an ex
 
 All review pages emit `noindex, nofollow`. `/seo/content-map` is always noindex. The XML sitemap contains only articles that pass the complete publication gate and only when `NEXT_PUBLIC_VIDEOCLAW_PUBLIC_INDEXING=true`.
 
-Human-readable article URLs use `/articles/<slug>`. Slugs are lowercase ASCII, 3–80 characters, hyphen-delimited, stable, and globally unique. Redirect planning is required before a published slug changes.
+Human-readable article URLs use `/blog/<slug>`. Slugs are lowercase ASCII, 3–80 characters, hyphen-delimited, stable, and globally unique. Redirect planning is required before a published slug changes.
 
 `llms.txt` may list only publishable articles and remains a private-review notice while global indexing is disabled.
 
@@ -177,6 +198,7 @@ Automated verification must prove:
 - every article ID, slug, title, and primary keyword is unique;
 - every source parses and renders without raw HTML;
 - every article has attribution, keyword evidence state, sources, media provenance, CTA, and review state;
+- every article has observed US Google SERP evidence with an Apify run and dataset reference before it is selected for the 250-page library;
 - no article is indexable while keyword validation or editorial approval is pending;
 - static generation creates all 250 article routes;
 - the content-map totals match the filesystem;
@@ -189,7 +211,7 @@ Production promotion or enabling the global indexing flag is outside this review
 ## Acceptance criteria
 
 - The repository contains exactly 250 canonical Markdown article sources: 50 for each fixed campaign.
-- Every Markdown source renders at a unique `/articles/<slug>` route with the approved editorial design.
+- Every Markdown source renders at a unique `/blog/<slug>` route with the approved editorial design.
 - Every rendered page exposes its traceable attribution and deterministic QA result in review mode.
 - `/seo/content-map` provides a complete 250-row operational view and workflow diagram.
 - Paid keyword metrics are authenticated observations or explicit null/pending values; none are invented.

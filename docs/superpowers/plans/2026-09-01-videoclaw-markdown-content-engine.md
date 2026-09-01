@@ -15,6 +15,7 @@
 - The library contains exactly 250 `.md` article sources and exactly 50 sources for each fixed campaign ID.
 - Markdown at `content/articles/<campaign-id>/<slug>.md` is the canonical source; article body copy is not hard-coded in JSX.
 - Numeric volume, difficulty, CPC, click, and traffic values are `null` until imported from an authenticated provider.
+- Live US Google SERP and autocomplete evidence is collected through Apify before final article selection; every final article records its Actor, run, dataset, query, timestamp, competitors, and observed query features.
 - Every generated draft is `status: draft`, `indexing: noindex`, and `keyword_evidence.validation_status: pending_paid_provider` in this review release.
 - Every article has unique `article_id`, `slug`, `title`, and `primary_keyword` values.
 - All external factual claims use source links; unsupported product, pricing, integration, timing, outcome, privacy, or customer claims are forbidden.
@@ -69,7 +70,7 @@ description: Build a credible funding announcement video and reuse its approved 
 slug: startup-funding-announcement-video
 status: draft
 indexing: noindex
-canonical_path: /articles/startup-funding-announcement-video
+canonical_path: /blog/startup-funding-announcement-video
 competitor_gap: Existing pages focus on press releases rather than reusable approved video evidence.
 keyword_evidence:
   provider: pending
@@ -80,6 +81,25 @@ keyword_evidence:
   cpc: null
   intent: informational
   validation_status: pending_paid_provider
+serp_evidence:
+  provider: apify
+  actor: apify/google-search-scraper
+  query: startup funding announcement video
+  country: US
+  language: en
+  observed_at: 2026-09-01
+  run_id: test-run-id
+  dataset_id: test-dataset-id
+  organic_result_count: 10
+  top_competitors:
+    - position: 1
+      title: Search Essentials
+      url: https://developers.google.com/search/docs/essentials
+      domain: developers.google.com
+  people_also_ask: []
+  related_queries: []
+  autocomplete_suggestions: []
+  validation_status: observed
 sources:
   - title: Search Essentials
     url: https://developers.google.com/search/docs/essentials
@@ -119,7 +139,7 @@ Expected: FAIL because `article-schema.ts` and `articles.ts` do not exist.
 
 - [ ] **Step 4: Implement the schema, parser, and loader**
 
-Use Zod enums for the exact campaign, funnel, intent, status, indexing, provider, and validation-state values in the spec. `parseArticleSource` calls `matter(source)`, validates `data`, rejects raw `<script`, `<iframe`, and event-handler HTML, verifies `canonical_path === /articles/${slug}`, and returns `{ frontmatter, body, filePath }`.
+Use Zod enums for the exact campaign, funnel, intent, status, indexing, provider, SERP provider, and validation-state values in the spec. `parseArticleSource` calls `matter(source)`, validates `data`, rejects raw `<script`, `<iframe`, and event-handler HTML, verifies `canonical_path === /blog/${slug}`, and returns `{ frontmatter, body, filePath }`.
 
 `getAllArticles` recursively reads only `.md` files under `content/articles`, sorts by `article_id`, and validates the complete result. It throws one aggregated error when invalid so production builds fail closed.
 
@@ -204,15 +224,15 @@ git commit -m "feat: add article QA and keyword provider contracts"
 ### Task 3: Markdown renderer and article attribution panel
 
 **Files:**
-- Create: `app/articles/[slug]/page.tsx`
-- Create: `app/articles/[slug]/page.test.tsx`
-- Create: `app/articles/[slug]/article-markdown.tsx`
-- Create: `app/articles/[slug]/article-attribution.tsx`
+- Create: `app/blog/[slug]/page.tsx`
+- Create: `app/blog/[slug]/page.test.tsx`
+- Create: `app/blog/[slug]/article-markdown.tsx`
+- Create: `app/blog/[slug]/article-attribution.tsx`
 - Modify: `app/globals.css`
 
 **Interfaces:**
 - Consumes: `getAllArticles`, `getArticleBySlug`, `auditArticle`, and the existing campaign URLs.
-- Produces: statically generated `/articles/<slug>` routes, dynamic metadata, safe Markdown rendering, JSON-LD publication gating, and a review attribution panel.
+- Produces: statically generated `/blog/<slug>` routes, dynamic metadata, safe Markdown rendering, JSON-LD publication gating, and a review attribution panel.
 
 - [ ] **Step 1: Write failing page tests**
 
@@ -222,7 +242,7 @@ Test `generateStaticParams` returns one literal `{ slug }` per record and `gener
 
 - [ ] **Step 2: Run the route test and verify RED**
 
-Run: `pnpm test 'app/articles/[slug]/page.test.tsx'`
+Run: `pnpm test 'app/blog/[slug]/page.test.tsx'`
 
 Expected: FAIL because the route components do not exist.
 
@@ -238,10 +258,10 @@ Namespace rules under `.article-page` and `.article-attribution`. Preserve the e
 
 - [ ] **Step 5: Verify and commit**
 
-Run: `pnpm test 'app/articles/[slug]/page.test.tsx' && pnpm run typecheck && pnpm run lint`
+Run: `pnpm test 'app/blog/[slug]/page.test.tsx' && pnpm run typecheck && pnpm run lint`
 
 ```bash
-git add 'app/articles/[slug]' app/globals.css
+git add 'app/blog/[slug]' app/globals.css
 git commit -m "feat: render traceable markdown articles"
 ```
 
@@ -317,7 +337,7 @@ expect(result.totals.byCampaign).toEqual({
 expect(result.findings).toEqual([]);
 ```
 
-Also assert global uniqueness of article ID, slug, title, and primary keyword; body word count of at least 600; at least two H2 headings; no raw HTML; no placeholder tokens; no invented numeric keyword metrics; all local media files exist; all external URLs parse; and every campaign contains at least one informational, commercial, and transactional article across top, middle, and bottom stages where appropriate.
+Also assert global uniqueness of article ID, slug, title, and primary keyword; body word count of at least 600; at least two H2 headings; no raw HTML; no placeholder tokens; no invented numeric keyword metrics; observed Apify US SERP evidence with run/dataset provenance; all local media files exist; all external URLs parse; and every campaign contains at least one informational, commercial, and transactional article across top, middle, and bottom stages where appropriate.
 
 - [ ] **Step 2: Run the library test and verify RED**
 
