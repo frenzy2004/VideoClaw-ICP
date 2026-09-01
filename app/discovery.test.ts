@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import nextConfig from '../next.config';
+import nextConfig, { buildSiteHeaders } from '../next.config';
 import { llmsText } from './llms.txt/route';
 import robots from './robots';
 import sitemap from './sitemap';
@@ -38,6 +38,19 @@ describe('campaign discovery controls', () => {
     ]));
   });
 
+  it('keeps the pilot and physical-AI guide noindex even when public indexing is enabled', () => {
+    expect(buildSiteHeaders(true)).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        source: '/pilots/dream-demo-day',
+        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
+      }),
+      expect.objectContaining({
+        source: '/guides/physical-ai-product-demo-before-demo-day',
+        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
+      }),
+    ]));
+  });
+
   it('publishes only the two approved routes when the exact flag is enabled', () => {
     process.env.NEXT_PUBLIC_VIDEOCLAW_PUBLIC_INDEXING = 'true';
     expect(robots()).toEqual({
@@ -61,5 +74,10 @@ describe('campaign discovery controls', () => {
     expect(llms).toContain('https://videoclaw.com/use-cases/demo-day-founder-content');
     expect(llms).toContain('https://videoclaw.com/guides/founder-story-after-demo-day');
     expect(llms).not.toMatch(/private|noindex|not approved/i);
+    expect(sitemap().map((entry) => entry.url)).not.toEqual(expect.arrayContaining([
+      'https://videoclaw.com/pilots/dream-demo-day',
+      'https://videoclaw.com/guides/physical-ai-product-demo-before-demo-day',
+    ]));
+    expect(llms).not.toMatch(/dream-demo-day|physical-ai-product-demo/i);
   });
 });

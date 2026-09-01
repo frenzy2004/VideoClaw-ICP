@@ -29,21 +29,39 @@ const mediaHeaders = mediaVariants.flatMap((variant) => [
   },
 ]);
 
+const permanentPrivateRouteHeaders = [
+  {
+    source: '/pilots/dream-demo-day',
+    headers: privateIndexingHeaders,
+  },
+  {
+    source: '/guides/physical-ai-product-demo-before-demo-day',
+    headers: privateIndexingHeaders,
+  },
+];
+
+export function buildSiteHeaders(publicIndexing: boolean) {
+  return [
+    ...(publicIndexing
+      ? []
+      : [
+          {
+            source: '/',
+            headers: privateIndexingHeaders,
+          },
+          {
+            source: '/:path*',
+            headers: privateIndexingHeaders,
+          },
+        ]),
+    ...permanentPrivateRouteHeaders,
+    ...mediaHeaders,
+  ];
+}
+
 const nextConfig: NextConfig = {
   async headers() {
-    if (publicIndexing) return mediaHeaders;
-
-    return [
-      {
-        source: '/',
-        headers: privateIndexingHeaders,
-      },
-      {
-        source: '/:path*',
-        headers: privateIndexingHeaders,
-      },
-      ...mediaHeaders,
-    ];
+    return buildSiteHeaders(publicIndexing);
   },
 };
 

@@ -9,6 +9,10 @@ export const CAMPAIGN_URLS = {
   useCase: `${SITE_URL}/use-cases/demo-day-founder-content`,
   guidePath: '/guides/founder-story-after-demo-day',
   guide: `${SITE_URL}/guides/founder-story-after-demo-day`,
+  dreamPilotPath: '/pilots/dream-demo-day',
+  dreamPilot: `${SITE_URL}/pilots/dream-demo-day`,
+  physicalAiGuidePath: '/guides/physical-ai-product-demo-before-demo-day',
+  physicalAiGuide: `${SITE_URL}/guides/physical-ai-product-demo-before-demo-day`,
   sourcePackPath: '/#source-pack',
 } as const;
 
@@ -266,7 +270,13 @@ function normalizeSameSiteHref(value: string | undefined) {
   }
 }
 
-const SAFE_PAGE_PATHS = new Set<string>(['/', CAMPAIGN_URLS.useCasePath, CAMPAIGN_URLS.guidePath]);
+const SAFE_PAGE_PATHS = new Set<string>([
+  '/',
+  CAMPAIGN_URLS.useCasePath,
+  CAMPAIGN_URLS.guidePath,
+  CAMPAIGN_URLS.dreamPilotPath,
+  CAMPAIGN_URLS.physicalAiGuidePath,
+]);
 const SAFE_HREF_PATHS = new Set<string>([
   ...SAFE_PAGE_PATHS,
   new URL(CAMPAIGN_URLS.alphaDownload).pathname,
@@ -286,6 +296,8 @@ const SAFE_CONTEXT_VALUES: Partial<Record<keyof CampaignEventContext, Set<string
     'founder-story-after-demo-day',
     'demo-day-source-pack',
     'demo-day-use-case',
+    'pilot-account-dossier',
+    'physical-ai-demo-day-guide',
   ]),
   link_id: new Set([
     'home-use-case-nav',
@@ -300,6 +312,10 @@ const SAFE_CONTEXT_VALUES: Partial<Record<keyof CampaignEventContext, Set<string
     'hero-source-pack',
     'source-controls-check',
     'closing-source-pack',
+    'pilot-physical-ai-guide',
+    'physical-ai-guide-download',
+    'physical-ai-guide-use-case',
+    'use-case-physical-ai-guide',
   ]),
   source_pack_id: new Set(['demo-day-source-pack']),
   source_type: new Set(['mixed']),

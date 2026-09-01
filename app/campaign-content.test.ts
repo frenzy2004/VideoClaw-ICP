@@ -21,6 +21,10 @@ describe('campaign content contracts', () => {
       alphaDownload: 'https://videoclaw.com/alpha/download',
       useCasePath: '/use-cases/demo-day-founder-content',
       guidePath: '/guides/founder-story-after-demo-day',
+      dreamPilotPath: '/pilots/dream-demo-day',
+      dreamPilot: 'https://videoclaw.com/pilots/dream-demo-day',
+      physicalAiGuidePath: '/guides/physical-ai-product-demo-before-demo-day',
+      physicalAiGuide: 'https://videoclaw.com/guides/physical-ai-product-demo-before-demo-day',
       sourcePackPath: '/#source-pack',
     });
   });
