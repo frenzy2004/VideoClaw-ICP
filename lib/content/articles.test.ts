@@ -176,6 +176,7 @@ function sourceWithPublishableEvidence(source: string): string {
     .replace('indexing: noindex', 'indexing: index')
     .replace('provider: pending', 'provider: semrush')
     .replace('observed_at: null', 'observed_at: 2026-09-01')
+    .replace('volume: null', 'volume: 100')
     .replace('validation_status: pending_paid_provider', 'validation_status: validated')
     .replace(/(seo_checked|evidence_checked|editorial_checked|media_checked): false/g, '$1: true')
     .replace('checked_at: null', 'checked_at: 2026-09-01');
@@ -282,6 +283,24 @@ describe('article source parsing', () => {
     )).toThrow(/keyword_evidence.*observed_at/i);
   });
 
+  it('rejects a named keyword provider that remains pending', () => {
+    expect(() => parseArticleSource(
+      sourceWith({ 'provider: pending': 'provider: semrush' }),
+      validPath,
+    )).toThrow(/keyword_evidence.*validation_status/i);
+  });
+
+  it('rejects validated named-provider evidence when all proprietary metrics are null', () => {
+    expect(() => parseArticleSource(
+      sourceWith({
+        'provider: pending': 'provider: ahrefs',
+        'observed_at: null': 'observed_at: 2026-09-01',
+        'validation_status: pending_paid_provider': 'validation_status: validated',
+      }),
+      validPath,
+    )).toThrow(/keyword_evidence.*metric/i);
+  });
+
   it.each(['draft', 'review'])('rejects an indexable %s record', (status) => {
     expect(() => parseArticleSource(
       sourceWith({
@@ -335,6 +354,24 @@ describe('article source parsing', () => {
     )).toThrow(/canonical_path/i);
   });
 
+  it.each([
+    ['uppercase characters', 'VC-C1-001'],
+    ['a two-digit sequence', 'vc-c1-01'],
+    ['an out-of-range campaign number', 'vc-c6-001'],
+  ])('requires the exact lowercase article_id pattern when it contains %s', (_label, articleId) => {
+    expect(() => parseArticleSource(
+      sourceWith({ 'article_id: vc-c1-001': `article_id: ${articleId}` }),
+      validPath,
+    )).toThrow(/article_id/i);
+  });
+
+  it('requires the article_id campaign number to match campaign_id', () => {
+    expect(() => parseArticleSource(
+      sourceWith({ 'article_id: vc-c1-001': 'article_id: vc-c2-001' }),
+      validPath,
+    )).toThrow(/article_id.*campaign/i);
+  });
+
   it('rejects non-local media sources', () => {
     expect(() => parseArticleSource(
       sourceWith({
@@ -348,6 +385,22 @@ describe('article source parsing', () => {
     expect(() => parseArticleSource(
       sourceWith({
         '/media/articles/newly-funded-founder/funding-announcement.svg': '//cdn.example.com/funding-announcement.svg',
+      }),
+      validPath,
+    )).toThrow(/media.*src/i);
+  });
+
+  it.each([
+    ['a non-article root file', '/robots.txt'],
+    ['path traversal', '/media/articles/newly-funded-founder/../secrets.svg'],
+    ['duplicate slashes', '/media/articles/newly-funded-founder//funding-announcement.svg'],
+    ['a query string', '/media/articles/newly-funded-founder/funding-announcement.svg?size=large'],
+    ['a fragment', '/media/articles/newly-funded-founder/funding-announcement.svg#detail'],
+    ['the wrong campaign directory', '/media/articles/video-production-comparison/funding-announcement.svg'],
+  ])('rejects media src with %s', (_label, src) => {
+    expect(() => parseArticleSource(
+      sourceWith({
+        '/media/articles/newly-funded-founder/funding-announcement.svg': src,
       }),
       validPath,
     )).toThrow(/media.*src/i);
@@ -371,8 +424,14 @@ describe('article source parsing', () => {
     ['event-handler HTML', '<img src="/media/articles/example.svg" onerror="alert(1)">'],
     ['slash-separated event-handler HTML', '<svg/onload=alert(1)>'],
     ['otherwise inert raw HTML', '<div>Visible text</div>'],
+    ['CDATA declarations', '<![CDATA[raw content]]>'],
+    ['ENTITY declarations', '<!ENTITY example "value">'],
   ])('rejects raw %s in the Markdown body', (_label, unsafeHtml) => {
     expect(() => parseArticleSource(`${validSource}\n${unsafeHtml}`, validPath)).toThrow(/raw HTML/i);
+  });
+
+  it('preserves Markdown autolinks while rejecting raw HTML', () => {
+    expect(parseArticleSource(`${validSource}\n<https://example.com>`, validPath).body).toContain('<https://example.com>');
   });
 });
 
@@ -389,6 +448,16 @@ describe('article library validation', () => {
 
     expect(validateArticleLibrary([first, second]).findings).toContainEqual(
       expect.objectContaining({ code }),
+    );
+  });
+
+  it('normalizes case when comparing duplicate article_id values', () => {
+    const first = validRecord();
+    const second = distinctRecord();
+    second.frontmatter = { ...second.frontmatter, article_id: 'VC-C1-001' };
+
+    expect(validateArticleLibrary([first, second]).findings).toContainEqual(
+      expect.objectContaining({ code: 'duplicate.article_id' }),
     );
   });
 

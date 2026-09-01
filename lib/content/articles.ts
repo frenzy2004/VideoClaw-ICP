@@ -43,13 +43,13 @@ function finding(code: string, message: string, filePath?: string): LibraryFindi
 }
 
 function duplicateKey(field: string, value: string): string {
-  return field === 'title' || field === 'primary_keyword'
+  return field === 'article_id' || field === 'title' || field === 'primary_keyword'
     ? value.trim().replace(/\s+/g, ' ').toLowerCase()
     : value;
 }
 
 function unsafeHtmlFinding(body: string, filePath: string): LibraryFinding | undefined {
-  if (/<(?:\/?[a-z][a-z0-9-]*(?:\s|\/|>)|!--|!doctype\b|\?)/i.test(body)) {
+  if (/<(?:\/?[a-z][a-z0-9-]*(?=[\t\n\f\r />])|!--|\?|![a-z]|!\[CDATA\[)/i.test(body)) {
     return finding('body.raw_html', 'Raw HTML is not allowed in article Markdown.', filePath);
   }
 }
@@ -209,6 +209,11 @@ function passesPublicationGate(article: ArticleRecord): boolean {
     && frontmatter.keyword_evidence.provider !== 'pending'
     && frontmatter.keyword_evidence.observed_at !== null
     && frontmatter.keyword_evidence.validation_status === 'validated'
+    && [
+      frontmatter.keyword_evidence.volume,
+      frontmatter.keyword_evidence.difficulty,
+      frontmatter.keyword_evidence.cpc,
+    ].some((value) => value !== null)
     && frontmatter.serp_evidence.provider === 'apify'
     && frontmatter.serp_evidence.actor === 'apify/google-search-scraper'
     && frontmatter.serp_evidence.country === 'US'

@@ -26,7 +26,10 @@ const dateString = z.preprocess(
 );
 
 const nonEmptyString = z.string().trim().min(1);
-const localMediaPath = z.string().regex(/^\/(?!\/)/, 'Media src must be a local path beginning with one /.');
+const localMediaPath = z.string().regex(
+  /^\/media\/articles\/[a-z0-9]+(?:-[a-z0-9]+)*\/(?:[a-z0-9]+(?:[-_][a-z0-9]+)*\/)*[a-z0-9]+(?:[-_][a-z0-9]+)*\.[a-z0-9]+$/,
+  'Media src must be a safe local file under /media/articles/<campaign_id>/.',
+);
 
 const KeywordEvidenceSchema = z.object({
   provider: KeywordProviderSchema,
@@ -56,18 +59,22 @@ const KeywordEvidenceSchema = z.object({
   }
 
   const hasMetric = [evidence.volume, evidence.difficulty, evidence.cpc].some((value) => value !== null);
-  if ((evidence.validation_status === 'validated' || hasMetric) && evidence.observed_at === null) {
-    context.addIssue({ code: 'custom', path: ['observed_at'], message: 'Authenticated validated evidence requires an observation date.' });
+  if (evidence.validation_status !== 'validated') {
+    context.addIssue({ code: 'custom', path: ['validation_status'], message: 'Named providers must use validated evidence.' });
   }
 
-  if (hasMetric && evidence.validation_status !== 'validated') {
-    context.addIssue({ code: 'custom', path: ['validation_status'], message: 'Observed numeric metrics must be validated.' });
+  if (evidence.observed_at === null) {
+    context.addIssue({ code: 'custom', path: ['observed_at'], message: 'Named providers require an observation date.' });
+  }
+
+  if (!hasMetric) {
+    context.addIssue({ code: 'custom', path: ['metrics'], message: 'Named providers require at least one proprietary metric.' });
   }
 });
 
 export const ArticleFrontmatterSchema = z.object({
   schema_version: z.literal(1),
-  article_id: nonEmptyString,
+  article_id: z.string().regex(/^vc-c[1-5]-[0-9]{3}$/, 'article_id must match vc-c[1-5]-NNN exactly.'),
   campaign_id: CampaignIdSchema,
   icp: nonEmptyString,
   customer_trigger: nonEmptyString,
@@ -131,6 +138,15 @@ export const ArticleFrontmatterSchema = z.object({
   }),
   related_articles: z.array(z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/)),
 }).strict().superRefine((frontmatter, context) => {
+  const expectedArticleIdPrefix = `vc-c${CAMPAIGN_IDS.indexOf(frontmatter.campaign_id) + 1}-`;
+  if (!frontmatter.article_id.startsWith(expectedArticleIdPrefix)) {
+    context.addIssue({
+      code: 'custom',
+      path: ['article_id'],
+      message: `article_id campaign number must match campaign_id ${frontmatter.campaign_id}.`,
+    });
+  }
+
   if (frontmatter.serp_evidence.query !== frontmatter.primary_keyword) {
     context.addIssue({
       code: 'custom',
@@ -145,6 +161,17 @@ export const ArticleFrontmatterSchema = z.object({
       path: ['indexing'],
       message: `${frontmatter.status} records must use noindex.`,
     });
+  }
+
+  const mediaPrefix = `/media/articles/${frontmatter.campaign_id}/`;
+  for (const [index, media] of frontmatter.media.entries()) {
+    if (!media.src.startsWith(mediaPrefix)) {
+      context.addIssue({
+        code: 'custom',
+        path: ['media', index, 'src'],
+        message: `Media src must use the matching campaign directory ${mediaPrefix}.`,
+      });
+    }
   }
 });
 
