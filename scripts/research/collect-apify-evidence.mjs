@@ -14,46 +14,106 @@ import {
 const AUTOCOMPLETE_ACTOR = 'automation-lab/google-autocomplete-scraper';
 const SERP_ACTOR = 'apify/google-search-scraper';
 const DEFAULT_MANIFEST = 'data/research/apify/run-manifest.json';
-const MVP_INTENT_REVIEW_RATIONALES = new Map([
+const MVP_INTENT_REVIEWS = new Map([
   [
     'vc-c2-001',
-    'The retained primary SERP connects Demo Day founder preparation with video and product-demo planning, supporting an MVP checklist draft.',
+    {
+      selectedKeyword: 'Demo Day video planning checklist',
+      runId: 'byqciqnPAkAEzEpsh',
+      datasetId: 'EZ4hzqPdB4IgeEQm5',
+      rationale:
+        'The retained primary SERP connects Demo Day founder preparation with video and product-demo planning, supporting an MVP checklist draft.',
+    },
   ],
   [
     'vc-c2-003',
-    'The retained primary SERP directly includes Demo Day pitch mistakes and startup video mistakes, matching the proposed corrective guide.',
+    {
+      selectedKeyword: 'Demo Day video mistakes',
+      runId: 'QdXE07LmRf56skYbB',
+      datasetId: 'rkFwIATnDdNq1XmUe',
+      rationale:
+        'The retained primary SERP directly includes Demo Day pitch mistakes and startup video mistakes, matching the proposed corrective guide.',
+    },
   ],
   [
     'vc-c2-006',
-    'The retained primary SERP contains startup investor-pitch video examples and founder discussions, matching the startup pitch-video intent.',
+    {
+      selectedKeyword: 'startup pitch video',
+      runId: 'QdXE07LmRf56skYbB',
+      datasetId: 'rkFwIATnDdNq1XmUe',
+      rationale:
+        'The retained primary SERP contains startup investor-pitch video examples and founder discussions, matching the startup pitch-video intent.',
+    },
   ],
   [
     'vc-c2-007',
-    'The retained primary SERP contains video-pitch guidance and pitch-format comparisons, matching the application-video comparison draft.',
+    {
+      selectedKeyword: 'application video vs pitch video',
+      runId: 'G4ZhaU2n2UL6VJFct',
+      datasetId: 'FxXHBVjbf8sxzidDq',
+      rationale:
+        'The retained primary SERP contains video-pitch guidance and pitch-format comparisons, matching the application-video comparison draft.',
+    },
   ],
   [
     'vc-c2-008',
-    'The retained primary SERP contains founder pitch-video guidance and investor-pitch video tools, matching the how-to draft.',
+    {
+      selectedKeyword: 'how to make a founder pitch video',
+      runId: 'QdXE07LmRf56skYbB',
+      datasetId: 'rkFwIATnDdNq1XmUe',
+      rationale:
+        'The retained primary SERP contains founder pitch-video guidance and investor-pitch video tools, matching the how-to draft.',
+    },
   ],
   [
     'vc-c2-009',
-    'The retained primary SERP contains a 60-second startup pitch guide and investor pitch-video results, matching the script-template draft.',
+    {
+      selectedKeyword: '60 second founder pitch video script',
+      runId: 'QdXE07LmRf56skYbB',
+      datasetId: 'rkFwIATnDdNq1XmUe',
+      rationale:
+        'The retained primary SERP contains a 60-second startup pitch guide and investor pitch-video results, matching the script-template draft.',
+    },
   ],
   [
     'vc-c2-013',
-    'The retained primary SERP directly covers live product-demo failures and recovery discussion, matching the failure-response draft.',
+    {
+      selectedKeyword: 'live product demo failure',
+      runId: 'QdXE07LmRf56skYbB',
+      datasetId: 'rkFwIATnDdNq1XmUe',
+      rationale:
+        'The retained primary SERP directly covers live product-demo failures and recovery discussion, matching the failure-response draft.',
+    },
   ],
   [
     'vc-c2-021',
-    'The retained primary SERP contains post-Demo-Day founder guidance and Demo Day discussion, matching the post-event action draft.',
+    {
+      selectedKeyword: 'what to do after Demo Day',
+      runId: 'G4ZhaU2n2UL6VJFct',
+      datasetId: 'FxXHBVjbf8sxzidDq',
+      rationale:
+        'The retained primary SERP contains post-Demo-Day founder guidance and Demo Day discussion, matching the post-event action draft.',
+    },
   ],
   [
     'vc-c2-026',
-    'The retained primary SERP contains after-Demo-Day guidance and investor follow-up context, matching the investor asset-send draft.',
+    {
+      selectedKeyword: 'what to send investors after Demo Day',
+      runId: 'G4ZhaU2n2UL6VJFct',
+      datasetId: 'FxXHBVjbf8sxzidDq',
+      rationale:
+        'The retained primary SERP contains after-Demo-Day guidance and investor follow-up context, matching the investor asset-send draft.',
+    },
   ],
   [
     'vc-c2-027',
-    'The retained primary SERP directly includes Demo Day follow-up structure and timing guidance, matching the investor timeline draft.',
+    {
+      selectedKeyword: 'Demo Day investor follow up timeline',
+      runId: 'QdXE07LmRf56skYbB',
+      datasetId: 'rkFwIATnDdNq1XmUe',
+      rationale:
+        'The retained primary SERP directly includes Demo Day follow-up structure and timing guidance, matching the investor timeline draft.',
+    },
   ],
 ]);
 
@@ -168,13 +228,25 @@ export function resolveVerifiedDatasetIds(runs, requestedDatasetIds, label) {
 }
 
 export function intentReviewForSelection(articleId, selection) {
-  const rationale = MVP_INTENT_REVIEW_RATIONALES.get(articleId);
+  const review = MVP_INTENT_REVIEWS.get(articleId);
   if (
-    rationale
+    review
+    && selection.selectedKeyword === review.selectedKeyword
+    && selection.evidence?.runId === review.runId
+    && selection.evidence?.datasetId === review.datasetId
     && selection.selectionDecision === 'retained_observed_primary'
-    && selection.evidence.organicResults.length > 0
+    && selection.evidence?.organicResults?.length > 0
   ) {
-    return { status: 'approved_for_mvp_draft', rationale };
+    return {
+      status: 'approved_for_mvp_draft',
+      rationale: review.rationale,
+      binding: {
+        articleId,
+        selectedKeyword: review.selectedKeyword,
+        runId: review.runId,
+        datasetId: review.datasetId,
+      },
+    };
   }
 
   return {

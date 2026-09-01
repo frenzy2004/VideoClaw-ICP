@@ -323,6 +323,61 @@ describe('custom Apify run and dataset provenance', () => {
   });
 });
 
+describe('manual MVP intent review bindings', () => {
+  const reviewedSelection = {
+    selectedKeyword: 'startup pitch video',
+    selectionDecision: 'retained_observed_primary',
+    evidence: {
+      runId: 'QdXE07LmRf56skYbB',
+      datasetId: 'rkFwIATnDdNq1XmUe',
+      organicResults: [{ title: 'Startup pitch video examples' }],
+    },
+  };
+
+  it('approves only the exact reviewed article, keyword, run and dataset tuple', () => {
+    expect(
+      evidenceCollector.intentReviewForSelection('vc-c2-006', reviewedSelection),
+    ).toEqual({
+      status: 'approved_for_mvp_draft',
+      rationale:
+        'The retained primary SERP contains startup investor-pitch video examples and founder discussions, matching the startup pitch-video intent.',
+      binding: {
+        articleId: 'vc-c2-006',
+        selectedKeyword: 'startup pitch video',
+        runId: 'QdXE07LmRf56skYbB',
+        datasetId: 'rkFwIATnDdNq1XmUe',
+      },
+    });
+  });
+
+  it('returns to pending when the selected keyword is stale', () => {
+    expect(
+      evidenceCollector.intentReviewForSelection('vc-c2-006', {
+        ...reviewedSelection,
+        selectedKeyword: 'startup founder pitch video',
+      }).status,
+    ).toBe('pending_editorial_intent_review');
+  });
+
+  it('returns to pending when the reviewed run is stale', () => {
+    expect(
+      evidenceCollector.intentReviewForSelection('vc-c2-006', {
+        ...reviewedSelection,
+        evidence: { ...reviewedSelection.evidence, runId: 'new-serp-run' },
+      }).status,
+    ).toBe('pending_editorial_intent_review');
+  });
+
+  it('returns to pending when the reviewed dataset is stale', () => {
+    expect(
+      evidenceCollector.intentReviewForSelection('vc-c2-006', {
+        ...reviewedSelection,
+        evidence: { ...reviewedSelection.evidence, datasetId: 'new-serp-dataset' },
+      }).status,
+    ).toBe('pending_editorial_intent_review');
+  });
+});
+
 describe('research matrix extraction', () => {
   it.each([
     'newly-funded-founder-article-matrix.md',
@@ -446,6 +501,9 @@ describe('committed SERP-observed research shortlist', () => {
       .filter(({ intentReview }) => intentReview.status === 'approved_for_mvp_draft')
       .map(({ articleId }) => articleId)
       .sort();
+    const approved = selected.filter(
+      ({ intentReview }) => intentReview.status === 'approved_for_mvp_draft',
+    );
 
     expect(datasets.every(({ state }) => state === 'serp_observed_research_shortlist')).toBe(true);
     expect(selected).toHaveLength(250);
@@ -461,6 +519,14 @@ describe('committed SERP-observed research shortlist', () => {
       'vc-c2-026',
       'vc-c2-027',
     ]);
+    expect(
+      approved.every(({ articleId, primaryKeyword, evidence, intentReview }) =>
+        intentReview.binding.articleId === articleId
+        && intentReview.binding.selectedKeyword === primaryKeyword
+        && intentReview.binding.runId === evidence.runId
+        && intentReview.binding.datasetId === evidence.datasetId,
+      ),
+    ).toBe(true);
     expect(
       selected.filter(
         ({ intentReview }) => intentReview.status === 'pending_editorial_intent_review',

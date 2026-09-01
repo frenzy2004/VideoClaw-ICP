@@ -22,6 +22,7 @@ Review fixes implemented and verified.
 - 225 matrix primaries retained; 25 empty or AI-overview-only primaries replaced with an observed secondary from the same article specification.
 - Zero selected records with an empty organic result set.
 - Ten manually reviewed Demo Day records are `approved_for_mvp_draft`; the other 240 remain `pending_editorial_intent_review`.
+- Each approval is bound to its exact reviewed `articleId`, selected keyword, Apify run ID, and dataset ID. Any stale field returns the record to pending editorial review.
 - All volume, difficulty, and CPC values remain null with provider `pending`.
 
 ## Research corrections
@@ -31,23 +32,28 @@ Review fixes implemented and verified.
 - Official Google SERP runs sometimes returned an AI Overview but no organic results. Those responses remain auditable in the evidence file but cannot qualify an article. The collector prefers a successful retry and otherwise replaces the primary with a researched secondary that has first-page organic competitors.
 - Automatic fallback selection uses observed SERP-feature density only. It is explicitly pending editorial intent review and does not assert ICP fit.
 - Editorial relevance is never auto-filled or included in `evidenceScore`. The ten MVP approvals carry concise manual rationales; every score keeps numeric relevance null.
+- Manual approval is fail-closed: article ID alone cannot preserve approval after the selected keyword or reviewed SERP provenance changes.
 - Explicit resumed run/dataset pairs must match each fetched run's `defaultDatasetId` before provenance is attributed.
 - Two article specifications were refined from new US autocomplete evidence after every original candidate returned no organic competitors: `30 60 90 day marketing plan` and `how to make a product demo video`.
 
 ## TDD and verification evidence
 
-Review-fix RED produced nine expected failures: two wrong-language acceptances, three relevance/scoring failures, two run/dataset-lineage failures, one misleading fallback label, and one missing committed-data intent-review contract. After the code changes, only the mechanical data migration remained red. The migrated focused suite passes 20/20 tests.
+Fix round 1 RED produced nine expected failures: two wrong-language acceptances, three relevance/scoring failures, two run/dataset-lineage failures, one misleading fallback label, and one missing committed-data intent-review contract. After the code changes, only the mechanical data migration remained red.
+
+Fix round 2 RED produced five expected failures: the missing review binding plus stale selected-keyword, stale-run, stale-dataset, and committed-data binding failures. After the binding implementation, only the mechanical approved-record migration remained red. The migrated focused suite passes 24/24 tests.
 
 Final checks before commit:
 
 ```text
-pnpm test lib/keywords/apify-evidence.test.ts — 20/20 passed
+pnpm test lib/keywords/apify-evidence.test.ts — 24/24 passed
 node --check lib/keywords/apify-evidence.mjs — passed
 node --check scripts/research/collect-apify-evidence.mjs — passed
-pnpm run typecheck — passed
+pnpm run typecheck — fix round 1 passed; fix round 2 is currently blocked by unrelated committed `app/article-responsive-css.test.ts` TS1501 at `7964b6c`
 git diff --check — passed
 credential scan for the exact runtime token — passed, zero matches
 ```
+
+Fix round 2 full lint, both Node syntax checks, focused tests, data-binding audit, diff check, and token scan pass. The current branch typecheck reports only the out-of-scope CSS-test target error above; Task 5 did not modify that file.
 
 ## Boundary
 
