@@ -1,8 +1,8 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import nextConfig, { buildSiteHeaders } from '../next.config';
-import { llmsText } from './llms.txt/route';
+import { buildLlmsText, llmsText } from './llms.txt/route';
 import robots from './robots';
-import sitemap from './sitemap';
+import sitemap, { buildSitemap } from './sitemap';
 
 const previousFlag = process.env.NEXT_PUBLIC_VIDEOCLAW_PUBLIC_INDEXING;
 
@@ -79,5 +79,27 @@ describe('campaign discovery controls', () => {
       'https://videoclaw.com/guides/physical-ai-product-demo-before-demo-day',
     ]));
     expect(llms).not.toMatch(/dream-demo-day|physical-ai-product-demo/i);
+  });
+
+  it('adds only publishable article discoveries without changing the private-route boundary', () => {
+    const articles = [
+      { slug: 'demo-day-video-checklist', title: 'Demo Day video checklist' },
+      { slug: 'founder-pitch-video', title: 'Founder pitch video guide' },
+    ];
+
+    expect(buildSitemap(true, articles).map((entry) => entry.url)).toEqual([
+      'https://videoclaw.com/use-cases/demo-day-founder-content',
+      'https://videoclaw.com/guides/founder-story-after-demo-day',
+      'https://videoclaw.com/blog/demo-day-video-checklist',
+      'https://videoclaw.com/blog/founder-pitch-video',
+    ]);
+
+    const llms = buildLlmsText(true, articles);
+    expect(llms).toContain('- Demo Day video checklist: https://videoclaw.com/blog/demo-day-video-checklist');
+    expect(llms).toContain('- Founder pitch video guide: https://videoclaw.com/blog/founder-pitch-video');
+    expect(llms).not.toMatch(/dream-demo-day|physical-ai-product-demo/i);
+
+    expect(buildSitemap(false, articles)).toEqual([]);
+    expect(buildLlmsText(false, articles)).not.toContain('/blog/');
   });
 });

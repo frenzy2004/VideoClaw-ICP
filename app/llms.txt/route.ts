@@ -1,6 +1,11 @@
+import { getPublishableArticles } from '../../lib/content/articles';
 import { CAMPAIGN_URLS, isPublicIndexingEnabled } from '../campaign-content';
+import type { DiscoveryArticle } from '../sitemap';
 
-export function llmsText(publicIndexing = isPublicIndexingEnabled()) {
+export function buildLlmsText(
+  publicIndexing: boolean,
+  articles: DiscoveryArticle[] = [],
+) {
   if (!publicIndexing) {
     return [
       '# VideoClaw private review build',
@@ -20,8 +25,27 @@ export function llmsText(publicIndexing = isPublicIndexingEnabled()) {
     '',
     `- Use case: ${CAMPAIGN_URLS.useCase}`,
     `- Founder guide: ${CAMPAIGN_URLS.guide}`,
+    ...(articles.length > 0
+      ? [
+          '',
+          '## Published guides',
+          '',
+          ...articles.map(({ slug, title }) => `- ${title}: https://videoclaw.com/blog/${slug}`),
+        ]
+      : []),
     '',
   ].join('\n');
+}
+
+export function llmsText(publicIndexing = isPublicIndexingEnabled()) {
+  const articles = publicIndexing
+    ? getPublishableArticles().map(({ frontmatter }) => ({
+        slug: frontmatter.slug,
+        title: frontmatter.title,
+      }))
+    : [];
+
+  return buildLlmsText(publicIndexing, articles);
 }
 
 export function GET() {
