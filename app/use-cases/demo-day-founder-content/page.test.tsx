@@ -34,6 +34,12 @@ describe('Demo Day founder content use-case page', () => {
     const guideLink = screen.getByRole('link', { name: 'Founder guide' });
     expect(guideLink).toHaveAttribute('href', '/guides/founder-story-after-demo-day');
     expect(guideLink).toHaveAttribute('data-vc-event', 'article_click');
+
+    const physicalAiGuideLink = screen.getByRole('link', { name: 'Physical-AI guide' });
+    expect(physicalAiGuideLink).toHaveAttribute('href', '/guides/physical-ai-product-demo-before-demo-day');
+    expect(physicalAiGuideLink).toHaveAttribute('data-vc-event', 'article_click');
+    expect(physicalAiGuideLink).toHaveAttribute('data-vc-article-id', 'physical-ai-demo-day-guide');
+    expect(physicalAiGuideLink).toHaveAttribute('data-vc-link-id', 'use-case-physical-ai-guide');
   });
 
   it('shows four viewer jobs and four local campaign prototypes', () => {

@@ -182,6 +182,7 @@ export default function UseCasePage() {
           <a href="#viewer-variants">Viewer variants</a>
           <a href="#controlled-workflow">Workflow</a>
           <a href={CAMPAIGN_URLS.guidePath} data-vc-event="article_click" data-vc-article-id="founder-story-after-demo-day" data-vc-link-id="use-case-guide-nav" data-vc-placement="masthead">Founder guide</a>
+          <a href={CAMPAIGN_URLS.physicalAiGuidePath} data-vc-event="article_click" data-vc-article-id="physical-ai-demo-day-guide" data-vc-link-id="use-case-physical-ai-guide" data-vc-placement="masthead">Physical-AI guide</a>
         </nav>
         <a
           className="campaign-header-cta"
