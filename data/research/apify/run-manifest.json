@@ -1,0 +1,226 @@
+{
+  "schemaVersion": 1,
+  "campaigns": {
+    "gtm-content-repurposing-buyer": {
+      "autocomplete": {
+        "actorId": "automation-lab/google-autocomplete-scraper",
+        "country": "US",
+        "language": "en",
+        "itemCount": 169,
+        "runs": [
+          {
+            "runId": "s2xicDcrW1ZdwwFc9",
+            "datasetId": "oDmIoNEp1bQr1rvBX",
+            "observedAt": "2026-09-01T04:50:51.216Z"
+          },
+          {
+            "runId": "P0TzIQx5wc8O8gyOF",
+            "datasetId": "u0knAz7IjEzxXy5Mf",
+            "observedAt": "2026-09-01T05:16:08.747Z"
+          }
+        ]
+      },
+      "serp": {
+        "actorId": "apify/google-search-scraper",
+        "country": "US",
+        "language": "en",
+        "device": "DESKTOP",
+        "queryCount": 229,
+        "runs": [
+          {
+            "runId": "1Amv8DcIBqr0ag11b",
+            "datasetId": "7VqxRTSF4IokgTcKq",
+            "observedAt": "2026-09-01T04:58:47.015Z"
+          },
+          {
+            "runId": "EeIAtDdBrzTdpxpea",
+            "datasetId": "5pasHfVUZtt6FfukG",
+            "observedAt": "2026-09-01T05:04:04.069Z"
+          },
+          {
+            "runId": "La1mvkjGoxvv9m5GV",
+            "datasetId": "PKgfADdaIE93JkUZM",
+            "observedAt": "2026-09-01T05:07:06.977Z"
+          },
+          {
+            "runId": "jXrZqZbdroFRVWjBL",
+            "datasetId": "SzUwu49uLvVG2VpXO",
+            "observedAt": "2026-09-01T05:17:21.972Z"
+          },
+          {
+            "runId": "eUo18R49hcUwqBD0A",
+            "datasetId": "jsUqhdirChBuaRb2i",
+            "observedAt": "2026-09-01T05:21:21.263Z"
+          },
+          {
+            "runId": "rpvyZkXSIIa3BfhJm",
+            "datasetId": "Memlmj2fGWhLe7hcW",
+            "observedAt": "2026-09-01T05:22:15.630Z"
+          }
+        ]
+      }
+    },
+    "accelerator-demo-day-founder": {
+      "autocomplete": {
+        "actorId": "automation-lab/google-autocomplete-scraper",
+        "country": "US",
+        "language": "en",
+        "itemCount": 11,
+        "runs": [
+          {
+            "runId": "ZM1zqFuWn5T5yvkB8",
+            "datasetId": "PfQcS6wc88WPoiIgV",
+            "observedAt": "2026-09-01T04:50:29.175Z"
+          }
+        ]
+      },
+      "serp": {
+        "actorId": "apify/google-search-scraper",
+        "country": "US",
+        "language": "en",
+        "device": "DESKTOP",
+        "queryCount": 213,
+        "runs": [
+          {
+            "runId": "QdXE07LmRf56skYbB",
+            "datasetId": "rkFwIATnDdNq1XmUe",
+            "observedAt": "2026-09-01T05:00:53.393Z"
+          },
+          {
+            "runId": "byqciqnPAkAEzEpsh",
+            "datasetId": "EZ4hzqPdB4IgeEQm5",
+            "observedAt": "2026-09-01T05:07:53.938Z"
+          },
+          {
+            "runId": "G4ZhaU2n2UL6VJFct",
+            "datasetId": "FxXHBVjbf8sxzidDq",
+            "observedAt": "2026-09-01T05:11:52.965Z"
+          }
+        ]
+      }
+    },
+    "video-production-comparison": {
+      "autocomplete": {
+        "actorId": "automation-lab/google-autocomplete-scraper",
+        "country": "US",
+        "language": "en",
+        "itemCount": 12,
+        "runs": [
+          {
+            "runId": "OYqFIQA3vWcDXcaI6",
+            "datasetId": "FhLs6apRBehAegjzh",
+            "observedAt": "2026-09-01T04:50:40.963Z"
+          }
+        ]
+      },
+      "serp": {
+        "actorId": "apify/google-search-scraper",
+        "country": "US",
+        "language": "en",
+        "device": "DESKTOP",
+        "queryCount": 237,
+        "runs": [
+          {
+            "runId": "TkdVq44zaNVyjhVwb",
+            "datasetId": "ZGD5h4mY1q2zKht2a",
+            "observedAt": "2026-09-01T05:03:45.928Z"
+          },
+          {
+            "runId": "hPle02fbjI2tvIASU",
+            "datasetId": "rDulh7eAQEfuFtHZI",
+            "observedAt": "2026-09-01T05:09:17.328Z"
+          },
+          {
+            "runId": "HafWfoEbTCB6q2D7c",
+            "datasetId": "N5ZJFP5NOEBC7U2xM",
+            "observedAt": "2026-09-01T05:12:19.872Z"
+          }
+        ]
+      }
+    },
+    "portfolio-media-platform": {
+      "autocomplete": {
+        "actorId": "automation-lab/google-autocomplete-scraper",
+        "country": "US",
+        "language": "en",
+        "itemCount": 22,
+        "runs": [
+          {
+            "runId": "DtBQkoE1h2xtTICSO",
+            "datasetId": "HdkxIVxqZVri1wWzx",
+            "observedAt": "2026-09-01T04:50:44.896Z"
+          }
+        ]
+      },
+      "serp": {
+        "actorId": "apify/google-search-scraper",
+        "country": "US",
+        "language": "en",
+        "device": "DESKTOP",
+        "queryCount": 211,
+        "runs": [
+          {
+            "runId": "eIGJEcatEs5PhzWIL",
+            "datasetId": "dKyHRuS1mkINeUMjS",
+            "observedAt": "2026-09-01T05:03:44.203Z"
+          },
+          {
+            "runId": "bG8K4PC2ahxBDS4iI",
+            "datasetId": "jlYVjN4i5KM4B88IE",
+            "observedAt": "2026-09-01T05:10:26.568Z"
+          }
+        ]
+      }
+    },
+    "newly-funded-founder": {
+      "autocomplete": {
+        "actorId": "automation-lab/google-autocomplete-scraper",
+        "country": "US",
+        "language": "en",
+        "itemCount": 59,
+        "runs": [
+          {
+            "runId": "hRC9s6kTfHfameyaj",
+            "datasetId": "BUOnbhfsjR1OGcIe1",
+            "observedAt": "2026-09-01T04:50:44.324Z"
+          },
+          {
+            "runId": "LOzfD5B9qqLW0Ae3P",
+            "datasetId": "qTzLa47BGz46PeUJy",
+            "observedAt": "2026-09-01T05:18:11.633Z"
+          }
+        ]
+      },
+      "serp": {
+        "actorId": "apify/google-search-scraper",
+        "country": "US",
+        "language": "en",
+        "device": "DESKTOP",
+        "queryCount": 231,
+        "runs": [
+          {
+            "runId": "7sn0bwM3IQS02Geuv",
+            "datasetId": "Ev7c6BgfiRP2UDohy",
+            "observedAt": "2026-09-01T05:01:00.378Z"
+          },
+          {
+            "runId": "pFFa2lCD7xCPrLcTn",
+            "datasetId": "bcgCwLMmOfTEQ0dcG",
+            "observedAt": "2026-09-01T05:08:21.570Z"
+          },
+          {
+            "runId": "NjYb5PwUrGitfign8",
+            "datasetId": "tGq4zwVhbQcmtq1rN",
+            "observedAt": "2026-09-01T05:11:47.079Z"
+          },
+          {
+            "runId": "qdykaQbtmZc6ha9aD",
+            "datasetId": "AXrFp6udUlBiXa3LH",
+            "observedAt": "2026-09-01T05:19:57.689Z"
+          }
+        ]
+      }
+    }
+  },
+  "updatedAt": "2026-09-01T05:24:38.875Z"
+}

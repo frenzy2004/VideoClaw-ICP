@@ -265,7 +265,7 @@ VideoClaw should be described, where context requires it, only as a private-alph
 - **Funnel stage:** middle
 - **Search intent:** informational
 - **Primary keyword:** turn SaaS product demo into campaign videos
-- **Secondary keywords:** SaaS demo to social clips; product demo GTM repurposing; demo clips for product marketing
+- **Secondary keywords:** SaaS demo to social clips; product demo GTM repurposing; how to make a product demo video
 - **Title:** How to Turn a SaaS Product Demo Into GTM Videos Without Losing the Product Story
 - **Slug:** turn-product-demo-into-short-videos
 - **Direct-answer thesis:** Turn a product demo into short videos by isolating one customer job and one visible proof moment per asset, then adding only the setup needed to understand it. Reframe the interface for the target screen, verify the product state and claim, and send every cut through product and marketing review.

@@ -871,7 +871,7 @@ The ten clusters cover different founder jobs. Within every cluster, the five sp
 | `funnel_stage` | `top` |
 | `search_intent` | `informational` |
 | `primary_keyword` | `30 60 90 day content strategy after startup funding` |
-| `secondary_keywords` | `post funding GTM media guide`; `90 day funded founder media strategy`; `newly funded startup content roadmap` |
+| `secondary_keywords` | `post funding GTM media guide`; `30 60 90 day marketing plan`; `newly funded startup content roadmap` |
 | `title` | The 30/60/90-Day GTM Media Strategy Guide for a Newly Funded Startup |
 | `slug` | `30-60-90-day-startup-content-plan` |
 | `direct_answer_thesis` | Use the first 30 days to establish message, proof, source assets, destinations, and measurement; days 31–60 to publish problem education and product or customer evidence; and days 61–90 to improve the system from observed audience and pipeline signals. The plan should serve one primary GTM objective at a time and keep hiring, investor, and customer variants tied to the same approved source truth. |
