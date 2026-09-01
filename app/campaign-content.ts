@@ -179,6 +179,8 @@ export function sanitizeCampaignEvent(value: unknown): CampaignEvent | undefined
   const record = value as Record<string, unknown>;
   if (!isCampaignEventName(record.event)) return undefined;
   if (typeof record.page_path !== 'string' || typeof record.timestamp !== 'string') return undefined;
+  if (isPermanentlyPrivateCampaignPath(record.page_path)) return undefined;
+  if (typeof record.href === 'string' && isPermanentlyPrivateCampaignPath(record.href)) return undefined;
   const timestamp = sanitizeTimestamp(record.timestamp);
   if (!timestamp) return undefined;
 
@@ -291,9 +293,6 @@ const SAFE_PAGE_PATHS = new Set<string>([
   '/',
   CAMPAIGN_URLS.useCasePath,
   CAMPAIGN_URLS.guidePath,
-  CAMPAIGN_URLS.dreamPilotPath,
-  CAMPAIGN_URLS.physicalAiGuidePath,
-  CAMPAIGN_URLS.physicalAiGuideDownloadPath,
 ]);
 const SAFE_HREF_PATHS = new Set<string>([
   ...SAFE_PAGE_PATHS,

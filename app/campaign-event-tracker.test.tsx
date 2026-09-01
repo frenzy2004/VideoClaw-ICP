@@ -119,6 +119,34 @@ describe('CampaignEventTracker', () => {
     expect(dataLayer).toEqual([]);
   });
 
+  it('rejects forged private-path events from a normal route', () => {
+    render(<CampaignEventTracker />);
+    const dataLayer = (window as Window & { dataLayer: unknown[] }).dataLayer;
+    dataLayer.length = 0;
+
+    window.dispatchEvent(
+      new CustomEvent('videoclaw:analytics', {
+        detail: {
+          event: 'page_view',
+          page_path: '/pilots/dream-demo-day',
+          timestamp: '2026-09-01T00:00:00.000Z',
+        },
+      }),
+    );
+    window.dispatchEvent(
+      new CustomEvent('videoclaw:analytics', {
+        detail: {
+          event: 'article_click',
+          page_path: '/use-cases/demo-day-founder-content',
+          timestamp: '2026-09-01T00:00:00.000Z',
+          href: '/guides/physical-ai-product-demo-before-demo-day/download',
+        },
+      }),
+    );
+
+    expect(dataLayer).toEqual([]);
+  });
+
   it('suppresses page, click, and direct-event mirroring when DNT is enabled', () => {
     Object.defineProperty(navigator, 'doNotTrack', { configurable: true, value: '1' });
     render(<CampaignEventTracker />);

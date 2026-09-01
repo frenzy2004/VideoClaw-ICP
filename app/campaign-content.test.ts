@@ -224,6 +224,25 @@ describe('campaign content contracts', () => {
     ).toBeUndefined();
   });
 
+  it('rejects private page paths and private destinations from direct analytics events', () => {
+    expect(
+      sanitizeCampaignEvent({
+        event: 'page_view',
+        page_path: '/pilots/dream-demo-day',
+        timestamp: '2026-09-01T00:00:00.000Z',
+      }),
+    ).toBeUndefined();
+
+    expect(
+      sanitizeCampaignEvent({
+        event: 'article_click',
+        page_path: '/use-cases/demo-day-founder-content',
+        timestamp: '2026-09-01T00:00:00.000Z',
+        href: '/guides/physical-ai-product-demo-before-demo-day/download',
+      }),
+    ).toBeUndefined();
+  });
+
   if (false) {
     // @ts-expect-error Video events require a stable videoId.
     formatCampaignEvent({
