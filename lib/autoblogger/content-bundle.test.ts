@@ -1,4 +1,6 @@
 import matter from 'gray-matter';
+import remarkParse from 'remark-parse';
+import { unified } from 'unified';
 import { describe, expect, it } from 'vitest';
 
 import { candidateFingerprints, type Candidate, type EvidenceBundle, type KeywordMetrics } from './domain';
@@ -6,11 +8,20 @@ import type { CheckedSource } from './sources';
 import {
   inspectGeneratedDraft,
   materializeDraftBundle,
+  renderEditorialSvg,
   selectProductMedia,
   type AllowlistedProductMedia,
   type DraftingContext,
   type GeneratedDraftV2,
 } from './content-bundle';
+
+type TestMarkdownNode = {
+  type: string;
+  depth?: number;
+  value?: string;
+  url?: string;
+  children?: TestMarkdownNode[];
+};
 
 const candidate: Candidate = {
   schemaVersion: 1,
@@ -93,7 +104,7 @@ const context: DraftingContext = {
       label: 'Federal Trade Commission: Advertising FAQs',
       url: 'https://www.ftc.gov/business-guidance/resources/advertising-faqs-guide-small-business',
       checkedAt: '2026-09-04T09:05:00.000Z',
-      facts: [{ id: 'ftc-support', text: 'Objective advertising claims require an appropriate basis.' }],
+      facts: [{ id: 'ftc-support', text: 'The FTC advertising guidance explains why objective claims need support.' }],
       excerpt: 'Another source excerpt exists only while the copied passage heuristic performs its comparison.',
     },
     {
@@ -101,7 +112,7 @@ const context: DraftingContext = {
       label: 'VideoClaw product features',
       url: 'https://videoclaw.com/features',
       checkedAt: '2026-09-04T09:10:00.000Z',
-      facts: [{ id: 'vc-text-editing', text: 'The current product supports text-based editing for recorded video.' }],
+      facts: [{ id: 'vc-text-editing', text: 'VideoClaw lets creators edit a recorded video with text.' }],
       excerpt: 'Product source text remains transient and is not sent to the language model or serialized.',
     },
   ],
@@ -128,7 +139,7 @@ const mediaAllowlist: AllowlistedProductMedia[] = [{
 const generatedDraft: GeneratedDraftV2 = {
   schemaVersion: 2,
   description: 'Create a credible founder pitch video with natural delivery, source-controlled claims, visible product proof, careful editing, reviewed captions, and one tested next step.',
-  customerTrigger: 'Use this workflow when preparing a pitch video that needs factual, natural delivery.',
+  customerTrigger: 'Use this workflow for a factual pitch video with natural delivery.',
   competitorGap: 'Address the gap between pitch advice, claim control, and product-proof production.',
   directAnswer: 'Create a founder pitch video by choosing one audience and next step, reducing the story to a few factual points, recording short natural takes, and showing one current product action. Then edit for clarity, verify every claim and caption against its source, and test the final playback path.',
   sections: [
@@ -146,7 +157,7 @@ const generatedDraft: GeneratedDraftV2 = {
     answer: [
       'Choose one audience, a few factual points, short founder-led takes, one product action, careful editing, and a tested next step.',
       'Include the customer situation, the useful change, relevant founder insight, one current product action, supportable evidence, and one next step.',
-      'Follow the recipient requirements; otherwise use the shortest duration that clearly communicates the problem, proof, and next step.',
+      'Follow the recipient requirements; otherwise set a duration that clearly communicates the problem, proof, and next step.',
     ][index],
   })),
   sourceReferences: [{ sourceId: 'yc' }, { sourceId: 'ftc' }, { sourceId: 'videoclaw' }],
@@ -201,6 +212,7 @@ describe('content bundle materialization', () => {
   it.each([
     ['/landing/../private/product.mp4', '/landing/full/founder-product.jpg'],
     ['/landing/%2e%2e/private/product.mp4', '/landing/full/founder-product.jpg'],
+    ['/landing/%25252e%25252e/private/product.mp4', '/landing/full/founder-product.jpg'],
     ['/landing/./product.mp4', '/landing/full/founder-product.jpg'],
     ['/landing/full/product.mp4', '/landing/../private/product.jpg'],
   ])('rejects media paths containing traversal or dot segments (%s)', (src, poster) => {
@@ -213,6 +225,14 @@ describe('content bundle materialization', () => {
       candidateFingerprints: undefined,
       keywordIncludes: ['---'],
     }])).toBeUndefined();
+  });
+
+  it.each(['title', 'alt', 'label', 'detail'] as const)('rejects XML-invalid controls in SVG-visible %s text', (field) => {
+    const graphic = structuredClone(generatedDraft.editorialGraphic);
+    if (field === 'title' || field === 'alt') graphic[field] = `Unsafe\u0001${field}`;
+    else graphic.steps[0][field] = `Unsafe\u0001${field}`;
+
+    expect(() => renderEditorialSvg(graphic)).toThrow(/XML/i);
   });
 
   it('serializes the exact review-state lander fields and a deterministic escaped 1200x675 SVG', () => {
@@ -363,6 +383,92 @@ describe('generated-content safety review', () => {
     expect(inspectGeneratedDraft(inspectedContext, draft).map((finding) => finding.code)).toContain(code);
   });
 
+  it.each([
+    'Use VideoClaw because it cuts editing time in half.',
+    'Use it because it cuts editing time in half.',
+    'This workflow may double conversion.',
+    'Does VideoClaw edit recorded video with text?',
+  ])('requires a binding for imperative, pronoun, and modal objective claim: %s', (span) => {
+    const unsafeDraft = withDraft({
+      sections: [{
+        ...generatedDraft.sections[0],
+        markdown: `${generatedDraft.sections[0].markdown} ${span}`,
+      }, generatedDraft.sections[1]],
+    });
+
+    expect(inspectGeneratedDraft(context, unsafeDraft)).toContainEqual(expect.objectContaining({
+      code: 'content.claim_binding',
+    }));
+  });
+
+  it.each(['Revenue doubles.', 'revenue doubles.'])('splits and rejects an appended unsupported outcome without intervening whitespace: %s', (appended) => {
+    const unsafeDraft = withDraft({
+      sections: [{
+        ...generatedDraft.sections[0],
+        markdown: `${generatedDraft.sections[0].markdown}${appended}`,
+      }, generatedDraft.sections[1]],
+    });
+
+    expect(inspectGeneratedDraft(context, unsafeDraft)).toContainEqual(expect.objectContaining({
+      code: 'content.claim_binding',
+    }));
+  });
+
+  it('does not accept a topically overlapping advertising fact as support for an outcome claim', () => {
+    const span = 'Objective advertising claims double conversion.';
+    const unsafeDraft = withDraft({
+      sections: [generatedDraft.sections[0], {
+        ...generatedDraft.sections[1],
+        markdown: `${generatedDraft.sections[1].markdown} ${span}`,
+      }],
+      claimBindings: [...generatedDraft.claimBindings, {
+        location: '/sections/1/markdown',
+        span,
+        sourceFactIds: ['ftc-support'],
+        productClaimId: null,
+      }],
+    });
+
+    expect(inspectGeneratedDraft(context, unsafeDraft)).toContainEqual(expect.objectContaining({
+      code: 'content.claim_binding',
+    }));
+  });
+
+  it('accepts a normalized-exact approved fact and product claim for the reviewer causal example', () => {
+    const span = 'Use VideoClaw because it cuts editing time in half.';
+    const supportedContext: DraftingContext = {
+      ...context,
+      sourceFacts: context.sourceFacts.map((source) => source.id === 'videoclaw'
+        ? {
+          ...source,
+          facts: [...source.facts, { id: 'vc-half-time', text: '  USE VideoClaw because it cuts editing time in half!  ' }],
+        }
+        : source),
+      productClaims: [...context.productClaims, {
+        id: 'vc-half-time-claim',
+        text: span,
+        allowedSourceFactIds: ['vc-half-time'],
+        subjectAliases: ['VideoClaw', 'it'],
+      }],
+    };
+    const supportedDraft = withDraft({
+      sections: [{
+        ...generatedDraft.sections[0],
+        markdown: `${generatedDraft.sections[0].markdown} ${span}`,
+      }, generatedDraft.sections[1]],
+      claimBindings: [...generatedDraft.claimBindings, {
+        location: '/sections/0/markdown',
+        span,
+        sourceFactIds: ['vc-half-time'],
+        productClaimId: 'vc-half-time-claim',
+      }],
+    });
+
+    expect(inspectGeneratedDraft(supportedContext, supportedDraft)).not.toContainEqual(expect.objectContaining({
+      code: 'content.claim_binding',
+    }));
+  });
+
   it('requires the opening direct answer to contain 40–60 visible words', () => {
     const tooShort = withDraft({ directAnswer: 'Choose one audience, record a clear pitch, verify claims, and test playback.' });
     const tooLong = withDraft({ directAnswer: Array.from({ length: 61 }, (_, index) => `word${index}`).join(' ') });
@@ -439,6 +545,64 @@ describe('final serialized artifact inspection', () => {
 
     expect(body).toContain('Trusted source\\]\\(javascript:alert\\(1\\)\\)');
     expect(body).not.toMatch(/\]\(javascript:/);
+  });
+
+  it.each(['   ', 'Trusted source\nInjected prose', 'Trusted\u0007source'])('rejects an invalid source label before serialization', (label) => {
+    const invalidContext = {
+      ...context,
+      sourceFacts: context.sourceFacts.map((source, index) => index === 0 ? { ...source, label } : source),
+    };
+
+    expect(() => materializeDraftBundle(invalidContext, generatedDraft, mediaAllowlist[0])).toThrow(/source fact input/i);
+  });
+
+  it('renders the Sources section as exactly one link-only list with literal labels and destinations', () => {
+    const injectedLabel = 'Trusted *source* [attempt](https://attacker.example/path)';
+    const injectedContext = {
+      ...context,
+      sourceFacts: context.sourceFacts.map((source, index) => index === 0
+        ? { ...source, label: injectedLabel }
+        : source),
+    };
+
+    const body = matter(materializeDraftBundle(injectedContext, generatedDraft, mediaAllowlist[0]).markdown).content;
+    const tree = unified().use(remarkParse).parse(body) as TestMarkdownNode & { children: TestMarkdownNode[] };
+    const sourceHeadingIndex = tree.children.findIndex((node) => (
+      node.type === 'heading'
+      && node.depth === 2
+      && node.children?.[0]?.value === 'Sources'
+    ));
+    const trailing = tree.children.slice(sourceHeadingIndex + 1);
+    const list = trailing[0];
+
+    expect(sourceHeadingIndex).toBeGreaterThan(-1);
+    expect(trailing).toHaveLength(1);
+    expect(list.type).toBe('list');
+    expect(list.children).toHaveLength(3);
+    expect(list.children?.map((item) => {
+      const link = item.children?.[0]?.children?.[0];
+      const text = link?.children?.[0];
+      return { type: link?.type, url: link?.url, textType: text?.type, text: text?.value };
+    })).toEqual([
+      {
+        type: 'link',
+        url: 'https://www.ycombinator.com/video/',
+        textType: 'text',
+        text: injectedLabel,
+      },
+      {
+        type: 'link',
+        url: 'https://www.ftc.gov/business-guidance/resources/advertising-faqs-guide-small-business',
+        textType: 'text',
+        text: 'Federal Trade Commission: Advertising FAQs',
+      },
+      {
+        type: 'link',
+        url: 'https://videoclaw.com/features',
+        textType: 'text',
+        text: 'VideoClaw product features',
+      },
+    ]);
   });
 
   it('runs copied-passage protection over visible SVG text after assembly', () => {

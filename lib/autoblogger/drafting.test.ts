@@ -119,7 +119,7 @@ const media: AllowlistedProductMedia = {
 const draft: GeneratedDraftV2 = {
   schemaVersion: 2,
   description: 'Plan a clear founder pitch video with factual points, natural delivery, visible product proof, supported claims, careful editing, reviewed captions, and a tested final playback path.',
-  customerTrigger: 'Use this workflow when Demo Day requires a clear, supportable founder video.',
+  customerTrigger: 'Use this workflow for a clear, supportable Demo Day founder video.',
   competitorGap: 'Address the gap across natural delivery, claim control, product proof, and playback checks.',
   directAnswer: 'Plan a founder pitch video by choosing one audience and next step, reducing the story to a few factual points, recording short natural takes, and showing one current product action. Then edit for clarity, verify each objective claim and caption against its source, and test the complete final playback path.',
   sections: [
@@ -192,6 +192,7 @@ describe('structured drafting orchestration', () => {
   it.each([
     { src: '/landing/../private/product.mp4' },
     { poster: '/landing/%2e%2e/private/product.jpg' },
+    { src: '/landing/%25252e%25252e/private/product.mp4' },
     { candidateFingerprints: undefined, keywordIncludes: ['---'] },
   ])('blocks an invalid media mapping before any model call', async (mediaChange) => {
     const client = new FixtureStructuredClient([draft, approvedCritique]);
@@ -263,7 +264,6 @@ describe('structured drafting orchestration', () => {
         code: 'copy.revise',
         message: 'Synthetic apify_api_critic_fixture_123456789 credential',
         repairInstruction: 'Revise the description.',
-        predicate: { path: '/description', operator: 'contains', value: 'revised' },
       }],
     };
     const client = new FixtureStructuredClient([draft, secretCritique, draft]);
@@ -280,6 +280,25 @@ describe('structured drafting orchestration', () => {
     expect(JSON.stringify(client.requests)).not.toContain('apify_api_critic_fixture_123456789');
   });
 
+  it('rejects a critic response that tries to supply its own acceptance predicate', async () => {
+    const selfAttestedCritique = {
+      schemaVersion: 1,
+      approved: false,
+      issues: [{
+        id: 'self-attested',
+        code: 'copy.revise',
+        message: 'Revise the copy.',
+        repairInstruction: 'Revise the description.',
+        predicate: { path: '/description', operator: 'contains', value: 'anything' },
+      }],
+    };
+    const client = new FixtureStructuredClient([draft, selfAttestedCritique]);
+    const drafter = createStructuredDrafter({ client, mediaAllowlist: [media] });
+
+    await expect(drafter.draft(context)).rejects.toThrow(/predicate|unrecognized/i);
+    expect(client.requests).toHaveLength(2);
+  });
+
   it('runs exactly one repair when the independent critique rejects the first draft', async () => {
     const critique: DraftCritiqueV1 = {
       schemaVersion: 1,
@@ -289,18 +308,13 @@ describe('structured drafting orchestration', () => {
         code: 'copy.too_generic',
         message: 'Make the opening more specific to the candidate.',
         repairInstruction: 'Name the founder pitch workflow in the opening.',
-        predicate: {
-          path: '/description',
-          operator: 'contains',
-          value: 'specific founder pitch workflow',
-        },
       }],
     };
     const repairedDraft = {
       ...structuredClone(draft),
       description: 'Use this specific founder pitch workflow to plan factual points, record natural takes, show product proof, support claims, review captions, and test final playback.',
     };
-    const client = new FixtureStructuredClient([draft, critique, repairedDraft, draft]);
+    const client = new FixtureStructuredClient([draft, critique, repairedDraft, approvedCritique]);
     const drafter = createStructuredDrafter({ client, mediaAllowlist: [media] });
 
     const outcome = await drafter.draft(context);
@@ -310,8 +324,91 @@ describe('structured drafting orchestration', () => {
       'videoclaw_article_draft_v2',
       'videoclaw_article_critique_v1',
       'videoclaw_article_repair_v2',
+      'videoclaw_article_critique_v1',
     ]);
     expect(JSON.stringify(outcome)).toContain(repairedDraft.description);
+  });
+
+  it('requires a clean second critique before accepting a repaired issue', async () => {
+    const firstCritique: DraftCritiqueV1 = {
+      schemaVersion: 1,
+      approved: false,
+      issues: [{
+        id: 'description-specificity',
+        code: 'copy.too_generic',
+        message: 'Make the opening more specific to the candidate.',
+        repairInstruction: 'Name the founder pitch workflow in the opening.',
+      }],
+    };
+    const repairedDraft = {
+      ...structuredClone(draft),
+      description: 'Use this specific founder pitch workflow to plan factual points and final playback.',
+    };
+    const client = new FixtureStructuredClient([
+      draft,
+      firstCritique,
+      repairedDraft,
+      approvedCritique,
+    ]);
+    const drafter = createStructuredDrafter({ client, mediaAllowlist: [media] });
+
+    const outcome = await drafter.draft(context);
+
+    expect(outcome).toMatchObject({ status: 'ready', repaired: true });
+    expect(client.requests.map(({ name }) => name)).toEqual([
+      'videoclaw_article_draft_v2',
+      'videoclaw_article_critique_v1',
+      'videoclaw_article_repair_v2',
+      'videoclaw_article_critique_v1',
+    ]);
+  });
+
+  it('blocks an unrelated repair when the second critique still rejects it and never repairs twice', async () => {
+    const firstCritique: DraftCritiqueV1 = {
+      schemaVersion: 1,
+      approved: false,
+      issues: [{
+        id: 'source-specificity',
+        code: 'copy.unspecific',
+        message: 'The source explanation is too generic.',
+        repairInstruction: 'Explain the source guidance.',
+      }],
+    };
+    const secondCritique: DraftCritiqueV1 = {
+      schemaVersion: 1,
+      approved: false,
+      issues: [{
+        id: 'source-specificity-remains',
+        code: 'copy.unspecific',
+        message: 'The source explanation remains too generic.',
+        repairInstruction: 'Explain the source guidance.',
+      }],
+    };
+    const unrelatedRepair = {
+      ...structuredClone(draft),
+      description: 'Use a different description without changing the source explanation.',
+    };
+    const client = new FixtureStructuredClient([
+      draft,
+      firstCritique,
+      unrelatedRepair,
+      secondCritique,
+      structuredClone(draft),
+    ]);
+    const drafter = createStructuredDrafter({ client, mediaAllowlist: [media] });
+
+    const outcome = await drafter.draft(context);
+
+    expect(outcome).toMatchObject({ status: 'blocked', reason: 'content_safety_failed' });
+    if (outcome.status !== 'blocked' || outcome.reason !== 'content_safety_failed') {
+      throw new Error('Expected content-safety block.');
+    }
+    expect(outcome.findings).toContainEqual(expect.objectContaining({
+      code: 'copy.unspecific',
+      issueId: 'source-specificity-remains',
+    }));
+    expect(client.requests.filter(({ name }) => name === 'videoclaw_article_repair_v2')).toHaveLength(1);
+    expect(client.requests).toHaveLength(4);
   });
 
   it('blocks after one repair when deterministic safety findings remain', async () => {
@@ -322,7 +419,7 @@ describe('structured drafting orchestration', () => {
         draft.sections[1],
       ],
     };
-    const client = new FixtureStructuredClient([unsafeDraft, approvedCritique, unsafeDraft, draft]);
+    const client = new FixtureStructuredClient([unsafeDraft, approvedCritique, unsafeDraft, approvedCritique]);
     const drafter = createStructuredDrafter({ client, mediaAllowlist: [media] });
 
     const outcome = await drafter.draft(context);
@@ -333,7 +430,7 @@ describe('structured drafting orchestration', () => {
     }
     expect(outcome.findings).toContainEqual(expect.objectContaining({ code: 'content.raw_html' }));
     expect(outcome).not.toHaveProperty('bundle');
-    expect(client.requests).toHaveLength(3);
+    expect(client.requests).toHaveLength(4);
   });
 
   it('blocks an unchanged repair after the independent critic rejected the draft', async () => {
@@ -345,14 +442,9 @@ describe('structured drafting orchestration', () => {
         code: 'copy.unspecific',
         message: 'The workflow needs a more specific explanation.',
         repairInstruction: 'Make the workflow explanation specific.',
-        predicate: {
-          path: '/sections/0/markdown',
-          operator: 'contains',
-          value: 'specific production sequence',
-        },
       }],
     };
-    const client = new FixtureStructuredClient([draft, critique, structuredClone(draft)]);
+    const client = new FixtureStructuredClient([draft, critique, structuredClone(draft), critique]);
     const drafter = createStructuredDrafter({ client, mediaAllowlist: [media] });
 
     const outcome = await drafter.draft(context);
@@ -360,12 +452,12 @@ describe('structured drafting orchestration', () => {
     expect(outcome).toMatchObject({
       status: 'blocked',
       reason: 'content_safety_failed',
-      findings: [{ code: 'critique.unresolved' }],
+      findings: [{ code: 'copy.unspecific', issueId: 'workflow-specificity' }],
     });
-    expect(client.requests).toHaveLength(3);
+    expect(client.requests).toHaveLength(4);
   });
 
-  it('blocks a repair that edits an unrelated field without satisfying the critic predicate', async () => {
+  it('blocks a repair that edits an unrelated field when the second critique still rejects it', async () => {
     const critique: DraftCritiqueV1 = {
       schemaVersion: 1,
       approved: false,
@@ -374,18 +466,13 @@ describe('structured drafting orchestration', () => {
         code: 'copy.unspecific',
         message: 'The source explanation is too generic.',
         repairInstruction: 'Explain that the guidance recommends speaking from bullets.',
-        predicate: {
-          path: '/sections/0/markdown',
-          operator: 'contains',
-          value: 'recommends speaking from bullets',
-        },
       }],
     };
     const unrelatedRepair = {
       ...structuredClone(draft),
       description: 'Use a changed description that does not resolve the section-level critic issue.',
     };
-    const client = new FixtureStructuredClient([draft, critique, unrelatedRepair]);
+    const client = new FixtureStructuredClient([draft, critique, unrelatedRepair, critique]);
     const drafter = createStructuredDrafter({ client, mediaAllowlist: [media] });
 
     const outcome = await drafter.draft(context);
@@ -393,9 +480,9 @@ describe('structured drafting orchestration', () => {
     expect(outcome).toMatchObject({
       status: 'blocked',
       reason: 'content_safety_failed',
-      findings: [{ code: 'critique.unresolved', issueId: 'source-specificity' }],
+      findings: [{ code: 'copy.unspecific', issueId: 'source-specificity' }],
     });
-    expect(client.requests).toHaveLength(3);
+    expect(client.requests).toHaveLength(4);
   });
 
   it.each([
@@ -451,6 +538,31 @@ describe('structured drafting orchestration', () => {
       'a date-only source check timestamp',
       { sourceFacts: [{ ...context.sourceFacts[0], checkedAt: '2026-09-04' }, context.sourceFacts[1]] },
       /source checkedAt.*ISO date-time/i,
+    ],
+    [
+      'an empty source label',
+      { sourceFacts: [{ ...context.sourceFacts[0], label: '   ' }, context.sourceFacts[1]] },
+      /source fact input/i,
+    ],
+    [
+      'a multiline source label',
+      { sourceFacts: [{ ...context.sourceFacts[0], label: 'Trusted source\nInjected prose' }, context.sourceFacts[1]] },
+      /source fact input/i,
+    ],
+    [
+      'a control-bearing source label',
+      { sourceFacts: [{ ...context.sourceFacts[0], label: 'Trusted\u0007source' }, context.sourceFacts[1]] },
+      /source fact input/i,
+    ],
+    [
+      'a source URL containing credentials',
+      { sourceFacts: [{ ...context.sourceFacts[0], url: 'https://fixture:secret@example.com/source' }, context.sourceFacts[1]] },
+      /source fact input/i,
+    ],
+    [
+      'a blank source fact',
+      { sourceFacts: [{ ...context.sourceFacts[0], facts: [{ id: 'yc-bullets', text: '   ' }] }, context.sourceFacts[1]] },
+      /source fact input/i,
     ],
     [
       'a secret-like value in model-bound source facts',

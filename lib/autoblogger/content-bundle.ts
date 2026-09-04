@@ -15,12 +15,29 @@ import {
   type EvidenceBundle,
   type KeywordMetrics,
 } from './domain';
-import { isoDateTimeToDateOnly } from './date-time';
+import { isStrictIsoDateTime, isoDateTimeToDateOnly } from './date-time';
 import { containsSecretLikeValue } from './secrets';
 import type { CheckedSource } from './sources';
 
 const nonBlankString = z.string().trim().min(1);
 const claimLocationPattern = /^\/(?:description|customerTrigger|competitorGap|directAnswer|sections\/\d+\/(?:heading|markdown)|faqAnswers\/\d+\/answer|editorialGraphic\/(?:title|alt)|editorialGraphic\/steps\/\d+\/(?:label|detail))$/;
+
+function isXml10Text(value: string): boolean {
+  for (const character of value) {
+    const codePoint = character.codePointAt(0) as number;
+    if (
+      codePoint !== 0x9
+      && codePoint !== 0xA
+      && codePoint !== 0xD
+      && !(codePoint >= 0x20 && codePoint <= 0xD7FF)
+      && !(codePoint >= 0xE000 && codePoint <= 0xFFFD)
+      && !(codePoint >= 0x10000 && codePoint <= 0x10FFFF)
+    ) return false;
+  }
+  return true;
+}
+
+const xmlVisibleString = (maximum: number) => z.string().trim().min(1).max(maximum).refine(isXml10Text);
 
 export const GeneratedDraftV2Schema = z.object({
   schemaVersion: z.literal(2),
@@ -46,11 +63,11 @@ export const GeneratedDraftV2Schema = z.object({
     productClaimId: nonBlankString.nullable(),
   }).strict()),
   editorialGraphic: z.object({
-    title: z.string().trim().min(1).max(100),
-    alt: z.string().trim().min(1).max(240),
+    title: xmlVisibleString(100),
+    alt: xmlVisibleString(240),
     steps: z.array(z.object({
-      label: z.string().trim().min(1).max(40),
-      detail: z.string().trim().min(1).max(120),
+      label: xmlVisibleString(40),
+      detail: xmlVisibleString(120),
     }).strict()).min(3).max(6),
   }).strict(),
 }).strict();
@@ -169,6 +186,31 @@ export type SourceFact = {
   excerpt?: string;
 };
 
+const singleLineControlFreeString = z.string().trim().min(1).refine((value) => (
+  !/[\u0000-\u001F\u007F-\u009F\u2028\u2029]/u.test(value)
+));
+
+const SourceFactInputSchema: z.ZodType<SourceFact> = z.object({
+  id: singleLineControlFreeString,
+  label: singleLineControlFreeString,
+  url: singleLineControlFreeString.refine((value) => normalizeHttpUrl(value) !== undefined),
+  checkedAt: z.string().refine(isStrictIsoDateTime),
+  facts: z.array(z.object({
+    id: singleLineControlFreeString,
+    text: singleLineControlFreeString,
+  }).strict()).min(1),
+  excerpt: z.string().optional(),
+}).strict();
+
+export function assertSourceFacts(sourceFacts: SourceFact[]): void {
+  if (sourceFacts.some(({ checkedAt }) => !isStrictIsoDateTime(checkedAt))) {
+    throw new Error('Every source checkedAt must be a strict ISO date-time.');
+  }
+  if (!z.array(SourceFactInputSchema).min(2).safeParse(sourceFacts).success) {
+    throw new Error('Invalid source fact input.');
+  }
+}
+
 export type ProductClaim = {
   id: string;
   text: string;
@@ -213,16 +255,24 @@ function isSafeLocalAssetPath(value: string): boolean {
   return value.split('/').slice(1).every((rawSegment) => {
     if (!rawSegment) return false;
     let segment = rawSegment;
+    let stable = false;
     try {
-      for (let attempt = 0; attempt < 2; attempt += 1) {
+      for (let attempt = 0; attempt < 6; attempt += 1) {
         const decoded = decodeURIComponent(segment);
-        if (decoded === segment) break;
+        if (decoded === segment) {
+          stable = true;
+          break;
+        }
         segment = decoded;
       }
     } catch {
       return false;
     }
-    return segment !== '.' && segment !== '..' && !segment.includes('/') && !segment.includes('\\');
+    return stable
+      && segment !== '.'
+      && segment !== '..'
+      && !segment.includes('/')
+      && !segment.includes('\\');
   });
 }
 
@@ -271,6 +321,7 @@ function normalizedWords(value: string): string[] {
 type MarkdownNode = {
   type: string;
   depth?: number;
+  ordered?: boolean;
   url?: string;
   value?: string;
   alt?: string;
@@ -389,32 +440,15 @@ function inspectReferences(
   return findings;
 }
 
-const editorialOpeningWords = new Set([
-  'address', 'avoid', 'bind', 'build', 'capture', 'check', 'choose', 'create', 'define', 'edit', 'follow',
-  'include', 'keep', 'make', 'plan', 'record', 'reduce', 'review', 'show', 'start', 'test',
-  'then', 'use', 'verify',
-]);
-
 function visibleMarkdownText(value: string): string {
   return markdownNodeText(parseMarkdown(value)).replace(/\s+/g, ' ').trim();
 }
 
 function sentences(value: string): string[] {
   return visibleMarkdownText(value)
-    .split(/(?<=[.!?])\s+/)
+    .split(/(?<=[.!?])(?:\s+|(?=[A-Z]))/u)
     .map((sentence) => sentence.trim())
     .filter(Boolean);
-}
-
-function isObjectiveSentence(sentence: string): boolean {
-  if (sentence.endsWith('?')) return false;
-  const firstWord = sentence.toLocaleLowerCase('en-US').match(/^[a-z]+/)?.[0] ?? '';
-  return !editorialOpeningWords.has(firstWord)
-    && !/\b(?:should|could|may|might|recommend|consider)\b/i.test(sentence)
-    && (
-      /[.!]$/u.test(sentence)
-      || /\b(?:is|are|was|were|has|have|can|will|does|do|supports?|lets?|guarantees?|doubles?|requires?|needs?|recommends?|includes?|provides?|reduces?|increases?|improves?|works?|uses?)\b/iu.test(sentence)
-    );
 }
 
 function generatedLocationValue(draft: GeneratedDraftV2, location: string): string | undefined {
@@ -433,7 +467,10 @@ function generatedLocationValue(draft: GeneratedDraftV2, location: string): stri
   return undefined;
 }
 
-function generatedObjectiveSentences(draft: GeneratedDraftV2): Array<{ location: string; span: string }> {
+function generatedClaimSentences(
+  context: DraftingContext,
+  draft: GeneratedDraftV2,
+): Array<{ location: string; span: string }> {
   return [
     { location: '/description', value: draft.description },
     { location: '/customerTrigger', value: draft.customerTrigger },
@@ -451,36 +488,30 @@ function generatedObjectiveSentences(draft: GeneratedDraftV2): Array<{ location:
       { location: `/editorialGraphic/steps/${index}/detail`, value: detail },
     ]),
   ].flatMap(({ location, value }) => sentences(value)
-    .filter(isObjectiveSentence)
+    .filter((span) => requiresClaimBinding(span, context.productClaims))
     .map((span) => ({ location, span })));
 }
 
 function containsProductAlias(sentence: string, claims: ProductClaim[]): boolean {
   const normalized = normalizeKeyword(sentence);
-  const aliases = claims.flatMap(({ subjectAliases }) => subjectAliases).map(normalizeKeyword);
+  const aliases = ['VideoClaw', ...claims.flatMap(({ subjectAliases }) => subjectAliases)].map(normalizeKeyword);
   return aliases.some((alias) => alias && ` ${normalized} `.includes(` ${alias} `))
     || /\b(?:it|this app|this product|this platform|this tool|the app|the product|the platform|the tool|our app|our product)\b/iu.test(sentence);
 }
 
-const claimStopWords = new Set([
-  'a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'for', 'from', 'has', 'have',
-  'in', 'is', 'it', 'of', 'on', 'or', 'that', 'the', 'this', 'to', 'was', 'were',
-  'will', 'with', 'why',
-]);
-
-function claimTerms(value: string): Set<string> {
-  return new Set(normalizedWords(value)
-    .filter((word) => word.length > 2 && !claimStopWords.has(word))
-    .map((word) => word
-      .replace(/(?:ing|ed)$/u, '')
-      .replace(/(?:es|s)$/u, '')));
+function requiresClaimBinding(sentence: string, claims: ProductClaim[]): boolean {
+  return containsProductAlias(sentence, claims)
+    || /\b(?:because|therefore|thus|causes|caused|leads\s+to|led\s+to|results\s+in|resulted\s+in|enables|enabled|guarantees|guaranteed|cuts|cutting|reduces|reduced|increases|increased|improves|improved|boosts|boosted|saves|saved|doubles|doubled|triples|tripled|converts|converted|conversion|revenue|growth|outcome|faster|slower|higher|lower|shorter|shortest|longer|longest|better|worse|more|less|fewer|most|least|best|half|twice|need|needs|require|requires)\b/iu.test(sentence)
+    || /\b\d+(?:\.\d+)?(?:\s?(?:%|x)|\s+(?:times?|minutes?|hours?|days?|weeks?|months?))?\b/iu.test(sentence);
 }
 
-function factsLexicallySupportSpan(span: string, factTexts: string[]): boolean {
-  const spanTerms = claimTerms(span);
-  const factTerms = claimTerms(factTexts.join(' '));
-  const overlap = [...spanTerms].filter((term) => factTerms.has(term)).length;
-  return spanTerms.size > 0 && overlap >= Math.min(2, spanTerms.size);
+function factExactlySupportsSpan(span: string, factTexts: string[]): boolean {
+  const normalizedSpan = normalizeKeyword(span);
+  return normalizedSpan.length > 0 && factTexts.some((text) => {
+    const normalizedFact = normalizeKeyword(text);
+    return normalizedFact.length > 0
+      && (normalizedSpan === normalizedFact || ` ${normalizedSpan} `.includes(` ${normalizedFact} `));
+  });
 }
 
 function claimBindingsAreValid(
@@ -493,7 +524,7 @@ function claimBindingsAreValid(
     for (const fact of source.facts) factsById.set(fact.id, { sourceId: source.id, text: fact.text });
   }
   const claimById = new Map(context.productClaims.map((claim) => [claim.id, claim]));
-  const expected = generatedObjectiveSentences(draft);
+  const expected = generatedClaimSentences(context, draft);
   const seen = new Set<string>();
   for (const binding of draft.claimBindings) {
     const key = `${binding.location}\n${binding.span}`;
@@ -502,13 +533,13 @@ function claimBindingsAreValid(
     if (
       seen.has(key)
       || !visibleSentences.includes(binding.span)
-      || !isObjectiveSentence(binding.span)
+      || !requiresClaimBinding(binding.span, context.productClaims)
       || new Set(binding.sourceFactIds).size !== binding.sourceFactIds.length
       || binding.sourceFactIds.some((factId) => (
         !factsById.has(factId)
         || !visibleSourceIds.includes(factsById.get(factId)?.sourceId as string)
       ))
-      || !factsLexicallySupportSpan(
+      || !factExactlySupportsSpan(
         binding.span,
         binding.sourceFactIds.map((factId) => factsById.get(factId)?.text ?? ''),
       )
@@ -616,6 +647,14 @@ function escapeXml(value: string): string {
 }
 
 export function renderEditorialSvg(graphic: GeneratedDraftV2['editorialGraphic']): string {
+  const visibleFields = [
+    graphic.title,
+    graphic.alt,
+    ...graphic.steps.flatMap(({ label, detail }) => [label, detail]),
+  ];
+  if (!visibleFields.every(isXml10Text)) {
+    throw new Error('SVG-visible text contains XML-invalid code points.');
+  }
   const cardWidth = 1040 / graphic.steps.length;
   const cards = graphic.steps.map((step, index) => {
     const x = 80 + (index * cardWidth);
@@ -635,6 +674,7 @@ export function normalizeHttpUrl(value: string): string | undefined {
   try {
     const url = new URL(value);
     if (url.protocol !== 'http:' && url.protocol !== 'https:') return undefined;
+    if (url.username || url.password) return undefined;
     url.hash = '';
     return url.toString();
   } catch {
@@ -644,7 +684,7 @@ export function normalizeHttpUrl(value: string): string | undefined {
 
 function inspectFinalMarkdown(
   markdown: string,
-  allowedSourceUrls: string[],
+  expectedSources: Array<{ label: string; url: string }>,
 ): DraftSafetyFinding[] {
   const findings: DraftSafetyFinding[] = [];
   const body = matter(markdown).content;
@@ -659,7 +699,7 @@ function inspectFinalMarkdown(
     }
   }
 
-  const allowed = new Set(allowedSourceUrls.flatMap((url) => {
+  const allowed = new Set(expectedSources.flatMap(({ url }) => {
     const normalized = normalizeHttpUrl(url);
     return normalized ? [normalized] : [];
   }));
@@ -690,11 +730,50 @@ function inspectFinalMarkdown(
       findings.push(finding('content.unsupported_link', 'Every final Markdown link must match the supplied source inventory.'));
     }
   });
+
+  const sourceHeadingIndexes = tree.children?.flatMap((node, index) => (
+    node.type === 'heading'
+    && node.depth === 2
+    && markdownNodeText(node).trim() === 'Sources'
+      ? [index]
+      : []
+  )) ?? [];
+  const sourceHeadingIndex = sourceHeadingIndexes[0] ?? -1;
+  const trailingNodes = sourceHeadingIndex < 0 ? [] : tree.children?.slice(sourceHeadingIndex + 1) ?? [];
+  const sourceList = trailingNodes[0];
+  const sourceItems = sourceList?.children ?? [];
+  const exactSourcesStructure = sourceHeadingIndexes.length === 1
+    && trailingNodes.length === 1
+    && sourceList?.type === 'list'
+    && sourceList.ordered === false
+    && sourceItems.length === expectedSources.length
+    && sourceItems.every((item, index) => {
+      const expected = expectedSources[index];
+      const paragraph = item.type === 'listItem' && item.children?.length === 1
+        ? item.children[0]
+        : undefined;
+      const link = paragraph?.type === 'paragraph' && paragraph.children?.length === 1
+        ? paragraph.children[0]
+        : undefined;
+      const normalizedDestination = link?.url ? normalizeHttpUrl(link.url) : undefined;
+      return link?.type === 'link'
+        && link.children?.length === 1
+        && link.children[0].type === 'text'
+        && link.children[0].value === expected?.label
+        && normalizedDestination === normalizeHttpUrl(expected?.url ?? '');
+    });
+  if (!exactSourcesStructure) {
+    findings.push(finding(
+      'content.sources_structure',
+      'The final Sources section must be exactly one link-only list matching the selected source labels and URLs.',
+    ));
+  }
   return findings;
 }
 
 function escapeMarkdownLabel(value: string): string {
-  return value.replace(/[\\[\]()<>]/g, '\\$&');
+  const escapable = new Set('\\`*_{}[]()#+-.!<>|~'.split(''));
+  return [...value].map((character) => escapable.has(character) ? `\\${character}` : character).join('');
 }
 
 function inspectFinalSvg(
@@ -777,8 +856,8 @@ export function materializeDraftBundle(
   value: unknown,
   media: AllowlistedProductMedia,
 ): DraftBundle {
+  assertSourceFacts(context.sourceFacts);
   isoDateTimeToDateOnly(context.generatedAt);
-  context.sourceFacts.forEach(({ checkedAt }) => isoDateTimeToDateOnly(checkedAt));
   const draft = GeneratedDraftV2Schema.parse(value);
   const findings = inspectGeneratedDraft(context, draft);
   if (findings.length > 0) {
@@ -837,7 +916,7 @@ export function materializeDraftBundle(
   const markdown = `---\n${yamlLines(article).join('\n')}\n---\n\n${body}\n`;
   const svg = renderEditorialSvg(draft.editorialGraphic);
   const finalFindings = uniqueFindings([
-    ...inspectFinalMarkdown(markdown, sources.map(({ url }) => url)),
+    ...inspectFinalMarkdown(markdown, sources.map(({ label, url }) => ({ label, url }))),
     ...inspectFinalSvg(svg, draft.editorialGraphic),
     ...(containsCopiedPassage(
       `${markdown}\n${svg}`,

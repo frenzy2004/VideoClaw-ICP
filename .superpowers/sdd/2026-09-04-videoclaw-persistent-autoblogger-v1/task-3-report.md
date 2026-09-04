@@ -129,3 +129,42 @@ Result: Next route generation and TypeScript passed; ESLint passed with zero out
 - Generic fact-to-claim support is deliberately deterministic and fail-closed: it requires source visibility, exact spans, valid IDs, and lexical overlap. It is not a semantic entailment or legal-substantiation engine, so the independent critic and later human factual/legal approvals remain necessary.
 - The contiguous 12-word copied-passage heuristic remains a guard for obvious copying rather than a plagiarism determination.
 - Media existence and final lander publication compatibility remain Task 4 responsibilities in a temporary lander checkout; this worker still does not duplicate the lander's native validator.
+
+## Scoped re-review fixes (second pass, 2026-09-05)
+
+This pass supersedes the earlier predicate-based repair acceptance and lexical-overlap grounding descriptions above. All scoped re-review findings were fixed in the shared feature worktree without modifying the production lander or production branches.
+
+### Implementation changes
+
+- Removed critic-authored acceptance predicates from both the runtime DTO and strict Structured Outputs schema. After the single permitted repair, the worker runs a new independent critique over the complete repaired draft. Readiness now requires both deterministic checks and that second critique to be clean and approved. A rejected second critique returns its structured issue IDs and blocks; there is no path to a second repair.
+- Tightened objective-claim discovery across generated metadata, sections, FAQ answers, and SVG-visible text. Product names, caller aliases, ambiguous product pronouns, causal/outcome/comparative language, and measurements require exact bindings, including imperatives, modals, and product-bearing questions. Adjacent assertions without whitespace are split and checked.
+- Replaced stem-overlap support with deterministic exact normalized support. A binding span must be an exact visible sentence at its declared generated location, and at least one selected visible source fact's complete approved claim text must normalize either equivalently to the span or as a complete contained sequence. Facts cannot be combined into a loose topical match. Product-bearing spans additionally require exact caller-supplied product-claim text and allowed fact IDs.
+- Added runtime SourceFact validation shared by drafting preflight and direct bundle materialization. Source collections require at least two entries; IDs, labels, fact IDs, and approved fact text must be nonblank, single-line, and control-free; facts cannot be empty; source URLs must be HTTP(S), credential-free normalized destinations; and `checkedAt` must be a strict ISO date-time. Invalid inputs fail before model use or serialization without echoing supplied content.
+- Hardened final Markdown inspection around the actual parsed AST. The document must contain exactly one final `## Sources` heading followed by exactly one unordered list. Its item count and order must match selected sources, and every item must contain exactly one paragraph with exactly one direct link, one literal text child equal to the expected label, and the expected normalized URL. Source labels now escape all Markdown-significant punctuation, preventing injected emphasis, prose, or links.
+- Extended local media decoding to repeat until stable with a six-pass cap. A segment that does not stabilize, decodes to a dot segment, or reveals a slash/backslash is invalid; triple-encoded traversal therefore blocks before any model call.
+- Added XML 1.0 code-point validation to every generated SVG-visible title, alt, step label, and detail at DTO parsing and at rendering. Escaping remains mandatory, and XML-invalid controls or lone surrogate code points cannot enter the SVG.
+
+### Regression-first evidence
+
+- Repair re-critique RED: the existing three-call flow returned after repair and had no second-critique request; an unrelated description change could satisfy a critic-authored predicate. GREEN: repaired readiness uses four calls (`draft`, `critique`, one `repair`, second `critique`), a still-rejected issue blocks with its second-critique issue ID, a clean second critique returns ready, and repair request count remains exactly one.
+- Grounding RED: imperative/modal outcome claims, pronoun claims, no-space appended assertions, and the reviewer counterexample `Objective advertising claims double conversion.` were accepted or could pass loose term overlap. GREEN: both reviewer examples, aliases/pronouns, modal claims, upper/lowercase appended assertions, product-bearing questions, missing/unknown bindings, and unrelated approved facts are rejected; an exact normalized approved fact and caller product claim is accepted.
+- Source/Markdown RED: blank, multiline, and control-bearing labels reached generation or materialization; Markdown-rich labels produced nested AST nodes instead of literal source text. GREEN: SourceFact preflight rejects malformed fields, and a punctuation-rich attempted link/prose injection serializes to exactly the expected link-only source list AST.
+- Media/XML RED: triple-encoded traversal selected an allowlist mapping, and XML-invalid controls rendered in each SVG-visible field. GREEN: the mapping is rejected before model use and all four SVG field categories fail rendering/DTO validation.
+
+### Verification
+
+Focused Task 3 verification:
+
+```text
+npm test -- lib/autoblogger/content-bundle.test.ts lib/autoblogger/drafting.test.ts
+```
+
+Result: 2 files and 91 tests passed.
+
+The first repository verification run passed all 392 tests and ESLint, while TypeScript identified an overly narrow recursive AST type in the new test only. After correcting that type, focused tests passed again and `npm run typecheck` completed successfully. The final fresh repository checks are recorded in the commit handoff.
+
+### Residual concerns after the second pass
+
+- Exact normalized fact containment is intentionally conservative and may reject legitimate paraphrases. That is preferable to accepting unsupported objective copy; callers should supply approved fact text matching the publishable claim they intend to allow.
+- The independent critic and later human factual/legal approvals remain necessary for meaning, context, and legal substantiation that deterministic string checks cannot establish.
+- Media file existence and the lander's final publication contract remain Task 4 checks in a temporary checkout; Task 3 continues to avoid a duplicate publication validator.

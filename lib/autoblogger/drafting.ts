@@ -11,6 +11,7 @@ import type { StructuredOutputClient } from './openai-responses';
 import {
   GENERATED_DRAFT_V2_JSON_SCHEMA,
   GeneratedDraftV2Schema,
+  assertSourceFacts,
   inspectGeneratedDraft,
   materializeDraftBundle,
   normalizeHttpUrl,
@@ -23,18 +24,11 @@ import {
 import { isStrictIsoDateTime } from './date-time';
 import { containsSecretLikeValue } from './secrets';
 
-const critiquePathPattern = /^\/(?:description|customerTrigger|competitorGap|directAnswer|sections\/\d+\/(?:heading|markdown)|faqAnswers\/\d+\/(?:question|answer)|sourceReferences\/\d+\/sourceId|claimBindings\/\d+\/(?:span|productClaimId)|editorialGraphic\/(?:title|alt)|editorialGraphic\/steps\/\d+\/(?:label|detail))$/;
-
 const CritiqueIssueSchema = z.object({
   id: z.string().trim().min(1),
   code: z.string().trim().min(1),
   message: z.string().trim().min(1),
   repairInstruction: z.string().trim().min(1),
-  predicate: z.object({
-    path: z.string().regex(critiquePathPattern),
-    operator: z.enum(['equals', 'not_equals', 'contains', 'not_contains']),
-    value: z.string().trim().min(1),
-  }).strict(),
 }).strict();
 
 const DraftCritiqueV1Schema = z.object({
@@ -76,18 +70,8 @@ export const DRAFT_CRITIQUE_V1_JSON_SCHEMA = {
           code: { type: 'string', pattern: '.*\\S.*' },
           message: { type: 'string', pattern: '.*\\S.*' },
           repairInstruction: { type: 'string', pattern: '.*\\S.*' },
-          predicate: {
-            type: 'object',
-            additionalProperties: false,
-            properties: {
-              path: { type: 'string', pattern: critiquePathPattern.source },
-              operator: { enum: ['equals', 'not_equals', 'contains', 'not_contains'] },
-              value: { type: 'string', pattern: '.*\\S.*' },
-            },
-            required: ['path', 'operator', 'value'],
-          },
         },
-        required: ['id', 'code', 'message', 'repairInstruction', 'predicate'],
+        required: ['id', 'code', 'message', 'repairInstruction'],
       },
     },
   },
@@ -141,8 +125,8 @@ three supplied FAQ questions exactly and reference every used product claim.`;
 const CRITIQUE_SYSTEM = `Act as an independent factual, legal-copy, safety, and editorial critic.
 Evaluate the draft against the supplied candidate, evidence, source facts, approved
 product claims, and output rules. Do not rewrite it. Return approved only when there
-are no issues; otherwise provide unique issue IDs, concrete repair instructions,
-and predicates that are false before repair and can be checked after repair.`;
+are no issues; otherwise provide unique issue IDs and concrete repair instructions.
+Never provide an acceptance predicate.`;
 
 const REPAIR_SYSTEM = `Repair the version 2 article-generation JSON exactly once.
 Address every independent-critique and deterministic-safety issue while preserving
@@ -171,44 +155,7 @@ function critiqueIssues(critique: DraftCritiqueV1): DraftSafetyFinding[] {
   if (critique.issues.length === 0) {
     return [{ code: 'critique.rejected', message: 'Independent critique rejected the draft.' }];
   }
-  return critique.issues.map(({ code, message }) => ({ code, message }));
-}
-
-function valueAtCritiquePath(draft: GeneratedDraftV2, path: string): unknown {
-  return path.slice(1).split('/').reduce<unknown>((value, segment) => {
-    if (!value || typeof value !== 'object') return undefined;
-    if (Array.isArray(value)) {
-      if (!/^\d+$/.test(segment)) return undefined;
-      return value[Number(segment)];
-    }
-    return (value as Record<string, unknown>)[segment];
-  }, draft);
-}
-
-function predicatePasses(draft: GeneratedDraftV2, issue: DraftCritiqueV1['issues'][number]): boolean {
-  const actual = valueAtCritiquePath(draft, issue.predicate.path);
-  if (typeof actual !== 'string') return false;
-  const { operator, value } = issue.predicate;
-  if (operator === 'equals') return actual === value;
-  if (operator === 'not_equals') return actual !== value;
-  if (operator === 'contains') return actual.includes(value);
-  return !actual.includes(value);
-}
-
-function unresolvedCritiqueFindings(
-  initial: GeneratedDraftV2,
-  repaired: GeneratedDraftV2,
-  critique: DraftCritiqueV1,
-): DraftSafetyFinding[] {
-  return critique.issues.flatMap((issue) => (
-    predicatePasses(initial, issue) || !predicatePasses(repaired, issue)
-      ? [{
-        code: 'critique.unresolved',
-        issueId: issue.id,
-        message: `Repair did not satisfy critic issue ${issue.id}.`,
-      }]
-      : []
-  ));
+  return critique.issues.map(({ id, code, message }) => ({ issueId: id, code, message }));
 }
 
 function validDateOnly(value: string): boolean {
@@ -221,6 +168,7 @@ function assertDraftingContext(context: DraftingContext): void {
   CandidateSchema.parse(context.candidate);
   EvidenceBundleSchema.parse(context.evidence);
   KeywordMetricsSchema.parse(context.keywordMetrics);
+  assertSourceFacts(context.sourceFacts);
   const expectedFingerprint = candidateFingerprints(context.candidate).candidate;
   if (context.evidence.candidateFingerprint !== expectedFingerprint) {
     throw new Error('Evidence candidate fingerprint does not match the drafting candidate.');
@@ -291,9 +239,6 @@ function assertDraftingContext(context: DraftingContext): void {
     throw new Error('Source and source-fact identifiers must be unique.');
   }
   const factIdSet = new Set(factIds);
-  if (context.sourceFacts.some(({ checkedAt }) => !isStrictIsoDateTime(checkedAt))) {
-    throw new Error('Every source checkedAt must be a strict ISO date-time.');
-  }
   for (const claim of context.productClaims) {
     if (
       claim.allowedSourceFactIds.length === 0
@@ -384,7 +329,29 @@ export function createStructuredDrafter(options: StructuredDrafterOptions) {
         },
       })) as GeneratedDraftV2;
       const remainingFindings = inspectGeneratedDraft(context, repaired);
-      remainingFindings.push(...unresolvedCritiqueFindings(initial, repaired, critique));
+      if (containsSecretLikeValue(repaired)) {
+        return {
+          status: 'blocked',
+          reason: 'content_safety_failed',
+          findings: remainingFindings.length > 0
+            ? remainingFindings
+            : [{ code: 'content.secret', message: 'Repaired draft contains a secret-like value.' }],
+        };
+      }
+      const repairedCritique = DraftCritiqueV1Schema.parse(await options.client.generate({
+        name: 'videoclaw_article_critique_v1',
+        schema: DRAFT_CRITIQUE_V1_JSON_SCHEMA,
+        system: CRITIQUE_SYSTEM,
+        input: { ...suppliedContext, draft: repaired },
+      }));
+      if (containsSecretLikeValue(repairedCritique)) {
+        return {
+          status: 'blocked',
+          reason: 'content_safety_failed',
+          findings: [{ code: 'content.secret', message: 'Critic output contains a secret-like value.' }],
+        };
+      }
+      remainingFindings.push(...critiqueIssues(repairedCritique));
       if (remainingFindings.length > 0) {
         return {
           status: 'blocked',
