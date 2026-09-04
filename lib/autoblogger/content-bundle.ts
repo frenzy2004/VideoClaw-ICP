@@ -514,6 +514,16 @@ function sentences(value: string): string[] {
     .filter(Boolean);
 }
 
+function claimSpansAtLocation(value: string, location: string): string[] {
+  if (!location.startsWith('/editorialGraphic/')) return sentences(value);
+  return value
+    .replace(/\r\n?/g, '\n')
+    .replace(/[^\S\n]+/g, ' ')
+    .split(/(?<=[.!?])(?:[^\S\n]+|(?=[A-Z]))|\n+/u)
+    .map((sentence) => sentence.trim())
+    .filter(Boolean);
+}
+
 function generatedLocationValue(draft: GeneratedDraftV2, location: string): string | undefined {
   if (location === '/description') return draft.description;
   if (location === '/customerTrigger') return draft.customerTrigger;
@@ -528,10 +538,6 @@ function generatedLocationValue(draft: GeneratedDraftV2, location: string): stri
   const step = location.match(/^\/editorialGraphic\/steps\/(\d+)\/(label|detail)$/);
   if (step) return draft.editorialGraphic.steps[Number(step[1])]?.[step[2] as 'label' | 'detail'];
   return undefined;
-}
-
-function usesProseClaimBoundaries(location: string): boolean {
-  return /^\/(?:description|customerTrigger|competitorGap|directAnswer|sections\/\d+\/markdown|faqAnswers\/\d+\/answer|editorialGraphic\/steps\/\d+\/detail)$/u.test(location);
 }
 
 function generatedClaimSentences(draft: GeneratedDraftV2): Array<{ location: string; span: string }> {
@@ -551,8 +557,7 @@ function generatedClaimSentences(draft: GeneratedDraftV2): Array<{ location: str
       { location: `/editorialGraphic/steps/${index}/label`, value: label },
       { location: `/editorialGraphic/steps/${index}/detail`, value: detail },
     ]),
-  ].flatMap(({ location, value }) => sentences(value)
-    .filter((span) => requiresClaimBinding(span, usesProseClaimBoundaries(location)))
+  ].flatMap(({ location, value }) => claimSpansAtLocation(value, location)
     .map((span) => ({ location, span })));
 }
 
@@ -561,13 +566,6 @@ function containsProductAlias(sentence: string, claims: ProductClaim[]): boolean
   const aliases = ['VideoClaw', ...claims.flatMap(({ subjectAliases }) => subjectAliases)].map(normalizeKeyword);
   return aliases.some((alias) => alias && ` ${normalized} `.includes(` ${alias} `))
     || /\b(?:it|this app|this product|this platform|this tool|the app|the product|the platform|the tool|our app|our product)\b/iu.test(sentence);
-}
-
-function requiresClaimBinding(
-  sentence: string,
-  endsAtProseBoundary = false,
-): boolean {
-  return endsAtProseBoundary && !sentence.endsWith('?');
 }
 
 function factExactlyMatchesSpan(span: string, factTexts: string[]): boolean {
@@ -591,11 +589,10 @@ function claimBindingsAreValid(
   for (const binding of draft.claimBindings) {
     const key = `${binding.location}\n${binding.span}`;
     const locationValue = generatedLocationValue(draft, binding.location);
-    const visibleSentences = locationValue ? sentences(locationValue) : [];
+    const visibleSentences = locationValue ? claimSpansAtLocation(locationValue, binding.location) : [];
     if (
       seen.has(key)
       || !visibleSentences.includes(binding.span)
-      || !requiresClaimBinding(binding.span, usesProseClaimBoundaries(binding.location))
       || new Set(binding.sourceFactIds).size !== binding.sourceFactIds.length
       || binding.sourceFactIds.some((factId) => (
         !factsById.has(factId)

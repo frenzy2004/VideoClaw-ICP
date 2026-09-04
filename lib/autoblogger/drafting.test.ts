@@ -157,14 +157,22 @@ const baselineDraftClaims = [
   { id: 'fixture-gap', location: '/competitorGap', span: 'Address the gap across natural delivery, claim control, product proof, and playback checks.' },
   { id: 'fixture-answer-1', location: '/directAnswer', span: 'Plan a founder pitch video by choosing one audience and next step, reducing the story to a few factual points, recording short natural takes, and showing one current product action.' },
   { id: 'fixture-answer-2', location: '/directAnswer', span: 'Then edit for clarity, verify each objective claim and caption against its source, and test the complete final playback path.' },
+  { id: 'fixture-heading-1', location: '/sections/0/heading', span: 'Choose the story and delivery' },
   { id: 'fixture-section-1', location: '/sections/0/markdown', span: 'Use a few memorable points and follow current application guidance for the recipient program.' },
+  { id: 'fixture-heading-2', location: '/sections/1/heading', span: 'Verify every objective claim' },
   { id: 'fixture-section-2', location: '/sections/1/markdown', span: 'Use the FTC advertising guidance to frame a careful internal claim review.' },
   { id: 'fixture-faq', location: '/faqAnswers/0/answer', span: 'Use the recipient requirements, support factual statements, keep the delivery natural, and test the exact final playback path.' },
   { id: 'fixture-faq', location: '/faqAnswers/1/answer', span: 'Use the recipient requirements, support factual statements, keep the delivery natural, and test the exact final playback path.' },
   { id: 'fixture-faq', location: '/faqAnswers/2/answer', span: 'Use the recipient requirements, support factual statements, keep the delivery natural, and test the exact final playback path.' },
+  { id: 'fixture-graphic-title', location: '/editorialGraphic/title', span: 'Founder pitch video workflow' },
+  { id: 'fixture-graphic-alt', location: '/editorialGraphic/alt', span: 'A four-step founder pitch video workflow' },
+  { id: 'fixture-graphic-label-1', location: '/editorialGraphic/steps/0/label', span: 'Audience' },
   { id: 'fixture-graphic-1', location: '/editorialGraphic/steps/0/detail', span: 'Choose one viewer and next step.' },
+  { id: 'fixture-graphic-label-2', location: '/editorialGraphic/steps/1/label', span: 'Story' },
   { id: 'fixture-graphic-2', location: '/editorialGraphic/steps/1/detail', span: 'Reduce the pitch to factual points.' },
+  { id: 'fixture-graphic-label-3', location: '/editorialGraphic/steps/2/label', span: 'Record' },
   { id: 'fixture-graphic-3', location: '/editorialGraphic/steps/2/detail', span: 'Capture short natural takes and proof.' },
+  { id: 'fixture-graphic-label-4', location: '/editorialGraphic/steps/3/label', span: 'Review' },
   { id: 'fixture-graphic-4', location: '/editorialGraphic/steps/3/detail', span: 'Verify claims, captions, and playback.' },
 ] as const;
 
@@ -190,6 +198,10 @@ const replacementDescriptions = {
 } as const;
 
 context.sourceFacts[0].facts.push(...Object.values(replacementDescriptions).map(({ id, text }) => ({ id, text })));
+context.sourceFacts[0].facts.push(
+  { id: 'fixture-heading-changed', text: 'Changed' },
+  { id: 'fixture-heading-alternate', text: 'Alternate' },
+);
 
 function draftWithBoundDescription(replacement: (typeof replacementDescriptions)[keyof typeof replacementDescriptions]): GeneratedDraftV2 {
   return {
@@ -309,7 +321,7 @@ describe('structured drafting orchestration', () => {
       'videoclaw_article_critique_v1',
     ]);
     expect(client.requests[1].system).toMatch(/independent/i);
-    expect(client.requests[0].system).toMatch(/every substantive prose sentence.*exact location and span/i);
+    expect(client.requests[0].system).toMatch(/every substantive visible generated string.*exact location and span/i);
     expect(JSON.stringify(client.requests)).not.toContain(context.sourceFacts[0].excerpt);
   });
 
@@ -326,11 +338,11 @@ describe('structured drafting orchestration', () => {
 
     const outcome = await drafter.draft(context);
 
-    expect(outcome).toMatchObject({
-      status: 'blocked',
-      reason: 'content_safety_failed',
-      findings: [{ code: 'content.secret' }],
-    });
+    expect(outcome).toMatchObject({ status: 'blocked', reason: 'content_safety_failed' });
+    if (outcome.status !== 'blocked' || outcome.reason !== 'content_safety_failed') {
+      throw new Error('Expected content-safety block.');
+    }
+    expect(outcome.findings).toContainEqual(expect.objectContaining({ code: 'content.secret' }));
     expect(client.requests).toHaveLength(1);
     expect(JSON.stringify(client.requests)).not.toContain('github_pat_generated_fixture_123456789');
   });
@@ -550,9 +562,12 @@ describe('structured drafting orchestration', () => {
     const unrelatedRepair = {
       ...structuredClone(draft),
       sections: [
-        { ...structuredClone(draft.sections[0]), heading: 'A changed but unrelated heading' },
+        { ...structuredClone(draft.sections[0]), heading: 'Changed' },
         structuredClone(draft.sections[1]),
       ],
+      claimBindings: draft.claimBindings.map((binding) => binding.location === '/sections/0/heading'
+        ? { ...binding, span: 'Changed', sourceFactIds: ['fixture-heading-changed'] }
+        : structuredClone(binding)),
     };
     const client = new FixtureStructuredClient([
       draft,
@@ -647,9 +662,12 @@ describe('structured drafting orchestration', () => {
     const unrelatedRepair = {
       ...structuredClone(draft),
       sections: [
-        { ...structuredClone(draft.sections[0]), heading: 'Another unrelated heading' },
+        { ...structuredClone(draft.sections[0]), heading: 'Alternate' },
         structuredClone(draft.sections[1]),
       ],
+      claimBindings: draft.claimBindings.map((binding) => binding.location === '/sections/0/heading'
+        ? { ...binding, span: 'Alternate', sourceFactIds: ['fixture-heading-alternate'] }
+        : structuredClone(binding)),
     };
     const client = new FixtureStructuredClient([
       draft,

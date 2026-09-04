@@ -208,7 +208,7 @@ export type StructuredDrafterOptions = {
 
 const DRAFT_SYSTEM = `Create version 2 article-generation JSON for VideoClaw.
 Use only the supplied source facts and caller-approved product claims.
-Bind every substantive prose sentence or line's exact location and span to an exactly
+Bind every substantive visible generated string's exact location and span to an exactly
 matching fact from a selected visible source; bind product claims to the supplied claim identifier.
 The direct answer must be 40–60 words. Produce no Markdown H1, raw HTML, secrets,
 internal research/debug prose, or links outside the supplied inventory. Answer the
