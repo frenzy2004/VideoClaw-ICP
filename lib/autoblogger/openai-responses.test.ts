@@ -151,6 +151,25 @@ describe('OpenAI Responses structured-output client', () => {
     expect(JSON.parse(requests[0].body as string).model).toBe('gpt-5.5-pinned');
   });
 
+  it.each([
+    'apify_api_synthetic_fixture_123456',
+    'github_pat_synthetic_fixture_123456',
+  ])('redacts a synthetic raw credential from provider failures', async (syntheticSecret) => {
+    const transport: HttpTransport = async () => ({
+      status: 500,
+      headers: {},
+      body: { error: { message: `Provider echoed ${syntheticSecret}` } },
+    });
+    const client = createOpenAIResponsesClient({ apiKey: 'sk-fixture-secret-value', transport });
+
+    await expect(client.generate({
+      name: 'worker_fixture_v1',
+      schema,
+      system: 'Return the requested fixture.',
+      input: {},
+    })).rejects.not.toThrow(syntheticSecret);
+  });
+
   it('rejects malformed or incomplete API-shaped responses', async () => {
     const transport: HttpTransport = async () => ({
       ...completedResponse('{"schemaVersion":1,"value":"drafted"}'),

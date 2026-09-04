@@ -9,7 +9,7 @@ import {
 import type {
   AllowlistedProductMedia,
   DraftingContext,
-  GeneratedDraftV1,
+  GeneratedDraftV2,
 } from './content-bundle';
 
 const candidate: Candidate = {
@@ -88,7 +88,7 @@ const context: DraftingContext = {
       id: 'yc',
       label: 'Y Combinator: Application Video',
       url: 'https://www.ycombinator.com/video/',
-      checkedAt: '2026-09-04',
+      checkedAt: '2026-09-04T09:00:00.000Z',
       facts: [{ id: 'yc-bullets', text: 'The current guidance recommends speaking from bullets.' }],
       excerpt: 'This exact transient excerpt must never appear in a model request or generated bundle output.',
     },
@@ -96,7 +96,7 @@ const context: DraftingContext = {
       id: 'ftc',
       label: 'Federal Trade Commission: Advertising FAQs',
       url: 'https://www.ftc.gov/business-guidance/resources/advertising-faqs-guide-small-business',
-      checkedAt: '2026-09-04',
+      checkedAt: '2026-09-04T09:05:00.000Z',
       facts: [{ id: 'ftc-basis', text: 'Objective advertising claims need a reasonable basis.' }],
       excerpt: 'A second transient excerpt exists solely for local copied passage comparison after generation.',
     },
@@ -116,11 +116,11 @@ const media: AllowlistedProductMedia = {
   height: 720,
 };
 
-const draft: GeneratedDraftV1 = {
-  schemaVersion: 1,
+const draft: GeneratedDraftV2 = {
+  schemaVersion: 2,
   description: 'Plan a clear founder pitch video with factual points, natural delivery, visible product proof, supported claims, careful editing, reviewed captions, and a tested final playback path.',
-  customerTrigger: 'Demo Day is approaching and the founder needs a clear, supportable video workflow.',
-  competitorGap: 'Observed guides do not combine natural delivery, claim control, product proof, and playback checks.',
+  customerTrigger: 'Use this workflow when Demo Day requires a clear, supportable founder video.',
+  competitorGap: 'Address the gap across natural delivery, claim control, product proof, and playback checks.',
   directAnswer: 'Plan a founder pitch video by choosing one audience and next step, reducing the story to a few factual points, recording short natural takes, and showing one current product action. Then edit for clarity, verify each objective claim and caption against its source, and test the complete final playback path.',
   sections: [
     {
@@ -137,7 +137,7 @@ const draft: GeneratedDraftV1 = {
     answer: 'Use the recipient requirements, support factual statements, keep the delivery natural, and test the exact final playback path.',
   })),
   sourceReferences: [{ sourceId: 'yc' }, { sourceId: 'ftc' }],
-  claimReferences: [],
+  claimBindings: [],
   editorialGraphic: {
     title: 'Founder pitch video workflow',
     alt: 'A four-step founder pitch video workflow',
@@ -189,6 +189,35 @@ describe('structured drafting orchestration', () => {
     expect(client.requests).toHaveLength(0);
   });
 
+  it.each([
+    { src: '/landing/../private/product.mp4' },
+    { poster: '/landing/%2e%2e/private/product.jpg' },
+    { candidateFingerprints: undefined, keywordIncludes: ['---'] },
+  ])('blocks an invalid media mapping before any model call', async (mediaChange) => {
+    const client = new FixtureStructuredClient([draft, approvedCritique]);
+    const drafter = createStructuredDrafter({
+      client,
+      mediaAllowlist: [{ ...media, ...mediaChange }],
+    });
+
+    await expect(drafter.draft(context)).resolves.toMatchObject({
+      status: 'blocked',
+      reason: 'media_mapping_required',
+    });
+    expect(client.requests).toHaveLength(0);
+  });
+
+  it('rejects secret-like selected media before any model call', async () => {
+    const client = new FixtureStructuredClient([draft, approvedCritique]);
+    const drafter = createStructuredDrafter({
+      client,
+      mediaAllowlist: [{ ...media, alt: 'Synthetic github_pat_fixture_123456789 credential' }],
+    });
+
+    await expect(drafter.draft(context)).rejects.toThrow(/secret/i);
+    expect(client.requests).toHaveLength(0);
+  });
+
   it('always drafts then independently critiques before returning a bundle', async () => {
     const client = new FixtureStructuredClient([draft, approvedCritique]);
     const drafter = createStructuredDrafter({ client, mediaAllowlist: [media] });
@@ -198,11 +227,57 @@ describe('structured drafting orchestration', () => {
     expect(outcome).toMatchObject({ status: 'ready', repaired: false });
     expect(outcome).toHaveProperty('bundle.markdown');
     expect(client.requests.map(({ name }) => name)).toEqual([
-      'videoclaw_article_draft_v1',
+      'videoclaw_article_draft_v2',
       'videoclaw_article_critique_v1',
     ]);
     expect(client.requests[1].system).toMatch(/independent/i);
+    expect(client.requests[0].system).toMatch(/every objective claim's exact location and span/i);
     expect(JSON.stringify(client.requests)).not.toContain(context.sourceFacts[0].excerpt);
+  });
+
+  it('does not send a generated secret-like draft into the critic context', async () => {
+    const secretDraft = {
+      ...structuredClone(draft),
+      description: 'Synthetic github_pat_generated_fixture_123456789 credential',
+    };
+    const client = new FixtureStructuredClient([secretDraft, approvedCritique]);
+    const drafter = createStructuredDrafter({ client, mediaAllowlist: [media] });
+
+    const outcome = await drafter.draft(context);
+
+    expect(outcome).toMatchObject({
+      status: 'blocked',
+      reason: 'content_safety_failed',
+      findings: [{ code: 'content.secret' }],
+    });
+    expect(client.requests).toHaveLength(1);
+    expect(JSON.stringify(client.requests)).not.toContain('github_pat_generated_fixture_123456789');
+  });
+
+  it('does not send a secret-like critic issue into the repair context', async () => {
+    const secretCritique: DraftCritiqueV1 = {
+      schemaVersion: 1,
+      approved: false,
+      issues: [{
+        id: 'unsafe-critic-output',
+        code: 'copy.revise',
+        message: 'Synthetic apify_api_critic_fixture_123456789 credential',
+        repairInstruction: 'Revise the description.',
+        predicate: { path: '/description', operator: 'contains', value: 'revised' },
+      }],
+    };
+    const client = new FixtureStructuredClient([draft, secretCritique, draft]);
+    const drafter = createStructuredDrafter({ client, mediaAllowlist: [media] });
+
+    const outcome = await drafter.draft(context);
+
+    expect(outcome).toMatchObject({
+      status: 'blocked',
+      reason: 'content_safety_failed',
+      findings: [{ code: 'content.secret' }],
+    });
+    expect(client.requests).toHaveLength(2);
+    expect(JSON.stringify(client.requests)).not.toContain('apify_api_critic_fixture_123456789');
   });
 
   it('runs exactly one repair when the independent critique rejects the first draft', async () => {
@@ -210,9 +285,15 @@ describe('structured drafting orchestration', () => {
       schemaVersion: 1,
       approved: false,
       issues: [{
+        id: 'description-specificity',
         code: 'copy.too_generic',
         message: 'Make the opening more specific to the candidate.',
         repairInstruction: 'Name the founder pitch workflow in the opening.',
+        predicate: {
+          path: '/description',
+          operator: 'contains',
+          value: 'specific founder pitch workflow',
+        },
       }],
     };
     const repairedDraft = {
@@ -226,9 +307,9 @@ describe('structured drafting orchestration', () => {
 
     expect(outcome).toMatchObject({ status: 'ready', repaired: true });
     expect(client.requests.map(({ name }) => name)).toEqual([
-      'videoclaw_article_draft_v1',
+      'videoclaw_article_draft_v2',
       'videoclaw_article_critique_v1',
-      'videoclaw_article_repair_v1',
+      'videoclaw_article_repair_v2',
     ]);
     expect(JSON.stringify(outcome)).toContain(repairedDraft.description);
   });
@@ -246,11 +327,11 @@ describe('structured drafting orchestration', () => {
 
     const outcome = await drafter.draft(context);
 
-    expect(outcome).toMatchObject({
-      status: 'blocked',
-      reason: 'content_safety_failed',
-      findings: [{ code: 'content.raw_html' }],
-    });
+    expect(outcome).toMatchObject({ status: 'blocked', reason: 'content_safety_failed' });
+    if (outcome.status !== 'blocked' || outcome.reason !== 'content_safety_failed') {
+      throw new Error('Expected content-safety block.');
+    }
+    expect(outcome.findings).toContainEqual(expect.objectContaining({ code: 'content.raw_html' }));
     expect(outcome).not.toHaveProperty('bundle');
     expect(client.requests).toHaveLength(3);
   });
@@ -260,9 +341,15 @@ describe('structured drafting orchestration', () => {
       schemaVersion: 1,
       approved: false,
       issues: [{
+        id: 'workflow-specificity',
         code: 'copy.unspecific',
         message: 'The workflow needs a more specific explanation.',
         repairInstruction: 'Make the workflow explanation specific.',
+        predicate: {
+          path: '/sections/0/markdown',
+          operator: 'contains',
+          value: 'specific production sequence',
+        },
       }],
     };
     const client = new FixtureStructuredClient([draft, critique, structuredClone(draft)]);
@@ -274,6 +361,39 @@ describe('structured drafting orchestration', () => {
       status: 'blocked',
       reason: 'content_safety_failed',
       findings: [{ code: 'critique.unresolved' }],
+    });
+    expect(client.requests).toHaveLength(3);
+  });
+
+  it('blocks a repair that edits an unrelated field without satisfying the critic predicate', async () => {
+    const critique: DraftCritiqueV1 = {
+      schemaVersion: 1,
+      approved: false,
+      issues: [{
+        id: 'source-specificity',
+        code: 'copy.unspecific',
+        message: 'The source explanation is too generic.',
+        repairInstruction: 'Explain that the guidance recommends speaking from bullets.',
+        predicate: {
+          path: '/sections/0/markdown',
+          operator: 'contains',
+          value: 'recommends speaking from bullets',
+        },
+      }],
+    };
+    const unrelatedRepair = {
+      ...structuredClone(draft),
+      description: 'Use a changed description that does not resolve the section-level critic issue.',
+    };
+    const client = new FixtureStructuredClient([draft, critique, unrelatedRepair]);
+    const drafter = createStructuredDrafter({ client, mediaAllowlist: [media] });
+
+    const outcome = await drafter.draft(context);
+
+    expect(outcome).toMatchObject({
+      status: 'blocked',
+      reason: 'content_safety_failed',
+      findings: [{ code: 'critique.unresolved', issueId: 'source-specificity' }],
     });
     expect(client.requests).toHaveLength(3);
   });
@@ -295,11 +415,59 @@ describe('structured drafting orchestration', () => {
       /checked source/i,
     ],
     [
+      'fewer than two distinct normalized checked final URLs',
+      {
+        evidence: {
+          ...context.evidence,
+          sources: [
+            ...context.evidence.sources,
+            { url: 'https://videoclaw.com/features', authoritative: true },
+          ],
+        },
+        checkedSources: [
+          context.checkedSources[0],
+          { ...context.checkedSources[1], finalUrl: 'https://www.ycombinator.com/video/#duplicate' },
+          {
+            url: 'https://videoclaw.com/features',
+            finalUrl: 'https://videoclaw.com/features',
+            status: 200,
+            reachable: true,
+            authoritative: true,
+          },
+        ],
+        sourceFacts: [
+          context.sourceFacts[0],
+          { ...context.sourceFacts[1], url: 'https://www.ycombinator.com/video/' },
+        ],
+      },
+      /distinct normalized checked final URLs/i,
+    ],
+    [
+      'a loose generated timestamp',
+      { generatedAt: 'September 5, 2026 02:00 UTC' },
+      /ISO date-time/i,
+    ],
+    [
+      'a date-only source check timestamp',
+      { sourceFacts: [{ ...context.sourceFacts[0], checkedAt: '2026-09-04' }, context.sourceFacts[1]] },
+      /source checkedAt.*ISO date-time/i,
+    ],
+    [
       'a secret-like value in model-bound source facts',
       {
         sourceFacts: [{
           ...context.sourceFacts[0],
           facts: [{ id: 'yc-bullets', text: 'API_KEY=abcdefghijklmnop123456' }],
+        }, context.sourceFacts[1]],
+      },
+      /secret/i,
+    ],
+    [
+      'a raw Apify token in outbound model context',
+      {
+        sourceFacts: [{
+          ...context.sourceFacts[0],
+          facts: [{ id: 'yc-bullets', text: 'Synthetic apify_api_fixture_123456789 token' }],
         }, context.sourceFacts[1]],
       },
       /secret/i,

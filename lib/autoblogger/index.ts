@@ -1,5 +1,6 @@
 export * from './apify-client';
 export * from './content-bundle';
+export * from './date-time';
 export * from './domain';
 export * from './drafting';
 export * from './http';
@@ -8,5 +9,6 @@ export * from './matrices';
 export * from './openai-responses';
 export * from './policies';
 export * from './research';
+export * from './secrets';
 export * from './sources';
 export * from './state';

@@ -80,3 +80,52 @@ The pre-existing untracked `package-lock.json` was not modified intentionally, s
 - The copied-passage check is a deterministic 12-word contiguous-match heuristic. It is useful for obvious copying but is not a plagiarism or copyright determination and may require tuning with production content.
 - The media boundary validates allowlist structure and explicit mapping, not filesystem existence. Task 4 must inject the files into a temporary lander checkout and let the lander's native check verify that the selected video, poster, and generated SVG exist.
 - Task 4 must exercise the emitted Markdown/SVG against the lander's native current check before any draft PR; Task 3 deliberately does not claim publication-contract parity on its own.
+
+## Important-review fixes (2026-09-05)
+
+All Important findings from the Task 3 review were addressed in the shared feature worktree. The production lander and production branches were not modified.
+
+### Implementation changes
+
+- Promoted the worker generation contract to strict `GeneratedDraftV2`/`videoclaw_article_draft_v2` and added exact claim bindings: generated location, visible sentence span, one or more source-fact IDs, and a nullable caller-supplied product-claim ID. Objective declarative claims in metadata, direct answers, headings/body, FAQ answers, and editorial SVG copy must have one unique binding. Each binding must resolve to facts belonging to selected visible sources and must have deterministic lexical support from those fact texts. Product claims additionally require exact caller-supplied text and only that claim's allowed facts. Product aliases and ambiguous pronouns are detected independent of a literal `VideoClaw` substring.
+- Replaced no-op-only repair checking with structured critic issue IDs and checkable path predicates. A repaired draft is accepted only when every critic predicate was false in the rejected draft, true in the replacement, and all deterministic checks pass. Unchanged or unrelated edits fail closed with the unresolved issue ID. Invalid critic approval/issue combinations and duplicate issue IDs are rejected by the runtime and Structured Outputs contracts.
+- Added a final serialized-Markdown inspection pass using the unified/remark parser stack. It parses the actual assembled document body after frontmatter serialization; requires the direct answer to be the first real 40–60-word paragraph; rejects ATX and Setext H1s, raw HTML, block code, reference links/images, autolinks, unsafe schemes, malformed links, and destinations outside normalized selected source URLs. Source labels are structurally Markdown-escaped before rendering.
+- Extended final-artifact checks across the assembled frontmatter, Markdown, and SVG. Every generated SVG text field must appear XML-escaped in the fixed 1200x675 script/event/resource-free SVG. Copied-passage comparison runs again after assembly against the transient excerpts, while excerpts remain absent from model requests and returned artifacts.
+- Centralized credential detection/redaction in `secrets.ts`. The shared patterns include raw `apify_api_` and `github_pat_` forms plus the existing OpenAI, Stripe-style, GitHub, AWS, assignment, Bearer, and Apikey forms. Generic model context, selected media, generated drafts before critic calls, critic output before repair calls, provider errors, and final artifacts are scanned without placing matched values in errors.
+- Normalized checked HTTP(S) final URLs before binding and now require at least two distinct normalized reachable final URLs both at drafting preflight and among selected visible source references.
+- Hardened allowlisted media paths against literal, encoded, and nested-encoded dot/traversal segments, separators, empty path segments, and backslashes. Candidate/keyword selectors that normalize to empty text are invalid. Invalid mappings still return the blocking media brief before any model call; selected media with secret-like content is rejected before model use.
+- Added strict ISO date-time parsing for `generatedAt` and every source `checkedAt`, including calendar/time validation. UTC date-only values are derived from valid timestamps for `createdAt`, `updatedAt`, and emitted source metadata. Apify `capturedAt` remains the exact validated date-only provenance value.
+- Aligned Structured Outputs string constraints with runtime non-whitespace checks and updated the generation/repair prompts to version 2 and explicit objective-claim binding instructions.
+- Added direct `remark-parse` and `unified` dependencies because the final artifact now relies on their public APIs. The pre-existing untracked `package-lock.json` was left unstaged and uncommitted as instructed.
+
+### Regression-first evidence
+
+- Repair verification RED: critic objects with issue IDs/predicates were rejected by the old schema, and an unrelated field edit returned `ready`. GREEN: `drafting.test.ts` passed the unchanged and unrelated-repair cases with `critique.unresolved` and the exact issue ID.
+- Claim grounding RED: schema-version-2 fixtures and `claimBindings` failed the v1 DTO; an unrelated fact binding was then accepted. GREEN: missing/invalid facts, appended assertions, unrelated-fact bindings, literal and pronoun product claims, metadata claims, and SVG prose claims are all blocked.
+- Final artifact RED: nine focused cases accepted Setext H1, code/reference/autolink constructs, unsafe destinations, a quoted direct answer, injected source-label syntax, or copied SVG prose. GREEN: the same structural suite passed, including an added unsafe image destination.
+- Secret/media/date/source RED: the combined focused run reported 18 expected failures, including missing centralized secret handling, raw fine-grained GitHub leakage, traversal media, empty selectors, duplicate normalized checked URLs, loose timestamps, unnormalized source dates, and missing final scans. GREEN: all focused Task 3 files passed.
+- Outbound-context RED: a generated credential reached the critic request and a critic credential reached the repair request. GREEN: both flows now stop before the next model call and return only generic `content.secret` findings.
+
+Final targeted verification before the repository-wide check:
+
+```text
+npm test -- lib/autoblogger/content-bundle.test.ts lib/autoblogger/drafting.test.ts lib/autoblogger/openai-responses.test.ts lib/autoblogger/secrets.test.ts lib/autoblogger/date-time.test.ts
+npx eslint lib/autoblogger/content-bundle.ts lib/autoblogger/content-bundle.test.ts lib/autoblogger/drafting.ts lib/autoblogger/drafting.test.ts lib/autoblogger/date-time.ts lib/autoblogger/date-time.test.ts lib/autoblogger/secrets.ts lib/autoblogger/secrets.test.ts lib/autoblogger/http.ts lib/autoblogger/openai-responses.test.ts
+git diff --check
+```
+
+Result: 5 focused files and 83 tests passed; targeted ESLint and diff checking completed with no output.
+
+Final repository-wide verification command:
+
+```text
+npm run typecheck && npm run lint && npm test && git diff --check
+```
+
+Result: Next route generation and TypeScript passed; ESLint passed with zero output; Vitest passed 33 files and 366 tests; `git diff --check` passed.
+
+### Residual concerns after fixes
+
+- Generic fact-to-claim support is deliberately deterministic and fail-closed: it requires source visibility, exact spans, valid IDs, and lexical overlap. It is not a semantic entailment or legal-substantiation engine, so the independent critic and later human factual/legal approvals remain necessary.
+- The contiguous 12-word copied-passage heuristic remains a guard for obvious copying rather than a plagiarism determination.
+- Media existence and final lander publication compatibility remain Task 4 responsibilities in a temporary lander checkout; this worker still does not duplicate the lander's native validator.

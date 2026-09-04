@@ -9,7 +9,7 @@ import {
   selectProductMedia,
   type AllowlistedProductMedia,
   type DraftingContext,
-  type GeneratedDraftV1,
+  type GeneratedDraftV2,
 } from './content-bundle';
 
 const candidate: Candidate = {
@@ -84,7 +84,7 @@ const context: DraftingContext = {
       id: 'yc',
       label: 'Y Combinator: Application Video',
       url: 'https://www.ycombinator.com/video/',
-      checkedAt: '2026-09-04',
+      checkedAt: '2026-09-04T09:00:00.000Z',
       facts: [{ id: 'yc-bullets', text: 'The application video guidance recommends speaking from bullets.' }],
       excerpt: 'A transient excerpt with twelve uniquely copied words should never persist in any output artifact.',
     },
@@ -92,7 +92,7 @@ const context: DraftingContext = {
       id: 'ftc',
       label: 'Federal Trade Commission: Advertising FAQs',
       url: 'https://www.ftc.gov/business-guidance/resources/advertising-faqs-guide-small-business',
-      checkedAt: '2026-09-04',
+      checkedAt: '2026-09-04T09:05:00.000Z',
       facts: [{ id: 'ftc-support', text: 'Objective advertising claims require an appropriate basis.' }],
       excerpt: 'Another source excerpt exists only while the copied passage heuristic performs its comparison.',
     },
@@ -100,7 +100,7 @@ const context: DraftingContext = {
       id: 'videoclaw',
       label: 'VideoClaw product features',
       url: 'https://videoclaw.com/features',
-      checkedAt: '2026-09-04',
+      checkedAt: '2026-09-04T09:10:00.000Z',
       facts: [{ id: 'vc-text-editing', text: 'The current product supports text-based editing for recorded video.' }],
       excerpt: 'Product source text remains transient and is not sent to the language model or serialized.',
     },
@@ -109,6 +109,7 @@ const context: DraftingContext = {
     id: 'vc-editing-claim',
     text: 'VideoClaw lets creators edit a recorded video with text.',
     allowedSourceFactIds: ['vc-text-editing'],
+    subjectAliases: ['VideoClaw', 'the app', 'it'],
   }],
   generatedAt: '2026-09-05T01:23:45.000Z',
 };
@@ -124,11 +125,11 @@ const mediaAllowlist: AllowlistedProductMedia[] = [{
   height: 720,
 }];
 
-const generatedDraft: GeneratedDraftV1 = {
-  schemaVersion: 1,
+const generatedDraft: GeneratedDraftV2 = {
+  schemaVersion: 2,
   description: 'Create a credible founder pitch video with natural delivery, source-controlled claims, visible product proof, careful editing, reviewed captions, and one tested next step.',
-  customerTrigger: 'The founder is preparing a pitch video and needs a factual workflow that preserves natural delivery.',
-  competitorGap: 'Observed results separate pitch advice from claim control and product-proof production.',
+  customerTrigger: 'Use this workflow when preparing a pitch video that needs factual, natural delivery.',
+  competitorGap: 'Address the gap between pitch advice, claim control, and product-proof production.',
   directAnswer: 'Create a founder pitch video by choosing one audience and next step, reducing the story to a few factual points, recording short natural takes, and showing one current product action. Then edit for clarity, verify every claim and caption against its source, and test the final playback path.',
   sections: [
     {
@@ -149,7 +150,20 @@ const generatedDraft: GeneratedDraftV1 = {
     ][index],
   })),
   sourceReferences: [{ sourceId: 'yc' }, { sourceId: 'ftc' }, { sourceId: 'videoclaw' }],
-  claimReferences: [{ claimId: 'vc-editing-claim', sourceFactIds: ['vc-text-editing'] }],
+  claimBindings: [
+    {
+      location: '/sections/1/markdown',
+      span: 'The FTC advertising guidance explains why objective claims need support.',
+      sourceFactIds: ['ftc-support'],
+      productClaimId: null,
+    },
+    {
+      location: '/sections/1/markdown',
+      span: 'VideoClaw lets creators edit a recorded video with text.',
+      sourceFactIds: ['vc-text-editing'],
+      productClaimId: 'vc-editing-claim',
+    },
+  ],
   editorialGraphic: {
     title: 'Founder pitch video workflow <script>alert("x")</script>',
     alt: 'Five-step founder pitch video workflow from audience choice to final playback check',
@@ -163,7 +177,7 @@ const generatedDraft: GeneratedDraftV1 = {
   },
 };
 
-function withDraft(change: Partial<GeneratedDraftV1>): GeneratedDraftV1 {
+function withDraft(change: Partial<GeneratedDraftV2>): GeneratedDraftV2 {
   return { ...structuredClone(generatedDraft), ...change };
 }
 
@@ -181,6 +195,23 @@ describe('content bundle materialization', () => {
       ...mediaAllowlist[0],
       src: 'https://cdn.example.com/unapproved.mp4',
       width: 0,
+    }])).toBeUndefined();
+  });
+
+  it.each([
+    ['/landing/../private/product.mp4', '/landing/full/founder-product.jpg'],
+    ['/landing/%2e%2e/private/product.mp4', '/landing/full/founder-product.jpg'],
+    ['/landing/./product.mp4', '/landing/full/founder-product.jpg'],
+    ['/landing/full/product.mp4', '/landing/../private/product.jpg'],
+  ])('rejects media paths containing traversal or dot segments (%s)', (src, poster) => {
+    expect(selectProductMedia(candidate, [{ ...mediaAllowlist[0], src, poster }])).toBeUndefined();
+  });
+
+  it('rejects media mappings whose configured selectors normalize to empty text', () => {
+    expect(selectProductMedia(candidate, [{
+      ...mediaAllowlist[0],
+      candidateFingerprints: undefined,
+      keywordIncludes: ['---'],
     }])).toBeUndefined();
   });
 
@@ -234,6 +265,11 @@ describe('content bundle materialization', () => {
     });
     expect(parsed.data).not.toHaveProperty('publishedAt');
     expect(parsed.data.sources).toHaveLength(3);
+    expect(parsed.data.sources.map(({ checkedAt }: { checkedAt: string }) => checkedAt)).toEqual([
+      '2026-09-04',
+      '2026-09-04',
+      '2026-09-04',
+    ]);
     expect(parsed.content.trimStart()).toMatch(/^Create a founder pitch video/);
     expect(parsed.content).toContain('[Y Combinator: Application Video](https://www.ycombinator.com/video/)');
     expect(parsed.content).not.toContain(context.sourceFacts[0].excerpt);
@@ -276,13 +312,55 @@ describe('generated-content safety review', () => {
     ['malformed Markdown', withDraft({ sections: [{ heading: 'Unsafe', markdown: '```text\nnever closed' }, generatedDraft.sections[1]] }), 'content.markdown_malformed'],
     ['research boilerplate', withDraft({ sections: [{ heading: 'Unsafe', markdown: 'Our debug research notes from the SERP say this is best.' }, generatedDraft.sections[1]] }), 'content.research_boilerplate'],
     ['copied source passage', withDraft({ sections: [{ heading: 'Unsafe', markdown: context.sourceFacts[0].excerpt as string }, generatedDraft.sections[1]] }), 'content.copied_passage'],
-    ['unsupported claim fact', withDraft({ claimReferences: [{ claimId: 'vc-editing-claim', sourceFactIds: ['ftc-support'] }] }), 'content.claim_reference'],
-    ['unsupported VideoClaw claim', withDraft({ sections: [{ heading: 'Unsafe', markdown: 'VideoClaw guarantees a tenfold conversion increase.' }, generatedDraft.sections[1]] }), 'content.claim_reference'],
+    ['unsupported claim fact', withDraft({ claimBindings: generatedDraft.claimBindings.map((binding, index) => index === 1 ? { ...binding, sourceFactIds: ['ftc-support'] } : binding) }), 'content.claim_binding'],
+    ['unsupported product assertion', withDraft({ sections: [{ heading: 'Unsafe', markdown: 'The app guarantees a tenfold conversion increase.' }, generatedDraft.sections[1]] }), 'content.claim_binding'],
+    ['appended objective assertion', withDraft({ sections: [generatedDraft.sections[0], { ...generatedDraft.sections[1], markdown: `${generatedDraft.sections[1].markdown} This workflow doubles conversion.` }] }), 'content.claim_binding'],
+    ['objective metadata assertion', withDraft({ customerTrigger: `${generatedDraft.customerTrigger} Market demand doubled.` }), 'content.claim_binding'],
+    ['objective SVG assertion', withDraft({
+      editorialGraphic: {
+        ...generatedDraft.editorialGraphic,
+        steps: generatedDraft.editorialGraphic.steps.map((step, index) => index === 0
+          ? { ...step, detail: 'Reliable workflows double conversion.' }
+          : step),
+      },
+    }), 'content.claim_binding'],
+    ['objective assertion bound to an unrelated fact', withDraft({
+      sections: [generatedDraft.sections[0], { ...generatedDraft.sections[1], markdown: `${generatedDraft.sections[1].markdown} Reliable workflows double conversion.` }],
+      claimBindings: [...generatedDraft.claimBindings, {
+        location: '/sections/1/markdown',
+        span: 'Reliable workflows double conversion.',
+        sourceFactIds: ['ftc-support'],
+        productClaimId: null,
+      }],
+    }), 'content.claim_binding'],
+    ['missing objective binding', withDraft({ claimBindings: generatedDraft.claimBindings.slice(1) }), 'content.claim_binding'],
+    ['unknown source fact binding', withDraft({ claimBindings: generatedDraft.claimBindings.map((binding, index) => index === 0 ? { ...binding, sourceFactIds: ['missing-fact'] } : binding) }), 'content.claim_binding'],
+    ['pronoun product claim with generic binding', withDraft({
+      sections: [generatedDraft.sections[0], { ...generatedDraft.sections[1], markdown: `${generatedDraft.sections[1].markdown} It guarantees faster editing.` }],
+      claimBindings: [...generatedDraft.claimBindings, {
+        location: '/sections/1/markdown',
+        span: 'It guarantees faster editing.',
+        sourceFactIds: ['ftc-support'],
+        productClaimId: null,
+      }],
+    }), 'content.claim_binding'],
     ['copied FAQ passage', withDraft({ faqAnswers: [{ ...generatedDraft.faqAnswers[0], answer: context.sourceFacts[0].excerpt as string }, ...generatedDraft.faqAnswers.slice(1)] }), 'content.copied_passage'],
     ['non-PAA FAQ', withDraft({ faqAnswers: [{ ...generatedDraft.faqAnswers[0], question: 'Invented question?' }, ...generatedDraft.faqAnswers.slice(1)] }), 'content.faq_mismatch'],
     ['citation inventory mismatch', withDraft({ sourceReferences: [{ sourceId: 'yc' }, { sourceId: 'missing' }] }), 'content.citation_mismatch'],
+    ['duplicate normalized source URLs', withDraft({ sourceReferences: [{ sourceId: 'yc' }, { sourceId: 'yc-copy' }] }), 'content.citation_mismatch'],
   ])('blocks %s', (_label, draft, code) => {
-    expect(inspectGeneratedDraft(context, draft).map((finding) => finding.code)).toContain(code);
+    const inspectedContext = _label === 'duplicate normalized source URLs'
+      ? {
+        ...context,
+        sourceFacts: [...context.sourceFacts, {
+          ...context.sourceFacts[0],
+          id: 'yc-copy',
+          url: 'https://www.ycombinator.com/video/#copy',
+          facts: [{ id: 'yc-copy-fact', text: 'A separately identified copy of the same final source.' }],
+        }],
+      }
+      : context;
+    expect(inspectGeneratedDraft(inspectedContext, draft).map((finding) => finding.code)).toContain(code);
   });
 
   it('requires the opening direct answer to contain 40–60 visible words', () => {
@@ -295,5 +373,136 @@ describe('generated-content safety review', () => {
     expect(inspectGeneratedDraft(context, tooLong)).toContainEqual(expect.objectContaining({
       code: 'content.direct_answer_words',
     }));
+  });
+});
+
+describe('final serialized artifact inspection', () => {
+  it.each([
+    [
+      'a Setext H1',
+      withDraft({ sections: [{ heading: 'Unsafe', markdown: 'Use this title\n===' }, generatedDraft.sections[1]] }),
+      /body_h1/,
+    ],
+    [
+      'a closed code fence',
+      withDraft({ sections: [{ heading: 'Unsafe', markdown: 'Use this example.\n\n```text\nsafe\n```' }, generatedDraft.sections[1]] }),
+      /code_fence/,
+    ],
+    [
+      'a reference link',
+      withDraft({ sections: [{ heading: 'Unsafe', markdown: 'Use [the guide][yc].\n\n[yc]: https://www.ycombinator.com/video/' }, generatedDraft.sections[1]] }),
+      /reference_link/,
+    ],
+    [
+      'an autolink',
+      withDraft({ sections: [{ heading: 'Unsafe', markdown: 'Use <https://www.ycombinator.com/video/>.' }, generatedDraft.sections[1]] }),
+      /autolink/,
+    ],
+    [
+      'a mailto destination',
+      withDraft({ sections: [{ heading: 'Unsafe', markdown: 'Use [email](mailto:editor@example.com).' }, generatedDraft.sections[1]] }),
+      /link_destination/,
+    ],
+    [
+      'a javascript destination',
+      withDraft({ sections: [{ heading: 'Unsafe', markdown: 'Use [this](javascript:alert(1)).' }, generatedDraft.sections[1]] }),
+      /link_destination/,
+    ],
+    [
+      'an unsafe image destination',
+      withDraft({ sections: [{ heading: 'Unsafe', markdown: 'Use this image.\n\n![Use proof](javascript:alert(1))' }, generatedDraft.sections[1]] }),
+      /link_destination/,
+    ],
+  ])('rejects final Markdown containing %s', (_label, unsafeDraft, expected) => {
+    expect(() => materializeDraftBundle(context, unsafeDraft, mediaAllowlist[0])).toThrow(expected);
+  });
+
+  it('requires the final direct answer to be a real paragraph', () => {
+    const quotedAnswer = `> ${generatedDraft.directAnswer}`;
+    const unsafeDraft = withDraft({
+      directAnswer: quotedAnswer,
+    });
+
+    expect(() => materializeDraftBundle(context, unsafeDraft, mediaAllowlist[0])).toThrow(/direct_answer_paragraph/);
+  });
+
+  it('escapes a source label so it cannot inject a second link destination', () => {
+    const injectedContext = {
+      ...context,
+      sourceFacts: context.sourceFacts.map((source, index) => index === 0
+        ? { ...source, label: 'Trusted source](javascript:alert(1))' }
+        : source),
+    };
+
+    const bundle = materializeDraftBundle(injectedContext, generatedDraft, mediaAllowlist[0]);
+    const body = matter(bundle.markdown).content;
+
+    expect(body).toContain('Trusted source\\]\\(javascript:alert\\(1\\)\\)');
+    expect(body).not.toMatch(/\]\(javascript:/);
+  });
+
+  it('runs copied-passage protection over visible SVG text after assembly', () => {
+    const copiedGraphic = withDraft({
+      editorialGraphic: {
+        ...generatedDraft.editorialGraphic,
+        steps: generatedDraft.editorialGraphic.steps.map((step, index) => index === 0
+          ? { ...step, detail: context.sourceFacts[0].excerpt as string }
+          : step),
+      },
+    });
+
+    expect(() => materializeDraftBundle(context, copiedGraphic, mediaAllowlist[0])).toThrow(/copied_passage/);
+  });
+
+  it('rejects a pronoun-based product claim even when it is lexically bound to a product fact', () => {
+    const span = 'During editing, it supports text editing for recorded video.';
+    const pronounDraft = withDraft({
+      sections: [generatedDraft.sections[0], {
+        ...generatedDraft.sections[1],
+        markdown: `${generatedDraft.sections[1].markdown} ${span}`,
+      }],
+      claimBindings: [...generatedDraft.claimBindings, {
+        location: '/sections/1/markdown',
+        span,
+        sourceFactIds: ['vc-text-editing'],
+        productClaimId: null,
+      }],
+    });
+
+    expect(inspectGeneratedDraft(context, pronounDraft)).toContainEqual(expect.objectContaining({
+      code: 'content.claim_binding',
+    }));
+  });
+
+  it.each([
+    ['raw Apify token', 'apify_api_synthetic_fixture_123456'],
+    ['fine-grained GitHub token', 'github_pat_synthetic_fixture_123456'],
+  ])('scans final Markdown, frontmatter, and SVG for a %s', (_label, syntheticSecret) => {
+    expect(() => materializeDraftBundle(context, generatedDraft, {
+      ...mediaAllowlist[0],
+      caption: `Synthetic redacted fixture ${syntheticSecret}`,
+    })).toThrow(/secret/);
+    expect(() => materializeDraftBundle(context, withDraft({
+      editorialGraphic: {
+        ...generatedDraft.editorialGraphic,
+        title: `Synthetic ${syntheticSecret}`,
+      },
+    }), mediaAllowlist[0])).toThrow(/secret/);
+  });
+
+  it('normalizes strict ISO date-times to UTC date-only publication fields', () => {
+    const shiftedContext = {
+      ...context,
+      generatedAt: '2026-09-05T00:30:00-05:00',
+      sourceFacts: context.sourceFacts.map((source) => ({
+        ...source,
+        checkedAt: '2026-09-04T23:30:00-05:00',
+      })),
+    };
+
+    const parsed = matter(materializeDraftBundle(shiftedContext, generatedDraft, mediaAllowlist[0]).markdown);
+    expect(parsed.data.createdAt).toBe('2026-09-05');
+    expect(parsed.data.updatedAt).toBe('2026-09-05');
+    expect(parsed.data.sources.every(({ checkedAt }: { checkedAt: string }) => checkedAt === '2026-09-05')).toBe(true);
   });
 });

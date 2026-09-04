@@ -1,3 +1,7 @@
+import matter from 'gray-matter';
+import remarkGfm from 'remark-gfm';
+import remarkParse from 'remark-parse';
+import { unified } from 'unified';
 import { z } from 'zod';
 
 import {
@@ -11,10 +15,15 @@ import {
   type EvidenceBundle,
   type KeywordMetrics,
 } from './domain';
+import { isoDateTimeToDateOnly } from './date-time';
+import { containsSecretLikeValue } from './secrets';
 import type { CheckedSource } from './sources';
 
-export const GeneratedDraftV1Schema = z.object({
-  schemaVersion: z.literal(1),
+const nonBlankString = z.string().trim().min(1);
+const claimLocationPattern = /^\/(?:description|customerTrigger|competitorGap|directAnswer|sections\/\d+\/(?:heading|markdown)|faqAnswers\/\d+\/answer|editorialGraphic\/(?:title|alt)|editorialGraphic\/steps\/\d+\/(?:label|detail))$/;
+
+export const GeneratedDraftV2Schema = z.object({
+  schemaVersion: z.literal(2),
   description: z.string().trim().min(1),
   customerTrigger: z.string().trim().min(1),
   competitorGap: z.string().trim().min(1),
@@ -30,9 +39,11 @@ export const GeneratedDraftV1Schema = z.object({
   sourceReferences: z.array(z.object({
     sourceId: z.string().trim().min(1),
   }).strict()).min(2),
-  claimReferences: z.array(z.object({
-    claimId: z.string().trim().min(1),
-    sourceFactIds: z.array(z.string().trim().min(1)).min(1),
+  claimBindings: z.array(z.object({
+    location: z.string().regex(claimLocationPattern),
+    span: nonBlankString,
+    sourceFactIds: z.array(nonBlankString).min(1),
+    productClaimId: nonBlankString.nullable(),
   }).strict()),
   editorialGraphic: z.object({
     title: z.string().trim().min(1).max(100),
@@ -44,17 +55,17 @@ export const GeneratedDraftV1Schema = z.object({
   }).strict(),
 }).strict();
 
-export type GeneratedDraftV1 = z.infer<typeof GeneratedDraftV1Schema>;
+export type GeneratedDraftV2 = z.infer<typeof GeneratedDraftV2Schema>;
 
-export const GENERATED_DRAFT_V1_JSON_SCHEMA = {
+export const GENERATED_DRAFT_V2_JSON_SCHEMA = {
   type: 'object',
   additionalProperties: false,
   properties: {
-    schemaVersion: { type: 'integer', const: 1 },
-    description: { type: 'string', minLength: 1 },
-    customerTrigger: { type: 'string', minLength: 1 },
-    competitorGap: { type: 'string', minLength: 1 },
-    directAnswer: { type: 'string', minLength: 1 },
+    schemaVersion: { type: 'integer', const: 2 },
+    description: { type: 'string', pattern: '.*\\S.*' },
+    customerTrigger: { type: 'string', pattern: '.*\\S.*' },
+    competitorGap: { type: 'string', pattern: '.*\\S.*' },
+    directAnswer: { type: 'string', pattern: '.*\\S.*' },
     sections: {
       type: 'array',
       minItems: 2,
@@ -62,8 +73,8 @@ export const GENERATED_DRAFT_V1_JSON_SCHEMA = {
         type: 'object',
         additionalProperties: false,
         properties: {
-          heading: { type: 'string', minLength: 1 },
-          markdown: { type: 'string', minLength: 1 },
+          heading: { type: 'string', pattern: '.*\\S.*' },
+          markdown: { type: 'string', pattern: '.*\\S.*' },
         },
         required: ['heading', 'markdown'],
       },
@@ -76,8 +87,8 @@ export const GENERATED_DRAFT_V1_JSON_SCHEMA = {
         type: 'object',
         additionalProperties: false,
         properties: {
-          question: { type: 'string', minLength: 1 },
-          answer: { type: 'string', minLength: 1 },
+          question: { type: 'string', pattern: '.*\\S.*' },
+          answer: { type: 'string', pattern: '.*\\S.*' },
         },
         required: ['question', 'answer'],
       },
@@ -88,32 +99,34 @@ export const GENERATED_DRAFT_V1_JSON_SCHEMA = {
       items: {
         type: 'object',
         additionalProperties: false,
-        properties: { sourceId: { type: 'string', minLength: 1 } },
+        properties: { sourceId: { type: 'string', pattern: '.*\\S.*' } },
         required: ['sourceId'],
       },
     },
-    claimReferences: {
+    claimBindings: {
       type: 'array',
       items: {
         type: 'object',
         additionalProperties: false,
         properties: {
-          claimId: { type: 'string', minLength: 1 },
+          location: { type: 'string', pattern: claimLocationPattern.source },
+          span: { type: 'string', pattern: '.*\\S.*' },
           sourceFactIds: {
             type: 'array',
             minItems: 1,
-            items: { type: 'string', minLength: 1 },
+            items: { type: 'string', pattern: '.*\\S.*' },
           },
+          productClaimId: { type: ['string', 'null'], pattern: '.*\\S.*' },
         },
-        required: ['claimId', 'sourceFactIds'],
+        required: ['location', 'span', 'sourceFactIds', 'productClaimId'],
       },
     },
     editorialGraphic: {
       type: 'object',
       additionalProperties: false,
       properties: {
-        title: { type: 'string', minLength: 1, maxLength: 100 },
-        alt: { type: 'string', minLength: 1, maxLength: 240 },
+        title: { type: 'string', pattern: '.*\\S.*', maxLength: 100 },
+        alt: { type: 'string', pattern: '.*\\S.*', maxLength: 240 },
         steps: {
           type: 'array',
           minItems: 3,
@@ -122,8 +135,8 @@ export const GENERATED_DRAFT_V1_JSON_SCHEMA = {
             type: 'object',
             additionalProperties: false,
             properties: {
-              label: { type: 'string', minLength: 1, maxLength: 40 },
-              detail: { type: 'string', minLength: 1, maxLength: 120 },
+              label: { type: 'string', pattern: '.*\\S.*', maxLength: 40 },
+              detail: { type: 'string', pattern: '.*\\S.*', maxLength: 120 },
             },
             required: ['label', 'detail'],
           },
@@ -141,7 +154,7 @@ export const GENERATED_DRAFT_V1_JSON_SCHEMA = {
     'sections',
     'faqAnswers',
     'sourceReferences',
-    'claimReferences',
+    'claimBindings',
     'editorialGraphic',
   ],
 } as const;
@@ -160,6 +173,7 @@ export type ProductClaim = {
   id: string;
   text: string;
   allowedSourceFactIds: string[];
+  subjectAliases: string[];
 };
 
 export type DraftProvenance = {
@@ -194,7 +208,25 @@ export type AllowlistedProductMedia = {
   height: number;
 };
 
-const localAssetPath = z.string().regex(/^\/(?!\/)[^\s?#]+$/);
+function isSafeLocalAssetPath(value: string): boolean {
+  if (!/^\/(?!\/)[^\s?#]+$/.test(value) || value.includes('\\')) return false;
+  return value.split('/').slice(1).every((rawSegment) => {
+    if (!rawSegment) return false;
+    let segment = rawSegment;
+    try {
+      for (let attempt = 0; attempt < 2; attempt += 1) {
+        const decoded = decodeURIComponent(segment);
+        if (decoded === segment) break;
+        segment = decoded;
+      }
+    } catch {
+      return false;
+    }
+    return segment !== '.' && segment !== '..' && !segment.includes('/') && !segment.includes('\\');
+  });
+}
+
+const localAssetPath = z.string().refine(isSafeLocalAssetPath);
 const AllowlistedProductMediaSchema = z.object({
   id: z.string().trim().min(1),
   candidateFingerprints: z.array(z.string().trim().min(1)).min(1).optional(),
@@ -210,27 +242,19 @@ const AllowlistedProductMediaSchema = z.object({
   media.candidateFingerprints?.length
   || media.campaignIds?.length
   || media.keywordIncludes?.length
-));
+)).refine((media) => [
+  ...(media.candidateFingerprints ?? []),
+  ...(media.keywordIncludes ?? []),
+].every((selector) => normalizeKeyword(selector).length > 0));
 
 export type DraftSafetyFinding = {
   code: string;
   message: string;
+  issueId?: string;
 };
 
-const secretPatterns = [
-  /\bsk-(?:proj-)?[A-Za-z0-9_-]{20,}\b/i,
-  /\b(?:sk|rk|pk)_(?:live|test)_[A-Za-z0-9]{16,}\b/i,
-  /\bgh[pousr]_[A-Za-z0-9]{20,}\b/i,
-  /\bAKIA[0-9A-Z]{16}\b/,
-  /\b(?:APIFY(?:_API)?_(?:TOKEN|KEY)|API[_-]?KEY|TOKEN|SECRET|PASSWORD)\s*[:=]\s*["']?[A-Za-z0-9_./-]{12,}/i,
-];
 const rawHtmlPattern = /<(?:\/?[a-z][a-z0-9-]*(?=[\t\n\f\r />])|!--|\?|![a-z]|!\[CDATA\[)/i;
 const researchBoilerplatePattern = /\b(?:debug research|research notes|SERP|people also ask|candidateFingerprint|sourceFactIds|claimReferences)\b/i;
-
-export function hasSecretLikeValue(value: unknown): boolean {
-  const serialized = typeof value === 'string' ? value : JSON.stringify(value);
-  return secretPatterns.some((pattern) => pattern.test(serialized));
-}
 
 function unique<T>(values: T[]): T[] {
   return [...new Set(values)];
@@ -244,13 +268,40 @@ function normalizedWords(value: string): string[] {
     .match(/[a-z0-9]+/g) ?? [];
 }
 
+type MarkdownNode = {
+  type: string;
+  depth?: number;
+  url?: string;
+  value?: string;
+  alt?: string;
+  children?: MarkdownNode[];
+  position?: {
+    start: { offset?: number };
+    end: { offset?: number };
+  };
+};
+
+const markdownParser = unified().use(remarkParse).use(remarkGfm);
+
+function parseMarkdown(markdown: string): MarkdownNode {
+  return markdownParser.parse(markdown) as MarkdownNode;
+}
+
+function walkMarkdown(node: MarkdownNode, visit: (node: MarkdownNode) => void): void {
+  visit(node);
+  node.children?.forEach((child) => walkMarkdown(child, visit));
+}
+
+function markdownNodeText(node: MarkdownNode): string {
+  if (node.type === 'text' || node.type === 'inlineCode') return node.value ?? '';
+  if (node.type === 'code') return '';
+  if (node.type === 'image') return node.alt ?? '';
+  if (node.type === 'html' || node.type === 'definition') return '';
+  return node.children?.map(markdownNodeText).join(' ') ?? '';
+}
+
 function visibleWordCount(markdown: string): number {
-  return normalizedWords(
-    markdown
-      .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
-      .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
-      .replace(/[`*_~>#|]/g, ' '),
-  ).length;
+  return normalizedWords(markdownNodeText(parseMarkdown(markdown))).length;
 }
 
 function containsCopiedPassage(body: string, excerpts: string[]): boolean {
@@ -289,7 +340,7 @@ function externalUrls(markdown: string): string[] {
     .map((match) => match[0].replace(/[.,;:!?]+$/, ''));
 }
 
-function generatedBody(draft: GeneratedDraftV1): string {
+function generatedBody(draft: GeneratedDraftV2): string {
   return [
     draft.directAnswer,
     ...draft.sections.flatMap((section) => [section.heading, section.markdown]),
@@ -302,58 +353,189 @@ function finding(code: string, message: string): DraftSafetyFinding {
 
 function inspectReferences(
   context: DraftingContext,
-  draft: GeneratedDraftV1,
+  draft: GeneratedDraftV2,
   body: string,
 ): DraftSafetyFinding[] {
   const findings: DraftSafetyFinding[] = [];
   const sourceById = new Map(context.sourceFacts.map((source) => [source.id, source]));
   const sourceIds = draft.sourceReferences.map(({ sourceId }) => sourceId);
-  if (sourceIds.length < 2 || unique(sourceIds).length !== sourceIds.length || sourceIds.some((id) => !sourceById.has(id))) {
+  const selectedNormalizedUrls = sourceIds.flatMap((id) => {
+    const url = sourceById.get(id)?.url;
+    const normalized = url ? normalizeHttpUrl(url) : undefined;
+    return normalized ? [normalized] : [];
+  });
+  if (
+    sourceIds.length < 2
+    || unique(sourceIds).length !== sourceIds.length
+    || sourceIds.some((id) => !sourceById.has(id))
+    || new Set(selectedNormalizedUrls).size < 2
+  ) {
     findings.push(finding('content.citation_mismatch', 'Source references must identify at least two distinct inventory sources.'));
   }
-  const allowedUrls = new Set(context.sourceFacts.map(({ url }) => url));
-  if (externalUrls(body).some((url) => !allowedUrls.has(url))) {
+  const allowedUrls = new Set(context.sourceFacts.flatMap(({ url }) => {
+    const normalized = normalizeHttpUrl(url);
+    return normalized ? [normalized] : [];
+  }));
+  if (externalUrls(body).some((url) => {
+    const normalized = normalizeHttpUrl(url);
+    return !normalized || !allowedUrls.has(normalized);
+  })) {
     findings.push(finding('content.unsupported_link', 'Every external Markdown link must match the supplied source inventory exactly.'));
   }
 
-  const factSource = new Map<string, string>();
-  for (const source of context.sourceFacts) {
-    for (const fact of source.facts) factSource.set(fact.id, source.id);
-  }
-  const claimById = new Map(context.productClaims.map((claim) => [claim.id, claim]));
-  const validReferencedClaims = new Set<string>();
-  for (const reference of draft.claimReferences) {
-    const claim = claimById.get(reference.claimId);
-    const valid = claim
-      && reference.sourceFactIds.length > 0
-      && reference.sourceFactIds.every((factId) => (
-        claim.allowedSourceFactIds.includes(factId)
-        && factSource.has(factId)
-        && sourceIds.includes(factSource.get(factId) as string)
-      ));
-    if (!valid || !body.includes(claim?.text ?? '')) {
-      findings.push(finding('content.claim_reference', 'Product claim references must bind used claims to allowed visible source facts.'));
-    } else {
-      validReferencedClaims.add(reference.claimId);
-    }
-  }
-  for (const claim of context.productClaims) {
-    if (body.includes(claim.text) && !validReferencedClaims.has(claim.id)) {
-      findings.push(finding('content.claim_reference', 'Every used product claim must have an allowed source-fact reference.'));
-    }
-  }
-  const productSentences = body.split(/(?<=[.!?])\s+/).filter((sentence) => /\bVideoClaw\b/i.test(sentence));
-  if (productSentences.some((sentence) => !context.productClaims.some((claim) => sentence.includes(claim.text)))) {
-    findings.push(finding('content.claim_reference', 'Generated VideoClaw claims must use caller-supplied claim text.'));
+  if (!claimBindingsAreValid(context, draft, sourceIds)) {
+    findings.push(finding('content.claim_binding', 'Every objective claim must bind its exact location and span to visible allowed source facts.'));
   }
   return findings;
+}
+
+const editorialOpeningWords = new Set([
+  'address', 'avoid', 'bind', 'build', 'capture', 'check', 'choose', 'create', 'define', 'edit', 'follow',
+  'include', 'keep', 'make', 'plan', 'record', 'reduce', 'review', 'show', 'start', 'test',
+  'then', 'use', 'verify',
+]);
+
+function visibleMarkdownText(value: string): string {
+  return markdownNodeText(parseMarkdown(value)).replace(/\s+/g, ' ').trim();
+}
+
+function sentences(value: string): string[] {
+  return visibleMarkdownText(value)
+    .split(/(?<=[.!?])\s+/)
+    .map((sentence) => sentence.trim())
+    .filter(Boolean);
+}
+
+function isObjectiveSentence(sentence: string): boolean {
+  if (sentence.endsWith('?')) return false;
+  const firstWord = sentence.toLocaleLowerCase('en-US').match(/^[a-z]+/)?.[0] ?? '';
+  return !editorialOpeningWords.has(firstWord)
+    && !/\b(?:should|could|may|might|recommend|consider)\b/i.test(sentence)
+    && (
+      /[.!]$/u.test(sentence)
+      || /\b(?:is|are|was|were|has|have|can|will|does|do|supports?|lets?|guarantees?|doubles?|requires?|needs?|recommends?|includes?|provides?|reduces?|increases?|improves?|works?|uses?)\b/iu.test(sentence)
+    );
+}
+
+function generatedLocationValue(draft: GeneratedDraftV2, location: string): string | undefined {
+  if (location === '/description') return draft.description;
+  if (location === '/customerTrigger') return draft.customerTrigger;
+  if (location === '/competitorGap') return draft.competitorGap;
+  if (location === '/directAnswer') return draft.directAnswer;
+  const section = location.match(/^\/sections\/(\d+)\/(heading|markdown)$/);
+  if (section) return draft.sections[Number(section[1])]?.[section[2] as 'heading' | 'markdown'];
+  const faq = location.match(/^\/faqAnswers\/(\d+)\/answer$/);
+  if (faq) return draft.faqAnswers[Number(faq[1])]?.answer;
+  if (location === '/editorialGraphic/title') return draft.editorialGraphic.title;
+  if (location === '/editorialGraphic/alt') return draft.editorialGraphic.alt;
+  const step = location.match(/^\/editorialGraphic\/steps\/(\d+)\/(label|detail)$/);
+  if (step) return draft.editorialGraphic.steps[Number(step[1])]?.[step[2] as 'label' | 'detail'];
+  return undefined;
+}
+
+function generatedObjectiveSentences(draft: GeneratedDraftV2): Array<{ location: string; span: string }> {
+  return [
+    { location: '/description', value: draft.description },
+    { location: '/customerTrigger', value: draft.customerTrigger },
+    { location: '/competitorGap', value: draft.competitorGap },
+    { location: '/directAnswer', value: draft.directAnswer },
+    ...draft.sections.flatMap(({ heading, markdown }, index) => [
+      { location: `/sections/${index}/heading`, value: heading },
+      { location: `/sections/${index}/markdown`, value: markdown },
+    ]),
+    ...draft.faqAnswers.map(({ answer }, index) => ({ location: `/faqAnswers/${index}/answer`, value: answer })),
+    { location: '/editorialGraphic/title', value: draft.editorialGraphic.title },
+    { location: '/editorialGraphic/alt', value: draft.editorialGraphic.alt },
+    ...draft.editorialGraphic.steps.flatMap(({ label, detail }, index) => [
+      { location: `/editorialGraphic/steps/${index}/label`, value: label },
+      { location: `/editorialGraphic/steps/${index}/detail`, value: detail },
+    ]),
+  ].flatMap(({ location, value }) => sentences(value)
+    .filter(isObjectiveSentence)
+    .map((span) => ({ location, span })));
+}
+
+function containsProductAlias(sentence: string, claims: ProductClaim[]): boolean {
+  const normalized = normalizeKeyword(sentence);
+  const aliases = claims.flatMap(({ subjectAliases }) => subjectAliases).map(normalizeKeyword);
+  return aliases.some((alias) => alias && ` ${normalized} `.includes(` ${alias} `))
+    || /\b(?:it|this app|this product|this platform|this tool|the app|the product|the platform|the tool|our app|our product)\b/iu.test(sentence);
+}
+
+const claimStopWords = new Set([
+  'a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'for', 'from', 'has', 'have',
+  'in', 'is', 'it', 'of', 'on', 'or', 'that', 'the', 'this', 'to', 'was', 'were',
+  'will', 'with', 'why',
+]);
+
+function claimTerms(value: string): Set<string> {
+  return new Set(normalizedWords(value)
+    .filter((word) => word.length > 2 && !claimStopWords.has(word))
+    .map((word) => word
+      .replace(/(?:ing|ed)$/u, '')
+      .replace(/(?:es|s)$/u, '')));
+}
+
+function factsLexicallySupportSpan(span: string, factTexts: string[]): boolean {
+  const spanTerms = claimTerms(span);
+  const factTerms = claimTerms(factTexts.join(' '));
+  const overlap = [...spanTerms].filter((term) => factTerms.has(term)).length;
+  return spanTerms.size > 0 && overlap >= Math.min(2, spanTerms.size);
+}
+
+function claimBindingsAreValid(
+  context: DraftingContext,
+  draft: GeneratedDraftV2,
+  visibleSourceIds: string[],
+): boolean {
+  const factsById = new Map<string, { sourceId: string; text: string }>();
+  for (const source of context.sourceFacts) {
+    for (const fact of source.facts) factsById.set(fact.id, { sourceId: source.id, text: fact.text });
+  }
+  const claimById = new Map(context.productClaims.map((claim) => [claim.id, claim]));
+  const expected = generatedObjectiveSentences(draft);
+  const seen = new Set<string>();
+  for (const binding of draft.claimBindings) {
+    const key = `${binding.location}\n${binding.span}`;
+    const locationValue = generatedLocationValue(draft, binding.location);
+    const visibleSentences = locationValue ? sentences(locationValue) : [];
+    if (
+      seen.has(key)
+      || !visibleSentences.includes(binding.span)
+      || !isObjectiveSentence(binding.span)
+      || new Set(binding.sourceFactIds).size !== binding.sourceFactIds.length
+      || binding.sourceFactIds.some((factId) => (
+        !factsById.has(factId)
+        || !visibleSourceIds.includes(factsById.get(factId)?.sourceId as string)
+      ))
+      || !factsLexicallySupportSpan(
+        binding.span,
+        binding.sourceFactIds.map((factId) => factsById.get(factId)?.text ?? ''),
+      )
+    ) return false;
+    seen.add(key);
+
+    const productClaim = binding.productClaimId === null
+      ? undefined
+      : claimById.get(binding.productClaimId);
+    if (productClaim) {
+      if (
+        binding.span !== productClaim.text
+        || binding.sourceFactIds.some((factId) => !productClaim.allowedSourceFactIds.includes(factId))
+      ) return false;
+    } else if (binding.productClaimId !== null || containsProductAlias(binding.span, context.productClaims)) {
+      return false;
+    }
+  }
+  return expected.length === draft.claimBindings.length
+    && expected.every(({ location, span }) => seen.has(`${location}\n${span}`));
 }
 
 export function inspectGeneratedDraft(
   context: DraftingContext,
   value: unknown,
 ): DraftSafetyFinding[] {
-  const parsed = GeneratedDraftV1Schema.safeParse(value);
+  const parsed = GeneratedDraftV2Schema.safeParse(value);
   if (!parsed.success) {
     return [finding('content.dto_invalid', parsed.error.issues.map((issue) => issue.message).join('; '))];
   }
@@ -377,7 +559,7 @@ export function inspectGeneratedDraft(
   if (/^#\s+\S/m.test(body) || draft.sections.some(({ heading }) => /^#/.test(heading))) {
     findings.push(finding('content.body_h1', 'The generated body cannot contain a Markdown H1.'));
   }
-  if (hasSecretLikeValue(draft)) {
+  if (containsSecretLikeValue(draft)) {
     findings.push(finding('content.secret', 'Generated content contains a secret-like value.'));
   }
   if (hasMalformedMarkdown(body)) {
@@ -433,7 +615,7 @@ function escapeXml(value: string): string {
     .replaceAll("'", '&apos;');
 }
 
-export function renderEditorialSvg(graphic: GeneratedDraftV1['editorialGraphic']): string {
+export function renderEditorialSvg(graphic: GeneratedDraftV2['editorialGraphic']): string {
   const cardWidth = 1040 / graphic.steps.length;
   const cards = graphic.steps.map((step, index) => {
     const x = 80 + (index * cardWidth);
@@ -447,6 +629,97 @@ export function renderEditorialSvg(graphic: GeneratedDraftV1['editorialGraphic']
     ].join('');
   }).join('');
   return `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc"><title id="title">${escapeXml(graphic.title)}</title><desc id="desc">${escapeXml(graphic.alt)}</desc><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#020617"/><stop offset="1" stop-color="#1e3a8a"/></linearGradient><style>.title{font:700 42px system-ui,sans-serif;fill:#f8fafc}.brand{font:700 18px system-ui,sans-serif;letter-spacing:4px;fill:#7dd3fc}.number{font:700 20px system-ui,sans-serif;fill:#082f49}.label{font:700 19px system-ui,sans-serif;fill:#f8fafc}.detail{font:400 15px/1.45 system-ui,sans-serif;color:#cbd5e1;text-align:center;overflow:hidden}</style></defs><rect width="1200" height="675" fill="url(#bg)"/><text x="80" y="92" class="brand">VIDEOCLAW</text><text x="80" y="158" class="title">${escapeXml(graphic.title)}</text>${cards}<path d="M80 550 H1120" stroke="#38bdf8" stroke-width="3"/><text x="80" y="600" class="brand">SOURCE-CONTROLLED EDITORIAL WORKFLOW</text></svg>`;
+}
+
+export function normalizeHttpUrl(value: string): string | undefined {
+  try {
+    const url = new URL(value);
+    if (url.protocol !== 'http:' && url.protocol !== 'https:') return undefined;
+    url.hash = '';
+    return url.toString();
+  } catch {
+    return undefined;
+  }
+}
+
+function inspectFinalMarkdown(
+  markdown: string,
+  allowedSourceUrls: string[],
+): DraftSafetyFinding[] {
+  const findings: DraftSafetyFinding[] = [];
+  const body = matter(markdown).content;
+  const tree = parseMarkdown(body);
+  const first = tree.children?.[0];
+  if (first?.type !== 'paragraph') {
+    findings.push(finding('content.direct_answer_paragraph', 'The final direct answer must be the first top-level paragraph.'));
+  } else {
+    const wordCount = normalizedWords(markdownNodeText(first)).length;
+    if (wordCount < 40 || wordCount > 60) {
+      findings.push(finding('content.direct_answer_words', `Final direct answer has ${wordCount} visible words; expected 40–60.`));
+    }
+  }
+
+  const allowed = new Set(allowedSourceUrls.flatMap((url) => {
+    const normalized = normalizeHttpUrl(url);
+    return normalized ? [normalized] : [];
+  }));
+  walkMarkdown(tree, (node) => {
+    if (node.type === 'heading' && node.depth === 1) {
+      findings.push(finding('content.body_h1', 'The final Markdown cannot contain an H1.'));
+    }
+    if (node.type === 'html') {
+      findings.push(finding('content.raw_html', 'The final Markdown cannot contain raw HTML.'));
+    }
+    if (node.type === 'code') {
+      findings.push(finding('content.code_fence', 'The final Markdown cannot contain fenced or indented code blocks.'));
+    }
+    if (node.type === 'linkReference' || node.type === 'imageReference' || node.type === 'definition') {
+      findings.push(finding('content.reference_link', 'The final Markdown cannot contain reference-style links.'));
+    }
+    if (node.type !== 'link' && node.type !== 'image') return;
+    const start = node.position?.start.offset;
+    const end = node.position?.end.offset;
+    const source = start === undefined || end === undefined ? '' : body.slice(start, end);
+    if (node.type === 'link' && !source.startsWith('[')) {
+      findings.push(finding('content.autolink', 'The final Markdown cannot contain autolinks.'));
+    }
+    const normalized = node.url ? normalizeHttpUrl(node.url) : undefined;
+    if (!normalized) {
+      findings.push(finding('content.link_destination', 'Markdown links must use safe HTTP or HTTPS destinations.'));
+    } else if (!allowed.has(normalized)) {
+      findings.push(finding('content.unsupported_link', 'Every final Markdown link must match the supplied source inventory.'));
+    }
+  });
+  return findings;
+}
+
+function escapeMarkdownLabel(value: string): string {
+  return value.replace(/[\\[\]()<>]/g, '\\$&');
+}
+
+function inspectFinalSvg(
+  svg: string,
+  graphic: GeneratedDraftV2['editorialGraphic'],
+): DraftSafetyFinding[] {
+  const visibleFields = [
+    graphic.title,
+    graphic.alt,
+    ...graphic.steps.flatMap(({ label, detail }) => [label, detail]),
+  ];
+  const fieldsAreEscaped = visibleFields.every((value) => svg.includes(escapeXml(value)));
+  if (
+    !/^<svg\b[^>]*\bwidth="1200"[^>]*\bheight="675"/u.test(svg)
+    || /<script\b|\son[a-z]+\s*=|(?:href|src)\s*=|javascript:/iu.test(svg)
+    || !fieldsAreEscaped
+  ) {
+    return [finding('content.svg_unsafe', 'The final SVG must be fixed-size, script-free, and contain only escaped visible fields.')];
+  }
+  return [];
+}
+
+function uniqueFindings(findings: DraftSafetyFinding[]): DraftSafetyFinding[] {
+  return unique(findings.map(({ code }) => code))
+    .map((code) => findings.find((item) => item.code === code) as DraftSafetyFinding);
 }
 
 function yamlScalar(value: unknown): string {
@@ -504,14 +777,16 @@ export function materializeDraftBundle(
   value: unknown,
   media: AllowlistedProductMedia,
 ): DraftBundle {
-  const draft = GeneratedDraftV1Schema.parse(value);
+  isoDateTimeToDateOnly(context.generatedAt);
+  context.sourceFacts.forEach(({ checkedAt }) => isoDateTimeToDateOnly(checkedAt));
+  const draft = GeneratedDraftV2Schema.parse(value);
   const findings = inspectGeneratedDraft(context, draft);
   if (findings.length > 0) {
     throw new Error(`Unsafe generated draft: ${findings.map(({ code }) => code).join(', ')}`);
   }
   const sourceById = new Map(context.sourceFacts.map((source) => [source.id, source]));
   const sources = draft.sourceReferences.map(({ sourceId }) => sourceById.get(sourceId) as SourceFact);
-  const date = context.generatedAt.slice(0, 10);
+  const date = isoDateTimeToDateOnly(context.generatedAt);
   const article = {
     id: context.candidate.articleId,
     campaign: context.candidate.campaignId,
@@ -527,7 +802,11 @@ export function materializeDraftBundle(
     description: draft.description,
     slug: context.candidate.slug,
     canonicalPath: `/blog/${context.candidate.slug}`,
-    sources: sources.map(({ label, url, checkedAt }) => ({ label, url, checkedAt })),
+    sources: sources.map(({ label, url, checkedAt }) => ({
+      label,
+      url,
+      checkedAt: isoDateTimeToDateOnly(checkedAt),
+    })),
     faqs: draft.faqAnswers,
     productMedia: {
       src: media.src,
@@ -553,14 +832,29 @@ export function materializeDraftBundle(
   const body = [
     draft.directAnswer,
     ...draft.sections.map(({ heading, markdown }) => `## ${heading}\n\n${markdown}`),
-    `## Sources\n\n${sources.map(({ label, url }) => `- [${label}](${url})`).join('\n')}`,
+    `## Sources\n\n${sources.map(({ label, url }) => `- [${escapeMarkdownLabel(label)}](${url})`).join('\n')}`,
   ].join('\n\n');
   const markdown = `---\n${yamlLines(article).join('\n')}\n---\n\n${body}\n`;
+  const svg = renderEditorialSvg(draft.editorialGraphic);
+  const finalFindings = uniqueFindings([
+    ...inspectFinalMarkdown(markdown, sources.map(({ url }) => url)),
+    ...inspectFinalSvg(svg, draft.editorialGraphic),
+    ...(containsCopiedPassage(
+      `${markdown}\n${svg}`,
+      context.sourceFacts.flatMap(({ excerpt }) => excerpt ? [excerpt] : []),
+    ) ? [finding('content.copied_passage', 'Final artifacts contain a copied source passage.')] : []),
+    ...(containsSecretLikeValue({ markdown, svg })
+      ? [finding('content.secret', 'Final artifacts contain a secret-like value.')]
+      : []),
+  ]);
+  if (finalFindings.length > 0) {
+    throw new Error(`Unsafe final artifacts: ${finalFindings.map(({ code }) => code).join(', ')}`);
+  }
   return DraftBundleSchema.parse({
     schemaVersion: 1,
     candidateFingerprint: candidateFingerprints(context.candidate).candidate,
     article,
     markdown,
-    svg: renderEditorialSvg(draft.editorialGraphic),
+    svg,
   });
 }

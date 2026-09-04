@@ -37,19 +37,7 @@ export type SourceHttpTransport = (
   request: SourceHttpRequest,
 ) => Promise<SourceHttpResponse>;
 
-export function redactSensitive(value: unknown, secrets: string[] = []): string {
-  let redacted = value instanceof Error
-    ? `${value.name}: ${value.message}`
-    : typeof value === 'string'
-      ? value
-      : JSON.stringify(value);
-  for (const secret of secrets) {
-    if (secret) redacted = redacted.replaceAll(secret, '[REDACTED]');
-  }
-  return redacted
-    .replace(/\b(?:apify_api_|sk-(?:proj-)?|gh[opsu]_)[A-Za-z0-9_-]+\b/g, '[REDACTED]')
-    .replace(/\b(?:Bearer|Apikey)\s+[^\s"']+/gi, '[REDACTED]');
-}
+export { redactSensitive } from './secrets';
 
 export async function requestWithTimeout<
   TRequest extends HttpRequest,
