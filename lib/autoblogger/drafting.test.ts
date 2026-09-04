@@ -151,6 +151,56 @@ const draft: GeneratedDraftV2 = {
   },
 };
 
+const baselineDraftClaims = [
+  { id: 'fixture-description', location: '/description', span: 'Plan a clear founder pitch video with factual points, natural delivery, visible product proof, supported claims, careful editing, reviewed captions, and a tested final playback path.' },
+  { id: 'fixture-trigger', location: '/customerTrigger', span: 'Use this workflow for a clear, supportable Demo Day founder video.' },
+  { id: 'fixture-gap', location: '/competitorGap', span: 'Address the gap across natural delivery, claim control, product proof, and playback checks.' },
+  { id: 'fixture-answer-1', location: '/directAnswer', span: 'Plan a founder pitch video by choosing one audience and next step, reducing the story to a few factual points, recording short natural takes, and showing one current product action.' },
+  { id: 'fixture-answer-2', location: '/directAnswer', span: 'Then edit for clarity, verify each objective claim and caption against its source, and test the complete final playback path.' },
+  { id: 'fixture-section-1', location: '/sections/0/markdown', span: 'Use a few memorable points and follow current application guidance for the recipient program.' },
+  { id: 'fixture-section-2', location: '/sections/1/markdown', span: 'Use the FTC advertising guidance to frame a careful internal claim review.' },
+  { id: 'fixture-faq', location: '/faqAnswers/0/answer', span: 'Use the recipient requirements, support factual statements, keep the delivery natural, and test the exact final playback path.' },
+  { id: 'fixture-faq', location: '/faqAnswers/1/answer', span: 'Use the recipient requirements, support factual statements, keep the delivery natural, and test the exact final playback path.' },
+  { id: 'fixture-faq', location: '/faqAnswers/2/answer', span: 'Use the recipient requirements, support factual statements, keep the delivery natural, and test the exact final playback path.' },
+  { id: 'fixture-graphic-1', location: '/editorialGraphic/steps/0/detail', span: 'Choose one viewer and next step.' },
+  { id: 'fixture-graphic-2', location: '/editorialGraphic/steps/1/detail', span: 'Reduce the pitch to factual points.' },
+  { id: 'fixture-graphic-3', location: '/editorialGraphic/steps/2/detail', span: 'Capture short natural takes and proof.' },
+  { id: 'fixture-graphic-4', location: '/editorialGraphic/steps/3/detail', span: 'Verify claims, captions, and playback.' },
+] as const;
+
+context.sourceFacts[0].facts.push(...[
+  ...new Map(baselineDraftClaims.map(({ id, span }) => [id, { id, text: span }])).values(),
+]);
+draft.claimBindings.push(...baselineDraftClaims.map(({ id, location, span }) => ({
+  location,
+  span,
+  sourceFactIds: [id],
+  productClaimId: null,
+})));
+
+const replacementDescriptions = {
+  detailed: {
+    id: 'fixture-replacement-detailed',
+    text: 'Use this specific founder pitch workflow to plan factual points, record natural takes, show product proof, support claims, review captions, and test final playback.',
+  },
+  concise: {
+    id: 'fixture-replacement-concise',
+    text: 'Use this specific founder pitch workflow to plan factual points and final playback.',
+  },
+} as const;
+
+context.sourceFacts[0].facts.push(...Object.values(replacementDescriptions).map(({ id, text }) => ({ id, text })));
+
+function draftWithBoundDescription(replacement: (typeof replacementDescriptions)[keyof typeof replacementDescriptions]): GeneratedDraftV2 {
+  return {
+    ...structuredClone(draft),
+    description: replacement.text,
+    claimBindings: draft.claimBindings.map((binding) => binding.location === '/description'
+      ? { ...binding, span: replacement.text, sourceFactIds: [replacement.id] }
+      : structuredClone(binding)),
+  };
+}
+
 const approvedCritique: DraftCritiqueV1 = {
   schemaVersion: 1,
   approved: true,
@@ -259,14 +309,17 @@ describe('structured drafting orchestration', () => {
       'videoclaw_article_critique_v1',
     ]);
     expect(client.requests[1].system).toMatch(/independent/i);
-    expect(client.requests[0].system).toMatch(/every objective claim's exact location and span/i);
+    expect(client.requests[0].system).toMatch(/every substantive prose sentence.*exact location and span/i);
     expect(JSON.stringify(client.requests)).not.toContain(context.sourceFacts[0].excerpt);
   });
 
   it('does not send a generated secret-like draft into the critic context', async () => {
     const secretDraft = {
       ...structuredClone(draft),
-      description: 'Use synthetic github_pat_generated_fixture_123456789 credentials only in this fixture.',
+      editorialGraphic: {
+        ...structuredClone(draft.editorialGraphic),
+        title: 'Synthetic github_pat_generated_fixture_123456789 credential',
+      },
     };
     const client = new FixtureStructuredClient([secretDraft, approvedCritique]);
     const drafter = createStructuredDrafter({ client, mediaAllowlist: [media] });
@@ -337,10 +390,7 @@ describe('structured drafting orchestration', () => {
         repairInstruction: 'Name the founder pitch workflow in the opening.',
       }],
     };
-    const repairedDraft = {
-      ...structuredClone(draft),
-      description: 'Use this specific founder pitch workflow to plan factual points, record natural takes, show product proof, support claims, review captions, and test final playback.',
-    };
+    const repairedDraft = draftWithBoundDescription(replacementDescriptions.detailed);
     const client = new FixtureStructuredClient([draft, critique, repairedDraft, resolvedVerification(critique)]);
     const drafter = createStructuredDrafter({ client, mediaAllowlist: [media] });
 
@@ -367,10 +417,7 @@ describe('structured drafting orchestration', () => {
         repairInstruction: 'Name the founder pitch workflow in the opening.',
       }],
     };
-    const repairedDraft = {
-      ...structuredClone(draft),
-      description: 'Use this specific founder pitch workflow to plan factual points and final playback.',
-    };
+    const repairedDraft = draftWithBoundDescription(replacementDescriptions.concise);
     const client = new FixtureStructuredClient([
       draft,
       firstCritique,
@@ -407,10 +454,7 @@ describe('structured drafting orchestration', () => {
         repairInstruction: 'Name the founder pitch workflow in the opening.',
       }],
     };
-    const repairedDraft = {
-      ...structuredClone(draft),
-      description: 'Use this specific founder pitch workflow to plan factual points and final playback.',
-    };
+    const repairedDraft = draftWithBoundDescription(replacementDescriptions.concise);
     const forgetfulVerification = {
       schemaVersion: 1,
       approved,
@@ -505,7 +549,10 @@ describe('structured drafting orchestration', () => {
     };
     const unrelatedRepair = {
       ...structuredClone(draft),
-      description: 'Use a different description without changing the source explanation.',
+      sections: [
+        { ...structuredClone(draft.sections[0]), heading: 'A changed but unrelated heading' },
+        structuredClone(draft.sections[1]),
+      ],
     };
     const client = new FixtureStructuredClient([
       draft,
@@ -599,7 +646,10 @@ describe('structured drafting orchestration', () => {
     };
     const unrelatedRepair = {
       ...structuredClone(draft),
-      description: 'Use a changed description for the draft.',
+      sections: [
+        { ...structuredClone(draft.sections[0]), heading: 'Another unrelated heading' },
+        structuredClone(draft.sections[1]),
+      ],
     };
     const client = new FixtureStructuredClient([
       draft,

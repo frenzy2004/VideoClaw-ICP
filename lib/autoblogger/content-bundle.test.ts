@@ -188,6 +188,31 @@ const generatedDraft: GeneratedDraftV2 = {
   },
 };
 
+const baselineEditorialClaims = [
+  { id: 'fixture-description', location: '/description', span: 'Create a credible founder pitch video with natural delivery, source-controlled claims, visible product proof, careful editing, reviewed captions, and one tested next step.' },
+  { id: 'fixture-trigger', location: '/customerTrigger', span: 'Use this workflow for a factual pitch video with natural delivery.' },
+  { id: 'fixture-gap', location: '/competitorGap', span: 'Address the gap between pitch advice, claim control, and product-proof production.' },
+  { id: 'fixture-answer-1', location: '/directAnswer', span: 'Create a founder pitch video by choosing one audience and next step, reducing the story to a few factual points, recording short natural takes, and showing one current product action.' },
+  { id: 'fixture-answer-2', location: '/directAnswer', span: 'Then edit for clarity, verify every claim and caption against its source, and test the final playback path.' },
+  { id: 'fixture-section-1', location: '/sections/0/markdown', span: 'Choose a few memorable points and speak from bullets, following application video guidance.' },
+  { id: 'fixture-faq-1', location: '/faqAnswers/0/answer', span: 'Choose one audience, a few factual points, short founder-led takes, one product action, careful editing, and a tested next step.' },
+  { id: 'fixture-faq-2', location: '/faqAnswers/1/answer', span: 'Include the customer situation, the useful change, relevant founder insight, one current product action, supportable evidence, and one next step.' },
+  { id: 'fixture-faq-3', location: '/faqAnswers/2/answer', span: 'Follow the recipient requirements; otherwise set a duration that clearly communicates the problem, proof, and next step.' },
+  { id: 'fixture-graphic-1', location: '/editorialGraphic/steps/0/detail', span: 'Choose one viewer and next step.' },
+  { id: 'fixture-graphic-2', location: '/editorialGraphic/steps/1/detail', span: 'Bind each objective claim to evidence.' },
+  { id: 'fixture-graphic-3', location: '/editorialGraphic/steps/2/detail', span: 'Record short natural sections.' },
+  { id: 'fixture-graphic-4', location: '/editorialGraphic/steps/3/detail', span: 'Show one current product action.' },
+  { id: 'fixture-graphic-5', location: '/editorialGraphic/steps/4/detail', span: 'Check captions, claims, and playback.' },
+] as const;
+
+context.sourceFacts[0].facts.push(...baselineEditorialClaims.map(({ id, span }) => ({ id, text: span })));
+generatedDraft.claimBindings.unshift(...baselineEditorialClaims.map(({ id, location, span }) => ({
+  location,
+  span,
+  sourceFactIds: [id],
+  productClaimId: null,
+})));
+
 function withDraft(change: Partial<GeneratedDraftV2>): GeneratedDraftV2 {
   return { ...structuredClone(generatedDraft), ...change };
 }
@@ -424,8 +449,7 @@ describe('generated-content safety review', () => {
     'Use VideoClaw because it cuts editing time in half.',
     'Use it because it cuts editing time in half.',
     'This workflow may double conversion.',
-    'Does VideoClaw edit recorded video with text?',
-  ])('requires a binding for imperative, pronoun, and modal objective claim: %s', (span) => {
+  ])('requires a binding for every product or modal prose claim: %s', (span) => {
     const unsafeDraft = withDraft({
       sections: [{
         ...generatedDraft.sections[0],
@@ -466,15 +490,16 @@ describe('generated-content safety review', () => {
     }));
   });
 
-  it('keeps a pure nonfactual imperative exempt from claim binding', () => {
+  it.each([
+    'Choose one audience and review the final file.',
+    'Choose one audience; backups matter',
+    'Choose one audience and backups matter',
+  ])('requires a binding for every substantive imperative-led prose span: %s', (markdown) => {
     const imperativeDraft = withDraft({
-      sections: [{
-        ...generatedDraft.sections[0],
-        markdown: `${generatedDraft.sections[0].markdown} Choose one audience and review the final file.`,
-      }, generatedDraft.sections[1]],
+      sections: [{ heading: 'Imperative workflow', markdown }, generatedDraft.sections[1]],
     });
 
-    expect(inspectGeneratedDraft(context, imperativeDraft)).not.toContainEqual(expect.objectContaining({
+    expect(inspectGeneratedDraft(context, imperativeDraft)).toContainEqual(expect.objectContaining({
       code: 'content.claim_binding',
     }));
   });
@@ -621,43 +646,35 @@ describe('generated-content safety review', () => {
 
 describe('final serialized artifact inspection', () => {
   it.each([
-    [
-      'a Setext H1',
-      withDraft({ sections: [{ heading: 'Unsafe', markdown: 'Use this title\n===' }, generatedDraft.sections[1]] }),
-      /body_h1/,
-    ],
-    [
-      'a closed code fence',
-      withDraft({ sections: [{ heading: 'Unsafe', markdown: 'Use this example.\n\n```text\nsafe\n```' }, generatedDraft.sections[1]] }),
-      /code_fence/,
-    ],
-    [
-      'a reference link',
-      withDraft({ sections: [{ heading: 'Unsafe', markdown: 'Use [the guide][yc].\n\n[yc]: https://www.ycombinator.com/video/' }, generatedDraft.sections[1]] }),
-      /reference_link/,
-    ],
-    [
-      'an autolink',
-      withDraft({ sections: [{ heading: 'Unsafe', markdown: 'Use <https://www.ycombinator.com/video/>.' }, generatedDraft.sections[1]] }),
-      /autolink/,
-    ],
-    [
-      'a mailto destination',
-      withDraft({ sections: [{ heading: 'Unsafe', markdown: 'Use [email](mailto:editor@example.com).' }, generatedDraft.sections[1]] }),
-      /link_destination/,
-    ],
-    [
-      'a javascript destination',
-      withDraft({ sections: [{ heading: 'Unsafe', markdown: 'Use [this](javascript:alert(1)).' }, generatedDraft.sections[1]] }),
-      /link_destination/,
-    ],
-    [
-      'an unsafe image destination',
-      withDraft({ sections: [{ heading: 'Unsafe', markdown: 'Use this image.\n\n![Use proof](javascript:alert(1))' }, generatedDraft.sections[1]] }),
-      /link_destination/,
-    ],
-  ])('rejects final Markdown containing %s', (_label, unsafeDraft, expected) => {
-    expect(() => materializeDraftBundle(context, unsafeDraft, mediaAllowlist[0])).toThrow(expected);
+    ['a Setext H1', 'Use this title\n===', ['Use this title'], /body_h1/],
+    ['a closed code fence', 'Use this example.\n\n```text\nsafe\n```', ['Use this example.'], /code_fence/],
+    ['a reference link', 'Use [the guide][yc].\n\n[yc]: https://www.ycombinator.com/video/', ['Use the guide.'], /reference_link/],
+    ['an autolink', 'Use <https://www.ycombinator.com/video/>.', ['Use https://www.ycombinator.com/video/.'], /autolink/],
+    ['a mailto destination', 'Use [email](mailto:editor@example.com).', ['Use email.'], /link_destination/],
+    ['a javascript destination', 'Use [this](javascript:alert(1)).', ['Use this.'], /link_destination/],
+    ['an unsafe image destination', 'Use this image.\n\n![Use proof](javascript:alert(1))', ['Use this image.', 'Use proof'], /link_destination/],
+  ])('rejects final Markdown containing %s', (_label, markdown, spans, expected) => {
+    const fixtureFacts = spans.map((span, index) => ({ id: `final-ast-${index}`, text: span }));
+    const supportedContext = {
+      ...context,
+      sourceFacts: context.sourceFacts.map((source, index) => index === 0
+        ? { ...source, facts: [...source.facts, ...fixtureFacts] }
+        : source),
+    };
+    const unsafeDraft = withDraft({
+      sections: [{ heading: 'Unsafe', markdown }, generatedDraft.sections[1]],
+      claimBindings: [
+        ...generatedDraft.claimBindings.filter(({ location }) => location !== '/sections/0/markdown'),
+        ...spans.map((span, index) => ({
+          location: '/sections/0/markdown',
+          span,
+          sourceFactIds: [`final-ast-${index}`],
+          productClaimId: null,
+        })),
+      ],
+    });
+
+    expect(() => materializeDraftBundle(supportedContext, unsafeDraft, mediaAllowlist[0])).toThrow(expected);
   });
 
   it('requires the final direct answer to be a real paragraph', () => {
@@ -743,16 +760,32 @@ describe('final serialized artifact inspection', () => {
   });
 
   it('runs copied-passage protection over visible SVG text after assembly', () => {
+    const copiedSpan = `Review ${context.sourceFacts[0].excerpt as string}`;
+    const copiedContext = {
+      ...context,
+      sourceFacts: context.sourceFacts.map((source, index) => index === 0
+        ? { ...source, facts: [...source.facts, { id: 'copied-graphic-fixture', text: copiedSpan }] }
+        : source),
+    };
     const copiedGraphic = withDraft({
       editorialGraphic: {
         ...generatedDraft.editorialGraphic,
         steps: generatedDraft.editorialGraphic.steps.map((step, index) => index === 0
-          ? { ...step, detail: `Review ${context.sourceFacts[0].excerpt as string}` }
+          ? { ...step, detail: copiedSpan }
           : step),
       },
+      claimBindings: [
+        ...generatedDraft.claimBindings.filter(({ location }) => location !== '/editorialGraphic/steps/0/detail'),
+        {
+          location: '/editorialGraphic/steps/0/detail',
+          span: copiedSpan,
+          sourceFactIds: ['copied-graphic-fixture'],
+          productClaimId: null,
+        },
+      ],
     });
 
-    expect(() => materializeDraftBundle(context, copiedGraphic, mediaAllowlist[0])).toThrow(/copied_passage/);
+    expect(() => materializeDraftBundle(copiedContext, copiedGraphic, mediaAllowlist[0])).toThrow(/copied_passage/);
   });
 
   it('rejects a pronoun-based product claim even when it is lexically bound to a product fact', () => {

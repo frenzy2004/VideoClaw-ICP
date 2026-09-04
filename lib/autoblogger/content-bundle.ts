@@ -534,10 +534,7 @@ function usesProseClaimBoundaries(location: string): boolean {
   return /^\/(?:description|customerTrigger|competitorGap|directAnswer|sections\/\d+\/markdown|faqAnswers\/\d+\/answer|editorialGraphic\/steps\/\d+\/detail)$/u.test(location);
 }
 
-function generatedClaimSentences(
-  context: DraftingContext,
-  draft: GeneratedDraftV2,
-): Array<{ location: string; span: string }> {
+function generatedClaimSentences(draft: GeneratedDraftV2): Array<{ location: string; span: string }> {
   return [
     { location: '/description', value: draft.description },
     { location: '/customerTrigger', value: draft.customerTrigger },
@@ -555,11 +552,7 @@ function generatedClaimSentences(
       { location: `/editorialGraphic/steps/${index}/detail`, value: detail },
     ]),
   ].flatMap(({ location, value }) => sentences(value)
-    .filter((span) => requiresClaimBinding(
-      span,
-      context.productClaims,
-      usesProseClaimBoundaries(location),
-    ))
+    .filter((span) => requiresClaimBinding(span, usesProseClaimBoundaries(location)))
     .map((span) => ({ location, span })));
 }
 
@@ -570,28 +563,11 @@ function containsProductAlias(sentence: string, claims: ProductClaim[]): boolean
     || /\b(?:it|this app|this product|this platform|this tool|the app|the product|the platform|the tool|our app|our product)\b/iu.test(sentence);
 }
 
-const pureImperativeOpeningWords = new Set([
-  'address', 'bind', 'build', 'capture', 'check', 'choose', 'create', 'define', 'edit',
-  'follow', 'include', 'keep', 'make', 'plan', 'record', 'reduce', 'review', 'show', 'start',
-  'test', 'then', 'use', 'verify',
-]);
-
 function requiresClaimBinding(
   sentence: string,
-  claims: ProductClaim[],
   endsAtProseBoundary = false,
 ): boolean {
-  const hasExplicitClaimSignal = containsProductAlias(sentence, claims)
-    || /\b(?:can|could|may|might|will|would|shall|should|must|ought\s+to)\b/iu.test(sentence)
-    || /\b(?:because|therefore|thereby|thus|so\s+that|causes|caused|leads\s+to|led\s+to|results\s+in|resulted\s+in|enables|enabled|ensures|ensured|allows|allowed|guarantees|guaranteed|protects|protected|prevents|prevented|preserves|preserved|delivers|delivered|achieves|achieved|drives|drove|driven|cuts|cutting|reduces|reduced|increases|increased|improves|improved|boosts|boosted|saves|saved|doubles|doubled|triples|tripled|converts|converted|conversion|revenue|growth|outcome|faster|slower|higher|lower|shorter|shortest|longer|longest|better|worse|more|less|fewer|most|least|best|half|twice|need|needs|require|requires)\b/iu.test(sentence)
-    || /\b(?:am|is|are|was|were|be|been|being|has|have|had|does|do|did|prefers?|costs?)\b/iu.test(sentence)
-    || /\bto\s+(?:protect|prevent|preserve|deliver|achieve|drive|cut|reduce|increase|improve|boost|save|convert)\b/iu.test(sentence)
-    || /\b\d+(?:\.\d+)?(?:\s?(?:%|x)|\s+(?:times?|minutes?|hours?|days?|weeks?|months?))?\b/iu.test(sentence);
-  if (hasExplicitClaimSignal) return true;
-  if (sentence.endsWith('?')) return false;
-  const firstWord = sentence.toLocaleLowerCase('en-US').match(/^[a-z]+/)?.[0] ?? '';
-  if (pureImperativeOpeningWords.has(firstWord)) return false;
-  return endsAtProseBoundary || /[.!]$/u.test(sentence);
+  return endsAtProseBoundary && !sentence.endsWith('?');
 }
 
 function factExactlyMatchesSpan(span: string, factTexts: string[]): boolean {
@@ -610,7 +586,7 @@ function claimBindingsAreValid(
     for (const fact of source.facts) factsById.set(fact.id, { sourceId: source.id, text: fact.text });
   }
   const claimById = new Map(context.productClaims.map((claim) => [claim.id, claim]));
-  const expected = generatedClaimSentences(context, draft);
+  const expected = generatedClaimSentences(draft);
   const seen = new Set<string>();
   for (const binding of draft.claimBindings) {
     const key = `${binding.location}\n${binding.span}`;
@@ -619,11 +595,7 @@ function claimBindingsAreValid(
     if (
       seen.has(key)
       || !visibleSentences.includes(binding.span)
-      || !requiresClaimBinding(
-        binding.span,
-        context.productClaims,
-        usesProseClaimBoundaries(binding.location),
-      )
+      || !requiresClaimBinding(binding.span, usesProseClaimBoundaries(binding.location))
       || new Set(binding.sourceFactIds).size !== binding.sourceFactIds.length
       || binding.sourceFactIds.some((factId) => (
         !factsById.has(factId)
