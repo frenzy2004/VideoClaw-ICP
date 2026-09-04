@@ -56,12 +56,15 @@ export const RUN_LIMITS = {
 } as const;
 
 export function evaluateEligibility(
-  _candidate: Candidate,
+  candidate: Candidate,
   evidence: EvidenceBundle,
   metrics: KeywordMetrics,
   mode: RunMode,
 ): { eligible: boolean; reasons: string[] } {
   const reasons: string[] = [];
+  if (evidence.candidateFingerprint !== candidateFingerprints(candidate).candidate) {
+    reasons.push('evidence_candidate_mismatch');
+  }
   if (evidence.suggestions.length === 0) reasons.push('missing_suggestions');
   if (evidence.serp.organicResultCount === 0) reasons.push('missing_serp');
   if (evidence.serp.organicResultCount > 0 && evidence.serp.peopleAlsoAsk.length < 3) reasons.push('missing_paa');
@@ -88,6 +91,10 @@ export function limitDeepInspections<T>(candidates: T[]): T[] {
   return candidates.slice(0, RUN_LIMITS.maxDeepInspections);
 }
 
+export function stageOpportunitiesForDeepInspection(opportunities: Opportunity[]): Opportunity[] {
+  return limitDeepInspections(limitCandidatesForScan(opportunities));
+}
+
 export function scoreOpportunity(opportunity: Opportunity): number {
   const evidenceScore = opportunity.evidence.suggestions.length
     + Math.min(opportunity.evidence.serp.organicResultCount, 10)
@@ -101,7 +108,7 @@ export function scoreOpportunity(opportunity: Opportunity): number {
 }
 
 export function selectOpportunities(opportunities: Opportunity[], mode: RunMode): Opportunity[] {
-  const ranked = limitCandidatesForScan(opportunities)
+  const ranked = stageOpportunitiesForDeepInspection(opportunities)
     .filter((opportunity) => evaluateEligibility(opportunity.candidate, opportunity.evidence, opportunity.metrics, mode).eligible)
     .sort((left, right) => {
       const scoreDifference = scoreOpportunity(right) - scoreOpportunity(left);

@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { RunRecordSchema, type RunRecord } from './domain';
 
 export const CandidateStateSchema = z.object({
+  mode: z.enum(['manual_pilot', 'scheduled']),
   status: z.enum(['selected', 'researched', 'drafted', 'validated', 'pr_opened', 'failed']),
   runId: z.string().trim().min(1),
   updatedAt: z.string().datetime(),
@@ -35,6 +36,12 @@ export function transitionCandidateState(
   next: CandidateState & { candidateFingerprint: string },
 ): AutobloggerState {
   const current = state.candidates[next.candidateFingerprint];
+  if (current && current.mode !== next.mode) {
+    throw new Error(`Candidate run mode cannot change from ${current.mode} to ${next.mode}.`);
+  }
+  if (next.mode === 'manual_pilot' && next.status === 'pr_opened') {
+    throw new Error('Manual pilot runs cannot open a pull request.');
+  }
   if (current?.status === next.status) return state;
 
   const currentStatus = current?.status ?? 'discovered';
@@ -47,6 +54,7 @@ export function transitionCandidateState(
     candidates: {
       ...state.candidates,
       [next.candidateFingerprint]: {
+        mode: next.mode,
         status: next.status,
         runId: next.runId,
         updatedAt: next.updatedAt,
@@ -57,6 +65,9 @@ export function transitionCandidateState(
 
 export function recordRun(state: AutobloggerState, run: RunRecord): AutobloggerState {
   const parsedRun = RunRecordSchema.parse(run);
+  if (parsedRun.mode === 'manual_pilot' && parsedRun.status === 'pr_opened') {
+    throw new Error('Manual pilot runs cannot open a pull request.');
+  }
   const existing = state.runs[parsedRun.runId];
   if (existing) {
     if (JSON.stringify(existing) === JSON.stringify(parsedRun)) return state;

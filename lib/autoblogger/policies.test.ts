@@ -45,9 +45,9 @@ describe('duplicate screening', () => {
   });
 });
 
-const completeEvidence = () => EvidenceBundleSchema.parse({
+const completeEvidence = (forCandidate = candidate()) => EvidenceBundleSchema.parse({
   schemaVersion: 1,
-  candidateFingerprint: candidateFingerprints(candidate()).candidate,
+  candidateFingerprint: candidateFingerprints(forCandidate).candidate,
   suggestions: ['Demo Day video planning checklist'],
   serp: {
     organicResultCount: 4,
@@ -123,22 +123,39 @@ describe('eligibility gates', () => {
       reasons: ['scheduled_requires_observed_volume_and_difficulty'],
     });
   });
+
+  it('rejects evidence bound to a different candidate fingerprint', () => {
+    const otherCandidate = candidate({
+      articleId: 'vc-c2-002',
+      primaryKeyword: 'Demo Day video mistakes',
+      title: 'Demo Day Video Mistakes',
+      slug: 'demo-day-video-mistakes',
+    });
+
+    expect(evaluateEligibility(candidate(), completeEvidence(otherCandidate), observedMetrics(), 'scheduled')).toEqual({
+      eligible: false,
+      reasons: ['evidence_candidate_mismatch'],
+    });
+  });
 });
 
 describe('bounded deterministic selection', () => {
   it('ranks eligible candidates, limits one ICP to two, selects only three, and allows a one-artifact manual pilot', () => {
-    const opportunity = (articleId: string, campaignId: Candidate['campaignId'], icp: string, volume: number) => ({
-      candidate: candidate({
+    const opportunity = (articleId: string, campaignId: Candidate['campaignId'], icp: string, volume: number) => {
+      const selectedCandidate = candidate({
         articleId,
         campaignId,
         icp,
         primaryKeyword: `keyword ${articleId}`,
         title: `Title ${articleId}`,
         slug: `slug-${articleId.toLowerCase()}`,
-      }),
-      evidence: completeEvidence(),
-      metrics: KeywordMetricsSchema.parse({ ...observedMetrics(), volume }),
-    });
+      });
+      return {
+        candidate: selectedCandidate,
+        evidence: completeEvidence(selectedCandidate),
+        metrics: KeywordMetricsSchema.parse({ ...observedMetrics(), volume }),
+      };
+    };
 
     const opportunities = [
       opportunity('vc-c2-001', 'accelerator-demo-day-founder', 'founders', 100),
@@ -163,20 +180,46 @@ describe('bounded deterministic selection', () => {
   });
 
   it('breaks equal scores by canonical candidate fingerprint rather than input order', () => {
+    const firstCandidate = candidate({ articleId: 'vc-c2-010', primaryKeyword: 'alpha keyword', title: 'Alpha title', slug: 'alpha-title' });
     const first = {
-      candidate: candidate({ articleId: 'vc-c2-010', primaryKeyword: 'alpha keyword', title: 'Alpha title', slug: 'alpha-title' }),
-      evidence: completeEvidence(),
+      candidate: firstCandidate,
+      evidence: completeEvidence(firstCandidate),
       metrics: observedMetrics(),
     };
+    const secondCandidate = candidate({ articleId: 'vc-c2-011', primaryKeyword: 'beta keyword', title: 'Beta title', slug: 'beta-title' });
     const second = {
-      candidate: candidate({ articleId: 'vc-c2-011', primaryKeyword: 'beta keyword', title: 'Beta title', slug: 'beta-title' }),
-      evidence: completeEvidence(),
+      candidate: secondCandidate,
+      evidence: completeEvidence(secondCandidate),
       metrics: observedMetrics(),
     };
 
     expect(selectOpportunities([second, first], 'scheduled').map(({ candidate: selected }) => selected.articleId)).toEqual([
       'vc-c2-010',
       'vc-c2-011',
+    ]);
+  });
+
+  it('does not evaluate or select deep evidence beyond the first ten staged candidates', () => {
+    const opportunities = Array.from({ length: 11 }, (_unused, index) => {
+      const articleId = `vc-c2-${String(index + 1).padStart(3, '0')}`;
+      const selectedCandidate = candidate({
+        articleId,
+        icp: `icp-${articleId}`,
+        primaryKeyword: `keyword ${articleId}`,
+        title: `Title ${articleId}`,
+        slug: `slug-${articleId.toLowerCase()}`,
+      });
+      return {
+        candidate: selectedCandidate,
+        evidence: completeEvidence(selectedCandidate),
+        metrics: KeywordMetricsSchema.parse({ ...observedMetrics(), volume: index === 10 ? 1_000 : index }),
+      };
+    });
+
+    expect(selectOpportunities(opportunities, 'scheduled').map(({ candidate: selected }) => selected.articleId)).toEqual([
+      'vc-c2-010',
+      'vc-c2-009',
+      'vc-c2-008',
     ]);
   });
 });

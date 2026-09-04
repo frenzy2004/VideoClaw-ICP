@@ -50,3 +50,38 @@ Added a focused `lib/autoblogger/` domain foundation:
 
 - `icp` is initialized from `campaignId` during matrix ingestion because the current matrices are campaign-scoped. Future sources can supply a more granular ICP string directly through `CandidateSchema` without changing selection policy.
 - Source reachability and PAA relevance are represented by normalized evidence fields here; Task 2 owns network collection, safe-source verification, and relevance extraction.
+
+## Fix round 1 — blocking findings
+
+### Implementation
+
+- Candidate state events now carry and persist run mode. A manual-pilot event cannot transition to `pr_opened`, and an existing candidate cannot switch modes mid-run.
+- `recordRun` now rejects a `manual_pilot` record with `pr_opened` status.
+- `selectOpportunities` now always passes its candidate pool through `stageOpportunitiesForDeepInspection`, which applies the 50-candidate scan cap and the 10-item deep-inspection cap before eligibility or scoring can run.
+- `evaluateEligibility` now compares `EvidenceBundle.candidateFingerprint` with the canonical fingerprint of its `Candidate` and rejects mismatches.
+
+### Regression tests and RED/GREEN evidence
+
+| Finding | Test file | RED command and observed output | GREEN command and observed output |
+| --- | --- | --- | --- |
+| Manual pilot may reach a PR state | `lib/autoblogger/state.test.ts` | `npm test -- lib/autoblogger/state.test.ts` — `refuses a manual-pilot transition to an opened pull request` failed: expected the function to throw, received no error. A separate run then showed `refuses to record a manual-pilot pull-request run` failing for the same reason. | `npm test -- lib/autoblogger/state.test.ts` — 5/5 tests passed after mode-aware transition and run guards. |
+| Deep cap is disconnected | `lib/autoblogger/policies.test.ts` | `npm test -- lib/autoblogger/policies.test.ts` — staged-candidate regression selected `vc-c2-011` (the eleventh item) ahead of capped candidates. | `npm test -- lib/autoblogger/policies.test.ts` — 15/15 tests passed after selection was routed through `stageOpportunitiesForDeepInspection`. |
+| Evidence can belong to another candidate | `lib/autoblogger/policies.test.ts` | `npm test -- lib/autoblogger/policies.test.ts` — mismatched evidence returned `{ eligible: true, reasons: [] }` instead of `evidence_candidate_mismatch`. | `npm test -- lib/autoblogger/policies.test.ts lib/autoblogger/state.test.ts` — 21/21 tests passed after canonical fingerprint comparison. |
+
+### Verification
+
+- `npm test -- lib/autoblogger/domain.test.ts lib/autoblogger/matrices.test.ts lib/autoblogger/policies.test.ts lib/autoblogger/state.test.ts` — 4 files, 26 tests passed.
+- `npm run typecheck` — passed.
+- `npm run lint` — passed.
+- `npm test` — 24 files, 252 tests passed.
+
+### Fix-round self-review
+
+- Both manual-pilot PR rejection boundaries are guarded: event/state progression and compact run persistence.
+- The only production selection path now stages at most ten deep-evidence opportunities before evaluating eligibility; the regression places the highest-scored candidate eleventh and proves it is excluded.
+- Eligibility now refuses cross-candidate evidence before considering any evidence-quality signal.
+- Scope remains limited to `lib/autoblogger/policies.ts`, `lib/autoblogger/state.ts`, and their regression tests.
+
+### Fix-round concerns
+
+- Task 2 must route its live researcher through `stageOpportunitiesForDeepInspection`; the Task 1 selection policy already enforces the same cap defensively at selection time.
