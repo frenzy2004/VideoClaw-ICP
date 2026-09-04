@@ -146,33 +146,66 @@ async function nextChunkWithTimeout(
 }
 
 async function consumeBodyWithinLimits(
-  body: AsyncIterable<Uint8Array>,
+  iterator: AsyncIterator<Uint8Array>,
   maxBodyBytes: number,
   remainingMs: () => number,
 ): Promise<void> {
-  const iterator = body[Symbol.asyncIterator]();
   let bytes = 0;
-  try {
-    for (;;) {
-      const timeLeft = remainingMs();
-      if (timeLeft <= 0) throw new Error('Source check timed out.');
-      const next = await nextChunkWithTimeout(iterator, timeLeft);
-      if (next.done) return;
-      if (!ArrayBuffer.isView(next.value) || next.value.BYTES_PER_ELEMENT !== 1) {
-        throw new Error('Source transport body must stream Uint8Array chunks.');
-      }
-      bytes += next.value.byteLength;
-      if (bytes > maxBodyBytes) {
-        throw new Error('Source response body exceeds the byte limit.');
-      }
+  for (;;) {
+    const timeLeft = remainingMs();
+    if (timeLeft <= 0) throw new Error('Source check timed out.');
+    const next = await nextChunkWithTimeout(iterator, timeLeft);
+    if (next.done) return;
+    if (!ArrayBuffer.isView(next.value) || next.value.BYTES_PER_ELEMENT !== 1) {
+      throw new Error('Source transport body must stream Uint8Array chunks.');
     }
-  } finally {
-    await iterator.return?.();
+    bytes += next.value.byteLength;
+    if (bytes > maxBodyBytes) {
+      throw new Error('Source response body exceeds the byte limit.');
+    }
   }
 }
 
-async function closeBody(body: AsyncIterable<Uint8Array>): Promise<void> {
-  await body[Symbol.asyncIterator]().return?.();
+async function cleanupIteratorBestEffort(
+  iterator: AsyncIterator<Uint8Array>,
+  remainingMs: () => number,
+): Promise<void> {
+  let cleanup: Promise<void>;
+  try {
+    cleanup = Promise.resolve(iterator.return?.()).then(
+      () => undefined,
+      () => undefined,
+    );
+  } catch {
+    return;
+  }
+
+  const timeLeft = remainingMs();
+  if (timeLeft <= 0) return;
+  let timeout: ReturnType<typeof setTimeout>;
+  try {
+    await Promise.race([
+      cleanup,
+      new Promise<void>((resolve) => {
+        timeout = setTimeout(resolve, timeLeft);
+      }),
+    ]);
+  } finally {
+    clearTimeout(timeout!);
+  }
+}
+
+async function withBodyCleanup<T>(
+  body: AsyncIterable<Uint8Array>,
+  remainingMs: () => number,
+  handleBody: (iterator: AsyncIterator<Uint8Array>) => Promise<T>,
+): Promise<T> {
+  const iterator = body[Symbol.asyncIterator]();
+  try {
+    return await handleBody(iterator);
+  } finally {
+    await cleanupIteratorBestEffort(iterator, remainingMs);
+  }
 }
 
 function assertTransportResponse(
@@ -244,32 +277,43 @@ export function createSafeSourceChecker(options: SafeSourceCheckerOptions): Safe
         }
         throw error;
       }
-      assertTransportResponse(response, currentUrl, allowedPeerAddresses);
+      const outcome = await withBodyCleanup(response.body, remainingMs, async (iterator) => {
+        assertTransportResponse(response, currentUrl, allowedPeerAddresses);
 
-      if (REDIRECT_STATUSES.has(response.status)) {
-        const location = header(response, 'location');
-        if (!location) throw new Error('Source redirect is missing a location.');
-        if (redirectCount >= limits.maxRedirects) throw new Error('Source redirect limit exceeded.');
-        await closeBody(response.body);
-        currentUrl = parseSourceUrl(new URL(location, currentUrl).toString());
-        redirectCount += 1;
-        continue;
-      }
+        if (REDIRECT_STATUSES.has(response.status)) {
+          const location = header(response, 'location');
+          if (!location) throw new Error('Source redirect is missing a location.');
+          if (redirectCount >= limits.maxRedirects) {
+            throw new Error('Source redirect limit exceeded.');
+          }
+          return {
+            kind: 'redirect' as const,
+            url: parseSourceUrl(new URL(location, currentUrl).toString()),
+          };
+        }
 
-      const contentLength = Number(header(response, 'content-length'));
-      if (
-        Number.isFinite(contentLength) && contentLength > limits.maxBodyBytes
-      ) {
-        throw new Error('Source response body exceeds the byte limit.');
-      }
-      await consumeBodyWithinLimits(response.body, limits.maxBodyBytes, remainingMs);
-      return {
-        url: initialUrl.toString(),
-        finalUrl: currentUrl.toString(),
-        status: response.status,
-        reachable: response.status >= 200 && response.status < 300,
-        authoritative: isAuthoritative(currentUrl),
-      };
+        const contentLength = Number(header(response, 'content-length'));
+        if (
+          Number.isFinite(contentLength) && contentLength > limits.maxBodyBytes
+        ) {
+          throw new Error('Source response body exceeds the byte limit.');
+        }
+        await consumeBodyWithinLimits(iterator, limits.maxBodyBytes, remainingMs);
+        return {
+          kind: 'checked' as const,
+          source: {
+            url: initialUrl.toString(),
+            finalUrl: currentUrl.toString(),
+            status: response.status,
+            reachable: response.status >= 200 && response.status < 300,
+            authoritative: isAuthoritative(currentUrl),
+          },
+        };
+      });
+
+      if (outcome.kind === 'checked') return outcome.source;
+      currentUrl = outcome.url;
+      redirectCount += 1;
     }
   }
 

@@ -15,6 +15,19 @@ async function* byteStream(...chunks: string[]) {
   for (const chunk of chunks) yield new TextEncoder().encode(chunk);
 }
 
+function bodyWithCleanup(
+  cleanup: () => Promise<IteratorResult<Uint8Array>>,
+): AsyncIterable<Uint8Array> {
+  return {
+    [Symbol.asyncIterator]() {
+      return {
+        next: async () => ({ done: true, value: undefined }),
+        return: cleanup,
+      };
+    },
+  };
+}
+
 function responseTransport(responses: Array<{
   status: number;
   headers?: Record<string, string>;
@@ -218,6 +231,70 @@ describe('safe source checks', () => {
       new Promise<string>((resolve) => setTimeout(() => resolve('still pending'), 20)),
     ]);
     expect(outcome).toMatch(/timed out/i);
+  });
+
+  it('deadline-bounds cleanup when iterator.return never settles', async () => {
+    const fixture = responseTransport([{
+      status: 200,
+      body: bodyWithCleanup(() => new Promise(() => undefined)),
+    }]);
+    const checker = createSafeSourceChecker({
+      transport: fixture.transport,
+      resolveHostname: publicResolver,
+      limits: { maxRedirects: 0, maxBodyBytes: 100, timeoutMs: 5 },
+    });
+
+    const outcome = await Promise.race([
+      checker.check('https://hanging-cleanup.example/source').then(
+        () => 'resolved',
+        (error) => String(error),
+      ),
+      new Promise<string>((resolve) => setTimeout(() => resolve('still pending'), 20)),
+    ]);
+
+    expect(outcome).toBe('resolved');
+  });
+
+  it('ignores redirect cleanup rejection and continues to the validated target', async () => {
+    const fixture = responseTransport([
+      {
+        status: 302,
+        headers: { location: '/canonical' },
+        body: bodyWithCleanup(async () => {
+          throw new Error('cleanup failed');
+        }),
+      },
+      { status: 200, body: 'canonical source' },
+    ]);
+    const checker = createSafeSourceChecker({
+      transport: fixture.transport,
+      resolveHostname: publicResolver,
+    });
+
+    await expect(checker.check('https://example.com/original')).resolves.toMatchObject({
+      finalUrl: 'https://example.com/canonical',
+      reachable: true,
+    });
+  });
+
+  it('cleans up an oversized response without replacing the byte-limit failure', async () => {
+    let cleanupCalls = 0;
+    const fixture = responseTransport([{
+      status: 200,
+      headers: { 'content-length': '101' },
+      body: bodyWithCleanup(async () => {
+        cleanupCalls += 1;
+        throw new Error('cleanup failed');
+      }),
+    }]);
+    const checker = createSafeSourceChecker({
+      transport: fixture.transport,
+      resolveHostname: publicResolver,
+      limits: { maxBodyBytes: 100 },
+    });
+
+    await expect(checker.check('https://example.com/oversized')).rejects.toThrow(/byte limit/i);
+    expect(cleanupCalls).toBe(1);
   });
 });
 

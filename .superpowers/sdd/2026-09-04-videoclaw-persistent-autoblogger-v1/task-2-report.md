@@ -113,3 +113,41 @@ Default safety bounds are three source redirects, 1,000,000 response bytes, and 
 ### Fix-round concerns
 
 - Task 5's production source transport must implement the explicit manual-redirect, address-pinning/peer-reporting, streaming, cancellation, and byte-cap contract. Task 2 now rejects responses that disclose auto-follow or a mismatched peer and independently enforces the streamed-byte limit.
+
+## Fix round 2 — Deadline-bounded iterator cleanup
+
+### Implementation
+
+- Centralized every post-response path under one body-iterator `finally`, including transport-response validation, redirect validation and continuation, content-length rejection, streamed-byte rejection, stream timeout, and normal completion.
+- Iterator cancellation is invoked once and treated as best-effort. Synchronous throws and asynchronous rejection are swallowed so cleanup cannot replace the check's success or primary failure.
+- Cleanup waits for at most the time remaining on the original source-check deadline. If that deadline has expired, the checker returns immediately after attaching rejection handling; a cancellation promise that never settles cannot hold `check()` open.
+- Rejection handling is attached before the deadline branch and remains attached after a timeout wins, preventing late cleanup rejection from becoming unhandled.
+- The explicit injected transport contract remains unchanged: manual redirects, validated peer addresses, streamed bytes, cancellation, and the transport byte cap are still required. No runtime claim or introspection was added for whether an abstract injected transport prebuffered its response; Task 5 owns the concrete production transport and its tests.
+
+### RED and GREEN evidence
+
+| Phase | Command and observed output |
+| --- | --- |
+| RED | `npm test -- lib/autoblogger/sources.test.ts -t "cleanup\|oversized response"` — 3 tests failed, 13 skipped. The never-settling `iterator.return()` left `check()` pending after 20 ms; redirect cleanup rejection replaced the successful redirect outcome; oversized-response rejection did not invoke cleanup. |
+| GREEN | Same command — 3 tests passed, 13 skipped. The 5 ms cleanup deadline bounded the never-settling cancellation, redirect cleanup rejection was ignored, and oversized-response cleanup ran without replacing the byte-limit error. |
+
+### Verification
+
+- `npm test -- lib/autoblogger/sources.test.ts` — 1 file, 16 tests passed.
+- `npm test -- lib/autoblogger/apify-client.test.ts lib/autoblogger/keyword-providers.test.ts lib/autoblogger/research.test.ts lib/autoblogger/sources.test.ts` — 4 files, 31 tests passed.
+- The first combined repository verification reached a clean typecheck, then lint identified the callback name `useBody` as a React Hook; the full suite did not run. Renaming it to the behavior-neutral `handleBody` resolved that lint-only issue.
+- Final fresh `npm run typecheck && npm run lint && npm test` — typecheck passed, lint completed with zero warnings or errors, and 28 files / 283 tests passed.
+- `git diff --check` — completed successfully.
+
+### Self-review
+
+- Confirmed one shared `finally` covers normal, redirect, and error outcomes after a source response exposes its iterator.
+- Confirmed cleanup rejection is observed immediately and cannot mask the original result, including when the cleanup timeout wins first.
+- Confirmed a never-settling cleanup promise is awaited only through the original remaining deadline; no independent timeout extends the source check.
+- Confirmed byte streaming, manual redirects, peer matching, and max-byte request fields remain intact and no transport implementation introspection was introduced.
+- Confirmed no live network calls, credentials, dependency changes, legacy parser changes, or fixed-matrix collector changes were introduced.
+- Confirmed the pre-existing untracked `package-lock.json` remains excluded.
+
+### Fix-round concerns
+
+- Task 5 must still implement and directly test the concrete production transport's no-auto-follow, address-pinning/peer-reporting, true streaming, cancellation, and byte-cap behavior. Task 2 can enforce only the explicit injected boundary and the observable response contract.
