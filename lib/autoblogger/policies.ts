@@ -91,7 +91,7 @@ export function limitDeepInspections<T>(candidates: T[]): T[] {
   return candidates.slice(0, RUN_LIMITS.maxDeepInspections);
 }
 
-export function stageOpportunitiesForDeepInspection(opportunities: Opportunity[]): Opportunity[] {
+export function stageOpportunitiesForDeepInspection<T>(opportunities: T[]): T[] {
   return limitDeepInspections(limitCandidatesForScan(opportunities));
 }
 
