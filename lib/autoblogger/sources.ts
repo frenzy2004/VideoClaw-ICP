@@ -1,6 +1,10 @@
 import { isIP } from 'node:net';
 
-import { requestWithTimeout, type HttpResponse, type HttpTransport } from './http';
+import {
+  requestWithTimeout,
+  type SourceHttpResponse,
+  type SourceHttpTransport,
+} from './http';
 
 export type DnsResolver = (hostname: string) => Promise<string[]>;
 
@@ -23,8 +27,8 @@ export type SafeSourceChecker = {
   select(urls: string[]): Promise<Array<{ url: string; authoritative: boolean }>>;
 };
 
-type SafeSourceCheckerOptions = {
-  transport: HttpTransport;
+export type SafeSourceCheckerOptions = {
+  transport: SourceHttpTransport;
   resolveHostname: DnsResolver;
   authoritativeDomains?: ReadonlySet<string>;
   primarySourceUrls?: string[];
@@ -79,6 +83,7 @@ function parseSourceUrl(value: string): URL {
     throw new Error('Source URL must use HTTP or HTTPS.');
   }
   if (url.username || url.password) throw new Error('Source URL credentials are not allowed.');
+  url.hash = '';
   return url;
 }
 
@@ -102,34 +107,86 @@ async function assertPublicTarget(
   url: URL,
   resolveHostname: DnsResolver,
   timeoutMs: number,
-): Promise<void> {
+): Promise<string[]> {
   const hostname = normalizedHostname(url.hostname);
   if (hostname === 'localhost' || hostname.endsWith('.localhost')) {
     throw new Error('Private or local source targets are not allowed.');
   }
   if (isIP(hostname)) {
     if (isPrivateAddress(hostname)) throw new Error('Private or local source targets are not allowed.');
-    return;
+    return [hostname];
   }
   const addresses = await resolveWithTimeout(resolveHostname, hostname, timeoutMs);
   if (addresses.length === 0 || addresses.some(isPrivateAddress)) {
     throw new Error('Private or local source targets are not allowed.');
   }
+  return addresses.map(normalizedHostname);
 }
 
-function header(response: HttpResponse, name: string): string | undefined {
+function header(response: SourceHttpResponse, name: string): string | undefined {
   const entry = Object.entries(response.headers).find(
     ([key]) => key.toLocaleLowerCase('en-US') === name.toLocaleLowerCase('en-US'),
   );
   return entry?.[1];
 }
 
-function bodyByteLength(body: unknown): number {
-  if (typeof body === 'string') return new TextEncoder().encode(body).byteLength;
-  if (body instanceof Uint8Array) return body.byteLength;
-  if (body instanceof ArrayBuffer) return body.byteLength;
-  if (body === null || body === undefined) return 0;
-  return new TextEncoder().encode(JSON.stringify(body)).byteLength;
+async function nextChunkWithTimeout(
+  iterator: AsyncIterator<Uint8Array>,
+  timeoutMs: number,
+): Promise<IteratorResult<Uint8Array>> {
+  let timeout: ReturnType<typeof setTimeout>;
+  const timeoutPromise = new Promise<never>((_resolve, reject) => {
+    timeout = setTimeout(() => reject(new Error('Source check timed out.')), timeoutMs);
+  });
+  try {
+    return await Promise.race([iterator.next(), timeoutPromise]);
+  } finally {
+    clearTimeout(timeout!);
+  }
+}
+
+async function consumeBodyWithinLimits(
+  body: AsyncIterable<Uint8Array>,
+  maxBodyBytes: number,
+  remainingMs: () => number,
+): Promise<void> {
+  const iterator = body[Symbol.asyncIterator]();
+  let bytes = 0;
+  try {
+    for (;;) {
+      const timeLeft = remainingMs();
+      if (timeLeft <= 0) throw new Error('Source check timed out.');
+      const next = await nextChunkWithTimeout(iterator, timeLeft);
+      if (next.done) return;
+      if (!ArrayBuffer.isView(next.value) || next.value.BYTES_PER_ELEMENT !== 1) {
+        throw new Error('Source transport body must stream Uint8Array chunks.');
+      }
+      bytes += next.value.byteLength;
+      if (bytes > maxBodyBytes) {
+        throw new Error('Source response body exceeds the byte limit.');
+      }
+    }
+  } finally {
+    await iterator.return?.();
+  }
+}
+
+async function closeBody(body: AsyncIterable<Uint8Array>): Promise<void> {
+  await body[Symbol.asyncIterator]().return?.();
+}
+
+function assertTransportResponse(
+  response: SourceHttpResponse,
+  requestedUrl: URL,
+  allowedPeerAddresses: readonly string[],
+): void {
+  if (response.redirected || parseSourceUrl(response.url).toString() !== requestedUrl.toString()) {
+    throw new Error('Source transport must use manual redirects and must not automatically follow.');
+  }
+  const peerAddress = normalizedHostname(response.peerAddress);
+  if (isPrivateAddress(peerAddress) || !allowedPeerAddresses.includes(peerAddress)) {
+    throw new Error('Source transport peer address does not match a validated address.');
+  }
 }
 
 function domainMatches(hostname: string, domain: string): boolean {
@@ -159,31 +216,41 @@ export function createSafeSourceChecker(options: SafeSourceCheckerOptions): Safe
     let currentUrl = initialUrl;
     let redirectCount = 0;
     const startedAt = Date.now();
+    const remainingMs = () => limits.timeoutMs - (Date.now() - startedAt);
 
     for (;;) {
-      let remainingMs = limits.timeoutMs - (Date.now() - startedAt);
-      if (remainingMs <= 0) throw new Error('Source check timed out.');
-      await assertPublicTarget(currentUrl, options.resolveHostname, remainingMs);
-      remainingMs = limits.timeoutMs - (Date.now() - startedAt);
-      if (remainingMs <= 0) throw new Error('Source check timed out.');
-      let response: HttpResponse;
+      let timeLeft = remainingMs();
+      if (timeLeft <= 0) throw new Error('Source check timed out.');
+      const allowedPeerAddresses = await assertPublicTarget(
+        currentUrl,
+        options.resolveHostname,
+        timeLeft,
+      );
+      timeLeft = remainingMs();
+      if (timeLeft <= 0) throw new Error('Source check timed out.');
+      let response: SourceHttpResponse;
       try {
         response = await requestWithTimeout(options.transport, {
           method: 'GET',
           url: currentUrl.toString(),
           headers: { Accept: 'text/html,application/xhtml+xml' },
-        }, remainingMs);
+          redirect: 'manual',
+          allowedPeerAddresses,
+          maxResponseBytes: limits.maxBodyBytes,
+        }, timeLeft);
       } catch (error) {
         if (/abort/i.test(String(error)) || Date.now() - startedAt >= limits.timeoutMs) {
           throw new Error('Source check timed out.');
         }
         throw error;
       }
+      assertTransportResponse(response, currentUrl, allowedPeerAddresses);
 
       if (REDIRECT_STATUSES.has(response.status)) {
         const location = header(response, 'location');
         if (!location) throw new Error('Source redirect is missing a location.');
         if (redirectCount >= limits.maxRedirects) throw new Error('Source redirect limit exceeded.');
+        await closeBody(response.body);
         currentUrl = parseSourceUrl(new URL(location, currentUrl).toString());
         redirectCount += 1;
         continue;
@@ -191,11 +258,11 @@ export function createSafeSourceChecker(options: SafeSourceCheckerOptions): Safe
 
       const contentLength = Number(header(response, 'content-length'));
       if (
-        (Number.isFinite(contentLength) && contentLength > limits.maxBodyBytes)
-        || bodyByteLength(response.body) > limits.maxBodyBytes
+        Number.isFinite(contentLength) && contentLength > limits.maxBodyBytes
       ) {
         throw new Error('Source response body exceeds the byte limit.');
       }
+      await consumeBodyWithinLimits(response.body, limits.maxBodyBytes, remainingMs);
       return {
         url: initialUrl.toString(),
         finalUrl: currentUrl.toString(),
@@ -210,7 +277,12 @@ export function createSafeSourceChecker(options: SafeSourceCheckerOptions): Safe
     const selected: Array<{ url: string; authoritative: boolean }> = [];
     const seen = new Set<string>();
     for (const url of urls) {
-      const result = await check(url);
+      let result: CheckedSource;
+      try {
+        result = await check(url);
+      } catch {
+        continue;
+      }
       if (!result.reachable || seen.has(result.finalUrl)) continue;
       seen.add(result.finalUrl);
       selected.push({ url: result.finalUrl, authoritative: result.authoritative });

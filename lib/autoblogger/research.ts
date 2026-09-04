@@ -85,6 +85,28 @@ async function retry<T>(operation: () => Promise<T>, maxAttempts: number): Promi
   throw latestError;
 }
 
+async function withinRunDeadline<T>(
+  operation: () => Promise<T>,
+  options: ApifyExecutionOptions,
+  startedAt: number,
+  stage: string,
+): Promise<T> {
+  const remainingMs = options.timeoutMs - (options.nowMs() - startedAt);
+  if (remainingMs <= 0) throw new Error(`Apify run timed out during ${stage}.`);
+  let timeout: ReturnType<typeof setTimeout>;
+  const timeoutPromise = new Promise<never>((_resolve, reject) => {
+    timeout = setTimeout(
+      () => reject(new Error(`Apify run timed out during ${stage}.`)),
+      remainingMs,
+    );
+  });
+  try {
+    return await Promise.race([operation(), timeoutPromise]);
+  } finally {
+    clearTimeout(timeout!);
+  }
+}
+
 function observationTime(run: ApifyRun): string {
   const value = run.finishedAt ?? run.startedAt;
   if (!value || Number.isNaN(Date.parse(value))) {
@@ -110,7 +132,12 @@ export async function runApifyActor(
   }
   const startedAt = options.nowMs();
   try {
-    const startedRun = await client.startActor(actorId, input);
+    const startedRun = await withinRunDeadline(
+      () => client.startActor(actorId, input),
+      options,
+      startedAt,
+      'startActor',
+    );
     let run = startedRun;
     let polls = 0;
     while (run.status !== 'SUCCEEDED') {
@@ -120,14 +147,32 @@ export async function runApifyActor(
       if (polls >= options.maxPolls) throw new Error('Apify polling limit exceeded.');
       const elapsed = options.nowMs() - startedAt;
       if (elapsed >= options.timeoutMs) throw new Error('Apify run timed out.');
-      await options.sleep(Math.min(options.pollIntervalMs, options.timeoutMs - elapsed));
-      run = await retry(() => client.getRun(startedRun.id), options.maxAttempts);
+      await withinRunDeadline(
+        () => options.sleep(Math.min(options.pollIntervalMs, options.timeoutMs - elapsed)),
+        options,
+        startedAt,
+        'polling sleep',
+      );
+      run = await retry(
+        () => withinRunDeadline(
+          () => client.getRun(startedRun.id),
+          options,
+          startedAt,
+          'getRun poll',
+        ),
+        options.maxAttempts,
+      );
       if (run.id !== startedRun.id) throw new Error('Apify polling returned a different run id.');
       polls += 1;
     }
     if (!run.defaultDatasetId) throw new Error(`Apify run ${run.id} has no default dataset.`);
     const items = await retry(
-      () => client.getDatasetItems(run.defaultDatasetId as string),
+      () => withinRunDeadline(
+        () => client.getDatasetItems(run.defaultDatasetId as string),
+        options,
+        startedAt,
+        'dataset retrieval',
+      ),
       options.maxAttempts,
     );
     return {
@@ -148,17 +193,25 @@ const QUESTION_STOP_WORDS = new Set([
   'a', 'an', 'and', 'are', 'do', 'does', 'for', 'how', 'in', 'is', 'of', 'on', 'the', 'to',
   'what', 'when', 'where', 'which', 'who', 'why', 'with', 'you', 'your',
 ]);
+const GENERIC_QUESTION_TOKENS = new Set(['startup', 'startups', 'video', 'videos']);
 
 function relevantTokens(value: string): Set<string> {
   return new Set(
     normalizeKeyword(value)
       .split(' ')
-      .filter((token) => token.length > 1 && !QUESTION_STOP_WORDS.has(token)),
+      .filter((token) =>
+        token.length > 1
+        && !QUESTION_STOP_WORDS.has(token)
+        && !GENERIC_QUESTION_TOKENS.has(token)),
   );
 }
 
 export function selectRelevantPaaQuestions(keyword: string, questions: string[]): string[] {
   const keywordTokens = relevantTokens(keyword);
+  const minimumOverlap = Math.min(2, keywordTokens.size);
+  if (minimumOverlap === 0) {
+    throw new Error('Research requires three relevant People Also Ask questions.');
+  }
   const selected: string[] = [];
   const seen = new Set<string>();
   for (const question of questions) {
@@ -167,7 +220,8 @@ export function selectRelevantPaaQuestions(keyword: string, questions: string[])
     if (!trimmed || seen.has(normalized)) continue;
     seen.add(normalized);
     const questionTokens = relevantTokens(trimmed);
-    if (![...questionTokens].some((token) => keywordTokens.has(token))) continue;
+    const overlap = [...questionTokens].filter((token) => keywordTokens.has(token)).length;
+    if (overlap < minimumOverlap) continue;
     selected.push(trimmed);
     if (selected.length === 3) return selected;
   }

@@ -68,3 +68,48 @@ Default safety bounds are three source redirects, 1,000,000 response bytes, and 
 - Semrush labels Keyword Reports API v4 as Early Access, so its fixture parser and boundary may need an explicit update if Semrush changes the response contract.
 - Task 5 must provide production `HttpTransport` and DNS resolver implementations plus the campaign-specific authority/primary-source configuration. Task 2 intentionally provides no implicit live transport or embedded authority list.
 - PAA relevance is a deterministic lexical gate. It prevents wholly unrelated questions but does not replace the independent editorial/critique checks planned for Task 3.
+
+## Fix round 1 — Important findings
+
+### Implementation
+
+- Added a dedicated `SourceHttpTransport` contract. Source requests now require `redirect: 'manual'`, the DNS-validated `allowedPeerAddresses`, and `maxResponseBytes`. Responses must expose the actual connected `peerAddress`, the response URL and redirect state, and an incremental `AsyncIterable<Uint8Array>` body. The checker rejects automatic-follow responses and peers outside the validated address set, passes the byte cap to the transport, independently counts streamed bytes, and closes stream iteration when it stops.
+- Source DNS, redirects, transport completion, and stream iteration remain inside one source deadline. The checker re-resolves each manual redirect destination and verifies the connected peer for every hop, preventing a redirect or DNS-rebinding hop from bypassing private-address checks.
+- `runApifyActor()` now races the remaining run deadline against `startActor`, every individual `getRun` retry, polling sleep, and each dataset retry. A hanging injected dependency cannot keep the caller beyond the configured run timeout.
+- Source URLs are canonicalized as HTTP resources with fragments removed before requests, returned evidence, and distinctness checks.
+- Source selection treats each unsafe, unreachable, timed-out, or malformed candidate as an individual failure, continues through later candidates, and applies the two-reachable/one-authoritative gate only after exhausting the candidate list.
+- PAA relevance now excludes generic `video`/`videos` and `startup`/`startups` terms and requires overlap with at least two meaningful keyword tokens when two are available.
+
+### RED and GREEN evidence
+
+| Finding | RED command and observed output | GREEN command and observed output |
+| --- | --- | --- |
+| Manual redirects, validated peer, streamed byte cap | `npm test -- lib/autoblogger/sources.test.ts -t "transport contract"` — 3 tests failed because auto-follow, private peer mismatch, and a two-chunk six-byte response all resolved successfully. | Same command — 3 tests passed, 8 skipped. `npm test -- lib/autoblogger/sources.test.ts` then passed 11/11 before the later source-selection regressions were added. |
+| End-to-end Apify deadline | `npm test -- lib/autoblogger/research.test.ts -t "hanging"` — 4 tests failed because delayed start, poll, sleep, and dataset dependencies all resolved after a 5 ms run timeout. | `npm test -- lib/autoblogger/research.test.ts -t "hanging"` — 4 tests passed, 4 skipped; full researcher file passed 8/8 before the later PAA regression was added. |
+| Fragment-safe distinctness and continue-after-failure | `npm test -- lib/autoblogger/sources.test.ts -t "canonicalizes|continues"` — 2 tests failed: fragment variants produced two sources and a private first candidate aborted selection. | Same command — 2 tests passed, 11 skipped. |
+| Stronger PAA relevance | `npm test -- lib/autoblogger/research.test.ts -t "generic video or startup"` — 1 test failed because three unrelated questions sharing only generic terms were accepted. | Same command — 1 test passed, 8 skipped. |
+| Combined affected files | After the individual cycles, `npm test -- lib/autoblogger/sources.test.ts lib/autoblogger/research.test.ts` passed 22/22. | Final source and researcher totals are 13/13 and 9/9 respectively. |
+
+### Verification
+
+- Focused Task 2: `npm test -- lib/autoblogger/apify-client.test.ts lib/autoblogger/keyword-providers.test.ts lib/autoblogger/research.test.ts lib/autoblogger/sources.test.ts` — 4 files, 28 tests passed.
+- `npm run typecheck` — Next route generation and TypeScript completed successfully.
+- `npm run lint` — completed with zero warnings or errors.
+- `npm test` — 28 files, 280 tests passed.
+- `git diff --check` — completed successfully before staging.
+
+### Self-review
+
+- Confirmed the generic provider/Apify HTTP boundary is unchanged; only safe source retrieval requires the stronger source-specific subtype.
+- Confirmed source HTTP cannot silently auto-follow under the contract, each hop gets a fresh DNS set, and the reported peer must be public and belong to that set.
+- Confirmed the checker does not materialize body content and stops as soon as streamed bytes exceed the cap; no body bytes enter `CheckedSource` or evidence.
+- Confirmed URL fragments never reach HTTP requests or distinctness keys.
+- Confirmed one failed source cannot prevent later candidates from satisfying the existing two-source/authority requirement.
+- Confirmed every blocking Apify dependency and every retry attempt receives only the deadline remaining from the original actor start.
+- Confirmed the stronger PAA mutation still permits the existing relevant demo-day questions and staged 50/10 researcher fixture.
+- Confirmed no live network calls, credentials, legacy parser changes, collector changes, or dependency additions were introduced.
+- Confirmed the pre-existing untracked `package-lock.json` remains excluded.
+
+### Fix-round concerns
+
+- Task 5's production source transport must implement the explicit manual-redirect, address-pinning/peer-reporting, streaming, cancellation, and byte-cap contract. Task 2 now rejects responses that disclose auto-follow or a mismatched peer and independently enforces the streamed-byte limit.

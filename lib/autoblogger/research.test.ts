@@ -34,7 +34,67 @@ function successfulRun(id: string, datasetId: string): ApifyRun {
   };
 }
 
+function delayed<T>(milliseconds: number, value: T): Promise<T> {
+  return new Promise((resolve) => setTimeout(() => resolve(value), milliseconds));
+}
+
 describe('bounded Apify execution', () => {
+  it('times out a hanging startActor dependency', async () => {
+    const client: ApifyClient = {
+      startActor: async () => delayed(25, successfulRun('run-123', 'dataset-456')),
+      getRun: async () => { throw new Error('not used'); },
+      getDatasetItems: async () => [],
+    };
+
+    await expect(runApifyActor(client, SERP_ACTOR_ID, {}, {
+      timeoutMs: 5,
+      maxAttempts: 1,
+    })).rejects.toThrow(/timed out.*start/i);
+  });
+
+  it('times out a hanging getRun poll dependency', async () => {
+    const client: ApifyClient = {
+      startActor: async () => ({ id: 'run-123', status: 'RUNNING' }),
+      getRun: async () => delayed(25, successfulRun('run-123', 'dataset-456')),
+      getDatasetItems: async () => [],
+    };
+
+    await expect(runApifyActor(client, SERP_ACTOR_ID, {}, {
+      timeoutMs: 5,
+      maxAttempts: 1,
+      pollIntervalMs: 0,
+      sleep: async () => undefined,
+    })).rejects.toThrow(/timed out.*poll/i);
+  });
+
+  it('times out a hanging polling sleep dependency', async () => {
+    const client: ApifyClient = {
+      startActor: async () => ({ id: 'run-123', status: 'RUNNING' }),
+      getRun: async () => successfulRun('run-123', 'dataset-456'),
+      getDatasetItems: async () => [],
+    };
+
+    await expect(runApifyActor(client, SERP_ACTOR_ID, {}, {
+      timeoutMs: 5,
+      maxAttempts: 1,
+      pollIntervalMs: 1,
+      sleep: async () => delayed(25, undefined),
+    })).rejects.toThrow(/timed out.*sleep/i);
+  });
+
+  it('times out a hanging dataset dependency', async () => {
+    const client: ApifyClient = {
+      startActor: async () => successfulRun('run-123', 'dataset-456'),
+      getRun: async () => { throw new Error('not used'); },
+      getDatasetItems: async () => delayed(25, []),
+    };
+
+    await expect(runApifyActor(client, SERP_ACTOR_ID, {}, {
+      timeoutMs: 5,
+      maxAttempts: 1,
+    })).rejects.toThrow(/timed out.*dataset/i);
+  });
+
   it('bounds polling, retries transient reads, and preserves exact run/dataset provenance', async () => {
     let pollAttempts = 0;
     let elapsed = 0;
@@ -217,6 +277,15 @@ describe('staged researcher', () => {
       'What belongs in a demo day checklist?',
       'What are payroll tax deadlines?',
       'How is a corporation registered?',
+    ])).toThrow(/three relevant/i);
+  });
+
+  it('rejects questions whose only overlap is a generic video or startup token', () => {
+    expect(() => selectRelevantPaaQuestions('startup product demo video', [
+      'Which video codec is best for archival footage?',
+      'How does a startup register for payroll tax?',
+      'Why is video compression useful for television?',
+      'What product demo evidence should a buyer review?',
     ])).toThrow(/three relevant/i);
   });
 });

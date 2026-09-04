@@ -14,6 +14,29 @@ export type HttpResponse = {
 
 export type HttpTransport = (request: HttpRequest) => Promise<HttpResponse>;
 
+/**
+ * Security contract for source retrieval transports. Implementations must:
+ * disable automatic redirects, connect only to one of `allowedPeerAddresses`,
+ * report the actual connected peer, expose body bytes incrementally, stop at
+ * `maxResponseBytes`, and cancel I/O when the signal aborts or iteration ends.
+ */
+export type SourceHttpRequest = HttpRequest & {
+  redirect: 'manual';
+  allowedPeerAddresses: readonly string[];
+  maxResponseBytes: number;
+};
+
+export type SourceHttpResponse = Omit<HttpResponse, 'body'> & {
+  body: AsyncIterable<Uint8Array>;
+  redirected: boolean;
+  url: string;
+  peerAddress: string;
+};
+
+export type SourceHttpTransport = (
+  request: SourceHttpRequest,
+) => Promise<SourceHttpResponse>;
+
 export function redactSensitive(value: unknown, secrets: string[] = []): string {
   let redacted = value instanceof Error
     ? `${value.name}: ${value.message}`
@@ -28,11 +51,14 @@ export function redactSensitive(value: unknown, secrets: string[] = []): string 
     .replace(/\b(?:Bearer|Apikey)\s+[^\s"']+/gi, '[REDACTED]');
 }
 
-export async function requestWithTimeout(
-  transport: HttpTransport,
-  request: Omit<HttpRequest, 'signal'>,
+export async function requestWithTimeout<
+  TRequest extends HttpRequest,
+  TResponse extends HttpResponse,
+>(
+  transport: (request: TRequest) => Promise<TResponse>,
+  request: Omit<TRequest, 'signal'>,
   timeoutMs: number,
-): Promise<HttpResponse> {
+): Promise<TResponse> {
   const controller = new AbortController();
   let timeout: ReturnType<typeof setTimeout>;
   const timeoutPromise = new Promise<never>((_resolve, reject) => {
@@ -43,7 +69,7 @@ export async function requestWithTimeout(
   });
   try {
     return await Promise.race([
-      transport({ ...request, signal: controller.signal }),
+      transport({ ...request, signal: controller.signal } as TRequest),
       timeoutPromise,
     ]);
   } finally {
