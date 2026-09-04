@@ -12,9 +12,9 @@ import {
   GENERATED_DRAFT_V2_JSON_SCHEMA,
   GeneratedDraftV2Schema,
   assertSourceFacts,
+  assertSourceFactsMatchCheckedSources,
   inspectGeneratedDraft,
   materializeDraftBundle,
-  normalizeHttpUrl,
   selectProductMedia,
   type AllowlistedProductMedia,
   type DraftSafetyFinding,
@@ -54,6 +54,47 @@ const DraftCritiqueV1Schema = z.object({
 
 export type DraftCritiqueV1 = z.infer<typeof DraftCritiqueV1Schema>;
 
+const RepairIssueEvaluationSchema = z.object({
+  issueId: z.string().trim().min(1),
+  resolved: z.boolean(),
+  message: z.string().trim().min(1),
+}).strict();
+
+const DraftRepairVerificationV1Schema = z.object({
+  schemaVersion: z.literal(1),
+  approved: z.boolean(),
+  evaluations: z.array(RepairIssueEvaluationSchema),
+  newIssues: z.array(CritiqueIssueSchema),
+}).strict().superRefine((verification, context) => {
+  const evaluationIds = verification.evaluations.map(({ issueId }) => issueId);
+  if (new Set(evaluationIds).size !== evaluationIds.length) {
+    context.addIssue({
+      code: 'custom',
+      message: 'repair-verification issue identifiers must be unique',
+      path: ['evaluations'],
+    });
+  }
+  const newIssueIds = verification.newIssues.map(({ id }) => id);
+  if (new Set(newIssueIds).size !== newIssueIds.length) {
+    context.addIssue({
+      code: 'custom',
+      message: 'new repair-verification issue identifiers must be unique',
+      path: ['newIssues'],
+    });
+  }
+  const isClean = verification.evaluations.every(({ resolved }) => resolved)
+    && verification.newIssues.length === 0;
+  if (verification.approved && !isClean) {
+    context.addIssue({
+      code: 'custom',
+      message: 'approved requires every evaluation to be resolved and no new issues',
+      path: ['approved'],
+    });
+  }
+});
+
+export type DraftRepairVerificationV1 = z.infer<typeof DraftRepairVerificationV1Schema>;
+
 export const DRAFT_CRITIQUE_V1_JSON_SCHEMA = {
   type: 'object',
   additionalProperties: false,
@@ -80,6 +121,57 @@ export const DRAFT_CRITIQUE_V1_JSON_SCHEMA = {
     if: { properties: { approved: { const: false } }, required: ['approved'] },
     then: { properties: { issues: { minItems: 1 } } },
     else: { properties: { issues: { maxItems: 0 } } },
+  }],
+} as const;
+
+export const DRAFT_REPAIR_VERIFICATION_V1_JSON_SCHEMA = {
+  type: 'object',
+  additionalProperties: false,
+  properties: {
+    schemaVersion: { type: 'integer', const: 1 },
+    approved: { type: 'boolean' },
+    evaluations: {
+      type: 'array',
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        properties: {
+          issueId: { type: 'string', pattern: '.*\\S.*' },
+          resolved: { type: 'boolean' },
+          message: { type: 'string', pattern: '.*\\S.*' },
+        },
+        required: ['issueId', 'resolved', 'message'],
+      },
+    },
+    newIssues: {
+      type: 'array',
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        properties: {
+          id: { type: 'string', pattern: '.*\\S.*' },
+          code: { type: 'string', pattern: '.*\\S.*' },
+          message: { type: 'string', pattern: '.*\\S.*' },
+          repairInstruction: { type: 'string', pattern: '.*\\S.*' },
+        },
+        required: ['id', 'code', 'message', 'repairInstruction'],
+      },
+    },
+  },
+  required: ['schemaVersion', 'approved', 'evaluations', 'newIssues'],
+  allOf: [{
+    if: { properties: { approved: { const: true } }, required: ['approved'] },
+    then: {
+      properties: {
+        evaluations: {
+          items: {
+            properties: { resolved: { const: true } },
+            required: ['resolved'],
+          },
+        },
+        newIssues: { maxItems: 0 },
+      },
+    },
   }],
 } as const;
 
@@ -128,6 +220,12 @@ product claims, and output rules. Do not rewrite it. Return approved only when t
 are no issues; otherwise provide unique issue IDs and concrete repair instructions.
 Never provide an acceptance predicate.`;
 
+const REPAIR_VERIFICATION_SYSTEM = `Independently verify one repaired article draft.
+Evaluate every supplied original critique issue by its exact stable ID. Return one
+explicit resolved/unresolved evaluation for every original issue and report every
+new issue separately. Approve only when all original issues are resolved and there
+are no new issues. Do not repair or rewrite the draft.`;
+
 const REPAIR_SYSTEM = `Repair the version 2 article-generation JSON exactly once.
 Address every independent-critique and deterministic-safety issue while preserving
 the supplied candidate, source inventory, exact FAQ questions, and approved claim
@@ -156,6 +254,45 @@ function critiqueIssues(critique: DraftCritiqueV1): DraftSafetyFinding[] {
     return [{ code: 'critique.rejected', message: 'Independent critique rejected the draft.' }];
   }
   return critique.issues.map(({ id, code, message }) => ({ issueId: id, code, message }));
+}
+
+function repairVerificationFindings(
+  originalIssues: DraftCritiqueV1['issues'],
+  verification: DraftRepairVerificationV1,
+): DraftSafetyFinding[] {
+  const originalById = new Map(originalIssues.map((issue) => [issue.id, issue]));
+  const evaluationById = new Map(verification.evaluations.map((evaluation) => [evaluation.issueId, evaluation]));
+  const findings: DraftSafetyFinding[] = [];
+
+  for (const issue of originalIssues) {
+    const evaluation = evaluationById.get(issue.id);
+    if (!evaluation) {
+      findings.push({
+        code: 'critique.verification_incomplete',
+        issueId: issue.id,
+        message: 'Post-repair verification omitted an original critique issue.',
+      });
+    } else if (!evaluation.resolved) {
+      findings.push({ code: issue.code, issueId: issue.id, message: evaluation.message });
+    }
+  }
+  for (const evaluation of verification.evaluations) {
+    if (!originalById.has(evaluation.issueId)) {
+      findings.push({
+        code: 'critique.verification_unexpected',
+        issueId: evaluation.issueId,
+        message: 'Post-repair verification evaluated an unknown original issue.',
+      });
+    }
+  }
+  findings.push(...verification.newIssues.map(({ id, code, message }) => ({ issueId: id, code, message })));
+  if (!verification.approved && findings.length === 0) {
+    findings.push({
+      code: 'critique.verification_rejected',
+      message: 'Post-repair verification did not approve the repaired draft.',
+    });
+  }
+  return findings;
 }
 
 function validDateOnly(value: string): boolean {
@@ -196,43 +333,7 @@ function assertDraftingContext(context: DraftingContext): void {
     throw new Error('Drafting requires exactly three PAA-grounded FAQ questions.');
   }
 
-  const evidenceByUrl = new Map(context.evidence.sources.flatMap((source) => {
-    const normalized = normalizeHttpUrl(source.url);
-    return normalized ? [[normalized, source] as const] : [];
-  }));
-  const reachableFinalUrls = new Set<string>();
-  for (const checked of context.checkedSources) {
-    const checkedUrl = normalizeHttpUrl(checked.url);
-    const finalUrl = normalizeHttpUrl(checked.finalUrl);
-    const evidenceSource = checkedUrl ? evidenceByUrl.get(checkedUrl) : undefined;
-    if (
-      evidenceSource
-      && finalUrl
-      && checked.reachable
-      && checked.status >= 200
-      && checked.status < 400
-      && evidenceSource.authoritative === checked.authoritative
-    ) {
-      reachableFinalUrls.add(finalUrl);
-    }
-  }
-  if (reachableFinalUrls.size < 2) {
-    throw new Error('Drafting requires at least two distinct normalized checked final URLs from checked sources.');
-  }
-  const sourceFactFinalUrls = context.sourceFacts.flatMap((source) => {
-    const normalized = normalizeHttpUrl(source.url);
-    return normalized ? [normalized] : [];
-  });
-  if (new Set(sourceFactFinalUrls).size < 2) {
-    throw new Error('Source facts require at least two distinct normalized checked final URLs.');
-  }
-  if (
-    context.sourceFacts.length < 2
-    || sourceFactFinalUrls.length !== context.sourceFacts.length
-    || sourceFactFinalUrls.some((url) => !reachableFinalUrls.has(url))
-  ) {
-    throw new Error('Each source fact must bind to a reachable checked source final URL.');
-  }
+  assertSourceFactsMatchCheckedSources(context);
   const sourceIds = context.sourceFacts.map(({ id }) => id);
   const factIds = context.sourceFacts.flatMap(({ facts }) => facts.map(({ id }) => id));
   if (new Set(sourceIds).size !== sourceIds.length || new Set(factIds).size !== factIds.length) {
@@ -338,20 +439,24 @@ export function createStructuredDrafter(options: StructuredDrafterOptions) {
             : [{ code: 'content.secret', message: 'Repaired draft contains a secret-like value.' }],
         };
       }
-      const repairedCritique = DraftCritiqueV1Schema.parse(await options.client.generate({
-        name: 'videoclaw_article_critique_v1',
-        schema: DRAFT_CRITIQUE_V1_JSON_SCHEMA,
-        system: CRITIQUE_SYSTEM,
-        input: { ...suppliedContext, draft: repaired },
+      const repairedVerification = DraftRepairVerificationV1Schema.parse(await options.client.generate({
+        name: 'videoclaw_article_repair_verification_v1',
+        schema: DRAFT_REPAIR_VERIFICATION_V1_JSON_SCHEMA,
+        system: REPAIR_VERIFICATION_SYSTEM,
+        input: {
+          ...suppliedContext,
+          originalIssues: critique.issues,
+          repairedDraft: repaired,
+        },
       }));
-      if (containsSecretLikeValue(repairedCritique)) {
+      if (containsSecretLikeValue(repairedVerification)) {
         return {
           status: 'blocked',
           reason: 'content_safety_failed',
           findings: [{ code: 'content.secret', message: 'Critic output contains a secret-like value.' }],
         };
       }
-      remainingFindings.push(...critiqueIssues(repairedCritique));
+      remainingFindings.push(...repairVerificationFindings(critique.issues, repairedVerification));
       if (remainingFindings.length > 0) {
         return {
           status: 'blocked',

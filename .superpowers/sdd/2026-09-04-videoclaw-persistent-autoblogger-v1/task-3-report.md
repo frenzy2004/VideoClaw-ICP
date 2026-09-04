@@ -168,3 +168,49 @@ The first repository verification run passed all 392 tests and ESLint, while Typ
 - Exact normalized fact containment is intentionally conservative and may reject legitimate paraphrases. That is preferable to accepting unsupported objective copy; callers should supply approved fact text matching the publishable claim they intend to allow.
 - The independent critic and later human factual/legal approvals remain necessary for meaning, context, and legal substantiation that deterministic string checks cannot establish.
 - Media file existence and the lander's final publication contract remain Task 4 checks in a temporary checkout; Task 3 continues to avoid a duplicate publication validator.
+
+## Final scoped review fixes (third pass, 2026-09-05)
+
+This pass supersedes the second-pass statement that a generic clean second critique is sufficient and clarifies that approved source-fact support now requires full normalized equality, not containment. No lander files or production branches were modified.
+
+### Implementation changes
+
+- Added a dedicated strict `videoclaw_article_repair_verification_v1` response contract. Its request contains the complete original critic issue objects, preserving every available ID, code, message, and repair instruction, plus the repaired draft. Its response contains one explicit resolved/unresolved evaluation per original issue ID and a separate `newIssues` collection.
+- Post-repair acceptance now requires exact original-ID coverage, no duplicate or unknown evaluations, every original issue resolved, no new issues, explicit approval, and clean deterministic checks. An omitted issue blocks whether the verifier claims approval or rejection. Unresolved and newly discovered issues retain structured IDs in blocking findings. The flow still makes at most one repair request.
+- Expanded claim detection to fail closed for declarative factual sentences and to explicitly cover product aliases/pronouns, all common modal auxiliaries (`can`, `could`, `may`, `might`, `will`, `would`, `shall`, `should`, `must`, and `ought to`), quantitative statements, causal language, comparisons, and outcome language. Only nonfactual imperatives and non-claim fragments without an objective signal remain exempt.
+- Replaced approved-fact containment with exact normalized equality between the complete visible sentence/span and one selected SourceFact claim text. A shorter approved fact can no longer substantiate a longer assertion with an appended outcome or guarantee. Product-claim bindings continue to require exact caller-supplied claim text and allowed fact IDs.
+- Centralized source-fact/checked-source binding in `content-bundle.ts` and invoke it from both drafting preflight and bundle materialization. Every source-fact URL must be a normalized reachable checked final URL corresponding to evidence with matching authority; at least two distinct final URLs are required. Materialization separately confirms that its selected visible source set contains distinct checked final URLs exactly matching the selected source records.
+- Removed `materializeDraftBundle()` and its validation helpers from the `lib/autoblogger/index.ts` public barrel. Its direct module export remains only for internal cross-file composition and direct regression tests, with defense-in-depth SourceFact validation, checked-source validation, DTO inspection, final Markdown/SVG inspection, and copied-passage/secret scans.
+- Materialization now reparses the supplied product media through `AllowlistedProductMediaSchema` before copying any field. Traversal, repeatedly encoded dot segments, malformed selectors, dimensions, and labels therefore cannot bypass the normal selection guard through a direct module call.
+- Added Unicode category `Cf` rejection to source identifiers/labels/fact text, media alt/caption labels, generated SVG-visible title/alt/step text, and direct SVG rendering. Existing ASCII/C0/C1 line/control and XML-code-point restrictions remain in force.
+
+### Regression-first evidence
+
+- Repair-accounting RED: a one-issue initial critique followed by an approving verifier with no issue evaluation returned `ready`. GREEN: both approving and rejecting forgetful verifiers block with `critique.verification_incomplete` and the omitted stable issue ID; a complete clean evaluation returns ready; unresolved and new issues block; request history proves exactly one repair.
+- Claim detection RED: eight standalone modal variants of `A backup recording can protect the pitch.` were accepted, and a longer guarantee passed when bound to a shorter contained fact. GREEN: all modal variants require binding, the shorter-fact bypass is rejected, an ordinary factual outcome without a keyword fails closed, and a genuinely nonfactual imperative remains exempt.
+- Materialization/Unicode RED: direct materialization serialized an unreachable source, traversal/encoded-traversal media, and zero-width media; category-Cf controls survived in source labels, media captions, and SVG titles. GREEN: all of those fixtures are rejected at the relevant preflight/materialization/render boundary.
+
+### Verification
+
+Focused Task 3 command:
+
+```text
+npm test -- lib/autoblogger/content-bundle.test.ts lib/autoblogger/drafting.test.ts
+```
+
+Result: 2 files and 112 tests passed.
+
+Repository-wide test command:
+
+```text
+npm test
+```
+
+Result: 33 files and 413 tests passed. Final TypeScript, ESLint, diff, staged-diff, branch-state, and lander-state checks are recorded in the commit handoff.
+
+### Residual concerns after the third pass
+
+- Exact normalized claim/fact equality intentionally rejects paraphrases and combined claims. Approved SourceFact text must be authored at the complete sentence granularity intended for publication.
+- Factual-sentence detection is deliberately conservative; uncommon imperative openings may require an explicit approved fact rather than being treated as editorial direction.
+- The verifier is still a model judgment, but it can no longer silently forget an original issue: deterministic ID accounting, new-issue reporting, and the human review-state approvals remain separate gates.
+- Media existence and final lander-native publication validation remain Task 4 responsibilities.

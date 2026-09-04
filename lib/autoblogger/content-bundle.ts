@@ -37,7 +37,20 @@ function isXml10Text(value: string): boolean {
   return true;
 }
 
-const xmlVisibleString = (maximum: number) => z.string().trim().min(1).max(maximum).refine(isXml10Text);
+function isFormatControlFree(value: string): boolean {
+  return !/\p{Cf}/u.test(value);
+}
+
+const singleLineControlFreeString = z.string().trim().min(1).refine((value) => (
+  !/[\u0000-\u001F\u007F-\u009F\u2028\u2029]/u.test(value)
+  && isFormatControlFree(value)
+));
+const xmlVisibleString = (maximum: number) => z.string()
+  .trim()
+  .min(1)
+  .max(maximum)
+  .refine(isXml10Text)
+  .refine(isFormatControlFree);
 
 export const GeneratedDraftV2Schema = z.object({
   schemaVersion: z.literal(2),
@@ -186,10 +199,6 @@ export type SourceFact = {
   excerpt?: string;
 };
 
-const singleLineControlFreeString = z.string().trim().min(1).refine((value) => (
-  !/[\u0000-\u001F\u007F-\u009F\u2028\u2029]/u.test(value)
-));
-
 const SourceFactInputSchema: z.ZodType<SourceFact> = z.object({
   id: singleLineControlFreeString,
   label: singleLineControlFreeString,
@@ -209,6 +218,49 @@ export function assertSourceFacts(sourceFacts: SourceFact[]): void {
   if (!z.array(SourceFactInputSchema).min(2).safeParse(sourceFacts).success) {
     throw new Error('Invalid source fact input.');
   }
+}
+
+export function assertSourceFactsMatchCheckedSources(context: Pick<
+DraftingContext,
+'evidence' | 'checkedSources' | 'sourceFacts'
+>): Set<string> {
+  const evidenceByUrl = new Map(context.evidence.sources.flatMap((source) => {
+    const normalized = normalizeHttpUrl(source.url);
+    return normalized ? [[normalized, source] as const] : [];
+  }));
+  const reachableFinalUrls = new Set<string>();
+  for (const checked of context.checkedSources) {
+    const checkedUrl = normalizeHttpUrl(checked.url);
+    const finalUrl = normalizeHttpUrl(checked.finalUrl);
+    const evidenceSource = checkedUrl ? evidenceByUrl.get(checkedUrl) : undefined;
+    if (
+      evidenceSource
+      && finalUrl
+      && checked.reachable
+      && checked.status >= 200
+      && checked.status < 400
+      && evidenceSource.authoritative === checked.authoritative
+    ) {
+      reachableFinalUrls.add(finalUrl);
+    }
+  }
+  if (reachableFinalUrls.size < 2) {
+    throw new Error('Drafting requires at least two distinct normalized checked final URLs from checked sources.');
+  }
+  const sourceFactFinalUrls = context.sourceFacts.flatMap(({ url }) => {
+    const normalized = normalizeHttpUrl(url);
+    return normalized ? [normalized] : [];
+  });
+  if (new Set(sourceFactFinalUrls).size < 2) {
+    throw new Error('Source facts require at least two distinct normalized checked final URLs.');
+  }
+  if (
+    sourceFactFinalUrls.length !== context.sourceFacts.length
+    || sourceFactFinalUrls.some((url) => !reachableFinalUrls.has(url))
+  ) {
+    throw new Error('Each source fact must bind to a reachable checked source final URL.');
+  }
+  return reachableFinalUrls;
 }
 
 export type ProductClaim = {
@@ -284,8 +336,8 @@ const AllowlistedProductMediaSchema = z.object({
   keywordIncludes: z.array(z.string().trim().min(1)).min(1).optional(),
   src: localAssetPath,
   poster: localAssetPath,
-  alt: z.string().trim().min(1),
-  caption: z.string().trim().min(1),
+  alt: singleLineControlFreeString,
+  caption: singleLineControlFreeString,
   width: z.number().int().positive(),
   height: z.number().int().positive(),
 }).strict().refine((media) => Boolean(
@@ -499,19 +551,28 @@ function containsProductAlias(sentence: string, claims: ProductClaim[]): boolean
     || /\b(?:it|this app|this product|this platform|this tool|the app|the product|the platform|the tool|our app|our product)\b/iu.test(sentence);
 }
 
+const pureImperativeOpeningWords = new Set([
+  'address', 'bind', 'build', 'capture', 'check', 'choose', 'create', 'define', 'edit',
+  'follow', 'include', 'keep', 'make', 'plan', 'record', 'reduce', 'review', 'show', 'start',
+  'test', 'then', 'use', 'verify',
+]);
+
 function requiresClaimBinding(sentence: string, claims: ProductClaim[]): boolean {
-  return containsProductAlias(sentence, claims)
-    || /\b(?:because|therefore|thus|causes|caused|leads\s+to|led\s+to|results\s+in|resulted\s+in|enables|enabled|guarantees|guaranteed|cuts|cutting|reduces|reduced|increases|increased|improves|improved|boosts|boosted|saves|saved|doubles|doubled|triples|tripled|converts|converted|conversion|revenue|growth|outcome|faster|slower|higher|lower|shorter|shortest|longer|longest|better|worse|more|less|fewer|most|least|best|half|twice|need|needs|require|requires)\b/iu.test(sentence)
+  const hasExplicitClaimSignal = containsProductAlias(sentence, claims)
+    || /\b(?:can|could|may|might|will|would|shall|should|must|ought\s+to)\b/iu.test(sentence)
+    || /\b(?:because|therefore|thereby|thus|so\s+that|causes|caused|leads\s+to|led\s+to|results\s+in|resulted\s+in|enables|enabled|ensures|ensured|allows|allowed|guarantees|guaranteed|protects|protected|prevents|prevented|preserves|preserved|delivers|delivered|achieves|achieved|drives|drove|driven|cuts|cutting|reduces|reduced|increases|increased|improves|improved|boosts|boosted|saves|saved|doubles|doubled|triples|tripled|converts|converted|conversion|revenue|growth|outcome|faster|slower|higher|lower|shorter|shortest|longer|longest|better|worse|more|less|fewer|most|least|best|half|twice|need|needs|require|requires)\b/iu.test(sentence)
+    || /\bto\s+(?:protect|prevent|preserve|deliver|achieve|drive|cut|reduce|increase|improve|boost|save|convert)\b/iu.test(sentence)
     || /\b\d+(?:\.\d+)?(?:\s?(?:%|x)|\s+(?:times?|minutes?|hours?|days?|weeks?|months?))?\b/iu.test(sentence);
+  if (hasExplicitClaimSignal) return true;
+  if (!/[.!]$/u.test(sentence)) return false;
+  const firstWord = sentence.toLocaleLowerCase('en-US').match(/^[a-z]+/)?.[0] ?? '';
+  return !pureImperativeOpeningWords.has(firstWord);
 }
 
-function factExactlySupportsSpan(span: string, factTexts: string[]): boolean {
+function factExactlyMatchesSpan(span: string, factTexts: string[]): boolean {
   const normalizedSpan = normalizeKeyword(span);
-  return normalizedSpan.length > 0 && factTexts.some((text) => {
-    const normalizedFact = normalizeKeyword(text);
-    return normalizedFact.length > 0
-      && (normalizedSpan === normalizedFact || ` ${normalizedSpan} `.includes(` ${normalizedFact} `));
-  });
+  return normalizedSpan.length > 0
+    && factTexts.some((text) => normalizeKeyword(text) === normalizedSpan);
 }
 
 function claimBindingsAreValid(
@@ -539,7 +600,7 @@ function claimBindingsAreValid(
         !factsById.has(factId)
         || !visibleSourceIds.includes(factsById.get(factId)?.sourceId as string)
       ))
-      || !factExactlySupportsSpan(
+      || !factExactlyMatchesSpan(
         binding.span,
         binding.sourceFactIds.map((factId) => factsById.get(factId)?.text ?? ''),
       )
@@ -654,6 +715,9 @@ export function renderEditorialSvg(graphic: GeneratedDraftV2['editorialGraphic']
   ];
   if (!visibleFields.every(isXml10Text)) {
     throw new Error('SVG-visible text contains XML-invalid code points.');
+  }
+  if (!visibleFields.every(isFormatControlFree)) {
+    throw new Error('SVG-visible text contains a Unicode format control.');
   }
   const cardWidth = 1040 / graphic.steps.length;
   const cards = graphic.steps.map((step, index) => {
@@ -857,7 +921,10 @@ export function materializeDraftBundle(
   media: AllowlistedProductMedia,
 ): DraftBundle {
   assertSourceFacts(context.sourceFacts);
+  const checkedFinalUrls = assertSourceFactsMatchCheckedSources(context);
   isoDateTimeToDateOnly(context.generatedAt);
+  const parsedMedia = AllowlistedProductMediaSchema.safeParse(media);
+  if (!parsedMedia.success) throw new Error('Invalid media input.');
   const draft = GeneratedDraftV2Schema.parse(value);
   const findings = inspectGeneratedDraft(context, draft);
   if (findings.length > 0) {
@@ -865,6 +932,18 @@ export function materializeDraftBundle(
   }
   const sourceById = new Map(context.sourceFacts.map((source) => [source.id, source]));
   const sources = draft.sourceReferences.map(({ sourceId }) => sourceById.get(sourceId) as SourceFact);
+  const selectedSourceUrls = sources.flatMap(({ url }) => {
+    const normalized = normalizeHttpUrl(url);
+    return normalized ? [normalized] : [];
+  });
+  if (
+    selectedSourceUrls.length !== sources.length
+    || new Set(selectedSourceUrls).size !== sources.length
+    || selectedSourceUrls.some((url) => !checkedFinalUrls.has(url))
+  ) {
+    throw new Error('Selected visible sources must exactly match distinct reachable checked final URLs.');
+  }
+  const safeMedia = parsedMedia.data;
   const date = isoDateTimeToDateOnly(context.generatedAt);
   const article = {
     id: context.candidate.articleId,
@@ -888,12 +967,12 @@ export function materializeDraftBundle(
     })),
     faqs: draft.faqAnswers,
     productMedia: {
-      src: media.src,
-      poster: media.poster,
-      alt: media.alt,
-      caption: media.caption,
-      width: media.width,
-      height: media.height,
+      src: safeMedia.src,
+      poster: safeMedia.poster,
+      alt: safeMedia.alt,
+      caption: safeMedia.caption,
+      width: safeMedia.width,
+      height: safeMedia.height,
     },
     editorialGraphic: {
       src: `/media/blog/${context.candidate.slug}.svg`,

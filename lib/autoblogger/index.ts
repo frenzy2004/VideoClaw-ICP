@@ -1,5 +1,19 @@
 export * from './apify-client';
-export * from './content-bundle';
+export {
+  GENERATED_DRAFT_V2_JSON_SCHEMA,
+  GeneratedDraftV2Schema,
+  inspectGeneratedDraft,
+  normalizeHttpUrl,
+  renderEditorialSvg,
+  selectProductMedia,
+  type AllowlistedProductMedia,
+  type DraftProvenance,
+  type DraftSafetyFinding,
+  type DraftingContext,
+  type GeneratedDraftV2,
+  type ProductClaim,
+  type SourceFact,
+} from './content-bundle';
 export * from './date-time';
 export * from './domain';
 export * from './drafting';

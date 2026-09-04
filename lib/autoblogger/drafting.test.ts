@@ -5,6 +5,7 @@ import type { StructuredOutputClient, StructuredOutputRequest } from './openai-r
 import {
   createStructuredDrafter,
   type DraftCritiqueV1,
+  type DraftRepairVerificationV1,
 } from './drafting';
 import type {
   AllowlistedProductMedia,
@@ -155,6 +156,32 @@ const approvedCritique: DraftCritiqueV1 = {
   approved: true,
   issues: [],
 };
+
+function resolvedVerification(critique: DraftCritiqueV1): DraftRepairVerificationV1 {
+  return {
+    schemaVersion: 1,
+    approved: true,
+    evaluations: critique.issues.map(({ id }) => ({
+      issueId: id,
+      resolved: true,
+      message: 'The repaired draft resolves this original issue.',
+    })),
+    newIssues: [],
+  };
+}
+
+function unresolvedVerification(critique: DraftCritiqueV1): DraftRepairVerificationV1 {
+  return {
+    schemaVersion: 1,
+    approved: false,
+    evaluations: critique.issues.map(({ id, message }) => ({
+      issueId: id,
+      resolved: false,
+      message,
+    })),
+    newIssues: [],
+  };
+}
 
 class FixtureStructuredClient implements StructuredOutputClient {
   readonly requests: StructuredOutputRequest[] = [];
@@ -314,7 +341,7 @@ describe('structured drafting orchestration', () => {
       ...structuredClone(draft),
       description: 'Use this specific founder pitch workflow to plan factual points, record natural takes, show product proof, support claims, review captions, and test final playback.',
     };
-    const client = new FixtureStructuredClient([draft, critique, repairedDraft, approvedCritique]);
+    const client = new FixtureStructuredClient([draft, critique, repairedDraft, resolvedVerification(critique)]);
     const drafter = createStructuredDrafter({ client, mediaAllowlist: [media] });
 
     const outcome = await drafter.draft(context);
@@ -324,12 +351,12 @@ describe('structured drafting orchestration', () => {
       'videoclaw_article_draft_v2',
       'videoclaw_article_critique_v1',
       'videoclaw_article_repair_v2',
-      'videoclaw_article_critique_v1',
+      'videoclaw_article_repair_verification_v1',
     ]);
     expect(JSON.stringify(outcome)).toContain(repairedDraft.description);
   });
 
-  it('requires a clean second critique before accepting a repaired issue', async () => {
+  it('requires clean post-repair verification before accepting a repaired issue', async () => {
     const firstCritique: DraftCritiqueV1 = {
       schemaVersion: 1,
       approved: false,
@@ -348,7 +375,7 @@ describe('structured drafting orchestration', () => {
       draft,
       firstCritique,
       repairedDraft,
-      approvedCritique,
+      resolvedVerification(firstCritique),
     ]);
     const drafter = createStructuredDrafter({ client, mediaAllowlist: [media] });
 
@@ -359,8 +386,100 @@ describe('structured drafting orchestration', () => {
       'videoclaw_article_draft_v2',
       'videoclaw_article_critique_v1',
       'videoclaw_article_repair_v2',
-      'videoclaw_article_critique_v1',
+      'videoclaw_article_repair_verification_v1',
     ]);
+    expect(client.requests[3]).toMatchObject({
+      input: {
+        originalIssues: firstCritique.issues,
+        repairedDraft,
+      },
+    });
+  });
+
+  it.each([true, false])('blocks when post-repair verification omits an original critic issue (approved: %s)', async (approved) => {
+    const firstCritique: DraftCritiqueV1 = {
+      schemaVersion: 1,
+      approved: false,
+      issues: [{
+        id: 'description-specificity',
+        code: 'copy.too_generic',
+        message: 'Make the opening more specific to the candidate.',
+        repairInstruction: 'Name the founder pitch workflow in the opening.',
+      }],
+    };
+    const repairedDraft = {
+      ...structuredClone(draft),
+      description: 'Use this specific founder pitch workflow to plan factual points and final playback.',
+    };
+    const forgetfulVerification = {
+      schemaVersion: 1,
+      approved,
+      evaluations: [],
+      newIssues: [],
+    };
+    const client = new FixtureStructuredClient([
+      draft,
+      firstCritique,
+      repairedDraft,
+      forgetfulVerification,
+    ]);
+    const drafter = createStructuredDrafter({ client, mediaAllowlist: [media] });
+
+    const outcome = await drafter.draft(context);
+
+    expect(outcome).toMatchObject({
+      status: 'blocked',
+      reason: 'content_safety_failed',
+      findings: [expect.objectContaining({
+        code: 'critique.verification_incomplete',
+        issueId: 'description-specificity',
+      })],
+    });
+    expect(client.requests.filter(({ name }) => name === 'videoclaw_article_repair_v2')).toHaveLength(1);
+  });
+
+  it('blocks a new issue found during post-repair verification without repairing again', async () => {
+    const firstCritique: DraftCritiqueV1 = {
+      schemaVersion: 1,
+      approved: false,
+      issues: [{
+        id: 'description-specificity',
+        code: 'copy.too_generic',
+        message: 'Make the opening more specific to the candidate.',
+        repairInstruction: 'Name the founder pitch workflow in the opening.',
+      }],
+    };
+    const verification: DraftRepairVerificationV1 = {
+      ...resolvedVerification(firstCritique),
+      approved: false,
+      newIssues: [{
+        id: 'new-legal-risk',
+        code: 'legal.new_risk',
+        message: 'The repaired wording introduces a new legal risk.',
+        repairInstruction: 'Remove the new legal risk.',
+      }],
+    };
+    const client = new FixtureStructuredClient([
+      draft,
+      firstCritique,
+      structuredClone(draft),
+      verification,
+      structuredClone(draft),
+    ]);
+    const drafter = createStructuredDrafter({ client, mediaAllowlist: [media] });
+
+    const outcome = await drafter.draft(context);
+
+    expect(outcome).toMatchObject({
+      status: 'blocked',
+      reason: 'content_safety_failed',
+      findings: [expect.objectContaining({
+        code: 'legal.new_risk',
+        issueId: 'new-legal-risk',
+      })],
+    });
+    expect(client.requests.filter(({ name }) => name === 'videoclaw_article_repair_v2')).toHaveLength(1);
+    expect(client.requests).toHaveLength(4);
   });
 
   it('blocks an unrelated repair when the second critique still rejects it and never repairs twice', async () => {
@@ -374,15 +493,15 @@ describe('structured drafting orchestration', () => {
         repairInstruction: 'Explain the source guidance.',
       }],
     };
-    const secondCritique: DraftCritiqueV1 = {
+    const secondVerification: DraftRepairVerificationV1 = {
       schemaVersion: 1,
       approved: false,
-      issues: [{
-        id: 'source-specificity-remains',
-        code: 'copy.unspecific',
+      evaluations: [{
+        issueId: 'source-specificity',
+        resolved: false,
         message: 'The source explanation remains too generic.',
-        repairInstruction: 'Explain the source guidance.',
       }],
+      newIssues: [],
     };
     const unrelatedRepair = {
       ...structuredClone(draft),
@@ -392,7 +511,7 @@ describe('structured drafting orchestration', () => {
       draft,
       firstCritique,
       unrelatedRepair,
-      secondCritique,
+      secondVerification,
       structuredClone(draft),
     ]);
     const drafter = createStructuredDrafter({ client, mediaAllowlist: [media] });
@@ -405,7 +524,7 @@ describe('structured drafting orchestration', () => {
     }
     expect(outcome.findings).toContainEqual(expect.objectContaining({
       code: 'copy.unspecific',
-      issueId: 'source-specificity-remains',
+      issueId: 'source-specificity',
     }));
     expect(client.requests.filter(({ name }) => name === 'videoclaw_article_repair_v2')).toHaveLength(1);
     expect(client.requests).toHaveLength(4);
@@ -419,7 +538,12 @@ describe('structured drafting orchestration', () => {
         draft.sections[1],
       ],
     };
-    const client = new FixtureStructuredClient([unsafeDraft, approvedCritique, unsafeDraft, approvedCritique]);
+    const client = new FixtureStructuredClient([
+      unsafeDraft,
+      approvedCritique,
+      unsafeDraft,
+      resolvedVerification(approvedCritique),
+    ]);
     const drafter = createStructuredDrafter({ client, mediaAllowlist: [media] });
 
     const outcome = await drafter.draft(context);
@@ -444,7 +568,12 @@ describe('structured drafting orchestration', () => {
         repairInstruction: 'Make the workflow explanation specific.',
       }],
     };
-    const client = new FixtureStructuredClient([draft, critique, structuredClone(draft), critique]);
+    const client = new FixtureStructuredClient([
+      draft,
+      critique,
+      structuredClone(draft),
+      unresolvedVerification(critique),
+    ]);
     const drafter = createStructuredDrafter({ client, mediaAllowlist: [media] });
 
     const outcome = await drafter.draft(context);
@@ -472,7 +601,12 @@ describe('structured drafting orchestration', () => {
       ...structuredClone(draft),
       description: 'Use a changed description that does not resolve the section-level critic issue.',
     };
-    const client = new FixtureStructuredClient([draft, critique, unrelatedRepair, critique]);
+    const client = new FixtureStructuredClient([
+      draft,
+      critique,
+      unrelatedRepair,
+      unresolvedVerification(critique),
+    ]);
     const drafter = createStructuredDrafter({ client, mediaAllowlist: [media] });
 
     const outcome = await drafter.draft(context);
@@ -552,6 +686,11 @@ describe('structured drafting orchestration', () => {
     [
       'a control-bearing source label',
       { sourceFacts: [{ ...context.sourceFacts[0], label: 'Trusted\u0007source' }, context.sourceFacts[1]] },
+      /source fact input/i,
+    ],
+    [
+      'a Unicode format-control source label',
+      { sourceFacts: [{ ...context.sourceFacts[0], label: 'Trusted\u202Esource' }, context.sourceFacts[1]] },
       /source fact input/i,
     ],
     [

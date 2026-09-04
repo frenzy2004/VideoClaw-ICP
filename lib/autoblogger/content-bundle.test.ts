@@ -97,7 +97,7 @@ const context: DraftingContext = {
       url: 'https://www.ycombinator.com/video/',
       checkedAt: '2026-09-04T09:00:00.000Z',
       facts: [{ id: 'yc-bullets', text: 'The application video guidance recommends speaking from bullets.' }],
-      excerpt: 'A transient excerpt with twelve uniquely copied words should never persist in any output artifact.',
+      excerpt: 'A transient excerpt with twelve uniquely copied words remains outside every persisted output artifact.',
     },
     {
       id: 'ftc',
@@ -227,12 +227,49 @@ describe('content bundle materialization', () => {
     }])).toBeUndefined();
   });
 
+  it('rejects Unicode format controls in visible media labels', () => {
+    expect(selectProductMedia(candidate, [{
+      ...mediaAllowlist[0],
+      caption: 'Trusted product demo\u202Egpj.exe',
+    }])).toBeUndefined();
+  });
+
   it.each(['title', 'alt', 'label', 'detail'] as const)('rejects XML-invalid controls in SVG-visible %s text', (field) => {
     const graphic = structuredClone(generatedDraft.editorialGraphic);
     if (field === 'title' || field === 'alt') graphic[field] = `Unsafe\u0001${field}`;
     else graphic.steps[0][field] = `Unsafe\u0001${field}`;
 
     expect(() => renderEditorialSvg(graphic)).toThrow(/XML/i);
+  });
+
+  it('rejects Unicode format controls in generated SVG-visible text', () => {
+    expect(() => renderEditorialSvg({
+      ...structuredClone(generatedDraft.editorialGraphic),
+      title: 'Founder workflow\u202Egpj.exe',
+    })).toThrow(/format control/i);
+  });
+
+  it('revalidates checked final URLs during direct materialization', () => {
+    const uncheckedContext = {
+      ...context,
+      checkedSources: context.checkedSources.map((source, index) => index === 0
+        ? { ...source, reachable: false }
+        : source),
+    };
+
+    expect(() => materializeDraftBundle(uncheckedContext, generatedDraft, mediaAllowlist[0])).toThrow(/checked source/i);
+  });
+
+  it.each([
+    { src: '/landing/../private/product.mp4' },
+    { poster: '/landing/%25252e%25252e/private/product.jpg' },
+    { width: 0 },
+  ])('reparses and rejects malformed media during direct materialization', (mediaChange) => {
+    expect(() => materializeDraftBundle(
+      context,
+      generatedDraft,
+      { ...mediaAllowlist[0], ...mediaChange },
+    )).toThrow(/media input/i);
   });
 
   it('serializes the exact review-state lander fields and a deterministic escaped 1200x675 SVG', () => {
@@ -397,6 +434,81 @@ describe('generated-content safety review', () => {
     });
 
     expect(inspectGeneratedDraft(context, unsafeDraft)).toContainEqual(expect.objectContaining({
+      code: 'content.claim_binding',
+    }));
+  });
+
+  it('fails closed on an ordinary factual outcome sentence without a modal keyword', () => {
+    const unsafeDraft = withDraft({
+      sections: [{
+        ...generatedDraft.sections[0],
+        markdown: `${generatedDraft.sections[0].markdown} A backup copy remains available after recording.`,
+      }, generatedDraft.sections[1]],
+    });
+
+    expect(inspectGeneratedDraft(context, unsafeDraft)).toContainEqual(expect.objectContaining({
+      code: 'content.claim_binding',
+    }));
+  });
+
+  it('keeps a pure nonfactual imperative exempt from claim binding', () => {
+    const imperativeDraft = withDraft({
+      sections: [{
+        ...generatedDraft.sections[0],
+        markdown: `${generatedDraft.sections[0].markdown} Choose one audience and review the final file.`,
+      }, generatedDraft.sections[1]],
+    });
+
+    expect(inspectGeneratedDraft(context, imperativeDraft)).not.toContainEqual(expect.objectContaining({
+      code: 'content.claim_binding',
+    }));
+  });
+
+  it.each([
+    'A backup recording can protect the pitch.',
+    'A backup recording could protect the pitch.',
+    'A backup recording may protect the pitch.',
+    'A backup recording might protect the pitch.',
+    'A backup recording will protect the pitch.',
+    'A backup recording would protect the pitch.',
+    'A backup recording should protect the pitch.',
+    'A backup recording must protect the pitch.',
+  ])('requires a binding for a standalone modal claim: %s', (span) => {
+    const unsafeDraft = withDraft({
+      sections: [{
+        ...generatedDraft.sections[0],
+        markdown: `${generatedDraft.sections[0].markdown} ${span}`,
+      }, generatedDraft.sections[1]],
+    });
+
+    expect(inspectGeneratedDraft(context, unsafeDraft)).toContainEqual(expect.objectContaining({
+      code: 'content.claim_binding',
+    }));
+  });
+
+  it('rejects a longer unsupported assertion bound to a shorter approved fact', () => {
+    const shortFact = 'A backup recording protects the pitch.';
+    const longerClaim = 'A backup recording protects the pitch and guarantees investor interest.';
+    const shortFactContext: DraftingContext = {
+      ...context,
+      sourceFacts: context.sourceFacts.map((source) => source.id === 'yc'
+        ? { ...source, facts: [...source.facts, { id: 'yc-backup', text: shortFact }] }
+        : source),
+    };
+    const unsafeDraft = withDraft({
+      sections: [{
+        ...generatedDraft.sections[0],
+        markdown: `${generatedDraft.sections[0].markdown} ${longerClaim}`,
+      }, generatedDraft.sections[1]],
+      claimBindings: [...generatedDraft.claimBindings, {
+        location: '/sections/0/markdown',
+        span: longerClaim,
+        sourceFactIds: ['yc-backup'],
+        productClaimId: null,
+      }],
+    });
+
+    expect(inspectGeneratedDraft(shortFactContext, unsafeDraft)).toContainEqual(expect.objectContaining({
       code: 'content.claim_binding',
     }));
   });
@@ -610,7 +722,7 @@ describe('final serialized artifact inspection', () => {
       editorialGraphic: {
         ...generatedDraft.editorialGraphic,
         steps: generatedDraft.editorialGraphic.steps.map((step, index) => index === 0
-          ? { ...step, detail: context.sourceFacts[0].excerpt as string }
+          ? { ...step, detail: `Review ${context.sourceFacts[0].excerpt as string}` }
           : step),
       },
     });
