@@ -451,6 +451,21 @@ describe('generated-content safety review', () => {
     }));
   });
 
+  it.each([
+    'Editing costs are high',
+    'Choose one audience\nEditing teams prefer backups',
+    'Choose one audience\n\nEditing teams prefer backups',
+    'Choose one audience; editing costs are high',
+  ])('treats end, line, paragraph, and mixed-clause boundaries as claims: %s', (markdown) => {
+    const unsafeDraft = withDraft({
+      sections: [{ heading: 'Boundary case', markdown }, generatedDraft.sections[1]],
+    });
+
+    expect(inspectGeneratedDraft(context, unsafeDraft)).toContainEqual(expect.objectContaining({
+      code: 'content.claim_binding',
+    }));
+  });
+
   it('keeps a pure nonfactual imperative exempt from claim binding', () => {
     const imperativeDraft = withDraft({
       sections: [{
@@ -590,6 +605,16 @@ describe('generated-content safety review', () => {
     }));
     expect(inspectGeneratedDraft(context, tooLong)).toContainEqual(expect.objectContaining({
       code: 'content.direct_answer_words',
+    }));
+  });
+
+  it.each([
+    ['description', withDraft({ description: 'Create a founder workflow\u202Ewith hidden direction.' })],
+    ['section body', withDraft({ sections: [{ heading: 'Safe heading', markdown: 'Review the file\u2066before delivery.' }, generatedDraft.sections[1]] })],
+    ['FAQ answer', withDraft({ faqAnswers: [{ ...generatedDraft.faqAnswers[0], answer: '\uFEFFChoose one audience and final action.' }, ...generatedDraft.faqAnswers.slice(1)] })],
+  ])('rejects a Unicode format control in generated %s', (_field, unsafeDraft) => {
+    expect(inspectGeneratedDraft(context, unsafeDraft)).toContainEqual(expect.objectContaining({
+      code: 'content.dto_invalid',
     }));
   });
 });
@@ -780,5 +805,14 @@ describe('final serialized artifact inspection', () => {
     expect(parsed.data.createdAt).toBe('2026-09-05');
     expect(parsed.data.updatedAt).toBe('2026-09-05');
     expect(parsed.data.sources.every(({ checkedAt }: { checkedAt: string }) => checkedAt === '2026-09-05')).toBe(true);
+  });
+
+  it('rejects a Unicode format control introduced by a runtime-owned final field', () => {
+    const unsafeContext = {
+      ...context,
+      candidate: { ...context.candidate, title: 'Founder workflow\u202Egpj.exe' },
+    };
+
+    expect(() => materializeDraftBundle(unsafeContext, generatedDraft, mediaAllowlist[0])).toThrow(/format_control/);
   });
 });

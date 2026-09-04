@@ -126,7 +126,7 @@ const draft: GeneratedDraftV2 = {
   sections: [
     {
       heading: 'Choose the story and delivery',
-      markdown: 'Use a few memorable points and follow [current application guidance](https://www.ycombinator.com/video/) when that program is the recipient.',
+      markdown: 'Use a few memorable points and follow [current application guidance](https://www.ycombinator.com/video/) for the recipient program.',
     },
     {
       heading: 'Verify every objective claim',
@@ -266,7 +266,7 @@ describe('structured drafting orchestration', () => {
   it('does not send a generated secret-like draft into the critic context', async () => {
     const secretDraft = {
       ...structuredClone(draft),
-      description: 'Synthetic github_pat_generated_fixture_123456789 credential',
+      description: 'Use synthetic github_pat_generated_fixture_123456789 credentials only in this fixture.',
     };
     const client = new FixtureStructuredClient([secretDraft, approvedCritique]);
     const drafter = createStructuredDrafter({ client, mediaAllowlist: [media] });
@@ -599,7 +599,7 @@ describe('structured drafting orchestration', () => {
     };
     const unrelatedRepair = {
       ...structuredClone(draft),
-      description: 'Use a changed description that does not resolve the section-level critic issue.',
+      description: 'Use a changed description for the draft.',
     };
     const client = new FixtureStructuredClient([
       draft,

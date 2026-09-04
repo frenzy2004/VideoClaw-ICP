@@ -19,7 +19,6 @@ import { isStrictIsoDateTime, isoDateTimeToDateOnly } from './date-time';
 import { containsSecretLikeValue } from './secrets';
 import type { CheckedSource } from './sources';
 
-const nonBlankString = z.string().trim().min(1);
 const claimLocationPattern = /^\/(?:description|customerTrigger|competitorGap|directAnswer|sections\/\d+\/(?:heading|markdown)|faqAnswers\/\d+\/answer|editorialGraphic\/(?:title|alt)|editorialGraphic\/steps\/\d+\/(?:label|detail))$/;
 
 function isXml10Text(value: string): boolean {
@@ -41,33 +40,37 @@ function isFormatControlFree(value: string): boolean {
   return !/\p{Cf}/u.test(value);
 }
 
-const singleLineControlFreeString = z.string().trim().min(1).refine((value) => (
-  !/[\u0000-\u001F\u007F-\u009F\u2028\u2029]/u.test(value)
-  && isFormatControlFree(value)
-));
+const rawFormatControlFreeString = z.string().refine(
+  isFormatControlFree,
+  'Unicode format controls are not allowed.',
+);
+const nonBlankString = rawFormatControlFreeString.pipe(z.string().trim().min(1));
+const singleLineControlFreeString = rawFormatControlFreeString.pipe(
+  z.string().trim().min(1).refine((value) => (
+    !/[\u0000-\u001F\u007F-\u009F\u2028\u2029]/u.test(value)
+  )),
+);
 const xmlVisibleString = (maximum: number) => z.string()
-  .trim()
-  .min(1)
-  .max(maximum)
   .refine(isXml10Text)
-  .refine(isFormatControlFree);
+  .refine(isFormatControlFree, 'Unicode format controls are not allowed.')
+  .pipe(z.string().trim().min(1).max(maximum));
 
 export const GeneratedDraftV2Schema = z.object({
   schemaVersion: z.literal(2),
-  description: z.string().trim().min(1),
-  customerTrigger: z.string().trim().min(1),
-  competitorGap: z.string().trim().min(1),
-  directAnswer: z.string().trim().min(1),
+  description: nonBlankString,
+  customerTrigger: nonBlankString,
+  competitorGap: nonBlankString,
+  directAnswer: nonBlankString,
   sections: z.array(z.object({
-    heading: z.string().trim().min(1),
-    markdown: z.string().trim().min(1),
+    heading: nonBlankString,
+    markdown: nonBlankString,
   }).strict()).min(2),
   faqAnswers: z.array(z.object({
-    question: z.string().trim().min(1),
-    answer: z.string().trim().min(1),
+    question: nonBlankString,
+    answer: nonBlankString,
   }).strict()).length(3),
   sourceReferences: z.array(z.object({
-    sourceId: z.string().trim().min(1),
+    sourceId: nonBlankString,
   }).strict()).min(2),
   claimBindings: z.array(z.object({
     location: z.string().regex(claimLocationPattern),
@@ -328,12 +331,12 @@ function isSafeLocalAssetPath(value: string): boolean {
   });
 }
 
-const localAssetPath = z.string().refine(isSafeLocalAssetPath);
+const localAssetPath = rawFormatControlFreeString.pipe(z.string().refine(isSafeLocalAssetPath));
 const AllowlistedProductMediaSchema = z.object({
-  id: z.string().trim().min(1),
-  candidateFingerprints: z.array(z.string().trim().min(1)).min(1).optional(),
+  id: nonBlankString,
+  candidateFingerprints: z.array(nonBlankString).min(1).optional(),
   campaignIds: z.array(CampaignIdSchema).min(1).optional(),
-  keywordIncludes: z.array(z.string().trim().min(1)).min(1).optional(),
+  keywordIncludes: z.array(nonBlankString).min(1).optional(),
   src: localAssetPath,
   poster: localAssetPath,
   alt: singleLineControlFreeString,
@@ -401,6 +404,16 @@ function markdownNodeText(node: MarkdownNode): string {
   if (node.type === 'image') return node.alt ?? '';
   if (node.type === 'html' || node.type === 'definition') return '';
   return node.children?.map(markdownNodeText).join(' ') ?? '';
+}
+
+function markdownNodeClaimText(node: MarkdownNode): string {
+  if (node.type === 'text' || node.type === 'inlineCode') return node.value ?? '';
+  if (node.type === 'break') return '\n';
+  if (node.type === 'code') return '';
+  if (node.type === 'image') return node.alt ?? '';
+  if (node.type === 'html' || node.type === 'definition') return '';
+  const separator = ['root', 'blockquote', 'list', 'listItem'].includes(node.type) ? '\n' : '';
+  return node.children?.map(markdownNodeClaimText).join(separator) ?? '';
 }
 
 function visibleWordCount(markdown: string): number {
@@ -492,13 +505,11 @@ function inspectReferences(
   return findings;
 }
 
-function visibleMarkdownText(value: string): string {
-  return markdownNodeText(parseMarkdown(value)).replace(/\s+/g, ' ').trim();
-}
-
 function sentences(value: string): string[] {
-  return visibleMarkdownText(value)
-    .split(/(?<=[.!?])(?:\s+|(?=[A-Z]))/u)
+  return markdownNodeClaimText(parseMarkdown(value))
+    .replace(/\r\n?/g, '\n')
+    .replace(/[^\S\n]+/g, ' ')
+    .split(/(?<=[.!?])(?:[^\S\n]+|(?=[A-Z]))|\n+/u)
     .map((sentence) => sentence.trim())
     .filter(Boolean);
 }
@@ -517,6 +528,10 @@ function generatedLocationValue(draft: GeneratedDraftV2, location: string): stri
   const step = location.match(/^\/editorialGraphic\/steps\/(\d+)\/(label|detail)$/);
   if (step) return draft.editorialGraphic.steps[Number(step[1])]?.[step[2] as 'label' | 'detail'];
   return undefined;
+}
+
+function usesProseClaimBoundaries(location: string): boolean {
+  return /^\/(?:description|customerTrigger|competitorGap|directAnswer|sections\/\d+\/markdown|faqAnswers\/\d+\/answer|editorialGraphic\/steps\/\d+\/detail)$/u.test(location);
 }
 
 function generatedClaimSentences(
@@ -540,7 +555,11 @@ function generatedClaimSentences(
       { location: `/editorialGraphic/steps/${index}/detail`, value: detail },
     ]),
   ].flatMap(({ location, value }) => sentences(value)
-    .filter((span) => requiresClaimBinding(span, context.productClaims))
+    .filter((span) => requiresClaimBinding(
+      span,
+      context.productClaims,
+      usesProseClaimBoundaries(location),
+    ))
     .map((span) => ({ location, span })));
 }
 
@@ -557,16 +576,22 @@ const pureImperativeOpeningWords = new Set([
   'test', 'then', 'use', 'verify',
 ]);
 
-function requiresClaimBinding(sentence: string, claims: ProductClaim[]): boolean {
+function requiresClaimBinding(
+  sentence: string,
+  claims: ProductClaim[],
+  endsAtProseBoundary = false,
+): boolean {
   const hasExplicitClaimSignal = containsProductAlias(sentence, claims)
     || /\b(?:can|could|may|might|will|would|shall|should|must|ought\s+to)\b/iu.test(sentence)
     || /\b(?:because|therefore|thereby|thus|so\s+that|causes|caused|leads\s+to|led\s+to|results\s+in|resulted\s+in|enables|enabled|ensures|ensured|allows|allowed|guarantees|guaranteed|protects|protected|prevents|prevented|preserves|preserved|delivers|delivered|achieves|achieved|drives|drove|driven|cuts|cutting|reduces|reduced|increases|increased|improves|improved|boosts|boosted|saves|saved|doubles|doubled|triples|tripled|converts|converted|conversion|revenue|growth|outcome|faster|slower|higher|lower|shorter|shortest|longer|longest|better|worse|more|less|fewer|most|least|best|half|twice|need|needs|require|requires)\b/iu.test(sentence)
+    || /\b(?:am|is|are|was|were|be|been|being|has|have|had|does|do|did|prefers?|costs?)\b/iu.test(sentence)
     || /\bto\s+(?:protect|prevent|preserve|deliver|achieve|drive|cut|reduce|increase|improve|boost|save|convert)\b/iu.test(sentence)
     || /\b\d+(?:\.\d+)?(?:\s?(?:%|x)|\s+(?:times?|minutes?|hours?|days?|weeks?|months?))?\b/iu.test(sentence);
   if (hasExplicitClaimSignal) return true;
-  if (!/[.!]$/u.test(sentence)) return false;
+  if (sentence.endsWith('?')) return false;
   const firstWord = sentence.toLocaleLowerCase('en-US').match(/^[a-z]+/)?.[0] ?? '';
-  return !pureImperativeOpeningWords.has(firstWord);
+  if (pureImperativeOpeningWords.has(firstWord)) return false;
+  return endsAtProseBoundary || /[.!]$/u.test(sentence);
 }
 
 function factExactlyMatchesSpan(span: string, factTexts: string[]): boolean {
@@ -594,7 +619,11 @@ function claimBindingsAreValid(
     if (
       seen.has(key)
       || !visibleSentences.includes(binding.span)
-      || !requiresClaimBinding(binding.span, context.productClaims)
+      || !requiresClaimBinding(
+        binding.span,
+        context.productClaims,
+        usesProseClaimBoundaries(binding.location),
+      )
       || new Set(binding.sourceFactIds).size !== binding.sourceFactIds.length
       || binding.sourceFactIds.some((factId) => (
         !factsById.has(factId)
@@ -997,6 +1026,9 @@ export function materializeDraftBundle(
   const finalFindings = uniqueFindings([
     ...inspectFinalMarkdown(markdown, sources.map(({ label, url }) => ({ label, url }))),
     ...inspectFinalSvg(svg, draft.editorialGraphic),
+    ...(!isFormatControlFree(markdown) || !isFormatControlFree(svg)
+      ? [finding('content.unicode_format_control', 'Final artifacts contain a Unicode format control.')]
+      : []),
     ...(containsCopiedPassage(
       `${markdown}\n${svg}`,
       context.sourceFacts.flatMap(({ excerpt }) => excerpt ? [excerpt] : []),

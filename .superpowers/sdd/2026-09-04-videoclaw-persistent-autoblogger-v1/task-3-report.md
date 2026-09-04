@@ -214,3 +214,46 @@ Result: 33 files and 413 tests passed. Final TypeScript, ESLint, diff, staged-di
 - Factual-sentence detection is deliberately conservative; uncommon imperative openings may require an explicit approved fact rather than being treated as editorial direction.
 - The verifier is still a model judgment, but it can no longer silently forget an original issue: deterministic ID accounting, new-issue reporting, and the human review-state approvals remain separate gates.
 - Media existence and final lander-native publication validation remain Task 4 responsibilities.
+
+## Final executable-gap fixes (fourth pass, 2026-09-05)
+
+This minimal pass addresses only the two final executable gaps. The production lander and production branches were not modified.
+
+### Implementation changes
+
+- Claim extraction now preserves Markdown block, paragraph, soft-line, and hard-break boundaries instead of flattening them before sentence analysis. End-of-input is treated as a complete boundary for prose-bearing fields, so punctuationless declarative claims require grounding. Headings, titles, alt text, and short labels can remain non-claim fragments unless they contain an explicit product, factual, causal, modal, comparative, outcome, or quantitative signal.
+- Imperative exemption is evaluated only after explicit objective signals. A pure instruction remains exempt, while an imperative containing an objective clause such as `editing costs are high` requires an exact claim-to-fact binding.
+- Added one shared raw-input Unicode-format-control schema and applied it before trimming to generated metadata, direct answers, section headings/body, FAQ questions/answers, source references, claim spans and IDs, source labels/facts, media identifiers/selectors/labels/paths, and SVG-visible strings. This catches normalization-hidden controls such as a leading byte-order mark.
+- Added a final serialized-artifact category-`Cf` guard over complete Markdown/frontmatter and SVG output, covering runtime-owned values such as the candidate title in addition to generated DTO fields.
+
+### Regression-first evidence
+
+- Boundary RED: punctuationless `Editing costs are high`, line- and paragraph-delimited claims after a pure imperative, and a mixed imperative/factual clause all returned no `content.claim_binding` finding. GREEN: all four cases now fail closed, while the existing pure nonfactual imperative regression remains accepted.
+- Format-control RED: category-`Cf` controls in description, section body, and FAQ answer passed DTO inspection, including a leading control removed by trimming; a runtime-owned title also serialized. GREEN: generated fields return `content.dto_invalid`, and final runtime-owned output returns `content.unicode_format_control`.
+- Two orchestration fixture strings were narrowed to genuinely nonfactual imperatives so existing tests continue to isolate secret redaction and unrelated repair behavior under the stricter claim-boundary semantics.
+
+### Verification
+
+Focused Task 3 command:
+
+```text
+npm test -- lib/autoblogger/content-bundle.test.ts lib/autoblogger/drafting.test.ts
+```
+
+Result: 2 files and 120 tests passed.
+
+Repository-wide checks:
+
+```text
+npm test
+npm run typecheck
+npm run lint
+git diff --check
+```
+
+Result: 33 files and 421 tests passed; Next route generation and TypeScript passed; ESLint passed with zero warnings; `git diff --check` passed.
+
+### Residual concerns after the fourth pass
+
+- Claim classification remains intentionally fail-closed for complete non-imperative prose, which can require an approved exact fact for terse factual-sounding copy. Pure editorial fragments and truly nonfactual imperatives remain exempt.
+- Exact normalized claim/fact equality, human approvals, media existence, and final lander-native publication validation retain the boundaries documented in the preceding pass.
