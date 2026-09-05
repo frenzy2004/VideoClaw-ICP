@@ -6,7 +6,24 @@ This worker is a controlled research-and-drafting system. It does not publish ar
 
 The initial 250-topic research library is an input, not a quota or publication gate. Each run scans at most 50 candidates, deeply checks at most 10, and produces at most 3 drafts with no more than 2 from one ICP.
 
-Operator status on 2026-09-05: `APIFY_TOKEN` is connected to the ICP Actions secrets. No OpenAI key was found; OpenAI, paid keyword-provider, lander read access, and publication App setup remain pending rollout dependencies. PR #55 is still **open/unmerged**. The ICP default branch is `seo-campaign`; GitHub schedules require this workflow on that default branch. These setup observations do not authorize a paid run or lander PR.
+Operator status on 2026-09-06: the user approved one live artifact-only pilot, but it has **not run**. `APIFY_TOKEN` is connected to ICP Actions secrets. No `OPENAI_API_KEY` or `LANDER_READ_TOKEN` was found in the known local configuration or repository secret-name inventory. Those credentials remain blockers; approval is no longer the pilot blocker. PR #1 and lander PR #55 remain **open/unmerged**, and `AUTOBLOG_SCHEDULE_ENABLED=false` was verified on GitHub. No production action, generated lander PR or schedule activation is authorized. The ICP default branch is `seo-campaign`; GitHub schedules require the workflow there.
+
+See the updated [three-lane system diagram](../diagrams/videoclaw-seo-aeo-geo-content-system.md) for the worker, current pilot and separate human release boundary.
+
+## Apify-first operation while metrics are pending
+
+Use the existing `KEYWORD_PROVIDER=pending` path for research and the one artifact-only pilot. Apify supplies US/en organic results, autocomplete, related searches and People Also Ask where present. Missing signals still fail their evidence gates; observing a SERP does not establish search volume.
+
+This is **not** a DataForSEO integration. Supported adapters remain `pending`, `semrush` and `ahrefs`. Do not set `KEYWORD_PROVIDER=dataforseo`, substitute the Apify token for provider credentials, or fill volume/difficulty/CPC using SERP counts or an unverified actor's estimates. Adding DataForSEO later requires a tested adapter and authenticated metrics; its lack does not block the pending-metrics pilot. Recurring and normal draft-PR mode still require observed paid metrics.
+
+Current pilot setup:
+
+1. Add `OPENAI_API_KEY` and a separate fine-grained `LANDER_READ_TOKEN` as Actions secrets in **VideoClaw-ICP**. The lander token needs only contents:read and pull requests:read on the lander. Do not paste keys into chat, PRs, Markdown or tracked configuration.
+2. Keep `KEYWORD_PROVIDER=pending`, `LANDER_BASE_REF=seo/founder-video-blog-launch` and `AUTOBLOG_SCHEDULE_ENABLED=false`. Keep the configured model exact; there is no silent model fallback.
+3. Once the reviewed workflow is available for manual execution, run `pilot` once. If testing the branch locally instead, supply the same runtime credentials and configured checkout; do not replace read-only inventory with a write-capable publication token.
+4. Retain and inspect the Markdown, SVG, source evidence and native validation report. Do not open a generated lander PR, consume another pilot, change approvals, merge, deploy or activate scheduling.
+
+Built-in ImageGen can update the architecture illustration without an OpenAI API key. That does not provide credentials to the worker's separate OpenAI Responses API drafting step.
 
 ## Safety boundary
 

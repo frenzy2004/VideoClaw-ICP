@@ -7,6 +7,10 @@ No lander source changes, article publishing, production merge, deployment, live
 
 Final local verification on 2026-09-05: **564 tests passed across 44 files**, including all native-fixture cases. Typecheck, repository lint, the ICP production build and `git diff --check` passed. Socket tests were run with localhost permission. No paid-provider or model request was made.
 
+Reverified on 2026-09-06 for the Apify-first pilot runbook and diagram update: **564/564 tests across 44 files**, lint, typecheck and build passed. The initial sandboxed run had seven `listen EPERM 127.0.0.1` failures; the unchanged suite passed after granting localhost socket permission. Build output still includes dependency warnings from gray-matter direct eval and vinext mixed imports; no clean-warning claim is made. No worker runtime code or publication gate was changed in this documentation update.
+
+The stored Apify token authenticated successfully through a read-only `/v2/users/me` request (HTTP 200). No actor or model request was started and no account details or token value were printed. Secret-name checks found `APIFY_TOKEN` only; the user has approved one artifact-only pilot, but the absent OpenAI key and lander read token still prevent that live run. Both PRs remained open, and the schedule variable remained `false`.
+
 - Candidate normalization, six identity keys, duplicate rejection, 50/10/3 limits and two-per-ICP cap.
 - US/en SERP normalization, paid-provider normalization and observation provenance, bounded polling and actor abort.
 - HTTPS source checks, DNS pinning, redirect safety, authoritative-source policies, streaming limits and cancellation.
