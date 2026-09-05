@@ -33,14 +33,22 @@ The 250-opportunity backlog is an input, not a required count or proof of measur
 Apify evidence → one draft + critique + QA → Markdown / SVG / report artifact → STOP
 ```
 
-- The user approved this one live pilot. **Live research ran; zero articles were generated.** Fifty candidates were scanned, and all ten deep checks failed: eight source-gate failures and two relevant-PAA failures. [Full pilot report](../autoblogger/LIVE-PILOT-2026-09-06.md).
-- The follow-up audited the failed sources and checked 36 distinct cross-ICP/broader query probes. Collector cross-checks still did not establish the required organic/PAA evidence. Queue/schema repairs and API acceptance tests are complete; the article preview remains blocked, not delivered. [Recovery report](../autoblogger/RESEARCH-RECOVERY-2026-09-06.md).
+- The first attempt scanned fifty candidates and failed all ten deep checks, generating no article. [Historical pilot report](../autoblogger/LIVE-PILOT-2026-09-06.md). Follow-up collector checks still did not establish the complete automated organic/PAA evidence bundle. [Recovery report](../autoblogger/RESEARCH-RECOVERY-2026-09-06.md).
+- A later **assisted local review** combined actual Apify organic results with separately recorded browser PAA and manually checked source bodies. GPT-5.5 completed generation, critique, repair and verification; its final result still failed review. An explicit editorial revision produced one local article, without claiming an unattended pass or consuming a successful-pilot slot. [Current assisted-review report](../autoblogger/ASSISTED-REVIEW-2026-09-06.md).
 - `KEYWORD_PROVIDER=pending` keeps volume, difficulty and CPC explicitly unknown. Paid metrics do not block this one pilot.
 - `LANDER_BASE_REF=seo/founder-video-blog-launch` validates against the unmerged blog contract, not production.
 - `APIFY_TOKEN` is present in ICP Actions secrets. `OPENAI_API_KEY` is now stored locally in an ignored environment file and verified against `gpt-5.5`; the scoped lander read token is still absent.
 - The read token must be separate and fine-grained, restricted to lander contents:read and pull requests:read. Interactive GitHub access does not establish that the worker credential is installed.
-- This local attempt used the existing checkout, fresh GET-only interactive GitHub inventory and ignored local state; no publication backend was supplied. It did not modify remote state or configure unattended Actions. The standard worker's prepared-artifact hash prevents consuming a second artifact after an uncertain failure; this attempt produced none.
+- Local attempts used the existing checkout, fresh GET-only interactive GitHub inventory and ignored local state; no publication backend was supplied. They did not modify remote state or configure unattended Actions. Preserve the failure history and reconcile the separately retained assisted artifact before another pilot.
 - Offline fixtures exercise this path but are **not** live generated article evidence.
+
+The assisted lane is deliberately separate from the persistent worker:
+
+```text
+Apify organic + browser PAA + checked sources → GPT draft/review → operator revision → native QA → LOCAL REVIEW ONLY
+```
+
+Its page is `http://127.0.0.1:3002/blog/demo-day-video-checklist` on the operator's computer. It is not a fourth article in PR #55, a lander PR, or production content.
 
 ### Apify and DataForSEO are different inputs
 
@@ -86,9 +94,9 @@ Every article traces back to campaign, ICP, trigger, intent, keyword, SERP obser
 
 | Work | Current state | Next dependency |
 | --- | --- | --- |
-| Article and diagram updates | Review-branch work; no production action | Team review |
+| Article and diagram updates | Original three review guides plus one assisted artifact in a separate local preview; no production action | Team review; artifact provenance remains explicit |
 | Worker implementation | PR #1 open; offline and native fixture verification recorded separately | Implementation review |
-| First live artifact-only pilot | Research and collector cross-checks attempted; 0 eligible drafts | Establish reliable organic/PAA evidence, then verify source bodies. Local OpenAI access works; scoped read token and Actions OpenAI secret are needed only for unattended execution |
+| Unattended live artifact-only pilot | Not yet successful; the local article required browser evidence and editorial intervention | Reliable automated research and a passing critique/repair run; scoped read token and OpenAI Actions secret for unattended execution |
 | Paid enrichment | Not connected; Apify research does not invent metrics | Provider access and a tested adapter |
 | Generated lander PRs | Not enabled | Merged blog contract, paid metrics, GitHub App and approved rollout |
 | Weekly automation | `AUTOBLOG_SCHEDULE_ENABLED=false`; Monday 16:00 UTC schedule is in the PR | Explicit activation approval and workflow on the default branch |

@@ -10,6 +10,7 @@ import {
 } from './domain';
 import type { StructuredOutputClient } from './openai-responses';
 import {
+  DraftMaterializationError,
   GENERATED_DRAFT_V2_JSON_SCHEMA,
   GeneratedDraftV2Schema,
   assertSourceFacts,
@@ -219,6 +220,21 @@ export type StructuredDrafterOptions = {
   mediaAllowlist: AllowlistedProductMedia[];
 };
 
+const ARTICLE_COMPOSITION_RULES = `Aim for about 900–1100 original, useful body words across directAnswer and sections,
+excluding metadata, FAQ answers, graphics, bindings, and the assembled Sources list.
+Develop substantive supported explanations, practical recommendations, and clearly
+labelled hypothetical examples; do not pad, repeat, copy, or invent facts to hit length.
+Make directAnswer one plain paragraph of 50 whitespace-separated words, within the
+required 40–60 range. Avoid Markdown, hyphenated words, and contractions in this opening
+so native reader-visible counting stays unambiguous; native validation remains authoritative.
+Use plain section heading text without Markdown prefixes and ordinary paragraphs or
+lists in section markdown. Do not generate a Sources section or a FAQ section: the
+assembler adds Sources and the native page renders faqAnswers separately.
+Do not use fenced or indented code, raw HTML, reference-style links, autolinks, or an H1.
+If a link is needed, use an inline [label](URL) from the supplied allowed inventory.
+Bind each rendered sentence separately, not a whole multi-sentence paragraph; strip
+Markdown syntax from binding spans. Select the parent source of every bound fact.`;
+
 const DRAFT_SYSTEM = `Create version 2 article-generation JSON for VideoClaw.
 Write an original useful article grounded in the supplied source facts and caller-approved product claims.
 Bind EVERY visible sentence, heading, metadata string, FAQ answer, and graphic label/detail
@@ -234,7 +250,8 @@ Product assertions must use the exact approved claim text, its productClaimId, a
 allowedSourceFactIds; never infer or invent product capabilities, including via pronouns.
 The direct answer must be 40–60 words. Produce no Markdown H1, raw HTML, secrets,
 internal research/debug prose, or links outside the supplied inventory. Answer the
-three supplied FAQ questions exactly and reference every used product claim.`;
+three supplied FAQ questions exactly and reference every used product claim.
+${ARTICLE_COMPOSITION_RULES}`;
 
 const SUPPORT_REVIEW_RULES = `Independently evaluate EVERY entry in bindingManifest in its full draft context,
 including headings, metadata, FAQ answers, and graphic text. Return exactly one
@@ -280,7 +297,11 @@ the supplied candidate, source inventory, exact FAQ questions, and approved clai
 bindings. Retain exact visible span/location bindings for all prose, use natural
 supported paraphrases and clearly labelled original guidance/examples, and never
 borrow paragraphs or expand snippet evidence into unseen body claims. Return a
-complete replacement object, with no commentary.`;
+complete replacement object, with no commentary.
+Product assertions still require exact approved wording, productClaimId, and allowed
+fact IDs; never introduce unsupported capabilities, including via pronouns. Produce
+no secrets, internal research/debug prose, or links outside the supplied inventory.
+${ARTICLE_COMPOSITION_RULES}`;
 
 function modelContext(context: DraftingContext): Record<string, unknown> {
   return {
@@ -513,11 +534,16 @@ export function createStructuredDrafter(options: StructuredDrafterOptions) {
       const bindingSupportFindings = supportFindings(initial, critique.supportEvaluations);
       const issues = [...deterministicFindings, ...critiqueIssues(critique), ...bindingSupportFindings];
       if (issues.length === 0) {
-        return {
-          status: 'ready',
-          repaired: false,
-          bundle: materializeDraftBundle(context, initial, media),
-        };
+        try {
+          return {
+            status: 'ready',
+            repaired: false,
+            bundle: materializeDraftBundle(context, initial, media),
+          };
+        } catch (error) {
+          if (!(error instanceof DraftMaterializationError)) throw error;
+          deterministicFindings.push(...error.findings);
+        }
       }
 
       const repaired = GeneratedDraftV2Schema.parse(await options.client.generate({
@@ -569,11 +595,20 @@ export function createStructuredDrafter(options: StructuredDrafterOptions) {
           findings: remainingFindings,
         };
       }
-      return {
-        status: 'ready',
-        repaired: true,
-        bundle: materializeDraftBundle(context, repaired, media),
-      };
+      try {
+        return {
+          status: 'ready',
+          repaired: true,
+          bundle: materializeDraftBundle(context, repaired, media),
+        };
+      } catch (error) {
+        if (!(error instanceof DraftMaterializationError)) throw error;
+        return {
+          status: 'blocked',
+          reason: 'content_safety_failed',
+          findings: error.findings,
+        };
+      }
     },
   };
 }

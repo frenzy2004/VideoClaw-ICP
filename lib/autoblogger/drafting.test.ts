@@ -893,6 +893,64 @@ describe('structured drafting orchestration', () => {
     expect(client.requests).toHaveLength(4);
   });
 
+  describe('bounded repair of final materialization failures', () => {
+    const sourcesFinding = {
+      code: 'content.body_sources',
+      message: 'Sources must be rendered from frontmatter.sources, not a generated body section.',
+    };
+    const duplicateSources = {
+      ...structuredClone(draft),
+      sections: [{ ...draft.sections[0], heading: 'Sources' }, draft.sections[1]],
+      claimBindings: draft.claimBindings.map((binding) => binding.location === '/sections/0/heading'
+        ? { ...binding, span: 'Sources' }
+        : binding),
+    };
+    const critique = { ...approvedCritique, supportEvaluations: supportedBindings(duplicateSources) };
+
+    it('repairs final-only findings even after an otherwise approved initial draft', async () => {
+      expect(inspectGeneratedDraft(context, duplicateSources)).toEqual([]);
+      const client = new FixtureStructuredClient([duplicateSources, critique, draft, resolvedVerification(critique)]);
+
+      const outcome = await createStructuredDrafter({ client, mediaAllowlist: [media] }).draft(context);
+
+      expect(outcome).toMatchObject({ status: 'ready', repaired: true });
+      expect(client.requests.map(({ name }) => name)).toEqual([
+        'videoclaw_article_draft_v2', 'videoclaw_article_critique_v1',
+        'videoclaw_article_repair_v2', 'videoclaw_article_repair_verification_v1',
+      ]);
+      expect(client.requests[2].input).toMatchObject({ deterministicFindings: [sourcesFinding] });
+      if (outcome.status !== 'ready') throw new Error('Expected repaired artifact.');
+      expect(outcome.bundle.markdown).not.toMatch(/^## Sources$/gm);
+    });
+
+    it('returns exact final findings when the one repair still cannot materialize', async () => {
+      const client = new FixtureStructuredClient([
+        duplicateSources, critique, duplicateSources, resolvedVerification(critique, duplicateSources),
+      ]);
+
+      await expect(createStructuredDrafter({ client, mediaAllowlist: [media] }).draft(context)).resolves.toEqual({
+        status: 'blocked', reason: 'content_safety_failed', findings: [sourcesFinding],
+      });
+      expect(client.requests).toHaveLength(4);
+      expect(client.requests[2].input).toMatchObject({ deterministicFindings: [sourcesFinding] });
+    });
+
+    it('blocks a final artifact failure introduced by repair without a second repair', async () => {
+      const rejected = {
+        ...approvedCritique, approved: false,
+        issues: [{ id: 'copy-clarity', code: 'copy.clarity', message: 'Clarify the opening.', repairInstruction: 'Clarify the opening.' }],
+      };
+      const client = new FixtureStructuredClient([
+        draft, rejected, duplicateSources, resolvedVerification(rejected, duplicateSources),
+      ]);
+
+      await expect(createStructuredDrafter({ client, mediaAllowlist: [media] }).draft(context)).resolves.toEqual({
+        status: 'blocked', reason: 'content_safety_failed', findings: [sourcesFinding],
+      });
+      expect(client.requests).toHaveLength(4);
+    });
+  });
+
   it('blocks an unchanged repair after the independent critic rejected the draft', async () => {
     const critique: DraftCritiqueV1 = {
       supportEvaluations: supportedBindings(),

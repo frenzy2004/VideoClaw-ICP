@@ -3,6 +3,14 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
+## Current assisted local review — 2026-09-06
+
+The [assisted-review report](ASSISTED-REVIEW-2026-09-06.md) supersedes the zero-generation status below. One actual four-call GPT-5.5 drafting/critique/repair run completed, but did not pass final review. An explicitly recorded operator revision produced a real review article using separately attributed Apify, browser PAA and body-source evidence. This is not an unattended worker success.
+
+Native validation and browser QA are recorded with the artifact in that report. Browser checks caught duplicate Sources rendering and clipped, off-brand graphic text despite an initially passing native build; those defects are corrected in the worker, not by modifying the lander. All original PR #55 source remains untouched.
+
+Final worker verification: **668 tests / 45 files**, lint, typecheck and build passed. The actual assisted bundle passed the lander's 32 native tests, lint and full build in a disposable checkout; a separate preview-mode build prerendered all four local guide routes. Local HTTP and 1280px/390px browser checks passed. Bundle hash: `a7f47aef4bfd025cf84e6020da1251c8cadf75f2437a99db0325e5ac569b238e`. Existing gray-matter/vinext build warnings remain. No production, indexing, schedule activation or autonomous-success claim is included.
+
 ## Research recovery checkpoint — 2026-09-06
 
 The [recovery report](RESEARCH-RECOVERY-2026-09-06.md) records 80 checked source URLs and 36 distinct query probes (43 SERP observations including repeats). No qualifying evidence bundle, live article-generation run or new article preview resulted. All five new Apify jobs were confirmed terminal; reported usage totals approximately $0.13, excluding OpenAI. Three synthetic, token-limited `gpt-5.5` calls verified acceptance of the actual generation/critique/repair schemas; intentionally incomplete outputs are not successful article evidence.

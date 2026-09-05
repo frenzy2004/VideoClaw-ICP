@@ -365,6 +365,13 @@ export type DraftSafetyFinding = {
   issueId?: string;
 };
 
+export class DraftMaterializationError extends Error {
+  constructor(readonly findings: DraftSafetyFinding[]) {
+    super(`Unsafe final artifacts: ${findings.map(({ code }) => code).join(', ')}`);
+    this.name = 'DraftMaterializationError';
+  }
+}
+
 const rawHtmlPattern = /<(?:\/?[a-z][a-z0-9-]*(?=[\t\n\f\r />])|!--|\?|![a-z]|!\[CDATA\[)/i;
 const researchBoilerplatePattern = /\b(?:debug research|research notes|SERP|people also ask|candidateFingerprint|sourceFactIds|claimReferences)\b/i;
 
@@ -568,11 +575,33 @@ function generatedClaimSentences(draft: GeneratedDraftV2): Array<{ location: str
     .map((span) => ({ location, span })));
 }
 
-function containsProductAlias(sentence: string, claims: ProductClaim[]): boolean {
+function containsExplicitProductAlias(sentence: string, claims: ProductClaim[]): boolean {
   const normalized = normalizeKeyword(sentence);
-  const aliases = ['VideoClaw', ...claims.flatMap(({ subjectAliases }) => subjectAliases)].map(normalizeKeyword);
+  const aliases = ['VideoClaw', ...claims.flatMap(({ subjectAliases }) => subjectAliases)]
+    .map(normalizeKeyword)
+    .filter((alias) => alias !== 'it');
   return aliases.some((alias) => alias && ` ${normalized} `.includes(` ${alias} `))
-    || /\b(?:it|this app|this product|this platform|this tool|the app|the product|the platform|the tool|our app|our product)\b/iu.test(sentence);
+    || /\b(?:this app|this product|this platform|this tool|the app|the product|the platform|the tool|our app|our product)\b/iu.test(sentence);
+}
+
+function containsProductAlias(
+  sentence: string,
+  claims: ProductClaim[],
+  localContext: string,
+): boolean {
+  if (containsExplicitProductAlias(sentence, claims)) return true;
+  if (!/\bit\b/iu.test(sentence)) return false;
+
+  // Only exempt simple editorial instructions whose object has an explicit local
+  // antecedent. Do not exempt subject pronouns, extra clauses, or ambiguous tools:
+  // those could assert an unapproved product capability and must remain fail-closed.
+  const ordinaryObjectInstruction = /^(?:review|read|watch|check|revise) it(?: carefully)?(?: (?:before|after) (?:sharing|recording|publishing|editing|sending|exporting))?[.!]?$/iu;
+  const ordinaryAntecedent = /\b(?:recording|video|script|draft|outline|footage|transcript|checklist)\b/iu;
+  const productAntecedent = /\b(?:app|application|product|platform|tool|software|service|editor)\b/iu;
+  return !ordinaryObjectInstruction.test(sentence)
+    || !ordinaryAntecedent.test(localContext)
+    || productAntecedent.test(localContext)
+    || containsExplicitProductAlias(localContext, claims);
 }
 
 function factExactlyMatchesSpan(span: string, factTexts: string[]): boolean {
@@ -597,6 +626,12 @@ function claimBindingsAreValid(
     const key = `${binding.location}\n${binding.span}`;
     const locationValue = generatedLocationValue(draft, binding.location);
     const visibleSentences = locationValue ? claimSpansAtLocation(locationValue, binding.location) : [];
+    const sentenceIndex = visibleSentences.indexOf(binding.span);
+    const section = binding.location.match(/^\/sections\/(\d+)\/markdown$/);
+    // Resolve against visible prose order, never the model's claimBindings order.
+    const localContext = sentenceIndex > 0
+      ? visibleSentences[sentenceIndex - 1]
+      : section ? draft.sections[Number(section[1])]?.heading ?? '' : '';
     if (
       seen.has(key)
       || !visibleSentences.includes(binding.span)
@@ -625,7 +660,7 @@ function claimBindingsAreValid(
           binding.sourceFactIds.map((factId) => factsById.get(factId)?.text ?? ''),
         )
       ) return false;
-    } else if (binding.productClaimId !== null || containsProductAlias(binding.span, context.productClaims)) {
+    } else if (binding.productClaimId !== null || containsProductAlias(binding.span, context.productClaims, localContext)) {
       return false;
     }
   }
@@ -717,6 +752,53 @@ function escapeXml(value: string): string {
     .replaceAll("'", '&apos;');
 }
 
+// Conservative Arial/Helvetica advances in ems, with room for fallback glyphs.
+// Layout never relies on a browser font load, canvas, or truncating a field.
+function editorialGlyphWidth(grapheme: string): number {
+  return [...grapheme].reduce((width, character) => {
+    if (/\p{Mark}/u.test(character)) return width;
+    if (character === ' ') return width + 0.3;
+    if (/[ilI.,'`:;!|]/u.test(character)) return width + 0.35;
+    if (/[MWmw@%&#]/u.test(character)) return width + 1;
+    if (/[A-Z]/u.test(character)) return width + 0.8;
+    if (/[a-z0-9]/u.test(character)) return width + 0.65;
+    return width + 1.1;
+  }, 0);
+}
+
+function wrapEditorialText(value: string, fontSize: number, width: number, preferWords = true): string[] {
+  const segments = new Intl.Segmenter('en', { granularity: 'grapheme' })
+    .segment(value.replace(/\s+/gu, ' ').trim());
+  const lines: string[] = [];
+  let line: string[] = [];
+  const measure = (characters: string[]) => characters.reduce((sum, character) => sum + editorialGlyphWidth(character) * fontSize, 0);
+  for (const { segment } of segments) {
+    if (editorialGlyphWidth(segment) * fontSize > width) {
+      throw new Error('Editorial graphic contains a grapheme that cannot fit safely.');
+    }
+    line.push(segment);
+    if (measure(line) <= width) continue;
+    const overflow = line.pop() as string;
+    const space = preferWords ? line.lastIndexOf(' ') : -1;
+    const carry = space < 0 ? [] : line.splice(space + 1);
+    lines.push(line.join(''));
+    line = [...carry, overflow];
+  }
+  if (line.length > 0) lines.push(line.join(''));
+  return lines;
+}
+
+function editorialText(
+  value: string, lines: string[], x: number, top: number, size: number,
+  className: string, weight: number,
+): string {
+  // The accessible label preserves the original field; the tspans visibly render
+  // every character. Keep whitespace at wrap boundaries for exact text recovery.
+  return `<text class="${className}" aria-label="${escapeXml(value)}" xml:space="preserve" font-family="Arial,Helvetica,sans-serif" font-size="${size}" font-weight="${weight}" fill="#14151A">${lines.map((line, index) => (
+    `<tspan x="${x}" y="${(top + size + index * size * 1.2).toFixed(2)}">${escapeXml(line)}</tspan>`
+  )).join('')}</text>`;
+}
+
 export function renderEditorialSvg(graphic: GeneratedDraftV2['editorialGraphic']): string {
   const visibleFields = [
     graphic.title,
@@ -729,19 +811,52 @@ export function renderEditorialSvg(graphic: GeneratedDraftV2['editorialGraphic']
   if (!visibleFields.every(isFormatControlFree)) {
     throw new Error('SVG-visible text contains a Unicode format control.');
   }
-  const cardWidth = 1040 / graphic.steps.length;
+  GeneratedDraftV2Schema.shape.editorialGraphic.parse(graphic);
+  let titleSize = 32;
+  let titleLines = wrapEditorialText(graphic.title, titleSize, 1136);
+  while (titleLines.length * titleSize * 1.2 > 90 && titleSize > 24) {
+    titleSize -= 1;
+    titleLines = wrapEditorialText(graphic.title, titleSize, 1136);
+  }
+  if (titleLines.length * titleSize * 1.2 > 90) {
+    titleLines = wrapEditorialText(graphic.title, titleSize, 1136, false);
+  }
+  // Colors mirror app/blog/blog.css in the production lander.
+  const cardWidth = 368;
+  const cardHeight = 232;
   const cards = graphic.steps.map((step, index) => {
-    const x = 80 + (index * cardWidth);
-    const center = x + (cardWidth - 16) / 2;
+    const x = 32 + (index % 3) * (cardWidth + 16);
+    const y = 174 + Math.floor(index / 3) * (cardHeight + 16);
+    let layout: { labelSize: number; detailSize: number; labelLines: string[]; detailLines: string[] } | undefined;
+    for (let labelSize = 20; labelSize >= 18 && !layout; labelSize -= 1) {
+      const labelLines = wrapEditorialText(step.label, labelSize, cardWidth - 76);
+      const available = cardHeight - 18 - labelLines.length * labelSize * 1.2 - 12 - 16;
+      for (let detailSize = 18; detailSize >= 15; detailSize -= 1) {
+        const detailLines = wrapEditorialText(step.detail, detailSize, cardWidth - 32);
+        if (detailLines.length * detailSize * 1.2 <= available) {
+          layout = { labelSize, detailSize, labelLines, detailLines };
+          break;
+        }
+      }
+    }
+    // At the field limits, exceptionally wide words can waste most of each line.
+    // Fall back to grapheme boundaries instead of hiding text or shrinking below
+    // readable sizes. Whitespace remains part of the rendered text.
+    layout ??= {
+      labelSize: 18, detailSize: 15,
+      labelLines: wrapEditorialText(step.label, 18, cardWidth - 76, false),
+      detailLines: wrapEditorialText(step.detail, 15, cardWidth - 32, false),
+    };
+    const detailTop = y + 18 + layout.labelLines.length * layout.labelSize * 1.2 + 12;
     return [
-      `<rect x="${x.toFixed(2)}" y="235" width="${(cardWidth - 16).toFixed(2)}" height="250" rx="22" fill="#172554" stroke="#60a5fa" stroke-width="2"/>`,
-      `<circle cx="${center.toFixed(2)}" cy="285" r="24" fill="#38bdf8"/>`,
-      `<text x="${center.toFixed(2)}" y="294" text-anchor="middle" class="number">${index + 1}</text>`,
-      `<text x="${center.toFixed(2)}" y="348" text-anchor="middle" class="label">${escapeXml(step.label)}</text>`,
-      `<foreignObject x="${(x + 14).toFixed(2)}" y="372" width="${(cardWidth - 44).toFixed(2)}" height="92"><div xmlns="http://www.w3.org/1999/xhtml" class="detail">${escapeXml(step.detail)}</div></foreignObject>`,
+      `<rect class="card" x="${x}" y="${y}" width="${cardWidth}" height="${cardHeight}" rx="16" fill="#F1EDE1" stroke="#14151A" stroke-width="2"/>`,
+      `<circle cx="${x + 30}" cy="${y + 32}" r="14" fill="#CBF3D9" stroke="#14151A" stroke-width="1"/>`,
+      `<text x="${x + 30}" y="${y + 38}" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="700" fill="#14151A">${index + 1}</text>`,
+      editorialText(step.label, layout.labelLines, x + 60, y + 18, layout.labelSize, 'label', 700),
+      editorialText(step.detail, layout.detailLines, x + 16, detailTop, layout.detailSize, 'detail', 400),
     ].join('');
   }).join('');
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc"><title id="title">${escapeXml(graphic.title)}</title><desc id="desc">${escapeXml(graphic.alt)}</desc><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#020617"/><stop offset="1" stop-color="#1e3a8a"/></linearGradient><style>.title{font:700 42px system-ui,sans-serif;fill:#f8fafc}.brand{font:700 18px system-ui,sans-serif;letter-spacing:4px;fill:#7dd3fc}.number{font:700 20px system-ui,sans-serif;fill:#082f49}.label{font:700 19px system-ui,sans-serif;fill:#f8fafc}.detail{font:400 15px/1.45 system-ui,sans-serif;color:#cbd5e1;text-align:center;overflow:hidden}</style></defs><rect width="1200" height="675" fill="url(#bg)"/><text x="80" y="92" class="brand">VIDEOCLAW</text><text x="80" y="158" class="title">${escapeXml(graphic.title)}</text>${cards}<path d="M80 550 H1120" stroke="#38bdf8" stroke-width="3"/><text x="80" y="600" class="brand">SOURCE-CONTROLLED EDITORIAL WORKFLOW</text></svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc"><title id="title">${escapeXml(graphic.title)}</title><desc id="desc">${escapeXml(graphic.alt)}</desc><rect width="1200" height="675" fill="#F1EDE1"/><text x="32" y="35" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="700" letter-spacing="3" fill="#14151A">VIDEOCLAW</text><path d="M32 151 H1168" stroke="#C33672" stroke-width="3"/>${editorialText(graphic.title, titleLines, 32, 54, titleSize, 'title', 700)}${cards}</svg>`;
 }
 
 export function normalizeHttpUrl(value: string): string | undefined {
@@ -756,12 +871,12 @@ export function normalizeHttpUrl(value: string): string | undefined {
   }
 }
 
-function inspectFinalMarkdown(
+export function inspectFinalMarkdown(
   markdown: string,
-  expectedSources: Array<{ label: string; url: string }>,
+  expectedSources: Array<{ label: string; url: string; checkedAt: string }>,
 ): DraftSafetyFinding[] {
   const findings: DraftSafetyFinding[] = [];
-  const body = matter(markdown).content;
+  const { data: frontmatter, content: body } = matter(markdown);
   const tree = parseMarkdown(body);
   const first = tree.children?.[0];
   if (first?.type !== 'paragraph') {
@@ -777,7 +892,36 @@ function inspectFinalMarkdown(
     const normalized = normalizeHttpUrl(url);
     return normalized ? [normalized] : [];
   }));
+  const serializedSources = z.array(z.object({
+    label: z.string().refine((value) => singleLineControlFreeString.safeParse(value).success),
+    url: z.string().refine((value) => normalizeHttpUrl(value) !== undefined),
+    checkedAt: z.string().refine((value) => isStrictIsoDateTime(`${value}T00:00:00.000Z`)),
+  }).strict()).min(2).safeParse(frontmatter.sources);
+  if (
+    !serializedSources.success
+    || allowed.size !== expectedSources.length
+    || serializedSources.data.length !== expectedSources.length
+    || serializedSources.data.some((source, index) => (
+      source.label !== expectedSources[index].label
+      || source.url !== expectedSources[index].url
+      || source.checkedAt !== expectedSources[index].checkedAt
+    ))
+  ) {
+    findings.push(finding(
+      'content.sources_structure',
+      'The final frontmatter.sources must exactly match the selected source labels, safe URLs, and checked dates.',
+    ));
+  }
   walkMarkdown(tree, (node) => {
+    if (node.type === 'heading') {
+      const heading = normalizeKeyword(markdownNodeClaimText(node));
+      if (heading === 'source' || heading === 'sources') {
+        findings.push(finding('content.body_sources', 'Sources must be rendered from frontmatter.sources, not a generated body section.'));
+      }
+      if (heading === 'faq' || heading === 'faqs' || heading === 'frequently asked questions') {
+        findings.push(finding('content.body_faqs', 'FAQs must be rendered from frontmatter.faqs, not a generated body section.'));
+      }
+    }
     if (node.type === 'heading' && node.depth === 1) {
       findings.push(finding('content.body_h1', 'The final Markdown cannot contain an H1.'));
     }
@@ -805,49 +949,7 @@ function inspectFinalMarkdown(
     }
   });
 
-  const sourceHeadingIndexes = tree.children?.flatMap((node, index) => (
-    node.type === 'heading'
-    && node.depth === 2
-    && markdownNodeText(node).trim() === 'Sources'
-      ? [index]
-      : []
-  )) ?? [];
-  const sourceHeadingIndex = sourceHeadingIndexes[0] ?? -1;
-  const trailingNodes = sourceHeadingIndex < 0 ? [] : tree.children?.slice(sourceHeadingIndex + 1) ?? [];
-  const sourceList = trailingNodes[0];
-  const sourceItems = sourceList?.children ?? [];
-  const exactSourcesStructure = sourceHeadingIndexes.length === 1
-    && trailingNodes.length === 1
-    && sourceList?.type === 'list'
-    && sourceList.ordered === false
-    && sourceItems.length === expectedSources.length
-    && sourceItems.every((item, index) => {
-      const expected = expectedSources[index];
-      const paragraph = item.type === 'listItem' && item.children?.length === 1
-        ? item.children[0]
-        : undefined;
-      const link = paragraph?.type === 'paragraph' && paragraph.children?.length === 1
-        ? paragraph.children[0]
-        : undefined;
-      const normalizedDestination = link?.url ? normalizeHttpUrl(link.url) : undefined;
-      return link?.type === 'link'
-        && link.children?.length === 1
-        && link.children[0].type === 'text'
-        && link.children[0].value === expected?.label
-        && normalizedDestination === normalizeHttpUrl(expected?.url ?? '');
-    });
-  if (!exactSourcesStructure) {
-    findings.push(finding(
-      'content.sources_structure',
-      'The final Sources section must be exactly one link-only list matching the selected source labels and URLs.',
-    ));
-  }
   return findings;
-}
-
-function escapeMarkdownLabel(value: string): string {
-  const escapable = new Set('\\`*_{}[]()#+-.!<>|~'.split(''));
-  return [...value].map((character) => escapable.has(character) ? `\\${character}` : character).join('');
 }
 
 function inspectFinalSvg(
@@ -1000,12 +1102,13 @@ export function materializeDraftBundle(
   const body = [
     draft.directAnswer,
     ...draft.sections.map(({ heading, markdown }) => `## ${heading}\n\n${markdown}`),
-    `## Sources\n\n${sources.map(({ label, url }) => `- [${escapeMarkdownLabel(label)}](${url})`).join('\n')}`,
   ].join('\n\n');
   const markdown = `---\n${yamlLines(article).join('\n')}\n---\n\n${body}\n`;
   const svg = renderEditorialSvg(draft.editorialGraphic);
   const finalFindings = uniqueFindings([
-    ...inspectFinalMarkdown(markdown, sources.map(({ label, url }) => ({ label, url }))),
+    ...inspectFinalMarkdown(markdown, sources.map(({ label, url, checkedAt }) => ({
+      label, url, checkedAt: isoDateTimeToDateOnly(checkedAt),
+    }))),
     ...inspectFinalSvg(svg, draft.editorialGraphic),
     ...(!isFormatControlFree(markdown) || !isFormatControlFree(svg)
       ? [finding('content.unicode_format_control', 'Final artifacts contain a Unicode format control.')]
@@ -1019,7 +1122,7 @@ export function materializeDraftBundle(
       : []),
   ]);
   if (finalFindings.length > 0) {
-    throw new Error(`Unsafe final artifacts: ${finalFindings.map(({ code }) => code).join(', ')}`);
+    throw new DraftMaterializationError(finalFindings);
   }
   return DraftBundleSchema.parse({
     schemaVersion: 1,

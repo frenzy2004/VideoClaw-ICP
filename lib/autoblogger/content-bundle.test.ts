@@ -6,6 +6,8 @@ import { describe, expect, it } from 'vitest';
 import { candidateFingerprints, type Candidate, type EvidenceBundle, type KeywordMetrics } from './domain';
 import type { CheckedSource } from './sources';
 import {
+  DraftMaterializationError,
+  inspectFinalMarkdown,
   inspectGeneratedDraft,
   materializeDraftBundle,
   renderEditorialSvg,
@@ -362,7 +364,8 @@ describe('content bundle materialization', () => {
       '2026-09-04',
     ]);
     expect(parsed.content.trimStart()).toMatch(/^Create a founder pitch video/);
-    expect(parsed.content).toContain('[Y Combinator: Application Video](https://www.ycombinator.com/video/)');
+    expect(parsed.content).toContain('[application video guidance](https://www.ycombinator.com/video/)');
+    expect(parsed.content).not.toMatch(/^## (?:Sources|FAQs|Frequently asked questions)$/gmi);
     expect(parsed.content).not.toContain(context.sourceFacts[0].excerpt);
     expect(first.svg).toContain('width="1200"');
     expect(first.svg).toContain('height="675"');
@@ -621,6 +624,59 @@ describe('generated-content safety review', () => {
 });
 
 describe('final serialized artifact inspection', () => {
+  describe('native frontmatter source inventory', () => {
+    const expectedSources = [
+      { label: 'YC guide', url: 'https://www.ycombinator.com/video/', checkedAt: '2026-09-04' },
+      { label: 'FTC guide', url: 'https://www.ftc.gov/guidance', checkedAt: '2026-09-04' },
+    ];
+    const legacyBodySources = '\n\n## Sources\n\n- [YC guide](https://www.ycombinator.com/video/)\n- [FTC guide](https://www.ftc.gov/guidance)';
+    const serialize = (sources: unknown, suffix = '') => (
+      `---\n${JSON.stringify({ sources })}\n---\n\n${generatedDraft.directAnswer}${suffix}\n`
+    );
+
+    it('accepts the exact selected inventory without requiring a body Sources list', () => {
+      expect(inspectFinalMarkdown(serialize(expectedSources), expectedSources)).toEqual([]);
+    });
+
+    it.each([
+      ['missing inventory', undefined],
+      ['null inventory', null],
+      ['non-array inventory', expectedSources[0]],
+      ['empty inventory', []],
+      ['missing selected source', expectedSources.slice(0, 1)],
+      ['extra source', [...expectedSources, { label: 'Extra', url: 'https://example.com/', checkedAt: '2026-09-04' }]],
+      ['reordered sources', [...expectedSources].reverse()],
+      ['duplicate source', [expectedSources[0], expectedSources[0]]],
+      ['changed label', [{ ...expectedSources[0], label: 'Different label' }, expectedSources[1]]],
+      ['non-string label', [{ ...expectedSources[0], label: 42 }, expectedSources[1]]],
+      ['changed destination', [{ ...expectedSources[0], url: 'https://attacker.example/' }, expectedSources[1]]],
+      ['added URL fragment', [{ ...expectedSources[0], url: `${expectedSources[0].url}#changed` }, expectedSources[1]]],
+      ['unsafe destination', [{ ...expectedSources[0], url: 'javascript:alert(1)' }, expectedSources[1]]],
+      ['credentialed destination', [{ ...expectedSources[0], url: 'https://user:pass@www.ycombinator.com/video/' }, expectedSources[1]]],
+      ['changed checked date', [{ ...expectedSources[0], checkedAt: '2026-09-05' }, expectedSources[1]]],
+      ['missing checked date', [{ label: expectedSources[0].label, url: expectedSources[0].url }, expectedSources[1]]],
+      ['extra source field', [{ ...expectedSources[0], injected: 'extra prose' }, expectedSources[1]]],
+    ])('rejects %s even when the legacy body list matches the inventory', (_label, sources) => {
+      // An otherwise correct legacy body list must not stand in for frontmatter validation.
+      for (const suffix of [legacyBodySources, '']) {
+        expect(inspectFinalMarkdown(serialize(sources, suffix), expectedSources)).toContainEqual(
+          expect.objectContaining({ code: 'content.sources_structure' }),
+        );
+      }
+    });
+
+    it.each([
+      ['one source', expectedSources.slice(0, 1)],
+      ['normalized duplicate URLs', [expectedSources[0], { ...expectedSources[1], url: `${expectedSources[0].url}#duplicate` }]],
+      ['unsafe URLs', [{ ...expectedSources[0], url: 'javascript:alert(1)' }, expectedSources[1]]],
+      ['impossible checked dates', [{ ...expectedSources[0], checkedAt: '2026-02-30' }, expectedSources[1]]],
+    ])('rejects an unsafe expected inventory with %s even when frontmatter matches', (_label, sources) => {
+      expect(inspectFinalMarkdown(serialize(sources), sources)).toContainEqual(
+        expect.objectContaining({ code: 'content.sources_structure' }),
+      );
+    });
+  });
+
   it.each([
     ['a Setext H1', 'Use this title\n===', ['Use this title'], /body_h1/],
     ['a closed code fence', 'Use this example.\n\n```text\nsafe\n```', ['Use this example.'], /code_fence/],
@@ -629,6 +685,13 @@ describe('final serialized artifact inspection', () => {
     ['a mailto destination', 'Use [email](mailto:editor@example.com).', ['Use email.'], /link_destination/],
     ['a javascript destination', 'Use [this](javascript:alert(1)).', ['Use this.'], /link_destination/],
     ['an unsafe image destination', 'Use this image.\n\n![Use proof](javascript:alert(1))', ['Use this image.', 'Use proof'], /link_destination/],
+    ['a generated Sources section', '## Sources\n\nUse the guide.', ['Sources', 'Use the guide.'], /body_sources/],
+    ['a formatted nested sources heading', '> ### **sources**:\n>\n> Use the guide.', ['sources:', 'Use the guide.'], /body_sources/],
+    ['a Setext sources heading', 'Sources\n---\n\nUse the guide.', ['Sources', 'Use the guide.'], /body_sources/],
+    ['a generated FAQs section', '## FAQs\n\nUse the guide.', ['FAQs', 'Use the guide.'], /body_faqs/],
+    ['a generated FAQ section', '### FAQ\n\nUse the guide.', ['FAQ', 'Use the guide.'], /body_faqs/],
+    ['a formatted nested FAQ heading', '> ### **Frequently asked questions**:\n>\n> Use the guide.', ['Frequently asked questions:', 'Use the guide.'], /body_faqs/],
+    ['a Setext FAQ heading', 'Frequently Asked Questions\n---\n\nUse the guide.', ['Frequently Asked Questions', 'Use the guide.'], /body_faqs/],
   ])('rejects final Markdown containing %s', (_label, markdown, spans, expected) => {
     const fixtureFacts = spans.map((span, index) => ({ id: `final-ast-${index}`, text: span }));
     const supportedContext = {
@@ -659,6 +722,7 @@ describe('final serialized artifact inspection', () => {
     });
 
     expect(() => materializeDraftBundle(supportedContext, unsafeDraft, mediaAllowlist[0])).toThrow(expected);
+    expect(() => materializeDraftBundle(supportedContext, unsafeDraft, mediaAllowlist[0])).toThrow(DraftMaterializationError);
   });
 
   it('requires the final direct answer to be a real paragraph', () => {
@@ -670,7 +734,7 @@ describe('final serialized artifact inspection', () => {
     expect(() => materializeDraftBundle(context, unsafeDraft, mediaAllowlist[0])).toThrow(/direct_answer_paragraph/);
   });
 
-  it('escapes a source label so it cannot inject a second link destination', () => {
+  it('keeps a source label literal in frontmatter so it cannot inject a body link destination', () => {
     const injectedContext = {
       ...context,
       sourceFacts: context.sourceFacts.map((source, index) => index === 0
@@ -679,9 +743,14 @@ describe('final serialized artifact inspection', () => {
     };
 
     const bundle = materializeDraftBundle(injectedContext, generatedDraft, mediaAllowlist[0]);
-    const body = matter(bundle.markdown).content;
+    const { data, content: body } = matter(bundle.markdown);
 
-    expect(body).toContain('Trusted source\\]\\(javascript:alert\\(1\\)\\)');
+    expect(data.sources[0]).toEqual({
+      label: 'Trusted source](javascript:alert(1))',
+      url: 'https://www.ycombinator.com/video/',
+      checkedAt: '2026-09-04',
+    });
+    expect(body).not.toContain('Trusted source');
     expect(body).not.toMatch(/\]\(javascript:/);
   });
 
@@ -694,7 +763,7 @@ describe('final serialized artifact inspection', () => {
     expect(() => materializeDraftBundle(invalidContext, generatedDraft, mediaAllowlist[0])).toThrow(/source fact input/i);
   });
 
-  it('renders the Sources section as exactly one link-only list with literal labels and destinations', () => {
+  it('leaves Sources and FAQs rendering to native frontmatter with the complete literal source inventory', () => {
     const injectedLabel = 'Trusted *source* [attempt](https://attacker.example/path)';
     const injectedContext = {
       ...context,
@@ -703,44 +772,36 @@ describe('final serialized artifact inspection', () => {
         : source),
     };
 
-    const body = matter(materializeDraftBundle(injectedContext, generatedDraft, mediaAllowlist[0]).markdown).content;
+    const bundle = materializeDraftBundle(injectedContext, generatedDraft, mediaAllowlist[0]);
+    const { data, content: body } = matter(bundle.markdown);
     const tree = unified().use(remarkParse).parse(body) as TestMarkdownNode & { children: TestMarkdownNode[] };
-    const sourceHeadingIndex = tree.children.findIndex((node) => (
+    const reservedHeadings = tree.children.filter((node) => (
       node.type === 'heading'
-      && node.depth === 2
-      && node.children?.[0]?.value === 'Sources'
+      && /^(?:Sources|FAQs|Frequently asked questions)$/i.test(node.children?.[0]?.value ?? '')
     ));
-    const trailing = tree.children.slice(sourceHeadingIndex + 1);
-    const list = trailing[0];
 
-    expect(sourceHeadingIndex).toBeGreaterThan(-1);
-    expect(trailing).toHaveLength(1);
-    expect(list.type).toBe('list');
-    expect(list.children).toHaveLength(3);
-    expect(list.children?.map((item) => {
-      const link = item.children?.[0]?.children?.[0];
-      const text = link?.children?.[0];
-      return { type: link?.type, url: link?.url, textType: text?.type, text: text?.value };
-    })).toEqual([
+    expect(reservedHeadings).toEqual([]);
+    expect(data.sources).toEqual([
       {
-        type: 'link',
+        label: injectedLabel,
         url: 'https://www.ycombinator.com/video/',
-        textType: 'text',
-        text: injectedLabel,
+        checkedAt: '2026-09-04',
       },
       {
-        type: 'link',
+        label: 'Federal Trade Commission: Advertising FAQs',
         url: 'https://www.ftc.gov/business-guidance/resources/advertising-faqs-guide-small-business',
-        textType: 'text',
-        text: 'Federal Trade Commission: Advertising FAQs',
+        checkedAt: '2026-09-04',
       },
       {
-        type: 'link',
+        label: 'VideoClaw product features',
         url: 'https://videoclaw.com/features',
-        textType: 'text',
-        text: 'VideoClaw product features',
+        checkedAt: '2026-09-04',
       },
     ]);
+    expect(data.sources).toEqual(bundle.article.sources);
+    expect(data.faqs).toEqual(generatedDraft.faqAnswers);
+    expect(body).not.toContain(injectedLabel);
+    expect(body).not.toContain('https://attacker.example/path');
   });
 
   it('runs copied-passage protection over visible SVG text after assembly', () => {
@@ -788,6 +849,48 @@ describe('final serialized artifact inspection', () => {
     });
 
     expect(inspectGeneratedDraft(context, pronounDraft)).toContainEqual(expect.objectContaining({
+      code: 'content.claim_binding',
+    }));
+  });
+
+  it.each([
+    { heading: 'Review the recording', spans: ['Review it before sharing.'] },
+    { heading: 'Review workflow', spans: ['Record a short video.', 'Review it before sharing.'] },
+    { heading: 'Review workflow', spans: ['Write a short script.', 'Read it before recording.'] },
+  ])('accepts an ordinary object pronoun with explicit local context: %j', ({ heading, spans }) => {
+    const contextualDraft = withDraft({
+      sections: [{ heading, markdown: spans.join(' ') }, generatedDraft.sections[1]],
+      claimBindings: [
+        ...generatedDraft.claimBindings.filter(({ location }) => !location.startsWith('/sections/0/')),
+        { location: '/sections/0/heading', span: heading, sourceFactIds: ['yc-bullets'], productClaimId: null },
+        ...spans.map((span) => ({ location: '/sections/0/markdown', span, sourceFactIds: ['yc-bullets'], productClaimId: null })),
+      ].reverse(),
+    });
+
+    // The existing product aliases include "it"; binding order is not discourse order.
+    expect(inspectGeneratedDraft(context, contextualDraft)).toEqual([]);
+  });
+
+  it.each([
+    { heading: 'Review workflow', spans: ['Review it before sharing.'] },
+    { heading: 'Review the recording', spans: ['It supports automatic captions.'] },
+    { heading: 'Review the recording', spans: ['Review it because it cuts editing time in half.'] },
+    { heading: 'Review workflow', spans: ['VideoClaw lets creators edit a recorded video with text.', 'Review it before sharing.'] },
+  ])('keeps ambiguous and product pronouns fail-closed with complete bindings: %j', ({ heading, spans }) => {
+    const contextualDraft = withDraft({
+      sections: [{ heading, markdown: spans.join(' ') }, generatedDraft.sections[1]],
+      claimBindings: [
+        ...generatedDraft.claimBindings.filter(({ location }) => !location.startsWith('/sections/0/')),
+        { location: '/sections/0/heading', span: heading, sourceFactIds: ['yc-bullets'], productClaimId: null },
+        ...spans.map((span) => ({
+          location: '/sections/0/markdown', span,
+          sourceFactIds: [span.startsWith('VideoClaw') ? 'vc-text-editing' : 'yc-bullets'],
+          productClaimId: span.startsWith('VideoClaw') ? 'vc-editing-claim' : null,
+        })),
+      ].reverse(),
+    });
+
+    expect(inspectGeneratedDraft(context, contextualDraft)).toContainEqual(expect.objectContaining({
       code: 'content.claim_binding',
     }));
   });
