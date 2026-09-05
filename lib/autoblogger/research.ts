@@ -13,8 +13,8 @@ import {
 import { redactSensitive } from './http';
 import {
   RUN_LIMITS,
+  limitDeepInspections,
   limitCandidatesForScan,
-  stageOpportunitiesForDeepInspection,
 } from './policies';
 import type { SafeSourceChecker } from './sources';
 
@@ -49,6 +49,25 @@ export type ResearchResult = {
     discovery: ApifyObservationProvenance;
     serp: ApifyObservationProvenance;
   };
+};
+
+export type ShallowResearchResult = {
+  candidate: Candidate;
+  suggestions: string[];
+  organicResults: Array<{
+    url: string;
+    title: string;
+    snippet: string;
+    resultType: string;
+  }>;
+  peopleAlsoAsk: string[];
+  relatedQueries: string[];
+  provenance: ResearchResult['provenance'];
+};
+
+export type ShallowResearchBatch = {
+  scannedCount: number;
+  results: ShallowResearchResult[];
 };
 
 export type ResearchBatch = {
@@ -239,24 +258,20 @@ type NormalizedSerp = {
   language: string;
   device: string;
   page: number;
-  organicResults: Array<{ url: string }>;
+  organicResults: Array<{ url: string; title: string; snippet: string; resultType: string }>;
   peopleAlsoAsk: string[];
+  relatedQueries: string[];
 };
 
 export function createResearcher(options: ResearcherOptions) {
   const execution = { ...DEFAULT_EXECUTION, ...options.execution };
-  return {
-    async research(allCandidates: Candidate[]): Promise<ResearchBatch> {
+  async function scan(allCandidates: Candidate[]): Promise<ShallowResearchBatch> {
       const scannedCandidates = limitCandidatesForScan(allCandidates);
-      const deepCandidates = stageOpportunitiesForDeepInspection(scannedCandidates);
-      if (
-        scannedCandidates.length > RUN_LIMITS.maxCandidatesScanned
-        || deepCandidates.length > RUN_LIMITS.maxDeepInspections
-      ) {
+      if (scannedCandidates.length > RUN_LIMITS.maxCandidatesScanned) {
         throw new Error('Research staging exceeded the configured scan or deep-inspection cap.');
       }
       if (scannedCandidates.length === 0) {
-        return { scannedCount: 0, deepInspectionCount: 0, results: [] };
+        return { scannedCount: 0, results: [] };
       }
 
       const discovery = await runApifyActor(options.apify, AUTOCOMPLETE_ACTOR_ID, {
@@ -273,7 +288,7 @@ export function createResearcher(options: ResearcherOptions) {
       );
 
       const serp = await runApifyActor(options.apify, SERP_ACTOR_ID, {
-        queries: `${deepCandidates.map(({ primaryKeyword }) => primaryKeyword).join('\n')}\n`,
+        queries: `${scannedCandidates.map(({ primaryKeyword }) => primaryKeyword).join('\n')}\n`,
         maxPagesPerQuery: 1,
         countryCode: 'us',
         languageCode: 'en',
@@ -288,8 +303,7 @@ export function createResearcher(options: ResearcherOptions) {
         (item) => normalizeSerpItem(item, serp.provenance) as NormalizedSerp,
       );
 
-      const results: ResearchResult[] = [];
-      for (const candidate of deepCandidates) {
+      const results = scannedCandidates.map((candidate): ShallowResearchResult => {
         const normalizedKeyword = normalizeKeyword(candidate.primaryKeyword);
         const observedSerp = serpItems.find(
           ({ query }) => normalizeKeyword(query) === normalizedKeyword,
@@ -303,38 +317,79 @@ export function createResearcher(options: ResearcherOptions) {
         ) {
           throw new Error('SERP research must use US/en desktop first-page observations.');
         }
+        const suggestions = autocomplete
+          .filter(({ keyword }) => normalizeKeyword(keyword) === normalizedKeyword)
+          .map(({ suggestion }) => suggestion);
+        return {
+          candidate,
+          suggestions,
+          organicResults: observedSerp.organicResults,
+          peopleAlsoAsk: observedSerp.peopleAlsoAsk,
+          relatedQueries: observedSerp.relatedQueries,
+          provenance: { discovery: discovery.provenance, serp: serp.provenance },
+        };
+      });
+      return { scannedCount: scannedCandidates.length, results };
+  }
+
+  async function inspect(shallowInput: ShallowResearchResult[]): Promise<ResearchBatch> {
+      const deepCandidates = limitDeepInspections(shallowInput);
+      const results: ResearchResult[] = [];
+      for (const shallow of deepCandidates) {
+        const { candidate } = shallow;
         const sources = await options.sourceChecker.select(
-          observedSerp.organicResults.map(({ url }) => url),
+          shallow.organicResults.map(({ url }) => url),
         );
         const faqQuestions = selectRelevantPaaQuestions(
           candidate.primaryKeyword,
-          observedSerp.peopleAlsoAsk,
+          shallow.peopleAlsoAsk,
         );
         const evidence = EvidenceBundleSchema.parse({
           schemaVersion: 1,
           candidateFingerprint: candidateFingerprints(candidate).candidate,
-          suggestions: autocomplete
-            .filter(({ keyword }) => normalizeKeyword(keyword) === normalizedKeyword)
-            .map(({ suggestion }) => suggestion),
+          suggestions: [
+            ...shallow.suggestions,
+            ...shallow.relatedQueries,
+          ],
           serp: {
-            organicResultCount: observedSerp.organicResults.length,
+            organicResultCount: shallow.organicResults.length,
             peopleAlsoAsk: faqQuestions,
           },
           sources,
           faqQuestions,
         });
-        results.push({
-          candidate,
-          evidence,
-          provenance: { discovery: discovery.provenance, serp: serp.provenance },
-        });
+        results.push({ candidate, evidence, provenance: shallow.provenance });
       }
-
       return {
-        scannedCount: scannedCandidates.length,
+        scannedCount: shallowInput.length,
         deepInspectionCount: deepCandidates.length,
         results,
       };
+  }
+
+  return {
+    scan,
+    inspect,
+    async research(allCandidates: Candidate[]): Promise<ResearchBatch> {
+      const shallow = await scan(allCandidates);
+      const ranked = shallow.results.sort((left, right) => (
+        (
+          right.suggestions.length
+          + right.relatedQueries.length
+          + right.organicResults.length
+          + right.peopleAlsoAsk.length
+        ) - (
+          left.suggestions.length
+          + left.relatedQueries.length
+          + left.organicResults.length
+          + left.peopleAlsoAsk.length
+        )
+        || candidateFingerprints(left.candidate).candidate.localeCompare(
+          candidateFingerprints(right.candidate).candidate,
+        )
+      ));
+      const inspected = await inspect(ranked);
+      return { ...inspected, scannedCount: shallow.scannedCount };
     },
   };
 }

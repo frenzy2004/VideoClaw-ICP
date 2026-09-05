@@ -1,5 +1,5 @@
 export type HttpRequest = {
-  method: 'GET' | 'POST';
+  method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
   url: string;
   headers: Record<string, string>;
   body?: string;

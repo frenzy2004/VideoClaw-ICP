@@ -2,6 +2,7 @@
   "name": "sites-project",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@11.19.0",
   "engines": {
     "node": ">=22.13.0"
   },
@@ -15,7 +16,13 @@
     "start:sites": "vinext start",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern .vercel",
     "test": "vitest run",
-    "typecheck": "next typegen && tsc --noEmit --incremental false --pretty false"
+    "typecheck": "next typegen && tsc --noEmit --incremental false --pretty false",
+    "autoblog": "tsx lib/autoblogger/cli-entry.ts",
+    "autoblog:research": "pnpm autoblog research",
+    "autoblog:pilot": "pnpm autoblog pilot",
+    "autoblog:run": "pnpm autoblog run",
+    "autoblog:validate": "pnpm autoblog validate",
+    "check:autoblogger": "vitest run lib/autoblogger && pnpm run typecheck"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
@@ -45,6 +52,7 @@
     "jsdom": "28.1.0",
     "react-server-dom-webpack": "19.2.6",
     "tailwindcss": "4.2.1",
+    "tsx": "4.20.5",
     "typescript": "5.9.3",
     "vinext": "1.0.0-beta.3",
     "vite": "8.0.13",

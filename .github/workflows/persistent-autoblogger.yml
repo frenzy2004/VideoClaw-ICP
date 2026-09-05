@@ -1,0 +1,102 @@
+name: Persistent Autoblogger
+
+on:
+  workflow_dispatch:
+    inputs:
+      command:
+        description: Controlled autoblogger operation
+        required: true
+        default: research
+        type: choice
+        options:
+          - research
+          - pilot
+          - run
+  schedule:
+    - cron: '0 16 * * 1'
+
+concurrency:
+  group: videoclaw-persistent-autoblogger
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  autoblogger:
+    if: github.event_name == 'workflow_dispatch' || vars.AUTOBLOG_SCHEDULE_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      AUTOBLOG_COMMAND: ${{ github.event_name == 'schedule' && 'run' || inputs.command }}
+      AUTOBLOG_RUN_ID: gha-${{ github.run_id }}-${{ github.run_attempt }}
+      AUTOBLOG_ARTIFACT_DIR: artifacts/autoblogger/gha-${{ github.run_id }}-${{ github.run_attempt }}
+      AUTOBLOG_SCHEDULE_ENABLED: ${{ vars.AUTOBLOG_SCHEDULE_ENABLED || 'false' }}
+      APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      OPENAI_MODEL: ${{ vars.OPENAI_MODEL || 'gpt-5.5' }}
+      KEYWORD_PROVIDER: ${{ vars.KEYWORD_PROVIDER || 'pending' }}
+      SEMRUSH_API_KEY: ${{ secrets.SEMRUSH_API_KEY }}
+      AHREFS_API_KEY: ${{ secrets.AHREFS_API_KEY }}
+      GITHUB_TOKEN: ${{ github.token }}
+      GITHUB_REPOSITORY: ${{ github.repository }}
+      LANDER_REPOSITORY: https://github.com/INFR-Organisation/videoclaw-lander.git
+      LANDER_OWNER: INFR-Organisation
+      LANDER_NAME: videoclaw-lander
+      LANDER_BASE_REF: ${{ vars.LANDER_BASE_REF || 'seo/founder-video-blog-launch' }}
+
+    steps:
+      - name: Check out VideoClaw-ICP
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.19.0
+          run_install: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.13.0'
+          cache: pnpm
+
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Unit and offline integration tests
+        run: pnpm test
+
+      - name: Typecheck
+        run: pnpm run typecheck
+
+      - name: Lint
+        run: pnpm run lint
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Create short-lived lander GitHub App token
+        id: lander-app-token
+        if: env.LANDER_BASE_REF == 'main' && env.AUTOBLOG_COMMAND == 'run'
+        uses: actions/create-github-app-token@v3
+        with:
+          app-id: ${{ secrets.LANDER_APP_ID }}
+          private-key: ${{ secrets.LANDER_APP_PRIVATE_KEY }}
+          owner: INFR-Organisation
+          repositories: videoclaw-lander
+
+      - name: Run controlled autoblogger
+        env:
+          LANDER_GITHUB_TOKEN: ${{ steps.lander-app-token.outputs.token }}
+        run: pnpm autoblog "$AUTOBLOG_COMMAND" --run-id "$AUTOBLOG_RUN_ID" --artifact-dir "$AUTOBLOG_ARTIFACT_DIR"
+
+      - name: Upload redacted run artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: autoblogger-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/autoblogger/
+          if-no-files-found: warn
+          retention-days: 7

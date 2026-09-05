@@ -170,7 +170,7 @@ describe('staged researcher', () => {
       language: 'en',
       scrapedAt: '2026-09-04T08:00:00.000Z',
     }));
-    const serpItems = candidates(10).map((candidate, index) => ({
+    const serpItems = candidates(50).map((candidate, index) => ({
       searchQuery: {
         term: candidate.primaryKeyword,
         device: 'DESKTOP',
@@ -191,6 +191,12 @@ describe('staged researcher', () => {
           url: `https://publisher.example/topic-${index + 1}`,
           description: 'Independent guide.',
         },
+        ...(index === 49 ? Array.from({ length: 8 }, (_unused, extra) => ({
+          position: extra + 3,
+          title: `${candidate.title} result ${extra + 3}`,
+          url: `https://publisher.example/topic-${index + 1}-${extra + 3}`,
+          description: 'Independent guide.',
+        })) : []),
       ],
       peopleAlsoAsk: [
         `What is founder video topic ${index + 1}?`,
@@ -242,7 +248,8 @@ describe('staged researcher', () => {
         saveHtmlToKeyValueStore: false,
       },
     });
-    expect((starts[1].input.queries as string).trim().split('\n')).toHaveLength(10);
+    expect((starts[1].input.queries as string).trim().split('\n')).toHaveLength(50);
+    expect(result.results.some(({ candidate }) => candidate.articleId === 'vc-c1-050')).toBe(true);
     expect(result.results.every(({ evidence }) => EvidenceBundleSchema.safeParse(evidence).success))
       .toBe(true);
     expect(result.results[0].provenance).toEqual({
