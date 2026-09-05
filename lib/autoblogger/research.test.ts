@@ -59,7 +59,7 @@ describe('bounded zero-organic SERP recovery', () => {
     expect(requests).toHaveLength(2);
     expect(requests[1]).toEqual({
       queries: 'founder video topic 1\nfounder video topic 3\n', maxPagesPerQuery: 1,
-      countryCode: 'us', languageCode: 'en', searchLanguage: 'en', mobileResults: false,
+      countryCode: 'us', languageCode: 'en', mobileResults: false,
       includeUnfilteredResults: false, saveHtml: false, saveHtmlToKeyValueStore: false,
       websiteContentScraper: { enable: false },
     });
@@ -121,6 +121,10 @@ describe('bounded zero-organic SERP recovery', () => {
     const { researcher, requests } = boundary(input.map((candidate) => row(candidate.primaryKeyword, true)), []);
     const result = await researcher.scan(input);
     expect(requests).toHaveLength(1);
+    // US/en describes the market and interface. Adding lr=lang_en changes the
+    // search population and reproduced empty Google pages for populated terms.
+    expect(requests[0]).toMatchObject({ countryCode: 'us', languageCode: 'en', mobileResults: false });
+    expect(requests[0]).not.toHaveProperty('searchLanguage');
     expect(result.results.map(({ organicResults }) => organicResults.length)).toEqual([1, 1]);
   });
 
@@ -214,8 +218,9 @@ describe('missing PAA collector recovery', () => {
     const candidate={...candidates(1)[0],primaryKeyword:'demo day video checklist'};
     const faq=['What is a demo day?','How does yc demo day work?','Can anyone attend YC demo day?'];
     let sourceSearches=0;
+    let supportInput: Record<string, unknown> | undefined;
     const client: ApifyClient = {
-      startActor:async(actorId,input)=>{expect(actorId).toBe(SERP_ACTOR_ID); const queries=String(input.queries).trim().split('\n');expect(queries).toHaveLength(2);expect(queries.every(q=>q.includes('site:ycombinator.com'))).toBe(true);sourceSearches++;return successfulRun('sources-run','sources-dataset');},
+      startActor:async(actorId,input)=>{supportInput=input;expect(actorId).toBe(SERP_ACTOR_ID); const queries=String(input.queries).trim().split('\n');expect(queries).toHaveLength(2);expect(queries.every(q=>q.includes('site:ycombinator.com'))).toBe(true);sourceSearches++;return successfulRun('sources-run','sources-dataset');},
       getRun:async()=>{throw new Error('not needed');},abortRun:async(id)=>({id,status:'ABORTED'}),
       getDatasetItems:async()=>faq.slice(0,2).map(question=>({searchQuery:{term:`${question} (site:ycombinator.com OR site:techstars.com)`,device:'DESKTOP',page:1,countryCode:'US',languageCode:'en'},organicResults:[{position:1,title:'What Happens at YC',url:'https://www.ycombinator.com/about',description:'Demo day details.'}],peopleAlsoAsk:[],relatedQueries:[]})),
     };
@@ -224,6 +229,8 @@ describe('missing PAA collector recovery', () => {
       return [{originalUrl:'https://publisher.example/checklist',finalUrl:'https://publisher.example/checklist',authoritative:false},{originalUrl:'https://www.ycombinator.com/about',finalUrl:'https://www.ycombinator.com/about',authoritative:true}];
     }}}).inspect([{candidate,suggestions:[],organicResults:[{title:'Checklist',url:'https://publisher.example/checklist',snippet:'Plan video',resultType:'article'}],peopleAlsoAsk:faq,relatedQueries:[],provenance:{discovery:{actorId:'a',runId:'r',datasetId:'d',observedAt:'2026-09-04T08:01:00.000Z'},serp:{actorId:SERP_ACTOR_ID,runId:'original-run',datasetId:'original-dataset',observedAt:'2026-09-04T08:01:00.000Z'}}}]);
     expect(sourceSearches).toBe(1);
+    expect(supportInput).toMatchObject({ countryCode: 'us', languageCode: 'en', mobileResults: false });
+    expect(supportInput).not.toHaveProperty('searchLanguage');
     expect(result.results[0].evidence.serp.organicResultCount).toBe(1);
     expect(result.results[0].evidence.sources).toHaveLength(2);
     expect(result.results[0].provenance.supportSearches?.[0].runId).toBe('sources-run');

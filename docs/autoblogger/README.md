@@ -6,7 +6,7 @@ This worker is a controlled research-and-drafting system. It does not publish ar
 
 The initial 250-topic research library is an input, not a quota or publication gate. Each run scans at most 50 candidates, deeply checks at most 10, and produces at most 3 drafts with no more than 2 from one ICP.
 
-Operator status on 2026-09-06: **zero successful fully automated article pilots or generated lander PRs**. The [latest alternative-topic report](ALTERNATIVE-PILOT-2026-09-06.md) records five-topic research and one actual artifact-only worker run. The selected product-demo checklist passed selection research, but both fresh organic requests in the worker returned empty; the run stopped before sources, model calls or native QA. Its one-use switch is consumed and its new decision is terminal at attempt one. The old candidate's three failures and unused fourth-attempt grant remain intact. No evidence was injected or gate relaxed. The [earlier retry report](APPROVED-RETRY-2026-09-06.md) and [automated-pipeline report](AUTOMATED-PIPELINE-2026-09-06.md) retain historical checkpoints.
+Operator status on 2026-09-06: **zero successful fully automated article pilots or generated lander PRs**. The [collector correction](COLLECTOR-FIX-2026-09-06.md) now demonstrates fresh automatic research with eight organic results, three relevant FAQs and four retrieved source bodies passing the drafting-input contract. Two controlled comparisons traced the empty product-demo results to an extra page-language filter; the worker now uses US targeting and an English interface without that restriction. This research-only verification made no model calls or state changes. The [previous alternative-topic run](ALTERNATIVE-PILOT-2026-09-06.md) remains failed; its one-use switch is consumed and its decision terminal at attempt one. The old candidate's three failures and unused fourth-attempt grant remain intact. No evidence was injected or gate relaxed. The [earlier retry report](APPROVED-RETRY-2026-09-06.md) and [automated-pipeline report](AUTOMATED-PIPELINE-2026-09-06.md) retain historical checkpoints.
 
 One older operator-assisted review article still exists separately. Its source audit, intervention and native QA are preserved in the [assisted-review report](ASSISTED-REVIEW-2026-09-06.md). It is not a successful `worker.execute()` result. The [research recovery report](RESEARCH-RECOVERY-2026-09-06.md) and [first pilot report](LIVE-PILOT-2026-09-06.md) retain earlier checkpoints.
 
@@ -17,6 +17,11 @@ See the updated [three-lane system diagram](../diagrams/videoclaw-seo-aeo-geo-co
 ## Apify-first operation while metrics are pending
 
 Use the existing `KEYWORD_PROVIDER=pending` path for research and the one artifact-only pilot. Apify supplies US/en organic results, autocomplete, related searches and People Also Ask where present. Missing signals still fail their evidence gates; observing a SERP does not establish search volume.
+
+For Google SERPs, US/en means US targeting and an English interface (`hl=en`),
+not a guarantee that every returned page is English. The optional English-page
+restriction (`lr=lang_en`) is omitted after the controlled collector diagnosis.
+Existing observations keep their original provenance; none were relabelled.
 
 The organic collector is supplemented by a dedicated PAA actor when fewer than three
 relevant questions are present. Two bounded attempts may be followed by automatic

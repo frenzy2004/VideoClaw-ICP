@@ -3,7 +3,26 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-## Latest alternative-topic pilot — 2026-09-06
+## Latest collector correction — 2026-09-06
+
+The [collector report](COLLECTOR-FIX-2026-09-06.md) records two controlled
+live comparisons and a separate fresh production-research-path verification.
+Removing the extra page-language filter changed the product-demo query from zero
+to eight organic results in both comparisons. The subsequent normal researcher
+collected eight organic results, three relevant FAQs and four verified source
+bodies; its drafting-input contract and manual-pilot evidence eligibility passed.
+No model call, worker reservation or generated article was made. All retained
+state and previous failures remain unchanged.
+
+Three regression assertions failed before the two input corrections and passed
+afterwards. Fresh full verification: **986 tests passed across 49 files** with
+`npm test -- --maxWorkers=4`; lint, typecheck, build and whitespace checks passed.
+The existing gray-matter direct-eval and vinext mixed-import warnings remain.
+Scoped independent review found no P1/P2. The correction changes neither retry
+authorization nor publication behavior; completing a live article still requires
+the separate bounded attempt through drafting/review and native lander QA.
+
+## Previous alternative-topic pilot — 2026-09-06
 
 The [alternative-pilot report](ALTERNATIVE-PILOT-2026-09-06.md) records the
 five-topic diagnostic, selection evidence and actual one-use worker execution.

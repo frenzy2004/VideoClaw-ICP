@@ -332,7 +332,8 @@ export function createResearcher(options: ResearcherOptions) {
         maxPagesPerQuery: 1,
         countryCode: 'us',
         languageCode: 'en',
-        searchLanguage: 'en',
+        // English interface, not lr=lang_en: that extra page-language filter
+        // reproduced empty Google pages for otherwise populated US queries.
         mobileResults: false,
         includeUnfilteredResults: false,
         saveHtml: false,
@@ -508,7 +509,7 @@ export function createResearcher(options: ResearcherOptions) {
           const queries = faqQuestions.slice(0, 2).map((question) => `${question} (site:ycombinator.com OR site:techstars.com)`);
           const support = await runApifyActor(options.apify, SERP_ACTOR_ID, {
             queries: `${queries.join('\n')}\n`, maxPagesPerQuery: 1,
-            countryCode: 'us', languageCode: 'en', searchLanguage: 'en', mobileResults: false,
+            countryCode: 'us', languageCode: 'en', mobileResults: false,
             saveHtml: false, saveHtmlToKeyValueStore: false,
             websiteContentScraper: {enable: false},
           }, execution);
