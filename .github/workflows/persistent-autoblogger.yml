@@ -1,0 +1,168 @@
+name: Persistent Autoblogger
+
+on:
+  workflow_dispatch:
+    inputs:
+      command:
+        description: Controlled autoblogger operation
+        required: true
+        default: research
+        type: choice
+        options:
+          - research
+          - pilot
+          - run
+      max_drafts:
+        description: Draft cap (keep 1 for the first two manual proving runs)
+        required: true
+        default: '1'
+        type: choice
+        options:
+          - '1'
+          - '2'
+          - '3'
+  schedule:
+    - cron: '0 16 * * 1'
+
+concurrency:
+  group: videoclaw-persistent-autoblogger
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  autoblogger:
+    if: github.event_name == 'workflow_dispatch' || vars.AUTOBLOG_SCHEDULE_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      AUTOBLOG_COMMAND: ${{ github.event_name == 'schedule' && 'run' || inputs.command }}
+      AUTOBLOG_RUN_ID: gha-${{ github.run_id }}-${{ github.run_attempt }}
+      AUTOBLOG_ARTIFACT_DIR: artifacts/autoblogger/gha-${{ github.run_id }}-${{ github.run_attempt }}
+      AUTOBLOG_MAX_DRAFTS: ${{ github.event_name == 'schedule' && '3' || inputs.max_drafts || '1' }}
+      AUTOBLOG_SCHEDULE_ENABLED: ${{ vars.AUTOBLOG_SCHEDULE_ENABLED || 'false' }}
+      OPENAI_MODEL: ${{ vars.OPENAI_MODEL || 'gpt-5.5' }}
+      KEYWORD_PROVIDER: ${{ vars.KEYWORD_PROVIDER || 'pending' }}
+      GITHUB_REPOSITORY: ${{ github.repository }}
+      LANDER_REPOSITORY: ${{ github.workspace }}/.autoblogger-lander
+      LANDER_OWNER: INFR-Organisation
+      LANDER_NAME: videoclaw-lander
+      LANDER_BASE_REF: ${{ vars.LANDER_BASE_REF || 'seo/founder-video-blog-launch' }}
+
+    steps:
+      - name: Check out VideoClaw-ICP
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4, resolved 2026-09-05
+        with:
+          persist-credentials: false
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4, annotated tag dereferenced 2026-09-05
+        with:
+          version: 11.19.0
+          run_install: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4, resolved 2026-09-05
+        with:
+          node-version: '22.13.0'
+          cache: pnpm
+
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Unit and offline integration tests
+        run: pnpm test
+
+      - name: Typecheck
+        run: pnpm run typecheck
+
+      - name: Lint
+        run: pnpm run lint
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Check private lander read access
+        env:
+          LANDER_READ_TOKEN: ${{ secrets.LANDER_READ_TOKEN }}
+        run: |
+          if [ -z "$LANDER_READ_TOKEN" ]; then
+            echo '::error::LANDER_READ_TOKEN with contents:read and pull_requests:read on videoclaw-lander is required, including before PR #55 merges. The state GITHUB_TOKEN cannot access this private repository.'
+            exit 1
+          fi
+
+      - name: Check out private lander for native validation
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4, resolved 2026-09-05
+        with:
+          repository: INFR-Organisation/videoclaw-lander
+          ref: ${{ env.LANDER_BASE_REF }}
+          token: ${{ secrets.LANDER_READ_TOKEN }}
+          path: .autoblogger-lander
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Install native lander test dependencies
+        working-directory: .autoblogger-lander
+        run: npm ci
+
+      - name: Verify native lander integration
+        env:
+          AUTOBLOG_NATIVE_LANDER_PATH: ${{ github.workspace }}/.autoblogger-lander
+        run: pnpm test lib/autoblogger/offline-e2e.test.ts
+
+      - name: Prepare research or drafts
+        id: prepare
+        env:
+          LANDER_READ_TOKEN: ${{ secrets.LANDER_READ_TOKEN }}
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+          OPENAI_API_KEY: ${{ env.AUTOBLOG_COMMAND != 'research' && secrets.OPENAI_API_KEY || '' }}
+          SEMRUSH_API_KEY: ${{ env.KEYWORD_PROVIDER == 'semrush' && secrets.SEMRUSH_API_KEY || '' }}
+          AHREFS_API_KEY: ${{ env.KEYWORD_PROVIDER == 'ahrefs' && secrets.AHREFS_API_KEY || '' }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          args=("$AUTOBLOG_COMMAND" --run-id "$AUTOBLOG_RUN_ID" --artifact-dir "$AUTOBLOG_ARTIFACT_DIR/prepare")
+          if [ "$AUTOBLOG_COMMAND" = run ]; then
+            args+=(--phase prepare --max-drafts "$AUTOBLOG_MAX_DRAFTS")
+          fi
+          pnpm autoblog "${args[@]}"
+
+      - name: Upload prepared run artifacts
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4, resolved 2026-09-05
+        if: always()
+        with:
+          name: autoblogger-prepared-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/autoblogger/
+          if-no-files-found: warn
+          retention-days: 7
+
+      - name: Create short-lived lander GitHub App token
+        id: lander-app-token
+        if: success() && steps.prepare.outcome == 'success' && env.LANDER_BASE_REF == 'main' && env.AUTOBLOG_COMMAND == 'run'
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3, resolved 2026-09-05
+        with:
+          app-id: ${{ secrets.LANDER_APP_ID }}
+          private-key: ${{ secrets.LANDER_APP_PRIVATE_KEY }}
+          owner: INFR-Organisation
+          repositories: videoclaw-lander
+          permission-contents: write
+          permission-pull-requests: write
+
+      - name: Publish prepared drafts
+        if: success() && steps.prepare.outcome == 'success' && env.LANDER_BASE_REF == 'main' && env.AUTOBLOG_COMMAND == 'run'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          LANDER_GITHUB_TOKEN: ${{ steps.lander-app-token.outputs.token }}
+        run: |
+          # Conservative local deadline inside the newly minted one-hour token lifetime.
+          export LANDER_TOKEN_EXPIRES_AT="$(date -u -d '+40 minutes' '+%Y-%m-%dT%H:%M:%S.000Z')"
+          pnpm autoblog run --phase publish --run-id "$AUTOBLOG_RUN_ID" --prepared-dir "$AUTOBLOG_ARTIFACT_DIR/prepare" --artifact-dir "$AUTOBLOG_ARTIFACT_DIR/publish" --max-drafts "$AUTOBLOG_MAX_DRAFTS"
+
+      - name: Upload redacted run artifacts
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4, resolved 2026-09-05
+        if: always()
+        with:
+          name: autoblogger-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/autoblogger/
+          if-no-files-found: warn
+          retention-days: 7

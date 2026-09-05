@@ -1,37 +1,111 @@
 # VideoClaw SEO / AEO / GEO content system
 
-![VideoClaw SEO, AEO, and GEO content-system diagram](./videoclaw-seo-aeo-geo-content-system.png)
+Review-only checkpoint: **6 September 2026**. No production merge, deployment, publishing, indexing submission, or schedule activation is authorized in this work.
 
-## How to read the diagram
+![VideoClaw worker, artifact-only pilot, and separate human publication gate](./videoclaw-seo-aeo-geo-content-system-v2.png)
 
-The main lane runs from left to right:
+Read the three lanes independently, left to right. There are no return arrows or cross-lane connectors. The raster is the pre-pilot architecture illustration; its credential/status annotations are superseded by the live-pilot results below. The detailed conditions below are the source of truth.
 
-1. Define five precise customer campaigns.
-2. Generate candidate searches and observe live US Google results with Apify.
-3. Retain traceable opportunities with the ICP, customer trigger, funnel stage, intent, keyword, competitor gap, and SERP provenance attached.
-4. Prioritize opportunities and produce source-backed Markdown articles with real VideoClaw media.
-5. Require technical SEO, search-intent, evidence, media, and editorial QA. Failed records return for revision and remain `noindex`.
-6. Render approved Markdown inside the production `videoclaw-lander` repository using the VideoClaw style guide.
-7. Publish approved pages on `videoclaw.com`, expose them through `robots.txt` and `sitemap.xml`, and route readers to `/download`.
+## 1. Persistent worker: research and drafting
 
-The keyword-provider input is deliberately separate from live SERP evidence. Apify proves what appears in US search results; an authenticated keyword provider supplies proprietary volume, keyword-difficulty, and CPC metrics. Those metrics must be enriched from the provider and never inferred from SERP observations.
-
-## Current checkpoint
-
-- 1,000 candidate searches have been generated across five campaigns.
-- 250 opportunities have live US first-page SERP observations.
-- Ten Demo Day articles exist as source-backed Markdown drafts.
-- The article schema, traceability model, QA system, review renderer, and private deployment are working.
-- The next production milestone is one to three manually approved posts integrated into `videoclaw-lander` and indexed on `videoclaw.com`.
-
-## Traceability contract
-
-Every published article must be reversible through this chain:
+Implementation: [VideoClaw-ICP PR #1](https://github.com/frenzy2004/VideoClaw-ICP/pull/1), branch `automation/persistent-autoblogger-v1`, targeting `seo-campaign`.
 
 ```text
-Article ← keyword ← intent ← customer trigger ← ICP ← campaign
+Balanced queue (up to 50) → evidence screen → up to 10 deep checks → up to 3 drafts → native QA → draft PRs
 ```
 
-## Measurement loop
+The last step is a future gated mode, not permission to open generated lander PRs now.
 
-After publication, Google Search Console impressions, clicks, average position, AI citation checks, and `/download` conversions feed back into search discovery. Those signals determine whether each page should be refreshed, rewritten, consolidated, or expanded.
+| Stage | What happens | Retained evidence |
+| --- | --- | --- |
+| Candidates | Read the incremental backlog and discover related searches for five ICPs. Deduplicate against state and lander inventory, then round-robin eligible campaigns; a full five-campaign queue gets ten scan slots each. | Candidate identity, campaign, trigger and intent |
+| Validation | Recheck US/en Google SERPs through Apify, record organic competitors and suggestion/PAA/related-query signals, and request keyword metrics from a configured provider. | Exact query, locale, actor run, dataset and observation time; metric provenance separately |
+| Top 10 | Screen known missing organic/suggestion/relevant-PAA/product-fit evidence before using a deep slot. Then require two reachable sources including an authoritative source and a defensible gap. Insufficient collection has bounded retries, not a claim of zero demand. | Source URLs, competitor gap, FAQ evidence and selection decision |
+| Up to 3 drafts | Structured OpenAI drafting and independent critique, at most one repair followed by verification. Maximum two drafts from one ICP. | Markdown bundle, critique result and hashes |
+| Native QA | Select allowlisted product media, generate a deterministic branded SVG and validate in a disposable lander checkout using its own contract, lint and build. | Media attribution and native QA report |
+| Draft PRs, later | Only the post-merge, fully credentialed mode can open one draft PR per article. All approval flags remain false. | PR number, artifact hash and outcome |
+
+The 250-opportunity backlog is an input, not a required count or proof of measured demand. Earlier research generated 1,000 candidate queries and retained 250 SERP-observed opportunities; do not describe that as 1,000 demand-validated keywords.
+
+## 2. Current pilot: exactly one artifact, no lander write
+
+```text
+Apify evidence → one draft + critique + QA → Markdown / SVG / report artifact → STOP
+```
+
+- The first attempt scanned fifty candidates and failed all ten deep checks, generating no article. [Historical pilot report](../autoblogger/LIVE-PILOT-2026-09-06.md). Follow-up collector checks still did not establish the complete automated organic/PAA evidence bundle. [Recovery report](../autoblogger/RESEARCH-RECOVERY-2026-09-06.md).
+- A later **assisted local review** combined actual Apify organic results with separately recorded browser PAA and manually checked source bodies. GPT-5.5 completed generation, critique, repair and verification; its final result still failed review. An explicit editorial revision produced one local article, without claiming an unattended pass or consuming a successful-pilot slot. [Current assisted-review report](../autoblogger/ASSISTED-REVIEW-2026-09-06.md).
+- `KEYWORD_PROVIDER=pending` keeps volume, difficulty and CPC explicitly unknown. Paid metrics do not block this one pilot.
+- `LANDER_BASE_REF=seo/founder-video-blog-launch` validates against the unmerged blog contract, not production.
+- `APIFY_TOKEN` is present in ICP Actions secrets. `OPENAI_API_KEY` is now stored locally in an ignored environment file and verified against `gpt-5.5`; the scoped lander read token is still absent.
+- The read token must be separate and fine-grained, restricted to lander contents:read and pull requests:read. Interactive GitHub access does not establish that the worker credential is installed.
+- Local attempts used the existing checkout, fresh GET-only interactive GitHub inventory and ignored local state; no publication backend was supplied. They did not modify remote state or configure unattended Actions. Preserve the failure history and reconcile the separately retained assisted artifact before another pilot.
+- Offline fixtures exercise this path but are **not** live generated article evidence.
+
+The assisted lane is deliberately separate from the persistent worker:
+
+```text
+Apify organic + browser PAA + checked sources → GPT draft/review → operator revision → native QA → LOCAL REVIEW ONLY
+```
+
+Its page is `http://127.0.0.1:3002/blog/demo-day-video-checklist` on the operator's computer. It is not a fourth article in PR #55, a lander PR, or production content.
+
+### Apify and DataForSEO are different inputs
+
+Apify remains the research source. Its Google Search actor exposes organic results, related queries and People Also Ask; these describe the search landscape, not monthly search volume or a keyword-difficulty estimate. [Apify actor documentation](https://apify.com/apify/google-search-scraper)
+
+DataForSEO is a possible later metrics integration, not a connected provider in this version. Its [Google Ads search-volume endpoint](https://docs.dataforseo.com/v3/keywords_data/google_ads/search_volume/live/) and [Labs keyword-difficulty endpoint](https://docs.dataforseo.com/v3/dataforseo_labs/google/bulk_keyword_difficulty/live/) are separate services. The current worker accepts `pending`, `semrush` and `ahrefs`; it does not accept `dataforseo` or turn an Apify token into DataForSEO credentials.
+
+No new metrics adapter is claimed here. A third-party Apify actor would need verified upstream provenance, US scope, date, units and response validation before its metrics could be used. Until then the pilot stays pending and recurring/draft-PR mode remains blocked by the paid-metrics gate.
+
+## 3. Site review and the human release boundary
+
+Site integration: [videoclaw-lander PR #55](https://github.com/INFR-Organisation/videoclaw-lander/pull/55), branch `seo/founder-video-blog-launch`, targeting `main`. It remains open and unmerged.
+
+```text
+Three Markdown posts in local /blog review → team copy / source / design approval → future human release
+```
+
+The three distinct review topics are:
+
+1. How to make a founder pitch video.
+2. A 60-second founder pitch video script.
+3. What to do when a live product demo fails.
+
+They use the lander's Markdown renderer, VideoClaw typography and media, `/download` CTAs and per-article metadata. All three remain `status: review` with every approval flag false. Review pages are non-indexable in previews and unavailable in production. Local editorial improvements are not team publication approval.
+
+Human approval, a future status/date change, merge, live-domain checks and search-engine submissions are separate release steps outside this authorization. The worker performs none of them.
+
+## Traceability and state
+
+Every article traces back to campaign, ICP, trigger, intent, keyword, SERP observation, competitor gap and cited sources. Provenance belongs in frontmatter and review reports, not public article prose.
+
+| Location | Contents |
+| --- | --- |
+| `VideoClaw-ICP` source branch | Worker, research library, tests and diagrams |
+| `autoblogger-state`, when Actions runs begin | Compact identities, decisions, run/dataset IDs, provider provenance, hashes, PR outcomes and bounded redacted failures; local pilot history must be reconciled first |
+| Ignored local pilot state and reports | This live attempt's decisions, provenance, bounded retries and source/PAA rejection report; not Git-backed |
+| Apify datasets | Raw search observations |
+| Seven-day workflow artifacts | Proposed Markdown, SVG, validated bundle and QA report |
+| `videoclaw-lander` review branch | Three manually reviewed drafts and blog renderer |
+| Runtime secrets only | Apify, OpenAI and scoped GitHub/provider credentials; never Git content |
+
+## What is ready, and what is blocked
+
+| Work | Current state | Next dependency |
+| --- | --- | --- |
+| Article and diagram updates | Original three review guides plus one assisted artifact in a separate local preview; no production action | Team review; artifact provenance remains explicit |
+| Worker implementation | PR #1 open; offline and native fixture verification recorded separately | Implementation review |
+| Unattended live artifact-only pilot | Not yet successful; the local article required browser evidence and editorial intervention | Reliable automated research and a passing critique/repair run; scoped read token and OpenAI Actions secret for unattended execution |
+| Paid enrichment | Not connected; Apify research does not invent metrics | Provider access and a tested adapter |
+| Generated lander PRs | Not enabled | Merged blog contract, paid metrics, GitHub App and approved rollout |
+| Weekly automation | `AUTOBLOG_SCHEDULE_ENABLED=false`; Monday 16:00 UTC schedule is in the PR | Explicit activation approval and workflow on the default branch |
+| Production and indexing | Out of scope | Separate team approval and release |
+
+After a future approved release, Search Console impressions/clicks, AI citations and download conversions can guide refreshes and consolidation. This measurement loop is planned, not currently automated.
+
+For commands, permissions and failure behavior, see the [worker runbook](../autoblogger/README.md) and [verification record](../autoblogger/VERIFICATION.md).
+
+## Diagram source
+
+The updated raster uses the built-in ImageGen tool with the previous PNG as an edit reference. [The exact prompt is retained here](./videoclaw-seo-aeo-geo-content-system-v2.prompt.md). The older PNG is preserved; this page embeds v2.
