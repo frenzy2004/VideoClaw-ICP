@@ -1,12 +1,15 @@
+import { createHash } from 'node:crypto';
 import matter from 'gray-matter';
 import { z } from 'zod';
 
 import { AutobloggerStateSchema, createAutobloggerState } from './state';
-import { CandidateSchema } from './domain';
+import { CandidateSchema, candidateFingerprints } from './domain';
 import { containsSecretLikeValue, redactSensitive } from './secrets';
 import { requestWithTimeout, type HttpRequest, type HttpResponse, type HttpTransport } from './http';
 import type {
+  GitHubAppInstallationAuth,
   GitHubPublisherBoundary,
+  GitHubReadOnlyAuth,
   GitHubTargetSnapshot,
   PreparedCommit,
 } from './publisher';
@@ -18,6 +21,19 @@ const STATE_PATH = 'state.json';
 const STATE_BRANCH = 'autoblogger-state';
 const SAFE_IDENTITY = /^[A-Za-z0-9_.-]+$/;
 
+export function createGitHubReadOnlyAuth(token: string, stateToken?: string): GitHubReadOnlyAuth {
+  if (!/^github_pat_[A-Za-z0-9_]{16,}$/u.test(token) || token === stateToken || token === process.env.GITHUB_TOKEN) {
+    throw new Error('LANDER_READ_TOKEN must be a separate fine-grained read-only PAT with contents:read and pull_requests:read; state and publication tokens are forbidden.');
+  }
+  return { kind: 'github_read_only', token };
+}
+
+function assertMutationAuth(auth: GitHubAppInstallationAuth): void {
+  if (!auth || auth.kind !== 'github_app_installation' || !/^ghs_[A-Za-z0-9_]{16,}$/u.test(auth.token) || auth.token === process.env.GITHUB_TOKEN) {
+    throw new Error('GitHub mutations require an explicit lander App installation token.');
+  }
+}
+
 const CompactFailureSchema = z.object({
   runId: z.string().trim().min(1).max(160),
   code: z.string().trim().min(1).max(120),
@@ -27,19 +43,47 @@ const CompactFailureSchema = z.object({
 }).strict();
 
 const CompactProvenanceSchema = z.object({
+  serp: z.object({
+    runId: z.string().trim().min(1).max(160),
+    datasetId: z.string().trim().min(1).max(160),
+    observedAt: z.string().datetime(),
+  }).strict(),
+  keyword: z.object({
+    provider: z.enum(['pending', 'semrush', 'ahrefs', 'similarweb']),
+    endpoint: z.string().url().max(1_000).nullable(),
+    observedAt: z.string().datetime().nullable(),
+    providerRequestId: z.string().trim().min(1).max(500).nullable(),
+    sourceObservedAt: z.string().trim().min(1).max(100).nullable(),
+  }).strict(),
+}).strict();
+
+export const CandidateDecisionSchema = z.object({
+  articleId: z.string().trim().min(1).max(128),
+  intentFingerprint: z.string().regex(/^intent:[0-9a-f]{64}$/u),
+  identities: z.array(z.string().trim().min(1).max(500)).min(6).max(6),
+  status: z.enum(['scanned', 'retryable', 'leased', 'completed', 'terminal', 'manual_attention']),
+  reason: z.string().trim().min(1).max(240),
+  attempts: z.number().int().min(0).max(3),
   runId: z.string().trim().min(1).max(160),
-  datasetId: z.string().trim().min(1).max(160),
-  provider: z.enum(['pending', 'semrush', 'ahrefs']),
-  observedAt: z.string().datetime(),
+  updatedAt: z.string().datetime(),
+  leaseExpiresAt: z.string().datetime().nullable(),
+}).strict();
+
+const ManualPilotSchema = z.object({
+  runId: z.string().trim().min(1).max(160),
+  status: z.enum(['leased', 'prepared', 'consumed']),
+  reservedAt: z.string().datetime(),
+  leaseExpiresAt: z.string().datetime().nullable(),
+  artifactHash: z.string().regex(/^[0-9a-f]{64}$/u).nullable(),
+  consumedAt: z.string().datetime().nullable(),
 }).strict();
 
 export const PersistentWorkerStateSchema = AutobloggerStateSchema.extend({
-  manualPilot: z.object({
-    runId: z.string().trim().min(1).max(160),
-    consumedAt: z.string().datetime(),
-  }).strict().nullable(),
+  manualPilot: ManualPilotSchema.nullable(),
   queuedCandidates: z.array(CandidateSchema).max(500),
   candidateFingerprints: z.array(z.string().trim().min(1).max(500)).max(20_000),
+  dedupeHashes: z.array(z.string().regex(/^[0-9a-f]{64}$/u)).max(30_000),
+  decisions: z.record(z.string(), CandidateDecisionSchema),
   provenance: z.record(z.string(), CompactProvenanceSchema),
   contentHashes: z.record(z.string(), z.string().regex(/^[0-9a-f]{64}$/)),
   pullRequests: z.record(z.string(), z.object({
@@ -58,11 +102,66 @@ export function createPersistentWorkerState(): PersistentWorkerState {
     manualPilot: null,
     queuedCandidates: [],
     candidateFingerprints: [],
+    dedupeHashes: [],
+    decisions: {},
     provenance: {},
     contentHashes: {},
     pullRequests: {},
     failures: [],
   });
+}
+
+export type CandidateDecision = z.infer<typeof CandidateDecisionSchema>;
+
+export const MAX_PERSISTENT_STATE_BYTES = 1_500_000;
+const MAX_DECISIONS = 5_000;
+const MAX_RUNS = 500;
+
+function identityHash(value: string): string {
+  return createHash('sha256').update(value).digest('hex');
+}
+
+export function compactPersistentWorkerState(input: PersistentWorkerState): PersistentWorkerState {
+  const parsed = PersistentWorkerStateSchema.parse(input);
+  const orderedDecisions = Object.entries(parsed.decisions).sort((left, right) => (
+    right[1].updatedAt.localeCompare(left[1].updatedAt) || left[0].localeCompare(right[0])
+  ));
+  const active = orderedDecisions.filter(([, decision]) => ['leased', 'retryable', 'manual_attention'].includes(decision.status));
+  if (active.length > MAX_DECISIONS) throw new Error('Persistent state contains too many active or retryable decisions to compact safely.');
+  const retainedDecisionEntries = [
+    ...active,
+    ...orderedDecisions.filter(([, decision]) => !['leased', 'retryable', 'manual_attention'].includes(decision.status)),
+  ].slice(0, MAX_DECISIONS);
+  const retainedDecisionKeys = new Set(retainedDecisionEntries.map(([key]) => key));
+  const droppedIdentityHashes = orderedDecisions
+    .filter(([key]) => !retainedDecisionKeys.has(key))
+    .flatMap(([, decision]) => decision.identities.map(identityHash));
+  const allIdentityHashes = parsed.candidateFingerprints.map(identityHash);
+  const candidateFingerprints = [...new Set(parsed.candidateFingerprints)].sort().slice(-20_000);
+  const dedupeHashes = [...new Set([
+    ...parsed.dedupeHashes,
+    ...allIdentityHashes,
+    ...droppedIdentityHashes,
+  ])].sort();
+  if (dedupeHashes.length > 30_000) throw new Error('Durable deduplication capacity reached; archive state before continuing. No identities were discarded.');
+  const retainedRuns = Object.entries(parsed.runs)
+    .sort((left, right) => right[1].startedAt.localeCompare(left[1].startedAt) || left[0].localeCompare(right[0]))
+    .slice(0, MAX_RUNS);
+  const compacted = PersistentWorkerStateSchema.parse({
+    ...parsed,
+    runs: Object.fromEntries(retainedRuns),
+    decisions: Object.fromEntries(retainedDecisionEntries.sort(([a], [b]) => a.localeCompare(b))),
+    candidateFingerprints,
+    dedupeHashes,
+    provenance: Object.fromEntries(Object.entries(parsed.provenance).filter(([key]) => retainedDecisionKeys.has(key)).sort(([a], [b]) => a.localeCompare(b))),
+    contentHashes: Object.fromEntries(Object.entries(parsed.contentHashes).filter(([key]) => retainedDecisionKeys.has(key)).sort(([a], [b]) => a.localeCompare(b))),
+    pullRequests: Object.fromEntries(Object.entries(parsed.pullRequests).filter(([key]) => retainedDecisionKeys.has(key)).sort(([a], [b]) => a.localeCompare(b))),
+    failures: parsed.failures.slice(-100),
+  });
+  if (Buffer.byteLength(JSON.stringify(compacted), 'utf8') > MAX_PERSISTENT_STATE_BYTES) {
+    throw new Error('Persistent state exceeds the 1.5MB fail-closed size limit after deterministic compaction.');
+  }
+  return compacted;
 }
 
 type GitHubRuntimeOptions = {
@@ -128,7 +227,8 @@ async function requestGitHub(
     if (!accepted.includes(response.status)) {
       throw new Error(`GitHub API returned HTTP ${response.status}.`);
     }
-    if (/rel="next"/iu.test(response.headers.link ?? '')) {
+    const link = Object.entries(response.headers).find(([key]) => key.toLowerCase() === 'link')?.[1] ?? '';
+    if (/rel="next"/iu.test(link)) {
       throw new Error('GitHub inventory pagination exceeded the bounded first page.');
     }
     return response;
@@ -143,11 +243,29 @@ function repoPath(owner: string, repository: string): string {
   return `/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repository)}`;
 }
 
-function parseArticle(content: string): { id?: string; slug?: string; title?: string; primaryKeyword?: string } {
+function parseArticle(content: string): { id?: string; articleId?: string; intentFingerprint?: string; slug?: string; title?: string; primaryKeyword?: string } {
   const data = matter(content).data as Record<string, unknown>;
-  const result: { id?: string; slug?: string; title?: string; primaryKeyword?: string } = {};
+  const result: { id?: string; articleId?: string; intentFingerprint?: string; slug?: string; title?: string; primaryKeyword?: string } = {};
   for (const key of ['id', 'slug', 'title', 'primaryKeyword'] as const) {
     if (typeof data[key] === 'string' && data[key].trim()) result[key] = data[key].trim();
+  }
+  if (result.id) result.articleId = result.id;
+  if (typeof data.intentFingerprint === 'string' && /^intent:[0-9a-f]{64}$/u.test(data.intentFingerprint)) {
+    result.intentFingerprint = data.intentFingerprint;
+  } else {
+    const candidate = CandidateSchema.safeParse({
+      schemaVersion: 1,
+      articleId: result.id,
+      campaignId: data.campaign,
+      icp: data.icp,
+      primaryKeyword: result.primaryKeyword,
+      secondaryKeywords: Array.isArray(data.secondaryKeywords) ? data.secondaryKeywords : [],
+      title: result.title,
+      slug: result.slug,
+      intent: data.searchIntent,
+      funnelStage: data.funnelStage,
+    });
+    if (candidate.success) result.intentFingerprint = candidateFingerprints(candidate.data).intent;
   }
   if (!result.id && !result.slug && !result.title && !result.primaryKeyword) {
     throw new Error('Lander article inventory record has no identity.');
@@ -164,6 +282,11 @@ function decodeBlob(value: unknown): string {
 function bundleMarker(body: unknown): string | undefined {
   if (typeof body !== 'string') return undefined;
   return body.match(/<!--\s*autoblogger-bundle-sha256:\s*([0-9a-f]{64})\s*-->/iu)?.[1];
+}
+
+function bodyIdentity(body: unknown, pattern: RegExp): string | undefined {
+  if (typeof body !== 'string') return undefined;
+  return body.match(pattern)?.[1]?.trim() || undefined;
 }
 
 function slugFromHead(head: string): string | undefined {
@@ -183,6 +306,15 @@ function parsePullRequest(value: unknown) {
     ...(bundleMarker(pr.body) ? { bundleHash: bundleMarker(pr.body) } : {}),
     ...(slug ? { slug } : {}),
     ...(title ? { title } : {}),
+    ...(bodyIdentity(pr.body, /^\s*-\s*Article ID:\s*(\S+)\s*$/imu)
+      ? { articleId: bodyIdentity(pr.body, /^\s*-\s*Article ID:\s*(\S+)\s*$/imu) }
+      : {}),
+    ...(bodyIdentity(pr.body, /^\s*-\s*Primary keyword:[ \t]*([^\r\n]+)$/imu)
+      ? { primaryKeyword: bodyIdentity(pr.body, /^\s*-\s*Primary keyword:[ \t]*([^\r\n]+)$/imu) }
+      : {}),
+    ...(bodyIdentity(pr.body, /^\s*-\s*Intent fingerprint:\s*(intent:[0-9a-f]{64})\s*$/imu)
+      ? { intentFingerprint: bodyIdentity(pr.body, /^\s*-\s*Intent fingerprint:\s*(intent:[0-9a-f]{64})\s*$/imu) }
+      : {}),
   };
 }
 
@@ -194,6 +326,8 @@ export function createGitHubPublisherBoundary(input: GitHubRuntimeOptions): GitH
   };
   return {
     async inspectTarget({ owner, repository, baseRef, blogLaunchPullRequest, auth }): Promise<GitHubTargetSnapshot> {
+      if (auth.kind === 'github_read_only') createGitHubReadOnlyAuth(auth.token);
+      else assertMutationAuth(auth);
       const root = repoPath(owner, repository);
       const baseResponse = await requestGitHub(
         options,
@@ -205,7 +339,7 @@ export function createGitHubPublisherBoundary(input: GitHubRuntimeOptions): GitH
       const baseSha = string(baseObject.sha, 'GitHub base SHA');
       const [launchResponse, branchResponse, treeResponse, pullsResponse] = await Promise.all([
         requestGitHub(options, auth.token, 'GET', `${root}/pulls/${blogLaunchPullRequest}`),
-        requestGitHub(options, auth.token, 'GET', `${root}/git/matching-refs/heads/autoblog/`),
+        requestGitHub(options, auth.token, 'GET', `${root}/git/matching-refs/heads/`),
         requestGitHub(options, auth.token, 'GET', `${root}/git/trees/${encodeURIComponent(baseSha)}?recursive=1`),
         requestGitHub(options, auth.token, 'GET', `${root}/pulls?state=open&per_page=100`),
       ]);
@@ -218,7 +352,8 @@ export function createGitHubPublisherBoundary(input: GitHubRuntimeOptions): GitH
         const status = record(compare.body, 'GitHub compare result').status;
         mergeCommitIncludedInBase = status === 'ahead' || status === 'identical';
       }
-      const branches = Array.isArray(branchResponse.body) ? branchResponse.body : [];
+      if (!Array.isArray(branchResponse.body)) throw new Error('GitHub branch inventory is incomplete.');
+      const branches = branchResponse.body;
       const branchRefs = branches.map((entry) => string(record(entry, 'GitHub ref').ref, 'GitHub ref name').replace(/^refs\/heads\//u, ''));
       const tree = record(treeResponse.body, 'GitHub repository tree');
       if (tree.truncated === true || !Array.isArray(tree.tree)) throw new Error('GitHub article inventory tree is incomplete.');
@@ -232,9 +367,39 @@ export function createGitHubPublisherBoundary(input: GitHubRuntimeOptions): GitH
         return parseArticle(decodeBlob(blob.body));
       }));
       if (!Array.isArray(pullsResponse.body)) throw new Error('GitHub open pull-request inventory is malformed.');
-      const openPullRequests = pullsResponse.body
-        .map((entry) => parsePullRequest(entry))
-        .filter(({ headRef }) => headRef.startsWith('autoblog/'));
+      const openPullRequests: GitHubTargetSnapshot['openPullRequests'] = [];
+      for (const entry of pullsResponse.body) {
+        const pull = parsePullRequest(entry);
+        const files = await requestGitHub(options, auth.token, 'GET', `${root}/pulls/${pull.number}/files?per_page=100`);
+        if (!Array.isArray(files.body)) throw new Error('GitHub pull-request file inventory is incomplete.');
+        const articleFiles = files.body.filter((value) => {
+          const file = record(value, 'GitHub pull-request file');
+          return file.status !== 'removed' && /^content\/articles\/[^/]+\.md$/u.test(string(file.filename, 'GitHub changed file name'));
+        });
+        const articles = await Promise.all(articleFiles.map(async (value) => {
+          const file = record(value, 'GitHub changed article');
+          const sha = string(file.sha, 'GitHub changed article SHA');
+          if (!/^[0-9a-f]{40,64}$/iu.test(sha)) throw new Error('GitHub changed article SHA is invalid.');
+          // Read immutable blob content through the authenticated repository API;
+          // never follow raw_url or download_url supplied by a PR or fork.
+          const blob = await requestGitHub(options, auth.token, 'GET', `${root}/git/blobs/${sha}`);
+          const article = parseArticle(decodeBlob(blob.body));
+          if (!article.articleId || !article.slug || !article.title || !article.primaryKeyword) {
+            throw new Error('Changed PR article is missing a required ID, slug, title, or primary keyword.');
+          }
+          return article;
+        }));
+        // A manual PR may contain multiple articles and no traceability bullets.
+        // Give each article its own inventory entry rather than its PR title.
+        if (articles.length > 0) {
+          for (const article of articles) {
+            openPullRequests.push({ number: pull.number, url: pull.url, headRef: pull.headRef, ...article,
+              ...(pull.bundleHash ? { bundleHash: pull.bundleHash } : {}) });
+          }
+        } else {
+          openPullRequests.push(pull);
+        }
+      }
       const launchBase = record(launch.base, 'GitHub blog-launch base');
       return {
         baseRef,
@@ -251,6 +416,7 @@ export function createGitHubPublisherBoundary(input: GitHubRuntimeOptions): GitH
       };
     },
     async prepareCommit(input: PreparedCommit) {
+      assertMutationAuth(input.auth);
       const root = repoPath(input.owner, input.repository);
       const blobs = await Promise.all(input.files.map(async (file) => {
         const response = await requestGitHub(options, input.auth.token, 'POST', `${root}/git/blobs`, {
@@ -272,12 +438,14 @@ export function createGitHubPublisherBoundary(input: GitHubRuntimeOptions): GitH
       return { commitSha: string(record(commitResponse.body, 'GitHub commit result').sha, 'GitHub commit SHA') };
     },
     async createBranch({ owner, repository, headRef, commitSha, auth }) {
+      assertMutationAuth(auth);
       await requestGitHub(options, auth.token, 'POST', `${repoPath(owner, repository)}/git/refs`, {
         ref: `refs/heads/${headRef}`,
         sha: commitSha,
       }, [201]);
     },
     async createDraftPullRequest({ owner, repository, baseRef, headRef, title, body, draft, bundleHash, auth }) {
+      assertMutationAuth(auth);
       const marker = `<!-- autoblogger-bundle-sha256: ${bundleHash} -->`;
       const response = await requestGitHub(options, auth.token, 'POST', `${repoPath(owner, repository)}/pulls`, {
         title,
@@ -302,6 +470,7 @@ export function createGitHubPublisherBoundary(input: GitHubRuntimeOptions): GitH
       return matches[0];
     },
     async deleteBranch({ owner, repository, headRef, auth }) {
+      assertMutationAuth(auth);
       await requestGitHub(
         options,
         auth.token,
@@ -365,7 +534,7 @@ export function createGitHubStateStore(input: GitHubStateStoreOptions): GitHubSt
       };
     },
     async save(stateInput, expectedVersion) {
-      const state = PersistentWorkerStateSchema.parse(stateInput);
+      const state = compactPersistentWorkerState(PersistentWorkerStateSchema.parse(stateInput));
       if (containsSecretLikeValue(state)) throw new Error('Persistent state contains a secret-like value.');
       const content = Buffer.from(`${JSON.stringify(state)}\n`).toString('base64');
       if (expectedVersion === null) {

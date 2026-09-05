@@ -37,9 +37,9 @@ const candidate: Candidate = {
 };
 
 const evidence: EvidenceBundle = {
-  schemaVersion: 1,
+  schemaVersion: 2,
   candidateFingerprint: candidateFingerprints(candidate).candidate,
-  suggestions: ['how to make a founder pitch video naturally'],
+  signals: { autocomplete: ['how to make a founder pitch video naturally'], peopleAlsoAsk: [], relatedSearches: [] },
   serp: {
     organicResultCount: 9,
     peopleAlsoAsk: [
@@ -49,9 +49,9 @@ const evidence: EvidenceBundle = {
     ],
   },
   sources: [
-    { url: 'https://www.ycombinator.com/video/', authoritative: true },
-    { url: 'https://www.ftc.gov/business-guidance/resources/advertising-faqs-guide-small-business', authoritative: true },
-    { url: 'https://videoclaw.com/features', authoritative: true },
+    { originalUrl: 'https://www.ycombinator.com/video/', finalUrl: 'https://www.ycombinator.com/video/', authoritative: true },
+    { originalUrl: 'https://www.ftc.gov/business-guidance/resources/advertising-faqs-guide-small-business', finalUrl: 'https://www.ftc.gov/business-guidance/resources/advertising-faqs-guide-small-business', authoritative: true },
+    { originalUrl: 'https://videoclaw.com/features', finalUrl: 'https://videoclaw.com/features', authoritative: true },
   ],
   faqQuestions: [
     'How do you create a founder pitch video?',
@@ -71,8 +71,8 @@ const keywordMetrics: KeywordMetrics = {
 };
 
 const checkedSources: CheckedSource[] = evidence.sources.map((source) => ({
-  url: source.url,
-  finalUrl: source.url,
+  url: source.originalUrl,
+  finalUrl: source.finalUrl,
   status: 200,
   reachable: true,
   authoritative: source.authoritative,
@@ -394,6 +394,19 @@ describe('content bundle materialization', () => {
 });
 
 describe('generated-content safety review', () => {
+  it('allows a natural general paraphrase with exact visible bindings and selected fact IDs', () => {
+    const span = 'The application advice favors bullet points for speaking.';
+    const paraphrase = withDraft({
+      sections: [{ ...generatedDraft.sections[0], markdown: span }, generatedDraft.sections[1]],
+      claimBindings: generatedDraft.claimBindings.map((binding) => binding.location === '/sections/0/markdown'
+        ? { ...binding, span, sourceFactIds: ['yc-bullets'] }
+        : binding),
+    });
+
+    // This checks structural eligibility only; the drafter must still obtain independent support review.
+    expect(inspectGeneratedDraft(context, paraphrase)).toEqual([]);
+  });
+
   it.each([
     ['raw HTML', withDraft({ sections: [{ heading: 'Unsafe', markdown: '<aside>hidden</aside>' }, generatedDraft.sections[1]] }), 'content.raw_html'],
     ['body H1', withDraft({ sections: [{ heading: 'Unsafe', markdown: '# Duplicate title' }, generatedDraft.sections[1]] }), 'content.body_h1'],
@@ -403,7 +416,7 @@ describe('generated-content safety review', () => {
     ['malformed Markdown', withDraft({ sections: [{ heading: 'Unsafe', markdown: '```text\nnever closed' }, generatedDraft.sections[1]] }), 'content.markdown_malformed'],
     ['research boilerplate', withDraft({ sections: [{ heading: 'Unsafe', markdown: 'Our debug research notes from the SERP say this is best.' }, generatedDraft.sections[1]] }), 'content.research_boilerplate'],
     ['copied source passage', withDraft({ sections: [{ heading: 'Unsafe', markdown: context.sourceFacts[0].excerpt as string }, generatedDraft.sections[1]] }), 'content.copied_passage'],
-    ['unsupported claim fact', withDraft({ claimBindings: generatedDraft.claimBindings.map((binding, index) => index === 1 ? { ...binding, sourceFactIds: ['ftc-support'] } : binding) }), 'content.claim_binding'],
+    ['unapproved product fact', withDraft({ claimBindings: generatedDraft.claimBindings.map((binding) => binding.productClaimId === 'vc-editing-claim' ? { ...binding, sourceFactIds: ['ftc-support'] } : binding) }), 'content.claim_binding'],
     ['unsupported product assertion', withDraft({ sections: [{ heading: 'Unsafe', markdown: 'The app guarantees a tenfold conversion increase.' }, generatedDraft.sections[1]] }), 'content.claim_binding'],
     ['appended objective assertion', withDraft({ sections: [generatedDraft.sections[0], { ...generatedDraft.sections[1], markdown: `${generatedDraft.sections[1].markdown} This workflow doubles conversion.` }] }), 'content.claim_binding'],
     ['objective metadata assertion', withDraft({ customerTrigger: `${generatedDraft.customerTrigger} Market demand doubled.` }), 'content.claim_binding'],
@@ -414,15 +427,6 @@ describe('generated-content safety review', () => {
           ? { ...step, detail: 'Reliable workflows double conversion.' }
           : step),
       },
-    }), 'content.claim_binding'],
-    ['objective assertion bound to an unrelated fact', withDraft({
-      sections: [generatedDraft.sections[0], { ...generatedDraft.sections[1], markdown: `${generatedDraft.sections[1].markdown} Reliable workflows double conversion.` }],
-      claimBindings: [...generatedDraft.claimBindings, {
-        location: '/sections/1/markdown',
-        span: 'Reliable workflows double conversion.',
-        sourceFactIds: ['ftc-support'],
-        productClaimId: null,
-      }],
     }), 'content.claim_binding'],
     ['missing objective binding', withDraft({ claimBindings: generatedDraft.claimBindings.slice(1) }), 'content.claim_binding'],
     ['unknown source fact binding', withDraft({ claimBindings: generatedDraft.claimBindings.map((binding, index) => index === 0 ? { ...binding, sourceFactIds: ['missing-fact'] } : binding) }), 'content.claim_binding'],
@@ -545,59 +549,12 @@ describe('generated-content safety review', () => {
     }));
   });
 
-  it('rejects a longer unsupported assertion bound to a shorter approved fact', () => {
-    const shortFact = 'A backup recording protects the pitch.';
-    const longerClaim = 'A backup recording protects the pitch and guarantees investor interest.';
-    const shortFactContext: DraftingContext = {
-      ...context,
-      sourceFacts: context.sourceFacts.map((source) => source.id === 'yc'
-        ? { ...source, facts: [...source.facts, { id: 'yc-backup', text: shortFact }] }
-        : source),
-    };
-    const unsafeDraft = withDraft({
-      sections: [{
-        ...generatedDraft.sections[0],
-        markdown: `${generatedDraft.sections[0].markdown} ${longerClaim}`,
-      }, generatedDraft.sections[1]],
-      claimBindings: [...generatedDraft.claimBindings, {
-        location: '/sections/0/markdown',
-        span: longerClaim,
-        sourceFactIds: ['yc-backup'],
-        productClaimId: null,
-      }],
-    });
-
-    expect(inspectGeneratedDraft(shortFactContext, unsafeDraft)).toContainEqual(expect.objectContaining({
-      code: 'content.claim_binding',
-    }));
-  });
-
   it.each(['Revenue doubles.', 'revenue doubles.'])('splits and rejects an appended unsupported outcome without intervening whitespace: %s', (appended) => {
     const unsafeDraft = withDraft({
       sections: [{
         ...generatedDraft.sections[0],
         markdown: `${generatedDraft.sections[0].markdown}${appended}`,
       }, generatedDraft.sections[1]],
-    });
-
-    expect(inspectGeneratedDraft(context, unsafeDraft)).toContainEqual(expect.objectContaining({
-      code: 'content.claim_binding',
-    }));
-  });
-
-  it('does not accept a topically overlapping advertising fact as support for an outcome claim', () => {
-    const span = 'Objective advertising claims double conversion.';
-    const unsafeDraft = withDraft({
-      sections: [generatedDraft.sections[0], {
-        ...generatedDraft.sections[1],
-        markdown: `${generatedDraft.sections[1].markdown} ${span}`,
-      }],
-      claimBindings: [...generatedDraft.claimBindings, {
-        location: '/sections/1/markdown',
-        span,
-        sourceFactIds: ['ftc-support'],
-        productClaimId: null,
-      }],
     });
 
     expect(inspectGeneratedDraft(context, unsafeDraft)).toContainEqual(expect.objectContaining({

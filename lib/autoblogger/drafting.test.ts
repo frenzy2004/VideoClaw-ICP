@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import { describe, expect, it } from 'vitest';
 
 import { candidateFingerprints, type Candidate } from './domain';
@@ -12,6 +13,7 @@ import type {
   DraftingContext,
   GeneratedDraftV2,
 } from './content-bundle';
+import { inspectGeneratedDraft } from './content-bundle';
 
 const candidate: Candidate = {
   schemaVersion: 1,
@@ -31,9 +33,9 @@ const fingerprint = candidateFingerprints(candidate).candidate;
 const context: DraftingContext = {
   candidate,
   evidence: {
-    schemaVersion: 1,
+    schemaVersion: 2,
     candidateFingerprint: fingerprint,
-    suggestions: ['founder pitch video workflow checklist'],
+    signals: { autocomplete: ['founder pitch video workflow checklist'], peopleAlsoAsk: [], relatedSearches: [] },
     serp: {
       organicResultCount: 8,
       peopleAlsoAsk: [
@@ -43,8 +45,8 @@ const context: DraftingContext = {
       ],
     },
     sources: [
-      { url: 'https://www.ycombinator.com/video/', authoritative: true },
-      { url: 'https://www.ftc.gov/business-guidance/resources/advertising-faqs-guide-small-business', authoritative: true },
+      { originalUrl: 'https://www.ycombinator.com/video/', finalUrl: 'https://www.ycombinator.com/video/', authoritative: true },
+      { originalUrl: 'https://www.ftc.gov/business-guidance/resources/advertising-faqs-guide-small-business', finalUrl: 'https://www.ftc.gov/business-guidance/resources/advertising-faqs-guide-small-business', authoritative: true },
     ],
     faqQuestions: [
       'How do you plan a founder pitch video?',
@@ -213,13 +215,36 @@ function draftWithBoundDescription(replacement: (typeof replacementDescriptions)
   };
 }
 
+function supportedBindings(value: GeneratedDraftV2 = draft): DraftCritiqueV1['supportEvaluations'] {
+  return value.claimBindings.map((binding, bindingIndex) => ({
+    bindingIndex,
+    bindingHash: createHash('sha256').update(JSON.stringify([
+      binding.location, binding.span, binding.sourceFactIds, binding.productClaimId,
+    ])).digest('hex'),
+    supported: true,
+    kind: binding.productClaimId === null ? 'source_claim' : 'product_claim',
+    rationale: `Fixture source ${binding.sourceFactIds.join(', ')} supports this span without added assertions.`,
+  }));
+}
+
+function withSourceClaim(span: string, factId = 'yc-bullets'): GeneratedDraftV2 {
+  return {
+    ...structuredClone(draft),
+    sections: [{ ...draft.sections[0], markdown: span }, draft.sections[1]],
+    claimBindings: draft.claimBindings.map((binding) => binding.location === '/sections/0/markdown'
+      ? { ...binding, span, sourceFactIds: [factId] }
+      : binding),
+  };
+}
+
 const approvedCritique: DraftCritiqueV1 = {
   schemaVersion: 1,
   approved: true,
   issues: [],
+  supportEvaluations: supportedBindings(),
 };
 
-function resolvedVerification(critique: DraftCritiqueV1): DraftRepairVerificationV1 {
+function resolvedVerification(critique: DraftCritiqueV1, repairedDraft = draft): DraftRepairVerificationV1 {
   return {
     schemaVersion: 1,
     approved: true,
@@ -229,10 +254,11 @@ function resolvedVerification(critique: DraftCritiqueV1): DraftRepairVerificatio
       message: 'The repaired draft resolves this original issue.',
     })),
     newIssues: [],
+    supportEvaluations: supportedBindings(repairedDraft),
   };
 }
 
-function unresolvedVerification(critique: DraftCritiqueV1): DraftRepairVerificationV1 {
+function unresolvedVerification(critique: DraftCritiqueV1, repairedDraft = draft): DraftRepairVerificationV1 {
   return {
     schemaVersion: 1,
     approved: false,
@@ -242,6 +268,7 @@ function unresolvedVerification(critique: DraftCritiqueV1): DraftRepairVerificat
       message,
     })),
     newIssues: [],
+    supportEvaluations: supportedBindings(repairedDraft),
   };
 }
 
@@ -258,6 +285,155 @@ class FixtureStructuredClient implements StructuredOutputClient {
 }
 
 describe('structured drafting orchestration', () => {
+  it('accepts a natural paraphrase only after complete independent support verification', async () => {
+    const paraphrase = withSourceClaim('The application advice favors bullet points for speaking.');
+    const critique: DraftCritiqueV1 = {
+      ...approvedCritique,
+      supportEvaluations: supportedBindings(paraphrase).map((evaluation) => (
+        paraphrase.claimBindings[evaluation.bindingIndex].location === '/sections/0/markdown'
+          ? { ...evaluation, rationale: 'yc-bullets recommends speaking from bullets; this paraphrase preserves that limited advice without asserting any body-only details or results.' }
+          : evaluation
+      )),
+    };
+    const client = new FixtureStructuredClient([paraphrase, critique]);
+    const outcome = await createStructuredDrafter({ client, mediaAllowlist: [media] }).draft(context);
+
+    expect(outcome).toMatchObject({ status: 'ready', repaired: false });
+    if (outcome.status !== 'ready') throw new Error('Expected independently reviewed paraphrase.');
+    expect(outcome.bundle.markdown).toContain('The application advice favors bullet points for speaking.');
+    expect(client.requests).toHaveLength(2);
+    expect(client.requests[1].input).toMatchObject({
+      bindingManifest: expect.arrayContaining([expect.objectContaining({
+        bindingIndex: 6,
+        bindingHash: expect.stringMatching(/^[a-f0-9]{64}$/),
+        location: '/sections/0/markdown',
+        span: 'The application advice favors bullet points for speaking.',
+        sourceFactIds: ['yc-bullets'],
+      })]),
+    });
+  });
+
+  it.each([
+    ['unrelated citation', 'The application advice favors bullet points for speaking.', 'ftc-basis', 'ftc-basis concerns substantiation of advertising claims, not speaking from bullets.'],
+    ['lexically overlapping outcome', 'Objective advertising claims double conversion.', 'ftc-basis', 'A reasonable basis for advertising claims does not imply a conversion gain.'],
+    ['unsupported extension', 'The current guidance recommends speaking from bullets and guarantees investor interest.', 'yc-bullets', 'The snippet recommends bullets but says nothing about investor interest or a guarantee.'],
+    ['unseen body detail', 'The application guidance includes a five-minute script template.', 'yc-bullets', 'The snippet mentions speaking from bullets, not a script template or its duration; the body was not supplied.'],
+    ['unlabelled invented example', 'A founder won funding after following these bullets.', 'yc-bullets', 'No actual founder outcome is evidenced and this invented example is not labelled hypothetical.'],
+    ['implicit unapproved capability', 'Automatic subtitles appear after each recording.', 'yc-bullets', 'In this product workflow this implies an unapproved capability, with neither an approved claim nor an allowed product fact.'],
+  ])('blocks %s when the independent critic rejects support, even if repair issue checks claim success', async (_label, span, factId, rationale) => {
+    const unsupported = withSourceClaim(span, factId);
+    const supportEvaluations = supportedBindings(unsupported).map((evaluation) => (
+      unsupported.claimBindings[evaluation.bindingIndex].location === '/sections/0/markdown'
+        ? { ...evaluation, supported: false, rationale }
+        : evaluation
+    ));
+    const critique: DraftCritiqueV1 = {
+      schemaVersion: 1,
+      approved: false,
+      issues: [{ id: 'unsupported-source-claim', code: 'source.unsupported', message: rationale, repairInstruction: 'Remove unsupported assertions or use a supported paraphrase.' }],
+      supportEvaluations,
+    };
+    // There is no lexical heuristic gate: the independent negative support judgment must block ready.
+    expect(inspectGeneratedDraft(context, unsupported)).toEqual([]);
+    const client = new FixtureStructuredClient([
+      unsupported,
+      critique,
+      unsupported,
+      { ...resolvedVerification(critique, unsupported), supportEvaluations },
+    ]);
+    const outcome = await createStructuredDrafter({ client, mediaAllowlist: [media] }).draft(context);
+
+    expect(outcome).toMatchObject({ status: 'blocked', reason: 'content_safety_failed', findings: expect.arrayContaining([
+      expect.objectContaining({ code: 'critique.support_rejected', message: expect.stringContaining(rationale) }),
+    ]) });
+    expect(outcome).not.toHaveProperty('bundle');
+    expect(client.requests).toHaveLength(4);
+  });
+
+  it.each([
+    ['missing sentence', (items: DraftCritiqueV1['supportEvaluations']) => items.slice(1), 'critique.support_incomplete'],
+    ['missing FAQ', (items: DraftCritiqueV1['supportEvaluations']) => items.filter(({ bindingIndex }) => bindingIndex !== 9), 'critique.support_incomplete'],
+    ['missing graphic label', (items: DraftCritiqueV1['supportEvaluations']) => items.filter(({ bindingIndex }) => bindingIndex !== 14), 'critique.support_incomplete'],
+    ['duplicate index', (items: DraftCritiqueV1['supportEvaluations']) => [...items, items[0]], 'critique.support_unexpected'],
+    ['unknown index', (items: DraftCritiqueV1['supportEvaluations']) => [...items, { ...items[0], bindingIndex: 999 }], 'critique.support_unexpected'],
+    ['stale hash', (items: DraftCritiqueV1['supportEvaluations']) => items.map((item, i) => i === 0 ? { ...item, bindingHash: '0'.repeat(64) } : item), 'critique.support_stale'],
+    ['false product classification', (items: DraftCritiqueV1['supportEvaluations']) => items.map((item, i) => i === 0 ? { ...item, kind: 'product_claim' as const } : item), 'critique.support_kind'],
+  ] as const)('fails closed on %s in both independent support reviews', async (_label, change, code) => {
+    const paraphrase = withSourceClaim('The application advice favors bullet points for speaking.');
+    const supportEvaluations = change(supportedBindings(paraphrase));
+    const client = new FixtureStructuredClient([
+      paraphrase,
+      { ...approvedCritique, supportEvaluations },
+      paraphrase,
+      { ...resolvedVerification(approvedCritique, paraphrase), supportEvaluations },
+    ]);
+    const outcome = await createStructuredDrafter({ client, mediaAllowlist: [media] }).draft(context);
+
+    expect(outcome).toMatchObject({ status: 'blocked', reason: 'content_safety_failed', findings: expect.arrayContaining([
+      expect.objectContaining({ code }),
+    ]) });
+    expect(client.requests).toHaveLength(4);
+    expect(client.requests[2].input).toMatchObject({ bindingSupportFindings: expect.arrayContaining([expect.objectContaining({ code })]) });
+  });
+
+  it.each(['text', 'fact IDs', 'location'] as const)('requires fresh support for repaired %s even when all original issues are resolved', async (change) => {
+    const original = withSourceClaim('The application advice favors bullet points for speaking.');
+    const critique: DraftCritiqueV1 = {
+      schemaVersion: 1,
+      approved: false,
+      issues: [{ id: 'revise', code: 'copy.revise', message: 'Revise the explanation.', repairInstruction: 'Use a clearer explanation.' }],
+      supportEvaluations: supportedBindings(original),
+    };
+    const repaired = change === 'text'
+      ? withSourceClaim('The application advice recommends using bullet points when speaking.')
+      : change === 'fact IDs'
+        ? withSourceClaim(original.sections[0].markdown, 'ftc-basis')
+        : { ...structuredClone(original), claimBindings: [...original.claimBindings].reverse() };
+    const staleVerification = { ...resolvedVerification(critique, repaired), supportEvaluations: supportedBindings(original) };
+    const client = new FixtureStructuredClient([original, critique, repaired, staleVerification]);
+    const outcome = await createStructuredDrafter({ client, mediaAllowlist: [media] }).draft(context);
+
+    expect(outcome).toMatchObject({ status: 'blocked', reason: 'content_safety_failed', findings: expect.arrayContaining([
+      expect.objectContaining({ code: 'critique.support_stale' }),
+    ]) });
+    expect(client.requests).toHaveLength(4);
+    expect(client.requests[3].input).toMatchObject({ originalIssues: critique.issues, repairedDraft: repaired });
+    expect((client.requests[3].input as { bindingManifest: unknown }).bindingManifest)
+      .not.toEqual((client.requests[1].input as { bindingManifest: unknown }).bindingManifest);
+  });
+
+  it('distinguishes explicitly supplied body facts from legacy search titles and snippets', async () => {
+    const provenanceContext = structuredClone(context);
+    provenanceContext.sourceFacts[0].facts[0].evidenceKind = 'body';
+    provenanceContext.sourceFacts[1].facts[0].evidenceKind = 'serp_snippet';
+    const client = new FixtureStructuredClient([draft, approvedCritique]);
+    const outcome = await createStructuredDrafter({ client, mediaAllowlist: [media] }).draft(provenanceContext);
+
+    expect(outcome.status).toBe('ready');
+    expect(client.requests[1].input).toMatchObject({ sourceFacts: [
+      expect.objectContaining({ facts: expect.arrayContaining([
+        expect.objectContaining({ id: 'yc-bullets', evidenceKind: 'body' }),
+        expect.objectContaining({ id: 'fixture-description', evidenceKind: 'serp_title_or_snippet' }),
+      ]) }),
+      expect.objectContaining({ facts: [expect.objectContaining({ id: 'ftc-basis', evidenceKind: 'serp_snippet' })] }),
+    ] });
+    expect(JSON.stringify(client.requests)).not.toContain(context.sourceFacts[0].excerpt);
+  });
+
+  it('never accepts legacy blanket approval with no per-binding support coverage', async () => {
+    const client = new FixtureStructuredClient([
+      draft,
+      { schemaVersion: 1, approved: true, issues: [] },
+      draft,
+      { schemaVersion: 1, approved: true, evaluations: [], newIssues: [] },
+    ]);
+    const outcome = await createStructuredDrafter({ client, mediaAllowlist: [media] }).draft(context);
+
+    expect(outcome).toMatchObject({ status: 'blocked', reason: 'content_safety_failed' });
+    expect(outcome).not.toHaveProperty('bundle');
+    expect(client.requests).toHaveLength(4);
+  });
+
   it('returns a blocking media brief without a DraftBundle or model call when no mapping is suitable', async () => {
     const client = new FixtureStructuredClient([draft, approvedCritique]);
     const drafter = createStructuredDrafter({ client, mediaAllowlist: [] });
@@ -321,7 +497,6 @@ describe('structured drafting orchestration', () => {
       'videoclaw_article_critique_v1',
     ]);
     expect(client.requests[1].system).toMatch(/independent/i);
-    expect(client.requests[0].system).toMatch(/every substantive visible generated string.*exact location and span/i);
     expect(JSON.stringify(client.requests)).not.toContain(context.sourceFacts[0].excerpt);
   });
 
@@ -349,6 +524,7 @@ describe('structured drafting orchestration', () => {
 
   it('does not send a secret-like critic issue into the repair context', async () => {
     const secretCritique: DraftCritiqueV1 = {
+      supportEvaluations: supportedBindings(),
       schemaVersion: 1,
       approved: false,
       issues: [{
@@ -393,6 +569,7 @@ describe('structured drafting orchestration', () => {
 
   it('runs exactly one repair when the independent critique rejects the first draft', async () => {
     const critique: DraftCritiqueV1 = {
+      supportEvaluations: supportedBindings(),
       schemaVersion: 1,
       approved: false,
       issues: [{
@@ -403,7 +580,7 @@ describe('structured drafting orchestration', () => {
       }],
     };
     const repairedDraft = draftWithBoundDescription(replacementDescriptions.detailed);
-    const client = new FixtureStructuredClient([draft, critique, repairedDraft, resolvedVerification(critique)]);
+    const client = new FixtureStructuredClient([draft, critique, repairedDraft, resolvedVerification(critique, repairedDraft)]);
     const drafter = createStructuredDrafter({ client, mediaAllowlist: [media] });
 
     const outcome = await drafter.draft(context);
@@ -420,6 +597,7 @@ describe('structured drafting orchestration', () => {
 
   it('requires clean post-repair verification before accepting a repaired issue', async () => {
     const firstCritique: DraftCritiqueV1 = {
+      supportEvaluations: supportedBindings(),
       schemaVersion: 1,
       approved: false,
       issues: [{
@@ -434,7 +612,7 @@ describe('structured drafting orchestration', () => {
       draft,
       firstCritique,
       repairedDraft,
-      resolvedVerification(firstCritique),
+      resolvedVerification(firstCritique, repairedDraft),
     ]);
     const drafter = createStructuredDrafter({ client, mediaAllowlist: [media] });
 
@@ -457,6 +635,7 @@ describe('structured drafting orchestration', () => {
 
   it.each([true, false])('blocks when post-repair verification omits an original critic issue (approved: %s)', async (approved) => {
     const firstCritique: DraftCritiqueV1 = {
+      supportEvaluations: supportedBindings(),
       schemaVersion: 1,
       approved: false,
       issues: [{
@@ -468,6 +647,7 @@ describe('structured drafting orchestration', () => {
     };
     const repairedDraft = draftWithBoundDescription(replacementDescriptions.concise);
     const forgetfulVerification = {
+      supportEvaluations: supportedBindings(repairedDraft),
       schemaVersion: 1,
       approved,
       evaluations: [],
@@ -496,6 +676,7 @@ describe('structured drafting orchestration', () => {
 
   it('blocks a new issue found during post-repair verification without repairing again', async () => {
     const firstCritique: DraftCritiqueV1 = {
+      supportEvaluations: supportedBindings(),
       schemaVersion: 1,
       approved: false,
       issues: [{
@@ -540,6 +721,7 @@ describe('structured drafting orchestration', () => {
 
   it('blocks an unrelated repair when the second critique still rejects it and never repairs twice', async () => {
     const firstCritique: DraftCritiqueV1 = {
+      supportEvaluations: supportedBindings(),
       schemaVersion: 1,
       approved: false,
       issues: [{
@@ -550,6 +732,7 @@ describe('structured drafting orchestration', () => {
       }],
     };
     const secondVerification: DraftRepairVerificationV1 = {
+      supportEvaluations: supportedBindings(),
       schemaVersion: 1,
       approved: false,
       evaluations: [{
@@ -621,6 +804,7 @@ describe('structured drafting orchestration', () => {
 
   it('blocks an unchanged repair after the independent critic rejected the draft', async () => {
     const critique: DraftCritiqueV1 = {
+      supportEvaluations: supportedBindings(),
       schemaVersion: 1,
       approved: false,
       issues: [{
@@ -650,6 +834,7 @@ describe('structured drafting orchestration', () => {
 
   it('blocks a repair that edits an unrelated field when the second critique still rejects it', async () => {
     const critique: DraftCritiqueV1 = {
+      supportEvaluations: supportedBindings(),
       schemaVersion: 1,
       approved: false,
       issues: [{
@@ -673,7 +858,7 @@ describe('structured drafting orchestration', () => {
       draft,
       critique,
       unrelatedRepair,
-      unresolvedVerification(critique),
+      unresolvedVerification(critique, unrelatedRepair),
     ]);
     const drafter = createStructuredDrafter({ client, mediaAllowlist: [media] });
 
@@ -710,7 +895,7 @@ describe('structured drafting orchestration', () => {
           ...context.evidence,
           sources: [
             ...context.evidence.sources,
-            { url: 'https://videoclaw.com/features', authoritative: true },
+            { originalUrl: 'https://videoclaw.com/features', finalUrl: 'https://videoclaw.com/features', authoritative: true },
           ],
         },
         checkedSources: [

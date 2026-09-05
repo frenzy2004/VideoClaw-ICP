@@ -1,53 +1,45 @@
-import { describe, expect, it } from 'vitest';
+// @vitest-environment node
+import { createHash } from 'node:crypto';
+import { mkdir, mkdtemp, readFile, readdir, rm, stat } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join, resolve } from 'node:path';
+import { afterEach, describe, expect, it } from 'vitest';
 
 import type { DraftingContext, GeneratedDraftV2 } from './content-bundle';
-import { CandidateSchema, EvidenceBundleSchema, KeywordMetricsSchema, candidateFingerprints, type Candidate } from './domain';
+import { CandidateSchema, candidateFingerprints, type Candidate } from './domain';
 import { createStructuredDrafter } from './drafting';
-import { createPersistentWorkerState, type PersistentWorkerState } from './github-runtime';
+import { createApifyClient } from './apify-client';
+import { createFileStateStore } from './local-state';
+import { createPendingKeywordProvider, createSemrushKeywordProvider } from './keyword-providers';
 import type { StructuredOutputClient, StructuredOutputRequest } from './openai-responses';
-import type { ShallowResearchResult } from './research';
-import { createAutobloggerWorker } from './worker';
+import { createResearcher } from './research';
+import { createSafeSourceChecker } from './sources';
+import { buildDraftingContextFromResearch, writeAutobloggerArtifacts } from './runtime';
+import { consumePreparedManualPilot } from './recovery';
+import { createAutobloggerWorker, type AutobloggerRunReport } from './worker';
+import { createOfflineNetwork } from './fixtures/offline-network';
+import { createOfflineLander, findNativeLanderPath, LANDER_REF, PRODUCT_MEDIA } from './fixtures/offline-lander';
 
 const directAnswer = 'Choose one audience, define one next step, record short founder-led takes, and show one current product action with evidence the viewer can verify. Review every factual statement against its cited source, add accurate captions, check pacing and sound, then test the complete playback path before sharing the final video.';
 
 function candidates(): Candidate[] {
   return Array.from({ length: 50 }, (_unused, index) => {
-    const campaignNumber = index % 3 + 1;
-    const campaignId = ['newly-funded-founder', 'accelerator-demo-day-founder', 'video-production-comparison'][campaignNumber - 1];
+    // The top three share an ICP: selecting the third must skip rank 3 for rank 4.
+    const campaignNumber = index >= 47 ? 1 : 2;
+    const campaignId = campaignNumber === 1 ? 'newly-funded-founder' : 'accelerator-demo-day-founder';
     return CandidateSchema.parse({
       schemaVersion: 1,
       articleId: `vc-c${campaignNumber}-${index + 100}`,
       campaignId,
       icp: campaignId,
-      primaryKeyword: `founder video workflow ${index}`,
-      secondaryKeywords: [],
+      primaryKeyword: `founder video product demo workflow ${index}`,
+      secondaryKeywords: [`founder video workflow ${index} checklist`],
       title: `Founder Video Workflow ${index}`,
       slug: `founder-video-workflow-${index}`,
       intent: 'informational',
-      funnelStage: index % 2 ? 'middle' : 'top',
+      funnelStage: 'middle',
     });
   });
-}
-
-function shallow(candidate: Candidate): ShallowResearchResult {
-  return {
-    candidate,
-    suggestions: [`${candidate.primaryKeyword} checklist`],
-    organicResults: [
-      { url: `https://primary.example/${candidate.slug}`, title: 'Primary checked guidance', snippet: 'Use checked evidence before recording.', resultType: 'article' },
-      { url: `https://secondary.example/${candidate.slug}`, title: 'Independent checked guidance', snippet: 'Test the complete playback path before sharing.', resultType: 'article' },
-    ],
-    peopleAlsoAsk: [
-      `What is ${candidate.primaryKeyword}?`,
-      `How do you plan ${candidate.primaryKeyword}?`,
-      `Why does ${candidate.primaryKeyword} matter?`,
-    ],
-    relatedQueries: [`${candidate.primaryKeyword} template`],
-    provenance: {
-      discovery: { actorId: 'autocomplete', runId: 'autocomplete-fixture', datasetId: 'autocomplete-data', observedAt: '2026-09-05T00:00:00.000Z' },
-      serp: { actorId: 'serp', runId: 'serp-fixture', datasetId: 'serp-data', observedAt: '2026-09-05T00:01:00.000Z' },
-    },
-  };
 }
 
 const visibleSpans = {
@@ -69,7 +61,31 @@ const visibleSpans = {
   labelThree: 'Playback', detailThree: 'Test the complete final video.',
 };
 
-function generated(context: DraftingContext, repaired: boolean): GeneratedDraftV2 {
+// Independently worded observed titles/snippets, never the generated article text.
+// Order is the raw SERP fixture's title/description order, two facts per source.
+const observedFacts: Record<string, string> = {
+  description: 'Founder recording guidance covers viewers, substantiation, capture, quality review and watching the result.',
+  'description-repaired': 'Source-led planning links the intended viewer to evidence collection, recording and final playback checks.',
+  trigger: 'Before producing founder footage, decide which assertions require substantiation.',
+  gap: 'Typical recording tips can omit the separate task of reviewing their supporting evidence.',
+  'answer-1': 'Select a specific viewer and call to action; capture brief founder segments and a present-day product interaction with verifiable support.',
+  'answer-2': 'Check factual assertions against citations, subtitle accuracy, timing and audio quality; watch the whole deliverable prior to distribution.',
+  'heading-1': 'Prepare supporting material before a shoot',
+  'section-1': 'Consult an initial supporting reference in advance of filming.',
+  'heading-2': 'Review the viewing experience',
+  'section-2': 'Consult another independent reference before distributing the recording.',
+  faq: 'Consult verified references and watch the completed recording from start to finish.',
+  'graphic-title': 'Map the relationship between a founder recording and its supporting material',
+  'graphic-alt': 'A diagram groups audience choice, substantiation and final viewing into three stages.',
+  'label-1': 'Intended viewer',
+  'detail-1': 'Select a single target viewer and intended subsequent action.',
+  'label-2': 'Substantiation',
+  'detail-2': 'Associate each factual assertion with an identifiable reference.',
+  'label-3': 'Final viewing',
+  'detail-3': 'Watch the finished recording in its entirety.',
+};
+
+function generated(context: Pick<DraftingContext, 'sourceFacts' | 'evidence'>, repaired: boolean): GeneratedDraftV2 {
   const firstUrl = context.sourceFacts[0].url;
   const secondUrl = context.sourceFacts[1].url;
   const bindings = [
@@ -105,8 +121,12 @@ function generated(context: DraftingContext, repaired: boolean): GeneratedDraftV
       { heading: visibleSpans.headingTwo, markdown: `Use the [second checked source](${secondUrl}) before sharing.` },
     ],
     faqAnswers: context.evidence.faqQuestions.map((question) => ({ question, answer: visibleSpans.faq })),
-    sourceReferences: [{ sourceId: 'source-1' }, { sourceId: 'source-2' }],
-    claimBindings: bindings.map(([id, location, span]) => ({ location, span, sourceFactIds: [id], productClaimId: null })),
+    sourceReferences: context.sourceFacts.map(({ id }) => ({ sourceId: id })),
+    claimBindings: bindings.map(([id, location, span]) => {
+      const fact = context.sourceFacts.flatMap(({ facts }) => facts)[Object.keys(observedFacts).indexOf(id)];
+      if (!fact) throw new Error(`Missing observed source fact for ${location}`);
+      return { location, span, sourceFactIds: [fact.id], productClaimId: null };
+    }),
     editorialGraphic: {
       title: visibleSpans.graphicTitle,
       alt: visibleSpans.graphicAlt,
@@ -121,153 +141,309 @@ function generated(context: DraftingContext, repaired: boolean): GeneratedDraftV
 
 class RepairingFixtureClient implements StructuredOutputClient {
   requests: StructuredOutputRequest[] = [];
+  rejectVerification = false;
+  omitSupportEvaluation = false;
 
   async generate(request: StructuredOutputRequest): Promise<unknown> {
     this.requests.push(request);
-    const input = request.input as { candidate: Candidate; draft?: GeneratedDraftV2; originalIssues?: Array<{ id: string }> };
-    const context = (this.contexts.get(input.candidate.articleId) as DraftingContext);
+    const input = request.input as DraftingContext & {
+      draft?: GeneratedDraftV2; repairedDraft?: GeneratedDraftV2; originalIssues?: Array<{ id: string }>;
+      bindingManifest?: Array<GeneratedDraftV2['claimBindings'][number] & { bindingIndex: number; bindingHash: string }>;
+    };
+    const context = input;
     if (request.name === 'videoclaw_article_draft_v2') return generated(context, false);
+    const supportEvaluations = () => {
+      expect(input.bindingManifest).toHaveLength(20);
+      const evaluations = input.bindingManifest!.map(({ bindingIndex, bindingHash, sourceFactIds, span }) => {
+        const facts = input.sourceFacts.flatMap(({ facts }) => facts).filter(({ id }) => sourceFactIds.includes(id));
+        expect(facts).toHaveLength(1);
+        expect(facts[0].text).not.toBe(span);
+        return {
+          bindingIndex, bindingHash, supported: true, kind: 'source_claim',
+          rationale: `The supplied search title/snippet ${sourceFactIds[0]} supports this paraphrased guidance; it adds no numbers, product capability or claim about unseen page content.`,
+        };
+      });
+      return this.omitSupportEvaluation ? evaluations.slice(1) : evaluations;
+    };
     if (request.name === 'videoclaw_article_critique_v1') {
-      return { schemaVersion: 1, approved: false, issues: [{ id: 'editorial-1', code: 'editorial.specificity', message: 'Use source-backed wording.', repairInstruction: 'Replace the description with the supplied source-backed fact.' }] };
+      return { schemaVersion: 1, approved: false, supportEvaluations: supportEvaluations(), issues: [{ id: 'editorial-1', code: 'editorial.specificity', message: 'Clarify the role of sources in the description.', repairInstruction: 'Paraphrase the source-led planning guidance in the description.' }] };
     }
     if (request.name === 'videoclaw_article_repair_v2') return generated(context, true);
     if (request.name === 'videoclaw_article_repair_verification_v1') {
-      return { schemaVersion: 1, approved: true, evaluations: [{ issueId: 'editorial-1', resolved: true, message: 'The repaired description uses the supplied fact.' }], newIssues: [] };
+      expect(input.originalIssues?.map(({ id }) => id)).toEqual(['editorial-1']);
+      expect(input.repairedDraft?.description).toBe(visibleSpans.repairedDescription);
+      return { schemaVersion: 1, approved: !this.rejectVerification, supportEvaluations: supportEvaluations(), evaluations: [{ issueId: 'editorial-1', resolved: !this.rejectVerification, message: 'Deterministic independent verification result.' }], newIssues: [] };
     }
     throw new Error(`Unexpected fixture request ${request.name}`);
   }
 
-  readonly contexts = new Map<string, DraftingContext>();
 }
 
-describe('offline 50-candidate flow', () => {
-  it('proves 50 shallow → 10 deep → 3 repaired Markdown/SVG artifacts with state idempotency', async () => {
-    const backlog = candidates();
-    const client = new RepairingFixtureClient();
-    let state: PersistentWorkerState = createPersistentWorkerState();
-    let version: string | null = 'v1';
-    let scanCount = 0;
-    let deepCount = 0;
-    let validationCount = 0;
-    const worker = createAutobloggerWorker({
-      backlog,
-      stateStore: {
-        load: async () => ({ state, version }),
-        save: async (next, expected) => {
-          expect(expected).toBe(version);
-          state = next;
-          version = `${version}-next`;
-          return { version };
-        },
-      },
-      researcher: {
-        scan: async (items) => {
-          scanCount += items.length;
-          return { scannedCount: items.length, results: items.map(shallow) };
-        },
-        inspect: async ([observation]) => {
-          deepCount += 1;
-          return {
-            scannedCount: 1,
-            deepInspectionCount: 1,
-            results: [{
-              candidate: observation.candidate,
-              provenance: observation.provenance,
-              evidence: EvidenceBundleSchema.parse({
-                schemaVersion: 1,
-                candidateFingerprint: candidateFingerprints(observation.candidate).candidate,
-                suggestions: [...observation.suggestions, ...observation.relatedQueries],
-                serp: { organicResultCount: 2, peopleAlsoAsk: observation.peopleAlsoAsk },
-                sources: [
-                  { url: observation.organicResults[0].url, authoritative: true },
-                  { url: observation.organicResults[1].url, authoritative: false },
-                ],
-                faqQuestions: observation.peopleAlsoAsk,
-              }),
-            }],
-          };
-        },
-      },
-      keywordProvider: {
-        enrich: async ({ keyword, intent }) => ({
-          metrics: KeywordMetricsSchema.parse({
-            schemaVersion: 1, provider: 'semrush', observedAt: '2026-09-05T00:00:00.000Z',
-            volume: Number(keyword.split(' ').at(-1)) + 10, difficulty: 20, cpc: 1, intent,
-          }),
-          provenance: { provider: 'semrush', endpoint: 'fixture', observedAt: '2026-09-05T00:00:00.000Z', providerRequestId: 'fixture', sourceObservedAt: '2026-09' },
-        }),
-      },
-      drafter: createStructuredDrafter({
-        client,
-        mediaAllowlist: [{
-          id: 'offline-product',
-          campaignIds: ['newly-funded-founder', 'accelerator-demo-day-founder', 'video-production-comparison'],
-          src: '/landing/full/founder-product.mp4', poster: '/landing/full/founder-product.jpg',
-          alt: 'A founder-led product demonstration', caption: 'An existing product demonstration.', width: 1280, height: 720,
-        }],
-      }),
-      buildDraftContext: ({ result, metrics }) => {
-        const facts = [
-          { id: 'description', text: visibleSpans.initialDescription },
-          { id: 'description-repaired', text: visibleSpans.repairedDescription },
-          { id: 'trigger', text: visibleSpans.customerTrigger },
-          { id: 'gap', text: visibleSpans.competitorGap },
-          { id: 'answer-1', text: visibleSpans.answerOne },
-          { id: 'answer-2', text: visibleSpans.answerTwo },
-          { id: 'heading-1', text: visibleSpans.headingOne },
-          { id: 'section-1', text: visibleSpans.sectionOne },
-          { id: 'heading-2', text: visibleSpans.headingTwo },
-          { id: 'section-2', text: visibleSpans.sectionTwo },
-          { id: 'faq', text: visibleSpans.faq },
-          { id: 'graphic-title', text: visibleSpans.graphicTitle },
-          { id: 'graphic-alt', text: visibleSpans.graphicAlt },
-          { id: 'label-1', text: visibleSpans.labelOne },
-          { id: 'detail-1', text: visibleSpans.detailOne },
-          { id: 'label-2', text: visibleSpans.labelTwo },
-          { id: 'detail-2', text: visibleSpans.detailTwo },
-          { id: 'label-3', text: visibleSpans.labelThree },
-          { id: 'detail-3', text: visibleSpans.detailThree },
-        ];
-        const context: DraftingContext = {
-          candidate: result.candidate,
-          evidence: result.evidence,
-          keywordMetrics: metrics,
-          checkedSources: result.evidence.sources.map((source) => ({ url: source.url, finalUrl: source.url, status: 200, reachable: true, authoritative: source.authoritative })),
-          provenance: { apifyRunId: 'serp-fixture', apifyDatasetId: 'serp-data', query: result.candidate.primaryKeyword, locale: 'en-US', capturedAt: '2026-09-05' },
-          sourceFacts: [
-            { id: 'source-1', label: 'Primary source', url: result.evidence.sources[0].url, checkedAt: '2026-09-05T00:01:00.000Z', facts },
-            { id: 'source-2', label: 'Secondary source', url: result.evidence.sources[1].url, checkedAt: '2026-09-05T00:01:00.000Z', facts: [{ id: 'secondary', text: 'Secondary checked guidance' }] },
-          ],
-          productClaims: [],
-          generatedAt: '2026-09-05T00:02:00.000Z',
-        };
-        client.contexts.set(result.candidate.articleId, context);
-        return context;
-      },
-      publisher: {
-        validateBundle: async (bundle) => {
-          validationCount += 1;
-          expect(bundle.markdown).toMatch(/status:\s*["']?review["']?/u);
-          expect(bundle.svg).toContain('width="1200"');
-          return { status: 'passed', cleanup: 'completed', bundleHash: 'a'.repeat(64), landerRef: 'seo/founder-video-blog-launch', checkedOutHeadSha: 'b'.repeat(40), articlePath: `content/articles/${String(bundle.article.slug)}.md`, svgPath: `public/media/blog/${String(bundle.article.slug)}.svg`, commands: [] };
-        },
-        openDraftPullRequest: async () => { throw new Error('Pre-merge fixture must not call the PR publisher.'); },
-      },
-      landerRef: 'seo/founder-video-blog-launch',
-      approvedMedia: { product: [], editorialGraphics: [] },
-      now: () => new Date('2026-09-05T00:03:00.000Z'),
-    });
+const temporaryRoots: string[] = [];
+afterEach(async () => {
+  for (const root of temporaryRoots.splice(0)) await rm(root, { recursive: true, force: true });
+});
 
-    const first = await worker.execute({ command: 'run', runId: 'offline-e2e-1' });
-    expect(first.failures).toEqual([]);
-    expect({ scanCount, deepCount, validationCount }).toEqual({ scanCount: 50, deepCount: 10, validationCount: 3 });
-    expect(first.artifacts).toHaveLength(3);
-    expect(first.artifacts.every(({ publication, bundle }) => publication === 'artifact_only' && bundle.svg !== null)).toBe(true);
-    expect(client.requests.map(({ name }) => name)).toHaveLength(12);
-    expect(client.requests.filter(({ name }) => name === 'videoclaw_article_repair_verification_v1')).toHaveLength(3);
+const nativeLanderPath = findNativeLanderPath();
 
-    const again = await worker.execute({ command: 'run', runId: 'offline-e2e-1' });
-    expect(again.status).toBe('already_recorded');
-    expect({ scanCount, deepCount, validationCount }).toEqual({ scanCount: 50, deepCount: 10, validationCount: 3 });
+async function setup(backlog = candidates(), pending = false, native = true) {
+  const root = await mkdtemp(join(tmpdir(), 'videoclaw-offline-e2e-'));
+  temporaryRoots.push(root);
+  const lander = await createOfflineLander(root, native ? nativeLanderPath : undefined);
+  const network = createOfflineNetwork(backlog, Object.values(observedFacts));
+  const client = new RepairingFixtureClient();
+  const statePath = join(root, 'worker-state.json');
+  const researcher = createResearcher({
+    apify: createApifyClient({ token: 'offline-apify', transport: network.json }),
+    sourceChecker: createSafeSourceChecker({
+      transport: network.source,
+      resolveHostname: network.resolveHostname,
+      authorityPolicies: [{ hostname: 'primary.example', pathPrefix: '/guides/' }],
+    }),
+    execution: { pollIntervalMs: 0 },
   });
+  const keywordProvider = pending
+    ? createPendingKeywordProvider()
+    : createSemrushKeywordProvider({
+      apiKey: 'offline-semrush',
+      transport: network.json,
+      now: () => '2026-09-05T00:01:00.000Z',
+    });
+  const contexts: DraftingContext[] = [];
+  const restart = () => createAutobloggerWorker({
+    backlog,
+    stateStore: createFileStateStore(statePath),
+    researcher,
+    keywordProvider,
+    drafter: createStructuredDrafter({
+      client,
+      mediaAllowlist: [{
+        id: 'offline-product',
+        campaignIds: ['newly-funded-founder', 'accelerator-demo-day-founder'],
+        ...PRODUCT_MEDIA,
+        alt: 'A founder-led product demonstration',
+        caption: 'An existing product demonstration.',
+        width: 1280,
+        height: 720,
+      }],
+    }),
+    buildDraftContext: (input) => {
+      const context = buildDraftingContextFromResearch({ ...input, generatedAt: '2026-09-05T00:02:00.000Z' });
+      contexts.push(context);
+      return context;
+    },
+    publisher: lander.publisher,
+    persistArtifact: (artifact, report) => writeAutobloggerArtifacts({ ...report, artifacts: [artifact] }, report.runId, root),
+    landerRef: LANDER_REF,
+    approvedMedia: { product: [PRODUCT_MEDIA], editorialGraphics: [] },
+    now: () => new Date('2026-09-05T00:03:00.000Z'),
+  });
+  return { root, lander, network, client, contexts, statePath, restart, worker: restart() };
+}
+
+async function assertArtifactsOnDisk(fixture: Awaited<ReturnType<typeof setup>>, report: AutobloggerRunReport) {
+  await writeAutobloggerArtifacts(report, report.runId, fixture.root);
+  const directory = join(fixture.root, report.runId);
+  for (const artifact of report.artifacts) {
+    const markdown = await readFile(join(directory, artifact.slug + '.md'), 'utf8');
+    const svg = await readFile(join(directory, artifact.slug + '.svg'), 'utf8');
+    expect(markdown).toBe(artifact.bundle.markdown);
+    expect(markdown).toContain(visibleSpans.repairedDescription);
+    expect(markdown).not.toContain(visibleSpans.initialDescription);
+    expect(markdown).toContain(directAnswer);
+    expect(markdown).toContain('https://primary.example/guides/');
+    expect(svg).toBe(artifact.bundle.svg);
+    expect(svg).toContain('width="1200"');
+    expect(svg).toContain('height="675"');
+    expect(svg).toContain(visibleSpans.graphicTitle);
+    expect(svg).toContain(visibleSpans.detailThree);
+    expect(JSON.parse(await readFile(join(directory, artifact.slug + '.bundle.json'), 'utf8'))).toEqual(artifact.bundle);
+    expect(JSON.parse(await readFile(join(directory, artifact.slug + '.publication.json'), 'utf8')).origin).toEqual(artifact.publicationOrigin);
+    expect((await stat(join(directory, artifact.slug + '.md'))).mode & 0o777).toBe(0o600);
+    expect(artifact.bundle.article).toMatchObject({
+      status: 'review', approvals: { copy: false, factual: false, legal: false, visual: false },
+      cta: { href: '/download' }, description: visibleSpans.repairedDescription,
+    });
+    expect(artifact.bundle.article).not.toHaveProperty('publishedAt');
+    expect(artifact.publication).toBe('artifact_only');
+    expect(artifact.pullRequest).toBeUndefined();
+    const validation = artifact.validation;
+    expect(validation).toMatchObject({
+      status: 'passed', cleanup: 'completed', packageManager: 'npm', landerRef: LANDER_REF,
+      checkedOutHeadSha: fixture.lander.head,
+      articlePath: 'content/articles/' + artifact.slug + '.md',
+      svgPath: 'public/media/blog/' + artifact.slug + '.svg',
+    });
+    expect(validation.bundleHash).toMatch(/^[a-f0-9]{64}$/u);
+    expect(validation.commands.map(({ label }) => label)).toEqual([
+      'clone', 'checkout', 'resolve-head', 'isolate-checkout', 'install',
+      'check:blog', 'lint', 'build', 'workspace-integrity',
+    ]);
+    expect(validation.commands.every(({ exitCode, timedOut }) => exitCode === 0 && !timedOut)).toBe(true);
+    expect(validation.commands.find(({ label }) => label === 'check:blog')?.stdout).toContain('Native lander contract accepted 1 review article');
+    expect(validation.commands.find(({ label }) => label === 'build')?.stdout).toContain('Built 1 preview page; 0 public article routes');
+    const rendered = fixture.lander.rendered.find(({ slug }) => slug === artifact.slug);
+    expect(rendered?.markdown).toBe(markdown);
+    expect(rendered?.svg).toBe(svg);
+    expect(rendered?.html).toContain('<h2>Plan the evidence</h2>');
+    expect(rendered?.html).toContain('<a href="https://primary.example/guides/');
+    expect(rendered?.publicRoutes).toEqual([]);
+  }
+  expect(await readdir(fixture.lander.validationRoot)).toEqual([]);
+  expect(fixture.lander.githubCalls).toEqual([]);
+  const persistedReport = JSON.parse(await readFile(join(directory, 'run-report.json'), 'utf8'));
+  expect(persistedReport.counts).toEqual(report.counts);
+}
+
+describe.skipIf(nativeLanderPath === undefined)('native lander offline integration (requires AUTOBLOG_NATIVE_LANDER_PATH or local sibling checkout)', () => {
+  it('researches all 50, deeply checks the best 10, validates 3 repaired artifacts with a 2-per-ICP cap, and survives restart', async () => {
+    const fixture = await setup();
+    const first = await fixture.worker.execute({ command: 'run', runId: 'offline-e2e-1' });
+    expect(first.failures, fixture.lander.commandFailures.join('\n')).toEqual([]);
+    expect(first.status).toBe('validated');
+    expect(first.counts).toEqual({
+      queued: 50, scanned: 50, shallowValidated: 50, metricsEnriched: 50,
+      deepInspected: 10, eligible: 10, drafted: 3, validated: 3, pullRequestsOpened: 0,
+    });
+    expect(fixture.network.autocompleteKeywords).toEqual(candidates().map(({ primaryKeyword }) => primaryKeyword));
+    expect(fixture.network.serpKeywords).toEqual(fixture.network.autocompleteKeywords);
+    expect(fixture.network.metricKeywords).toEqual(fixture.network.autocompleteKeywords);
+    // Increasing volume with otherwise equal signals makes this ranking independent of worker helpers.
+    expect([...new Set(fixture.network.sourceRequests.map(({ url }) => new URL(url).pathname.split('/')[2]))]).toEqual(
+      [49, 48, 47, 46, 45, 44, 43, 42, 41, 40].map((index) => 'founder-video-workflow-' + index),
+    );
+    expect(fixture.network.sourceRequests).toHaveLength(110); // Ten sources + one manual redirect per candidate.
+    expect(first.artifacts.map(({ slug }) => slug)).toEqual([
+      'founder-video-workflow-49', 'founder-video-workflow-48', 'founder-video-workflow-46',
+    ]);
+    expect(first.artifacts.filter(({ icp }) => icp === 'newly-funded-founder')).toHaveLength(2);
+    expect(first.artifacts.filter(({ icp }) => icp === 'accelerator-demo-day-founder')).toHaveLength(1);
+    for (const [index, artifact] of first.artifacts.entries()) {
+      expect(artifact.metrics).toMatchObject({
+        provider: 'semrush', volume: [5_000, 4_900, 4_700][index], difficulty: 20, cpc: 1.25,
+        observedAt: '2026-09-05T00:01:00.000Z',
+      });
+      expect(artifact.keywordProvenance).toMatchObject({
+        provider: 'semrush', endpoint: 'https://api.semrush.com/apis/v4/keywords/v1/metrics',
+        sourceObservedAt: '2026-09',
+      });
+      expect(artifact.publicationOrigin.evidence).toMatchObject({
+        schemaVersion: 2, candidateFingerprint: artifact.candidateFingerprint,
+        serp: { organicResultCount: 10 },
+      });
+      expect(artifact.publicationOrigin.evidence.sources[0]).toEqual({
+        originalUrl: 'https://primary.example/guides/' + artifact.slug + '/redirect',
+        finalUrl: 'https://primary.example/guides/' + artifact.slug + '/0',
+        authoritative: true,
+      });
+      expect(artifact.publicationOrigin.evidence.sources[1].authoritative).toBe(false);
+      // The real publisher independently enforces premerge artifact-only authorization.
+      expect(await fixture.lander.publisher.openDraftPullRequest({
+        bundle: artifact.bundle, validation: artifact.validation, mode: 'scheduled',
+        keywordMetrics: artifact.metrics, origin: artifact.publicationOrigin,
+      })).toEqual({ status: 'artifact_only', reason: 'lander_base_not_ready' });
+    }
+    expect(fixture.client.requests.map(({ name }) => name)).toEqual(Array.from({ length: 3 }, () => [
+      'videoclaw_article_draft_v2', 'videoclaw_article_critique_v1',
+      'videoclaw_article_repair_v2', 'videoclaw_article_repair_verification_v1',
+    ]).flat());
+    await assertArtifactsOnDisk(fixture, first);
+    const saved = await createFileStateStore(fixture.statePath).load();
+    expect(saved.state.runs['offline-e2e-1'].status).toBe('validated');
+    expect(Object.keys(saved.state.contentHashes)).toHaveLength(3);
+    expect(saved.state.pullRequests).toEqual({});
+    for (const artifact of first.artifacts) {
+      expect(saved.state.decisions[artifact.candidateFingerprint]).toMatchObject({ status: 'completed', reason: 'artifact_prepared', attempts: 1 });
+      expect(saved.state.contentHashes[artifact.candidateFingerprint]).toBe(createHash('sha256').update(JSON.stringify(artifact.bundle)).digest('hex'));
+    }
+    expect(saved.state.decisions[candidateFingerprints(candidates()[47]).candidate]).toMatchObject({
+      status: 'retryable', reason: 'eligible_deferred_by_run_cap', attempts: 0,
+    });
+    const activity = [fixture.network.requests.length, fixture.client.requests.length, fixture.lander.commands.length];
+    expect((await fixture.restart().execute({ command: 'run', runId: 'offline-e2e-1' })).status).toBe('already_recorded');
+    expect([fixture.network.requests.length, fixture.client.requests.length, fixture.lander.commands.length]).toEqual(activity);
+    expect((await createFileStateStore(fixture.statePath).load()).version).toBe(saved.version);
+
+    // Negative control: changing only Markdown bypasses worker-envelope checks, but must fail articles.ts.
+    const valid = first.artifacts[0].bundle;
+    const invalid = await fixture.lander.publisher.validateBundle({
+      ...valid, markdown: valid.markdown.replace(directAnswer, 'Too short.'),
+    });
+    expect(invalid).toMatchObject({ status: 'failed', cleanup: 'completed', failure: expect.stringContaining('check:blog failed.') });
+    expect(invalid.commands.at(-1)).toMatchObject({ label: 'check:blog', exitCode: 1 });
+    expect(invalid.commands.at(-1)?.stderr).toContain('expected 40–60 words');
+    expect(invalid.commands.some(({ label }) => label === 'lint' || label === 'build')).toBe(false);
+    expect(await readdir(fixture.lander.validationRoot)).toEqual([]);
+    await fixture.lander.assertReadOnly();
+    // Opt-in handoff for a separate CLI validation against the full native app.
+    // Keep one real generated bundle; the production writer also exports its origin.
+    const outputDirectory = process.env.AUTOBLOG_E2E_OUTPUT_DIR;
+    if (outputDirectory !== undefined) {
+      expect(outputDirectory.trim()).not.toBe('');
+      const outputRoot = resolve(outputDirectory);
+      await mkdir(outputRoot, { recursive: true });
+      await writeAutobloggerArtifacts({ ...first, artifacts: [first.artifacts[0]] }, '.', outputRoot);
+    }
+  }, 120_000);
+
+  it('persists one pending-metrics pilot as prepared, writes actual files, then finalizes consumption exactly once', async () => {
+    const fixture = await setup(candidates(), true);
+    const report = await fixture.worker.execute({ command: 'pilot', runId: 'offline-pilot' });
+    expect(report.failures, fixture.lander.commandFailures.join('\n')).toEqual([]);
+    expect(report.counts).toMatchObject({ scanned: 50, deepInspected: 10, drafted: 1, validated: 1, pullRequestsOpened: 0 });
+    expect(report.artifacts).toHaveLength(1);
+    const [artifact] = report.artifacts;
+    expect(artifact.metrics).toMatchObject({ provider: 'pending', observedAt: null, volume: null, difficulty: null, cpc: null });
+    expect(artifact.bundle.article.searchMetrics).toEqual({
+      volume: 'provider-pending', keywordDifficulty: 'provider-pending', cpc: 'provider-pending',
+    });
+    expect(fixture.network.metricKeywords).toEqual([]);
+    const store = createFileStateStore(fixture.statePath);
+    const prepared = await store.load();
+    const hash = createHash('sha256').update(JSON.stringify(artifact.bundle)).digest('hex');
+    expect(prepared.state.manualPilot).toMatchObject({ status: 'prepared', runId: 'offline-pilot', artifactHash: hash, consumedAt: null });
+    await expect(consumePreparedManualPilot(store, report.runId, '0'.repeat(64), '2026-09-05T00:04:00.000Z')).rejects.toThrow('acknowledgement');
+    await expect(fixture.restart().execute({ command: 'pilot', runId: 'other-pilot-before-finalization' })).rejects.toThrow('one manual');
+    expect((await store.load()).version).toBe(prepared.version);
+    await assertArtifactsOnDisk(fixture, report);
+    const diskBundle = await readFile(join(fixture.root, report.runId, artifact.slug + '.bundle.json'), 'utf8');
+    expect(createHash('sha256').update(JSON.stringify(JSON.parse(diskBundle))).digest('hex')).toBe(hash);
+    await consumePreparedManualPilot(createFileStateStore(fixture.statePath), report.runId, hash, '2026-09-05T00:04:00.000Z');
+    const finalized = await store.load();
+    expect(finalized.state.manualPilot).toMatchObject({ status: 'consumed', artifactHash: hash, consumedAt: '2026-09-05T00:04:00.000Z' });
+    await consumePreparedManualPilot(createFileStateStore(fixture.statePath), report.runId, hash, '2026-09-05T00:05:00.000Z');
+    expect((await store.load()).version).toBe(finalized.version);
+    const activity = [fixture.network.requests.length, fixture.client.requests.length, fixture.lander.commands.length];
+    expect((await fixture.restart().execute({ command: 'pilot', runId: 'offline-pilot' })).status).toBe('already_recorded');
+    await expect(fixture.restart().execute({ command: 'pilot', runId: 'other-pilot-after-finalization' })).rejects.toThrow('one manual');
+    expect([fixture.network.requests.length, fixture.client.requests.length, fixture.lander.commands.length]).toEqual(activity);
+    expect(await fixture.lander.publisher.openDraftPullRequest({
+      bundle: artifact.bundle, validation: artifact.validation, mode: 'manual_pilot',
+      keywordMetrics: artifact.metrics, origin: artifact.publicationOrigin,
+    })).toEqual({ status: 'artifact_only', reason: 'manual_pilot_cannot_publish' });
+    await fixture.lander.assertReadOnly();
+  }, 120_000);
+
+});
+
+describe('offline drafting rejection integration (no lander required)', () => {
+  it.each([
+    { problem: 'an unresolved repair', code: 'editorial.specificity', omitSupport: false },
+    { problem: 'missing per-binding support coverage', code: 'critique.support_incomplete', omitSupport: true },
+  ])('blocks $problem before any lander command or artifact can be produced', async ({ code, omitSupport }) => {
+    const fixture = await setup([candidates()[49]], false, false);
+    fixture.client.rejectVerification = !omitSupport;
+    fixture.client.omitSupportEvaluation = omitSupport;
+    const report = await fixture.worker.execute({ command: 'run', runId: 'offline-rejected-repair' });
+    expect(report.status).toBe('failed');
+    expect(report.counts).toMatchObject({ deepInspected: 1, drafted: 0, validated: 0 });
+    expect(report.artifacts).toEqual([]);
+    expect(report.failures).toEqual([expect.objectContaining({
+      code: 'candidate_failed', detail: expect.stringContaining(code),
+    })]);
+    expect(fixture.client.requests.at(-1)?.name).toBe('videoclaw_article_repair_verification_v1');
+    expect(fixture.lander.commands).toEqual([]);
+    expect((await createFileStateStore(fixture.statePath).load()).state.contentHashes).toEqual({});
+    await fixture.lander.assertReadOnly();
+  }, 120_000);
 });

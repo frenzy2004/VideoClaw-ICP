@@ -20,6 +20,7 @@ import {
 } from './domain';
 import type { DraftProvenance } from './content-bundle';
 import { isStrictIsoDateTime } from './date-time';
+import type { KeywordProvenance } from './keyword-providers';
 import type { RunMode } from './policies';
 import { containsSecretLikeValue, redactSensitive } from './secrets';
 
@@ -30,6 +31,8 @@ const SAFE_REF = /^[A-Za-z0-9](?:[A-Za-z0-9._/-]{0,198}[A-Za-z0-9])?$/;
 const SAFE_REPOSITORY_IDENTITY = /^[A-Za-z0-9](?:[A-Za-z0-9_.-]{0,98}[A-Za-z0-9])?$/;
 const INVENTORY_IDENTITY_LIMITS = {
   id: 128,
+  articleId: 128,
+  intentFingerprint: 80,
   slug: 200,
   title: 300,
   primaryKeyword: 500,
@@ -108,8 +111,17 @@ export type GitHubAppInstallationAuth = {
   expiresAt: string;
 };
 
+export type GitHubReadOnlyAuth = {
+  kind: 'github_read_only';
+  token: string;
+};
+
+export type GitHubInventoryAuth = GitHubAppInstallationAuth | GitHubReadOnlyAuth;
+
 export type ArticleInventoryEntry = {
   id?: string;
+  articleId?: string;
+  intentFingerprint?: string;
   slug?: string;
   title?: string;
   primaryKeyword?: string;
@@ -154,9 +166,9 @@ export interface GitHubPublisherBoundary {
   inspectTarget(input: {
     owner: string;
     repository: string;
-    baseRef: 'main';
+    baseRef: string;
     blogLaunchPullRequest: 55;
-    auth: GitHubAppInstallationAuth;
+    auth: GitHubInventoryAuth;
   }): Promise<GitHubTargetSnapshot>;
   prepareCommit(input: PreparedCommit): Promise<{ commitSha: string }>;
   createBranch(input: {
@@ -209,6 +221,7 @@ export type PublisherOrigin = {
   candidate: Readonly<Candidate>;
   evidence: Readonly<EvidenceBundle>;
   provenance: Readonly<DraftProvenance>;
+  keywordProvenance: Readonly<KeywordProvenance>;
   approvedMedia: Readonly<ApprovedPublicationMedia>;
 };
 
@@ -248,13 +261,17 @@ function isolatedCommandEnvironment(): NodeJS.ProcessEnv {
     'NODE_EXTRA_CA_CERTS',
     'SystemRoot',
   ];
-  return {
-    NODE_ENV: process.env.NODE_ENV ?? 'production',
+  // Next augments the parent's ProcessEnv with required NODE_ENV. Child-process
+  // environments do not have that requirement; omission here is intentional.
+  const environment: Record<string, string | undefined> = {
+    // Leave mode unset: npm ci needs dev dependencies and native tests exercise
+    // local visibility. Next's own build command selects production mode.
     NPM_CONFIG_AUDIT: 'false',
     NPM_CONFIG_FUND: 'false',
     NPM_CONFIG_UPDATE_NOTIFIER: 'false',
     ...Object.fromEntries(allowed.flatMap((key) => process.env[key] === undefined ? [] : [[key, process.env[key]]])),
   };
+  return environment as NodeJS.ProcessEnv;
 }
 
 export function createProcessCommandBoundary(options: { maxCaptureCharacters?: number } = {}): CommandBoundary {
@@ -696,10 +713,10 @@ function assertPublisherOrigin(
   bundle: DraftBundle,
   metadata: PublicationMetadata,
   input: Readonly<PublisherOrigin>,
-): void {
+): { intentFingerprint: string; keywordProvenance: KeywordProvenance } {
   if (containsSecretLikeValue(input)) throw new Error('Publisher origin contains a secret-like value.');
   const origin = readRecord(input, 'Publisher origin');
-  assertExactKeys(origin, ['candidate', 'evidence', 'provenance', 'approvedMedia'], 'Publisher origin');
+  assertExactKeys(origin, ['candidate', 'evidence', 'provenance', 'keywordProvenance', 'approvedMedia'], 'Publisher origin');
   const candidate = CandidateSchema.parse(origin.candidate);
   const evidence = EvidenceBundleSchema.parse(origin.evidence);
   const expectedFingerprint = candidateFingerprints(candidate).candidate;
@@ -758,10 +775,33 @@ function assertPublisherOrigin(
     || !approvedEditorial.includes(metadata.editorialGraphic.src)
   ) throw new Error('Draft media is not present in the approved publication allowlist.');
 
-  const evidenceSourceUrls = new Set(evidence.sources.map(({ url }) => url));
+  const evidenceSourceUrls = new Set(evidence.sources.map(({ finalUrl }) => finalUrl));
   if (metadata.sources.some(({ url }) => !evidenceSourceUrls.has(url))) {
     throw new Error('Draft sources are not bound to the originating evidence bundle.');
   }
+  const keyword = readRecord(origin.keywordProvenance, 'Keyword provenance');
+  assertExactKeys(keyword, ['provider', 'endpoint', 'observedAt', 'providerRequestId', 'sourceObservedAt'], 'Keyword provenance');
+  const nullableString = (key: keyof KeywordProvenance, maximum: number): string | null => {
+    const value = keyword[key];
+    if (value === null) return null;
+    if (typeof value !== 'string' || !value.trim() || value.length > maximum) throw new Error(`Keyword provenance ${key} is invalid.`);
+    return value;
+  };
+  const keywordProvenance: KeywordProvenance = {
+    provider: keyword.provider as KeywordProvenance['provider'],
+    endpoint: nullableString('endpoint', 1_000),
+    observedAt: nullableString('observedAt', 100),
+    providerRequestId: nullableString('providerRequestId', 500),
+    sourceObservedAt: nullableString('sourceObservedAt', 100),
+  };
+  if (
+    !['pending', 'semrush', 'ahrefs', 'similarweb'].includes(String(keywordProvenance.provider))
+    || keywordProvenance.provider !== metadata.metrics.provider
+    || keywordProvenance.observedAt !== metadata.metrics.observedAt
+    || (keywordProvenance.endpoint !== null && new URL(keywordProvenance.endpoint).protocol !== 'https:')
+    || (keywordProvenance.observedAt !== null && !isStrictIsoDateTime(keywordProvenance.observedAt))
+  ) throw new Error('Keyword provenance does not exactly bind to the validated metrics.');
+  return { intentFingerprint: candidateFingerprints(candidate).intent, keywordProvenance };
 }
 
 function assertValidationAuthorization(
@@ -797,6 +837,7 @@ function validInstallationAuth(auth: GitHubAppInstallationAuth | undefined, now:
 function sameIdentity(metadata: PublicationMetadata, entry: ArticleInventoryEntry): boolean {
   return Boolean(
     (entry.id && entry.id === metadata.id)
+    || (entry.articleId && entry.articleId === metadata.id)
     || (entry.slug && normalizeSlug(entry.slug) === normalizeSlug(metadata.slug))
     || (entry.title && normalizeTitle(entry.title) === normalizeTitle(metadata.title))
     || (entry.primaryKeyword && normalizeKeyword(entry.primaryKeyword) === normalizeKeyword(metadata.primaryKeyword)),
@@ -810,6 +851,7 @@ function safeTraceValue(value: string): string {
 function pullRequestBody(
   metadata: PublicationMetadata,
   authorization: ValidationAuthorization,
+  trace: { intentFingerprint: string; keywordProvenance: KeywordProvenance },
 ): string {
   const metric = (value: number | 'provider-pending' | null) => value === null ? 'unavailable' : String(value);
   const body = [
@@ -817,10 +859,14 @@ function pullRequestBody(
     '',
     `- ICP: ${safeTraceValue(metadata.icp)}`,
     `- Article ID: ${safeTraceValue(metadata.id)}`,
+    `- Intent fingerprint: ${trace.intentFingerprint}`,
     `- Campaign: ${safeTraceValue(metadata.campaign)}`,
     `- Primary keyword: ${safeTraceValue(metadata.primaryKeyword)}`,
     `- Keyword provider: ${metadata.metrics.provider}`,
     `- Metrics observed: ${metadata.metrics.observedAt ?? 'provider-pending'}`,
+    `- Keyword endpoint: ${trace.keywordProvenance.endpoint ?? 'provider-pending'}`,
+    `- Keyword request ID: ${trace.keywordProvenance.providerRequestId ?? 'unavailable'}`,
+    `- Keyword source date: ${trace.keywordProvenance.sourceObservedAt ?? 'unavailable'}`,
     `- Volume: ${metric(metadata.metrics.volume)}`,
     `- Keyword difficulty: ${metric(metadata.metrics.difficulty)}`,
     `- CPC: ${metric(metadata.metrics.cpc)}`,
@@ -1039,7 +1085,7 @@ export function createPublisher(options: PublisherOptions): Publisher {
         await run({
           label: 'clone',
           command: 'git',
-          args: ['clone', '--no-local', '--no-checkout', '--branch', options.lander.ref, '--', options.lander.repository, checkout],
+          args: ['clone', '--no-local', '--no-checkout', '--depth', '1', '--single-branch', '--branch', options.lander.ref, '--', options.lander.repository, checkout],
           cwd: temporaryDirectory,
         });
         await run({ label: 'checkout', command: 'git', args: ['checkout', '--detach', 'HEAD'], cwd: checkout });
@@ -1110,10 +1156,11 @@ export function createPublisher(options: PublisherOptions): Publisher {
       let bundle: DraftBundle;
       let metadata: PublicationMetadata;
       let authorization: ValidationAuthorization;
+      let originTrace: { intentFingerprint: string; keywordProvenance: KeywordProvenance };
       try {
         bundle = DraftBundleSchema.parse(input.bundle);
         metadata = readPublicationMetadata(bundle, input.mode, input.keywordMetrics);
-        assertPublisherOrigin(bundle, metadata, input.origin);
+        originTrace = assertPublisherOrigin(bundle, metadata, input.origin);
         const retained = validationAuthorizations.get(input.validation as ValidationReport);
         if (!retained) throw new Error('Validation report identity was not authorized by this publisher instance.');
         authorization = retained;
@@ -1184,7 +1231,7 @@ export function createPublisher(options: PublisherOptions): Publisher {
       }
       const coordinates = bundleCoordinates(bundle);
       const title = `Review: ${metadata.title}`;
-      const body = pullRequestBody(metadata, authorization);
+      const body = pullRequestBody(metadata, authorization, originTrace);
       const prepared: PreparedCommit = {
         owner: options.lander.owner,
         repository: options.lander.name,

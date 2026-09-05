@@ -8,7 +8,7 @@ import { promisify } from 'node:util';
 
 import { afterEach, describe, expect, it } from 'vitest';
 
-import type { Candidate, DraftBundle, EvidenceBundle } from './domain';
+import { candidateFingerprints, type Candidate, type DraftBundle, type EvidenceBundle } from './domain';
 import { containsSecretLikeValue } from './secrets';
 import {
   createProcessCommandBoundary,
@@ -148,16 +148,16 @@ function originFixture(bundle = bundleFixture()) {
     funnelStage: 'top',
   };
   const evidence: EvidenceBundle = {
-    schemaVersion: 1,
+    schemaVersion: 2,
     candidateFingerprint: bundle.candidateFingerprint,
-    suggestions: [candidate.primaryKeyword],
+    signals: { autocomplete: [candidate.primaryKeyword], peopleAlsoAsk: [], relatedSearches: [] },
     serp: {
       organicResultCount: 10,
       peopleAlsoAsk: ['How do founders make pitch videos?', 'What belongs in a founder pitch?', 'How long should it be?'],
     },
     sources: [
-      { url: 'https://www.ycombinator.com/video/', authoritative: true },
-      { url: 'https://www.ftc.gov/business-guidance/', authoritative: true },
+      { originalUrl: 'https://www.ycombinator.com/video/', finalUrl: 'https://www.ycombinator.com/video/', authoritative: true },
+      { originalUrl: 'https://www.ftc.gov/business-guidance/', finalUrl: 'https://www.ftc.gov/business-guidance/', authoritative: true },
     ],
     faqQuestions: ['How do founders make pitch videos?', 'What belongs in a founder pitch?', 'How long should it be?'],
   };
@@ -170,6 +170,13 @@ function originFixture(bundle = bundleFixture()) {
       query: provenance.query,
       locale: provenance.locale,
       capturedAt: provenance.capturedAt,
+    },
+    keywordProvenance: {
+      provider: 'semrush' as const,
+      endpoint: 'https://api.semrush.com/apis/v4/keywords/v1/metrics',
+      observedAt: '2026-09-05T03:45:00.000Z',
+      providerRequestId: 'request-fixture-1',
+      sourceObservedAt: '2026-09',
     },
     approvedMedia: {
       product: [{ src: productMedia.src, poster: productMedia.poster }],
@@ -514,6 +521,16 @@ describe('Publisher.validateBundle', () => {
     }
   });
 
+  it('does not force production mode during native dependency installation and contract tests', async () => {
+    const result = await createProcessCommandBoundary().run({
+      label: 'native-environment-check', command: process.execPath,
+      args: ['-e', "process.stdout.write(JSON.stringify({node:process.env.NODE_ENV ?? null,vercel:process.env.VERCEL_ENV ?? null}))"],
+      cwd: process.cwd(), timeoutMs: 5_000,
+    });
+    expect(result.exitCode).toBe(0);
+    expect(JSON.parse(result.stdout)).toEqual({ node: null, vercel: null });
+  });
+
   it.skipIf(process.platform === 'win32')('terminates descendants that inherit command output and resolves within a bounded deadline', async () => {
     const root = await mkdtemp(join(tmpdir(), 'autoblogger-process-tree-'));
     temporaryDirectories.push(root);
@@ -700,7 +717,10 @@ describe('Publisher.openDraftPullRequest', () => {
       validation: fixture.validation,
       mode: 'manual_pilot',
       keywordMetrics: pendingKeywordMetrics,
-      origin: fixture.origin,
+      origin: {
+        ...fixture.origin,
+        keywordProvenance: { provider: 'pending', endpoint: null, observedAt: null, providerRequestId: null, sourceObservedAt: null },
+      },
       auth,
     });
 
@@ -742,6 +762,10 @@ describe('Publisher.openDraftPullRequest', () => {
     expect(fixture.github.prepared?.pullRequest.body).toContain('Keyword difficulty: 22');
     expect(fixture.github.prepared?.pullRequest.body).toContain('Keyword provider: semrush');
     expect(fixture.github.prepared?.pullRequest.body).toContain('Metrics observed: 2026-09-05T03:45:00.000Z');
+    expect(fixture.github.prepared?.pullRequest.body).toContain('Keyword endpoint: https://api.semrush.com/apis/v4/keywords/v1/metrics');
+    expect(fixture.github.prepared?.pullRequest.body).toContain('Keyword request ID: request-fixture-1');
+    expect(fixture.github.prepared?.pullRequest.body).toContain('Keyword source date: 2026-09');
+    expect(fixture.github.prepared?.pullRequest.body).toContain(`Intent fingerprint: ${candidateFingerprints(fixture.origin.candidate).intent}`);
     expect(fixture.github.prepared?.pullRequest.body).toContain('Current results omit an evidence-led video workflow.');
     expect(fixture.github.prepared?.pullRequest.body).toContain('https://www.ycombinator.com/video/');
     expect(fixture.github.prepared?.pullRequest.body).toContain('/landing/full/founder-product.mp4');

@@ -20,15 +20,20 @@ describe('autoblogger canonical identities', () => {
     expect(normalizeIntent('Informational — direct answer')).toBe('informational');
 
     expect(candidateFingerprints({
+      articleId: 'vc-c2-001',
       campaignId: 'accelerator-demo-day-founder',
+      icp: 'accelerator founder preparing a demo day pitch video',
       primaryKeyword: 'Demo Day Video Plan',
       title: 'Demo Day: Video Plan',
       slug: 'demo-day-video-plan',
       intent: 'informational',
+      funnelStage: 'top',
     })).toEqual({
+      articleId: 'article:vc-c2-001',
       keyword: 'keyword:demo day video plan',
       title: 'title:demo day video plan',
       slug: 'slug:demo-day-video-plan',
+      intent: expect.stringMatching(/^intent:[0-9a-f]{64}$/u),
       candidate: 'candidate:accelerator-demo-day-founder:demo day video plan',
     });
   });
@@ -49,11 +54,11 @@ describe('versioned autoblogger contracts', () => {
       funnelStage: 'top',
     });
     const evidence = EvidenceBundleSchema.parse({
-      schemaVersion: 1,
+      schemaVersion: 2,
       candidateFingerprint: 'candidate:accelerator-demo-day-founder:demo day video planning checklist',
-      suggestions: ['Demo Day video planning checklist'],
+      signals: { autocomplete: ['Demo Day video planning checklist'], peopleAlsoAsk: [], relatedSearches: [] },
       serp: { organicResultCount: 4, peopleAlsoAsk: ['What should a Demo Day video include?'] },
-      sources: [{ url: 'https://www.ycombinator.com/demoday', authoritative: true }],
+      sources: [{ originalUrl: 'https://www.ycombinator.com/demoday', finalUrl: 'https://www.ycombinator.com/demoday', authoritative: true }],
       faqQuestions: ['What should a Demo Day video include?'],
     });
     const metrics = KeywordMetricsSchema.parse({

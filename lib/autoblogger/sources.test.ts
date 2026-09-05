@@ -130,8 +130,8 @@ describe('safe source checks', () => {
       resolveHostname: async () => ['10.2.3.4'],
     });
 
-    await expect(directChecker.check('http://127.0.0.1/admin')).rejects.toThrow(/private|local/i);
-    await expect(directChecker.check('http://localhost/admin')).rejects.toThrow(/private|local/i);
+    await expect(directChecker.check('http://127.0.0.1/admin')).rejects.toThrow(/https/i);
+    await expect(directChecker.check('http://localhost/admin')).rejects.toThrow(/https/i);
     await expect(resolvedChecker.check('https://public-looking.example/data')).rejects.toThrow(
       /private|local/i,
     );
@@ -149,7 +149,7 @@ describe('safe source checks', () => {
       resolveHostname: publicResolver,
     });
 
-    await expect(checker.check('https://safe.example/source')).rejects.toThrow(/private|local/i);
+    await expect(checker.check('https://safe.example/source')).rejects.toThrow(/https/i);
     expect(fixture.requests).toHaveLength(1);
   });
 
@@ -307,7 +307,7 @@ describe('source authority and evidence selection', () => {
     const checker = createSafeSourceChecker({
       transport: fixture.transport,
       resolveHostname: publicResolver,
-      authoritativeDomains: new Set(['authority.example']),
+      authorityPolicies: [{ hostname: 'authority.example' }],
     });
 
     await expect(checker.select([
@@ -325,7 +325,7 @@ describe('source authority and evidence selection', () => {
     const checker = createSafeSourceChecker({
       transport: fixture.transport,
       resolveHostname: publicResolver,
-      authoritativeDomains: new Set(['authority.example']),
+      authorityPolicies: [{ hostname: 'authority.example' }],
     });
 
     await expect(checker.select([
@@ -333,12 +333,12 @@ describe('source authority and evidence selection', () => {
       'https://authority.example/reference',
       'https://publisher.example/guide',
     ])).resolves.toEqual([
-      { url: 'https://authority.example/reference', authoritative: true },
-      { url: 'https://publisher.example/guide', authoritative: false },
+      { originalUrl: 'https://authority.example/reference', finalUrl: 'https://authority.example/reference', authoritative: true },
+      { originalUrl: 'https://publisher.example/guide', finalUrl: 'https://publisher.example/guide', authoritative: false },
     ]);
   });
 
-  it('uses only caller-supplied authority domains and same-domain primary sources', async () => {
+  it('uses only exact caller-supplied authority hosts and path prefixes', async () => {
     const fixture = responseTransport([
       { status: 200, body: 'standard' },
       { status: 200, body: 'primary documentation' },
@@ -347,15 +347,17 @@ describe('source authority and evidence selection', () => {
     const checker = createSafeSourceChecker({
       transport: fixture.transport,
       resolveHostname: publicResolver,
-      authoritativeDomains: new Set(['standards.example']),
-      primarySourceUrls: ['https://product.example/docs/canonical'],
+      authorityPolicies: [
+        { hostname: 'standards.example' },
+        { hostname: 'product.example', pathPrefix: '/docs/' },
+      ],
     });
 
     await expect(checker.check('https://standards.example/spec')).resolves.toMatchObject({
       authoritative: true,
     });
     await expect(checker.check('https://product.example/press/facts')).resolves.toMatchObject({
-      authoritative: true,
+      authoritative: false,
     });
     await expect(checker.check('https://wikipedia.org/wiki/Video')).resolves.toMatchObject({
       authoritative: false,
@@ -369,15 +371,15 @@ describe('source authority and evidence selection', () => {
         { status: 200, body: 'second' },
       ]).transport,
       resolveHostname: publicResolver,
-      authoritativeDomains: new Set(['authority.example']),
+      authorityPolicies: [{ hostname: 'authority.example' }],
     });
     const selected = await passing.select([
       'https://authority.example/reference',
       'https://publisher.example/guide',
     ]);
     expect(selected).toEqual([
-      { url: 'https://authority.example/reference', authoritative: true },
-      { url: 'https://publisher.example/guide', authoritative: false },
+      { originalUrl: 'https://authority.example/reference', finalUrl: 'https://authority.example/reference', authoritative: true },
+      { originalUrl: 'https://publisher.example/guide', finalUrl: 'https://publisher.example/guide', authoritative: false },
     ]);
 
     const failing = createSafeSourceChecker({

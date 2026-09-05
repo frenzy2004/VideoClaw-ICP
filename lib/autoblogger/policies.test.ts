@@ -46,9 +46,9 @@ describe('duplicate screening', () => {
 });
 
 const completeEvidence = (forCandidate = candidate()) => EvidenceBundleSchema.parse({
-  schemaVersion: 1,
+  schemaVersion: 2,
   candidateFingerprint: candidateFingerprints(forCandidate).candidate,
-  suggestions: ['Demo Day video planning checklist'],
+  signals: { autocomplete: ['Demo Day video planning checklist'], peopleAlsoAsk: [], relatedSearches: [] },
   serp: {
     organicResultCount: 4,
     peopleAlsoAsk: [
@@ -58,8 +58,8 @@ const completeEvidence = (forCandidate = candidate()) => EvidenceBundleSchema.pa
     ],
   },
   sources: [
-    { url: 'https://www.ycombinator.com/demoday', authoritative: true },
-    { url: 'https://www.w3.org/WAI/media/av/', authoritative: true },
+    { originalUrl: 'https://www.ycombinator.com/demoday', finalUrl: 'https://www.ycombinator.com/demoday', authoritative: true },
+    { originalUrl: 'https://www.w3.org/WAI/media/av/', finalUrl: 'https://www.w3.org/WAI/media/av/', authoritative: true },
   ],
   faqQuestions: [
     'What should a Demo Day video include?',
@@ -80,13 +80,13 @@ const observedMetrics = () => KeywordMetricsSchema.parse({
 
 describe('eligibility gates', () => {
   it.each([
-    ['suggestions', { suggestions: [] }, 'missing_suggestions'],
+    ['suggestions', { signals: { autocomplete: [], peopleAlsoAsk: [], relatedSearches: [] } }, 'missing_suggestion_signal'],
     ['SERP', { serp: { organicResultCount: 0, peopleAlsoAsk: [] } }, 'missing_serp'],
     ['People Also Ask signals', { serp: { organicResultCount: 4, peopleAlsoAsk: ['What should a Demo Day video include?'] } }, 'missing_paa'],
-    ['sources', { sources: [{ url: 'https://www.ycombinator.com/demoday', authoritative: true }] }, 'missing_sources'],
+    ['sources', { sources: [{ originalUrl: 'https://www.ycombinator.com/demoday', finalUrl: 'https://www.ycombinator.com/demoday', authoritative: true }] }, 'missing_sources'],
     ['authoritative source', { sources: [
-      { url: 'https://example.com/one', authoritative: false },
-      { url: 'https://example.com/two', authoritative: false },
+      { originalUrl: 'https://example.com/one', finalUrl: 'https://example.com/one', authoritative: false },
+      { originalUrl: 'https://example.com/two', finalUrl: 'https://example.com/two', authoritative: false },
     ] }, 'missing_authoritative_source'],
     ['FAQ signals', { faqQuestions: ['What should a Demo Day video include?'] }, 'missing_faqs'],
   ])('rejects evidence missing %s', (_signal, mutation, reason) => {
@@ -146,8 +146,8 @@ describe('bounded deterministic selection', () => {
         articleId,
         campaignId,
         icp,
-        primaryKeyword: `keyword ${articleId}`,
-        title: `Title ${articleId}`,
+        primaryKeyword: campaignId === 'video-production-comparison' ? `video agency comparison ${articleId}` : `demo day pitch video ${articleId}`,
+        title: campaignId === 'video-production-comparison' ? `Video Agency Comparison ${articleId}` : `Demo Day Pitch Video ${articleId}`,
         slug: `slug-${articleId.toLowerCase()}`,
       });
       return {
@@ -180,13 +180,13 @@ describe('bounded deterministic selection', () => {
   });
 
   it('breaks equal scores by canonical candidate fingerprint rather than input order', () => {
-    const firstCandidate = candidate({ articleId: 'vc-c2-010', primaryKeyword: 'alpha keyword', title: 'Alpha title', slug: 'alpha-title' });
+    const firstCandidate = candidate({ articleId: 'vc-c2-010', primaryKeyword: 'demo day pitch video alpha', title: 'Demo Day Pitch Video Alpha', slug: 'alpha-title' });
     const first = {
       candidate: firstCandidate,
       evidence: completeEvidence(firstCandidate),
       metrics: observedMetrics(),
     };
-    const secondCandidate = candidate({ articleId: 'vc-c2-011', primaryKeyword: 'beta keyword', title: 'Beta title', slug: 'beta-title' });
+    const secondCandidate = candidate({ articleId: 'vc-c2-011', primaryKeyword: 'demo day pitch video beta', title: 'Demo Day Pitch Video Beta', slug: 'beta-title' });
     const second = {
       candidate: secondCandidate,
       evidence: completeEvidence(secondCandidate),
@@ -205,8 +205,8 @@ describe('bounded deterministic selection', () => {
       const selectedCandidate = candidate({
         articleId,
         icp: `icp-${articleId}`,
-        primaryKeyword: `keyword ${articleId}`,
-        title: `Title ${articleId}`,
+        primaryKeyword: `demo day pitch video ${articleId}`,
+        title: `Demo Day Pitch Video ${articleId}`,
         slug: `slug-${articleId.toLowerCase()}`,
       });
       return {

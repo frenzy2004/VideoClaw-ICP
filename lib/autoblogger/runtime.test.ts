@@ -4,10 +4,79 @@ import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
 import { CandidateSchema, EvidenceBundleSchema, KeywordMetricsSchema, candidateFingerprints } from './domain';
-import { writeAutobloggerArtifacts, buildDraftingContextFromResearch, loadBacklogCandidates } from './runtime';
+import { writeAutobloggerArtifacts, buildDraftingContextFromResearch, loadBacklogCandidates, createProductionAutobloggerRuntime } from './runtime';
+import { validateAutobloggerEnvironment } from './cli';
+import { createPersistentWorkerState } from './github-runtime';
+import type { HttpRequest, HttpTransport } from './http';
 import type { ResearchResult, ShallowResearchResult } from './research';
 
 describe('runtime context and artifacts', () => {
+  it('reconciles fresh article, manual PR, and reserved branch identities before any paid API', async () => {
+    const root = await mkdtemp(join(tmpdir(), 'autoblogger-read-inventory-'));
+    await mkdir(join(root, '.git'));
+    const backlog = await loadBacklogCandidates(process.cwd());
+    const [existing, openPr, reserved] = backlog;
+    let state = createPersistentWorkerState();
+    state.candidateFingerprints = backlog.slice(3).flatMap((candidate) => Object.values(candidateFingerprints(candidate)));
+    const requests: HttpRequest[] = [];
+    const readToken = 'github_pat_read_inventory_fixture_123456';
+    const stateToken = 'fixture-state-token';
+    const transport: HttpTransport = async (request) => {
+      requests.push(request);
+      const url = new URL(request.url);
+      expect(url.hostname).toBe('api.github.com'); // Any paid request is a test failure.
+      let body: unknown;
+      if (url.pathname.startsWith('/repos/owner/icp/')) {
+        expect(request.headers.Authorization).toBe(`Bearer ${stateToken}`);
+        if (request.method === 'GET') body = { sha: 'state-sha', encoding: 'base64', content: Buffer.from(JSON.stringify(state)).toString('base64') };
+        else {
+          state = JSON.parse(Buffer.from(JSON.parse(request.body as string).content, 'base64').toString('utf8'));
+          body = { content: { sha: 'updated-state-sha' } };
+        }
+      } else {
+        expect(request.headers.Authorization).toBe(`Bearer ${readToken}`);
+        expect(request.method).toBe('GET');
+        if (url.pathname.endsWith('/git/ref/heads/feature')) body = { object: { sha: 'a'.repeat(40) } };
+        else if (url.pathname.endsWith('/pulls/55')) body = { state: 'open', merged: false, base: { ref: 'main' } };
+        else if (url.pathname.endsWith('/git/matching-refs/heads/')) body = [{ ref: `refs/heads/autoblog/2026-09-05-${reserved.slug}` }];
+        else if (url.pathname.includes('/git/trees/')) body = { tree: [{ path: 'content/articles/existing.md', type: 'blob', sha: 'b'.repeat(40) }], truncated: false };
+        else if (url.pathname.includes('/git/blobs/')) body = { encoding: 'base64', content: Buffer.from(`---\nid: ${existing.articleId}\nslug: ${existing.slug}\ntitle: ${existing.title}\nprimaryKeyword: ${existing.primaryKeyword}\n---\n`).toString('base64') };
+        else if (url.pathname.endsWith('/pulls')) body = [{ number: 12, html_url: 'https://github.com/owner/lander/pull/12', title: 'Manual topic', body: `- Primary keyword: ${openPr.primaryKeyword}`, head: { ref: 'editor/topic' } }];
+        else if (url.pathname.endsWith('/pulls/12/files')) body = [];
+        else throw new Error(`Unexpected endpoint: ${url.pathname}`);
+      }
+      return { status: 200, headers: {}, body };
+    };
+    const config = validateAutobloggerEnvironment('research', {
+      APIFY_TOKEN: 'fixture-apify', KEYWORD_PROVIDER: 'pending', GITHUB_TOKEN: stateToken, GITHUB_REPOSITORY: 'owner/icp',
+      LANDER_REPOSITORY: root, LANDER_OWNER: 'owner', LANDER_NAME: 'lander', LANDER_BASE_REF: 'feature', LANDER_READ_TOKEN: readToken,
+    });
+    const runtime = await createProductionAutobloggerRuntime(config, process.cwd(), { transport });
+    expect(requests.some(({ url }) => url.endsWith('/pulls/12/files?per_page=100'))).toBe(true);
+    const report = await runtime.execute({ command: 'research', runId: 'early-dedupe' });
+    expect(report.counts).toMatchObject({ scanned: 0, drafted: 0 });
+    for (const candidate of [existing, openPr, reserved]) {
+      expect(state.decisions[candidateFingerprints(candidate).candidate]).toBeDefined();
+    }
+    expect(state.decisions[candidateFingerprints(reserved).candidate].reason).toBe('reconciliation_required');
+    expect(state.pullRequests[candidateFingerprints(openPr).candidate]).toMatchObject({ number: 12 });
+  });
+
+  it('stops preparation on read-access failure before constructing a paid runtime', async () => {
+    const root = await mkdtemp(join(tmpdir(), 'autoblogger-read-denied-'));
+    await mkdir(join(root, '.git'));
+    const requests: HttpRequest[] = [];
+    const config = validateAutobloggerEnvironment('pilot', {
+      APIFY_TOKEN: 'fixture-apify', OPENAI_API_KEY: 'fixture-model', KEYWORD_PROVIDER: 'pending', GITHUB_TOKEN: 'fixture-state', GITHUB_REPOSITORY: 'owner/icp',
+      LANDER_REPOSITORY: root, LANDER_OWNER: 'owner', LANDER_NAME: 'lander', LANDER_BASE_REF: 'feature', LANDER_READ_TOKEN: 'github_pat_read_inventory_fixture_123456',
+    });
+    await expect(createProductionAutobloggerRuntime(config, process.cwd(), { transport: async (request) => {
+      requests.push(request); return { status: 403, headers: {}, body: {} };
+    } })).rejects.toThrow(/403/);
+    expect(requests).toHaveLength(1);
+    expect(requests[0].url).toContain('/repos/owner/lander/');
+  });
+
   it('loads the incremental matrix backlog without enforcing an exact library gate', async () => {
     const candidates = await loadBacklogCandidates(process.cwd());
     expect(candidates.length).toBeGreaterThanOrEqual(250);
@@ -35,13 +104,13 @@ describe('runtime context and artifacts', () => {
       },
     };
     const evidence = EvidenceBundleSchema.parse({
-      schemaVersion: 1,
+      schemaVersion: 2,
       candidateFingerprint: candidateFingerprints(candidate).candidate,
-      suggestions: shallow.suggestions,
+      signals: { autocomplete: shallow.suggestions, peopleAlsoAsk: shallow.peopleAlsoAsk, relatedSearches: shallow.relatedQueries },
       serp: { organicResultCount: 2, peopleAlsoAsk: shallow.peopleAlsoAsk },
       sources: [
-        { url: shallow.organicResults[0].url, authoritative: true },
-        { url: shallow.organicResults[1].url, authoritative: false },
+        { originalUrl: shallow.organicResults[0].url, finalUrl: shallow.organicResults[0].url, authoritative: true },
+        { originalUrl: shallow.organicResults[1].url, finalUrl: shallow.organicResults[1].url, authoritative: false },
       ],
       faqQuestions: shallow.peopleAlsoAsk,
     });
@@ -82,13 +151,13 @@ describe('runtime context and artifacts', () => {
       },
     };
     const evidence = EvidenceBundleSchema.parse({
-      schemaVersion: 1,
+      schemaVersion: 2,
       candidateFingerprint: candidateFingerprints(candidate).candidate,
-      suggestions: shallow.suggestions,
+      signals: { autocomplete: shallow.suggestions, peopleAlsoAsk: shallow.peopleAlsoAsk, relatedSearches: shallow.relatedQueries },
       serp: { organicResultCount: 2, peopleAlsoAsk: shallow.peopleAlsoAsk },
       sources: [
-        { url: shallow.organicResults[0].url, authoritative: true },
-        { url: shallow.organicResults[1].url, authoritative: false },
+        { originalUrl: shallow.organicResults[0].url, finalUrl: shallow.organicResults[0].url, authoritative: true },
+        { originalUrl: shallow.organicResults[1].url, finalUrl: shallow.organicResults[1].url, authoritative: false },
       ],
       faqQuestions: shallow.peopleAlsoAsk,
     });
@@ -129,7 +198,17 @@ describe('runtime context and artifacts', () => {
     expect(compact).not.toContain('Article');
     expect(compact).not.toContain('<svg');
     await expect(stat(join(root, 'fixture-article.bundle.json'))).resolves.toBeTruthy();
+    expect(JSON.parse(await readFile(join(root, 'fixture-article.publication.json'), 'utf8')))
+      .toMatchObject({ runId: 'pilot-artifact', bundle: report.artifacts[0].bundle });
     await expect(writeAutobloggerArtifacts(report, '../escape', root)).rejects.toThrow(/artifact directory/i);
+  });
+
+  it('retains the prepared report when a later operation writes a failure artifact', async () => {
+    const root = await mkdtemp(join(tmpdir(), 'autoblogger-failure-'));
+    await writeAutobloggerArtifacts({ status: 'passed' }, root, root);
+    await writeAutobloggerArtifacts({ schemaVersion: 1, status: 'failed', error: 'initialization failed' }, root, root);
+    expect(JSON.parse(await readFile(join(root, 'failure-report.json'), 'utf8'))).toMatchObject({ status: 'failed' });
+    expect(JSON.parse(await readFile(join(root, 'validation-report.json'), 'utf8'))).toEqual({ status: 'passed' });
   });
 
   it('rejects a symlinked artifact directory before writing outside the configured root', async () => {

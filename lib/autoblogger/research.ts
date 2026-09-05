@@ -150,6 +150,8 @@ export async function runApifyActor(
     throw new Error('Apify execution bounds are invalid.');
   }
   const startedAt = options.nowMs();
+  let startedRunId: string | undefined;
+  let runSucceeded = false;
   try {
     const startedRun = await withinRunDeadline(
       () => client.startActor(actorId, input),
@@ -157,6 +159,7 @@ export async function runApifyActor(
       startedAt,
       'startActor',
     );
+    startedRunId = startedRun.id;
     let run = startedRun;
     let polls = 0;
     while (run.status !== 'SUCCEEDED') {
@@ -184,6 +187,7 @@ export async function runApifyActor(
       if (run.id !== startedRun.id) throw new Error('Apify polling returned a different run id.');
       polls += 1;
     }
+    runSucceeded = true;
     if (!run.defaultDatasetId) throw new Error(`Apify run ${run.id} has no default dataset.`);
     const items = await retry(
       () => withinRunDeadline(
@@ -204,6 +208,21 @@ export async function runApifyActor(
       },
     };
   } catch (error) {
+    if (startedRunId && !runSucceeded) {
+      let cleanupTimer: ReturnType<typeof setTimeout> | undefined;
+      try {
+        await Promise.race([
+          client.abortRun(startedRunId),
+          new Promise<void>((resolve) => {
+            cleanupTimer = setTimeout(resolve, Math.min(5_000, options.timeoutMs));
+          }),
+        ]);
+      } catch {
+        // Best-effort remote cost cleanup must not hide the original redacted failure.
+      } finally {
+        if (cleanupTimer) clearTimeout(cleanupTimer);
+      }
+    }
     throw new Error(`Apify research failed: ${redactSensitive(error)}`);
   }
 }
@@ -345,12 +364,13 @@ export function createResearcher(options: ResearcherOptions) {
           shallow.peopleAlsoAsk,
         );
         const evidence = EvidenceBundleSchema.parse({
-          schemaVersion: 1,
+          schemaVersion: 2,
           candidateFingerprint: candidateFingerprints(candidate).candidate,
-          suggestions: [
-            ...shallow.suggestions,
-            ...shallow.relatedQueries,
-          ],
+          signals: {
+            autocomplete: shallow.suggestions,
+            peopleAlsoAsk: shallow.peopleAlsoAsk,
+            relatedSearches: shallow.relatedQueries,
+          },
           serp: {
             organicResultCount: shallow.organicResults.length,
             peopleAlsoAsk: faqQuestions,

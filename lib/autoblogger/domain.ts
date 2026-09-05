@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import { z } from 'zod';
 
 export type AutobloggerIntent = 'informational' | 'commercial' | 'transactional' | 'navigational';
@@ -16,7 +17,7 @@ export const FunnelStageSchema = z.enum(['top', 'middle', 'bottom']);
 
 export const CandidateSchema = z.object({
   schemaVersion: z.literal(1),
-  articleId: z.string().regex(/^vc-c[1-5]-\d{3}$/),
+  articleId: z.string().regex(/^vc-c[1-5]-(?:\d{3}|d-[0-9a-f]{16})$/),
   campaignId: CampaignIdSchema,
   icp: z.string().trim().min(1),
   primaryKeyword: z.string().trim().min(1),
@@ -28,15 +29,20 @@ export const CandidateSchema = z.object({
 }).strict();
 
 export const EvidenceBundleSchema = z.object({
-  schemaVersion: z.literal(1),
+  schemaVersion: z.literal(2),
   candidateFingerprint: z.string().min(1),
-  suggestions: z.array(z.string().trim().min(1)),
+  signals: z.object({
+    autocomplete: z.array(z.string().trim().min(1)),
+    peopleAlsoAsk: z.array(z.string().trim().min(1)),
+    relatedSearches: z.array(z.string().trim().min(1)),
+  }).strict(),
   serp: z.object({
     organicResultCount: z.number().int().nonnegative(),
     peopleAlsoAsk: z.array(z.string().trim().min(1)),
   }).strict(),
   sources: z.array(z.object({
-    url: z.string().url(),
+    originalUrl: z.string().url(),
+    finalUrl: z.string().url(),
     authoritative: z.boolean(),
   }).strict()),
   faqQuestions: z.array(z.string().trim().min(1)),
@@ -112,21 +118,33 @@ export function normalizeIntent(value: string): AutobloggerIntent {
 }
 
 export function candidateFingerprints(candidate: {
+  articleId: string;
   campaignId: string;
+  icp: string;
   primaryKeyword: string;
   title: string;
   slug: string;
   intent: string;
+  funnelStage: string;
 }) {
   const keyword = normalizeKeyword(candidate.primaryKeyword);
   const title = normalizeTitle(candidate.title);
   const slug = normalizeSlug(candidate.slug);
   normalizeIntent(candidate.intent);
+  const intentMaterial = [
+    candidate.campaignId,
+    normalizeComparableText(candidate.icp),
+    normalizeComparableText(candidate.funnelStage),
+    normalizeIntent(candidate.intent),
+    keyword,
+  ].join('\n');
 
   return {
+    articleId: `article:${candidate.articleId.toLocaleLowerCase('en-US')}`,
     keyword: `keyword:${keyword}`,
     title: `title:${title}`,
     slug: `slug:${slug}`,
+    intent: `intent:${createHash('sha256').update(intentMaterial).digest('hex')}`,
     candidate: `candidate:${candidate.campaignId}:${keyword}`,
   };
 }

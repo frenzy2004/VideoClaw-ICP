@@ -26,6 +26,7 @@ describe('Apify HTTP client', () => {
         },
       },
       [{ suggestion: 'demo day video checklist template' }],
+      { data: { id: 'run-123', status: 'ABORTING' } },
     ]);
     const client = createApifyClient({ token: 'apify-secret', transport: fixture.transport });
 
@@ -39,11 +40,12 @@ describe('Apify HTTP client', () => {
     await expect(client.getDatasetItems('dataset-456')).resolves.toEqual([
       { suggestion: 'demo day video checklist template' },
     ]);
+    await expect(client.abortRun('run-123')).resolves.toMatchObject({ id: 'run-123', status: 'ABORTING' });
 
     expect(fixture.requests).toEqual([
       {
         method: 'POST',
-        url: 'https://api.apify.com/v2/acts/apify~google-search-scraper/runs',
+        url: 'https://api.apify.com/v2/acts/apify~google-search-scraper/runs?timeout=120&maxTotalChargeUsd=2',
         headers: {
           Accept: 'application/json',
           Authorization: 'Bearer apify-secret',
@@ -64,7 +66,22 @@ describe('Apify HTTP client', () => {
         headers: { Accept: 'application/json', Authorization: 'Bearer apify-secret' },
         signal: expect.any(AbortSignal),
       },
+      {
+        method: 'POST',
+        url: 'https://api.apify.com/v2/actor-runs/run-123/abort?gracefully=true',
+        headers: { Accept: 'application/json', Authorization: 'Bearer apify-secret' },
+        signal: expect.any(AbortSignal),
+      },
     ]);
+  });
+
+  it('applies bounded server-side run limits even if the start response is lost', async () => {
+    const fixture = fixtureTransport([{ data: { id: 'bounded-run', status: 'RUNNING' } }]);
+    await createApifyClient({ token: 'test-token', transport: fixture.transport, runTimeoutSeconds: 90, maxTotalChargeUsd: 1 })
+      .startActor('apify/google-search-scraper', {});
+    expect(fixture.requests[0].url).toContain('timeout=90&maxTotalChargeUsd=1');
+    expect(() => createApifyClient({ token: 'test-token', transport: fixture.transport, runTimeoutSeconds: 0 })).toThrow(/limits/);
+    expect(() => createApifyClient({ token: 'test-token', transport: fixture.transport, maxTotalChargeUsd: Infinity })).toThrow(/limits/);
   });
 
   it('redacts token values and recognizable credential patterns from HTTP errors', async () => {

@@ -17,7 +17,6 @@ const DEFAULT_JSON_BODY_LIMIT = 2_000_000;
 const REDIRECT_STATUS = new Set([301, 302, 303, 307, 308]);
 
 type RuntimeHttpOptions = {
-  allowHttpForTests?: boolean;
   maxResponseBytes?: number;
 };
 
@@ -76,10 +75,10 @@ function destroyOnAbort(
   return () => signal.removeEventListener('abort', abort);
 }
 
-export function createNodeJsonHttpTransport(options: RuntimeHttpOptions = {}): HttpTransport {
+function createJsonHttpTransport(options: RuntimeHttpOptions, allowHttpForTests: boolean): HttpTransport {
   const maximum = numericLimit(options.maxResponseBytes, DEFAULT_JSON_BODY_LIMIT);
   return async (input: HttpRequest): Promise<HttpResponse> => {
-    const url = parseUrl(input.url, options.allowHttpForTests === true);
+    const url = parseUrl(input.url, allowHttpForTests);
     return await new Promise<HttpResponse>((resolve, reject) => {
       const request = requester(url)(safeRequestOptions(url, input), (response) => {
         const chunks: Buffer[] = [];
@@ -113,6 +112,15 @@ export function createNodeJsonHttpTransport(options: RuntimeHttpOptions = {}): H
       request.end();
     });
   };
+}
+
+export function createNodeJsonHttpTransport(options: RuntimeHttpOptions = {}): HttpTransport {
+  return createJsonHttpTransport(options, false);
+}
+
+/** Explicitly test-only. Production runtime has no cleartext configuration switch. */
+export function createTestOnlyNodeJsonHttpTransport(options: RuntimeHttpOptions = {}): HttpTransport {
+  return createJsonHttpTransport(options, true);
 }
 
 export function createNodeDnsResolver(options: {
@@ -162,35 +170,61 @@ function streamingBody(
   request: ReturnType<typeof http.request>,
   maximum: number,
 ): AsyncIterable<Uint8Array> {
-  return {
-    async *[Symbol.asyncIterator]() {
-      let bytes = 0;
-      let finished = false;
+  const iterator = response[Symbol.asyncIterator]();
+  let bytes = 0;
+  let closed = false;
+  const close = () => {
+    if (closed) return;
+    closed = true;
+    if (!response.destroyed) response.destroy();
+    if (!request.destroyed) request.destroy();
+    if (!response.socket.destroyed) response.socket.destroy();
+  };
+  const bodyIterator: AsyncIterator<Uint8Array> & AsyncIterable<Uint8Array> = {
+    async next() {
+      if (closed) return { done: true, value: undefined };
       try {
-        for await (const chunk of response) {
-          const value = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk);
-          bytes += value.byteLength;
-          if (bytes > maximum) {
-            throw new Error('Source response body exceeds the byte limit.');
-          }
-          yield new Uint8Array(value.buffer, value.byteOffset, value.byteLength);
+        const next = await iterator.next();
+        if (next.done) {
+          closed = true;
+          return { done: true, value: undefined };
         }
-        finished = true;
-      } finally {
-        if (!finished && !response.destroyed) response.destroy();
-        if (!finished && !request.destroyed) request.destroy();
+        const value = Buffer.isBuffer(next.value) ? next.value : Buffer.from(next.value);
+        bytes += value.byteLength;
+        if (bytes > maximum) {
+          close();
+          throw new Error('Source response body exceeds the byte limit.');
+        }
+        return {
+          done: false,
+          value: new Uint8Array(value.buffer, value.byteOffset, value.byteLength),
+        };
+      } catch (error) {
+        close();
+        throw error;
       }
     },
+    async return() {
+      close();
+      try {
+        await iterator.return?.();
+      } catch {
+        // Destruction above is authoritative cleanup.
+      }
+      return { done: true, value: undefined };
+    },
+    [Symbol.asyncIterator]() { return this; },
+  };
+  return {
+    [Symbol.asyncIterator]() { return bodyIterator; },
   };
 }
 
-export function createNodeSourceHttpTransport(options: {
-  allowHttpForTests?: boolean;
-} = {}): SourceHttpTransport {
+function createSourceHttpTransport(allowHttpForTests: boolean): SourceHttpTransport {
   return async (input: SourceHttpRequest): Promise<SourceHttpResponse> => {
     if (input.redirect !== 'manual') throw new Error('Source redirects must be manual.');
     const maximum = numericLimit(input.maxResponseBytes, 1);
-    const url = parseUrl(input.url, options.allowHttpForTests === true || input.url.startsWith('http:'));
+    const url = parseUrl(input.url, allowHttpForTests);
     return await new Promise<SourceHttpResponse>((resolve, reject) => {
       let settled = false;
       const request = requester(url)(pinnedRequestOptions(url, input), (response) => {
@@ -202,6 +236,12 @@ export function createNodeSourceHttpTransport(options: {
           return;
         }
         settled = true;
+        const removeResponseAbort = destroyOnAbort(input.signal, (error) => {
+          response.destroy(error);
+          request.destroy(error);
+          response.socket.destroy(error);
+        });
+        response.once('close', removeResponseAbort);
         resolve({
           status: response.statusCode ?? 0,
           headers: headersRecord(response.headers),
@@ -219,6 +259,15 @@ export function createNodeSourceHttpTransport(options: {
       request.end(input.body);
     });
   };
+}
+
+export function createNodeSourceHttpTransport(): SourceHttpTransport {
+  return createSourceHttpTransport(false);
+}
+
+/** Explicitly test-only. Production runtime has no cleartext configuration switch. */
+export function createTestOnlyNodeSourceHttpTransport(): SourceHttpTransport {
+  return createSourceHttpTransport(true);
 }
 
 export function isRedirectStatus(status: number): boolean {

@@ -11,7 +11,8 @@ import {
 import { createPersistentWorkerState, type PersistentWorkerState } from './github-runtime';
 import { createPendingKeywordProvider, type KeywordProvider } from './keyword-providers';
 import type { ShallowResearchResult } from './research';
-import { createAutobloggerWorker } from './worker';
+import { createAutobloggerWorker, discoverCandidatesFromResearch } from './worker';
+import { reserveCandidate } from './recovery';
 
 function candidate(index: number): Candidate {
   const campaignNumber = index % 3 === 0 ? 2 : index % 3 === 1 ? 1 : 3;
@@ -70,25 +71,37 @@ function fixture(input: {
   landerRef?: string;
   openDraftPullRequest?: NonNullable<Parameters<typeof createAutobloggerWorker>[0]['publisher']['openDraftPullRequest']>;
   keywordProvider?: KeywordProvider;
+  backlogCount?: number;
+  failScan?: boolean;
+  failDraft?: boolean;
+  maxDrafts?: 1 | 2 | 3;
+  onReservation?: (state: PersistentWorkerState) => void;
+  beforeSave?: (state: PersistentWorkerState) => void;
+  initialState?: PersistentWorkerState;
+  now?: () => Date;
+  persistArtifact?: Parameters<typeof createAutobloggerWorker>[0]['persistArtifact'];
 } = {}) {
-  let state = createPersistentWorkerState();
+  let state = input.initialState ?? createPersistentWorkerState();
   let version: string | null = 'state-v1';
   const counters = { scanned: 0, enriched: 0, inspected: [] as number[], drafted: 0, validated: 0, opened: 0, saved: 0 };
-  const backlog = Array.from({ length: 50 }, (_unused, index) => candidate(index));
+  const backlog = Array.from({ length: input.backlogCount ?? 50 }, (_unused, index) => candidate(index));
   const worker = createAutobloggerWorker({
     backlog,
     stateStore: {
       load: async () => ({ state, version }),
       save: async (next: PersistentWorkerState, expected: string | null) => {
         expect(expected).toBe(version);
+        input.beforeSave?.(next);
         state = next;
         version = `state-v${counters.saved + 2}`;
         counters.saved += 1;
+        input.onReservation?.(state);
         return { version };
       },
     },
     researcher: {
       scan: async (items) => {
+        if (input.failScan) throw new Error('temporary network failure');
         counters.scanned = items.length;
         return { scannedCount: items.length, results: items.map(shallow) };
       },
@@ -103,13 +116,13 @@ function fixture(input: {
             candidate: item.candidate,
             provenance: item.provenance,
             evidence: EvidenceBundleSchema.parse({
-              schemaVersion: 1,
+              schemaVersion: 2,
               candidateFingerprint: candidateFingerprints(item.candidate).candidate,
-              suggestions: [...item.suggestions, ...item.relatedQueries],
+              signals: { autocomplete: item.suggestions, peopleAlsoAsk: item.peopleAlsoAsk, relatedSearches: item.relatedQueries },
               serp: { organicResultCount: 2, peopleAlsoAsk: item.peopleAlsoAsk },
               sources: [
-                { url: item.organicResults[0].url, authoritative: true },
-                { url: item.organicResults[1].url, authoritative: false },
+                { originalUrl: item.organicResults[0].url, finalUrl: item.organicResults[0].url, authoritative: true },
+                { originalUrl: item.organicResults[1].url, finalUrl: item.organicResults[1].url, authoritative: false },
               ],
               faqQuestions: item.peopleAlsoAsk,
             }),
@@ -138,6 +151,7 @@ function fixture(input: {
     },
     drafter: {
       draft: async (context) => {
+        if (input.failDraft) throw new Error('temporary model timeout');
         counters.drafted += 1;
         return { status: 'ready' as const, repaired: true, bundle: bundle(context.candidate) };
       },
@@ -147,7 +161,7 @@ function fixture(input: {
       evidence: result.evidence,
       keywordMetrics: metrics,
       checkedSources: result.evidence.sources.map((source) => ({
-        url: source.url, finalUrl: source.url, status: 200, reachable: true, authoritative: source.authoritative,
+        url: source.originalUrl, finalUrl: source.finalUrl, status: 200, reachable: true, authoritative: source.authoritative,
       })),
       provenance: {
         apifyRunId: result.provenance.serp.runId,
@@ -157,7 +171,7 @@ function fixture(input: {
         capturedAt: '2026-09-05',
       },
       sourceFacts: result.evidence.sources.map((source, index) => ({
-        id: `source-${index}`, label: `Source ${index}`, url: source.url, checkedAt: '2026-09-05T00:00:00.000Z',
+        id: `source-${index}`, label: `Source ${index}`, url: source.finalUrl, checkedAt: '2026-09-05T00:00:00.000Z',
         facts: [{ id: `fact-${index}`, text: `Source-backed fact ${index}.` }],
       })),
       productClaims: [],
@@ -179,12 +193,98 @@ function fixture(input: {
     },
     landerRef: input.landerRef ?? 'seo/founder-video-blog-launch',
     approvedMedia: { product: [], editorialGraphics: [] },
-    now: () => new Date('2026-09-05T00:00:00.000Z'),
+    now: input.now ?? (() => new Date('2026-09-05T00:00:00.000Z')),
+    maxDrafts: input.maxDrafts,
+    persistArtifact: input.persistArtifact,
   });
   return { worker, counters, getState: () => state };
 }
 
 describe('persistent autoblogger worker', () => {
+  it('retains a discovered candidate during a live lease and recovers it after expiry', async () => {
+    const discovered = candidate(99);
+    const initialState = reserveCandidate({ ...createPersistentWorkerState(), queuedCandidates: [discovered] }, discovered, 'prior-run', 'scheduled', '2026-09-05T00:00:00.000Z');
+    let clock = new Date('2026-09-05T00:05:00.000Z');
+    const { worker, getState } = fixture({ backlogCount: 0, initialState, now: () => clock });
+    const immediate = await worker.execute({ command: 'run', runId: 'immediate-retry' });
+    expect(immediate.counts.scanned).toBe(0);
+    expect(getState().queuedCandidates).toContainEqual(discovered);
+    clock = new Date('2026-09-05T00:35:00.000Z');
+    const recovered = await worker.execute({ command: 'run', runId: 'after-lease-expiry' });
+    expect(recovered.counts.scanned).toBe(1);
+    expect(recovered.counts.drafted).toBe(1);
+  });
+
+  it('cannot produce a second pilot after artifact output succeeds but final state saving fails', async () => {
+    let artifactWritten = false;
+    let clock = new Date('2026-09-05T00:00:00.000Z');
+    const { worker, getState } = fixture({ backlogCount: 2, now: () => clock,
+      persistArtifact: async () => { artifactWritten = true; },
+      beforeSave: () => { if (artifactWritten) throw new Error('temporary state outage'); },
+    });
+    await expect(worker.execute({ command: 'pilot', runId: 'pilot-state-outage' })).rejects.toThrow(/state outage/);
+    expect(artifactWritten).toBe(true);
+    expect(getState().manualPilot).toMatchObject({ status: 'prepared', leaseExpiresAt: null });
+    clock = new Date('2026-09-05T01:00:00.000Z');
+    await expect(worker.execute({ command: 'pilot', runId: 'later-pilot' })).rejects.toThrow(/already reserved, prepared, or consumed/);
+  });
+
+  it('retains the observed seed as a secondary term for newly discovered opportunities', () => {
+    const seed = candidate(0);
+    const discovered = discoverCandidatesFromResearch([shallow(seed)], [seed]);
+    expect(discovered.length).toBeGreaterThan(0);
+    for (const item of discovered) {
+      expect(item.secondaryKeywords).toEqual([seed.primaryKeyword]);
+      expect(item.primaryKeyword).not.toBe(seed.primaryKeyword);
+    }
+  });
+
+  it('retains research-only candidates for drafting and stores provenance for all scanned keywords', async () => {
+    const { worker, getState } = fixture({ backlogCount: 5 });
+    const report = await worker.execute({ command: 'research', runId: 'research-before-drafting' });
+    expect(report.status).toBe('researched');
+    expect(Object.keys(getState().provenance)).toHaveLength(5);
+    for (const item of Array.from({ length: 5 }, (_, index) => candidate(index))) {
+      expect(getState().queuedCandidates).toContainEqual(item);
+      expect(getState().decisions[candidateFingerprints(item).candidate]).toMatchObject({ status: 'retryable', reason: 'research_ready_for_drafting', attempts: 0 });
+    }
+    const next = await worker.execute({ command: 'run', runId: 'draft-after-research' });
+    expect(next.counts.drafted).toBeGreaterThan(0);
+  });
+
+  it('saves all scanned candidates before paid research and bounds scan retries', async () => {
+    let savedBeforeScan = false;
+    const { worker, getState } = fixture({ backlogCount: 2, failScan: true, onReservation: (state) => {
+      if (Object.values(state.decisions).some(({ status }) => status === 'leased')) {
+        savedBeforeScan = state.queuedCandidates.length === 2;
+      }
+    } });
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      await expect(worker.execute({ command: 'run', runId: `scan-failure-${attempt}` })).rejects.toThrow(/network/);
+    }
+    expect(savedBeforeScan).toBe(true);
+    expect(Object.values(getState().decisions).every((decision) => decision.status === 'terminal' && decision.attempts === 3)).toBe(true);
+  });
+
+  it('retains deferred and retryable discovered candidates and enforces one draft when requested', async () => {
+    const { worker, getState } = fixture({ maxDrafts: 1 });
+    const result = await worker.execute({ command: 'run', runId: 'one-article-run' });
+    expect(result.artifacts).toHaveLength(1);
+    const retryable = Object.entries(getState().decisions).filter(([, value]) => value.status === 'retryable');
+    expect(retryable.length).toBe(9);
+    expect(retryable.every(([key]) => getState().queuedCandidates.some((candidate) => candidateFingerprints(candidate).candidate === key))).toBe(true);
+  });
+
+  it('does not consume a failed pilot and preserves real retry attempts', async () => {
+    const { worker, getState } = fixture({ backlogCount: 1, failDraft: true });
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      const result = await worker.execute({ command: 'pilot', runId: `failed-pilot-${attempt}` });
+      expect(result.artifacts).toHaveLength(0);
+      expect(getState().manualPilot).toBeNull();
+      expect(Object.values(getState().decisions)[0].attempts).toBe(attempt);
+    }
+    expect(Object.values(getState().decisions)[0].status).toBe('terminal');
+  });
   it('validates all 50 shallow candidates, deep-checks the best 10, and drafts max three/max two per ICP', async () => {
     const { worker, counters } = fixture();
     const report = await worker.execute({ command: 'run', runId: 'fixture-run-1' });
@@ -207,6 +307,7 @@ describe('persistent autoblogger worker', () => {
     expect(first.artifacts).toHaveLength(1);
     expect(counters.opened).toBe(0);
     expect(getState().manualPilot?.runId).toBe('fixture-pilot-1');
+    expect(getState().manualPilot?.status).toBe('prepared');
 
     const repeated = await worker.execute({ command: 'pilot', runId: 'fixture-pilot-1' });
     expect(repeated.status).toBe('already_recorded');
@@ -214,6 +315,18 @@ describe('persistent autoblogger worker', () => {
 
     await expect(worker.execute({ command: 'pilot', runId: 'fixture-pilot-2' })).rejects.toThrow(/pilot.*already/i);
     expect(counters.opened).toBe(0);
+  });
+
+  it('preserves the unscanned backlog tail and records a decision for every shallow scan', async () => {
+    const { worker, getState } = fixture({ backlogCount: 75 });
+    const report = await worker.execute({ command: 'research', runId: 'fixture-tail-1' });
+    expect(report.counts.scanned).toBe(50);
+    expect(Object.keys(getState().decisions)).toHaveLength(50);
+    expect(getState().queuedCandidates.some(({ articleId }) => articleId === candidate(74).articleId)).toBe(true);
+
+    const rerun = await worker.execute({ command: 'research', runId: 'fixture-tail-2' });
+    expect(rerun.counts.scanned).toBeGreaterThanOrEqual(25);
+    expect(rerun.counts.scanned).toBeLessThanOrEqual(50);
   });
 
   it('lets research use pending metrics while still completing all 50 shallow and 10 deep checks', async () => {

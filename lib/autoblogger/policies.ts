@@ -8,7 +8,9 @@ import {
   type KeywordMetrics,
 } from './domain';
 
-type InventoryEntry = Partial<Pick<Candidate, 'primaryKeyword' | 'title' | 'slug'>>;
+type InventoryEntry = Partial<Pick<Candidate, 'articleId' | 'primaryKeyword' | 'title' | 'slug'>> & {
+  intentFingerprint?: string;
+};
 
 export type DuplicateInventory = {
   backlog?: Candidate[];
@@ -20,7 +22,9 @@ export type DuplicateInventory = {
 function hasMatchingIdentity(candidate: Candidate, entries: InventoryEntry[]): boolean {
   const fingerprints = candidateFingerprints(candidate);
   return entries.some((entry) =>
-    (entry.primaryKeyword && `keyword:${normalizeKeyword(entry.primaryKeyword)}` === fingerprints.keyword)
+    (entry.articleId && `article:${entry.articleId.toLocaleLowerCase('en-US')}` === fingerprints.articleId)
+    || (entry.intentFingerprint && entry.intentFingerprint === fingerprints.intent)
+    || (entry.primaryKeyword && `keyword:${normalizeKeyword(entry.primaryKeyword)}` === fingerprints.keyword)
     || (entry.title && `title:${normalizeTitle(entry.title)}` === fingerprints.title)
     || (entry.slug && `slug:${normalizeSlug(entry.slug)}` === fingerprints.slug),
   );
@@ -33,7 +37,7 @@ export function screenDuplicate(candidate: Candidate, inventory: DuplicateInvent
   if (hasMatchingIdentity(candidate, inventory.backlog ?? [])) {
     return { accepted: false, reason: 'duplicate_backlog' };
   }
-  if ((inventory.stateCandidateFingerprints ?? []).includes(candidateFingerprints(candidate).candidate)) {
+  if ((inventory.stateCandidateFingerprints ?? []).some((value) => Object.values(candidateFingerprints(candidate)).includes(value))) {
     return { accepted: false, reason: 'duplicate_state' };
   }
   if (hasMatchingIdentity(candidate, inventory.landerInventory ?? [])) {
@@ -65,12 +69,16 @@ export function evaluateEligibility(
   if (evidence.candidateFingerprint !== candidateFingerprints(candidate).candidate) {
     reasons.push('evidence_candidate_mismatch');
   }
-  if (evidence.suggestions.length === 0) reasons.push('missing_suggestions');
+  const hasSuggestionSignal = evidence.signals.autocomplete.length > 0
+    || evidence.signals.peopleAlsoAsk.length > 0
+    || evidence.signals.relatedSearches.length > 0;
+  if (!hasSuggestionSignal) reasons.push('missing_suggestion_signal');
   if (evidence.serp.organicResultCount === 0) reasons.push('missing_serp');
   if (evidence.serp.organicResultCount > 0 && evidence.serp.peopleAlsoAsk.length < 3) reasons.push('missing_paa');
   if (evidence.sources.length < 2) reasons.push('missing_sources');
   if (!evidence.sources.some((source) => source.authoritative)) reasons.push('missing_authoritative_source');
   if (evidence.faqQuestions.length < 3) reasons.push('missing_faqs');
+  if (!evaluateProductRelevance(candidate)) reasons.push('missing_product_relevance');
   if (mode === 'scheduled' && (metrics.provider === 'pending' || metrics.volume === null || metrics.difficulty === null)) {
     reasons.push('scheduled_requires_observed_volume_and_difficulty');
   }
@@ -96,7 +104,9 @@ export function stageOpportunitiesForDeepInspection<T>(opportunities: T[]): T[] 
 }
 
 export function scoreOpportunity(opportunity: Opportunity): number {
-  const evidenceScore = opportunity.evidence.suggestions.length
+  const evidenceScore = opportunity.evidence.signals.autocomplete.length
+    + opportunity.evidence.signals.peopleAlsoAsk.length
+    + opportunity.evidence.signals.relatedSearches.length
     + Math.min(opportunity.evidence.serp.organicResultCount, 10)
     + opportunity.evidence.serp.peopleAlsoAsk.length
     + opportunity.evidence.sources.length
@@ -105,6 +115,19 @@ export function scoreOpportunity(opportunity: Opportunity): number {
     ? 0
     : opportunity.metrics.volume - opportunity.metrics.difficulty;
   return evidenceScore + metricsScore;
+}
+
+const PRODUCT_RELEVANCE_PHRASES: Record<Candidate['campaignId'], readonly string[]> = {
+  'newly-funded-founder': ['founder video', 'launch video', 'funding announcement', 'product demo', 'gtm video'],
+  'accelerator-demo-day-founder': ['demo day', 'pitch video', 'investor demo', 'live demo', 'product demo'],
+  'video-production-comparison': ['video agency', 'video freelancer', 'video editor', 'ai video', 'video production'],
+  'gtm-content-repurposing-buyer': ['content repurposing', 'marketing video', 'gtm content', 'ai video', 'video workflow'],
+  'portfolio-media-platform': ['accelerator content', 'portfolio company', 'cohort content', 'founder media', 'startup portfolio'],
+};
+
+export function evaluateProductRelevance(candidate: Candidate): boolean {
+  const text = normalizeKeyword(`${candidate.primaryKeyword} ${candidate.title} ${candidate.icp}`);
+  return PRODUCT_RELEVANCE_PHRASES[candidate.campaignId].some((phrase) => text.includes(phrase));
 }
 
 export function selectOpportunities(opportunities: Opportunity[], mode: RunMode): Opportunity[] {

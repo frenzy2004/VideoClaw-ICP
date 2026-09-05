@@ -7,6 +7,8 @@ import {
   createNodeDnsResolver,
   createNodeJsonHttpTransport,
   createNodeSourceHttpTransport,
+  createTestOnlyNodeJsonHttpTransport,
+  createTestOnlyNodeSourceHttpTransport,
 } from './runtime-http';
 
 async function listen(server: Server): Promise<number> {
@@ -35,7 +37,7 @@ describe('production JSON transport', () => {
       response.end(JSON.stringify({ ok: true, payload: 'x'.repeat(64) }));
     });
     const port = await listen(server);
-    const transport = createNodeJsonHttpTransport({ allowHttpForTests: true, maxResponseBytes: 32 });
+    const transport = createTestOnlyNodeJsonHttpTransport({ maxResponseBytes: 32 });
     const controller = new AbortController();
 
     const redirect = await transport({
@@ -59,7 +61,7 @@ describe('production JSON transport', () => {
   it('aborts a hanging request within the caller deadline', async () => {
     const server = createServer(() => undefined);
     const port = await listen(server);
-    const transport = createNodeJsonHttpTransport({ allowHttpForTests: true });
+    const transport = createTestOnlyNodeJsonHttpTransport();
 
     await expect(requestWithTimeout(transport, {
       method: 'GET',
@@ -67,6 +69,16 @@ describe('production JSON transport', () => {
       headers: {},
     }, 20)).rejects.toThrow(/timed out/i);
     await close(server);
+  });
+
+  it('has no production configuration switch that enables cleartext HTTP', async () => {
+    const transport = createNodeJsonHttpTransport();
+    await expect(transport({
+      method: 'GET',
+      url: 'http://127.0.0.1/not-allowed',
+      headers: {},
+      signal: new AbortController().signal,
+    })).rejects.toThrow(/https/i);
   });
 });
 
@@ -84,7 +96,7 @@ describe('pinned streaming source transport', () => {
       response.end('followed');
     });
     const port = await listen(server);
-    const transport = createNodeSourceHttpTransport({ allowHttpForTests: true });
+    const transport = createTestOnlyNodeSourceHttpTransport();
     const controller = new AbortController();
     const response = await transport({
       method: 'GET',
@@ -117,7 +129,7 @@ describe('pinned streaming source transport', () => {
       setTimeout(() => response.end('90'), 30);
     });
     const port = await listen(server);
-    const transport = createNodeSourceHttpTransport({ allowHttpForTests: true });
+    const transport = createTestOnlyNodeSourceHttpTransport();
     const request = (maxResponseBytes: number) => transport({
       method: 'GET' as const,
       url: `http://stream.invalid:${port}/stream`,
@@ -143,6 +155,31 @@ describe('pinned streaming source transport', () => {
     await close(server);
   });
 
+  it('destroys a redirect response when return is called before next', async () => {
+    let responseClosed = false;
+    const server = createServer((_request, response) => {
+      response.on('close', () => { responseClosed = true; });
+      response.writeHead(302, { location: '/other' });
+      response.write('redirect body held open');
+    });
+    const port = await listen(server);
+    const transport = createTestOnlyNodeSourceHttpTransport();
+    const response = await transport({
+      method: 'GET',
+      url: `http://redirect.invalid:${port}/start`,
+      headers: {},
+      signal: new AbortController().signal,
+      redirect: 'manual',
+      allowedPeerAddresses: ['127.0.0.1'],
+      maxResponseBytes: 100,
+    });
+    const iterator = response.body[Symbol.asyncIterator]();
+    await iterator.return?.();
+    await new Promise((resolve) => setTimeout(resolve, 20));
+    expect(responseClosed).toBe(true);
+    await close(server);
+  });
+
   it('destroys an in-flight response when the caller aborts after headers', async () => {
     let responseClosed = false;
     const server = createServer((_request, response) => {
@@ -152,7 +189,7 @@ describe('pinned streaming source transport', () => {
     });
     const port = await listen(server);
     const controller = new AbortController();
-    const transport = createNodeSourceHttpTransport({ allowHttpForTests: true });
+    const transport = createTestOnlyNodeSourceHttpTransport();
     const response = await transport({
       method: 'GET',
       url: `http://abort.invalid:${port}/stream`,
@@ -174,7 +211,7 @@ describe('pinned streaming source transport', () => {
   it('rejects an invalid peer allowlist and returns deduplicated DNS addresses', async () => {
     const server = createServer((_request, response) => response.end('ok'));
     const port = await listen(server);
-    const transport = createNodeSourceHttpTransport({ allowHttpForTests: true });
+    const transport = createTestOnlyNodeSourceHttpTransport();
     await expect(transport({
       method: 'GET',
       url: `http://source.invalid:${port}/`,
@@ -194,5 +231,18 @@ describe('pinned streaming source transport', () => {
     });
     await expect(resolver('Example.COM')).resolves.toEqual(['203.0.113.8', '2001:db8::8']);
     await close(server);
+  });
+
+  it('rejects cleartext HTTP in the production source constructor', async () => {
+    const transport = createNodeSourceHttpTransport();
+    await expect(transport({
+      method: 'GET',
+      url: 'http://source.invalid/',
+      headers: {},
+      signal: new AbortController().signal,
+      redirect: 'manual',
+      allowedPeerAddresses: ['203.0.113.10'],
+      maxResponseBytes: 100,
+    })).rejects.toThrow(/https/i);
   });
 });

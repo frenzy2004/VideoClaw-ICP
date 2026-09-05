@@ -197,7 +197,12 @@ export type SourceFact = {
   label: string;
   url: string;
   checkedAt: string;
-  facts: Array<{ id: string; text: string }>;
+  facts: Array<{
+    id: string;
+    text: string;
+    /** Omitted legacy facts are conservatively treated as search titles/snippets by the critic. */
+    evidenceKind?: 'serp_title' | 'serp_snippet' | 'body';
+  }>;
   /** Used only for copied-passage comparison. Never included in model input or artifacts. */
   excerpt?: string;
 };
@@ -210,6 +215,7 @@ const SourceFactInputSchema: z.ZodType<SourceFact> = z.object({
   facts: z.array(z.object({
     id: singleLineControlFreeString,
     text: singleLineControlFreeString,
+    evidenceKind: z.enum(['serp_title', 'serp_snippet', 'body']).optional(),
   }).strict()).min(1),
   excerpt: z.string().optional(),
 }).strict();
@@ -228,7 +234,7 @@ DraftingContext,
 'evidence' | 'checkedSources' | 'sourceFacts'
 >): Set<string> {
   const evidenceByUrl = new Map(context.evidence.sources.flatMap((source) => {
-    const normalized = normalizeHttpUrl(source.url);
+    const normalized = normalizeHttpUrl(source.originalUrl);
     return normalized ? [[normalized, source] as const] : [];
   }));
   const reachableFinalUrls = new Set<string>();
@@ -239,6 +245,7 @@ DraftingContext,
     if (
       evidenceSource
       && finalUrl
+      && finalUrl === normalizeHttpUrl(evidenceSource.finalUrl)
       && checked.reachable
       && checked.status >= 200
       && checked.status < 400
@@ -598,13 +605,14 @@ function claimBindingsAreValid(
         !factsById.has(factId)
         || !visibleSourceIds.includes(factsById.get(factId)?.sourceId as string)
       ))
-      || !factExactlyMatchesSpan(
-        binding.span,
-        binding.sourceFactIds.map((factId) => factsById.get(factId)?.text ?? ''),
-      )
     ) return false;
     seen.add(key);
 
+    // General prose may paraphrase sources or offer labelled original guidance/examples.
+    // This is only structural binding validation, never proof of factual support.
+    // The independent critic in drafting.ts must evaluate EVERY binding; lexical
+    // overlap cannot establish entailment. Model factual grading is inherently
+    // probabilistic and provides no guarantee that a source supports a claim.
     const productClaim = binding.productClaimId === null
       ? undefined
       : claimById.get(binding.productClaimId);
@@ -612,6 +620,10 @@ function claimBindingsAreValid(
       if (
         binding.span !== productClaim.text
         || binding.sourceFactIds.some((factId) => !productClaim.allowedSourceFactIds.includes(factId))
+        || !factExactlyMatchesSpan(
+          binding.span,
+          binding.sourceFactIds.map((factId) => factsById.get(factId)?.text ?? ''),
+        )
       ) return false;
     } else if (binding.productClaimId !== null || containsProductAlias(binding.span, context.productClaims)) {
       return false;

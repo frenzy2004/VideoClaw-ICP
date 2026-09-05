@@ -24,14 +24,22 @@ export type CheckedSource = {
 
 export type SafeSourceChecker = {
   check(url: string): Promise<CheckedSource>;
-  select(urls: string[]): Promise<Array<{ url: string; authoritative: boolean }>>;
+  select(urls: string[]): Promise<Array<{
+    originalUrl: string;
+    finalUrl: string;
+    authoritative: boolean;
+  }>>;
+};
+
+export type AuthorityPolicy = {
+  hostname: string;
+  pathPrefix?: string;
 };
 
 export type SafeSourceCheckerOptions = {
   transport: SourceHttpTransport;
   resolveHostname: DnsResolver;
-  authoritativeDomains?: ReadonlySet<string>;
-  primarySourceUrls?: string[];
+  authorityPolicies?: readonly AuthorityPolicy[];
   limits?: Partial<SourceCheckLimits>;
 };
 
@@ -43,7 +51,7 @@ const DEFAULT_LIMITS: SourceCheckLimits = {
 const REDIRECT_STATUSES = new Set([301, 302, 303, 307, 308]);
 
 function normalizedHostname(hostname: string): string {
-  return hostname.toLocaleLowerCase('en-US').replace(/^\[|\]$/g, '').replace(/^www\./, '');
+  return hostname.toLocaleLowerCase('en-US').replace(/^\[|\]$/g, '');
 }
 
 function isPrivateIpv4(address: string): boolean {
@@ -77,10 +85,10 @@ function isPrivateAddress(address: string): boolean {
     || normalized.startsWith('ff');
 }
 
-function parseSourceUrl(value: string): URL {
+function parseSourceUrl(value: string, allowHttpForTests = false): URL {
   const url = new URL(value);
-  if (!['http:', 'https:'].includes(url.protocol)) {
-    throw new Error('Source URL must use HTTP or HTTPS.');
+  if (url.protocol !== 'https:' && !(allowHttpForTests && url.protocol === 'http:')) {
+    throw new Error('Source URL must use HTTPS.');
   }
   if (url.username || url.password) throw new Error('Source URL credentials are not allowed.');
   url.hash = '';
@@ -222,30 +230,30 @@ function assertTransportResponse(
   }
 }
 
-function domainMatches(hostname: string, domain: string): boolean {
-  return hostname === domain || hostname.endsWith(`.${domain}`);
-}
-
-export function createSafeSourceChecker(options: SafeSourceCheckerOptions): SafeSourceChecker {
+function createSourceChecker(options: SafeSourceCheckerOptions, allowHttpForTests: boolean): SafeSourceChecker {
   const limits = { ...DEFAULT_LIMITS, ...options.limits };
   if (limits.maxRedirects < 0 || limits.maxBodyBytes < 0 || limits.timeoutMs <= 0) {
     throw new Error('Source-check limits must be non-negative and timeout must be positive.');
   }
-  const authoritativeDomains = new Set(
-    [...(options.authoritativeDomains ?? [])].map(normalizedHostname),
-  );
-  const primaryDomains = new Set(
-    (options.primarySourceUrls ?? []).map((url) => normalizedHostname(parseSourceUrl(url).hostname)),
-  );
+  const authorityPolicies = (options.authorityPolicies ?? []).map((policy) => {
+    const hostname = normalizedHostname(policy.hostname);
+    if (!hostname || isIP(hostname) || hostname.includes('/')) throw new Error('Authority policy hostname is invalid.');
+    const pathPrefix = policy.pathPrefix ?? '/';
+    if (!pathPrefix.startsWith('/') || pathPrefix.includes('..') || pathPrefix.includes('?') || pathPrefix.includes('#')) {
+      throw new Error('Authority policy path prefix is invalid.');
+    }
+    return { hostname, pathPrefix };
+  });
 
   function isAuthoritative(url: URL): boolean {
     const hostname = normalizedHostname(url.hostname);
-    return [...authoritativeDomains, ...primaryDomains]
-      .some((domain) => domainMatches(hostname, domain));
+    return authorityPolicies.some((policy) => (
+      hostname === policy.hostname && url.pathname.startsWith(policy.pathPrefix)
+    ));
   }
 
   async function check(value: string): Promise<CheckedSource> {
-    const initialUrl = parseSourceUrl(value);
+    const initialUrl = parseSourceUrl(value, allowHttpForTests);
     let currentUrl = initialUrl;
     let redirectCount = 0;
     const startedAt = Date.now();
@@ -288,7 +296,7 @@ export function createSafeSourceChecker(options: SafeSourceCheckerOptions): Safe
           }
           return {
             kind: 'redirect' as const,
-            url: parseSourceUrl(new URL(location, currentUrl).toString()),
+            url: parseSourceUrl(new URL(location, currentUrl).toString(), allowHttpForTests),
           };
         }
 
@@ -317,8 +325,12 @@ export function createSafeSourceChecker(options: SafeSourceCheckerOptions): Safe
     }
   }
 
-  async function select(urls: string[]): Promise<Array<{ url: string; authoritative: boolean }>> {
-    const selected: Array<{ url: string; authoritative: boolean }> = [];
+  async function select(urls: string[]): Promise<Array<{
+    originalUrl: string;
+    finalUrl: string;
+    authoritative: boolean;
+  }>> {
+    const selected: Array<{ originalUrl: string; finalUrl: string; authoritative: boolean }> = [];
     const seen = new Set<string>();
     for (const url of urls) {
       let result: CheckedSource;
@@ -329,7 +341,11 @@ export function createSafeSourceChecker(options: SafeSourceCheckerOptions): Safe
       }
       if (!result.reachable || seen.has(result.finalUrl)) continue;
       seen.add(result.finalUrl);
-      selected.push({ url: result.finalUrl, authoritative: result.authoritative });
+      selected.push({
+        originalUrl: result.url,
+        finalUrl: result.finalUrl,
+        authoritative: result.authoritative,
+      });
     }
     if (selected.length < 2 || !selected.some(({ authoritative }) => authoritative)) {
       throw new Error('Research requires two reachable sources including one authoritative source.');
@@ -338,4 +354,13 @@ export function createSafeSourceChecker(options: SafeSourceCheckerOptions): Safe
   }
 
   return { check, select };
+}
+
+export function createSafeSourceChecker(options: SafeSourceCheckerOptions): SafeSourceChecker {
+  return createSourceChecker(options, false);
+}
+
+/** Explicitly test-only cleartext constructor. Production runtime never imports this. */
+export function createTestOnlySafeSourceChecker(options: SafeSourceCheckerOptions): SafeSourceChecker {
+  return createSourceChecker(options, true);
 }

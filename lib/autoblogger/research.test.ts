@@ -44,6 +44,7 @@ describe('bounded Apify execution', () => {
       startActor: async () => delayed(25, successfulRun('run-123', 'dataset-456')),
       getRun: async () => { throw new Error('not used'); },
       getDatasetItems: async () => [],
+      abortRun: async (runId) => ({ id: runId, status: 'ABORTING' }),
     };
 
     await expect(runApifyActor(client, SERP_ACTOR_ID, {}, {
@@ -57,6 +58,7 @@ describe('bounded Apify execution', () => {
       startActor: async () => ({ id: 'run-123', status: 'RUNNING' }),
       getRun: async () => delayed(25, successfulRun('run-123', 'dataset-456')),
       getDatasetItems: async () => [],
+      abortRun: async (runId) => ({ id: runId, status: 'ABORTING' }),
     };
 
     await expect(runApifyActor(client, SERP_ACTOR_ID, {}, {
@@ -72,6 +74,7 @@ describe('bounded Apify execution', () => {
       startActor: async () => ({ id: 'run-123', status: 'RUNNING' }),
       getRun: async () => successfulRun('run-123', 'dataset-456'),
       getDatasetItems: async () => [],
+      abortRun: async (runId) => ({ id: runId, status: 'ABORTING' }),
     };
 
     await expect(runApifyActor(client, SERP_ACTOR_ID, {}, {
@@ -87,6 +90,7 @@ describe('bounded Apify execution', () => {
       startActor: async () => successfulRun('run-123', 'dataset-456'),
       getRun: async () => { throw new Error('not used'); },
       getDatasetItems: async () => delayed(25, []),
+      abortRun: async (runId) => ({ id: runId, status: 'ABORTING' }),
     };
 
     await expect(runApifyActor(client, SERP_ACTOR_ID, {}, {
@@ -107,6 +111,7 @@ describe('bounded Apify execution', () => {
         return successfulRun('run-123', 'dataset-456');
       },
       getDatasetItems: async () => [{ observed: true }],
+      abortRun: async (runId) => ({ id: runId, status: 'ABORTING' }),
     };
 
     const result = await runApifyActor(client, SERP_ACTOR_ID, { queries: 'topic\n' }, {
@@ -136,6 +141,7 @@ describe('bounded Apify execution', () => {
       startActor: async () => ({ id: 'run-secret', status: 'RUNNING' }),
       getRun: async () => ({ id: 'run-secret', status: 'RUNNING' }),
       getDatasetItems: async () => [],
+      abortRun: async (runId) => ({ id: runId, status: 'ABORTING' }),
     };
 
     await expect(runApifyActor(client, AUTOCOMPLETE_ACTOR_ID, {}, {
@@ -216,12 +222,14 @@ describe('staged researcher', () => {
       getRun: async () => { throw new Error('Already complete'); },
       getDatasetItems: async (datasetId) =>
         datasetId === 'autocomplete-dataset' ? autocompleteItems : serpItems,
+      abortRun: async (runId) => ({ id: runId, status: 'ABORTING' }),
     };
     const researcher = createResearcher({
       apify: client,
       sourceChecker: {
         select: async (urls) => urls.map((url, index) => ({
-          url,
+          originalUrl: url,
+          finalUrl: url,
           authoritative: index === 0,
         })),
       },
