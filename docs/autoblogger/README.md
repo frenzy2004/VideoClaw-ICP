@@ -6,7 +6,7 @@ This worker is a controlled research-and-drafting system. It does not publish ar
 
 The initial 250-topic research library is an input, not a quota or publication gate. Each run scans at most 50 candidates, deeply checks at most 10, and produces at most 3 drafts with no more than 2 from one ICP.
 
-Operator status on 2026-09-06: **zero successful fully automated article pilots or generated lander PRs**. The [latest retry report](APPROVED-RETRY-2026-09-06.md) records one explicitly authorized extra attempt, while preserving the previous three failures and the normal retry cap. That attempt remains unused: fresh exact-query and related-query checks found no qualifying PAA evidence. No gate was relaxed or unrelated questions relabelled to obtain a passing run. The preceding [automated-pipeline report](AUTOMATED-PIPELINE-2026-09-06.md) records the source-input fix and earlier failed live generation.
+Operator status on 2026-09-06: **zero successful fully automated article pilots or generated lander PRs**. The [latest alternative-topic report](ALTERNATIVE-PILOT-2026-09-06.md) records five-topic research and one actual artifact-only worker run. The selected product-demo checklist passed selection research, but both fresh organic requests in the worker returned empty; the run stopped before sources, model calls or native QA. Its one-use switch is consumed and its new decision is terminal at attempt one. The old candidate's three failures and unused fourth-attempt grant remain intact. No evidence was injected or gate relaxed. The [earlier retry report](APPROVED-RETRY-2026-09-06.md) and [automated-pipeline report](AUTOMATED-PIPELINE-2026-09-06.md) retain historical checkpoints.
 
 One older operator-assisted review article still exists separately. Its source audit, intervention and native QA are preserved in the [assisted-review report](ASSISTED-REVIEW-2026-09-06.md). It is not a successful `worker.execute()` result. The [research recovery report](RESEARCH-RECOVERY-2026-09-06.md) and [first pilot report](LIVE-PILOT-2026-09-06.md) retain earlier checkpoints.
 
@@ -26,6 +26,11 @@ PAA answer text, including AI overview answers, is never source evidence. Source
 facts now come from automatically retrieved body passages, with complete adjacent
 qualifications and separate fetch/hash provenance. See the
 [automated-pipeline report](AUTOMATED-PIPELINE-2026-09-06.md).
+
+Empty organic rows receive one bounded exact-query retry before the PAA stage.
+Each result retains the selected observation's actual provenance and both
+completed `serpAttempts`. Empty retry results still fail closed; they do not
+prove zero demand or permit substitution of an older organic snapshot.
 
 This is **not** a DataForSEO integration. Supported adapters remain `pending`, `semrush` and `ahrefs`. Do not set `KEYWORD_PROVIDER=dataforseo`, substitute the Apify token for provider credentials, or fill volume/difficulty/CPC using SERP counts or an unverified actor's estimates. Adding DataForSEO later requires a tested adapter and authenticated metrics; its lack does not block the pending-metrics pilot. Recurring and normal draft-PR mode still require observed paid metrics.
 
@@ -87,6 +92,14 @@ default. The specifically authorized one-use exception binds a fourth attempt to
 the retained candidate and a fresh manual run, without resetting any history. See
 the [retry report](APPROVED-RETRY-2026-09-06.md) for its exact command and current
 evidence blocker. It grants no publishing or scheduled-execution authority.
+
+The later explicit target-switch form accepts `--candidate-file` (a private,
+ignored identity-only JSON file) and `--switch-target-from` (the parked grant's
+approved run ID). It records a distinct candidate/run authorization and preserves
+the old grant and attempts. Research is recollected by the normal worker. The
+switch used in the [latest pilot](ALTERNATIVE-PILOT-2026-09-06.md) is consumed;
+rerunning it, changing its run ID, or invoking the parked retry is refused.
+Reconcile and obtain explicit authorization before any further live attempt.
 
 ## Runtime configuration
 

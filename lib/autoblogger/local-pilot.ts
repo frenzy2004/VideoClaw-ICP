@@ -1,7 +1,7 @@
 import { CandidateSchema, candidateFingerprints, type Candidate } from './domain';
 import { PersistentWorkerStateSchema, type PersistentWorkerState } from './github-runtime';
 import type { HttpTransport } from './http';
-import { MAX_CANDIDATE_ATTEMPTS, grantManualRetryApproval, hasManualRetryApproval } from './recovery';
+import { MAX_CANDIDATE_ATTEMPTS, grantManualRetryApproval, hasManualRetryApproval, grantManualTargetSwitch, hasManualTargetSwitch } from './recovery';
 import type { ArticleInventoryEntry } from './publisher';
 import { z } from 'zod';
 import matter from 'gray-matter';
@@ -29,14 +29,17 @@ import { createLocalReplayRecorder, createReplayAuditedClient, createReplayAudit
 export const LOCAL_PILOT_LANDER_REF = 'seo/founder-video-blog-launch';
 const LANDER_API = 'repos/INFR-Organisation/videoclaw-lander';
 const STATE_API = 'repos/frenzy2004/VideoClaw-ICP';
-export function parseLocalPilotArguments(argv: string[]): { runId: string; approveRetryFrom?: string } {
+type LocalPilotArguments = { runId: string; approveRetryFrom?: string; candidateFile?: string; switchTargetFrom?: string };
+export function parseLocalPilotArguments(argv: string[]): LocalPilotArguments {
   const safeRunId = (value: string) => typeof value === 'string' && /^[A-Za-z0-9][A-Za-z0-9._-]{0,159}$/u.test(value);
   const ordinary = argv.length === 3 && argv[2] === '--execute';
   const approved = argv.length === 5 && argv[2] === '--approve-retry-from' && safeRunId(argv[3]) && argv[3] !== argv[1] && argv[4] === '--execute';
-  if ((!ordinary && !approved) || argv[0] !== '--run-id' || !safeRunId(argv[1])) {
-    throw new Error('Usage: tsx lib/autoblogger/local-pilot-entry.ts --run-id NEW_RUN_ID [--approve-retry-from FAILED_THIRD_RUN_ID] --execute (local artifact-only; paid research/model work).');
+  const switched = argv.length === 7 && argv[2] === '--candidate-file' && !!argv[3]?.trim() && !argv[3].startsWith('--') && !argv[3].includes('\0')
+    && argv[4] === '--switch-target-from' && safeRunId(argv[5]) && argv[5] !== argv[1] && argv[6] === '--execute';
+  if ((!ordinary && !approved && !switched) || argv[0] !== '--run-id' || !safeRunId(argv[1])) {
+    throw new Error('Usage: tsx lib/autoblogger/local-pilot-entry.ts --run-id NEW_RUN_ID [--approve-retry-from FAILED_THIRD_RUN_ID | --candidate-file PRIVATE_CANDIDATE_JSON --switch-target-from PARKED_APPROVED_RUN_ID] --execute (local artifact-only; paid research/model work).');
   }
-  return { runId: argv[1], ...(approved ? { approveRetryFrom: argv[3] } : {}) };
+  return { runId: argv[1], ...(approved ? { approveRetryFrom: argv[3] } : {}), ...(switched ? { candidateFile: argv[3], switchTargetFrom: argv[5] } : {}) };
 }
 const shaSchema = z.string().regex(/^[a-f0-9]{40,64}$/u);
 const refSchema = z.object({ ref: z.string().min(1) });
@@ -85,11 +88,43 @@ export async function inspectLocalPilotInventory(input: LocalInventoryInput, get
   return { baseSha, existingArticles, openPullRequests, branchRefs, audit: { observedAt: new Date().toISOString(), localMatchesRemote: true, baseSha, pr55, existingArticleIdentities: existingArticles.length, openPullRequests: pulls.length, openArticleIdentities: openPullRequests.length, branches: branchRefs.length, remoteStatePresent: false, authentication: 'interactive_gh_GET_only' } };
 }
 
-type LocalPilotCandidateInput = { state: PersistentWorkerState; backlog: Candidate[]; candidate: unknown; runId: string; approveRetryFrom?: string; approvedAt?: string };
+type LocalPilotCandidateInput = { state: PersistentWorkerState; backlog: Candidate[]; candidate: unknown; runId: string; approveRetryFrom?: string; switchTargetFrom?: string; approvedAt?: string };
 export function reconcileLocalPilotCandidate(input: LocalPilotCandidateInput) {
   let state = PersistentWorkerStateSchema.parse(input.state);
   const candidate = CandidateSchema.parse(input.candidate);
   if (!/^[A-Za-z0-9][A-Za-z0-9._-]{0,159}$/u.test(input.runId) || state.runs[input.runId]) throw new Error('A fresh run ID is required; prior run records cannot be reused.');
+  if (input.switchTargetFrom !== undefined) {
+    if (input.approveRetryFrom !== undefined || state.manualPilot !== null) throw new Error('A target switch cannot combine retry authority or an existing global pilot reservation.');
+    const approval = state.manualTargetSwitch;
+    if (approval) {
+      if (approval.parkedRetryRunId !== input.switchTargetFrom
+        || !hasManualTargetSwitch(state, candidate, input.runId, 'manual_pilot', input.approvedAt ?? approval.approvedAt)) throw new Error('Existing target switch does not match this explicit unused approval.');
+    } else {
+      state = grantManualTargetSwitch(state, candidate, { parkedRetryRunId: input.switchTargetFrom, runId: input.runId, approvedAt: input.approvedAt ?? '' });
+    }
+    const identities = Object.values(candidateFingerprints(candidate));
+    const addExact = (items: Candidate[]) => {
+      const overlaps = items.filter((item) => Object.values(candidateFingerprints(item)).some((id) => identities.includes(id)));
+      if (overlaps.length > 1 || overlaps.some((item) => JSON.stringify(CandidateSchema.parse(item)) !== JSON.stringify(candidate))) throw new Error('Selected candidate overlaps a different retained queue or backlog identity.');
+      return overlaps.length ? items : [...items, candidate];
+    };
+    // The matrix can still contain the old pre-review wording. Reconcile only
+    // that transient row against the parked grant, never the persisted history.
+    const parked = state.manualRetryApproval!;
+    const matchesParked = (item: Candidate) => JSON.stringify(Object.values(candidateFingerprints(item)).sort()) === JSON.stringify([...parked.identities].sort());
+    const retained = state.queuedCandidates.filter(matchesParked);
+    if (input.backlog.filter(({ articleId }) => articleId === parked.articleId).length > 1) throw new Error('Ambiguous parked candidate rows in the transient backlog.');
+    const backlog = input.backlog.map((item) => {
+      if (item.articleId !== parked.articleId || matchesParked(item)) return item;
+      const fingerprint = candidateFingerprints(item).candidate;
+      if (retained.length !== 1 || item.campaignId !== retained[0].campaignId || item.slug !== retained[0].slug
+        || (fingerprint !== parked.candidateFingerprint && state.decisions[fingerprint])) throw new Error('Cannot reconcile the old matrix row without an exact retained parked candidate and unattempted representation.');
+      return retained[0];
+    });
+    return { state: PersistentWorkerStateSchema.parse({ ...state, queuedCandidates: addExact(state.queuedCandidates) }),
+      backlog: addExact(backlog), candidate, nextAttempt: state.manualTargetSwitch!.startingAttempts + 1 };
+  }
+  if (state.manualTargetSwitch) throw new Error('The pending target switch requires its explicit candidate and switch flag; the old retry grant is parked.');
   if (candidate.articleId !== 'vc-c2-001') throw new Error('The local retry must retain article vc-c2-001.');
   if (input.approveRetryFrom !== undefined) {
     const approval = state.manualRetryApproval;
@@ -183,19 +218,33 @@ async function assertRealPath(root: string, path: string): Promise<void> {
   }
 }
 
+/** Identity only: selection evidence must be freshly collected by the normal worker. */
+export async function readLocalPilotCandidateFile(root: string, candidateFile: string): Promise<Candidate> {
+  const path = resolve(root, candidateFile);
+  const suffix = relative(resolve(root, 'artifacts'), path);
+  if (!suffix || suffix === '..' || suffix.startsWith(`..${sep}`)) throw new Error('Selected candidate must be a private file within artifacts.');
+  await assertRealPath(root, path);
+  const metadata = await lstat(path);
+  if (!metadata.isFile() || (metadata.mode & 0o077) !== 0 || metadata.size > 16_384) throw new Error('Selected candidate must be a private regular file of at most 16 KiB.');
+  const text = await readFile(path, 'utf8');
+  if (Buffer.byteLength(text, 'utf8') > 16_384 || containsSecretLikeValue(text)) throw new Error('Unsafe or oversized selected candidate.');
+  return CandidateSchema.parse(JSON.parse(text));
+}
+
 /** Explicit local execution, never a credential fallback for Actions. No work occurs on import. */
-export async function runLocalArtifactPilot(options: { root: string; runId: string; approveRetryFrom?: string }): Promise<AutobloggerRunReport> {
-  parseLocalPilotArguments(['--run-id', options.runId, ...(options.approveRetryFrom !== undefined ? ['--approve-retry-from', options.approveRetryFrom] : []), '--execute']);
+export async function runLocalArtifactPilot(options: LocalPilotArguments & { root: string }): Promise<AutobloggerRunReport> {
+  parseLocalPilotArguments(['--run-id', options.runId, ...(options.approveRetryFrom !== undefined ? ['--approve-retry-from', options.approveRetryFrom] : []),
+    ...(options.candidateFile !== undefined ? ['--candidate-file', options.candidateFile] : []), ...(options.switchTargetFrom !== undefined ? ['--switch-target-from', options.switchTargetFrom] : []), '--execute']);
   if (process.env.GITHUB_EVENT_NAME === 'schedule' || process.env.AUTOBLOG_SCHEDULE_ENABLED === 'true' || process.env.LANDER_GITHUB_TOKEN?.trim()) throw new Error('Local pilot must not receive publication or scheduled execution authority.');
   const root = await realpath(resolve(options.root));
   const lander = await realpath(resolve(root, '../videoclaw-lander-blog-launch'));
   const statePath = resolve(root, 'artifacts/autoblogger/local-pilot-2026-09-06/state.json');
-  const contextPath = resolve(root, 'artifacts/autoblogger/pilot-completion-2026-09-06/context/validation-report.json');
+  const candidateInputPath = resolve(root, options.candidateFile ?? 'artifacts/autoblogger/pilot-completion-2026-09-06/context/validation-report.json');
   const artifactRoot = resolve(root, 'artifacts/autoblogger');
   const outputDirectory = resolve(artifactRoot, options.runId);
-  for (const path of [statePath, contextPath, artifactRoot]) await assertRealPath(root, path);
+  for (const path of [statePath, candidateInputPath, artifactRoot]) await assertRealPath(root, path);
   if (!(await lstat(statePath)).isFile()) throw new Error('Retained pilot state is required; this runner never creates a fresh state history.');
-  for (const path of [statePath, contextPath, outputDirectory]) gitRead(root, ['check-ignore', '--quiet', '--no-index', '--', path]);
+  for (const path of [statePath, candidateInputPath, outputDirectory]) gitRead(root, ['check-ignore', '--quiet', '--no-index', '--', path]);
   const lockPath = `${statePath}.execution.lock`;
   const lock = await open(lockPath, 'wx', 0o600);
   const events: Record<string, unknown>[] = [];
@@ -213,9 +262,11 @@ export async function runLocalArtifactPilot(options: { root: string; runId: stri
     if (!initial.version) throw new Error('Existing local pilot state is mandatory.');
     // Extract only identity from the historical artifact. Never import its
     // assisted facts, FAQs, source documents, provenance, or rewritten draft.
-    const priorCandidate = JSON.parse(await readFile(contextPath, 'utf8')).context?.candidate;
-    const prepared = reconcileLocalPilotCandidate({ state: initial.state, backlog: await loadBacklogCandidates(root), candidate: priorCandidate, runId: options.runId,
-      ...(options.approveRetryFrom !== undefined ? { approveRetryFrom: options.approveRetryFrom, approvedAt: new Date().toISOString() } : {}) });
+    const selectedCandidate = options.candidateFile ? await readLocalPilotCandidateFile(root, options.candidateFile)
+      : JSON.parse(await readFile(candidateInputPath, 'utf8')).context?.candidate;
+    const prepared = reconcileLocalPilotCandidate({ state: initial.state, backlog: await loadBacklogCandidates(root), candidate: selectedCandidate, runId: options.runId,
+      ...(options.approveRetryFrom !== undefined ? { approveRetryFrom: options.approveRetryFrom, approvedAt: new Date().toISOString() } : {}),
+      ...(options.switchTargetFrom !== undefined ? { switchTargetFrom: options.switchTargetFrom, approvedAt: new Date().toISOString() } : {}) });
     const localArticles = await Promise.all((await readdir(resolve(lander, 'content/articles'))).filter((name) => name.endsWith('.md')).map(async (name) => articleIdentity(await readFile(resolve(lander, 'content/articles', name), 'utf8'))));
     const snapshot = await inspectLocalPilotInventory({
       head: gitRead(lander, ['rev-parse', 'HEAD']), branch: gitRead(lander, ['branch', '--show-current']), clean: gitRead(lander, ['status', '--porcelain']) === '', localArticles, candidate: prepared.candidate,
@@ -234,7 +285,8 @@ export async function runLocalArtifactPilot(options: { root: string; runId: stri
     outputCreated = true;
     const replay = createLocalReplayRecorder({ root, directory: resolve(outputDirectory, 'replay'), secrets: [process.env.APIFY_TOKEN, process.env.OPENAI_API_KEY] });
     await audit({ ...snapshot.audit, runId: options.runId, candidate: prepared.candidate, nextAttempt: prepared.nextAttempt, priorStateHash: initial.version, priorRunIds: Object.keys(initial.state.runs), priorFailureCount: initial.state.failures.length, manualPilot: initial.state.manualPilot,
-      ...(prepared.state.manualRetryApproval ? { manualRetryApproval: prepared.state.manualRetryApproval } : {}) }, 'preflight');
+      ...(prepared.state.manualRetryApproval ? { manualRetryApproval: prepared.state.manualRetryApproval } : {}),
+      ...(prepared.state.manualTargetSwitch ? { manualTargetSwitch: prepared.state.manualTargetSwitch } : {}) }, 'preflight');
     event('preflight_passed', { articleId: prepared.candidate.articleId, nextAttempt: prepared.nextAttempt, baseSha: snapshot.baseSha, publicationEnabled: false });
     await stateStore.save(prepared.state, initial.version);
     const transport = createModelAuditTransport(createNodeJsonHttpTransport(), async (record) => {

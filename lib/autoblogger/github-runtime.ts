@@ -54,6 +54,7 @@ export const ApifyCollectionProvenanceSchema = z.object({
 export const ResearchProvenanceSchema = z.object({
   discovery: ApifyCollectionProvenanceSchema,
   serp: ApifyCollectionProvenanceSchema,
+  serpAttempts: z.array(ApifyCollectionProvenanceSchema).max(2).optional(),
   paa: ApifyCollectionProvenanceSchema.optional(),
   paaAttempts: z.array(ApifyCollectionProvenanceSchema).max(2).optional(),
   supportSearches: z.array(ApifyCollectionProvenanceSchema).max(10).optional(),
@@ -79,6 +80,7 @@ const CompactProvenanceSchema = z.object({
     datasetId: z.string().trim().min(1).max(160),
     observedAt: z.string().datetime(),
   }).strict(),
+  serpAttempts: z.array(ApifyCollectionProvenanceSchema).max(2).optional(),
   keyword: z.object({
     provider: z.enum(['pending', 'semrush', 'ahrefs', 'similarweb']),
     endpoint: z.string().url().max(1_000).nullable(),
@@ -124,9 +126,23 @@ const ManualRetryApprovalSchema = z.object({
   consumedAt: z.string().datetime().nullable(),
 }).strict();
 
+const ManualTargetSwitchSchema = z.object({
+  mode: z.literal('manual_pilot'),
+  reason: z.literal('user_authorized_alternative_topic'),
+  parkedRetryRunId: z.string().regex(/^[A-Za-z0-9][A-Za-z0-9._-]{0,159}$/u),
+  parkedRetryApprovalHash: z.string().regex(/^[0-9a-f]{64}$/u),
+  candidate: CandidateSchema,
+  candidateFingerprint: z.string().startsWith('candidate:').max(500),
+  runId: z.string().regex(/^[A-Za-z0-9][A-Za-z0-9._-]{0,159}$/u),
+  startingAttempts: z.number().int().min(0).max(2),
+  approvedAt: z.string().datetime(),
+  consumedAt: z.string().datetime().nullable(),
+}).strict();
+
 export const PersistentWorkerStateSchema = AutobloggerStateSchema.extend({
   manualPilot: ManualPilotSchema.nullable(),
   manualRetryApproval: ManualRetryApprovalSchema.optional(),
+  manualTargetSwitch: ManualTargetSwitchSchema.optional(),
   queuedCandidates: z.array(CandidateSchema).max(500),
   candidateFingerprints: z.array(z.string().trim().min(1).max(500)).max(20_000),
   dedupeHashes: z.array(z.string().regex(/^[0-9a-f]{64}$/u)).max(30_000),
@@ -141,7 +157,40 @@ export const PersistentWorkerStateSchema = AutobloggerStateSchema.extend({
   failures: z.array(CompactFailureSchema).max(100),
 }).strict().superRefine((state, ctx) => {
   const approval = state.manualRetryApproval;
+  const targetSwitch = state.manualTargetSwitch;
   const invalid = (message: string) => ctx.addIssue({ code: 'custom', path: ['manualRetryApproval'], message });
+  if (targetSwitch) {
+    const fail = (message: string) => ctx.addIssue({ code: 'custom', path: ['manualTargetSwitch'], message });
+    const identities = Object.values(candidateFingerprints(targetSwitch.candidate));
+    const fingerprint = candidateFingerprints(targetSwitch.candidate).candidate;
+    const decision = state.decisions[fingerprint];
+    const approvedAt = Date.parse(targetSwitch.approvedAt);
+    if (!approval || approval.consumedAt || targetSwitch.parkedRetryRunId !== approval.runId
+      || targetSwitch.parkedRetryApprovalHash !== createHash('sha256').update(JSON.stringify(approval)).digest('hex')
+      || approvedAt < Date.parse(approval.approvedAt) || targetSwitch.runId === approval.runId || targetSwitch.runId === approval.priorRunId
+      || targetSwitch.candidateFingerprint !== fingerprint || identities.some((identity) => approval.identities.includes(identity))) {
+      fail('Target switch requires an unchanged unused parked grant and a distinct candidate and fresh run.');
+    }
+    if (decision && (decision.articleId !== targetSwitch.candidate.articleId
+      || JSON.stringify([...decision.identities].sort()) !== JSON.stringify([...identities].sort()))) fail('Target switch candidate identities must remain exact.');
+    if (state.pullRequests[fingerprint]) fail('Target switch is artifact-only; publication state is forbidden.');
+    if (!targetSwitch.consumedAt) {
+      if (state.runs[targetSwitch.runId] || Object.values(state.decisions).some(({ runId }) => runId === targetSwitch.runId)
+        || state.contentHashes[fingerprint] || state.candidates[fingerprint]
+        || (decision ? decision.status !== 'retryable' || decision.attempts !== targetSwitch.startingAttempts
+          || Date.parse(decision.updatedAt) > approvedAt : targetSwitch.startingAttempts !== 0)) fail('Unused target switch requires a fresh normal-cap candidate reservation with no artifact.');
+    } else {
+      const consumedAt = Date.parse(targetSwitch.consumedAt);
+      const run = state.runs[targetSwitch.runId];
+      if (consumedAt < approvedAt || !decision || decision.runId !== targetSwitch.runId
+        || decision.attempts !== targetSwitch.startingAttempts + 1 || Date.parse(decision.updatedAt) < consumedAt
+        || (run && (run.runId !== targetSwitch.runId || run.mode !== 'manual_pilot' || run.status === 'pr_opened'
+          || Date.parse(run.startedAt) < approvedAt || run.selectedCandidateFingerprints.some((fp) => fp !== fingerprint)))) fail('Consumed target switch must retain its single normal-cap attempt and exact artifact-only run.');
+    }
+    if (state.manualPilot && (state.manualPilot.runId !== targetSwitch.runId
+      || Date.parse(state.manualPilot.reservedAt) < approvedAt
+      || (!targetSwitch.consumedAt && state.manualPilot.status !== 'leased'))) fail('The global pilot lifecycle belongs only to the approved target-switch run.');
+  }
   for (const [fingerprint, decision] of Object.entries(state.decisions)) {
     if (decision.attempts > 3 && (!approval?.consumedAt || approval.candidateFingerprint !== fingerprint
       || approval.runId !== decision.runId || decision.status === 'retryable')) invalid('Attempt four requires its exact consumed manual retry approval.');
@@ -189,7 +238,7 @@ export const PersistentWorkerStateSchema = AutobloggerStateSchema.extend({
       || (projection && (projection.mode !== 'manual_pilot'
         || Date.parse(projection.updatedAt) > Date.parse(decision.updatedAt)
         || (projection.status !== 'failed' && !stalePreDraft)))
-      || (state.manualPilot && (state.manualPilot.status !== 'leased' || state.manualPilot.runId !== approval.runId))) {
+      || (state.manualPilot && !targetSwitch && (state.manualPilot.status !== 'leased' || state.manualPilot.runId !== approval.runId))) {
       invalid('Unused manual retry approval requires a fresh run and an exhausted failed candidate with no artifact or pilot success.');
     }
   } else {
@@ -240,7 +289,8 @@ function retainFailureHistory(input: PersistentWorkerState): PersistentWorkerSta
     // Keep every fourth-attempt record for contextual validation below, even if
     // malformed authorization would otherwise hide it among discarded history.
     if (failure.attempt === 4 || (input.manualRetryApproval && failure.runId === input.manualRetryApproval.priorRunId
-      && failure.attempt === 3 && failure.code === 'candidate_failed')) pinned.add(index);
+      && failure.attempt === 3 && failure.code === 'candidate_failed')
+      || failure.runId === input.manualTargetSwitch?.runId) pinned.add(index);
     else ordinary.push(index);
   });
   if (pinned.size > 100) throw new Error('Required manual retry failure audit exceeds the 100-record bound.');
@@ -254,7 +304,8 @@ export function compactPersistentWorkerState(input: PersistentWorkerState): Pers
     right[1].updatedAt.localeCompare(left[1].updatedAt) || left[0].localeCompare(right[0])
   ));
   const retainedForRecovery = ([fingerprint, decision]: (typeof orderedDecisions)[number]) => (
-    fingerprint === parsed.manualRetryApproval?.candidateFingerprint || ['leased', 'retryable', 'manual_attention'].includes(decision.status)
+    fingerprint === parsed.manualRetryApproval?.candidateFingerprint || fingerprint === parsed.manualTargetSwitch?.candidateFingerprint
+      || ['leased', 'retryable', 'manual_attention'].includes(decision.status)
   );
   const active = orderedDecisions.filter(retainedForRecovery);
   if (active.length > MAX_DECISIONS) throw new Error('Persistent state contains too many active or retryable decisions to compact safely.');
@@ -277,6 +328,7 @@ export function compactPersistentWorkerState(input: PersistentWorkerState): Pers
   const approvalRuns = new Set(parsed.manualRetryApproval ? [parsed.manualRetryApproval.priorRunId, parsed.manualRetryApproval.runId] : []);
   const projectionRunId = parsed.manualRetryApproval && parsed.candidates[parsed.manualRetryApproval.candidateFingerprint]?.runId;
   if (projectionRunId) approvalRuns.add(projectionRunId);
+  if (parsed.manualTargetSwitch) approvalRuns.add(parsed.manualTargetSwitch.runId);
   const retainedRuns = Object.entries(parsed.runs)
     .sort((left, right) => Number(approvalRuns.has(right[0])) - Number(approvalRuns.has(left[0]))
       || right[1].startedAt.localeCompare(left[1].startedAt) || left[0].localeCompare(right[0]))

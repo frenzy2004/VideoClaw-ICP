@@ -48,11 +48,45 @@ export function hasManualRetryApproval(
   mode: RunMode | undefined, nowIso: string,
 ): boolean {
   const approval = state.manualRetryApproval;
-  if (!approval || approval.consumedAt || mode !== 'manual_pilot' || runId !== approval.runId
+  if (state.manualTargetSwitch || !approval || approval.consumedAt || mode !== 'manual_pilot' || runId !== approval.runId
     || candidateFingerprints(candidate).candidate !== approval.candidateFingerprint
     || JSON.stringify(candidateIdentityList(candidate).sort()) !== JSON.stringify([...approval.identities].sort())
     || assertDate(nowIso) < assertDate(approval.approvedAt)) return false;
   return PersistentWorkerStateSchema.safeParse(state).success;
+}
+
+/** One explicit alternative-topic pilot; the existing retry authorization stays parked, unchanged. */
+export function grantManualTargetSwitch(
+  stateInput: PersistentWorkerState,
+  candidateInput: Candidate,
+  input: { parkedRetryRunId: string; runId: string; approvedAt: string },
+): PersistentWorkerState {
+  const state = PersistentWorkerStateSchema.parse(stateInput);
+  const candidate = CandidateSchema.parse(candidateInput);
+  const fingerprint = candidateFingerprints(candidate).candidate;
+  const identities = candidateIdentityList(candidate);
+  if (!state.manualRetryApproval || state.manualTargetSwitch || state.manualPilot !== null) throw new Error('Target switch requires one unused parked retry grant and no prior switch or pilot reservation.');
+  const decision = state.decisions[fingerprint];
+  if (Object.entries(state.decisions).some(([fp, item]) => fp !== fingerprint && item.identities.some((id) => identities.includes(id)))
+    || (!decision && identities.some((id) => state.candidateFingerprints.includes(id) || state.dedupeHashes.includes(hashIdentity(id))))) throw new Error('Target switch must not reset a previously seen candidate identity.');
+  for (const item of state.queuedCandidates) {
+    if (candidateIdentityList(item).some((id) => identities.includes(id)) && JSON.stringify(CandidateSchema.parse(item)) !== JSON.stringify(candidate)) throw new Error('Target switch overlaps another queued candidate.');
+  }
+  return PersistentWorkerStateSchema.parse({ ...state, manualTargetSwitch: {
+    ...input, mode: 'manual_pilot', reason: 'user_authorized_alternative_topic', candidate,
+    candidateFingerprint: fingerprint, startingAttempts: decision?.attempts ?? 0,
+    parkedRetryApprovalHash: hashIdentity(JSON.stringify(state.manualRetryApproval)), consumedAt: null,
+  } });
+}
+
+export function hasManualTargetSwitch(
+  state: PersistentWorkerState, candidateInput: Candidate, runId: string | undefined,
+  mode: RunMode | undefined, nowIso: string,
+): boolean {
+  const approval = state.manualTargetSwitch;
+  return !!approval && !approval.consumedAt && mode === 'manual_pilot' && runId === approval.runId
+    && JSON.stringify(CandidateSchema.parse(candidateInput)) === JSON.stringify(approval.candidate)
+    && assertDate(nowIso) >= assertDate(approval.approvedAt) && PersistentWorkerStateSchema.safeParse(state).success;
 }
 
 function assertDate(value: string): number {
@@ -120,6 +154,8 @@ export function reserveCandidate(
   const candidate = CandidateSchema.parse(candidateInput);
   const fingerprint = candidateFingerprints(candidate).candidate;
   const existing = state.decisions[fingerprint];
+  const targetSwitch = state.manualTargetSwitch;
+  if (targetSwitch && !hasManualTargetSwitch(state, candidate, runId, mode, updatedAt)) throw new Error('Target switch is exact, manual-only and one-use; reuse or another target is forbidden.');
   const manualRetry = hasManualRetryApproval(state, candidate, runId, mode, updatedAt);
   if ((existing?.attempts ?? 0) > MAX_CANDIDATE_ATTEMPTS) throw new Error('Manual retry approval is consumed; retry limit is exhausted.');
   if (existing?.status === 'leased' && existing.runId === runId && assertDate(existing.leaseExpiresAt as string) > now) return state;
@@ -133,7 +169,7 @@ export function reserveCandidate(
   if (attempts > MAX_CANDIDATE_ATTEMPTS && !manualRetry) throw new Error('Candidate retry limit is exhausted.');
   const reserved = manualRetry ? {
     ...state, manualRetryApproval: { ...state.manualRetryApproval!, consumedAt: updatedAt },
-  } : state;
+  } : targetSwitch ? { ...state, manualTargetSwitch: { ...targetSwitch, consumedAt: updatedAt } } : state;
   return decisionFor(reserved, candidate, {
     status: 'leased',
     reason: 'draft_reservation',
@@ -157,9 +193,11 @@ export function markCandidateFailure(
   const existing = state.decisions[candidateFingerprints(candidate).candidate];
   const attempts = existing?.attempts ?? 0;
   const reconciliation = reason === 'reconciliation_required';
+  const consumedSwitch = state.manualTargetSwitch?.consumedAt
+    && state.manualTargetSwitch.candidateFingerprint === candidateFingerprints(candidate).candidate;
   const status: CandidateDecision['status'] = reconciliation
     ? 'manual_attention'
-    : retryable && attempts < MAX_CANDIDATE_ATTEMPTS ? 'retryable' : 'terminal';
+    : retryable && !consumedSwitch && attempts < MAX_CANDIDATE_ATTEMPTS ? 'retryable' : 'terminal';
   return decisionFor(state, candidate, {
     status,
     reason,
@@ -198,7 +236,8 @@ export function deferCandidate(
   updatedAt: string,
 ): PersistentWorkerState {
   const existing = state.decisions[candidateFingerprints(candidate).candidate];
-  if ((existing?.attempts ?? 0) > MAX_CANDIDATE_ATTEMPTS) {
+  if ((existing?.attempts ?? 0) > MAX_CANDIDATE_ATTEMPTS
+    || (state.manualTargetSwitch?.consumedAt && state.manualTargetSwitch.candidateFingerprint === candidateFingerprints(candidate).candidate)) {
     return markCandidateFailure(state, candidate, runId, reason, false, updatedAt);
   }
   return decisionFor(state, candidate, {

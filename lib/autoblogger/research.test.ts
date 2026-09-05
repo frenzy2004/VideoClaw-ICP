@@ -12,6 +12,129 @@ import type { ApifyClient, ApifyRun } from './apify-client';
 import { PAA_ACTOR_ID } from './paa';
 const researchClock={nowMs:()=>Date.parse('2026-09-04T08:15:00.000Z')};
 
+describe('bounded zero-organic SERP recovery', () => {
+  const questions = [
+    'How do you plan a founder video topic?',
+    'What belongs in a founder video topic?',
+    'Why does a founder video topic matter?',
+  ];
+  function row(query: string, organic: boolean) {
+    return {
+      searchQuery: { term: query, device: 'DESKTOP', page: 1, countryCode: 'US', languageCode: 'en' },
+      serpProviderCode: 'L', hasNextPage: organic,
+      organicResults: organic ? [{ position: 1, title: 'Demo planning guide', url: 'https://publisher.example/guide', description: 'Observed guide.' }] : [],
+      peopleAlsoAsk: organic ? questions.map((question) => ({ question })) : [],
+      relatedQueries: organic ? [{ title: 'founder video topic planning' }] : [],
+      paidResults: [], paidProducts: [], suggestedResults: [], customData: null,
+    };
+  }
+  function boundary(initial: unknown[], retried: unknown[] | Error) {
+    const requests: Record<string, unknown>[] = [];
+    const client: ApifyClient = {
+      startActor: async (actor, input) => {
+        if (actor === AUTOCOMPLETE_ACTOR_ID) return successfulRun('discovery', 'discovery');
+        if (actor !== SERP_ACTOR_ID) throw new Error('Unexpected paid actor');
+        requests.push(input);
+        if (requests.length > 2) throw new Error('Unbounded SERP retry');
+        if (requests.length === 2 && retried instanceof Error) throw retried;
+        return { ...successfulRun(`serp-${requests.length}`, `dataset-${requests.length}`),
+          finishedAt: requests.length === 1 ? '2026-09-04T08:01:00.000Z' : '2026-09-04T08:02:00.000Z' };
+      },
+      getRun: async () => { throw new Error('Already complete'); },
+      getDatasetItems: async (id) => id === 'discovery' ? [] : id === 'dataset-1' ? initial : retried as unknown[],
+      abortRun: async (id) => ({ id, status: 'ABORTED' }),
+    };
+    return { requests, researcher: createResearcher({ apify: client, sourceChecker: { select: async () => [] }, execution: researchClock }) };
+  }
+
+  it('retries only empty exact queries and carries the selected row run into deep evidence', async () => {
+    const input = candidates(3);
+    const initial = input.map((candidate, index) => row(candidate.primaryKeyword, index === 1));
+    const recovered = row(input[0].primaryKeyword, true);
+    const stillEmpty = row(input[2].primaryKeyword, false);
+    const { researcher, requests } = boundary(initial, [stillEmpty, row('unrequested topic', true), recovered]);
+    const result = await researcher.scan(input);
+
+    expect(result.results.map(({ organicResults }) => organicResults.length)).toEqual([1, 1, 0]);
+    expect(requests).toHaveLength(2);
+    expect(requests[1]).toEqual({
+      queries: 'founder video topic 1\nfounder video topic 3\n', maxPagesPerQuery: 1,
+      countryCode: 'us', languageCode: 'en', searchLanguage: 'en', mobileResults: false,
+      includeUnfilteredResults: false, saveHtml: false, saveHtmlToKeyValueStore: false,
+      websiteContentScraper: { enable: false },
+    });
+    expect(result.results[0].peopleAlsoAsk).toEqual(questions);
+    expect(result.results[0].relatedQueries).toEqual(['founder video topic planning']);
+    expect(result.results[0].provenance.serp).toMatchObject({ runId: 'serp-2', datasetId: 'dataset-2', observedAt: '2026-09-04T08:02:00.000Z' });
+    expect(result.results[0].provenance.serpAttempts?.map(({ runId }) => runId)).toEqual(['serp-1', 'serp-2']);
+    expect(result.results[1].provenance.serp.runId).toBe('serp-1');
+    expect(result.results[1].provenance.serpAttempts).toBeUndefined();
+    expect(result.results[2].provenance.serp.runId).toBe('serp-2');
+    expect(result.results[2].serpCollectionError).toMatch(/no organic/i);
+    const deep = await researcher.inspect([result.results[0]]);
+    expect(deep.results[0].evidence.serp.organicResultCount).toBe(1);
+    expect(deep.results[0].provenance.serpAttempts?.map(({ runId }) => runId)).toEqual(['serp-1', 'serp-2']);
+  });
+
+  it('stops after one still-empty retry and preserves both observation IDs', async () => {
+    const input = candidates(1);
+    const empty = row(input[0].primaryKeyword, false);
+    const { researcher, requests } = boundary([empty], [empty]);
+    const result = await researcher.scan(input);
+    expect(requests).toHaveLength(2);
+    expect(result.results[0].organicResults).toEqual([]);
+    expect(result.results[0].provenance.serpAttempts?.map(({ datasetId }) => datasetId)).toEqual(['dataset-1', 'dataset-2']);
+    expect(result.results[0].serpCollectionError).toMatch(/no organic/i);
+  });
+
+  it('keeps the original empty observation when the single retry fails to start', async () => {
+    const input = candidates(1);
+    const { researcher, requests } = boundary([row(input[0].primaryKeyword, false)], new Error('temporary provider failure'));
+    const result = await researcher.scan(input);
+    expect(requests).toHaveLength(2);
+    expect(result.results[0].organicResults).toEqual([]);
+    expect(result.results[0].provenance.serp.runId).toBe('serp-1');
+    expect(result.results[0].serpCollectionError).toContain('temporary provider failure');
+  });
+
+  it.each(['wrong query', 'wrong country', 'wrong language', 'mobile', 'second page', 'duplicate', 'missing'])('does not accept %s retry evidence', async (problem) => {
+    const input = candidates(1);
+    const observation = row(input[0].primaryKeyword, true);
+    if (problem === 'wrong query') observation.searchQuery.term = 'another founder video topic';
+    if (problem === 'wrong country') observation.searchQuery.countryCode = 'GB';
+    if (problem === 'wrong language') observation.searchQuery.languageCode = 'fr';
+    if (problem === 'mobile') observation.searchQuery.device = 'MOBILE';
+    if (problem === 'second page') observation.searchQuery.page = 2;
+    const retry = problem === 'missing' ? [] : problem === 'duplicate' ? [observation, observation] : [observation];
+    const { researcher, requests } = boundary([row(input[0].primaryKeyword, false)], retry);
+    const result = await researcher.scan(input);
+    expect(requests).toHaveLength(2);
+    expect(result.results[0].organicResults).toEqual([]);
+    expect(result.results[0].peopleAlsoAsk).toEqual([]);
+    expect(result.results[0].provenance.serp.runId).toBe('serp-1');
+    expect(result.results[0].provenance.serpAttempts?.map(({ runId }) => runId)).toEqual(['serp-1', 'serp-2']);
+    expect(result.results[0].serpCollectionError).toBeTruthy();
+  });
+
+  it('does not pay for a retry when every initial row contains organic results', async () => {
+    const input = candidates(2);
+    const { researcher, requests } = boundary(input.map((candidate) => row(candidate.primaryKeyword, true)), []);
+    const result = await researcher.scan(input);
+    expect(requests).toHaveLength(1);
+    expect(result.results.map(({ organicResults }) => organicResults.length)).toEqual([1, 1]);
+  });
+
+  it('bounds retry queries to the initial 50-candidate scan', async () => {
+    const input = candidates(55);
+    const { researcher, requests } = boundary(input.slice(0, 50).map((candidate) => row(candidate.primaryKeyword, false)), []);
+    const result = await researcher.scan(input);
+    expect(result.scannedCount).toBe(50);
+    expect(requests).toHaveLength(2);
+    expect(String(requests[1].queries).trim().split('\n')).toHaveLength(50);
+    expect(String(requests[1].queries)).not.toContain('founder video topic 51');
+  });
+});
+
 describe('missing PAA collector recovery', () => {
   it.each(['2026-09-03T08:01:00.000Z','2026-09-05T08:01:00.000Z'])('rejects fresh-run PAA rows with invalid freshness: %s', async(checkedAt)=>{
     const candidate={...candidates(1)[0],primaryKeyword:'demo day video checklist'};

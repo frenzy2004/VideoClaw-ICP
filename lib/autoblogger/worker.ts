@@ -38,6 +38,7 @@ import {
   buildIncrementalQueue,
   candidateIdentityList,
   deferCandidate,
+  hasManualTargetSwitch,
   markCandidateCompleted,
   markCandidateFailure,
   markCandidateScanned,
@@ -327,9 +328,10 @@ function artifactHash(bundle: DraftBundle): string {
 }
 
 function compactResearchProvenance(value: ResearchResult['provenance']) {
-  const { serp, paa, paaAttempts, supportSearches } = ResearchProvenanceSchema.parse(value);
+  const { serp, serpAttempts, paa, paaAttempts, supportSearches } = ResearchProvenanceSchema.parse(value);
   return {
     serp: { runId: serp.runId, datasetId: serp.datasetId, observedAt: serp.observedAt },
+    ...(serpAttempts ? { serpAttempts } : {}),
     ...(paa ? { paa } : {}),
     ...(paaAttempts ? { paaAttempts } : {}),
     ...(supportSearches ? { supportSearches } : {}),
@@ -369,7 +371,13 @@ export function createAutobloggerWorker(options: AutobloggerWorkerOptions) {
         return report;
       }
       const approval = state.manualRetryApproval;
-      if (approval && (!approval.consumedAt || approval.runId === input.runId)) {
+      const targetSwitch = state.manualTargetSwitch;
+      if (targetSwitch) {
+        if (options.targetCandidateFingerprint !== targetSwitch.candidateFingerprint || options.publicationEnabled !== false
+          || !hasManualTargetSwitch(state, targetSwitch.candidate, input.runId, mode, startedAt)) {
+          throw new Error('Target switch requires its exact new artifact-only pilot run and target; reuse is forbidden.');
+        }
+      } else if (approval && (!approval.consumedAt || approval.runId === input.runId)) {
         if (approval.consumedAt || mode !== 'manual_pilot' || input.runId !== approval.runId
           || options.targetCandidateFingerprint !== approval.candidateFingerprint || options.publicationEnabled !== false) {
           throw new Error('Manual retry approval requires its exact new artifact-only pilot run and target; reuse is forbidden.');
@@ -412,11 +420,13 @@ export function createAutobloggerWorker(options: AutobloggerWorkerOptions) {
         }
         if (mode === 'manual_pilot' && state.manualPilot?.runId === input.runId) state = { ...state, manualPilot: null };
         const retryApproval = state.manualRetryApproval;
-        if (retryApproval?.runId === input.runId) {
+        const switchedTarget = state.manualTargetSwitch;
+        if (retryApproval?.runId === input.runId || switchedTarget?.runId === input.runId) {
+          const fingerprint = switchedTarget?.runId === input.runId ? switchedTarget.candidateFingerprint : retryApproval!.candidateFingerprint;
           state = recordPersistent(state, { schemaVersion: 1, runId: input.runId, mode, startedAt, selectedCandidateFingerprints: [], status: 'failed' });
           state = { ...state, failures: [...state.failures, {
-            runId: input.runId, candidateFingerprint: retryApproval.candidateFingerprint,
-            code: 'shallow_research_failed', attempt: 4, observedAt: now().toISOString(), detail: safeDetail(error),
+            runId: input.runId, candidateFingerprint: fingerprint,
+            code: 'shallow_research_failed', attempt: state.decisions[fingerprint].attempts, observedAt: now().toISOString(), detail: safeDetail(error),
           }] };
         }
         await options.stateStore.save(compactPersistentWorkerState(state), version);
@@ -460,7 +470,7 @@ export function createAutobloggerWorker(options: AutobloggerWorkerOptions) {
           report.counts.metricsEnriched += 1;
         } catch (error) {
           state = markCandidateFailure(state, observation.candidate, input.runId, 'keyword_enrichment_failed', true, now().toISOString());
-          report.failures.push({ candidateFingerprint: fingerprint, code: 'keyword_enrichment_failed', detail: safeDetail(error), retryable: true, attempt: state.decisions[fingerprint].attempts });
+          report.failures.push({ candidateFingerprint: fingerprint, code: 'keyword_enrichment_failed', detail: safeDetail(error), retryable: state.decisions[fingerprint].status === 'retryable', attempt: state.decisions[fingerprint].attempts });
         }
       }
 
@@ -518,7 +528,7 @@ export function createAutobloggerWorker(options: AutobloggerWorkerOptions) {
           report.counts.deepInspected += 1;
         } catch (error) {
           state = markCandidateFailure(state, ranked.observation.candidate, input.runId, 'deep_inspection_failed', true, now().toISOString());
-          report.failures.push({ candidateFingerprint: fingerprint, code: 'deep_inspection_failed', detail: safeDetail(error), retryable: true, attempt: state.decisions[fingerprint].attempts });
+          report.failures.push({ candidateFingerprint: fingerprint, code: 'deep_inspection_failed', detail: safeDetail(error), retryable: state.decisions[fingerprint].status === 'retryable', attempt: state.decisions[fingerprint].attempts });
         }
       }
 

@@ -12,6 +12,8 @@ import {
   reserveCandidate,
   reserveManualPilot,
   grantManualRetryApproval,
+  grantManualTargetSwitch,
+  hasManualRetryApproval,
   deferCandidate,
 } from './recovery';
 import { createFileStateStore } from './local-state';
@@ -53,6 +55,73 @@ describe('bounded candidate recovery', () => {
     }
     return { item, state, fp: candidateFingerprints(item).candidate };
   }
+
+  const switchInput = { parkedRetryRunId: grantInput.runId, runId: 'alternative-pilot', approvedAt: retryAt };
+  function switched() {
+    const old = exhausted();
+    const parked = grantManualRetryApproval(old.state, old.item, grantInput);
+    const target = candidate(2, 1);
+    return { ...old, parked, target, state: grantManualTargetSwitch(parked, target, switchInput) };
+  }
+
+  it('marks a failed consumed one-use target switch terminal even below the normal retry cap', () => {
+    const { state, target, parked } = switched();
+    const reserved = reserveCandidate(state, target, switchInput.runId, 'manual_pilot', retryAt);
+    const failed = markCandidateFailure(reserved, target, switchInput.runId, 'insufficient_data:missing_serp', true, retryAt);
+    expect(failed.decisions[candidateFingerprints(target).candidate]).toMatchObject({ status: 'terminal', attempts: 1 });
+    expect(failed.manualRetryApproval).toEqual(parked.manualRetryApproval);
+    expect(failed.manualTargetSwitch).toEqual(reserved.manualTargetSwitch);
+  });
+
+  it('parks the unchanged old grant and reserves a distinct target once at its normal first attempt', () => {
+    const { state, parked, item, target, fp } = switched();
+    expect(state.manualRetryApproval).toEqual(parked.manualRetryApproval);
+    for (const field of ['runs', 'failures', 'decisions', 'candidates', 'contentHashes', 'pullRequests', 'candidateFingerprints', 'dedupeHashes'] as const) expect(state[field]).toEqual(parked[field]);
+    expect(state.manualTargetSwitch).toMatchObject({ ...switchInput, candidate: target, startingAttempts: 0, consumedAt: null });
+    expect(hasManualRetryApproval(state, item, grantInput.runId, 'manual_pilot', retryAt)).toBe(false);
+    const leased = reserveManualPilot(state, switchInput.runId, retryAt);
+    expect(PersistentWorkerStateSchema.safeParse(leased).success).toBe(true);
+    const reserved = reserveCandidate(leased, target, switchInput.runId, 'manual_pilot', retryAt);
+    expect(reserved.decisions[candidateFingerprints(target).candidate]).toMatchObject({ attempts: 1, runId: switchInput.runId });
+    expect(reserved.decisions[fp]).toEqual(parked.decisions[fp]);
+    expect(reserved.manualRetryApproval).toEqual(parked.manualRetryApproval);
+    expect(reserved.manualTargetSwitch?.consumedAt).toBe(retryAt);
+    expect(() => reserveCandidate(reserved, target, switchInput.runId, 'manual_pilot', retryAt)).toThrow();
+    const prepared = markManualPilotPrepared(reserved, switchInput.runId, 'a'.repeat(64), retryAt);
+    expect(PersistentWorkerStateSchema.safeParse(prepared).success).toBe(true);
+    const consumed = { ...prepared, manualPilot: { ...prepared.manualPilot!, status: 'consumed', consumedAt: retryAt } };
+    expect(PersistentWorkerStateSchema.safeParse(consumed).success).toBe(true);
+    expect(PersistentWorkerStateSchema.safeParse({ ...consumed, manualPilot: { ...consumed.manualPilot, runId: 'other' } }).success).toBe(false);
+    expect(() => grantManualTargetSwitch(reserved, candidate(3), { ...switchInput, runId: 'second-switch' })).toThrow();
+  });
+
+  it.each(['old-target', 'old-keyword', 'old-title', 'old-run', 'wrong-parked-run', 'scheduled', 'other-run', 'other-target', 'changed-title', 'changed-old-grant', 'premature-success'])('fails closed for target switch %s', (problem) => {
+    const { state, parked, target, item } = switched();
+    if (problem === 'old-target') expect(() => grantManualTargetSwitch(parked, item, switchInput)).toThrow();
+    if (problem === 'old-keyword' || problem === 'old-title') expect(() => grantManualTargetSwitch(parked, { ...target, [problem === 'old-keyword' ? 'primaryKeyword' : 'title']: problem === 'old-keyword' ? item.primaryKeyword : item.title }, switchInput)).toThrow();
+    if (problem === 'old-run') expect(() => grantManualTargetSwitch(parked, target, { ...switchInput, runId: grantInput.runId })).toThrow();
+    if (problem === 'wrong-parked-run') expect(() => grantManualTargetSwitch(parked, target, { ...switchInput, parkedRetryRunId: 'wrong' })).toThrow();
+    if (problem === 'changed-old-grant') expect(PersistentWorkerStateSchema.safeParse({ ...state, manualRetryApproval: { ...state.manualRetryApproval, reason: 'changed' } }).success).toBe(false);
+    if (problem === 'premature-success') expect(PersistentWorkerStateSchema.safeParse({ ...state, manualPilot: { runId: switchInput.runId, status: 'prepared', reservedAt: retryAt, leaseExpiresAt: null, artifactHash: 'a'.repeat(64), consumedAt: null } }).success).toBe(false);
+    if (['scheduled', 'other-run', 'other-target', 'changed-title'].includes(problem)) expect(() => reserveCandidate(state,
+      problem === 'other-target' ? item : problem === 'changed-title' ? { ...target, title: 'Changed' } : target,
+      problem === 'other-run' ? 'other' : switchInput.runId, problem === 'scheduled' ? 'scheduled' : 'manual_pilot', retryAt)).toThrow();
+  });
+
+  it('keeps existing new-target attempts, never decrements a switch, and does not permit attempt four', () => {
+    const { parked, target } = switched();
+    const fp = candidateFingerprints(target).candidate;
+    for (const attempts of [2, 3]) {
+      const prior = { ...parked, decisions: { ...parked.decisions, [fp]: { articleId: target.articleId, intentFingerprint: candidateFingerprints(target).intent,
+        identities: Object.values(candidateFingerprints(target)), status: 'retryable' as const, reason: 'temporary', attempts, runId: 'earlier-target-run', updatedAt: retryAt, leaseExpiresAt: null } } };
+      if (attempts === 3) { expect(() => grantManualTargetSwitch(prior, target, switchInput)).toThrow(); continue; }
+      const approved = grantManualTargetSwitch(prior, target, switchInput);
+      const reserved = reserveCandidate(approved, target, switchInput.runId, 'manual_pilot', retryAt);
+      expect(reserved.decisions[fp].attempts).toBe(3);
+      expect(deferCandidate(reserved, target, switchInput.runId, 'not_selected', retryAt).decisions[fp]).toMatchObject({ attempts: 3, status: 'terminal' });
+      expect(() => reserveCandidate(recoverExpiredReservations(reserved, '2026-09-06T22:00:00.000Z'), target, switchInput.runId, 'manual_pilot', '2026-09-06T22:00:00.000Z')).toThrow();
+    }
+  });
 
   it('grants and consumes one exact fourth reservation without resetting history or identities', () => {
     const { item, state, fp } = exhausted();

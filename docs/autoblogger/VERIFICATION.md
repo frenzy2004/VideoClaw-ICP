@@ -3,7 +3,40 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-## Latest one-use retry approval — 2026-09-06
+## Latest alternative-topic pilot — 2026-09-06
+
+The [alternative-pilot report](ALTERNATIVE-PILOT-2026-09-06.md) records the
+five-topic diagnostic, selection evidence and actual one-use worker execution.
+The live run failed after two empty organic responses: **zero model calls,
+articles, native generated-article QA passes or lander PRs**. The selected topic's
+earlier qualifying snapshot was not substituted into the failed run.
+
+Final software verification: **986 tests passed across 49 files** with
+`npm test -- --maxWorkers=4`; repository typecheck, lint, build and whitespace
+checks passed. An initial default-parallel run timed out in the existing
+250-row content-map test (985 passed). That test passed unchanged in isolation
+and in the full four-worker run; no timeout or assertion was loosened. Existing
+gray-matter direct-eval and vinext mixed-import build warnings remain.
+
+Regressions cover bounded empty-organic retries with exact provenance, unchanged
+old-grant history, single-candidate/run target switching, the complete pilot
+lifecycle, stale transient-backlog reconciliation, and accurate terminal failure
+reporting. The final five failure-classification cases were observed RED before
+the correction and GREEN afterwards. Independent review found and rechecked the
+old backlog collision; no remaining P1/P2 was reported in the scoped code review.
+
+Actual-state queue/reservation checks ran in memory before the live attempt.
+Afterwards, an audited compare-and-swap changed only the new failed candidate's
+derived retry classification to terminal at attempt one and added a correction
+record. Old grant/run/decision/failure history and the original failed report are
+retained. No second pilot or model call was made. Both runtime credential values
+and secret patterns were checked against the proposed diff and new report without
+printing them. Private state and diagnostic outputs remain ignored.
+
+Lander HEAD remained clean at `b6b0833c78443b44b12bf6d33f05baa7ac8427d3`;
+PR #55 was open/unmerged and `AUTOBLOG_SCHEDULE_ENABLED=false` on fresh checks.
+
+## Previous one-use retry approval — 2026-09-06
 
 The [approved-retry report](APPROVED-RETRY-2026-09-06.md) records the current
 checkpoint. An explicit additional manual attempt preserves the normal cap and

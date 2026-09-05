@@ -8,9 +8,10 @@ import {
   PersistentWorkerStateSchema,
   compactPersistentWorkerState,
   PaaObservationsSchema,
+  ResearchProvenanceSchema,
 } from './github-runtime';
 import { CandidateSchema, candidateFingerprints } from './domain';
-import { grantManualRetryApproval } from './recovery';
+import { grantManualRetryApproval, grantManualTargetSwitch, reserveCandidate, markCandidateFailure } from './recovery';
 
 const auth = {
   kind: 'github_app_installation' as const,
@@ -30,6 +31,20 @@ function queuedTransport(responses: HttpResponse[]) {
 }
 
 const json = (body: unknown, status = 200): HttpResponse => ({ status, headers: {}, body });
+
+it('retains at most two SERP collection attempts in full and persistent provenance', () => {
+  const collection = { actorId: 'actor', runId: 'retry', datasetId: 'dataset', observedAt: '2026-09-06T21:00:00.000Z' };
+  const attempts = [{ ...collection, runId: 'first-empty' }, collection];
+  const full = { discovery: collection, serp: collection, serpAttempts: attempts };
+  expect(ResearchProvenanceSchema.parse(full).serpAttempts).toEqual(attempts);
+  const state = createPersistentWorkerState();
+  state.provenance['candidate:test'] = { serp: { runId: collection.runId, datasetId: collection.datasetId, observedAt: collection.observedAt },
+    keyword: { provider: 'pending', endpoint: null, observedAt: null, providerRequestId: null, sourceObservedAt: null }, serpAttempts: attempts };
+  expect(PersistentWorkerStateSchema.parse(state).provenance['candidate:test'].serpAttempts).toEqual(attempts);
+  expect(ResearchProvenanceSchema.safeParse({ ...full, serpAttempts: [...attempts, collection] }).success).toBe(false);
+  state.provenance['candidate:test'].serpAttempts = [...attempts, collection];
+  expect(PersistentWorkerStateSchema.safeParse(state).success).toBe(false);
+});
 
 describe('one-use manual retry state validation', () => {
   const candidate = CandidateSchema.parse({
@@ -59,6 +74,39 @@ describe('one-use manual retry state validation', () => {
       },
     };
   }
+
+  it.each(['failures', 'runs', 'decisions'])('pins both independent approval histories within the existing %s bound', (kind) => {
+    const parked = PersistentWorkerStateSchema.parse(approvedState());
+    const target = CandidateSchema.parse({ ...candidate, articleId: 'vc-c1-d-ab0e55b1dd7f78fa', campaignId: 'newly-funded-founder',
+      primaryKeyword: 'product demo checklist', title: 'Plan a Product Demo Checklist', slug: 'product-demo-checklist' });
+    const targetFp = candidateFingerprints(target).candidate;
+    let state = grantManualTargetSwitch(parked, target, { parkedRetryRunId: 'new-run', runId: 'alternative', approvedAt: at });
+    state = reserveCandidate(state, target, 'alternative', 'manual_pilot', at);
+    state = markCandidateFailure(state, target, 'alternative', 'candidate_failed', false, at);
+    state.runs.alternative = { schemaVersion: 1, runId: 'alternative', mode: 'manual_pilot', startedAt: at, selectedCandidateFingerprints: [targetFp], status: 'failed' };
+    state.failures.push({ runId: 'alternative', candidateFingerprint: targetFp, code: 'candidate_failed', attempt: 1, observedAt: at, detail: 'Alternative failure.' });
+    const before = structuredClone(state);
+    for (let index = 0; index < (kind === 'decisions' ? 5_001 : kind === 'runs' ? 501 : 100); index += 1) {
+      const runId = `unrelated-${index}`;
+      const date = '2026-09-07T00:00:00.000Z';
+      if (kind === 'decisions') state.decisions[`u:${index}`] = { articleId: 'old', intentFingerprint: `intent:${'a'.repeat(64)}`, identities: ['a', 'b', 'c', 'd', 'e', 'f'],
+        status: 'terminal', reason: 'done', attempts: 3, runId: 'old', updatedAt: date, leaseExpiresAt: null };
+      if (kind === 'runs') state.runs[runId] = { ...state.runs.alternative, runId, startedAt: date, selectedCandidateFingerprints: [] };
+      if (kind === 'failures') state.failures.push({ runId, code: 'candidate_failed', attempt: 1, observedAt: date, detail: 'Unrelated failure.' });
+    }
+    const compacted = compactPersistentWorkerState(state);
+    expect(Object.keys(compacted.runs)).toHaveLength(kind === 'runs' ? 500 : 2);
+    expect(Object.keys(compacted.decisions)).toHaveLength(kind === 'decisions' ? 5_000 : 2);
+    expect(compacted.failures).toHaveLength(kind === 'failures' ? 100 : 2);
+    expect(compacted.failures.slice(0, 2)).toEqual(before.failures);
+    expect(compacted.runs.alternative).toEqual(before.runs.alternative);
+    expect(compacted.runs['prior-run']).toEqual(before.runs['prior-run']);
+    expect(compacted.decisions[targetFp]).toEqual(before.decisions[targetFp]);
+    expect(compacted.decisions[fp.candidate]).toEqual(before.decisions[fp.candidate]);
+    expect(JSON.stringify(compacted.manualRetryApproval)).toBe(JSON.stringify(parked.manualRetryApproval));
+    expect(compacted.manualTargetSwitch).toEqual(before.manualTargetSwitch);
+    expect(PersistentWorkerStateSchema.safeParse(compacted).success).toBe(true);
+  });
 
   it.each([false, true])('round-trips the exact audited grant (consumed: %s)', (consumed) => {
     const state = approvedState(consumed);

@@ -1,8 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { CandidateSchema, candidateFingerprints } from './domain';
 import { createPersistentWorkerState } from './github-runtime';
-import { grantManualRetryApproval, markCandidateFailure, markCandidateScanned, reserveCandidate, reserveManualPilot } from './recovery';
-import { reconcileLocalPilotCandidate, createModelAuditTransport, inspectLocalPilotInventory, parseLocalPilotArguments } from './local-pilot';
+import { grantManualRetryApproval, markCandidateFailure, markCandidateScanned, reserveCandidate, reserveManualPilot, buildIncrementalQueue } from './recovery';
+import { reconcileLocalPilotCandidate, createModelAuditTransport, inspectLocalPilotInventory, parseLocalPilotArguments, readLocalPilotCandidateFile } from './local-pilot';
+import { mkdtemp, mkdir, writeFile, chmod, symlink } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 
 const original = CandidateSchema.parse({
   schemaVersion: 1, articleId: 'vc-c2-001', campaignId: 'accelerator-demo-day-founder', icp: 'accelerator-demo-day-founder',
@@ -37,6 +40,93 @@ describe('local artifact-only pilot preflight', () => {
     input.state.queuedCandidates = [other]; // Terminal cleanup removed only the exhausted candidate.
     return { ...input, runId: 'approved-attempt-4', approveRetryFrom: 'automated-attempt-3', approvedAt: '2026-09-06T21:00:00.000Z' };
   }
+
+  it('requires paired explicit candidate-file and target-switch flags and never combines retry grants', () => {
+    const args = ['--run-id', 'alternative-pilot', '--candidate-file', 'artifacts/selected-candidate.json', '--switch-target-from', 'approved-attempt-4', '--execute'];
+    expect(parseLocalPilotArguments(args)).toEqual({ runId: 'alternative-pilot', candidateFile: args[3], switchTargetFrom: args[5] });
+    for (const bad of [args.slice(0, -1), [...args, '--reset'], ['--run-id', 'new', '--candidate-file', args[3], '--execute'],
+      ['--run-id', 'new', '--switch-target-from', 'old', '--execute'], [...args.slice(0, -1), '--approve-retry-from', 'old', '--execute'],
+      ['--run-id', 'approved-attempt-4', ...args.slice(2)]]) expect(() => parseLocalPilotArguments(bad)).toThrow();
+  });
+
+  function switchFixture() {
+    const input = terminalFixture();
+    const old = reconcileLocalPilotCandidate(input);
+    return { state: old.state, backlog: old.backlog, candidate: other, runId: 'alternative-pilot', switchTargetFrom: input.runId, approvedAt: input.approvedAt };
+  }
+
+  it('adds a distinct selected candidate without mapping old history and idempotently reloads only its explicit pending switch', () => {
+    const input = switchFixture();
+    const before = structuredClone(input);
+    input.state.queuedCandidates = [refined];
+    input.backlog = [original];
+    const result = reconcileLocalPilotCandidate(input);
+    const queue = buildIncrementalQueue({ state: reserveManualPilot(result.state, input.runId, input.approvedAt), backlog: result.backlog,
+      runId: input.runId, mode: 'manual_pilot', now: input.approvedAt });
+    expect(queue.scan).toEqual([other]);
+    expect(result.nextAttempt).toBe(1);
+    expect(result.candidate).toEqual(other);
+    expect(result.state.queuedCandidates).toEqual([refined, other]);
+    expect(result.backlog).toEqual([refined, other]);
+    expect(input.backlog).toEqual([original]);
+    expect(input.state.queuedCandidates).toEqual([refined]);
+    expect(result.state.manualRetryApproval).toEqual(before.state.manualRetryApproval);
+    for (const key of ['decisions', 'runs', 'failures', 'candidates', 'contentHashes', 'pullRequests', 'candidateFingerprints', 'dedupeHashes'] as const) expect(result.state[key]).toEqual(before.state[key]);
+    const reloaded = reconcileLocalPilotCandidate({ ...input, state: JSON.parse(JSON.stringify(result.state)), backlog: result.backlog, approvedAt: '2026-09-07T21:00:00.000Z' });
+    expect(reloaded.state).toEqual(result.state);
+    expect(() => reconcileLocalPilotCandidate({ ...input, state: result.state, switchTargetFrom: undefined })).toThrow();
+    expect(() => reconcileLocalPilotCandidate({ ...input, state: result.state, runId: 'other-run' })).toThrow();
+    expect(() => reconcileLocalPilotCandidate({ ...input, state: result.state, candidate: { ...other, title: 'Changed title' } })).toThrow();
+  });
+
+  it.each(['missing-exact-retained-row', 'wrong-retained-title', 'changed-campaign', 'changed-slug', 'attempted-matrix-row', 'duplicate-matrix-row'])('does not reconcile an unaudited parked backlog representation: %s', (problem) => {
+    const input = switchFixture();
+    input.backlog = [original, other];
+    if (problem === 'missing-exact-retained-row') input.state.queuedCandidates = [other];
+    if (problem === 'wrong-retained-title') input.state.queuedCandidates = [{ ...refined, title: 'Unapproved title' }, other];
+    if (problem === 'changed-campaign') input.backlog[0] = { ...original, campaignId: 'newly-funded-founder' };
+    if (problem === 'changed-slug') input.backlog[0] = { ...original, slug: 'unrelated-topic' };
+    if (problem === 'attempted-matrix-row') input.state.decisions[candidateFingerprints(original).candidate] = { ...input.state.decisions[fingerprint],
+      intentFingerprint: candidateFingerprints(original).intent, identities: Object.values(candidateFingerprints(original)) };
+    if (problem === 'duplicate-matrix-row') input.backlog.push(original);
+    const before = structuredClone(input);
+    expect(() => reconcileLocalPilotCandidate(input)).toThrow();
+    expect(input).toEqual(before);
+  });
+
+  it.each(['old-candidate', 'old-keyword', 'backlog-collision', 'scheduled-pilot', 'prepared-pilot', 'seen-hash', 'terminal-new', 'both-flags'])('rejects target-switch %s without altering retained state', (problem) => {
+    const input = switchFixture();
+    if (problem === 'old-candidate') input.candidate = refined;
+    if (problem === 'old-keyword') input.candidate = { ...other, primaryKeyword: refined.primaryKeyword };
+    if (problem === 'backlog-collision') input.backlog.push({ ...other, articleId: 'vc-c2-003' });
+    if (problem === 'scheduled-pilot' || problem === 'prepared-pilot') input.state.manualPilot = { runId: 'other', status: problem === 'prepared-pilot' ? 'prepared' : 'leased', reservedAt: at, leaseExpiresAt: null, artifactHash: null, consumedAt: null };
+    if (problem === 'seen-hash') input.state.candidateFingerprints.push(candidateFingerprints(other).keyword);
+    if (problem === 'terminal-new') input.state.decisions[candidateFingerprints(other).candidate] = { ...input.state.decisions[fingerprint], articleId: other.articleId, intentFingerprint: candidateFingerprints(other).intent, identities: Object.values(candidateFingerprints(other)) };
+    const before = structuredClone(input.state);
+    expect(() => reconcileLocalPilotCandidate({ ...input, ...(problem === 'both-flags' ? { approveRetryFrom: 'automated-attempt-3' } : {}) })).toThrow();
+    expect(input.state).toEqual(before);
+  });
+
+  it('reads only a private bounded bare Candidate file under artifacts, never a context/evidence envelope', async () => {
+    const root = await mkdtemp(join(tmpdir(), 'pilot-candidate-'));
+    const directory = join(root, 'artifacts');
+    await mkdir(directory);
+    const path = join(directory, 'candidate.json');
+    await writeFile(path, JSON.stringify(other), { mode: 0o600 });
+    expect(await readLocalPilotCandidateFile(root, 'artifacts/candidate.json')).toEqual(other);
+    await writeFile(path, JSON.stringify({ candidate: other, evidence: {} }));
+    await expect(readLocalPilotCandidateFile(root, path)).rejects.toThrow();
+    await writeFile(path, ' '.repeat(16_385));
+    await expect(readLocalPilotCandidateFile(root, path)).rejects.toThrow();
+    await writeFile(path, JSON.stringify(other));
+    await chmod(path, 0o644);
+    await expect(readLocalPilotCandidateFile(root, path)).rejects.toThrow();
+    await chmod(path, 0o600);
+    await symlink(path, join(directory, 'alias.json'));
+    await expect(readLocalPilotCandidateFile(root, 'artifacts/alias.json')).rejects.toThrow();
+    await writeFile(join(root, 'outside.json'), JSON.stringify(other), { mode: 0o600 });
+    await expect(readLocalPilotCandidateFile(root, 'outside.json')).rejects.toThrow();
+  });
 
   it('parses the explicit prior-run retry approval without adding a default override', () => {
     expect(parseLocalPilotArguments(['--run-id', 'approved-attempt-4', '--approve-retry-from', 'automated-pilot-2026-09-06-attempt-3', '--execute'])).toEqual({

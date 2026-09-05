@@ -50,6 +50,7 @@ export type ResearchResult = {
   provenance: {
     discovery: ApifyObservationProvenance;
     serp: ApifyObservationProvenance;
+    serpAttempts?: ApifyObservationProvenance[];
     paa?: ApifyObservationProvenance;
     paaAttempts?: ApifyObservationProvenance[];
     supportSearches?: ApifyObservationProvenance[];
@@ -67,6 +68,7 @@ export type ShallowResearchResult = {
   }>;
   peopleAlsoAsk: string[];
   relatedQueries: string[];
+  serpCollectionError?: string;
   paaObservations?: PaaObservation[];
   paaCollectionError?: string;
   paaCacheReused?: boolean;
@@ -325,7 +327,7 @@ export function createResearcher(options: ResearcherOptions) {
         (item) => normalizeAutocompleteItem(item) as NormalizedAutocomplete,
       );
 
-      const serp = await runApifyActor(options.apify, SERP_ACTOR_ID, {
+      const serpInput = {
         queries: `${scannedCandidates.map(({ primaryKeyword }) => primaryKeyword).join('\n')}\n`,
         maxPagesPerQuery: 1,
         countryCode: 'us',
@@ -336,7 +338,8 @@ export function createResearcher(options: ResearcherOptions) {
         saveHtml: false,
         saveHtmlToKeyValueStore: false,
         websiteContentScraper: { enable: false },
-      }, execution);
+      };
+      const serp = await runApifyActor(options.apify, SERP_ACTOR_ID, serpInput, execution);
       const serpItems = serp.items.map(
         (item) => normalizeSerpItem(item, serp.provenance) as NormalizedSerp,
       );
@@ -367,6 +370,46 @@ export function createResearcher(options: ResearcherOptions) {
           provenance: { discovery: discovery.provenance, serp: serp.provenance },
         };
       });
+      // Successful provider jobs can still return empty organic rows. Retry only
+      // those exact queries once, without changing locale or expanding the scan.
+      // Replace a row atomically so its organic/PAA/related fields share the
+      // selected SERP provenance; keep both completed observations for audit.
+      const missingOrganic = results.filter((result) => result.organicResults.length === 0);
+      if (missingOrganic.length) {
+        for (const result of missingOrganic) result.provenance.serpAttempts = [serp.provenance];
+        const retryQueries = [...new Map(missingOrganic.map(({ candidate }) =>
+          [normalizeKeyword(candidate.primaryKeyword), candidate.primaryKeyword])).values()];
+        try {
+          const retried = await runApifyActor(options.apify, SERP_ACTOR_ID, {
+            ...serpInput, queries: `${retryQueries.join('\n')}\n`,
+          }, execution);
+          for (const result of missingOrganic) {
+            result.provenance.serpAttempts!.push(retried.provenance);
+            try {
+              const matching = retried.items.filter((item) => {
+                const query = (item as { searchQuery?: { term?: unknown } } | null)?.searchQuery?.term;
+                return typeof query === 'string'
+                  && normalizeKeyword(query) === normalizeKeyword(result.candidate.primaryKeyword);
+              });
+              if (matching.length !== 1) throw new Error('SERP retry requires one exact-query observation.');
+              const observation = normalizeSerpItem(matching[0], retried.provenance) as NormalizedSerp;
+              if (observation.country !== 'US' || observation.language !== 'en'
+                || observation.device !== 'DESKTOP' || observation.page !== 1) {
+                throw new Error('SERP retry requires US/en desktop first-page observations.');
+              }
+              result.organicResults = observation.organicResults;
+              result.peopleAlsoAsk = observation.peopleAlsoAsk;
+              result.relatedQueries = observation.relatedQueries;
+              result.provenance.serp = retried.provenance;
+              if (!observation.organicResults.length) result.serpCollectionError = 'SERP retry returned no organic results.';
+            } catch (error) {
+              result.serpCollectionError = redactSensitive(error).slice(0, 500);
+            }
+          }
+        } catch (error) {
+          for (const result of missingOrganic) result.serpCollectionError = redactSensitive(error).slice(0, 500);
+        }
+      }
       // The organic collector can return a valid SERP without its dynamic PAA
       // component. One bounded batch uses a purpose-built collector; its answers
       // are never promoted to verified source facts (many are AI overviews).
