@@ -84,10 +84,11 @@ type ResearcherOptions = {
 
 const TERMINAL_FAILURES = new Set(['FAILED', 'ABORTED', 'TIMED-OUT']);
 const DEFAULT_EXECUTION: ApifyExecutionOptions = {
-  maxPolls: 30,
+  maxPolls: 150,
   maxAttempts: 3,
   pollIntervalMs: 1_000,
-  timeoutMs: 60_000,
+  // Permit the server's bounded 120-second job plus final status/dataset reads.
+  timeoutMs: 150_000,
   nowMs: () => Date.now(),
   sleep: (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds)),
 };
@@ -299,7 +300,9 @@ export function createResearcher(options: ResearcherOptions) {
         country: 'us',
         maxDepth: 1,
         maxSuggestionsPerKeyword: 10,
-        appendAlphabet: true,
+        // Validate the seed queries first; alphabet expansion multiplies this
+        // bounded 50-candidate scan into up to 1,350 provider queries.
+        appendAlphabet: false,
         maxRequestRetries: 3,
       }, execution);
       const autocomplete = discovery.items.map(

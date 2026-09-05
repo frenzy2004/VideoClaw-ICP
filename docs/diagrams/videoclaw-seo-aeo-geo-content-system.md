@@ -4,7 +4,7 @@ Review-only checkpoint: **6 September 2026**. No production merge, deployment, p
 
 ![VideoClaw worker, artifact-only pilot, and separate human publication gate](./videoclaw-seo-aeo-geo-content-system-v2.png)
 
-Read the three lanes independently, left to right. There are no return arrows or cross-lane connectors. The detailed conditions below are the source of truth.
+Read the three lanes independently, left to right. There are no return arrows or cross-lane connectors. The raster is the pre-pilot architecture illustration; its credential/status annotations are superseded by the live-pilot results below. The detailed conditions below are the source of truth.
 
 ## 1. Persistent worker: research and drafting
 
@@ -33,12 +33,12 @@ The 250-opportunity backlog is an input, not a required count or proof of measur
 Apify evidence → one draft + critique + QA → Markdown / SVG / report artifact → STOP
 ```
 
-- The user approved this one live pilot. **It has not run.**
+- The user approved this one live pilot. **Live research ran; zero articles were generated.** Fifty candidates were scanned, and all ten deep checks failed: eight source-gate failures and two relevant-PAA failures. [Full pilot report](../autoblogger/LIVE-PILOT-2026-09-06.md).
 - `KEYWORD_PROVIDER=pending` keeps volume, difficulty and CPC explicitly unknown. Paid metrics do not block this one pilot.
 - `LANDER_BASE_REF=seo/founder-video-blog-launch` validates against the unmerged blog contract, not production.
-- `APIFY_TOKEN` is present in ICP Actions secrets. The known local configuration and repository secret-name inventory contain neither `OPENAI_API_KEY` nor `LANDER_READ_TOKEN` at this checkpoint.
+- `APIFY_TOKEN` is present in ICP Actions secrets. `OPENAI_API_KEY` is now stored locally in an ignored environment file and verified against `gpt-5.5`; the scoped lander read token is still absent.
 - The read token must be separate and fine-grained, restricted to lander contents:read and pull requests:read. Interactive GitHub access does not establish that the worker credential is installed.
-- The pilot uses ICP state but cannot create a lander article branch or PR. Its prepared artifact hash prevents consuming a second pilot after an uncertain failure.
+- This local attempt used the existing checkout, fresh GET-only interactive GitHub inventory and ignored local state; no publication backend was supplied. It did not modify remote state or configure unattended Actions. The standard worker's prepared-artifact hash prevents consuming a second artifact after an uncertain failure; this attempt produced none.
 - Offline fixtures exercise this path but are **not** live generated article evidence.
 
 ### Apify and DataForSEO are different inputs
@@ -74,7 +74,8 @@ Every article traces back to campaign, ICP, trigger, intent, keyword, SERP obser
 | Location | Contents |
 | --- | --- |
 | `VideoClaw-ICP` source branch | Worker, research library, tests and diagrams |
-| `autoblogger-state`, when runs begin | Compact identities, decisions, run/dataset IDs, provider provenance, hashes, PR outcomes and bounded redacted failures |
+| `autoblogger-state`, when Actions runs begin | Compact identities, decisions, run/dataset IDs, provider provenance, hashes, PR outcomes and bounded redacted failures; local pilot history must be reconciled first |
+| Ignored local pilot state and reports | This live attempt's decisions, provenance, bounded retries and source/PAA rejection report; not Git-backed |
 | Apify datasets | Raw search observations |
 | Seven-day workflow artifacts | Proposed Markdown, SVG, validated bundle and QA report |
 | `videoclaw-lander` review branch | Three manually reviewed drafts and blog renderer |
@@ -86,7 +87,7 @@ Every article traces back to campaign, ICP, trigger, intent, keyword, SERP obser
 | --- | --- | --- |
 | Article and diagram updates | Review-branch work; no production action | Team review |
 | Worker implementation | PR #1 open; offline and native fixture verification recorded separately | Implementation review |
-| First live artifact-only pilot | Authorized, not run | OpenAI key and lander read token; workflow availability if using Actions |
+| First live artifact-only pilot | Live research attempted; 0 eligible drafts | Improve candidate/source evidence; local OpenAI access works. Scoped read token and Actions OpenAI secret are needed only for unattended execution |
 | Paid enrichment | Not connected; Apify research does not invent metrics | Provider access and a tested adapter |
 | Generated lander PRs | Not enabled | Merged blog contract, paid metrics, GitHub App and approved rollout |
 | Weekly automation | `AUTOBLOG_SCHEDULE_ENABLED=false`; Monday 16:00 UTC schedule is in the PR | Explicit activation approval and workflow on the default branch |

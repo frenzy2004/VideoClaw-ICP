@@ -37,7 +37,8 @@ const ApifyRunSchema = z.object({
   status: z.string().trim().min(1),
   defaultDatasetId: z.string().trim().min(1).optional(),
   startedAt: z.string().optional(),
-  finishedAt: z.string().optional(),
+  // Running jobs explicitly return null; preserve the run ID for polling/abort.
+  finishedAt: z.string().nullish().transform((value) => value ?? undefined),
 }).passthrough();
 
 async function requestApify(

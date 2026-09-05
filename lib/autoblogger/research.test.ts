@@ -39,6 +39,25 @@ function delayed<T>(milliseconds: number, value: T): Promise<T> {
 }
 
 describe('bounded Apify execution', () => {
+  it('allows a valid 117-second live-sized batch under the default polling budget', async () => {
+    let elapsed = 0;
+    const client: ApifyClient = {
+      startActor: async () => ({ id: 'live-sized-run', status: 'RUNNING' }),
+      getRun: async () => elapsed < 117_000
+        ? { id: 'live-sized-run', status: 'RUNNING' }
+        : successfulRun('live-sized-run', 'complete-dataset'),
+      getDatasetItems: async () => [{ query: 'founder video' }],
+      abortRun: async (id) => ({ id, status: 'ABORTING' }),
+    };
+    const result = await runApifyActor(client, SERP_ACTOR_ID, {}, {
+      nowMs: () => elapsed,
+      sleep: async (milliseconds) => { elapsed += milliseconds; },
+    });
+    expect(result.items).toEqual([{ query: 'founder video' }]);
+    expect(result.provenance.runId).toBe('live-sized-run');
+    expect(elapsed).toBeGreaterThanOrEqual(117_000);
+  });
+
   it('times out a hanging startActor dependency', async () => {
     const client: ApifyClient = {
       startActor: async () => delayed(25, successfulRun('run-123', 'dataset-456')),
@@ -242,7 +261,8 @@ describe('staged researcher', () => {
     expect(result.results).toHaveLength(10);
     expect(starts[0]).toMatchObject({
       actorId: AUTOCOMPLETE_ACTOR_ID,
-      input: { country: 'us', language: 'en', maxRequestRetries: 3 },
+      // The 50-candidate shallow stage must not expand into 1,350 paid queries.
+      input: { country: 'us', language: 'en', maxRequestRetries: 3, maxDepth: 1, appendAlphabet: false },
     });
     expect((starts[0].input.keywords as string[])).toHaveLength(50);
     expect(starts[1]).toMatchObject({

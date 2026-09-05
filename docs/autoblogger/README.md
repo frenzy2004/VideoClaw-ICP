@@ -6,7 +6,7 @@ This worker is a controlled research-and-drafting system. It does not publish ar
 
 The initial 250-topic research library is an input, not a quota or publication gate. Each run scans at most 50 candidates, deeply checks at most 10, and produces at most 3 drafts with no more than 2 from one ICP.
 
-Operator status on 2026-09-06: the user approved one live artifact-only pilot, but it has **not run**. `APIFY_TOKEN` is connected to ICP Actions secrets. No `OPENAI_API_KEY` or `LANDER_READ_TOKEN` was found in the known local configuration or repository secret-name inventory. Those credentials remain blockers; approval is no longer the pilot blocker. PR #1 and lander PR #55 remain **open/unmerged**, and `AUTOBLOG_SCHEDULE_ENABLED=false` was verified on GitHub. No production action, generated lander PR or schedule activation is authorized. The ICP default branch is `seo-campaign`; GitHub schedules require the workflow there.
+Operator status on 2026-09-06: the approved live artifact-only pilot was attempted locally. OpenAI `gpt-5.5` completed a structured API preflight using the key stored in ignored local configuration. Existing interactive GitHub access supported GET-only inventory checks without a lander read token. Fifty US/en candidates were observed; all ten deep checks failed the source or relevant-PAA gates, so **zero articles or PRs were generated**. See the [live pilot report](LIVE-PILOT-2026-09-06.md), including adapter fixes, exact run IDs and the distinction between local and Actions credentials. `APIFY_TOKEN` is connected to ICP Actions secrets; `OPENAI_API_KEY` was verified locally only and `LANDER_READ_TOKEN` is still absent. PR #1 and lander PR #55 remain **open/unmerged**, and the schedule remains disabled. No production action, generated lander PR or schedule activation is authorized. The ICP default branch is `seo-campaign`; GitHub schedules require the workflow there.
 
 See the updated [three-lane system diagram](../diagrams/videoclaw-seo-aeo-geo-content-system.md) for the worker, current pilot and separate human release boundary.
 
@@ -16,7 +16,7 @@ Use the existing `KEYWORD_PROVIDER=pending` path for research and the one artifa
 
 This is **not** a DataForSEO integration. Supported adapters remain `pending`, `semrush` and `ahrefs`. Do not set `KEYWORD_PROVIDER=dataforseo`, substitute the Apify token for provider credentials, or fill volume/difficulty/CPC using SERP counts or an unverified actor's estimates. Adding DataForSEO later requires a tested adapter and authenticated metrics; its lack does not block the pending-metrics pilot. Recurring and normal draft-PR mode still require observed paid metrics.
 
-Current pilot setup:
+Unattended Actions setup (not the completed local research attempt):
 
 1. Add `OPENAI_API_KEY` and a separate fine-grained `LANDER_READ_TOKEN` as Actions secrets in **VideoClaw-ICP**. The lander token needs only contents:read and pull requests:read on the lander. Do not paste keys into chat, PRs, Markdown or tracked configuration.
 2. Keep `KEYWORD_PROVIDER=pending`, `LANDER_BASE_REF=seo/founder-video-blog-launch` and `AUTOBLOG_SCHEDULE_ENABLED=false`. Keep the configured model exact; there is no silent model fallback.
@@ -134,6 +134,7 @@ Turning on the schedule does not turn on publishing. Every generated article sti
 ## Failure and cost handling
 
 - Apify polling, HTTP requests, source bodies, command execution, and the workflow job all have finite bounds.
+- Shallow autocomplete now queries only the fifty seeds, without 27-fold alphabet expansion. Client execution defaults to at most 150 polls within 150 seconds, allowing the existing bounded server job to finish and return its dataset. Missing evidence still fails closed.
 - Actor launches also default to Apify's server-side `timeout=120` seconds and `maxTotalChargeUsd=2` per actor run. The $2 setting caps supported pay-per-event charges; it is **not** a total account, total workflow, or universal compute-cost cap. Multiple actor runs can each incur charges. Bounded client polling and best-effort abort complement the server timeout and do not guarantee instantaneous cancellation.
 - The model path is exactly draft → critique → optional single repair → verification critique. Unresolved issues fail closed.
 - Source requests pin the DNS result, reject public-to-private redirects, stream with a byte cap, avoid proxy environment reuse, and cancel on abort or early iterator return.

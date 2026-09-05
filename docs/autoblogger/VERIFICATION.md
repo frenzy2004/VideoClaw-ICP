@@ -1,9 +1,17 @@
 # Autoblogger v1 verification
 
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
-No lander source changes, article publishing, production merge, deployment, live paid pilot, or schedule activation are part of this verification.
+No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-## Automated coverage
+## Live local checkpoint — 2026-09-06
+
+The [live-pilot report](LIVE-PILOT-2026-09-06.md) records the result: OpenAI `gpt-5.5` structured preflight passed; Apify completed fifty US/en search observations; ten deep checks were attempted and none passed (eight source-gate and two relevant-PAA failures). Zero article-generation calls, generated articles, native generated-bundle builds or lander PRs occurred. This is **not** a successful end-to-end article pilot.
+
+Three live integration assumptions were corrected: nullable Apify finish timestamps, 27-fold autocomplete expansion, and a client polling budget shorter than the observed 117-second SERP job. All were reproduced red before their fixes. Final verification: **567 tests passed across 44 files**, repository lint, typecheck, build and `git diff --check` passed. Existing gray-matter direct-eval and vinext mixed-import build warnings remain.
+
+The OpenAI key is stored locally in an ignored permission-600 environment file, not installed as an Actions secret. Fresh interactive GET-only GitHub inventory and the existing local lander checkout enabled this local attempt without extracting or substituting a broad token. The standard worker's fine-grained read-token/App requirements remain unchanged. Both PRs were verified open/unmerged and `AUTOBLOG_SCHEDULE_ENABLED=false`; all four pilot-created Apify runs were verified terminal. The local state and diagnostic files remain ignored and must be reconciled before future unattended execution.
+
+## Earlier automated coverage
 
 Final local verification on 2026-09-05: **564 tests passed across 44 files**, including all native-fixture cases. Typecheck, repository lint, the ICP production build and `git diff --check` passed. Socket tests were run with localhost permission. No paid-provider or model request was made.
 
@@ -43,7 +51,7 @@ The fixture bundle and full command report remain in ignored `artifacts/autoblog
 ## Operational dependencies
 
 - `APIFY_TOKEN` was securely stored in ICP Actions secrets on 2026-09-05. No value appears in the repository.
-- OpenAI, paid keyword-provider access, lander read credentials and publication App installation remain required for their respective live steps.
+- OpenAI is now verified locally; its Actions secret, paid keyword-provider access, scoped lander read credentials and publication App installation remain required for their respective unattended/later steps.
 - PR #55 was still open at the 2026-09-05 check. Pre-merge output remains artifact-only.
 - The schedule defaults to disabled. Enabling it and reviewing/publishing every generated article remain human decisions.
 
