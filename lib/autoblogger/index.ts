@@ -22,6 +22,7 @@ export * from './keyword-providers';
 export * from './matrices';
 export * from './openai-responses';
 export * from './policies';
+export * from './publisher';
 export * from './research';
 export * from './secrets';
 export * from './sources';
