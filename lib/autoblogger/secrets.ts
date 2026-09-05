@@ -16,8 +16,30 @@ function serializedValue(value: unknown): string {
 }
 
 export function containsSecretLikeValue(value: unknown): boolean {
-  const serialized = serializedValue(value);
-  return SECRET_PATTERN_SOURCES.some((source) => new RegExp(source, 'i').test(serialized));
+  const pending: unknown[] = [value];
+  const seen = new WeakSet<object>();
+  while (pending.length > 0) {
+    const current = pending.pop();
+    if (typeof current === 'string') {
+      if (SECRET_PATTERN_SOURCES.some((source) => new RegExp(source, 'i').test(current))) return true;
+      continue;
+    }
+    if (current instanceof Error) {
+      pending.push(current.name, current.message);
+      continue;
+    }
+    if (!current || typeof current !== 'object' || seen.has(current)) continue;
+    seen.add(current);
+    if (Array.isArray(current)) {
+      pending.push(...current);
+      continue;
+    }
+    for (const [key, entry] of Object.entries(current)) {
+      pending.push(key, entry);
+      if (typeof entry === 'string') pending.push(`${key}=${entry}`);
+    }
+  }
+  return false;
 }
 
 export function redactSensitive(value: unknown, secrets: string[] = []): string {

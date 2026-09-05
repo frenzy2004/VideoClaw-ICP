@@ -8,7 +8,8 @@ import { promisify } from 'node:util';
 
 import { afterEach, describe, expect, it } from 'vitest';
 
-import type { DraftBundle } from './domain';
+import type { Candidate, DraftBundle, EvidenceBundle } from './domain';
+import { containsSecretLikeValue } from './secrets';
 import {
   createProcessCommandBoundary,
   createPublisher,
@@ -27,7 +28,7 @@ async function runGit(cwd: string, args: string[]): Promise<void> {
   await execFileAsync('git', args, { cwd });
 }
 
-async function createLanderRepository(lockfile: 'npm' | 'pnpm' = 'npm') {
+async function createLanderRepository(lockfile: 'npm' | 'npm-real' | 'pnpm' = 'npm') {
   const root = await mkdtemp(join(tmpdir(), 'autoblogger-publisher-source-'));
   temporaryDirectories.push(root);
   await mkdir(join(root, 'content/articles'), { recursive: true });
@@ -35,13 +36,39 @@ async function createLanderRepository(lockfile: 'npm' | 'pnpm' = 'npm') {
   await mkdir(join(root, 'public/landing/full'), { recursive: true });
   await writeFile(join(root, 'public/landing/full/founder-product.mp4'), 'video fixture');
   await writeFile(join(root, 'public/landing/full/founder-product.jpg'), 'poster fixture');
+  const realNpmFixture = lockfile === 'npm-real';
+  const fixtureScript = (label: string, verifyBundle = false) => `node -e ${JSON.stringify([
+    "const fs = require('node:fs');",
+    ...(verifyBundle ? [
+      "if (!fs.existsSync('content/articles/founder-pitch-video-workflow.md')) process.exit(9);",
+      "if (!fs.existsSync('public/media/blog/founder-pitch-video-workflow.svg')) process.exit(10);",
+    ] : []),
+    `process.stdout.write(${JSON.stringify(`fixture ${label}`)});`,
+  ].join(''))}`;
   await writeFile(join(root, 'package.json'), JSON.stringify({
     name: 'fixture-lander',
+    version: '1.0.0',
     private: true,
     ...(lockfile === 'pnpm' ? { packageManager: 'pnpm@10.0.0' } : {}),
-    scripts: { 'check:blog': 'fixture', lint: 'fixture', build: 'fixture' },
+    scripts: realNpmFixture
+      ? {
+          'check:blog': fixtureScript('check:blog', true),
+          lint: fixtureScript('lint'),
+          build: fixtureScript('build'),
+        }
+      : { 'check:blog': 'fixture', lint: 'fixture', build: 'fixture' },
   }));
-  await writeFile(join(root, lockfile === 'npm' ? 'package-lock.json' : 'pnpm-lock.yaml'), '{}\n');
+  if (lockfile === 'pnpm') {
+    await writeFile(join(root, 'pnpm-lock.yaml'), '{}\n');
+  } else {
+    await writeFile(join(root, 'package-lock.json'), realNpmFixture ? JSON.stringify({
+      name: 'fixture-lander',
+      version: '1.0.0',
+      lockfileVersion: 3,
+      requires: true,
+      packages: { '': { name: 'fixture-lander', version: '1.0.0' } },
+    }, null, 2) : '{}\n');
+  }
   await writeFile(join(root, '.gitignore'), 'node_modules\n.next\n');
   await runGit(root, ['init', '-b', 'main']);
   await runGit(root, ['config', 'user.name', 'Fixture']);
@@ -103,6 +130,54 @@ function bundleFixture(overrides: Partial<DraftBundle> = {}): DraftBundle {
   };
 }
 
+function originFixture(bundle = bundleFixture()) {
+  const article = bundle.article as Record<string, unknown>;
+  const provenance = article.provenance as Record<string, string>;
+  const productMedia = article.productMedia as Record<string, string>;
+  const editorialGraphic = article.editorialGraphic as Record<string, string>;
+  const candidate: Candidate = {
+    schemaVersion: 1,
+    articleId: article.id as Candidate['articleId'],
+    campaignId: article.campaign as Candidate['campaignId'],
+    icp: article.icp as string,
+    primaryKeyword: article.primaryKeyword as string,
+    secondaryKeywords: [],
+    title: article.title as string,
+    slug: article.slug as string,
+    intent: article.searchIntent as Candidate['intent'],
+    funnelStage: 'top',
+  };
+  const evidence: EvidenceBundle = {
+    schemaVersion: 1,
+    candidateFingerprint: bundle.candidateFingerprint,
+    suggestions: [candidate.primaryKeyword],
+    serp: {
+      organicResultCount: 10,
+      peopleAlsoAsk: ['How do founders make pitch videos?', 'What belongs in a founder pitch?', 'How long should it be?'],
+    },
+    sources: [
+      { url: 'https://www.ycombinator.com/video/', authoritative: true },
+      { url: 'https://www.ftc.gov/business-guidance/', authoritative: true },
+    ],
+    faqQuestions: ['How do founders make pitch videos?', 'What belongs in a founder pitch?', 'How long should it be?'],
+  };
+  return {
+    candidate,
+    evidence,
+    provenance: {
+      apifyRunId: provenance.apifyRunId,
+      apifyDatasetId: provenance.apifyDatasetId,
+      query: provenance.query,
+      locale: provenance.locale,
+      capturedAt: provenance.capturedAt,
+    },
+    approvedMedia: {
+      product: [{ src: productMedia.src, poster: productMedia.poster }],
+      editorialGraphics: [editorialGraphic.src],
+    },
+  };
+}
+
 class FixtureCommandBoundary implements CommandBoundary {
   readonly requests: CommandRequest[] = [];
   readonly observedFiles: Array<{ markdown: string; svg: string; remotes: string }> = [];
@@ -149,6 +224,7 @@ class FixtureGitHubBoundary implements GitHubPublisherBoundary {
   failAt?: 'prepare' | 'branch' | 'pull_request';
   invalidPreparedSha = false;
   invalidPullRequestResponse = false;
+  failPullRequestLookup = false;
 
   constructor(readonly snapshot: GitHubTargetSnapshot = structuredClone(readySnapshot)) {}
 
@@ -177,13 +253,19 @@ class FixtureGitHubBoundary implements GitHubPublisherBoundary {
     this.calls.push('pull_request');
     if (this.failAt === 'pull_request') throw new Error('pull request failed');
     if (this.invalidPullRequestResponse) return { number: 0, url: 'javascript:invalid' };
-    const pullRequest = { number: 91, url: 'https://github.test/pull/91', headRef: input.headRef, bundleHash: input.bundleHash };
+    const pullRequest = {
+      number: 91,
+      url: 'https://github.test/INFR-Organisation/videoclaw-lander/pull/91',
+      headRef: input.headRef,
+      bundleHash: input.bundleHash,
+    };
     this.pullRequests.push(pullRequest);
     return pullRequest;
   }
 
   async findOpenPullRequestByHead(input: { headRef: string }) {
     this.calls.push('find_pull_request');
+    if (this.failPullRequestLookup) throw new Error('lookup unavailable');
     return this.pullRequests.find(({ headRef }) => headRef === input.headRef) ?? null;
   }
 
@@ -212,6 +294,29 @@ describe('Publisher.validateBundle', () => {
     expect(command.requests).toEqual([]);
   });
 
+  it('rejects a secret-like value in the exact input before any command side effect', async () => {
+    const source = await createLanderRepository();
+    const command = new FixtureCommandBoundary();
+    const secret = 'apify_api_synthetic_fixture_123456';
+    const bundle = Object.freeze(bundleFixture({
+      markdown: `${bundleFixture().markdown}\n${secret}`,
+    }));
+    const publisher = createPublisher({
+      lander: { repository: source, ref: 'main', owner: 'INFR-Organisation', name: 'videoclaw-lander' },
+      command,
+    });
+
+    expect(bundle.markdown).toContain(secret);
+    expect(containsSecretLikeValue(bundle)).toBe(true);
+
+    const report = await publisher.validateBundle(bundle);
+
+    expect(report).toMatchObject({ status: 'failed', cleanup: 'completed', commands: [] });
+    expect(report.failure).toMatch(/secret-like/i);
+    expect(JSON.stringify(report)).not.toContain(secret);
+    expect(command.requests).toEqual([]);
+  });
+
   it('validates one immutable bundle in a disposable clone without changing the configured source checkout', async () => {
     const source = await createLanderRepository();
     await writeFile(join(source, 'local-uncommitted-note.txt'), 'must remain untouched');
@@ -226,12 +331,18 @@ describe('Publisher.validateBundle', () => {
 
     const report = await publisher.validateBundle(frozenBundle);
 
-    expect(report).toMatchObject({ status: 'passed', cleanup: 'completed', packageManager: 'npm' });
+    expect(report).toMatchObject({
+      status: 'passed',
+      cleanup: 'completed',
+      packageManager: 'npm',
+      checkedOutHeadSha: beforeHead,
+    });
     expect(report.articlePath).toBe('content/articles/founder-pitch-video-workflow.md');
     expect(report.svgPath).toBe('public/media/blog/founder-pitch-video-workflow.svg');
     expect(report.commands.map(({ label, exitCode }) => [label, exitCode])).toEqual([
       ['clone', 0],
       ['checkout', 0],
+      ['resolve-head', 0],
       ['isolate-checkout', 0],
       ['install', 0],
       ['check:blog', 0],
@@ -261,6 +372,31 @@ describe('Publisher.validateBundle', () => {
       command: 'pnpm',
       args: ['install', '--frozen-lockfile'],
     });
+  });
+
+  it('executes the selected npm commands against a minimal offline fixture repository', async () => {
+    const source = await createLanderRepository('npm-real');
+    const publisher = createPublisher({
+      lander: { repository: source, ref: 'main', owner: 'INFR-Organisation', name: 'videoclaw-lander' },
+      command: createProcessCommandBoundary(),
+      commandTimeoutMs: 10_000,
+    });
+
+    const report = await publisher.validateBundle(bundleFixture());
+
+    expect(report.status).toBe('passed');
+    expect(report.commands.map(({ label }) => label)).toEqual([
+      'clone',
+      'checkout',
+      'resolve-head',
+      'isolate-checkout',
+      'install',
+      'check:blog',
+      'lint',
+      'build',
+      'workspace-integrity',
+    ]);
+    expect(report.commands.find(({ label }) => label === 'check:blog')?.stdout).toContain('fixture check:blog');
   });
 
   it('fails before install when declared product media is unavailable', async () => {
@@ -377,6 +513,60 @@ describe('Publisher.validateBundle', () => {
       else process.env[variableName] = previous;
     }
   });
+
+  it.skipIf(process.platform === 'win32')('terminates descendants that inherit command output and resolves within a bounded deadline', async () => {
+    const root = await mkdtemp(join(tmpdir(), 'autoblogger-process-tree-'));
+    temporaryDirectories.push(root);
+    const pidFile = join(root, 'descendant.pid');
+    const parentProgram = [
+      "const { spawn } = require('node:child_process');",
+      "const { writeFileSync } = require('node:fs');",
+      "const descendant = spawn(process.execPath, ['-e', 'setInterval(() => {}, 1000)'], { stdio: ['ignore', 'inherit', 'inherit'] });",
+      `writeFileSync(${JSON.stringify(pidFile)}, String(descendant.pid));`,
+      'setInterval(() => {}, 1000);',
+    ].join('\n');
+    const boundary = createProcessCommandBoundary();
+    let descendantPid: number | undefined;
+    try {
+      const result = await Promise.race([
+        boundary.run({
+          label: 'process-tree-timeout',
+          command: process.execPath,
+          args: ['-e', parentProgram],
+          cwd: root,
+          timeoutMs: 250,
+        }),
+        new Promise<'outer_deadline'>((resolveDeadline) => {
+          setTimeout(() => resolveDeadline('outer_deadline'), 2_500);
+        }),
+      ]);
+      descendantPid = Number.parseInt(await readFile(pidFile, 'utf8'), 10);
+
+      expect(result).not.toBe('outer_deadline');
+      expect(result).toMatchObject({ timedOut: true });
+      const processGone = await (async () => {
+        for (let attempt = 0; attempt < 50; attempt += 1) {
+          try {
+            process.kill(descendantPid as number, 0);
+          } catch (error) {
+            if ((error as NodeJS.ErrnoException).code === 'ESRCH') return true;
+            throw error;
+          }
+          await new Promise((resolveDelay) => setTimeout(resolveDelay, 20));
+        }
+        return false;
+      })();
+      expect(processGone).toBe(true);
+    } finally {
+      if (descendantPid) {
+        try {
+          process.kill(descendantPid, 'SIGKILL');
+        } catch (error) {
+          if ((error as NodeJS.ErrnoException).code !== 'ESRCH') throw error;
+        }
+      }
+    }
+  }, 5_000);
 });
 
 describe('Publisher.openDraftPullRequest', () => {
@@ -392,11 +582,15 @@ describe('Publisher.openDraftPullRequest', () => {
       lander: { repository: source, ref, owner: 'INFR-Organisation', name: 'videoclaw-lander' },
       command,
       github,
+      githubWebBase: 'https://github.test',
       now: () => new Date('2026-09-05T04:00:00.000Z'),
     });
     const validation = await publisher.validateBundle(bundle);
     expect(validation.status).toBe('passed');
-    return { publisher, bundle, validation, github };
+    if (github.snapshot.baseSha === readySnapshot.baseSha) {
+      github.snapshot.baseSha = validation.checkedOutHeadSha as string;
+    }
+    return { publisher, bundle, validation, github, origin: originFixture(bundle) };
   }
 
   const auth = {
@@ -430,6 +624,7 @@ describe('Publisher.openDraftPullRequest', () => {
       validation: feature.validation,
       mode: 'scheduled',
       keywordMetrics: paidKeywordMetrics,
+      origin: feature.origin,
       auth,
     });
 
@@ -445,6 +640,7 @@ describe('Publisher.openDraftPullRequest', () => {
       validation: unmerged.validation,
       mode: 'scheduled',
       keywordMetrics: paidKeywordMetrics,
+      origin: unmerged.origin,
       auth,
     });
     expect(unmergedResult).toEqual({ status: 'artifact_only', reason: 'blog_launch_not_merged_into_main' });
@@ -458,6 +654,7 @@ describe('Publisher.openDraftPullRequest', () => {
       validation: fixture.validation,
       mode: 'scheduled',
       keywordMetrics: paidKeywordMetrics,
+      origin: fixture.origin,
     });
 
     expect(result).toEqual({ status: 'blocked', reason: 'github_app_auth_required' });
@@ -474,6 +671,7 @@ describe('Publisher.openDraftPullRequest', () => {
         validation: fixture.validation,
         mode: 'scheduled',
         keywordMetrics: paidKeywordMetrics,
+        origin: fixture.origin,
         auth,
       });
 
@@ -502,6 +700,7 @@ describe('Publisher.openDraftPullRequest', () => {
       validation: fixture.validation,
       mode: 'manual_pilot',
       keywordMetrics: pendingKeywordMetrics,
+      origin: fixture.origin,
       auth,
     });
 
@@ -516,18 +715,19 @@ describe('Publisher.openDraftPullRequest', () => {
       validation: fixture.validation,
       mode: 'scheduled',
       keywordMetrics: paidKeywordMetrics,
+      origin: fixture.origin,
       auth,
     });
 
     expect(result).toEqual({
       status: 'opened',
       number: 91,
-      url: 'https://github.test/pull/91',
+      url: 'https://github.test/INFR-Organisation/videoclaw-lander/pull/91',
       headRef: 'autoblog/2026-09-05-founder-pitch-video-workflow',
     });
     expect(fixture.github.calls).toEqual(['inspect', 'prepare', 'branch', 'pull_request']);
     expect(fixture.github.prepared).toMatchObject({
-      baseSha: readySnapshot.baseSha,
+      baseSha: fixture.validation.checkedOutHeadSha,
       files: [
         { path: 'content/articles/founder-pitch-video-workflow.md', content: fixture.bundle.markdown },
         { path: 'public/media/blog/founder-pitch-video-workflow.svg', content: fixture.bundle.svg },
@@ -560,6 +760,7 @@ describe('Publisher.openDraftPullRequest', () => {
         validation: fixture.validation,
         mode: 'scheduled',
         keywordMetrics: paidKeywordMetrics,
+        origin: fixture.origin,
         auth,
       });
 
@@ -567,6 +768,31 @@ describe('Publisher.openDraftPullRequest', () => {
       expect(github.branches.size).toBe(0);
       expect(github.pullRequests).toHaveLength(0);
     }
+  });
+
+  it('retains the branch and requires reconciliation when PR creation and lookup are both uncertain', async () => {
+    const github = new FixtureGitHubBoundary();
+    github.failAt = 'pull_request';
+    github.failPullRequestLookup = true;
+    const fixture = await setup('main', github);
+
+    const result = await fixture.publisher.openDraftPullRequest({
+      bundle: fixture.bundle,
+      validation: fixture.validation,
+      mode: 'scheduled',
+      keywordMetrics: paidKeywordMetrics,
+      origin: fixture.origin,
+      auth,
+    });
+
+    expect(result).toEqual({
+      status: 'reconciliation_required',
+      reason: 'pull_request_state_uncertain',
+      headRef: 'autoblog/2026-09-05-founder-pitch-video-workflow',
+    });
+    expect(github.calls).toEqual(['inspect', 'prepare', 'branch', 'pull_request', 'find_pull_request']);
+    expect(github.branches).toEqual(new Set(['autoblog/2026-09-05-founder-pitch-video-workflow']));
+    expect(JSON.stringify(result)).not.toContain(auth.token);
   });
 
   it('rejects malformed commit and pull-request responses without leaving a branch or PR', async () => {
@@ -581,6 +807,7 @@ describe('Publisher.openDraftPullRequest', () => {
         validation: fixture.validation,
         mode: 'scheduled',
         keywordMetrics: paidKeywordMetrics,
+        origin: fixture.origin,
         auth,
       });
 
@@ -599,6 +826,7 @@ describe('Publisher.openDraftPullRequest', () => {
       validation: duplicate.validation,
       mode: 'scheduled',
       keywordMetrics: paidKeywordMetrics,
+      origin: duplicate.origin,
       auth,
     })).resolves.toEqual({ status: 'blocked', reason: 'duplicate_target' });
     expect(duplicate.github.calls).toEqual(['inspect']);
@@ -607,7 +835,7 @@ describe('Publisher.openDraftPullRequest', () => {
     rerun.github.snapshot.branchRefs.push('autoblog/2026-09-05-founder-pitch-video-workflow');
     rerun.github.snapshot.openPullRequests.push({
       number: 89,
-      url: 'https://github.test/pull/89',
+      url: 'https://github.test/INFR-Organisation/videoclaw-lander/pull/89',
       headRef: 'autoblog/2026-09-05-founder-pitch-video-workflow',
       bundleHash: rerun.validation.bundleHash,
     });
@@ -616,11 +844,12 @@ describe('Publisher.openDraftPullRequest', () => {
       validation: rerun.validation,
       mode: 'scheduled',
       keywordMetrics: paidKeywordMetrics,
+      origin: rerun.origin,
       auth,
     })).resolves.toEqual({
       status: 'already_exists',
       number: 89,
-      url: 'https://github.test/pull/89',
+      url: 'https://github.test/INFR-Organisation/videoclaw-lander/pull/89',
       headRef: 'autoblog/2026-09-05-founder-pitch-video-workflow',
     });
     expect(rerun.github.calls).toEqual(['inspect']);
@@ -642,6 +871,7 @@ describe('Publisher.openDraftPullRequest', () => {
       validation: fixture.validation,
       mode: 'scheduled',
       keywordMetrics: paidKeywordMetrics,
+      origin: fixture.origin,
       auth,
     });
 
@@ -658,11 +888,30 @@ describe('Publisher.openDraftPullRequest', () => {
       validation: fixture.validation,
       mode: 'scheduled',
       keywordMetrics: paidKeywordMetrics,
+      origin: originFixture(changed),
       auth,
     });
 
     expect(result).toMatchObject({ status: 'blocked', reason: 'publication_gate_failed' });
     expect(fixture.github.calls).toEqual([]);
+  });
+
+  it('refuses remote writes when main moved away from the exact validated checkout SHA', async () => {
+    const fixture = await setup();
+    fixture.github.snapshot.baseSha = 'ffffffffffffffffffffffffffffffffffffffff';
+
+    const result = await fixture.publisher.openDraftPullRequest({
+      bundle: fixture.bundle,
+      validation: fixture.validation,
+      mode: 'scheduled',
+      keywordMetrics: paidKeywordMetrics,
+      origin: fixture.origin,
+      auth,
+    });
+
+    expect(result).toEqual({ status: 'blocked', reason: 'validated_base_mismatch' });
+    expect(fixture.github.calls).toEqual(['inspect']);
+    expect(fixture.github.prepared).toBeUndefined();
   });
 
   it('rejects paid metrics that do not match the validated article frontmatter', async () => {
@@ -672,6 +921,46 @@ describe('Publisher.openDraftPullRequest', () => {
       validation: fixture.validation,
       mode: 'scheduled',
       keywordMetrics: { ...paidKeywordMetrics, volume: 999 },
+      origin: fixture.origin,
+      auth,
+    });
+
+    expect(result).toMatchObject({ status: 'blocked', reason: 'publication_gate_failed' });
+    expect(fixture.github.calls).toEqual([]);
+  });
+
+  it('rejects a trusted origin whose Apify provenance does not exactly bind to the draft', async () => {
+    const fixture = await setup();
+    const origin = originFixture(fixture.bundle);
+    origin.provenance.apifyRunId = 'run_different_snapshot';
+
+    const result = await fixture.publisher.openDraftPullRequest({
+      bundle: fixture.bundle,
+      validation: fixture.validation,
+      mode: 'scheduled',
+      keywordMetrics: paidKeywordMetrics,
+      origin,
+      auth,
+    });
+
+    expect(result).toMatchObject({ status: 'blocked', reason: 'publication_gate_failed' });
+    expect(fixture.github.calls).toEqual([]);
+  });
+
+  it('rejects an existing lander media asset that is absent from the approved allowlist', async () => {
+    const fixture = await setup();
+    const origin = originFixture(fixture.bundle);
+    origin.approvedMedia.product = [{
+      src: '/landing/full/approved-other.mp4',
+      poster: '/landing/full/approved-other.jpg',
+    }];
+
+    const result = await fixture.publisher.openDraftPullRequest({
+      bundle: fixture.bundle,
+      validation: fixture.validation,
+      mode: 'scheduled',
+      keywordMetrics: paidKeywordMetrics,
+      origin,
       auth,
     });
 
@@ -693,6 +982,7 @@ describe('Publisher.openDraftPullRequest', () => {
       lander: { repository: source, ref: 'main', owner: 'INFR-Organisation', name: 'videoclaw-lander' },
       command: new FixtureCommandBoundary(),
       github,
+      githubWebBase: 'https://github.test',
       now: () => new Date('2026-09-05T04:00:00.000Z'),
     });
 
@@ -701,6 +991,7 @@ describe('Publisher.openDraftPullRequest', () => {
       validation: foreignReport,
       mode: 'scheduled',
       keywordMetrics: paidKeywordMetrics,
+      origin: originFixture(bundle),
       auth,
     });
 
@@ -718,6 +1009,7 @@ describe('Publisher.openDraftPullRequest', () => {
       validation: fixture.validation,
       mode: 'scheduled',
       keywordMetrics: paidKeywordMetrics,
+      origin: fixture.origin,
       auth,
     });
 
@@ -725,5 +1017,62 @@ describe('Publisher.openDraftPullRequest', () => {
     expect(fixture.github.calls).toEqual(['inspect']);
     expect(fixture.github.branches.size).toBe(0);
     expect(fixture.github.pullRequests).toHaveLength(0);
+  });
+
+  it('rejects a created PR URL outside the configured GitHub host and repository', async () => {
+    const github = new FixtureGitHubBoundary();
+    github.createDraftPullRequest = async () => {
+      github.calls.push('pull_request');
+      return { number: 91, url: 'https://attacker.example/INFR-Organisation/videoclaw-lander/pull/91' };
+    };
+    const fixture = await setup('main', github);
+
+    const result = await fixture.publisher.openDraftPullRequest({
+      bundle: fixture.bundle,
+      validation: fixture.validation,
+      mode: 'scheduled',
+      keywordMetrics: paidKeywordMetrics,
+      origin: fixture.origin,
+      auth,
+    });
+
+    expect(result).toMatchObject({ status: 'blocked', reason: 'github_operation_failed' });
+    expect(github.branches).toEqual(new Set());
+    expect(github.pullRequests).toEqual([]);
+  });
+
+  it.each([
+    ['an object-valued present article identity', (snapshot: GitHubTargetSnapshot) => {
+      snapshot.existingArticles.push({ slug: 'some-other-article', title: { unsafe: true } as unknown as string });
+    }],
+    ['an array-valued present PR identity', (snapshot: GitHubTargetSnapshot) => {
+      snapshot.openPullRequests.push({
+        number: 88,
+        url: 'https://github.test/INFR-Organisation/videoclaw-lander/pull/88',
+        headRef: 'autoblog/2026-09-04-other-article',
+        slug: 'other-article',
+        primaryKeyword: ['unsafe'] as unknown as string,
+      });
+    }],
+    ['an empty present identity', (snapshot: GitHubTargetSnapshot) => {
+      snapshot.existingArticles.push({ slug: 'some-other-article', title: '   ' });
+    }],
+  ])('turns %s into a clean inspection refusal', async (_label, mutate) => {
+    const snapshot = structuredClone(readySnapshot);
+    mutate(snapshot);
+    const fixture = await setup('main', new FixtureGitHubBoundary(snapshot));
+
+    const result = await fixture.publisher.openDraftPullRequest({
+      bundle: fixture.bundle,
+      validation: fixture.validation,
+      mode: 'scheduled',
+      keywordMetrics: paidKeywordMetrics,
+      origin: fixture.origin,
+      auth,
+    });
+
+    expect(result).toMatchObject({ status: 'blocked', reason: 'github_inspection_failed' });
+    expect(fixture.github.calls).toEqual(['inspect']);
+    expect(fixture.github.prepared).toBeUndefined();
   });
 });

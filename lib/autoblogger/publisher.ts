@@ -5,14 +5,20 @@ import { tmpdir } from 'node:os';
 import { dirname, isAbsolute, join, relative, resolve, sep } from 'node:path';
 
 import {
+  CandidateSchema,
   DraftBundleSchema,
+  EvidenceBundleSchema,
   KeywordMetricsSchema,
+  candidateFingerprints,
   normalizeKeyword,
   normalizeSlug,
   normalizeTitle,
+  type Candidate,
   type DraftBundle,
+  type EvidenceBundle,
   type KeywordMetrics,
 } from './domain';
+import type { DraftProvenance } from './content-bundle';
 import { isStrictIsoDateTime } from './date-time';
 import type { RunMode } from './policies';
 import { containsSecretLikeValue, redactSensitive } from './secrets';
@@ -22,6 +28,12 @@ const DEFAULT_REPORT_OUTPUT_LIMIT = 4_000;
 const SAFE_SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const SAFE_REF = /^[A-Za-z0-9](?:[A-Za-z0-9._/-]{0,198}[A-Za-z0-9])?$/;
 const SAFE_REPOSITORY_IDENTITY = /^[A-Za-z0-9](?:[A-Za-z0-9_.-]{0,98}[A-Za-z0-9])?$/;
+const INVENTORY_IDENTITY_LIMITS = {
+  id: 128,
+  slug: 200,
+  title: 300,
+  primaryKeyword: 500,
+} as const;
 
 export type CommandRequest = {
   label: string;
@@ -52,6 +64,7 @@ export type ValidationReport = {
   cleanup: 'completed' | 'failed';
   bundleHash: string;
   landerRef: string;
+  checkedOutHeadSha?: string;
   articlePath?: string;
   svgPath?: string;
   packageManager?: 'npm' | 'pnpm' | 'yarn';
@@ -68,6 +81,7 @@ export type PublisherOptions = {
   };
   command: CommandBoundary;
   github?: GitHubPublisherBoundary;
+  githubWebBase?: string;
   temporaryRoot?: string;
   commandTimeoutMs?: number;
   reportOutputLimit?: number;
@@ -173,12 +187,26 @@ export type OpenDraftPullRequestInput = {
   validation: Readonly<ValidationReport>;
   mode: RunMode;
   keywordMetrics: Readonly<KeywordMetrics>;
+  origin: Readonly<PublisherOrigin>;
   auth?: GitHubAppInstallationAuth;
+};
+
+export type ApprovedPublicationMedia = {
+  product: ReadonlyArray<Readonly<{ src: string; poster: string }>>;
+  editorialGraphics: ReadonlyArray<string>;
+};
+
+export type PublisherOrigin = {
+  candidate: Readonly<Candidate>;
+  evidence: Readonly<EvidenceBundle>;
+  provenance: Readonly<DraftProvenance>;
+  approvedMedia: Readonly<ApprovedPublicationMedia>;
 };
 
 export type OpenDraftPullRequestResult =
   | { status: 'opened'; number: number; url: string; headRef: string }
   | { status: 'already_exists'; number: number; url: string; headRef: string }
+  | { status: 'reconciliation_required'; reason: 'pull_request_state_uncertain'; headRef: string }
   | { status: 'artifact_only'; reason: 'lander_base_not_ready' | 'blog_launch_not_merged_into_main' | 'manual_pilot_cannot_publish' }
   | { status: 'blocked'; reason: string; detail?: string };
 
@@ -213,6 +241,9 @@ function isolatedCommandEnvironment(): NodeJS.ProcessEnv {
   ];
   return {
     NODE_ENV: process.env.NODE_ENV ?? 'production',
+    NPM_CONFIG_AUDIT: 'false',
+    NPM_CONFIG_FUND: 'false',
+    NPM_CONFIG_UPDATE_NOTIFIER: 'false',
     ...Object.fromEntries(allowed.flatMap((key) => process.env[key] === undefined ? [] : [[key, process.env[key]]])),
   };
 }
@@ -227,17 +258,58 @@ export function createProcessCommandBoundary(options: { maxCaptureCharacters?: n
         let stderr = '';
         let timedOut = false;
         let settled = false;
+        let hardKill: NodeJS.Timeout | undefined;
+        let outerDeadline: NodeJS.Timeout | undefined;
+        const useProcessGroup = process.platform !== 'win32';
         const child = spawn(request.command, request.args, {
           cwd: request.cwd,
           env: isolatedCommandEnvironment(),
           shell: false,
           stdio: ['ignore', 'pipe', 'pipe'],
+          detached: useProcessGroup,
         });
+        const terminateTree = (signal: NodeJS.Signals) => {
+          if (!child.pid) return;
+          if (useProcessGroup) {
+            try {
+              process.kill(-child.pid, signal);
+              return;
+            } catch (error) {
+              if ((error as NodeJS.ErrnoException).code !== 'ESRCH') child.kill(signal);
+              return;
+            }
+          }
+          child.kill(signal);
+        };
+        const clearTimers = () => {
+          clearTimeout(timeout);
+          if (hardKill) clearTimeout(hardKill);
+          if (outerDeadline) clearTimeout(outerDeadline);
+        };
+        const finish = (exitCode: number | null) => {
+          if (settled) return;
+          settled = true;
+          clearTimers();
+          resolveCommand({
+            exitCode,
+            stdout,
+            stderr,
+            durationMs: Date.now() - startedAt,
+            timedOut,
+          });
+        };
         const timeout = setTimeout(() => {
           timedOut = true;
-          child.kill('SIGTERM');
-          const hardKill = setTimeout(() => child.kill('SIGKILL'), 1_000);
+          terminateTree('SIGTERM');
+          hardKill = setTimeout(() => terminateTree('SIGKILL'), 250);
           hardKill.unref();
+          outerDeadline = setTimeout(() => {
+            terminateTree('SIGKILL');
+            child.stdout.destroy();
+            child.stderr.destroy();
+            finish(null);
+          }, 750);
+          outerDeadline.unref();
         }, request.timeoutMs);
         timeout.unref();
         child.stdout.on('data', (chunk: Buffer) => {
@@ -248,21 +320,16 @@ export function createProcessCommandBoundary(options: { maxCaptureCharacters?: n
         });
         child.once('error', (error) => {
           if (settled) return;
+          if (timedOut) {
+            finish(null);
+            return;
+          }
           settled = true;
-          clearTimeout(timeout);
+          clearTimers();
           rejectCommand(error);
         });
         child.once('close', (exitCode) => {
-          if (settled) return;
-          settled = true;
-          clearTimeout(timeout);
-          resolveCommand({
-            exitCode,
-            stdout,
-            stderr,
-            durationMs: Date.now() - startedAt,
-            timedOut,
-          });
+          finish(exitCode);
         });
       });
     },
@@ -599,6 +666,95 @@ function readPublicationMetadata(
   };
 }
 
+function assertExactKeys(record: Record<string, unknown>, keys: string[], label: string): void {
+  if (Object.keys(record).sort().join(',') !== [...keys].sort().join(',')) {
+    throw new Error(`${label} contains unsupported fields.`);
+  }
+}
+
+function readBoundedOriginString(record: Record<string, unknown>, key: string, label: string): string {
+  const value = record[key];
+  if (
+    typeof value !== 'string'
+    || !value.trim()
+    || value.length > 1_000
+    || /[\u0000-\u001f\u007f-\u009f\u202a-\u202e\u2066-\u2069]/u.test(value)
+  ) throw new Error(`${label}.${key} must be a bounded non-empty string.`);
+  return value;
+}
+
+function assertPublisherOrigin(
+  bundle: DraftBundle,
+  metadata: PublicationMetadata,
+  input: Readonly<PublisherOrigin>,
+): void {
+  if (containsSecretLikeValue(input)) throw new Error('Publisher origin contains a secret-like value.');
+  const origin = readRecord(input, 'Publisher origin');
+  assertExactKeys(origin, ['candidate', 'evidence', 'provenance', 'approvedMedia'], 'Publisher origin');
+  const candidate = CandidateSchema.parse(origin.candidate);
+  const evidence = EvidenceBundleSchema.parse(origin.evidence);
+  const expectedFingerprint = candidateFingerprints(candidate).candidate;
+  if (
+    bundle.candidateFingerprint !== expectedFingerprint
+    || evidence.candidateFingerprint !== expectedFingerprint
+    || candidate.articleId !== metadata.id
+    || candidate.campaignId !== metadata.campaign
+    || candidate.icp !== metadata.icp
+    || candidate.primaryKeyword !== metadata.primaryKeyword
+    || candidate.title !== metadata.title
+    || candidate.slug !== metadata.slug
+    || candidate.intent !== (bundle.article as Record<string, unknown>).searchIntent
+  ) throw new Error('Publisher candidate/evidence binding does not match the draft bundle.');
+
+  const provenance = readRecord(origin.provenance, 'Publisher provenance');
+  assertExactKeys(
+    provenance,
+    ['apifyRunId', 'apifyDatasetId', 'query', 'locale', 'capturedAt'],
+    'Publisher provenance',
+  );
+  const trustedProvenance: DraftProvenance = {
+    apifyRunId: readBoundedOriginString(provenance, 'apifyRunId', 'Publisher provenance'),
+    apifyDatasetId: readBoundedOriginString(provenance, 'apifyDatasetId', 'Publisher provenance'),
+    query: readBoundedOriginString(provenance, 'query', 'Publisher provenance'),
+    locale: readBoundedOriginString(provenance, 'locale', 'Publisher provenance'),
+    capturedAt: readBoundedOriginString(provenance, 'capturedAt', 'Publisher provenance'),
+  };
+  if (
+    trustedProvenance.query !== candidate.primaryKeyword
+    || Object.entries(trustedProvenance).some(([key, value]) => (
+      metadata.provenance[key as keyof DraftProvenance] !== value
+    ))
+  ) throw new Error('Publisher Apify provenance does not exactly match the draft bundle.');
+
+  const approvedMedia = readRecord(origin.approvedMedia, 'Approved publication media');
+  assertExactKeys(approvedMedia, ['product', 'editorialGraphics'], 'Approved publication media');
+  if (!Array.isArray(approvedMedia.product) || !Array.isArray(approvedMedia.editorialGraphics)) {
+    throw new Error('Approved publication media must contain product and editorial arrays.');
+  }
+  const approvedProduct = approvedMedia.product.map((entry) => {
+    const record = readRecord(entry, 'Approved product media');
+    assertExactKeys(record, ['src', 'poster'], 'Approved product media');
+    return {
+      src: `/${safePublicAssetRelativePath(readBoundedOriginString(record, 'src', 'Approved product media'))}`,
+      poster: `/${safePublicAssetRelativePath(readBoundedOriginString(record, 'poster', 'Approved product media'))}`,
+    };
+  });
+  const approvedEditorial = approvedMedia.editorialGraphics.map((entry) => (
+    `/${safePublicAssetRelativePath(readBoundedOriginString({ entry }, 'entry', 'Approved editorial media'))}`
+  ));
+  if (
+    !approvedProduct.some(({ src, poster }) => (
+      src === metadata.productMedia.src && poster === metadata.productMedia.poster
+    ))
+    || !approvedEditorial.includes(metadata.editorialGraphic.src)
+  ) throw new Error('Draft media is not present in the approved publication allowlist.');
+
+  const evidenceSourceUrls = new Set(evidence.sources.map(({ url }) => url));
+  if (metadata.sources.some(({ url }) => !evidenceSourceUrls.has(url))) {
+    throw new Error('Draft sources are not bound to the originating evidence bundle.');
+  }
+}
+
 function assertValidationMatches(
   bundle: DraftBundle,
   validation: Readonly<ValidationReport>,
@@ -610,12 +766,14 @@ function assertValidationMatches(
     || validation.cleanup !== 'completed'
     || validation.bundleHash !== hashBundle(bundle)
     || validation.landerRef !== landerRef
+    || typeof validation.checkedOutHeadSha !== 'string'
+    || !/^[0-9a-f]{40,64}$/i.test(validation.checkedOutHeadSha)
     || validation.articlePath !== coordinates.articlePath
     || validation.svgPath !== coordinates.svgPath
   ) {
     throw new Error('A successful validation report for this exact bundle and lander ref is required.');
   }
-  const requiredCommands = ['clone', 'checkout', 'isolate-checkout', 'install', 'check:blog', 'lint', 'build', 'workspace-integrity'];
+  const requiredCommands = ['clone', 'checkout', 'resolve-head', 'isolate-checkout', 'install', 'check:blog', 'lint', 'build', 'workspace-integrity'];
   if (
     validation.commands.map(({ label }) => label).join(',') !== requiredCommands.join(',')
     || validation.commands.some(({ exitCode, timedOut }) => exitCode !== 0 || timedOut)
@@ -688,7 +846,31 @@ function githubFailureDetail(error: unknown, auth?: GitHubAppInstallationAuth): 
   return redactSensitive(error, auth ? [auth.token] : []).slice(0, 1_000);
 }
 
-function assertTargetSnapshot(value: GitHubTargetSnapshot): GitHubTargetSnapshot {
+function assertPresentInventoryIdentities(record: Record<string, unknown>, label: string): number {
+  let present = 0;
+  for (const [key, limit] of Object.entries(INVENTORY_IDENTITY_LIMITS) as Array<[
+    keyof typeof INVENTORY_IDENTITY_LIMITS,
+    number,
+  ]>) {
+    if (!Object.prototype.hasOwnProperty.call(record, key)) continue;
+    present += 1;
+    const value = record[key];
+    if (
+      typeof value !== 'string'
+      || !value.trim()
+      || value.length > limit
+      || /[\u0000-\u001f\u007f-\u009f\u202a-\u202e\u2066-\u2069]/u.test(value)
+    ) {
+      throw new Error(`${label} ${key} must be a bounded non-empty string.`);
+    }
+  }
+  return present;
+}
+
+function assertTargetSnapshot(
+  value: GitHubTargetSnapshot,
+  expectedPullRequestUrl: (number: number) => string,
+): GitHubTargetSnapshot {
   const snapshot = readRecord(value, 'GitHub target snapshot');
   if (snapshot.baseRef !== 'main' || typeof snapshot.baseSha !== 'string' || !/^[0-9a-f]{40,64}$/i.test(snapshot.baseSha)) {
     throw new Error('GitHub target snapshot has an invalid main base.');
@@ -710,18 +892,19 @@ function assertTargetSnapshot(value: GitHubTargetSnapshot): GitHubTargetSnapshot
   }
   for (const entry of snapshot.existingArticles as unknown[]) {
     const record = readRecord(entry, 'GitHub article inventory entry');
-    if (!['id', 'slug', 'title', 'primaryKeyword'].some((key) => typeof record[key] === 'string' && record[key])) {
+    if (assertPresentInventoryIdentities(record, 'GitHub article inventory entry') === 0) {
       throw new Error('GitHub article inventory entry requires an identity.');
     }
   }
   for (const entry of snapshot.openPullRequests as unknown[]) {
     const record = readRecord(entry, 'GitHub open pull request');
+    assertPresentInventoryIdentities(record, 'GitHub open pull request');
     if (
       typeof record.number !== 'number'
       || !Number.isInteger(record.number)
       || record.number <= 0
       || typeof record.url !== 'string'
-      || !normalizeHttpsUrl(record.url)
+      || record.url !== expectedPullRequestUrl(record.number)
       || typeof record.headRef !== 'string'
       || !isSafeRef(record.headRef)
       || (record.bundleHash !== undefined && (typeof record.bundleHash !== 'string' || !/^[0-9a-f]{64}$/i.test(record.bundleHash)))
@@ -732,14 +915,25 @@ function assertTargetSnapshot(value: GitHubTargetSnapshot): GitHubTargetSnapshot
   return value;
 }
 
-function normalizeHttpsUrl(value: string): string | undefined {
+function normalizeGitHubWebBase(value: string): string {
   try {
     const url = new URL(value);
-    if (url.protocol !== 'https:' || url.username || url.password) return undefined;
-    return url.toString();
+    if (
+      url.protocol !== 'https:'
+      || url.username
+      || url.password
+      || url.search
+      || url.hash
+    ) throw new Error('invalid GitHub web base');
+    url.pathname = url.pathname.replace(/\/+$/u, '');
+    return url.toString().replace(/\/$/u, '');
   } catch {
-    return undefined;
+    throw new Error('GitHub web base must be a credential-free HTTPS URL.');
   }
+}
+
+function pullRequestUrlFor(webBase: string, owner: string, repository: string, number: number): string {
+  return `${webBase}/${encodeURIComponent(owner)}/${encodeURIComponent(repository)}/pull/${number}`;
 }
 
 function assertCommitSha(value: unknown): string {
@@ -749,14 +943,17 @@ function assertCommitSha(value: unknown): string {
   return value;
 }
 
-function assertPullRequestResult(value: unknown): { number: number; url: string } {
+function assertPullRequestResult(
+  value: unknown,
+  expectedPullRequestUrl: (number: number) => string,
+): { number: number; url: string } {
   const result = readRecord(value, 'GitHub pull-request result');
   if (
     typeof result.number !== 'number'
     || !Number.isInteger(result.number)
     || result.number <= 0
     || typeof result.url !== 'string'
-    || !normalizeHttpsUrl(result.url)
+    || result.url !== expectedPullRequestUrl(result.number)
   ) {
     throw new Error('GitHub returned an invalid draft pull request.');
   }
@@ -767,6 +964,13 @@ export function createPublisher(options: PublisherOptions): Publisher {
   const timeoutMs = options.commandTimeoutMs ?? DEFAULT_COMMAND_TIMEOUT_MS;
   const outputLimit = options.reportOutputLimit ?? DEFAULT_REPORT_OUTPUT_LIMIT;
   const now = options.now ?? (() => new Date());
+  const githubWebBase = normalizeGitHubWebBase(options.githubWebBase ?? 'https://github.com');
+  const expectedPullRequestUrl = (number: number) => pullRequestUrlFor(
+    githubWebBase,
+    options.lander.owner,
+    options.lander.name,
+    number,
+  );
   const validatedBundleHashes = new Set<string>();
   if (!isSafeRef(options.lander.ref)) throw new Error('Unsafe lander ref.');
   assertSafeRepository(options.lander.repository);
@@ -776,6 +980,17 @@ export function createPublisher(options: PublisherOptions): Publisher {
 
   return {
     async validateBundle(input) {
+      const exactInputHash = hashBundle(input as DraftBundle);
+      if (containsSecretLikeValue(input)) {
+        return {
+          status: 'failed',
+          cleanup: 'completed',
+          bundleHash: exactInputHash,
+          landerRef: options.lander.ref,
+          commands: [],
+          failure: 'Draft bundle contains a secret-like value.',
+        };
+      }
       const bundle = DraftBundleSchema.parse(input);
       const bundleHash = hashBundle(bundle);
       const report: ValidationReport = {
@@ -823,6 +1038,13 @@ export function createPublisher(options: PublisherOptions): Publisher {
           cwd: temporaryDirectory,
         });
         await run({ label: 'checkout', command: 'git', args: ['checkout', '--detach', 'HEAD'], cwd: checkout });
+        const resolvedHead = (await run({
+          label: 'resolve-head',
+          command: 'git',
+          args: ['rev-parse', '--verify', 'HEAD'],
+          cwd: checkout,
+        })).stdout.trim();
+        report.checkedOutHeadSha = assertCommitSha(resolvedHead);
         await run({ label: 'isolate-checkout', command: 'git', args: ['remote', 'remove', 'origin'], cwd: checkout });
         if (await pathExists(join(checkout, coordinates.articlePath)) || await pathExists(join(checkout, coordinates.svgPath))) {
           throw new Error('Article or editorial graphic already exists in the configured lander ref.');
@@ -873,6 +1095,7 @@ export function createPublisher(options: PublisherOptions): Publisher {
       try {
         bundle = DraftBundleSchema.parse(input.bundle);
         metadata = readPublicationMetadata(bundle, input.mode, input.keywordMetrics);
+        assertPublisherOrigin(bundle, metadata, input.origin);
         assertValidationMatches(bundle, input.validation, options.lander.ref);
         if (!validatedBundleHashes.has(input.validation.bundleHash)) {
           throw new Error('Validation report was not produced by this publisher instance.');
@@ -906,7 +1129,7 @@ export function createPublisher(options: PublisherOptions): Publisher {
           baseRef: 'main',
           blogLaunchPullRequest: 55,
           auth,
-        }));
+        }), expectedPullRequestUrl);
       } catch (error) {
         return { status: 'blocked', reason: 'github_inspection_failed', detail: githubFailureDetail(error, auth) };
       }
@@ -918,6 +1141,12 @@ export function createPublisher(options: PublisherOptions): Publisher {
         || !snapshot.blogLaunch.mergeCommitIncludedInBase
       ) {
         return { status: 'artifact_only', reason: 'blog_launch_not_merged_into_main' };
+      }
+      if (
+        snapshot.baseRef !== options.lander.ref
+        || snapshot.baseSha !== input.validation.checkedOutHeadSha
+      ) {
+        return { status: 'blocked', reason: 'validated_base_mismatch' };
       }
       const existingHeadPullRequest = snapshot.openPullRequests.find(({ headRef: current }) => current === headRef);
       if (existingHeadPullRequest?.bundleHash === input.validation.bundleHash) {
@@ -973,22 +1202,34 @@ export function createPublisher(options: PublisherOptions): Publisher {
           draft: true,
           bundleHash: input.validation.bundleHash,
           auth,
-        }));
+        }), expectedPullRequestUrl);
         return { status: 'opened', number: pullRequest.number, url: pullRequest.url, headRef };
       } catch (error) {
         if (branchCreated) {
+          let existing: Awaited<ReturnType<GitHubPublisherBoundary['findOpenPullRequestByHead']>>;
           try {
-            const existing = await options.github.findOpenPullRequestByHead({
+            existing = await options.github.findOpenPullRequestByHead({
               owner: options.lander.owner,
               repository: options.lander.name,
               headRef,
               auth,
             });
-            if (existing?.bundleHash === input.validation.bundleHash) {
-              return { status: 'already_exists', number: existing.number, url: existing.url, headRef };
-            }
           } catch {
-            // The cleanup attempt below remains fail-closed and does not expose credentials.
+            return { status: 'reconciliation_required', reason: 'pull_request_state_uncertain', headRef };
+          }
+          if (existing !== null) {
+            try {
+              const reconciled = assertPullRequestResult(existing, expectedPullRequestUrl);
+              if (
+                existing.headRef === headRef
+                && existing.bundleHash === input.validation.bundleHash
+              ) {
+                return { status: 'already_exists', number: reconciled.number, url: reconciled.url, headRef };
+              }
+            } catch {
+              // A malformed reconciliation response is not proof that the remote branch is safe to delete.
+            }
+            return { status: 'reconciliation_required', reason: 'pull_request_state_uncertain', headRef };
           }
           try {
             await options.github.deleteBranch({
