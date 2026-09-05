@@ -1,9 +1,12 @@
 # Automated pipeline verification — 6 September 2026
 
-**The requested fully automated article milestone has not passed.** Automatic
+**Historical checkpoint; see the [approved-retry report](APPROVED-RETRY-2026-09-06.md)
+for the latest status. The requested fully automated article milestone has not passed.** Automatic
 research and source-body input validation are demonstrated; a live draft that
 passes critique, repair and native QA is still unproven. The configured candidate
-retry limit is exhausted, and no history or limit was reset to force another run.
+retry limit was exhausted at this checkpoint, and no history or limit was reset to
+force another run. A later explicit one-use approval is recorded separately; fresh
+PAA diagnostics, not the original source-input bug, now prevent a qualifying run.
 
 ## Scope
 

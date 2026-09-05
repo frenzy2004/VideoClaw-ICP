@@ -368,12 +368,19 @@ export function createAutobloggerWorker(options: AutobloggerWorkerOptions) {
         report.status = 'already_recorded';
         return report;
       }
+      const approval = state.manualRetryApproval;
+      if (approval && (!approval.consumedAt || approval.runId === input.runId)) {
+        if (approval.consumedAt || mode !== 'manual_pilot' || input.runId !== approval.runId
+          || options.targetCandidateFingerprint !== approval.candidateFingerprint || options.publicationEnabled !== false) {
+          throw new Error('Manual retry approval requires its exact new artifact-only pilot run and target; reuse is forbidden.');
+        }
+      }
 
       const allKnownCandidates = [...state.queuedCandidates, ...options.backlog];
       state = reconcileTargetInventory(state, allKnownCandidates, options, startedAt);
       if (mode === 'manual_pilot') state = reserveManualPilot(state, input.runId, startedAt);
       const inventory = [...(options.landerInventory ?? []), ...(options.openPullRequestInventory ?? [])];
-      const queue = buildIncrementalQueue({ state, backlog: options.backlog, inventory, now: startedAt });
+      const queue = buildIncrementalQueue({ state, backlog: options.backlog, inventory, now: startedAt, runId: input.runId, mode });
       if (options.targetCandidateFingerprint) {
         const target = queue.all.find((candidate) => candidateFingerprints(candidate).candidate === options.targetCandidateFingerprint);
         if (!target) throw new Error('Requested target candidate is not eligible for recovery.');
@@ -404,6 +411,14 @@ export function createAutobloggerWorker(options: AutobloggerWorkerOptions) {
           state = markCandidateFailure(state, candidate, input.runId, 'shallow_research_failed', true, now().toISOString());
         }
         if (mode === 'manual_pilot' && state.manualPilot?.runId === input.runId) state = { ...state, manualPilot: null };
+        const retryApproval = state.manualRetryApproval;
+        if (retryApproval?.runId === input.runId) {
+          state = recordPersistent(state, { schemaVersion: 1, runId: input.runId, mode, startedAt, selectedCandidateFingerprints: [], status: 'failed' });
+          state = { ...state, failures: [...state.failures, {
+            runId: input.runId, candidateFingerprint: retryApproval.candidateFingerprint,
+            code: 'shallow_research_failed', attempt: 4, observedAt: now().toISOString(), detail: safeDetail(error),
+          }] };
+        }
         await options.stateStore.save(compactPersistentWorkerState(state), version);
         throw error;
       }
@@ -662,7 +677,7 @@ export function createAutobloggerWorker(options: AutobloggerWorkerOptions) {
           if (artifactIndex >= 0 && report.artifacts[artifactIndex].publication === 'artifact_only') report.artifacts.splice(artifactIndex, 1);
           const retryableFailure = isRetryableError(error);
           state = markCandidateFailure(state, candidate, input.runId, 'candidate_failed', retryableFailure, now().toISOString());
-          report.failures.push({ candidateFingerprint: fingerprints.candidate, code: 'candidate_failed', detail: safeDetail(error), retryable: retryableFailure, attempt: state.decisions[fingerprints.candidate].attempts });
+          report.failures.push({ candidateFingerprint: fingerprints.candidate, code: 'candidate_failed', detail: safeDetail(error), retryable: state.decisions[fingerprints.candidate].status === 'retryable', attempt: state.decisions[fingerprints.candidate].attempts });
         }
       }
 
@@ -693,10 +708,11 @@ export function createAutobloggerWorker(options: AutobloggerWorkerOptions) {
         failures: [...state.failures, ...report.failures.map((failure) => ({
           runId: input.runId,
           code: failure.code,
-          attempt: Math.max(1, Math.min(3, failure.attempt ?? 1)),
+          attempt: Math.max(1, failure.attempt ?? 1),
+          ...(failure.candidateFingerprint ? { candidateFingerprint: failure.candidateFingerprint } : {}),
           observedAt: now().toISOString(),
           detail: failure.detail,
-        }))].slice(-100),
+        }))],
       };
       await options.stateStore.save(compactPersistentWorkerState(state), version);
       report.status = runStatus;

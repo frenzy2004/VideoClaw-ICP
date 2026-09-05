@@ -37,7 +37,9 @@ function assertMutationAuth(auth: GitHubAppInstallationAuth): void {
 const CompactFailureSchema = z.object({
   runId: z.string().trim().min(1).max(160),
   code: z.string().trim().min(1).max(120),
-  attempt: z.number().int().min(1).max(3),
+  // Four is accepted only by the enclosing state's consumed-grant checks.
+  attempt: z.number().int().min(1).max(4),
+  candidateFingerprint: z.string().trim().min(1).max(500).optional(),
   observedAt: z.string().datetime(),
   detail: z.string().trim().min(1).max(500),
 }).strict();
@@ -110,12 +112,25 @@ const ManualPilotSchema = z.object({
   consumedAt: z.string().datetime().nullable(),
 }).strict();
 
+const ManualRetryApprovalSchema = z.object({
+  mode: z.literal('manual_pilot'),
+  articleId: z.literal('vc-c2-001'),
+  candidateFingerprint: z.string().startsWith('candidate:').max(500),
+  identities: z.array(z.string().trim().min(1).max(500)).length(6),
+  priorRunId: z.string().regex(/^[A-Za-z0-9][A-Za-z0-9._-]{0,159}$/u),
+  runId: z.string().regex(/^[A-Za-z0-9][A-Za-z0-9._-]{0,159}$/u),
+  reason: z.string().trim().min(1).max(240),
+  approvedAt: z.string().datetime(),
+  consumedAt: z.string().datetime().nullable(),
+}).strict();
+
 export const PersistentWorkerStateSchema = AutobloggerStateSchema.extend({
   manualPilot: ManualPilotSchema.nullable(),
+  manualRetryApproval: ManualRetryApprovalSchema.optional(),
   queuedCandidates: z.array(CandidateSchema).max(500),
   candidateFingerprints: z.array(z.string().trim().min(1).max(500)).max(20_000),
   dedupeHashes: z.array(z.string().regex(/^[0-9a-f]{64}$/u)).max(30_000),
-  decisions: z.record(z.string(), CandidateDecisionSchema),
+  decisions: z.record(z.string(), CandidateDecisionSchema.extend({ attempts: z.number().int().min(0).max(4) })),
   provenance: z.record(z.string(), CompactProvenanceSchema),
   contentHashes: z.record(z.string(), z.string().regex(/^[0-9a-f]{64}$/)),
   pullRequests: z.record(z.string(), z.object({
@@ -124,7 +139,70 @@ export const PersistentWorkerStateSchema = AutobloggerStateSchema.extend({
     status: z.enum(['opened', 'already_exists', 'reconciliation_required']),
   }).strict()),
   failures: z.array(CompactFailureSchema).max(100),
-}).strict();
+}).strict().superRefine((state, ctx) => {
+  const approval = state.manualRetryApproval;
+  const invalid = (message: string) => ctx.addIssue({ code: 'custom', path: ['manualRetryApproval'], message });
+  for (const [fingerprint, decision] of Object.entries(state.decisions)) {
+    if (decision.attempts > 3 && (!approval?.consumedAt || approval.candidateFingerprint !== fingerprint
+      || approval.runId !== decision.runId || decision.status === 'retryable')) invalid('Attempt four requires its exact consumed manual retry approval.');
+  }
+  for (const failure of state.failures) {
+    if (failure.attempt > 3 && (!approval?.consumedAt || failure.runId !== approval.runId
+      || failure.candidateFingerprint !== approval.candidateFingerprint
+      || Date.parse(failure.observedAt) < Date.parse(approval.consumedAt))) invalid('Fourth failure requires its exact consumed manual retry approval.');
+  }
+  if (!approval) return;
+  const decision = state.decisions[approval.candidateFingerprint];
+  const prior = state.runs[approval.priorRunId];
+  const approvedAt = Date.parse(approval.approvedAt);
+  const priorFailure = state.failures.some((failure) => failure.runId === approval.priorRunId
+    && failure.attempt === 3 && failure.code === 'candidate_failed'
+    && (!failure.candidateFingerprint || failure.candidateFingerprint === approval.candidateFingerprint)
+    && Date.parse(failure.observedAt) <= approvedAt);
+  if (approval.priorRunId === approval.runId || !prior || prior.runId !== approval.priorRunId
+    || prior.mode !== 'manual_pilot' || prior.status !== 'failed' || !priorFailure
+    || prior.selectedCandidateFingerprints.length !== 1 || prior.selectedCandidateFingerprints[0] !== approval.candidateFingerprint
+    || Date.parse(prior.startedAt) > approvedAt) invalid('Manual retry approval requires the retained failed third manual pilot.');
+  if (!decision || decision.articleId !== approval.articleId
+    || !approval.identities.includes(approval.candidateFingerprint) || !approval.identities.includes(`article:${approval.articleId}`)
+    || !approval.identities.includes(decision.intentFingerprint) || new Set(approval.identities).size !== 6
+    || JSON.stringify([...decision.identities].sort()) !== JSON.stringify([...approval.identities].sort())) {
+    invalid('Manual retry approval must retain the exact candidate identities.');
+    return;
+  }
+  if (!approval.consumedAt) {
+    const projection = state.candidates[approval.candidateFingerprint];
+    const projectionRun = projection && state.runs[projection.runId];
+    // The legacy projection is not advanced by persistent worker run records.
+    // Accept only pre-draft progress proven stale by an older failed manual run.
+    const stalePreDraft = projection && ['selected', 'researched'].includes(projection.status)
+      && projection.mode === 'manual_pilot' && projectionRun?.runId === projection.runId
+      && projectionRun.mode === 'manual_pilot' && projectionRun.status === 'failed'
+      && projectionRun.selectedCandidateFingerprints.length === 1
+      && projectionRun.selectedCandidateFingerprints[0] === approval.candidateFingerprint
+      && prior && Date.parse(projectionRun.startedAt) < Date.parse(prior.startedAt)
+      && Date.parse(projectionRun.startedAt) <= Date.parse(projection.updatedAt)
+      && Date.parse(projection.updatedAt) <= Date.parse(decision.updatedAt);
+    if (decision.status !== 'terminal' || decision.reason !== 'candidate_failed' || decision.attempts !== 3
+      || decision.runId !== approval.priorRunId || decision.leaseExpiresAt !== null || Date.parse(decision.updatedAt) > approvedAt
+      || state.runs[approval.runId] || state.contentHashes[approval.candidateFingerprint] || state.pullRequests[approval.candidateFingerprint]
+      || (projection && (projection.mode !== 'manual_pilot'
+        || Date.parse(projection.updatedAt) > Date.parse(decision.updatedAt)
+        || (projection.status !== 'failed' && !stalePreDraft)))
+      || (state.manualPilot && (state.manualPilot.status !== 'leased' || state.manualPilot.runId !== approval.runId))) {
+      invalid('Unused manual retry approval requires a fresh run and an exhausted failed candidate with no artifact or pilot success.');
+    }
+  } else {
+    const consumedAt = Date.parse(approval.consumedAt);
+    const run = state.runs[approval.runId];
+    if (consumedAt < approvedAt || Date.parse(decision.updatedAt) < consumedAt
+      || decision.attempts !== 4 || decision.runId !== approval.runId
+      || (run && (run.mode !== 'manual_pilot' || run.status === 'pr_opened' || Date.parse(run.startedAt) < approvedAt
+        || run.selectedCandidateFingerprints.some((fingerprint) => fingerprint !== approval.candidateFingerprint)))) {
+      invalid('Consumed manual retry approval cannot be reset, moved to another run, or used for publication.');
+    }
+  }
+});
 
 export type PersistentWorkerState = z.infer<typeof PersistentWorkerStateSchema>;
 
@@ -153,16 +231,36 @@ function identityHash(value: string): string {
   return createHash('sha256').update(value).digest('hex');
 }
 
+function retainFailureHistory(input: PersistentWorkerState): PersistentWorkerState['failures'] {
+  const failures = z.array(CompactFailureSchema).parse(input.failures);
+  if (failures.length <= 100) return failures;
+  const pinned = new Set<number>();
+  const ordinary: number[] = [];
+  failures.forEach((failure, index) => {
+    // Keep every fourth-attempt record for contextual validation below, even if
+    // malformed authorization would otherwise hide it among discarded history.
+    if (failure.attempt === 4 || (input.manualRetryApproval && failure.runId === input.manualRetryApproval.priorRunId
+      && failure.attempt === 3 && failure.code === 'candidate_failed')) pinned.add(index);
+    else ordinary.push(index);
+  });
+  if (pinned.size > 100) throw new Error('Required manual retry failure audit exceeds the 100-record bound.');
+  const keep = new Set([...pinned, ...ordinary.slice(Math.max(0, ordinary.length - (100 - pinned.size)))]);
+  return failures.filter((_failure, index) => keep.has(index));
+}
+
 export function compactPersistentWorkerState(input: PersistentWorkerState): PersistentWorkerState {
-  const parsed = PersistentWorkerStateSchema.parse(input);
+  const parsed = PersistentWorkerStateSchema.parse({ ...input, failures: retainFailureHistory(input) });
   const orderedDecisions = Object.entries(parsed.decisions).sort((left, right) => (
     right[1].updatedAt.localeCompare(left[1].updatedAt) || left[0].localeCompare(right[0])
   ));
-  const active = orderedDecisions.filter(([, decision]) => ['leased', 'retryable', 'manual_attention'].includes(decision.status));
+  const retainedForRecovery = ([fingerprint, decision]: (typeof orderedDecisions)[number]) => (
+    fingerprint === parsed.manualRetryApproval?.candidateFingerprint || ['leased', 'retryable', 'manual_attention'].includes(decision.status)
+  );
+  const active = orderedDecisions.filter(retainedForRecovery);
   if (active.length > MAX_DECISIONS) throw new Error('Persistent state contains too many active or retryable decisions to compact safely.');
   const retainedDecisionEntries = [
     ...active,
-    ...orderedDecisions.filter(([, decision]) => !['leased', 'retryable', 'manual_attention'].includes(decision.status)),
+    ...orderedDecisions.filter((entry) => !retainedForRecovery(entry)),
   ].slice(0, MAX_DECISIONS);
   const retainedDecisionKeys = new Set(retainedDecisionEntries.map(([key]) => key));
   const droppedIdentityHashes = orderedDecisions
@@ -176,8 +274,12 @@ export function compactPersistentWorkerState(input: PersistentWorkerState): Pers
     ...droppedIdentityHashes,
   ])].sort();
   if (dedupeHashes.length > 30_000) throw new Error('Durable deduplication capacity reached; archive state before continuing. No identities were discarded.');
+  const approvalRuns = new Set(parsed.manualRetryApproval ? [parsed.manualRetryApproval.priorRunId, parsed.manualRetryApproval.runId] : []);
+  const projectionRunId = parsed.manualRetryApproval && parsed.candidates[parsed.manualRetryApproval.candidateFingerprint]?.runId;
+  if (projectionRunId) approvalRuns.add(projectionRunId);
   const retainedRuns = Object.entries(parsed.runs)
-    .sort((left, right) => right[1].startedAt.localeCompare(left[1].startedAt) || left[0].localeCompare(right[0]))
+    .sort((left, right) => Number(approvalRuns.has(right[0])) - Number(approvalRuns.has(left[0]))
+      || right[1].startedAt.localeCompare(left[1].startedAt) || left[0].localeCompare(right[0]))
     .slice(0, MAX_RUNS);
   const compacted = PersistentWorkerStateSchema.parse({
     ...parsed,
@@ -188,7 +290,7 @@ export function compactPersistentWorkerState(input: PersistentWorkerState): Pers
     provenance: Object.fromEntries(Object.entries(parsed.provenance).filter(([key]) => retainedDecisionKeys.has(key)).sort(([a], [b]) => a.localeCompare(b))),
     contentHashes: Object.fromEntries(Object.entries(parsed.contentHashes).filter(([key]) => retainedDecisionKeys.has(key)).sort(([a], [b]) => a.localeCompare(b))),
     pullRequests: Object.fromEntries(Object.entries(parsed.pullRequests).filter(([key]) => retainedDecisionKeys.has(key)).sort(([a], [b]) => a.localeCompare(b))),
-    failures: parsed.failures.slice(-100),
+    failures: parsed.failures,
   });
   if (Buffer.byteLength(JSON.stringify(compacted), 'utf8') > MAX_PERSISTENT_STATE_BYTES) {
     throw new Error('Persistent state exceeds the 1.5MB fail-closed size limit after deterministic compaction.');

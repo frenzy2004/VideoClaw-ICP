@@ -35,7 +35,7 @@ Apify evidence → one draft + critique + QA → Markdown / SVG / report artifac
 
 - The first attempt scanned fifty candidates and failed all ten deep checks, generating no article. [Historical pilot report](../autoblogger/LIVE-PILOT-2026-09-06.md). Follow-up collector checks still did not establish the complete automated organic/PAA evidence bundle. [Recovery report](../autoblogger/RESEARCH-RECOVERY-2026-09-06.md).
 - A later **assisted local review** combined actual Apify organic results with separately recorded browser PAA and manually checked source bodies. GPT-5.5 completed generation, critique, repair and verification; its final result still failed review. An explicit editorial revision produced one local article, without claiming an unattended pass or consuming a successful-pilot slot. [Current assisted-review report](../autoblogger/ASSISTED-REVIEW-2026-09-06.md).
-- **Latest automatic pipeline:** organic SERPs, exact-query PAA and supporting body pages are now collected without manual evidence injection. Attempt 2 completed four model calls but failed final draft checks. Attempt 3 stopped before OpenAI on an invisible source character; that defect is fixed and a fresh four-page/35-fact input check passes. No automatically generated article has passed native QA. The candidate remains terminal at its three-attempt limit. [Latest verification report](../autoblogger/AUTOMATED-PIPELINE-2026-09-06.md).
+- **Latest automatic pipeline:** attempt 2 failed final draft checks; attempt 3 stopped on an invisible source character. That input bug is fixed and fresh four-page/35-fact checks pass. One additional artifact-only attempt is explicitly authorized with all three previous failures retained. It remains unused: fresh exact-query and related-query checks found no qualifying PAA evidence. No automatically generated article has passed native QA. [Latest retry/evidence report](../autoblogger/APPROVED-RETRY-2026-09-06.md).
 - `KEYWORD_PROVIDER=pending` keeps volume, difficulty and CPC explicitly unknown. Paid metrics do not block this one pilot.
 - `LANDER_BASE_REF=seo/founder-video-blog-launch` validates against the unmerged blog contract, not production.
 - `APIFY_TOKEN` is present in ICP Actions secrets. `OPENAI_API_KEY` is now stored locally in an ignored environment file and verified against `gpt-5.5`; the scoped lander read token is still absent.
@@ -53,6 +53,8 @@ Fresh organic SERP → bounded PAA collection / recent exact-query reuse → sou
 Recent PAA reuse retains its original timestamp and separate run/dataset; it never
 pretends a missing Google feature appeared in the newest organic run. Local exact
 replay receipts remain private and ignored. No retry history was reset.
+The one-use retry approval changes only the execution allowance for its exact
+manual run. It does not relax source, FAQ, model-review or native-QA gates.
 
 The assisted lane is deliberately separate from the persistent worker:
 
@@ -108,7 +110,7 @@ Every article traces back to campaign, ICP, trigger, intent, keyword, SERP obser
 | --- | --- | --- |
 | Article and diagram updates | Original three review guides plus one assisted artifact in a separate local preview; no production action | Team review; artifact provenance remains explicit |
 | Worker implementation | PR #1 open; offline and native fixture verification recorded separately | Implementation review |
-| Automated local article milestone | Automatic research/body input now demonstrated; final live critique/repair/native-QA pass still missing | Explicit review of the exhausted candidate retry before further live generation; preserve all failed history |
+| Automated local article milestone | Input bug fixed; one extra manual attempt authorized but unconsumed; full article pass still missing | Fresh qualifying PAA evidence for the retained target; no gate relaxation or identity change |
 | Unattended Actions pilot | Not configured; no successful unattended article | Scoped read token, OpenAI Actions secret, reconciled state and reviewed worker |
 | Paid enrichment | Not connected; Apify research does not invent metrics | Provider access and a tested adapter |
 | Generated lander PRs | Not enabled | Merged blog contract, paid metrics, GitHub App and approved rollout |

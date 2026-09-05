@@ -3,10 +3,26 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-## Latest automatic-pipeline fixes — 2026-09-06
+## Latest one-use retry approval — 2026-09-06
 
-The [automatic-pipeline report](AUTOMATED-PIPELINE-2026-09-06.md) is the current
-checkpoint. **836 tests across 49 files pass.** Automatic PAA recovery and body
+The [approved-retry report](APPROVED-RETRY-2026-09-06.md) records the current
+checkpoint. An explicit additional manual attempt preserves the normal cap and
+earlier failures. It remains unconsumed because fresh exact-query and related-query
+diagnostics found no qualifying PAA evidence. No new model call, automatic article,
+native generated-bundle QA pass or lander write is claimed.
+
+Fresh verification: **921 tests across 49 files passed**, along with lint,
+typecheck, build and whitespace checks. Regression coverage includes restart-safe
+unused approvals and preservation of required audit history at compaction limits.
+The runtime-credential leak check passed. Existing build warnings remain.
+Real grant-only persistence and reload passed without reserving attempt four;
+all prior run/failure/decision/projection history was checked unchanged. Final
+independent review found no outstanding P1/P2 findings in this scoped patch.
+
+## Previous automatic-pipeline fixes — 2026-09-06
+
+The [automatic-pipeline report](AUTOMATED-PIPELINE-2026-09-06.md) records this
+earlier checkpoint. **836 tests across 49 files passed.** Automatic PAA recovery and body
 retrieval are demonstrated with exact provenance. Live attempt 2 completed four
 model calls but failed final draft checks. Attempt 3 passed automatic research but
 failed before OpenAI on source format controls. That mismatch is now fixed, and a

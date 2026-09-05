@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { CandidateSchema, candidateFingerprints } from './domain';
 import { createPersistentWorkerState } from './github-runtime';
-import { markCandidateFailure, markCandidateScanned, reserveCandidate, reserveManualPilot } from './recovery';
+import { grantManualRetryApproval, markCandidateFailure, markCandidateScanned, reserveCandidate, reserveManualPilot } from './recovery';
 import { reconcileLocalPilotCandidate, createModelAuditTransport, inspectLocalPilotInventory, parseLocalPilotArguments } from './local-pilot';
 
 const original = CandidateSchema.parse({
@@ -25,6 +25,81 @@ function fixture() {
 }
 
 describe('local artifact-only pilot preflight', () => {
+  function terminalFixture() {
+    const input = fixture();
+    for (let attempt = 2; attempt <= 3; attempt += 1) {
+      const runId = `automated-attempt-${attempt}`;
+      input.state = reserveCandidate(input.state, refined, runId, 'manual_pilot', at);
+      input.state = markCandidateFailure(input.state, refined, runId, 'candidate_failed', true, at);
+      input.state.runs[runId] = { schemaVersion: 1, runId, mode: 'manual_pilot', startedAt: at, selectedCandidateFingerprints: [fingerprint], status: 'failed' };
+      input.state.failures.push({ runId, code: 'candidate_failed', attempt, observedAt: at, detail: 'Retained failure.' });
+    }
+    input.state.queuedCandidates = [other]; // Terminal cleanup removed only the exhausted candidate.
+    return { ...input, runId: 'approved-attempt-4', approveRetryFrom: 'automated-attempt-3', approvedAt: '2026-09-06T21:00:00.000Z' };
+  }
+
+  it('parses the explicit prior-run retry approval without adding a default override', () => {
+    expect(parseLocalPilotArguments(['--run-id', 'approved-attempt-4', '--approve-retry-from', 'automated-pilot-2026-09-06-attempt-3', '--execute'])).toEqual({
+      runId: 'approved-attempt-4', approveRetryFrom: 'automated-pilot-2026-09-06-attempt-3',
+    });
+    for (const args of [
+      ['--run-id', 'new', '--approve-retry-from', '../old', '--execute'],
+      ['--run-id', 'same', '--approve-retry-from', 'same', '--execute'],
+      ['--run-id', 'new', '--approve-retry-from', 'old'],
+      ['--run-id', 'new', '--approve-retry-from', 'old', '--execute', '--reset'],
+      ['--run-id', 'new', '--approve-retry-from', '--execute'],
+    ]) expect(() => parseLocalPilotArguments(args)).toThrow();
+  });
+
+  it('restores only the approved recorded terminal identity and retains all other queued history', () => {
+    const input = terminalFixture();
+    const before = structuredClone(input);
+    const result = reconcileLocalPilotCandidate(input);
+    expect(result.nextAttempt).toBe(4);
+    expect(result.state.manualRetryApproval).toMatchObject({ runId: input.runId, priorRunId: input.approveRetryFrom,
+      candidateFingerprint: fingerprint, identities: Object.values(candidateFingerprints(refined)),
+      reason: 'user_authorized_after_input_fix', approvedAt: input.approvedAt, consumedAt: null });
+    expect(result.state.queuedCandidates).toEqual([other, refined]);
+    expect(result.state.decisions).toEqual(before.state.decisions);
+    expect(result.state.runs).toEqual(before.state.runs);
+    expect(result.state.failures).toEqual(before.state.failures);
+    expect(result.state.dedupeHashes).toEqual(before.state.dedupeHashes);
+    expect(result.state.candidateFingerprints).toEqual(before.state.candidateFingerprints);
+    expect(input).toEqual(before);
+    expect(reserveCandidate(result.state, refined, input.runId, 'manual_pilot', input.approvedAt).decisions[fingerprint].attempts).toBe(4);
+  });
+
+  it('reuses an identical unused approval only with the explicit flag and preserves its original audit date', () => {
+    const input = terminalFixture();
+    input.state = grantManualRetryApproval(input.state, refined, { priorRunId: input.approveRetryFrom, runId: input.runId, reason: 'user_authorized_after_input_fix', approvedAt: input.approvedAt });
+    const before = structuredClone(input.state);
+    input.approvedAt = '2026-09-07T21:00:00.000Z';
+    const result = reconcileLocalPilotCandidate(input);
+    expect(result.state.manualRetryApproval).toEqual(before.manualRetryApproval);
+    expect(result.state.decisions).toEqual(before.decisions);
+    expect(result.nextAttempt).toBe(4);
+    expect(() => reconcileLocalPilotCandidate({ ...input, approveRetryFrom: undefined })).toThrow();
+    const consumed = reserveCandidate(result.state, refined, input.runId, 'manual_pilot', input.approvedAt);
+    expect(() => reconcileLocalPilotCandidate({ ...input, state: consumed })).toThrow();
+  });
+
+  it.each(['default', 'wrong-prior', 'missing-date', 'different-grant-run', 'different-grant-reason', 'missing-backlog', 'changed-title', 'prepared-pilot'])(
+    'does not restore a terminal candidate with %s', (problem) => {
+      const input = terminalFixture();
+      if (problem === 'default') input.approveRetryFrom = undefined as unknown as string;
+      if (problem === 'wrong-prior') input.approveRetryFrom = 'automated-attempt-2';
+      if (problem === 'missing-date') input.approvedAt = undefined as unknown as string;
+      if (problem === 'different-grant-run' || problem === 'different-grant-reason') input.state = grantManualRetryApproval(input.state, refined, { priorRunId: input.approveRetryFrom, runId: problem === 'different-grant-run' ? 'another-run' : input.runId,
+        reason: problem === 'different-grant-reason' ? 'another_reason' : 'user_authorized_after_input_fix', approvedAt: input.approvedAt });
+      if (problem === 'missing-backlog') input.backlog = [other];
+      if (problem === 'changed-title') input.candidate = { ...refined, title: 'Changed title' };
+      if (problem === 'prepared-pilot') input.state.manualPilot = { runId: 'old', status: 'prepared', reservedAt: at, leaseExpiresAt: null, artifactHash: 'a'.repeat(64), consumedAt: null };
+      const before = structuredClone(input);
+      expect(() => reconcileLocalPilotCandidate(input)).toThrow();
+      expect(input).toEqual(before);
+    },
+  );
+
   it('requires an explicit execution flag and a fresh bounded run-id argument', () => {
     expect(parseLocalPilotArguments(['--run-id', 'automated-attempt-2', '--execute'])).toEqual({ runId: 'automated-attempt-2' });
     for (const args of [[], ['--run-id', 'attempt'], ['--execute'], ['--run-id', '../escape', '--execute'], ['--run-id', 'attempt', '--execute', '--reset'], ['--run-id', 'attempt', '--execute', '--candidate-id', 'new']]) {

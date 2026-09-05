@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto';
 import { CandidateSchema, candidateFingerprints, type Candidate } from './domain';
 import {
   compactPersistentWorkerState,
+  PersistentWorkerStateSchema,
   type CandidateDecision,
   type PersistentWorkerState,
   type GitHubStateStore,
@@ -24,6 +25,36 @@ export function candidateIdentityList(candidate: Candidate): string[] {
   return Object.values(candidateFingerprints(candidate));
 }
 
+/** Explicit local approval only; callers must persist this before paid work. */
+export function grantManualRetryApproval(
+  state: PersistentWorkerState,
+  candidateInput: Candidate,
+  input: { priorRunId: string; runId: string; reason: string; approvedAt: string },
+): PersistentWorkerState {
+  const candidate = CandidateSchema.parse(candidateInput);
+  if (state.manualRetryApproval || state.manualPilot !== null) throw new Error('Manual retry approval is one-use and requires no existing pilot reservation.');
+  return PersistentWorkerStateSchema.parse({
+    ...state,
+    manualRetryApproval: {
+      ...input, mode: 'manual_pilot', articleId: candidate.articleId,
+      candidateFingerprint: candidateFingerprints(candidate).candidate,
+      identities: candidateIdentityList(candidate), consumedAt: null,
+    },
+  });
+}
+
+export function hasManualRetryApproval(
+  state: PersistentWorkerState, candidate: Candidate, runId: string | undefined,
+  mode: RunMode | undefined, nowIso: string,
+): boolean {
+  const approval = state.manualRetryApproval;
+  if (!approval || approval.consumedAt || mode !== 'manual_pilot' || runId !== approval.runId
+    || candidateFingerprints(candidate).candidate !== approval.candidateFingerprint
+    || JSON.stringify(candidateIdentityList(candidate).sort()) !== JSON.stringify([...approval.identities].sort())
+    || assertDate(nowIso) < assertDate(approval.approvedAt)) return false;
+  return PersistentWorkerStateSchema.safeParse(state).success;
+}
+
 function assertDate(value: string): number {
   const time = Date.parse(value);
   if (!Number.isFinite(time)) throw new Error('Recovery timestamp must be an ISO date-time.');
@@ -36,7 +67,7 @@ function decisionFor(
   patch: Pick<CandidateDecision, 'status' | 'reason' | 'attempts' | 'runId' | 'updatedAt' | 'leaseExpiresAt'>,
 ): PersistentWorkerState {
   const fingerprints = candidateFingerprints(candidate);
-  return {
+  const next = {
     ...state,
     decisions: {
       ...state.decisions,
@@ -48,6 +79,7 @@ function decisionFor(
       },
     },
   };
+  return state.manualRetryApproval ? PersistentWorkerStateSchema.parse(next) : next;
 }
 
 export function markCandidateScanned(
@@ -79,7 +111,7 @@ export function reserveCandidate(
   state: PersistentWorkerState,
   candidateInput: Candidate,
   runId: string,
-  _mode: RunMode,
+  mode: RunMode,
   updatedAt: string,
   leaseMs = DEFAULT_LEASE_MS,
 ): PersistentWorkerState {
@@ -88,16 +120,21 @@ export function reserveCandidate(
   const candidate = CandidateSchema.parse(candidateInput);
   const fingerprint = candidateFingerprints(candidate).candidate;
   const existing = state.decisions[fingerprint];
+  const manualRetry = hasManualRetryApproval(state, candidate, runId, mode, updatedAt);
+  if ((existing?.attempts ?? 0) > MAX_CANDIDATE_ATTEMPTS) throw new Error('Manual retry approval is consumed; retry limit is exhausted.');
   if (existing?.status === 'leased' && existing.runId === runId && assertDate(existing.leaseExpiresAt as string) > now) return state;
   if (existing?.status === 'leased' && existing.leaseExpiresAt && assertDate(existing.leaseExpiresAt) > now) {
     throw new Error('Candidate already has an active reservation in another run.');
   }
-  if (existing && ['completed', 'terminal', 'manual_attention'].includes(existing.status)) {
+  if (existing && ['completed', 'terminal', 'manual_attention'].includes(existing.status) && !manualRetry) {
     throw new Error('Candidate is terminal and cannot be retried.');
   }
   const attempts = (existing?.attempts ?? 0) + 1;
-  if (attempts > MAX_CANDIDATE_ATTEMPTS) throw new Error('Candidate retry limit is exhausted.');
-  return decisionFor(state, candidate, {
+  if (attempts > MAX_CANDIDATE_ATTEMPTS && !manualRetry) throw new Error('Candidate retry limit is exhausted.');
+  const reserved = manualRetry ? {
+    ...state, manualRetryApproval: { ...state.manualRetryApproval!, consumedAt: updatedAt },
+  } : state;
+  return decisionFor(reserved, candidate, {
     status: 'leased',
     reason: 'draft_reservation',
     attempts,
@@ -161,6 +198,9 @@ export function deferCandidate(
   updatedAt: string,
 ): PersistentWorkerState {
   const existing = state.decisions[candidateFingerprints(candidate).candidate];
+  if ((existing?.attempts ?? 0) > MAX_CANDIDATE_ATTEMPTS) {
+    return markCandidateFailure(state, candidate, runId, reason, false, updatedAt);
+  }
   return decisionFor(state, candidate, {
     status: 'retryable', reason, runId, updatedAt, leaseExpiresAt: null,
     attempts: Math.max(0, (existing?.attempts ?? 0) - 1),
@@ -272,6 +312,8 @@ export function buildIncrementalQueue(input: {
   discoveries?: Candidate[];
   inventory?: RecoveryInventoryEntry[];
   now: string;
+  runId?: string;
+  mode?: RunMode;
 }): { state: PersistentWorkerState; all: Candidate[]; scan: Candidate[]; tail: Candidate[] } {
   let state = recoverExpiredReservations(input.state, input.now);
   const inventory = new Set((input.inventory ?? []).flatMap(inventoryIdentities));
@@ -300,7 +342,8 @@ export function buildIncrementalQueue(input: {
       });
       continue;
     }
-    if (decision && !['retryable'].includes(decision.status)) continue;
+    if (decision && decision.status !== 'retryable'
+      && !hasManualRetryApproval(state, candidate, input.runId, input.mode, input.now)) continue;
     if (!decision && identities.some((identity) => (
       state.candidateFingerprints.includes(identity) || state.dedupeHashes.includes(hashIdentity(identity))
     ))) continue;

@@ -6,11 +6,11 @@ This worker is a controlled research-and-drafting system. It does not publish ar
 
 The initial 250-topic research library is an input, not a quota or publication gate. Each run scans at most 50 candidates, deeply checks at most 10, and produces at most 3 drafts with no more than 2 from one ICP.
 
-Operator status on 2026-09-06: **automatic research/body collection demonstrated; zero successful fully automated article pilots or generated lander PRs**. The latest [automated-pipeline report](AUTOMATED-PIPELINE-2026-09-06.md) records the implemented fixes, 836 passing tests, a failed four-call model run and a subsequent pre-model input failure. The latter defect is fixed and fresh source-input validation passes. The retained candidate has exhausted its three-attempt limit; no reset, manual evidence injection or editorial rewrite was used to claim success.
+Operator status on 2026-09-06: **zero successful fully automated article pilots or generated lander PRs**. The [latest retry report](APPROVED-RETRY-2026-09-06.md) records one explicitly authorized extra attempt, while preserving the previous three failures and the normal retry cap. That attempt remains unused: fresh exact-query and related-query checks found no qualifying PAA evidence. No gate was relaxed or unrelated questions relabelled to obtain a passing run. The preceding [automated-pipeline report](AUTOMATED-PIPELINE-2026-09-06.md) records the source-input fix and earlier failed live generation.
 
 One older operator-assisted review article still exists separately. Its source audit, intervention and native QA are preserved in the [assisted-review report](ASSISTED-REVIEW-2026-09-06.md). It is not a successful `worker.execute()` result. The [research recovery report](RESEARCH-RECOVERY-2026-09-06.md) and [first pilot report](LIVE-PILOT-2026-09-06.md) retain earlier checkpoints.
 
-`APIFY_TOKEN` is connected to ICP Actions secrets; `OPENAI_API_KEY` works locally only and `LANDER_READ_TOKEN` is still absent. Local attempts used fresh GET-only interactive GitHub inventory without substituting a broad token into the unattended worker. State/history is preserved and must be reconciled before Actions use; the exhausted retry requires an explicit operator decision, not a new identity. PR #1 and lander PR #55 remain **open/unmerged**, and the schedule is disabled. No production action, generated lander PR or schedule activation is authorized. The ICP default branch is `seo-campaign`; GitHub schedules require the workflow there.
+`APIFY_TOKEN` is connected to ICP Actions secrets; `OPENAI_API_KEY` works locally only and `LANDER_READ_TOKEN` is still absent. Local attempts used fresh GET-only interactive GitHub inventory without substituting a broad token into the unattended worker. State/history is preserved and must be reconciled before Actions use. The one-use local retry authorization is not an unattended retry override. PR #1 and lander PR #55 remain **open/unmerged**, and the schedule is disabled. No production action, generated lander PR or schedule activation is authorized. The ICP default branch is `seo-campaign`; GitHub schedules require the workflow there.
 
 See the updated [three-lane system diagram](../diagrams/videoclaw-seo-aeo-geo-content-system.md) for the worker, current pilot and separate human release boundary.
 
@@ -82,7 +82,11 @@ credential flow or a generic way to start additional pilots. It verifies the cle
 local lander against fresh GET-only GitHub inventory, retains all previous attempts,
 and has no publisher capability. Its exact model/context replay receipts stay in
 private, ignored local files; never commit them or attach them to a PR. A completed
-pilot or exhausted retry budget causes preflight to refuse further execution.
+pilot or exhausted retry budget causes preflight to refuse further execution by
+default. The specifically authorized one-use exception binds a fourth attempt to
+the retained candidate and a fresh manual run, without resetting any history. See
+the [retry report](APPROVED-RETRY-2026-09-06.md) for its exact command and current
+evidence blocker. It grants no publishing or scheduled-execution authority.
 
 ## Runtime configuration
 

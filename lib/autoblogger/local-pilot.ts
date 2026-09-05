@@ -1,7 +1,7 @@
 import { CandidateSchema, candidateFingerprints, type Candidate } from './domain';
 import { PersistentWorkerStateSchema, type PersistentWorkerState } from './github-runtime';
 import type { HttpTransport } from './http';
-import { MAX_CANDIDATE_ATTEMPTS } from './recovery';
+import { MAX_CANDIDATE_ATTEMPTS, grantManualRetryApproval, hasManualRetryApproval } from './recovery';
 import type { ArticleInventoryEntry } from './publisher';
 import { z } from 'zod';
 import matter from 'gray-matter';
@@ -29,11 +29,14 @@ import { createLocalReplayRecorder, createReplayAuditedClient, createReplayAudit
 export const LOCAL_PILOT_LANDER_REF = 'seo/founder-video-blog-launch';
 const LANDER_API = 'repos/INFR-Organisation/videoclaw-lander';
 const STATE_API = 'repos/frenzy2004/VideoClaw-ICP';
-export function parseLocalPilotArguments(argv: string[]) {
-  if (argv.length !== 3 || argv[0] !== '--run-id' || argv[2] !== '--execute' || !/^[A-Za-z0-9][A-Za-z0-9._-]{0,159}$/u.test(argv[1])) {
-    throw new Error('Usage: tsx lib/autoblogger/local-pilot-entry.ts --run-id NEW_RUN_ID --execute (local artifact-only; paid research/model work).');
+export function parseLocalPilotArguments(argv: string[]): { runId: string; approveRetryFrom?: string } {
+  const safeRunId = (value: string) => typeof value === 'string' && /^[A-Za-z0-9][A-Za-z0-9._-]{0,159}$/u.test(value);
+  const ordinary = argv.length === 3 && argv[2] === '--execute';
+  const approved = argv.length === 5 && argv[2] === '--approve-retry-from' && safeRunId(argv[3]) && argv[3] !== argv[1] && argv[4] === '--execute';
+  if ((!ordinary && !approved) || argv[0] !== '--run-id' || !safeRunId(argv[1])) {
+    throw new Error('Usage: tsx lib/autoblogger/local-pilot-entry.ts --run-id NEW_RUN_ID [--approve-retry-from FAILED_THIRD_RUN_ID] --execute (local artifact-only; paid research/model work).');
   }
-  return { runId: argv[1] };
+  return { runId: argv[1], ...(approved ? { approveRetryFrom: argv[3] } : {}) };
 }
 const shaSchema = z.string().regex(/^[a-f0-9]{40,64}$/u);
 const refSchema = z.object({ ref: z.string().min(1) });
@@ -82,15 +85,30 @@ export async function inspectLocalPilotInventory(input: LocalInventoryInput, get
   return { baseSha, existingArticles, openPullRequests, branchRefs, audit: { observedAt: new Date().toISOString(), localMatchesRemote: true, baseSha, pr55, existingArticleIdentities: existingArticles.length, openPullRequests: pulls.length, openArticleIdentities: openPullRequests.length, branches: branchRefs.length, remoteStatePresent: false, authentication: 'interactive_gh_GET_only' } };
 }
 
-type LocalPilotCandidateInput = { state: PersistentWorkerState; backlog: Candidate[]; candidate: unknown; runId: string };
+type LocalPilotCandidateInput = { state: PersistentWorkerState; backlog: Candidate[]; candidate: unknown; runId: string; approveRetryFrom?: string; approvedAt?: string };
 export function reconcileLocalPilotCandidate(input: LocalPilotCandidateInput) {
-  const state = PersistentWorkerStateSchema.parse(input.state);
+  let state = PersistentWorkerStateSchema.parse(input.state);
   const candidate = CandidateSchema.parse(input.candidate);
   if (!/^[A-Za-z0-9][A-Za-z0-9._-]{0,159}$/u.test(input.runId) || state.runs[input.runId]) throw new Error('A fresh run ID is required; prior run records cannot be reused.');
   if (candidate.articleId !== 'vc-c2-001') throw new Error('The local retry must retain article vc-c2-001.');
+  if (input.approveRetryFrom !== undefined) {
+    const approval = state.manualRetryApproval;
+    if (approval) {
+      if (approval.priorRunId !== input.approveRetryFrom || approval.runId !== input.runId
+        || approval.reason !== 'user_authorized_after_input_fix'
+        || !hasManualRetryApproval(state, candidate, input.runId, 'manual_pilot', input.approvedAt ?? approval.approvedAt)) {
+        throw new Error('Existing manual retry approval does not match this explicit unused grant.');
+      }
+    } else {
+      state = grantManualRetryApproval(state, candidate, { priorRunId: input.approveRetryFrom, runId: input.runId,
+        reason: 'user_authorized_after_input_fix', approvedAt: input.approvedAt ?? '' });
+    }
+  }
   const fingerprints = candidateFingerprints(candidate);
   const decision = state.decisions[fingerprints.candidate];
-  if (!decision || decision.status !== 'retryable' || decision.attempts < 1 || decision.attempts >= MAX_CANDIDATE_ATTEMPTS
+  const manualRetry = input.approveRetryFrom !== undefined
+    && hasManualRetryApproval(state, candidate, input.runId, 'manual_pilot', input.approvedAt ?? state.manualRetryApproval?.approvedAt ?? '');
+  if (!decision || (!manualRetry && (decision.status !== 'retryable' || decision.attempts < 1 || decision.attempts >= MAX_CANDIDATE_ATTEMPTS))
     || decision.articleId !== candidate.articleId || decision.intentFingerprint !== fingerprints.intent
     || JSON.stringify([...decision.identities].sort()) !== JSON.stringify(Object.values(fingerprints).sort())) {
     throw new Error('The retained candidate must exactly match an existing bounded retryable decision.');
@@ -111,7 +129,9 @@ export function reconcileLocalPilotCandidate(input: LocalPilotCandidateInput) {
       return candidate;
     });
   };
-  return { state: { ...state, queuedCandidates: reconcile(state.queuedCandidates) }, backlog: reconcile(input.backlog), candidate, nextAttempt: decision.attempts + 1 };
+  const queued = manualRetry && !state.queuedCandidates.some(({ articleId }) => articleId === candidate.articleId)
+    ? [...state.queuedCandidates, candidate] : state.queuedCandidates;
+  return { state: PersistentWorkerStateSchema.parse({ ...state, queuedCandidates: reconcile(queued) }), backlog: reconcile(input.backlog), candidate, nextAttempt: decision.attempts + 1 };
 }
 
 export type ModelAuditRecord = { call: number; phase: string; httpStatus: number; response: unknown };
@@ -164,8 +184,8 @@ async function assertRealPath(root: string, path: string): Promise<void> {
 }
 
 /** Explicit local execution, never a credential fallback for Actions. No work occurs on import. */
-export async function runLocalArtifactPilot(options: { root: string; runId: string }): Promise<AutobloggerRunReport> {
-  parseLocalPilotArguments(['--run-id', options.runId, '--execute']);
+export async function runLocalArtifactPilot(options: { root: string; runId: string; approveRetryFrom?: string }): Promise<AutobloggerRunReport> {
+  parseLocalPilotArguments(['--run-id', options.runId, ...(options.approveRetryFrom !== undefined ? ['--approve-retry-from', options.approveRetryFrom] : []), '--execute']);
   if (process.env.GITHUB_EVENT_NAME === 'schedule' || process.env.AUTOBLOG_SCHEDULE_ENABLED === 'true' || process.env.LANDER_GITHUB_TOKEN?.trim()) throw new Error('Local pilot must not receive publication or scheduled execution authority.');
   const root = await realpath(resolve(options.root));
   const lander = await realpath(resolve(root, '../videoclaw-lander-blog-launch'));
@@ -194,7 +214,8 @@ export async function runLocalArtifactPilot(options: { root: string; runId: stri
     // Extract only identity from the historical artifact. Never import its
     // assisted facts, FAQs, source documents, provenance, or rewritten draft.
     const priorCandidate = JSON.parse(await readFile(contextPath, 'utf8')).context?.candidate;
-    const prepared = reconcileLocalPilotCandidate({ state: initial.state, backlog: await loadBacklogCandidates(root), candidate: priorCandidate, runId: options.runId });
+    const prepared = reconcileLocalPilotCandidate({ state: initial.state, backlog: await loadBacklogCandidates(root), candidate: priorCandidate, runId: options.runId,
+      ...(options.approveRetryFrom !== undefined ? { approveRetryFrom: options.approveRetryFrom, approvedAt: new Date().toISOString() } : {}) });
     const localArticles = await Promise.all((await readdir(resolve(lander, 'content/articles'))).filter((name) => name.endsWith('.md')).map(async (name) => articleIdentity(await readFile(resolve(lander, 'content/articles', name), 'utf8'))));
     const snapshot = await inspectLocalPilotInventory({
       head: gitRead(lander, ['rev-parse', 'HEAD']), branch: gitRead(lander, ['branch', '--show-current']), clean: gitRead(lander, ['status', '--porcelain']) === '', localArticles, candidate: prepared.candidate,
@@ -212,7 +233,8 @@ export async function runLocalArtifactPilot(options: { root: string; runId: stri
     await mkdir(outputDirectory, { mode: 0o700 }); // Exclusive fresh receipt; never overwrite a prior run.
     outputCreated = true;
     const replay = createLocalReplayRecorder({ root, directory: resolve(outputDirectory, 'replay'), secrets: [process.env.APIFY_TOKEN, process.env.OPENAI_API_KEY] });
-    await audit({ ...snapshot.audit, runId: options.runId, candidate: prepared.candidate, nextAttempt: prepared.nextAttempt, priorStateHash: initial.version, priorRunIds: Object.keys(initial.state.runs), priorFailureCount: initial.state.failures.length, manualPilot: initial.state.manualPilot }, 'preflight');
+    await audit({ ...snapshot.audit, runId: options.runId, candidate: prepared.candidate, nextAttempt: prepared.nextAttempt, priorStateHash: initial.version, priorRunIds: Object.keys(initial.state.runs), priorFailureCount: initial.state.failures.length, manualPilot: initial.state.manualPilot,
+      ...(prepared.state.manualRetryApproval ? { manualRetryApproval: prepared.state.manualRetryApproval } : {}) }, 'preflight');
     event('preflight_passed', { articleId: prepared.candidate.articleId, nextAttempt: prepared.nextAttempt, baseSha: snapshot.baseSha, publicationEnabled: false });
     await stateStore.save(prepared.state, initial.version);
     const transport = createModelAuditTransport(createNodeJsonHttpTransport(), async (record) => {

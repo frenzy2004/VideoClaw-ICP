@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { CAMPAIGN_IDS, CandidateSchema, candidateFingerprints, type Candidate } from './domain';
-import { createPersistentWorkerState } from './github-runtime';
+import { createPersistentWorkerState, PersistentWorkerStateSchema } from './github-runtime';
 import {
   buildIncrementalQueue,
   consumePreparedManualPilot,
@@ -11,6 +11,8 @@ import {
   recoverExpiredReservations,
   reserveCandidate,
   reserveManualPilot,
+  grantManualRetryApproval,
+  deferCandidate,
 } from './recovery';
 import { createFileStateStore } from './local-state';
 import { createHash } from 'node:crypto';
@@ -35,6 +37,95 @@ function candidate(index: number, campaignNumber = 1): Candidate {
 }
 
 describe('bounded candidate recovery', () => {
+  const retryAt = '2026-09-06T21:00:00.000Z';
+  const grantInput = { priorRunId: 'run-3', runId: 'approved-attempt-4', reason: 'user_authorized_after_input_fix', approvedAt: retryAt };
+  function exhausted() {
+    const item = candidate(1, 2);
+    let state = createPersistentWorkerState();
+    for (let attempt = 1; attempt <= 3; attempt += 1) {
+      const at = `2026-09-06T20:0${attempt}:00.000Z`;
+      const runId = `run-${attempt}`;
+      state = reserveCandidate(state, item, runId, 'manual_pilot', at);
+      state = markCandidateScanned(state, item, runId, at);
+      state = markCandidateFailure(state, item, runId, 'candidate_failed', true, at);
+      state.runs[runId] = { schemaVersion: 1, runId, mode: 'manual_pilot', startedAt: at, selectedCandidateFingerprints: [candidateFingerprints(item).candidate], status: 'failed' };
+      state.failures.push({ runId, code: 'candidate_failed', attempt, observedAt: at, detail: 'Retained failure.' });
+    }
+    return { item, state, fp: candidateFingerprints(item).candidate };
+  }
+
+  it('grants and consumes one exact fourth reservation without resetting history or identities', () => {
+    const { item, state, fp } = exhausted();
+    const before = structuredClone(state);
+    const approved = grantManualRetryApproval(state, item, grantInput);
+    expect(approved.decisions).toEqual(before.decisions);
+    expect(approved.runs).toEqual(before.runs);
+    expect(approved.failures).toEqual(before.failures);
+    expect(approved.candidateFingerprints).toEqual(before.candidateFingerprints);
+    expect(approved.dedupeHashes).toEqual(before.dedupeHashes);
+    expect(approved.manualRetryApproval).toMatchObject({ ...grantInput, candidateFingerprint: fp, articleId: item.articleId, mode: 'manual_pilot', consumedAt: null });
+    const queue = buildIncrementalQueue({ state: approved, backlog: [item], now: retryAt, runId: grantInput.runId, mode: 'manual_pilot' });
+    expect(queue.scan).toEqual([item]);
+    const reserved = reserveCandidate(queue.state, item, grantInput.runId, 'manual_pilot', retryAt);
+    expect(reserved.decisions[fp]).toMatchObject({ attempts: 4, status: 'leased', runId: grantInput.runId });
+    expect(reserved.manualRetryApproval?.consumedAt).toBe(retryAt);
+    expect(PersistentWorkerStateSchema.safeParse(reserved).success).toBe(true);
+    expect(() => reserveCandidate(reserved, item, grantInput.runId, 'manual_pilot', retryAt)).toThrow(/retry|exhausted/i);
+    const failed = markCandidateFailure(reserved, item, grantInput.runId, 'candidate_failed', true, retryAt);
+    expect(failed.decisions[fp]).toMatchObject({ attempts: 4, status: 'terminal' });
+    expect(() => grantManualRetryApproval(failed, item, { ...grantInput, runId: 'run-5' })).toThrow();
+    expect(state).toEqual(before);
+  });
+
+  it.each(['completed', 'manual_attention', 'wrong-reason', 'second-attempt', 'artifact', 'pr', 'pilot-prepared', 'changed-title', 'other-candidate', 'prior-run', 'wrong-prior', 'empty-reason', 'invalid-date'])(
+    'refuses a manual grant for %s', (problem) => {
+      const { state, item, fp } = exhausted();
+      const input = { ...grantInput };
+      let target = item;
+      if (problem === 'completed' || problem === 'manual_attention') state.decisions[fp].status = problem;
+      if (problem === 'wrong-reason') state.decisions[fp].reason = 'ineligible:product_irrelevance';
+      if (problem === 'second-attempt') state.decisions[fp].attempts = 2;
+      if (problem === 'artifact') state.contentHashes[fp] = 'a'.repeat(64);
+      if (problem === 'pr') state.pullRequests[fp] = { number: 1, url: 'https://github.com/owner/repo/pull/1', status: 'already_exists' };
+      if (problem === 'pilot-prepared') state.manualPilot = { runId: 'prior', status: 'prepared', reservedAt: retryAt, leaseExpiresAt: null, artifactHash: 'a'.repeat(64), consumedAt: null };
+      if (problem === 'changed-title') target = { ...item, title: 'Changed title' };
+      if (problem === 'other-candidate') target = candidate(2, 2);
+      if (problem === 'prior-run') input.runId = 'run-3';
+      if (problem === 'wrong-prior') input.priorRunId = 'run-2';
+      if (problem === 'empty-reason') input.reason = '';
+      if (problem === 'invalid-date') input.approvedAt = 'invalid';
+      const before = structuredClone(state);
+      expect(() => grantManualRetryApproval(state, target, input)).toThrow();
+      expect(state).toEqual(before);
+    },
+  );
+
+  it.each(['scheduled', 'other-run', 'other-candidate', 'inventory', 'no-run-context'])(
+    'does not use the terminal retry exception for %s', (problem) => {
+      const { item, state } = exhausted();
+      const approved = grantManualRetryApproval(state, item, grantInput);
+      const mode = problem === 'scheduled' ? 'scheduled' as const : 'manual_pilot' as const;
+      const runId = problem === 'other-run' ? 'other-run' : grantInput.runId;
+      const target = problem === 'other-candidate' ? { ...item, title: 'Changed title' } : item;
+      if (problem === 'inventory') {
+        expect(() => buildIncrementalQueue({ state: approved, backlog: [target], now: retryAt, runId, mode, inventory: [{ slug: item.slug }] })).toThrow();
+        return;
+      }
+      const queue = buildIncrementalQueue({ state: approved, backlog: [target], now: retryAt,
+        ...(problem === 'no-run-context' ? {} : { runId, mode }),
+      });
+      expect(queue.scan).toEqual([]);
+      if (problem !== 'no-run-context') expect(() => reserveCandidate(approved, target, runId, mode, retryAt)).toThrow();
+    },
+  );
+
+  it('never decrements a consumed manual exception when deferring or expiring its lease', () => {
+    const { item, state, fp } = exhausted();
+    const reserved = reserveCandidate(grantManualRetryApproval(state, item, grantInput), item, grantInput.runId, 'manual_pilot', retryAt, 1_000);
+    expect(deferCandidate(reserved, item, grantInput.runId, 'not_selected', retryAt).decisions[fp]).toMatchObject({ attempts: 4, status: 'terminal' });
+    expect(recoverExpiredReservations(reserved, '2026-09-06T21:00:02.000Z').decisions[fp]).toMatchObject({ attempts: 4, status: 'terminal' });
+  });
+
   it('round-robins five full campaigns into ten candidates each in the bounded scan', () => {
     const backlog = CAMPAIGN_IDS.flatMap((_campaignId, campaignIndex) => (
       Array.from({ length: 50 }, (_unused, index) => candidate(index + 1, campaignIndex + 1))

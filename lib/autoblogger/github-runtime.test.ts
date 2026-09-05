@@ -9,6 +9,8 @@ import {
   compactPersistentWorkerState,
   PaaObservationsSchema,
 } from './github-runtime';
+import { CandidateSchema, candidateFingerprints } from './domain';
+import { grantManualRetryApproval } from './recovery';
 
 const auth = {
   kind: 'github_app_installation' as const,
@@ -28,6 +30,169 @@ function queuedTransport(responses: HttpResponse[]) {
 }
 
 const json = (body: unknown, status = 200): HttpResponse => ({ status, headers: {}, body });
+
+describe('one-use manual retry state validation', () => {
+  const candidate = CandidateSchema.parse({
+    schemaVersion: 1, articleId: 'vc-c2-001', campaignId: 'accelerator-demo-day-founder', icp: 'founder',
+    primaryKeyword: 'demo day video checklist', secondaryKeywords: [], title: 'Demo Day Video Checklist',
+    slug: 'demo-day-video-checklist', intent: 'informational', funnelStage: 'top',
+  });
+  const fp = candidateFingerprints(candidate);
+  const before = '2026-09-06T20:00:00.000Z';
+  const at = '2026-09-06T21:00:00.000Z';
+  function approvedState(consumed = false) {
+    return {
+      ...createPersistentWorkerState(),
+      decisions: { [fp.candidate]: {
+        articleId: candidate.articleId, identities: Object.values(fp), intentFingerprint: fp.intent,
+        status: 'terminal', reason: 'candidate_failed', attempts: consumed ? 4 : 3,
+        runId: consumed ? 'new-run' : 'prior-run', updatedAt: consumed ? at : before, leaseExpiresAt: null,
+      } },
+      runs: { 'prior-run': { schemaVersion: 1, runId: 'prior-run', mode: 'manual_pilot', startedAt: before, selectedCandidateFingerprints: [fp.candidate], status: 'failed' } },
+      failures: [
+        { runId: 'prior-run', code: 'candidate_failed', attempt: 3, observedAt: before, detail: 'Prior failure.' },
+        ...(consumed ? [{ runId: 'new-run', code: 'candidate_failed', attempt: 4, observedAt: at, detail: 'New failure.', candidateFingerprint: fp.candidate }] : []),
+      ],
+      manualRetryApproval: {
+        mode: 'manual_pilot', articleId: 'vc-c2-001', candidateFingerprint: fp.candidate, identities: Object.values(fp),
+        priorRunId: 'prior-run', runId: 'new-run', reason: 'User authorized one artifact-only retry.', approvedAt: at, consumedAt: consumed ? at : null,
+      },
+    };
+  }
+
+  it.each([false, true])('round-trips the exact audited grant (consumed: %s)', (consumed) => {
+    const state = approvedState(consumed);
+    const parsed = PersistentWorkerStateSchema.parse(state);
+    expect(compactPersistentWorkerState(parsed)).toMatchObject(state);
+  });
+
+  function historicalProjection(status: 'selected' | 'researched') {
+    const state = PersistentWorkerStateSchema.parse(approvedState());
+    delete state.manualRetryApproval;
+    state.candidates[fp.candidate] = { mode: 'manual_pilot', status, runId: 'older-failed-run', updatedAt: '2026-09-06T18:28:51.779Z' };
+    state.runs['older-failed-run'] = { schemaVersion: 1, runId: 'older-failed-run', mode: 'manual_pilot',
+      status: 'failed', startedAt: '2026-09-06T18:28:40.602Z', selectedCandidateFingerprints: [fp.candidate] };
+    return state;
+  }
+  const grant = { priorRunId: 'prior-run', runId: 'new-run', reason: 'user_authorized_after_input_fix', approvedAt: at };
+
+  it.each(['selected', 'researched'] as const)('allows a historical %s projection linked to an older failed manual run without rewriting history', (status) => {
+    const state = historicalProjection(status);
+    const original = structuredClone(state);
+    const approved = grantManualRetryApproval(state, candidate, grant);
+    const compacted = compactPersistentWorkerState(approved);
+    for (const key of ['candidates', 'decisions', 'runs', 'failures', 'contentHashes', 'pullRequests'] as const) {
+      expect(compacted[key]).toEqual(original[key]);
+    }
+    expect(compacted.manualRetryApproval?.consumedAt).toBeNull();
+    expect(state).toEqual(original);
+  });
+
+  it('allows the historical projection timestamp at the latest failed decision boundary', () => {
+    const state = historicalProjection('researched');
+    state.candidates[fp.candidate].updatedAt = before;
+    expect(grantManualRetryApproval(state, candidate, grant).candidates).toEqual(state.candidates);
+  });
+
+  it.each(['drafted', 'validated', 'pr_opened', 'newer', 'scheduled-projection', 'failed-scheduled', 'failed-newer', 'scheduled-run', 'successful-run', 'missing-run', 'wrong-run-id', 'different-candidate', 'later-run', 'before-run', 'artifact', 'pr', 'pilot'])(
+    'rejects contradictory historical projection: %s', (problem) => {
+      const state = historicalProjection('researched');
+      const projection = state.candidates[fp.candidate];
+      const run = state.runs[projection.runId];
+      if (problem === 'drafted' || problem === 'validated' || problem === 'pr_opened') projection.status = problem;
+      if (problem === 'newer') projection.updatedAt = '2026-09-06T20:00:00.001Z';
+      if (problem === 'scheduled-projection') projection.mode = 'scheduled';
+      if (problem === 'failed-scheduled' || problem === 'failed-newer') projection.status = 'failed';
+      if (problem === 'failed-scheduled') projection.mode = 'scheduled';
+      if (problem === 'failed-newer') projection.updatedAt = '2026-09-06T20:00:00.001Z';
+      if (problem === 'scheduled-run') run.mode = 'scheduled';
+      if (problem === 'successful-run') run.status = 'validated';
+      if (problem === 'missing-run') delete state.runs[projection.runId];
+      if (problem === 'wrong-run-id') run.runId = 'another-run';
+      if (problem === 'different-candidate') run.selectedCandidateFingerprints = ['candidate:other:topic'];
+      if (problem === 'later-run') run.startedAt = '2026-09-06T20:00:00.001Z';
+      if (problem === 'before-run') projection.updatedAt = '2026-09-06T18:28:40.601Z';
+      if (problem === 'artifact') state.contentHashes[fp.candidate] = 'a'.repeat(64);
+      if (problem === 'pr') state.pullRequests[fp.candidate] = { number: 1, url: 'https://github.com/owner/repo/pull/1', status: 'opened' };
+      if (problem === 'pilot') state.manualPilot = { runId: 'old', status: 'prepared', reservedAt: before, leaseExpiresAt: null, artifactHash: 'a'.repeat(64), consumedAt: null };
+      const original = structuredClone(state);
+      expect(() => grantManualRetryApproval(state, candidate, grant)).toThrow();
+      expect(state).toEqual(original);
+    },
+  );
+
+  it('pins the historical projection supporting run when more than 500 newer runs are compacted', () => {
+    const state = grantManualRetryApproval(historicalProjection('researched'), candidate, grant);
+    for (let index = 0; index < 501; index += 1) {
+      const runId = `newer-${index}`;
+      state.runs[runId] = { schemaVersion: 1, runId, mode: 'scheduled', startedAt: '2026-09-07T00:00:00.000Z', selectedCandidateFingerprints: [], status: 'failed' };
+    }
+    const compacted = compactPersistentWorkerState(state);
+    expect(Object.keys(compacted.runs)).toHaveLength(500);
+    expect(compacted.runs['older-failed-run']).toEqual(state.runs['older-failed-run']);
+    expect(compacted.candidates).toEqual(state.candidates);
+    expect(PersistentWorkerStateSchema.safeParse(compacted).success).toBe(true);
+  });
+
+  it.each(['missing-grant', 'unused-grant', 'different-candidate', 'different-run', 'scheduled-prior', 'successful-prior', 'missing-prior-failure', 'wrong-failure-fingerprint', 'wrong-failure-run', 'decremented-attempt', 'retryable-four', 'future-consumption', 'fifth-attempt'])(
+    'rejects attempt four with %s', (problem) => {
+      const state = approvedState(true);
+      const input: Record<string, unknown> = state;
+      if (problem === 'missing-grant') delete input.manualRetryApproval;
+      if (problem === 'unused-grant') state.manualRetryApproval.consumedAt = null;
+      if (problem === 'different-candidate') state.manualRetryApproval.candidateFingerprint = 'candidate:other:topic';
+      if (problem === 'different-run') state.decisions[fp.candidate].runId = 'other-run';
+      if (problem === 'scheduled-prior') state.runs['prior-run'].mode = 'scheduled';
+      if (problem === 'successful-prior') state.runs['prior-run'].status = 'validated';
+      if (problem === 'missing-prior-failure') state.failures.shift();
+      if (problem === 'wrong-failure-fingerprint') state.failures[1].candidateFingerprint = 'candidate:other:topic';
+      if (problem === 'wrong-failure-run') state.failures[1].runId = 'other-run';
+      if (problem === 'decremented-attempt') state.decisions[fp.candidate].attempts = 3;
+      if (problem === 'retryable-four') state.decisions[fp.candidate].status = 'retryable';
+      if (problem === 'future-consumption') state.manualRetryApproval.consumedAt = '2026-09-06T22:00:00.000Z';
+      if (problem === 'fifth-attempt') state.decisions[fp.candidate].attempts = 5;
+      expect(PersistentWorkerStateSchema.safeParse(input).success).toBe(false);
+    },
+  );
+
+  it('keeps legacy state without a grant valid and rejects an unaudited fourth failure', () => {
+    const state = createPersistentWorkerState();
+    expect(PersistentWorkerStateSchema.parse(state)).toEqual(state);
+    expect(PersistentWorkerStateSchema.safeParse({ ...state, failures: [{ runId: 'any-run', code: 'candidate_failed', attempt: 4, observedAt: at, detail: 'No grant.' }] }).success).toBe(false);
+  });
+
+  it.each(['runs', 'decisions'])('pins the approval audit when compacting newer unrelated %s', (kind) => {
+    const input = approvedState(true);
+    const state = PersistentWorkerStateSchema.parse(input);
+    for (let index = 0; kind === 'runs' && index < 501; index += 1) {
+      const runId = `unrelated-${index}`;
+      state.runs[runId] = { schemaVersion: 1, runId, mode: 'scheduled', startedAt: '2026-09-07T00:00:00.000Z', selectedCandidateFingerprints: [], status: 'failed' };
+    }
+    for (let index = 0; kind === 'decisions' && index < 5_000; index += 1) state.decisions[`old-${index}`] = {
+      articleId: 'old', intentFingerprint: `intent:${'a'.repeat(64)}`, identities: ['a', 'b', 'c', 'd', 'e', 'f'],
+      status: 'terminal', reason: 'done', attempts: 3, runId: 'old', updatedAt: '2026-09-07T00:00:00.000Z', leaseExpiresAt: null,
+    };
+    const compacted = compactPersistentWorkerState(state);
+    expect(compacted.manualRetryApproval).toEqual(input.manualRetryApproval);
+    expect(compacted.decisions[fp.candidate]).toEqual(input.decisions[fp.candidate]);
+    expect(compacted.runs['prior-run']).toEqual(input.runs['prior-run']);
+    expect(compacted.failures).toEqual(input.failures);
+  });
+
+  it('pins the required third and fourth failures ahead of 100 newer failures without exceeding the bound', () => {
+    const input = approvedState(true);
+    const state = PersistentWorkerStateSchema.parse(input);
+    state.failures.push(...Array.from({ length: 100 }, (_, index) => ({ runId: `unrelated-${index}`,
+      code: 'candidate_failed', attempt: 1, observedAt: '2026-09-07T00:00:00.000Z', detail: 'Unrelated failure.' })));
+    const compacted = compactPersistentWorkerState(state);
+    expect(compacted.failures).toHaveLength(100);
+    expect(compacted.failures.slice(0, 2)).toEqual(input.failures);
+    expect(compacted.failures[2].runId).toBe('unrelated-2');
+    expect(PersistentWorkerStateSchema.safeParse(compacted).success).toBe(true);
+    const unaudited = { ...state, manualRetryApproval: undefined };
+    expect(() => compactPersistentWorkerState(unaudited)).toThrow();
+  });
+});
 
 describe('least-privilege GitHub publisher boundary', () => {
   it('inspects the exact repository and materializes one commit without a GITHUB_TOKEN fallback', async () => {

@@ -13,11 +13,11 @@ import {
   type EvidenceBundle,
   type KeywordMetrics,
 } from './domain';
-import { createPersistentWorkerState, type PersistentWorkerState } from './github-runtime';
+import { createPersistentWorkerState, PersistentWorkerStateSchema, type PersistentWorkerState } from './github-runtime';
 import { createPendingKeywordProvider, type KeywordProvider } from './keyword-providers';
 import type { ShallowResearchResult } from './research';
 import { createAutobloggerWorker, discoverCandidatesFromResearch } from './worker';
-import { reserveCandidate } from './recovery';
+import { reserveCandidate, grantManualRetryApproval, markCandidateScanned, markCandidateFailure } from './recovery';
 import { writeAutobloggerArtifacts } from './runtime';
 
 function candidate(index: number): Candidate {
@@ -87,6 +87,8 @@ function fixture(input: {
   failDraft?: boolean;
   maxDrafts?: 1 | 2 | 3;
   targetCandidateFingerprint?: string;
+  publicationEnabled?: boolean;
+  landerInventory?: Parameters<typeof createAutobloggerWorker>[0]['landerInventory'];
   onReservation?: (state: PersistentWorkerState) => void;
   beforeSave?: (state: PersistentWorkerState) => void;
   initialState?: PersistentWorkerState;
@@ -211,12 +213,104 @@ function fixture(input: {
     now: input.now ?? (() => new Date('2026-09-05T00:00:00.000Z')),
     maxDrafts: input.maxDrafts,
     targetCandidateFingerprint: input.targetCandidateFingerprint,
+    publicationEnabled: input.publicationEnabled,
+    landerInventory: input.landerInventory,
     persistArtifact: input.persistArtifact,
   });
   return { worker, counters, getState: () => state };
 }
 
 describe('persistent autoblogger worker', () => {
+  function approvedRetry() {
+    const item = { ...candidate(0), articleId: 'vc-c2-001' };
+    const fp = candidateFingerprints(item).candidate;
+    let state = createPersistentWorkerState();
+    for (let attempt = 1; attempt <= 3; attempt += 1) {
+      const at = `2026-09-04T20:0${attempt}:00.000Z`;
+      const runId = `prior-${attempt}`;
+      state = reserveCandidate(state, item, runId, 'manual_pilot', at);
+      state = markCandidateScanned(state, item, runId, at);
+      state = markCandidateFailure(state, item, runId, 'candidate_failed', true, at);
+      state.runs[runId] = { schemaVersion: 1, runId, mode: 'manual_pilot', startedAt: at, selectedCandidateFingerprints: [fp], status: 'failed' };
+      state.failures.push({ runId, code: 'candidate_failed', attempt, observedAt: at, detail: 'Prior failure retained.' });
+    }
+    state = grantManualRetryApproval(state, item, { priorRunId: 'prior-3', runId: 'approved-attempt-4', reason: 'user_authorized_after_input_fix', approvedAt: '2026-09-05T00:00:00.000Z' });
+    return { item, state, fp };
+  }
+
+  it.each([false, true])('persists and consumes the exact retry before research, retaining real attempt four (draft fails: %s)', async (failDraft) => {
+    const { item, state, fp } = approvedRetry();
+    const before = structuredClone(state);
+    const f = fixture({ backlog: [item, candidate(1)], initialState: state, targetCandidateFingerprint: fp, publicationEnabled: false, failDraft,
+      onReservation: (saved) => {
+        expect(saved.manualRetryApproval?.consumedAt).toBe('2026-09-05T00:00:00.000Z');
+        expect(saved.decisions[fp].attempts).toBe(4);
+        expect(PersistentWorkerStateSchema.safeParse(saved).success).toBe(true);
+        if (!f.counters.scanned) expect(saved.decisions[fp].status).toBe('leased');
+      },
+    });
+    const report = await f.worker.execute({ command: 'pilot', runId: 'approved-attempt-4' });
+    expect(report.status).toBe(failDraft ? 'failed' : 'validated');
+    expect(f.counters.scanned).toBe(1);
+    expect(f.counters.opened).toBe(0);
+    expect(f.getState().runs).toMatchObject(before.runs);
+    expect(f.getState().failures.slice(0, 3)).toEqual(before.failures);
+    expect(f.getState().decisions[fp]).toMatchObject({ attempts: 4, status: failDraft ? 'terminal' : 'completed' });
+    expect(f.getState().queuedCandidates).toContainEqual(candidate(1));
+    if (failDraft) {
+      expect(report.failures).toContainEqual(expect.objectContaining({ candidateFingerprint: fp, attempt: 4, retryable: false }));
+      expect(f.getState().failures.at(-1)).toMatchObject({ candidateFingerprint: fp, runId: 'approved-attempt-4', attempt: 4 });
+    } else {
+      expect(report.artifacts).toHaveLength(1);
+      expect(report.artifacts[0].publication).toBe('artifact_only');
+      expect(f.getState().manualPilot?.status).toBe('prepared');
+    }
+    const savedCount = f.counters.saved;
+    expect((await f.worker.execute({ command: 'pilot', runId: 'approved-attempt-4' })).status).toBe('already_recorded');
+    expect(f.counters.saved).toBe(savedCount);
+    await expect(f.worker.execute({ command: 'pilot', runId: 'attempt-5' })).rejects.toThrow();
+  });
+
+  it.each(['scheduled', 'research', 'wrong-run', 'no-target', 'wrong-target', 'publishing', 'implicit-publication', 'inventory', 'save-conflict'])(
+    'refuses %s before any paid stage of the manual retry', async (problem) => {
+      const { item, state, fp } = approvedRetry();
+      const f = fixture({ backlog: [item, candidate(1)], initialState: state,
+        targetCandidateFingerprint: problem === 'no-target' ? undefined : problem === 'wrong-target' ? candidateFingerprints(candidate(1)).candidate : fp,
+        publicationEnabled: problem === 'publishing' ? true : problem === 'implicit-publication' ? undefined : false,
+        landerInventory: problem === 'inventory' ? [{ articleId: item.articleId }] : [],
+        beforeSave: problem === 'save-conflict' ? () => { throw new Error('State conflict'); } : undefined,
+      });
+      await expect(f.worker.execute({ command: problem === 'scheduled' ? 'run' : problem === 'research' ? 'research' : 'pilot', runId: problem === 'wrong-run' ? 'other-run' : 'approved-attempt-4' })).rejects.toThrow();
+      expect(f.counters).toMatchObject({ scanned: 0, enriched: 0, drafted: 0, opened: 0, saved: 0 });
+      expect(f.getState().manualRetryApproval?.consumedAt).toBeNull();
+    },
+  );
+
+  it('retains consumed approval and the fourth failure if the first research call fails', async () => {
+    const { item, state, fp } = approvedRetry();
+    const f = fixture({ backlog: [item], initialState: state, targetCandidateFingerprint: fp, publicationEnabled: false, failScan: true });
+    await expect(f.worker.execute({ command: 'pilot', runId: 'approved-attempt-4' })).rejects.toThrow('temporary network failure');
+    expect(f.getState().decisions[fp]).toMatchObject({ attempts: 4, status: 'terminal' });
+    expect(f.getState().manualRetryApproval?.consumedAt).not.toBeNull();
+    expect(f.getState().failures.at(-1)).toMatchObject({ runId: 'approved-attempt-4', candidateFingerprint: fp, attempt: 4, code: 'shallow_research_failed' });
+    expect(f.getState().runs['approved-attempt-4'].status).toBe('failed');
+  });
+
+  it.each([false, true])('pins the prior third failure when appending to a full history (scan fails: %s)', async (failScan) => {
+    const { item, state, fp } = approvedRetry();
+    const priorFailure = state.failures[2];
+    state.failures = [priorFailure, ...Array.from({ length: 99 }, (_, index) => ({
+      runId: `unrelated-${index}`, code: 'candidate_failed', attempt: 1, observedAt: '2026-09-04T21:00:00.000Z', detail: 'Unrelated failure.',
+    }))];
+    const f = fixture({ backlog: [item], initialState: state, targetCandidateFingerprint: fp, publicationEnabled: false, failScan, failDraft: true });
+    if (failScan) await expect(f.worker.execute({ command: 'pilot', runId: 'approved-attempt-4' })).rejects.toThrow('temporary network failure');
+    else expect((await f.worker.execute({ command: 'pilot', runId: 'approved-attempt-4' })).status).toBe('failed');
+    expect(f.getState().failures).toHaveLength(100);
+    expect(f.getState().failures).toContainEqual(priorFailure);
+    expect(f.getState().failures.at(-1)).toMatchObject({ runId: 'approved-attempt-4', candidateFingerprint: fp, attempt: 4 });
+    expect(PersistentWorkerStateSchema.safeParse(f.getState()).success).toBe(true);
+  });
+
   it('targets one eligible retained identity without scanning or losing the rest of the queue', async () => {
     const backlog = Array.from({ length: 6 }, (_value, index) => candidate(index));
     const { worker, counters, getState } = fixture({ backlog, targetCandidateFingerprint: candidateFingerprints(backlog[1]).candidate });
