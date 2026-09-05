@@ -6,6 +6,7 @@ import { AUTOCOMPLETE_ACTOR_ID, SERP_ACTOR_ID } from '../research';
 
 const OBSERVED_AT = '2026-09-05T00:01:00.000Z';
 const PUBLIC_PEER = '93.184.216.34';
+const escapeHtml = (text: string) => text.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 
 /** Only external I/O is replaced. Actor envelopes, normalization, metrics and source checking stay real. */
 export function createOfflineNetwork(backlog: Candidate[], sourceFacts: string[]) {
@@ -75,9 +76,17 @@ export function createOfflineNetwork(backlog: Candidate[], sourceFacts: string[]
             const hostname = index % 2 === 0 ? 'primary.example' : 'secondary.example';
             const finalUrl = 'https://' + hostname + '/guides/' + candidate.slug + '/' + index;
             const url = index === 0 ? finalUrl.replace(/\/0$/u, '/redirect') : finalUrl;
-            const title = sourceFacts[index * 2] ?? 'Review founder video evidence';
-            const description = sourceFacts[index * 2 + 1] ?? 'Independent guidance on checking a finished recording.';
-            pages.set(finalUrl, { status: 200, body: '<article><h2>' + title + '</h2><p>' + description + '</p></article>' });
+            // Search metadata deliberately contains none of the fact catalog. A
+            // regression to snippets cannot satisfy the drafting fixture below.
+            const title = `Founder video reference ${index + 1}`;
+            const description = 'Search summary for a founder video planning reference.';
+            const split = Math.ceil(sourceFacts.length / 2);
+            const paragraphs = index < 2 ? sourceFacts.slice(index * split, (index + 1) * split)
+              : [`Founder video reference ${index + 1} recommends reviewing the completed recording before distribution.`];
+            // Each catalog entry is an independent topic, not a qualification of
+            // its neighbor. Make those boundaries explicit in the source HTML.
+            pages.set(finalUrl, { status: 200, body: '<article><h1>Founder video preparation</h1>'
+              + paragraphs.map((text) => '<section><p>' + escapeHtml(text) + '</p></section>').join('') + '</article>' });
             if (url !== finalUrl) pages.set(url, { status: 302, body: '', location: finalUrl });
             return { position: index + 1, url, title, description };
           });

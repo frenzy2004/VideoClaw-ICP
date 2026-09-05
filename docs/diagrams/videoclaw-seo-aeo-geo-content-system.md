@@ -20,7 +20,7 @@ The last step is a future gated mode, not permission to open generated lander PR
 | --- | --- | --- |
 | Candidates | Read the incremental backlog and discover related searches for five ICPs. Deduplicate against state and lander inventory, then round-robin eligible campaigns; a full five-campaign queue gets ten scan slots each. | Candidate identity, campaign, trigger and intent |
 | Validation | Recheck US/en Google SERPs through Apify, record organic competitors and suggestion/PAA/related-query signals, and request keyword metrics from a configured provider. | Exact query, locale, actor run, dataset and observation time; metric provenance separately |
-| Top 10 | Screen known missing organic/suggestion/relevant-PAA/product-fit evidence before using a deep slot. Then require two reachable sources including an authoritative source and a defensible gap. Insufficient collection has bounded retries, not a claim of zero demand. | Source URLs, competitor gap, FAQ evidence and selection decision |
+| Top 10 | Screen missing organic/suggestion/relevant-PAA/product-fit evidence before using a deep slot. Then retrieve at least two source bodies including an authoritative source. Preserve complete qualifications and reject unsafe input. A proposed editorial angle is not proof that competitors lack coverage. | Source URLs, fetch times/hashes, bounded body context, FAQ provenance and selection decision |
 | Up to 3 drafts | Structured OpenAI drafting and independent critique, at most one repair followed by verification. Maximum two drafts from one ICP. | Markdown bundle, critique result and hashes |
 | Native QA | Select allowlisted product media, generate a deterministic branded SVG and validate in a disposable lander checkout using its own contract, lint and build. | Media attribution and native QA report |
 | Draft PRs, later | Only the post-merge, fully credentialed mode can open one draft PR per article. All approval flags remain false. | PR number, artifact hash and outcome |
@@ -35,12 +35,24 @@ Apify evidence → one draft + critique + QA → Markdown / SVG / report artifac
 
 - The first attempt scanned fifty candidates and failed all ten deep checks, generating no article. [Historical pilot report](../autoblogger/LIVE-PILOT-2026-09-06.md). Follow-up collector checks still did not establish the complete automated organic/PAA evidence bundle. [Recovery report](../autoblogger/RESEARCH-RECOVERY-2026-09-06.md).
 - A later **assisted local review** combined actual Apify organic results with separately recorded browser PAA and manually checked source bodies. GPT-5.5 completed generation, critique, repair and verification; its final result still failed review. An explicit editorial revision produced one local article, without claiming an unattended pass or consuming a successful-pilot slot. [Current assisted-review report](../autoblogger/ASSISTED-REVIEW-2026-09-06.md).
+- **Latest automatic pipeline:** organic SERPs, exact-query PAA and supporting body pages are now collected without manual evidence injection. Attempt 2 completed four model calls but failed final draft checks. Attempt 3 stopped before OpenAI on an invisible source character; that defect is fixed and a fresh four-page/35-fact input check passes. No automatically generated article has passed native QA. The candidate remains terminal at its three-attempt limit. [Latest verification report](../autoblogger/AUTOMATED-PIPELINE-2026-09-06.md).
 - `KEYWORD_PROVIDER=pending` keeps volume, difficulty and CPC explicitly unknown. Paid metrics do not block this one pilot.
 - `LANDER_BASE_REF=seo/founder-video-blog-launch` validates against the unmerged blog contract, not production.
 - `APIFY_TOKEN` is present in ICP Actions secrets. `OPENAI_API_KEY` is now stored locally in an ignored environment file and verified against `gpt-5.5`; the scoped lander read token is still absent.
 - The read token must be separate and fine-grained, restricted to lander contents:read and pull requests:read. Interactive GitHub access does not establish that the worker credential is installed.
 - Local attempts used the existing checkout, fresh GET-only interactive GitHub inventory and ignored local state; no publication backend was supplied. They did not modify remote state or configure unattended Actions. Preserve the failure history and reconcile the separately retained assisted artifact before another pilot.
 - Offline fixtures exercise this path but are **not** live generated article evidence.
+
+The repaired research path is linear:
+
+```text
+Fresh organic SERP → bounded PAA collection / recent exact-query reuse → source-body retrieval
+→ structured draft → independent critique → one repair → independent recheck → native QA
+```
+
+Recent PAA reuse retains its original timestamp and separate run/dataset; it never
+pretends a missing Google feature appeared in the newest organic run. Local exact
+replay receipts remain private and ignored. No retry history was reset.
 
 The assisted lane is deliberately separate from the persistent worker:
 
@@ -96,7 +108,8 @@ Every article traces back to campaign, ICP, trigger, intent, keyword, SERP obser
 | --- | --- | --- |
 | Article and diagram updates | Original three review guides plus one assisted artifact in a separate local preview; no production action | Team review; artifact provenance remains explicit |
 | Worker implementation | PR #1 open; offline and native fixture verification recorded separately | Implementation review |
-| Unattended live artifact-only pilot | Not yet successful; the local article required browser evidence and editorial intervention | Reliable automated research and a passing critique/repair run; scoped read token and OpenAI Actions secret for unattended execution |
+| Automated local article milestone | Automatic research/body input now demonstrated; final live critique/repair/native-QA pass still missing | Explicit review of the exhausted candidate retry before further live generation; preserve all failed history |
+| Unattended Actions pilot | Not configured; no successful unattended article | Scoped read token, OpenAI Actions secret, reconciled state and reviewed worker |
 | Paid enrichment | Not connected; Apify research does not invent metrics | Provider access and a tested adapter |
 | Generated lander PRs | Not enabled | Merged blog contract, paid metrics, GitHub App and approved rollout |
 | Weekly automation | `AUTOBLOG_SCHEDULE_ENABLED=false`; Monday 16:00 UTC schedule is in the PR | Explicit activation approval and workflow on the default branch |

@@ -3,7 +3,21 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-## Current assisted local review — 2026-09-06
+## Latest automatic-pipeline fixes — 2026-09-06
+
+The [automatic-pipeline report](AUTOMATED-PIPELINE-2026-09-06.md) is the current
+checkpoint. **836 tests across 49 files pass.** Automatic PAA recovery and body
+retrieval are demonstrated with exact provenance. Live attempt 2 completed four
+model calls but failed final draft checks. Attempt 3 passed automatic research but
+failed before OpenAI on source format controls. That mismatch is now fixed, and a
+fresh four-page/35-fact recheck passes the draft-input contract without altering
+state or making model calls. The source/input check is not a full article pass.
+
+No newly automatic live article reached native QA. The candidate remains terminal
+at three attempts; no retry reset or manual copy/evidence substitution occurred.
+The older assisted artifact below is historical and does not satisfy this milestone.
+
+## Historical assisted local review — 2026-09-06
 
 The [assisted-review report](ASSISTED-REVIEW-2026-09-06.md) supersedes the zero-generation status below. One actual four-call GPT-5.5 drafting/critique/repair run completed, but did not pass final review. An explicitly recorded operator revision produced a real review article using separately attributed Apify, browser PAA and body-source evidence. This is not an unattended worker success.
 
@@ -75,4 +89,8 @@ The fixture bundle and full command report remain in ignored `artifacts/autoblog
 - PR #55 was still open at the 2026-09-05 check. Pre-merge output remains artifact-only.
 - The schedule defaults to disabled. Enabling it and reviewing/publishing every generated article remain human decisions.
 
-Independent model critique is probabilistic. The runtime currently supplies checked SERP titles/snippets as evidence, clearly distinguished from full-page facts; a reachable URL alone cannot establish its body content. Human review of source support, usefulness, originality, media suitability and copy remains mandatory.
+Independent model critique is probabilistic. The runtime now supplies automatically
+retrieved, bounded body context groups with fetch/hash provenance; titles/snippets
+cannot substitute for them. Retrieval verifies origin and content, not the truth of
+every publisher claim. Human review of support, usefulness, originality, media and
+copy remains mandatory. No successful unattended article outcome is claimed.

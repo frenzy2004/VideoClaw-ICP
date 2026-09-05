@@ -22,6 +22,7 @@ export interface ApifyClient {
   getRun(runId: string): Promise<ApifyRun>;
   getDatasetItems(datasetId: string): Promise<unknown[]>;
   abortRun(runId: string): Promise<ApifyRun>;
+  getRecentActorRuns?(actorId: string): Promise<ApifyRun[]>;
 }
 
 type ApifyClientOptions = {
@@ -83,6 +84,11 @@ export function createApifyClient(options: ApifyClientOptions): ApifyClient {
     throw new Error('Apify run limits must be bounded: 1–600 seconds and greater than zero to 10 USD per actor.');
   }
   return {
+    async getRecentActorRuns(actorId) {
+      const actorPath = encodeURIComponent(actorId.replace('/', '~'));
+      const envelope = await requestApify(options, 'GET', `/acts/${actorPath}/runs?status=SUCCEEDED&desc=1&limit=10`);
+      return z.object({data:z.object({items:z.array(ApifyRunSchema).max(10)})}).parse(envelope).data.items;
+    },
     async startActor(actorId, input) {
       const actorPath = encodeURIComponent(actorId.replace('/', '~'));
       // Server-side timeout also applies if the response containing the run ID is lost.

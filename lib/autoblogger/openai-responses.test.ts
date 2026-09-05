@@ -1,7 +1,7 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import type { HttpRequest, HttpResponse, HttpTransport } from './http';
-import { createOpenAIResponsesClient } from './openai-responses';
+import { createOpenAIResponsesClient, type OpenAIResponsesClientOptions } from './openai-responses';
 
 function completedResponse(outputText: string): HttpResponse {
   return {
@@ -105,6 +105,8 @@ describe('OpenAI Responses structured-output client', () => {
     });
     expect(JSON.parse(requests[0].body as string)).toMatchObject({
       model: 'gpt-5.5',
+      max_output_tokens: 24_000,
+      reasoning: { effort: 'low' },
       store: false,
       text: {
         format: {
@@ -115,6 +117,65 @@ describe('OpenAI Responses structured-output client', () => {
         },
       },
     });
+  });
+
+  it('passes explicit output and reasoning limits without substituting the requested model', async () => {
+    const requests: HttpRequest[] = [];
+    const client = createOpenAIResponsesClient({
+      apiKey: 'fixture', env: { OPENAI_MODEL: 'gpt-5.5-pinned' },
+      maxOutputTokens: 12_000, reasoningEffort: 'medium', timeoutMs: 120_000,
+      transport: async (request) => { requests.push(request); return completedResponse('{}'); },
+    });
+    await client.generate({ name: 'fixture', schema, system: 'Fixture', input: {} });
+    expect(JSON.parse(requests[0].body!)).toMatchObject({
+      model: 'gpt-5.5-pinned', max_output_tokens: 12_000, reasoning: { effort: 'medium' },
+    });
+    expect(requests).toHaveLength(1);
+  });
+
+  it.each([
+    { maxOutputTokens: 0 }, { maxOutputTokens: -1 }, { maxOutputTokens: 1.5 },
+    { maxOutputTokens: Infinity }, { maxOutputTokens: NaN }, { maxOutputTokens: 128_001 },
+    { timeoutMs: 0 }, { timeoutMs: -1 }, { timeoutMs: 1.5 }, { timeoutMs: Infinity }, { timeoutMs: NaN }, { timeoutMs: 600_001 },
+    { reasoningEffort: 'invented' },
+  ])('rejects invalid request bounds before transport: %j', (limits) => {
+    let calls = 0;
+    expect(() => createOpenAIResponsesClient({
+      apiKey: 'fixture', env: {}, ...limits,
+      transport: async () => { calls += 1; return completedResponse('{}'); },
+    } as OpenAIResponsesClientOptions)).toThrow(/maxOutputTokens|timeoutMs|reasoningEffort/);
+    expect(calls).toBe(0);
+  });
+
+  it('allows a 90-second structured response under the default timeout', async () => {
+    vi.useFakeTimers();
+    try {
+      const client = createOpenAIResponsesClient({
+        apiKey: 'fixture', env: {},
+        transport: () => new Promise((resolve) => setTimeout(() => resolve(completedResponse('{"value":"complete"}')), 90_000)),
+      });
+      const result = client.generate({ name: 'fixture', schema, system: 'Fixture', input: {} }).catch((error) => ({ error: String(error) }));
+      await vi.advanceTimersByTimeAsync(90_000);
+      expect(await result).toEqual({ value: 'complete' });
+    } finally { vi.useRealTimers(); }
+  });
+
+  it.each([undefined, 75_000])('aborts once at the configured finite timeout (%s), with no retry', async (timeoutMs) => {
+    vi.useFakeTimers();
+    try {
+      const requests: HttpRequest[] = [];
+      const client = createOpenAIResponsesClient({
+        apiKey: 'fixture', env: {}, timeoutMs,
+        transport: (request) => { requests.push(request); return new Promise(() => {}); },
+      });
+      const result = client.generate({ name: 'fixture', schema, system: 'Fixture', input: {} }).catch((error) => String(error));
+      await vi.advanceTimersByTimeAsync((timeoutMs ?? 240_000) - 1);
+      expect(requests[0].signal.aborted).toBe(false);
+      await vi.advanceTimersByTimeAsync(1);
+      expect(requests[0].signal.aborted).toBe(true);
+      expect(await result).toContain(`timed out after ${timeoutMs ?? 240_000}ms`);
+      expect(requests).toHaveLength(1);
+    } finally { vi.useRealTimers(); }
   });
 
   it('uses the explicit OPENAI_MODEL override and never retries a failed model with a fallback', async () => {

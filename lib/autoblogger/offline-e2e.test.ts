@@ -61,8 +61,8 @@ const visibleSpans = {
   labelThree: 'Playback', detailThree: 'Test the complete final video.',
 };
 
-// Independently worded observed titles/snippets, never the generated article text.
-// Order is the raw SERP fixture's title/description order, two facts per source.
+// Independently worded synthetic page-body paragraphs, never generated prose.
+// The real HTML extractor reads this catalog from the first two checked pages.
 const observedFacts: Record<string, string> = {
   description: 'Founder recording guidance covers viewers, substantiation, capture, quality review and watching the result.',
   'description-repaired': 'Source-led planning links the intended viewer to evidence collection, recording and final playback checks.',
@@ -70,18 +70,18 @@ const observedFacts: Record<string, string> = {
   gap: 'Typical recording tips can omit the separate task of reviewing their supporting evidence.',
   'answer-1': 'Select a specific viewer and call to action; capture brief founder segments and a present-day product interaction with verifiable support.',
   'answer-2': 'Check factual assertions against citations, subtitle accuracy, timing and audio quality; watch the whole deliverable prior to distribution.',
-  'heading-1': 'Prepare supporting material before a shoot',
+  'heading-1': 'Prepare supporting material before a shoot begins.',
   'section-1': 'Consult an initial supporting reference in advance of filming.',
-  'heading-2': 'Review the viewing experience',
+  'heading-2': 'Review the viewing experience of the completed recording.',
   'section-2': 'Consult another independent reference before distributing the recording.',
   faq: 'Consult verified references and watch the completed recording from start to finish.',
-  'graphic-title': 'Map the relationship between a founder recording and its supporting material',
+  'graphic-title': 'Map the relationship between a founder recording and its supporting material.',
   'graphic-alt': 'A diagram groups audience choice, substantiation and final viewing into three stages.',
-  'label-1': 'Intended viewer',
+  'label-1': 'The intended viewer determines the audience for a recording.',
   'detail-1': 'Select a single target viewer and intended subsequent action.',
-  'label-2': 'Substantiation',
+  'label-2': 'Substantiation pairs factual assertions with supporting evidence.',
   'detail-2': 'Associate each factual assertion with an identifiable reference.',
-  'label-3': 'Final viewing',
+  'label-3': 'Final viewing means watching the completed recording before distribution.',
   'detail-3': 'Watch the finished recording in its entirety.',
 };
 
@@ -123,7 +123,7 @@ function generated(context: Pick<DraftingContext, 'sourceFacts' | 'evidence'>, r
     faqAnswers: context.evidence.faqQuestions.map((question) => ({ question, answer: visibleSpans.faq })),
     sourceReferences: context.sourceFacts.map(({ id }) => ({ sourceId: id })),
     claimBindings: bindings.map(([id, location, span]) => {
-      const fact = context.sourceFacts.flatMap(({ facts }) => facts)[Object.keys(observedFacts).indexOf(id)];
+      const fact = context.sourceFacts.flatMap(({ facts }) => facts).find(({ text }) => text === observedFacts[id]);
       if (!fact) throw new Error(`Missing observed source fact for ${location}`);
       return { location, span, sourceFactIds: [fact.id], productClaimId: null };
     }),
@@ -158,9 +158,10 @@ class RepairingFixtureClient implements StructuredOutputClient {
         const facts = input.sourceFacts.flatMap(({ facts }) => facts).filter(({ id }) => sourceFactIds.includes(id));
         expect(facts).toHaveLength(1);
         expect(facts[0].text).not.toBe(span);
+        expect(facts[0].evidenceKind).toBe('body');
         return {
           bindingIndex, bindingHash, supported: true, kind: 'source_claim',
-          rationale: `The supplied search title/snippet ${sourceFactIds[0]} supports this paraphrased guidance; it adds no numbers, product capability or claim about unseen page content.`,
+          rationale: `The retrieved HTML body passage ${sourceFactIds[0]} supports this independently paraphrased guidance; it adds no numbers or product capability.`,
         };
       });
       return this.omitSupportEvaluation ? evaluations.slice(1) : evaluations;
@@ -315,7 +316,15 @@ describe.skipIf(nativeLanderPath === undefined)('native lander offline integrati
     expect([...new Set(fixture.network.sourceRequests.map(({ url }) => new URL(url).pathname.split('/')[2]))]).toEqual(
       [49, 48, 47, 46, 45, 44, 43, 42, 41, 40].map((index) => 'founder-video-workflow-' + index),
     );
-    expect(fixture.network.sourceRequests).toHaveLength(110); // Ten sources + one manual redirect per candidate.
+    expect(fixture.network.sourceRequests).toHaveLength(50); // Four body sources + one manual redirect per candidate.
+    for (const context of fixture.contexts) {
+      expect(context.sourceFacts).toHaveLength(4);
+      expect(context.sourceFacts.flatMap(({ facts }) => facts.map(({ text }) => text))).toEqual(
+        expect.arrayContaining(Object.values(observedFacts)),
+      );
+      expect(context.sourceFacts.flatMap(({ facts }) => facts).every(({ evidenceKind }) => evidenceKind === 'body')).toBe(true);
+      expect(JSON.stringify(context.sourceFacts)).not.toContain('Search summary');
+    }
     expect(first.artifacts.map(({ slug }) => slug)).toEqual([
       'founder-video-workflow-49', 'founder-video-workflow-48', 'founder-video-workflow-46',
     ]);

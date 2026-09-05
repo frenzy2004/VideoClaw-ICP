@@ -42,6 +42,35 @@ const CompactFailureSchema = z.object({
   detail: z.string().trim().min(1).max(500),
 }).strict();
 
+export const ApifyCollectionProvenanceSchema = z.object({
+  actorId: z.string().trim().min(1).max(240),
+  runId: z.string().trim().min(1).max(160),
+  datasetId: z.string().trim().min(1).max(160),
+  observedAt: z.string().datetime(),
+}).strict();
+
+export const ResearchProvenanceSchema = z.object({
+  discovery: ApifyCollectionProvenanceSchema,
+  serp: ApifyCollectionProvenanceSchema,
+  paa: ApifyCollectionProvenanceSchema.optional(),
+  paaAttempts: z.array(ApifyCollectionProvenanceSchema).max(2).optional(),
+  supportSearches: z.array(ApifyCollectionProvenanceSchema).max(10).optional(),
+}).strict();
+
+// Project only question/collection metadata. Provider answer text is not evidence
+// and must never be copied into the worker's persisted artifact report.
+export const PaaObservationsSchema = z.array(ApifyCollectionProvenanceSchema.extend({
+  query: z.string().trim().min(1).max(500),
+  question: z.string().trim().min(1).max(500),
+  parentQuestion: z.string().trim().min(1).max(500).nullable(),
+  country: z.literal('US'),
+  language: z.literal('en'),
+  position: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
+}).strip()).max(30);
+
+export type ResearchProvenance = z.infer<typeof ResearchProvenanceSchema>;
+export type PaaObservations = z.infer<typeof PaaObservationsSchema>;
+
 const CompactProvenanceSchema = z.object({
   serp: z.object({
     runId: z.string().trim().min(1).max(160),
@@ -55,6 +84,9 @@ const CompactProvenanceSchema = z.object({
     providerRequestId: z.string().trim().min(1).max(500).nullable(),
     sourceObservedAt: z.string().trim().min(1).max(100).nullable(),
   }).strict(),
+  paa: ApifyCollectionProvenanceSchema.optional(),
+  paaAttempts: z.array(ApifyCollectionProvenanceSchema).max(2).optional(),
+  supportSearches: z.array(ApifyCollectionProvenanceSchema).max(10).optional(),
 }).strict();
 
 export const CandidateDecisionSchema = z.object({

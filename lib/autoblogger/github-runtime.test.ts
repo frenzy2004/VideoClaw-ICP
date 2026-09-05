@@ -5,6 +5,9 @@ import {
   createGitHubPublisherBoundary,
   createGitHubStateStore,
   createPersistentWorkerState,
+  PersistentWorkerStateSchema,
+  compactPersistentWorkerState,
+  PaaObservationsSchema,
 } from './github-runtime';
 
 const auth = {
@@ -161,6 +164,54 @@ describe('least-privilege GitHub publisher boundary', () => {
 });
 
 describe('compact same-repository state branch', () => {
+  const collector = { actorId: 'paa-collector', runId: 'paa-run', datasetId: 'paa-data', observedAt: '2026-09-05T00:00:00.000Z' };
+  const provenance = {
+    serp: { runId: 'organic-run', datasetId: 'organic-data', observedAt: collector.observedAt },
+    keyword: { provider: 'pending', endpoint: null, observedAt: null, providerRequestId: null, sourceObservedAt: null },
+    paa: collector,
+    paaAttempts: [{ ...collector, runId: 'paa-first-empty' }, collector],
+    supportSearches: [{ ...collector, actorId: 'support-search', runId: 'support-run', datasetId: 'support-data' }],
+  };
+  const stateWithProvenance = (value: unknown) => ({
+    ...createPersistentWorkerState(),
+    decisions: { fixture: {
+      articleId: 'vc-c2-001', intentFingerprint: `intent:${'a'.repeat(64)}`, identities: ['article:vc-c2-001', 'keyword:demo day video', 'title:demo day video', 'slug:demo-day-video', `intent:${'a'.repeat(64)}`, 'candidate:fixture'],
+      status: 'retryable', reason: 'prior_failure', attempts: 1, runId: 'prior-run', updatedAt: collector.observedAt, leaseExpiresAt: null,
+    } },
+    provenance: { fixture: value },
+  });
+
+  it('round-trips bounded optional PAA and support-search metadata without relabeling the organic run', () => {
+    const state = PersistentWorkerStateSchema.parse(stateWithProvenance(provenance));
+    const compacted = compactPersistentWorkerState(state);
+    expect(compacted.provenance.fixture).toEqual(provenance);
+    expect(PersistentWorkerStateSchema.parse(JSON.parse(JSON.stringify(compacted))).provenance.fixture).toEqual(provenance);
+    const legacy = { serp: provenance.serp, keyword: provenance.keyword };
+    expect(PersistentWorkerStateSchema.parse(stateWithProvenance(legacy)).provenance.fixture).toEqual(legacy);
+  });
+
+  it.each([
+    ['too many support searches', { ...provenance, supportSearches: Array.from({ length: 11 }, () => collector) }],
+    ['too many PAA attempts', { ...provenance, paaAttempts: [collector, collector, collector] }],
+    ['oversized actor id', { ...provenance, paa: { ...collector, actorId: 'x'.repeat(241) } }],
+    ['oversized run id', { ...provenance, paa: { ...collector, runId: 'x'.repeat(161) } }],
+    ['invalid collection time', { ...provenance, paa: { ...collector, observedAt: 'yesterday' } }],
+    ['raw PAA answers', { ...provenance, paa: { ...collector, answer: 'not provenance' } }],
+  ])('rejects %s in compact provenance', (_label, value) => {
+    expect(PersistentWorkerStateSchema.safeParse(stateWithProvenance(provenance)).success).toBe(true);
+    expect(PersistentWorkerStateSchema.safeParse(stateWithProvenance(value)).success).toBe(false);
+  });
+
+  it('bounds question-only PAA records and drops provider answers rather than storing them', () => {
+    const row = { ...collector, query: 'demo day video', question: 'How do founders rehearse a demo day video?', parentQuestion: null, country: 'US', language: 'en', position: 1 };
+    expect(PaaObservationsSchema.parse([{ ...row, answer: 'Raw provider answer' }])).toEqual([row]);
+    expect(PaaObservationsSchema.safeParse(Array.from({ length: 30 }, () => row)).success).toBe(true);
+    expect(PaaObservationsSchema.safeParse(Array.from({ length: 31 }, () => row)).success).toBe(false);
+    for (const patch of [{ question: 'x'.repeat(501) }, { query: 'x'.repeat(501) }, { parentQuestion: 'x'.repeat(501) }, { position: 0 }, { country: 'GB' }, { language: 'fr' }, { observedAt: 'yesterday' }]) {
+      expect(PaaObservationsSchema.safeParse([{ ...row, ...patch }]).success).toBe(false);
+    }
+  });
+
   it('loads, validates, and updates state with optimistic concurrency', async () => {
     const state = createPersistentWorkerState();
     const encoded = Buffer.from(`${JSON.stringify(state)}\n`).toString('base64');

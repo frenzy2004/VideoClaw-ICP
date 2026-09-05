@@ -16,7 +16,8 @@ import {
   limitDeepInspections,
   limitCandidatesForScan,
 } from './policies';
-import type { SafeSourceChecker } from './sources';
+import type { SafeSourceChecker, SourceDocument, SourceSelectionWithContent } from './sources';
+import { PAA_ACTOR_ID, normalizePaaRows, type PaaObservation } from './paa';
 
 export const AUTOCOMPLETE_ACTOR_ID = 'automation-lab/google-autocomplete-scraper';
 export const SERP_ACTOR_ID = 'apify/google-search-scraper';
@@ -45,9 +46,13 @@ export type ApifyExecutionOptions = {
 export type ResearchResult = {
   candidate: Candidate;
   evidence: EvidenceBundle;
+  sourceDocuments?: SourceDocument[];
   provenance: {
     discovery: ApifyObservationProvenance;
     serp: ApifyObservationProvenance;
+    paa?: ApifyObservationProvenance;
+    paaAttempts?: ApifyObservationProvenance[];
+    supportSearches?: ApifyObservationProvenance[];
   };
 };
 
@@ -62,6 +67,9 @@ export type ShallowResearchResult = {
   }>;
   peopleAlsoAsk: string[];
   relatedQueries: string[];
+  paaObservations?: PaaObservation[];
+  paaCollectionError?: string;
+  paaCacheReused?: boolean;
   provenance: ResearchResult['provenance'];
 };
 
@@ -78,7 +86,7 @@ export type ResearchBatch = {
 
 type ResearcherOptions = {
   apify: ApifyClient;
-  sourceChecker: Pick<SafeSourceChecker, 'select'>;
+  sourceChecker: Pick<SafeSourceChecker, 'select' | 'selectWithContent'>;
   execution?: Partial<ApifyExecutionOptions>;
 };
 
@@ -285,6 +293,14 @@ type NormalizedSerp = {
 
 export function createResearcher(options: ResearcherOptions) {
   const execution = { ...DEFAULT_EXECUTION, ...options.execution };
+  const currentPaa = (row: PaaObservation, provenance: ApifyObservationProvenance) => {
+    const rowTime = Date.parse(row.observedAt);
+    const runTime = Date.parse(provenance.observedAt);
+    const now = execution.nowMs();
+    return now - rowTime >= 0 && now - rowTime <= 60 * 60_000
+      && now - runTime >= 0 && now - runTime <= 60 * 60_000
+      && Math.abs(rowTime - runTime) <= 5 * 60_000;
+  };
   async function scan(allCandidates: Candidate[]): Promise<ShallowResearchBatch> {
       const scannedCandidates = limitCandidatesForScan(allCandidates);
       if (scannedCandidates.length > RUN_LIMITS.maxCandidatesScanned) {
@@ -351,6 +367,77 @@ export function createResearcher(options: ResearcherOptions) {
           provenance: { discovery: discovery.provenance, serp: serp.provenance },
         };
       });
+      // The organic collector can return a valid SERP without its dynamic PAA
+      // component. One bounded batch uses a purpose-built collector; its answers
+      // are never promoted to verified source facts (many are AI overviews).
+      const needsPaa = (result: ShallowResearchResult) => {
+        if (!result.organicResults.length) return false;
+        try { selectRelevantPaaQuestions(result.candidate.primaryKeyword, result.peopleAlsoAsk); return false; }
+        catch { return true; }
+      };
+      for (let attempt = 0; attempt < 2; attempt++) {
+        const missingQuestions = results.filter(needsPaa);
+        if (!missingQuestions.length) break;
+        try {
+          const paa = await runApifyActor(options.apify, PAA_ACTOR_ID, {
+            keywords: missingQuestions.map(({candidate}) => candidate.primaryKeyword),
+            countryCode: 'us', languageCode: 'en', includeRelatedSearches: true,
+          }, execution);
+          for (const result of missingQuestions) {
+            const observed = normalizePaaRows(paa.items, result.candidate.primaryKeyword, paa.provenance);
+            const current = observed.observations.filter(row => currentPaa(row, paa.provenance));
+            result.peopleAlsoAsk = [...new Set([...result.peopleAlsoAsk, ...current.map(({question}) => question)])];
+            result.relatedQueries = [...new Set([...result.relatedQueries, ...observed.relatedSearches])];
+            const prior = result.paaObservations ?? [];
+            const seen = new Set(prior.map(({question}) => normalizeKeyword(question)));
+            let selectedQuestions: string[] = [];
+            try { selectedQuestions = selectRelevantPaaQuestions(result.candidate.primaryKeyword, result.peopleAlsoAsk); } catch { /* Still incomplete; next attempt or cache may recover. */ }
+            const selected = new Set(selectedQuestions.map(normalizeKeyword));
+            result.paaObservations = [...prior, ...current.filter(({question}) => !seen.has(normalizeKeyword(question)))]
+              .sort((left,right) => Number(selected.has(normalizeKeyword(right.question))) - Number(selected.has(normalizeKeyword(left.question))))
+              .slice(0, 30);
+            result.provenance.paa = paa.provenance;
+            result.provenance.paaAttempts = [...(result.provenance.paaAttempts ?? []), paa.provenance];
+            delete result.paaCollectionError;
+          }
+        } catch (error) {
+          for (const result of missingQuestions) result.paaCollectionError = redactSensitive(error).slice(0, 500);
+        }
+      }
+      // Google features are intermittent. Reuse only exact-query observations
+      // from this actor's own recent datasets, never a caller-supplied question
+      // list. Keep their ORIGINAL time/run, not the current organic SERP's time.
+      // One-hour freshness and a ten-dataset/30-second bound prevent stale or
+      // unbounded recovery. Live organic rankings above are always recollected.
+      if (results.some(needsPaa) && options.apify.getRecentActorRuns) {
+        const cacheStarted = execution.nowMs();
+        const cacheBounds = {...execution, timeoutMs:30_000};
+        try {
+          const runs = await withinRunDeadline(() => options.apify.getRecentActorRuns!(PAA_ACTOR_ID), cacheBounds, cacheStarted, 'recent PAA runs');
+          for (const run of runs.slice(0, 10)) {
+            const missing = results.filter(needsPaa);
+            if (!missing.length) break;
+            if (run.status !== 'SUCCEEDED' || !run.defaultDatasetId || !run.finishedAt) continue;
+            const age = execution.nowMs() - Date.parse(run.finishedAt);
+            if (!Number.isFinite(age) || age < 0 || age > 60 * 60_000) continue;
+            const items = await withinRunDeadline(() => options.apify.getDatasetItems(run.defaultDatasetId!), cacheBounds, cacheStarted, 'recent PAA dataset');
+            const provenance = {actorId:PAA_ACTOR_ID,runId:run.id,datasetId:run.defaultDatasetId,observedAt:run.finishedAt};
+            for (const result of missing) {
+              const observed = normalizePaaRows(items, result.candidate.primaryKeyword, provenance);
+              const observations = observed.observations.filter(row => currentPaa(row, provenance));
+              const questions = observations.map(({question}) => question);
+              try { selectRelevantPaaQuestions(result.candidate.primaryKeyword, questions); } catch { continue; }
+              result.peopleAlsoAsk = questions;
+              result.paaObservations = observations;
+              result.provenance.paa = provenance;
+              result.paaCacheReused = true;
+              delete result.paaCollectionError;
+            }
+          }
+        } catch (error) {
+          for (const result of results.filter(needsPaa)) result.paaCollectionError = redactSensitive(error).slice(0, 500);
+        }
+      }
       return { scannedCount: scannedCandidates.length, results };
   }
 
@@ -359,13 +446,42 @@ export function createResearcher(options: ResearcherOptions) {
       const results: ResearchResult[] = [];
       for (const shallow of deepCandidates) {
         const { candidate } = shallow;
-        const sources = await options.sourceChecker.select(
-          shallow.organicResults.map(({ url }) => url),
-        );
         const faqQuestions = selectRelevantPaaQuestions(
           candidate.primaryKeyword,
           shallow.peopleAlsoAsk,
         );
+        const sourceUrls = shallow.organicResults.map(({url}) => url);
+        const provenance = {...shallow.provenance};
+        let selection: SourceSelectionWithContent;
+        const selectSources = async (urls: string[]): Promise<SourceSelectionWithContent> => options.sourceChecker.selectWithContent
+          ? options.sourceChecker.selectWithContent(urls, {query:candidate.primaryKeyword,questions:faqQuestions})
+          : {sources:await options.sourceChecker.select(urls),sourceDocuments:[]};
+        try {
+          selection = await selectSources(sourceUrls);
+        } catch {
+          // Discovery, not injected facts: two observed FAQ queries restricted
+          // to primary startup-program publishers. Preserve their own run IDs;
+          // these results never inflate the primary keyword's organic count.
+          const queries = faqQuestions.slice(0, 2).map((question) => `${question} (site:ycombinator.com OR site:techstars.com)`);
+          const support = await runApifyActor(options.apify, SERP_ACTOR_ID, {
+            queries: `${queries.join('\n')}\n`, maxPagesPerQuery: 1,
+            countryCode: 'us', languageCode: 'en', searchLanguage: 'en', mobileResults: false,
+            saveHtml: false, saveHtmlToKeyValueStore: false,
+            websiteContentScraper: {enable: false},
+          }, execution);
+          const observations = support.items.map((item) => normalizeSerpItem(item, support.provenance) as NormalizedSerp);
+          for (const observation of observations) {
+            if (!queries.some((query) => normalizeKeyword(query) === normalizeKeyword(observation.query))
+              || observation.country !== 'US' || observation.language !== 'en'
+              || observation.device !== 'DESKTOP' || observation.page !== 1) continue;
+            for (const result of observation.organicResults) {
+              const hostname = new URL(result.url).hostname.replace(/^www\./u, '');
+              if (hostname === 'ycombinator.com' || hostname === 'techstars.com') sourceUrls.push(result.url);
+            }
+          }
+          provenance.supportSearches = [support.provenance];
+          selection = await selectSources([...new Set(sourceUrls)].slice(0, 24));
+        }
         const evidence = EvidenceBundleSchema.parse({
           schemaVersion: 2,
           candidateFingerprint: candidateFingerprints(candidate).candidate,
@@ -378,10 +494,10 @@ export function createResearcher(options: ResearcherOptions) {
             organicResultCount: shallow.organicResults.length,
             peopleAlsoAsk: faqQuestions,
           },
-          sources,
+          sources: selection.sources,
           faqQuestions,
         });
-        results.push({ candidate, evidence, provenance: shallow.provenance });
+        results.push({ candidate, evidence, provenance, ...(selection.sourceDocuments.length ? {sourceDocuments:selection.sourceDocuments} : {}) });
       }
       return {
         scannedCount: shallowInput.length,

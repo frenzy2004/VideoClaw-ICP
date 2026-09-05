@@ -39,9 +39,14 @@ The test also submits malformed Markdown and requires the native article validat
 to fail. Publisher reports are never fabricated. GitHub calls fail at the boundary;
 research, provider, source-safety, drafting, publisher and file-state implementations
 are real. Only HTTP/DNS and structured model output are deterministic fixtures.
-Draft prose paraphrases independently worded observed search titles/snippets; critic
-and repair verification return explicit support coverage for the supplied binding
-manifest. Reachability does not claim that source page bodies were used as evidence.
+Draft prose paraphrases independently worded synthetic HTML body paragraphs. The
+real source checker retrieves streamed bodies, follows a validated redirect, and
+extracts bounded passages from at most four pages. All 19 supporting passages fit
+within the first two pages. Search metadata deliberately omits those facts, so a
+regression to snippet-only evidence fails the fixture. Critic and repair verification
+return explicit support coverage for the supplied binding manifest; their negative
+controls still reject unresolved issues and missing per-binding support. This is
+offline fixture evidence, not a live-provider or autonomous editorial-success claim.
 
 All temporary fixtures are deleted by default. To retain **one** successful generated
 bundle for a separate full native lander CLI validation, opt in:

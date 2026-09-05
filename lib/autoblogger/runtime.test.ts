@@ -9,6 +9,22 @@ import { validateAutobloggerEnvironment } from './cli';
 import { createPersistentWorkerState } from './github-runtime';
 import type { HttpRequest, HttpTransport } from './http';
 import type { ResearchResult, ShallowResearchResult } from './research';
+import { createSafeSourceChecker } from './sources';
+
+async function sourceDocumentsFor(urls: string[], body: string) {
+  const checker = createSafeSourceChecker({
+    resolveHostname: async () => ['93.184.216.34'],
+    authorityPolicies: [{ hostname: 'primary.example' }],
+    transport: async (request) => ({
+      status: 200, url: request.url, redirected: false,
+      peerAddress: request.allowedPeerAddresses[0],
+      headers: { 'content-type': 'text/html' },
+      body: (async function* () { yield new TextEncoder().encode(body); })(),
+    }),
+  });
+  // Synthetic transport data, never live or manually curated page facts.
+  return Promise.all(urls.map((url) => checker.read(url)));
+}
 
 describe('runtime context and artifacts', () => {
   it('reconciles fresh article, manual PR, and reserved branch identities before any paid API', async () => {
@@ -83,7 +99,7 @@ describe('runtime context and artifacts', () => {
     expect(new Set(candidates.map(({ articleId }) => articleId)).size).toBe(candidates.length);
   });
 
-  it('builds exact transient source facts only from checked SERP observations', () => {
+  it('builds body-only facts and keeps fetch timestamps and citation identity', () => {
     const candidate = CandidateSchema.parse({
       schemaVersion: 1, articleId: 'vc-c2-901', campaignId: 'accelerator-demo-day-founder', icp: 'demo day founder',
       primaryKeyword: 'founder video proof workflow', secondaryKeywords: [], title: 'Founder Video Proof Workflow',
@@ -114,23 +130,47 @@ describe('runtime context and artifacts', () => {
       ],
       faqQuestions: shallow.peopleAlsoAsk,
     });
-    const result: ResearchResult = { candidate, evidence, provenance: shallow.provenance };
+    const sourceDocuments = evidence.sources.map((source) => ({
+      url: source.originalUrl, finalUrl: source.finalUrl, status: 200, reachable: true,
+      authoritative: source.authoritative, checkedAt: '2026-09-05T00:01:30.000Z',
+      contentType: 'text/html', bodySha256: 'a'.repeat(64),
+      text: 'Record the presentation and watch it with a reviewer.',
+      passages: [{ text: 'Record the presentation and watch it with a reviewer.', start: 0, end: 53 }],
+    }));
+    const result: ResearchResult = Object.assign({ candidate, evidence, provenance: shallow.provenance }, { sourceDocuments });
     const metrics = KeywordMetricsSchema.parse({ schemaVersion: 1, provider: 'pending', observedAt: null, volume: null, difficulty: null, cpc: null, intent: 'informational' });
 
     const context = buildDraftingContextFromResearch({ result, shallow, metrics, generatedAt: '2026-09-05T00:02:00.000Z' });
     expect(context.sourceFacts).toHaveLength(2);
     expect(context.sourceFacts[0]).toMatchObject({
       url: 'https://primary.example/guide',
+      checkedAt: '2026-09-05T00:01:30.000Z',
       facts: [
-        { text: 'Primary founder guide' },
-        { text: 'A founder workflow should connect the customer problem to visible product proof.' },
+        { text: 'Record the presentation and watch it with a reviewer.', evidenceKind: 'body' },
       ],
     });
+    expect(JSON.stringify(context.sourceFacts)).not.toContain('visible product proof');
     expect(context.checkedSources.every(({ reachable, status }) => reachable && status === 200)).toBe(true);
     expect(context.provenance).toEqual({ apifyRunId: 'run-s', apifyDatasetId: 'data-s', query: candidate.primaryKeyword, locale: 'en-US', capturedAt: '2026-09-05' });
+    for (const mutatedDocuments of [
+      undefined,
+      [],
+      sourceDocuments.map((document) => ({ ...document, finalUrl: 'https://unrelated.example/claim' })),
+      sourceDocuments.map((document) => ({ ...document, passages: [{ text: 'A claim not present in the document.', start: 0, end: 35 }] })),
+      sourceDocuments.map((document) => ({ ...document, reachable: false, status: 503 })),
+      sourceDocuments.map((document) => ({ ...document,
+        text: '\u200d' + document.text,
+        passages: [{ text: '\u200d' + document.text, start: 0, end: document.text.length + 1 }],
+      })),
+    ]) {
+      expect(() => buildDraftingContextFromResearch({
+        result: Object.assign({}, result, { sourceDocuments: mutatedDocuments }), shallow, metrics,
+        generatedAt: '2026-09-05T00:02:00.000Z',
+      })).toThrow(/body|document|source/i);
+    }
   });
 
-  it('bounds SERP-derived source facts before they enter the model context', () => {
+  it('bounds complete body facts and ignores oversized SERP snippets', async () => {
     const candidate = CandidateSchema.parse({
       schemaVersion: 1, articleId: 'vc-c2-902', campaignId: 'accelerator-demo-day-founder', icp: 'demo day founder',
       primaryKeyword: 'bounded founder video workflow', secondaryKeywords: [], title: 'Bounded Founder Video Workflow',
@@ -162,14 +202,19 @@ describe('runtime context and artifacts', () => {
       faqQuestions: shallow.peopleAlsoAsk,
     });
     const metrics = KeywordMetricsSchema.parse({ schemaVersion: 1, provider: 'pending', observedAt: null, volume: null, difficulty: null, cpc: null, intent: 'informational' });
+    const sourceDocuments = await sourceDocumentsFor(evidence.sources.map(({ originalUrl }) => originalUrl),
+      '<main><section><p>' + 'Do not truncate this body paragraph. '.repeat(70) + '</p></section>'
+      + '<section><p>Rehearse the founder video before sharing the final file.</p></section></main>');
     const context = buildDraftingContextFromResearch({
-      result: { candidate, evidence, provenance: shallow.provenance },
+      result: Object.assign({ candidate, evidence, provenance: shallow.provenance }, { sourceDocuments }),
       shallow,
       metrics,
       generatedAt: '2026-09-05T00:02:00.000Z',
     });
 
-    expect(context.sourceFacts[0].facts[1].text.length).toBeLessThanOrEqual(600);
+    expect(context.sourceFacts[0].facts).toEqual([
+      { id: 'source-1-fact-1', text: 'Rehearse the founder video before sharing the final file.', evidenceKind: 'body' },
+    ]);
   });
 
   it('writes Markdown, SVG, and a compact report without overwriting outside the artifact directory', async () => {

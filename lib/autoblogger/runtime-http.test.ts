@@ -122,11 +122,17 @@ describe('pinned streaming source transport', () => {
 
   it('streams chunks, enforces the byte cap, and cancels on iterator return', async () => {
     let responseClosed = false;
+    let finishResponse: (() => void) | undefined;
+    let waitForClose: Promise<void> | undefined;
     const server = createServer((_request, response) => {
-      response.on('close', () => { responseClosed = true; });
+      waitForClose = new Promise((resolve) => response.on('close', () => {
+        responseClosed = true;
+        resolve();
+      }));
       response.write('1234');
-      setTimeout(() => response.write('5678'), 10);
-      setTimeout(() => response.end('90'), 30);
+      // The test controls when the rest is sent. Timer delays do not guarantee
+      // separate TCP chunks under a parallel test runner.
+      finishResponse = () => response.end('567890');
     });
     const port = await listen(server);
     const transport = createTestOnlyNodeSourceHttpTransport();
@@ -143,14 +149,16 @@ describe('pinned streaming source transport', () => {
     const capped = await request(6);
     const cappedIterator = capped.body[Symbol.asyncIterator]();
     expect(Buffer.from((await cappedIterator.next()).value as Uint8Array).toString()).toBe('1234');
+    finishResponse!();
     await expect(cappedIterator.next()).rejects.toThrow(/byte limit/i);
+    await waitForClose;
 
     responseClosed = false;
     const cancellable = await request(100);
     const iterator = cancellable.body[Symbol.asyncIterator]();
     await iterator.next();
     await iterator.return?.();
-    await new Promise((resolve) => setTimeout(resolve, 20));
+    await waitForClose;
     expect(responseClosed).toBe(true);
     await close(server);
   });

@@ -6,15 +6,26 @@ This worker is a controlled research-and-drafting system. It does not publish ar
 
 The initial 250-topic research library is an input, not a quota or publication gate. Each run scans at most 50 candidates, deeply checks at most 10, and produces at most 3 drafts with no more than 2 from one ICP.
 
-Operator status on 2026-09-06: **one operator-assisted review article; zero successful unattended article pilots or generated lander PRs**. Actual GPT-5.5 generation, critique, repair and verification calls completed using Apify organic results, separately attributed browser PAA and manually checked source bodies. The repaired output still failed critique/claim-binding gates; an explicit editorial revision produced the local review artifact. Its source audit, exact intervention, native QA and remaining blockers are in the [assisted-review report](ASSISTED-REVIEW-2026-09-06.md). Do not present this as `worker.execute()` succeeding or as evidence that unattended research is solved. The [research recovery report](RESEARCH-RECOVERY-2026-09-06.md) and [first pilot report](LIVE-PILOT-2026-09-06.md) retain the earlier zero-generation checkpoints.
+Operator status on 2026-09-06: **automatic research/body collection demonstrated; zero successful fully automated article pilots or generated lander PRs**. The latest [automated-pipeline report](AUTOMATED-PIPELINE-2026-09-06.md) records the implemented fixes, 836 passing tests, a failed four-call model run and a subsequent pre-model input failure. The latter defect is fixed and fresh source-input validation passes. The retained candidate has exhausted its three-attempt limit; no reset, manual evidence injection or editorial rewrite was used to claim success.
 
-`APIFY_TOKEN` is connected to ICP Actions secrets; `OPENAI_API_KEY` works locally only and `LANDER_READ_TOKEN` is still absent. Local attempts used fresh GET-only interactive GitHub inventory without substituting a broad token into the unattended worker. Earlier state/history is preserved; the later assisted failure and separate editorial artifact must be reconciled before Actions use. PR #1 and lander PR #55 remain **open/unmerged**, and the schedule is disabled. No production action, generated lander PR or schedule activation is authorized. The ICP default branch is `seo-campaign`; GitHub schedules require the workflow there.
+One older operator-assisted review article still exists separately. Its source audit, intervention and native QA are preserved in the [assisted-review report](ASSISTED-REVIEW-2026-09-06.md). It is not a successful `worker.execute()` result. The [research recovery report](RESEARCH-RECOVERY-2026-09-06.md) and [first pilot report](LIVE-PILOT-2026-09-06.md) retain earlier checkpoints.
+
+`APIFY_TOKEN` is connected to ICP Actions secrets; `OPENAI_API_KEY` works locally only and `LANDER_READ_TOKEN` is still absent. Local attempts used fresh GET-only interactive GitHub inventory without substituting a broad token into the unattended worker. State/history is preserved and must be reconciled before Actions use; the exhausted retry requires an explicit operator decision, not a new identity. PR #1 and lander PR #55 remain **open/unmerged**, and the schedule is disabled. No production action, generated lander PR or schedule activation is authorized. The ICP default branch is `seo-campaign`; GitHub schedules require the workflow there.
 
 See the updated [three-lane system diagram](../diagrams/videoclaw-seo-aeo-geo-content-system.md) for the worker, current pilot and separate human release boundary.
 
 ## Apify-first operation while metrics are pending
 
 Use the existing `KEYWORD_PROVIDER=pending` path for research and the one artifact-only pilot. Apify supplies US/en organic results, autocomplete, related searches and People Also Ask where present. Missing signals still fail their evidence gates; observing a SERP does not establish search volume.
+
+The organic collector is supplemented by a dedicated PAA actor when fewer than three
+relevant questions are present. Two bounded attempts may be followed by automatic
+lookup of at most ten recent actor datasets. Reuse requires exact query, US/en and
+original timestamps within one hour; it is not relabelled as a current SERP feature.
+PAA answer text, including AI overview answers, is never source evidence. Source
+facts now come from automatically retrieved body passages, with complete adjacent
+qualifications and separate fetch/hash provenance. See the
+[automated-pipeline report](AUTOMATED-PIPELINE-2026-09-06.md).
 
 This is **not** a DataForSEO integration. Supported adapters remain `pending`, `semrush` and `ahrefs`. Do not set `KEYWORD_PROVIDER=dataforseo`, substitute the Apify token for provider credentials, or fill volume/difficulty/CPC using SERP counts or an unverified actor's estimates. Adding DataForSEO later requires a tested adapter and authenticated metrics; its lack does not block the pending-metrics pilot. Recurring and normal draft-PR mode still require observed paid metrics.
 
@@ -62,6 +73,16 @@ pnpm autoblog validate --bundle artifacts/autoblogger/local-pilot-001/example.bu
 Prepare durably writes each Markdown/SVG/bundle and generated `.publication.json` before completing its candidate decision. The pilot additionally saves a non-expiring prepared hash reservation **before the first output write**: an uncertain filesystem write or lost final-state acknowledgement requires manual reconciliation and cannot release a second pilot. Pilot consumption still occurs only after the final artifact/report sync. Publish reads prepared files without invoking research, providers, or the model. It requires the same run ID, a validated scheduled-mode run, the exact set of prepared candidate decisions and identities, matching stored SHA-256 bundle hashes and provenance, and complete paid metrics. It reruns `Publisher.validateBundle` and retains the exact report object in the same publisher instance used to open each draft PR. Serialized QA reports cannot grant publication authority. PR #55 must be merged into `main`; the publisher repeats target, duplicate, and base-SHA checks before writing.
 
 The CLI prints one compact JSON summary to stdout. Markdown, SVG, bundle JSON, publication envelopes, and the bounded QA report are written under the selected artifact directory using file sync, atomic rename, and directory sync. Pilot consumption occurs only after the final report write succeeds. Errors (including initialization/argument failures) produce a redacted `failure-report.json` where the artifact directory is writable, with machine-readable stderr as the fallback.
+
+### Local retry diagnostic
+
+`local-pilot-entry.ts` is a narrow, explicit artifact-only diagnostic for the retained
+`vc-c2-001` retry and existing local state. It is not an alternative unattended
+credential flow or a generic way to start additional pilots. It verifies the clean
+local lander against fresh GET-only GitHub inventory, retains all previous attempts,
+and has no publisher capability. Its exact model/context replay receipts stay in
+private, ignored local files; never commit them or attach them to a PR. A completed
+pilot or exhausted retry budget causes preflight to refuse further execution.
 
 ## Runtime configuration
 

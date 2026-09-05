@@ -203,7 +203,7 @@ export type SourceFact = {
     /** Omitted legacy facts are conservatively treated as search titles/snippets by the critic. */
     evidenceKind?: 'serp_title' | 'serp_snippet' | 'body';
   }>;
-  /** Used only for copied-passage comparison. Never included in model input or artifacts. */
+  /** Used for copied-passage comparison. Excluded from model input, Git and compact reports; a private ignored local replay may retain it. */
   excerpt?: string;
 };
 
@@ -363,6 +363,12 @@ export type DraftSafetyFinding = {
   code: string;
   message: string;
   issueId?: string;
+  bindingIndex?: number;
+  location?: string;
+  span?: string;
+  sourceFactIds?: string[];
+  reason?: string;
+  repairInstruction?: string;
 };
 
 export class DraftMaterializationError extends Error {
@@ -434,17 +440,48 @@ function visibleWordCount(markdown: string): number {
   return normalizedWords(markdownNodeText(parseMarkdown(markdown))).length;
 }
 
-function containsCopiedPassage(body: string, excerpts: string[]): boolean {
+function copiedPassage(body: string, excerpt: string): string | undefined {
   const bodyWords = normalizedWords(body);
-  if (bodyWords.length < 12) return false;
-  const bodyText = bodyWords.join(' ');
-  return excerpts.some((excerpt) => {
-    const words = normalizedWords(excerpt);
-    for (let index = 0; index <= words.length - 12; index += 1) {
-      if (bodyText.includes(words.slice(index, index + 12).join(' '))) return true;
+  if (bodyWords.length < 12) return undefined;
+  const bodyText = ` ${bodyWords.join(' ')} `;
+  const words = normalizedWords(excerpt);
+  for (let index = 0; index <= words.length - 12; index += 1) {
+    const span = words.slice(index, index + 12).join(' ');
+    if (bodyText.includes(` ${span} `)) return span;
+  }
+  return undefined;
+}
+
+function containsCopiedPassage(body: string, excerpts: string[]): boolean {
+  return excerpts.some((excerpt) => copiedPassage(body, excerpt) !== undefined);
+}
+
+function copiedDraftFindings(context: DraftingContext, draft: GeneratedDraftV2): DraftSafetyFinding[] {
+  const claims = generatedClaimSentences(draft);
+  const locations = unique(claims.map(({ location }) => location));
+  const findings: DraftSafetyFinding[] = [];
+  for (const location of locations) {
+    const value = generatedLocationValue(draft, location) ?? '';
+    for (const source of context.sourceFacts) {
+      if (!source.excerpt) continue;
+      const copied = copiedPassage(value, source.excerpt);
+      if (!copied) continue;
+      // Use a complete rendered sentence when possible. A cross-sentence match
+      // retains the full field so repair cannot miss either half of the passage.
+      const span = claims.find((claim) => claim.location === location
+        && copiedPassage(claim.span, copied))?.span ?? value;
+      const bindingIndex = draft.claimBindings.findIndex((binding) => binding.location === location && binding.span === span);
+      findings.push({
+        code: 'content.copied_passage', location, span,
+        ...(bindingIndex >= 0 ? { bindingIndex } : {}),
+        sourceFactIds: source.facts.filter(({ text }) => copiedPassage(text, copied)).map(({ id }) => id),
+        reason: 'copied_source_passage',
+        message: `Copied source passage at ${location} from ${source.id}: ${JSON.stringify(copied)}.`,
+        repairInstruction: 'Remove or genuinely paraphrase this passage in original language without changing its supported meaning; check every occurrence and recompute exact bindings.',
+      });
     }
-    return false;
-  });
+  }
+  return findings;
 }
 
 function hasMalformedMarkdown(markdown: string): boolean {
@@ -513,9 +550,7 @@ function inspectReferences(
     findings.push(finding('content.unsupported_link', 'Every external Markdown link must match the supplied source inventory exactly.'));
   }
 
-  if (!claimBindingsAreValid(context, draft, sourceIds)) {
-    findings.push(finding('content.claim_binding', 'Every objective claim must bind its exact location and span to visible allowed source facts.'));
-  }
+  findings.push(...inspectClaimBindings(context, draft, sourceIds));
   return findings;
 }
 
@@ -579,28 +614,80 @@ function containsExplicitProductAlias(sentence: string, claims: ProductClaim[]):
   const normalized = normalizeKeyword(sentence);
   const aliases = ['VideoClaw', ...claims.flatMap(({ subjectAliases }) => subjectAliases)]
     .map(normalizeKeyword)
-    .filter((alias) => alias !== 'it');
+    .filter((alias) => !['it', 'the product', 'this product'].includes(alias));
   return aliases.some((alias) => alias && ` ${normalized} `.includes(` ${alias} `))
-    || /\b(?:this app|this product|this platform|this tool|the app|the product|the platform|the tool|our app|our product)\b/iu.test(sentence);
+    || /\b(?:this app|this platform|this tool|the app|the platform|the tool|our app|our product)\b/iu.test(sentence);
+}
+
+// These identify visible non-software noun phrases, not factual support. A word
+// used as a modifier ("the recording tool") is not an ordinary antecedent.
+const ordinaryReferent = /\b(?:(?:a|an|the|this|that|each|your) (?:short )?(?:guide|scene|example|brief|script|storyboard|row|presentation|recording|video|draft|outline|footage|transcript|checklist)|new content|demo day)\b(?![-\s]+(?:app|application|product|platform|tool|software|service|editor)\b)/iu;
+const softwareReferent = /\b(?:app|application|platform|tool|software|service|editor)\b/iu;
+
+function hasExplicitOrdinarySubject(prefix: string): boolean {
+  const referent = ordinaryReferent.exec(prefix);
+  // Only a sentence-leading noun phrase with its own predicate may override
+  // prior product context. "After reviewing the recording, it ..." names an
+  // object inside an introductory phrase, not the subject of the main clause.
+  return referent?.index === 0 && /^\s+(?:is|was|does|has|needs|keeps|contains|shows|remains|can|could|should|must|will|would)\b/iu
+    .test(prefix.slice(referent[0].length));
+}
+
+function attributedNonProductSubject(prefix: string, factTexts: string[]): boolean {
+  // Named third-party attribution must also be present as the subject of a
+  // supplied fact. Neither that match nor pronoun resolution proves entailment.
+  const subject = prefix.match(/^([\p{Lu}][\p{L}\d]*(?:[ -][\p{Lu}][\p{L}\d]*){0,3})\s+(?:also\s+)?(?:says|notes|explains|reports)\s+$/u)?.[1];
+  return Boolean(subject && factTexts.some((text) => (
+    normalizeKeyword(text).startsWith(`${normalizeKeyword(subject)} `)
+  )));
 }
 
 function containsProductAlias(
   sentence: string,
   claims: ProductClaim[],
   localContext: string,
+  priorProductContext: boolean,
+  factTexts: string[],
 ): boolean {
   if (containsExplicitProductAlias(sentence, claims)) return true;
-  if (!/\bit\b/iu.test(sentence)) return false;
+  const productReferences = [...sentence.matchAll(/\b(?:the|this) product\b/giu)];
+  const pronoun = /\bit\b/iu.exec(sentence);
+  if (!pronoun && productReferences.length === 0) return false;
+  const prefix = pronoun ? sentence.slice(0, pronoun.index) : '';
+  // A newly named ordinary subject in this very sentence can resolve its own
+  // pronoun, even after a product paragraph. It never clears the product context
+  // for later standalone pronouns, and software/product nouns remain ambiguous.
+  if (pronoun && !softwareReferent.test(sentence) && !/\bproduct\b/iu.test(sentence)
+    && ((ordinaryReferent.test(prefix) && (!priorProductContext || hasExplicitOrdinarySubject(prefix)))
+      || attributedNonProductSubject(prefix, factTexts))) return false;
+  // Do not let an intervening ordinary noun or a hypothetical label erase a
+  // visible VideoClaw antecedent. This deliberately leaves ambiguity fail-closed.
+  if (priorProductContext) return true;
+  if (productReferences.length > 0) {
+    const genericContext = /\b(?:company|customer|hypothetical)\b/iu.test(sentence);
+    const genericVideoSubject = /^a (?:software )?demo video\b/iu.test(sentence);
+    const genericRolesOnly = productReferences.every((reference) => {
+      const after = sentence.slice(reference.index! + reference[0].length).trimStart();
+      if (genericContext && /^(?:response|screen|value|matters)\b/iu.test(after)) return true;
+      // The category is a video, and the product is its demonstrated object,
+      // not the subject of a capability assertion. Check every occurrence; an
+      // added "the product adds captions" must not inherit this exception.
+      return genericVideoSubject && reference[0].toLowerCase() === 'the product'
+        && /\b(?:see|show|shows|showing)\s+$/iu.test(sentence.slice(0, reference.index))
+        && /^in action\b/iu.test(after);
+    });
+    if (!genericRolesOnly) return true;
+  }
+  if (!pronoun) return false;
+  if (softwareReferent.test(sentence)) return true;
 
-  // Only exempt simple editorial instructions whose object has an explicit local
-  // antecedent. Do not exempt subject pronouns, extra clauses, or ambiguous tools:
-  // those could assert an unapproved product capability and must remain fail-closed.
+  // Cross-sentence context is allowed only for a simple editorial object command.
+  // A standalone "It adds captions" still has no explicit ordinary referent.
   const ordinaryObjectInstruction = /^(?:review|read|watch|check|revise) it(?: carefully)?(?: (?:before|after) (?:sharing|recording|publishing|editing|sending|exporting))?[.!]?$/iu;
-  const ordinaryAntecedent = /\b(?:recording|video|script|draft|outline|footage|transcript|checklist)\b/iu;
-  const productAntecedent = /\b(?:app|application|product|platform|tool|software|service|editor)\b/iu;
   return !ordinaryObjectInstruction.test(sentence)
-    || !ordinaryAntecedent.test(localContext)
-    || productAntecedent.test(localContext)
+    || !ordinaryReferent.test(localContext)
+    || softwareReferent.test(localContext)
+    || /\bproduct\b/iu.test(localContext)
     || containsExplicitProductAlias(localContext, claims);
 }
 
@@ -610,11 +697,11 @@ function factExactlyMatchesSpan(span: string, factTexts: string[]): boolean {
     && factTexts.some((text) => normalizeKeyword(text) === normalizedSpan);
 }
 
-function claimBindingsAreValid(
+function inspectClaimBindings(
   context: DraftingContext,
   draft: GeneratedDraftV2,
   visibleSourceIds: string[],
-): boolean {
+): DraftSafetyFinding[] {
   const factsById = new Map<string, { sourceId: string; text: string }>();
   for (const source of context.sourceFacts) {
     for (const fact of source.facts) factsById.set(fact.id, { sourceId: source.id, text: fact.text });
@@ -622,7 +709,25 @@ function claimBindingsAreValid(
   const claimById = new Map(context.productClaims.map((claim) => [claim.id, claim]));
   const expected = generatedClaimSentences(draft);
   const seen = new Set<string>();
-  for (const binding of draft.claimBindings) {
+  const findings: DraftSafetyFinding[] = [];
+  // Visible draft order is authoritative, not the model's binding-array order.
+  const productContext = new Map<string, boolean>();
+  let priorProductContext = containsExplicitProductAlias(context.candidate.title, context.productClaims);
+  for (const { location, span } of expected) {
+    const key = `${location}\n${span}`;
+    if (productContext.has(key)) findings.push({
+      code: 'content.claim_binding', location, span, sourceFactIds: [], reason: 'repeated_span',
+      message: `Repeated identical span at ${location}: ${JSON.stringify(span)}. Remove repetition so each visible sentence has one unambiguous binding.`,
+    });
+    productContext.set(key, priorProductContext);
+    priorProductContext ||= containsExplicitProductAlias(span, context.productClaims);
+  }
+  for (const [bindingIndex, binding] of draft.claimBindings.entries()) {
+    const reject = (reason: string, message: string) => findings.push({
+      code: 'content.claim_binding', bindingIndex, location: binding.location,
+      span: binding.span, sourceFactIds: binding.sourceFactIds, reason,
+      message: `Binding ${bindingIndex} at ${binding.location}, span ${JSON.stringify(binding.span)}: ${message}`,
+    });
     const key = `${binding.location}\n${binding.span}`;
     const locationValue = generatedLocationValue(draft, binding.location);
     const visibleSentences = locationValue ? claimSpansAtLocation(locationValue, binding.location) : [];
@@ -632,15 +737,13 @@ function claimBindingsAreValid(
     const localContext = sentenceIndex > 0
       ? visibleSentences[sentenceIndex - 1]
       : section ? draft.sections[Number(section[1])]?.heading ?? '' : '';
-    if (
-      seen.has(key)
-      || !visibleSentences.includes(binding.span)
-      || new Set(binding.sourceFactIds).size !== binding.sourceFactIds.length
-      || binding.sourceFactIds.some((factId) => (
-        !factsById.has(factId)
-        || !visibleSourceIds.includes(factsById.get(factId)?.sourceId as string)
-      ))
-    ) return false;
+    if (seen.has(key)) reject('duplicate_binding', 'Use exactly one binding for this location and span.');
+    if (!visibleSentences.includes(binding.span)) reject('span_mismatch', 'Bind an exact rendered sentence at an existing location.');
+    if (new Set(binding.sourceFactIds).size !== binding.sourceFactIds.length) reject('duplicate_fact', 'Do not repeat source fact IDs.');
+    const unknownFacts = binding.sourceFactIds.filter((id) => !factsById.has(id));
+    if (unknownFacts.length > 0) reject('unknown_fact', `Unknown source fact IDs: ${unknownFacts.join(', ')}.`);
+    const unselectedFacts = binding.sourceFactIds.filter((id) => factsById.has(id) && !visibleSourceIds.includes(factsById.get(id)!.sourceId));
+    if (unselectedFacts.length > 0) reject('unselected_source', `Select the parent source for facts: ${unselectedFacts.join(', ')}.`);
     seen.add(key);
 
     // General prose may paraphrase sources or offer labelled original guidance/examples.
@@ -659,13 +762,23 @@ function claimBindingsAreValid(
           binding.span,
           binding.sourceFactIds.map((factId) => factsById.get(factId)?.text ?? ''),
         )
-      ) return false;
-    } else if (binding.productClaimId !== null || containsProductAlias(binding.span, context.productClaims, localContext)) {
-      return false;
+      ) reject('product_claim_mismatch', 'Use exact approved product wording, only its allowed fact IDs, and an exact supporting fact.');
+    } else if (binding.productClaimId !== null) {
+      reject('unknown_product_claim', `Unknown product claim ID: ${binding.productClaimId}.`);
+    } else if (containsProductAlias(
+      binding.span, context.productClaims, localContext, productContext.get(key) ?? true,
+      binding.sourceFactIds.map((id) => factsById.get(id)?.text ?? ''),
+    )) {
+      reject('unapproved_product_reference', 'Explicit or ambiguous VideoClaw reference requires an exact approved product claim; remove the unsupported assertion or make a genuinely non-product referent explicit.');
     }
   }
-  return expected.length === draft.claimBindings.length
-    && expected.every(({ location, span }) => seen.has(`${location}\n${span}`));
+  for (const { location, span } of expected) {
+    if (!seen.has(`${location}\n${span}`)) findings.push({
+      code: 'content.claim_binding', location, span, sourceFactIds: [], reason: 'missing_binding',
+      message: `Missing exact binding at ${location} for span ${JSON.stringify(span)}. Bind to relevant selected source facts.`,
+    });
+  }
+  return findings;
 }
 
 export function inspectGeneratedDraft(
@@ -705,7 +818,9 @@ export function inspectGeneratedDraft(
   if (researchBoilerplatePattern.test(publishableProse)) {
     findings.push(finding('content.research_boilerplate', 'Public prose contains internal research or debug terminology.'));
   }
-  if (containsCopiedPassage(publishableProse, context.sourceFacts.flatMap(({ excerpt }) => excerpt ? [excerpt] : []))) {
+  const copyFindings = copiedDraftFindings(context, draft);
+  findings.push(...copyFindings);
+  if (copyFindings.length === 0 && containsCopiedPassage(publishableProse, context.sourceFacts.flatMap(({ excerpt }) => excerpt ? [excerpt] : []))) {
     findings.push(finding('content.copied_passage', 'Generated content contains a copied source passage.'));
   }
   const actualQuestions = draft.faqAnswers.map(({ question }) => question);
@@ -716,7 +831,7 @@ export function inspectGeneratedDraft(
     findings.push(finding('content.faq_mismatch', 'FAQ questions must exactly match the three PAA-grounded evidence questions.'));
   }
   findings.push(...inspectReferences(context, draft, publishableProse));
-  return unique(findings.map(({ code }) => code)).map((code) => findings.find((item) => item.code === code) as DraftSafetyFinding);
+  return uniqueFindings(findings);
 }
 
 export function selectProductMedia(
@@ -973,8 +1088,13 @@ function inspectFinalSvg(
 }
 
 function uniqueFindings(findings: DraftSafetyFinding[]): DraftSafetyFinding[] {
-  return unique(findings.map(({ code }) => code))
-    .map((code) => findings.find((item) => item.code === code) as DraftSafetyFinding);
+  const seen = new Set<string>();
+  return findings.filter(({ code, bindingIndex, location, span, reason }) => {
+    const key = JSON.stringify([code, bindingIndex, location, span, reason]);
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
 }
 
 function yamlScalar(value: unknown): string {

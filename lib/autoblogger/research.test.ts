@@ -9,6 +9,125 @@ import {
   selectRelevantPaaQuestions,
 } from './research';
 import type { ApifyClient, ApifyRun } from './apify-client';
+import { PAA_ACTOR_ID } from './paa';
+const researchClock={nowMs:()=>Date.parse('2026-09-04T08:15:00.000Z')};
+
+describe('missing PAA collector recovery', () => {
+  it.each(['2026-09-03T08:01:00.000Z','2026-09-05T08:01:00.000Z'])('rejects fresh-run PAA rows with invalid freshness: %s', async(checkedAt)=>{
+    const candidate={...candidates(1)[0],primaryKeyword:'demo day video checklist'};
+    const questions=['What is a demo day?','How does yc demo day work?','Can anyone attend YC demo day?'];
+    const client:ApifyClient={startActor:async(actor)=>successfulRun(actor,actor),getRun:async()=>{throw Error('unexpected');},abortRun:async(id)=>({id,status:'ABORTED'}),getDatasetItems:async(id)=>id===AUTOCOMPLETE_ACTOR_ID?[]:id===PAA_ACTOR_ID?questions.map((question,i)=>({record_type:'paa_question',keyword:candidate.primaryKeyword,question,position:i+1,country:'us',language:'en',checked_at:checkedAt})):[{searchQuery:{term:candidate.primaryKeyword,device:'DESKTOP',page:1,countryCode:'US',languageCode:'en'},organicResults:[{position:1,title:'Plan',url:'https://publisher.example/plan',description:'Planning'}],peopleAlsoAsk:[],relatedQueries:[]}]};
+    const result=await createResearcher({apify:client,sourceChecker:{select:async()=>[]},execution:researchClock}).scan([candidate]);
+    expect(result.results[0].peopleAlsoAsk).toEqual([]);
+    expect(result.results[0].paaObservations).toEqual([]);
+  });
+  it('retains provenance for selected FAQs when the first collection fills the observation cap with unrelated questions', async()=>{
+    const candidate={...candidates(1)[0],primaryKeyword:'demo day video checklist'};
+    const questions=['What is a demo day?','How does yc demo day work?','Can anyone attend YC demo day?'];
+    let calls=0;
+    const client:ApifyClient={startActor:async(actor)=>{const id=actor===PAA_ACTOR_ID?`paa-${++calls}`:actor;return successfulRun(id,id);},getRun:async()=>{throw Error('unexpected');},abortRun:async(id)=>({id,status:'ABORTED'}),getDatasetItems:async(id)=>id===AUTOCOMPLETE_ACTOR_ID?[]:id.startsWith('paa-')?(id==='paa-1'?Array.from({length:30},(_,i)=>`What is unrelated accounting rule ${i}?`):questions).map((question,i)=>({record_type:'paa_question',keyword:candidate.primaryKeyword,question,position:i+1,country:'us',language:'en',checked_at:'2026-09-04T08:01:00.000Z'})):[{searchQuery:{term:candidate.primaryKeyword,device:'DESKTOP',page:1,countryCode:'US',languageCode:'en'},organicResults:[{position:1,title:'Plan',url:'https://publisher.example/plan',description:'Planning'}],peopleAlsoAsk:[],relatedQueries:[]}]};
+    const result=await createResearcher({apify:client,sourceChecker:{select:async()=>[]},execution:researchClock}).scan([candidate]);
+    const selected=selectRelevantPaaQuestions(candidate.primaryKeyword,result.results[0].peopleAlsoAsk);
+    expect(selected).toEqual(questions);
+    for(const question of selected) expect(result.results[0].paaObservations?.find(item=>item.question===question)).toMatchObject({runId:'paa-2',datasetId:'paa-2'});
+    expect(result.results[0].paaObservations!.length).toBeLessThanOrEqual(30);
+  });
+  it.each([false,true])('automatically reuses only recent exact-query PAA observations (stale=%s)', async (stale) => {
+    const candidate={...candidates(1)[0],primaryKeyword:'demo day video checklist'};
+    const questions=['What is a demo day?','How does yc demo day work?','Can anyone attend YC demo day?'];
+    const checkedAt=stale?'2026-09-04T06:00:00.000Z':'2026-09-04T08:01:00.000Z';
+    const client:ApifyClient={
+      startActor:async(actorId)=>successfulRun(actorId,actorId),
+      getRun:async()=>{throw new Error('not needed');},abortRun:async(id)=>({id,status:'ABORTED'}),
+      getRecentActorRuns:async()=>[{...successfulRun('prior-observation','prior-dataset'),finishedAt:checkedAt}],
+      getDatasetItems:async(id)=>id===AUTOCOMPLETE_ACTOR_ID||id===PAA_ACTOR_ID?[]:id==='prior-dataset'
+        ?questions.map((question,index)=>({record_type:'paa_question',keyword:candidate.primaryKeyword,question,position:index+1,country:'us',language:'en',checked_at:checkedAt}))
+        :[{searchQuery:{term:candidate.primaryKeyword,device:'DESKTOP',page:1,countryCode:'US',languageCode:'en'},organicResults:[{position:1,title:'Planning',url:'https://publisher.example/planning',description:'Planning evidence.'}],peopleAlsoAsk:[],relatedQueries:[]}],
+    };
+    const result=await createResearcher({apify:client,sourceChecker:{select:async()=>[]},execution:{nowMs:()=>Date.parse('2026-09-04T08:15:00.000Z')}}).scan([candidate]);
+    expect(result.results[0].peopleAlsoAsk).toEqual(stale?[]:questions);
+    if(!stale){expect(result.results[0].paaCacheReused).toBe(true);expect(result.results[0].provenance.paa?.runId).toBe('prior-observation');expect(result.results[0].paaObservations?.[0].observedAt).toBe(checkedAt);}
+  });
+  it('retries an empty dynamic PAA response once and retains both collection IDs', async () => {
+    const candidate={...candidates(1)[0],primaryKeyword:'demo day video checklist'};
+    const questions=['What is a demo day?','How does yc demo day work?','Can anyone attend YC demo day?'];
+    let paaRuns=0;
+    const client:ApifyClient={
+      startActor:async(actorId)=>{const id=actorId===PAA_ACTOR_ID?`paa-${++paaRuns}`:actorId;return successfulRun(id,id);},
+      getRun:async()=>{throw new Error('not needed');},abortRun:async(id)=>({id,status:'ABORTED'}),
+      getDatasetItems:async(id)=>id===AUTOCOMPLETE_ACTOR_ID||id==='paa-1'?[]:id==='paa-2'
+        ?questions.map((question,index)=>({record_type:'paa_question',keyword:candidate.primaryKeyword,question,position:index+1,country:'us',language:'en',checked_at:'2026-09-04T08:01:00.000Z'}))
+        :[{searchQuery:{term:candidate.primaryKeyword,device:'DESKTOP',page:1,countryCode:'US',languageCode:'en'},organicResults:[{position:1,title:'Planning',url:'https://publisher.example/planning',description:'Planning evidence.'}],peopleAlsoAsk:[],relatedQueries:[]}],
+    };
+    const result=await createResearcher({apify:client,sourceChecker:{select:async()=>[]},execution:researchClock}).scan([candidate]);
+    expect(paaRuns).toBe(2);
+    expect(result.results[0].peopleAlsoAsk).toEqual(questions);
+    expect(result.results[0].provenance.paaAttempts?.map(({runId})=>runId)).toEqual(['paa-1','paa-2']);
+  });
+  it('preserves organic observations but records the missing evidence when the optional PAA collector fails', async () => {
+    const candidate={...candidates(1)[0],primaryKeyword:'demo day video checklist'};
+    const client:ApifyClient={
+      startActor:async(actorId)=>{if(actorId===PAA_ACTOR_ID)throw new Error('temporary collector failure');return successfulRun(actorId,actorId);},
+      getRun:async()=>{throw new Error('not needed');},abortRun:async(id)=>({id,status:'ABORTED'}),
+      getDatasetItems:async(id)=>id===AUTOCOMPLETE_ACTOR_ID?[]:[{searchQuery:{term:candidate.primaryKeyword,device:'DESKTOP',page:1,countryCode:'US',languageCode:'en'},organicResults:[{position:1,title:'Planning',url:'https://publisher.example/planning',description:'Planning evidence.'}],peopleAlsoAsk:[],relatedQueries:[]}],
+    };
+    const result=await createResearcher({apify:client,sourceChecker:{select:async()=>[]},execution:researchClock}).scan([candidate]);
+    expect(result.results[0].organicResults).toHaveLength(1);
+    expect(result.results[0].peopleAlsoAsk).toEqual([]);
+    expect(result.results[0].paaCollectionError).toContain('temporary collector failure');
+    expect(()=>selectRelevantPaaQuestions(candidate.primaryKeyword,result.results[0].peopleAlsoAsk)).toThrow();
+  });
+  it('passes retrieved body documents to drafting and never falls back to reachability when body verification fails', async () => {
+    const candidate={...candidates(1)[0],primaryKeyword:'demo day video checklist'};
+    const source={originalUrl:'https://www.ycombinator.com/about',finalUrl:'https://www.ycombinator.com/about',authoritative:true};
+    const doc={url:source.originalUrl,finalUrl:source.finalUrl,status:200,reachable:true,authoritative:true,checkedAt:'2026-09-04T08:02:00.000Z',contentType:'text/html',bodySha256:'a'.repeat(64),text:'The program ends with Demo Day.',passages:[{text:'The program ends with Demo Day.',start:0,end:31}]};
+    const noIo=async()=>{throw new Error('Unexpected I/O');};
+    const client:ApifyClient={startActor:noIo,getRun:noIo,getDatasetItems:noIo,abortRun:noIo};
+    const shallow={candidate,suggestions:[],organicResults:[{title:'YC',url:source.originalUrl,snippet:'Snippet must not be used.',resultType:'article'}],peopleAlsoAsk:['What is a demo day?','How does yc demo day work?','Can anyone attend YC demo day?'],relatedQueries:[],provenance:{discovery:{actorId:'a',runId:'a',datasetId:'a',observedAt:'2026-09-04T08:01:00.000Z'},serp:{actorId:'s',runId:'s',datasetId:'s',observedAt:'2026-09-04T08:01:00.000Z'}}};
+    const result=await createResearcher({apify:client,sourceChecker:{select:noIo,selectWithContent:async()=>({sources:[source],sourceDocuments:[doc]})}}).inspect([shallow]);
+    expect(result.results[0].sourceDocuments).toEqual([doc]);
+  });
+  it('automatically discovers primary source URLs without counting them as target keyword competitors', async () => {
+    const candidate={...candidates(1)[0],primaryKeyword:'demo day video checklist'};
+    const faq=['What is a demo day?','How does yc demo day work?','Can anyone attend YC demo day?'];
+    let sourceSearches=0;
+    const client: ApifyClient = {
+      startActor:async(actorId,input)=>{expect(actorId).toBe(SERP_ACTOR_ID); const queries=String(input.queries).trim().split('\n');expect(queries).toHaveLength(2);expect(queries.every(q=>q.includes('site:ycombinator.com'))).toBe(true);sourceSearches++;return successfulRun('sources-run','sources-dataset');},
+      getRun:async()=>{throw new Error('not needed');},abortRun:async(id)=>({id,status:'ABORTED'}),
+      getDatasetItems:async()=>faq.slice(0,2).map(question=>({searchQuery:{term:`${question} (site:ycombinator.com OR site:techstars.com)`,device:'DESKTOP',page:1,countryCode:'US',languageCode:'en'},organicResults:[{position:1,title:'What Happens at YC',url:'https://www.ycombinator.com/about',description:'Demo day details.'}],peopleAlsoAsk:[],relatedQueries:[]})),
+    };
+    const result=await createResearcher({apify:client,sourceChecker:{select:async(urls)=>{
+      if(!urls.includes('https://www.ycombinator.com/about')) throw new Error('No primary source');
+      return [{originalUrl:'https://publisher.example/checklist',finalUrl:'https://publisher.example/checklist',authoritative:false},{originalUrl:'https://www.ycombinator.com/about',finalUrl:'https://www.ycombinator.com/about',authoritative:true}];
+    }}}).inspect([{candidate,suggestions:[],organicResults:[{title:'Checklist',url:'https://publisher.example/checklist',snippet:'Plan video',resultType:'article'}],peopleAlsoAsk:faq,relatedQueries:[],provenance:{discovery:{actorId:'a',runId:'r',datasetId:'d',observedAt:'2026-09-04T08:01:00.000Z'},serp:{actorId:SERP_ACTOR_ID,runId:'original-run',datasetId:'original-dataset',observedAt:'2026-09-04T08:01:00.000Z'}}}]);
+    expect(sourceSearches).toBe(1);
+    expect(result.results[0].evidence.serp.organicResultCount).toBe(1);
+    expect(result.results[0].evidence.sources).toHaveLength(2);
+    expect(result.results[0].provenance.supportSearches?.[0].runId).toBe('sources-run');
+  });
+  it('recovers exact-query questions through one dedicated collection and keeps separate provenance', async () => {
+    const candidate = {...candidates(1)[0],primaryKeyword:'demo day video checklist'};
+    const questions=['What is a demo day?', 'How does yc demo day work?', 'Can anyone attend YC demo day?'];
+    let starts=0;
+    const client: ApifyClient = {
+      async startActor(actorId, input) {
+        starts++;
+        if(actorId===PAA_ACTOR_ID) expect(input).toEqual({keywords:[candidate.primaryKeyword],countryCode:'us',languageCode:'en',includeRelatedSearches:true});
+        return successfulRun(actorId,actorId);
+      },
+      getRun:async()=>{throw new Error('not needed');}, abortRun:async(id)=>({id,status:'ABORTED'}),
+      getDatasetItems:async(id)=> id===AUTOCOMPLETE_ACTOR_ID ? [] : id===PAA_ACTOR_ID
+        ? questions.map((question,index)=>({record_type:'paa_question',keyword:candidate.primaryKeyword,question,position:index+1,country:'us',language:'en',checked_at:'2026-09-04T08:01:00.000Z'}))
+        : [{searchQuery:{term:candidate.primaryKeyword,device:'DESKTOP',page:1,countryCode:'US',languageCode:'en'},organicResults:[{position:1,title:'Video planning',url:'https://publisher.example/checklist',description:'Plan a video.'}],peopleAlsoAsk:[],relatedQueries:[]}],
+    };
+    const result=await createResearcher({apify:client,sourceChecker:{select:async()=>[]},execution:researchClock}).scan([candidate]);
+    expect(starts).toBe(3);
+    expect(result.results[0].peopleAlsoAsk).toEqual(questions);
+    expect(result.results[0].provenance.serp.runId).toBe(SERP_ACTOR_ID);
+    expect(result.results[0].provenance.paa?.runId).toBe(PAA_ACTOR_ID);
+    expect(result.results[0].paaObservations?.map(({query})=>query)).toEqual(Array(3).fill(candidate.primaryKeyword));
+  });
+});
 
 function candidates(count: number): Candidate[] {
   return Array.from({ length: count }, (_, index) => CandidateSchema.parse({

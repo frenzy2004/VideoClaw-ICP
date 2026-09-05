@@ -286,6 +286,111 @@ class FixtureStructuredClient implements StructuredOutputClient {
   }
 }
 
+describe('contextual review and targeted bounded repair', () => {
+  it('accepts an ordinary recording referent only after complete independent support review', async () => {
+    const value = withSourceClaim('If practice partners are unavailable, record the presentation and watch it back with the same questions.');
+    expect(inspectGeneratedDraft(context, value)).toEqual([]);
+    const client = new FixtureStructuredClient([value, { ...approvedCritique, supportEvaluations: supportedBindings(value) }]);
+    await expect(createStructuredDrafter({ client, mediaAllowlist: [media] }).draft(context))
+      .resolves.toMatchObject({ status: 'ready', repaired: false });
+    expect(client.requests).toHaveLength(2);
+  });
+
+  it.each([true, false])('targets the unsupported timing heading and cited facts within four calls (repaired: %s)', async (fix) => {
+    const sourceContext = structuredClone(context);
+    const fact = { id: 'yc-followup', text: 'YC continues supporting startups during fundraising in the weeks after Demo Day.', evidenceKind: 'body' as const };
+    sourceContext.sourceFacts[0].facts.push(fact);
+    const initial = structuredClone(draft);
+    const location = '/sections/0/heading';
+    const span = 'Prepare media assets and follow up before demo day attention arrives';
+    initial.sections[0].heading = span;
+    const bindingIndex = initial.claimBindings.findIndex((binding) => binding.location === location);
+    initial.claimBindings[bindingIndex] = { location, span, sourceFactIds: [fact.id], productClaimId: null };
+    expect(inspectGeneratedDraft(sourceContext, initial)).toEqual([]);
+    const issue = { id: 'unsupported-timing', code: 'source.unsupported', message: 'The bound fact supports post-event fundraising, not pre-event attention.', repairInstruction: 'Remove the unsupported before-event timing; use only the supplied post-event scope.' };
+    const supportEvaluations = supportedBindings(initial);
+    supportEvaluations[bindingIndex] = { ...supportEvaluations[bindingIndex], supported: false, rationale: issue.message };
+    const critique = { ...approvedCritique, approved: false, issues: [issue], supportEvaluations };
+    const repaired = structuredClone(initial);
+    if (fix) {
+      repaired.sections[0].heading = 'Prepare media assets for post-event investor conversations';
+      repaired.claimBindings[bindingIndex].span = repaired.sections[0].heading;
+    }
+    const verification = fix ? resolvedVerification(critique, repaired) : {
+      ...unresolvedVerification(critique, repaired), supportEvaluations,
+    };
+    const client = new FixtureStructuredClient([initial, critique, repaired, verification]);
+    const result = await createStructuredDrafter({ client, mediaAllowlist: [media] }).draft(sourceContext);
+    expect(result.status).toBe(fix ? 'ready' : 'blocked');
+    expect(client.requests).toHaveLength(4);
+    const target = expect.objectContaining({
+      bindingIndex, location, span, sourceFactIds: [fact.id],
+      citedFacts: [{ sourceId: 'yc', factId: fact.id, text: fact.text, evidenceKind: 'body' }],
+      findings: expect.arrayContaining([expect.objectContaining({ code: 'critique.support_rejected', message: expect.stringContaining(issue.message) })]),
+    });
+    expect(client.requests[2].input).toMatchObject({ repairTargets: expect.arrayContaining([target]) });
+    expect(client.requests[3].input).toMatchObject({ originalRepairTargets: expect.arrayContaining([target]) });
+    if (!fix) expect(result).toMatchObject({ findings: expect.arrayContaining([
+      expect.objectContaining({ code: 'critique.support_rejected', bindingIndex, location, span, sourceFactIds: [fact.id] }),
+    ]) });
+  });
+
+  it('targets deterministic product violations even if both model reviews approve them', async () => {
+    const value = withSourceClaim('The app automatically adds captions.');
+    const critique = { ...approvedCritique, supportEvaluations: supportedBindings(value) };
+    const client = new FixtureStructuredClient([value, critique, value, resolvedVerification(critique, value)]);
+    const outcome = await createStructuredDrafter({ client, mediaAllowlist: [media] }).draft(context);
+    const bindingIndex = value.claimBindings.findIndex((binding) => binding.location === '/sections/0/markdown');
+    expect(outcome.status).toBe('blocked');
+    expect(client.requests).toHaveLength(4);
+    expect(client.requests[2].input).toMatchObject({ repairTargets: expect.arrayContaining([
+      expect.objectContaining({ bindingIndex, span: value.sections[0].markdown, findings: expect.arrayContaining([
+        expect.objectContaining({ code: 'content.claim_binding', reason: 'unapproved_product_reference' }),
+      ]) }),
+    ]) });
+  });
+
+  it('places helper-independent editorial and targeted repair instructions in the production prompts', async () => {
+    const critique = { ...approvedCritique, approved: false, issues: [{ id: 'clarity', code: 'copy.clarity', message: 'Clarify.', repairInstruction: 'Clarify the opening.' }] };
+    const client = new FixtureStructuredClient([draft, critique, draft, resolvedVerification(critique)]);
+    await createStructuredDrafter({ client, mediaAllowlist: [media] }).draft(context);
+    for (const index of [0, 2]) {
+      expect(client.requests[index].system).toContain('Do not quote source wording');
+      expect(client.requests[index].system).toContain('180');
+      expect(client.requests[index].system).toContain('no numbered headings');
+      expect(client.requests[index].system).toContain('native page renders sources and FAQ answers');
+      expect(client.requests[index].system).toContain('plain paragraph of 40–60 words');
+      expect(client.requests[index].system).toContain('Do not add filler to reach exactly 50');
+      expect(client.requests[index].system).toContain('Name the publisher when attributing advice');
+      expect(client.requests[index].system).toContain('Frame competitorGap as a proposed editorial synthesis');
+      expect(client.requests[index].system).not.toContain('50 whitespace-separated words');
+    }
+    expect(client.requests[2].system).toContain('repairTargets');
+    expect(client.requests[2].system).toContain('Preserve unaffected');
+    expect(client.requests[2].system).toContain('all occurrences and paraphrases');
+    expect(client.requests[2].system).toContain('not just the reported location');
+    expect(client.requests[2].system).toContain('finalize the visible text first');
+    expect(client.requests[2].system).toContain('editorialGraphic.steps');
+    expect(client.requests[2].system).toContain('Do not preserve a stale binding');
+    for (const index of [0, 2]) expect(client.requests[index].system).toContain('Write all public prose in English');
+    for (const index of [1, 3]) expect(client.requests[index].system).toContain('ordinary non-VideoClaw referent');
+  });
+
+  it('still blocks stale repaired graphic bindings even if verification approves their old text', async () => {
+    const critique = { ...approvedCritique, approved: false, issues: [{ id: 'quality', code: 'source.unsupported', message: 'Recording quality is not supported.', repairInstruction: 'Remove unsupported recording-quality claims everywhere.' }] };
+    const repaired = structuredClone(draft);
+    const location = '/editorialGraphic/steps/3/detail';
+    repaired.editorialGraphic.steps[3].detail = 'Keep the software demo clip ready to revisit the产品';
+    const client = new FixtureStructuredClient([draft, critique, repaired, resolvedVerification(critique, repaired)]);
+    const outcome = await createStructuredDrafter({ client, mediaAllowlist: [media] }).draft(context);
+    expect(outcome).toMatchObject({ status: 'blocked', findings: expect.arrayContaining([
+      expect.objectContaining({ code: 'content.claim_binding', location, reason: 'span_mismatch' }),
+      expect.objectContaining({ code: 'content.claim_binding', location, span: repaired.editorialGraphic.steps[3].detail, reason: 'missing_binding' }),
+    ]) });
+    expect(client.requests).toHaveLength(4);
+  });
+});
+
 describe('provider response schemas and runtime approval invariants', () => {
   const issue = {
     id: 'description-specificity',
@@ -906,6 +1011,14 @@ describe('structured drafting orchestration', () => {
         : binding),
     };
     const critique = { ...approvedCritique, supportEvaluations: supportedBindings(duplicateSources) };
+
+    it('includes final-only findings alongside independent critique issues in the same repair', async () => {
+      const rejected = { ...critique, approved: false, issues: [{ id: 'copy', code: 'copy.clarity', message: 'Clarify the opening.', repairInstruction: 'Clarify the opening.' }] };
+      const client = new FixtureStructuredClient([duplicateSources, rejected, draft, resolvedVerification(rejected)]);
+      await expect(createStructuredDrafter({ client, mediaAllowlist: [media] }).draft(context)).resolves.toMatchObject({ status: 'ready', repaired: true });
+      expect(client.requests).toHaveLength(4);
+      expect(client.requests[2].input).toMatchObject({ deterministicFindings: expect.arrayContaining([sourcesFinding]), critique: rejected });
+    });
 
     it('repairs final-only findings even after an otherwise approved initial draft', async () => {
       expect(inspectGeneratedDraft(context, duplicateSources)).toEqual([]);

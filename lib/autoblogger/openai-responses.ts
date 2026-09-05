@@ -2,6 +2,9 @@ import { redactSensitive, requestWithTimeout, type HttpTransport } from './http'
 
 export const DEFAULT_OPENAI_MODEL = 'gpt-5.5';
 export const OPENAI_RESPONSES_URL = 'https://api.openai.com/v1/responses';
+export const DEFAULT_OPENAI_MAX_OUTPUT_TOKENS = 24_000;
+export const DEFAULT_OPENAI_TIMEOUT_MS = 240_000;
+export type OpenAIReasoningEffort = 'none' | 'low' | 'medium' | 'high' | 'xhigh';
 
 export type JsonSchema = Readonly<Record<string, unknown>>;
 
@@ -22,6 +25,8 @@ export type OpenAIResponsesClientOptions = {
   env?: Record<string, string | undefined>;
   endpoint?: string;
   timeoutMs?: number;
+  maxOutputTokens?: number;
+  reasoningEffort?: OpenAIReasoningEffort;
 };
 
 type OpenAIResponseBody = {
@@ -79,6 +84,13 @@ function configuredModel(env: Record<string, string | undefined>): string {
   return model;
 }
 
+function boundedInteger(name: string, value: number, maximum: number): number {
+  if (!Number.isInteger(value) || value < 1 || value > maximum) {
+    throw new Error(`${name} must be an integer from 1 to ${maximum}.`);
+  }
+  return value;
+}
+
 export function createOpenAIResponsesClient(
   options: OpenAIResponsesClientOptions,
 ): StructuredOutputClient {
@@ -86,7 +98,14 @@ export function createOpenAIResponsesClient(
   if (!apiKey) throw new Error('OpenAI API key is required.');
   const model = configuredModel(options.env ?? process.env);
   const endpoint = options.endpoint ?? OPENAI_RESPONSES_URL;
-  const timeoutMs = options.timeoutMs ?? 60_000;
+  // Application limits are explicit and finite; provider rejection never triggers
+  // a retry, a different model, or a silent change to reasoning/output settings.
+  const timeoutMs = boundedInteger('timeoutMs', options.timeoutMs ?? DEFAULT_OPENAI_TIMEOUT_MS, 600_000);
+  const maxOutputTokens = boundedInteger('maxOutputTokens', options.maxOutputTokens ?? DEFAULT_OPENAI_MAX_OUTPUT_TOKENS, 128_000);
+  const reasoningEffort = options.reasoningEffort ?? 'low';
+  if (!['none', 'low', 'medium', 'high', 'xhigh'].includes(reasoningEffort)) {
+    throw new Error('reasoningEffort must be none, low, medium, high, or xhigh.');
+  }
 
   return {
     async generate(request): Promise<unknown> {
@@ -102,6 +121,8 @@ export function createOpenAIResponsesClient(
           body: JSON.stringify({
             model,
             store: false,
+            max_output_tokens: maxOutputTokens,
+            reasoning: { effort: reasoningEffort },
             input: [
               {
                 role: 'system',

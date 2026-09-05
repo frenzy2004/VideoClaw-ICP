@@ -14,6 +14,13 @@ function fixtureTransport(bodies: unknown[], status = 200) {
 }
 
 describe('Apify HTTP client', () => {
+  it('reads only a bounded recent successful-run inventory for the specified actor', async () => {
+    const fixture=fixtureTransport([{data:{items:[{id:'prior-run',status:'SUCCEEDED',defaultDatasetId:'prior-dataset',finishedAt:'2026-09-05T19:24:52.533Z'}]}}]);
+    const client=createApifyClient({token:'fixture-token',transport:fixture.transport});
+    expect(client.getRecentActorRuns).toBeTypeOf('function');
+    expect(await client.getRecentActorRuns!('santhej/people-also-ask-scraper')).toEqual([{id:'prior-run',status:'SUCCEEDED',defaultDatasetId:'prior-dataset',finishedAt:'2026-09-05T19:24:52.533Z'}]);
+    expect(fixture.requests[0]).toMatchObject({method:'GET',url:'https://api.apify.com/v2/acts/santhej~people-also-ask-scraper/runs?status=SUCCEEDED&desc=1&limit=10'});
+  });
   it('normalizes a live RUNNING response with null finishedAt without losing its run ID', async () => {
     const fixture = fixtureTransport([
       { data: { id: 'running-job', status: 'RUNNING', startedAt: '2026-09-05T17:00:18.000Z', finishedAt: null, defaultDatasetId: 'live-dataset' } },

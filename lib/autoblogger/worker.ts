@@ -18,6 +18,10 @@ import type { KeywordEnrichment, KeywordProvider, KeywordProvenance } from './ke
 import {
   compactPersistentWorkerState,
   createPersistentWorkerState,
+  ResearchProvenanceSchema,
+  PaaObservationsSchema,
+  type ResearchProvenance,
+  type PaaObservations,
   type GitHubStateStore,
   type PersistentWorkerState,
 } from './github-runtime';
@@ -66,6 +70,8 @@ export type AutobloggerArtifact = {
   metrics: KeywordMetrics;
   keywordProvenance: KeywordProvenance;
   serpProvenance: ResearchResult['provenance']['serp'];
+  researchProvenance?: ResearchProvenance;
+  paaObservations?: PaaObservations;
   publicationOrigin: PublisherOrigin;
   validation: Awaited<ReturnType<Publisher['validateBundle']>>;
   pullRequest?: { number: number; url: string; headRef: string };
@@ -111,6 +117,8 @@ export type AutobloggerWorkerOptions = {
   githubAuth?: GitHubAppInstallationAuth;
   publicationEnabled?: boolean;
   maxDrafts?: 1 | 2 | 3;
+  /** Explicit local retry selection; never bypasses inventory or recovery gates. */
+  targetCandidateFingerprint?: string;
   persistArtifact?: (artifact: AutobloggerArtifact, report: AutobloggerRunReport) => Promise<void>;
   now?: () => Date;
 };
@@ -318,6 +326,16 @@ function artifactHash(bundle: DraftBundle): string {
   return createHash('sha256').update(JSON.stringify(bundle)).digest('hex');
 }
 
+function compactResearchProvenance(value: ResearchResult['provenance']) {
+  const { serp, paa, paaAttempts, supportSearches } = ResearchProvenanceSchema.parse(value);
+  return {
+    serp: { runId: serp.runId, datasetId: serp.datasetId, observedAt: serp.observedAt },
+    ...(paa ? { paa } : {}),
+    ...(paaAttempts ? { paaAttempts } : {}),
+    ...(supportSearches ? { supportSearches } : {}),
+  };
+}
+
 function isRetryableError(error: unknown): boolean {
   return /timeout|timed out|temporary|rate limit|429|5\d\d|network|socket|source/i.test(String(error));
 }
@@ -356,6 +374,13 @@ export function createAutobloggerWorker(options: AutobloggerWorkerOptions) {
       if (mode === 'manual_pilot') state = reserveManualPilot(state, input.runId, startedAt);
       const inventory = [...(options.landerInventory ?? []), ...(options.openPullRequestInventory ?? [])];
       const queue = buildIncrementalQueue({ state, backlog: options.backlog, inventory, now: startedAt });
+      if (options.targetCandidateFingerprint) {
+        const target = queue.all.find((candidate) => candidateFingerprints(candidate).candidate === options.targetCandidateFingerprint);
+        if (!target) throw new Error('Requested target candidate is not eligible for recovery.');
+        queue.tail = queue.all.filter((candidate) => candidate !== target);
+        queue.scan = [target];
+        queue.all = [target, ...queue.tail];
+      }
       state = queue.state;
       // A live lease is excluded from this scan, not from durable queue storage.
       const heldCandidates = state.queuedCandidates.filter((candidate) => ['leased', 'manual_attention'].includes(
@@ -414,7 +439,7 @@ export function createAutobloggerWorker(options: AutobloggerWorkerOptions) {
           });
           enrichmentByFingerprint.set(fingerprint, enriched);
           state = { ...state, provenance: { ...state.provenance, [fingerprint]: {
-            serp: { runId: observation.provenance.serp.runId, datasetId: observation.provenance.serp.datasetId, observedAt: observation.provenance.serp.observedAt },
+            ...compactResearchProvenance(observation.provenance),
             keyword: enriched.provenance,
           } } };
           report.counts.metricsEnriched += 1;
@@ -469,6 +494,11 @@ export function createAutobloggerWorker(options: AutobloggerWorkerOptions) {
           const result = inspected.results[0];
           if (!result || inspected.deepInspectionCount !== 1) throw new Error('Deep inspection returned no evidence bundle.');
           const enrichment = enrichmentByFingerprint.get(fingerprint) as KeywordEnrichment;
+          // Supporting searches are collected during deep inspection, after the
+          // shallow provenance write. Retain them even if drafting later fails.
+          state = { ...state, provenance: { ...state.provenance, [fingerprint]: {
+            ...compactResearchProvenance(result.provenance), keyword: enrichment.provenance,
+          } } };
           deep.push({ result, shallow: ranked.observation, enrichment, score: ranked.score + deepEvidenceScore(result) });
           report.counts.deepInspected += 1;
         } catch (error) {
@@ -590,6 +620,8 @@ export function createAutobloggerWorker(options: AutobloggerWorkerOptions) {
             metrics: item.enrichment.metrics,
             keywordProvenance: item.enrichment.provenance,
             serpProvenance: item.result.provenance.serp,
+            researchProvenance: ResearchProvenanceSchema.parse(item.result.provenance),
+            ...(item.shallow.paaObservations ? { paaObservations: PaaObservationsSchema.parse(item.shallow.paaObservations) } : {}),
             publicationOrigin,
             validation,
             ...(pullRequest ? { pullRequest: { number: pullRequest.number, url: pullRequest.url, headRef: pullRequest.headRef } } : {}),
@@ -609,7 +641,7 @@ export function createAutobloggerWorker(options: AutobloggerWorkerOptions) {
             provenance: {
               ...state.provenance,
               [fingerprints.candidate]: {
-                serp: { runId: item.result.provenance.serp.runId, datasetId: item.result.provenance.serp.datasetId, observedAt: item.result.provenance.serp.observedAt },
+                ...compactResearchProvenance(item.result.provenance),
                 keyword: item.enrichment.provenance,
               },
             },

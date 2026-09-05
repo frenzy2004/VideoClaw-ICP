@@ -30,6 +30,7 @@ import { createResearcher, type ResearchResult, type ShallowResearchResult } fro
 import { createNodeDnsResolver, createNodeJsonHttpTransport, createNodeSourceHttpTransport } from './runtime-http';
 import { containsSecretLikeValue } from './secrets';
 import { createSafeSourceChecker } from './sources';
+import { SOURCE_TEXT_LIMIT, SOURCE_PASSAGE_LIMIT, SOURCE_PASSAGE_CHARACTER_LIMIT } from './source-extraction';
 import { consumePreparedManualPilot } from './recovery';
 import { createAutobloggerWorker, type AutobloggerRunReport } from './worker';
 import type { HttpTransport } from './http';
@@ -42,7 +43,7 @@ const MATRIX_FILES = [
   ['portfolio-media-platform', 'docs/research/campaigns/portfolio-media-platform-article-matrix.md'],
 ] as const;
 
-const MEDIA_ALLOWLIST: AllowlistedProductMedia[] = [
+export const MEDIA_ALLOWLIST: AllowlistedProductMedia[] = [
   {
     id: 'founder-product-demo',
     campaignIds: ['newly-funded-founder', 'accelerator-demo-day-founder'],
@@ -75,8 +76,6 @@ const MEDIA_ALLOWLIST: AllowlistedProductMedia[] = [
   },
 ];
 
-const MAX_SERP_FACT_CHARACTERS = 600;
-
 export async function loadBacklogCandidates(root: string): Promise<Candidate[]> {
   const inputs = await Promise.all(MATRIX_FILES.map(async ([campaignId, path]) => ({
     campaignId,
@@ -91,12 +90,6 @@ export async function loadBacklogCandidates(root: string): Promise<Candidate[]> 
   });
 }
 
-function cleanVisibleFact(value: string): string | undefined {
-  const cleaned = value.replace(/[\u0000-\u001f\u007f-\u009f\u202a-\u202e\u2066-\u2069]/gu, ' ').replace(/\s+/gu, ' ').trim();
-  if (!cleaned) return undefined;
-  return Array.from(cleaned).slice(0, MAX_SERP_FACT_CHARACTERS).join('').trim();
-}
-
 export function buildDraftingContextFromResearch(input: {
   result: ResearchResult;
   shallow: ShallowResearchResult;
@@ -104,30 +97,57 @@ export function buildDraftingContextFromResearch(input: {
   generatedAt: string;
 }): DraftingContext {
   const checkedAt = input.result.provenance.serp.observedAt;
-  const sourceFacts = input.result.evidence.sources.map((source, sourceIndex) => {
-    const normalized = normalizeHttpUrl(source.originalUrl);
-    const organic = input.shallow.organicResults.find((result) => normalizeHttpUrl(result.url) === normalized);
-    if (!organic) throw new Error('A checked source has no matching live SERP observation.');
-    const visible = [cleanVisibleFact(organic.title), cleanVisibleFact(organic.snippet)].filter((value): value is string => Boolean(value));
-    if (visible.length === 0) throw new Error('A checked source has no safe visible facts.');
+  const documents = input.result.sourceDocuments;
+  const sources = input.result.evidence.sources;
+  if (!documents || sources.length < 2 || sources.length > 4
+    || new Set(sources.map((source) => normalizeHttpUrl(source.finalUrl))).size !== sources.length) {
+    throw new Error('Drafting requires two to four distinct verified source body documents.');
+  }
+  const selectedDocuments = sources.map((source) => {
+    const matches = documents.filter((document) => normalizeHttpUrl(document.url) === normalizeHttpUrl(source.originalUrl)
+      && normalizeHttpUrl(document.finalUrl) === normalizeHttpUrl(source.finalUrl));
+    const document = matches[0];
+    if (matches.length !== 1 || !document.reachable || document.status < 200 || document.status >= 300
+      || document.authoritative !== source.authoritative
+      || !['text/html', 'application/xhtml+xml'].includes(document.contentType)
+      || !/^[a-f0-9]{64}$/.test(document.bodySha256)
+      || !Number.isFinite(Date.parse(document.checkedAt))
+      || new Date(document.checkedAt).toISOString() !== document.checkedAt
+      || !document.text || document.text.length > SOURCE_TEXT_LIMIT
+      || !document.passages.length || document.passages.length > SOURCE_PASSAGE_LIMIT
+      || document.passages.some((passage) => (
+        !Number.isInteger(passage.start) || !Number.isInteger(passage.end)
+        || passage.start < 0 || passage.end <= passage.start || passage.end > document.text.length
+        || !passage.text.trim() || passage.text.length > SOURCE_PASSAGE_CHARACTER_LIMIT
+        || /[\u0000-\u001f\u007f-\u009f\p{Cf}]/u.test(passage.text)
+        || document.text.slice(passage.start, passage.end) !== passage.text
+      ))) {
+      throw new Error('Missing, mismatched or invalid verified source body document.');
+    }
+    return document;
+  });
+  const sourceFacts = selectedDocuments.map((document, sourceIndex) => {
     return {
       id: `source-${sourceIndex + 1}`,
-      label: new URL(source.finalUrl).hostname.replace(/^www\./u, ''),
-      url: source.finalUrl,
-      checkedAt,
-      facts: visible.map((text, factIndex) => ({ id: `source-${sourceIndex + 1}-fact-${factIndex + 1}`, text })),
+      label: new URL(document.finalUrl).hostname.replace(/^www\./u, ''),
+      url: document.finalUrl,
+      checkedAt: document.checkedAt,
+      facts: document.passages.map(({ text }, factIndex) => ({
+        id: `source-${sourceIndex + 1}-fact-${factIndex + 1}`, text, evidenceKind: 'body' as const,
+      })),
+      excerpt: document.text,
     };
   });
   return {
     candidate: input.result.candidate,
     evidence: input.result.evidence,
     keywordMetrics: input.metrics,
-    checkedSources: input.result.evidence.sources.map((source) => ({
-      url: source.originalUrl,
-      finalUrl: source.finalUrl,
-      status: 200,
-      reachable: true,
-      authoritative: source.authoritative,
+    checkedSources: selectedDocuments.map((document) => ({
+      url: document.url,
+      finalUrl: document.finalUrl,
+      status: document.status,
+      reachable: document.reachable,
+      authoritative: document.authoritative,
     })),
     provenance: {
       apifyRunId: input.result.provenance.serp.runId,
@@ -155,6 +175,8 @@ function compactReport(report: AutobloggerRunReport) {
       metrics: artifact.metrics,
       keywordProvenance: artifact.keywordProvenance,
       serpProvenance: artifact.serpProvenance,
+      researchProvenance: artifact.researchProvenance,
+      paaObservations: artifact.paaObservations,
       pullRequest: artifact.pullRequest,
       validation: {
         status: artifact.validation.status,
@@ -286,6 +308,26 @@ function providerFor(config: AutobloggerRuntimeEnvironment, transport: ReturnTyp
   return createPendingKeywordProvider();
 }
 
+export function createProductionSourceChecker() {
+  return createSafeSourceChecker({
+    transport: createNodeSourceHttpTransport(),
+    resolveHostname: createNodeDnsResolver(),
+    authorityPolicies: [
+      { hostname: 'ycombinator.com' },
+      { hostname: 'www.ycombinator.com' },
+      { hostname: 'techstars.com' },
+      { hostname: 'www.techstars.com' },
+      { hostname: 'www.nist.gov' },
+      { hostname: 'www.ftc.gov' },
+      { hostname: 'www.w3.org' },
+      { hostname: 'developers.google.com', pathPrefix: '/search/' },
+      { hostname: 'learn.microsoft.com' },
+      { hostname: 'videoclaw.com' },
+      { hostname: 'www.videoclaw.com' },
+    ],
+  });
+}
+
 export async function createProductionAutobloggerRuntime(
   config: AutobloggerRuntimeEnvironment,
   root = process.cwd(),
@@ -322,23 +364,7 @@ export async function createProductionAutobloggerRuntime(
     owner: config.landerOwner, repository: config.landerName, baseRef: config.landerBaseRef,
     blogLaunchPullRequest: 55, auth: readAuth,
   });
-  const sourceChecker = createSafeSourceChecker({
-    transport: createNodeSourceHttpTransport(),
-    resolveHostname: createNodeDnsResolver(),
-    authorityPolicies: [
-      { hostname: 'ycombinator.com' },
-      { hostname: 'www.ycombinator.com' },
-      { hostname: 'techstars.com' },
-      { hostname: 'www.techstars.com' },
-      { hostname: 'www.nist.gov' },
-      { hostname: 'www.ftc.gov' },
-      { hostname: 'www.w3.org' },
-      { hostname: 'developers.google.com', pathPrefix: '/search/' },
-      { hostname: 'learn.microsoft.com' },
-      { hostname: 'videoclaw.com' },
-      { hostname: 'www.videoclaw.com' },
-    ],
-  });
+  const sourceChecker = createProductionSourceChecker();
   const researcher = createResearcher({
     apify: createApifyClient({ token: config.apifyToken as string, transport }),
     sourceChecker,

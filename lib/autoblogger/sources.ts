@@ -1,4 +1,8 @@
 import { isIP } from 'node:net';
+import { createHash } from 'node:crypto';
+
+import { extractSourceBody, type SourceReadOptions, type SourcePassage } from './source-extraction';
+export type { SourceReadOptions, SourcePassage } from './source-extraction';
 
 import {
   requestWithTimeout,
@@ -29,7 +33,24 @@ export type SafeSourceChecker = {
     finalUrl: string;
     authoritative: boolean;
   }>>;
+  read?(url: string, options?: SourceReadOptions): Promise<SourceDocument>;
+  selectWithContent?(urls: string[], options?: SourceReadOptions): Promise<SourceSelectionWithContent>;
 };
+
+export type SourceDocument = CheckedSource & {
+  checkedAt: string;
+  contentType: string;
+  bodySha256: string;
+  text: string;
+  passages: SourcePassage[];
+};
+
+export type SourceSelectionWithContent = {
+  sources: Array<{ originalUrl: string; finalUrl: string; authoritative: boolean }>;
+  sourceDocuments: SourceDocument[];
+};
+
+type ContentSourceChecker = SafeSourceChecker & Required<Pick<SafeSourceChecker, 'read' | 'selectWithContent'>>;
 
 export type AuthorityPolicy = {
   hostname: string;
@@ -157,13 +178,15 @@ async function consumeBodyWithinLimits(
   iterator: AsyncIterator<Uint8Array>,
   maxBodyBytes: number,
   remainingMs: () => number,
-): Promise<void> {
+  retain: boolean,
+): Promise<Buffer> {
   let bytes = 0;
+  const chunks: Buffer[] = [];
   for (;;) {
     const timeLeft = remainingMs();
     if (timeLeft <= 0) throw new Error('Source check timed out.');
     const next = await nextChunkWithTimeout(iterator, timeLeft);
-    if (next.done) return;
+    if (next.done) return Buffer.concat(chunks);
     if (!ArrayBuffer.isView(next.value) || next.value.BYTES_PER_ELEMENT !== 1) {
       throw new Error('Source transport body must stream Uint8Array chunks.');
     }
@@ -171,6 +194,7 @@ async function consumeBodyWithinLimits(
     if (bytes > maxBodyBytes) {
       throw new Error('Source response body exceeds the byte limit.');
     }
+    if (retain) chunks.push(Buffer.from(next.value));
   }
 }
 
@@ -230,7 +254,7 @@ function assertTransportResponse(
   }
 }
 
-function createSourceChecker(options: SafeSourceCheckerOptions, allowHttpForTests: boolean): SafeSourceChecker {
+function createSourceChecker(options: SafeSourceCheckerOptions, allowHttpForTests: boolean): ContentSourceChecker {
   const limits = { ...DEFAULT_LIMITS, ...options.limits };
   if (limits.maxRedirects < 0 || limits.maxBodyBytes < 0 || limits.timeoutMs <= 0) {
     throw new Error('Source-check limits must be non-negative and timeout must be positive.');
@@ -252,7 +276,9 @@ function createSourceChecker(options: SafeSourceCheckerOptions, allowHttpForTest
     ));
   }
 
-  async function check(value: string): Promise<CheckedSource> {
+  async function retrieve(value: string, retain: boolean): Promise<{
+    source: CheckedSource; body: Buffer; contentType: string; checkedAt: string;
+  }> {
     const initialUrl = parseSourceUrl(value, allowHttpForTests);
     let currentUrl = initialUrl;
     let redirectCount = 0;
@@ -306,9 +332,12 @@ function createSourceChecker(options: SafeSourceCheckerOptions, allowHttpForTest
         ) {
           throw new Error('Source response body exceeds the byte limit.');
         }
-        await consumeBodyWithinLimits(iterator, limits.maxBodyBytes, remainingMs);
+        const body = await consumeBodyWithinLimits(iterator, limits.maxBodyBytes, remainingMs, retain);
         return {
           kind: 'checked' as const,
+          body,
+          contentType: header(response, 'content-type') ?? '',
+          checkedAt: new Date().toISOString(),
           source: {
             url: initialUrl.toString(),
             finalUrl: currentUrl.toString(),
@@ -319,10 +348,59 @@ function createSourceChecker(options: SafeSourceCheckerOptions, allowHttpForTest
         };
       });
 
-      if (outcome.kind === 'checked') return outcome.source;
+      if (outcome.kind === 'checked') return outcome;
       currentUrl = outcome.url;
       redirectCount += 1;
     }
+  }
+
+  async function check(value: string): Promise<CheckedSource> {
+    return (await retrieve(value, false)).source;
+  }
+
+  async function read(value: string, readOptions: SourceReadOptions = {}): Promise<SourceDocument> {
+    const { source, body, contentType, checkedAt } = await retrieve(value, true);
+    if (!source.reachable) throw new Error('Source body evidence requires a successful response.');
+    const mime = contentType.split(';')[0].trim().toLowerCase();
+    if (mime !== 'text/html' && mime !== 'application/xhtml+xml') {
+      throw new Error('Source body evidence requires an HTML content type.');
+    }
+    const charset = /charset\s*=\s*["']?([^;\s"']+)/i.exec(contentType)?.[1] ?? 'utf-8';
+    const html = new TextDecoder(charset, { fatal: true }).decode(body);
+    return {
+      ...source, checkedAt, contentType: mime,
+      bodySha256: createHash('sha256').update(body).digest('hex'),
+      ...extractSourceBody(html, readOptions),
+    };
+  }
+
+  async function selectWithContent(urls: string[], readOptions: SourceReadOptions = {}): Promise<SourceSelectionWithContent> {
+    const sourceDocuments: SourceDocument[] = [];
+    const seen = new Set<string>();
+    const requested = new Set<string>();
+    for (const url of urls) {
+      let document: SourceDocument;
+      try {
+        const normalized = parseSourceUrl(url, allowHttpForTests).toString();
+        if (requested.has(normalized)) continue;
+        requested.add(normalized);
+        document = await read(normalized, readOptions);
+      } catch { continue; }
+      if (seen.has(document.finalUrl)) continue;
+      seen.add(document.finalUrl);
+      if (sourceDocuments.length < 4) sourceDocuments.push(document);
+      else if (document.authoritative && !sourceDocuments.some((source) => source.authoritative)) {
+        sourceDocuments[sourceDocuments.length - 1] = document;
+      }
+      if (sourceDocuments.length === 4 && sourceDocuments.some((source) => source.authoritative)) break;
+    }
+    if (sourceDocuments.length < 2 || !sourceDocuments.some((source) => source.authoritative)) {
+      throw new Error('Research requires two usable body evidence sources including one authoritative source.');
+    }
+    return {
+      sources: sourceDocuments.map(({ url, finalUrl, authoritative }) => ({ originalUrl: url, finalUrl, authoritative })),
+      sourceDocuments,
+    };
   }
 
   async function select(urls: string[]): Promise<Array<{
@@ -353,14 +431,14 @@ function createSourceChecker(options: SafeSourceCheckerOptions, allowHttpForTest
     return selected;
   }
 
-  return { check, select };
+  return { check, select, read, selectWithContent };
 }
 
-export function createSafeSourceChecker(options: SafeSourceCheckerOptions): SafeSourceChecker {
+export function createSafeSourceChecker(options: SafeSourceCheckerOptions): ContentSourceChecker {
   return createSourceChecker(options, false);
 }
 
 /** Explicitly test-only cleartext constructor. Production runtime never imports this. */
-export function createTestOnlySafeSourceChecker(options: SafeSourceCheckerOptions): SafeSourceChecker {
+export function createTestOnlySafeSourceChecker(options: SafeSourceCheckerOptions): ContentSourceChecker {
   return createSourceChecker(options, true);
 }

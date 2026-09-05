@@ -30,7 +30,7 @@ function bodyWithCleanup(
 
 function responseTransport(responses: Array<{
   status: number;
-  headers?: Record<string, string>;
+  headers?: Record<string, string | undefined>;
   body?: unknown;
   redirected?: boolean;
   url?: string;
@@ -299,6 +299,100 @@ describe('safe source checks', () => {
 });
 
 describe('source authority and evidence selection', () => {
+  it('keeps relevant organic pages while making room for a later authority within four pages', async () => {
+    const urls = ['payroll', 'organic', 'second', 'third', 'fourth', 'authority'].map((name) => (
+      `https://${name}.example/guide`
+    ));
+    const fixture = responseTransport(urls.map((_, index) => ({
+      status: 200, headers: { 'content-type': 'text/html' },
+      body: index === 0 ? '<p>Payroll tax withholding depends on the employee earnings.</p>'
+        : `<p>Demo day video planning guidance from source ${index} includes time for review.</p>`,
+    })));
+    const checker = createSafeSourceChecker({
+      transport: fixture.transport, resolveHostname: publicResolver,
+      authorityPolicies: [{ hostname: 'authority.example' }],
+    });
+    const selection = await checker.selectWithContent(urls, { query: 'demo day video checklist' });
+    expect(selection.sources.map(({ originalUrl }) => originalUrl)).toEqual([
+      'https://organic.example/guide', 'https://second.example/guide',
+      'https://third.example/guide', 'https://authority.example/guide',
+    ]);
+    expect(selection.sourceDocuments).toHaveLength(4);
+  });
+
+  it('fetches duplicate normalized inputs once and ignores non-successful body content', async () => {
+    const fixture = responseTransport([
+      { status: 503, headers: { 'content-type': 'text/html' }, body: '<p>Video claim on a temporary error page must not become evidence.</p>' },
+      { status: 200, headers: { 'content-type': 'text/html' }, body: '<p>Video recordings can be reviewed before the presentation.</p>' },
+      { status: 200, headers: { 'content-type': 'text/html' }, body: '<p>Video preparation includes a final check of the exported file.</p>' },
+    ]);
+    const checker = createSafeSourceChecker({
+      transport: fixture.transport, resolveHostname: publicResolver,
+      authorityPolicies: [{ hostname: 'authority.example' }],
+    });
+    const selection = await checker.selectWithContent([
+      'https://authority.example/unavailable', 'https://authority.example/guide#a',
+      'https://authority.example/guide#b', 'https://publisher.example/guide',
+    ], { query: 'video preparation' });
+    expect(selection.sources.map(({ originalUrl }) => originalUrl)).toEqual([
+      'https://authority.example/guide', 'https://publisher.example/guide',
+    ]);
+    expect(fixture.requests).toHaveLength(3);
+  });
+
+  it.each([
+    { headers: { 'content-type': 'text/html' }, body: 'x'.repeat(101), error: /byte limit/i },
+    { headers: { 'content-type': 'text/html' }, redirected: true, error: /manual redirect/i },
+    { headers: { 'content-type': 'text/html' }, peerAddress: '10.0.0.1', error: /validated address/i },
+    { status: 302, headers: { location: 'https://127.0.0.1/private' }, error: /private|local/i },
+  ])('read enforces byte, redirect and peer safeguards: $error', async ({ error, ...response }) => {
+    const checker = createSafeSourceChecker({
+      transport: responseTransport([{ status: 200, ...response }]).transport,
+      resolveHostname: publicResolver, limits: { maxBodyBytes: 100 },
+    });
+    await expect(checker.read('https://publisher.example/guide')).rejects.toThrow(error);
+  });
+
+  it('selects body documents from the validated final resource without a second fetch', async () => {
+    const fixture = responseTransport([
+      { status: 302, headers: { location: 'https://authority.example/canonical' } },
+      { status: 200, headers: { 'content-type': 'text/html' }, body: '<main><p>Founders rehearse the presentation with candid feedback.</p></main>' },
+      { status: 200, headers: { 'content-type': 'text/html' }, body: '<article><p>Plan the video backward from the release date and leave time for review.</p></article>' },
+    ]);
+    const checker = createSafeSourceChecker({
+      transport: fixture.transport, resolveHostname: publicResolver,
+      authorityPolicies: [{ hostname: 'authority.example' }],
+    });
+    expect(checker.selectWithContent).toBeTypeOf('function');
+    const selection = await checker.selectWithContent([
+      'https://publisher.example/original', 'https://publisher.example/planning',
+    ], { query: 'founder video planning' });
+    expect(selection.sources).toEqual([
+      { originalUrl: 'https://publisher.example/original', finalUrl: 'https://authority.example/canonical', authoritative: true },
+      { originalUrl: 'https://publisher.example/planning', finalUrl: 'https://publisher.example/planning', authoritative: false },
+    ]);
+    expect(selection.sourceDocuments[0].text).toBe('Founders rehearse the presentation with candid feedback.');
+    expect(selection.sourceDocuments[0].finalUrl).toBe('https://authority.example/canonical');
+    expect(fixture.requests.map(({ url }) => url)).toEqual([
+      'https://publisher.example/original', 'https://authority.example/canonical', 'https://publisher.example/planning',
+    ]);
+  });
+
+  it('does not count an authoritative empty page as usable body evidence', async () => {
+    const fixture = responseTransport([
+      { status: 200, headers: { 'content-type': 'text/html' }, body: '<html><nav>Home</nav></html>' },
+      { status: 200, headers: { 'content-type': 'text/html' }, body: '<p>Review the final video before sharing it with an investor.</p>' },
+    ]);
+    const checker = createSafeSourceChecker({
+      transport: fixture.transport, resolveHostname: publicResolver,
+      authorityPolicies: [{ hostname: 'authority.example' }],
+    });
+    expect(checker.selectWithContent).toBeTypeOf('function');
+    await expect(checker.selectWithContent([
+      'https://authority.example/empty', 'https://publisher.example/source',
+    ])).rejects.toThrow(/two.*body.*authoritative/i);
+  });
+
   it('canonicalizes fragments before deciding whether final resources are distinct', async () => {
     const fixture = responseTransport([
       { status: 200, body: 'same page' },

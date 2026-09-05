@@ -1,4 +1,7 @@
 import { describe, expect, it } from 'vitest';
+import { mkdtemp, readFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 
 import {
   CandidateSchema,
@@ -15,6 +18,7 @@ import { createPendingKeywordProvider, type KeywordProvider } from './keyword-pr
 import type { ShallowResearchResult } from './research';
 import { createAutobloggerWorker, discoverCandidatesFromResearch } from './worker';
 import { reserveCandidate } from './recovery';
+import { writeAutobloggerArtifacts } from './runtime';
 
 function candidate(index: number): Candidate {
   const campaignNumber = index % 3 === 0 ? 2 : index % 3 === 1 ? 1 : 3;
@@ -76,11 +80,13 @@ function fixture(input: {
   backlog?: Candidate[];
   backlogCount?: number;
   observe?: (item: Candidate) => ShallowResearchResult;
+  inspectProvenance?: (item: ShallowResearchResult) => ShallowResearchResult['provenance'];
   metricsOverrides?: (index: number) => Partial<KeywordMetrics>;
   evidenceOverrides?: Partial<EvidenceBundle>;
   failScan?: boolean;
   failDraft?: boolean;
   maxDrafts?: 1 | 2 | 3;
+  targetCandidateFingerprint?: string;
   onReservation?: (state: PersistentWorkerState) => void;
   beforeSave?: (state: PersistentWorkerState) => void;
   initialState?: PersistentWorkerState;
@@ -120,7 +126,7 @@ function fixture(input: {
           deepInspectionCount: 1,
           results: [{
             candidate: item.candidate,
-            provenance: item.provenance,
+            provenance: input.inspectProvenance?.(item) ?? item.provenance,
             evidence: EvidenceBundleSchema.parse({
               schemaVersion: 2,
               candidateFingerprint: candidateFingerprints(item.candidate).candidate,
@@ -204,12 +210,98 @@ function fixture(input: {
     approvedMedia: { product: [], editorialGraphics: [] },
     now: input.now ?? (() => new Date('2026-09-05T00:00:00.000Z')),
     maxDrafts: input.maxDrafts,
+    targetCandidateFingerprint: input.targetCandidateFingerprint,
     persistArtifact: input.persistArtifact,
   });
   return { worker, counters, getState: () => state };
 }
 
 describe('persistent autoblogger worker', () => {
+  it('targets one eligible retained identity without scanning or losing the rest of the queue', async () => {
+    const backlog = Array.from({ length: 6 }, (_value, index) => candidate(index));
+    const { worker, counters, getState } = fixture({ backlog, targetCandidateFingerprint: candidateFingerprints(backlog[1]).candidate });
+    const report = await worker.execute({ command: 'pilot', runId: 'targeted-pilot' });
+    expect(report.status).toBe('validated');
+    expect(report.artifacts.map(({ articleId }) => articleId)).toEqual(['vc-c1-101']);
+    expect(counters.scanned).toBe(1);
+    for (const item of backlog.filter((_item, index) => index !== 1)) {
+      expect(getState().queuedCandidates).toContainEqual(item);
+      expect(getState().decisions[candidateFingerprints(item).candidate]).toBeUndefined();
+    }
+  });
+
+  it('does not substitute another candidate when the explicit target is excluded by an active lease', async () => {
+    const backlog = [candidate(1), candidate(4)];
+    const state = reserveCandidate(createPersistentWorkerState(), backlog[0], 'other-run', 'manual_pilot', '2026-09-05T00:00:00.000Z');
+    const { worker, counters } = fixture({ backlog, initialState: state, targetCandidateFingerprint: candidateFingerprints(backlog[0]).candidate });
+    await expect(worker.execute({ command: 'pilot', runId: 'unavailable-target' })).rejects.toThrow(/target.*eligible/i);
+    expect(counters.scanned).toBe(0);
+    expect(counters.saved).toBe(0);
+  });
+
+  const paaCollector = { actorId: 'paa-collector', runId: 'paa-run', datasetId: 'paa-data', observedAt: '2026-09-05T00:01:00.000Z' };
+  const supportCollector = { actorId: 'support-search', runId: 'support-run', datasetId: 'support-data', observedAt: '2026-09-05T00:02:00.000Z' };
+  const withPaa = (item: Candidate): ShallowResearchResult => ({
+    ...shallow(item),
+    provenance: { ...shallow(item).provenance, paa: paaCollector, paaAttempts: [{ ...paaCollector, runId: 'paa-first-empty' }, paaCollector] },
+    paaObservations: [{
+      ...paaCollector, query: item.primaryKeyword, question: `What is ${item.primaryKeyword}?`,
+      parentQuestion: null, country: 'US', language: 'en', position: 1,
+    }],
+  });
+  const withSupport = (item: ShallowResearchResult) => ({ ...item.provenance, supportSearches: [supportCollector] });
+
+  it('retains separate PAA collection provenance in research-only state', async () => {
+    const { worker, getState } = fixture({ backlog: [candidate(1)], observe: withPaa });
+    const report = await worker.execute({ command: 'research', runId: 'paa-research' });
+    expect(report.status).toBe('researched');
+    expect(getState().provenance[candidateFingerprints(candidate(1)).candidate]).toMatchObject({
+      serp: { runId: 'serp-run', datasetId: 'serp-data' },
+      paa: { actorId: 'paa-collector', runId: 'paa-run', datasetId: 'paa-data', observedAt: '2026-09-05T00:01:00.000Z' },
+      paaAttempts: [{ ...paaCollector, runId: 'paa-first-empty' }, paaCollector],
+    });
+  });
+
+  it('retains support-search provenance added by deep inspection even when drafting fails', async () => {
+    const { worker, getState } = fixture({ backlog: [candidate(1)], observe: withPaa, inspectProvenance: withSupport, failDraft: true });
+    const report = await worker.execute({ command: 'pilot', runId: 'support-draft-failure' });
+    expect(report.status).toBe('failed');
+    expect(getState().provenance[candidateFingerprints(candidate(1)).candidate]).toMatchObject({
+      serp: { runId: 'serp-run' }, paa: { runId: 'paa-run' },
+      supportSearches: [{ actorId: 'support-search', runId: 'support-run', datasetId: 'support-data', observedAt: '2026-09-05T00:02:00.000Z' }],
+    });
+  });
+
+  it('writes full collector provenance and question-only PAA observations to artifact reports', async () => {
+    const root = await mkdtemp(join(tmpdir(), 'autoblogger-provenance-'));
+    const { worker, getState } = fixture({
+      backlog: [candidate(1)], inspectProvenance: withSupport,
+      observe: (item) => {
+        const observed = withPaa(item);
+        return { ...observed, paaObservations: observed.paaObservations?.map((row) => ({ ...row, answer: 'RAW_ANSWER_MUST_NOT_BE_RETAINED' })) };
+      },
+    });
+    const report = await worker.execute({ command: 'pilot', runId: 'separate-provenance' });
+    expect(report.status).toBe('validated');
+    await writeAutobloggerArtifacts(report, root, root);
+    const written = await readFile(join(root, 'run-report.json'), 'utf8');
+    const artifact = JSON.parse(written).artifacts[0];
+    expect(artifact.researchProvenance).toEqual({
+      discovery: { actorId: 'autocomplete', runId: 'discovery-run', datasetId: 'discovery-data', observedAt: '2026-09-05T00:00:00.000Z' },
+      serp: { actorId: 'serp', runId: 'serp-run', datasetId: 'serp-data', observedAt: '2026-09-05T00:00:00.000Z' },
+      paa: paaCollector,
+      paaAttempts: [{ ...paaCollector, runId: 'paa-first-empty' }, paaCollector],
+      supportSearches: [supportCollector],
+    });
+    expect(artifact.paaObservations).toEqual([{
+      ...paaCollector, query: 'founder video evidence topic 1', question: 'What is founder video evidence topic 1?',
+      parentQuestion: null, country: 'US', language: 'en', position: 1,
+    }]);
+    expect(artifact.serpProvenance.runId).toBe('serp-run');
+    expect(written).not.toContain('RAW_ANSWER_MUST_NOT_BE_RETAINED');
+    expect(getState().provenance[candidateFingerprints(candidate(1)).candidate]).toMatchObject({ paa: paaCollector, supportSearches: [supportCollector] });
+  });
+
   describe.each(['run', 'pilot', 'research'] as const)('%s shallow selection', (command) => {
     it.each([
       { label: 'zero organic results', reasons: 'missing_serp', patch: { organicResults: [] } },

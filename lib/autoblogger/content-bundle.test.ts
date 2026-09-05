@@ -245,6 +245,23 @@ describe('content bundle materialization', () => {
     }])).toBeUndefined();
   });
 
+  it('gives bounded repair an exact copied-prose target instead of a generic rejection', () => {
+    const copied = context.sourceFacts[0].excerpt as string;
+    const draft = withDraft({ sections: [{ heading: 'Checklist', markdown: copied }, generatedDraft.sections[1]] });
+    const issue = inspectGeneratedDraft(context, draft).find(({ code }) => code === 'content.copied_passage');
+    expect(issue).toMatchObject({ location: '/sections/0/markdown', span: copied });
+    expect(issue?.message).toContain('a transient excerpt with twelve uniquely copied words remains outside every persisted');
+    expect(issue?.repairInstruction).toContain('paraphrase');
+  });
+
+  it('reports copied graphic text before the only repair pass', () => {
+    const copied = context.sourceFacts[0].excerpt as string;
+    const draft = withDraft({ editorialGraphic: { ...generatedDraft.editorialGraphic, alt: copied } });
+    expect(inspectGeneratedDraft(context, draft)).toEqual(expect.arrayContaining([
+      expect.objectContaining({ code: 'content.copied_passage', location: '/editorialGraphic/alt', span: copied }),
+    ]));
+  });
+
   it.each([
     ['/landing/../private/product.mp4', '/landing/full/founder-product.jpg'],
     ['/landing/%2e%2e/private/product.mp4', '/landing/full/founder-product.jpg'],
@@ -619,6 +636,146 @@ describe('generated-content safety review', () => {
   ])('rejects a Unicode format control in generated %s', (_field, unsafeDraft) => {
     expect(inspectGeneratedDraft(context, unsafeDraft)).toContainEqual(expect.objectContaining({
       code: 'content.dto_invalid',
+    }));
+  });
+});
+
+describe('contextual product references and precise binding failures', () => {
+  function withSpans(spans: string[]): GeneratedDraftV2 {
+    return withDraft({
+      sections: [{ heading: 'Founder demo workflow', markdown: spans.join(' ') }, generatedDraft.sections[1]],
+      claimBindings: [
+        ...generatedDraft.claimBindings.filter(({ location }) => !location.startsWith('/sections/0/')),
+        { location: '/sections/0/heading', span: 'Founder demo workflow', sourceFactIds: ['yc-bullets'], productClaimId: null },
+        ...spans.map((span) => ({
+          location: '/sections/0/markdown', span,
+          sourceFactIds: [span === context.productClaims[0].text ? 'vc-text-editing' : 'yc-bullets'],
+          productClaimId: span === context.productClaims[0].text ? 'vc-editing-claim' : null,
+        })),
+      ].reverse(),
+    });
+  }
+
+  it.each([
+    'This guide keeps a focused scope: it connects investor presentation goals with practical video preparation.',
+    'The viewer should understand what the company does, who the customer is, and why the product matters.',
+    'Hypothetical example: an investor should understand the customer pain, the product response, and the next meeting we want.',
+    'Ask whether each scene supports investor interest; if it does not, cut or defer it.',
+    'That example is only a planning model, but it reflects the need to protect time for feedback.',
+    'The brief can be one page if it answers practical questions.',
+    'Refine the script before turning it into shots.',
+    'A sequence identifies the customer, shows the product response, and ends with a next step.',
+    'The storyboard does not need to be artistic; it only needs to clarify what must be captured.',
+    'Hypothetical storyboard row: the product screen illustrates a customer problem.',
+    'Label that row as hypothetical if you use it, because it is an example structure.',
+    'If practice partners are unavailable, record the presentation and watch it back with the same questions.',
+    'Recommended scorecard: is the company clear, is the customer specific, and is the product value visible?',
+    'Demo day is not only a moment on a calendar; it can be the start of investor conversations.',
+    'Stop adding new content unless it fixes a clarity problem.',
+    'YC also says it continues supporting startups during the fundraising process in the weeks after Demo Day.',
+  ])('does not classify an explicit ordinary referent as VideoClaw: %s', (span) => {
+    const sourceContext = structuredClone(context);
+    sourceContext.sourceFacts[0].facts.push({
+      id: 'yc-fundraising', evidenceKind: 'body',
+      text: 'YC says it continues supporting startups during the fundraising process in the weeks after Demo Day.',
+    });
+    const value = withSpans([span]);
+    if (span.startsWith('YC')) {
+      value.claimBindings.find((binding) => binding.span === span)!.sourceFactIds = ['yc-fundraising'];
+    }
+    expect(inspectGeneratedDraft(sourceContext, value)).toEqual([]);
+  });
+
+  it.each([
+    ['VideoClaw automatically adds captions.'],
+    ['The app automatically adds captions.'],
+    ['Hypothetical example: VideoClaw doubles conversion.'],
+    [context.productClaims[0].text, 'It automatically adds captions.'],
+    [context.productClaims[0].text, 'The script needs a review.', 'It automatically adds captions.'],
+    [context.productClaims[0].text, 'Hypothetical example: the product automatically adds captions.'],
+    ['The recording tool is ready; it automatically adds captions.'],
+    ['It automatically adds captions.'],
+    ['The product automatically adds captions.'],
+  ])('retains the product gate with complete, reordered bindings: %j', (...spans) => {
+    expect(inspectGeneratedDraft(context, withSpans(spans))).toContainEqual(
+      expect.objectContaining({ code: 'content.claim_binding' }),
+    );
+  });
+
+  it('reports every broken binding and uncovered span instead of stopping at the first one', () => {
+    const missing = generatedDraft.claimBindings.find(({ location }) => location === '/description')!;
+    const bindings = generatedDraft.claimBindings.filter((binding) => binding !== missing).map((binding, index) => (
+      index < 2 ? { ...binding, sourceFactIds: ['missing-fact'] } : binding
+    ));
+    const findings = inspectGeneratedDraft(context, withDraft({ claimBindings: bindings }));
+    expect(findings).toEqual(expect.arrayContaining([
+      expect.objectContaining({ code: 'content.claim_binding', bindingIndex: 0, location: bindings[0].location, span: bindings[0].span, reason: 'unknown_fact' }),
+      expect.objectContaining({ code: 'content.claim_binding', bindingIndex: 1, location: bindings[1].location, span: bindings[1].span, reason: 'unknown_fact' }),
+      expect.objectContaining({ code: 'content.claim_binding', location: '/description', span: missing.span, reason: 'missing_binding' }),
+    ]));
+  });
+
+  it('does not let one binding cover repeated identical sentences at the same location', () => {
+    const span = 'Review the recording.';
+    const value = withSpans([span, span]);
+    value.claimBindings.splice(value.claimBindings.findIndex((binding) => binding.span === span), 1);
+    expect(inspectGeneratedDraft(context, value)).toContainEqual(expect.objectContaining({
+      code: 'content.claim_binding', location: '/sections/0/markdown', span,
+    }));
+  });
+
+  it.each([
+    'Review the recording tool because it automatically adds captions.',
+    'Review a short video editor because it automatically adds captions.',
+    'The company likes the product because it automatically adds captions.',
+    'YC also says it continues supporting startups.',
+  ])('does not infer an ordinary referent or third-party subject without the required context: %s', (span) => {
+    expect(inspectGeneratedDraft(context, withSpans([span]))).toContainEqual(expect.objectContaining({
+      code: 'content.claim_binding', span, reason: 'unapproved_product_reference',
+    }));
+  });
+
+  it('resolves a new explicit ordinary subject without clearing ambiguous product context', () => {
+    const ordinary = 'The storyboard does not need to be artistic; it only needs to clarify what must be captured.';
+    expect(inspectGeneratedDraft(context, withSpans([context.productClaims[0].text, ordinary]))).toEqual([]);
+    const ambiguous = 'It automatically adds captions.';
+    expect(inspectGeneratedDraft(context, withSpans([context.productClaims[0].text, ordinary, ambiguous])))
+      .toContainEqual(expect.objectContaining({ span: ambiguous, reason: 'unapproved_product_reference' }));
+  });
+
+  it.each([
+    'After reviewing the recording, it automatically adds captions.',
+    'Before exporting the video, it automatically adds captions.',
+    'While checking the script, it automatically adds captions.',
+    'For the recording, it automatically adds captions.',
+    'After reviewing the recording it automatically adds captions.',
+    'The recording review is complete; it automatically adds captions.',
+  ])('does not let an introductory object override the prior product subject: %s', (span) => {
+    const value = withSpans([context.productClaims[0].text, span]);
+    const bindingIndex = value.claimBindings.findIndex((binding) => binding.span === span);
+    expect(value.claimBindings[bindingIndex].productClaimId).toBeNull();
+    expect(inspectGeneratedDraft(context, value)).toContainEqual(expect.objectContaining({
+      code: 'content.claim_binding', bindingIndex, location: '/sections/0/markdown',
+      span, reason: 'unapproved_product_reference',
+    }));
+  });
+
+  it.each([
+    'A software demo video is useful when the viewer needs to see the product in action, while an explainer video is better suited to introducing the problem and solution context.',
+    'A demo video shows the product in action.',
+  ])('treats the demonstrated product as an object in a generic video category definition: %s', (span) => {
+    expect(inspectGeneratedDraft(context, withSpans([span]))).toEqual([]);
+  });
+
+  it.each([
+    ['A software demo video shows VideoClaw automatically adding captions.'],
+    ['A software demo video shows the app automatically adding captions.'],
+    ['A software demo video shows the product in action and the product automatically adds captions.'],
+    ['A software demo video shows the product in action while it automatically adds captions.'],
+    [context.productClaims[0].text, 'A software demo video shows the product in action.'],
+  ])('does not use a generic video category to exempt product capabilities: %j', (...spans) => {
+    expect(inspectGeneratedDraft(context, withSpans(spans))).toContainEqual(expect.objectContaining({
+      code: 'content.claim_binding', reason: 'unapproved_product_reference',
     }));
   });
 });
