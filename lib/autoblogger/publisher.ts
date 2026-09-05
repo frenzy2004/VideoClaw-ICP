@@ -72,6 +72,15 @@ export type ValidationReport = {
   failure?: string;
 };
 
+type ValidationAuthorization = Readonly<{
+  bundleHash: string;
+  checkedOutHeadSha: string;
+  landerRef: string;
+  articlePath: string;
+  svgPath: string;
+  commandLabels: ReadonlyArray<string>;
+}>;
+
 export type PublisherOptions = {
   lander: {
     repository: string;
@@ -755,30 +764,24 @@ function assertPublisherOrigin(
   }
 }
 
-function assertValidationMatches(
+function assertValidationAuthorization(
   bundle: DraftBundle,
-  validation: Readonly<ValidationReport>,
+  authorization: ValidationAuthorization,
   landerRef: string,
 ): void {
   const coordinates = bundleCoordinates(bundle);
   if (
-    validation.status !== 'passed'
-    || validation.cleanup !== 'completed'
-    || validation.bundleHash !== hashBundle(bundle)
-    || validation.landerRef !== landerRef
-    || typeof validation.checkedOutHeadSha !== 'string'
-    || !/^[0-9a-f]{40,64}$/i.test(validation.checkedOutHeadSha)
-    || validation.articlePath !== coordinates.articlePath
-    || validation.svgPath !== coordinates.svgPath
+    authorization.bundleHash !== hashBundle(bundle)
+    || authorization.landerRef !== landerRef
+    || !/^[0-9a-f]{40,64}$/i.test(authorization.checkedOutHeadSha)
+    || authorization.articlePath !== coordinates.articlePath
+    || authorization.svgPath !== coordinates.svgPath
   ) {
-    throw new Error('A successful validation report for this exact bundle and lander ref is required.');
+    throw new Error('An internal validation authorization for this exact bundle and lander ref is required.');
   }
   const requiredCommands = ['clone', 'checkout', 'resolve-head', 'isolate-checkout', 'install', 'check:blog', 'lint', 'build', 'workspace-integrity'];
-  if (
-    validation.commands.map(({ label }) => label).join(',') !== requiredCommands.join(',')
-    || validation.commands.some(({ exitCode, timedOut }) => exitCode !== 0 || timedOut)
-  ) {
-    throw new Error('Validation report is missing a successful native lander command.');
+  if (authorization.commandLabels.join(',') !== requiredCommands.join(',')) {
+    throw new Error('Validation authorization is missing a successful native lander command.');
   }
 }
 
@@ -806,7 +809,7 @@ function safeTraceValue(value: string): string {
 
 function pullRequestBody(
   metadata: PublicationMetadata,
-  validation: ValidationReport,
+  authorization: ValidationAuthorization,
 ): string {
   const metric = (value: number | 'provider-pending' | null) => value === null ? 'unavailable' : String(value);
   const body = [
@@ -833,8 +836,8 @@ function pullRequestBody(
     ...metadata.sources.map(({ label, url }) => `- ${safeTraceValue(label)} — ${safeTraceValue(url)}`),
     '',
     '### QA',
-    `- Bundle SHA-256: ${validation.bundleHash}`,
-    ...validation.commands.map(({ label, exitCode }) => `- ${label}: ${exitCode === 0 ? 'passed' : 'failed'}`),
+    `- Bundle SHA-256: ${authorization.bundleHash}`,
+    ...authorization.commandLabels.map((label) => `- ${label}: passed`),
     '',
     'This is a review-only draft. It does not publish, approve, merge, or deploy the article.',
   ].join('\n');
@@ -898,7 +901,9 @@ function assertTargetSnapshot(
   }
   for (const entry of snapshot.openPullRequests as unknown[]) {
     const record = readRecord(entry, 'GitHub open pull request');
-    assertPresentInventoryIdentities(record, 'GitHub open pull request');
+    if (assertPresentInventoryIdentities(record, 'GitHub open pull request') === 0) {
+      throw new Error('GitHub open pull request requires an article identity.');
+    }
     if (
       typeof record.number !== 'number'
       || !Number.isInteger(record.number)
@@ -971,7 +976,7 @@ export function createPublisher(options: PublisherOptions): Publisher {
     options.lander.name,
     number,
   );
-  const validatedBundleHashes = new Set<string>();
+  const validationAuthorizations = new WeakMap<ValidationReport, ValidationAuthorization>();
   if (!isSafeRef(options.lander.ref)) throw new Error('Unsafe lander ref.');
   assertSafeRepository(options.lander.repository);
   assertSafeRepositoryIdentity(options.lander.owner, options.lander.name);
@@ -1085,21 +1090,34 @@ export function createPublisher(options: PublisherOptions): Publisher {
         }
       }
       if (report.status === 'passed' && report.cleanup === 'completed') {
-        validatedBundleHashes.add(report.bundleHash);
+        if (!report.checkedOutHeadSha || !report.articlePath || !report.svgPath) {
+          report.status = 'failed';
+          report.failure = 'Validation authorization is incomplete.';
+        } else {
+          validationAuthorizations.set(report, Object.freeze({
+            bundleHash: report.bundleHash,
+            checkedOutHeadSha: report.checkedOutHeadSha,
+            landerRef: report.landerRef,
+            articlePath: report.articlePath,
+            svgPath: report.svgPath,
+            commandLabels: Object.freeze(report.commands.map(({ label }) => label)),
+          }));
+        }
       }
       return report;
     },
     async openDraftPullRequest(input) {
       let bundle: DraftBundle;
       let metadata: PublicationMetadata;
+      let authorization: ValidationAuthorization;
       try {
         bundle = DraftBundleSchema.parse(input.bundle);
         metadata = readPublicationMetadata(bundle, input.mode, input.keywordMetrics);
         assertPublisherOrigin(bundle, metadata, input.origin);
-        assertValidationMatches(bundle, input.validation, options.lander.ref);
-        if (!validatedBundleHashes.has(input.validation.bundleHash)) {
-          throw new Error('Validation report was not produced by this publisher instance.');
-        }
+        const retained = validationAuthorizations.get(input.validation as ValidationReport);
+        if (!retained) throw new Error('Validation report identity was not authorized by this publisher instance.');
+        authorization = retained;
+        assertValidationAuthorization(bundle, authorization, options.lander.ref);
         if (containsSecretLikeValue(bundle)) throw new Error('Draft bundle contains a secret-like value.');
       } catch (error) {
         return { status: 'blocked', reason: 'publication_gate_failed', detail: githubFailureDetail(error) };
@@ -1144,12 +1162,12 @@ export function createPublisher(options: PublisherOptions): Publisher {
       }
       if (
         snapshot.baseRef !== options.lander.ref
-        || snapshot.baseSha !== input.validation.checkedOutHeadSha
+        || snapshot.baseSha !== authorization.checkedOutHeadSha
       ) {
         return { status: 'blocked', reason: 'validated_base_mismatch' };
       }
       const existingHeadPullRequest = snapshot.openPullRequests.find(({ headRef: current }) => current === headRef);
-      if (existingHeadPullRequest?.bundleHash === input.validation.bundleHash) {
+      if (existingHeadPullRequest?.bundleHash === authorization.bundleHash) {
         return {
           status: 'already_exists',
           number: existingHeadPullRequest.number,
@@ -1166,7 +1184,7 @@ export function createPublisher(options: PublisherOptions): Publisher {
       }
       const coordinates = bundleCoordinates(bundle);
       const title = `Review: ${metadata.title}`;
-      const body = pullRequestBody(metadata, input.validation);
+      const body = pullRequestBody(metadata, authorization);
       const prepared: PreparedCommit = {
         owner: options.lander.owner,
         repository: options.lander.name,
@@ -1200,7 +1218,7 @@ export function createPublisher(options: PublisherOptions): Publisher {
           title,
           body,
           draft: true,
-          bundleHash: input.validation.bundleHash,
+          bundleHash: authorization.bundleHash,
           auth,
         }), expectedPullRequestUrl);
         return { status: 'opened', number: pullRequest.number, url: pullRequest.url, headRef };
@@ -1222,7 +1240,7 @@ export function createPublisher(options: PublisherOptions): Publisher {
               const reconciled = assertPullRequestResult(existing, expectedPullRequestUrl);
               if (
                 existing.headRef === headRef
-                && existing.bundleHash === input.validation.bundleHash
+                && existing.bundleHash === authorization.bundleHash
               ) {
                 return { status: 'already_exists', number: reconciled.number, url: reconciled.url, headRef };
               }

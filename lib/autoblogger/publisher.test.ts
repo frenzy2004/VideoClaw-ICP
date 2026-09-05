@@ -838,6 +838,7 @@ describe('Publisher.openDraftPullRequest', () => {
       url: 'https://github.test/INFR-Organisation/videoclaw-lander/pull/89',
       headRef: 'autoblog/2026-09-05-founder-pitch-video-workflow',
       bundleHash: rerun.validation.bundleHash,
+      slug: 'founder-pitch-video-workflow',
     });
     await expect(rerun.publisher.openDraftPullRequest({
       bundle: rerun.bundle,
@@ -911,6 +912,43 @@ describe('Publisher.openDraftPullRequest', () => {
 
     expect(result).toEqual({ status: 'blocked', reason: 'validated_base_mismatch' });
     expect(fixture.github.calls).toEqual(['inspect']);
+    expect(fixture.github.prepared).toBeUndefined();
+  });
+
+  it('does not let a mutated report SHA authorize a different target snapshot', async () => {
+    const fixture = await setup();
+    fixture.validation.checkedOutHeadSha = 'ffffffffffffffffffffffffffffffffffffffff';
+    fixture.github.snapshot.baseSha = 'ffffffffffffffffffffffffffffffffffffffff';
+
+    const result = await fixture.publisher.openDraftPullRequest({
+      bundle: fixture.bundle,
+      validation: fixture.validation,
+      mode: 'scheduled',
+      keywordMetrics: paidKeywordMetrics,
+      origin: fixture.origin,
+      auth,
+    });
+
+    expect(result).toEqual({ status: 'blocked', reason: 'validated_base_mismatch' });
+    expect(fixture.github.calls).toEqual(['inspect']);
+    expect(fixture.github.prepared).toBeUndefined();
+  });
+
+  it('does not let a serialized copy of a successful report authorize publication', async () => {
+    const fixture = await setup();
+    const copiedReport = structuredClone(fixture.validation);
+
+    const result = await fixture.publisher.openDraftPullRequest({
+      bundle: fixture.bundle,
+      validation: copiedReport,
+      mode: 'scheduled',
+      keywordMetrics: paidKeywordMetrics,
+      origin: fixture.origin,
+      auth,
+    });
+
+    expect(result).toMatchObject({ status: 'blocked', reason: 'publication_gate_failed' });
+    expect(fixture.github.calls).toEqual([]);
     expect(fixture.github.prepared).toBeUndefined();
   });
 
@@ -1039,6 +1077,31 @@ describe('Publisher.openDraftPullRequest', () => {
     expect(result).toMatchObject({ status: 'blocked', reason: 'github_operation_failed' });
     expect(github.branches).toEqual(new Set());
     expect(github.pullRequests).toEqual([]);
+  });
+
+  it('rejects an identity-less open PR inventory row before any remote write', async () => {
+    const snapshot = structuredClone(readySnapshot);
+    snapshot.openPullRequests.push({
+      number: 88,
+      url: 'https://github.test/INFR-Organisation/videoclaw-lander/pull/88',
+      headRef: 'autoblog/2026-09-04-other-article',
+    });
+    const fixture = await setup('main', new FixtureGitHubBoundary(snapshot));
+
+    const result = await fixture.publisher.openDraftPullRequest({
+      bundle: fixture.bundle,
+      validation: fixture.validation,
+      mode: 'scheduled',
+      keywordMetrics: paidKeywordMetrics,
+      origin: fixture.origin,
+      auth,
+    });
+
+    expect(result).toMatchObject({ status: 'blocked', reason: 'github_inspection_failed' });
+    expect(fixture.github.calls).toEqual(['inspect']);
+    expect(fixture.github.prepared).toBeUndefined();
+    expect(fixture.github.branches.size).toBe(0);
+    expect(fixture.github.pullRequests).toHaveLength(0);
   });
 
   it.each([
