@@ -3,7 +3,19 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-## Live local checkpoint — 2026-09-06
+## Research recovery checkpoint — 2026-09-06
+
+The [recovery report](RESEARCH-RECOVERY-2026-09-06.md) records 80 checked source URLs and 36 distinct query probes (43 SERP observations including repeats). No qualifying evidence bundle, live article-generation run or new article preview resulted. All five new Apify jobs were confirmed terminal; reported usage totals approximately $0.13, excluding OpenAI. Three synthetic, token-limited `gpt-5.5` calls verified acceptance of the actual generation/critique/repair schemas; intentionally incomplete outputs are not successful article evidence.
+
+Repairs: campaign-balanced queue order, evidence screening before the deep-check cap with bounded retries for insufficient data, and provider-compatible critique schemas retaining runtime approval invariants. Regression tests were reproduced red before fixes. The full offline fixture initially caught an old-order expectation; it now asserts the explicit fair order and retains exact 50-candidate coverage.
+
+Fresh final verification: **615 tests passed across 44 files**; repository lint, typecheck, build and whitespace checks passed. The native offline fixture ran, including its generated-artifact validation. This is not a full native build of a new live article, because none qualified. Existing gray-matter direct-eval and vinext mixed-import build warnings remain. A secret-pattern scan of the proposed tracked diff and new report passed.
+
+Independent review found one additional provider-failure edge case: irrelevant candidates could remain retryable if enrichment failed first. Product relevance now rejects them before the metrics request; new tests cover `run`, `pilot` and `research` while preserving retries for relevant candidates. The reviewer rechecked the fix and all three regressions passed. Independent review of queue/schema changes found no critical or important defects.
+
+Lander source stayed clean at `b6b0833c78443b44b12bf6d33f05baa7ac8427d3`; PR #55 and ICP PR #1 were verified open/unmerged and the schedule variable was `false`. Existing local pilot state was not reset or consumed. No source authority policy, production state, publication capability or recurring activation was changed.
+
+## Historical first live local checkpoint — 2026-09-06
 
 The [live-pilot report](LIVE-PILOT-2026-09-06.md) records the result: OpenAI `gpt-5.5` structured preflight passed; Apify completed fifty US/en search observations; ten deep checks were attempted and none passed (eight source-gate and two relevant-PAA failures). Zero article-generation calls, generated articles, native generated-bundle builds or lander PRs occurred. This is **not** a successful end-to-end article pilot.
 

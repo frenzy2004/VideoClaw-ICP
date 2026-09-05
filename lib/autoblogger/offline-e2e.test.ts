@@ -305,7 +305,10 @@ describe.skipIf(nativeLanderPath === undefined)('native lander offline integrati
       queued: 50, scanned: 50, shallowValidated: 50, metricsEnriched: 50,
       deepInspected: 10, eligible: 10, drafted: 3, validated: 3, pullRequestsOpened: 0,
     });
-    expect(fixture.network.autocompleteKeywords).toEqual(candidates().map(({ primaryKeyword }) => primaryKeyword));
+    expect(fixture.network.autocompleteKeywords).toEqual(
+      [0, 47, 1, 48, 2, 49, ...Array.from({ length: 44 }, (_unused, index) => index + 3)]
+        .map((index) => `founder video product demo workflow ${index}`),
+    );
     expect(fixture.network.serpKeywords).toEqual(fixture.network.autocompleteKeywords);
     expect(fixture.network.metricKeywords).toEqual(fixture.network.autocompleteKeywords);
     // Increasing volume with otherwise equal signals makes this ranking independent of worker helpers.

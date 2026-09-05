@@ -306,10 +306,26 @@ export function buildIncrementalQueue(input: {
     ))) continue;
     all.push(candidate);
   }
+
+  // Balance eligible campaigns in first-seen order, preserving each campaign's queue order.
+  const candidatesByCampaign = new Map<Candidate['campaignId'], Candidate[]>();
+  for (const candidate of all) {
+    const campaign = candidatesByCampaign.get(candidate.campaignId);
+    if (campaign) campaign.push(candidate);
+    else candidatesByCampaign.set(candidate.campaignId, [candidate]);
+  }
+  const fairQueue: Candidate[] = [];
+  for (let round = 0; fairQueue.length < all.length; round += 1) {
+    for (const campaign of candidatesByCampaign.values()) {
+      const candidate = campaign[round];
+      if (candidate) fairQueue.push(candidate);
+    }
+  }
+
   return {
     state: compactPersistentWorkerState(state),
-    all,
-    scan: all.slice(0, RUN_LIMITS.maxCandidatesScanned),
-    tail: all.slice(RUN_LIMITS.maxCandidatesScanned),
+    all: fairQueue,
+    scan: fairQueue.slice(0, RUN_LIMITS.maxCandidatesScanned),
+    tail: fairQueue.slice(RUN_LIMITS.maxCandidatesScanned),
   };
 }

@@ -123,6 +123,8 @@ const DraftRepairVerificationV1Schema = z.object({
 
 export type DraftRepairVerificationV1 = z.infer<typeof DraftRepairVerificationV1Schema>;
 
+// Structured Outputs does not support conditional composition. These provider
+// schemas enforce shape; the Zod refinements above enforce approval consistency.
 export const DRAFT_CRITIQUE_V1_JSON_SCHEMA = {
   type: 'object',
   additionalProperties: false,
@@ -146,11 +148,6 @@ export const DRAFT_CRITIQUE_V1_JSON_SCHEMA = {
     },
   },
   required: ['schemaVersion', 'approved', 'issues', 'supportEvaluations'],
-  allOf: [{
-    if: { properties: { approved: { const: false } }, required: ['approved'] },
-    then: { properties: { issues: { minItems: 1 } } },
-    else: { properties: { issues: { maxItems: 0 } } },
-  }],
 } as const;
 
 export const DRAFT_REPAIR_VERIFICATION_V1_JSON_SCHEMA = {
@@ -189,20 +186,6 @@ export const DRAFT_REPAIR_VERIFICATION_V1_JSON_SCHEMA = {
     },
   },
   required: ['schemaVersion', 'approved', 'evaluations', 'newIssues', 'supportEvaluations'],
-  allOf: [{
-    if: { properties: { approved: { const: true } }, required: ['approved'] },
-    then: {
-      properties: {
-        evaluations: {
-          items: {
-            properties: { resolved: { const: true } },
-            required: ['resolved'],
-          },
-        },
-        newIssues: { maxItems: 0 },
-      },
-    },
-  }],
 } as const;
 
 export type MediaBlockingBrief = {

@@ -7,6 +7,8 @@ import {
   candidateFingerprints,
   type Candidate,
   type DraftBundle,
+  type EvidenceBundle,
+  type KeywordMetrics,
 } from './domain';
 import { createPersistentWorkerState, type PersistentWorkerState } from './github-runtime';
 import { createPendingKeywordProvider, type KeywordProvider } from './keyword-providers';
@@ -71,7 +73,11 @@ function fixture(input: {
   landerRef?: string;
   openDraftPullRequest?: NonNullable<Parameters<typeof createAutobloggerWorker>[0]['publisher']['openDraftPullRequest']>;
   keywordProvider?: KeywordProvider;
+  backlog?: Candidate[];
   backlogCount?: number;
+  observe?: (item: Candidate) => ShallowResearchResult;
+  metricsOverrides?: (index: number) => Partial<KeywordMetrics>;
+  evidenceOverrides?: Partial<EvidenceBundle>;
   failScan?: boolean;
   failDraft?: boolean;
   maxDrafts?: 1 | 2 | 3;
@@ -84,7 +90,7 @@ function fixture(input: {
   let state = input.initialState ?? createPersistentWorkerState();
   let version: string | null = 'state-v1';
   const counters = { scanned: 0, enriched: 0, inspected: [] as number[], drafted: 0, validated: 0, opened: 0, saved: 0 };
-  const backlog = Array.from({ length: input.backlogCount ?? 50 }, (_unused, index) => candidate(index));
+  const backlog = input.backlog ?? Array.from({ length: input.backlogCount ?? 50 }, (_unused, index) => candidate(index));
   const worker = createAutobloggerWorker({
     backlog,
     stateStore: {
@@ -103,7 +109,7 @@ function fixture(input: {
       scan: async (items) => {
         if (input.failScan) throw new Error('temporary network failure');
         counters.scanned = items.length;
-        return { scannedCount: items.length, results: items.map(shallow) };
+        return { scannedCount: items.length, results: items.map(input.observe ?? shallow) };
       },
       inspect: async (items) => {
         const item = items[0];
@@ -125,6 +131,7 @@ function fixture(input: {
                 { originalUrl: item.organicResults[1].url, finalUrl: item.organicResults[1].url, authoritative: false },
               ],
               faqQuestions: item.peopleAlsoAsk,
+              ...input.evidenceOverrides,
             }),
           }],
         };
@@ -135,17 +142,19 @@ function fixture(input: {
         counters.enriched += 1;
         const index = Number(keyword.split(' ').at(-1));
         const provider = mode === 'scheduled' ? 'semrush' : 'pending';
+        const metrics = KeywordMetricsSchema.parse({
+          schemaVersion: 1,
+          provider,
+          observedAt: provider === 'pending' ? null : '2026-09-05T00:00:00.000Z',
+          volume: provider === 'pending' ? null : index + 1,
+          difficulty: provider === 'pending' ? null : 10,
+          cpc: null,
+          intent,
+          ...input.metricsOverrides?.(index),
+        });
         return {
-          metrics: KeywordMetricsSchema.parse({
-            schemaVersion: 1,
-            provider,
-            observedAt: provider === 'pending' ? null : '2026-09-05T00:00:00.000Z',
-            volume: provider === 'pending' ? null : index + 1,
-            difficulty: provider === 'pending' ? null : 10,
-            cpc: null,
-            intent,
-          }),
-          provenance: { provider, endpoint: null, observedAt: null, providerRequestId: null, sourceObservedAt: null },
+          metrics,
+          provenance: { provider: metrics.provider, endpoint: null, observedAt: null, providerRequestId: null, sourceObservedAt: null },
         };
       },
     },
@@ -201,6 +210,186 @@ function fixture(input: {
 }
 
 describe('persistent autoblogger worker', () => {
+  describe.each(['run', 'pilot', 'research'] as const)('%s shallow selection', (command) => {
+    it.each([
+      { label: 'zero organic results', reasons: 'missing_serp', patch: { organicResults: [] } },
+      { label: 'no discovery signals', reasons: 'missing_suggestion_signal,missing_relevant_paa', patch: { suggestions: [], peopleAlsoAsk: [], relatedQueries: [] } },
+      { label: 'generic PAA', reasons: 'missing_relevant_paa', patch: { peopleAlsoAsk: [
+        'Which video codec is best for archival footage?',
+        'How does a startup register for payroll tax?',
+        'Why is video compression useful for television?',
+        'What is founder evidence topic planning?',
+      ] } },
+      { label: 'duplicate PAA', reasons: 'missing_relevant_paa', patch: { peopleAlsoAsk: [
+        'What is founder evidence topic planning?',
+        'WHAT IS FOUNDER EVIDENCE TOPIC PLANNING?',
+        ' What is founder evidence topic planning? ',
+      ] } },
+      { label: 'no product relevance', reasons: 'missing_product_relevance', patch: {} },
+      { label: 'no product relevance and empty organic results', reasons: 'missing_serp,missing_product_relevance', patch: { organicResults: [] } },
+    ])('excludes high-scoring candidates with $label before spending the ten deep slots', async ({ reasons, patch }) => {
+      const retryable = !reasons.includes('missing_product_relevance');
+      const backlog = Array.from({ length: 21 }, (_unused, index) => (
+        index < 10 && !retryable
+          ? { ...candidate(index), primaryKeyword: `payroll tax setup ${index}`, title: `Payroll Tax Setup ${index}`, icp: 'payroll operators' }
+          : candidate(index)
+      ));
+      const { worker, counters, getState } = fixture({
+        backlog,
+        observe: (item) => Number(item.slug.split('-').at(-1)) < 10 ? { ...shallow(item), ...patch } : shallow(item),
+        metricsOverrides: (index) => ({
+          provider: 'semrush', observedAt: '2026-09-05T00:00:00.000Z', volume: index < 10 ? 10_000 : index + 1,
+        }),
+      });
+
+      const report = await worker.execute({ command, runId: `shallow-${command}` });
+
+      expect(counters.inspected).toHaveLength(10);
+      expect(counters.inspected.every((index) => index >= 10)).toBe(true);
+      expect(counters.inspected).toContain(20);
+      expect(counters.enriched).toBe(retryable ? 21 : 11);
+      expect(report.counts).toMatchObject({
+        scanned: 21, metricsEnriched: retryable ? 21 : 11,
+        deepInspected: 10, eligible: command === 'research' ? 0 : 10,
+        drafted: command === 'research' ? 0 : command === 'pilot' ? 1 : 3,
+      });
+      for (const item of backlog.slice(0, 10)) {
+        const fingerprint = candidateFingerprints(item).candidate;
+        expect(getState().decisions[fingerprint]).toMatchObject({
+          status: retryable ? 'retryable' : 'terminal',
+          reason: `${retryable ? 'insufficient_data' : 'ineligible'}:${reasons}`, attempts: 1, leaseExpiresAt: null,
+        });
+        if (retryable) expect(getState().queuedCandidates).toContainEqual(item);
+        else expect(getState().queuedCandidates).not.toContainEqual(item);
+        expect(report.failures).toContainEqual({
+          candidateFingerprint: fingerprint, code: 'not_selected_for_deep_inspection', detail: reasons, retryable, attempt: 1,
+        });
+      }
+      expect(report.failures).toHaveLength(10);
+      if (command === 'pilot') expect(getState().manualPilot?.status).toBe('prepared');
+    });
+  });
+
+  it.each(['run', 'pilot', 'research'] as const)('rejects product irrelevance before a failing metrics provider in %s while retaining relevant retries', async (command) => {
+    const irrelevant = { ...candidate(0), primaryKeyword: 'payroll tax setup', title: 'Payroll Tax Setup', icp: 'payroll operators' };
+    const relevant = candidate(1);
+    const requestedKeywords: string[] = [];
+    const { worker, counters, getState } = fixture({
+      backlog: [irrelevant, relevant],
+      keywordProvider: {
+        enrich: async ({ keyword }) => {
+          requestedKeywords.push(keyword);
+          throw new Error('temporary metrics provider outage');
+        },
+      },
+    });
+
+    const report = await worker.execute({ command, runId: `irrelevant-provider-failure-${command}` });
+    const irrelevantFingerprint = candidateFingerprints(irrelevant).candidate;
+    const relevantFingerprint = candidateFingerprints(relevant).candidate;
+
+    expect(getState().decisions[irrelevantFingerprint]).toMatchObject({
+      status: 'terminal', reason: 'ineligible:missing_product_relevance', attempts: 1, leaseExpiresAt: null,
+    });
+    expect(requestedKeywords).toEqual([relevant.primaryKeyword]);
+    expect(getState().queuedCandidates).not.toContainEqual(irrelevant);
+    expect(getState().decisions[relevantFingerprint]).toMatchObject({
+      status: 'retryable', reason: 'keyword_enrichment_failed', attempts: 1, leaseExpiresAt: null,
+    });
+    expect(getState().queuedCandidates).toContainEqual(relevant);
+    expect(report.failures.filter(({ candidateFingerprint }) => candidateFingerprint === irrelevantFingerprint)).toEqual([{
+      candidateFingerprint: irrelevantFingerprint, code: 'not_selected_for_deep_inspection',
+      detail: 'missing_product_relevance', retryable: false, attempt: 1,
+    }]);
+    expect(report.failures).toContainEqual(expect.objectContaining({
+      candidateFingerprint: relevantFingerprint, code: 'keyword_enrichment_failed', retryable: true, attempt: 1,
+    }));
+    expect(report.counts).toMatchObject({ scanned: 2, metricsEnriched: 0, deepInspected: 0, eligible: 0, drafted: 0 });
+    expect(counters.inspected).toEqual([]);
+    expect(getState().manualPilot).toBeNull();
+  });
+
+  it.each([
+    { label: 'pending provider', metrics: { provider: 'pending' as const, volume: 10_000, difficulty: 0 } },
+    { label: 'missing volume', metrics: { volume: null, difficulty: 0 } },
+    { label: 'missing difficulty', metrics: { volume: 10_000, difficulty: null } },
+  ])('excludes scheduled candidates with $label before ranking', async ({ metrics }) => {
+    const { worker, counters, getState } = fixture({
+      backlogCount: 11,
+      observe: (item) => {
+        const observation = shallow(item);
+        return Number(item.slug.split('-').at(-1)) < 10
+          ? { ...observation, suggestions: Array.from({ length: 100 }, (_unused, index) => `${item.primaryKeyword} guide ${index}`) }
+          : observation;
+      },
+      metricsOverrides: (index) => index < 10 ? metrics : { volume: 0, difficulty: 0 },
+    });
+
+    const report = await worker.execute({ command: 'run', runId: 'scheduled-metrics-shortlist' });
+
+    expect(counters.inspected).toEqual([10]);
+    expect(report.counts).toMatchObject({ deepInspected: 1, eligible: 1, drafted: 1 });
+    for (let index = 0; index < 10; index += 1) {
+      const fingerprint = candidateFingerprints(candidate(index)).candidate;
+      expect(getState().decisions[fingerprint]).toMatchObject({
+        status: 'retryable', reason: 'insufficient_data:scheduled_requires_observed_volume_and_difficulty', attempts: 1,
+      });
+      expect(getState().queuedCandidates).toContainEqual(candidate(index));
+      expect(report.failures).toContainEqual(expect.objectContaining({
+        candidateFingerprint: fingerprint, code: 'not_selected_for_deep_inspection',
+        detail: 'scheduled_requires_observed_volume_and_difficulty', retryable: true,
+      }));
+    }
+  });
+
+  it.each(['run', 'pilot', 'research'] as const)('bounds insufficient-data retries at three attempts in %s without deferring or resetting them', async (command) => {
+    const item = candidate(0);
+    const fingerprint = candidateFingerprints(item).candidate;
+    const reasons = 'missing_suggestion_signal,missing_relevant_paa';
+    const { worker, counters, getState } = fixture({
+      backlog: [item],
+      observe: (candidate) => ({ ...shallow(candidate), suggestions: [], peopleAlsoAsk: [], relatedQueries: [] }),
+    });
+
+    for (let attempt = 1; attempt <= 3; attempt += 1) {
+      const report = await worker.execute({ command, runId: `insufficient-${command}-${attempt}` });
+
+      expect(report.counts).toMatchObject({ scanned: 1, deepInspected: 0, eligible: 0, drafted: 0 });
+      expect(getState().decisions[fingerprint]).toMatchObject({
+        status: attempt < 3 ? 'retryable' : 'terminal',
+        reason: `insufficient_data:${reasons}`, attempts: attempt, leaseExpiresAt: null,
+      });
+      expect(report.failures).toContainEqual({
+        candidateFingerprint: fingerprint, code: 'not_selected_for_deep_inspection', detail: reasons,
+        retryable: attempt < 3, attempt,
+      });
+      expect(getState().queuedCandidates).toEqual(attempt < 3 ? [item] : []);
+      expect(getState().manualPilot).toBeNull();
+    }
+
+    const terminal = getState().decisions[fingerprint];
+    const fourth = await worker.execute({ command, runId: `insufficient-${command}-4` });
+    expect(fourth.counts.scanned).toBe(0);
+    expect(getState().decisions[fingerprint]).toEqual(terminal);
+    expect(counters.inspected).toEqual([]);
+  });
+
+  it.each([
+    { label: 'missing sources', evidence: { sources: [] }, reason: 'missing_sources' },
+    { label: 'a different candidate', evidence: { candidateFingerprint: candidateFingerprints(candidate(99)).candidate }, reason: 'evidence_candidate_mismatch' },
+    { label: 'missing FAQs', evidence: { faqQuestions: [] }, reason: 'missing_faqs' },
+  ])('still rejects deep evidence with $label after passing shallow checks', async ({ evidence, reason }) => {
+    const { worker, counters, getState } = fixture({ backlogCount: 1, evidenceOverrides: evidence });
+
+    const report = await worker.execute({ command: 'pilot', runId: 'deep-evidence-gates' });
+
+    expect(counters.inspected).toEqual([0]);
+    expect(report.counts).toMatchObject({ deepInspected: 1, eligible: 0, drafted: 0 });
+    expect(report.artifacts).toEqual([]);
+    expect(getState().decisions[candidateFingerprints(candidate(0)).candidate].reason).toContain(reason);
+    expect(getState().manualPilot).toBeNull();
+  });
+
   it('retains a discovered candidate during a live lease and recovers it after expiry', async () => {
     const discovered = candidate(99);
     const initialState = reserveCandidate({ ...createPersistentWorkerState(), queuedCandidates: [discovered] }, discovered, 'prior-run', 'scheduled', '2026-09-05T00:00:00.000Z');

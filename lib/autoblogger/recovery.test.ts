@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { CandidateSchema, candidateFingerprints, type Candidate } from './domain';
+import { CAMPAIGN_IDS, CandidateSchema, candidateFingerprints, type Candidate } from './domain';
 import { createPersistentWorkerState } from './github-runtime';
 import {
   buildIncrementalQueue,
@@ -13,26 +13,162 @@ import {
   reserveManualPilot,
 } from './recovery';
 import { createFileStateStore } from './local-state';
+import { createHash } from 'node:crypto';
 import { join } from 'node:path';
 import { mkdtemp } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 
-function candidate(index: number): Candidate {
+function candidate(index: number, campaignNumber = 1): Candidate {
+  const campaignId = CAMPAIGN_IDS[campaignNumber - 1];
   return CandidateSchema.parse({
     schemaVersion: 1,
-    articleId: `vc-c1-${String(index).padStart(3, '0')}`,
-    campaignId: 'newly-funded-founder',
-    icp: 'newly funded founder planning a founder video launch',
-    primaryKeyword: `founder launch video plan ${index}`,
+    articleId: `vc-c${campaignNumber}-${String(index).padStart(3, '0')}`,
+    campaignId,
+    icp: campaignId,
+    primaryKeyword: `${campaignId} video plan ${index}`,
     secondaryKeywords: [],
-    title: `Founder Launch Video Plan ${index}`,
-    slug: `founder-launch-video-plan-${index}`,
+    title: `${campaignId} Video Plan ${index}`,
+    slug: `${campaignId}-video-plan-${index}`,
     intent: 'informational',
     funnelStage: 'top',
   });
 }
 
 describe('bounded candidate recovery', () => {
+  it('round-robins five full campaigns into ten candidates each in the bounded scan', () => {
+    const backlog = CAMPAIGN_IDS.flatMap((_campaignId, campaignIndex) => (
+      Array.from({ length: 50 }, (_unused, index) => candidate(index + 1, campaignIndex + 1))
+    ));
+    const queue = buildIncrementalQueue({
+      state: createPersistentWorkerState(), backlog, now: '2026-09-05T00:00:00.000Z',
+    });
+
+    expect(queue.scan).toHaveLength(50);
+    for (let round = 0; round < 10; round += 1) {
+      expect(queue.scan.slice(round * 5, (round + 1) * 5).map(({ campaignId }) => campaignId)).toEqual(CAMPAIGN_IDS);
+    }
+    for (const campaignId of CAMPAIGN_IDS) {
+      expect(queue.scan.filter((item) => item.campaignId === campaignId)).toHaveLength(10);
+    }
+    expect(queue.all).toEqual([...queue.scan, ...queue.tail]);
+    expect(queue.tail).toHaveLength(200);
+    expect(queue.tail.slice(0, 5).map(({ articleId }) => articleId)).toEqual([
+      'vc-c1-011', 'vc-c2-011', 'vc-c3-011', 'vc-c4-011', 'vc-c5-011',
+    ]);
+    expect(queue.all.map(({ articleId }) => articleId).sort()).toEqual(backlog.map(({ articleId }) => articleId).sort());
+    expect(new Set(queue.all.map(({ articleId }) => articleId)).size).toBe(250);
+  });
+
+  it('refills the scan from remaining campaigns when a campaign exhausts its candidates', () => {
+    const backlog = CAMPAIGN_IDS.flatMap((_campaignId, campaignIndex) => (
+      Array.from({ length: campaignIndex === 0 ? 1 : 50 }, (_unused, index) => candidate(index + 1, campaignIndex + 1))
+    ));
+    const queue = buildIncrementalQueue({
+      state: createPersistentWorkerState(), backlog, now: '2026-09-05T00:00:00.000Z',
+    });
+
+    expect(queue.scan).toHaveLength(50);
+    expect(CAMPAIGN_IDS.map((campaignId) => queue.scan.filter((item) => item.campaignId === campaignId).length)).toEqual([1, 13, 12, 12, 12]);
+    expect(queue.scan.slice(0, 10).map(({ articleId }) => articleId)).toEqual([
+      'vc-c1-001', 'vc-c2-001', 'vc-c3-001', 'vc-c4-001', 'vc-c5-001',
+      'vc-c2-002', 'vc-c3-002', 'vc-c4-002', 'vc-c5-002', 'vc-c2-003',
+    ]);
+    expect(queue.scan.at(-1)?.articleId).toBe('vc-c2-013');
+    expect(queue.tail.slice(0, 4).map(({ articleId }) => articleId)).toEqual([
+      'vc-c3-013', 'vc-c4-013', 'vc-c5-013', 'vc-c2-014',
+    ]);
+    expect(queue.all).toEqual([...queue.scan, ...queue.tail]);
+    expect(queue.tail).toHaveLength(151);
+    expect(queue.all.map(({ articleId }) => articleId).sort()).toEqual(backlog.map(({ articleId }) => articleId).sort());
+  });
+
+  it('keeps within-campaign queue order across queued, backlog and discovery duplicates', () => {
+    const queued = [candidate(9, 3), candidate(7), { ...candidate(2, 3), icp: 'another buyer in the same campaign' }, candidate(4)];
+    const backlog = [queued[3], candidate(1), queued[2], candidate(5, 3)];
+    const discoveries = [queued[0], candidate(8), candidate(6, 3), backlog[1]];
+    const state = { ...createPersistentWorkerState(), queuedCandidates: queued };
+    const queue = buildIncrementalQueue({ state, backlog, discoveries, now: '2026-09-05T00:00:00.000Z' });
+
+    expect(queue.all.map(({ articleId }) => articleId)).toEqual([
+      'vc-c3-009', 'vc-c1-007', 'vc-c3-002', 'vc-c1-004',
+      'vc-c3-005', 'vc-c1-001', 'vc-c3-006', 'vc-c1-008',
+    ]);
+    expect(queue.scan).toEqual(queue.all);
+    expect(queue.tail).toEqual([]);
+  });
+
+  it('balances only eligible work after durable identities, lifecycle decisions and lease recovery', () => {
+    const now = '2026-09-05T00:02:00.000Z';
+    const excluded = Array.from({ length: 8 }, (_unused, index) => candidate(index + 90));
+    const recovered = candidate(1, 2);
+    let state = reserveManualPilot(createPersistentWorkerState(), 'pilot-1', '2026-09-05T00:00:00.000Z');
+    const statuses = ['scanned', 'leased', 'completed', 'terminal', 'manual_attention', 'leased'] as const;
+    statuses.forEach((status, index) => {
+      const item = excluded[index];
+      state = markCandidateScanned(state, item, 'prior-run', '2026-09-05T00:00:00.000Z');
+      const fingerprint = candidateFingerprints(item).candidate;
+      state.decisions[fingerprint] = {
+        ...state.decisions[fingerprint], status,
+        attempts: index === 5 ? 3 : 1,
+        leaseExpiresAt: status === 'leased'
+          ? index === 5 ? '2026-09-05T00:01:00.000Z' : '2026-09-05T00:30:00.000Z'
+          : null,
+      };
+    });
+    state.candidateFingerprints.push(candidateFingerprints(excluded[6]).keyword);
+    state.dedupeHashes.push(createHash('sha256').update(candidateFingerprints(excluded[7]).title).digest('hex'));
+    state = markCandidateScanned(state, recovered, 'prior-run', '2026-09-05T00:00:00.000Z');
+    state = reserveCandidate(state, recovered, 'prior-run', 'scheduled', '2026-09-05T00:00:00.000Z', 60_000);
+    const eligible = [candidate(1, 3), candidate(2, 3), recovered, candidate(2, 2)];
+
+    const queue = buildIncrementalQueue({ state, backlog: [...excluded, ...eligible], now });
+
+    expect(queue.all.map(({ articleId }) => articleId)).toEqual(['vc-c3-001', 'vc-c2-001', 'vc-c3-002', 'vc-c2-002']);
+    expect(queue.scan).toEqual(queue.all);
+    expect(queue.tail).toEqual([]);
+    expect(queue.state.decisions[candidateFingerprints(recovered).candidate]).toMatchObject({
+      status: 'retryable', reason: 'lease_expired', attempts: 1, leaseExpiresAt: null,
+    });
+    expect(queue.state.decisions[candidateFingerprints(excluded[5]).candidate]).toMatchObject({
+      status: 'terminal', reason: 'lease_expired_retry_limit', attempts: 3, leaseExpiresAt: null,
+    });
+    expect(queue.state.decisions[candidateFingerprints(excluded[1]).candidate]).toEqual(state.decisions[candidateFingerprints(excluded[1]).candidate]);
+    expect(queue.state.manualPilot).toEqual(state.manualPilot);
+  });
+
+  it.each(['articleId', 'primaryKeyword', 'title', 'slug', 'intentFingerprint'] as const)(
+    'excludes inventory matches by %s before allocating campaign scan capacity',
+    (field) => {
+      const blocked = candidate(1);
+      const value = field === 'intentFingerprint' ? candidateFingerprints(blocked).intent : blocked[field].toUpperCase();
+      const eligible = [2, 3, 4, 5].flatMap((campaignNumber) => (
+        Array.from({ length: 50 }, (_unused, index) => candidate(index + 1, campaignNumber))
+      ));
+      const queue = buildIncrementalQueue({
+        state: createPersistentWorkerState(), backlog: [blocked, ...eligible],
+        inventory: [{ [field]: value }], now: '2026-09-05T00:00:00.000Z',
+      });
+
+      expect(queue.scan).toHaveLength(50);
+      expect(CAMPAIGN_IDS.map((campaignId) => queue.scan.filter((item) => item.campaignId === campaignId).length)).toEqual([0, 13, 13, 12, 12]);
+      expect(queue.all).not.toContainEqual(blocked);
+      expect(queue.all).toEqual([...queue.scan, ...queue.tail]);
+      expect(queue.all.map(({ articleId }) => articleId).sort()).toEqual(eligible.map(({ articleId }) => articleId).sort());
+      expect(queue.state.decisions[candidateFingerprints(blocked).candidate]).toMatchObject({
+        status: 'manual_attention', reason: 'target_inventory_match', attempts: 0,
+      });
+    },
+  );
+
+  it('still rejects cross-campaign identity collisions beyond the bounded scan', () => {
+    const backlog = Array.from({ length: 50 }, (_unused, index) => candidate(index + 1));
+    const collision = { ...candidate(1, 2), slug: backlog[0].slug };
+
+    expect(() => buildIncrementalQueue({
+      state: createPersistentWorkerState(), backlog, discoveries: [collision], now: '2026-09-05T00:00:00.000Z',
+    })).toThrow(/identity collision/i);
+  });
+
   it('preserves the unscanned queue tail and includes retryable candidates', () => {
     let state = createPersistentWorkerState();
     const backlog = Array.from({ length: 75 }, (_unused, index) => candidate(index + 1));

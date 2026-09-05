@@ -1,5 +1,7 @@
 # Local artifact-only pilot — 6 September 2026 (MYT)
 
+Historical first attempt. The later [research recovery checkpoint](RESEARCH-RECOVERY-2026-09-06.md) records the source audit, balanced queue, schema correction and additional collection checks. Neither attempt produced a qualifying article.
+
 ## Outcome
 
 **Live research ran. No article was generated or approved.** The selected ten opportunities did not pass the existing evidence gates. No branch, generated lander PR, production change, deployment, indexing submission or schedule activation occurred.

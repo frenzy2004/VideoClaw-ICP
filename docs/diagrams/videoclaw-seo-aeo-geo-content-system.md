@@ -11,16 +11,16 @@ Read the three lanes independently, left to right. There are no return arrows or
 Implementation: [VideoClaw-ICP PR #1](https://github.com/frenzy2004/VideoClaw-ICP/pull/1), branch `automation/persistent-autoblogger-v1`, targeting `seo-campaign`.
 
 ```text
-Up to 50 candidates → validation → top 10 deep checks → up to 3 drafts → native QA → draft PRs
+Balanced queue (up to 50) → evidence screen → up to 10 deep checks → up to 3 drafts → native QA → draft PRs
 ```
 
 The last step is a future gated mode, not permission to open generated lander PRs now.
 
 | Stage | What happens | Retained evidence |
 | --- | --- | --- |
-| Candidates | Read the incremental backlog and discover related searches for five ICPs. Deduplicate IDs, slugs, titles, keywords and intent fingerprints against state and lander inventory. | Candidate identity, campaign, trigger and intent |
+| Candidates | Read the incremental backlog and discover related searches for five ICPs. Deduplicate against state and lander inventory, then round-robin eligible campaigns; a full five-campaign queue gets ten scan slots each. | Candidate identity, campaign, trigger and intent |
 | Validation | Recheck US/en Google SERPs through Apify, record organic competitors and suggestion/PAA/related-query signals, and request keyword metrics from a configured provider. | Exact query, locale, actor run, dataset and observation time; metric provenance separately |
-| Top 10 | Require two reachable sources including an authoritative source, three relevant PAA-grounded FAQs, a defensible competitor gap and product/ICP fit. | Source URLs, competitor gap, FAQ evidence and selection decision |
+| Top 10 | Screen known missing organic/suggestion/relevant-PAA/product-fit evidence before using a deep slot. Then require two reachable sources including an authoritative source and a defensible gap. Insufficient collection has bounded retries, not a claim of zero demand. | Source URLs, competitor gap, FAQ evidence and selection decision |
 | Up to 3 drafts | Structured OpenAI drafting and independent critique, at most one repair followed by verification. Maximum two drafts from one ICP. | Markdown bundle, critique result and hashes |
 | Native QA | Select allowlisted product media, generate a deterministic branded SVG and validate in a disposable lander checkout using its own contract, lint and build. | Media attribution and native QA report |
 | Draft PRs, later | Only the post-merge, fully credentialed mode can open one draft PR per article. All approval flags remain false. | PR number, artifact hash and outcome |
@@ -34,6 +34,7 @@ Apify evidence → one draft + critique + QA → Markdown / SVG / report artifac
 ```
 
 - The user approved this one live pilot. **Live research ran; zero articles were generated.** Fifty candidates were scanned, and all ten deep checks failed: eight source-gate failures and two relevant-PAA failures. [Full pilot report](../autoblogger/LIVE-PILOT-2026-09-06.md).
+- The follow-up audited the failed sources and checked 36 distinct cross-ICP/broader query probes. Collector cross-checks still did not establish the required organic/PAA evidence. Queue/schema repairs and API acceptance tests are complete; the article preview remains blocked, not delivered. [Recovery report](../autoblogger/RESEARCH-RECOVERY-2026-09-06.md).
 - `KEYWORD_PROVIDER=pending` keeps volume, difficulty and CPC explicitly unknown. Paid metrics do not block this one pilot.
 - `LANDER_BASE_REF=seo/founder-video-blog-launch` validates against the unmerged blog contract, not production.
 - `APIFY_TOKEN` is present in ICP Actions secrets. `OPENAI_API_KEY` is now stored locally in an ignored environment file and verified against `gpt-5.5`; the scoped lander read token is still absent.
@@ -87,7 +88,7 @@ Every article traces back to campaign, ICP, trigger, intent, keyword, SERP obser
 | --- | --- | --- |
 | Article and diagram updates | Review-branch work; no production action | Team review |
 | Worker implementation | PR #1 open; offline and native fixture verification recorded separately | Implementation review |
-| First live artifact-only pilot | Live research attempted; 0 eligible drafts | Improve candidate/source evidence; local OpenAI access works. Scoped read token and Actions OpenAI secret are needed only for unattended execution |
+| First live artifact-only pilot | Research and collector cross-checks attempted; 0 eligible drafts | Establish reliable organic/PAA evidence, then verify source bodies. Local OpenAI access works; scoped read token and Actions OpenAI secret are needed only for unattended execution |
 | Paid enrichment | Not connected; Apify research does not invent metrics | Provider access and a tested adapter |
 | Generated lander PRs | Not enabled | Merged blog contract, paid metrics, GitHub App and approved rollout |
 | Weekly automation | `AUTOBLOG_SCHEDULE_ENABLED=false`; Monday 16:00 UTC schedule is in the PR | Explicit activation approval and workflow on the default branch |

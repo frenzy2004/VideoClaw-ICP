@@ -5,6 +5,8 @@ import { candidateFingerprints, type Candidate } from './domain';
 import type { StructuredOutputClient, StructuredOutputRequest } from './openai-responses';
 import {
   createStructuredDrafter,
+  DRAFT_CRITIQUE_V1_JSON_SCHEMA,
+  DRAFT_REPAIR_VERIFICATION_V1_JSON_SCHEMA,
   type DraftCritiqueV1,
   type DraftRepairVerificationV1,
 } from './drafting';
@@ -13,7 +15,7 @@ import type {
   DraftingContext,
   GeneratedDraftV2,
 } from './content-bundle';
-import { inspectGeneratedDraft } from './content-bundle';
+import { GENERATED_DRAFT_V2_JSON_SCHEMA, inspectGeneratedDraft } from './content-bundle';
 
 const candidate: Candidate = {
   schemaVersion: 1,
@@ -283,6 +285,95 @@ class FixtureStructuredClient implements StructuredOutputClient {
     return this.outputs.shift();
   }
 }
+
+describe('provider response schemas and runtime approval invariants', () => {
+  const issue = {
+    id: 'description-specificity',
+    code: 'copy.too_generic',
+    message: 'Make the opening more specific to the candidate.',
+    repairInstruction: 'Name the founder pitch workflow in the opening.',
+  };
+  const rejectedCritique: DraftCritiqueV1 = {
+    ...approvedCritique,
+    approved: false,
+    issues: [issue],
+  };
+
+  // OpenAI Structured Outputs rejects these keywords even in nested schemas.
+  // https://developers.openai.com/api/docs/guides/structured-outputs
+  const unsupportedKeywords = new Set([
+    'allOf', 'not', 'dependentRequired', 'dependentSchemas', 'if', 'then', 'else',
+  ]);
+  function unsupportedPaths(value: unknown, path = '$'): string[] {
+    if (!value || typeof value !== 'object') return [];
+    return Object.entries(value).flatMap(([key, child]) => [
+      ...(unsupportedKeywords.has(key) ? [`${path}.${key}`] : []),
+      ...unsupportedPaths(child, `${path}.${key}`),
+    ]);
+  }
+
+  it.each(Object.entries({
+    GENERATED_DRAFT_V2_JSON_SCHEMA,
+    DRAFT_CRITIQUE_V1_JSON_SCHEMA,
+    DRAFT_REPAIR_VERIFICATION_V1_JSON_SCHEMA,
+  }))('%s contains no unsupported composition keywords', (_name, schema) => {
+    expect(unsupportedPaths(schema)).toEqual([]);
+    expect(schema).toMatchObject({ type: 'object', additionalProperties: false });
+    expect(schema).not.toHaveProperty('anyOf');
+  });
+
+  it.each([
+    { approved: true, issues: [issue] },
+    { approved: false, issues: [] },
+  ])('rejects inconsistent critique approval in Zod: %j', async (changes) => {
+    const client = new FixtureStructuredClient([draft, { ...approvedCritique, ...changes }]);
+    const drafter = createStructuredDrafter({ client, mediaAllowlist: [media] });
+
+    await expect(drafter.draft(context)).rejects.toMatchObject({
+      name: 'ZodError',
+      issues: expect.arrayContaining([expect.objectContaining({ code: 'custom', path: ['approved'] })]),
+    });
+    expect(client.requests).toHaveLength(2);
+  });
+
+  it.each([
+    { evaluations: [{ issueId: issue.id, resolved: false, message: 'The original issue remains.' }], newIssues: [] },
+    { evaluations: [{ issueId: issue.id, resolved: true, message: 'The original issue is resolved.' }], newIssues: [{ ...issue, id: 'new-issue' }] },
+  ])('rejects inconsistent repair approval in Zod: %j', async (changes) => {
+    const repaired = draftWithBoundDescription(replacementDescriptions.detailed);
+    const client = new FixtureStructuredClient([
+      draft,
+      rejectedCritique,
+      repaired,
+      { ...resolvedVerification(rejectedCritique, repaired), ...changes },
+    ]);
+    const drafter = createStructuredDrafter({ client, mediaAllowlist: [media] });
+
+    await expect(drafter.draft(context)).rejects.toMatchObject({
+      name: 'ZodError',
+      issues: expect.arrayContaining([expect.objectContaining({ code: 'custom', path: ['approved'] })]),
+    });
+    expect(client.requests).toHaveLength(4);
+  });
+
+  it('allows repair verification to withhold approval even when its listed issues are resolved', async () => {
+    const repaired = draftWithBoundDescription(replacementDescriptions.detailed);
+    const client = new FixtureStructuredClient([
+      draft,
+      rejectedCritique,
+      repaired,
+      { ...resolvedVerification(rejectedCritique, repaired), approved: false },
+    ]);
+    const drafter = createStructuredDrafter({ client, mediaAllowlist: [media] });
+
+    await expect(drafter.draft(context)).resolves.toMatchObject({
+      status: 'blocked',
+      reason: 'content_safety_failed',
+      findings: [expect.objectContaining({ code: 'critique.verification_rejected' })],
+    });
+    expect(client.requests).toHaveLength(4);
+  });
+});
 
 describe('structured drafting orchestration', () => {
   it('accepts a natural paraphrase only after complete independent support verification', async () => {

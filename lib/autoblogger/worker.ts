@@ -29,7 +29,7 @@ import type {
   Publisher,
   PublisherOrigin,
 } from './publisher';
-import type { ResearchBatch, ResearchResult, ShallowResearchBatch, ShallowResearchResult } from './research';
+import { selectRelevantPaaQuestions, type ResearchBatch, type ResearchResult, type ShallowResearchBatch, type ShallowResearchResult } from './research';
 import {
   buildIncrementalQueue,
   candidateIdentityList,
@@ -252,6 +252,21 @@ function preliminaryScore(observation: ShallowResearchResult, metrics: KeywordMe
     + funnel;
 }
 
+function shallowIneligibilityReasons(observation: ShallowResearchResult): string[] {
+  const reasons: string[] = [];
+  if (observation.suggestions.length === 0 && observation.peopleAlsoAsk.length === 0 && observation.relatedQueries.length === 0) {
+    reasons.push('missing_suggestion_signal');
+  }
+  if (observation.organicResults.length === 0) reasons.push('missing_serp');
+  try {
+    selectRelevantPaaQuestions(observation.candidate.primaryKeyword, observation.peopleAlsoAsk);
+  } catch {
+    reasons.push('missing_relevant_paa');
+  }
+  if (!evaluateProductRelevance(observation.candidate)) reasons.push('missing_product_relevance');
+  return reasons;
+}
+
 function deepEvidenceScore(result: ResearchResult): number {
   const authoritativeSources = result.evidence.sources.filter(({ authoritative }) => authoritative).length;
   return Math.min(result.evidence.sources.length, 5) * 2
@@ -376,10 +391,21 @@ export function createAutobloggerWorker(options: AutobloggerWorkerOptions) {
         state = markCandidateScanned(state, observation.candidate, input.runId, now().toISOString());
       }
 
+      const shallowRejections = new Set<string>();
       const enrichmentByFingerprint = new Map<string, KeywordEnrichment>();
       const enrichmentMode: RunMode = input.command === 'research' ? 'manual_pilot' : mode;
       for (const observation of shallowBatch.results) {
         const fingerprint = candidateFingerprints(observation.candidate).candidate;
+        if (!evaluateProductRelevance(observation.candidate)) {
+          const reasons = shallowIneligibilityReasons(observation);
+          shallowRejections.add(fingerprint);
+          state = markCandidateFailure(state, observation.candidate, input.runId, `ineligible:${reasons.join(',')}`, false, now().toISOString());
+          report.failures.push({
+            candidateFingerprint: fingerprint, code: 'not_selected_for_deep_inspection', detail: reasons.join(','),
+            retryable: false, attempt: state.decisions[fingerprint].attempts,
+          });
+          continue;
+        }
         try {
           const enriched = await options.keywordProvider.enrich({
             keyword: observation.candidate.primaryKeyword,
@@ -399,7 +425,28 @@ export function createAutobloggerWorker(options: AutobloggerWorkerOptions) {
       }
 
       const rankedShallow = shallowBatch.results
-        .filter(({ candidate }) => enrichmentByFingerprint.has(candidateFingerprints(candidate).candidate))
+        .filter((observation) => {
+          const fingerprint = candidateFingerprints(observation.candidate).candidate;
+          const enrichment = enrichmentByFingerprint.get(fingerprint);
+          if (!enrichment) return false;
+          const reasons = shallowIneligibilityReasons(observation);
+          const { metrics } = enrichment;
+          if (enrichmentMode === 'scheduled' && (metrics.provider === 'pending' || metrics.volume === null || metrics.difficulty === null)) {
+            reasons.push('scheduled_requires_observed_volume_and_difficulty');
+          }
+          if (reasons.length === 0) return true;
+          shallowRejections.add(fingerprint);
+          const retryable = !reasons.includes('missing_product_relevance');
+          state = markCandidateFailure(
+            state, observation.candidate, input.runId,
+            `${retryable ? 'insufficient_data' : 'ineligible'}:${reasons.join(',')}`, retryable, now().toISOString(),
+          );
+          report.failures.push({
+            candidateFingerprint: fingerprint, code: 'not_selected_for_deep_inspection', detail: reasons.join(','),
+            retryable: state.decisions[fingerprint].status === 'retryable', attempt: state.decisions[fingerprint].attempts,
+          });
+          return false;
+        })
         .map((observation) => ({
           observation,
           score: preliminaryScore(observation, (enrichmentByFingerprint.get(candidateFingerprints(observation.candidate).candidate) as KeywordEnrichment).metrics),
@@ -437,7 +484,7 @@ export function createAutobloggerWorker(options: AutobloggerWorkerOptions) {
       if (input.command === 'research') {
         for (const observation of shallowBatch.results) {
           const fingerprint = candidateFingerprints(observation.candidate).candidate;
-          if (!['retryable', 'terminal'].includes(state.decisions[fingerprint]?.status)) {
+          if (!shallowRejections.has(fingerprint) && !['retryable', 'terminal'].includes(state.decisions[fingerprint]?.status)) {
             state = deferCandidate(state, observation.candidate, input.runId, 'research_ready_for_drafting', now().toISOString());
           }
         }
