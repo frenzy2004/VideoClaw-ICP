@@ -29,18 +29,19 @@ import { createLocalReplayRecorder, createReplayAuditedClient, createReplayAudit
 export const LOCAL_PILOT_LANDER_REF = 'seo/founder-video-blog-launch';
 const LANDER_API = 'repos/INFR-Organisation/videoclaw-lander';
 const STATE_API = 'repos/frenzy2004/VideoClaw-ICP';
-type LocalPilotArguments = { runId: string; approveRetryFrom?: string; candidateFile?: string; switchTargetFrom?: string; retryTargetFrom?: string; approveTargetExtraAttempt?: boolean };
+type LocalPilotArguments = { runId: string; approveRetryFrom?: string; candidateFile?: string; switchTargetFrom?: string; retryTargetFrom?: string; approveTargetExtraAttempt?: boolean; approveSourcePlanRetry?: boolean };
 export function parseLocalPilotArguments(argv: string[]): LocalPilotArguments {
   const safeRunId = (value: string) => typeof value === 'string' && /^[A-Za-z0-9][A-Za-z0-9._-]{0,159}$/u.test(value);
   const ordinary = argv.length === 3 && argv[2] === '--execute';
   const approved = argv.length === 5 && argv[2] === '--approve-retry-from' && safeRunId(argv[3]) && argv[3] !== argv[1] && argv[4] === '--execute';
   const extraAttempt = argv.length === 8 && argv[4] === '--retry-target-from' && argv[6] === '--approve-target-extra-attempt' && argv[7] === '--execute';
-  const switched = ((argv.length === 7 && argv[6] === '--execute') || extraAttempt) && argv[2] === '--candidate-file' && !!argv[3]?.trim() && !argv[3].startsWith('--') && !argv[3].includes('\0')
+  const sourcePlanRetry = argv.length === 8 && argv[4] === '--retry-target-from' && argv[6] === '--approve-source-plan-retry' && argv[7] === '--execute';
+  const switched = ((argv.length === 7 && argv[6] === '--execute') || extraAttempt || sourcePlanRetry) && argv[2] === '--candidate-file' && !!argv[3]?.trim() && !argv[3].startsWith('--') && !argv[3].includes('\0')
     && ['--switch-target-from', '--retry-target-from'].includes(argv[4]) && safeRunId(argv[5]) && argv[5] !== argv[1];
   if ((!ordinary && !approved && !switched) || argv[0] !== '--run-id' || !safeRunId(argv[1])) {
-    throw new Error('Usage: tsx lib/autoblogger/local-pilot-entry.ts --run-id NEW_RUN_ID [--approve-retry-from FAILED_THIRD_RUN_ID | --candidate-file PRIVATE_CANDIDATE_JSON (--switch-target-from PARKED_APPROVED_RUN_ID | --retry-target-from FAILED_TARGET_RUN_ID [--approve-target-extra-attempt])] --execute (local artifact-only; paid research/model work).');
+    throw new Error('Usage: tsx lib/autoblogger/local-pilot-entry.ts --run-id NEW_RUN_ID [--approve-retry-from FAILED_THIRD_RUN_ID | --candidate-file PRIVATE_CANDIDATE_JSON (--switch-target-from PARKED_APPROVED_RUN_ID | --retry-target-from FAILED_TARGET_RUN_ID [--approve-target-extra-attempt | --approve-source-plan-retry])] --execute (local artifact-only; paid research/model work).');
   }
-  return { runId: argv[1], ...(approved ? { approveRetryFrom: argv[3] } : {}), ...(switched ? { candidateFile: argv[3], ...(argv[4] === '--retry-target-from' ? { retryTargetFrom: argv[5] } : { switchTargetFrom: argv[5] }) } : {}), ...(extraAttempt ? { approveTargetExtraAttempt: true } : {}) };
+  return { runId: argv[1], ...(approved ? { approveRetryFrom: argv[3] } : {}), ...(switched ? { candidateFile: argv[3], ...(argv[4] === '--retry-target-from' ? { retryTargetFrom: argv[5] } : { switchTargetFrom: argv[5] }) } : {}), ...(extraAttempt ? { approveTargetExtraAttempt: true } : {}), ...(sourcePlanRetry ? { approveSourcePlanRetry: true } : {}) };
 }
 const shaSchema = z.string().regex(/^[a-f0-9]{40,64}$/u);
 const refSchema = z.object({ ref: z.string().min(1) });
@@ -89,11 +90,12 @@ export async function inspectLocalPilotInventory(input: LocalInventoryInput, get
   return { baseSha, existingArticles, openPullRequests, branchRefs, audit: { observedAt: new Date().toISOString(), localMatchesRemote: true, baseSha, pr55, existingArticleIdentities: existingArticles.length, openPullRequests: pulls.length, openArticleIdentities: openPullRequests.length, branches: branchRefs.length, remoteStatePresent: false, authentication: 'interactive_gh_GET_only' } };
 }
 
-type LocalPilotCandidateInput = { state: PersistentWorkerState; backlog: Candidate[]; candidate: unknown; runId: string; approveRetryFrom?: string; switchTargetFrom?: string; retryTargetFrom?: string; approveTargetExtraAttempt?: boolean; approvedAt?: string };
+type LocalPilotCandidateInput = { state: PersistentWorkerState; backlog: Candidate[]; candidate: unknown; runId: string; approveRetryFrom?: string; switchTargetFrom?: string; retryTargetFrom?: string; approveTargetExtraAttempt?: boolean; approveSourcePlanRetry?: boolean; approvedAt?: string };
 export function reconcileLocalPilotCandidate(input: LocalPilotCandidateInput) {
   let state = PersistentWorkerStateSchema.parse(input.state);
   const candidate = CandidateSchema.parse(input.candidate);
-  if (input.approveTargetExtraAttempt === true && input.retryTargetFrom === undefined) throw new Error('Extra-attempt approval requires an explicit target retry.');
+  if (((input.approveTargetExtraAttempt === true || input.approveSourcePlanRetry === true) && input.retryTargetFrom === undefined)
+    || (input.approveTargetExtraAttempt === true && input.approveSourcePlanRetry === true)) throw new Error('Extra-attempt approval requires one distinct explicit target retry.');
   if (!/^[A-Za-z0-9][A-Za-z0-9._-]{0,159}$/u.test(input.runId) || state.runs[input.runId]) throw new Error('A fresh run ID is required; prior run records cannot be reused.');
   if (input.switchTargetFrom !== undefined || input.retryTargetFrom !== undefined) {
     if (input.approveRetryFrom !== undefined || (input.switchTargetFrom !== undefined && input.retryTargetFrom !== undefined) || state.manualPilot !== null) throw new Error('A target switch cannot combine retry authority or an existing global pilot reservation.');
@@ -102,9 +104,10 @@ export function reconcileLocalPilotCandidate(input: LocalPilotCandidateInput) {
       if (approval?.retry && !approval.retry.consumedAt) {
         if (approval.retry.priorRunId !== input.retryTargetFrom
           || (approval.retry.reason === 'user_authorized_after_editorial_fix') !== (input.approveTargetExtraAttempt === true)
+          || (approval.retry.reason === 'user_authorized_after_source_planning_fix') !== (input.approveSourcePlanRetry === true)
           || !hasManualTargetSwitch(state, candidate, input.runId, 'manual_pilot', input.approvedAt ?? '')) throw new Error('Existing target retry does not match this explicit unused approval.');
       } else state = grantManualTargetRetry(state, candidate, { priorRunId: input.retryTargetFrom, runId: input.runId, approvedAt: input.approvedAt ?? '',
-        ...(input.approveTargetExtraAttempt === true ? { extraAttempt: true } : {}) });
+        ...(input.approveTargetExtraAttempt === true ? { extraAttempt: true } : {}), ...(input.approveSourcePlanRetry === true ? { sourcePlanRetry: true } : {}) });
     } else if (approval) {
       if (approval.retry || approval.parkedRetryRunId !== input.switchTargetFrom
         || !hasManualTargetSwitch(state, candidate, input.runId, 'manual_pilot', input.approvedAt ?? approval.approvedAt)) throw new Error('Existing target switch does not match this explicit unused approval.');
@@ -249,7 +252,8 @@ export async function runLocalArtifactPilot(options: LocalPilotArguments & { roo
   parseLocalPilotArguments(['--run-id', options.runId, ...(options.approveRetryFrom !== undefined ? ['--approve-retry-from', options.approveRetryFrom] : []),
     ...(options.candidateFile !== undefined ? ['--candidate-file', options.candidateFile] : []), ...(options.switchTargetFrom !== undefined ? ['--switch-target-from', options.switchTargetFrom] : []),
     ...(options.retryTargetFrom !== undefined ? ['--retry-target-from', options.retryTargetFrom] : []),
-    ...(options.approveTargetExtraAttempt === true ? ['--approve-target-extra-attempt'] : []), '--execute']);
+    ...(options.approveTargetExtraAttempt === true ? ['--approve-target-extra-attempt'] : []),
+    ...(options.approveSourcePlanRetry === true ? ['--approve-source-plan-retry'] : []), '--execute']);
   if (process.env.GITHUB_EVENT_NAME === 'schedule' || process.env.AUTOBLOG_SCHEDULE_ENABLED === 'true' || process.env.LANDER_GITHUB_TOKEN?.trim()) throw new Error('Local pilot must not receive publication or scheduled execution authority.');
   const root = await realpath(resolve(options.root));
   const lander = await realpath(resolve(root, '../videoclaw-lander-blog-launch'));
@@ -283,7 +287,8 @@ export async function runLocalArtifactPilot(options: LocalPilotArguments & { roo
       ...(options.approveRetryFrom !== undefined ? { approveRetryFrom: options.approveRetryFrom, approvedAt: new Date().toISOString() } : {}),
       ...(options.switchTargetFrom !== undefined ? { switchTargetFrom: options.switchTargetFrom, approvedAt: new Date().toISOString() } : {}),
       ...(options.retryTargetFrom !== undefined ? { retryTargetFrom: options.retryTargetFrom, approvedAt: new Date().toISOString() } : {}),
-      ...(options.approveTargetExtraAttempt === true ? { approveTargetExtraAttempt: true } : {}) });
+      ...(options.approveTargetExtraAttempt === true ? { approveTargetExtraAttempt: true } : {}),
+      ...(options.approveSourcePlanRetry === true ? { approveSourcePlanRetry: true } : {}) });
     const localArticles = await Promise.all((await readdir(resolve(lander, 'content/articles'))).filter((name) => name.endsWith('.md')).map(async (name) => articleIdentity(await readFile(resolve(lander, 'content/articles', name), 'utf8'))));
     const snapshot = await inspectLocalPilotInventory({
       head: gitRead(lander, ['rev-parse', 'HEAD']), branch: gitRead(lander, ['branch', '--show-current']), clean: gitRead(lander, ['status', '--porcelain']) === '', localArticles, candidate: prepared.candidate,

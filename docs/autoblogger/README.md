@@ -6,13 +6,15 @@ This worker is a controlled research-and-drafting system. It does not publish ar
 
 The initial 250-topic research library is an input, not a quota or publication gate. Each run scans at most 50 candidates, deeply checks at most 10, and produces at most 3 drafts with no more than 2 from one ICP.
 
-Operator status on 2026-09-07: **zero clean uninterrupted worker passes or generated lander PRs**. The [latest editorial pilot](EDITORIAL-PILOT-2026-09-07.md) used one explicitly approved fourth attempt and exactly four live GPT-5.5 calls. Fresh organic/PAA/source retrieval worked; description and repetitive-label improvements appeared in the drafts. Final review still rejected excessive single-source derivation and an unsupported recording-workflow heading; the deterministic reference checker also rejected one instruction. No accepted Markdown bundle or native QA pass resulted. The candidate is terminal at attempt four, with the consumed approval and all earlier history retained. No further retry is authorized.
+Operator status on 2026-09-07: **zero clean uninterrupted worker passes or generated lander PRs**. The [latest source-planned pilot](SOURCE-PLANNED-PILOT-2026-09-07.md) used one explicitly approved fifth attempt and exactly four live GPT-5.5 calls. Fresh research and source retrieval completed, but final checks rejected a remaining product-reference false positive, unexpected verification issue IDs, private audience-metadata support and 226 source-derived words against the 180-word limit. No accepted Markdown bundle or native QA pass resulted. All earlier history is retained; the candidate is terminal at five and no sixth attempt is permitted. Worker tests (1,229), lint, typecheck and build pass; these are not article-quality approval.
 
-The subsequent [source-planning correction](SOURCE-PLANNING-FIX-2026-09-07.md)
+The preceding [source-planning correction](SOURCE-PLANNING-FIX-2026-09-07.md)
 adds bounded per-page evidence anchors, cumulative reviewed source-use accounting
 and whole-article repair routing; it also fixes the ordinary-object reference
 false positive. Offline replay of unchanged saved responses still blocks the old
-article for source overuse and an unsupported heading. No new live run occurred.
+article for source overuse and an unsupported heading. That correction was offline;
+the separately authorized subsequent live test is reported above. The
+[fourth-attempt report](EDITORIAL-PILOT-2026-09-07.md) remains historical evidence.
 
 An [earlier artifact report](PRODUCT-DEMO-ARTIFACT-2026-09-06.md) records native QA passing only after a grammar correction and offline replay of unchanged saved responses. That historical result is not a clean live worker pass or current editorial approval.
 
@@ -137,6 +139,13 @@ and success remains one review-only artifact. A consumed retry cannot be reused
 or automatically renewed, combined with another authorization, or used in scheduled/PR mode.
 Terminal cleanup of the old parked queue row does not resurrect its stale matrix
 entry; the stored old decision, grant, run and failure history remain intact.
+
+The separately authorized source-planning test uses `--approve-source-plan-retry`
+with the exact candidate-file and failed-fourth target-retry arguments. It permits
+one fifth attempt only after the failed consumed editorial grant, preserves that
+grant in `retryHistory`, and cannot be reloaded using the old fourth-attempt flag.
+This local-only authorization is now consumed. Normal retries remain capped at
+three; no sixth attempt, publication or scheduled execution is authorized.
 
 A separately approved fourth same-target attempt additionally requires
 `--approve-target-extra-attempt` immediately before `--execute`. This records a

@@ -3,6 +3,30 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
+## Latest source-planned live pilot — 2026-09-07
+
+The [source-planned pilot report](SOURCE-PLANNED-PILOT-2026-09-07.md) records the
+separately authorized fifth artifact-only attempt. Normal cap three and all prior
+history remain intact; there is no sixth-attempt path. Six RED regressions preceded
+implementation, then 224 focused tests passed. Independent review found no Critical,
+Important or Minor issues in the scoped authorization change.
+
+Full repository verification: **1,229 tests across 50 files passed** with one worker;
+lint, typecheck, build and whitespace checks passed. The unchanged 250-row content
+map took 1,423 ms. Existing dependency build warnings remain.
+
+The live pipeline collected eight organic results, 19 question strings and four
+source bodies, then completed four HTTP-200 GPT-5.5 calls. Final checks **failed**:
+one reference-check disagreement, unknown verification IDs for deterministic issues,
+private audience metadata rejected as a source claim, and 226 reviewed source-derived
+words from CheckFlow (limit 180). All are retained; none was waived. Zero accepted
+Markdown bundles, native article validations or lander PRs resulted.
+
+Receipt hashes verified. State retains nine runs/20 failures and a terminal fifth
+attempt, with no successful pilot marker or content hash. Production, PR #55 and
+schedule activation remain untouched. Passing worker tests is not evidence that
+the clean live article milestone has succeeded.
+
 ## Latest offline source-planning correction — 2026-09-07
 
 The [source-planning report](SOURCE-PLANNING-FIX-2026-09-07.md) records bounded

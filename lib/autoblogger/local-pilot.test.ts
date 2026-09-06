@@ -158,6 +158,94 @@ describe('local artifact-only pilot preflight', () => {
     expect(() => reserveCandidate(reserved, other, 'fifth', 'manual_pilot', input.approvedAt)).toThrow();
   });
 
+  function failedFourthTargetFixture() {
+    const input = failedThirdTargetFixture();
+    const prepared = reconcileLocalPilotCandidate(input);
+    let state = reserveCandidate(prepared.state, other, input.runId, 'manual_pilot', input.approvedAt);
+    state = markCandidateFailure(state, other, input.runId, 'candidate_failed', false, input.approvedAt);
+    const fp = candidateFingerprints(other).candidate;
+    state.runs[input.runId] = { schemaVersion: 1, runId: input.runId, mode: 'manual_pilot', startedAt: input.approvedAt, selectedCandidateFingerprints: [fp], status: 'failed' };
+    state.failures.push({ runId: input.runId, candidateFingerprint: fp, code: 'candidate_failed', attempt: 4, observedAt: input.approvedAt, detail: 'Source-budget review rejected attempt four.' });
+    return { ...input, state, runId: 'source-planned-retry', retryTargetFrom: input.runId,
+      approvedAt: '2026-09-07T02:00:00.000Z', approveTargetExtraAttempt: false, approveSourcePlanRetry: true };
+  }
+
+  it('grants one source-planning retry after the retained fourth failure, preserving the full audit chain', () => {
+    const input = failedFourthTargetFixture();
+    const before = structuredClone(input.state);
+    const prepared = reconcileLocalPilotCandidate(input);
+    expect(prepared.nextAttempt).toBe(5);
+    expect(prepared.state.manualTargetSwitch?.retry).toMatchObject({ reason: 'user_authorized_after_source_planning_fix', priorRunId: input.retryTargetFrom,
+      runId: input.runId, priorDecision: before.decisions[candidateFingerprints(other).candidate], consumedAt: null });
+    expect(prepared.state.manualTargetSwitch?.retryHistory).toEqual([...before.manualTargetSwitch!.retryHistory!, before.manualTargetSwitch!.retry]);
+    for (const key of ['decisions', 'runs', 'failures', 'manualRetryApproval'] as const) expect(prepared.state[key]).toEqual(before[key]);
+    const queue = buildIncrementalQueue({ state: reserveManualPilot(prepared.state, input.runId, input.approvedAt), backlog: prepared.backlog,
+      runId: input.runId, mode: 'manual_pilot', now: input.approvedAt });
+    expect(queue.scan).toEqual([other]);
+    const reserved = reserveCandidate(queue.state, other, input.runId, 'manual_pilot', input.approvedAt);
+    expect(reserved.decisions[candidateFingerprints(other).candidate]).toMatchObject({ attempts: 5, status: 'leased', runId: input.runId });
+    expect(compactPersistentWorkerState(reserved).manualTargetSwitch).toEqual(reserved.manualTargetSwitch);
+    expect(() => reserveCandidate(reserved, other, 'sixth', 'manual_pilot', input.approvedAt)).toThrow();
+    expect(() => reserveCandidate(prepared.state, other, input.runId, 'scheduled', input.approvedAt)).toThrow();
+    expect(input.state).toEqual(before);
+  });
+
+  it('reloads the unused fifth grant only with its separate explicit source-planning flag', () => {
+    const input = failedFourthTargetFixture();
+    const prepared = reconcileLocalPilotCandidate(input);
+    const reload = { ...input, state: JSON.parse(JSON.stringify(prepared.state)), approvedAt: '2026-09-07T03:00:00.000Z' };
+    expect(reconcileLocalPilotCandidate(reload).state).toEqual(prepared.state);
+    expect(() => reconcileLocalPilotCandidate({ ...reload, approveSourcePlanRetry: false })).toThrow();
+    expect(() => reconcileLocalPilotCandidate({ ...reload, approveSourcePlanRetry: false, approveTargetExtraAttempt: true })).toThrow();
+    expect(() => reconcileLocalPilotCandidate({ ...reload, approveTargetExtraAttempt: true })).toThrow();
+  });
+
+  it.each(['missing-history', 'wrong-fourth-reason', 'missing-fourth-failure', 'wrong-prior', 'old-approval', 'wrong-target', 'artifact', 'wrong-mode', 'no-flag', 'both-flags'])(
+    'rejects a fifth grant with %s', (problem) => {
+      const input = failedFourthTargetFixture();
+      if (problem === 'wrong-prior') input.retryTargetFrom = 'attribution-retry';
+      if (problem === 'old-approval') input.approvedAt = '2026-09-06T00:00:00.000Z';
+      if (problem === 'wrong-target') input.candidate = refined;
+      if (problem === 'artifact') input.state.contentHashes[candidateFingerprints(other).candidate] = 'a'.repeat(64);
+      if (problem === 'wrong-mode') input.state.runs[input.retryTargetFrom].mode = 'scheduled';
+      if (problem === 'no-flag') input.approveSourcePlanRetry = false;
+      if (problem === 'both-flags') input.approveTargetExtraAttempt = true;
+      if (problem === 'missing-fourth-failure') input.state.failures = input.state.failures.filter(f => f.runId !== input.retryTargetFrom);
+      if (problem === 'missing-history') input.state.manualTargetSwitch!.retryHistory = [];
+      if (problem === 'wrong-fourth-reason') input.state.manualTargetSwitch!.retry!.reason = 'user_authorized_after_attribution_fix';
+      expect(() => reconcileLocalPilotCandidate(input)).toThrow();
+    });
+
+  it.each([1, 2, 3])('rejects source-planning approval before attempt four has failed (prior attempt %s)', (attempt) => {
+    const input = attempt === 1 ? failedSwitchFixture() : attempt === 2 ? failedTargetRetryFixture() : failedThirdTargetFixture();
+    expect(() => reconcileLocalPilotCandidate({ ...input, approveTargetExtraAttempt: false, approveSourcePlanRetry: true })).toThrow();
+  });
+
+  it('retains fifth failure history and refuses a sixth attempt even with the source-planning flag', () => {
+    const input = failedFourthTargetFixture();
+    const prepared = reconcileLocalPilotCandidate(input);
+    let state = reserveCandidate(prepared.state, other, input.runId, 'manual_pilot', input.approvedAt);
+    state = markCandidateFailure(state, other, input.runId, 'candidate_failed', true, input.approvedAt);
+    const fp = candidateFingerprints(other).candidate;
+    state.runs[input.runId] = { schemaVersion: 1, runId: input.runId, mode: 'manual_pilot', startedAt: input.approvedAt, selectedCandidateFingerprints: [fp], status: 'failed' };
+    state.failures.push({ runId: input.runId, candidateFingerprint: fp, code: 'candidate_failed', attempt: 5, observedAt: input.approvedAt, detail: 'Fifth attempt failed.' });
+    expect(PersistentWorkerStateSchema.safeParse(state).success).toBe(true);
+    expect(compactPersistentWorkerState(state).failures).toEqual(state.failures);
+    expect(state.decisions[fp].status).toBe('terminal');
+    expect(() => reconcileLocalPilotCandidate({ ...input, state, runId: 'sixth', retryTargetFrom: input.runId, approvedAt: '2026-09-07T03:00:00.000Z' })).toThrow();
+    const unrelated = structuredClone(state);
+    unrelated.failures.push({ runId: 'unapproved', code: 'candidate_failed', attempt: 5, observedAt: input.approvedAt, detail: 'Unapproved fifth attempt.' });
+    expect(PersistentWorkerStateSchema.safeParse(unrelated).success).toBe(false);
+  });
+
+  it('parses the source-planning flag only with an exact candidate-file target retry', () => {
+    const args = ['--run-id', 'source-planned-retry', '--candidate-file', 'artifacts/selected.json', '--retry-target-from', 'editorial-fixed-retry', '--approve-source-plan-retry', '--execute'];
+    expect(parseLocalPilotArguments(args)).toEqual({ runId: args[1], candidateFile: args[3], retryTargetFrom: args[5], approveSourcePlanRetry: true });
+    for (const bad of [args.slice(0, -1), [...args.slice(0, -1), '--approve-target-extra-attempt', '--execute'],
+      [...args.slice(0, 4), '--switch-target-from', ...args.slice(5)], ['--run-id', 'new', '--approve-source-plan-retry', '--execute'],
+      [...args.slice(0, -1), '--approve-source-plan-retry', '--execute']]) expect(() => parseLocalPilotArguments(bad)).toThrow();
+  });
+
   it('reloads an unused fourth target approval only with the matching explicit extra-attempt flag', () => {
     const input = failedThirdTargetFixture();
     const prepared = reconcileLocalPilotCandidate(input);

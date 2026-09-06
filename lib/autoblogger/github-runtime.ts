@@ -37,8 +37,8 @@ function assertMutationAuth(auth: GitHubAppInstallationAuth): void {
 const CompactFailureSchema = z.object({
   runId: z.string().trim().min(1).max(160),
   code: z.string().trim().min(1).max(120),
-  // Four is accepted only by the enclosing state's consumed-grant checks.
-  attempt: z.number().int().min(1).max(4),
+  // Above three is accepted only by the enclosing state's consumed-grant checks.
+  attempt: z.number().int().min(1).max(5),
   candidateFingerprint: z.string().trim().min(1).max(500).optional(),
   observedAt: z.string().datetime(),
   detail: z.string().trim().min(1).max(500),
@@ -127,10 +127,10 @@ const ManualRetryApprovalSchema = z.object({
 }).strict();
 
 const ManualTargetRetrySchema = z.object({
-  reason: z.enum(['user_authorized_after_collector_fix', 'user_authorized_after_attribution_fix', 'user_authorized_after_editorial_fix']),
+  reason: z.enum(['user_authorized_after_collector_fix', 'user_authorized_after_attribution_fix', 'user_authorized_after_editorial_fix', 'user_authorized_after_source_planning_fix']),
   priorRunId: z.string().regex(/^[A-Za-z0-9][A-Za-z0-9._-]{0,159}$/u),
   runId: z.string().regex(/^[A-Za-z0-9][A-Za-z0-9._-]{0,159}$/u),
-  priorDecision: CandidateDecisionSchema,
+  priorDecision: CandidateDecisionSchema.extend({ attempts: z.number().int().min(0).max(4) }),
   approvedAt: z.string().datetime(),
   consumedAt: z.string().datetime().nullable(),
 }).strict();
@@ -147,7 +147,7 @@ const ManualTargetSwitchSchema = z.object({
   approvedAt: z.string().datetime(),
   consumedAt: z.string().datetime().nullable(),
   retry: ManualTargetRetrySchema.optional(),
-  retryHistory: z.array(ManualTargetRetrySchema).max(2).optional(),
+  retryHistory: z.array(ManualTargetRetrySchema).max(3).optional(),
 }).strict();
 
 export const PersistentWorkerStateSchema = AutobloggerStateSchema.extend({
@@ -157,7 +157,7 @@ export const PersistentWorkerStateSchema = AutobloggerStateSchema.extend({
   queuedCandidates: z.array(CandidateSchema).max(500),
   candidateFingerprints: z.array(z.string().trim().min(1).max(500)).max(20_000),
   dedupeHashes: z.array(z.string().regex(/^[0-9a-f]{64}$/u)).max(30_000),
-  decisions: z.record(z.string(), CandidateDecisionSchema.extend({ attempts: z.number().int().min(0).max(4) })),
+  decisions: z.record(z.string(), CandidateDecisionSchema.extend({ attempts: z.number().int().min(0).max(5) })),
   provenance: z.record(z.string(), CompactProvenanceSchema),
   contentHashes: z.record(z.string(), z.string().regex(/^[0-9a-f]{64}$/)),
   pullRequests: z.record(z.string(), z.object({
@@ -190,10 +190,14 @@ export const PersistentWorkerStateSchema = AutobloggerStateSchema.extend({
       const prior = state.runs[item.priorRunId];
       const saved = item.priorDecision;
       const extraAttempt = item.reason === 'user_authorized_after_editorial_fix';
+      const sourcePlanRetry = item.reason === 'user_authorized_after_source_planning_fix';
+      const allowedAttempt = sourcePlanRetry
+        ? saved.attempts === 4 && retries[index - 1]?.reason === 'user_authorized_after_editorial_fix' && index === retries.length - 1
+        : extraAttempt ? saved.attempts === 3 : saved.attempts < 3;
       if (!previous.consumedAt || item.priorRunId !== previous.runId || runIds.has(item.runId)
         || saved.status !== 'terminal' || saved.leaseExpiresAt !== null || saved.runId !== item.priorRunId
         || saved.attempts !== targetSwitch.startingAttempts + 1 + index
-        || (extraAttempt ? saved.attempts !== 3 || index !== retries.length - 1 : saved.attempts >= 3)
+        || !allowedAttempt
         || saved.articleId !== targetSwitch.candidate.articleId || saved.intentFingerprint !== candidateFingerprints(targetSwitch.candidate).intent
         || JSON.stringify([...saved.identities].sort()) !== JSON.stringify([...identities].sort())
         || Date.parse(saved.updatedAt) < Date.parse(previous.consumedAt!) || Date.parse(item.approvedAt) < Date.parse(saved.updatedAt)
@@ -235,21 +239,24 @@ export const PersistentWorkerStateSchema = AutobloggerStateSchema.extend({
       || Date.parse(state.manualPilot.reservedAt) < (retry ? Date.parse(retry.approvedAt) : approvedAt)
       || (!(retry ? retry.consumedAt : targetSwitch.consumedAt) && state.manualPilot.status !== 'leased'))) fail('The global pilot lifecycle belongs only to the approved target-switch run.');
   }
-  const targetExtra = targetSwitch?.retry?.reason === 'user_authorized_after_editorial_fix' && targetSwitch.retry.consumedAt
-    ? targetSwitch.retry : undefined;
+  // Retain the consumed fourth grant when a separately approved fifth grant is
+  // appended. Each extra decision/failure must still match its own grant exactly.
+  const targetExtras = [...(targetSwitch?.retryHistory ?? []), ...(targetSwitch?.retry ? [targetSwitch.retry] : [])]
+    .filter(item => item.consumedAt && ['user_authorized_after_editorial_fix', 'user_authorized_after_source_planning_fix'].includes(item.reason));
   for (const [fingerprint, decision] of Object.entries(state.decisions)) {
-    const exactTargetExtra = targetExtra && targetSwitch?.candidateFingerprint === fingerprint
-      && targetExtra.runId === decision.runId && decision.status !== 'retryable';
+    const exactTargetExtra = targetExtras.some(item => targetSwitch?.candidateFingerprint === fingerprint
+      && item.runId === decision.runId && decision.attempts === item.priorDecision.attempts + 1 && decision.status !== 'retryable');
     if (decision.attempts > 3 && (!approval?.consumedAt || approval.candidateFingerprint !== fingerprint
-      || approval.runId !== decision.runId || decision.status === 'retryable') && !exactTargetExtra) invalid('Attempt four requires its exact consumed manual retry approval.');
+      || decision.attempts !== 4 || approval.runId !== decision.runId || decision.status === 'retryable') && !exactTargetExtra) invalid('Extra attempts require their exact consumed manual retry approval.');
   }
   for (const failure of state.failures) {
-    const exactTargetExtra = targetExtra && failure.runId === targetExtra.runId
+    const exactTargetExtra = targetExtras.some(item => failure.runId === item.runId
       && failure.candidateFingerprint === targetSwitch?.candidateFingerprint
-      && Date.parse(failure.observedAt) >= Date.parse(targetExtra.consumedAt!);
+      && failure.attempt === item.priorDecision.attempts + 1
+      && Date.parse(failure.observedAt) >= Date.parse(item.consumedAt!));
     if (failure.attempt > 3 && (!approval?.consumedAt || failure.runId !== approval.runId
-      || failure.candidateFingerprint !== approval.candidateFingerprint
-      || Date.parse(failure.observedAt) < Date.parse(approval.consumedAt)) && !exactTargetExtra) invalid('Fourth failure requires its exact consumed manual retry approval.');
+      || failure.attempt !== 4 || failure.candidateFingerprint !== approval.candidateFingerprint
+      || Date.parse(failure.observedAt) < Date.parse(approval.consumedAt)) && !exactTargetExtra) invalid('Extra failures require their exact consumed manual retry approval.');
   }
   if (!approval) return;
   const decision = state.decisions[approval.candidateFingerprint];
@@ -337,9 +344,9 @@ function retainFailureHistory(input: PersistentWorkerState): PersistentWorkerSta
   const pinned = new Set<number>();
   const ordinary: number[] = [];
   failures.forEach((failure, index) => {
-    // Keep every fourth-attempt record for contextual validation below, even if
+    // Keep every extra-attempt record for contextual validation below, even if
     // malformed authorization would otherwise hide it among discarded history.
-    if (failure.attempt === 4 || (input.manualRetryApproval && failure.runId === input.manualRetryApproval.priorRunId
+    if (failure.attempt > 3 || (input.manualRetryApproval && failure.runId === input.manualRetryApproval.priorRunId
       && failure.attempt === 3 && failure.code === 'candidate_failed')
       || failure.runId === input.manualTargetSwitch?.runId || failure.runId === input.manualTargetSwitch?.retry?.runId
       || input.manualTargetSwitch?.retryHistory?.some(item => item.runId === failure.runId)) pinned.add(index);
