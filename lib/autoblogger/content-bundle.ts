@@ -621,7 +621,7 @@ function containsExplicitProductAlias(sentence: string, claims: ProductClaim[]):
 
 // These identify visible non-software noun phrases, not factual support. A word
 // used as a modifier ("the recording tool") is not an ordinary antecedent.
-const ordinaryReferent = /\b(?:(?:a|an|the|this|that|each|your) (?:short )?(?:guide|scene|example|brief|buyer brief|prospect research|script|storyboard|row|presentation|recording|video|draft|outline|footage|transcript|checklist)|new content|demo day)\b(?![-\s]+(?:app|application|product|platform|tool|software|service|editor)\b)/iu;
+const ordinaryReferent = /\b(?:(?:a|an|the|this|that|each|your) (?:short )?(?:guide|scene|example|brief|buyer brief|prospect research|script|storyboard|row|presentation|recording|video|draft|outline|footage|transcript|checklist)|new content|demo day|watch time)\b(?![-\s]+(?:app|application|product|platform|tool|software|service|editor)\b)/iu;
 const softwareReferent = /\b(?:app|application|platform|tool|software|service|editor)\b/iu;
 
 function hasExplicitOrdinarySubject(prefix: string): boolean {
@@ -654,6 +654,17 @@ function containsProductAlias(
   const pronoun = /\bit\b/iu.exec(sentence);
   if (!pronoun && productReferences.length === 0) return false;
   const prefix = pronoun ? sentence.slice(0, pronoun.index) : '';
+  // A grammatical dummy subject ("it can be useful to decide") and the object
+  // of an explicit problem-addressing instruction are not software subjects.
+  // Keep these narrow: no prior product context, second pronoun or added claim.
+  if (pronoun && !priorProductContext && productReferences.length === 0
+    && [...sentence.matchAll(/\bit\b/giu)].length === 1) {
+    const tail = sentence.slice(pronoun.index);
+    if (!softwareReferent.test(sentence) && !/\bproduct\b/iu.test(sentence)
+      && /^(?:original (?:editorial note|recommendation):\s*)?(?:for (?:a|the|your) (?:founder|team|presenter)[^,;:.!?]{0,160},\s*)?it (?:can|may) be useful to decide whether (?:the|your) (?:next )?(?:asset|video|demo|presentation) should (?:educate|persuade|explain|demonstrate)(?:,\s*(?:educate|persuade|explain|demonstrate))*(?: or (?:do both|educate|persuade|explain|demonstrate))?[.!]?$/iu.test(sentence)) return false;
+    if (/(?:^|:\s*)(?:state|identify|describe) the (?:customer|buyer|user) problem,\s*show the software (?:path|workflow) that (?:addresses|solves) $/iu.test(prefix)
+      && /^it(?: and (?:end|finish|close) with (?:one )?(?:concrete )?(?:next )?(?:action|step))?[.!]?$/iu.test(tail)) return false;
+  }
   // A newly named ordinary subject in this very sentence can resolve its own
   // pronoun, even after a product paragraph. It never clears the product context
   // for later standalone pronouns, and software/product nouns remain ambiguous.

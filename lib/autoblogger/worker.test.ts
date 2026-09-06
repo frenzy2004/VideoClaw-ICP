@@ -247,13 +247,22 @@ describe('persistent autoblogger worker', () => {
     }) };
   }
 
-  it.each(['success', 'draft-failure', 'scan-throw'])('executes only the explicitly authorized same-target retry: %s', async (outcome) => {
+  it.each([2, 3].flatMap(attempt => ['success', 'draft-failure', 'scan-throw'].map(outcome => ({ attempt, outcome }))))('executes only the explicitly authorized same-target attempt $attempt: $outcome', async ({ attempt, outcome }) => {
     const { old, target, state, fp } = alternativePilot();
     const first = fixture({ backlog: [target], initialState: state, targetCandidateFingerprint: fp, publicationEnabled: false, failDraft: true });
     await first.worker.execute({ command: 'pilot', runId: 'alternative-pilot' });
-    const before = structuredClone(first.getState());
-    const nextTime = '2026-09-05T01:00:00.000Z';
-    const approved = grantManualTargetRetry(before, target, { priorRunId: 'alternative-pilot', runId: 'collector-retry', approvedAt: nextTime });
+    let before = structuredClone(first.getState());
+    let priorRunId = 'alternative-pilot';
+    if (attempt === 3) {
+      const approved = grantManualTargetRetry(before, target, { priorRunId, runId: 'first-target-retry', approvedAt: '2026-09-05T01:00:00.000Z' });
+      const failed = fixture({ backlog: [target], initialState: approved, targetCandidateFingerprint: fp, publicationEnabled: false,
+        now: () => new Date('2026-09-05T01:00:00.000Z'), failDraft: true });
+      await failed.worker.execute({ command: 'pilot', runId: 'first-target-retry' });
+      before = structuredClone(failed.getState());
+      priorRunId = 'first-target-retry';
+    }
+    const nextTime = '2026-09-05T02:00:00.000Z';
+    const approved = grantManualTargetRetry(before, target, { priorRunId, runId: 'collector-retry', approvedAt: nextTime });
     const second = fixture({ backlog: [old.item, target], initialState: approved, targetCandidateFingerprint: fp, publicationEnabled: false,
       now: () => new Date(nextTime), failDraft: outcome === 'draft-failure', failScan: outcome === 'scan-throw' });
     if (outcome === 'scan-throw') await expect(second.worker.execute({ command: 'pilot', runId: 'collector-retry' })).rejects.toThrow('temporary network failure');
@@ -263,17 +272,19 @@ describe('persistent autoblogger worker', () => {
       expect(result.artifacts).toHaveLength(outcome === 'success' ? 1 : 0);
     }
     const saved = second.getState();
-    expect(saved.decisions[fp]).toMatchObject({ attempts: 2, status: outcome === 'success' ? 'completed' : 'terminal' });
+    expect(saved.decisions[fp]).toMatchObject({ attempts: attempt, status: outcome === 'success' ? 'completed' : 'terminal' });
     expect(saved.runs).toMatchObject(before.runs);
     expect(saved.failures.slice(0, before.failures.length)).toEqual(before.failures);
     expect(saved.manualTargetSwitch?.retry?.priorDecision).toEqual(before.decisions[fp]);
     expect(saved.manualRetryApproval).toEqual(before.manualRetryApproval);
+    if (attempt === 3) expect(saved.manualTargetSwitch?.retryHistory).toEqual([before.manualTargetSwitch!.retry]);
     expect(second.counters.opened).toBe(0);
     expect(saved.runs['collector-retry'].status).toBe(outcome === 'success' ? 'validated' : 'failed');
-    if (outcome !== 'success') expect(saved.failures.at(-1)).toMatchObject({ runId: 'collector-retry', attempt: 2 });
+    if (outcome !== 'success') expect(saved.failures.at(-1)).toMatchObject({ runId: 'collector-retry', attempt });
     else expect(PersistentWorkerStateSchema.safeParse({ ...saved,
       manualPilot: { ...saved.manualPilot!, status: 'consumed', consumedAt: nextTime } }).success).toBe(true);
     await expect(second.worker.execute({ command: 'pilot', runId: 'another-retry' })).rejects.toThrow();
+    if (attempt === 3) expect(() => grantManualTargetRetry(saved, target, { priorRunId: 'collector-retry', runId: 'forbidden-fourth', approvedAt: '2026-09-05T03:00:00.000Z' })).toThrow();
   });
 
   it('takes a switched target through research, drafting and prepared artifact output with a stale old matrix row', async () => {

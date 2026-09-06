@@ -3,7 +3,41 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-## Latest product-demo retry — 2026-09-06
+## Latest unchanged-draft artifact validation — 2026-09-06
+
+The [artifact report](PRODUCT-DEMO-ARTIFACT-2026-09-06.md) distinguishes the live
+worker failure from the subsequent unchanged-response revalidation. The new live
+attempt automatically retrieved organic/PAA/source evidence and completed four
+GPT-5.5 calls. Final model verification approved all bindings and resolved all
+four initial issues. Three deterministic product-reference false positives then
+stopped the worker. No article copy or evidence was manually changed.
+
+After reproducing those grammar defects RED and fixing them narrowly, all four
+saved responses were replayed offline through the production drafter. The exact
+resulting bundle passed the lander's native 32-test blog contract, lint and build
+in a disposable checkout of `b6b0833c78443b44b12bf6d33f05baa7ac8427d3`.
+The original lander and persisted state were checked unchanged. The original
+run is still failed; the terminal candidate retains attempt three. No successful
+pilot marker, publication envelope or generated lander PR was recorded.
+
+Fresh worker verification: **1,028 tests across 49 files passed** with
+`npm test -- --maxWorkers=2`; lint, typecheck, build and whitespace checks passed.
+An earlier four-worker run alongside the build timed out in the existing
+content-map test; unchanged two-worker reruns passed, with no timeout relaxation.
+Existing gray-matter direct-eval and vinext mixed-import build warnings remain.
+
+Independent review found and rechecked a P2 overly broad grammar exemption; the
+final version anchors the whole sentence and blocks capability suffixes.
+Reviewer verification ran 63 focused tests, all passing, with no remaining P1/P2
+reported in scope. Main-agent final offline revalidation and native QA ran after
+that tightening and retained the same bundle hash:
+`1e2737e160a0c2aa923eb919914393b95b369eab8065039e22a4dbd34942badc`.
+
+This is not a clean uninterrupted end-to-end worker pass, browser/Lighthouse QA
+of the new article, or publication approval. Copy quality and metadata limitations
+are explicitly recorded in the artifact report. PR #55 and production are untouched.
+
+## Previous product-demo retry — 2026-09-06
 
 The [retry report](PRODUCT-DEMO-RETRY-2026-09-06.md) records a real automatic
 research/draft/critique/repair/verification run. Final verification failed two

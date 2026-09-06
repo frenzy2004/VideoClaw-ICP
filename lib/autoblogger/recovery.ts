@@ -90,15 +90,17 @@ export function hasManualTargetSwitch(
     && assertDate(nowIso) >= assertDate(active.approvedAt) && PersistentWorkerStateSchema.safeParse(state).success;
 }
 
-/** One explicit same-target retry after a collector fix; never resets prior history. */
+/** Explicit one-use same-target approval within the normal cap; retains consumed grants. */
 export function grantManualTargetRetry(stateInput: PersistentWorkerState, candidate: Candidate,
   input: { priorRunId: string; runId: string; approvedAt: string }): PersistentWorkerState {
   const state = PersistentWorkerStateSchema.parse(stateInput);
   const target = state.manualTargetSwitch;
-  if (!target?.consumedAt || target.retry || state.manualPilot !== null
+  if (!target?.consumedAt || (target.retry && !target.retry.consumedAt) || state.manualPilot !== null
     || JSON.stringify(CandidateSchema.parse(candidate)) !== JSON.stringify(target.candidate)) throw new Error('Target retry requires an exact failed target and new one-use approval.');
-  return PersistentWorkerStateSchema.parse({ ...state, manualTargetSwitch: { ...target, retry: {
-    ...input, reason: 'user_authorized_after_collector_fix', priorDecision: state.decisions[target.candidateFingerprint], consumedAt: null,
+  return PersistentWorkerStateSchema.parse({ ...state, manualTargetSwitch: { ...target,
+    ...(target.retry ? { retryHistory: [...(target.retryHistory ?? []), target.retry] } : {}), retry: {
+    ...input, reason: target.retry ? 'user_authorized_after_attribution_fix' : 'user_authorized_after_collector_fix',
+    priorDecision: state.decisions[target.candidateFingerprint], consumedAt: null,
   } } });
 }
 

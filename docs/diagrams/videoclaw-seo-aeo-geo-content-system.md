@@ -35,7 +35,7 @@ Apify evidence → one draft + critique + QA → Markdown / SVG / report artifac
 
 - The first attempt scanned fifty candidates and failed all ten deep checks, generating no article. [Historical pilot report](../autoblogger/LIVE-PILOT-2026-09-06.md). Follow-up collector checks still did not establish the complete automated organic/PAA evidence bundle. [Recovery report](../autoblogger/RESEARCH-RECOVERY-2026-09-06.md).
 - A later **assisted local review** combined actual Apify organic results with separately recorded browser PAA and manually checked source bodies. GPT-5.5 completed generation, critique, repair and verification; its final result still failed review. An explicit editorial revision produced one local article, without claiming an unattended pass or consuming a successful-pilot slot. [Current assisted-review report](../autoblogger/ASSISTED-REVIEW-2026-09-06.md).
-- **Latest automatic attempt:** the authorized product-demo retry collected eight organic results, three relevant FAQs and four source bodies, then completed all four model stages. Final independent review still rejected two attribution issues. A product-reference false positive is fixed; offline replay of the unchanged responses still blocks correctly on independent review. Prompt clarifications are tested, not yet live-proven. The retry is consumed at attempt two and all earlier history remains retained. No automatically generated article has passed native QA. [Retry report](../autoblogger/PRODUCT-DEMO-RETRY-2026-09-06.md); [collector correction](../autoblogger/COLLECTOR-FIX-2026-09-06.md).
+- **Latest automatic attempt and separate revalidation:** a newly authorized product-demo attempt collected eight organic results, PAA questions and four source bodies, then completed all four model stages. Independent verification approved the repair. Deterministic grammar false positives stopped the live worker; after a test-first fix, offline replay of the same saved responses returned the unchanged review bundle, which passed native blog checks, lint and build. No article rewriting, manual evidence injection or new paid call was used in revalidation. The live run remains failed and terminal at attempt three; no successful pilot marker or generated lander PR exists. [Artifact report](../autoblogger/PRODUCT-DEMO-ARTIFACT-2026-09-06.md). The [previous retry](../autoblogger/PRODUCT-DEMO-RETRY-2026-09-06.md) remains a historical failure.
 - `KEYWORD_PROVIDER=pending` keeps volume, difficulty and CPC explicitly unknown. Paid metrics do not block this one pilot.
 - `LANDER_BASE_REF=seo/founder-video-blog-launch` validates against the unmerged blog contract, not production.
 - `APIFY_TOKEN` is present in ICP Actions secrets. `OPENAI_API_KEY` is now stored locally in an ignored environment file and verified against `gpt-5.5`; the scoped lander read token is still absent.
@@ -49,6 +49,18 @@ The repaired research path is linear:
 US / English-interface SERP (no page-language filter) → bounded PAA collection → source-body retrieval
 → structured draft → independent critique → one repair → independent recheck → native QA
 ```
+
+The latest observed result, rather than the intended uninterrupted path:
+
+```text
+Live research → draft → critique → repair → model approval → grammar-check failure (retained)
+Saved unchanged responses → corrected checks → native QA passed → REVIEW ARTIFACT ONLY
+```
+
+These are sequential observations, not two pilot executions. The second line
+made no model calls and changed no state. Technical acceptance does not establish
+production copy quality; repetitive labels, a short description and one broader
+FAQ remain human-review items.
 
 Recent PAA reuse retains its original timestamp and separate run/dataset; it never
 pretends a missing Google feature appeared in the newest organic run. Local exact
@@ -108,9 +120,9 @@ Every article traces back to campaign, ICP, trigger, intent, keyword, SERP obser
 
 | Work | Current state | Next dependency |
 | --- | --- | --- |
-| Article and diagram updates | Original three review guides plus one assisted artifact in a separate local preview; no production action | Team review; artifact provenance remains explicit |
+| Article and diagram updates | Original three review guides, older assisted local preview, and new unchanged-response Markdown/SVG review artifact; no production action | Team review; keep each artifact's provenance distinct |
 | Worker implementation | PR #1 open; offline and native fixture verification recorded separately | Implementation review |
-| Automated local article milestone | Research and four model stages ran; final review failed two attribution checks; no completed automatic article | A separately authorized bounded attempt must prove the updated prompts and pass independent review, then native QA; no history reset |
+| Automated local article milestone | Live model verification approved; the unchanged draft passed native QA after a grammar fix and offline replay | Clean uninterrupted worker execution is still unproven; terminal attempt-three history cannot be reset or silently retried |
 | Unattended Actions pilot | Not configured; no successful unattended article | Scoped read token, OpenAI Actions secret, reconciled state and reviewed worker |
 | Paid enrichment | Not connected; Apify research does not invent metrics | Provider access and a tested adapter |
 | Generated lander PRs | Not enabled | Merged blog contract, paid metrics, GitHub App and approved rollout |

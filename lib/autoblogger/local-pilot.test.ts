@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { CandidateSchema, candidateFingerprints } from './domain';
-import { createPersistentWorkerState } from './github-runtime';
+import { createPersistentWorkerState, PersistentWorkerStateSchema, compactPersistentWorkerState } from './github-runtime';
 import { grantManualRetryApproval, markCandidateFailure, markCandidateScanned, reserveCandidate, reserveManualPilot, buildIncrementalQueue } from './recovery';
 import { reconcileLocalPilotCandidate, createModelAuditTransport, inspectLocalPilotInventory, parseLocalPilotArguments, readLocalPilotCandidateFile } from './local-pilot';
 import { mkdtemp, mkdir, writeFile, chmod, symlink } from 'node:fs/promises';
@@ -90,6 +90,53 @@ describe('local artifact-only pilot preflight', () => {
     const failed = markCandidateFailure(reserved, other, input.runId, 'candidate_failed', true, input.approvedAt);
     expect(failed.decisions[fp]).toMatchObject({ attempts: 2, status: 'terminal' });
     expect(() => reconcileLocalPilotCandidate({ ...input, state: failed, runId: 'third' })).toThrow();
+  });
+
+  function failedTargetRetryFixture() {
+    const input = failedSwitchFixture();
+    const prepared = reconcileLocalPilotCandidate(input);
+    let state = reserveCandidate(prepared.state, other, input.runId, 'manual_pilot', input.approvedAt);
+    state = markCandidateFailure(state, other, input.runId, 'candidate_failed', false, input.approvedAt);
+    const fp = candidateFingerprints(other).candidate;
+    state.runs[input.runId] = { schemaVersion: 1, runId: input.runId, mode: 'manual_pilot', startedAt: input.approvedAt, selectedCandidateFingerprints: [fp], status: 'failed' };
+    state.failures.push({ runId: input.runId, candidateFingerprint: fp, code: 'candidate_failed', attempt: 2, observedAt: input.approvedAt, detail: 'Independent review rejected the repaired draft.' });
+    return { ...input, state, runId: 'attribution-retry', retryTargetFrom: input.runId, approvedAt: '2026-09-06T23:00:00.000Z' };
+  }
+
+  it('appends explicit third-attempt approval without replacing the consumed retry history', () => {
+    const input = failedTargetRetryFixture();
+    const before = structuredClone(input.state);
+    const fp = candidateFingerprints(other).candidate;
+    const prepared = reconcileLocalPilotCandidate(input);
+    expect(prepared.nextAttempt).toBe(3);
+    expect(prepared.state.manualTargetSwitch?.retryHistory).toEqual([before.manualTargetSwitch!.retry]);
+    expect(prepared.state.manualTargetSwitch?.retry).toMatchObject({ priorRunId: 'collector-fixed-retry', runId: 'attribution-retry', priorDecision: before.decisions[fp], consumedAt: null });
+    expect(prepared.state.decisions).toEqual(before.decisions);
+    expect(prepared.state.runs).toEqual(before.runs);
+    expect(prepared.state.failures).toEqual(before.failures);
+    expect(prepared.state.manualRetryApproval).toEqual(before.manualRetryApproval);
+    const reloaded = reconcileLocalPilotCandidate({ ...input, state: JSON.parse(JSON.stringify(prepared.state)) });
+    expect(reloaded.state).toEqual(prepared.state);
+    const queue = buildIncrementalQueue({ state: reserveManualPilot(reloaded.state, input.runId, input.approvedAt), backlog: reloaded.backlog, runId: input.runId, mode: 'manual_pilot', now: input.approvedAt });
+    expect(queue.scan).toEqual([other]);
+    const reserved = reserveCandidate(queue.state, other, input.runId, 'manual_pilot', input.approvedAt);
+    expect(reserved.decisions[fp]).toMatchObject({ attempts: 3, runId: input.runId });
+    expect(reserved.manualTargetSwitch?.retryHistory).toEqual([before.manualTargetSwitch!.retry]);
+    expect(compactPersistentWorkerState(reserved).manualTargetSwitch).toEqual(reserved.manualTargetSwitch);
+    expect(() => reserveCandidate(reserved, other, 'fourth', 'manual_pilot', input.approvedAt)).toThrow();
+  });
+
+  it.each(['missing-history', 'unconsumed-history', 'wrong-chain', 'reused-run', 'changed-attempt', 'missing-prior-failure'])('rejects a third-attempt grant with %s', (problem) => {
+    const input = failedTargetRetryFixture();
+    const value = reconcileLocalPilotCandidate(input).state;
+    const target = value.manualTargetSwitch!;
+    if (problem === 'missing-history') target.retryHistory = [];
+    if (problem === 'unconsumed-history') target.retryHistory![0].consumedAt = null;
+    if (problem === 'wrong-chain') target.retry!.priorRunId = target.runId;
+    if (problem === 'reused-run') target.retry!.runId = target.runId;
+    if (problem === 'changed-attempt') target.retry!.priorDecision.attempts = 1;
+    if (problem === 'missing-prior-failure') value.failures = value.failures.filter(f => f.runId !== 'alternative-pilot');
+    expect(PersistentWorkerStateSchema.safeParse(value).success).toBe(false);
   });
 
   it.each(['wrong-target', 'wrong-prior', 'old-run', 'artifact', 'success', 'missing-failure', 'active-pilot', 'older-approval'])(

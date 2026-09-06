@@ -97,7 +97,7 @@ export function reconcileLocalPilotCandidate(input: LocalPilotCandidateInput) {
     if (input.approveRetryFrom !== undefined || (input.switchTargetFrom !== undefined && input.retryTargetFrom !== undefined) || state.manualPilot !== null) throw new Error('A target switch cannot combine retry authority or an existing global pilot reservation.');
     const approval = state.manualTargetSwitch;
     if (input.retryTargetFrom !== undefined) {
-      if (approval?.retry) {
+      if (approval?.retry && !approval.retry.consumedAt) {
         if (approval.retry.priorRunId !== input.retryTargetFrom || !hasManualTargetSwitch(state, candidate, input.runId, 'manual_pilot', input.approvedAt ?? '')) throw new Error('Existing target retry does not match this explicit unused approval.');
       } else state = grantManualTargetRetry(state, candidate, { priorRunId: input.retryTargetFrom, runId: input.runId, approvedAt: input.approvedAt ?? '' });
     } else if (approval) {
