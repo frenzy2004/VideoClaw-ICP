@@ -20,8 +20,8 @@ The last step is a future gated mode, not permission to open generated lander PR
 | --- | --- | --- |
 | Candidates | Read the incremental backlog and discover related searches for five ICPs. Deduplicate against state and lander inventory, then round-robin eligible campaigns; a full five-campaign queue gets ten scan slots each. | Candidate identity, campaign, trigger and intent |
 | Validation | Recheck US/en Google SERPs through Apify, record organic competitors and suggestion/PAA/related-query signals, and request keyword metrics from a configured provider. | Exact query, locale, actor run, dataset and observation time; metric provenance separately |
-| Top 10 | Screen missing organic/suggestion/relevant-PAA/product-fit evidence before using a deep slot. Then retrieve at least two source bodies including an authoritative source. Preserve complete qualifications and reject unsafe input. A proposed editorial angle is not proof that competitors lack coverage. | Source URLs, fetch times/hashes, bounded body context, FAQ provenance and selection decision |
-| Up to 3 drafts | Bounded source anchors guide task-specific original composition. Structured drafting and independent critique feed cumulative per-page source accounting. Aggregate excess triggers whole-article restructuring in the one repair; independent verification and code gates recheck the result. Maximum two drafts from one ICP. | Source-use ledger, current binding classifications, critique result, and hashes; Markdown only if accepted |
+| Top 10 | Screen missing organic/suggestion/relevant-PAA/product-fit evidence before using a deep slot. Retrieve and rank topical bodies, selecting at least two distinct pages including an authority. Format-word or heading matches alone do not establish body relevance; lexical relevance is not factual proof. Preserve qualifications and reject unsafe input. | Source URLs, fetch times/hashes, body/heading boundaries, bounded context, FAQ provenance and selection decision |
+| Up to 3 drafts | Body-only anchors guide original composition. Private campaign context comes from the configured ICP. Drafting, independent critique and machine checks share one repair-issue registry. Reviewed source use above the 120-word planning target triggers whole-article repair; final review retains the 180-word ceiling. Maximum two drafts from one ICP. | Source-use ledger, current binding classifications, stable issue IDs, critique result and hashes; Markdown only if accepted |
 | Native QA | Select allowlisted product media, generate a deterministic branded SVG and validate in a disposable lander checkout using its own contract, lint and build. | Media attribution and native QA report |
 | Draft PRs, later | Only the post-merge, fully credentialed mode can open one draft PR per article. All approval flags remain false. | PR number, artifact hash and outcome |
 
@@ -45,7 +45,13 @@ checks rejected a cross-sentence reference, unexpected verification IDs, private
 audience-metadata support and 226 source-derived words against a 180-word limit.
 No accepted Markdown or native QA pass resulted. The candidate is terminal at
 five, all history is retained, and no sixth attempt is permitted. Software checks
-pass (1,229 tests, lint, typecheck, build); the live article milestone does not.
+passed at that checkpoint; the live article milestone did not.
+
+The subsequent [offline review/repair correction](../autoblogger/REVIEW-REPAIR-FIX-2026-09-07.md)
+addresses the reference, issue-ID and private-metadata problems and improves
+source selection/allocation. A synthetic bundle passed the native lander contract,
+lint and full build in an isolated checkout. There was no new live run or state
+reset: these software fixes do not relabel the failed fifth attempt as successful.
 
 The historical [fourth-attempt report](../autoblogger/EDITORIAL-PILOT-2026-09-07.md)
 records eight organic results, automatic PAA/source retrieval and four model calls.

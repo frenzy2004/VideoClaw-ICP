@@ -299,6 +299,102 @@ describe('safe source checks', () => {
 });
 
 describe('source authority and evidence selection', () => {
+  it.each([2, 3, 4, 5, 6])('does not let an H%s topic heading qualify unrelated body prose', async level => {
+    const html = `<h${level}>Product demo checklist</h${level}><p>The cafeteria serves lunch daily and closes early on Fridays.</p>`;
+    const fixture = responseTransport(Array.from({ length: 2 }, () => ({ status: 200, headers: { 'content-type': 'text/html' }, body: html })));
+    const checker = createSafeSourceChecker({ transport: fixture.transport, resolveHostname: publicResolver, authorityPolicies: [{ hostname: 'authority.example' }] });
+    await expect(checker.selectWithContent(['https://authority.example/guide', 'https://publisher.example/guide'], { query: 'product demo checklist' }))
+      .rejects.toThrow(/two.*relevant.*body.*authoritative/i);
+  });
+
+  it.each(['How does a product demo work?', 'How do product demos work?'])('accepts topical body evidence with equivalent framing: %s', async query => {
+    const fixture = responseTransport([
+      'A product demo works by walking buyers through a realistic workflow.',
+      'Product demos work by showing buyers how a task is completed in the application.',
+    ].map(body => ({ status: 200, headers: { 'content-type': 'text/html' }, body: `<p>${body}</p>` })));
+    const checker = createSafeSourceChecker({ transport: fixture.transport, resolveHostname: publicResolver, authorityPolicies: [{ hostname: 'authority.example' }] });
+    expect((await checker.selectWithContent(['https://authority.example/guide', 'https://publisher.example/guide'], { query })).sourceDocuments).toHaveLength(2);
+  });
+
+  it('skips adjacent and pitch-only bodies even when four usable pages include an authority', async () => {
+    const names = ['launch', 'content', 'onboarding', 'pitch', 'demo', 'authority'];
+    const bodies = [
+      'The product launch checklist covers pricing, distribution and launch announcements.',
+      'A product content checklist identifies stale descriptions and inconsistent terminology.',
+      'The sales onboarding checklist introduces new hires to the product catalog.',
+      'Demo Day pitches introduce investors to the team and the market opportunity.',
+      'A product demo should connect a buyer problem to the workflow being demonstrated.',
+      'Rehearse the product demo with a realistic scenario and allow time for buyer questions.',
+    ];
+    const fixture = responseTransport(bodies.map(body => ({ status: 200, headers: { 'content-type': 'text/html' }, body: `<p>${body}</p>` })));
+    const checker = createSafeSourceChecker({ transport: fixture.transport, resolveHostname: publicResolver,
+      authorityPolicies: [{ hostname: 'pitch.example' }, { hostname: 'authority.example' }] });
+    const selection = await checker.selectWithContent(names.map(name => `https://${name}.example/guide`), {
+      query: 'product demo checklist', questions: ['How do founders pitch investors on Demo Day?'],
+    });
+    expect(selection.sources.map(source => source.originalUrl)).toEqual(['https://demo.example/guide', 'https://authority.example/guide']);
+  });
+
+  it.each([
+    ['one topical page', 'Product content health checks should identify stale copy and incorrect terminology.', 'A product demo should explain a buyer workflow and leave room for questions.'],
+    ['only off-topic authority', 'The product launch checklist defines launch milestones and launch owners.', 'A product demo should explain a buyer workflow and leave room for questions.'],
+    ['only generic overlap', 'The product launch checklist defines launch milestones and launch owners.', 'The onboarding checklist introduces sales hires to the product catalog.'],
+  ])('refuses %s before drafting', async (_name, authority, other) => {
+    const fixture = responseTransport([authority, other].map(body => ({ status: 200, headers: { 'content-type': 'text/html' }, body: `<p>${body}</p>` })));
+    const checker = createSafeSourceChecker({ transport: fixture.transport, resolveHostname: publicResolver, authorityPolicies: [{ hostname: 'authority.example' }] });
+    await expect(checker.selectWithContent(['https://authority.example/guide', 'https://publisher.example/guide'], { query: 'product demo checklist' }))
+      .rejects.toThrow(/two.*relevant.*body.*authoritative/i);
+  });
+
+  it('does not count query, www, fragment or trailing-slash aliases as two relevant documents', async () => {
+    const fixture = responseTransport(Array.from({ length: 2 }, () => ({ status: 200, headers: { 'content-type': 'text/html' },
+      body: '<p>A product demo should explain the buyer workflow and allow time for questions.</p>' })));
+    const checker = createSafeSourceChecker({ transport: fixture.transport, resolveHostname: publicResolver, authorityPolicies: [{ hostname: 'authority.example' }] });
+    await expect(checker.selectWithContent(['https://authority.example/guide', 'https://www.authority.example/guide/?ref=x#intro'], { query: 'product demo checklist' }))
+      .rejects.toThrow(/two.*relevant.*body.*authoritative/i);
+  });
+
+  it('requires a core topic instead of selecting by a missing query or generic format words', async () => {
+    for (const query of [undefined, 'product checklist template']) {
+      const fixture = responseTransport(Array.from({ length: 2 }, () => ({ status: 200, headers: { 'content-type': 'text/html' }, body: '<p>The product checklist template includes several steps for the reader to follow.</p>' })));
+      const checker = createSafeSourceChecker({ transport: fixture.transport, resolveHostname: publicResolver, authorityPolicies: [{ hostname: 'authority.example' }] });
+      await expect(checker.selectWithContent(['https://authority.example/guide', 'https://publisher.example/guide'], { query }))
+        .rejects.toThrow(/two.*relevant.*body.*authoritative/i);
+    }
+  });
+
+  it('cannot qualify a source using metadata, navigation, headings or repeated query-only prose', async () => {
+    const fixture = responseTransport([
+      '<head><title>Product demo checklist</title><meta name="description" content="Product demo checklist" /></head><nav>Product demo checklist</nav><h1>Product demo checklist</h1><p>The product launch checklist describes pricing and distribution decisions.</p>',
+      '<p>Product demo checklist product demo checklist product demo checklist.</p>',
+      '<p>A product demo should connect the buyer problem to a realistic workflow.</p>',
+    ].map(body => ({ status: 200, headers: { 'content-type': 'text/html' }, body })));
+    const checker = createSafeSourceChecker({ transport: fixture.transport, resolveHostname: publicResolver, authorityPolicies: [{ hostname: 'authority.example' }] });
+    await expect(checker.selectWithContent(['https://authority.example/metadata', 'https://authority.example/spam', 'https://publisher.example/demo'], { query: 'product demo checklist' }))
+      .rejects.toThrow(/two.*relevant.*body.*authoritative/i);
+  });
+
+  it('ranks a later stronger topical body above earlier topical pages without inflating repeated prose', async () => {
+    const topical = 'A product demo should connect the buyer problem to a realistic workflow.';
+    const strong = `${topical} Rehearse the product demo with a buyer scenario and leave time for questions.`;
+    const fixture = responseTransport([topical.repeat(8), topical, topical, topical, strong].map(body => ({ status: 200, headers: { 'content-type': 'text/html' }, body: `<p>${body}</p>` })));
+    const checker = createSafeSourceChecker({ transport: fixture.transport, resolveHostname: publicResolver, authorityPolicies: [{ hostname: 'authority.example' }] });
+    const selection = await checker.selectWithContent(['https://repeat.example/guide', 'https://authority.example/guide', 'https://third.example/guide', 'https://fourth.example/guide', 'https://strong.example/guide'], { query: 'product demo checklist' });
+    expect(selection.sources.map(source => source.originalUrl)).toEqual(['https://strong.example/guide', 'https://repeat.example/guide', 'https://authority.example/guide', 'https://third.example/guide']);
+  });
+
+  it('applies topic qualifiers beyond demos while retaining the whole qualified passage', async () => {
+    const body = 'Remote employee onboarding should explain where to obtain equipment and support. This applies only to employees in the regional pilot, not contractors.';
+    const fixture = responseTransport([
+      'Employee onboarding should explain the reporting structure and the team responsibilities.', body,
+      'Remote employee onboarding should cover equipment access and the support process.',
+    ].map(text => ({ status: 200, headers: { 'content-type': 'text/html' }, body: `<p>${text}</p>` })));
+    const checker = createSafeSourceChecker({ transport: fixture.transport, resolveHostname: publicResolver, authorityPolicies: [{ hostname: 'authority.example' }] });
+    const selection = await checker.selectWithContent(['https://nearby.example/guide', 'https://authority.example/guide', 'https://publisher.example/guide'], { query: 'how to create a remote employee onboarding checklist' });
+    expect(selection.sources.map(source => source.originalUrl)).toEqual(['https://authority.example/guide', 'https://publisher.example/guide']);
+    expect(selection.sourceDocuments[0].passages[0].text).toBe(body);
+  });
+
   it('keeps relevant organic pages while making room for a later authority within four pages', async () => {
     const urls = ['payroll', 'organic', 'second', 'third', 'fourth', 'authority'].map((name) => (
       `https://${name}.example/guide`
@@ -323,7 +419,7 @@ describe('source authority and evidence selection', () => {
   it('fetches duplicate normalized inputs once and ignores non-successful body content', async () => {
     const fixture = responseTransport([
       { status: 503, headers: { 'content-type': 'text/html' }, body: '<p>Video claim on a temporary error page must not become evidence.</p>' },
-      { status: 200, headers: { 'content-type': 'text/html' }, body: '<p>Video recordings can be reviewed before the presentation.</p>' },
+      { status: 200, headers: { 'content-type': 'text/html' }, body: '<p>Video preparation includes reviewing recordings before the presentation.</p>' },
       { status: 200, headers: { 'content-type': 'text/html' }, body: '<p>Video preparation includes a final check of the exported file.</p>' },
     ]);
     const checker = createSafeSourceChecker({
@@ -356,8 +452,8 @@ describe('source authority and evidence selection', () => {
   it('selects body documents from the validated final resource without a second fetch', async () => {
     const fixture = responseTransport([
       { status: 302, headers: { location: 'https://authority.example/canonical' } },
-      { status: 200, headers: { 'content-type': 'text/html' }, body: '<main><p>Founders rehearse the presentation with candid feedback.</p></main>' },
-      { status: 200, headers: { 'content-type': 'text/html' }, body: '<article><p>Plan the video backward from the release date and leave time for review.</p></article>' },
+      { status: 200, headers: { 'content-type': 'text/html' }, body: '<main><p>Founder video planning includes rehearsing the presentation with candid feedback.</p></main>' },
+      { status: 200, headers: { 'content-type': 'text/html' }, body: '<article><p>Founder video planning works backward from the release date to leave time for review.</p></article>' },
     ]);
     const checker = createSafeSourceChecker({
       transport: fixture.transport, resolveHostname: publicResolver,
@@ -371,7 +467,7 @@ describe('source authority and evidence selection', () => {
       { originalUrl: 'https://publisher.example/original', finalUrl: 'https://authority.example/canonical', authoritative: true },
       { originalUrl: 'https://publisher.example/planning', finalUrl: 'https://publisher.example/planning', authoritative: false },
     ]);
-    expect(selection.sourceDocuments[0].text).toBe('Founders rehearse the presentation with candid feedback.');
+    expect(selection.sourceDocuments[0].text).toBe('Founder video planning includes rehearsing the presentation with candid feedback.');
     expect(selection.sourceDocuments[0].finalUrl).toBe('https://authority.example/canonical');
     expect(fixture.requests.map(({ url }) => url)).toEqual([
       'https://publisher.example/original', 'https://authority.example/canonical', 'https://publisher.example/planning',

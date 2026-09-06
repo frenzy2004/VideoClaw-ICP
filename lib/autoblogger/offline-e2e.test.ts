@@ -45,7 +45,6 @@ function candidates(): Candidate[] {
 const visibleSpans = {
   initialDescription: 'This checked founder video workflow connects audience, evidence, recording, review, and playback.',
   repairedDescription: 'This source-backed founder video workflow connects audience, evidence, recording, review, and playback.',
-  customerTrigger: 'Use this workflow when a founder video needs checked evidence.',
   competitorGap: 'Address the gap between recording advice and evidence review.',
   answerOne: 'Choose one audience, define one next step, record short founder-led takes, and show one current product action with evidence the viewer can verify.',
   answerTwo: 'Review every factual statement against its cited source, add accurate captions, check pacing and sound, then test the complete playback path before sharing the final video.',
@@ -66,7 +65,6 @@ const visibleSpans = {
 const observedFacts: Record<string, string> = {
   description: 'Founder recording guidance covers viewers, substantiation, capture, quality review and watching the result.',
   'description-repaired': 'Source-led planning links the intended viewer to evidence collection, recording and final playback checks.',
-  trigger: 'Before producing founder footage, decide which assertions require substantiation.',
   gap: 'Typical recording tips can omit the separate task of reviewing their supporting evidence.',
   'answer-1': 'Select a specific viewer and call to action; capture brief founder segments and a present-day product interaction with verifiable support.',
   'answer-2': 'Check factual assertions against citations, subtitle accuracy, timing and audio quality; watch the whole deliverable prior to distribution.',
@@ -85,12 +83,11 @@ const observedFacts: Record<string, string> = {
   'detail-3': 'Watch the finished recording in its entirety.',
 };
 
-function generated(context: Pick<DraftingContext, 'sourceFacts' | 'evidence'>, repaired: boolean): GeneratedDraftV2 {
+function generated(context: Pick<DraftingContext, 'candidate' | 'sourceFacts' | 'evidence'>, repaired: boolean): GeneratedDraftV2 {
   const firstUrl = context.sourceFacts[0].url;
   const secondUrl = context.sourceFacts[1].url;
   const bindings = [
     [repaired ? 'description-repaired' : 'description', '/description', repaired ? visibleSpans.repairedDescription : visibleSpans.initialDescription],
-    ['trigger', '/customerTrigger', visibleSpans.customerTrigger],
     ['gap', '/competitorGap', visibleSpans.competitorGap],
     ['answer-1', '/directAnswer', visibleSpans.answerOne],
     ['answer-2', '/directAnswer', visibleSpans.answerTwo],
@@ -113,7 +110,7 @@ function generated(context: Pick<DraftingContext, 'sourceFacts' | 'evidence'>, r
   return {
     schemaVersion: 2,
     description: repaired ? visibleSpans.repairedDescription : visibleSpans.initialDescription,
-    customerTrigger: visibleSpans.customerTrigger,
+    customerTrigger: context.candidate.icp,
     competitorGap: visibleSpans.competitorGap,
     directAnswer,
     sections: [
@@ -147,13 +144,14 @@ class RepairingFixtureClient implements StructuredOutputClient {
   async generate(request: StructuredOutputRequest): Promise<unknown> {
     this.requests.push(request);
     const input = request.input as DraftingContext & {
-      draft?: GeneratedDraftV2; repairedDraft?: GeneratedDraftV2; originalIssues?: Array<{ id: string }>;
+      draft?: GeneratedDraftV2; repairedDraft?: GeneratedDraftV2; originalIssues?: Array<{ id: string; code: string }>;
       bindingManifest?: Array<GeneratedDraftV2['claimBindings'][number] & { bindingIndex: number; bindingHash: string }>;
     };
     const context = input;
     if (request.name === 'videoclaw_article_draft_v2') return generated(context, false);
     const supportEvaluations = () => {
-      expect(input.bindingManifest).toHaveLength(20);
+      expect(input.bindingManifest).toHaveLength(19);
+      expect(input.bindingManifest!.some(binding => binding.location === '/customerTrigger')).toBe(false);
       const evaluations = input.bindingManifest!.map(({ bindingIndex, bindingHash, sourceFactIds, span }) => {
         const facts = input.sourceFacts.flatMap(({ facts }) => facts).filter(({ id }) => sourceFactIds.includes(id));
         expect(facts).toHaveLength(1);
@@ -171,9 +169,15 @@ class RepairingFixtureClient implements StructuredOutputClient {
     }
     if (request.name === 'videoclaw_article_repair_v2') return generated(context, true);
     if (request.name === 'videoclaw_article_repair_verification_v1') {
-      expect(input.originalIssues?.map(({ id }) => id)).toEqual(['editorial-1']);
+      expect(input.originalIssues?.map(({ code }) => code)).toEqual(this.omitSupportEvaluation
+        ? ['editorial.specificity', 'content.source_usage_review', 'critique.support_incomplete']
+        : ['editorial.specificity']);
       expect(input.repairedDraft?.description).toBe(visibleSpans.repairedDescription);
-      return { schemaVersion: 1, approved: !this.rejectVerification, supportEvaluations: supportEvaluations(), evaluations: [{ issueId: 'editorial-1', resolved: !this.rejectVerification, message: 'Deterministic independent verification result.' }], newIssues: [] };
+      return { schemaVersion: 1, approved: !this.rejectVerification && !this.omitSupportEvaluation, supportEvaluations: supportEvaluations(),
+        evaluations: input.originalIssues!.map(({ id, code }) => ({ issueId: id,
+          resolved: code === 'editorial.specificity' ? !this.rejectVerification : !this.omitSupportEvaluation,
+          message: 'Deterministic offline verification fixture result.',
+        })), newIssues: [] };
     }
     throw new Error(`Unexpected fixture request ${request.name}`);
   }
@@ -316,7 +320,7 @@ describe.skipIf(nativeLanderPath === undefined)('native lander offline integrati
     expect([...new Set(fixture.network.sourceRequests.map(({ url }) => new URL(url).pathname.split('/')[2]))]).toEqual(
       [49, 48, 47, 46, 45, 44, 43, 42, 41, 40].map((index) => 'founder-video-workflow-' + index),
     );
-    expect(fixture.network.sourceRequests).toHaveLength(50); // Four body sources + one manual redirect per candidate.
+    expect(fixture.network.sourceRequests).toHaveLength(110); // Ten candidate bodies + one manual redirect per candidate, then select four.
     for (const context of fixture.contexts) {
       expect(context.sourceFacts).toHaveLength(4);
       expect(context.sourceFacts.flatMap(({ facts }) => facts.map(({ text }) => text))).toEqual(

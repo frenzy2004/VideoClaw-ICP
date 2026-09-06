@@ -16,6 +16,22 @@ function checkerFor(html: string, contentType = 'text/html; charset=utf-8') {
 }
 
 describe('verified source body extraction', () => {
+  it('preserves a heading qualification and adjacent prose while distinguishing where body evidence starts', async () => {
+    const html = '<h2>Current batch only</h2><p>A product demo should walk buyers through a realistic workflow.</p>'
+      + '<p>Do not present unfinished features as available.</p>';
+    const document = await checkerFor(html).read('https://publisher.example/qualified');
+    expect(document.passages).toEqual([{
+      text: 'Current batch only A product demo should walk buyers through a realistic workflow. Do not present unfinished features as available.',
+      start: 0, end: document.text.length, bodyStart: 19,
+    }]);
+    expect(document.text.slice(document.passages[0].start, document.passages[0].end)).toBe(document.passages[0].text);
+  });
+
+  it('records an explicit body start for a passage without a heading', async () => {
+    const document = await checkerFor('<p>A product demo should walk buyers through a realistic workflow.</p>').read('https://publisher.example/plain');
+    expect(document.passages[0]).toMatchObject({ bodyStart: 0 });
+  });
+
   it('omits a whole context group with invisible format controls before draft validation', async () => {
     const html = '<main><section><p>\u200d \u200d This source group contains invisible joiners in its prose.</p></section>'
       + '<section><p>Rehearse the founder video before sharing the final file.</p></section></main>';

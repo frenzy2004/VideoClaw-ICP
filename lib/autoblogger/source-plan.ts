@@ -1,7 +1,9 @@
 import { createHash } from 'node:crypto';
 import { normalizeHttpUrl, type DraftSafetyFinding, type DraftingContext, type GeneratedDraftV2, type SourceFact } from './content-bundle';
+import { scoreSourceTopic, sourcePageIdentity } from './source-relevance';
 
 export const MAX_SOURCE_DERIVED_WORDS = 180;
+export const TARGET_SOURCE_DERIVED_WORDS = 120;
 
 // Conservative budget identity, NOT a URL canonicalization claim: query variants
 // share one allowance even when they might genuinely contain different material.
@@ -10,8 +12,7 @@ function sourceGroups(facts: SourceFact[]) {
   for (const source of facts) {
     const normalized = normalizeHttpUrl(source.url);
     if (!normalized) throw new Error('Source planning requires a valid HTTP source URL.');
-    const url = new URL(normalized);
-    const key = `${url.hostname.replace(/^www\./, '')}${url.port ? `:${url.port}` : ''}${url.pathname.replace(/\/+$/, '')}`;
+    const key = sourcePageIdentity(normalized);
     const entries = groups.get(key) ?? [];
     entries.push(source);
     groups.set(key, entries);
@@ -20,14 +21,12 @@ function sourceGroups(facts: SourceFact[]) {
 }
 
 export function buildSourcePlan(context: DraftingContext) {
-  const stopwords = new Set('a an the of in for with and or on at is are what when before after your you from this that should do can how to'.split(' '));
-  const terms = new Set((context.candidate.primaryKeyword.toLowerCase().match(/[\p{L}\p{N}]+/gu) ?? []).filter(term => !stopwords.has(term)));
-  const relevance = (text: string) => [...new Set(text.toLowerCase().match(/[\p{L}\p{N}]+/gu) ?? [])].filter(term => terms.has(term)).length;
+  const relevance = (fact: SourceFact['facts'][number]) => scoreSourceTopic(context.candidate.primaryKeyword, fact.text, fact.bodyStart);
   const anchors = (group: SourceFact[]) => {
     const seen = new Set<string>();
     return group.flatMap(source => source.facts)
-      .filter(fact => relevance(fact.text) > 0)
-      .sort((a, b) => Number(b.evidenceKind === 'body') - Number(a.evidenceKind === 'body') || relevance(b.text) - relevance(a.text))
+      .filter(fact => fact.evidenceKind === 'body' && relevance(fact) > 0)
+      .sort((a, b) => relevance(b) - relevance(a))
       .filter(fact => {
         const key = fact.text.normalize('NFKC').toLowerCase().trim().replace(/\s+/gu, ' ');
         if (seen.has(key)) return false;
@@ -42,6 +41,8 @@ export function buildSourcePlan(context: DraftingContext) {
       sourceIds: group.map(source => source.id),
       url: group[0].url,
       maxDerivedWords: MAX_SOURCE_DERIVED_WORDS,
+      targetDerivedWords: TARGET_SOURCE_DERIVED_WORDS,
+      reserveDerivedWords: MAX_SOURCE_DERIVED_WORDS - TARGET_SOURCE_DERIVED_WORDS,
       // Anchor suggestions do not delete facts or certify relevance/support.
       anchorFactIds: anchors(group),
     })),
@@ -57,6 +58,50 @@ type SupportEvaluation = {
   bindingIndex: number; bindingHash: string; supported: boolean;
   kind: 'source_claim' | 'original_guidance' | 'original_example' | 'product_claim';
 };
+
+/** Nonblocking sensitivity diagnostic, independent of critic classification.
+ * Grounding is mandatory even for original advice: these totals are potential
+ * exposure under reclassification, NOT copying/derivation evidence or a gate.
+ * Only invalid fact references produce findings. Claim coverage and semantic
+ * copying checks remain the responsibility of the existing truth gates.
+ */
+export function measurePotentialSourceUse(facts: SourceFact[], draft: GeneratedDraftV2) {
+  const findings: DraftSafetyFinding[] = [];
+  const groups = sourceGroups(facts);
+  const sources = groups.map(group => ({
+    sourceIds: group.map(source => source.id), url: group[0].url,
+    maxDerivedWords: MAX_SOURCE_DERIVED_WORDS, targetDerivedWords: TARGET_SOURCE_DERIVED_WORDS,
+    potentialDerivedWords: 0, bindingIndices: [] as number[],
+  }));
+  const factPages = new Map<string, Set<number>>();
+  groups.forEach((group, pageIndex) => group.forEach(source => source.facts.forEach(fact => {
+    const pages = factPages.get(fact.id) ?? new Set<number>();
+    pages.add(pageIndex);
+    factPages.set(fact.id, pages);
+  })));
+  draft.claimBindings.forEach((binding, bindingIndex) => {
+    const pages = new Set<number>();
+    for (const id of new Set(binding.sourceFactIds)) {
+      const matches = factPages.get(id);
+      if (!matches || matches.size !== 1) {
+        findings.push({ code: 'content.source_usage_review', bindingIndex, location: binding.location,
+          message: 'Potential source accounting requires known, unambiguous fact IDs.' });
+      }
+      for (const page of matches ?? []) pages.add(page);
+    }
+    if (['/customerTrigger', '/competitorGap'].includes(binding.location)) return;
+    const words = binding.span.match(/[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)*/gu)?.length ?? 0;
+    for (const pageIndex of pages) {
+      sources[pageIndex].potentialDerivedWords += words;
+      sources[pageIndex].bindingIndices.push(bindingIndex);
+    }
+  });
+  const warnings = sources.filter(page => page.potentialDerivedWords > TARGET_SOURCE_DERIVED_WORDS).map(page => ({
+    sourceIds: page.sourceIds,
+    message: `${page.potentialDerivedWords} cited public words could be exposed to reclassification; the reviewed derivation target is ${TARGET_SOURCE_DERIVED_WORDS} and final limit ${MAX_SOURCE_DERIVED_WORDS}. Contextual grounding of longer original advice is not evidence of copying or derivation. This diagnostic alone must not block acceptance or force deletion.`,
+  }));
+  return { sources, findings, warnings };
+}
 
 export function measureReviewedSourceUse(facts: SourceFact[], draft: GeneratedDraftV2, evaluations: SupportEvaluation[]) {
   const findings: DraftSafetyFinding[] = [];

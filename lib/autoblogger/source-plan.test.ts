@@ -1,7 +1,8 @@
 import { createHash } from 'node:crypto';
 import { describe, expect, it } from 'vitest';
 import type { DraftingContext, GeneratedDraftV2, SourceFact } from './content-bundle';
-import { buildSourcePlan, measureReviewedSourceUse } from './source-plan';
+import { buildSourcePlan, measureReviewedSourceUse, measurePotentialSourceUse as measure } from './source-plan';
+import { extractSourceBody } from './source-extraction';
 
 function source(id: string, url = `https://example.com/${id}`): SourceFact {
   return { id, label: id, url, checkedAt: '2026-09-06T10:00:00.000Z', facts: [
@@ -25,16 +26,36 @@ function specimen(spans: Array<{ location: string; words: number; factIds?: stri
 }
 
 describe('source planning and cumulative reviewed usage', () => {
+  it('does not anchor an extracted H2 topic label attached to unrelated body prose', () => {
+    const document = extractSourceBody('<h2>Product demo checklist</h2><p>The cafeteria serves lunch daily and closes early on Fridays.</p>');
+    const a = source('a');
+    a.facts = document.passages.map(({ text, bodyStart }) => ({ text, bodyStart, id: 'heading-only', evidenceKind: 'body' as const }));
+    const before = structuredClone(a);
+    expect(buildSourcePlan({ ...planningContext, sourceFacts: [a] }).sources[0].anchorFactIds).toEqual([]);
+    expect(a).toEqual(before);
+  });
+
+  it.each([
+    ['How does a product demo work?', 'A product demo works by walking buyers through a realistic workflow.'],
+    ['How do product demos work?', 'A product demo works by walking buyers through a realistic workflow.'],
+    ['How has a product demo changed?', 'A product demo changed when teams started walking buyers through a realistic workflow.'],
+    ['How have product demos changed?', 'Product demos changed when teams started walking buyers through a realistic workflow.'],
+  ])('keeps topical anchors across equivalent query framing: %s', (primaryKeyword, text) => {
+    const a = source('a');
+    a.facts = [{ id: 'work', text, evidenceKind: 'body' }];
+    expect(buildSourcePlan({ ...planningContext, candidate: { ...planningContext.candidate, primaryKeyword }, sourceFacts: [a] }).sources[0].anchorFactIds).toEqual(['work']);
+  });
+
   it('gives each verified source bounded relevant anchors without deleting original evidence', () => {
     const context = structuredClone(planningContext);
-    context.sourceFacts[0].facts.push(...Array.from({ length: 20 }, (_, i) => ({ id: `a-extra-${i}`, text: `Product demo detail ${i}.`, evidenceKind: 'body' as const })));
+    context.sourceFacts[0].facts.push(...Array.from({ length: 20 }, (_, i) => ({ id: `a-extra-${i}`, text: `Product demo detail ${i} explains one buyer workflow.`, evidenceKind: 'body' as const })));
     const before = structuredClone(context);
     const plan = buildSourcePlan(context);
     expect(plan.sources).toHaveLength(2);
     expect(plan.sources[0].anchorFactIds).toHaveLength(3);
-    expect(plan.sources[1].anchorFactIds).toHaveLength(3);
+    expect(plan.sources[1].anchorFactIds).toHaveLength(2);
     expect(plan.sources[0].anchorFactIds[0]).toBe('a-check');
-    expect(plan.sources[1].anchorFactIds).toContain('b-snippet');
+    expect(plan.sources[1].anchorFactIds).not.toContain('b-snippet');
     expect(plan.sources[1].anchorFactIds).not.toContain('b-irrelevant');
     expect(plan.readerTask).toBe('product demo checklist');
     expect(plan.originalWork.map(item => item.role)).toEqual(['decision_tool', 'hypothetical_example', 'troubleshooting']);
@@ -46,8 +67,9 @@ describe('source planning and cumulative reviewed usage', () => {
     const plan = buildSourcePlan(context);
     expect(plan.sources).toHaveLength(2);
     expect(plan.sources[0].sourceIds).toEqual(['a', 'alias']);
-    expect(plan.sources[0].anchorFactIds).toHaveLength(3);
+    expect(plan.sources[0].anchorFactIds).toHaveLength(2);
     expect(plan.sources[0].maxDerivedWords).toBe(180);
+    expect(plan.sources[0]).toMatchObject({ targetDerivedWords: 120, reserveDerivedWords: 60 });
   });
 
   it('never spends an anchor slot on duplicate page text or facts with no query overlap', () => {
@@ -57,8 +79,32 @@ describe('source planning and cumulative reviewed usage', () => {
     const irrelevant = source('unrelated');
     irrelevant.facts = [{ id: 'unrelated', text: 'The conference offers refreshments.', evidenceKind: 'body' }];
     const plan = buildSourcePlan({ ...planningContext, sourceFacts: [a, alias, irrelevant] });
-    expect(plan.sources[0].anchorFactIds).toEqual(['a-check', 'a-demo', 'a-snippet']);
+    expect(plan.sources[0].anchorFactIds).toEqual(['a-check', 'a-demo']);
     expect(plan.sources[1].anchorFactIds).toEqual([]);
+  });
+
+  it.each([
+    ['product demo checklist', 'The product launch checklist assigns launch owners and deadlines.', 'The product demo should follow the buyer workflow and explain the result.'],
+    ['payroll tax checklist', 'A payroll onboarding checklist introduces employees to the payroll system.', 'Payroll tax records should distinguish withheld tax from employer contributions.'],
+    ['remote employee onboarding checklist', 'Employee onboarding introduces the team and explains the reporting structure.', 'Remote employee onboarding should explain where to obtain equipment and support.'],
+    ['product demo checklist', 'Product pricing determines the launch budget. Demo Day pitches introduce the team.', 'Product demos should connect the buyer problem to a realistic workflow.'],
+    ['How to create product demos checklist', 'The product launch checklist assigns launch owners and deadlines.', 'Product demos should connect the buyer problem to a realistic workflow.'],
+    ['how to make remote employee onboarding checklist', 'Employee onboarding introduces the team and explains the reporting structure.', 'Remote employee onboarding should explain where to obtain equipment and support.'],
+    ['product demo before launch', 'A product demo after launch can show customers the finished workflow.', 'A product demo before launch should label unfinished parts of the workflow.'],
+  ])('requires the core topic and qualifiers for anchors: %s', (query, adjacent, topical) => {
+    const a = source('a');
+    a.facts = [{ id: 'adjacent', text: adjacent, evidenceKind: 'body' }, { id: 'topical', text: topical, evidenceKind: 'body' }];
+    const plan = buildSourcePlan({ ...planningContext, candidate: { ...planningContext.candidate, primaryKeyword: query }, sourceFacts: [a] });
+    expect(plan.sources[0].anchorFactIds).toEqual(['topical']);
+  });
+
+  it('does not promote isolated keywords, topic-only labels or a distant accidental co-occurrence', () => {
+    const a = source('a');
+    a.facts = [
+      { id: 'label', text: 'Product demo checklist template examples.', evidenceKind: 'body' },
+      { id: 'distant', text: `Product launches require ${'careful planning '.repeat(30)}before a demo day pitch.`, evidenceKind: 'body' },
+    ];
+    expect(buildSourcePlan({ ...planningContext, sourceFacts: [a] }).sources[0].anchorFactIds).toEqual([]);
   });
 
   it('adds disjoint public prose, FAQs, description and graphic words before enforcing the limit', () => {
@@ -100,5 +146,56 @@ describe('source planning and cumulative reviewed usage', () => {
     expect(measureReviewedSourceUse(facts, input.draft, input.evaluations).findings).toEqual(expect.arrayContaining([
       expect.objectContaining({ code: 'content.source_usage_review' }),
     ]));
+  });
+});
+
+describe('conservative potential source exposure', () => {
+  it('exposes 226 words before repair even when the initial critic counts only 79', () => {
+    const input = specimen([{ location: '/sections/0/markdown', words: 79 }, { location: '/faqAnswers/0/answer', words: 147 },
+      { location: '/customerTrigger', words: 200 }, { location: '/competitorGap', words: 200 }]);
+    const reviews = input.evaluations.map((evaluation, index) => ({ ...evaluation, kind: index === 1 ? 'original_guidance' as const : evaluation.kind }));
+    expect(measureReviewedSourceUse(facts, input.draft, reviews).sources[0].derivedWords).toBe(79);
+    const before = structuredClone(input.draft);
+    const result = measure(facts, input.draft);
+    expect(result.sources[0]).toMatchObject({ potentialDerivedWords: 226, bindingIndices: [0, 1], targetDerivedWords: 120, maxDerivedWords: 180 });
+    expect(result.findings).toEqual([]);
+    expect(result.warnings).toEqual([expect.objectContaining({ sourceIds: ['a'] })]);
+    expect(input.draft).toEqual(before);
+  });
+
+  it('reserves margin before the hard limit and includes metadata and graphic text', () => {
+    const input = specimen([{ location: '/description', words: 60 }, { location: '/editorialGraphic/steps/0/detail', words: 60 }]);
+    expect(measure(facts, input.draft).findings).toEqual([]);
+    input.draft.claimBindings.push({ ...input.draft.claimBindings[0], location: '/title', span: 'one' });
+    expect(measure(facts, input.draft).sources[0].potentialDerivedWords).toBe(121);
+    expect(measure(facts, input.draft).findings).toEqual([]);
+    expect(measure(facts, input.draft).warnings).toHaveLength(1);
+  });
+
+  it('charges a span in full to each distinct page but does not multiply aliases or repeated fact references', () => {
+    const input = specimen([{ location: '/sections/0/markdown', words: 121, factIds: ['a-demo', 'a-check', 'alias-demo', 'a-demo', 'b-demo'] }]);
+    const result = measure([...facts, source('alias', 'https://www.example.com/a/?ref=track#intro')], input.draft);
+    expect(result.sources.map(page => page.potentialDerivedWords)).toEqual([121, 121]);
+    expect(result.sources[0].sourceIds).toEqual(['a', 'alias']);
+    expect(result.sources.map(page => page.bindingIndices)).toEqual([[0], [0]]);
+    expect(result.findings).toEqual([]);
+    expect(result.warnings).toHaveLength(2);
+  });
+
+  it('does not block a long original-advice article solely because every span needs contextual grounding', () => {
+    const input = specimen([{ location: '/sections/0/markdown', words: 500 }, { location: '/sections/1/markdown', words: 500, factIds: ['b-demo'] }]);
+    const reviews = input.evaluations.map(evaluation => ({ ...evaluation, kind: 'original_guidance' as const }));
+    expect(measureReviewedSourceUse(facts, input.draft, reviews).sources.map(page => page.derivedWords)).toEqual([0, 0]);
+    const result = measure(facts, input.draft);
+    expect(result.sources.map(page => page.potentialDerivedWords)).toEqual([500, 500]);
+    expect(result.findings).toEqual([]);
+    expect(result.warnings).toHaveLength(2);
+  });
+
+  it.each(['unknown', 'ambiguous'])('reports %s fact references instead of silently dropping potential exposure', problem => {
+    const input = specimen([{ location: '/sections/0/markdown', words: 121, factIds: [problem === 'unknown' ? 'missing-fact' : 'a-demo'] }]);
+    const ledgerFacts = structuredClone(facts);
+    if (problem === 'ambiguous') ledgerFacts[1].facts[1].id = 'a-demo';
+    expect(measure(ledgerFacts, input.draft).findings).toEqual(expect.arrayContaining([expect.objectContaining({ code: 'content.source_usage_review' })]));
   });
 });

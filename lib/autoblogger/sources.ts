@@ -2,6 +2,7 @@ import { isIP } from 'node:net';
 import { createHash } from 'node:crypto';
 
 import { extractSourceBody, type SourceReadOptions, type SourcePassage } from './source-extraction';
+import { scoreSourceTopic, sourcePageIdentity } from './source-relevance';
 export type { SourceReadOptions, SourcePassage } from './source-extraction';
 
 import {
@@ -375,8 +376,7 @@ function createSourceChecker(options: SafeSourceCheckerOptions, allowHttpForTest
   }
 
   async function selectWithContent(urls: string[], readOptions: SourceReadOptions = {}): Promise<SourceSelectionWithContent> {
-    const sourceDocuments: SourceDocument[] = [];
-    const seen = new Set<string>();
+    const relevant = new Map<string, { document: SourceDocument; score: number }>();
     const requested = new Set<string>();
     for (const url of urls) {
       let document: SourceDocument;
@@ -386,16 +386,28 @@ function createSourceChecker(options: SafeSourceCheckerOptions, allowHttpForTest
         requested.add(normalized);
         document = await read(normalized, readOptions);
       } catch { continue; }
-      if (seen.has(document.finalUrl)) continue;
-      seen.add(document.finalUrl);
-      if (sourceDocuments.length < 4) sourceDocuments.push(document);
-      else if (document.authoritative && !sourceDocuments.some((source) => source.authoritative)) {
-        sourceDocuments[sourceDocuments.length - 1] = document;
+      // Score only prose, never a retained H2–H6 heading joined to unrelated
+      // prose. Keep the original document/passages unchanged for evidence use.
+      const bodyText = document.passages.map(passage => passage.text.slice(passage.bodyStart ?? 0)).join('\n\n');
+      const score = scoreSourceTopic(readOptions.query ?? '', bodyText);
+      if (!score) continue;
+      const key = sourcePageIdentity(document.finalUrl);
+      const prior = relevant.get(key);
+      if (!prior || Number(document.authoritative) > Number(prior.document.authoritative)
+        || (document.authoritative === prior.document.authoritative && score > prior.score)) {
+        relevant.set(key, { document, score });
       }
-      if (sourceDocuments.length === 4 && sourceDocuments.some((source) => source.authoritative)) break;
+    }
+    // Rank the whole supplied candidate set; early reachable pages must not
+    // crowd out later topical bodies. Keep complete excerpts/qualifiers intact.
+    const ranked = [...relevant.values()].sort((a, b) => b.score - a.score);
+    const sourceDocuments = ranked.slice(0, 4).map(item => item.document);
+    const authority = ranked.find(item => item.document.authoritative)?.document;
+    if (authority && sourceDocuments.length === 4 && !sourceDocuments.some(source => source.authoritative)) {
+      sourceDocuments[sourceDocuments.length - 1] = authority;
     }
     if (sourceDocuments.length < 2 || !sourceDocuments.some((source) => source.authoritative)) {
-      throw new Error('Research requires two usable body evidence sources including one authoritative source.');
+      throw new Error('Research requires two directly relevant usable body evidence sources including one authoritative source.');
     }
     return {
       sources: sourceDocuments.map(({ url, finalUrl, authoritative }) => ({ originalUrl: url, finalUrl, authoritative })),

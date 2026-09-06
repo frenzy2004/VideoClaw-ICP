@@ -19,7 +19,7 @@ import { isStrictIsoDateTime, isoDateTimeToDateOnly } from './date-time';
 import { containsSecretLikeValue } from './secrets';
 import type { CheckedSource } from './sources';
 
-const claimLocationPattern = /^\/(?:description|customerTrigger|competitorGap|directAnswer|sections\/\d+\/(?:heading|markdown)|faqAnswers\/\d+\/answer|editorialGraphic\/(?:title|alt)|editorialGraphic\/steps\/\d+\/(?:label|detail))$/;
+const claimLocationPattern = /^\/(?:description|competitorGap|directAnswer|sections\/\d+\/(?:heading|markdown)|faqAnswers\/\d+\/answer|editorialGraphic\/(?:title|alt)|editorialGraphic\/steps\/\d+\/(?:label|detail))$/;
 
 function isXml10Text(value: string): boolean {
   for (const character of value) {
@@ -58,7 +58,8 @@ const xmlVisibleString = (maximum: number) => z.string()
 export const GeneratedDraftV2Schema = z.object({
   schemaVersion: z.literal(2),
   description: nonBlankString,
-  customerTrigger: nonBlankString,
+  // Preserve the caller-owned value verbatim for the exact campaign check.
+  customerTrigger: rawFormatControlFreeString.refine((value) => value.trim().length > 0),
   competitorGap: nonBlankString,
   directAnswer: nonBlankString,
   sections: z.array(z.object({
@@ -202,6 +203,8 @@ export type SourceFact = {
     text: string;
     /** Omitted legacy facts are conservatively treated as search titles/snippets by the critic. */
     evidenceKind?: 'serp_title' | 'serp_snippet' | 'body';
+    /** Extractor-provided UTF-16 offset into unchanged text; absent on legacy facts. */
+    bodyStart?: number;
   }>;
   /** Used for copied-passage comparison. Excluded from model input, Git and compact reports; a private ignored local replay may retain it. */
   excerpt?: string;
@@ -216,7 +219,8 @@ const SourceFactInputSchema: z.ZodType<SourceFact> = z.object({
     id: singleLineControlFreeString,
     text: singleLineControlFreeString,
     evidenceKind: z.enum(['serp_title', 'serp_snippet', 'body']).optional(),
-  }).strict()).min(1),
+    bodyStart: z.number().int().min(0).optional(),
+  }).strict().refine(({ text, bodyStart }) => bodyStart === undefined || bodyStart <= text.length)).min(1),
   excerpt: z.string().optional(),
 }).strict();
 
@@ -580,7 +584,6 @@ function claimSpansAtLocation(value: string, location: string): string[] {
 
 function generatedLocationValue(draft: GeneratedDraftV2, location: string): string | undefined {
   if (location === '/description') return draft.description;
-  if (location === '/customerTrigger') return draft.customerTrigger;
   if (location === '/competitorGap') return draft.competitorGap;
   if (location === '/directAnswer') return draft.directAnswer;
   const section = location.match(/^\/sections\/(\d+)\/(heading|markdown)$/);
@@ -597,7 +600,6 @@ function generatedLocationValue(draft: GeneratedDraftV2, location: string): stri
 function generatedClaimSentences(draft: GeneratedDraftV2): Array<{ location: string; span: string }> {
   return [
     { location: '/description', value: draft.description },
-    { location: '/customerTrigger', value: draft.customerTrigger },
     { location: '/competitorGap', value: draft.competitorGap },
     { location: '/directAnswer', value: draft.directAnswer },
     ...draft.sections.flatMap(({ heading, markdown }, index) => [
@@ -686,6 +688,26 @@ function attributedNonProductSubject(prefix: string, factTexts: string[]): boole
   )));
 }
 
+function hasOrdinaryExplanationAntecedent(sentence: string, previousSentence: string): boolean {
+  // A small noun-phrase grammar admits editorial explanations, not arbitrary
+  // predicates after "It". Match both sentences in full so an added capability
+  // clause, second actor, or unknown modifier cannot inherit this exception.
+  const modifier = '(?:checklist|planning|review|demo|buyer|customer|consistent|working|defined|clear|next|short|simple|editorial)';
+  const head = '(?:principle|approach|sequence|structure|purpose|scope|path|problem|story|setup|steps?|questions?|argument)';
+  const nounPhrase = `(?:the|a|an|this|that) (?:${modifier} ){0,3}${head}`;
+  const nounList = `${nounPhrase}(?:, ${nounPhrase})*(?:,? and ${nounPhrase})?`;
+  const explanation = new RegExp(`^it (?:illustrates|explains|summarizes|outlines) ${nounPhrase}(?: of (?:matching|linking|connecting|aligning) ${nounPhrase} (?:to|with) ${nounList})?[.!]?$`, 'iu');
+  if (!explanation.test(sentence)) return false;
+
+  const subject = '(?:this|that|the|a|an) (?:hypothetical |illustrative )?(?:example|worksheet)';
+  const description = '(?:hypothetical|illustrative|(?:a|an) (?:planning|review|hypothetical|illustrative) (?:exercise|aid|example|worksheet))';
+  // A negated, generic attribution is allowed only inside this closed clause.
+  // Actual product names and affirmative capability assertions cannot match it.
+  const disclaimer = ' and (?:is|was) not (?:a|an) (?:claim|assertion) that (?:any|a) named product (?:has|provides) (?:these|those) (?:capabilities|features|outcomes)(?: or (?:capabilities|features|outcomes))?';
+  return new RegExp(`^${subject} (?:(?:is|was) ${description}(?:${disclaimer})?|(?:lists|outlines|summarizes) ${nounList})[.!]?$`, 'iu')
+    .test(previousSentence);
+}
+
 function containsProductAlias(
   sentence: string,
   claims: ProductClaim[],
@@ -744,7 +766,12 @@ function containsProductAlias(
     && [...sentence.matchAll(/\bit\b/giu)].length === 1
     && hasExplicitImperativeObject(prefix, sentence.slice(pronoun.index))) return false;
 
-  // Cross-sentence context is allowed only for a simple editorial object command.
+  // Prior product context and explicit aliases have already failed closed.
+  // This resolves only the adjacent ordinary subject, never factual support.
+  if (!containsExplicitProductAlias(localContext, claims)
+    && hasOrdinaryExplanationAntecedent(sentence, localContext)) return false;
+
+  // The remaining cross-sentence exception is a simple editorial object command.
   // A standalone "It adds captions" still has no explicit ordinary referent.
   const ordinaryObjectInstruction = /^(?:review|read|watch|check|revise) it(?: carefully)?(?: (?:before|after) (?:sharing|recording|publishing|editing|sending|exporting))?[.!]?$/iu;
   return !ordinaryObjectInstruction.test(sentence)
@@ -866,7 +893,7 @@ function editorialFindings(context: DraftingContext, draft: GeneratedDraftV2): D
   const labels: Array<{ location: string; span: string }> = [];
   const locations = new Set(generatedClaimSentences(draft).map(({ location }) => location));
   for (const location of locations) {
-    if (location === '/customerTrigger' || location === '/competitorGap') continue;
+    if (location === '/competitorGap') continue;
     const value = generatedLocationValue(draft, location)!;
     const checkBlock = (span: string) => {
       // Soft wraps and Markdown hard breaks do not change the visible label.
@@ -907,6 +934,13 @@ export function inspectGeneratedDraft(
   ].join('\n');
   const publishableProse = `${body}\n${metadata}`;
   const findings: DraftSafetyFinding[] = [];
+  if (draft.customerTrigger !== context.candidate.icp) {
+    findings.push({
+      code: 'content.campaign_context', location: '/customerTrigger', span: draft.customerTrigger,
+      message: 'customerTrigger must exactly equal the caller-configured candidate.icp; campaign audience metadata is not a source claim.',
+      repairInstruction: 'Copy context.candidate.icp verbatim into customerTrigger and do not create a source binding for this field.',
+    });
+  }
   findings.push(...editorialFindings(context, draft));
   const directAnswerWords = visibleWordCount(draft.directAnswer);
   if (directAnswerWords < 40 || directAnswerWords > 60) {

@@ -7,6 +7,9 @@ import { candidateFingerprints, type Candidate, type EvidenceBundle, type Keywor
 import type { CheckedSource } from './sources';
 import {
   DraftMaterializationError,
+  GENERATED_DRAFT_V2_JSON_SCHEMA,
+  GeneratedDraftV2Schema,
+  assertSourceFacts,
   inspectFinalMarkdown,
   inspectGeneratedDraft,
   materializeDraftBundle,
@@ -141,7 +144,7 @@ const mediaAllowlist: AllowlistedProductMedia[] = [{
 const generatedDraft: GeneratedDraftV2 = {
   schemaVersion: 2,
   description: 'Create a credible founder pitch video with natural delivery, source-controlled claims, visible product proof, careful editing, reviewed captions, and one tested next step.',
-  customerTrigger: 'Use this workflow for a factual pitch video with natural delivery.',
+  customerTrigger: candidate.icp,
   competitorGap: 'Address the gap between pitch advice, claim control, and product-proof production.',
   directAnswer: 'Create a founder pitch video by choosing one audience and next step, reducing the story to a few factual points, recording short natural takes, and showing one current product action. Then edit for clarity, verify every claim and caption against its source, and test the final playback path.',
   sections: [
@@ -192,7 +195,6 @@ const generatedDraft: GeneratedDraftV2 = {
 
 const baselineEditorialClaims = [
   { id: 'fixture-description', location: '/description', span: 'Create a credible founder pitch video with natural delivery, source-controlled claims, visible product proof, careful editing, reviewed captions, and one tested next step.' },
-  { id: 'fixture-trigger', location: '/customerTrigger', span: 'Use this workflow for a factual pitch video with natural delivery.' },
   { id: 'fixture-gap', location: '/competitorGap', span: 'Address the gap between pitch advice, claim control, and product-proof production.' },
   { id: 'fixture-answer-1', location: '/directAnswer', span: 'Create a founder pitch video by choosing one audience and next step, reducing the story to a few factual points, recording short natural takes, and showing one current product action.' },
   { id: 'fixture-answer-2', location: '/directAnswer', span: 'Then edit for clarity, verify every claim and caption against its source, and test the final playback path.' },
@@ -227,6 +229,81 @@ generatedDraft.claimBindings.unshift(...baselineEditorialClaims.map(({ id, locat
 function withDraft(change: Partial<GeneratedDraftV2>): GeneratedDraftV2 {
   return { ...structuredClone(generatedDraft), ...change };
 }
+
+describe('source fact body offsets', () => {
+  const text = 'Demo checklist. Do not skip rehearsal before sharing.';
+
+  it.each([undefined, 0, 16, text.length])('accepts bodyStart %j without changing evidence text or inventing an offset', (bodyStart) => {
+    const sources = structuredClone(context.sourceFacts);
+    sources[0].facts[0] = { id: 'offset-fixture', text, evidenceKind: 'body',
+      ...(bodyStart === undefined ? {} : { bodyStart }),
+    };
+    expect(() => assertSourceFacts(sources)).not.toThrow();
+    expect(sources[0].facts[0].text).toBe(text);
+    if (bodyStart === undefined) expect(sources[0].facts[0]).not.toHaveProperty('bodyStart');
+    else expect(sources[0].facts[0]).toHaveProperty('bodyStart', bodyStart);
+  });
+
+  it.each([-1, 1.5, text.length + 1, NaN, Infinity, '16', null])('rejects invalid bodyStart %j', (bodyStart) => {
+    const sources = structuredClone(context.sourceFacts);
+    sources[0].facts[0] = { id: 'offset-fixture', text, evidenceKind: 'body' };
+    Object.assign(sources[0].facts[0], { bodyStart });
+    expect(() => assertSourceFacts(sources)).toThrow(/Invalid source fact input/);
+  });
+});
+
+describe('caller-owned campaign context', () => {
+  it('accepts the canonical customerTrigger without a source fact or binding', () => {
+    expect(inspectGeneratedDraft(context, generatedDraft)).toEqual([]);
+    expect(matter(materializeDraftBundle(context, generatedDraft, mediaAllowlist[0]).markdown).data.customerTrigger)
+      .toBe(candidate.icp);
+  });
+
+  it.each([
+    'A different audience',
+    `${candidate.icp} Market demand doubled.`,
+    candidate.icp.toLowerCase(),
+    ` ${candidate.icp} `,
+  ])('rejects altered customerTrigger metadata deterministically: %j', (customerTrigger) => {
+    const value = withDraft({ customerTrigger });
+    expect(inspectGeneratedDraft(context, value)).toContainEqual(expect.objectContaining({
+      code: 'content.campaign_context', location: '/customerTrigger', span: customerTrigger,
+    }));
+    expect(() => materializeDraftBundle(context, value, mediaAllowlist[0])).toThrow(/content.campaign_context/);
+  });
+
+  it('rejects customerTrigger source bindings in both draft schemas', () => {
+    const value = withDraft({ claimBindings: [...generatedDraft.claimBindings, {
+      location: '/customerTrigger', span: candidate.icp, sourceFactIds: ['yc-bullets'], productClaimId: null,
+    }] });
+    expect(GeneratedDraftV2Schema.safeParse(value).success).toBe(false);
+    const locationPattern = new RegExp(GENERATED_DRAFT_V2_JSON_SCHEMA.properties.claimBindings.items.properties.location.pattern);
+    expect(locationPattern.test('/customerTrigger')).toBe(false);
+    expect(inspectGeneratedDraft(context, value)).toContainEqual(expect.objectContaining({ code: 'content.dto_invalid' }));
+  });
+
+  it.each(['/description', '/competitorGap', '/directAnswer', '/sections/0/markdown', '/faqAnswers/0/answer', '/editorialGraphic/steps/0/detail'])(
+    'still requires source bindings at %s with canonical campaign metadata', (location) => {
+      const value = withDraft({ claimBindings: generatedDraft.claimBindings.filter(binding => binding.location !== location) });
+      expect(inspectGeneratedDraft(context, value)).toContainEqual(expect.objectContaining({
+        code: 'content.claim_binding', location, reason: 'missing_binding',
+      }));
+    },
+  );
+
+  it('does not exempt an unsupported public product claim under canonical metadata', () => {
+    const span = 'The app guarantees a tenfold conversion increase.';
+    const value = withDraft({
+      sections: [{ ...generatedDraft.sections[0], markdown: span }, generatedDraft.sections[1]],
+      claimBindings: [...generatedDraft.claimBindings.filter(binding => binding.location !== '/sections/0/markdown'), {
+        location: '/sections/0/markdown', span, sourceFactIds: ['yc-bullets'], productClaimId: null,
+      }],
+    });
+    expect(inspectGeneratedDraft(context, value)).toContainEqual(expect.objectContaining({
+      code: 'content.claim_binding', location: '/sections/0/markdown', span, reason: 'unapproved_product_reference',
+    }));
+  });
+});
 
 describe('reader-facing editorial quality', () => {
   it.each([
@@ -503,7 +580,7 @@ describe('generated-content safety review', () => {
     ['unapproved product fact', withDraft({ claimBindings: generatedDraft.claimBindings.map((binding) => binding.productClaimId === 'vc-editing-claim' ? { ...binding, sourceFactIds: ['ftc-support'] } : binding) }), 'content.claim_binding'],
     ['unsupported product assertion', withDraft({ sections: [{ heading: 'Unsafe', markdown: 'The app guarantees a tenfold conversion increase.' }, generatedDraft.sections[1]] }), 'content.claim_binding'],
     ['appended objective assertion', withDraft({ sections: [generatedDraft.sections[0], { ...generatedDraft.sections[1], markdown: `${generatedDraft.sections[1].markdown} This workflow doubles conversion.` }] }), 'content.claim_binding'],
-    ['objective metadata assertion', withDraft({ customerTrigger: `${generatedDraft.customerTrigger} Market demand doubled.` }), 'content.claim_binding'],
+    ['altered campaign metadata', withDraft({ customerTrigger: `${generatedDraft.customerTrigger} Market demand doubled.` }), 'content.campaign_context'],
     ['objective SVG assertion', withDraft({
       editorialGraphic: {
         ...generatedDraft.editorialGraphic,
@@ -795,6 +872,67 @@ describe('contextual product references and precise binding failures', () => {
     expect(inspectGeneratedDraft(context, withSpans([span]))).toEqual([]);
   });
 
+  const hypotheticalAntecedent = 'This example is hypothetical and is not a claim that any named product has these capabilities or outcomes.';
+  const checklistExplanation = 'It illustrates the checklist principle of matching the demo path to a buyer problem, a consistent story, a working demo setup, and a defined next step.';
+
+  it.each([
+    [hypotheticalAntecedent, checklistExplanation],
+    ['An example is illustrative.', 'It explains the planning approach.'],
+    ['That example is a planning exercise.', 'It summarizes the review sequence.'],
+    ['The worksheet is a review aid.', 'It outlines the demo structure.'],
+    ['This worksheet lists the review steps.', 'It illustrates the planning principle of linking the demo path with a buyer problem and a clear next step.'],
+    ['The example was hypothetical and was not an assertion that a named product provides those features or outcomes.', 'It explains the checklist purpose.'],
+  ])('resolves an immediately preceding ordinary explanation subject: %j', (...spans) => {
+    // withSpans reverses bindings: visible sentence order must determine reference.
+    expect(inspectGeneratedDraft(context, withSpans(spans))).toEqual([]);
+  });
+
+  it.each([
+    [checklistExplanation],
+    ['This is hypothetical.', checklistExplanation],
+    ['The example and the worksheet are ready.', checklistExplanation],
+    ['The founder reviewed an example.', checklistExplanation],
+    ['After reviewing the example, the presenter opened the editor.', checklistExplanation],
+    ['This example is hypothetical.', 'Prepare the meeting agenda.', checklistExplanation],
+    ['VideoClaw is a planning aid.', checklistExplanation],
+    ['Descript is a planning aid.', checklistExplanation],
+    ['The app is a planning aid.', checklistExplanation],
+    ['The product is a planning aid.', checklistExplanation],
+    ['This example software is a planning aid.', checklistExplanation],
+    ['The worksheet tool is a review aid.', checklistExplanation],
+    ['This example is a Descript worksheet.', checklistExplanation],
+    ['This example is hypothetical and the app adds captions.', checklistExplanation],
+    ['This example is hypothetical and is a claim that any named product has these capabilities or outcomes.', checklistExplanation],
+    [context.productClaims[0].text, hypotheticalAntecedent, checklistExplanation],
+    [hypotheticalAntecedent, 'It adds captions.'],
+    [hypotheticalAntecedent, 'It can generate subtitles.'],
+    [hypotheticalAntecedent, 'It supports automatic captions.'],
+    [hypotheticalAntecedent, 'It illustrates the checklist principle and automatically adds captions.'],
+    [hypotheticalAntecedent, 'It illustrates the checklist principle; it exports videos.'],
+    [hypotheticalAntecedent, 'It explains how the software adds captions.'],
+    [hypotheticalAntecedent, 'It illustrates the checklist principle and VideoClaw adds captions.'],
+    [hypotheticalAntecedent, 'It explains the principle that generates captions.'],
+    [hypotheticalAntecedent, 'It illustrates the checklist principle of matching the demo path to a buyer problem and generates subtitles.'],
+  ])('keeps cross-sentence product, vague, and added capability references blocked: %j', (...spans) => {
+    const span = spans.at(-1)!;
+    const value = withSpans(spans);
+    expect(inspectGeneratedDraft(context, value)).toContainEqual(expect.objectContaining({
+      code: 'content.claim_binding', location: '/sections/0/markdown', span,
+      bindingIndex: value.claimBindings.findIndex(binding => binding.span === span),
+      reason: 'unapproved_product_reference',
+    }));
+  });
+
+  it('does not carry an ordinary explanation antecedent across section boundaries', () => {
+    const value = withSpans([hypotheticalAntecedent]);
+    value.sections[1] = { ...value.sections[1], markdown: checklistExplanation };
+    value.claimBindings = value.claimBindings.filter(binding => binding.location !== '/sections/1/markdown');
+    value.claimBindings.push({ location: '/sections/1/markdown', span: checklistExplanation, sourceFactIds: ['yc-bullets'], productClaimId: null });
+    expect(inspectGeneratedDraft(context, value)).toContainEqual(expect.objectContaining({
+      location: '/sections/1/markdown', span: checklistExplanation, reason: 'unapproved_product_reference',
+    }));
+  });
+
   it.each([
     ['VideoClaw prepares supporting material only when it fits the buyer use case.'],
     ['Descript prepares supporting material only when it fits the buyer use case.'],
@@ -954,7 +1092,6 @@ describe('literal claim coverage outside Markdown-rendered fields', () => {
   const fields: Array<{ location: string; set: (draft: GeneratedDraftV2, text: string) => void }> = [
     { location: '/faqAnswers/0/answer', set: (draft, text) => { draft.faqAnswers[0].answer = text; } },
     { location: '/description', set: (draft, text) => { draft.description = text; } },
-    { location: '/customerTrigger', set: (draft, text) => { draft.customerTrigger = text; } },
     { location: '/competitorGap', set: (draft, text) => { draft.competitorGap = text; } },
     { location: '/editorialGraphic/title', set: (draft, text) => { draft.editorialGraphic.title = text; } },
     { location: '/editorialGraphic/alt', set: (draft, text) => { draft.editorialGraphic.alt = text; } },

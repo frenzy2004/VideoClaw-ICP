@@ -3,7 +3,24 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-## Latest source-planned live pilot — 2026-09-07
+## Latest offline review/repair correction — 2026-09-07
+
+The [correction report](REVIEW-REPAIR-FIX-2026-09-07.md) records shared repair IDs,
+configured campaign metadata, ordinary-example reference handling, topical body
+selection and source-allocation repair. Missing/unknown/duplicate review IDs and
+unsupported product claims still fail closed. The source-use ceiling remains 180.
+
+Final checks: **1,332 tests across 50 files**, lint, typecheck with route generation,
+build and whitespace checks passed. Existing dependency build warnings remain.
+
+A synthetic generated bundle passed the native lander's **32 blog tests, lint
+and full build** in a disposable checkout at `b6b0833`. This is separate from the
+offline native-parser/fixture-renderer tests; neither is a fresh live article.
+The original lander checkout and terminal fifth-attempt state remain unchanged.
+No live research/model call, retry grant, publication or schedule activation was
+performed. See the report for receipt hashes, compatibility limits and final checks.
+
+## Previous source-planned live pilot — 2026-09-07
 
 The [source-planned pilot report](SOURCE-PLANNED-PILOT-2026-09-07.md) records the
 separately authorized fifth artifact-only attempt. Normal cap three and all prior

@@ -81,8 +81,13 @@ export function createOfflineNetwork(backlog: Candidate[], sourceFacts: string[]
             const title = `Founder video reference ${index + 1}`;
             const description = 'Search summary for a founder video planning reference.';
             const split = Math.ceil(sourceFacts.length / 2);
-            const paragraphs = index < 2 ? sourceFacts.slice(index * split, (index + 1) * split)
-              : [`Founder video reference ${index + 1} recommends reviewing the completed recording before distribution.`];
+            // These numbered workflows are synthetic test topics, not live
+            // source observations. Give each body substantive topic support;
+            // a matching search title or generic recording advice is insufficient.
+            const workflow = candidate.primaryKeyword.split(' ').at(-1);
+            const topic = `Workflow ${workflow} for a founder product demo video starts with choosing the intended viewer and verifying the claims shown on screen.`;
+            const paragraphs = index < 2 ? [topic, ...sourceFacts.slice(index * split, (index + 1) * split)]
+              : [`Workflow ${workflow} for a founder product demo video includes reviewing the completed recording before distribution.`];
             // Each catalog entry is an independent topic, not a qualification of
             // its neighbor. Make those boundaries explicit in the source HTML.
             pages.set(finalUrl, { status: 200, body: '<article><h1>Founder video preparation</h1>'

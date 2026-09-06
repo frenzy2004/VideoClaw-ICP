@@ -99,7 +99,16 @@ describe('runtime context and artifacts', () => {
     expect(new Set(candidates.map(({ articleId }) => articleId)).size).toBe(candidates.length);
   });
 
-  it('builds body-only facts and keeps fetch timestamps and citation identity', () => {
+  it.each([
+    { label: 'legacy absence', bodyStart: undefined, valid: true },
+    { label: 'no heading', bodyStart: 0, valid: true },
+    { label: 'heading prefix', bodyStart: 16, valid: true },
+    { label: 'negative offset', bodyStart: -1, valid: false },
+    { label: 'fractional offset', bodyStart: 1.5, valid: false },
+    { label: 'out-of-bounds offset', bodyStart: 1000, valid: false },
+    { label: 'NaN offset', bodyStart: NaN, valid: false },
+    { label: 'infinite offset', bodyStart: Infinity, valid: false },
+  ])('preserves body fact provenance and validates bodyStart: $label', ({ bodyStart, valid }) => {
     const candidate = CandidateSchema.parse({
       schemaVersion: 1, articleId: 'vc-c2-901', campaignId: 'accelerator-demo-day-founder', icp: 'demo day founder',
       primaryKeyword: 'founder video proof workflow', secondaryKeywords: [], title: 'Founder Video Proof Workflow',
@@ -130,25 +139,35 @@ describe('runtime context and artifacts', () => {
       ],
       faqQuestions: shallow.peopleAlsoAsk,
     });
+    const passageText = 'Demo checklist. Do not skip rehearsal before sharing.';
+    const preamble = 'Document preamble. ';
     const sourceDocuments = evidence.sources.map((source) => ({
       url: source.originalUrl, finalUrl: source.finalUrl, status: 200, reachable: true,
       authoritative: source.authoritative, checkedAt: '2026-09-05T00:01:30.000Z',
       contentType: 'text/html', bodySha256: 'a'.repeat(64),
-      text: 'Record the presentation and watch it with a reviewer.',
-      passages: [{ text: 'Record the presentation and watch it with a reviewer.', start: 0, end: 53 }],
+      text: preamble + passageText,
+      passages: [{ text: passageText, start: preamble.length, end: preamble.length + passageText.length,
+        ...(bodyStart === undefined ? {} : { bodyStart }),
+      }],
     }));
     const result: ResearchResult = Object.assign({ candidate, evidence, provenance: shallow.provenance }, { sourceDocuments });
     const metrics = KeywordMetricsSchema.parse({ schemaVersion: 1, provider: 'pending', observedAt: null, volume: null, difficulty: null, cpc: null, intent: 'informational' });
 
-    const context = buildDraftingContextFromResearch({ result, shallow, metrics, generatedAt: '2026-09-05T00:02:00.000Z' });
+    const input = { result, shallow, metrics, generatedAt: '2026-09-05T00:02:00.000Z' };
+    if (!valid) {
+      expect(() => buildDraftingContextFromResearch(input)).toThrow(/invalid verified source body document/i);
+      return;
+    }
+    const context = buildDraftingContextFromResearch(input);
     expect(context.sourceFacts).toHaveLength(2);
     expect(context.sourceFacts[0]).toMatchObject({
       url: 'https://primary.example/guide',
       checkedAt: '2026-09-05T00:01:30.000Z',
       facts: [
-        { text: 'Record the presentation and watch it with a reviewer.', evidenceKind: 'body' },
+        { text: passageText, evidenceKind: 'body', ...(bodyStart === undefined ? {} : { bodyStart }) },
       ],
     });
+    if (bodyStart === undefined) expect(context.sourceFacts[0].facts[0]).not.toHaveProperty('bodyStart');
     expect(JSON.stringify(context.sourceFacts)).not.toContain('visible product proof');
     expect(context.checkedSources.every(({ reachable, status }) => reachable && status === 200)).toBe(true);
     expect(context.provenance).toEqual({ apifyRunId: 'run-s', apifyDatasetId: 'data-s', query: candidate.primaryKeyword, locale: 'en-US', capturedAt: '2026-09-05' });
@@ -213,7 +232,7 @@ describe('runtime context and artifacts', () => {
     });
 
     expect(context.sourceFacts[0].facts).toEqual([
-      { id: 'source-1-fact-1', text: 'Rehearse the founder video before sharing the final file.', evidenceKind: 'body' },
+      { id: 'source-1-fact-1', text: 'Rehearse the founder video before sharing the final file.', evidenceKind: 'body', bodyStart: 0 },
     ]);
   });
 

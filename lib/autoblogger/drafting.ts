@@ -25,7 +25,7 @@ import {
 } from './content-bundle';
 import { isStrictIsoDateTime } from './date-time';
 import { containsSecretLikeValue } from './secrets';
-import { buildSourcePlan, measureReviewedSourceUse, MAX_SOURCE_DERIVED_WORDS } from './source-plan';
+import { buildSourcePlan, measurePotentialSourceUse, measureReviewedSourceUse, MAX_SOURCE_DERIVED_WORDS, TARGET_SOURCE_DERIVED_WORDS } from './source-plan';
 
 const CritiqueIssueSchema = z.object({
   id: z.string().trim().min(1),
@@ -242,6 +242,9 @@ The description must explain the reader's task and the concrete help in this art
 not repeat the candidate title. Aim for 120–160 characters; the worker accepts
 80–200 as a house editorial range, not a search-engine ranking guarantee.
 Do not pad the description or promise unsupported results. Bind its final text.
+customerTrigger is private campaign configuration, not a source claim: copy
+campaignContext.customerTrigger verbatim (from candidate.icp). Do not create a
+claimBinding for /customerTrigger. All public prose and competitorGap still require bindings.
 Frame competitorGap as a proposed editorial synthesis of the selected sources,
 not a proven absence across competitors or a claim of measured search demand.
 Separate source-supported themes from original editorial additions in competitorGap;
@@ -260,7 +263,8 @@ hypothetical worked example, and useful troubleshooting, not a competitor's outl
 Use headings specific to readerTask; do not insert a recording workflow merely
 because this publisher sells video software. Never label a paraphrase original.
 Do not quote source wording in article prose. Keep total words derived from any one
-source at or below ${MAX_SOURCE_DERIVED_WORDS} across the article, including paraphrases and non-contiguous
+source around or below ${TARGET_SOURCE_DERIVED_WORDS}, leaving a review reserve before the final
+${MAX_SOURCE_DERIVED_WORDS}-word limit across the article, including paraphrases and non-contiguous
 passages; original practical guidance must be clearly labelled and relevant, not a
 disguise for close paraphrase. Exact caller-approved product claims remain required.
 Make directAnswer one plain paragraph of 40–60 words, aiming naturally for about 50.
@@ -296,7 +300,10 @@ internal research/debug prose, or links outside the supplied inventory. Answer t
 three supplied FAQ questions exactly and reference every used product claim.
 ${ARTICLE_COMPOSITION_RULES}`;
 
-const SUPPORT_REVIEW_RULES = `Independently evaluate EVERY entry in bindingManifest in its full draft context,
+const SUPPORT_REVIEW_RULES = `customerTrigger is private caller-configured campaign metadata from candidate.icp,
+not an externally sourced claim. Code requires exact equality. Do not require an
+external citation for that field. This does not exempt competitorGap or public prose.
+Independently evaluate EVERY entry in bindingManifest in its full draft context,
 including headings, metadata, FAQ answers, and graphic text. Return exactly one
 supportEvaluations item per entry, copying bindingIndex and bindingHash without alteration.
 Use kind source_claim, original_guidance, original_example, or product_claim and give
@@ -343,9 +350,10 @@ Never provide an acceptance predicate.
 ${SUPPORT_REVIEW_RULES}`;
 
 const REPAIR_VERIFICATION_SYSTEM = `Independently verify one repaired article draft.
-Evaluate every supplied original critique issue by its exact stable ID. Return one
+Evaluate every supplied originalIssues entry by its exact stable ID. The registry
+contains both independent-critique and deterministic-check issues. Return one
 explicit resolved/unresolved evaluation for every original issue and report every
-new issue separately. Reevaluate support for ALL repaired bindings, including unchanged
+new issue separately; never invent an ID from a binding index or code. Reevaluate support for ALL repaired bindings, including unchanged
 ones, from repairedDraft and the current bindingManifest; do not reuse original support
 decisions or assume that resolving an old issue proves support for the replacement.
 Use originalRepairTargets to locate the previously failed spans and evidence scope;
@@ -361,6 +369,8 @@ bindings. Retain exact visible span/location bindings for all prose, use natural
 supported paraphrases and clearly labelled original guidance/examples, and never
 borrow paragraphs or expand snippet evidence into unseen body claims. Return a
 complete replacement object, with no commentary.
+The originalIssues registry is the complete list of stable issue IDs that the
+independent verifier will check. Resolve all of them, including machine findings.
 Use repairTargets to address the exact unresolved location/span and cited facts.
 Remove or narrow assertions unsupported by those facts; do not invent supporting
 facts or substitute a merely related citation. Preserve unaffected supported prose
@@ -372,11 +382,15 @@ their bindingIndices to find repeated reliance across body, FAQs, metadata and
 graphic text. Do not resolve a budget failure by changing citations, calling copied
 advice original, or simply adding another source to the same borrowed passage.
 Create genuinely original reader decisions/examples or cut redundant source-derived
-coverage. A single-location patch is not sufficient for an aggregate violation.
+coverage. Aim at the ${TARGET_SOURCE_DERIVED_WORDS}-word reviewed derivation target per page;
+the final hard limit remains ${MAX_SOURCE_DERIVED_WORDS}. Potential source exposure
+counts include contextual citations for original advice and are only a risk diagnostic,
+not proof of copying or a word limit on genuinely original guidance.
+A single-location patch is not sufficient for an aggregate violation.
 Recompute exact bindings for
 any changed rendered sentences, headings, or locations, retaining complete coverage.
 For each rejected assertion, inspect all occurrences and paraphrases across the
-entire article, not just the reported location: directAnswer, description, customerTrigger, competitorGap, every section,
+entire article, not just the reported location: directAnswer, description, competitorGap, every section,
 FAQ answers, and editorialGraphic.steps as well as its title/alt. Remove or qualify
 the same unsupported idea wherever it appears. Fixing "record cleanly" in the opening
 does not resolve "a clean screen recording" elsewhere without supporting evidence.
@@ -396,6 +410,7 @@ ${ARTICLE_COMPOSITION_RULES}`;
 function modelContext(context: DraftingContext): Record<string, unknown> {
   return {
     candidate: context.candidate,
+    campaignContext: { customerTrigger: context.candidate.icp, provenance: 'candidate.icp' },
     evidence: context.evidence,
     keywordMetrics: context.keywordMetrics,
     provenance: context.provenance,
@@ -423,6 +438,13 @@ function bindingManifest(draft: GeneratedDraftV2) {
     ])).digest('hex'),
     ...binding,
   }));
+}
+
+function generatedDraftSchema(context: DraftingContext) {
+  return { ...GENERATED_DRAFT_V2_JSON_SCHEMA, properties: {
+    ...GENERATED_DRAFT_V2_JSON_SCHEMA.properties,
+    customerTrigger: { type: 'string', enum: [context.candidate.icp] },
+  } };
 }
 
 function supportFindings(
@@ -503,6 +525,39 @@ function critiqueIssues(critique: DraftCritiqueV1): DraftSafetyFinding[] {
     return [{ code: 'critique.rejected', message: 'Independent critique rejected the draft.' }];
   }
   return critique.issues.map(({ id, code, message, repairInstruction }) => ({ issueId: id, code, message, repairInstruction }));
+}
+
+function buildRepairIssueRegistry(critique: DraftCritiqueV1, findings: DraftSafetyFinding[]) {
+  const issues = [...critique.issues];
+  const ids = new Set(issues.map(issue => issue.id));
+  const machine = new Map<string, string>();
+  const identifiedFindings = findings.map(finding => {
+    const identity = JSON.stringify([finding.code, finding.location, finding.span, finding.bindingIndex, finding.reason, finding.message]);
+    let id = machine.get(identity);
+    if (!id) {
+      const base = `check-${createHash('sha256').update(identity).digest('hex').slice(0, 24)}`;
+      id = base;
+      for (let suffix = 2; ids.has(id); suffix += 1) id = `${base}-${suffix}`;
+      ids.add(id);
+      machine.set(identity, id);
+      issues.push({ id, code: finding.code, message: finding.message,
+        repairInstruction: finding.repairInstruction ?? 'Correct this exact finding without changing the supplied evidence or approval rules. Rebuild affected bindings.' });
+    }
+    return { ...finding, issueId: id };
+  });
+  return { issues, findings: identifiedFindings };
+}
+
+function repairVerificationSchema(issues: DraftCritiqueV1['issues']) {
+  const base = DRAFT_REPAIR_VERIFICATION_V1_JSON_SCHEMA;
+  return { ...base, properties: { ...base.properties, evaluations: {
+    ...base.properties.evaluations,
+    minItems: issues.length, maxItems: issues.length,
+    items: { ...base.properties.evaluations.items, properties: {
+      ...base.properties.evaluations.items.properties,
+      issueId: { type: 'string', ...(issues.length ? { enum: issues.map(issue => issue.id) } : {}) },
+    } },
+  } } };
 }
 
 function repairVerificationFindings(
@@ -632,7 +687,7 @@ export function createStructuredDrafter(options: StructuredDrafterOptions) {
       suppliedContext.sourcePlan = buildSourcePlan(context);
       const initial = GeneratedDraftV2Schema.parse(await options.client.generate({
         name: 'videoclaw_article_draft_v2',
-        schema: GENERATED_DRAFT_V2_JSON_SCHEMA,
+        schema: generatedDraftSchema(context),
         system: DRAFT_SYSTEM,
         input: suppliedContext,
       }));
@@ -660,14 +715,28 @@ export function createStructuredDrafter(options: StructuredDrafterOptions) {
         };
       }
       const bindingSupportFindings = supportFindings(initial, critique.supportEvaluations);
+      const canMaterialize = deterministicFindings.length === 0;
       const sourceUsage = measureReviewedSourceUse(context.sourceFacts, initial, critique.supportEvaluations);
+      const potentialSourceUsage = measurePotentialSourceUse(context.sourceFacts, initial);
       deterministicFindings.push(...sourceUsage.findings);
+      deterministicFindings.push(...potentialSourceUsage.findings);
+      // This is an initial composition buffer, not a lower final acceptance cap.
+      // Contextually grounded original guidance is not counted as derivation.
+      if (sourceUsage.findings.length === 0) {
+        deterministicFindings.push(...sourceUsage.sources
+          .filter(source => source.derivedWords > TARGET_SOURCE_DERIVED_WORDS)
+          .map(source => ({
+            code: 'content.source_allocation',
+            message: `Reviewed derivation from ${source.sourceIds.join(', ')} is ${source.derivedWords} words, above the ${TARGET_SOURCE_DERIVED_WORDS}-word planning target. Preserve margin before the final ${MAX_SOURCE_DERIVED_WORDS}-word limit.`,
+            repairInstruction: 'Restructure source-derived passages across the article, retaining necessary facts and genuinely original reader tools. Do not disguise paraphrases as original guidance or change citations to evade source accounting.',
+          })));
+      }
       // Check final formatting even when the critic rejects a structurally valid
       // draft, so the one repair sees all actionable findings in the same call.
-      if (deterministicFindings.length === 0) {
+      if (canMaterialize) {
         try {
           const bundle = materializeDraftBundle(context, initial, media);
-          if (critiqueIssues(critique).length === 0 && bindingSupportFindings.length === 0) {
+          if (deterministicFindings.length === 0 && critiqueIssues(critique).length === 0 && bindingSupportFindings.length === 0) {
             return { status: 'ready', repaired: false, bundle };
           }
         } catch (error) {
@@ -675,21 +744,24 @@ export function createStructuredDrafter(options: StructuredDrafterOptions) {
           deterministicFindings.push(...error.findings);
         }
       }
-      const targets = repairTargets(context, initial, [...deterministicFindings, ...bindingSupportFindings]);
+      const registry = buildRepairIssueRegistry(critique, [...deterministicFindings, ...bindingSupportFindings]);
+      const targets = repairTargets(context, initial, registry.findings);
 
       const repaired = GeneratedDraftV2Schema.parse(await options.client.generate({
         name: 'videoclaw_article_repair_v2',
-        schema: GENERATED_DRAFT_V2_JSON_SCHEMA,
+        schema: generatedDraftSchema(context),
         system: REPAIR_SYSTEM,
         input: {
           ...suppliedContext,
           draft: initial,
           critique,
+          originalIssues: registry.issues,
           deterministicFindings,
           bindingSupportFindings,
           repairTargets: targets,
           sourceUsage,
-          repairStrategy: sourceUsage.findings.some(f => f.code === 'content.source_budget')
+          potentialSourceUsage,
+          repairStrategy: deterministicFindings.some(f => ['content.source_budget', 'content.source_allocation'].includes(f.code))
             || critique.issues.some(issue => /deriv|copy|paraphras|source.?budget|reliance/iu.test(`${issue.code} ${issue.message}`))
             ? 'restructure_article' : 'targeted_repair',
         },
@@ -706,11 +778,11 @@ export function createStructuredDrafter(options: StructuredDrafterOptions) {
       }
       const repairedVerification = DraftRepairVerificationV1Schema.parse(await options.client.generate({
         name: 'videoclaw_article_repair_verification_v1',
-        schema: DRAFT_REPAIR_VERIFICATION_V1_JSON_SCHEMA,
+        schema: repairVerificationSchema(registry.issues),
         system: REPAIR_VERIFICATION_SYSTEM,
         input: {
           ...suppliedContext,
-          originalIssues: critique.issues,
+          originalIssues: registry.issues,
           originalRepairTargets: targets,
           repairedDraft: repaired,
           bindingManifest: bindingManifest(repaired),
@@ -723,7 +795,7 @@ export function createStructuredDrafter(options: StructuredDrafterOptions) {
           findings: [{ code: 'content.secret', message: 'Critic output contains a secret-like value.' }],
         };
       }
-      remainingFindings.push(...repairVerificationFindings(critique.issues, repairedVerification));
+      remainingFindings.push(...repairVerificationFindings(registry.issues, repairedVerification));
       remainingFindings.push(...supportFindings(repaired, repairedVerification.supportEvaluations));
       remainingFindings.push(...measureReviewedSourceUse(context.sourceFacts, repaired, repairedVerification.supportEvaluations).findings);
       if (remainingFindings.length > 0) {

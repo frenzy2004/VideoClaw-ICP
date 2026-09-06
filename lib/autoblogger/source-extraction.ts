@@ -1,7 +1,14 @@
 import { createRequire } from 'node:module';
 
 export type SourceReadOptions = { query?: string; questions?: readonly string[] };
-export type SourcePassage = { text: string; start: number; end: number };
+export type SourcePassage = {
+  text: string; start: number; end: number;
+  /** UTF-16 offset relative to passage.text, after its retained heading and
+   * separating space. New extraction always emits this; 0 means no heading.
+   * The heading and all adjacent qualifications remain in the exact passage.
+   */
+  bodyStart?: number;
+};
 
 export const SOURCE_TEXT_LIMIT = 8_000;
 export const SOURCE_PASSAGE_LIMIT = 20;
@@ -98,7 +105,7 @@ export function extractSourceBody(html: string, options: SourceReadOptions = {})
     || /(?:^|\s)(?:w-richtext|fl-rich-text|sl-markdown-content)(?:$|\s)/u.test(node.getAttribute?.('class') ?? '')
   )));
   const scope = bodyScope ?? main ?? nodes.find((node) => node.tagName === 'BODY') ?? root;
-  const candidates: Array<{ text: string; order: number; score: number }> = [];
+  const candidates: Array<{ text: string; bodyStart: number; order: number; score: number }> = [];
   const queryTokens = tokens(options.query ?? '');
   const questionTokens = (options.questions ?? []).slice(0, 10).map(tokens);
   const topicTerms = new Set([...queryTokens, ...questionTokens.flatMap((terms) => [...terms])]);
@@ -122,7 +129,7 @@ export function extractSourceBody(html: string, options: SourceReadOptions = {})
     const words = tokens(text);
     const overlap = (terms: Set<string>) => [...terms].filter((term) => words.has(term)).length;
     const score = overlap(queryTokens) * 2 + Math.max(0, ...questionTokens.map((terms) => overlap(terms) * 6));
-    candidates.push({ text, order: candidates.length, score });
+    candidates.push({ text, bodyStart: heading ? heading.length + 1 : 0, order: candidates.length, score });
   };
   while (bodyNodes.length) {
     const { node, exit, previousHeading } = bodyNodes.pop()!;
@@ -182,7 +189,7 @@ export function extractSourceBody(html: string, options: SourceReadOptions = {})
     if (text) text += '\n\n';
     const start = text.length;
     text += candidate.text;
-    return { text: candidate.text, start, end: text.length };
+    return { text: candidate.text, start, end: text.length, bodyStart: candidate.bodyStart };
   });
   if (!passages.length) throw new Error('Source has no usable body evidence.');
   return { text, passages };

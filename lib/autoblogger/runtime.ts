@@ -119,6 +119,8 @@ export function buildDraftingContextFromResearch(input: {
         !Number.isInteger(passage.start) || !Number.isInteger(passage.end)
         || passage.start < 0 || passage.end <= passage.start || passage.end > document.text.length
         || !passage.text.trim() || passage.text.length > SOURCE_PASSAGE_CHARACTER_LIMIT
+        || (passage.bodyStart !== undefined && (!Number.isInteger(passage.bodyStart)
+          || passage.bodyStart < 0 || passage.bodyStart > passage.text.length))
         || /[\u0000-\u001f\u007f-\u009f\p{Cf}]/u.test(passage.text)
         || document.text.slice(passage.start, passage.end) !== passage.text
       ))) {
@@ -132,8 +134,9 @@ export function buildDraftingContextFromResearch(input: {
       label: new URL(document.finalUrl).hostname.replace(/^www\./u, ''),
       url: document.finalUrl,
       checkedAt: document.checkedAt,
-      facts: document.passages.map(({ text }, factIndex) => ({
+      facts: document.passages.map(({ text, bodyStart }, factIndex) => ({
         id: `source-${sourceIndex + 1}-fact-${factIndex + 1}`, text, evidenceKind: 'body' as const,
+        ...(bodyStart === undefined ? {} : { bodyStart }),
       })),
       excerpt: document.text,
     };
