@@ -227,9 +227,20 @@ labelled hypothetical examples; do not pad, repeat, copy, or invent facts to hit
 Name the publisher when attributing advice; never write "a supplied source" or
 "the supplied evidence" in public prose. Keep classroom, application-video and
 investor-event requirements distinct. Omit irrelevant rules rather than treating
-every retrieved fact as a requirement to include it. A clearly labelled original
-recommendations section can establish that context once; do not repeat an internal
-compliance disclaimer in every sentence.
+every retrieved fact as a requirement to include it.
+Write for a founder using the guide, not for an internal evidence auditor.
+Establish your own advice once with a reader-facing section heading such as
+"Recommended recording workflow" or a brief "We recommend..." introduction,
+then give direct, practical instructions within that scope. Do not prefix each
+paragraph or FAQ with "Original recommendation:" or "Original editorial note:".
+Keep source-backed statements attributed to the named publisher, and visibly mark
+invented examples as hypothetical. Never remove a qualification needed for truth.
+Private binding metadata and review rationales carry the audit detail; section
+context must make the distinction clear to readers without repeated disclaimers.
+The description must explain the reader's task and the concrete help in this article,
+not repeat the candidate title. Aim for 120–160 characters; the worker accepts
+80–200 as a house editorial range, not a search-engine ranking guarantee.
+Do not pad the description or promise unsupported results. Bind its final text.
 Frame competitorGap as a proposed editorial synthesis of the selected sources,
 not a proven absence across competitors or a claim of measured search demand.
 Separate source-supported themes from original editorial additions in competitorGap;
@@ -262,8 +273,8 @@ Bind EVERY visible sentence, heading, metadata string, FAQ answer, and graphic l
 by exact location and visible prose span to valid fact IDs from selected checked sources.
 General source claims may be natural paraphrases: preserve meaning, scope, qualifiers,
 and uncertainty; no lexical-overlap shortcut and no invented outcomes or measurements.
-Clearly label original guidance as recommendations and invented examples as hypothetical
-in the visible prose; bind each to relevant source facts as context, without attributing
+Clearly identify original guidance through a recommendations heading or introduction,
+and invented examples as hypothetical in the visible prose; bind each to relevant source facts as context, without attributing
 your own advice or examples to the source. Headings/labels may summarize that guidance.
 Never borrow source paragraphs. A reachable URL is not evidence of its body content:
 search titles/snippets support only their supplied limited text, not unseen body facts.
@@ -288,8 +299,16 @@ For a list attributed to named publishers, require cited support for every item.
 An "editorial synthesis" label alone does not distinguish original additions from
 source advice, including in competitorGap; require that distinction in the text.
 For original guidance/examples, explicitly check that recommendations/hypothetical
-examples are clearly labelled in visible prose (or its heading/context), relevant to
+examples are clearly identified in visible prose (or its heading/context), relevant to
 the bound facts, and not passed off as sourced facts, real events, or proven outcomes.
+A recommendation heading or scoped introduction can establish original-guidance
+context for subsequent instructions; do not demand an "Original recommendation:"
+prefix on every sentence. Hypothetical examples still need visible identification.
+Check reader-facing quality too: reject a description that repeats the title or
+fails to explain the article's practical help, and reject repetitive process labels
+or disclaimers. Recommend restructuring into scoped guidance rather than removing
+truth-preserving qualifications. The description house range is 80–200 characters,
+with 120–160 preferred; length alone never proves usefulness or source support.
 Reject borrowed paragraphs or close copying; an original synthesis is required.
 Explicitly check product restrictions for every span: any direct or implicit VideoClaw
 capability assertion needs an approved productClaimId, exact approved wording and

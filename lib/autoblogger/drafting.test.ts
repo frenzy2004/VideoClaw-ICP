@@ -287,6 +287,65 @@ class FixtureStructuredClient implements StructuredOutputClient {
 }
 
 describe('contextual review and targeted bounded repair', () => {
+  it('blocks a repair that only soft-wraps the repeated labels while updating exact bindings', async () => {
+    const initial = structuredClone(draft);
+    const originalSpans = ['Original recommendation: Plan the recording.', 'Original editorial note: Rehearse the opening.'];
+    initial.sections[0].markdown = originalSpans.join('\n\n');
+    initial.claimBindings = initial.claimBindings.filter(({ location }) => location !== '/sections/0/markdown');
+    initial.claimBindings.push(...originalSpans.map(span => ({
+      location: '/sections/0/markdown', span, sourceFactIds: ['yc-bullets'], productClaimId: null,
+    })));
+    const repaired = structuredClone(initial);
+    repaired.sections[0].markdown = 'Original\nrecommendation: Plan the recording.\n\nOriginal editorial\nnote: Rehearse the opening.';
+    repaired.claimBindings = repaired.claimBindings.filter(({ location }) => location !== '/sections/0/markdown');
+    repaired.claimBindings.push(...['Original', 'recommendation: Plan the recording.', 'Original editorial', 'note: Rehearse the opening.'].map(span => ({
+      location: '/sections/0/markdown', span, sourceFactIds: ['yc-bullets'], productClaimId: null,
+    })));
+    const critique = { ...approvedCritique, supportEvaluations: supportedBindings(initial) };
+    const client = new FixtureStructuredClient([initial, critique, repaired, resolvedVerification(critique, repaired)]);
+    const outcome = await createStructuredDrafter({ client, mediaAllowlist: [media] }).draft(context);
+    expect(client.requests).toHaveLength(4);
+    expect(outcome).toMatchObject({ status: 'blocked', findings: expect.arrayContaining([
+      expect.objectContaining({ code: 'content.editorial_scaffolding', location: '/sections/0/markdown' }),
+    ]) });
+    expect(outcome).not.toHaveProperty('bundle');
+  });
+
+  it.each([true, false])('keeps editorial defects in the one bounded repair even when the critic approves (fixed: %s)', async (fixed) => {
+    const initial = structuredClone(draft);
+    initial.description = candidate.title;
+    const spans = ['Original recommendation: Plan the recording.', 'Original editorial note: Rehearse the opening.'];
+    initial.sections[0].markdown = spans.join('\n\n');
+    initial.claimBindings = initial.claimBindings.filter(({ location }) => location !== '/description' && location !== '/sections/0/markdown');
+    initial.claimBindings.push(
+      { location: '/description', span: initial.description, sourceFactIds: ['yc-bullets'], productClaimId: null },
+      ...spans.map(span => ({ location: '/sections/0/markdown', span, sourceFactIds: ['yc-bullets'], productClaimId: null })),
+    );
+    const critique = { ...approvedCritique, supportEvaluations: supportedBindings(initial) };
+    const repaired = fixed ? draft : initial;
+    const client = new FixtureStructuredClient([initial, critique, repaired, resolvedVerification(critique, repaired)]);
+    const outcome = await createStructuredDrafter({ client, mediaAllowlist: [media] }).draft(context);
+    expect(client.requests).toHaveLength(4);
+    expect(client.requests[2].input).toMatchObject({
+      deterministicFindings: expect.arrayContaining([
+        expect.objectContaining({ code: 'content.description_duplicate', location: '/description' }),
+        expect.objectContaining({ code: 'content.editorial_scaffolding', location: '/sections/0/markdown' }),
+      ]),
+    });
+    if (fixed) {
+      expect(outcome).toMatchObject({ status: 'ready', repaired: true });
+      if (outcome.status !== 'ready') throw new Error('Expected repaired review artifact.');
+      expect(outcome.bundle.markdown).toContain(draft.description);
+      expect(outcome.bundle.markdown).not.toContain('Original recommendation:');
+    } else {
+      expect(outcome).toMatchObject({ status: 'blocked', findings: expect.arrayContaining([
+        expect.objectContaining({ code: 'content.description_duplicate' }),
+        expect.objectContaining({ code: 'content.editorial_scaffolding' }),
+      ]) });
+      expect(outcome).not.toHaveProperty('bundle');
+    }
+  });
+
   it('accepts an ordinary recording referent only after complete independent support review', async () => {
     const value = withSourceClaim('If practice partners are unavailable, record the presentation and watch it back with the same questions.');
     expect(inspectGeneratedDraft(context, value)).toEqual([]);

@@ -62,6 +62,13 @@ made no model calls and changed no state. Technical acceptance does not establis
 production copy quality; repetitive labels, a short description and one broader
 FAQ remain human-review items.
 
+The subsequent [editorial correction](../autoblogger/EDITORIAL-QUALITY-2026-09-06.md)
+now detects those description/label problems in the saved draft and excludes the
+adjacent launch-checklist FAQ during observed-question selection. This was tested
+without new model/research calls or rewriting the artifact. The old native QA
+result remains historical; the old draft is not accepted by the stronger current
+worker editorial checks.
+
 Recent PAA reuse retains its original timestamp and separate run/dataset; it never
 pretends a missing Google feature appeared in the newest organic run. Local exact
 replay receipts remain private and ignored. No retry history was reset.

@@ -792,6 +792,51 @@ function inspectClaimBindings(
   return findings;
 }
 
+function editorialFindings(context: DraftingContext, draft: GeneratedDraftV2): DraftSafetyFinding[] {
+  const findings: DraftSafetyFinding[] = [];
+  const add = (code: string, location: string, span: string, message: string) => {
+    const bindingIndex = draft.claimBindings.findIndex(binding => binding.location === location && binding.span === span);
+    findings.push({
+      code, location, span, message, repairInstruction: message,
+      ...(bindingIndex >= 0 ? { bindingIndex, sourceFactIds: draft.claimBindings[bindingIndex].sourceFactIds } : {}),
+    });
+  };
+  // A worker editorial policy, not a Google ranking rule or a semantic-quality score.
+  const descriptionLength = [...draft.description.trim().replace(/\s+/gu, ' ')].length;
+  if (descriptionLength < 80 || descriptionLength > 200) {
+    add('content.description_length', '/description', draft.description,
+      'Write a specific 80–200 character description of what this article helps the reader do; aim for 120–160 without padding. Rebuild its exact supported bindings.');
+  }
+  if (normalizeKeyword(draft.description) === normalizeKeyword(context.candidate.title)) {
+    add('content.description_duplicate', '/description', draft.description,
+      'The description repeats the title. Summarize the practical reader outcome and article contents instead, without promising unsupported results; rebuild its exact bindings.');
+  }
+  const labels: Array<{ location: string; span: string }> = [];
+  const locations = new Set(generatedClaimSentences(draft).map(({ location }) => location));
+  for (const location of locations) {
+    if (location === '/customerTrigger' || location === '/competitorGap') continue;
+    const value = generatedLocationValue(draft, location)!;
+    const checkBlock = (span: string) => {
+      // Soft wraps and Markdown hard breaks do not change the visible label.
+      // Inspect a rendered block but retain its original text for repair; never
+      // rewrite the audited draft or change claim-binding segmentation.
+      const matches = span.matchAll(/\b(?:original\s+(?:recommendation|editorial\s+note|guidance)|editorial\s+note)\s*:/giu);
+      labels.push(...Array.from(matches, () => ({ location, span: span.trim() })));
+    };
+    if (location.startsWith('/editorialGraphic/')) checkBlock(value);
+    else walkMarkdown(parseMarkdown(value), node => {
+      if (['paragraph', 'heading', 'tableCell'].includes(node.type)) checkBlock(markdownNodeClaimText(node));
+    });
+  }
+  if (labels.length > 1) {
+    for (const { location, span } of labels) {
+      add('content.editorial_scaffolding', location, span,
+        'Repeated editorial process labels interrupt the article. Establish recommendation context once in a clear section heading or introduction and use natural instructions. Keep hypothetical examples explicit, source attribution accurate and all exact bindings current; do not merely strip labels from factual or product claims.');
+    }
+  }
+  return findings;
+}
+
 export function inspectGeneratedDraft(
   context: DraftingContext,
   value: unknown,
@@ -810,6 +855,7 @@ export function inspectGeneratedDraft(
   ].join('\n');
   const publishableProse = `${body}\n${metadata}`;
   const findings: DraftSafetyFinding[] = [];
+  findings.push(...editorialFindings(context, draft));
   const directAnswerWords = visibleWordCount(draft.directAnswer);
   if (directAnswerWords < 40 || directAnswerWords > 60) {
     findings.push(finding('content.direct_answer_words', `Direct answer has ${directAnswerWords} visible words; expected 40–60.`));

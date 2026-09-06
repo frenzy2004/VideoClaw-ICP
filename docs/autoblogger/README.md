@@ -8,6 +8,13 @@ The initial 250-topic research library is an input, not a quota or publication g
 
 Operator status on 2026-09-06: **one automatically researched/generated/repaired article passed native QA after unchanged-response offline revalidation; zero clean uninterrupted worker passes or generated lander PRs**. The [latest artifact report](PRODUCT-DEMO-ARTIFACT-2026-09-06.md) records the newly authorized attempt: eight organic results, automatic PAA/source retrieval and four live GPT-5.5 calls. Independent verification approved the repair, but deterministic grammar false positives stopped the live worker. After a test-first checker fix, replaying the same four saved responses produced the unchanged review bundle and passed the lander's 32 native tests, lint and build without new paid calls, manual evidence injection or rewriting. The original failed run remains failed; the candidate is terminal at attempt three, with earlier approvals/history intact. Passing technical checks is not copy/design approval: repetitive editorial labels, the description and an adjacent-topic FAQ still need review.
 
+**Subsequent editorial correction:** the [quality-check report](EDITORIAL-QUALITY-2026-09-06.md)
+records tested description, repetitive-label and FAQ-selection fixes. The unchanged
+saved draft now fails the stricter worker editorial checks; its earlier native QA
+pass is historical, not current editorial approval. Re-selecting from the saved
+observed question pool excludes the launch checklist and retains a product-demo
+example question. No new article, model call, research request or retry was made.
+
 The [previous product-demo retry](PRODUCT-DEMO-RETRY-2026-09-06.md), [collector correction](COLLECTOR-FIX-2026-09-06.md), [alternative-topic run](ALTERNATIVE-PILOT-2026-09-06.md), [earlier retry report](APPROVED-RETRY-2026-09-06.md) and [automated-pipeline report](AUTOMATED-PIPELINE-2026-09-06.md) retain historical checkpoints. Do not relabel any of them as successful or reset the exhausted candidate to run another pilot.
 
 One older operator-assisted review article still exists separately. Its source audit, intervention and native QA are preserved in the [assisted-review report](ASSISTED-REVIEW-2026-09-06.md). It is not a successful `worker.execute()` result. The [research recovery report](RESEARCH-RECOVERY-2026-09-06.md) and [first pilot report](LIVE-PILOT-2026-09-06.md) retain earlier checkpoints.
@@ -52,6 +59,8 @@ Built-in ImageGen can update the architecture illustration without an OpenAI API
 
 ## Safety boundary
 
+- Reader-facing editorial checks reject descriptions that repeat the title or fall outside the worker's 80–200-character house range, and repeated process labels in public prose. This is not a Google ranking rule or a semantic-quality score. Findings enter the existing single repair; independent support review remains required.
+- FAQ selection uses observed wording only, distinguishes topic terms from article-format words, and prefers stronger topic matches. Lexical matching is conservative, not a guarantee of semantic relevance; missing three qualifying questions still blocks preparation.
 - Generated articles are always `status: review`, have all approval flags set to `false`, omit `publishedAt`, and point only to `/download`.
 - The worker cannot approve, publish, merge, deploy, or change production article state.
 - A manual pending-metrics pilot creates exactly one short-lived workflow artifact and never invokes the lander PR publisher.

@@ -140,6 +140,130 @@ describe('bounded zero-organic SERP recovery', () => {
 });
 
 describe('missing PAA collector recovery', () => {
+  describe('FAQ relevance through collection and inspection', () => {
+    const candidate = { ...candidates(1)[0], primaryKeyword: 'product demo checklist' };
+    const genericQuestions = [
+      'What is a product demo?',
+      'When starting a product demo, what should you do first?',
+    ];
+    const adjacentQuestion = 'What are the steps involved in a product launch checklist?';
+    const checklistQuestion = 'What should a product demo checklist include?';
+
+    function boundary(initial: string[], collections: string[][], queryCandidate = candidate) {
+      const requests: Record<string, unknown>[] = [];
+      const client: ApifyClient = {
+        startActor: async (actor, input) => {
+          if (actor === PAA_ACTOR_ID) {
+            requests.push(input);
+            if (requests.length > collections.length) throw new Error('Unexpected PAA attempt');
+            return successfulRun(`paa-${requests.length}`, `paa-data-${requests.length}`);
+          }
+          if (actor !== AUTOCOMPLETE_ACTOR_ID && actor !== SERP_ACTOR_ID) throw new Error('Unexpected actor');
+          return successfulRun(actor, actor);
+        },
+        getRun: async () => { throw new Error('Already complete'); },
+        abortRun: async (id) => ({ id, status: 'ABORTED' }),
+        getDatasetItems: async (id) => {
+          if (id === AUTOCOMPLETE_ACTOR_ID) return [];
+          if (id === SERP_ACTOR_ID) return [{
+            searchQuery: { term: queryCandidate.primaryKeyword, device: 'DESKTOP', page: 1, countryCode: 'US', languageCode: 'en' },
+            organicResults: [{ position: 1, title: 'Demo planning', url: 'https://publisher.example/plan', description: 'Planning.' }],
+            peopleAlsoAsk: initial.map((question) => ({ question })), relatedQueries: [],
+          }];
+          const collection = Number(id.replace('paa-data-', ''));
+          return collections[collection - 1].map((question, index) => ({
+            record_type: 'paa_question', keyword: queryCandidate.primaryKeyword, question,
+            parent_question: adjacentQuestion, position: index + 1, country: 'us', language: 'en',
+            checked_at: '2026-09-04T08:01:00.000Z',
+          }));
+        },
+      };
+      return {
+        requests,
+        researcher: createResearcher({ apify: client, sourceChecker: { select: async () => [] }, execution: researchClock }),
+      };
+    }
+
+    it('recovers a missing topical FAQ in two bounded attempts and retains its exact observation at the cap', async () => {
+      const initial = [...genericQuestions, adjacentQuestion];
+      const { researcher, requests } = boundary(initial, [
+        Array.from({ length: 30 }, (_, index) => `What belongs in product launch checklist ${index + 1}?`),
+        [checklistQuestion],
+      ]);
+      const scanned = await researcher.scan([candidate]);
+      expect(requests).toEqual(Array(2).fill({
+        keywords: ['product demo checklist'], countryCode: 'us', languageCode: 'en', includeRelatedSearches: true,
+      }));
+      const shallow = scanned.results[0];
+      expect(shallow.peopleAlsoAsk).toEqual(expect.arrayContaining([...initial, checklistQuestion]));
+      expect(shallow.paaObservations).toHaveLength(30);
+      expect(shallow.paaObservations?.find(({ question }) => question === checklistQuestion)).toEqual({
+        question: checklistQuestion, parentQuestion: adjacentQuestion, query: 'product demo checklist',
+        actorId: PAA_ACTOR_ID, runId: 'paa-2', datasetId: 'paa-data-2',
+        observedAt: '2026-09-04T08:01:00.000Z', position: 1, country: 'US', language: 'en',
+      });
+      const deep = (await researcher.inspect([shallow])).results[0];
+      expect(deep.evidence.faqQuestions).toEqual([checklistQuestion, ...genericQuestions]);
+      expect(deep.evidence.serp.peopleAlsoAsk).toEqual([checklistQuestion, ...genericQuestions]);
+      expect(deep.evidence.signals.peopleAlsoAsk).toEqual(shallow.peopleAlsoAsk);
+      expect(deep.provenance.serp.runId).toBe(SERP_ACTOR_ID);
+      expect(deep.provenance.paaAttempts?.map(({ runId, datasetId }) => [runId, datasetId]))
+        .toEqual([['paa-1', 'paa-data-1'], ['paa-2', 'paa-data-2']]);
+    });
+
+    it('stops after two adjacent-only collections and still refuses inspection with fewer than three topical FAQs', async () => {
+      const initial = [...genericQuestions, adjacentQuestion];
+      const { researcher, requests } = boundary(initial, [[adjacentQuestion], [adjacentQuestion]]);
+      const scanned = await researcher.scan([candidate]);
+      expect(requests).toHaveLength(2);
+      expect(scanned.results[0].peopleAlsoAsk).toEqual(initial);
+      expect(scanned.results[0].provenance.paaAttempts?.map(({ runId }) => runId)).toEqual(['paa-1', 'paa-2']);
+      await expect(researcher.inspect(scanned.results)).rejects.toThrow(/three relevant/i);
+    });
+
+    it('uses sufficient observed SERP FAQs without starting the PAA collector', async () => {
+      const initial = [...genericQuestions, checklistQuestion];
+      const { researcher, requests } = boundary(initial, []);
+      const scanned = await researcher.scan([candidate]);
+      const deep = await researcher.inspect(scanned.results);
+      expect(requests).toEqual([]);
+      expect(deep.results[0].evidence.faqQuestions).toEqual([checklistQuestion, ...genericQuestions]);
+      expect(deep.results[0].provenance.paa).toBeUndefined();
+      expect(scanned.results[0].peopleAlsoAsk).toEqual(initial);
+    });
+
+    it.each([false, true])('preserves the original how-to query and bounded FAQ recovery (needsRecovery=%s)', async (needsRecovery) => {
+      const howToCandidate = { ...candidate, primaryKeyword: 'how to make a founder pitch video' };
+      const questions = [
+        'How do you plan a founder pitch video?',
+        'What belongs in a founder pitch video?',
+        'How long should a founder pitch video be?',
+      ];
+      const { researcher, requests } = boundary(
+        needsRecovery ? questions.slice(0, 2) : questions,
+        needsRecovery ? [[], [questions[2]]] : [],
+        howToCandidate,
+      );
+      const scanned = await researcher.scan([howToCandidate]);
+      expect(requests).toEqual(needsRecovery ? Array(2).fill({
+        keywords: ['how to make a founder pitch video'], countryCode: 'us', languageCode: 'en', includeRelatedSearches: true,
+      }) : []);
+      const deep = (await researcher.inspect(scanned.results)).results[0];
+      expect(deep.evidence.faqQuestions).toEqual(questions);
+      expect(deep.evidence.serp.peopleAlsoAsk).toEqual(questions);
+      expect(deep.provenance.serp.runId).toBe(SERP_ACTOR_ID);
+      if (needsRecovery) {
+        expect(deep.provenance.paaAttempts?.map(({ runId }) => runId)).toEqual(['paa-1', 'paa-2']);
+        expect(scanned.results[0].paaObservations?.[0]).toMatchObject({
+          query: 'how to make a founder pitch video', question: questions[2],
+          actorId: PAA_ACTOR_ID, runId: 'paa-2', datasetId: 'paa-data-2', observedAt: '2026-09-04T08:01:00.000Z',
+        });
+      } else {
+        expect(deep.provenance.paa).toBeUndefined();
+      }
+    });
+  });
+
   it.each(['2026-09-03T08:01:00.000Z','2026-09-05T08:01:00.000Z'])('rejects fresh-run PAA rows with invalid freshness: %s', async(checkedAt)=>{
     const candidate={...candidates(1)[0],primaryKeyword:'demo day video checklist'};
     const questions=['What is a demo day?','How does yc demo day work?','Can anyone attend YC demo day?'];
@@ -561,6 +685,180 @@ describe('staged researcher', () => {
       'What belongs in a demo day checklist?',
       'What are payroll tax deadlines?',
       'How is a corporation registered?',
+    ])).toThrow(/three relevant/i);
+  });
+
+  it('rejects the observed product-launch checklist FAQ while retaining generic product-demo questions', () => {
+    expect(selectRelevantPaaQuestions('product demo checklist', [
+      'What are the steps involved in a product launch checklist?',
+      'What is a product demo?',
+      'When starting a product demo, what should you do first?',
+      'How do you prepare a product demo?',
+    ])).toEqual([
+      'What is a product demo?',
+      'When starting a product demo, what should you do first?',
+      'How do you prepare a product demo?',
+    ]);
+  });
+
+  it.each(['workflow', 'workflows', 'process', 'processes', 'plan', 'plans', 'planning'])(
+    'retains the existing founder-pitch FAQ triplet when the keyword ends in %s', (modifier) => {
+      const questions = [
+        'How do you plan a founder pitch video?',
+        'What belongs in a founder pitch video?',
+        'How long should a founder pitch video be?',
+      ];
+      expect(selectRelevantPaaQuestions(`founder pitch video ${modifier}`, questions)).toEqual(questions);
+    },
+  );
+
+  it.each(['make', 'create'])('retains founder-pitch FAQs without the leading how-to-%s framing', (verb) => {
+    const questions = [
+      'How do you plan a founder pitch video?',
+      'What belongs in a founder pitch video?',
+      'How long should a founder pitch video be?',
+    ];
+    expect(selectRelevantPaaQuestions(`how to ${verb} a founder pitch video`, questions)).toEqual(questions);
+  });
+
+  it.each([
+    {
+      keyword: 'how to make a product demo checklist',
+      questions: ['What is a product demo?', 'How do you prepare a product demo?', 'How do you make a product launch checklist?'],
+    },
+    {
+      keyword: 'how to create a product launch video',
+      questions: ['What is a product launch video?', 'How do you plan a product launch video?', 'How do you create a product demo video?'],
+    },
+    {
+      keyword: 'how to create a customer onboarding email',
+      questions: ['What is a customer onboarding email?', 'When do you send a customer onboarding email?', 'How do you create a customer retention email?'],
+    },
+    {
+      keyword: 'how to make a product demo recording process',
+      questions: ['What is the product demo recording process?', 'Who manages the product demo recording process?', 'How do you make a product demo editing process?'],
+    },
+    {
+      keyword: 'how to record a founder pitch video',
+      questions: ['How do you record a founder pitch video?', 'Where do you record a founder pitch video?', 'How long should a founder pitch video be?'],
+    },
+    {
+      keyword: 'make a founder pitch video',
+      questions: ['How do you make a founder pitch video?', 'Why make a founder pitch video?', 'How long should a founder pitch video be?'],
+    },
+  ])('does not erase essential terms or verbs outside the supported framing in $keyword', ({ keyword, questions }) => {
+    expect(() => selectRelevantPaaQuestions(keyword, questions)).toThrow(/three relevant/i);
+  });
+
+  it('retains the existing Demo Day planning-checklist FAQ triplet', () => {
+    const questions = [
+      'What should a Demo Day video include?',
+      'How long should a Demo Day video be?',
+      'How do you prepare for Demo Day?',
+    ];
+    expect(selectRelevantPaaQuestions('Demo Day video planning checklist', questions)).toEqual(questions);
+  });
+
+  it('inspects founder-pitch workflow evidence using exact generic topic FAQs and ranks an observed workflow FAQ first', async () => {
+    const candidate = { ...candidates(1)[0], primaryKeyword: 'founder pitch video workflow' };
+    const genericQuestions = [
+      'How do you plan a founder pitch video?',
+      'What belongs in a founder pitch video?',
+      'How long should a founder pitch video be?',
+    ];
+    const workflowQuestion = 'Who reviews the founder pitch video workflow?';
+    const noIo = async () => { throw new Error('Unexpected I/O'); };
+    const researcher = createResearcher({
+      apify: { startActor: noIo, getRun: noIo, getDatasetItems: noIo, abortRun: noIo },
+      sourceChecker: { select: async () => [] },
+    });
+    const provenance = {
+      discovery: { actorId: 'autocomplete', runId: 'discovery', datasetId: 'discovery-data', observedAt: '2026-09-04T08:01:00.000Z' },
+      serp: { actorId: SERP_ACTOR_ID, runId: 'serp', datasetId: 'serp-data', observedAt: '2026-09-04T08:01:00.000Z' },
+    };
+    for (const questions of [genericQuestions, [...genericQuestions, workflowQuestion]]) {
+      const result = await researcher.inspect([{
+        candidate, suggestions: [], organicResults: [], peopleAlsoAsk: questions, relatedQueries: [], provenance,
+      }]);
+      expect(result.results[0].evidence.faqQuestions).toEqual(questions.length === 3
+        ? genericQuestions : [workflowQuestion, ...genericQuestions.slice(0, 2)]);
+      expect(result.results[0].evidence.signals.peopleAlsoAsk).toEqual(questions);
+      expect(result.results[0].provenance).toEqual(provenance);
+    }
+  });
+
+  it.each([
+    {
+      keyword: 'product demo workflow',
+      questions: ['What is a product demo?', 'How do you prepare a product demo?', 'What belongs in a product launch workflow?'],
+    },
+    {
+      keyword: 'customer onboarding email process',
+      questions: ['What is a customer onboarding email?', 'When do you send a customer onboarding email?', 'What belongs in a customer retention email process?'],
+    },
+    {
+      keyword: 'business process automation checklist',
+      questions: ['What is business process automation?', 'How do you implement business process automation?', 'What belongs in a business automation checklist?'],
+    },
+    {
+      keyword: 'workflow automation checklist',
+      questions: ['What is workflow automation?', 'How do you implement workflow automation?', 'What belongs in a marketing automation checklist?'],
+    },
+  ])('keeps substantive topic terms required in $keyword', ({ keyword, questions }) => {
+    expect(() => selectRelevantPaaQuestions(keyword, questions)).toThrow(/three relevant/i);
+  });
+
+  it('ranks stronger observed FAQs ahead of generic topic questions without rewriting or duplicating them', () => {
+    const questions = [
+      'What is a product demo?',
+      'When starting a product demo, what should you do first?',
+      'How do you prepare a product demo?',
+      'What should a Product Demo checklist include?',
+      'WHAT SHOULD A PRODUCT DEMO CHECKLIST INCLUDE?',
+      'Who reviews a product-demo checklist?',
+    ];
+    const original = [...questions];
+    expect(selectRelevantPaaQuestions('product demo checklist', questions)).toEqual([
+      'What should a Product Demo checklist include?',
+      'Who reviews a product-demo checklist?',
+      'What is a product demo?',
+    ]);
+    expect(questions).toEqual(original);
+  });
+
+  it.each([
+    ['product demo checklist', 'What are the steps involved in a product launch checklist?'],
+    ['product demo guide', 'What belongs in a product launch guide?'],
+    ['product demo template', 'What belongs in a product launch template?'],
+    ['product demo examples', 'Where can I find product launch examples?'],
+  ])('does not let format words replace a missing topic term for %s', (keyword, adjacentQuestion) => {
+    expect(() => selectRelevantPaaQuestions(keyword, [
+      'What is a product demo?',
+      'When starting a product demo, what should you do first?',
+      adjacentQuestion,
+      'WHAT IS A PRODUCT DEMO?',
+    ])).toThrow(/three relevant/i);
+  });
+
+  it('rejects adjacent topics beyond product demos even with two or more matching words', () => {
+    expect(selectRelevantPaaQuestions('customer onboarding email checklist', [
+      'What belongs in a customer retention email checklist?',
+      'What is a customer onboarding email?',
+      'How do you write a customer onboarding email?',
+      'When do you send a customer onboarding email?',
+    ])).toEqual([
+      'What is a customer onboarding email?',
+      'How do you write a customer onboarding email?',
+      'When do you send a customer onboarding email?',
+    ]);
+  });
+
+  it('does not count a format-only keyword or weaken the existing overlap minimum', () => {
+    expect(() => selectRelevantPaaQuestions('video checklist', [
+      'What is a checklist?', 'Who uses a checklist?', 'How do you write a checklist?',
+    ])).toThrow(/three relevant/i);
+    expect(() => selectRelevantPaaQuestions('demo checklist', [
+      'What is a demo?', 'Who presents a demo?', 'How do you prepare a demo?',
     ])).toThrow(/three relevant/i);
   });
 

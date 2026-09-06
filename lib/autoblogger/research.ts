@@ -243,6 +243,13 @@ const QUESTION_STOP_WORDS = new Set([
   'what', 'when', 'where', 'which', 'who', 'why', 'with', 'you', 'your',
 ]);
 const GENERIC_QUESTION_TOKENS = new Set(['startup', 'startups', 'video', 'videos']);
+// Article formats can strengthen a topic match, but cannot stand in for it.
+const QUESTION_FORMAT_TOKENS = new Set([
+  'checklist', 'checklists', 'guide', 'guides', 'template', 'templates', 'example', 'examples',
+]);
+const QUESTION_PROCESS_MODIFIERS = new Set([
+  'workflow', 'workflows', 'process', 'processes', 'plan', 'plans', 'planning',
+]);
 
 function relevantTokens(value: string): Set<string> {
   return new Set(
@@ -257,11 +264,22 @@ function relevantTokens(value: string): Set<string> {
 
 export function selectRelevantPaaQuestions(keyword: string, questions: string[]): string[] {
   const keywordTokens = relevantTokens(keyword);
+  // Normalize only this leading query framing, never verbs throughout a topic
+  // (e.g. "record") or the observed questions. Keep the original keyword's
+  // tokens for the overlap floor and ranking, and its exact query for collection.
+  const topicKeyword = normalizeKeyword(keyword).replace(/^how to (?:make|create) /u, '');
+  const topicTokens = [...relevantTokens(topicKeyword)].filter((token) => !QUESTION_FORMAT_TOKENS.has(token));
+  // A trailing process label describes the article's treatment of its topic.
+  // Keep at least two topic terms; retain interior terms such as "process" in
+  // "business process automation". All modifiers still count toward ranking.
+  while (topicTokens.length > 2 && QUESTION_PROCESS_MODIFIERS.has(topicTokens[topicTokens.length - 1])) {
+    topicTokens.pop();
+  }
   const minimumOverlap = Math.min(2, keywordTokens.size);
-  if (minimumOverlap === 0) {
+  if (topicTokens.length === 0) {
     throw new Error('Research requires three relevant People Also Ask questions.');
   }
-  const selected: string[] = [];
+  const selected: Array<{ question: string; overlap: number }> = [];
   const seen = new Set<string>();
   for (const question of questions) {
     const trimmed = question.trim();
@@ -269,10 +287,17 @@ export function selectRelevantPaaQuestions(keyword: string, questions: string[])
     if (!trimmed || seen.has(normalized)) continue;
     seen.add(normalized);
     const questionTokens = relevantTokens(trimmed);
+    // Require the whole lexical topic: "product" + "checklist" is not
+    // "product demo". Generic questions about that topic remain eligible.
+    if (!topicTokens.every((token) => questionTokens.has(token))) continue;
     const overlap = [...questionTokens].filter((token) => keywordTokens.has(token)).length;
     if (overlap < minimumOverlap) continue;
-    selected.push(trimmed);
-    if (selected.length === 3) return selected;
+    selected.push({ question: trimmed, overlap });
+  }
+  if (selected.length >= 3) {
+    // Stable ties retain observation order and the first exact observed string.
+    return selected.sort((left, right) => right.overlap - left.overlap)
+      .slice(0, 3).map(({ question }) => question);
   }
   throw new Error('Research requires three relevant People Also Ask questions.');
 }

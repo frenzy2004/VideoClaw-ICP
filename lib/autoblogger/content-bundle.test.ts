@@ -228,6 +228,70 @@ function withDraft(change: Partial<GeneratedDraftV2>): GeneratedDraftV2 {
   return { ...structuredClone(generatedDraft), ...change };
 }
 
+describe('reader-facing editorial quality', () => {
+  it.each([
+    candidate.title,
+    'HOW TO MAKE A FOUNDER PITCH VIDEO — WITHOUT LOSING YOUR VOICE!',
+  ])('rejects a description that repeats the normalized title: %s', (description) => {
+    expect(inspectGeneratedDraft(context, withDraft({ description }))).toContainEqual(
+      expect.objectContaining({ code: 'content.description_duplicate', location: '/description' }),
+    );
+  });
+
+  it.each([79, 201])('rejects a %i-character description outside the worker house range', (length) => {
+    expect(inspectGeneratedDraft(context, withDraft({ description: 'x'.repeat(length) }))).toContainEqual(
+      expect.objectContaining({ code: 'content.description_length', location: '/description' }),
+    );
+  });
+
+  it.each([80, 200])('allows the %i-character description boundary without claiming semantic quality', (length) => {
+    const findings = inspectGeneratedDraft(context, withDraft({ description: 'x'.repeat(length) }));
+    expect(findings.some(({ code }) => code.startsWith('content.description_'))).toBe(false);
+  });
+
+  it('rejects repeated process labels across visible prose and FAQs with exact repair locations', () => {
+    const value = withDraft({});
+    value.sections[0].markdown = '**Original recommendation:** Record a short practice take.';
+    value.faqAnswers[0].answer = 'Original editorial note: Choose one audience.';
+    expect(inspectGeneratedDraft(context, value)).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        code: 'content.editorial_scaffolding', location: '/sections/0/markdown',
+        span: 'Original recommendation: Record a short practice take.',
+      }),
+      expect.objectContaining({
+        code: 'content.editorial_scaffolding', location: '/faqAnswers/0/answer',
+        span: 'Original editorial note: Choose one audience.',
+      }),
+    ]));
+  });
+
+  it('allows a section-level recommendation heading and a visibly hypothetical example', () => {
+    const value = withDraft({});
+    value.sections[0] = {
+      heading: 'Recommended recording workflow',
+      markdown: 'Record a short practice take.\n\nHypothetical example: A founder rehearses the opening before recording.',
+    };
+    value.customerTrigger = 'Original editorial note: The audience framing belongs in private metadata.';
+    value.competitorGap = 'Original recommendation: The proposed synthesis is not a measured market gap.';
+    expect(inspectGeneratedDraft(context, value).some(({ code }) => code === 'content.editorial_scaffolding')).toBe(false);
+  });
+
+  it.each(['\n', '  \n', '\\\n'])('detects repeated visible labels across Markdown line breaks %j', (separator) => {
+    const value = withDraft({});
+    value.sections[0].markdown = `Original${separator}recommendation: Plan the recording.\n\nOriginal editorial${separator}note: Rehearse the opening.`;
+    expect(inspectGeneratedDraft(context, value)).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        code: 'content.editorial_scaffolding', location: '/sections/0/markdown',
+        span: expect.stringContaining('recommendation: Plan the recording.'),
+      }),
+      expect.objectContaining({
+        code: 'content.editorial_scaffolding', location: '/sections/0/markdown',
+        span: expect.stringContaining('note: Rehearse the opening.'),
+      }),
+    ]));
+  });
+});
+
 describe('content bundle materialization', () => {
   it('selects only an explicitly allowlisted product video and poster mapping', () => {
     expect(selectProductMedia(candidate, mediaAllowlist)).toEqual(mediaAllowlist[0]);

@@ -3,7 +3,29 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-## Latest unchanged-draft artifact validation — 2026-09-06
+## Latest editorial correction — 2026-09-06
+
+The [quality-check report](EDITORIAL-QUALITY-2026-09-06.md) records the
+description, repetitive-label and FAQ-selection corrections. Regression tests
+reproduced false acceptance before fixes. Deterministic editorial findings now
+enter the existing bounded repair even if the model critic approves; unrepaired
+findings block bundle creation.
+
+A read-only audit of the saved live response detects its title-only description
+and 22 repetitive process labels. Re-selection from the same observed FAQ pool
+excludes the launch-checklist question. Receipt hashes and unchanged local state
+are verified. No model/research requests, copy rewriting, additional pilot or
+lander changes were made. The previous native QA pass below remains historical;
+the saved article does not pass the stronger current editorial checks.
+
+Fresh final verification: **1,076 tests across 49 files passed**, followed
+sequentially by repository lint, `npm run typecheck` (including Next route
+type generation) and build. The 50-candidate offline fixture ran with the
+native article parser and its fixture renderer; this is not a full Next build
+of a newly generated live article. Existing gray-matter/vinext build warnings
+remain. Exact final verification details are in the quality-check report.
+
+## Previous unchanged-draft artifact validation — 2026-09-06
 
 The [artifact report](PRODUCT-DEMO-ARTIFACT-2026-09-06.md) distinguishes the live
 worker failure from the subsequent unchanged-response revalidation. The new live
