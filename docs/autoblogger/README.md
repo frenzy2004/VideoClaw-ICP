@@ -6,7 +6,7 @@ This worker is a controlled research-and-drafting system. It does not publish ar
 
 The initial 250-topic research library is an input, not a quota or publication gate. Each run scans at most 50 candidates, deeply checks at most 10, and produces at most 3 drafts with no more than 2 from one ICP.
 
-Operator status on 2026-09-06: **zero successful fully automated article pilots or generated lander PRs**. The [collector correction](COLLECTOR-FIX-2026-09-06.md) now demonstrates fresh automatic research with eight organic results, three relevant FAQs and four retrieved source bodies passing the drafting-input contract. Two controlled comparisons traced the empty product-demo results to an extra page-language filter; the worker now uses US targeting and an English interface without that restriction. This research-only verification made no model calls or state changes. The [previous alternative-topic run](ALTERNATIVE-PILOT-2026-09-06.md) remains failed; its one-use switch is consumed and its decision terminal at attempt one. The old candidate's three failures and unused fourth-attempt grant remain intact. No evidence was injected or gate relaxed. The [earlier retry report](APPROVED-RETRY-2026-09-06.md) and [automated-pipeline report](AUTOMATED-PIPELINE-2026-09-06.md) retain historical checkpoints.
+Operator status on 2026-09-06: **zero successful fully automated article pilots or generated lander PRs**. The [authorized product-demo retry](PRODUCT-DEMO-RETRY-2026-09-06.md) automatically collected eight organic results, three relevant FAQs and four source bodies, then completed generation, critique, one repair and independent verification. Final review still rejected two attribution issues. A product-reference false positive is now fixed; replaying the unchanged responses confirms the independent rejection remains. Revised attribution prompts are tested, not yet live-proven. The retry is consumed and the candidate terminal at attempt two; all earlier history and the old candidate's unused grant remain intact. No article was manually rewritten or evidence injected. The [collector correction](COLLECTOR-FIX-2026-09-06.md), [previous alternative-topic run](ALTERNATIVE-PILOT-2026-09-06.md), [earlier retry report](APPROVED-RETRY-2026-09-06.md) and [automated-pipeline report](AUTOMATED-PIPELINE-2026-09-06.md) retain historical checkpoints.
 
 One older operator-assisted review article still exists separately. Its source audit, intervention and native QA are preserved in the [assisted-review report](ASSISTED-REVIEW-2026-09-06.md). It is not a successful `worker.execute()` result. The [research recovery report](RESEARCH-RECOVERY-2026-09-06.md) and [first pilot report](LIVE-PILOT-2026-09-06.md) retain earlier checkpoints.
 
@@ -105,6 +105,16 @@ the old grant and attempts. Research is recollected by the normal worker. The
 switch used in the [latest pilot](ALTERNATIVE-PILOT-2026-09-06.md) is consumed;
 rerunning it, changing its run ID, or invoking the parked retry is refused.
 Reconcile and obtain explicit authorization before any further live attempt.
+
+After the collector correction, an explicitly authorized same-target retry uses
+`--candidate-file PRIVATE_CANDIDATE_JSON --retry-target-from FAILED_TARGET_RUN_ID`.
+This records one nested approval and the prior terminal decision; it does not
+reset the consumed switch, decrement attempts, or unpark the old grant. The exact
+candidate and fresh manual run are bound before paid work. Failure is terminal,
+and success remains one review-only artifact. A consumed retry cannot be reused,
+renewed, combined with another authorization, or used in scheduled/PR mode.
+Terminal cleanup of the old parked queue row does not resurrect its stale matrix
+entry; the stored old decision, grant, run and failure history remain intact.
 
 ## Runtime configuration
 

@@ -363,17 +363,22 @@ describe('contextual review and targeted bounded repair', () => {
       expect(client.requests[index].system).toContain('Do not add filler to reach exactly 50');
       expect(client.requests[index].system).toContain('Name the publisher when attributing advice');
       expect(client.requests[index].system).toContain('Frame competitorGap as a proposed editorial synthesis');
+      expect(client.requests[index].system).toContain('Separate source-supported themes from original editorial additions in competitorGap');
+      expect(client.requests[index].system).toContain('Label invented outcome lists as example outcomes');
       expect(client.requests[index].system).not.toContain('50 whitespace-separated words');
     }
     expect(client.requests[2].system).toContain('repairTargets');
     expect(client.requests[2].system).toContain('Preserve unaffected');
     expect(client.requests[2].system).toContain('all occurrences and paraphrases');
     expect(client.requests[2].system).toContain('not just the reported location');
+    expect(client.requests[2].system).toContain('description, customerTrigger, competitorGap');
+    expect(client.requests[2].system).toContain('Audit unchanged bindings too');
     expect(client.requests[2].system).toContain('finalize the visible text first');
     expect(client.requests[2].system).toContain('editorialGraphic.steps');
     expect(client.requests[2].system).toContain('Do not preserve a stale binding');
     for (const index of [0, 2]) expect(client.requests[index].system).toContain('Write all public prose in English');
     for (const index of [1, 3]) expect(client.requests[index].system).toContain('ordinary non-VideoClaw referent');
+    for (const index of [1, 3]) expect(client.requests[index].system).toContain('For a list attributed to named publishers, require cited support for every item');
   });
 
   it('still blocks stale repaired graphic bindings even if verification approves their old text', async () => {

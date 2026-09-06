@@ -621,7 +621,7 @@ function containsExplicitProductAlias(sentence: string, claims: ProductClaim[]):
 
 // These identify visible non-software noun phrases, not factual support. A word
 // used as a modifier ("the recording tool") is not an ordinary antecedent.
-const ordinaryReferent = /\b(?:(?:a|an|the|this|that|each|your) (?:short )?(?:guide|scene|example|brief|script|storyboard|row|presentation|recording|video|draft|outline|footage|transcript|checklist)|new content|demo day)\b(?![-\s]+(?:app|application|product|platform|tool|software|service|editor)\b)/iu;
+const ordinaryReferent = /\b(?:(?:a|an|the|this|that|each|your) (?:short )?(?:guide|scene|example|brief|buyer brief|prospect research|script|storyboard|row|presentation|recording|video|draft|outline|footage|transcript|checklist)|new content|demo day)\b(?![-\s]+(?:app|application|product|platform|tool|software|service|editor)\b)/iu;
 const softwareReferent = /\b(?:app|application|platform|tool|software|service|editor)\b/iu;
 
 function hasExplicitOrdinarySubject(prefix: string): boolean {

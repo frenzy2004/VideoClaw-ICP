@@ -421,8 +421,9 @@ export function createAutobloggerWorker(options: AutobloggerWorkerOptions) {
         if (mode === 'manual_pilot' && state.manualPilot?.runId === input.runId) state = { ...state, manualPilot: null };
         const retryApproval = state.manualRetryApproval;
         const switchedTarget = state.manualTargetSwitch;
-        if (retryApproval?.runId === input.runId || switchedTarget?.runId === input.runId) {
-          const fingerprint = switchedTarget?.runId === input.runId ? switchedTarget.candidateFingerprint : retryApproval!.candidateFingerprint;
+        const switchedRun = switchedTarget?.runId === input.runId || switchedTarget?.retry?.runId === input.runId;
+        if (retryApproval?.runId === input.runId || switchedRun) {
+          const fingerprint = switchedRun ? switchedTarget!.candidateFingerprint : retryApproval!.candidateFingerprint;
           state = recordPersistent(state, { schemaVersion: 1, runId: input.runId, mode, startedAt, selectedCandidateFingerprints: [], status: 'failed' });
           state = { ...state, failures: [...state.failures, {
             runId: input.runId, candidateFingerprint: fingerprint,

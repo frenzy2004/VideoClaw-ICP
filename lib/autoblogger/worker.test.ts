@@ -17,7 +17,7 @@ import { createPersistentWorkerState, PersistentWorkerStateSchema, type Persiste
 import { createPendingKeywordProvider, type KeywordProvider } from './keyword-providers';
 import type { ShallowResearchResult } from './research';
 import { createAutobloggerWorker, discoverCandidatesFromResearch } from './worker';
-import { reserveCandidate, grantManualRetryApproval, grantManualTargetSwitch, markCandidateScanned, markCandidateFailure } from './recovery';
+import { reserveCandidate, grantManualRetryApproval, grantManualTargetSwitch, grantManualTargetRetry, markCandidateScanned, markCandidateFailure } from './recovery';
 import { writeAutobloggerArtifacts } from './runtime';
 import { reconcileLocalPilotCandidate } from './local-pilot';
 
@@ -246,6 +246,35 @@ describe('persistent autoblogger worker', () => {
       parkedRetryRunId: 'approved-attempt-4', runId: 'alternative-pilot', approvedAt: '2026-09-05T00:00:00.000Z',
     }) };
   }
+
+  it.each(['success', 'draft-failure', 'scan-throw'])('executes only the explicitly authorized same-target retry: %s', async (outcome) => {
+    const { old, target, state, fp } = alternativePilot();
+    const first = fixture({ backlog: [target], initialState: state, targetCandidateFingerprint: fp, publicationEnabled: false, failDraft: true });
+    await first.worker.execute({ command: 'pilot', runId: 'alternative-pilot' });
+    const before = structuredClone(first.getState());
+    const nextTime = '2026-09-05T01:00:00.000Z';
+    const approved = grantManualTargetRetry(before, target, { priorRunId: 'alternative-pilot', runId: 'collector-retry', approvedAt: nextTime });
+    const second = fixture({ backlog: [old.item, target], initialState: approved, targetCandidateFingerprint: fp, publicationEnabled: false,
+      now: () => new Date(nextTime), failDraft: outcome === 'draft-failure', failScan: outcome === 'scan-throw' });
+    if (outcome === 'scan-throw') await expect(second.worker.execute({ command: 'pilot', runId: 'collector-retry' })).rejects.toThrow('temporary network failure');
+    else {
+      const result = await second.worker.execute({ command: 'pilot', runId: 'collector-retry' });
+      expect(result.status).toBe(outcome === 'success' ? 'validated' : 'failed');
+      expect(result.artifacts).toHaveLength(outcome === 'success' ? 1 : 0);
+    }
+    const saved = second.getState();
+    expect(saved.decisions[fp]).toMatchObject({ attempts: 2, status: outcome === 'success' ? 'completed' : 'terminal' });
+    expect(saved.runs).toMatchObject(before.runs);
+    expect(saved.failures.slice(0, before.failures.length)).toEqual(before.failures);
+    expect(saved.manualTargetSwitch?.retry?.priorDecision).toEqual(before.decisions[fp]);
+    expect(saved.manualRetryApproval).toEqual(before.manualRetryApproval);
+    expect(second.counters.opened).toBe(0);
+    expect(saved.runs['collector-retry'].status).toBe(outcome === 'success' ? 'validated' : 'failed');
+    if (outcome !== 'success') expect(saved.failures.at(-1)).toMatchObject({ runId: 'collector-retry', attempt: 2 });
+    else expect(PersistentWorkerStateSchema.safeParse({ ...saved,
+      manualPilot: { ...saved.manualPilot!, status: 'consumed', consumedAt: nextTime } }).success).toBe(true);
+    await expect(second.worker.execute({ command: 'pilot', runId: 'another-retry' })).rejects.toThrow();
+  });
 
   it('takes a switched target through research, drafting and prepared artifact output with a stale old matrix row', async () => {
     const old = approvedRetry();

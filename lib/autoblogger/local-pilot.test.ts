@@ -55,6 +55,73 @@ describe('local artifact-only pilot preflight', () => {
     return { state: old.state, backlog: old.backlog, candidate: other, runId: 'alternative-pilot', switchTargetFrom: input.runId, approvedAt: input.approvedAt };
   }
 
+  function failedSwitchFixture() {
+    const input = switchFixture();
+    const prepared = reconcileLocalPilotCandidate(input);
+    let state = reserveCandidate(prepared.state, other, input.runId, 'manual_pilot', input.approvedAt);
+    state = markCandidateFailure(state, other, input.runId, 'missing_serp,missing_relevant_paa', true, input.approvedAt);
+    state.runs[input.runId] = { schemaVersion: 1, runId: input.runId, mode: 'manual_pilot', startedAt: input.approvedAt, selectedCandidateFingerprints: [candidateFingerprints(other).candidate], status: 'failed' };
+    state.failures.push({ runId: input.runId, candidateFingerprint: candidateFingerprints(other).candidate, code: 'insufficient_data', attempt: 1, observedAt: input.approvedAt, detail: 'Missing SERP.' });
+    return { state, backlog: prepared.backlog, candidate: other, runId: 'collector-fixed-retry', retryTargetFrom: input.runId, approvedAt: '2026-09-06T22:00:00.000Z' };
+  }
+
+  it('records one explicit same-target retry and preserves the failed decision and old grant through reservation', () => {
+    const input = failedSwitchFixture();
+    const before = structuredClone(input.state);
+    const fp = candidateFingerprints(other).candidate;
+    const prepared = reconcileLocalPilotCandidate(input);
+    expect(prepared.nextAttempt).toBe(2);
+    expect(prepared.state.decisions).toEqual(before.decisions);
+    expect(prepared.state.runs).toEqual(before.runs);
+    expect(prepared.state.failures).toEqual(before.failures);
+    expect(prepared.state.manualRetryApproval).toEqual(before.manualRetryApproval);
+    expect(prepared.state.manualTargetSwitch).toMatchObject(before.manualTargetSwitch!);
+    expect(prepared.state.manualTargetSwitch?.retry).toMatchObject({ priorRunId: 'alternative-pilot', runId: input.runId, priorDecision: before.decisions[fp], consumedAt: null });
+    const reloaded = reconcileLocalPilotCandidate({ ...input, state: JSON.parse(JSON.stringify(prepared.state)) });
+    expect(reloaded.state).toEqual(prepared.state);
+    const queue = buildIncrementalQueue({ state: reserveManualPilot(reloaded.state, input.runId, input.approvedAt), backlog: reloaded.backlog, runId: input.runId, mode: 'manual_pilot', now: input.approvedAt });
+    expect(queue.scan).toEqual([other]);
+    const reserved = reserveCandidate(queue.state, other, input.runId, 'manual_pilot', input.approvedAt);
+    expect(reserved.decisions[fp]).toMatchObject({ attempts: 2, status: 'leased', runId: input.runId });
+    expect(reserved.manualTargetSwitch?.retry?.priorDecision).toEqual(before.decisions[fp]);
+    expect(reserved.manualTargetSwitch?.consumedAt).toBe(before.manualTargetSwitch!.consumedAt);
+    expect(reserved.manualRetryApproval).toEqual(before.manualRetryApproval);
+    expect(() => reserveCandidate(reserved, other, input.runId, 'manual_pilot', input.approvedAt)).toThrow();
+    const failed = markCandidateFailure(reserved, other, input.runId, 'candidate_failed', true, input.approvedAt);
+    expect(failed.decisions[fp]).toMatchObject({ attempts: 2, status: 'terminal' });
+    expect(() => reconcileLocalPilotCandidate({ ...input, state: failed, runId: 'third' })).toThrow();
+  });
+
+  it.each(['wrong-target', 'wrong-prior', 'old-run', 'artifact', 'success', 'missing-failure', 'active-pilot', 'older-approval'])(
+    'refuses same-target reconciliation with %s', (problem) => {
+      const input = failedSwitchFixture();
+      if (problem === 'wrong-target') input.candidate = refined;
+      if (problem === 'wrong-prior') input.retryTargetFrom = 'unrelated';
+      if (problem === 'old-run') input.runId = input.retryTargetFrom;
+      if (problem === 'artifact') input.state.contentHashes[candidateFingerprints(other).candidate] = 'a'.repeat(64);
+      if (problem === 'success') input.state.runs[input.retryTargetFrom].status = 'validated';
+      if (problem === 'missing-failure') input.state.failures = input.state.failures.filter(f => f.runId !== input.retryTargetFrom);
+      if (problem === 'active-pilot') input.state = reserveManualPilot(input.state, input.retryTargetFrom, input.approvedAt);
+      if (problem === 'older-approval') input.approvedAt = '2026-09-05T18:00:00.000Z';
+      expect(() => reconcileLocalPilotCandidate(input)).toThrow();
+    });
+
+  it('does not resurrect the exhausted parked matrix row after terminal queue cleanup', () => {
+    const input = failedSwitchFixture();
+    input.state.queuedCandidates = input.state.queuedCandidates.filter(c => c.articleId !== refined.articleId);
+    input.backlog = [original, other];
+    const result = reconcileLocalPilotCandidate(input);
+    expect(result.backlog).toEqual([other]);
+    expect(result.state.decisions[fingerprint]).toEqual(input.state.decisions[fingerprint]);
+    expect(result.state.manualRetryApproval).toEqual(input.state.manualRetryApproval);
+  });
+
+  it('requires the explicit same-target retry CLI flag and disallows combining authorizations', () => {
+    const args = ['--run-id', 'collector-fixed-retry', '--candidate-file', 'artifacts/selected.json', '--retry-target-from', 'alternative-pilot', '--execute'];
+    expect(parseLocalPilotArguments(args)).toEqual({ runId: 'collector-fixed-retry', candidateFile: 'artifacts/selected.json', retryTargetFrom: 'alternative-pilot' });
+    expect(() => parseLocalPilotArguments([...args.slice(0, -1), '--switch-target-from', 'old', '--execute'])).toThrow();
+  });
+
   it('adds a distinct selected candidate without mapping old history and idempotently reloads only its explicit pending switch', () => {
     const input = switchFixture();
     const before = structuredClone(input);

@@ -3,7 +3,23 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-## Latest collector correction — 2026-09-06
+## Latest product-demo retry — 2026-09-06
+
+The [retry report](PRODUCT-DEMO-RETRY-2026-09-06.md) records a real automatic
+research/draft/critique/repair/verification run. Final verification failed two
+attribution checks; no new automatic Markdown bundle or native article QA pass
+resulted. A reproduced product-reference false positive is fixed, while offline
+replay of the unchanged saved responses still blocks on independent review.
+The improved attribution prompts have not yet been exercised in another live run.
+
+Fresh verification: **1,007 tests across 49 files passed**, plus lint, typecheck,
+build and whitespace checks. This includes one-use retry/history regressions,
+ordinary-referent positives and product-context negatives, and production prompt
+coverage. Existing build warnings remain. Retry accounting advanced to attempt
+two without resetting history; the new approval is consumed and decision terminal.
+No production or lander change and no schedule activation occurred.
+
+## Previous collector correction — 2026-09-06
 
 The [collector report](COLLECTOR-FIX-2026-09-06.md) records two controlled
 live comparisons and a separate fresh production-research-path verification.
