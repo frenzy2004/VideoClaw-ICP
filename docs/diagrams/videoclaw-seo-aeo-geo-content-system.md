@@ -1,6 +1,6 @@
 # VideoClaw SEO / AEO / GEO content system
 
-Review-only checkpoint: **6 September 2026**. No production merge, deployment, publishing, indexing submission, or schedule activation is authorized in this work.
+Review-only checkpoint: **7 September 2026**. No production merge, deployment, publishing, indexing submission, or schedule activation is authorized in this work.
 
 ![VideoClaw worker, artifact-only pilot, and separate human publication gate](./videoclaw-seo-aeo-geo-content-system-v2.png)
 
@@ -21,7 +21,7 @@ The last step is a future gated mode, not permission to open generated lander PR
 | Candidates | Read the incremental backlog and discover related searches for five ICPs. Deduplicate against state and lander inventory, then round-robin eligible campaigns; a full five-campaign queue gets ten scan slots each. | Candidate identity, campaign, trigger and intent |
 | Validation | Recheck US/en Google SERPs through Apify, record organic competitors and suggestion/PAA/related-query signals, and request keyword metrics from a configured provider. | Exact query, locale, actor run, dataset and observation time; metric provenance separately |
 | Top 10 | Screen missing organic/suggestion/relevant-PAA/product-fit evidence before using a deep slot. Then retrieve at least two source bodies including an authoritative source. Preserve complete qualifications and reject unsafe input. A proposed editorial angle is not proof that competitors lack coverage. | Source URLs, fetch times/hashes, bounded body context, FAQ provenance and selection decision |
-| Up to 3 drafts | Structured OpenAI drafting and independent critique, at most one repair followed by verification. Maximum two drafts from one ICP. | Markdown bundle, critique result and hashes |
+| Up to 3 drafts | Bounded source anchors guide task-specific original composition. Structured drafting and independent critique feed cumulative per-page source accounting. Aggregate excess triggers whole-article restructuring in the one repair; independent verification and code gates recheck the result. Maximum two drafts from one ICP. | Source-use ledger, current binding classifications, critique result, and hashes; Markdown only if accepted |
 | Native QA | Select allowlisted product media, generate a deterministic branded SVG and validate in a disposable lander checkout using its own contract, lint and build. | Media attribution and native QA report |
 | Draft PRs, later | Only the post-merge, fully credentialed mode can open one draft PR per article. All approval flags remain false. | PR number, artifact hash and outcome |
 
@@ -45,7 +45,13 @@ Metadata, repetitive labels and FAQ selection improved. Final review still rejec
 source over-reliance and a recording heading; a separate product-reference checker
 disagreement also remains. No accepted Markdown bundle or native article QA pass
 resulted. The candidate is terminal at attempt four, with all history retained and
-no further live retry authorized. The observations below are historical.
+no further live retry authorized.
+
+The [offline source-planning fix](../autoblogger/SOURCE-PLANNING-FIX-2026-09-07.md)
+now resolves the reference-check disagreement and gives the repair a cumulative
+source-use ledger. Saved review classifications account for 845 CloudShare-derived
+public words, above the unchanged 180 limit. The unchanged article remains blocked;
+no new paid run or native QA pass is claimed. The observations below are historical.
 
 - The first attempt scanned fifty candidates and failed all ten deep checks, generating no article. [Historical pilot report](../autoblogger/LIVE-PILOT-2026-09-06.md). Follow-up collector checks still did not establish the complete automated organic/PAA evidence bundle. [Recovery report](../autoblogger/RESEARCH-RECOVERY-2026-09-06.md).
 - A later **assisted local review** combined actual Apify organic results with separately recorded browser PAA and manually checked source bodies. GPT-5.5 completed generation, critique, repair and verification; its final result still failed review. An explicit editorial revision produced one local article, without claiming an unattended pass or consuming a successful-pilot slot. [Current assisted-review report](../autoblogger/ASSISTED-REVIEW-2026-09-06.md).

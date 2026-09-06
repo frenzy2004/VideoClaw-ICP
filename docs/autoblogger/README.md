@@ -8,6 +8,12 @@ The initial 250-topic research library is an input, not a quota or publication g
 
 Operator status on 2026-09-07: **zero clean uninterrupted worker passes or generated lander PRs**. The [latest editorial pilot](EDITORIAL-PILOT-2026-09-07.md) used one explicitly approved fourth attempt and exactly four live GPT-5.5 calls. Fresh organic/PAA/source retrieval worked; description and repetitive-label improvements appeared in the drafts. Final review still rejected excessive single-source derivation and an unsupported recording-workflow heading; the deterministic reference checker also rejected one instruction. No accepted Markdown bundle or native QA pass resulted. The candidate is terminal at attempt four, with the consumed approval and all earlier history retained. No further retry is authorized.
 
+The subsequent [source-planning correction](SOURCE-PLANNING-FIX-2026-09-07.md)
+adds bounded per-page evidence anchors, cumulative reviewed source-use accounting
+and whole-article repair routing; it also fixes the ordinary-object reference
+false positive. Offline replay of unchanged saved responses still blocks the old
+article for source overuse and an unsupported heading. No new live run occurred.
+
 An [earlier artifact report](PRODUCT-DEMO-ARTIFACT-2026-09-06.md) records native QA passing only after a grammar correction and offline replay of unchanged saved responses. That historical result is not a clean live worker pass or current editorial approval.
 
 **Subsequent editorial correction:** the [quality-check report](EDITORIAL-QUALITY-2026-09-06.md)

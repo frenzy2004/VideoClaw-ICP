@@ -3,7 +3,37 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-## Latest bounded editorial pilot — 2026-09-07
+## Latest offline source-planning correction — 2026-09-07
+
+The [source-planning report](SOURCE-PLANNING-FIX-2026-09-07.md) records bounded
+source anchors, cumulative source-use accounting, whole-article bounded-repair
+instructions and the imperative-object reference correction. These were tested
+offline; no further live retry, API spend or article rewrite occurred.
+
+Fresh final full-suite verification: **1,212 tests across 50 files passed** using one
+worker, including the unchanged 250-row content-map test (1,350 ms). Repository
+lint, typecheck with Next route type generation, build and whitespace checks also
+passed. Existing gray-matter direct-eval and vinext mixed-import warnings remain.
+No timeout or test assertion was relaxed to address the prior full-suite timeout.
+
+Hash-verified offline replay of the four saved responses still returns blocked:
+the reference false positive is fixed, but the independently reviewed source
+overuse and recording heading remain. The new ledger counts 845 CloudShare-derived
+public words against the unchanged limit of 180. It creates no bundle and cannot
+reach native article QA. Saved receipts and persistent state remain byte-identical.
+
+The native parser/fixture-renderer end-to-end test passed as part of the full
+suite. It is synthetic evidence, not a full lander build of a fresh live article.
+
+Independent review reproduced and cleared additional defects before integration:
+literal FAQ text omitted by Markdown parsing, rendered heading text hiding a
+product name, and overly broad imperative reference exemptions. Section headings
+now use their actual emitted Markdown context; plain metadata/FAQs retain literal
+text. Unknown object heads remain blocked instead of guessing their identity.
+Duplicate and zero-overlap anchor suggestions were also removed. The reviewer
+reported no remaining Important or Minor findings in this scoped final patch.
+
+## Previous bounded editorial pilot — 2026-09-07
 
 The [live pilot report](EDITORIAL-PILOT-2026-09-07.md) records the separately
 approved fourth attempt, fresh research, all four model calls and failed final

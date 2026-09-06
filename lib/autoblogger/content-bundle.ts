@@ -564,7 +564,12 @@ function sentences(value: string): string[] {
 }
 
 function claimSpansAtLocation(value: string, location: string): string[] {
-  if (!location.startsWith('/editorialGraphic/')) return sentences(value);
+  // Headings are emitted into the body as ATX Markdown, not literal JSX. Parse
+  // that exact context so inline formatting cannot hide a rendered product name.
+  if (/^\/sections\/\d+\/heading$/.test(location)) return sentences(`## ${value}`);
+  // Native text and metadata retain literal fences, definitions, tags and inline
+  // markers; only actual Markdown body fields use Markdown sentence extraction.
+  if (location === '/directAnswer' || /^\/sections\/\d+\/markdown$/.test(location)) return sentences(value);
   return value
     .replace(/\r\n?/g, '\n')
     .replace(/[^\S\n]+/g, ' ')
@@ -633,6 +638,45 @@ function hasExplicitOrdinarySubject(prefix: string): boolean {
     .test(prefix.slice(referent[0].length));
 }
 
+function hasExplicitImperativeObject(prefix: string, clause: string): boolean {
+  // Resolve a short, unqualified common-noun object followed immediately by a
+  // subordinate clause. A named subject ("Descript prepares ...") is not an
+  // imperative, and a prepositional/relative clause can introduce another actor.
+  const object = prefix.match(/^(?:prepare|review|revise|check|use)\s+(.+?)\s+(?:only\s+)?(?:when|if|unless|before|after|because)\s+$/iu)?.[1];
+  // Syntax cannot distinguish an unknown lowercase brand from a common noun.
+  // Reuse the bounded ordinary-artifact vocabulary and explicit editorial
+  // object categories. Unknown heads (including devices) fail closed; this is
+  // reference resolution only, never evidence that the advice is supported.
+  const ordinary = object ? ordinaryReferent.exec(object) : null;
+  const knownArtifact = object && (/(?:^|\s)(?:material|appendix|collateral|handout|agenda|evidence)$/u.test(object)
+    || (ordinary?.index === 0 && ordinary[0].length === object.length));
+  // A syntactic object alone does not establish a non-software referent. Require
+  // the whole subordinate clause to describe an editorial relation: suitability,
+  // audience delivery, or argumentative structure. Unknown predicates and added
+  // clauses stay ambiguous, including capabilities of an unnamed instrument.
+  const relation = clause.match(/^it (fits|answers|reaches|lacks|sets|supports) ([a-z]+(?:\s+[a-z]+){0,7})[.!]?$/iu);
+  const complement = relation?.[2] ?? '';
+  const editorialComplements: Record<string, RegExp> = {
+    fits: /\b(?:use case|purpose|scope)$/,
+    answers: /\bquestions?$/,
+    reaches: /\baudience$/,
+    lacks: /\b(?:next step|structure|clarity)$/,
+    sets: /\bexpectations$/,
+    supports: /\b(?:argument|claim|point)$/,
+  };
+  const editorialRelation = relation && editorialComplements[relation[1].toLowerCase()]?.test(complement.toLowerCase());
+  // "Use" can select an instrument rather than an artifact. Only a qualified
+  // object under a restrictive evidentiary condition is resolved here; a reason
+  // to use an unknown thing must not become an approved capability assertion.
+  if (/^use\b/iu.test(prefix) && (!object?.includes(' ')
+    || !/\bonly if\s+$/iu.test(prefix) || relation?.[1].toLowerCase() !== 'supports')) return false;
+  return Boolean(object && knownArtifact && editorialRelation
+    && !/\b(?:and|or|but|for|from|with|without|of|to|in|on|by|as|that|which|who)\b/iu.test(complement)
+    // Preserve case here: a proper name inside the object remains ambiguous.
+    && /^[a-z]+(?:\s+[a-z]+){0,4}$/u.test(object)
+    && !/\b(?:and|or|but|for|from|with|without|of|to|in|on|by|as|that|which|who|it|its|they|their)\b/iu.test(object));
+}
+
 function attributedNonProductSubject(prefix: string, factTexts: string[]): boolean {
   // Named third-party attribution must also be present as the subject of a
   // supplied fact. Neither that match nor pronoun resolution proves entailment.
@@ -691,6 +735,14 @@ function containsProductAlias(
   }
   if (!pronoun) return false;
   if (softwareReferent.test(sentence)) return true;
+
+  // An imperative's local object can resolve its single subordinate pronoun
+  // without adding nouns or complete sentences to the ordinary-referent list.
+  // Prior product context has already failed closed above; this is not support
+  // for the instruction's factual meaning or any subsequent capability claim.
+  if (!/\bproduct\b/iu.test(sentence)
+    && [...sentence.matchAll(/\bit\b/giu)].length === 1
+    && hasExplicitImperativeObject(prefix, sentence.slice(pronoun.index))) return false;
 
   // Cross-sentence context is allowed only for a simple editorial object command.
   // A standalone "It adds captions" still has no explicit ordinary referent.

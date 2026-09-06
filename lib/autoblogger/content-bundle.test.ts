@@ -784,6 +784,75 @@ describe('contextual product references and precise binding failures', () => {
     );
   });
 
+  it.each([
+    'Prepare supporting material only when it fits the buyer use case.',
+    'Prepare an appendix if it answers buyer questions.',
+    'Review collateral before it reaches the audience.',
+    'Revise a handout when it lacks a clear next step.',
+    'Check the agenda because it sets expectations.',
+    'Use relevant evidence only if it supports the argument.',
+  ])('resolves the direct object of an imperative as the local pronoun antecedent: %s', (span) => {
+    expect(inspectGeneratedDraft(context, withSpans([span]))).toEqual([]);
+  });
+
+  it.each([
+    ['VideoClaw prepares supporting material only when it fits the buyer use case.'],
+    ['Descript prepares supporting material only when it fits the buyer use case.'],
+    ['Loom prepares an appendix when it automatically adds captions.'],
+    ['Prepare Descript only when it fits the buyer use case.'],
+    ['Prepare a Loom recording when it automatically adds captions.'],
+    ['Prepare supporting material software only when it fits the buyer use case.'],
+    ['Prepare a supporting material tool when it automatically adds captions.'],
+    ['Prepare supporting material for the product when it automatically adds captions.'],
+    ['Prepare supporting material with Descript when it automatically adds captions.'],
+    ['Prepare supporting material with descript when it automatically adds captions.'],
+    ['Prepare supporting material, then it automatically adds captions.'],
+    ['Prepare supporting material only when it fits the buyer use case; it automatically adds captions.'],
+    ['Prepare supporting material only when it fits the buyer use case and VideoClaw automatically adds captions.'],
+    [context.productClaims[0].text, 'Prepare supporting material only when it fits the buyer use case.'],
+    [context.productClaims[0].text, 'After preparing supporting material, it automatically adds captions.'],
+    ['Prepare supporting material only when it fits the buyer use case.', 'It automatically adds captions.'],
+  ])('keeps product subjects and ambiguous imperative objects blocked: %j', (...spans) => {
+    const span = spans.at(-1)!;
+    const value = withSpans(spans);
+    const bindingIndex = value.claimBindings.findIndex((binding) => binding.span === span);
+    expect(inspectGeneratedDraft(context, value)).toContainEqual(expect.objectContaining({
+      code: 'content.claim_binding', bindingIndex, location: '/sections/0/markdown',
+      span, reason: 'unapproved_product_reference',
+    }));
+  });
+
+  it.each([
+    'Use descript because it automatically adds captions.',
+    'Use the recorder because it automatically adds captions.',
+    'Use the recorder because it adds captions.',
+    'Use the recorder because it can add captions.',
+    'Use the recorder because it supports automatic captions.',
+    'Use the recorder only if it automatically adds captions.',
+    'Use descript when it exports videos.',
+    'Use descript because it answers buyer questions.',
+    'Use the recorder when it reaches the audience.',
+    'Use the recorder only if it answers buyer questions.',
+    'Use descript only if it supports the argument.',
+    'Prepare the recorder because it automatically adds captions.',
+    'Review descript because it automatically adds captions.',
+    'Revise the recorder when it generates subtitles.',
+    'Check the recorder because it adds captions.',
+    'Check descript because it answers buyer questions.',
+    'Review descript because it answers buyer questions.',
+    'Prepare the recorder when it answers buyer questions.',
+    'Use relevant evidence only if it supports the argument and automatically adds captions.',
+    'Prepare supporting material only when it fits the buyer use case and automatically adds captions.',
+  ])('does not exempt an imperative with an unresolved capability subject: %s', (span) => {
+    const value = withSpans([span]);
+    const bindingIndex = value.claimBindings.findIndex((binding) => binding.span === span);
+    expect(value.claimBindings[bindingIndex].productClaimId).toBeNull();
+    expect(inspectGeneratedDraft(context, value)).toContainEqual(expect.objectContaining({
+      code: 'content.claim_binding', bindingIndex, location: '/sections/0/markdown',
+      span, reason: 'unapproved_product_reference',
+    }));
+  });
+
   it('reports every broken binding and uncovered span instead of stopping at the first one', () => {
     const missing = generatedDraft.claimBindings.find(({ location }) => location === '/description')!;
     const bindings = generatedDraft.claimBindings.filter((binding) => binding !== missing).map((binding, index) => (
@@ -860,6 +929,80 @@ describe('contextual product references and precise binding failures', () => {
       code: 'content.claim_binding', reason: 'unapproved_product_reference',
     }));
   });
+});
+
+describe('literal claim coverage outside Markdown-rendered fields', () => {
+  it.each(['Video**Claw** automatically adds captions', 'Video\x60Claw\x60 automatically adds captions'])('blocks a product name visually assembled by heading Markdown: %s', (heading) => {
+    const value = structuredClone(generatedDraft);
+    value.sections[0].heading = heading;
+    value.claimBindings = value.claimBindings.filter(b => b.location !== '/sections/0/heading');
+    value.claimBindings.push({ location: '/sections/0/heading', span: heading, sourceFactIds: ['yc-bullets'], productClaimId: null });
+    expect(inspectGeneratedDraft(context, value)).toEqual(expect.arrayContaining([
+      expect.objectContaining({ code: 'content.claim_binding', location: '/sections/0/heading' }),
+    ]));
+    expect(() => materializeDraftBundle(context, value, mediaAllowlist[0])).toThrow();
+  });
+
+  it('matches a legitimate heading binding to rendered Markdown text', () => {
+    const value = structuredClone(generatedDraft);
+    const original = value.sections[0].heading;
+    value.sections[0].heading = `**${original}**`;
+    expect(inspectGeneratedDraft(context, value)).toEqual([]);
+    expect(materializeDraftBundle(context, value, mediaAllowlist[0]).markdown).toContain(`## **${original}**`);
+  });
+
+  const fields: Array<{ location: string; set: (draft: GeneratedDraftV2, text: string) => void }> = [
+    { location: '/faqAnswers/0/answer', set: (draft, text) => { draft.faqAnswers[0].answer = text; } },
+    { location: '/description', set: (draft, text) => { draft.description = text; } },
+    { location: '/customerTrigger', set: (draft, text) => { draft.customerTrigger = text; } },
+    { location: '/competitorGap', set: (draft, text) => { draft.competitorGap = text; } },
+    { location: '/editorialGraphic/title', set: (draft, text) => { draft.editorialGraphic.title = text; } },
+    { location: '/editorialGraphic/alt', set: (draft, text) => { draft.editorialGraphic.alt = text; } },
+    { location: '/editorialGraphic/steps/0/label', set: (draft, text) => { draft.editorialGraphic.steps[0].label = text; } },
+    { location: '/editorialGraphic/steps/0/detail', set: (draft, text) => { draft.editorialGraphic.steps[0].detail = text; } },
+  ];
+  const formats = [
+    { format: 'fenced code', text: '```\nA brief.\n```', span: 'A brief.' },
+    { format: 'indented code', text: '    A brief.', span: 'A brief.' },
+    { format: 'definition', text: '[x]: / "A brief"', span: '[x]: / "A brief"' },
+    { format: 'inline code', text: '`A brief.`', span: '`A brief.`' },
+    { format: 'HTML', text: '<b>A brief.</b>', span: '<b>A brief.</b>' },
+  ];
+
+  it.each(fields.flatMap(field => formats.map(format => ({ ...field, ...format }))))(
+    'requires the literal $format span at $location even when Markdown would hide or transform it',
+    ({ location, set, text, span }) => {
+      const value = withDraft({});
+      set(value, text);
+      value.claimBindings = value.claimBindings.filter(binding => binding.location !== location);
+      expect(inspectGeneratedDraft(context, value)).toContainEqual(expect.objectContaining({
+        code: 'content.claim_binding', location, span, reason: 'missing_binding',
+      }));
+    },
+  );
+
+  it.each(fields)('accepts exact literal bindings at $location without stripping inline markers', ({ location, set }) => {
+    const span = '`A brief.`';
+    const value = withDraft({});
+    set(value, span);
+    value.claimBindings = value.claimBindings.filter(binding => binding.location !== location);
+    value.claimBindings.push({ location, span, sourceFactIds: ['yc-bullets'], productClaimId: null });
+    expect(inspectGeneratedDraft(context, value).filter(finding => finding.code === 'content.claim_binding')).toEqual([]);
+  });
+
+  it.each(['/directAnswer', '/sections/0/markdown'])(
+    'keeps rendered Markdown sentence binding at %s', (location) => {
+      const value = withDraft({});
+      const markdown = 'Choose a **brief** and review `the agenda`.';
+      if (location === '/directAnswer') value.directAnswer = markdown;
+      else value.sections[0].markdown = markdown;
+      value.claimBindings = value.claimBindings.filter(binding => binding.location !== location);
+      value.claimBindings.push({
+        location, span: 'Choose a brief and review the agenda.', sourceFactIds: ['yc-bullets'], productClaimId: null,
+      });
+      expect(inspectGeneratedDraft(context, value).filter(finding => finding.code === 'content.claim_binding')).toEqual([]);
+    },
+  );
 });
 
 describe('final serialized artifact inspection', () => {
