@@ -90,16 +90,19 @@ export function hasManualTargetSwitch(
     && assertDate(nowIso) >= assertDate(active.approvedAt) && PersistentWorkerStateSchema.safeParse(state).success;
 }
 
-/** Explicit one-use same-target approval within the normal cap; retains consumed grants. */
+/** One-use same-target approval; attempt four requires separate explicit authority. */
 export function grantManualTargetRetry(stateInput: PersistentWorkerState, candidate: Candidate,
-  input: { priorRunId: string; runId: string; approvedAt: string }): PersistentWorkerState {
+  input: { priorRunId: string; runId: string; approvedAt: string; extraAttempt?: boolean }): PersistentWorkerState {
   const state = PersistentWorkerStateSchema.parse(stateInput);
   const target = state.manualTargetSwitch;
   if (!target?.consumedAt || (target.retry && !target.retry.consumedAt) || state.manualPilot !== null
     || JSON.stringify(CandidateSchema.parse(candidate)) !== JSON.stringify(target.candidate)) throw new Error('Target retry requires an exact failed target and new one-use approval.');
+  const attempts = state.decisions[target.candidateFingerprint]?.attempts;
+  if (input.extraAttempt ? attempts !== MAX_CANDIDATE_ATTEMPTS : attempts >= MAX_CANDIDATE_ATTEMPTS) throw new Error('An exhausted target requires separate one-use fourth-attempt approval; no fifth attempt is allowed.');
   return PersistentWorkerStateSchema.parse({ ...state, manualTargetSwitch: { ...target,
     ...(target.retry ? { retryHistory: [...(target.retryHistory ?? []), target.retry] } : {}), retry: {
-    ...input, reason: target.retry ? 'user_authorized_after_attribution_fix' : 'user_authorized_after_collector_fix',
+    priorRunId: input.priorRunId, runId: input.runId, approvedAt: input.approvedAt,
+    reason: input.extraAttempt ? 'user_authorized_after_editorial_fix' : target.retry ? 'user_authorized_after_attribution_fix' : 'user_authorized_after_collector_fix',
     priorDecision: state.decisions[target.candidateFingerprint], consumedAt: null,
   } } });
 }
@@ -173,6 +176,7 @@ export function reserveCandidate(
   if (targetSwitch && !hasManualTargetSwitch(state, candidate, runId, mode, updatedAt)) throw new Error('Target switch is exact, manual-only and one-use; reuse or another target is forbidden.');
   const manualRetry = hasManualRetryApproval(state, candidate, runId, mode, updatedAt);
   const targetRetry = !!targetSwitch?.retry && hasManualTargetSwitch(state, candidate, runId, mode, updatedAt);
+  const extraTargetAttempt = targetRetry && targetSwitch?.retry?.reason === 'user_authorized_after_editorial_fix';
   if ((existing?.attempts ?? 0) > MAX_CANDIDATE_ATTEMPTS) throw new Error('Manual retry approval is consumed; retry limit is exhausted.');
   if (existing?.status === 'leased' && existing.runId === runId && assertDate(existing.leaseExpiresAt as string) > now) return state;
   if (existing?.status === 'leased' && existing.leaseExpiresAt && assertDate(existing.leaseExpiresAt) > now) {
@@ -182,7 +186,7 @@ export function reserveCandidate(
     throw new Error('Candidate is terminal and cannot be retried.');
   }
   const attempts = (existing?.attempts ?? 0) + 1;
-  if (attempts > MAX_CANDIDATE_ATTEMPTS && !manualRetry) throw new Error('Candidate retry limit is exhausted.');
+  if (attempts > MAX_CANDIDATE_ATTEMPTS && !manualRetry && !extraTargetAttempt) throw new Error('Candidate retry limit is exhausted.');
   const reserved = manualRetry ? {
     ...state, manualRetryApproval: { ...state.manualRetryApproval!, consumedAt: updatedAt },
   } : targetRetry ? { ...state, manualTargetSwitch: { ...targetSwitch!, retry: { ...targetSwitch!.retry!, consumedAt: updatedAt } } }

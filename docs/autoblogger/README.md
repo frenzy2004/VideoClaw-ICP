@@ -6,7 +6,9 @@ This worker is a controlled research-and-drafting system. It does not publish ar
 
 The initial 250-topic research library is an input, not a quota or publication gate. Each run scans at most 50 candidates, deeply checks at most 10, and produces at most 3 drafts with no more than 2 from one ICP.
 
-Operator status on 2026-09-06: **one automatically researched/generated/repaired article passed native QA after unchanged-response offline revalidation; zero clean uninterrupted worker passes or generated lander PRs**. The [latest artifact report](PRODUCT-DEMO-ARTIFACT-2026-09-06.md) records the newly authorized attempt: eight organic results, automatic PAA/source retrieval and four live GPT-5.5 calls. Independent verification approved the repair, but deterministic grammar false positives stopped the live worker. After a test-first checker fix, replaying the same four saved responses produced the unchanged review bundle and passed the lander's 32 native tests, lint and build without new paid calls, manual evidence injection or rewriting. The original failed run remains failed; the candidate is terminal at attempt three, with earlier approvals/history intact. Passing technical checks is not copy/design approval: repetitive editorial labels, the description and an adjacent-topic FAQ still need review.
+Operator status on 2026-09-07: **zero clean uninterrupted worker passes or generated lander PRs**. The [latest editorial pilot](EDITORIAL-PILOT-2026-09-07.md) used one explicitly approved fourth attempt and exactly four live GPT-5.5 calls. Fresh organic/PAA/source retrieval worked; description and repetitive-label improvements appeared in the drafts. Final review still rejected excessive single-source derivation and an unsupported recording-workflow heading; the deterministic reference checker also rejected one instruction. No accepted Markdown bundle or native QA pass resulted. The candidate is terminal at attempt four, with the consumed approval and all earlier history retained. No further retry is authorized.
+
+An [earlier artifact report](PRODUCT-DEMO-ARTIFACT-2026-09-06.md) records native QA passing only after a grammar correction and offline replay of unchanged saved responses. That historical result is not a clean live worker pass or current editorial approval.
 
 **Subsequent editorial correction:** the [quality-check report](EDITORIAL-QUALITY-2026-09-06.md)
 records tested description, repetitive-label and FAQ-selection fixes. The unchanged
@@ -122,13 +124,22 @@ After the collector correction, an explicitly authorized same-target retry uses
 This records one current approval and the prior terminal decision; it does not
 reset the consumed switch, decrement attempts, or unpark the old grant. A later
 explicitly approved attempt retains the earlier consumed approval unchanged in
-`retryHistory`. The chain is bounded by the normal three-attempt cap, and all
+`retryHistory`. Ordinary retries stop at the three-attempt cap, and all
 required prior run/failure records are pinned during compaction. The exact
 candidate and fresh manual run are bound before paid work. Failure is terminal,
 and success remains one review-only artifact. A consumed retry cannot be reused
 or automatically renewed, combined with another authorization, or used in scheduled/PR mode.
 Terminal cleanup of the old parked queue row does not resurrect its stale matrix
 entry; the stored old decision, grant, run and failure history remain intact.
+
+A separately approved fourth same-target attempt additionally requires
+`--approve-target-extra-attempt` immediately before `--execute`. This records a
+new `user_authorized_after_editorial_fix` approval, archives both previous
+consumed retries, and binds the exact failed third attempt, candidate and fresh
+manual run. It cannot authorize a fifth attempt or scheduled/PR execution. The
+local transport refuses a fifth Responses API POST before sending it, including
+when earlier calls failed. The normal retry cap and every quality gate remain
+unchanged. Never add this flag without explicit operator approval.
 
 ## Runtime configuration
 

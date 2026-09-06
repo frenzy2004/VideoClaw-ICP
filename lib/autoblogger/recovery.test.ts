@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { CAMPAIGN_IDS, CandidateSchema, candidateFingerprints, type Candidate } from './domain';
-import { createPersistentWorkerState, PersistentWorkerStateSchema } from './github-runtime';
+import { compactPersistentWorkerState, createPersistentWorkerState, PersistentWorkerStateSchema } from './github-runtime';
 import {
   buildIncrementalQueue,
   consumePreparedManualPilot,
@@ -13,6 +13,7 @@ import {
   reserveManualPilot,
   grantManualRetryApproval,
   grantManualTargetSwitch,
+  grantManualTargetRetry,
   hasManualRetryApproval,
   deferCandidate,
 } from './recovery';
@@ -63,6 +64,77 @@ describe('bounded candidate recovery', () => {
     const target = candidate(2, 1);
     return { ...old, parked, target, state: grantManualTargetSwitch(parked, target, switchInput) };
   }
+
+  function exhaustedSwitchedTarget() {
+    const input = switched();
+    let state = input.state;
+    for (let attempt = 1; attempt <= 3; attempt += 1) {
+      const runId = attempt === 1 ? switchInput.runId : `target-attempt-${attempt}`;
+      const at = `2026-09-06T21:0${attempt}:00.000Z`;
+      if (attempt > 1) state = grantManualTargetRetry(state, input.target, {
+        priorRunId: attempt === 2 ? switchInput.runId : 'target-attempt-2', runId, approvedAt: at,
+      });
+      state = reserveCandidate(state, input.target, runId, 'manual_pilot', at);
+      state = markCandidateFailure(state, input.target, runId, 'candidate_failed', true, at);
+      const fp = candidateFingerprints(input.target).candidate;
+      state.runs[runId] = { schemaVersion: 1, runId, mode: 'manual_pilot', startedAt: at, selectedCandidateFingerprints: [fp], status: 'failed' };
+      state.failures.push({ runId, candidateFingerprint: fp, code: 'candidate_failed', attempt, observedAt: at, detail: 'Retained automatic failure.' });
+    }
+    return { ...input, state, targetFp: candidateFingerprints(input.target).candidate };
+  }
+
+  const extraInput = { priorRunId: 'target-attempt-3', runId: 'target-extra-attempt-4', approvedAt: '2026-09-06T22:00:00.000Z', extraAttempt: true };
+
+  it('reserves one explicitly approved fourth target attempt with all prior decisions and grants retained', () => {
+    const { state, target, targetFp } = exhaustedSwitchedTarget();
+    const before = structuredClone(state);
+    const approved = grantManualTargetRetry(state, target, extraInput);
+    expect(approved.manualTargetSwitch?.retryHistory).toEqual([...before.manualTargetSwitch!.retryHistory!, before.manualTargetSwitch!.retry]);
+    expect(approved.manualTargetSwitch?.retry).toMatchObject({ reason: 'user_authorized_after_editorial_fix', priorDecision: before.decisions[targetFp], consumedAt: null });
+    for (const key of ['runs', 'failures', 'decisions', 'manualRetryApproval', 'contentHashes', 'pullRequests'] as const) expect(approved[key]).toEqual(before[key]);
+    const queue = buildIncrementalQueue({ state: reserveManualPilot(approved, extraInput.runId, extraInput.approvedAt), backlog: [target], runId: extraInput.runId, mode: 'manual_pilot', now: extraInput.approvedAt });
+    expect(queue.scan).toEqual([target]);
+    const reserved = reserveCandidate(queue.state, target, extraInput.runId, 'manual_pilot', extraInput.approvedAt);
+    expect(reserved.decisions[targetFp]).toMatchObject({ attempts: 4, status: 'leased', runId: extraInput.runId });
+    expect(reserved.manualTargetSwitch?.retry?.consumedAt).toBe(extraInput.approvedAt);
+    const compacted = compactPersistentWorkerState(reserved);
+    expect(compacted.manualTargetSwitch).toEqual(reserved.manualTargetSwitch);
+    expect(compacted.runs).toEqual(before.runs);
+    const prepared = markManualPilotPrepared(reserved, extraInput.runId, 'b'.repeat(64), extraInput.approvedAt);
+    expect(PersistentWorkerStateSchema.safeParse(prepared).success).toBe(true);
+    expect(() => reserveCandidate(recoverExpiredReservations(reserved, '2026-09-07T01:00:00.000Z'), target, 'fifth', 'manual_pilot', '2026-09-07T01:00:00.000Z')).toThrow();
+    expect(() => reserveCandidate(reserved, target, extraInput.runId, 'manual_pilot', extraInput.approvedAt)).toThrow();
+    const failed = markCandidateFailure(reserved, target, extraInput.runId, 'candidate_failed', true, extraInput.approvedAt);
+    failed.runs[extraInput.runId] = { schemaVersion: 1, runId: extraInput.runId, mode: 'manual_pilot', startedAt: extraInput.approvedAt, selectedCandidateFingerprints: [targetFp], status: 'failed' };
+    failed.failures.push({ runId: extraInput.runId, candidateFingerprint: targetFp, code: 'candidate_failed', attempt: 4, observedAt: extraInput.approvedAt, detail: 'Retained fourth failure.' });
+    expect(PersistentWorkerStateSchema.safeParse(failed).success).toBe(true);
+    expect(failed.decisions[targetFp]).toMatchObject({ attempts: 4, status: 'terminal' });
+    expect(() => grantManualTargetRetry({ ...failed, manualPilot: null }, target, { ...extraInput, priorRunId: extraInput.runId, runId: 'fifth' })).toThrow();
+    expect(state).toEqual(before);
+  });
+
+  it('never treats an ordinary retry request as fourth-attempt authorization', () => {
+    const { state, target } = exhaustedSwitchedTarget();
+    expect(() => grantManualTargetRetry(state, target, { ...extraInput, extraAttempt: false })).toThrow();
+    expect(() => grantManualTargetRetry(state, target, { priorRunId: extraInput.priorRunId, runId: extraInput.runId, approvedAt: extraInput.approvedAt })).toThrow();
+  });
+
+  it.each(['scheduled', 'other-run', 'changed-title', 'missing-history', 'wrong-reason', 'missing-third-failure', 'reused-run', 'old-approval'])(
+    'rejects an exceptional fourth target attempt with %s', (problem) => {
+      const { state, target } = exhaustedSwitchedTarget();
+      const approved = grantManualTargetRetry(state, target, extraInput);
+      if (problem === 'scheduled' || problem === 'other-run' || problem === 'changed-title') {
+        expect(() => reserveCandidate(approved, problem === 'changed-title' ? { ...target, title: 'Another title' } : target,
+          problem === 'other-run' ? 'unapproved-run' : extraInput.runId, problem === 'scheduled' ? 'scheduled' : 'manual_pilot', extraInput.approvedAt)).toThrow();
+        return;
+      }
+      if (problem === 'missing-history') approved.manualTargetSwitch!.retryHistory!.pop();
+      if (problem === 'wrong-reason') approved.manualTargetSwitch!.retry!.reason = 'user_authorized_after_attribution_fix';
+      if (problem === 'missing-third-failure') approved.failures = approved.failures.filter(f => f.runId !== extraInput.priorRunId);
+      if (problem === 'reused-run') approved.manualTargetSwitch!.retry!.runId = 'target-attempt-2';
+      if (problem === 'old-approval') approved.manualTargetSwitch!.retry!.approvedAt = retryAt;
+      expect(PersistentWorkerStateSchema.safeParse(approved).success).toBe(false);
+    });
 
   it('marks a failed consumed one-use target switch terminal even below the normal retry cap', () => {
     const { state, target, parked } = switched();

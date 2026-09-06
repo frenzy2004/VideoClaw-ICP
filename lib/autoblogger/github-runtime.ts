@@ -127,7 +127,7 @@ const ManualRetryApprovalSchema = z.object({
 }).strict();
 
 const ManualTargetRetrySchema = z.object({
-  reason: z.enum(['user_authorized_after_collector_fix', 'user_authorized_after_attribution_fix']),
+  reason: z.enum(['user_authorized_after_collector_fix', 'user_authorized_after_attribution_fix', 'user_authorized_after_editorial_fix']),
   priorRunId: z.string().regex(/^[A-Za-z0-9][A-Za-z0-9._-]{0,159}$/u),
   runId: z.string().regex(/^[A-Za-z0-9][A-Za-z0-9._-]{0,159}$/u),
   priorDecision: CandidateDecisionSchema,
@@ -147,7 +147,7 @@ const ManualTargetSwitchSchema = z.object({
   approvedAt: z.string().datetime(),
   consumedAt: z.string().datetime().nullable(),
   retry: ManualTargetRetrySchema.optional(),
-  retryHistory: z.array(ManualTargetRetrySchema).max(1).optional(),
+  retryHistory: z.array(ManualTargetRetrySchema).max(2).optional(),
 }).strict();
 
 export const PersistentWorkerStateSchema = AutobloggerStateSchema.extend({
@@ -189,9 +189,11 @@ export const PersistentWorkerStateSchema = AutobloggerStateSchema.extend({
       const previous = retries[index - 1] ?? targetSwitch;
       const prior = state.runs[item.priorRunId];
       const saved = item.priorDecision;
+      const extraAttempt = item.reason === 'user_authorized_after_editorial_fix';
       if (!previous.consumedAt || item.priorRunId !== previous.runId || runIds.has(item.runId)
         || saved.status !== 'terminal' || saved.leaseExpiresAt !== null || saved.runId !== item.priorRunId
-        || saved.attempts !== targetSwitch.startingAttempts + 1 + index || saved.attempts >= 3
+        || saved.attempts !== targetSwitch.startingAttempts + 1 + index
+        || (extraAttempt ? saved.attempts !== 3 || index !== retries.length - 1 : saved.attempts >= 3)
         || saved.articleId !== targetSwitch.candidate.articleId || saved.intentFingerprint !== candidateFingerprints(targetSwitch.candidate).intent
         || JSON.stringify([...saved.identities].sort()) !== JSON.stringify([...identities].sort())
         || Date.parse(saved.updatedAt) < Date.parse(previous.consumedAt!) || Date.parse(item.approvedAt) < Date.parse(saved.updatedAt)
@@ -233,14 +235,21 @@ export const PersistentWorkerStateSchema = AutobloggerStateSchema.extend({
       || Date.parse(state.manualPilot.reservedAt) < (retry ? Date.parse(retry.approvedAt) : approvedAt)
       || (!(retry ? retry.consumedAt : targetSwitch.consumedAt) && state.manualPilot.status !== 'leased'))) fail('The global pilot lifecycle belongs only to the approved target-switch run.');
   }
+  const targetExtra = targetSwitch?.retry?.reason === 'user_authorized_after_editorial_fix' && targetSwitch.retry.consumedAt
+    ? targetSwitch.retry : undefined;
   for (const [fingerprint, decision] of Object.entries(state.decisions)) {
+    const exactTargetExtra = targetExtra && targetSwitch?.candidateFingerprint === fingerprint
+      && targetExtra.runId === decision.runId && decision.status !== 'retryable';
     if (decision.attempts > 3 && (!approval?.consumedAt || approval.candidateFingerprint !== fingerprint
-      || approval.runId !== decision.runId || decision.status === 'retryable')) invalid('Attempt four requires its exact consumed manual retry approval.');
+      || approval.runId !== decision.runId || decision.status === 'retryable') && !exactTargetExtra) invalid('Attempt four requires its exact consumed manual retry approval.');
   }
   for (const failure of state.failures) {
+    const exactTargetExtra = targetExtra && failure.runId === targetExtra.runId
+      && failure.candidateFingerprint === targetSwitch?.candidateFingerprint
+      && Date.parse(failure.observedAt) >= Date.parse(targetExtra.consumedAt!);
     if (failure.attempt > 3 && (!approval?.consumedAt || failure.runId !== approval.runId
       || failure.candidateFingerprint !== approval.candidateFingerprint
-      || Date.parse(failure.observedAt) < Date.parse(approval.consumedAt))) invalid('Fourth failure requires its exact consumed manual retry approval.');
+      || Date.parse(failure.observedAt) < Date.parse(approval.consumedAt)) && !exactTargetExtra) invalid('Fourth failure requires its exact consumed manual retry approval.');
   }
   if (!approval) return;
   const decision = state.decisions[approval.candidateFingerprint];

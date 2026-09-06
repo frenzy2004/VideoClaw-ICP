@@ -3,7 +3,28 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-## Latest editorial correction — 2026-09-06
+## Latest bounded editorial pilot — 2026-09-07
+
+The [live pilot report](EDITORIAL-PILOT-2026-09-07.md) records the separately
+approved fourth attempt, fresh research, all four model calls and failed final
+review. Description/label/FAQ improvements were observed, but source over-reliance
+and an unsupported recording heading still failed independent verification.
+A deterministic reference-check disagreement is also retained. **Zero accepted
+bundles, native article QA passes or lander PRs** resulted. No review override,
+manual rewriting or fifth call occurred.
+
+Independent re-review verified 207 scoped tests with no remaining P1/P2 after
+fixing the old-switch reload bypass. The normal cap is unchanged; the separately
+authorized extra grant is consumed and terminal attempt-four history is retained.
+
+Final full-suite runs: **1,100 passed / 1 failed**, with the existing 250-row
+content-map test timing out unchanged at five seconds. Lint, typecheck and build
+passed separately after the live run. No timeout/assertion was loosened. This is
+a review checkpoint, not an all-green release or successful article milestone.
+The unchanged content-map file passed its isolated rerun (8/8; 250-row case
+2,316 ms). That does not replace either failed full-suite result.
+
+## Previous editorial correction — 2026-09-06
 
 The [quality-check report](EDITORIAL-QUALITY-2026-09-06.md) records the
 description, repetitive-label and FAQ-selection corrections. Regression tests

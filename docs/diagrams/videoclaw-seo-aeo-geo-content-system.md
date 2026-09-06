@@ -33,6 +33,20 @@ The 250-opportunity backlog is an input, not a required count or proof of measur
 Apify evidence → one draft + critique + QA → Markdown / SVG / report artifact → STOP
 ```
 
+Latest observation, 2026-09-07 Malaysia date:
+
+```text
+Fresh research → draft → critique → one repair → final review FAILED → STOP
+```
+
+The [fourth-attempt report](../autoblogger/EDITORIAL-PILOT-2026-09-07.md)
+records eight organic results, automatic PAA/source retrieval and four model calls.
+Metadata, repetitive labels and FAQ selection improved. Final review still rejected
+source over-reliance and a recording heading; a separate product-reference checker
+disagreement also remains. No accepted Markdown bundle or native article QA pass
+resulted. The candidate is terminal at attempt four, with all history retained and
+no further live retry authorized. The observations below are historical.
+
 - The first attempt scanned fifty candidates and failed all ten deep checks, generating no article. [Historical pilot report](../autoblogger/LIVE-PILOT-2026-09-06.md). Follow-up collector checks still did not establish the complete automated organic/PAA evidence bundle. [Recovery report](../autoblogger/RESEARCH-RECOVERY-2026-09-06.md).
 - A later **assisted local review** combined actual Apify organic results with separately recorded browser PAA and manually checked source bodies. GPT-5.5 completed generation, critique, repair and verification; its final result still failed review. An explicit editorial revision produced one local article, without claiming an unattended pass or consuming a successful-pilot slot. [Current assisted-review report](../autoblogger/ASSISTED-REVIEW-2026-09-06.md).
 - **Latest automatic attempt and separate revalidation:** a newly authorized product-demo attempt collected eight organic results, PAA questions and four source bodies, then completed all four model stages. Independent verification approved the repair. Deterministic grammar false positives stopped the live worker; after a test-first fix, offline replay of the same saved responses returned the unchanged review bundle, which passed native blog checks, lint and build. No article rewriting, manual evidence injection or new paid call was used in revalidation. The live run remains failed and terminal at attempt three; no successful pilot marker or generated lander PR exists. [Artifact report](../autoblogger/PRODUCT-DEMO-ARTIFACT-2026-09-06.md). The [previous retry](../autoblogger/PRODUCT-DEMO-RETRY-2026-09-06.md) remains a historical failure.
@@ -129,7 +143,7 @@ Every article traces back to campaign, ICP, trigger, intent, keyword, SERP obser
 | --- | --- | --- |
 | Article and diagram updates | Original three review guides, older assisted local preview, and new unchanged-response Markdown/SVG review artifact; no production action | Team review; keep each artifact's provenance distinct |
 | Worker implementation | PR #1 open; offline and native fixture verification recorded separately | Implementation review |
-| Automated local article milestone | Live model verification approved; the unchanged draft passed native QA after a grammar fix and offline replay | Clean uninterrupted worker execution is still unproven; terminal attempt-three history cannot be reset or silently retried |
+| Automated local article milestone | Latest live fourth attempt failed final review; zero accepted bundles or native article QA passes from that run | Source allocation/originality and reference-check correction; no further live retry authorized |
 | Unattended Actions pilot | Not configured; no successful unattended article | Scoped read token, OpenAI Actions secret, reconciled state and reviewed worker |
 | Paid enrichment | Not connected; Apify research does not invent metrics | Provider access and a tested adapter |
 | Generated lander PRs | Not enabled | Merged blog contract, paid metrics, GitHub App and approved rollout |

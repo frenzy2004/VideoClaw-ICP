@@ -126,6 +126,84 @@ describe('local artifact-only pilot preflight', () => {
     expect(() => reserveCandidate(reserved, other, 'fourth', 'manual_pilot', input.approvedAt)).toThrow();
   });
 
+  function failedThirdTargetFixture() {
+    const input = failedTargetRetryFixture();
+    const prepared = reconcileLocalPilotCandidate(input);
+    let state = reserveCandidate(prepared.state, other, input.runId, 'manual_pilot', input.approvedAt);
+    state = markCandidateFailure(state, other, input.runId, 'candidate_failed', false, input.approvedAt);
+    const fp = candidateFingerprints(other).candidate;
+    state.runs[input.runId] = { schemaVersion: 1, runId: input.runId, mode: 'manual_pilot', startedAt: input.approvedAt, selectedCandidateFingerprints: [fp], status: 'failed' };
+    state.failures.push({ runId: input.runId, candidateFingerprint: fp, code: 'candidate_failed', attempt: 3, observedAt: input.approvedAt, detail: 'Editorial review rejected the third attempt.' });
+    return { ...input, state, runId: 'editorial-fixed-retry', retryTargetFrom: input.runId, approvedAt: '2026-09-07T00:00:00.000Z', approveTargetExtraAttempt: true };
+  }
+
+  it('grants the explicitly approved fourth target attempt while preserving failed history', () => {
+    const input = failedThirdTargetFixture();
+    const before = structuredClone(input);
+    const prepared = reconcileLocalPilotCandidate(input);
+    expect(prepared.nextAttempt).toBe(4);
+    expect(prepared.state.manualTargetSwitch?.retry).toMatchObject({
+      priorRunId: 'attribution-retry', runId: 'editorial-fixed-retry', reason: 'user_authorized_after_editorial_fix',
+      priorDecision: before.state.decisions[candidateFingerprints(other).candidate], consumedAt: null,
+    });
+    expect(prepared.state.manualTargetSwitch?.retryHistory).toEqual([
+      ...before.state.manualTargetSwitch!.retryHistory!, before.state.manualTargetSwitch!.retry,
+    ]);
+    for (const key of ['decisions', 'runs', 'failures', 'manualRetryApproval'] as const) expect(prepared.state[key]).toEqual(before.state[key]);
+    expect(input).toEqual(before);
+    const queue = buildIncrementalQueue({ state: reserveManualPilot(prepared.state, input.runId, input.approvedAt), backlog: prepared.backlog, runId: input.runId, mode: 'manual_pilot', now: input.approvedAt });
+    expect(queue.scan).toEqual([other]);
+    const reserved = reserveCandidate(queue.state, other, input.runId, 'manual_pilot', input.approvedAt);
+    expect(reserved.decisions[candidateFingerprints(other).candidate]).toMatchObject({ attempts: 4, runId: input.runId });
+    expect(() => reserveCandidate(reserved, other, 'fifth', 'manual_pilot', input.approvedAt)).toThrow();
+  });
+
+  it('reloads an unused fourth target approval only with the matching explicit extra-attempt flag', () => {
+    const input = failedThirdTargetFixture();
+    const prepared = reconcileLocalPilotCandidate(input);
+    const reloaded = { ...input, state: JSON.parse(JSON.stringify(prepared.state)), approvedAt: '2026-09-07T01:00:00.000Z' };
+    expect(reconcileLocalPilotCandidate(reloaded).state).toEqual(prepared.state);
+    expect(() => reconcileLocalPilotCandidate({ ...reloaded, approveTargetExtraAttempt: undefined })).toThrow();
+    expect(() => reconcileLocalPilotCandidate({ ...reloaded, approveTargetExtraAttempt: false })).toThrow();
+  });
+
+  it.each([2, 3, 4])('does not reload target attempt %s through the old switch flag', (attempt) => {
+    const input = attempt === 2 ? failedSwitchFixture() : attempt === 3 ? failedTargetRetryFixture() : failedThirdTargetFixture();
+    const prepared = reconcileLocalPilotCandidate(input);
+    expect(() => reconcileLocalPilotCandidate({ state: prepared.state, backlog: prepared.backlog, candidate: input.candidate,
+      runId: input.runId, approvedAt: input.approvedAt, switchTargetFrom: prepared.state.manualTargetSwitch!.parkedRetryRunId })).toThrow();
+  });
+
+  it.each([2, 3])('rejects an extra-attempt flag on an unused normal target attempt %s approval', (attempt) => {
+    const input = attempt === 2 ? failedSwitchFixture() : failedTargetRetryFixture();
+    const prepared = reconcileLocalPilotCandidate(input);
+    expect(() => reconcileLocalPilotCandidate({ ...input, state: prepared.state, approveTargetExtraAttempt: true })).toThrow();
+  });
+
+  it('keeps the normal target cap at three without explicit extra-attempt approval', () => {
+    const input = failedThirdTargetFixture();
+    expect(() => reconcileLocalPilotCandidate({ ...input, approveTargetExtraAttempt: undefined })).toThrow();
+  });
+
+  it.each(['ordinary', 'old-retry', 'switch'])('rejects extra-attempt reconciliation in %s mode', (mode) => {
+    const input = mode === 'ordinary' ? fixture() : mode === 'old-retry' ? terminalFixture() : switchFixture();
+    expect(() => reconcileLocalPilotCandidate({ ...input, approveTargetExtraAttempt: true })).toThrow();
+  });
+
+  it('parses extra-attempt approval only alongside candidate-file and target-retry before execute', () => {
+    const args = ['--run-id', 'editorial-fixed-retry', '--candidate-file', 'artifacts/selected.json', '--retry-target-from', 'attribution-retry', '--approve-target-extra-attempt', '--execute'];
+    expect(parseLocalPilotArguments(args)).toEqual({ runId: 'editorial-fixed-retry', candidateFile: 'artifacts/selected.json', retryTargetFrom: 'attribution-retry', approveTargetExtraAttempt: true });
+    for (const bad of [
+      ['--run-id', 'new', '--approve-target-extra-attempt', '--execute'],
+      ['--run-id', 'new', '--approve-retry-from', 'old', '--approve-target-extra-attempt', '--execute'],
+      [...args.slice(0, 4), '--switch-target-from', ...args.slice(5)],
+      [...args.slice(0, 6), '--execute', '--approve-target-extra-attempt'],
+      [...args.slice(0, -1), '--approve-target-extra-attempt', '--execute'],
+      args.slice(0, -1),
+      ['--run-id', 'new', '--retry-target-from', 'old', '--approve-target-extra-attempt', '--execute'],
+    ]) expect(() => parseLocalPilotArguments(bad)).toThrow();
+  });
+
   it.each(['missing-history', 'unconsumed-history', 'wrong-chain', 'reused-run', 'changed-attempt', 'missing-prior-failure'])('rejects a third-attempt grant with %s', (problem) => {
     const input = failedTargetRetryFixture();
     const value = reconcileLocalPilotCandidate(input).state;
@@ -356,6 +434,31 @@ describe('local artifact-only pilot preflight', () => {
 });
 
 describe('unmodified production model transport auditing', () => {
+  it.each(['success', 'http-failure', 'transport-failure'])('stops before the fifth Responses POST after %s, excluding Apify GET and POST', async (outcome) => {
+    const dispatched: string[] = [];
+    const requests: unknown[] = [];
+    const responses: unknown[] = [];
+    const transport = createModelAuditTransport(async (request) => {
+      dispatched.push(`${request.method} ${request.url}`);
+      if (request.url === 'https://api.openai.com/v1/responses' && outcome === 'transport-failure') throw new Error('offline failure');
+      return { status: outcome === 'http-failure' ? 500 : 200, headers: {}, body: {} };
+    }, async (record) => { responses.push(record); }, async (record) => { requests.push(record); });
+    const request = { method: 'POST' as const, url: 'https://api.openai.com/v1/responses', headers: {}, signal: new AbortController().signal, body: '{}' };
+    for (let call = 1; call <= 4; call += 1) {
+      await transport({ ...request, method: 'GET', url: 'https://api.apify.com/v2/datasets/example/items' });
+      await transport({ ...request, url: 'https://api.apify.com/v2/acts/example/runs' });
+      if (outcome === 'transport-failure') await expect(transport(request)).rejects.toThrow('offline failure');
+      else expect((await transport(request)).status).toBe(outcome === 'http-failure' ? 500 : 200);
+    }
+    await expect(transport(request)).rejects.toThrow(/four|4|limit|budget/i);
+    await expect(transport(request)).rejects.toThrow(/four|4|limit|budget/i);
+    await transport({ ...request, url: 'https://api.apify.com/v2/acts/example/runs' });
+    expect(dispatched.filter(value => value === 'POST https://api.openai.com/v1/responses')).toHaveLength(4);
+    expect(dispatched).toHaveLength(13);
+    expect(requests).toEqual([1, 2, 3, 4].map(call => ({ call, phase: 'unknown', requestBody: '{}' })));
+    expect(responses).toHaveLength(outcome === 'transport-failure' ? 0 : 4);
+  });
+
   it('durably records exact credential-free wire input before dispatch, even when the provider fails', async () => {
     const records: unknown[] = [];
     const payload = { model: 'fixture-model', store: false, input: [{ role: 'user', content: [{ type: 'input_text', text: JSON.stringify({ sourceFacts: [{ id: 's1', facts: [{ id: 'f1', text: 'Original support.' }] }] }) }] }], text: { format: { name: 'article_draft' } } };
