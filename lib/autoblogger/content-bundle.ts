@@ -663,19 +663,20 @@ function hasExplicitImperativeObject(prefix: string, clause: string): boolean {
   // Resolve a short, unqualified common-noun object followed immediately by a
   // subordinate clause. A named subject ("Descript prepares ...") is not an
   // imperative, and a prepositional/relative clause can introduce another actor.
-  const object = prefix.match(/^(?:prepare|review|revise|check|use)\s+(.+?)\s+(?:only\s+)?(?:when|if|unless|before|after|because)\s+$/iu)?.[1];
+  const object = prefix.match(/^(?:prepare|review|revise|check|use|remove)\s+(.+?)\s+(?:only\s+)?(?:when|if|unless|before|after|because)\s+$/iu)?.[1];
   // Syntax cannot distinguish an unknown lowercase brand from a common noun.
   // Reuse the bounded ordinary-artifact vocabulary and explicit editorial
   // object categories. Unknown heads (including devices) fail closed; this is
   // reference resolution only, never evidence that the advice is supported.
   const ordinary = object ? ordinaryReferent.exec(object) : null;
   const knownArtifact = object && (/(?:^|\s)(?:material|appendix|collateral|handout|agenda|evidence)$/u.test(object)
+    || /^(?:company|founder|customer) history$/u.test(object)
     || (ordinary?.index === 0 && ordinary[0].length === object.length));
   // A syntactic object alone does not establish a non-software referent. Require
   // the whole subordinate clause to describe an editorial relation: suitability,
   // audience delivery, or argumentative structure. Unknown predicates and added
   // clauses stay ambiguous, including capabilities of an unnamed instrument.
-  const relation = clause.match(/^it (fits|answers|reaches|lacks|sets|supports) ([a-z]+(?:\s+[a-z]+){0,7})[.!]?$/iu);
+  const relation = clause.match(/^it (fits|answers|reaches|lacks|sets|supports|explains) ([a-z]+(?:\s+[a-z]+){0,7})[.!]?$/iu);
   const complement = relation?.[2] ?? '';
   const editorialComplements: Record<string, RegExp> = {
     fits: /\b(?:use case|purpose|scope)$/,
@@ -684,6 +685,7 @@ function hasExplicitImperativeObject(prefix: string, clause: string): boolean {
     lacks: /\b(?:next step|structure|clarity)$/,
     sets: /\bexpectations$/,
     supports: /\b(?:argument|claim|point)$/,
+    explains: /\b(?:buyer|customer) risk$/,
   };
   const editorialRelation = relation && editorialComplements[relation[1].toLowerCase()]?.test(complement.toLowerCase());
   // "Use" can select an instrument rather than an artifact. Only a qualified
@@ -707,15 +709,21 @@ function attributedNonProductSubject(prefix: string, factTexts: string[]): boole
   )));
 }
 
+function hasVerifiedPublisherHost(publisher: string, sourceUrls: string[]): boolean {
+  const hosts: Record<string, string> = { descript: 'descript.com', cloudshare: 'cloudshare.com' };
+  const expected = hosts[publisher.toLowerCase()];
+  return Boolean(expected && sourceUrls.some(url => {
+    try { return new URL(url).hostname.replace(/^www\./u, '') === expected; }
+    catch { return false; }
+  }));
+}
+
 function hasAttributedEditorialCoordination(sentence: string, sourceUrls: string[]): boolean {
   // A named publisher coordinates two advice predicates. Resolve its single
   // pronoun only when the cited page identifies that publisher; neither the
   // grammar nor the hostname establishes support for the advice itself.
   const subject = sentence.match(/^([\p{Lu}][\p{L}\d]*) (?:says|notes|explains) (?:a|the) (?:software )?demo video should include a (?:compelling|clear) (?:story|use case)(?: or use case)?, and it (?:also )?(?:advises|recommends) (?:concise|focused|short)(?:, (?:concise|focused|short))? demos[.!]?$/u)?.[1];
-  return Boolean(subject && sourceUrls.some(url => {
-    try { return new URL(url).hostname.replace(/^www\./u, '').split('.')[0] === subject.toLowerCase(); }
-    catch { return false; }
-  }));
+  return Boolean(subject && hasVerifiedPublisherHost(subject, sourceUrls));
 }
 
 function hasEditorialObjectRouting(sentence: string): boolean {
@@ -723,6 +731,9 @@ function hasEditorialObjectRouting(sentence: string): boolean {
   // planning action, not a software capability subject. No added assertion or
   // named product inherits the exception. Factual support is still reviewed.
   if ([...sentence.matchAll(/\bit\b/giu)].length !== 1) return false;
+  // The introduction is the explicit object of a human revision instruction.
+  // Match the complete clause; another actor or capability cannot inherit it.
+  if (/^if (?:the|this|your) (?:opening|introduction) feels (?:weak|unclear|generic), (?:rewrite|revise) it around (?:the|a) (?:buyer|customer)[’']s (?:current )?(?:obstacle|problem)(?: instead of (?:the|a) (?:founder|company)[’']s category label)?[.!]?$/iu.test(sentence)) return true;
   // Human planning goals and rehearsal instructions keep an explicit ordinary
   // object. Closed complements prevent an added capability from inheriting it.
   if (/^(?:your|the) goal is to make (?:one|a|the) (?:customer|buyer) (?:situation|problem) easy to understand, show the action that addresses it, and ask for a (?:specific|clear) next step[.!]?$/iu.test(sentence)
@@ -736,6 +747,31 @@ function hasEditorialObjectRouting(sentence: string): boolean {
   // human subject/predicates do not assert that any product supplies the answer.
   const question = new RegExp(`^If (?:the|a) (?:buyer|customer|prospect) asks about ([a-z]+(?: [a-z]+){0,5}), (?:the|a) (?:founder|presenter) (?:would|should|can) either show (?:a|the) prepared answer if (?:that|the) topic is part of the decision or (?:place|put|note) it in ${destination} if (?:the|that) topic is secondary[.!]?$`, 'u').exec(sentence);
   return Boolean(question && !/\b(?:it|its|they|their|them|we|our|this|that|which|who)\b/u.test(question[1]));
+}
+
+function hasEditorialListAntecedent(sentence: string, previousSentences: string[]): boolean {
+  // Follow at most two adjacent parallel conditionals to a visible worksheet.
+  // A paragraph-wide mention or an unrelated intervening sentence is not enough.
+  // The conditional only describes entries on paper, followed by a human choice;
+  // no arbitrary software predicates or appended pronouns inherit the referent.
+  const choice = '(?:choose|select) the one (?:most likely to buy next|that makes the (?:clearest|strongest) case for a follow[ -]up decision)';
+  const rehearsal = 'rehearse the objection that could stop the deal rather than the easiest one to answer';
+  const conditional = new RegExp(`^if (it|(?:the|this|your) (?:worksheet|checklist|brief|outline)) lists (?:several|multiple) (?:customer segments|workflows|objections), (?:${choice}|${rehearsal})[.!]?$`, 'iu');
+  if (conditional.exec(sentence)?.[1].toLowerCase() !== 'it') return false;
+  for (const previous of previousSentences.slice(-2).reverse()) {
+    const match = conditional.exec(previous);
+    if (!match) return false;
+    if (match[1].toLowerCase() !== 'it') return true;
+  }
+  return false;
+}
+
+function hasAttributedRecordingObject(sentence: string, sourceUrls: string[]): boolean {
+  // Resolve a demonstrated object in publisher-attributed human instructions.
+  // A matching source hostname establishes attribution identity only; the
+  // independent critic still must verify the complete instructional claim.
+  const publisher = /^(?:for software, )?([\p{Lu}][\p{L}\d]*) (?:says|notes|explains) (?:one|a) (?:straightforward|simple) approach is to record the screen while (?:walking through|demonstrating) the product(?: or feature)?, then add a voiceover that explains the steps shown[.!]?$/u.exec(sentence.replace(/^For software,/u, 'for software,'))?.[1];
+  return Boolean(publisher && hasVerifiedPublisherHost(publisher, sourceUrls));
 }
 
 function hasOrdinaryExplanationAntecedent(sentence: string, previousSentence: string): boolean {
@@ -767,6 +803,7 @@ function containsProductAlias(
   priorProductContext: boolean,
   factTexts: string[],
   sourceUrls: string[],
+  previousSentences: string[],
 ): boolean {
   if (containsExplicitProductAlias(sentence, claims)) return true;
   const productReferences = [...sentence.matchAll(/\b(?:the|this) product\b/giu)];
@@ -813,6 +850,8 @@ function containsProductAlias(
   // Do not let an intervening ordinary noun or a hypothetical label erase a
   // visible VideoClaw antecedent. This deliberately leaves ambiguity fail-closed.
   if (priorProductContext) return true;
+  if (productReferences.length === 1 && pronouns.length === 0
+    && hasAttributedRecordingObject(sentence, sourceUrls)) return false;
   if (productReferences.length > 0) {
     const genericContext = /\b(?:company|customer|hypothetical)\b/iu.test(sentence);
     const genericVideoSubject = /^a (?:software )?demo video\b/iu.test(sentence);
@@ -831,6 +870,8 @@ function containsProductAlias(
   if (!pronoun) return false;
   if (hasAttributedEditorialCoordination(sentence, sourceUrls)) return false;
   if (softwareReferent.test(sentence)) return true;
+
+  if (productReferences.length === 0 && hasEditorialListAntecedent(sentence, previousSentences)) return false;
 
   if (!/\bproduct\b/iu.test(sentence) && hasEditorialObjectRouting(sentence)) return false;
 
@@ -935,6 +976,7 @@ function inspectClaimBindings(
       binding.span, context.productClaims, localContext, productContext.get(key) ?? true,
       binding.sourceFactIds.map((id) => factsById.get(id)?.text ?? ''),
       binding.sourceFactIds.map((id) => factsById.get(id)?.url ?? ''),
+      visibleSentences.slice(Math.max(0, sentenceIndex - 2), sentenceIndex),
     )) {
       reject('unapproved_product_reference', 'Explicit or ambiguous VideoClaw reference requires an exact approved product claim; remove the unsupported assertion or make a genuinely non-product referent explicit.');
     }

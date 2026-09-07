@@ -901,6 +901,75 @@ describe('contextual product references and precise binding failures', () => {
     return draft;
   }
 
+  const worksheetAnchor = 'If the worksheet lists several customer segments, choose the one most likely to buy next.';
+  const worksheetWorkflow = 'If it lists several workflows, choose the one that makes the clearest case for a follow up decision.';
+  const worksheetObjection = 'If it lists several objections, rehearse the objection that could stop the deal rather than the easiest one to answer.';
+  const openingRevision = 'If the opening feels weak, rewrite it around the buyer’s current obstacle instead of the founder’s category label.';
+  const recordingAdvice = 'For software, Descript says one straightforward approach is to record the screen while walking through the product or feature, then add a voiceover that explains the steps shown.';
+
+  it('resolves a bounded parallel worksheet chain in visible order, not binding order', () => {
+    expect(inspectGeneratedDraft(context, withSpans([worksheetAnchor, worksheetWorkflow, worksheetObjection]))).toEqual([]);
+  });
+
+  it.each([
+    'Remove company history unless it explains buyer risk.',
+    'Remove company history if it lacks structure.',
+    openingRevision,
+    'If the introduction feels unclear, revise it around the customer’s current problem.',
+  ])('resolves explicit human revision objects without inferring product capabilities: %s', span => {
+    expect(inspectGeneratedDraft(context, withSpans([span]))).toEqual([]);
+  });
+
+  it('resolves the demonstrated product object in source-identified recording instructions', () => {
+    expect(inspectGeneratedDraft(adviceContext, withAttributedAdvice(recordingAdvice))).toEqual([]);
+  });
+
+  it.each(['descript.attacker.example', 'descript.com.attacker.example', 'unrelated.example'])(
+    'rejects publisher lookalikes rather than trusting the first hostname label: %s', hostname => {
+      const spoofedContext = structuredClone(adviceContext);
+      spoofedContext.sourceFacts.at(-1)!.url = `https://${hostname}/blog/article/software-demo-videos`;
+      for (const span of [recordingAdvice, attributedAdvice]) {
+        expect(inspectGeneratedDraft(spoofedContext, withAttributedAdvice(span))).toContainEqual(expect.objectContaining({
+          code: 'content.claim_binding', span, reason: 'unapproved_product_reference',
+        }));
+      }
+    },
+  );
+
+  it.each([
+    [worksheetWorkflow],
+    [worksheetObjection],
+    ['The worksheet tool is ready.', worksheetWorkflow],
+    [worksheetAnchor, 'The team reviewed the agenda.', worksheetWorkflow],
+    [worksheetAnchor, worksheetWorkflow, 'It automatically adds captions.'],
+    [worksheetAnchor, worksheetWorkflow.replace('choose the one', 'automatically caption the one')],
+    [worksheetAnchor, worksheetWorkflow.replace('decision.', 'decision and it adds captions.')],
+    [context.productClaims[0].text, worksheetAnchor, worksheetWorkflow],
+    ['Remove company history unless it automatically adds captions.'],
+    ['Remove company history unless it explains buyer risk and generates subtitles.'],
+    ['Remove company history software unless it explains buyer risk.'],
+    ['Remove Acme unless it explains buyer risk.'],
+    [openingRevision.replace('the opening', 'the platform')],
+    [openingRevision.replace('weak, rewrite', 'weak and automatically adds captions, rewrite')],
+    [openingRevision.replace('label.', 'label and it automatically adds captions.')],
+    [context.productClaims[0].text, openingRevision],
+  ])('keeps ambiguous subjects and appended capabilities blocked in revision grammar: %j', (...spans) => {
+    expect(inspectGeneratedDraft(context, withSpans(spans))).toContainEqual(expect.objectContaining({
+      code: 'content.claim_binding', span: spans.at(-1), reason: 'unapproved_product_reference',
+    }));
+  });
+
+  it.each([
+    recordingAdvice.replace('Descript', 'VideoClaw'),
+    recordingAdvice.replace('Descript', 'UnknownPublisher'),
+    recordingAdvice.replace('walking through the product or feature', 'the product automatically captions the feature'),
+    recordingAdvice.replace('steps shown.', 'steps shown and the product generates subtitles.'),
+  ])('does not grant recording attribution exceptions to product assertions: %s', span => {
+    expect(inspectGeneratedDraft(adviceContext, withAttributedAdvice(span))).toContainEqual(expect.objectContaining({
+      code: 'content.claim_binding', span, reason: 'unapproved_product_reference',
+    }));
+  });
+
   it('resolves coordinated publisher advice only against the cited source identity', () => {
     expect(inspectGeneratedDraft(adviceContext, withAttributedAdvice(attributedAdvice))).toEqual([]);
   });

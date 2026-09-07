@@ -3,7 +3,26 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-## Current composition revalidation — 2026-09-08 Malaysia time
+## Current unchanged-article native proof — 2026-09-08 Malaysia time
+
+The [awake-attempt and revalidation report](AWAKE-PROOF-2026-09-08.md) separates
+the failed live run from the successful post-fix validation. Fresh automatic
+research and all four GPT-5.5 stages completed. Five mechanical reference false
+positives blocked native QA. Their test-first corrections retain unsupported
+product, source-use, copying and review gates, and reject publisher lookalikes.
+
+The exact saved repaired response, original 21-issue registry and independent
+verdict passed the shared live finalizer. All 116 binding hashes matched. No prose,
+source fact or verdict was edited and no additional provider call was made.
+Native validation passed **32 lander blog tests, lint and full Next build** in a
+disposable clone at `b6b0833`; its workspace-integrity check and cleanup passed.
+
+Worker verification: **1,703 tests across 51 files**, lint, regenerated-route
+typecheck, build and whitespace checks passed. Existing dependency warnings remain.
+The original run remains failed; state is terminal at ten with no eleventh path.
+No original lander changes, production action or schedule activation occurred.
+
+## Previous composition revalidation — 2026-09-08 Malaysia time
 
 The [quality revalidation report](QUALITY-REVALIDATION-2026-09-07.md) records the
 worksheet-first prompt correction and independently reviewed, explicit one-use
@@ -15,7 +34,8 @@ Fresh organic/PAA/source research worked, but the Mac entered lid-closed sleep
 response ID or usage receipt. The provider-side outcome is unknown. There was no
 draft, critique, repair, accepted bundle, native article QA or generated lander PR.
 The composition fix remains live-unproven; timeout handling was not weakened.
-All history remains, the candidate is terminal at nine, and no tenth path exists.
+At that checkpoint all history remained, the candidate was terminal at nine, and
+no tenth path existed. The separately authorized continuation is recorded above.
 
 ## Previous scope-alignment and source-query correction — 2026-09-07
 

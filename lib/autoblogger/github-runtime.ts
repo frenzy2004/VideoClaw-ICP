@@ -38,7 +38,7 @@ const CompactFailureSchema = z.object({
   runId: z.string().trim().min(1).max(160),
   code: z.string().trim().min(1).max(120),
   // Above three is accepted only by the enclosing state's consumed-grant checks.
-  attempt: z.number().int().min(1).max(9),
+  attempt: z.number().int().min(1).max(10),
   candidateFingerprint: z.string().trim().min(1).max(500).optional(),
   observedAt: z.string().datetime(),
   detail: z.string().trim().min(1).max(500),
@@ -140,18 +140,24 @@ export const EngineeringResumeEvidenceSchema = z.object({
 export type EngineeringResumeEvidence = z.infer<typeof EngineeringResumeEvidenceSchema>;
 
 export const QUALITY_REVALIDATION_PRIOR_RUN = 'engineering-resume-product-demo-pilot-2026-09-07';
-export const QualityRevalidationEvidenceSchema = EngineeringResumeEvidenceSchema.extend({
+export const INTERRUPTION_PRIOR_RUN = 'quality-revalidation-product-demo-pilot-2026-09-07';
+export const QualityFailureEvidenceSchema = EngineeringResumeEvidenceSchema.extend({
   priorRunId: z.literal(QUALITY_REVALIDATION_PRIOR_RUN),
   failureDetail: z.string().min(1).max(1_500).regex(/^Error: Draft blocked: content_safety_failed \(content\.[^\r\n]+\)\.$/u),
 });
+export const InterruptionEvidenceSchema = EngineeringResumeEvidenceSchema.extend({
+  priorRunId: z.literal(INTERRUPTION_PRIOR_RUN),
+  failureDetail: z.literal('Error: OpenAI structured generation failed: Error: HTTP request timed out after 240000ms.'),
+});
+export const QualityRevalidationEvidenceSchema = z.discriminatedUnion('priorRunId', [QualityFailureEvidenceSchema, InterruptionEvidenceSchema]);
 export type QualityRevalidationEvidence = z.infer<typeof QualityRevalidationEvidenceSchema>;
 
 const ManualTargetRetrySchema = z.object({
   reason: z.enum(['user_authorized_after_collector_fix', 'user_authorized_after_attribution_fix', 'user_authorized_after_editorial_fix', 'user_authorized_after_source_planning_fix', 'user_authorized_after_review_repair_fix', 'user_authorized_after_scope_alignment_fix', 'manual_engineering_resume', 'manual_quality_revalidation']),
   priorRunId: z.string().regex(/^[A-Za-z0-9][A-Za-z0-9._-]{0,159}$/u),
   runId: z.string().regex(/^[A-Za-z0-9][A-Za-z0-9._-]{0,159}$/u),
-  priorDecision: CandidateDecisionSchema.extend({ attempts: z.number().int().min(0).max(8) }),
-  maxAttempt: z.union([z.literal(8), z.literal(9)]).optional(),
+  priorDecision: CandidateDecisionSchema.extend({ attempts: z.number().int().min(0).max(9) }),
+  maxAttempt: z.union([z.literal(8), z.literal(9), z.literal(10)]).optional(),
   evidence: z.union([EngineeringResumeEvidenceSchema, QualityRevalidationEvidenceSchema]).optional(),
   priorApprovalHash: z.string().regex(/^[0-9a-f]{64}$/u).optional(),
   approvedAt: z.string().datetime(),
@@ -170,7 +176,7 @@ const ManualTargetSwitchSchema = z.object({
   approvedAt: z.string().datetime(),
   consumedAt: z.string().datetime().nullable(),
   retry: ManualTargetRetrySchema.optional(),
-  retryHistory: z.array(ManualTargetRetrySchema).max(7).optional(),
+  retryHistory: z.array(ManualTargetRetrySchema).max(8).optional(),
 }).strict();
 
 export const PersistentWorkerStateSchema = AutobloggerStateSchema.extend({
@@ -180,7 +186,7 @@ export const PersistentWorkerStateSchema = AutobloggerStateSchema.extend({
   queuedCandidates: z.array(CandidateSchema).max(500),
   candidateFingerprints: z.array(z.string().trim().min(1).max(500)).max(20_000),
   dedupeHashes: z.array(z.string().regex(/^[0-9a-f]{64}$/u)).max(30_000),
-  decisions: z.record(z.string(), CandidateDecisionSchema.extend({ attempts: z.number().int().min(0).max(9) })),
+  decisions: z.record(z.string(), CandidateDecisionSchema.extend({ attempts: z.number().int().min(0).max(10) })),
   provenance: z.record(z.string(), CompactProvenanceSchema),
   contentHashes: z.record(z.string(), z.string().regex(/^[0-9a-f]{64}$/)),
   pullRequests: z.record(z.string(), z.object({
@@ -218,21 +224,23 @@ export const PersistentWorkerStateSchema = AutobloggerStateSchema.extend({
       const scopeAlignmentRetry = item.reason === 'user_authorized_after_scope_alignment_fix';
       const engineeringResume = item.reason === 'manual_engineering_resume';
       const qualityRevalidation = item.reason === 'manual_quality_revalidation';
+      const interruption = qualityRevalidation && item.priorRunId === INTERRUPTION_PRIOR_RUN;
       const evidence = item.evidence;
       const qualityEvidence = QualityRevalidationEvidenceSchema.safeParse(evidence);
       if (qualityRevalidation) {
         const priorTarget = { ...targetSwitch, retry: retries[index - 1], retryHistory: history.slice(0, index - 1) };
-        if (item.maxAttempt !== 9 || !qualityEvidence.success || item.priorRunId !== QUALITY_REVALIDATION_PRIOR_RUN
+        if (item.maxAttempt !== (interruption ? 10 : 9) || !qualityEvidence.success || qualityEvidence.data.priorRunId !== item.priorRunId
+          || item.priorRunId !== (interruption ? INTERRUPTION_PRIOR_RUN : QUALITY_REVALIDATION_PRIOR_RUN)
           || item.priorApprovalHash !== createHash('sha256').update(JSON.stringify(priorTarget)).digest('hex')
           || evidence?.candidateFingerprint !== fingerprint || evidence?.articleId !== targetSwitch.candidate.articleId
           || evidence?.reportStartedAt !== prior?.startedAt || Date.parse(evidence?.reportCompletedAt ?? '') < Date.parse(saved.updatedAt)
           || Date.parse(evidence?.auditCompletedAt ?? '') < Date.parse(evidence?.reportCompletedAt ?? '')
           || Date.parse(item.approvedAt) < Date.parse(evidence?.auditCompletedAt ?? '') || saved.reason !== 'candidate_failed'
-          || !state.failures.some(f => f.runId === item.priorRunId && f.candidateFingerprint === fingerprint && f.attempt === 8
+          || !state.failures.some(f => f.runId === item.priorRunId && f.candidateFingerprint === fingerprint && f.attempt === (interruption ? 9 : 8)
             && f.code === 'candidate_failed' && qualityEvidence.success && f.detail === qualityEvidence.data.failureDetail
             && Date.parse(f.observedAt) <= Date.parse(qualityEvidence.data.reportCompletedAt))
-          || Object.values(state.runs).some(run => run.runId !== item.runId && run.mode === 'manual_pilot' && ['validated', 'pr_opened'].includes(run.status))) {
-          fail('Quality revalidation requires the exact closed eighth quality failure, unchanged consumed approval history and no prior successful pilot.');
+          || Object.values(state.runs).some(run => run.runId !== targetSwitch.retry?.runId && run.mode === 'manual_pilot' && ['validated', 'pr_opened'].includes(run.status))) {
+          fail('Quality revalidation requires the exact approved closed failure, unchanged consumed approval history and no prior successful pilot.');
         }
       } else if (item.priorApprovalHash !== undefined || (engineeringResume ? item.maxAttempt !== 8 || !EngineeringResumeEvidenceSchema.safeParse(evidence).success || !evidence
         || evidence.priorRunId !== item.priorRunId || evidence.candidateFingerprint !== fingerprint || evidence.articleId !== targetSwitch.candidate.articleId
@@ -242,7 +250,9 @@ export const PersistentWorkerStateSchema = AutobloggerStateSchema.extend({
         || !state.failures.some(f => f.runId === item.priorRunId && f.candidateFingerprint === fingerprint && f.attempt === 7 && f.code === 'deep_inspection_failed')
         : item.maxAttempt !== undefined || evidence !== undefined)) fail('Engineering resume requires exact closed source-failure evidence and a fixed eighth-attempt cap.');
       const allowedAttempt = qualityRevalidation
-        ? saved.attempts === 8 && retries[index - 1]?.reason === 'manual_engineering_resume' && index === retries.length - 1
+        ? saved.attempts === (interruption ? 9 : 8)
+          && retries[index - 1]?.reason === (interruption ? 'manual_quality_revalidation' : 'manual_engineering_resume')
+          && (index === retries.length - 1 || (!interruption && retries[index + 1]?.priorRunId === INTERRUPTION_PRIOR_RUN))
           && prior?.selectedCandidateFingerprints.length === 1
         : engineeringResume
         ? saved.attempts === 7 && retries[index - 1]?.reason === 'user_authorized_after_scope_alignment_fix'

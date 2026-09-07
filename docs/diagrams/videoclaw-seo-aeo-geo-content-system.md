@@ -1,6 +1,6 @@
 # VideoClaw SEO / AEO / GEO content system
 
-Review-only checkpoint: **7 September 2026**. No production merge, deployment, publishing, indexing submission, or schedule activation is authorized in this work.
+Review-only checkpoint: **8 September 2026**. No production merge, deployment, publishing, indexing submission, or schedule activation is authorized in this work.
 
 ![VideoClaw worker, artifact-only pilot, and separate human publication gate](./videoclaw-seo-aeo-geo-content-system-v2.png)
 
@@ -33,20 +33,26 @@ The 250-opportunity backlog is an input, not a required count or proof of measur
 Apify evidence → one draft + critique + QA → Markdown / SVG / report artifact → STOP
 ```
 
-Latest observation, 2026-09-07 Malaysia date:
+Latest observation, 2026-09-08 Malaysia date:
 
 ```text
-Fresh SERP + PAA + four source bodies → drafting started → local sleep / timeout → STOP
+LIVE: Apify + four source bodies → draft → critique → repair → verifier approves → checker false positives → STOP
+POST-FIX: Same captured article + same verdict → shared final gates → native lander QA passes → review artifact → STOP
 ```
 
-The [current ninth-attempt report](../autoblogger/QUALITY-REVALIDATION-2026-09-07.md)
-records fresh automatic research followed by a first-request timeout. The Mac's
-power log shows lid-closed sleep 51 seconds into drafting. No model response,
-usage receipt, accepted article or native article QA resulted. Worksheet-first
-composition is now implemented but remains live-unproven. The candidate is terminal
-at nine, every prior failure remains, and there is no tenth path. Software checks
-pass 1,632 tests, lint, typecheck and build. Further authorized local testing needs
-an awake machine; unattended access remains a separate dependency.
+The [current report](../autoblogger/AWAKE-PROOF-2026-09-08.md) records the tenth
+authorized live attempt and separate post-fix validation. The automatically
+researched and repaired article passed the unmodified lander's **32 blog tests,
+lint and build** after correcting five reference-check false positives. The saved
+article, source facts and independent verdict were not rewritten; no further
+provider call was made. This is **not an uninterrupted live worker success**.
+The original failed report/state remains terminal at ten, with no eleventh path.
+Software checks pass **1,703 tests**, lint, typecheck and build. The output is a
+local review artifact only; unattended access remains a separate dependency.
+
+The historical [ninth-attempt report](../autoblogger/QUALITY-REVALIDATION-2026-09-07.md)
+retains the first-request timeout during lid-closed sleep, without a returned
+response or known provider-side outcome. That failure has not been relabelled.
 
 The historical [eighth-attempt report](../autoblogger/SCOPE-ALIGNMENT-PILOT-2026-09-07.md)
 records working automatic research and substantive Plan/Record/Rehearse coverage.

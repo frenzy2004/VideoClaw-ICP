@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { CandidateSchema, candidateFingerprints } from './domain';
 import { createPersistentWorkerState, PersistentWorkerStateSchema, compactPersistentWorkerState } from './github-runtime';
-import { grantManualRetryApproval, markCandidateFailure, markCandidateScanned, reserveCandidate, reserveManualPilot, buildIncrementalQueue } from './recovery';
+import { grantManualRetryApproval, markCandidateFailure, markCandidateCompleted, markCandidateScanned, reserveCandidate, reserveManualPilot, buildIncrementalQueue } from './recovery';
 import { reconcileLocalPilotCandidate, createModelAuditTransport, inspectLocalPilotInventory, parseLocalPilotArguments, readLocalPilotCandidateFile, validateEngineeringResumeEvidence, readLocalEngineeringResumeEvidence, validateQualityRevalidationEvidence, readLocalQualityRevalidationEvidence } from './local-pilot';
 import { createHash } from 'node:crypto';
 import { mkdtemp, mkdir, writeFile, chmod, symlink } from 'node:fs/promises';
@@ -583,6 +583,70 @@ describe('local artifact-only pilot preflight', () => {
       [...args.slice(0, 4), '--switch-target-from', ...args.slice(5)], [...args.slice(0, -1), '--approve-engineering-resume', '--execute'],
       ['--run-id', args[5], ...args.slice(2)], ['--run-id', 'ninth', '--approve-quality-revalidation', '--execute']]) expect(() => parseLocalPilotArguments(bad)).toThrow();
   });
+
+  function interruptionFixture() {
+    const input = { ...failedEighthTargetFixture(), runId: 'quality-revalidation-product-demo-pilot-2026-09-07' };
+    const fp = candidateFingerprints(other).candidate;
+    const completedAt = '2026-09-07T08:10:00.000Z';
+    const detail = 'Error: OpenAI structured generation failed: Error: HTTP request timed out after 240000ms.';
+    let state = reserveCandidate(reconcileLocalPilotCandidate(input).state, other, input.runId, 'manual_pilot', input.approvedAt);
+    state = markCandidateFailure(state, other, input.runId, 'candidate_failed', false, completedAt);
+    state.runs[input.runId] = { schemaVersion: 1, runId: input.runId, mode: 'manual_pilot', startedAt: input.approvedAt, selectedCandidateFingerprints: [fp], status: 'failed' };
+    state.failures.push({ runId: input.runId, candidateFingerprint: fp, code: 'candidate_failed', attempt: 9, observedAt: completedAt, detail });
+    const prior = qualityFailureProof();
+    const failures = [{ ...prior.report.failures[0], attempt: 9, detail }];
+    const report = { ...prior.report, runId: input.runId, startedAt: input.approvedAt, completedAt, failures };
+    const events: Array<Record<string, unknown> & { at: string }> = prior.audit.events.slice(0, 6).map(e => ({ ...e, at: input.approvedAt }));
+    Object.assign(events[0], { nextAttempt: 9 });
+    events.push({ at: completedAt, stage: 'pilot_completed', status: 'failed', counts: report.counts, failures } as typeof events[number]);
+    const audit = { ...prior.audit, runId: input.runId, events };
+    const proof = { priorRunId: input.runId, candidate: other, implementationHash: 'e'.repeat(64), reportText: JSON.stringify(report), auditText: JSON.stringify(audit) };
+    return { input: { ...input, state, runId: 'awake-proof', retryTargetFrom: input.runId, approvedAt: '2026-09-08T01:00:00.000Z' }, proof, report, audit };
+  }
+
+  it('requires the distinct interruption CLI, not the old quality flag, for the exact ninth run', () => {
+    const args = ['--run-id', 'awake-proof', '--candidate-file', 'artifacts/selected.json', '--retry-target-from',
+      'quality-revalidation-product-demo-pilot-2026-09-07', '--approve-interruption-resume', '--execute'];
+    expect(parseLocalPilotArguments(args)).toEqual({ runId: args[1], candidateFile: args[3], retryTargetFrom: args[5], approveQualityRevalidation: true });
+    for (const bad of [[...args.slice(0, 6), '--approve-quality-revalidation', '--execute'], [...args.slice(0, 5), 'other-timeout', ...args.slice(6)],
+      args.slice(0, -1), [...args.slice(0, 4), '--switch-target-from', ...args.slice(5)]]) expect(() => parseLocalPilotArguments(bad)).toThrow();
+  });
+
+  it('allows the newly authorized tenth proof once and retains all history on success', () => {
+    const { input, proof } = interruptionFixture();
+    // The proof parser must accept only the closed first-request timeout, not a model/copy failure.
+    const evidence = validateQualityRevalidationEvidence(proof);
+    const before = structuredClone(input.state);
+    const prepared = reconcileLocalPilotCandidate({ ...input, qualityRevalidationEvidence: evidence });
+    expect(prepared.nextAttempt).toBe(10);
+    expect(prepared.state.manualTargetSwitch?.retry?.maxAttempt).toBe(10);
+    expect(prepared.state.failures).toEqual(before.failures);
+    expect(prepared.state.manualTargetSwitch?.retryHistory?.at(-1)).toEqual(before.manualTargetSwitch?.retry);
+    expect(() => reserveCandidate(prepared.state, other, input.runId, 'scheduled', input.approvedAt)).toThrow();
+    let state = reserveCandidate(prepared.state, other, input.runId, 'manual_pilot', input.approvedAt);
+    expect(() => reserveCandidate(state, other, input.runId, 'manual_pilot', input.approvedAt)).toThrow();
+    state = markCandidateCompleted(state, other, input.runId, 'prepared', input.approvedAt);
+    state.runs[input.runId] = { schemaVersion: 1, runId: input.runId, mode: 'manual_pilot', startedAt: input.approvedAt, selectedCandidateFingerprints: [candidateFingerprints(other).candidate], status: 'validated' };
+    expect(PersistentWorkerStateSchema.safeParse(state).success).toBe(true);
+    expect(() => reconcileLocalPilotCandidate({ ...input, state, runId: 'eleventh', retryTargetFrom: input.runId, qualityRevalidationEvidence: evidence })).toThrow();
+    expect(input.state).toEqual(before);
+  });
+
+  it.each(['model-response', 'extra-stage', 'wrong-phase', 'wrong-timeout', 'wrong-attempt', 'wrong-run', 'native', 'artifact', 'counts', 'publication'])(
+    'rejects interruption proof with %s', problem => {
+      const { proof, report, audit } = interruptionFixture();
+      if (problem === 'model-response') audit.events[5].stage = 'model_response_retained';
+      if (problem === 'extra-stage') audit.events.push({ ...audit.events[5] });
+      if (problem === 'wrong-phase') audit.events[5].phase = 'videoclaw_article_repair_v2';
+      if (problem === 'wrong-timeout') report.failures[0].detail = 'Draft failed quality review.';
+      if (problem === 'wrong-attempt') report.failures[0].attempt = 8;
+      if (problem === 'wrong-run') proof.priorRunId = 'different-timeout';
+      if (problem === 'native') audit.events[5].stage = 'native_validation_started';
+      if (problem === 'artifact') report.artifacts.push({} as never);
+      if (problem === 'counts') report.counts.drafted = 1;
+      if (problem === 'publication') audit.publicationEnabled = true;
+      expect(() => validateQualityRevalidationEvidence({ ...proof, reportText: JSON.stringify(report), auditText: JSON.stringify(audit) })).toThrow();
+    });
 
   it('accepts quality attempt nine once, preserves all history, and blocks replay, schedules and attempt ten', () => {
     const input = failedEighthTargetFixture();

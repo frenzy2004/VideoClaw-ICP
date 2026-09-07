@@ -712,24 +712,92 @@ function assertDraftingContext(context: DraftingContext): void {
   }
 }
 
+export type FinalizeReviewedRepairInput = {
+  context: DraftingContext;
+  repaired: unknown;
+  /** Exact registry captured in the original verifier request; never recompute its IDs. */
+  originalIssues: DraftCritiqueV1['issues'];
+  verification: unknown;
+  /** Existing allowlisted media; its safety and candidate scope are checked again. */
+  media: AllowlistedProductMedia;
+};
+
+function mediaMappingRequired(context: DraftingContext): DraftingOutcome {
+  return {
+    status: 'blocked',
+    reason: 'media_mapping_required',
+    mediaBrief: {
+      code: 'media.mapping_required',
+      candidateFingerprint: context.evidence.candidateFingerprint,
+      slug: context.candidate.slug,
+      requiredWidth: 1200,
+      requiredHeight: 675,
+      message: 'Map this candidate to an existing allowlisted product video/poster pair before drafting.',
+    },
+  };
+}
+
+/** Apply the live final repair gates to a saved draft and its independent verdict, without I/O. */
+export function finalizeReviewedRepair(input: FinalizeReviewedRepairInput): DraftingOutcome {
+  const { context, originalIssues } = input;
+  assertDraftingContext(context);
+  const media = selectProductMedia(context.candidate, [input.media]);
+  if (!media) return mediaMappingRequired(context);
+  if (containsSecretLikeValue(media)) {
+    throw new Error('Selected media contains a secret-like value.');
+  }
+  const repaired = GeneratedDraftV2Schema.parse(input.repaired);
+  const remainingFindings = inspectGeneratedDraft(context, repaired);
+  if (containsSecretLikeValue(repaired)) {
+    return {
+      status: 'blocked',
+      reason: 'content_safety_failed',
+      findings: remainingFindings.length > 0
+        ? remainingFindings
+        : [{ code: 'content.secret', message: 'Repaired draft contains a secret-like value.' }],
+    };
+  }
+  const verification = DraftRepairVerificationV1Schema.parse(input.verification);
+  if (containsSecretLikeValue(verification)) {
+    return {
+      status: 'blocked',
+      reason: 'content_safety_failed',
+      findings: [{ code: 'content.secret', message: 'Critic output contains a secret-like value.' }],
+    };
+  }
+  remainingFindings.push(...repairVerificationFindings(originalIssues, verification));
+  remainingFindings.push(...supportFindings(repaired, verification.supportEvaluations));
+  remainingFindings.push(...measureReviewedSourceUse(context.sourceFacts, repaired, verification.supportEvaluations).findings);
+  if (remainingFindings.length > 0) {
+    return {
+      status: 'blocked',
+      reason: 'content_safety_failed',
+      findings: remainingFindings,
+    };
+  }
+  try {
+    return {
+      status: 'ready',
+      repaired: true,
+      bundle: materializeDraftBundle(context, repaired, media),
+    };
+  } catch (error) {
+    if (!(error instanceof DraftMaterializationError)) throw error;
+    return {
+      status: 'blocked',
+      reason: 'content_safety_failed',
+      findings: error.findings,
+    };
+  }
+}
+
 export function createStructuredDrafter(options: StructuredDrafterOptions) {
   return {
     async draft(context: DraftingContext): Promise<DraftingOutcome> {
       assertDraftingContext(context);
       const media = selectProductMedia(context.candidate, options.mediaAllowlist);
       if (!media) {
-        return {
-          status: 'blocked',
-          reason: 'media_mapping_required',
-          mediaBrief: {
-            code: 'media.mapping_required',
-            candidateFingerprint: context.evidence.candidateFingerprint,
-            slug: context.candidate.slug,
-            requiredWidth: 1200,
-            requiredHeight: 675,
-            message: 'Map this candidate to an existing allowlisted product video/poster pair before drafting.',
-          },
-        };
+        return mediaMappingRequired(context);
       }
       if (containsSecretLikeValue(media)) {
         throw new Error('Selected media contains a secret-like value.');
@@ -826,7 +894,7 @@ export function createStructuredDrafter(options: StructuredDrafterOptions) {
             : [{ code: 'content.secret', message: 'Repaired draft contains a secret-like value.' }],
         };
       }
-      const repairedVerification = DraftRepairVerificationV1Schema.parse(await options.client.generate({
+      const repairedVerification = await options.client.generate({
         name: 'videoclaw_article_repair_verification_v1',
         schema: repairVerificationSchema(registry.issues),
         system: REPAIR_VERIFICATION_SYSTEM,
@@ -837,38 +905,11 @@ export function createStructuredDrafter(options: StructuredDrafterOptions) {
           repairedDraft: repaired,
           bindingManifest: bindingManifest(repaired),
         },
-      }));
-      if (containsSecretLikeValue(repairedVerification)) {
-        return {
-          status: 'blocked',
-          reason: 'content_safety_failed',
-          findings: [{ code: 'content.secret', message: 'Critic output contains a secret-like value.' }],
-        };
-      }
-      remainingFindings.push(...repairVerificationFindings(registry.issues, repairedVerification));
-      remainingFindings.push(...supportFindings(repaired, repairedVerification.supportEvaluations));
-      remainingFindings.push(...measureReviewedSourceUse(context.sourceFacts, repaired, repairedVerification.supportEvaluations).findings);
-      if (remainingFindings.length > 0) {
-        return {
-          status: 'blocked',
-          reason: 'content_safety_failed',
-          findings: remainingFindings,
-        };
-      }
-      try {
-        return {
-          status: 'ready',
-          repaired: true,
-          bundle: materializeDraftBundle(context, repaired, media),
-        };
-      } catch (error) {
-        if (!(error instanceof DraftMaterializationError)) throw error;
-        return {
-          status: 'blocked',
-          reason: 'content_safety_failed',
-          findings: error.findings,
-        };
-      }
+      });
+      return finalizeReviewedRepair({
+        context, repaired, originalIssues: registry.issues,
+        verification: repairedVerification, media,
+      });
     },
   };
 }

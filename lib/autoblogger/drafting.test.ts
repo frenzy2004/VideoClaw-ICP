@@ -5,6 +5,7 @@ import { candidateFingerprints, type Candidate } from './domain';
 import type { StructuredOutputClient, StructuredOutputRequest } from './openai-responses';
 import {
   createStructuredDrafter,
+  finalizeReviewedRepair,
   DRAFT_CRITIQUE_V1_JSON_SCHEMA,
   DRAFT_REPAIR_VERIFICATION_V1_JSON_SCHEMA,
   type DraftCritiqueV1,
@@ -301,6 +302,176 @@ function verifyRequest(repaired = draft) {
     })),
   });
 }
+
+describe('finalizeReviewedRepair', () => {
+  // Captured IDs are deliberately unrelated to the current checker's findings.
+  const originalIssues: DraftCritiqueV1['issues'] = [{
+    id: 'check-captured-before-parser-fix', code: 'content.claim_binding',
+    message: 'The old checker reported a binding mismatch.',
+    repairInstruction: 'Correct the reported binding.',
+  }];
+  function input() {
+    return structuredClone({
+      context, repaired: draft, originalIssues, media,
+      verification: resolvedVerification({ ...approvedCritique, approved: false, issues: originalIssues }),
+    });
+  }
+
+  it('materializes unchanged saved JSON using the exact captured issue registry without mutating inputs', () => {
+    const saved = input();
+    const before = structuredClone(saved);
+    expect(inspectGeneratedDraft(saved.context, saved.repaired)).toEqual([]);
+    const result = finalizeReviewedRepair(saved);
+    expect(result).toMatchObject({ status: 'ready', repaired: true });
+    if (result.status !== 'ready') throw new Error('Expected a reviewed bundle.');
+    expect(result.bundle.markdown).toContain(draft.directAnswer);
+    expect(result.bundle.markdown).toContain('/landing/full/founder-product.mp4');
+    expect(saved).toEqual(before);
+  });
+
+  it.each([
+    ['unresolved', 'content.claim_binding'],
+    ['missing', 'critique.verification_incomplete'],
+    ['orphan', 'critique.verification_unexpected'],
+    ['withheld', 'critique.verification_rejected'],
+    ['new issue', 'copy.new_issue'],
+  ])('blocks a %s original independent verdict', (kind, code) => {
+    const saved = input();
+    if (kind === 'unresolved') {
+      saved.verification.approved = false;
+      saved.verification.evaluations[0].resolved = false;
+    } else if (kind === 'missing') saved.verification.evaluations = [];
+    else if (kind === 'orphan') saved.verification.evaluations.push({ issueId: 'invented-id', resolved: true, message: 'Resolved.' });
+    else if (kind === 'withheld') saved.verification.approved = false;
+    else {
+      saved.verification.approved = false;
+      saved.verification.newIssues = [{ ...originalIssues[0], id: 'new-issue', code }];
+    }
+    const result = finalizeReviewedRepair(saved);
+    expect(result).toMatchObject({ status: 'blocked', reason: 'content_safety_failed', findings: expect.arrayContaining([
+      expect.objectContaining({ code, ...(['unresolved', 'missing'].includes(kind) ? { issueId: originalIssues[0].id } : {}) }),
+    ]) });
+    expect(result).not.toHaveProperty('bundle');
+  });
+
+  it.each([
+    ['stale', 'critique.support_stale'],
+    ['unsupported', 'critique.support_rejected'],
+    ['missing', 'critique.support_incomplete'],
+    ['duplicate', 'critique.support_unexpected'],
+    ['orphan', 'critique.support_unexpected'],
+    ['wrong kind', 'critique.support_kind'],
+  ])('blocks %s binding support in the saved verdict', (kind, code) => {
+    const saved = input();
+    const items = saved.verification.supportEvaluations;
+    if (kind === 'stale') items[0].bindingHash = '0'.repeat(64);
+    else if (kind === 'unsupported') items[0].supported = false;
+    else if (kind === 'missing') items.shift();
+    else if (kind === 'duplicate') items.push({ ...items[0] });
+    else if (kind === 'orphan') items.push({ ...items[0], bindingIndex: 999 });
+    else items[0].kind = 'product_claim';
+    const result = finalizeReviewedRepair(saved);
+    expect(result).toMatchObject({ status: 'blocked', reason: 'content_safety_failed', findings: expect.arrayContaining([
+      expect.objectContaining({ code }),
+    ]) });
+    expect(result).not.toHaveProperty('bundle');
+  });
+
+  it.each(['draft shape', 'verdict shape', 'duplicate evaluations', 'inconsistent approval'])('parses and rejects invalid %s', (kind) => {
+    const saved = input();
+    if (kind === 'draft shape') Object.assign(saved.repaired, { schemaVersion: 1 });
+    else if (kind === 'verdict shape') Object.assign(saved.verification, { approved: 'true' });
+    else if (kind === 'duplicate evaluations') saved.verification.evaluations.push({ ...saved.verification.evaluations[0] });
+    else saved.verification.evaluations[0].resolved = false;
+    expect(() => finalizeReviewedRepair(saved)).toThrow(expect.objectContaining({ name: 'ZodError' }));
+  });
+
+  it.each(['draft', 'verdict'])('blocks secret-like content in the saved %s', (kind) => {
+    const saved = input();
+    const secret = 'Synthetic github_pat_fixture_123456789 credential';
+    if (kind === 'draft') saved.repaired.directAnswer = secret;
+    else saved.verification.evaluations[0].message = secret;
+    const result = finalizeReviewedRepair(saved);
+    expect(result).toMatchObject({ status: 'blocked', reason: 'content_safety_failed', findings: expect.arrayContaining([
+      expect.objectContaining({ code: 'content.secret' }),
+    ]) });
+    expect(result).not.toHaveProperty('bundle');
+  });
+
+  it('blocks unsafe draft markup despite an approving saved verdict', () => {
+    const saved = input();
+    saved.repaired.sections[0].markdown = '<script>doNotRun()</script>';
+    const result = finalizeReviewedRepair(saved);
+    expect(result).toMatchObject({ status: 'blocked', findings: expect.arrayContaining([
+      expect.objectContaining({ code: 'content.raw_html' }),
+    ]) });
+    expect(result).not.toHaveProperty('bundle');
+  });
+
+  it('enforces reviewed cumulative source use despite complete approving support', () => {
+    const saved = input();
+    saved.repaired.claimBindings.forEach(binding => { binding.sourceFactIds = ['yc-bullets']; });
+    saved.verification.supportEvaluations = supportedBindings(saved.repaired).map(item => ({ ...item, kind: 'source_claim' }));
+    expect(inspectGeneratedDraft(saved.context, saved.repaired)).toEqual([]);
+    const result = finalizeReviewedRepair(saved);
+    expect(result).toMatchObject({ status: 'blocked', findings: expect.arrayContaining([
+      expect.objectContaining({ code: 'content.source_budget' }),
+    ]) });
+    expect(result).not.toHaveProperty('bundle');
+  });
+
+  it('returns final materialization findings after all review gates pass', () => {
+    const saved = input();
+    saved.repaired.sections[0].heading = 'Sources';
+    saved.repaired.claimBindings.find(binding => binding.location === '/sections/0/heading')!.span = 'Sources';
+    saved.verification.supportEvaluations = supportedBindings(saved.repaired);
+    expect(inspectGeneratedDraft(saved.context, saved.repaired)).toEqual([]);
+    expect(finalizeReviewedRepair(saved)).toEqual({
+      status: 'blocked', reason: 'content_safety_failed', findings: [{
+        code: 'content.body_sources',
+        message: 'Sources must be rendered from frontmatter.sources, not a generated body section.',
+      }],
+    });
+  });
+
+  it.each(['fingerprint', 'unchecked source', 'context secret', 'media secret'])('enforces live %s preconditions', (kind) => {
+    const saved = input();
+    if (kind === 'fingerprint') saved.context.evidence.candidateFingerprint = 'different-candidate';
+    else if (kind === 'unchecked source') saved.context.checkedSources[0].reachable = false;
+    else if (kind === 'context secret') saved.context.sourceFacts[0].facts[0].text = 'Synthetic github_pat_fixture_123456789 credential';
+    else saved.media.alt = 'Synthetic github_pat_fixture_123456789 credential';
+    expect(() => finalizeReviewedRepair(saved)).toThrow(kind.endsWith('secret') ? /secret/i : /fingerprint|checked|reachable/i);
+  });
+
+  it.each([
+    { src: '/landing/../private/product.mp4' },
+    { poster: '/landing/%2e%2e/private/product.jpg' },
+    { candidateFingerprints: ['another-candidate'] },
+    { candidateFingerprints: undefined, keywordIncludes: ['---'] },
+  ])('blocks unsafe or mismatched media using live selection rules: %j', (change) => {
+    const saved = input();
+    Object.assign(saved.media, change);
+    const result = finalizeReviewedRepair(saved);
+    expect(result).toMatchObject({ status: 'blocked', reason: 'media_mapping_required' });
+    expect(result).not.toHaveProperty('bundle');
+  });
+
+  it('replays the actual live verifier input and verdict to the same result', async () => {
+    const critique = { ...approvedCritique, approved: false, issues: originalIssues };
+    let captured: ReturnType<typeof input> | undefined;
+    const client = new FixtureStructuredClient([draft, critique, draft, (request: StructuredOutputRequest) => {
+      const wire = request.input as { repairedDraft: GeneratedDraftV2; originalIssues: DraftCritiqueV1['issues'] };
+      const verification = verifyRequest()(request);
+      captured = structuredClone({ context, repaired: wire.repairedDraft, originalIssues: wire.originalIssues, verification, media });
+      return verification;
+    }]);
+    const live = await createStructuredDrafter({ client, mediaAllowlist: [media] }).draft(context);
+    expect(live).toMatchObject({ status: 'ready', repaired: true });
+    expect(client.requests).toHaveLength(4);
+    expect(captured).toBeDefined();
+    expect(finalizeReviewedRepair(captured!)).toEqual(live);
+  });
+});
 
 describe('consistent repair issue registry', () => {
   function titleOnlyDraft() {

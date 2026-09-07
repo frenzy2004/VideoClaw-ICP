@@ -103,20 +103,23 @@ export function grantManualTargetRetry(stateInput: PersistentWorkerState, candid
   if ((input.engineeringResumeEvidence !== undefined && !input.engineeringResume)
     || (input.qualityRevalidationEvidence !== undefined && !input.qualityRevalidation)
     || [input.extraAttempt, input.sourcePlanRetry, input.reviewRepairRetry, input.scopeAlignmentRetry, input.engineeringResume, input.qualityRevalidation].filter(Boolean).length > 1
-    || (input.qualityRevalidation ? attempts !== 8 || target.retry?.reason !== 'manual_engineering_resume' || !input.qualityRevalidationEvidence
+    || (input.qualityRevalidation ? !input.qualityRevalidationEvidence
+      || !(attempts === 8 && target.retry?.reason === 'manual_engineering_resume'
+        || attempts === 9 && target.retry?.reason === 'manual_quality_revalidation'
+          && input.priorRunId === 'quality-revalidation-product-demo-pilot-2026-09-07')
       : input.engineeringResume ? attempts !== 7 || target.retry?.reason !== 'user_authorized_after_scope_alignment_fix' || !input.engineeringResumeEvidence
       : input.scopeAlignmentRetry ? attempts !== 6 || target.retry?.reason !== 'user_authorized_after_review_repair_fix'
       : input.reviewRepairRetry ? attempts !== 5 || target.retry?.reason !== 'user_authorized_after_source_planning_fix'
       : input.sourcePlanRetry ? attempts !== 4 || target.retry?.reason !== 'user_authorized_after_editorial_fix'
       : input.extraAttempt ? attempts !== MAX_CANDIDATE_ATTEMPTS : attempts >= MAX_CANDIDATE_ATTEMPTS)) {
-    throw new Error('Extra attempts require distinct one-use approval after the matching failed attempt; no tenth attempt is allowed.');
+    throw new Error('Extra attempts require distinct one-use approval after the matching failed attempt; no eleventh attempt is allowed.');
   }
   return PersistentWorkerStateSchema.parse({ ...state, manualTargetSwitch: { ...target,
     ...(target.retry ? { retryHistory: [...(target.retryHistory ?? []), target.retry] } : {}), retry: {
     priorRunId: input.priorRunId, runId: input.runId, approvedAt: input.approvedAt,
     reason: input.qualityRevalidation ? 'manual_quality_revalidation' : input.engineeringResume ? 'manual_engineering_resume' : input.scopeAlignmentRetry ? 'user_authorized_after_scope_alignment_fix' : input.reviewRepairRetry ? 'user_authorized_after_review_repair_fix' : input.sourcePlanRetry ? 'user_authorized_after_source_planning_fix' : input.extraAttempt ? 'user_authorized_after_editorial_fix' : target.retry ? 'user_authorized_after_attribution_fix' : 'user_authorized_after_collector_fix',
     ...(input.engineeringResume ? { maxAttempt: 8, evidence: input.engineeringResumeEvidence } : {}),
-    ...(input.qualityRevalidation ? { maxAttempt: 9, evidence: input.qualityRevalidationEvidence, priorApprovalHash: hashIdentity(JSON.stringify(target)) } : {}),
+    ...(input.qualityRevalidation ? { maxAttempt: attempts + 1, evidence: input.qualityRevalidationEvidence, priorApprovalHash: hashIdentity(JSON.stringify(target)) } : {}),
     priorDecision: state.decisions[target.candidateFingerprint], consumedAt: null,
   } } });
 }

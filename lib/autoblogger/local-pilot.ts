@@ -1,5 +1,5 @@
 import { CandidateSchema, candidateFingerprints, type Candidate } from './domain';
-import { PersistentWorkerStateSchema, EngineeringResumeEvidenceSchema, QualityRevalidationEvidenceSchema, QUALITY_REVALIDATION_PRIOR_RUN, type QualityRevalidationEvidence, type EngineeringResumeEvidence, type PersistentWorkerState } from './github-runtime';
+import { PersistentWorkerStateSchema, EngineeringResumeEvidenceSchema, QualityRevalidationEvidenceSchema, QualityFailureEvidenceSchema, InterruptionEvidenceSchema, INTERRUPTION_PRIOR_RUN, QUALITY_REVALIDATION_PRIOR_RUN, type QualityRevalidationEvidence, type EngineeringResumeEvidence, type PersistentWorkerState } from './github-runtime';
 import type { HttpTransport } from './http';
 import { MAX_CANDIDATE_ATTEMPTS, grantManualRetryApproval, hasManualRetryApproval, grantManualTargetSwitch, hasManualTargetSwitch, grantManualTargetRetry } from './recovery';
 import type { ArticleInventoryEntry } from './publisher';
@@ -39,11 +39,13 @@ export function parseLocalPilotArguments(argv: string[]): LocalPilotArguments {
   const reviewRepairRetry = argv.length === 8 && argv[4] === '--retry-target-from' && argv[6] === '--approve-review-repair-retry' && argv[7] === '--execute';
   const scopeAlignmentRetry = argv.length === 8 && argv[4] === '--retry-target-from' && argv[6] === '--approve-scope-alignment-retry' && argv[7] === '--execute';
   const engineeringResume = argv.length === 8 && argv[4] === '--retry-target-from' && argv[6] === '--approve-engineering-resume' && argv[7] === '--execute';
-  const qualityRevalidation = argv.length === 8 && argv[4] === '--retry-target-from' && argv[5] === QUALITY_REVALIDATION_PRIOR_RUN && argv[6] === '--approve-quality-revalidation' && argv[7] === '--execute';
+  const qualityRevalidation = argv.length === 8 && argv[4] === '--retry-target-from' && argv[7] === '--execute'
+    && (argv[5] === QUALITY_REVALIDATION_PRIOR_RUN && argv[6] === '--approve-quality-revalidation'
+      || argv[5] === INTERRUPTION_PRIOR_RUN && argv[6] === '--approve-interruption-resume');
   const switched = ((argv.length === 7 && argv[6] === '--execute') || extraAttempt || sourcePlanRetry || reviewRepairRetry || scopeAlignmentRetry || engineeringResume || qualityRevalidation) && argv[2] === '--candidate-file' && !!argv[3]?.trim() && !argv[3].startsWith('--') && !argv[3].includes('\0')
     && ['--switch-target-from', '--retry-target-from'].includes(argv[4]) && safeRunId(argv[5]) && argv[5] !== argv[1];
   if ((!ordinary && !approved && !switched) || argv[0] !== '--run-id' || !safeRunId(argv[1])) {
-    throw new Error('Usage: tsx lib/autoblogger/local-pilot-entry.ts --run-id NEW_RUN_ID [--approve-retry-from FAILED_THIRD_RUN_ID | --candidate-file PRIVATE_CANDIDATE_JSON (--switch-target-from PARKED_APPROVED_RUN_ID | --retry-target-from FAILED_TARGET_RUN_ID [--approve-target-extra-attempt | --approve-source-plan-retry | --approve-review-repair-retry | --approve-scope-alignment-retry | --approve-engineering-resume | --approve-quality-revalidation])] --execute (local artifact-only; paid research/model work).');
+    throw new Error('Usage: tsx lib/autoblogger/local-pilot-entry.ts --run-id NEW_RUN_ID [--approve-retry-from FAILED_THIRD_RUN_ID | --candidate-file PRIVATE_CANDIDATE_JSON (--switch-target-from PARKED_APPROVED_RUN_ID | --retry-target-from FAILED_TARGET_RUN_ID [--approve-target-extra-attempt | --approve-source-plan-retry | --approve-review-repair-retry | --approve-scope-alignment-retry | --approve-engineering-resume | --approve-quality-revalidation | --approve-interruption-resume])] --execute (local artifact-only; paid research/model work).');
   }
   return { runId: argv[1], ...(approved ? { approveRetryFrom: argv[3] } : {}), ...(switched ? { candidateFile: argv[3], ...(argv[4] === '--retry-target-from' ? { retryTargetFrom: argv[5] } : { switchTargetFrom: argv[5] }) } : {}), ...(extraAttempt ? { approveTargetExtraAttempt: true } : {}), ...(sourcePlanRetry ? { approveSourcePlanRetry: true } : {}), ...(reviewRepairRetry ? { approveReviewRepairRetry: true } : {}), ...(scopeAlignmentRetry ? { approveScopeAlignmentRetry: true } : {}), ...(engineeringResume ? { approveEngineeringResume: true } : {}), ...(qualityRevalidation ? { approveQualityRevalidation: true } : {}) };
 }
@@ -303,41 +305,46 @@ export function validateEngineeringResumeEvidence(input: {
 
 /** A separate quality gate: the legacy eighth source-only proof stays unchanged. */
 export function validateQualityRevalidationEvidence(input: Parameters<typeof validateEngineeringResumeEvidence>[0]): QualityRevalidationEvidence {
-  if (input.priorRunId !== QUALITY_REVALIDATION_PRIOR_RUN
+  const interruption = input.priorRunId === INTERRUPTION_PRIOR_RUN;
+  const priorAttempt = interruption ? 9 : 8;
+  const last = interruption ? 6 : 13;
+  if ((!interruption && input.priorRunId !== QUALITY_REVALIDATION_PRIOR_RUN)
     || [input.reportText, input.auditText].some(text => Buffer.byteLength(text, 'utf8') > 2_000_000)) throw new Error('Quality revalidation requires bounded receipts from the exact eighth run.');
   const candidate = CandidateSchema.parse(input.candidate);
   const count = z.number().int().nonnegative();
   const counts = z.object({ queued: count, scanned: z.literal(1), shallowValidated: z.literal(1), metricsEnriched: z.literal(1),
     deepInspected: z.literal(1), eligible: z.literal(1), drafted: z.literal(0), validated: z.literal(0), pullRequestsOpened: z.literal(0) }).strict();
   const failures = z.tuple([z.object({ candidateFingerprint: z.literal(candidateFingerprints(candidate).candidate), code: z.literal('candidate_failed'),
-    detail: QualityRevalidationEvidenceSchema.shape.failureDetail, retryable: z.literal(false), attempt: z.literal(8) }).strict()]);
+    detail: interruption ? InterruptionEvidenceSchema.shape.failureDetail : QualityFailureEvidenceSchema.shape.failureDetail,
+    retryable: z.literal(false), attempt: z.literal(priorAttempt) }).strict()]);
   const report = z.object({ schemaVersion: z.literal(1), command: z.literal('pilot'), runId: z.literal(input.priorRunId), mode: z.literal('manual_pilot'),
     status: z.literal('failed'), startedAt: z.string().datetime(), completedAt: z.string().datetime(), limits: z.record(z.string(), count),
     counts, artifacts: z.array(z.unknown()).length(0), failures }).strict().parse(JSON.parse(input.reportText));
   const audit = z.object({ runId: z.literal(input.priorRunId), execution: z.literal('local_production_worker_artifact_only'),
     publicationEnabled: z.literal(false), scheduledRuntimeConfigured: z.literal(false),
-    events: z.array(z.object({ at: z.string().datetime(), stage: z.string() }).passthrough()).length(14),
+    events: z.array(z.object({ at: z.string().datetime(), stage: z.string() }).passthrough()).length(last + 1),
   }).strict().parse(JSON.parse(input.auditText));
   const phases = ['videoclaw_article_draft_v2', 'videoclaw_article_critique_v1', 'videoclaw_article_repair_v2', 'videoclaw_article_repair_verification_v1'];
   const stages = ['preflight_passed', 'research_started', 'research_completed', 'source_inspection_started', 'source_inspection_completed',
-    ...phases.flatMap(() => ['model_stage_started', 'model_response_retained']), 'pilot_completed'];
+    ...(interruption ? ['model_stage_started'] : phases.flatMap(() => ['model_stage_started', 'model_response_retained'])), 'pilot_completed'];
   if (audit.events.some((event, index) => event.stage !== stages[index]
     || (index > 0 && Date.parse(event.at) < Date.parse(audit.events[index - 1].at)))) throw new Error('Quality revalidation requires complete ordered source and four-model stages, without native validation.');
-  z.object({ articleId: z.literal(candidate.articleId), nextAttempt: z.literal(8), publicationEnabled: z.literal(false) }).parse(audit.events[0]);
+  z.object({ articleId: z.literal(candidate.articleId), nextAttempt: z.literal(priorAttempt), publicationEnabled: z.literal(false) }).parse(audit.events[0]);
   z.object({ candidates: z.literal(1) }).parse(audit.events[1]);
   z.object({ observations: z.array(z.object({ articleId: z.literal(candidate.articleId), query: z.literal(candidate.primaryKeyword) })).length(1) }).parse(audit.events[2]);
   z.object({ results: z.literal(1) }).parse(audit.events[4]);
-  phases.forEach((phase, index) => {
+  if (interruption) z.object({ phase: z.literal(phases[0]) }).parse(audit.events[5]);
+  else phases.forEach((phase, index) => {
     z.object({ phase: z.literal(phase) }).parse(audit.events[5 + index * 2]);
     z.object({ phase: z.literal(phase), call: z.literal(index + 1), httpStatus: z.literal(200) }).parse(audit.events[6 + index * 2]);
   });
-  const completed = z.object({ status: z.literal('failed'), counts, failures }).parse(audit.events[13]);
+  const completed = z.object({ status: z.literal('failed'), counts, failures }).parse(audit.events[last]);
   if (JSON.stringify(completed.counts) !== JSON.stringify(report.counts) || JSON.stringify(completed.failures) !== JSON.stringify(report.failures)
     || Date.parse(report.completedAt) < Date.parse(report.startedAt) || Date.parse(audit.events[0].at) > Date.parse(report.startedAt)
-    || Date.parse(audit.events[1].at) < Date.parse(report.startedAt) || Date.parse(audit.events[12].at) > Date.parse(report.completedAt)
-    || Date.parse(audit.events[13].at) < Date.parse(report.completedAt)) throw new Error('Quality report and closed execution audit must agree.');
+    || Date.parse(audit.events[1].at) < Date.parse(report.startedAt) || Date.parse(audit.events[last - 1].at) > Date.parse(report.completedAt)
+    || Date.parse(audit.events[last].at) < Date.parse(report.completedAt)) throw new Error('Quality report and closed execution audit must agree.');
   return QualityRevalidationEvidenceSchema.parse({ priorRunId: input.priorRunId, candidateFingerprint: candidateFingerprints(candidate).candidate,
-    articleId: candidate.articleId, reportStartedAt: report.startedAt, reportCompletedAt: report.completedAt, auditCompletedAt: audit.events[13].at,
+    articleId: candidate.articleId, reportStartedAt: report.startedAt, reportCompletedAt: report.completedAt, auditCompletedAt: audit.events[last].at,
     reportHash: createHash('sha256').update(input.reportText).digest('hex'), auditHash: createHash('sha256').update(input.auditText).digest('hex'),
     implementationHash: input.implementationHash, failureDetail: report.failures[0].detail });
 }
@@ -357,7 +364,7 @@ export async function readLocalEngineeringResumeEvidence(root: string, priorRunI
 }
 
 export async function readLocalQualityRevalidationEvidence(root: string, priorRunId: string, candidate: Candidate, expected?: QualityRevalidationEvidence): Promise<QualityRevalidationEvidence> {
-  if (priorRunId !== QUALITY_REVALIDATION_PRIOR_RUN) throw new Error('Quality revalidation requires the exact eighth run.');
+  if (![QUALITY_REVALIDATION_PRIOR_RUN, INTERRUPTION_PRIOR_RUN].includes(priorRunId)) throw new Error('Quality revalidation requires an exact approved prior run.');
   const evidence = validateQualityRevalidationEvidence({ ...await readLocalRetryReceipts(root, priorRunId), priorRunId, candidate });
   if (expected && JSON.stringify(evidence) !== JSON.stringify(QualityRevalidationEvidenceSchema.parse(expected))) throw new Error('Quality revalidation receipts or implementation changed during preflight.');
   return evidence;
@@ -388,7 +395,7 @@ export async function runLocalArtifactPilot(options: LocalPilotArguments & { roo
     ...(options.approveReviewRepairRetry === true ? ['--approve-review-repair-retry'] : []),
     ...(options.approveScopeAlignmentRetry === true ? ['--approve-scope-alignment-retry'] : []),
     ...(options.approveEngineeringResume === true ? ['--approve-engineering-resume'] : []),
-    ...(options.approveQualityRevalidation === true ? ['--approve-quality-revalidation'] : []), '--execute']);
+    ...(options.approveQualityRevalidation === true ? [options.retryTargetFrom === INTERRUPTION_PRIOR_RUN ? '--approve-interruption-resume' : '--approve-quality-revalidation'] : []), '--execute']);
   if (process.env.GITHUB_EVENT_NAME === 'schedule' || process.env.AUTOBLOG_SCHEDULE_ENABLED === 'true' || process.env.LANDER_GITHUB_TOKEN?.trim()) throw new Error('Local pilot must not receive publication or scheduled execution authority.');
   const root = await realpath(resolve(options.root));
   const lander = await realpath(resolve(root, '../videoclaw-lander-blog-launch'));
@@ -414,8 +421,10 @@ export async function runLocalArtifactPilot(options: LocalPilotArguments & { roo
     const stateStore = createFileStateStore(statePath);
     const initial = await stateStore.load();
     if (!initial.version) throw new Error('Existing local pilot state is mandatory.');
-    if (options.approveQualityRevalidation && initial.state.manualTargetSwitch?.retry?.reason !== 'manual_quality_revalidation'
-      && initial.version !== '2a73391994794137f9d0e9cc388f4ac0d1a26218c740bfacda8176bd11afbf96') throw new Error('Quality revalidation requires the audited eighth-run state snapshot.');
+    if (options.approveQualityRevalidation && initial.state.manualTargetSwitch?.retry?.runId !== options.runId
+      && initial.version !== (options.retryTargetFrom === INTERRUPTION_PRIOR_RUN
+        ? '5976d25d5ec7fa67578342d3da8aedec77b481f03d21044d22be972ad2ef9a33'
+        : '2a73391994794137f9d0e9cc388f4ac0d1a26218c740bfacda8176bd11afbf96')) throw new Error('Quality revalidation requires the audited prior-run state snapshot.');
     // Extract only identity from the historical artifact. Never import its
     // assisted facts, FAQs, source documents, provenance, or rewritten draft.
     const selectedCandidate = options.candidateFile ? await readLocalPilotCandidateFile(root, options.candidateFile)
