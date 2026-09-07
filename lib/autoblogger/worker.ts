@@ -39,6 +39,7 @@ import {
   candidateIdentityList,
   deferCandidate,
   hasManualTargetSwitch,
+  hasManualFreshCandidate,
   markCandidateCompleted,
   markCandidateFailure,
   markCandidateScanned,
@@ -391,7 +392,13 @@ export function createAutobloggerWorker(options: AutobloggerWorkerOptions) {
       }
       const approval = state.manualRetryApproval;
       const targetSwitch = state.manualTargetSwitch;
-      if (targetSwitch) {
+      const fresh = state.manualFreshCandidateApproval;
+      if (fresh) {
+        if (options.targetCandidateFingerprint !== candidateFingerprints(fresh.candidate).candidate || options.publicationEnabled !== false
+          || !hasManualFreshCandidate(state, fresh.candidate, input.runId, mode, startedAt)) {
+          throw new Error('Fresh approval requires its exact new artifact-only pilot run and candidate; reuse is forbidden.');
+        }
+      } else if (targetSwitch) {
         if (options.targetCandidateFingerprint !== targetSwitch.candidateFingerprint || options.publicationEnabled !== false
           || !hasManualTargetSwitch(state, targetSwitch.candidate, input.runId, mode, startedAt)) {
           throw new Error('Target switch requires its exact new artifact-only pilot run and target; reuse is forbidden.');
@@ -441,8 +448,9 @@ export function createAutobloggerWorker(options: AutobloggerWorkerOptions) {
         const retryApproval = state.manualRetryApproval;
         const switchedTarget = state.manualTargetSwitch;
         const switchedRun = switchedTarget?.runId === input.runId || switchedTarget?.retry?.runId === input.runId;
-        if (retryApproval?.runId === input.runId || switchedRun) {
-          const fingerprint = switchedRun ? switchedTarget!.candidateFingerprint : retryApproval!.candidateFingerprint;
+        if (fresh || retryApproval?.runId === input.runId || switchedRun) {
+          const fingerprint = fresh ? candidateFingerprints(fresh.candidate).candidate
+            : switchedRun ? switchedTarget!.candidateFingerprint : retryApproval!.candidateFingerprint;
           state = recordPersistent(state, { schemaVersion: 1, runId: input.runId, mode, startedAt, selectedCandidateFingerprints: [], status: 'failed' });
           state = { ...state, failures: [...state.failures, {
             runId: input.runId, candidateFingerprint: fingerprint,
@@ -586,7 +594,9 @@ export function createAutobloggerWorker(options: AutobloggerWorkerOptions) {
           ? deferCandidate(state, item.result.candidate, input.runId, 'eligible_deferred_by_run_cap', now().toISOString())
           : markCandidateCompleted(state, item.result.candidate, input.runId, `ineligible:${eligibility.reasons.join(',')}`, now().toISOString());
       }
-      if (selected.length === 0) report.failures.push({ code: 'no_eligible_opportunities', detail: 'No opportunity passed every fail-closed eligibility gate.', retryable: false });
+      if (selected.length === 0) report.failures.push({ code: 'no_eligible_opportunities', detail: 'No opportunity passed every fail-closed eligibility gate.', retryable: false,
+        ...(fresh ? { candidateFingerprint: candidateFingerprints(fresh.candidate).candidate, attempt: 1 } : {}),
+      });
 
       // Attempts cover the entire scan/enrich/draft sequence, not just drafting.
       // Keep selected/deferred discoveries available for lease recovery.

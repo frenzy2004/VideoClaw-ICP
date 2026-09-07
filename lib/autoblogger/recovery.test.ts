@@ -15,6 +15,9 @@ import {
   grantManualTargetSwitch,
   grantManualTargetRetry,
   hasManualRetryApproval,
+  grantManualFreshCandidate,
+  hasManualFreshCandidate,
+  markCandidateCompleted,
   deferCandidate,
 } from './recovery';
 import { createFileStateStore } from './local-state';
@@ -84,6 +87,99 @@ describe('bounded candidate recovery', () => {
   }
 
   const extraInput = { priorRunId: 'target-attempt-3', runId: 'target-extra-attempt-4', approvedAt: '2026-09-06T22:00:00.000Z', extraAttempt: true };
+
+  const freshInput = { runId: 'fresh-topic-proof', approvedAt: '2026-09-08T00:00:00.000Z' };
+  it.each(['success', 'failure', 'deferred', 'expired'])('uses exactly one fresh attempt with immutable history: %s', async (outcome) => {
+    const { state } = exhaustedSwitchedTarget();
+    const item = candidate(90);
+    state.queuedCandidates = [item];
+    const before = structuredClone(state);
+    const fp = candidateFingerprints(item).candidate;
+    const approved = grantManualFreshCandidate(state, item, freshInput);
+    expect(approved.manualFreshCandidateApproval).toMatchObject({ schemaVersion: 1, ...freshInput,
+      reason: 'user_authorized_new_topic_proof', candidate: item, consumedAt: null,
+      priorHistoryHash: createHash('sha256').update(JSON.stringify({ manualRetryApproval: before.manualRetryApproval, manualTargetSwitch: before.manualTargetSwitch })).digest('hex') });
+    expect(approved.queuedCandidates).toEqual([item]);
+    expect(hasManualFreshCandidate(approved, item, freshInput.runId, 'manual_pilot', freshInput.approvedAt)).toBe(true);
+    let reserved = reserveCandidate(reserveManualPilot(approved, freshInput.runId, freshInput.approvedAt), item, freshInput.runId, 'manual_pilot', freshInput.approvedAt);
+    expect(reserved.decisions[fp]).toMatchObject({ attempts: 1, status: 'leased' });
+    expect(reserved.manualFreshCandidateApproval?.consumedAt).toBe(freshInput.approvedAt);
+    expect(() => reserveCandidate(reserved, item, freshInput.runId, 'manual_pilot', freshInput.approvedAt)).toThrow();
+    reserved = markCandidateScanned(reserved, item, freshInput.runId, freshInput.approvedAt);
+    if (outcome === 'success') {
+      reserved = markCandidateCompleted(reserved, item, freshInput.runId, 'artifact_prepared', freshInput.approvedAt);
+      reserved.runs[freshInput.runId] = { schemaVersion: 1, runId: freshInput.runId, mode: 'manual_pilot', startedAt: freshInput.approvedAt, selectedCandidateFingerprints: [fp], status: 'validated' };
+      reserved.contentHashes[fp] = 'b'.repeat(64);
+      reserved = markManualPilotPrepared(reserved, freshInput.runId, 'b'.repeat(64), freshInput.approvedAt);
+      await consumePreparedManualPilot({ load: async () => ({ state: reserved, version: 'v1' }), save: async (next) => {
+        reserved = PersistentWorkerStateSchema.parse(next); return { version: 'v2' };
+      } }, freshInput.runId, 'b'.repeat(64), freshInput.approvedAt);
+      expect(reserved.manualPilot?.status).toBe('consumed');
+    } else if (outcome === 'deferred') reserved = deferCandidate(reserved, item, freshInput.runId, 'budget_deferred', freshInput.approvedAt);
+    else if (outcome === 'expired') {
+      const leased = reserveCandidate(approved, item, freshInput.runId, 'manual_pilot', freshInput.approvedAt);
+      reserved = recoverExpiredReservations(leased, '2026-09-09T00:00:00.000Z');
+    } else reserved = markCandidateFailure(reserved, item, freshInput.runId, 'candidate_failed', true, freshInput.approvedAt);
+    expect(reserved.decisions[fp]).toMatchObject({ attempts: 1, status: outcome === 'success' ? 'completed' : 'terminal' });
+    const compacted = compactPersistentWorkerState(reserved);
+    expect(compacted.manualRetryApproval).toEqual(before.manualRetryApproval);
+    expect(compacted.manualTargetSwitch).toEqual(before.manualTargetSwitch);
+    expect(compacted.decisions).toMatchObject(before.decisions);
+    expect(compacted.runs).toMatchObject(before.runs);
+    expect(compacted.failures).toEqual(before.failures);
+    expect(() => grantManualFreshCandidate({ ...compacted, manualPilot: null }, candidate(91), { ...freshInput, runId: 'another' })).toThrow();
+    expect(state).toEqual(before);
+  });
+
+  it.each(['seen', 'dedupe', 'projection', 'hash', 'pr', 'decision', 'queue-collision', 'old-target', 'same-intent-new-slug', 'lease', 'attention', 'pilot', 'unconsumed-retry', 'reused-run', 'early'])('rejects unsafe fresh grants: %s', problem => {
+    const { state, target } = exhaustedSwitchedTarget();
+    let item = candidate(90);
+    const fp = candidateFingerprints(item).candidate;
+    const id = candidateFingerprints(item).intent;
+    if (problem === 'seen') state.candidateFingerprints.push(id);
+    if (problem === 'dedupe') state.dedupeHashes.push(createHash('sha256').update(id).digest('hex'));
+    if (problem === 'projection') state.candidates[fp] = { mode: 'manual_pilot', status: 'failed', runId: 'old', updatedAt: retryAt };
+    if (problem === 'hash') state.contentHashes[fp] = 'a'.repeat(64);
+    if (problem === 'pr') state.pullRequests[fp] = { number: 1, url: 'https://example.com/pr/1', status: 'opened' };
+    if (problem === 'decision') state.decisions[fp] = { ...state.decisions[candidateFingerprints(target).candidate], identities: Object.values(candidateFingerprints(item)), articleId: item.articleId, intentFingerprint: id, attempts: 0 };
+    if (problem === 'queue-collision') state.queuedCandidates.push({ ...item, secondaryKeywords: ['changed row'] });
+    if (problem === 'old-target') item = target;
+    if (problem === 'same-intent-new-slug') item = { ...target, articleId: item.articleId, title: item.title, slug: item.slug };
+    if (problem === 'lease' || problem === 'attention') state.decisions['unrelated'] = { ...state.decisions[candidateFingerprints(target).candidate], attempts: 1,
+      status: problem === 'lease' ? 'leased' : 'manual_attention', leaseExpiresAt: problem === 'lease' ? '2026-09-09T00:00:00.000Z' : null };
+    if (problem === 'pilot') state.manualPilot = reserveManualPilot(state, 'unrelated', freshInput.approvedAt).manualPilot;
+    if (problem === 'unconsumed-retry') state.manualTargetSwitch!.retry!.consumedAt = null;
+    expect(() => grantManualFreshCandidate(state, item, { ...freshInput,
+      runId: problem === 'reused-run' ? 'target-attempt-3' : freshInput.runId,
+      approvedAt: problem === 'early' ? '2026-09-05T00:00:00.000Z' : freshInput.approvedAt })).toThrow();
+  });
+
+  it.each(['scheduled', 'other-target', 'other-run', 'changed-row', 'early', 'history-tamper'])('rejects fresh reservation with %s', problem => {
+    const { state } = exhaustedSwitchedTarget();
+    const item = candidate(90);
+    const approved = grantManualFreshCandidate(state, item, freshInput);
+    if (problem === 'history-tamper') approved.manualRetryApproval!.reason = 'altered history';
+    const target = problem === 'other-target' ? candidate(91) : problem === 'changed-row' ? { ...item, secondaryKeywords: ['changed'] } : item;
+    const runId = problem === 'other-run' ? 'unapproved' : freshInput.runId;
+    const mode = problem === 'scheduled' ? 'scheduled' : 'manual_pilot';
+    const at = problem === 'early' ? retryAt : freshInput.approvedAt;
+    expect(hasManualFreshCandidate(approved, target, runId, mode, at)).toBe(false);
+    expect(() => reserveCandidate(approved, target, runId, mode, at)).toThrow();
+  });
+
+  it.each(['attempt-two', 'other-decision', 'published', 'wrong-run-mode', 'reset-consumption', 'wrong-pilot'])('validates the consumed fresh lifecycle: %s', problem => {
+    const { state } = exhaustedSwitchedTarget();
+    const item = candidate(90);
+    const fp = candidateFingerprints(item).candidate;
+    const next = reserveCandidate(grantManualFreshCandidate(state, item, freshInput), item, freshInput.runId, 'manual_pilot', freshInput.approvedAt);
+    if (problem === 'attempt-two') next.decisions[fp].attempts = 2;
+    if (problem === 'other-decision') next.decisions.other = { ...next.decisions[fp] };
+    if (problem === 'published') next.pullRequests[fp] = { number: 1, url: 'https://example.com/pr/1', status: 'opened' };
+    if (problem === 'wrong-run-mode') next.runs[freshInput.runId] = { schemaVersion: 1, runId: freshInput.runId, mode: 'scheduled', startedAt: freshInput.approvedAt, selectedCandidateFingerprints: [fp], status: 'validated' };
+    if (problem === 'reset-consumption') next.manualFreshCandidateApproval!.consumedAt = null;
+    if (problem === 'wrong-pilot') next.manualPilot = reserveManualPilot(next, 'wrong', freshInput.approvedAt).manualPilot;
+    expect(PersistentWorkerStateSchema.safeParse(next).success).toBe(false);
+  });
 
   it('reserves one explicitly approved fourth target attempt with all prior decisions and grants retained', () => {
     const { state, target, targetFp } = exhaustedSwitchedTarget();

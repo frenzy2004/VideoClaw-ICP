@@ -3,7 +3,20 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-## Current unchanged-article native proof — 2026-09-08 Malaysia time
+## Latest fresh-topic live test — 2026-09-08 Malaysia time
+
+The [webinar-repurposing test](FRESH-WEBINAR-PROOF-2026-09-08.md) attempted one
+different topic with fresh US/en Apify evidence. Eight organic results were found,
+but the question pool did not provide three relevant repurposing FAQs. The worker
+recorded the rejection at attempt one, before source inspection, model generation
+or native article QA. **The uninterrupted live milestone remains unproven.**
+
+A one-use fresh-candidate permission preserves the old grants and failures. Tests
+and independent review also caught and fixed zero-eligible failure persistence.
+All **1,749 tests across 52 files**, lint, typecheck, build and whitespace checks
+passed. No production, original lander, generated PR or schedule change occurred.
+
+## Previous unchanged-article native proof — 2026-09-08 Malaysia time
 
 The [awake-attempt and revalidation report](AWAKE-PROOF-2026-09-08.md) separates
 the failed live run from the successful post-fix validation. Fresh automatic

@@ -87,9 +87,35 @@ export function hasManualTargetSwitch(
 ): boolean {
   const approval = state.manualTargetSwitch;
   const active = approval?.retry ?? approval;
-  return !!approval && !!active && !active.consumedAt && mode === 'manual_pilot' && runId === active.runId
+  return !state.manualFreshCandidateApproval && !!approval && !!active && !active.consumedAt && mode === 'manual_pilot' && runId === active.runId
     && JSON.stringify(CandidateSchema.parse(candidateInput)) === JSON.stringify(approval.candidate)
     && assertDate(nowIso) >= assertDate(active.approvedAt) && PersistentWorkerStateSchema.safeParse(state).success;
+}
+
+/** One new topic at attempt one; historical authorizations remain sealed in place. */
+export function grantManualFreshCandidate(
+  stateInput: PersistentWorkerState, candidateInput: Candidate,
+  input: { runId: string; approvedAt: string },
+): PersistentWorkerState {
+  const state = PersistentWorkerStateSchema.parse(stateInput);
+  const candidate = CandidateSchema.parse(candidateInput);
+  if (state.manualFreshCandidateApproval || state.manualPilot !== null) throw new Error('Fresh candidate approval is one-use and requires no existing pilot.');
+  return PersistentWorkerStateSchema.parse({ ...state, manualFreshCandidateApproval: {
+    schemaVersion: 1, ...input, reason: 'user_authorized_new_topic_proof', candidate,
+    priorHistoryHash: hashIdentity(JSON.stringify({ manualRetryApproval: state.manualRetryApproval, manualTargetSwitch: state.manualTargetSwitch })),
+    consumedAt: null,
+  } });
+}
+
+export function hasManualFreshCandidate(
+  state: PersistentWorkerState, candidateInput: Candidate, runId: string | undefined,
+  mode: RunMode | undefined, nowIso: string,
+): boolean {
+  const approval = state.manualFreshCandidateApproval;
+  const candidate = CandidateSchema.safeParse(candidateInput);
+  return !!approval && !approval.consumedAt && mode === 'manual_pilot' && runId === approval.runId
+    && candidate.success && JSON.stringify(candidate.data) === JSON.stringify(approval.candidate)
+    && Date.parse(nowIso) >= Date.parse(approval.approvedAt) && PersistentWorkerStateSchema.safeParse(state).success;
 }
 
 /** One-use same-target approval; each attempt above three requires distinct explicit authority. */
@@ -97,7 +123,7 @@ export function grantManualTargetRetry(stateInput: PersistentWorkerState, candid
   input: { priorRunId: string; runId: string; approvedAt: string; extraAttempt?: boolean; sourcePlanRetry?: boolean; reviewRepairRetry?: boolean; scopeAlignmentRetry?: boolean; engineeringResume?: boolean; engineeringResumeEvidence?: EngineeringResumeEvidence; qualityRevalidation?: boolean; qualityRevalidationEvidence?: QualityRevalidationEvidence }): PersistentWorkerState {
   const state = PersistentWorkerStateSchema.parse(stateInput);
   const target = state.manualTargetSwitch;
-  if (!target?.consumedAt || (target.retry && !target.retry.consumedAt) || state.manualPilot !== null
+  if (state.manualFreshCandidateApproval || !target?.consumedAt || (target.retry && !target.retry.consumedAt) || state.manualPilot !== null
     || JSON.stringify(CandidateSchema.parse(candidate)) !== JSON.stringify(target.candidate)) throw new Error('Target retry requires an exact failed target and new one-use approval.');
   const attempts = state.decisions[target.candidateFingerprint]?.attempts;
   if ((input.engineeringResumeEvidence !== undefined && !input.engineeringResume)
@@ -190,7 +216,9 @@ export function reserveCandidate(
   const fingerprint = candidateFingerprints(candidate).candidate;
   const existing = state.decisions[fingerprint];
   const targetSwitch = state.manualTargetSwitch;
-  if (targetSwitch && !hasManualTargetSwitch(state, candidate, runId, mode, updatedAt)) throw new Error('Target switch is exact, manual-only and one-use; reuse or another target is forbidden.');
+  const fresh = hasManualFreshCandidate(state, candidate, runId, mode, updatedAt);
+  if (state.manualFreshCandidateApproval && !fresh) throw new Error('Fresh candidate approval is exact, manual-only and one-use.');
+  if (!fresh && targetSwitch && !hasManualTargetSwitch(state, candidate, runId, mode, updatedAt)) throw new Error('Target switch is exact, manual-only and one-use; reuse or another target is forbidden.');
   const manualRetry = hasManualRetryApproval(state, candidate, runId, mode, updatedAt);
   const targetRetry = !!targetSwitch?.retry && hasManualTargetSwitch(state, candidate, runId, mode, updatedAt);
   const extraTargetAttempt = targetRetry && targetSwitch?.retry?.reason === 'user_authorized_after_editorial_fix';
@@ -209,7 +237,7 @@ export function reserveCandidate(
   }
   const attempts = (existing?.attempts ?? 0) + 1;
   if (attempts > MAX_CANDIDATE_ATTEMPTS && !manualRetry && !extraTargetAttempt && !sourcePlanRetry && !reviewRepairRetry && !scopeAlignmentRetry && !engineeringResume && !qualityRevalidation) throw new Error('Candidate retry limit is exhausted.');
-  const reserved = manualRetry ? {
+  const reserved = fresh ? { ...state, manualFreshCandidateApproval: { ...state.manualFreshCandidateApproval!, consumedAt: updatedAt } } : manualRetry ? {
     ...state, manualRetryApproval: { ...state.manualRetryApproval!, consumedAt: updatedAt },
   } : targetRetry ? { ...state, manualTargetSwitch: { ...targetSwitch!, retry: { ...targetSwitch!.retry!, consumedAt: updatedAt } } }
     : targetSwitch ? { ...state, manualTargetSwitch: { ...targetSwitch, consumedAt: updatedAt } } : state;
@@ -238,9 +266,11 @@ export function markCandidateFailure(
   const reconciliation = reason === 'reconciliation_required';
   const consumedSwitch = state.manualTargetSwitch?.consumedAt
     && state.manualTargetSwitch.candidateFingerprint === candidateFingerprints(candidate).candidate;
+  const consumedFresh = state.manualFreshCandidateApproval?.consumedAt
+    && candidateFingerprints(state.manualFreshCandidateApproval.candidate).candidate === candidateFingerprints(candidate).candidate;
   const status: CandidateDecision['status'] = reconciliation
     ? 'manual_attention'
-    : retryable && !consumedSwitch && attempts < MAX_CANDIDATE_ATTEMPTS ? 'retryable' : 'terminal';
+    : retryable && !consumedSwitch && !consumedFresh && attempts < MAX_CANDIDATE_ATTEMPTS ? 'retryable' : 'terminal';
   return decisionFor(state, candidate, {
     status,
     reason,
@@ -280,6 +310,7 @@ export function deferCandidate(
 ): PersistentWorkerState {
   const existing = state.decisions[candidateFingerprints(candidate).candidate];
   if ((existing?.attempts ?? 0) > MAX_CANDIDATE_ATTEMPTS
+    || (state.manualFreshCandidateApproval?.consumedAt && candidateFingerprints(state.manualFreshCandidateApproval.candidate).candidate === candidateFingerprints(candidate).candidate)
     || (state.manualTargetSwitch?.consumedAt && state.manualTargetSwitch.candidateFingerprint === candidateFingerprints(candidate).candidate)) {
     return markCandidateFailure(state, candidate, runId, reason, false, updatedAt);
   }
@@ -295,10 +326,12 @@ export function recoverExpiredReservations(state: PersistentWorkerState, nowIso:
     if (decision.status !== 'leased' || !decision.leaseExpiresAt || assertDate(decision.leaseExpiresAt) > now) {
       return [fingerprint, decision];
     }
+    const exhausted = decision.attempts >= MAX_CANDIDATE_ATTEMPTS
+      || !!(state.manualFreshCandidateApproval?.consumedAt && candidateFingerprints(state.manualFreshCandidateApproval.candidate).candidate === fingerprint);
     return [fingerprint, {
       ...decision,
-      status: decision.attempts >= MAX_CANDIDATE_ATTEMPTS ? 'terminal' : 'retryable',
-      reason: decision.attempts >= MAX_CANDIDATE_ATTEMPTS ? 'lease_expired_retry_limit' : 'lease_expired',
+      status: exhausted ? 'terminal' : 'retryable',
+      reason: exhausted ? 'lease_expired_retry_limit' : 'lease_expired',
       updatedAt: nowIso,
       leaseExpiresAt: null,
     } satisfies CandidateDecision];

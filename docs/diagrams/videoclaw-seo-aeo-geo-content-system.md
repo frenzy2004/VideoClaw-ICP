@@ -36,11 +36,24 @@ Apify evidence → one draft + critique + QA → Markdown / SVG / report artifac
 Latest observation, 2026-09-08 Malaysia date:
 
 ```text
+FRESH TOPIC: Webinar repurposing → eight organic results → insufficient relevant PAA → rejection recorded → STOP
+```
+
+The [fresh-topic report](../autoblogger/FRESH-WEBINAR-PROOF-2026-09-08.md) records
+one new-topic attempt, not an old-candidate retry. Research failed before source
+inspection, model generation or native QA. No new article resulted, and the
+uninterrupted live milestone remains unproven. Worker checks pass **1,749 tests**,
+lint, typecheck and build. Prior failures remain retained; no production or schedule
+action occurred.
+
+Previous, separate product-demo checkpoint:
+
+```text
 LIVE: Apify + four source bodies → draft → critique → repair → verifier approves → checker false positives → STOP
 POST-FIX: Same captured article + same verdict → shared final gates → native lander QA passes → review artifact → STOP
 ```
 
-The [current report](../autoblogger/AWAKE-PROOF-2026-09-08.md) records the tenth
+The [previous report](../autoblogger/AWAKE-PROOF-2026-09-08.md) records the tenth
 authorized live attempt and separate post-fix validation. The automatically
 researched and repaired article passed the unmodified lander's **32 blog tests,
 lint and build** after correcting five reference-check false positives. The saved

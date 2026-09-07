@@ -17,7 +17,7 @@ import { createPersistentWorkerState, PersistentWorkerStateSchema, type Persiste
 import { createPendingKeywordProvider, type KeywordProvider } from './keyword-providers';
 import type { ShallowResearchResult } from './research';
 import { createAutobloggerWorker, discoverCandidatesFromResearch } from './worker';
-import { reserveCandidate, grantManualRetryApproval, grantManualTargetSwitch, grantManualTargetRetry, markCandidateScanned, markCandidateFailure } from './recovery';
+import { reserveCandidate, grantManualRetryApproval, grantManualTargetSwitch, grantManualTargetRetry, grantManualFreshCandidate, markCandidateScanned, markCandidateFailure } from './recovery';
 import { writeAutobloggerArtifacts } from './runtime';
 import { reconcileLocalPilotCandidate } from './local-pilot';
 import type { DraftSafetyFinding } from './content-bundle';
@@ -249,6 +249,81 @@ describe('persistent autoblogger worker', () => {
       parkedRetryRunId: 'approved-attempt-4', runId: 'alternative-pilot', approvedAt: '2026-09-05T00:00:00.000Z',
     }) };
   }
+
+  async function freshPilot() {
+    const { target, state, fp } = alternativePilot();
+    const first = fixture({ backlog: [target], initialState: state, targetCandidateFingerprint: fp, publicationEnabled: false, failDraft: true });
+    await first.worker.execute({ command: 'pilot', runId: 'alternative-pilot' });
+    const approved = grantManualTargetRetry(first.getState(), target, { priorRunId: 'alternative-pilot', runId: 'closed-target-retry', approvedAt: '2026-09-05T01:00:00.000Z' });
+    const second = fixture({ backlog: [target], initialState: approved, targetCandidateFingerprint: fp, publicationEnabled: false, failDraft: true, now: () => new Date('2026-09-05T01:00:00.000Z') });
+    await second.worker.execute({ command: 'pilot', runId: 'closed-target-retry' });
+    const before = structuredClone(second.getState());
+    const fresh = candidate(99);
+    const at = '2026-09-05T02:00:00.000Z';
+    return { before, fresh, at, state: grantManualFreshCandidate(before, fresh, { runId: 'fresh-pilot', approvedAt: at }) };
+  }
+
+  it.each(['success', 'draft-failure', 'scan-throw'])('runs only the fresh approved topic with immutable old history: %s', async outcome => {
+    const { before, fresh, at, state } = await freshPilot();
+    const fp = candidateFingerprints(fresh).candidate;
+    const f = fixture({ initialState: state, backlog: [fresh, candidate(98)], targetCandidateFingerprint: fp,
+      publicationEnabled: false, failDraft: outcome === 'draft-failure', failScan: outcome === 'scan-throw', now: () => new Date(at),
+      beforeSave: next => { expect(PersistentWorkerStateSchema.safeParse(next).success).toBe(true); },
+      persistArtifact: async () => { expect(f.getState().manualPilot?.status).toBe('prepared'); },
+    });
+    if (outcome === 'scan-throw') await expect(f.worker.execute({ command: 'pilot', runId: 'fresh-pilot' })).rejects.toThrow('temporary network failure');
+    else {
+      const report = await f.worker.execute({ command: 'pilot', runId: 'fresh-pilot' });
+      expect(report.status).toBe(outcome === 'success' ? 'validated' : 'failed');
+      expect(report.artifacts).toHaveLength(outcome === 'success' ? 1 : 0);
+      expect(f.counters.scanned).toBe(1);
+    }
+    const saved = f.getState();
+    expect(saved.decisions[fp]).toMatchObject({ attempts: 1, status: outcome === 'success' ? 'completed' : 'terminal' });
+    expect(saved.manualRetryApproval).toEqual(before.manualRetryApproval);
+    expect(saved.manualTargetSwitch).toEqual(before.manualTargetSwitch);
+    expect(saved.runs).toMatchObject(before.runs);
+    expect(saved.decisions).toMatchObject(before.decisions);
+    expect(saved.failures.slice(0, before.failures.length)).toEqual(before.failures);
+    expect(saved.runs['fresh-pilot'].status).toBe(outcome === 'success' ? 'validated' : 'failed');
+    expect(saved.manualFreshCandidateApproval?.consumedAt).toBe(at);
+    expect(f.counters.opened).toBe(0);
+    await expect(f.worker.execute({ command: 'pilot', runId: 'unapproved-next' })).rejects.toThrow();
+  });
+
+  it.each(['scheduled', 'other-target', 'publication', 'missing-publication-flag', 'other-run', 'lease'])('blocks fresh worker startup before any work: %s', async problem => {
+    const { fresh, at, state } = await freshPilot();
+    if (problem === 'lease') state.decisions.other = { ...Object.values(state.decisions)[0], attempts: 1, status: 'leased', leaseExpiresAt: '2026-09-06T00:00:00.000Z' };
+    const f = fixture({ initialState: state, backlog: [fresh], now: () => new Date(at),
+      targetCandidateFingerprint: candidateFingerprints(problem === 'other-target' ? candidate(98) : fresh).candidate,
+      publicationEnabled: problem === 'publication' ? true : problem === 'missing-publication-flag' ? undefined : false });
+    await expect(f.worker.execute({ command: problem === 'scheduled' ? 'run' : 'pilot', runId: problem === 'other-run' ? 'wrong' : 'fresh-pilot' })).rejects.toThrow();
+    expect(f.counters).toMatchObject({ scanned: 0, drafted: 0, saved: 0, opened: 0 });
+  });
+
+  it.each(['enrichment-failed', 'missing-faqs'])('durably records a fresh run with zero eligible opportunities: %s', async reason => {
+    const { before, fresh, at, state } = await freshPilot();
+    const fp = candidateFingerprints(fresh).candidate;
+    const f = fixture({ initialState: state, backlog: [fresh], targetCandidateFingerprint: fp,
+      publicationEnabled: false, now: () => new Date(at),
+      ...(reason === 'enrichment-failed' ? { keywordProvider: { enrich: async () => { throw new Error('Provider unavailable'); } } }
+        : { evidenceOverrides: { faqQuestions: [] } }),
+    });
+    const report = await f.worker.execute({ command: 'pilot', runId: 'fresh-pilot' });
+    expect(report.status).toBe('failed');
+    expect(report.artifacts).toEqual([]);
+    const saved = f.getState();
+    expect(PersistentWorkerStateSchema.safeParse(saved).success).toBe(true);
+    expect(saved.runs['fresh-pilot'].status).toBe('failed');
+    expect(saved.failures).toContainEqual(expect.objectContaining({ runId: 'fresh-pilot',
+      candidateFingerprint: fp, attempt: 1, code: 'no_eligible_opportunities' }));
+    expect(saved.decisions[fp].leaseExpiresAt).toBeNull();
+    expect(saved.manualPilot).toBeNull();
+    expect(saved.manualTargetSwitch).toEqual(before.manualTargetSwitch);
+    expect(saved.runs).toMatchObject(before.runs);
+    expect(f.counters).toMatchObject({ drafted: 0, validated: 0, opened: 0 });
+    await expect(f.worker.execute({ command: 'pilot', runId: 'unapproved-next' })).rejects.toThrow();
+  });
 
   it.each([2, 3].flatMap(attempt => ['success', 'draft-failure', 'scan-throw'].map(outcome => ({ attempt, outcome }))))('executes only the explicitly authorized same-target attempt $attempt: $outcome', async ({ attempt, outcome }) => {
     const { old, target, state, fp } = alternativePilot();

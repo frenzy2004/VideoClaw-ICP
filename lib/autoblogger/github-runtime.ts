@@ -179,10 +179,21 @@ const ManualTargetSwitchSchema = z.object({
   retryHistory: z.array(ManualTargetRetrySchema).max(8).optional(),
 }).strict();
 
+const ManualFreshCandidateApprovalSchema = z.object({
+  schemaVersion: z.literal(1),
+  runId: z.string().regex(/^[A-Za-z0-9][A-Za-z0-9._-]{0,159}$/u),
+  reason: z.literal('user_authorized_new_topic_proof'),
+  candidate: CandidateSchema,
+  approvedAt: z.string().datetime(),
+  priorHistoryHash: z.string().regex(/^[0-9a-f]{64}$/u),
+  consumedAt: z.string().datetime().nullable(),
+}).strict();
+
 export const PersistentWorkerStateSchema = AutobloggerStateSchema.extend({
   manualPilot: ManualPilotSchema.nullable(),
   manualRetryApproval: ManualRetryApprovalSchema.optional(),
   manualTargetSwitch: ManualTargetSwitchSchema.optional(),
+  manualFreshCandidateApproval: ManualFreshCandidateApprovalSchema.optional(),
   queuedCandidates: z.array(CandidateSchema).max(500),
   candidateFingerprints: z.array(z.string().trim().min(1).max(500)).max(20_000),
   dedupeHashes: z.array(z.string().regex(/^[0-9a-f]{64}$/u)).max(30_000),
@@ -198,6 +209,64 @@ export const PersistentWorkerStateSchema = AutobloggerStateSchema.extend({
 }).strict().superRefine((state, ctx) => {
   const approval = state.manualRetryApproval;
   const targetSwitch = state.manualTargetSwitch;
+  const fresh = state.manualFreshCandidateApproval;
+  if (fresh) {
+    const fail = (message: string) => ctx.addIssue({ code: 'custom', path: ['manualFreshCandidateApproval'], message });
+    const fingerprints = candidateFingerprints(fresh.candidate);
+    const fingerprint = fingerprints.candidate;
+    const identities = Object.values(fingerprints);
+    const approvedAt = Date.parse(fresh.approvedAt);
+    const consumedAt = fresh.consumedAt ? Date.parse(fresh.consumedAt) : null;
+    const decision = state.decisions[fingerprint];
+    const run = state.runs[fresh.runId];
+    const projection = state.candidates[fingerprint];
+    const oldGrants = [targetSwitch, ...(targetSwitch?.retryHistory ?? []), targetSwitch?.retry].filter(item => !!item);
+    if (!approval || !targetSwitch?.consumedAt || !targetSwitch.retry?.consumedAt
+      || fresh.priorHistoryHash !== createHash('sha256').update(JSON.stringify({ manualRetryApproval: approval, manualTargetSwitch: targetSwitch })).digest('hex')
+      || [approval?.priorRunId, approval?.runId, ...oldGrants.map(item => item.runId)].includes(fresh.runId)
+      || oldGrants.some(item => !item.consumedAt || Date.parse(item.consumedAt) > approvedAt || state.runs[item.runId]?.status !== 'failed')
+      || [approval?.candidateFingerprint, targetSwitch?.candidateFingerprint].some(fp => {
+        if (!fp) return true;
+        const old = state.decisions[fp];
+        return !old || old.status !== 'terminal' || old.leaseExpiresAt !== null || Date.parse(old.updatedAt) > approvedAt
+          || state.runs[old.runId]?.status !== 'failed' || !!state.contentHashes[fp] || !!state.pullRequests[fp]
+          || ['drafted', 'validated', 'pr_opened'].includes(state.candidates[fp]?.status ?? '');
+      })) fail('Fresh approval requires sealed consumed history and closed failed historical targets.');
+    if (identities.some(id => approval?.identities.includes(id) || (targetSwitch && Object.values(candidateFingerprints(targetSwitch.candidate)).includes(id)))
+      || Object.entries(state.decisions).some(([fp, item]) => fp !== fingerprint
+        && (item.runId === fresh.runId || item.identities.some(id => identities.includes(id)) || ['leased', 'manual_attention'].includes(item.status)))
+      || state.queuedCandidates.some(item => Object.values(candidateFingerprints(item)).some(id => identities.includes(id))
+        && JSON.stringify(item) !== JSON.stringify(fresh.candidate))
+      || Object.entries(state.candidates).some(([fp, item]) => fp !== fingerprint && item.runId === fresh.runId)
+      || Object.entries(state.runs).some(([id, item]) => item.runId === fresh.runId && id !== fresh.runId)
+      || state.pullRequests[fingerprint]) fail('Fresh approval must have distinct identities, exclusive run ownership and no publication or other active reservations.');
+    if (!fresh.consumedAt) {
+      if (decision || run || projection || state.contentHashes[fingerprint]
+        || state.failures.some(item => item.runId === fresh.runId || item.candidateFingerprint === fingerprint)
+        || identities.some(id => state.candidateFingerprints.includes(id) || state.dedupeHashes.includes(createHash('sha256').update(id).digest('hex')))) {
+        fail('Unused fresh approval requires a never-attempted, unseen candidate and unused run.');
+      }
+    } else if (consumedAt! < approvedAt || !decision || decision.runId !== fresh.runId || decision.attempts !== 1
+      || decision.articleId !== fresh.candidate.articleId || decision.intentFingerprint !== fingerprints.intent
+      || JSON.stringify([...decision.identities].sort()) !== JSON.stringify([...identities].sort())
+      || Date.parse(decision.updatedAt) < consumedAt! || decision.status === 'retryable'
+      || (decision.status === 'leased' ? !decision.leaseExpiresAt || Date.parse(decision.leaseExpiresAt) <= Date.parse(decision.updatedAt) : decision.leaseExpiresAt !== null)
+      || (run && (run.runId !== fresh.runId || run.mode !== 'manual_pilot' || run.status === 'pr_opened'
+        || Date.parse(run.startedAt) < approvedAt || Date.parse(run.startedAt) > consumedAt!
+        || run.selectedCandidateFingerprints.some(fp => fp !== fingerprint)))
+      || (projection && (projection.mode !== 'manual_pilot' || projection.runId !== fresh.runId || projection.status === 'pr_opened' || Date.parse(projection.updatedAt) < consumedAt!))
+      || state.failures.some(item => (item.runId === fresh.runId || item.candidateFingerprint === fingerprint)
+        && (item.runId !== fresh.runId || item.candidateFingerprint !== fingerprint || item.attempt !== 1 || Date.parse(item.observedAt) < consumedAt!))) {
+      fail('Consumed fresh approval must retain exactly attempt one of its artifact-only manual run.');
+    }
+    const pilot = state.manualPilot;
+    if (pilot && (pilot.runId !== fresh.runId || Date.parse(pilot.reservedAt) < approvedAt
+      || (!fresh.consumedAt && pilot.status !== 'leased')
+      || (pilot.status !== 'leased' && (!pilot.artifactHash || pilot.leaseExpiresAt !== null))
+      || (pilot.status === 'consumed' && (!pilot.consumedAt || Date.parse(pilot.consumedAt) < consumedAt!)))) {
+      fail('The global pilot lifecycle belongs only to the exact fresh approved run.');
+    }
+  }
   const invalid = (message: string) => ctx.addIssue({ code: 'custom', path: ['manualRetryApproval'], message });
   if (targetSwitch) {
     const fail = (message: string) => ctx.addIssue({ code: 'custom', path: ['manualTargetSwitch'], message });
@@ -239,7 +308,9 @@ export const PersistentWorkerStateSchema = AutobloggerStateSchema.extend({
           || !state.failures.some(f => f.runId === item.priorRunId && f.candidateFingerprint === fingerprint && f.attempt === (interruption ? 9 : 8)
             && f.code === 'candidate_failed' && qualityEvidence.success && f.detail === qualityEvidence.data.failureDetail
             && Date.parse(f.observedAt) <= Date.parse(qualityEvidence.data.reportCompletedAt))
-          || Object.values(state.runs).some(run => run.runId !== targetSwitch.retry?.runId && run.mode === 'manual_pilot' && ['validated', 'pr_opened'].includes(run.status))) {
+          || Object.values(state.runs).some(run => run.runId !== targetSwitch.retry?.runId
+            && !(fresh?.consumedAt && run.runId === fresh.runId && run.status === 'validated')
+            && run.mode === 'manual_pilot' && ['validated', 'pr_opened'].includes(run.status))) {
           fail('Quality revalidation requires the exact approved closed failure, unchanged consumed approval history and no prior successful pilot.');
         }
       } else if (item.priorApprovalHash !== undefined || (engineeringResume ? item.maxAttempt !== 8 || !EngineeringResumeEvidenceSchema.safeParse(evidence).success || !evidence
@@ -314,7 +385,7 @@ export const PersistentWorkerStateSchema = AutobloggerStateSchema.extend({
           || Date.parse(run.startedAt) < Date.parse(active.approvedAt)
           || run.selectedCandidateFingerprints.some((fp) => fp !== fingerprint)))) fail('Consumed target switch must retain its bounded attempt and exact artifact-only run.');
     }
-    if (state.manualPilot && (state.manualPilot.runId !== (retry?.runId ?? targetSwitch.runId)
+    if (!fresh && state.manualPilot && (state.manualPilot.runId !== (retry?.runId ?? targetSwitch.runId)
       || Date.parse(state.manualPilot.reservedAt) < (retry ? Date.parse(retry.approvedAt) : approvedAt)
       || (!(retry ? retry.consumedAt : targetSwitch.consumedAt) && state.manualPilot.status !== 'leased'))) fail('The global pilot lifecycle belongs only to the approved target-switch run.');
   }
@@ -428,6 +499,7 @@ function retainFailureHistory(input: PersistentWorkerState): PersistentWorkerSta
     if (failure.attempt > 3 || (input.manualRetryApproval && failure.runId === input.manualRetryApproval.priorRunId
       && failure.attempt === 3 && failure.code === 'candidate_failed')
       || failure.runId === input.manualTargetSwitch?.runId || failure.runId === input.manualTargetSwitch?.retry?.runId
+      || failure.runId === input.manualFreshCandidateApproval?.runId
       || input.manualTargetSwitch?.retryHistory?.some(item => item.runId === failure.runId)) pinned.add(index);
     else ordinary.push(index);
   });
@@ -443,6 +515,7 @@ export function compactPersistentWorkerState(input: PersistentWorkerState): Pers
   ));
   const retainedForRecovery = ([fingerprint, decision]: (typeof orderedDecisions)[number]) => (
     fingerprint === parsed.manualRetryApproval?.candidateFingerprint || fingerprint === parsed.manualTargetSwitch?.candidateFingerprint
+      || (parsed.manualFreshCandidateApproval && fingerprint === candidateFingerprints(parsed.manualFreshCandidateApproval.candidate).candidate)
       || ['leased', 'retryable', 'manual_attention'].includes(decision.status)
   );
   const active = orderedDecisions.filter(retainedForRecovery);
@@ -456,7 +529,7 @@ export function compactPersistentWorkerState(input: PersistentWorkerState): Pers
     .filter(([key]) => !retainedDecisionKeys.has(key))
     .flatMap(([, decision]) => decision.identities.map(identityHash));
   const allIdentityHashes = parsed.candidateFingerprints.map(identityHash);
-  const candidateFingerprints = [...new Set(parsed.candidateFingerprints)].sort().slice(-20_000);
+  const retainedFingerprints = [...new Set(parsed.candidateFingerprints)].sort().slice(-20_000);
   const dedupeHashes = [...new Set([
     ...parsed.dedupeHashes,
     ...allIdentityHashes,
@@ -467,6 +540,7 @@ export function compactPersistentWorkerState(input: PersistentWorkerState): Pers
   const projectionRunId = parsed.manualRetryApproval && parsed.candidates[parsed.manualRetryApproval.candidateFingerprint]?.runId;
   if (projectionRunId) approvalRuns.add(projectionRunId);
   if (parsed.manualTargetSwitch) approvalRuns.add(parsed.manualTargetSwitch.runId);
+  if (parsed.manualFreshCandidateApproval) approvalRuns.add(parsed.manualFreshCandidateApproval.runId);
   if (parsed.manualTargetSwitch?.retry) approvalRuns.add(parsed.manualTargetSwitch.retry.runId);
   for (const item of parsed.manualTargetSwitch?.retryHistory ?? []) approvalRuns.add(item.runId);
   const retainedRuns = Object.entries(parsed.runs)
@@ -477,7 +551,7 @@ export function compactPersistentWorkerState(input: PersistentWorkerState): Pers
     ...parsed,
     runs: Object.fromEntries(retainedRuns),
     decisions: Object.fromEntries(retainedDecisionEntries.sort(([a], [b]) => a.localeCompare(b))),
-    candidateFingerprints,
+    candidateFingerprints: retainedFingerprints,
     dedupeHashes,
     provenance: Object.fromEntries(Object.entries(parsed.provenance).filter(([key]) => retainedDecisionKeys.has(key)).sort(([a], [b]) => a.localeCompare(b))),
     contentHashes: Object.fromEntries(Object.entries(parsed.contentHashes).filter(([key]) => retainedDecisionKeys.has(key)).sort(([a], [b]) => a.localeCompare(b))),

@@ -29,6 +29,35 @@ function fixture() {
 }
 
 describe('local artifact-only pilot preflight', () => {
+  it('accepts one explicit fresh-candidate run without combining retry permissions', () => {
+    const args = ['--run-id', 'fresh-webinar-proof', '--candidate-file', 'artifacts/fresh.json', '--approve-fresh-candidate', '--execute'];
+    expect(parseLocalPilotArguments(args)).toEqual({ runId: 'fresh-webinar-proof', candidateFile: 'artifacts/fresh.json', approveFreshCandidate: true });
+    for (const bad of [args.slice(0, -1), [...args, '--reset'], [...args.slice(0, -1), '--retry-target-from', 'old', '--execute'],
+      ['--run-id', 'fresh', '--approve-fresh-candidate', '--execute']]) expect(() => parseLocalPilotArguments(bad)).toThrow();
+  });
+
+  it('adds a never-attempted topic without editing the historical grants or backlog', () => {
+    const prior = failedThirdTargetFixture();
+    const candidate = { ...other, articleId: 'vc-c4-051', campaignId: 'gtm-content-repurposing-buyer' as const,
+      primaryKeyword: 'webinar repurposing', title: 'Webinar Repurposing for a Marketing Team', slug: 'webinar-repurposing' };
+    const input = { state: prior.state, backlog: prior.backlog, candidate, runId: 'fresh-topic-proof', approveFreshCandidate: true, approvedAt: '2026-09-08T00:00:00.000Z' };
+    const originalInput = structuredClone(input);
+    const prepared = reconcileLocalPilotCandidate(input);
+    expect(input).toEqual(originalInput);
+    expect(prepared.nextAttempt).toBe(1);
+    expect(prepared.state.decisions).toEqual(prior.state.decisions);
+    expect(prepared.state.runs).toEqual(prior.state.runs);
+    expect(prepared.state.failures).toEqual(prior.state.failures);
+    expect(prepared.state.manualTargetSwitch).toEqual(prior.state.manualTargetSwitch);
+    expect(prepared.state.manualRetryApproval).toEqual(prior.state.manualRetryApproval);
+    expect(prepared.backlog).toContainEqual(candidate);
+    expect(prepared.state.queuedCandidates).toContainEqual(candidate);
+    for (const extra of [{ retryTargetFrom: 'old' }, { switchTargetFrom: 'old' }, { approveRetryFrom: 'old' }, { approveTargetExtraAttempt: true }]) {
+      expect(() => reconcileLocalPilotCandidate({ ...input, ...extra })).toThrow();
+    }
+    const overlap = { ...candidate, primaryKeyword: other.primaryKeyword };
+    expect(() => reconcileLocalPilotCandidate({ ...input, candidate: overlap })).toThrow();
+  });
   function terminalFixture() {
     const input = fixture();
     for (let attempt = 2; attempt <= 3; attempt += 1) {
