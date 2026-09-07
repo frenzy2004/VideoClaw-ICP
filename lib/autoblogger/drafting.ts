@@ -297,6 +297,18 @@ not possible, the issue remains unresolved; do not waive independent final verif
 
 const DRAFT_SYSTEM = `Create version 2 article-generation JSON for VideoClaw.
 Write an original useful article grounded in the supplied source facts and caller-approved product claims.
+Compose the reader's working document FIRST: a fill-in decision worksheet, concrete
+steps covering the fixed title, one worked hypothetical example, and troubleshooting
+choices. Aim for a focused 800–1,100-word guide, not an exhaustive source survey.
+Make the choices specific enough that a reader can use the guide without opening
+another page. Do not turn source facts into a sequence of publisher summaries.
+Use at most one short attributed source note per selected page, about 25–40 words,
+only where the fact materially helps a decision. Use at least two distinct checked
+sources, but you need not cite every supplied source. Do not repeat these notes or
+their paraphrases in later sections, FAQs, the direct answer or the graphic. Those
+fields should present the guide's original recommendations/example, not another
+summary of the publishers. Every recommendation still needs relevant contextual
+fact bindings, and close paraphrase must never be labelled original.
 Bind EVERY visible sentence, heading, metadata string, FAQ answer, and graphic label/detail
 by exact location and visible prose span to valid fact IDs from selected checked sources.
 General source claims may be natural paraphrases: preserve meaning, scope, qualifiers,
@@ -383,6 +395,15 @@ and there are no new issues. Do not repair or rewrite the draft.
 ${SUPPORT_REVIEW_RULES}`;
 
 const REPAIR_SYSTEM = `Repair the version 2 article-generation JSON exactly once.
+When cumulative source-use issues are present, discard the old exposition and
+compose a shorter working guide from the reader's decisions. Retaining the same
+sections with sentence-level substitutions did not resolve the source overuse.
+Keep only one 25–40-word attributed note per needed source page, in one location;
+remove repeated source summaries and derivative FAQ/graphic wording. Use at least
+two distinct checked sources. Build the remaining value as a genuinely original
+worksheet, a hypothetical application and conditional checks, not disguised
+paraphrase. Recompute all bindings after composition. Do not preserve an otherwise
+supported paragraph merely because the critic marked its individual facts supported.
 Address every independent-critique and deterministic-safety issue while preserving
 the supplied candidate, source inventory, exact FAQ questions, and approved claim
 bindings. Retain exact visible span/location bindings for all prose, use natural

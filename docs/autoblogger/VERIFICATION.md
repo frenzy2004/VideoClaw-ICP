@@ -3,9 +3,23 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-## Current scope-alignment and source-query correction — 2026-09-07
+## Current composition revalidation — 2026-09-08 Malaysia time
 
-See the [current report](SCOPE-ALIGNMENT-PILOT-2026-09-07.md). Source selection now
+The [quality revalidation report](QUALITY-REVALIDATION-2026-09-07.md) records the
+worksheet-first prompt correction and independently reviewed, explicit one-use
+ninth grant. All **1,632 tests across 51 files**, lint, regenerated-route typecheck,
+build and whitespace checks passed before execution.
+
+Fresh organic/PAA/source research worked, but the Mac entered lid-closed sleep
+51 seconds into the first OpenAI request. That request timed out without a response,
+response ID or usage receipt. The provider-side outcome is unknown. There was no
+draft, critique, repair, accepted bundle, native article QA or generated lander PR.
+The composition fix remains live-unproven; timeout handling was not weakened.
+All history remains, the candidate is terminal at nine, and no tenth path exists.
+
+## Previous scope-alignment and source-query correction — 2026-09-07
+
+See the [eighth-attempt report](SCOPE-ALIGNMENT-PILOT-2026-09-07.md). Source selection now
 preserves complementary title-task evidence after the unchanged topic gate, and
 body research uses four short, separate publisher queries. The eighth live run
 completed research and all four model stages, but copying and cumulative source
@@ -13,8 +27,8 @@ overuse prevented acceptance and native article QA. It remains a failed run.
 Before that continuation, **1,522 tests across 51 files**, lint, typecheck and build
 passed. Subsequent offline fixes address parsing false positives, whole-article
 budget routing, hidden planning warnings and duplicated evidence in repair inputs.
-These checks alone do not establish a clean live article. State is terminal at
-eight and has not been reset; no ninth-attempt path was introduced.
+These checks alone did not establish a clean live article. At that checkpoint,
+state was terminal at eight and no ninth-attempt path had been introduced.
 
 Final branch verification after those fixes passed **1,591 tests across 51 files**,
 lint, regenerated-route typecheck, build and whitespace checks. Unchanged receipt

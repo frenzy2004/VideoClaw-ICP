@@ -8,6 +8,7 @@ import {
   type PersistentWorkerState,
   type GitHubStateStore,
   type EngineeringResumeEvidence,
+  type QualityRevalidationEvidence,
 } from './github-runtime';
 import { RUN_LIMITS, type RunMode } from './policies';
 
@@ -93,26 +94,29 @@ export function hasManualTargetSwitch(
 
 /** One-use same-target approval; each attempt above three requires distinct explicit authority. */
 export function grantManualTargetRetry(stateInput: PersistentWorkerState, candidate: Candidate,
-  input: { priorRunId: string; runId: string; approvedAt: string; extraAttempt?: boolean; sourcePlanRetry?: boolean; reviewRepairRetry?: boolean; scopeAlignmentRetry?: boolean; engineeringResume?: boolean; engineeringResumeEvidence?: EngineeringResumeEvidence }): PersistentWorkerState {
+  input: { priorRunId: string; runId: string; approvedAt: string; extraAttempt?: boolean; sourcePlanRetry?: boolean; reviewRepairRetry?: boolean; scopeAlignmentRetry?: boolean; engineeringResume?: boolean; engineeringResumeEvidence?: EngineeringResumeEvidence; qualityRevalidation?: boolean; qualityRevalidationEvidence?: QualityRevalidationEvidence }): PersistentWorkerState {
   const state = PersistentWorkerStateSchema.parse(stateInput);
   const target = state.manualTargetSwitch;
   if (!target?.consumedAt || (target.retry && !target.retry.consumedAt) || state.manualPilot !== null
     || JSON.stringify(CandidateSchema.parse(candidate)) !== JSON.stringify(target.candidate)) throw new Error('Target retry requires an exact failed target and new one-use approval.');
   const attempts = state.decisions[target.candidateFingerprint]?.attempts;
   if ((input.engineeringResumeEvidence !== undefined && !input.engineeringResume)
-    || [input.extraAttempt, input.sourcePlanRetry, input.reviewRepairRetry, input.scopeAlignmentRetry, input.engineeringResume].filter(Boolean).length > 1
-    || (input.engineeringResume ? attempts !== 7 || target.retry?.reason !== 'user_authorized_after_scope_alignment_fix' || !input.engineeringResumeEvidence
+    || (input.qualityRevalidationEvidence !== undefined && !input.qualityRevalidation)
+    || [input.extraAttempt, input.sourcePlanRetry, input.reviewRepairRetry, input.scopeAlignmentRetry, input.engineeringResume, input.qualityRevalidation].filter(Boolean).length > 1
+    || (input.qualityRevalidation ? attempts !== 8 || target.retry?.reason !== 'manual_engineering_resume' || !input.qualityRevalidationEvidence
+      : input.engineeringResume ? attempts !== 7 || target.retry?.reason !== 'user_authorized_after_scope_alignment_fix' || !input.engineeringResumeEvidence
       : input.scopeAlignmentRetry ? attempts !== 6 || target.retry?.reason !== 'user_authorized_after_review_repair_fix'
       : input.reviewRepairRetry ? attempts !== 5 || target.retry?.reason !== 'user_authorized_after_source_planning_fix'
       : input.sourcePlanRetry ? attempts !== 4 || target.retry?.reason !== 'user_authorized_after_editorial_fix'
       : input.extraAttempt ? attempts !== MAX_CANDIDATE_ATTEMPTS : attempts >= MAX_CANDIDATE_ATTEMPTS)) {
-    throw new Error('Extra attempts require distinct one-use approval after the matching failed attempt; no ninth attempt is allowed.');
+    throw new Error('Extra attempts require distinct one-use approval after the matching failed attempt; no tenth attempt is allowed.');
   }
   return PersistentWorkerStateSchema.parse({ ...state, manualTargetSwitch: { ...target,
     ...(target.retry ? { retryHistory: [...(target.retryHistory ?? []), target.retry] } : {}), retry: {
     priorRunId: input.priorRunId, runId: input.runId, approvedAt: input.approvedAt,
-    reason: input.engineeringResume ? 'manual_engineering_resume' : input.scopeAlignmentRetry ? 'user_authorized_after_scope_alignment_fix' : input.reviewRepairRetry ? 'user_authorized_after_review_repair_fix' : input.sourcePlanRetry ? 'user_authorized_after_source_planning_fix' : input.extraAttempt ? 'user_authorized_after_editorial_fix' : target.retry ? 'user_authorized_after_attribution_fix' : 'user_authorized_after_collector_fix',
+    reason: input.qualityRevalidation ? 'manual_quality_revalidation' : input.engineeringResume ? 'manual_engineering_resume' : input.scopeAlignmentRetry ? 'user_authorized_after_scope_alignment_fix' : input.reviewRepairRetry ? 'user_authorized_after_review_repair_fix' : input.sourcePlanRetry ? 'user_authorized_after_source_planning_fix' : input.extraAttempt ? 'user_authorized_after_editorial_fix' : target.retry ? 'user_authorized_after_attribution_fix' : 'user_authorized_after_collector_fix',
     ...(input.engineeringResume ? { maxAttempt: 8, evidence: input.engineeringResumeEvidence } : {}),
+    ...(input.qualityRevalidation ? { maxAttempt: 9, evidence: input.qualityRevalidationEvidence, priorApprovalHash: hashIdentity(JSON.stringify(target)) } : {}),
     priorDecision: state.decisions[target.candidateFingerprint], consumedAt: null,
   } } });
 }
@@ -191,7 +195,8 @@ export function reserveCandidate(
   const reviewRepairRetry = targetRetry && targetSwitch?.retry?.reason === 'user_authorized_after_review_repair_fix';
   const scopeAlignmentRetry = targetRetry && targetSwitch?.retry?.reason === 'user_authorized_after_scope_alignment_fix';
   const engineeringResume = targetRetry && targetSwitch?.retry?.reason === 'manual_engineering_resume';
-  if ((existing?.attempts ?? 0) > MAX_CANDIDATE_ATTEMPTS && !sourcePlanRetry && !reviewRepairRetry && !scopeAlignmentRetry && !engineeringResume) throw new Error('Manual retry approval is consumed; retry limit is exhausted.');
+  const qualityRevalidation = targetRetry && targetSwitch?.retry?.reason === 'manual_quality_revalidation';
+  if ((existing?.attempts ?? 0) > MAX_CANDIDATE_ATTEMPTS && !sourcePlanRetry && !reviewRepairRetry && !scopeAlignmentRetry && !engineeringResume && !qualityRevalidation) throw new Error('Manual retry approval is consumed; retry limit is exhausted.');
   if (existing?.status === 'leased' && existing.runId === runId && assertDate(existing.leaseExpiresAt as string) > now) return state;
   if (existing?.status === 'leased' && existing.leaseExpiresAt && assertDate(existing.leaseExpiresAt) > now) {
     throw new Error('Candidate already has an active reservation in another run.');
@@ -200,7 +205,7 @@ export function reserveCandidate(
     throw new Error('Candidate is terminal and cannot be retried.');
   }
   const attempts = (existing?.attempts ?? 0) + 1;
-  if (attempts > MAX_CANDIDATE_ATTEMPTS && !manualRetry && !extraTargetAttempt && !sourcePlanRetry && !reviewRepairRetry && !scopeAlignmentRetry && !engineeringResume) throw new Error('Candidate retry limit is exhausted.');
+  if (attempts > MAX_CANDIDATE_ATTEMPTS && !manualRetry && !extraTargetAttempt && !sourcePlanRetry && !reviewRepairRetry && !scopeAlignmentRetry && !engineeringResume && !qualityRevalidation) throw new Error('Candidate retry limit is exhausted.');
   const reserved = manualRetry ? {
     ...state, manualRetryApproval: { ...state.manualRetryApproval!, consumedAt: updatedAt },
   } : targetRetry ? { ...state, manualTargetSwitch: { ...targetSwitch!, retry: { ...targetSwitch!.retry!, consumedAt: updatedAt } } }

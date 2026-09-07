@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { CandidateSchema, candidateFingerprints } from './domain';
 import { createPersistentWorkerState, PersistentWorkerStateSchema, compactPersistentWorkerState } from './github-runtime';
 import { grantManualRetryApproval, markCandidateFailure, markCandidateScanned, reserveCandidate, reserveManualPilot, buildIncrementalQueue } from './recovery';
-import { reconcileLocalPilotCandidate, createModelAuditTransport, inspectLocalPilotInventory, parseLocalPilotArguments, readLocalPilotCandidateFile, validateEngineeringResumeEvidence, readLocalEngineeringResumeEvidence } from './local-pilot';
+import { reconcileLocalPilotCandidate, createModelAuditTransport, inspectLocalPilotInventory, parseLocalPilotArguments, readLocalPilotCandidateFile, validateEngineeringResumeEvidence, readLocalEngineeringResumeEvidence, validateQualityRevalidationEvidence, readLocalQualityRevalidationEvidence } from './local-pilot';
 import { createHash } from 'node:crypto';
 import { mkdtemp, mkdir, writeFile, chmod, symlink } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
@@ -534,6 +534,159 @@ describe('local artifact-only pilot preflight', () => {
     return { ...input, state, runId: 'engineering-resume', retryTargetFrom: input.runId, approvedAt: '2026-09-07T07:00:00.000Z',
       approveScopeAlignmentRetry: false, approveEngineeringResume: true, engineeringResumeEvidence: resumeEvidence() };
   }
+
+  function qualityFailureProof() {
+    const priorRunId = 'engineering-resume-product-demo-pilot-2026-09-07';
+    const counts = { queued: 2, scanned: 1, shallowValidated: 1, metricsEnriched: 1, deepInspected: 1, eligible: 1, drafted: 0, validated: 0, pullRequestsOpened: 0 };
+    const failures = [{ candidateFingerprint: candidateFingerprints(other).candidate, code: 'candidate_failed',
+      detail: 'Error: Draft blocked: content_safety_failed (content.claim_binding=1).', retryable: false, attempt: 8 }];
+    const report = { schemaVersion: 1, command: 'pilot', runId: priorRunId, mode: 'manual_pilot', status: 'failed',
+      startedAt: '2026-09-07T07:00:00.000Z', completedAt: '2026-09-07T07:01:00.000Z', limits: {}, counts, artifacts: [], failures };
+    const events: Record<string, unknown>[] = [
+      { at: report.startedAt, stage: 'preflight_passed', articleId: other.articleId, nextAttempt: 8, publicationEnabled: false },
+      { at: report.startedAt, stage: 'research_started', candidates: 1 },
+      { at: report.startedAt, stage: 'research_completed', observations: [{ articleId: other.articleId, query: other.primaryKeyword }] },
+      { at: report.startedAt, stage: 'source_inspection_started' },
+      { at: report.startedAt, stage: 'source_inspection_completed', results: 1 },
+    ];
+    ['videoclaw_article_draft_v2', 'videoclaw_article_critique_v1', 'videoclaw_article_repair_v2', 'videoclaw_article_repair_verification_v1'].forEach((phase, index) => {
+      events.push({ at: report.startedAt, stage: 'model_stage_started', phase },
+        { at: report.startedAt, stage: 'model_response_retained', phase, call: index + 1, httpStatus: 200 });
+    });
+    events.push({ at: report.completedAt, stage: 'pilot_completed', status: 'failed', counts, failures });
+    return { priorRunId, candidate: other, implementationHash: 'd'.repeat(64), report,
+      audit: { runId: priorRunId, execution: 'local_production_worker_artifact_only', publicationEnabled: false, scheduledRuntimeConfigured: false, events } };
+  }
+
+  function qualityEvidence(proof = qualityFailureProof()) {
+    return validateQualityRevalidationEvidence({ ...proof, reportText: JSON.stringify(proof.report), auditText: JSON.stringify(proof.audit) });
+  }
+
+  function failedEighthTargetFixture() {
+    const proof = qualityFailureProof();
+    const input = { ...failedSeventhTargetFixture(), runId: proof.priorRunId };
+    let state = reserveCandidate(reconcileLocalPilotCandidate(input).state, other, input.runId, 'manual_pilot', input.approvedAt);
+    state = markCandidateFailure(state, other, input.runId, 'candidate_failed', false, proof.report.completedAt);
+    const fp = candidateFingerprints(other).candidate;
+    state.runs[input.runId] = { schemaVersion: 1, runId: input.runId, mode: 'manual_pilot', startedAt: input.approvedAt, selectedCandidateFingerprints: [fp], status: 'failed' };
+    state.failures.push({ runId: input.runId, candidateFingerprint: fp, code: 'candidate_failed', attempt: 8,
+      observedAt: proof.report.completedAt, detail: proof.report.failures[0].detail });
+    return { ...input, state, runId: 'quality-revalidation', retryTargetFrom: input.runId, approvedAt: '2026-09-07T08:00:00.000Z',
+      approveEngineeringResume: false, engineeringResumeEvidence: undefined, approveQualityRevalidation: true, qualityRevalidationEvidence: qualityEvidence(proof) };
+  }
+
+  it('accepts quality revalidation only with its explicit exact eighth-run CLI', () => {
+    const args = ['--run-id', 'quality-revalidation', '--candidate-file', 'artifacts/selected.json', '--retry-target-from',
+      'engineering-resume-product-demo-pilot-2026-09-07', '--approve-quality-revalidation', '--execute'];
+    expect(parseLocalPilotArguments(args)).toEqual({ runId: args[1], candidateFile: args[3], retryTargetFrom: args[5], approveQualityRevalidation: true });
+    for (const bad of [args.slice(0, -1), [...args.slice(0, 5), 'other-eighth', ...args.slice(6)],
+      [...args.slice(0, 4), '--switch-target-from', ...args.slice(5)], [...args.slice(0, -1), '--approve-engineering-resume', '--execute'],
+      ['--run-id', args[5], ...args.slice(2)], ['--run-id', 'ninth', '--approve-quality-revalidation', '--execute']]) expect(() => parseLocalPilotArguments(bad)).toThrow();
+  });
+
+  it('accepts quality attempt nine once, preserves all history, and blocks replay, schedules and attempt ten', () => {
+    const input = failedEighthTargetFixture();
+    const before = structuredClone(input.state);
+    const fp = candidateFingerprints(other).candidate;
+    const prepared = reconcileLocalPilotCandidate(input);
+    expect(prepared.nextAttempt).toBe(9);
+    expect(prepared.state.manualTargetSwitch?.retry).toMatchObject({ reason: 'manual_quality_revalidation', maxAttempt: 9,
+      evidence: input.qualityRevalidationEvidence, priorDecision: before.decisions[fp], consumedAt: null });
+    expect(prepared.state.manualTargetSwitch?.retryHistory).toEqual([...before.manualTargetSwitch!.retryHistory!, before.manualTargetSwitch!.retry]);
+    for (const key of ['decisions', 'runs', 'failures', 'manualRetryApproval'] as const) expect(prepared.state[key]).toEqual(before[key]);
+    expect(reconcileLocalPilotCandidate({ ...input, state: structuredClone(prepared.state) }).state).toEqual(prepared.state);
+    const queue = buildIncrementalQueue({ state: reserveManualPilot(prepared.state, input.runId, input.approvedAt), backlog: prepared.backlog,
+      runId: input.runId, mode: 'manual_pilot', now: input.approvedAt });
+    expect(queue.scan).toEqual([other]);
+    expect(() => reserveCandidate(prepared.state, other, input.runId, 'scheduled', input.approvedAt)).toThrow();
+    expect(() => reserveCandidate(prepared.state, { ...other, secondaryKeywords: ['changed'] }, input.runId, 'manual_pilot', input.approvedAt)).toThrow();
+    const reserved = reserveCandidate(queue.state, other, input.runId, 'manual_pilot', input.approvedAt);
+    expect(reserved.decisions[fp]).toMatchObject({ attempts: 9, status: 'leased' });
+    expect(reserved.manualTargetSwitch?.retry?.consumedAt).toBe(input.approvedAt);
+    expect(() => reserveCandidate(reserved, other, input.runId, 'manual_pilot', input.approvedAt)).toThrow();
+    let failed = markCandidateFailure(reserved, other, input.runId, 'candidate_failed', true, input.approvedAt);
+    failed.manualPilot = null;
+    failed.runs[input.runId] = { schemaVersion: 1, runId: input.runId, mode: 'manual_pilot', startedAt: input.approvedAt, selectedCandidateFingerprints: [fp], status: 'failed' };
+    failed.failures.push({ runId: input.runId, candidateFingerprint: fp, code: 'candidate_failed', attempt: 9, observedAt: input.approvedAt, detail: 'Ninth failed.' });
+    failed = compactPersistentWorkerState(failed);
+    expect(failed.failures).toEqual([...before.failures, failed.failures.at(-1)]);
+    expect(failed.decisions[fp]).toMatchObject({ attempts: 9, status: 'terminal' });
+    for (const flag of ['approveQualityRevalidation', 'approveEngineeringResume', 'approveScopeAlignmentRetry', 'approveReviewRepairRetry', 'approveSourcePlanRetry', 'approveTargetExtraAttempt']) {
+      expect(() => reconcileLocalPilotCandidate({ ...input, state: failed, runId: 'tenth', retryTargetFrom: input.runId, approveQualityRevalidation: false, [flag]: true })).toThrow();
+    }
+    expect(() => reserveCandidate(failed, other, 'tenth', 'manual_pilot', input.approvedAt)).toThrow();
+    expect(input.state).toEqual(before);
+  });
+
+  it.each(['missing-completion', 'missing-source', 'missing-model', 'extra-model', 'wrong-phase', 'wrong-call', 'http-error', 'native', 'source-only',
+    'wrong-run', 'wrong-candidate', 'wrong-attempt', 'other-failure', 'counts-mismatch', 'failure-mismatch', 'artifact', 'publication', 'scheduled', 'late-model'])(
+    'rejects quality receipts with %s', (problem) => {
+      const proof = qualityFailureProof();
+      const events = proof.audit.events;
+      if (problem === 'missing-completion') events.pop();
+      if (problem === 'missing-source') events.splice(4, 1);
+      if (problem === 'missing-model') events.splice(12, 1);
+      if (problem === 'extra-model') events.splice(13, 0, { ...events[12] });
+      if (problem === 'wrong-phase') events[11].phase = 'videoclaw_article_draft_v2';
+      if (problem === 'wrong-call') events[12].call = 3;
+      if (problem === 'http-error') events[12].httpStatus = 500;
+      if (problem === 'native') events[12].stage = 'native_validation_started';
+      if (problem === 'source-only') proof.report.counts.deepInspected = 0;
+      if (problem === 'wrong-run') proof.priorRunId = 'another-eighth';
+      if (problem === 'wrong-candidate') proof.candidate = { ...other, articleId: 'other' };
+      if (problem === 'wrong-attempt') proof.report.failures[0].attempt = 7;
+      if (problem === 'other-failure') proof.report.failures[0].detail = 'Provider timed out.';
+      if (problem === 'counts-mismatch') events.at(-1)!.counts = { ...proof.report.counts, drafted: 1 };
+      if (problem === 'failure-mismatch') events.at(-1)!.failures = [];
+      if (problem === 'artifact') proof.report.artifacts = [{}] as never[];
+      if (problem === 'publication') proof.audit.publicationEnabled = true;
+      if (problem === 'scheduled') proof.audit.scheduledRuntimeConfigured = true;
+      if (problem === 'late-model') events[12].at = '2026-09-07T09:00:00.000Z';
+      expect(() => qualityEvidence(proof)).toThrow();
+    });
+
+  it.each(['no-proof', 'no-flag', 'old-flag', 'changed-candidate', 'missing-history', 'unused-eight', 'wrong-prior', 'reused-run',
+    'artifact', 'prior-success', 'missing-selection', 'wrong-detail', 'missing-failure', 'report-start', 'future-proof'])(
+    'rejects quality approval with %s without mutating history', (problem) => {
+      const input = failedEighthTargetFixture();
+      const fp = candidateFingerprints(other).candidate;
+      if (problem === 'no-proof') input.qualityRevalidationEvidence = undefined as never;
+      if (problem === 'no-flag') input.approveQualityRevalidation = false;
+      if (problem === 'old-flag') input.approveEngineeringResume = true;
+      if (problem === 'changed-candidate') input.candidate = { ...other, secondaryKeywords: ['changed'] };
+      if (problem === 'missing-history') input.state.manualTargetSwitch!.retryHistory!.shift();
+      if (problem === 'unused-eight') input.state.manualTargetSwitch!.retry!.consumedAt = null;
+      if (problem === 'wrong-prior') input.retryTargetFrom = 'engineering-resume';
+      if (problem === 'reused-run') input.runId = 'alternative-pilot';
+      if (problem === 'artifact') input.state.contentHashes[fp] = 'a'.repeat(64);
+      if (problem === 'prior-success') input.state.runs['old-success'] = { ...input.state.runs[input.retryTargetFrom], runId: 'old-success', status: 'validated' };
+      if (problem === 'missing-selection') input.state.runs[input.retryTargetFrom].selectedCandidateFingerprints = [];
+      if (problem === 'wrong-detail') input.state.failures.at(-1)!.detail = 'Unrelated failure.';
+      if (problem === 'missing-failure') input.state.failures.pop();
+      if (problem === 'report-start') input.qualityRevalidationEvidence.reportStartedAt = at;
+      if (problem === 'future-proof') input.qualityRevalidationEvidence.auditCompletedAt = '2027-01-01T00:00:00.000Z';
+      const before = structuredClone(input);
+      expect(() => reconcileLocalPilotCandidate(input)).toThrow();
+      expect(input).toEqual(before);
+    });
+
+  it.each(['reportHash', 'auditHash', 'implementationHash'])('rejects reloaded quality authority after %s changes', (field) => {
+    const input = failedEighthTargetFixture();
+    const state = reconcileLocalPilotCandidate(input).state;
+    expect(() => reconcileLocalPilotCandidate({ ...input, state, qualityRevalidationEvidence: { ...input.qualityRevalidationEvidence, [field]: 'f'.repeat(64) } })).toThrow();
+  });
+
+  it('rejects even schema-valid edits to the consumed eighth grant after quality approval', () => {
+    const input = failedEighthTargetFixture();
+    const state = reconcileLocalPilotCandidate(input).state;
+    state.manualTargetSwitch!.retryHistory!.at(-1)!.evidence!.implementationHash = 'e'.repeat(64);
+    expect(PersistentWorkerStateSchema.safeParse(state).success).toBe(false);
+  });
+
+  it('fails closed when local quality receipts are absent', async () => {
+    const root = await mkdtemp(join(tmpdir(), 'quality-revalidation-'));
+    await expect(readLocalQualityRevalidationEvidence(root, qualityFailureProof().priorRunId, other)).rejects.toThrow();
+  });
 
   it('binds a closed zero-model source failure to literal report, audit and implementation hashes', () => {
     const proof = sourceFailureProof();

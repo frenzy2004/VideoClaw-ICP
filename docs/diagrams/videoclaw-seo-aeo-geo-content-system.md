@@ -36,10 +36,19 @@ Apify evidence → one draft + critique + QA → Markdown / SVG / report artifac
 Latest observation, 2026-09-07 Malaysia date:
 
 ```text
-Fresh SERP + PAA + four source bodies → draft → critique → one repair → copy/source checks FAILED → STOP
+Fresh SERP + PAA + four source bodies → drafting started → local sleep / timeout → STOP
 ```
 
-The [current eighth-attempt report](../autoblogger/SCOPE-ALIGNMENT-PILOT-2026-09-07.md)
+The [current ninth-attempt report](../autoblogger/QUALITY-REVALIDATION-2026-09-07.md)
+records fresh automatic research followed by a first-request timeout. The Mac's
+power log shows lid-closed sleep 51 seconds into drafting. No model response,
+usage receipt, accepted article or native article QA resulted. Worksheet-first
+composition is now implemented but remains live-unproven. The candidate is terminal
+at nine, every prior failure remains, and there is no tenth path. Software checks
+pass 1,632 tests, lint, typecheck and build. Further authorized local testing needs
+an awake machine; unattended access remains a separate dependency.
+
+The historical [eighth-attempt report](../autoblogger/SCOPE-ALIGNMENT-PILOT-2026-09-07.md)
 records working automatic research and substantive Plan/Record/Rehearse coverage.
 All four GPT-5.5 stages completed. The repaired article still copied a passage and
 derived 221, 214 and 326 words from three pages against the 180-word ceiling. No
@@ -48,9 +57,9 @@ accepted Markdown bundle, native article validation or generated PR resulted.
 Follow-up offline corrections address false binding errors, promote aggregate
 source limits to article-level repair requirements, retain all per-page planning
 warnings, and remove duplicated source text from repair targets without dropping
-evidence. Their tests do not establish improved live generation. The candidate is
-terminal at eight, all history remains, and no ninth-attempt path exists.
-Final software checks pass 1,591 tests, lint, typecheck and build. Unchanged-receipt
+evidence. Their tests did not establish improved live generation. At that checkpoint
+the candidate was terminal at eight, with no ninth-attempt path.
+Software checks then passed 1,591 tests, lint, typecheck and build. Unchanged-receipt
 inspection clears 22 false binding findings, while the genuine copied-passage and
 source-use violations remain blocked.
 
@@ -188,7 +197,7 @@ Every article traces back to campaign, ICP, trigger, intent, keyword, SERP obser
 | --- | --- | --- |
 | Article and diagram updates | Original three review guides, older assisted local preview, and new unchanged-response Markdown/SVG review artifact; no production action | Team review; keep each artifact's provenance distinct |
 | Worker implementation | PR #1 open; offline and native fixture verification recorded separately | Implementation review |
-| Automated local article milestone | Eighth attempt completed automatic research and four model stages, but failed copying/source-use checks; zero accepted bundles or native article validations | Improved generated-copy quality still needs proof; follow-up software fixes are offline-verified only. Candidate remains terminal at eight, without a ninth path |
+| Automated local article milestone | Ninth attempt completed fresh research, then local sleep overlapped the first model request and it timed out without a response; zero accepted bundles or native article validations | Worksheet-first copy quality still needs proof in an uninterrupted run. Candidate is terminal at nine, without a tenth path; no retry or history reset is authorized automatically |
 | Unattended Actions pilot | Not configured; no successful unattended article | Scoped read token, OpenAI Actions secret, reconciled state and reviewed worker |
 | Paid enrichment | Not connected; Apify research does not invent metrics | Provider access and a tested adapter |
 | Generated lander PRs | Not enabled | Merged blog contract, paid metrics, GitHub App and approved rollout |

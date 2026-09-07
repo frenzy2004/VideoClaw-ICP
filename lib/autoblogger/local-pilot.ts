@@ -1,5 +1,5 @@
 import { CandidateSchema, candidateFingerprints, type Candidate } from './domain';
-import { PersistentWorkerStateSchema, EngineeringResumeEvidenceSchema, type EngineeringResumeEvidence, type PersistentWorkerState } from './github-runtime';
+import { PersistentWorkerStateSchema, EngineeringResumeEvidenceSchema, QualityRevalidationEvidenceSchema, QUALITY_REVALIDATION_PRIOR_RUN, type QualityRevalidationEvidence, type EngineeringResumeEvidence, type PersistentWorkerState } from './github-runtime';
 import type { HttpTransport } from './http';
 import { MAX_CANDIDATE_ATTEMPTS, grantManualRetryApproval, hasManualRetryApproval, grantManualTargetSwitch, hasManualTargetSwitch, grantManualTargetRetry } from './recovery';
 import type { ArticleInventoryEntry } from './publisher';
@@ -29,7 +29,7 @@ import { createLocalReplayRecorder, createReplayAuditedClient, createReplayAudit
 export const LOCAL_PILOT_LANDER_REF = 'seo/founder-video-blog-launch';
 const LANDER_API = 'repos/INFR-Organisation/videoclaw-lander';
 const STATE_API = 'repos/frenzy2004/VideoClaw-ICP';
-type LocalPilotArguments = { runId: string; approveRetryFrom?: string; candidateFile?: string; switchTargetFrom?: string; retryTargetFrom?: string; approveTargetExtraAttempt?: boolean; approveSourcePlanRetry?: boolean; approveReviewRepairRetry?: boolean; approveScopeAlignmentRetry?: boolean; approveEngineeringResume?: boolean };
+type LocalPilotArguments = { runId: string; approveRetryFrom?: string; candidateFile?: string; switchTargetFrom?: string; retryTargetFrom?: string; approveTargetExtraAttempt?: boolean; approveSourcePlanRetry?: boolean; approveReviewRepairRetry?: boolean; approveScopeAlignmentRetry?: boolean; approveEngineeringResume?: boolean; approveQualityRevalidation?: boolean };
 export function parseLocalPilotArguments(argv: string[]): LocalPilotArguments {
   const safeRunId = (value: string) => typeof value === 'string' && /^[A-Za-z0-9][A-Za-z0-9._-]{0,159}$/u.test(value);
   const ordinary = argv.length === 3 && argv[2] === '--execute';
@@ -39,12 +39,13 @@ export function parseLocalPilotArguments(argv: string[]): LocalPilotArguments {
   const reviewRepairRetry = argv.length === 8 && argv[4] === '--retry-target-from' && argv[6] === '--approve-review-repair-retry' && argv[7] === '--execute';
   const scopeAlignmentRetry = argv.length === 8 && argv[4] === '--retry-target-from' && argv[6] === '--approve-scope-alignment-retry' && argv[7] === '--execute';
   const engineeringResume = argv.length === 8 && argv[4] === '--retry-target-from' && argv[6] === '--approve-engineering-resume' && argv[7] === '--execute';
-  const switched = ((argv.length === 7 && argv[6] === '--execute') || extraAttempt || sourcePlanRetry || reviewRepairRetry || scopeAlignmentRetry || engineeringResume) && argv[2] === '--candidate-file' && !!argv[3]?.trim() && !argv[3].startsWith('--') && !argv[3].includes('\0')
+  const qualityRevalidation = argv.length === 8 && argv[4] === '--retry-target-from' && argv[5] === QUALITY_REVALIDATION_PRIOR_RUN && argv[6] === '--approve-quality-revalidation' && argv[7] === '--execute';
+  const switched = ((argv.length === 7 && argv[6] === '--execute') || extraAttempt || sourcePlanRetry || reviewRepairRetry || scopeAlignmentRetry || engineeringResume || qualityRevalidation) && argv[2] === '--candidate-file' && !!argv[3]?.trim() && !argv[3].startsWith('--') && !argv[3].includes('\0')
     && ['--switch-target-from', '--retry-target-from'].includes(argv[4]) && safeRunId(argv[5]) && argv[5] !== argv[1];
   if ((!ordinary && !approved && !switched) || argv[0] !== '--run-id' || !safeRunId(argv[1])) {
-    throw new Error('Usage: tsx lib/autoblogger/local-pilot-entry.ts --run-id NEW_RUN_ID [--approve-retry-from FAILED_THIRD_RUN_ID | --candidate-file PRIVATE_CANDIDATE_JSON (--switch-target-from PARKED_APPROVED_RUN_ID | --retry-target-from FAILED_TARGET_RUN_ID [--approve-target-extra-attempt | --approve-source-plan-retry | --approve-review-repair-retry | --approve-scope-alignment-retry | --approve-engineering-resume])] --execute (local artifact-only; paid research/model work).');
+    throw new Error('Usage: tsx lib/autoblogger/local-pilot-entry.ts --run-id NEW_RUN_ID [--approve-retry-from FAILED_THIRD_RUN_ID | --candidate-file PRIVATE_CANDIDATE_JSON (--switch-target-from PARKED_APPROVED_RUN_ID | --retry-target-from FAILED_TARGET_RUN_ID [--approve-target-extra-attempt | --approve-source-plan-retry | --approve-review-repair-retry | --approve-scope-alignment-retry | --approve-engineering-resume | --approve-quality-revalidation])] --execute (local artifact-only; paid research/model work).');
   }
-  return { runId: argv[1], ...(approved ? { approveRetryFrom: argv[3] } : {}), ...(switched ? { candidateFile: argv[3], ...(argv[4] === '--retry-target-from' ? { retryTargetFrom: argv[5] } : { switchTargetFrom: argv[5] }) } : {}), ...(extraAttempt ? { approveTargetExtraAttempt: true } : {}), ...(sourcePlanRetry ? { approveSourcePlanRetry: true } : {}), ...(reviewRepairRetry ? { approveReviewRepairRetry: true } : {}), ...(scopeAlignmentRetry ? { approveScopeAlignmentRetry: true } : {}), ...(engineeringResume ? { approveEngineeringResume: true } : {}) };
+  return { runId: argv[1], ...(approved ? { approveRetryFrom: argv[3] } : {}), ...(switched ? { candidateFile: argv[3], ...(argv[4] === '--retry-target-from' ? { retryTargetFrom: argv[5] } : { switchTargetFrom: argv[5] }) } : {}), ...(extraAttempt ? { approveTargetExtraAttempt: true } : {}), ...(sourcePlanRetry ? { approveSourcePlanRetry: true } : {}), ...(reviewRepairRetry ? { approveReviewRepairRetry: true } : {}), ...(scopeAlignmentRetry ? { approveScopeAlignmentRetry: true } : {}), ...(engineeringResume ? { approveEngineeringResume: true } : {}), ...(qualityRevalidation ? { approveQualityRevalidation: true } : {}) };
 }
 const shaSchema = z.string().regex(/^[a-f0-9]{40,64}$/u);
 const refSchema = z.object({ ref: z.string().min(1) });
@@ -93,12 +94,13 @@ export async function inspectLocalPilotInventory(input: LocalInventoryInput, get
   return { baseSha, existingArticles, openPullRequests, branchRefs, audit: { observedAt: new Date().toISOString(), localMatchesRemote: true, baseSha, pr55, existingArticleIdentities: existingArticles.length, openPullRequests: pulls.length, openArticleIdentities: openPullRequests.length, branches: branchRefs.length, remoteStatePresent: false, authentication: 'interactive_gh_GET_only' } };
 }
 
-type LocalPilotCandidateInput = { state: PersistentWorkerState; backlog: Candidate[]; candidate: unknown; runId: string; approveRetryFrom?: string; switchTargetFrom?: string; retryTargetFrom?: string; approveTargetExtraAttempt?: boolean; approveSourcePlanRetry?: boolean; approveReviewRepairRetry?: boolean; approveScopeAlignmentRetry?: boolean; approveEngineeringResume?: boolean; engineeringResumeEvidence?: EngineeringResumeEvidence; approvedAt?: string };
+type LocalPilotCandidateInput = { state: PersistentWorkerState; backlog: Candidate[]; candidate: unknown; runId: string; approveRetryFrom?: string; switchTargetFrom?: string; retryTargetFrom?: string; approveTargetExtraAttempt?: boolean; approveSourcePlanRetry?: boolean; approveReviewRepairRetry?: boolean; approveScopeAlignmentRetry?: boolean; approveEngineeringResume?: boolean; engineeringResumeEvidence?: EngineeringResumeEvidence; approveQualityRevalidation?: boolean; qualityRevalidationEvidence?: QualityRevalidationEvidence; approvedAt?: string };
 export function reconcileLocalPilotCandidate(input: LocalPilotCandidateInput) {
   let state = PersistentWorkerStateSchema.parse(input.state);
   const candidate = CandidateSchema.parse(input.candidate);
-  const extraApprovals = [input.approveTargetExtraAttempt, input.approveSourcePlanRetry, input.approveReviewRepairRetry, input.approveScopeAlignmentRetry, input.approveEngineeringResume].filter(flag => flag === true).length;
+  const extraApprovals = [input.approveTargetExtraAttempt, input.approveSourcePlanRetry, input.approveReviewRepairRetry, input.approveScopeAlignmentRetry, input.approveEngineeringResume, input.approveQualityRevalidation].filter(flag => flag === true).length;
   if ((input.approveEngineeringResume === true) !== (input.engineeringResumeEvidence !== undefined)) throw new Error('Engineering resume requires explicit authority and validated local evidence together.');
+  if ((input.approveQualityRevalidation === true) !== (input.qualityRevalidationEvidence !== undefined)) throw new Error('Quality revalidation requires explicit authority and validated local evidence together.');
   if ((extraApprovals > 0 && input.retryTargetFrom === undefined) || extraApprovals > 1) throw new Error('Extra-attempt approval requires one distinct explicit target retry.');
   if (!/^[A-Za-z0-9][A-Za-z0-9._-]{0,159}$/u.test(input.runId) || state.runs[input.runId]) throw new Error('A fresh run ID is required; prior run records cannot be reused.');
   if (input.switchTargetFrom !== undefined || input.retryTargetFrom !== undefined) {
@@ -112,13 +114,16 @@ export function reconcileLocalPilotCandidate(input: LocalPilotCandidateInput) {
           || (approval.retry.reason === 'user_authorized_after_review_repair_fix') !== (input.approveReviewRepairRetry === true)
           || (approval.retry.reason === 'user_authorized_after_scope_alignment_fix') !== (input.approveScopeAlignmentRetry === true)
           || (approval.retry.reason === 'manual_engineering_resume') !== (input.approveEngineeringResume === true)
+          || (approval.retry.reason === 'manual_quality_revalidation') !== (input.approveQualityRevalidation === true)
           || (input.approveEngineeringResume && JSON.stringify(approval.retry.evidence) !== JSON.stringify(EngineeringResumeEvidenceSchema.parse(input.engineeringResumeEvidence)))
+          || (input.approveQualityRevalidation && JSON.stringify(approval.retry.evidence) !== JSON.stringify(QualityRevalidationEvidenceSchema.parse(input.qualityRevalidationEvidence)))
           || !hasManualTargetSwitch(state, candidate, input.runId, 'manual_pilot', input.approvedAt ?? '')) throw new Error('Existing target retry does not match this explicit unused approval.');
       } else state = grantManualTargetRetry(state, candidate, { priorRunId: input.retryTargetFrom, runId: input.runId, approvedAt: input.approvedAt ?? '',
         ...(input.approveTargetExtraAttempt === true ? { extraAttempt: true } : {}), ...(input.approveSourcePlanRetry === true ? { sourcePlanRetry: true } : {}),
         ...(input.approveReviewRepairRetry === true ? { reviewRepairRetry: true } : {}),
         ...(input.approveScopeAlignmentRetry === true ? { scopeAlignmentRetry: true } : {}),
-        ...(input.approveEngineeringResume === true ? { engineeringResume: true, engineeringResumeEvidence: input.engineeringResumeEvidence } : {}) });
+        ...(input.approveEngineeringResume === true ? { engineeringResume: true, engineeringResumeEvidence: input.engineeringResumeEvidence } : {}),
+        ...(input.approveQualityRevalidation === true ? { qualityRevalidation: true, qualityRevalidationEvidence: input.qualityRevalidationEvidence } : {}) });
     } else if (approval) {
       if (approval.retry || approval.parkedRetryRunId !== input.switchTargetFrom
         || !hasManualTargetSwitch(state, candidate, input.runId, 'manual_pilot', input.approvedAt ?? approval.approvedAt)) throw new Error('Existing target switch does not match this explicit unused approval.');
@@ -296,6 +301,47 @@ export function validateEngineeringResumeEvidence(input: {
     implementationHash: input.implementationHash });
 }
 
+/** A separate quality gate: the legacy eighth source-only proof stays unchanged. */
+export function validateQualityRevalidationEvidence(input: Parameters<typeof validateEngineeringResumeEvidence>[0]): QualityRevalidationEvidence {
+  if (input.priorRunId !== QUALITY_REVALIDATION_PRIOR_RUN
+    || [input.reportText, input.auditText].some(text => Buffer.byteLength(text, 'utf8') > 2_000_000)) throw new Error('Quality revalidation requires bounded receipts from the exact eighth run.');
+  const candidate = CandidateSchema.parse(input.candidate);
+  const count = z.number().int().nonnegative();
+  const counts = z.object({ queued: count, scanned: z.literal(1), shallowValidated: z.literal(1), metricsEnriched: z.literal(1),
+    deepInspected: z.literal(1), eligible: z.literal(1), drafted: z.literal(0), validated: z.literal(0), pullRequestsOpened: z.literal(0) }).strict();
+  const failures = z.tuple([z.object({ candidateFingerprint: z.literal(candidateFingerprints(candidate).candidate), code: z.literal('candidate_failed'),
+    detail: QualityRevalidationEvidenceSchema.shape.failureDetail, retryable: z.literal(false), attempt: z.literal(8) }).strict()]);
+  const report = z.object({ schemaVersion: z.literal(1), command: z.literal('pilot'), runId: z.literal(input.priorRunId), mode: z.literal('manual_pilot'),
+    status: z.literal('failed'), startedAt: z.string().datetime(), completedAt: z.string().datetime(), limits: z.record(z.string(), count),
+    counts, artifacts: z.array(z.unknown()).length(0), failures }).strict().parse(JSON.parse(input.reportText));
+  const audit = z.object({ runId: z.literal(input.priorRunId), execution: z.literal('local_production_worker_artifact_only'),
+    publicationEnabled: z.literal(false), scheduledRuntimeConfigured: z.literal(false),
+    events: z.array(z.object({ at: z.string().datetime(), stage: z.string() }).passthrough()).length(14),
+  }).strict().parse(JSON.parse(input.auditText));
+  const phases = ['videoclaw_article_draft_v2', 'videoclaw_article_critique_v1', 'videoclaw_article_repair_v2', 'videoclaw_article_repair_verification_v1'];
+  const stages = ['preflight_passed', 'research_started', 'research_completed', 'source_inspection_started', 'source_inspection_completed',
+    ...phases.flatMap(() => ['model_stage_started', 'model_response_retained']), 'pilot_completed'];
+  if (audit.events.some((event, index) => event.stage !== stages[index]
+    || (index > 0 && Date.parse(event.at) < Date.parse(audit.events[index - 1].at)))) throw new Error('Quality revalidation requires complete ordered source and four-model stages, without native validation.');
+  z.object({ articleId: z.literal(candidate.articleId), nextAttempt: z.literal(8), publicationEnabled: z.literal(false) }).parse(audit.events[0]);
+  z.object({ candidates: z.literal(1) }).parse(audit.events[1]);
+  z.object({ observations: z.array(z.object({ articleId: z.literal(candidate.articleId), query: z.literal(candidate.primaryKeyword) })).length(1) }).parse(audit.events[2]);
+  z.object({ results: z.literal(1) }).parse(audit.events[4]);
+  phases.forEach((phase, index) => {
+    z.object({ phase: z.literal(phase) }).parse(audit.events[5 + index * 2]);
+    z.object({ phase: z.literal(phase), call: z.literal(index + 1), httpStatus: z.literal(200) }).parse(audit.events[6 + index * 2]);
+  });
+  const completed = z.object({ status: z.literal('failed'), counts, failures }).parse(audit.events[13]);
+  if (JSON.stringify(completed.counts) !== JSON.stringify(report.counts) || JSON.stringify(completed.failures) !== JSON.stringify(report.failures)
+    || Date.parse(report.completedAt) < Date.parse(report.startedAt) || Date.parse(audit.events[0].at) > Date.parse(report.startedAt)
+    || Date.parse(audit.events[1].at) < Date.parse(report.startedAt) || Date.parse(audit.events[12].at) > Date.parse(report.completedAt)
+    || Date.parse(audit.events[13].at) < Date.parse(report.completedAt)) throw new Error('Quality report and closed execution audit must agree.');
+  return QualityRevalidationEvidenceSchema.parse({ priorRunId: input.priorRunId, candidateFingerprint: candidateFingerprints(candidate).candidate,
+    articleId: candidate.articleId, reportStartedAt: report.startedAt, reportCompletedAt: report.completedAt, auditCompletedAt: audit.events[13].at,
+    reportHash: createHash('sha256').update(input.reportText).digest('hex'), auditHash: createHash('sha256').update(input.auditText).digest('hex'),
+    implementationHash: input.implementationHash, failureDetail: report.failures[0].detail });
+}
+
 /** Hash the local implementation under review, including staged and unstaged code. */
 function localImplementationHash(root: string): string {
   const paths = ['.', ':(exclude)docs', ':(exclude)artifacts', ':(exclude)*.md', ':(exclude).env*'];
@@ -307,6 +353,17 @@ function localImplementationHash(root: string): string {
 
 /** Read only the exact ignored receipts; never create state or accept caller-supplied hashes. */
 export async function readLocalEngineeringResumeEvidence(root: string, priorRunId: string, candidate: Candidate): Promise<EngineeringResumeEvidence> {
+  return validateEngineeringResumeEvidence({ ...await readLocalRetryReceipts(root, priorRunId), priorRunId, candidate });
+}
+
+export async function readLocalQualityRevalidationEvidence(root: string, priorRunId: string, candidate: Candidate, expected?: QualityRevalidationEvidence): Promise<QualityRevalidationEvidence> {
+  if (priorRunId !== QUALITY_REVALIDATION_PRIOR_RUN) throw new Error('Quality revalidation requires the exact eighth run.');
+  const evidence = validateQualityRevalidationEvidence({ ...await readLocalRetryReceipts(root, priorRunId), priorRunId, candidate });
+  if (expected && JSON.stringify(evidence) !== JSON.stringify(QualityRevalidationEvidenceSchema.parse(expected))) throw new Error('Quality revalidation receipts or implementation changed during preflight.');
+  return evidence;
+}
+
+async function readLocalRetryReceipts(root: string, priorRunId: string) {
   if (!/^[A-Za-z0-9][A-Za-z0-9._-]{0,159}$/u.test(priorRunId)) throw new Error('Engineering resume requires a safe exact prior run ID.');
   const directory = resolve(root, 'artifacts/autoblogger', priorRunId);
   const readReceipt = async (suffix: string) => {
@@ -318,7 +375,7 @@ export async function readLocalEngineeringResumeEvidence(root: string, priorRunI
     return readFile(path, 'utf8');
   };
   const [reportText, auditText] = await Promise.all([readReceipt('run-report.json'), readReceipt('execution-audit/validation-report.json')]);
-  return validateEngineeringResumeEvidence({ reportText, auditText, priorRunId, candidate, implementationHash: localImplementationHash(root) });
+  return { reportText, auditText, implementationHash: localImplementationHash(root) };
 }
 
 /** Explicit local execution, never a credential fallback for Actions. No work occurs on import. */
@@ -330,7 +387,8 @@ export async function runLocalArtifactPilot(options: LocalPilotArguments & { roo
     ...(options.approveSourcePlanRetry === true ? ['--approve-source-plan-retry'] : []),
     ...(options.approveReviewRepairRetry === true ? ['--approve-review-repair-retry'] : []),
     ...(options.approveScopeAlignmentRetry === true ? ['--approve-scope-alignment-retry'] : []),
-    ...(options.approveEngineeringResume === true ? ['--approve-engineering-resume'] : []), '--execute']);
+    ...(options.approveEngineeringResume === true ? ['--approve-engineering-resume'] : []),
+    ...(options.approveQualityRevalidation === true ? ['--approve-quality-revalidation'] : []), '--execute']);
   if (process.env.GITHUB_EVENT_NAME === 'schedule' || process.env.AUTOBLOG_SCHEDULE_ENABLED === 'true' || process.env.LANDER_GITHUB_TOKEN?.trim()) throw new Error('Local pilot must not receive publication or scheduled execution authority.');
   const root = await realpath(resolve(options.root));
   const lander = await realpath(resolve(root, '../videoclaw-lander-blog-launch'));
@@ -356,12 +414,16 @@ export async function runLocalArtifactPilot(options: LocalPilotArguments & { roo
     const stateStore = createFileStateStore(statePath);
     const initial = await stateStore.load();
     if (!initial.version) throw new Error('Existing local pilot state is mandatory.');
+    if (options.approveQualityRevalidation && initial.state.manualTargetSwitch?.retry?.reason !== 'manual_quality_revalidation'
+      && initial.version !== '2a73391994794137f9d0e9cc388f4ac0d1a26218c740bfacda8176bd11afbf96') throw new Error('Quality revalidation requires the audited eighth-run state snapshot.');
     // Extract only identity from the historical artifact. Never import its
     // assisted facts, FAQs, source documents, provenance, or rewritten draft.
     const selectedCandidate = options.candidateFile ? await readLocalPilotCandidateFile(root, options.candidateFile)
       : JSON.parse(await readFile(candidateInputPath, 'utf8')).context?.candidate;
     const engineeringResumeEvidence = options.approveEngineeringResume
       ? await readLocalEngineeringResumeEvidence(root, options.retryTargetFrom!, selectedCandidate) : undefined;
+    const qualityRevalidationEvidence = options.approveQualityRevalidation
+      ? await readLocalQualityRevalidationEvidence(root, options.retryTargetFrom!, selectedCandidate) : undefined;
     const prepared = reconcileLocalPilotCandidate({ state: initial.state, backlog: await loadBacklogCandidates(root), candidate: selectedCandidate, runId: options.runId,
       ...(options.approveRetryFrom !== undefined ? { approveRetryFrom: options.approveRetryFrom, approvedAt: new Date().toISOString() } : {}),
       ...(options.switchTargetFrom !== undefined ? { switchTargetFrom: options.switchTargetFrom, approvedAt: new Date().toISOString() } : {}),
@@ -370,7 +432,13 @@ export async function runLocalArtifactPilot(options: LocalPilotArguments & { roo
       ...(options.approveSourcePlanRetry === true ? { approveSourcePlanRetry: true } : {}),
       ...(options.approveReviewRepairRetry === true ? { approveReviewRepairRetry: true } : {}),
       ...(options.approveScopeAlignmentRetry === true ? { approveScopeAlignmentRetry: true } : {}),
-      ...(options.approveEngineeringResume === true ? { approveEngineeringResume: true, engineeringResumeEvidence } : {}) });
+      ...(options.approveEngineeringResume === true ? { approveEngineeringResume: true, engineeringResumeEvidence } : {}),
+      ...(options.approveQualityRevalidation === true ? { approveQualityRevalidation: true, qualityRevalidationEvidence } : {}) });
+    const recheckQuality = async () => {
+      if (!qualityRevalidationEvidence) return;
+      if (JSON.stringify(await readLocalPilotCandidateFile(root, options.candidateFile!)) !== JSON.stringify(prepared.candidate)) throw new Error('Quality revalidation candidate changed during execution.');
+      await readLocalQualityRevalidationEvidence(root, options.retryTargetFrom!, prepared.candidate, qualityRevalidationEvidence);
+    };
     const localArticles = await Promise.all((await readdir(resolve(lander, 'content/articles'))).filter((name) => name.endsWith('.md')).map(async (name) => articleIdentity(await readFile(resolve(lander, 'content/articles', name), 'utf8'))));
     const snapshot = await inspectLocalPilotInventory({
       head: gitRead(lander, ['rev-parse', 'HEAD']), branch: gitRead(lander, ['branch', '--show-current']), clean: gitRead(lander, ['status', '--porcelain']) === '', localArticles, candidate: prepared.candidate,
@@ -395,8 +463,13 @@ export async function runLocalArtifactPilot(options: LocalPilotArguments & { roo
     if (engineeringResumeEvidence && JSON.stringify(await readLocalEngineeringResumeEvidence(root, options.retryTargetFrom!, prepared.candidate)) !== JSON.stringify(engineeringResumeEvidence)) {
       throw new Error('Engineering resume receipts or implementation changed during preflight.');
     }
+    await recheckQuality();
     await stateStore.save(prepared.state, initial.version);
-    const transport = createModelAuditTransport(createNodeJsonHttpTransport(), async (record) => {
+    const http = createNodeJsonHttpTransport();
+    const transport = createModelAuditTransport(async request => {
+      if (request.method === 'POST') await recheckQuality();
+      return http(request);
+    }, async (record) => {
       await replay(`response-${record.call}-${record.phase}`, record);
       await audit(record, `model-${record.call}-${record.phase}`);
       event('model_response_retained', { call: record.call, phase: record.phase, httpStatus: record.httpStatus });
@@ -453,7 +526,10 @@ export async function runLocalArtifactPilot(options: LocalPilotArguments & { roo
       landerRef: LOCAL_PILOT_LANDER_REF, approvedMedia: { product: MEDIA_ALLOWLIST.map(({ src, poster }) => ({ src, poster })), editorialGraphics: [] },
       landerInventory: snapshot.existingArticles, openPullRequestInventory: snapshot.openPullRequests, branchInventory: snapshot.branchRefs,
       publicationEnabled: false, maxDrafts: 1,
-      persistArtifact: (artifact, report) => writeAutobloggerArtifacts({ ...report, artifacts: [artifact] }, outputDirectory, root),
+      persistArtifact: async (artifact, report) => {
+        await recheckQuality();
+        return writeAutobloggerArtifacts({ ...report, artifacts: [artifact] }, outputDirectory, root);
+      },
     });
     const report = await worker.execute({ command: 'pilot', runId: options.runId });
     await writeAutobloggerArtifacts(report, outputDirectory, root);
