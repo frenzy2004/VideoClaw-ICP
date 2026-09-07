@@ -630,6 +630,11 @@ function containsExplicitProductAlias(sentence: string, claims: ProductClaim[]):
 // used as a modifier ("the recording tool") is not an ordinary antecedent.
 const ordinaryReferent = /\b(?:(?:a|an|the|this|that|each|your) (?:short )?(?:guide|scene|example|brief|buyer brief|prospect research|script|storyboard|row|presentation|recording|video|draft|outline|footage|transcript|checklist)|new content|demo day|watch time)\b(?![-\s]+(?:app|application|product|platform|tool|software|service|editor)\b)/iu;
 const softwareReferent = /\b(?:app|application|platform|tool|software|service|editor)\b/iu;
+// Qualified artifacts may resolve a grammatical subject or a closed editorial
+// object command; merely mentioning one must not expand the legacy noun matcher.
+const qualifiedArtifact = '(?:a|an|the|this|that|each|your) (?:(?:short|useful|demo|planning|review) ){1,2}(?:guide|scene|example|brief|script|storyboard|row|presentation|recording|video|draft|outline|footage|transcript|checklist)\\b(?![-\\s]+(?:app|application|product|platform|tool|software|service|editor)\\b)';
+const qualifiedSubject = new RegExp(`^${qualifiedArtifact}\\s+(?:is|was|does|has|needs|keeps|contains|shows|remains|can|could|should|must|will|would)\\b`, 'iu');
+const qualifiedObjectCommand = new RegExp(`^(?:(?:after|before) [a-z ]{1,60}, )?(?:review|check|revise) ${qualifiedArtifact} (?:(?:before|after) (?:sharing|recording|publishing|editing|sending|exporting)|and (?:review|check|revise))\\s+$`, 'iu');
 
 function hasExplicitOrdinarySubject(prefix: string): boolean {
   const referent = ordinaryReferent.exec(prefix);
@@ -688,6 +693,22 @@ function attributedNonProductSubject(prefix: string, factTexts: string[]): boole
   )));
 }
 
+function hasEditorialObjectRouting(sentence: string): boolean {
+  // These whole-sentence grammars identify "it" as the object of a human
+  // planning action, not a software capability subject. No added assertion or
+  // named product inherits the exception. Factual support is still reviewed.
+  if ([...sentence.matchAll(/\bit\b/giu)].length !== 1) return false;
+  const purpose = '(?:the|a|your) (?:buyer problem|customer problem|value proposition|next step|argument)';
+  const purposes = `${purpose}(?:, ${purpose})*(?:,? (?:or|and) ${purpose})?`;
+  const destination = '(?:the |a )?(?:backup material|appendix|recap|follow-up list)';
+  const decision = new RegExp(`^(?:(?:use|apply) (?:this|the|a) decision filter: )?if (?:a|the|this) (?:capability|feature|section|topic|detail|point) does not support ${purposes}, (?:move|defer|place|put) it (?:to|in|into) ${destination}[.!]?$`, 'iu');
+  if (decision.test(sentence)) return true;
+  // A lowercase question topic can be routed into a written recap. The fixed
+  // human subject/predicates do not assert that any product supplies the answer.
+  const question = new RegExp(`^If (?:the|a) (?:buyer|customer|prospect) asks about ([a-z]+(?: [a-z]+){0,5}), (?:the|a) (?:founder|presenter) (?:would|should|can) either show (?:a|the) prepared answer if (?:that|the) topic is part of the decision or (?:place|put|note) it in ${destination} if (?:the|that) topic is secondary[.!]?$`, 'u').exec(sentence);
+  return Boolean(question && !/\b(?:it|its|they|their|them|we|our|this|that|which|who)\b/u.test(question[1]));
+}
+
 function hasOrdinaryExplanationAntecedent(sentence: string, previousSentence: string): boolean {
   // A small noun-phrase grammar admits editorial explanations, not arbitrary
   // predicates after "It". Match both sentences in full so an added capability
@@ -735,6 +756,10 @@ function containsProductAlias(
   // pronoun, even after a product paragraph. It never clears the product context
   // for later standalone pronouns, and software/product nouns remain ambiguous.
   if (pronoun && !softwareReferent.test(sentence) && !/\bproduct\b/iu.test(sentence)
+    && (qualifiedSubject.test(prefix)
+      || (!priorProductContext && [...sentence.matchAll(/\bit\b/giu)].length === 1
+        && qualifiedObjectCommand.test(prefix) && /^it[.!]?$/iu.test(sentence.slice(pronoun.index))))) return false;
+  if (pronoun && !softwareReferent.test(sentence) && !/\bproduct\b/iu.test(sentence)
     && ((ordinaryReferent.test(prefix) && (!priorProductContext || hasExplicitOrdinarySubject(prefix)))
       || attributedNonProductSubject(prefix, factTexts))) return false;
   // Do not let an intervening ordinary noun or a hypothetical label erase a
@@ -757,6 +782,8 @@ function containsProductAlias(
   }
   if (!pronoun) return false;
   if (softwareReferent.test(sentence)) return true;
+
+  if (!/\bproduct\b/iu.test(sentence) && hasEditorialObjectRouting(sentence)) return false;
 
   // An imperative's local object can resolve its single subordinate pronoun
   // without adding nouns or complete sentences to the ordinary-referent list.

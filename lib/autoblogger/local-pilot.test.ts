@@ -246,6 +246,130 @@ describe('local artifact-only pilot preflight', () => {
       [...args.slice(0, -1), '--approve-source-plan-retry', '--execute']]) expect(() => parseLocalPilotArguments(bad)).toThrow();
   });
 
+  function failedFifthTargetFixture() {
+    const input = failedFourthTargetFixture();
+    const prepared = reconcileLocalPilotCandidate(input);
+    let state = reserveCandidate(prepared.state, other, input.runId, 'manual_pilot', input.approvedAt);
+    state = markCandidateFailure(state, other, input.runId, 'candidate_failed', true, input.approvedAt);
+    const fp = candidateFingerprints(other).candidate;
+    state.runs[input.runId] = { schemaVersion: 1, runId: input.runId, mode: 'manual_pilot', startedAt: input.approvedAt, selectedCandidateFingerprints: [fp], status: 'failed' };
+    state.failures.push({ runId: input.runId, candidateFingerprint: fp, code: 'candidate_failed', attempt: 5, observedAt: input.approvedAt, detail: 'Review/repair rejected attempt five.' });
+    return { ...input, state, runId: 'review-repair-retry', retryTargetFrom: input.runId,
+      approvedAt: '2026-09-07T04:00:00.000Z', approveSourcePlanRetry: false, approveReviewRepairRetry: true };
+  }
+
+  it('records and consumes one review/repair retry at attempt six while retaining the complete audit chain', () => {
+    const input = failedFifthTargetFixture();
+    const before = structuredClone(input);
+    const prepared = reconcileLocalPilotCandidate(input);
+    const fp = candidateFingerprints(other).candidate;
+    expect(prepared.nextAttempt).toBe(6);
+    expect(prepared.state.manualTargetSwitch?.retry).toMatchObject({ reason: 'user_authorized_after_review_repair_fix',
+      priorRunId: input.retryTargetFrom, runId: input.runId, priorDecision: before.state.decisions[fp], consumedAt: null });
+    expect(prepared.state.manualTargetSwitch?.retryHistory).toEqual([...before.state.manualTargetSwitch!.retryHistory!, before.state.manualTargetSwitch!.retry]);
+    for (const key of ['decisions', 'runs', 'failures', 'manualRetryApproval', 'candidateFingerprints', 'dedupeHashes'] as const) expect(prepared.state[key]).toEqual(before.state[key]);
+    const reloaded = reconcileLocalPilotCandidate({ ...input, state: JSON.parse(JSON.stringify(prepared.state)), approvedAt: '2026-09-07T05:00:00.000Z' });
+    expect(reloaded.state).toEqual(prepared.state);
+    const queue = buildIncrementalQueue({ state: reserveManualPilot(reloaded.state, input.runId, input.approvedAt), backlog: reloaded.backlog,
+      runId: input.runId, mode: 'manual_pilot', now: input.approvedAt });
+    expect(queue.scan).toEqual([other]);
+    const reserved = reserveCandidate(queue.state, other, input.runId, 'manual_pilot', input.approvedAt);
+    expect(reserved.decisions[fp]).toMatchObject({ attempts: 6, status: 'leased', runId: input.runId });
+    expect(reserved.manualTargetSwitch?.retry?.consumedAt).toBe(input.approvedAt);
+    const compacted = compactPersistentWorkerState(reserved);
+    for (const key of ['manualTargetSwitch', 'manualRetryApproval', 'runs', 'failures'] as const) expect(compacted[key]).toEqual(reserved[key]);
+    expect(() => reserveCandidate(reserved, other, input.runId, 'manual_pilot', input.approvedAt)).toThrow();
+    expect(() => reserveCandidate(prepared.state, other, input.runId, 'scheduled', input.approvedAt)).toThrow();
+    expect(() => reserveCandidate(prepared.state, refined, input.runId, 'manual_pilot', input.approvedAt)).toThrow();
+    expect(() => reserveCandidate(prepared.state, other, 'another-run', 'manual_pilot', input.approvedAt)).toThrow();
+    expect(buildIncrementalQueue({ state: prepared.state, backlog: prepared.backlog, runId: input.runId, mode: 'scheduled', now: input.approvedAt }).scan).toEqual([]);
+    expect(input).toEqual(before);
+  });
+
+  it.each(['no-flag', 'source-flag', 'editorial-flag', 'both-flags', 'switch-flag', 'wrong-run'])(
+    'does not reload an unused sixth grant with %s', (problem) => {
+      const input = failedFifthTargetFixture();
+      const reload = { ...input, state: reconcileLocalPilotCandidate(input).state };
+      if (['no-flag', 'source-flag', 'editorial-flag'].includes(problem)) reload.approveReviewRepairRetry = false;
+      if (problem === 'source-flag' || problem === 'both-flags') reload.approveSourcePlanRetry = true;
+      if (problem === 'editorial-flag') reload.approveTargetExtraAttempt = true;
+      if (problem === 'wrong-run') reload.runId = 'different';
+      if (problem === 'switch-flag') {
+        expect(() => reconcileLocalPilotCandidate({ ...reload, retryTargetFrom: undefined, switchTargetFrom: input.retryTargetFrom })).toThrow();
+      } else expect(() => reconcileLocalPilotCandidate(reload)).toThrow();
+    });
+
+  it.each(['missing-history', 'unconsumed-source-grant', 'wrong-source-reason', 'missing-fifth-failure', 'wrong-prior', 'old-approval', 'wrong-target',
+    'artifact', 'drafted', 'validated', 'pr_opened', 'success', 'pilot', 'scheduled', 'missing-selection', 'reused-run', 'no-flag', 'source-flag', 'editorial-flag'])(
+    'rejects a sixth grant with %s without changing history', (problem) => {
+      const input = failedFifthTargetFixture();
+      const fp = candidateFingerprints(other).candidate;
+      if (problem === 'missing-history') input.state.manualTargetSwitch!.retryHistory = [];
+      if (problem === 'unconsumed-source-grant') input.state.manualTargetSwitch!.retry!.consumedAt = null;
+      if (problem === 'wrong-source-reason') input.state.manualTargetSwitch!.retry!.reason = 'user_authorized_after_editorial_fix';
+      if (problem === 'missing-fifth-failure') input.state.failures = input.state.failures.filter(f => f.runId !== input.retryTargetFrom);
+      if (problem === 'wrong-prior') input.retryTargetFrom = 'editorial-fixed-retry';
+      if (problem === 'old-approval') input.approvedAt = at;
+      if (problem === 'wrong-target') input.candidate = refined;
+      if (problem === 'artifact') input.state.contentHashes[fp] = 'a'.repeat(64);
+      if (problem === 'drafted' || problem === 'validated' || problem === 'pr_opened') input.state.candidates[fp] = {
+        status: problem, mode: 'manual_pilot', runId: input.retryTargetFrom, updatedAt: input.approvedAt };
+      if (problem === 'success') input.state.runs[input.retryTargetFrom].status = 'validated';
+      if (problem === 'pilot') input.state = reserveManualPilot(input.state, input.retryTargetFrom, input.approvedAt);
+      if (problem === 'scheduled') input.state.runs[input.retryTargetFrom].mode = 'scheduled';
+      if (problem === 'missing-selection') input.state.runs[input.retryTargetFrom].selectedCandidateFingerprints = [];
+      if (problem === 'reused-run') input.runId = 'alternative-pilot';
+      if (problem === 'no-flag' || problem === 'source-flag' || problem === 'editorial-flag') input.approveReviewRepairRetry = false;
+      if (problem === 'source-flag') input.approveSourcePlanRetry = true;
+      if (problem === 'editorial-flag') input.approveTargetExtraAttempt = true;
+      const before = structuredClone(input);
+      expect(() => reconcileLocalPilotCandidate(input)).toThrow();
+      expect(input).toEqual(before);
+    });
+
+  it.each([1, 2, 3, 4])('rejects review/repair approval before attempt five has failed (prior attempt %s)', (attempt) => {
+    const input = [failedSwitchFixture, failedTargetRetryFixture, failedThirdTargetFixture, failedFourthTargetFixture][attempt - 1]();
+    expect(() => reconcileLocalPilotCandidate({ ...input, approveTargetExtraAttempt: false, approveSourcePlanRetry: false, approveReviewRepairRetry: true })).toThrow();
+  });
+
+  it('retains the sixth failure and rejects a seventh attempt or any unmatched sixth-attempt record', () => {
+    const input = failedFifthTargetFixture();
+    const prepared = reconcileLocalPilotCandidate(input);
+    const fp = candidateFingerprints(other).candidate;
+    let state = reserveCandidate(prepared.state, other, input.runId, 'manual_pilot', input.approvedAt);
+    state = markCandidateFailure(state, other, input.runId, 'candidate_failed', true, input.approvedAt);
+    state.runs[input.runId] = { schemaVersion: 1, runId: input.runId, mode: 'manual_pilot', startedAt: input.approvedAt, selectedCandidateFingerprints: [fp], status: 'failed' };
+    state.failures.push({ runId: input.runId, candidateFingerprint: fp, code: 'candidate_failed', attempt: 6, observedAt: input.approvedAt, detail: 'Sixth attempt failed.' });
+    expect(PersistentWorkerStateSchema.safeParse(state).success).toBe(true);
+    expect(compactPersistentWorkerState(state).failures).toEqual(state.failures);
+    expect(state.decisions[fp]).toMatchObject({ status: 'terminal', attempts: 6 });
+    for (const flags of [{}, { approveReviewRepairRetry: false }, { approveReviewRepairRetry: false, approveSourcePlanRetry: true },
+      { approveReviewRepairRetry: false, approveTargetExtraAttempt: true }]) {
+      expect(() => reconcileLocalPilotCandidate({ ...input, state, runId: 'seventh', retryTargetFrom: input.runId, ...flags })).toThrow();
+    }
+    for (const problem of ['unconsumed', 'missing-history', 'wrong-reason', 'scheduled', 'publication', 'seventh', 'foreign-failure', 'foreign-decision']) {
+      const invalid = structuredClone(state);
+      if (problem === 'unconsumed') invalid.manualTargetSwitch!.retry!.consumedAt = null;
+      if (problem === 'missing-history') invalid.manualTargetSwitch!.retryHistory!.pop();
+      if (problem === 'wrong-reason') invalid.manualTargetSwitch!.retry!.reason = 'user_authorized_after_source_planning_fix';
+      if (problem === 'scheduled') invalid.runs[input.runId].mode = 'scheduled';
+      if (problem === 'publication') invalid.runs[input.runId].status = 'pr_opened';
+      if (problem === 'seventh') invalid.decisions[fp].attempts = 7;
+      if (problem === 'foreign-failure') invalid.failures.push({ ...invalid.failures.at(-1)!, runId: 'unapproved' });
+      if (problem === 'foreign-decision') invalid.decisions[fingerprint] = { ...invalid.decisions[fingerprint], attempts: 6 };
+      expect(PersistentWorkerStateSchema.safeParse(invalid).success, problem).toBe(false);
+    }
+  });
+
+  it('parses review/repair authority only with the exact candidate-file target retry and execute flags', () => {
+    const args = ['--run-id', 'review-repair-retry', '--candidate-file', 'artifacts/selected.json', '--retry-target-from', 'source-planned-retry', '--approve-review-repair-retry', '--execute'];
+    expect(parseLocalPilotArguments(args)).toEqual({ runId: args[1], candidateFile: args[3], retryTargetFrom: args[5], approveReviewRepairRetry: true });
+    for (const bad of [args.slice(0, -1), [...args.slice(0, 4), '--switch-target-from', ...args.slice(5)],
+      ['--run-id', 'new', '--approve-review-repair-retry', '--execute'], ['--run-id', args[5], ...args.slice(2)],
+      ...['--approve-source-plan-retry', '--approve-target-extra-attempt', '--approve-review-repair-retry'].map(flag => [...args.slice(0, -1), flag, '--execute']),
+      ['--run-id', 'new', '--approve-retry-from', 'old', '--approve-review-repair-retry', '--execute']]) expect(() => parseLocalPilotArguments(bad)).toThrow();
+  });
+
   it('reloads an unused fourth target approval only with the matching explicit extra-attempt flag', () => {
     const input = failedThirdTargetFixture();
     const prepared = reconcileLocalPilotCandidate(input);

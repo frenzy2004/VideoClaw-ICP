@@ -18,6 +18,7 @@ import {
 } from './policies';
 import type { SafeSourceChecker, SourceDocument, SourceSelectionWithContent } from './sources';
 import { PAA_ACTOR_ID, normalizePaaRows, type PaaObservation } from './paa';
+import { isDiscoverySourceUrl, sourceDiscoveryQueries } from './source-policy';
 
 export const AUTOCOMPLETE_ACTOR_ID = 'automation-lab/google-autocomplete-scraper';
 export const SERP_ACTOR_ID = 'apify/google-search-scraper';
@@ -528,10 +529,10 @@ export function createResearcher(options: ResearcherOptions) {
         try {
           selection = await selectSources(sourceUrls);
         } catch {
-          // Discovery, not injected facts: two observed FAQ queries restricted
-          // to primary startup-program publishers. Preserve their own run IDs;
+          // Discovery, not injected facts: the exact topic and one observed FAQ
+          // query scoped to program/practitioner sources. Preserve their own run IDs;
           // these results never inflate the primary keyword's organic count.
-          const queries = faqQuestions.slice(0, 2).map((question) => `${question} (site:ycombinator.com OR site:techstars.com)`);
+          const queries = sourceDiscoveryQueries(candidate.primaryKeyword, faqQuestions);
           const support = await runApifyActor(options.apify, SERP_ACTOR_ID, {
             queries: `${queries.join('\n')}\n`, maxPagesPerQuery: 1,
             countryCode: 'us', languageCode: 'en', mobileResults: false,
@@ -544,8 +545,7 @@ export function createResearcher(options: ResearcherOptions) {
               || observation.country !== 'US' || observation.language !== 'en'
               || observation.device !== 'DESKTOP' || observation.page !== 1) continue;
             for (const result of observation.organicResults) {
-              const hostname = new URL(result.url).hostname.replace(/^www\./u, '');
-              if (hostname === 'ycombinator.com' || hostname === 'techstars.com') sourceUrls.push(result.url);
+              if (isDiscoverySourceUrl(result.url)) sourceUrls.push(result.url);
             }
           }
           provenance.supportSearches = [support.provenance];

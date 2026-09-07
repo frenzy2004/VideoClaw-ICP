@@ -20,6 +20,7 @@ import { createAutobloggerWorker, discoverCandidatesFromResearch } from './worke
 import { reserveCandidate, grantManualRetryApproval, grantManualTargetSwitch, grantManualTargetRetry, markCandidateScanned, markCandidateFailure } from './recovery';
 import { writeAutobloggerArtifacts } from './runtime';
 import { reconcileLocalPilotCandidate } from './local-pilot';
+import type { DraftSafetyFinding } from './content-bundle';
 
 function candidate(index: number): Candidate {
   const campaignNumber = index % 3 === 0 ? 2 : index % 3 === 1 ? 1 : 3;
@@ -86,6 +87,7 @@ function fixture(input: {
   evidenceOverrides?: Partial<EvidenceBundle>;
   failScan?: boolean;
   failDraft?: boolean;
+  blockedFindings?: DraftSafetyFinding[];
   maxDrafts?: 1 | 2 | 3;
   targetCandidateFingerprint?: string;
   publicationEnabled?: boolean;
@@ -170,6 +172,7 @@ function fixture(input: {
     drafter: {
       draft: async (context) => {
         if (input.failDraft) throw new Error('temporary model timeout');
+        if (input.blockedFindings) return { status: 'blocked' as const, reason: 'content_safety_failed' as const, findings: input.blockedFindings };
         counters.drafted += 1;
         return { status: 'ready' as const, repaired: true, bundle: bundle(context.candidate) };
       },
@@ -803,6 +806,36 @@ describe('persistent autoblogger worker', () => {
     expect(retryable.every(([key]) => getState().queuedCandidates.some((candidate) => candidateFingerprints(candidate).candidate === key))).toBe(true);
   });
 
+  it('retains distinct rejection categories instead of truncating later editorial failures behind quoted prose', async () => {
+    const { worker, counters, getState } = fixture({ backlogCount: 1, blockedFindings: [
+      { code: 'content.claim_binding', message: `A quoted span ${'long text '.repeat(100)}` },
+      { code: 'content.claim_binding', message: 'Another rejected reference.' },
+      { code: 'TITLE_SCOPE_MISMATCH', message: 'Missing recording instructions.' },
+      { code: 'critique.support_rejected', message: 'Unsupported checklist detail.' },
+    ] });
+    const result = await worker.execute({ command: 'pilot', runId: 'compact-rejection' });
+    const detail = result.failures[0].detail;
+    expect(detail).toContain('content.claim_binding=2');
+    expect(detail).toContain('TITLE_SCOPE_MISMATCH=1');
+    expect(detail).toContain('critique.support_rejected=1');
+    expect(detail).not.toContain('quoted span');
+    expect(detail.length).toBeLessThanOrEqual(500);
+    expect(result.status).toBe('failed');
+    expect(counters.validated).toBe(0);
+    expect(counters.opened).toBe(0);
+    expect(getState().failures.at(-1)?.detail).toBe(detail);
+  });
+  it('bounds and sanitizes unexpected finding codes without logging their messages', async () => {
+    const { worker } = fixture({ backlogCount: 1, blockedFindings: [
+      { code: 'not a code: private prose', message: 'private prose' },
+      ...Array.from({ length: 40 }, (_, index) => ({ code: `code_${index}_${'x'.repeat(50)}`, message: 'private prose' })),
+    ] });
+    const result = await worker.execute({ command: 'pilot', runId: 'bounded-rejection' });
+    expect(result.failures[0].detail).toContain('unrecognized_finding=1');
+    expect(result.failures[0].detail).toMatch(/additional finding types/);
+    expect(result.failures[0].detail).not.toContain('private prose');
+    expect(result.failures[0].detail.length).toBeLessThanOrEqual(500);
+  });
   it('does not consume a failed pilot and preserves real retry attempts', async () => {
     const { worker, getState } = fixture({ backlogCount: 1, failDraft: true });
     for (let attempt = 1; attempt <= 3; attempt++) {

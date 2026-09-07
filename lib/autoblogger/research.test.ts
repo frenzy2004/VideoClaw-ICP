@@ -10,6 +10,8 @@ import {
 } from './research';
 import type { ApifyClient, ApifyRun } from './apify-client';
 import { PAA_ACTOR_ID } from './paa';
+import { createSafeSourceChecker } from './sources';
+import { PRODUCTION_SOURCE_AUTHORITY_POLICIES } from './source-policy';
 const researchClock={nowMs:()=>Date.parse('2026-09-04T08:15:00.000Z')};
 
 describe('bounded zero-organic SERP recovery', () => {
@@ -346,7 +348,7 @@ describe('missing PAA collector recovery', () => {
     const client: ApifyClient = {
       startActor:async(actorId,input)=>{supportInput=input;expect(actorId).toBe(SERP_ACTOR_ID); const queries=String(input.queries).trim().split('\n');expect(queries).toHaveLength(2);expect(queries.every(q=>q.includes('site:ycombinator.com'))).toBe(true);sourceSearches++;return successfulRun('sources-run','sources-dataset');},
       getRun:async()=>{throw new Error('not needed');},abortRun:async(id)=>({id,status:'ABORTED'}),
-      getDatasetItems:async()=>faq.slice(0,2).map(question=>({searchQuery:{term:`${question} (site:ycombinator.com OR site:techstars.com)`,device:'DESKTOP',page:1,countryCode:'US',languageCode:'en'},organicResults:[{position:1,title:'What Happens at YC',url:'https://www.ycombinator.com/about',description:'Demo day details.'}],peopleAlsoAsk:[],relatedQueries:[]})),
+      getDatasetItems:async()=>[candidate.primaryKeyword,faq[0]].map(question=>({searchQuery:{term:`${question} (site:ycombinator.com OR site:techstars.com OR site:techsmith.com/blog/ OR site:descript.com/blog/article/)`,device:'DESKTOP',page:1,countryCode:'US',languageCode:'en'},organicResults:[{position:1,title:'What Happens at YC',url:'https://www.ycombinator.com/about',description:'Demo day details.'}],peopleAlsoAsk:[],relatedQueries:[]})),
     };
     const result=await createResearcher({apify:client,sourceChecker:{select:async(urls)=>{
       if(!urls.includes('https://www.ycombinator.com/about')) throw new Error('No primary source');
@@ -358,6 +360,57 @@ describe('missing PAA collector recovery', () => {
     expect(result.results[0].evidence.serp.organicResultCount).toBe(1);
     expect(result.results[0].evidence.sources).toHaveLength(2);
     expect(result.results[0].provenance.supportSearches?.[0].runId).toBe('sources-run');
+  });
+  it('retrieves scoped practitioner bodies discovered by exact US/en support searches, rejecting unrelated rows', async () => {
+    const candidate = { ...candidates(1)[0], primaryKeyword: 'product demo checklist' };
+    const faq = ['How to structure a product demo?', 'When starting a product demo, what should you do first?', 'Can you give me an example of a product demo?'];
+    const queries = [candidate.primaryKeyword, faq[0]].map(q => `${q} (site:ycombinator.com OR site:techstars.com OR site:techsmith.com/blog/ OR site:descript.com/blog/article/)`);
+    const good = ['https://www.techsmith.com/blog/demo/', 'https://www.descript.com/blog/article/demo'];
+    const requested: string[] = [];
+    const checker = createSafeSourceChecker({
+      authorityPolicies: PRODUCTION_SOURCE_AUTHORITY_POLICIES,
+      resolveHostname: async () => ['93.184.216.34'],
+      transport: async request => {
+        requested.push(request.url);
+        const body = good.includes(request.url)
+          ? '<article><p>A product demo explains a customer task through a recorded walkthrough.</p></article>'
+          : '<article><p>The accelerator cohort attends a networking event before fundraising season.</p></article>';
+        return { status: 200, headers: { 'content-type': 'text/html' }, url: request.url,
+          redirected: false, peerAddress: request.allowedPeerAddresses[0],
+          body: (async function* () { yield new TextEncoder().encode(body); })() };
+      },
+    });
+    const row = (term: string, url: string, countryCode = 'US', languageCode = 'en') => ({
+      searchQuery: { term, countryCode, languageCode, device: 'DESKTOP', page: 1 },
+      organicResults: [{ position: 1, title: 'Guide', url, description: 'Snippet is not evidence.' }],
+    });
+    const client: ApifyClient = {
+      startActor: async (actor, input) => {
+        expect(actor).toBe(SERP_ACTOR_ID);
+        expect(input.queries).toBe(`${queries.join('\n')}\n`);
+        return successfulRun('support', 'support-dataset');
+      },
+      getRun: async () => { throw new Error('Already complete'); },
+      abortRun: async id => ({ id, status: 'ABORTED' }),
+      getDatasetItems: async () => [
+        ...good.map((url, i) => row(queries[i], url)),
+        row('unrequested query', 'https://www.techsmith.com/blog/wrong-query/'),
+        row(queries[0], 'https://www.descript.com/blog/article-spoof/outside'),
+        row(queries[0], 'https://www.techsmith.com.evil.example/blog/spoof/'),
+      ],
+    };
+    const result = await createResearcher({ apify: client, sourceChecker: checker, execution: researchClock }).inspect([{
+      candidate, suggestions: [], relatedQueries: [], peopleAlsoAsk: faq,
+      organicResults: [{ title: 'Launch guide', url: 'https://publisher.example/launch', snippet: 'Not a verified fact.', resultType: 'article' }],
+      provenance: { discovery: { actorId: 'a', runId: 'a', datasetId: 'a', observedAt: '2026-09-04T08:01:00.000Z' },
+        serp: { actorId: SERP_ACTOR_ID, runId: 'original', datasetId: 'original-dataset', observedAt: '2026-09-04T08:01:00.000Z' } },
+    }]);
+    expect(result.results[0].evidence.sources.map(source => source.finalUrl)).toEqual(good);
+    expect(result.results[0].sourceDocuments?.every(document => document.passages.length > 0)).toBe(true);
+    expect(result.results[0].evidence.serp.organicResultCount).toBe(1);
+    expect(result.results[0].provenance.serp.runId).toBe('original');
+    expect(result.results[0].provenance.supportSearches?.[0].runId).toBe('support');
+    expect([...new Set(requested)]).toEqual(['https://publisher.example/launch', ...good]);
   });
   it('recovers exact-query questions through one dedicated collection and keeps separate provenance', async () => {
     const candidate = {...candidates(1)[0],primaryKeyword:'demo day video checklist'};

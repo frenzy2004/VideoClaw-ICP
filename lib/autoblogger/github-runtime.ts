@@ -38,7 +38,7 @@ const CompactFailureSchema = z.object({
   runId: z.string().trim().min(1).max(160),
   code: z.string().trim().min(1).max(120),
   // Above three is accepted only by the enclosing state's consumed-grant checks.
-  attempt: z.number().int().min(1).max(5),
+  attempt: z.number().int().min(1).max(6),
   candidateFingerprint: z.string().trim().min(1).max(500).optional(),
   observedAt: z.string().datetime(),
   detail: z.string().trim().min(1).max(500),
@@ -127,10 +127,10 @@ const ManualRetryApprovalSchema = z.object({
 }).strict();
 
 const ManualTargetRetrySchema = z.object({
-  reason: z.enum(['user_authorized_after_collector_fix', 'user_authorized_after_attribution_fix', 'user_authorized_after_editorial_fix', 'user_authorized_after_source_planning_fix']),
+  reason: z.enum(['user_authorized_after_collector_fix', 'user_authorized_after_attribution_fix', 'user_authorized_after_editorial_fix', 'user_authorized_after_source_planning_fix', 'user_authorized_after_review_repair_fix']),
   priorRunId: z.string().regex(/^[A-Za-z0-9][A-Za-z0-9._-]{0,159}$/u),
   runId: z.string().regex(/^[A-Za-z0-9][A-Za-z0-9._-]{0,159}$/u),
-  priorDecision: CandidateDecisionSchema.extend({ attempts: z.number().int().min(0).max(4) }),
+  priorDecision: CandidateDecisionSchema.extend({ attempts: z.number().int().min(0).max(5) }),
   approvedAt: z.string().datetime(),
   consumedAt: z.string().datetime().nullable(),
 }).strict();
@@ -147,7 +147,7 @@ const ManualTargetSwitchSchema = z.object({
   approvedAt: z.string().datetime(),
   consumedAt: z.string().datetime().nullable(),
   retry: ManualTargetRetrySchema.optional(),
-  retryHistory: z.array(ManualTargetRetrySchema).max(3).optional(),
+  retryHistory: z.array(ManualTargetRetrySchema).max(4).optional(),
 }).strict();
 
 export const PersistentWorkerStateSchema = AutobloggerStateSchema.extend({
@@ -157,7 +157,7 @@ export const PersistentWorkerStateSchema = AutobloggerStateSchema.extend({
   queuedCandidates: z.array(CandidateSchema).max(500),
   candidateFingerprints: z.array(z.string().trim().min(1).max(500)).max(20_000),
   dedupeHashes: z.array(z.string().regex(/^[0-9a-f]{64}$/u)).max(30_000),
-  decisions: z.record(z.string(), CandidateDecisionSchema.extend({ attempts: z.number().int().min(0).max(5) })),
+  decisions: z.record(z.string(), CandidateDecisionSchema.extend({ attempts: z.number().int().min(0).max(6) })),
   provenance: z.record(z.string(), CompactProvenanceSchema),
   contentHashes: z.record(z.string(), z.string().regex(/^[0-9a-f]{64}$/)),
   pullRequests: z.record(z.string(), z.object({
@@ -191,8 +191,13 @@ export const PersistentWorkerStateSchema = AutobloggerStateSchema.extend({
       const saved = item.priorDecision;
       const extraAttempt = item.reason === 'user_authorized_after_editorial_fix';
       const sourcePlanRetry = item.reason === 'user_authorized_after_source_planning_fix';
-      const allowedAttempt = sourcePlanRetry
-        ? saved.attempts === 4 && retries[index - 1]?.reason === 'user_authorized_after_editorial_fix' && index === retries.length - 1
+      const reviewRepairRetry = item.reason === 'user_authorized_after_review_repair_fix';
+      const allowedAttempt = reviewRepairRetry
+        ? saved.attempts === 5 && retries[index - 1]?.reason === 'user_authorized_after_source_planning_fix' && index === retries.length - 1
+          && prior?.selectedCandidateFingerprints.length === 1
+        : sourcePlanRetry
+        ? saved.attempts === 4 && retries[index - 1]?.reason === 'user_authorized_after_editorial_fix'
+          && (index === retries.length - 1 || retries[index + 1]?.reason === 'user_authorized_after_review_repair_fix')
         : extraAttempt ? saved.attempts === 3 : saved.attempts < 3;
       if (!previous.consumedAt || item.priorRunId !== previous.runId || runIds.has(item.runId)
         || saved.status !== 'terminal' || saved.leaseExpiresAt !== null || saved.runId !== item.priorRunId
@@ -208,6 +213,7 @@ export const PersistentWorkerStateSchema = AutobloggerStateSchema.extend({
           && f.attempt === saved.attempts && Date.parse(f.observedAt) <= Date.parse(item.approvedAt))) fail('Target retry requires the retained failed attempt, exact identities and explicit later approval.');
       if (!item.consumedAt && (JSON.stringify(decision) !== JSON.stringify(saved)
         || state.runs[item.runId] || state.contentHashes[fingerprint] || state.candidates[fingerprint]?.status === 'validated'
+        || (reviewRepairRetry && ['drafted', 'pr_opened'].includes(state.candidates[fingerprint]?.status ?? ''))
         || Object.values(state.decisions).some(d => d.runId === item.runId))) fail('Unused target retry must preserve its prior decision and cannot reuse a run or artifact.');
       if (item.consumedAt && Date.parse(item.consumedAt) < Date.parse(item.approvedAt)) fail('Target retry cannot precede approval.');
       runIds.add(item.runId);
@@ -239,10 +245,10 @@ export const PersistentWorkerStateSchema = AutobloggerStateSchema.extend({
       || Date.parse(state.manualPilot.reservedAt) < (retry ? Date.parse(retry.approvedAt) : approvedAt)
       || (!(retry ? retry.consumedAt : targetSwitch.consumedAt) && state.manualPilot.status !== 'leased'))) fail('The global pilot lifecycle belongs only to the approved target-switch run.');
   }
-  // Retain the consumed fourth grant when a separately approved fifth grant is
-  // appended. Each extra decision/failure must still match its own grant exactly.
+  // Retain all consumed grants when another explicit approval is appended.
+  // Each extra decision/failure must still match its own grant exactly.
   const targetExtras = [...(targetSwitch?.retryHistory ?? []), ...(targetSwitch?.retry ? [targetSwitch.retry] : [])]
-    .filter(item => item.consumedAt && ['user_authorized_after_editorial_fix', 'user_authorized_after_source_planning_fix'].includes(item.reason));
+    .filter(item => item.consumedAt && ['user_authorized_after_editorial_fix', 'user_authorized_after_source_planning_fix', 'user_authorized_after_review_repair_fix'].includes(item.reason));
   for (const [fingerprint, decision] of Object.entries(state.decisions)) {
     const exactTargetExtra = targetExtras.some(item => targetSwitch?.candidateFingerprint === fingerprint
       && item.runId === decision.runId && decision.attempts === item.priorDecision.attempts + 1 && decision.status !== 'retryable');

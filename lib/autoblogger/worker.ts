@@ -128,6 +128,25 @@ function safeDetail(error: unknown): string {
   return redactSensitive(error).replace(/[\r\n]+/gu, ' ').slice(0, 500);
 }
 
+function compactFindingCodes(findings: { code: string }[]): string {
+  // Prose from the first finding used to consume the entire 500-character
+  // state/report allowance, hiding later editorial failures. Keep categories
+  // and counts here; full private model receipts retain the actual evidence.
+  const counts = new Map<string, number>();
+  for (const finding of findings) {
+    const code = /^[a-z][a-z0-9_.-]{0,63}$/iu.test(finding.code) ? finding.code : 'unrecognized_finding';
+    counts.set(code, (counts.get(code) ?? 0) + 1);
+  }
+  const entries: string[] = [];
+  for (const [code, count] of counts) {
+    const entry = `${code}=${count}`;
+    if ([...entries, entry].join('; ').length > 350) break;
+    entries.push(entry);
+  }
+  const omitted = counts.size - entries.length;
+  return `${entries.join('; ') || 'no_reported_codes'}${omitted ? `; +${omitted} additional finding types` : ''}`;
+}
+
 function recordPersistent(state: PersistentWorkerState, run: RunRecord): PersistentWorkerState {
   const core = recordRun({ schemaVersion: 1, candidates: state.candidates, runs: state.runs }, run);
   return { ...state, runs: core.runs };
@@ -597,7 +616,7 @@ export function createAutobloggerWorker(options: AutobloggerWorkerOptions) {
           const drafting = await options.drafter.draft(context);
           if (drafting.status !== 'ready') {
             const findingCodes = drafting.reason === 'content_safety_failed'
-              ? drafting.findings.map(({ code, message }) => `${code}: ${message}`).join(', ')
+              ? compactFindingCodes(drafting.findings)
               : drafting.mediaBrief.code;
             throw new Error(`Draft blocked: ${drafting.reason} (${findingCodes}).`);
           }

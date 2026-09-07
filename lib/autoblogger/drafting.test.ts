@@ -385,6 +385,69 @@ describe('consistent repair issue registry', () => {
 });
 
 describe('contextual review and targeted bounded repair', () => {
+  it.each(['TITLE_SCOPE_MISMATCH', 'EDITORIAL_MISSING_WORKFLOW'])(
+    'restructures unlocalized %s without a source-budget failure and still blocks an unresolved repair', async (code) => {
+      const scopedContext = structuredClone(context);
+      scopedContext.candidate.title = 'Product Demo Checklist: Plan, Record and Rehearse';
+      scopedContext.candidate.primaryKeyword = 'product demo checklist';
+      scopedContext.provenance.query = 'product demo checklist';
+      scopedContext.evidence.candidateFingerprint = candidateFingerprints(scopedContext.candidate).candidate;
+      const scopedMedia = { ...media, candidateFingerprints: [scopedContext.evidence.candidateFingerprint] };
+      const before = structuredClone(scopedContext);
+      const initial = structuredClone(draft); // No recording workflow in its body sections.
+      if (code === 'EDITORIAL_MISSING_WORKFLOW') {
+        initial.description = scopedContext.candidate.title;
+        initial.claimBindings.find(binding => binding.location === '/description')!.span = initial.description;
+      }
+      const issue = { id: 'ISS-001', code, message: 'The fixed title promises Record but the body has no actionable recording workflow.',
+        repairInstruction: 'Add supported recording coverage to the body; a title edit or isolated reference fixes cannot resolve this issue.' };
+      const critique = { ...approvedCritique, approved: false, issues: [issue], supportEvaluations: supportedBindings(initial) };
+      // Deliberately leave the article-level defect unresolved: this is a routing
+      // regression, not a fixture claiming that a real model repaired the article.
+      const client = new FixtureStructuredClient([initial, critique, initial, unresolvedVerification(critique, initial)]);
+      const outcome = await createStructuredDrafter({ client, mediaAllowlist: [scopedMedia] }).draft(scopedContext);
+      const repair = client.requests[2].input as {
+        repairStrategy: string; articleLevelIssues: DraftCritiqueV1['issues']; originalIssues: DraftCritiqueV1['issues'];
+        deterministicFindings: Array<{ code: string }>; repairTargets: unknown[];
+      };
+      expect(repair.deterministicFindings.some(f => ['content.source_budget', 'content.source_allocation'].includes(f.code))).toBe(false);
+      expect(repair.repairStrategy).toBe('restructure_article');
+      expect(repair.articleLevelIssues).toEqual([issue]);
+      expect(repair.originalIssues).toContainEqual(issue);
+      if (code === 'TITLE_SCOPE_MISMATCH') expect(repair.repairTargets).toEqual([]);
+      else expect(repair.repairTargets.length).toBeGreaterThan(0);
+      expect(client.requests[3].input).toMatchObject({ originalIssues: repair.originalIssues, repairedDraft: initial });
+      for (const request of client.requests) expect(request.input).toMatchObject({
+        candidate: before.candidate, evidence: before.evidence, productClaims: before.productClaims,
+      });
+      for (const index of [0, 2]) {
+        const schema = client.requests[index].schema as typeof GENERATED_DRAFT_V2_JSON_SCHEMA;
+        expect(schema.additionalProperties).toBe(false);
+        expect(schema.properties).not.toHaveProperty('title');
+      }
+      expect(outcome).toMatchObject({ status: 'blocked', reason: 'content_safety_failed',
+        findings: expect.arrayContaining([expect.objectContaining({ code, issueId: 'ISS-001' })]) });
+      expect(outcome).not.toHaveProperty('bundle');
+      expect(client.requests.map(request => request.name)).toEqual([
+        'videoclaw_article_draft_v2', 'videoclaw_article_critique_v1',
+        'videoclaw_article_repair_v2', 'videoclaw_article_repair_verification_v1',
+      ]);
+      expect(scopedContext).toEqual(before);
+    });
+
+  it('keeps a localized machine-only description repair targeted', async () => {
+    const initial = structuredClone(draft);
+    initial.description = candidate.title;
+    initial.claimBindings.find(binding => binding.location === '/description')!.span = initial.description;
+    const critique = { ...approvedCritique, supportEvaluations: supportedBindings(initial) };
+    const client = new FixtureStructuredClient([initial, critique, draft, verifyRequest()]);
+    const outcome = await createStructuredDrafter({ client, mediaAllowlist: [media] }).draft(context);
+    expect(client.requests[2].input).toMatchObject({ repairStrategy: 'targeted_repair', articleLevelIssues: [],
+      repairTargets: expect.arrayContaining([expect.objectContaining({ location: '/description', span: candidate.title })]) });
+    expect(outcome).toMatchObject({ status: 'ready', repaired: true });
+    expect(client.requests).toHaveLength(4);
+  });
+
   it('repairs a reviewed derivation above the planning target before the final hard limit', async () => {
     const initial = structuredClone(draft);
     initial.claimBindings.forEach(binding => { binding.sourceFactIds = ['yc-bullets']; });
@@ -405,6 +468,7 @@ describe('contextual review and targeted bounded repair', () => {
     expect(outcome).toMatchObject({ status: 'ready', repaired: true });
     expect(client.requests[2].input).toMatchObject({
       repairStrategy: 'restructure_article',
+      articleLevelIssues: [],
       deterministicFindings: expect.arrayContaining([expect.objectContaining({ code: 'content.source_allocation' })]),
     });
   });

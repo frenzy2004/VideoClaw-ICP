@@ -39,12 +39,21 @@ Latest observation, 2026-09-07 Malaysia date:
 Fresh research → draft → critique → one repair → final review FAILED → STOP
 ```
 
-The [latest fifth-attempt report](../autoblogger/SOURCE-PLANNED-PILOT-2026-09-07.md)
+The [latest sixth-attempt report](../autoblogger/SOURCE-DISCOVERY-PILOT-2026-09-07.md)
+records eight organic results, three observed FAQs, three retrieved source bodies
+and four GPT-5.5 calls. Final review rejected missing recording guidance promised
+by the fixed title and two checklist citation details. No accepted Markdown or
+live native QA resulted. Subsequent offline fixes improve article-level repair
+routing, remove three reference-check false positives and expose all rejection
+categories in compact reports. They do not change the failed live outcome. State
+is terminal at six, history is retained, and no seventh-attempt path exists.
+
+The historical [fifth-attempt report](../autoblogger/SOURCE-PLANNED-PILOT-2026-09-07.md)
 records fresh organic/PAA/source retrieval and exactly four GPT-5.5 calls. Final
 checks rejected a cross-sentence reference, unexpected verification IDs, private
 audience-metadata support and 226 source-derived words against a 180-word limit.
 No accepted Markdown or native QA pass resulted. The candidate is terminal at
-five, all history is retained, and no sixth attempt is permitted. Software checks
+five at that checkpoint, with no sixth-attempt path then. Software checks
 passed at that checkpoint; the live article milestone did not.
 
 The subsequent [offline review/repair correction](../autoblogger/REVIEW-REPAIR-FIX-2026-09-07.md)

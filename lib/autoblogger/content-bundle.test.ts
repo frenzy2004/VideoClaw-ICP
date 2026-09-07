@@ -875,6 +875,47 @@ describe('contextual product references and precise binding failures', () => {
   const hypotheticalAntecedent = 'This example is hypothetical and is not a claim that any named product has these capabilities or outcomes.';
   const checklistExplanation = 'It illustrates the checklist principle of matching the demo path to a buyer problem, a consistent story, a working demo setup, and a defined next step.';
 
+  const decisionRouting = 'Use this decision filter: if a capability does not support the buyer problem, the value proposition, or the next step, move it to backup material.';
+  const questionRouting = 'If the buyer asks about payment setup, the founder would either show a prepared answer if that topic is part of the decision or place it in the recap if the topic is secondary.';
+  it.each([
+    decisionRouting,
+    'If a section does not support the buyer problem, move it to the appendix.',
+    questionRouting,
+    'If a customer asks about pricing, a presenter should either show a prepared answer if the topic is part of the decision or put it in the follow-up list if that topic is secondary.',
+    'A useful demo checklist is not the longest one; it is the one that makes the next customer conversation clearer.',
+    'The planning brief is concise; it focuses on the audience.',
+    'After rehearsal, review the planning brief before sharing it.',
+    'Before rehearsal, check the useful demo checklist and revise it.',
+  ])('resolves editorial object routing and a qualified ordinary subject: %s', span => {
+    expect(inspectGeneratedDraft(context, withSpans([span]))).toEqual([]);
+  });
+
+  it.each([
+    [context.productClaims[0].text, decisionRouting],
+    [context.productClaims[0].text, questionRouting],
+    [decisionRouting.replace('a capability', 'VideoClaw')],
+    [decisionRouting.replace('move it to backup material.', 'it automatically adds captions.')],
+    [decisionRouting.replace('backup material.', 'backup material and it adds captions.')],
+    [questionRouting.replace('would either show a prepared answer', 'automatically generates captions and would either show a prepared answer')],
+    [questionRouting.replace('secondary.', 'secondary and it records the screen.')],
+    [questionRouting.replace('payment setup', 'whether it automatically adds captions')],
+    [questionRouting.replace('payment setup', 'its automatic captions')],
+    [questionRouting.replace('payment setup', 'how they generate subtitles')],
+    [questionRouting.replace('payment setup', 'a useful demo checklist it generates')],
+    ['A useful demo checklist tool is ready; it adds captions.'],
+    ['The planning brief platform is ready; it adds captions.'],
+    ['After reviewing a useful demo checklist, it automatically adds captions.'],
+    ['After reviewing a useful demo checklist, now it automatically adds captions.'],
+    ['Before reviewing the planning brief, it records the screen.'],
+    ['After reviewing a useful demo checklist it automatically adds captions.'],
+    ['Using a useful demo checklist, it automatically exports videos.'],
+    [questionRouting, 'It automatically adds captions.'],
+  ])('does not let editorial routing admit software subjects or extra capabilities: %j', (...spans) => {
+    expect(inspectGeneratedDraft(context, withSpans(spans))).toContainEqual(expect.objectContaining({
+      span: spans.at(-1), reason: 'unapproved_product_reference',
+    }));
+  });
+
   it.each([
     [hypotheticalAntecedent, checklistExplanation],
     ['An example is illustrative.', 'It explains the planning approach.'],

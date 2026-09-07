@@ -3,7 +3,27 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-## Latest offline review/repair correction — 2026-09-07
+## Latest source-discovery pilot and offline corrections — 2026-09-07
+
+The [current report](SOURCE-DISCOVERY-PILOT-2026-09-07.md) records the separately
+authorized sixth artifact-only attempt, its failure, and the subsequent software
+fixes. Eight organic results, three observed FAQs, three source bodies and all four
+model stages completed automatically. Missing recording coverage and rejected
+checklist citation support prevented article acceptance and native QA. The source
+budget, issue registry and private-metadata checks did not fail this time.
+
+Follow-up tests cover article-level repair routing, ordinary editorial references
+and compact rejection summaries. Hash-verified offline inspection clears the three
+mechanical false positives without altering the saved draft or its rejected review.
+The state remains terminal at six; there is no seventh attempt or published article.
+See the report for exact provenance, final checks and the independent review.
+
+Final local checks passed: **1,412 tests across 51 files**, lint, typecheck with
+fresh route generation, build and whitespace checks. A separate synthetic bundle
+passed the unmodified native lander 32 blog tests, lint and full Next build.
+These are compatibility checks, not a successful live article or editorial approval.
+
+## Previous offline review/repair correction — 2026-09-07
 
 The [correction report](REVIEW-REPAIR-FIX-2026-09-07.md) records shared repair IDs,
 configured campaign metadata, ordinary-example reference handling, topical body
@@ -24,7 +44,7 @@ performed. See the report for receipt hashes, compatibility limits and final che
 
 The [source-planned pilot report](SOURCE-PLANNED-PILOT-2026-09-07.md) records the
 separately authorized fifth artifact-only attempt. Normal cap three and all prior
-history remain intact; there is no sixth-attempt path. Six RED regressions preceded
+history remained intact; there was no sixth-attempt path at that checkpoint. Six RED regressions preceded
 implementation, then 224 focused tests passed. Independent review found no Critical,
 Important or Minor issues in the scoped authorization change.
 

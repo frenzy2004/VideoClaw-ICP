@@ -30,6 +30,7 @@ import { createResearcher, type ResearchResult, type ShallowResearchResult } fro
 import { createNodeDnsResolver, createNodeJsonHttpTransport, createNodeSourceHttpTransport } from './runtime-http';
 import { containsSecretLikeValue } from './secrets';
 import { createSafeSourceChecker } from './sources';
+import { PRODUCTION_SOURCE_AUTHORITY_POLICIES } from './source-policy';
 import { SOURCE_TEXT_LIMIT, SOURCE_PASSAGE_LIMIT, SOURCE_PASSAGE_CHARACTER_LIMIT } from './source-extraction';
 import { consumePreparedManualPilot } from './recovery';
 import { createAutobloggerWorker, type AutobloggerRunReport } from './worker';
@@ -315,19 +316,7 @@ export function createProductionSourceChecker() {
   return createSafeSourceChecker({
     transport: createNodeSourceHttpTransport(),
     resolveHostname: createNodeDnsResolver(),
-    authorityPolicies: [
-      { hostname: 'ycombinator.com' },
-      { hostname: 'www.ycombinator.com' },
-      { hostname: 'techstars.com' },
-      { hostname: 'www.techstars.com' },
-      { hostname: 'www.nist.gov' },
-      { hostname: 'www.ftc.gov' },
-      { hostname: 'www.w3.org' },
-      { hostname: 'developers.google.com', pathPrefix: '/search/' },
-      { hostname: 'learn.microsoft.com' },
-      { hostname: 'videoclaw.com' },
-      { hostname: 'www.videoclaw.com' },
-    ],
+    authorityPolicies: PRODUCTION_SOURCE_AUTHORITY_POLICIES,
   });
 }
 

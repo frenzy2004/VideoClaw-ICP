@@ -300,7 +300,18 @@ internal research/debug prose, or links outside the supplied inventory. Answer t
 three supplied FAQ questions exactly and reference every used product claim.
 ${ARTICLE_COMPOSITION_RULES}`;
 
-const SUPPORT_REVIEW_RULES = `customerTrigger is private caller-configured campaign metadata from candidate.icp,
+const FIXED_CANDIDATE_RULES = `All supplied candidate fields are immutable, including title, articleId, slug,
+primaryKeyword and icp. GeneratedDraftV2 has no article title field; the native
+article uses candidate.title unchanged. Do not propose changing the title to resolve
+a title/body scope mismatch. Require substantive supported body coverage for each
+task promised by the fixed title (for example, Record requires actionable recording
+coverage, not a passing mention or a reference-only edit). Use only supplied evidence
+and clearly scoped original recommendations grounded in relevant facts. Never invent
+source facts or product capabilities to fulfil the title. If supported coverage is
+not possible, the issue remains unresolved; do not waive independent final verification.`;
+
+const SUPPORT_REVIEW_RULES = `${FIXED_CANDIDATE_RULES}
+customerTrigger is private caller-configured campaign metadata from candidate.icp,
 not an externally sourced claim. Code requires exact equality. Do not require an
 external citation for that field. This does not exempt competitorGap or public prose.
 Independently evaluate EVERY entry in bindingManifest in its full draft context,
@@ -369,8 +380,15 @@ bindings. Retain exact visible span/location bindings for all prose, use natural
 supported paraphrases and clearly labelled original guidance/examples, and never
 borrow paragraphs or expand snippet evidence into unseen body claims. Return a
 complete replacement object, with no commentary.
+${FIXED_CANDIDATE_RULES}
 The originalIssues registry is the complete list of stable issue IDs that the
 independent verifier will check. Resolve all of them, including machine findings.
+articleLevelIssues contains unlocalized independent-critique issues. Address their
+editorial requirements across the body and other affected fields, even when
+repairTargets is empty or only lists reference/binding fixes. For title scope,
+restructure sections to deliver the promised supported workflow; preserve the fixed
+candidate and exact FAQ questions. A localized span patch alone cannot resolve
+missing article-level coverage. Rebuild bindings from the changed visible text.
 Use repairTargets to address the exact unresolved location/span and cited facts.
 Remove or narrow assertions unsupported by those facts; do not invent supporting
 facts or substitute a merely related citation. Preserve unaffected supported prose
@@ -746,6 +764,9 @@ export function createStructuredDrafter(options: StructuredDrafterOptions) {
       }
       const registry = buildRepairIssueRegistry(critique, [...deterministicFindings, ...bindingSupportFindings]);
       const targets = repairTargets(context, initial, registry.findings);
+      // Critic issues have no machine-resolved location. Keep their full scope
+      // separate from localized targets rather than guessing spans from free text.
+      const articleLevelIssues = critique.issues;
 
       const repaired = GeneratedDraftV2Schema.parse(await options.client.generate({
         name: 'videoclaw_article_repair_v2',
@@ -756,13 +777,14 @@ export function createStructuredDrafter(options: StructuredDrafterOptions) {
           draft: initial,
           critique,
           originalIssues: registry.issues,
+          articleLevelIssues,
           deterministicFindings,
           bindingSupportFindings,
           repairTargets: targets,
           sourceUsage,
           potentialSourceUsage,
-          repairStrategy: deterministicFindings.some(f => ['content.source_budget', 'content.source_allocation'].includes(f.code))
-            || critique.issues.some(issue => /deriv|copy|paraphras|source.?budget|reliance/iu.test(`${issue.code} ${issue.message}`))
+          repairStrategy: articleLevelIssues.length > 0
+            || deterministicFindings.some(f => ['content.source_budget', 'content.source_allocation'].includes(f.code))
             ? 'restructure_article' : 'targeted_repair',
         },
       })) as GeneratedDraftV2;
