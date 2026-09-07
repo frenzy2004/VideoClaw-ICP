@@ -331,14 +331,21 @@ describe('missing PAA collector recovery', () => {
     expect(()=>selectRelevantPaaQuestions(candidate.primaryKeyword,result.results[0].peopleAlsoAsk)).toThrow();
   });
   it('passes retrieved body documents to drafting and never falls back to reachability when body verification fails', async () => {
-    const candidate={...candidates(1)[0],primaryKeyword:'demo day video checklist'};
+    const candidate={...candidates(1)[0],primaryKeyword:'demo day video checklist',title:'Demo Day Video Checklist: Record and Rehearse'};
     const source={originalUrl:'https://www.ycombinator.com/about',finalUrl:'https://www.ycombinator.com/about',authoritative:true};
     const doc={url:source.originalUrl,finalUrl:source.finalUrl,status:200,reachable:true,authoritative:true,checkedAt:'2026-09-04T08:02:00.000Z',contentType:'text/html',bodySha256:'a'.repeat(64),text:'The program ends with Demo Day.',passages:[{text:'The program ends with Demo Day.',start:0,end:31}]};
     const noIo=async()=>{throw new Error('Unexpected I/O');};
-    const client:ApifyClient={startActor:noIo,getRun:noIo,getDatasetItems:noIo,abortRun:noIo};
+    let searches = 0;
+    const client:ApifyClient={startActor:async (_actor, input) => {
+      searches++;
+      expect(String(input.queries)).toContain('demo day video site:descript.com/blog/article/');
+      return successfulRun('scope-search', 'scope-dataset');
+    },getRun:noIo,getDatasetItems:async()=>[],abortRun:noIo};
     const shallow={candidate,suggestions:[],organicResults:[{title:'YC',url:source.originalUrl,snippet:'Snippet must not be used.',resultType:'article'}],peopleAlsoAsk:['What is a demo day?','How does yc demo day work?','Can anyone attend YC demo day?'],relatedQueries:[],provenance:{discovery:{actorId:'a',runId:'a',datasetId:'a',observedAt:'2026-09-04T08:01:00.000Z'},serp:{actorId:'s',runId:'s',datasetId:'s',observedAt:'2026-09-04T08:01:00.000Z'}}};
     const result=await createResearcher({apify:client,sourceChecker:{select:noIo,selectWithContent:async()=>({sources:[source],sourceDocuments:[doc]})}}).inspect([shallow]);
     expect(result.results[0].sourceDocuments).toEqual([doc]);
+    expect(searches).toBe(1); // Topic/authority success must not skip practitioner discovery.
+    expect(result.results[0].provenance.supportSearches?.[0].runId).toBe('scope-search');
   });
   it('automatically discovers primary source URLs without counting them as target keyword competitors', async () => {
     const candidate={...candidates(1)[0],primaryKeyword:'demo day video checklist'};
@@ -362,9 +369,12 @@ describe('missing PAA collector recovery', () => {
     expect(result.results[0].provenance.supportSearches?.[0].runId).toBe('sources-run');
   });
   it('retrieves scoped practitioner bodies discovered by exact US/en support searches, rejecting unrelated rows', async () => {
-    const candidate = { ...candidates(1)[0], primaryKeyword: 'product demo checklist' };
+    const candidate = { ...candidates(1)[0], primaryKeyword: 'product demo checklist', title: 'Product Demo Checklist: Plan, Record and Rehearse' };
     const faq = ['How to structure a product demo?', 'When starting a product demo, what should you do first?', 'Can you give me an example of a product demo?'];
-    const queries = [candidate.primaryKeyword, faq[0]].map(q => `${q} (site:ycombinator.com OR site:techstars.com OR site:techsmith.com/blog/ OR site:descript.com/blog/article/)`);
+    const queries = [
+      'product demo site:ycombinator.com', 'product demo site:techstars.com',
+      'product demo site:techsmith.com/blog/', 'product demo site:descript.com/blog/article/',
+    ];
     const good = ['https://www.techsmith.com/blog/demo/', 'https://www.descript.com/blog/article/demo'];
     const requested: string[] = [];
     const checker = createSafeSourceChecker({
@@ -411,6 +421,35 @@ describe('missing PAA collector recovery', () => {
     expect(result.results[0].provenance.serp.runId).toBe('original');
     expect(result.results[0].provenance.supportSearches?.[0].runId).toBe('support');
     expect([...new Set(requested)]).toEqual(['https://publisher.example/launch', ...good]);
+  });
+  it('reserves source inspection slots for later publishers when the organic and first support sets are full', async () => {
+    const candidate = { ...candidates(1)[0], primaryKeyword: 'product demo checklist', title: 'Product Demo Checklist: Plan, Record and Rehearse' };
+    const questions = ['How to structure a product demo?', 'When starting a product demo, what should you do first?', 'Can you give me an example of a product demo?'];
+    const organic = Array.from({ length: 20 }, (_, i) => ({ title: 'Demo', url: `https://publisher.example/demo-${i}`, snippet: 'Snippet', resultType: 'article' }));
+    let queries: string[] = [];
+    let fetched: string[] = [];
+    const client: ApifyClient = {
+      startActor: async (_actor, input) => { queries = String(input.queries).trim().split('\n'); return successfulRun('scope', 'scope-data'); },
+      getRun: async () => { throw new Error('Already complete'); }, abortRun: async id => ({ id, status: 'ABORTED' }),
+      getDatasetItems: async () => queries.map((term, group) => ({
+        searchQuery: { term, device: 'DESKTOP', page: 1, countryCode: 'US', languageCode: 'en' },
+        organicResults: Array.from({ length: 10 }, (_, i) => ({ position: i + 1, title: 'Guide', description: 'Snippet',
+          url: group ? `https://www.descript.com/blog/article/record-${i}` : `https://www.ycombinator.com/companies/demo-${i}` })),
+      })),
+    };
+    const result = await createResearcher({ apify: client, sourceChecker: {
+      select: async () => { throw new Error('Body verification required'); },
+      selectWithContent: async urls => {
+        fetched = urls;
+        if (!urls.includes('https://www.descript.com/blog/article/record-0')) throw new Error('Recording sources crowded out');
+        return { sources: urls.slice(0, 2).map(url => ({ originalUrl: url, finalUrl: url, authoritative: true })), sourceDocuments: [] };
+      },
+    }, execution: researchClock }).inspect([{ candidate, suggestions: [], relatedQueries: [], peopleAlsoAsk: questions, organicResults: organic,
+      provenance: { discovery: { actorId: 'a', runId: 'a', datasetId: 'a', observedAt: '2026-09-04T08:01:00.000Z' },
+        serp: { actorId: SERP_ACTOR_ID, runId: 'original', datasetId: 'original-data', observedAt: '2026-09-04T08:01:00.000Z' } } }]);
+    expect(fetched).toHaveLength(24);
+    expect(fetched.slice(0, 3)).toEqual(['https://publisher.example/demo-0', 'https://www.ycombinator.com/companies/demo-0', 'https://www.descript.com/blog/article/record-0']);
+    expect(result.results[0].evidence.serp.organicResultCount).toBe(20);
   });
   it('recovers exact-query questions through one dedicated collection and keeps separate provenance', async () => {
     const candidate = {...candidates(1)[0],primaryKeyword:'demo day video checklist'};

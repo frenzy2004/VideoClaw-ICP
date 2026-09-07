@@ -20,7 +20,7 @@ The last step is a future gated mode, not permission to open generated lander PR
 | --- | --- | --- |
 | Candidates | Read the incremental backlog and discover related searches for five ICPs. Deduplicate against state and lander inventory, then round-robin eligible campaigns; a full five-campaign queue gets ten scan slots each. | Candidate identity, campaign, trigger and intent |
 | Validation | Recheck US/en Google SERPs through Apify, record organic competitors and suggestion/PAA/related-query signals, and request keyword metrics from a configured provider. | Exact query, locale, actor run, dataset and observation time; metric provenance separately |
-| Top 10 | Screen missing organic/suggestion/relevant-PAA/product-fit evidence before using a deep slot. Retrieve and rank topical bodies, selecting at least two distinct pages including an authority. Format-word or heading matches alone do not establish body relevance; lexical relevance is not factual proof. Preserve qualifications and reject unsafe input. | Source URLs, fetch times/hashes, body/heading boundaries, bounded context, FAQ provenance and selection decision |
+| Top 10 | Screen missing organic/suggestion/relevant-PAA/product-fit evidence before using a deep slot. Use four short, scoped publisher searches alongside the exact keyword SERP; share 24 fetch slots and retain complementary title-task bodies. Select at least two distinct pages including an authority. Format-word or heading matches alone do not establish body relevance; lexical relevance is not factual proof. | Source URLs, fetch times/hashes, body/heading boundaries, bounded context, separate support-query provenance, FAQ provenance and selection decision |
 | Up to 3 drafts | Body-only anchors guide original composition. Private campaign context comes from the configured ICP. Drafting, independent critique and machine checks share one repair-issue registry. Reviewed source use above the 120-word planning target triggers whole-article repair; final review retains the 180-word ceiling. Maximum two drafts from one ICP. | Source-use ledger, current binding classifications, stable issue IDs, critique result and hashes; Markdown only if accepted |
 | Native QA | Select allowlisted product media, generate a deterministic branded SVG and validate in a disposable lander checkout using its own contract, lint and build. | Media attribution and native QA report |
 | Draft PRs, later | Only the post-merge, fully credentialed mode can open one draft PR per article. All approval flags remain false. | PR number, artifact hash and outcome |
@@ -36,17 +36,33 @@ Apify evidence → one draft + critique + QA → Markdown / SVG / report artifac
 Latest observation, 2026-09-07 Malaysia date:
 
 ```text
-Fresh research → draft → critique → one repair → final review FAILED → STOP
+Fresh SERP + PAA + four source bodies → draft → critique → one repair → copy/source checks FAILED → STOP
 ```
 
-The [latest sixth-attempt report](../autoblogger/SOURCE-DISCOVERY-PILOT-2026-09-07.md)
+The [current eighth-attempt report](../autoblogger/SCOPE-ALIGNMENT-PILOT-2026-09-07.md)
+records working automatic research and substantive Plan/Record/Rehearse coverage.
+All four GPT-5.5 stages completed. The repaired article still copied a passage and
+derived 221, 214 and 326 words from three pages against the 180-word ceiling. No
+accepted Markdown bundle, native article validation or generated PR resulted.
+
+Follow-up offline corrections address false binding errors, promote aggregate
+source limits to article-level repair requirements, retain all per-page planning
+warnings, and remove duplicated source text from repair targets without dropping
+evidence. Their tests do not establish improved live generation. The candidate is
+terminal at eight, all history remains, and no ninth-attempt path exists.
+Final software checks pass 1,591 tests, lint, typecheck and build. Unchanged-receipt
+inspection clears 22 false binding findings, while the genuine copied-passage and
+source-use violations remain blocked.
+
+The historical [sixth-attempt report](../autoblogger/SOURCE-DISCOVERY-PILOT-2026-09-07.md)
 records eight organic results, three observed FAQs, three retrieved source bodies
 and four GPT-5.5 calls. Final review rejected missing recording guidance promised
 by the fixed title and two checklist citation details. No accepted Markdown or
 live native QA resulted. Subsequent offline fixes improve article-level repair
 routing, remove three reference-check false positives and expose all rejection
-categories in compact reports. They do not change the failed live outcome. State
-is terminal at six, history is retained, and no seventh-attempt path exists.
+categories in compact reports. They do not change that failed live outcome. State
+was terminal at six at that checkpoint; the separately authorized later attempts
+are recorded in the current report above.
 
 The historical [fifth-attempt report](../autoblogger/SOURCE-PLANNED-PILOT-2026-09-07.md)
 records fresh organic/PAA/source retrieval and exactly four GPT-5.5 calls. Final
@@ -172,7 +188,7 @@ Every article traces back to campaign, ICP, trigger, intent, keyword, SERP obser
 | --- | --- | --- |
 | Article and diagram updates | Original three review guides, older assisted local preview, and new unchanged-response Markdown/SVG review artifact; no production action | Team review; keep each artifact's provenance distinct |
 | Worker implementation | PR #1 open; offline and native fixture verification recorded separately | Implementation review |
-| Automated local article milestone | Latest live fifth attempt failed final checks; zero accepted bundles or native article QA passes from that run | Review-issue contract, audience-metadata provenance, source allocation and reference-check diagnosis; no sixth attempt authorized |
+| Automated local article milestone | Eighth attempt completed automatic research and four model stages, but failed copying/source-use checks; zero accepted bundles or native article validations | Improved generated-copy quality still needs proof; follow-up software fixes are offline-verified only. Candidate remains terminal at eight, without a ninth path |
 | Unattended Actions pilot | Not configured; no successful unattended article | Scoped read token, OpenAI Actions secret, reconciled state and reviewed worker |
 | Paid enrichment | Not connected; Apify research does not invent metrics | Provider access and a tested adapter |
 | Generated lander PRs | Not enabled | Merged blog contract, paid metrics, GitHub App and approved rollout |

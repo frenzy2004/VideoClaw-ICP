@@ -524,15 +524,13 @@ export function createResearcher(options: ResearcherOptions) {
         const provenance = {...shallow.provenance};
         let selection: SourceSelectionWithContent;
         const selectSources = async (urls: string[]): Promise<SourceSelectionWithContent> => options.sourceChecker.selectWithContent
-          ? options.sourceChecker.selectWithContent(urls, {query:candidate.primaryKeyword,questions:faqQuestions})
+          ? options.sourceChecker.selectWithContent(urls, {query:candidate.primaryKeyword,questions:faqQuestions,articleTitle:candidate.title})
           : {sources:await options.sourceChecker.select(urls),sourceDocuments:[]};
-        try {
-          selection = await selectSources(sourceUrls);
-        } catch {
-          // Discovery, not injected facts: the exact topic and one observed FAQ
-          // query scoped to program/practitioner sources. Preserve their own run IDs;
-          // these results never inflate the primary keyword's organic count.
-          const queries = sourceDiscoveryQueries(candidate.primaryKeyword, faqQuestions);
+        const discoverSupport = async (articleTitle?: string) => {
+          // Discovery, not injected facts. Body research covers the fixed title
+          // as well as the keyword before drafting; a topical company profile
+          // alone does not prove coverage of a promised practical workflow.
+          const queries = sourceDiscoveryQueries(candidate.primaryKeyword, faqQuestions, articleTitle);
           const support = await runApifyActor(options.apify, SERP_ACTOR_ID, {
             queries: `${queries.join('\n')}\n`, maxPagesPerQuery: 1,
             countryCode: 'us', languageCode: 'en', mobileResults: false,
@@ -540,16 +538,37 @@ export function createResearcher(options: ResearcherOptions) {
             websiteContentScraper: {enable: false},
           }, execution);
           const observations = support.items.map((item) => normalizeSerpItem(item, support.provenance) as NormalizedSerp);
+          const groups = [sourceUrls.slice(), ...queries.map(() => [] as string[])];
           for (const observation of observations) {
-            if (!queries.some((query) => normalizeKeyword(query) === normalizeKeyword(observation.query))
+            const queryIndex = queries.findIndex((query) => normalizeKeyword(query) === normalizeKeyword(observation.query));
+            if (queryIndex < 0
               || observation.country !== 'US' || observation.language !== 'en'
               || observation.device !== 'DESKTOP' || observation.page !== 1) continue;
             for (const result of observation.organicResults) {
-              if (isDiscoverySourceUrl(result.url)) sourceUrls.push(result.url);
+              if (isDiscoverySourceUrl(result.url)) groups[queryIndex + 1].push(result.url);
             }
           }
+          // Share the existing 24-fetch budget across organic and all support
+          // result sets. Appending then truncating would discard later publishers.
+          const balanced = new Set<string>();
+          for (let i = 0; i < Math.max(...groups.map(group => group.length)) && balanced.size < 24; i++) {
+            for (const group of groups) {
+              if (group[i]) balanced.add(group[i]);
+              if (balanced.size === 24) break;
+            }
+          }
+          sourceUrls.splice(0, sourceUrls.length, ...balanced);
           provenance.supportSearches = [support.provenance];
+        };
+        if (options.sourceChecker.selectWithContent) {
+          await discoverSupport(candidate.title);
           selection = await selectSources([...new Set(sourceUrls)].slice(0, 24));
+        } else {
+          try { selection = await selectSources(sourceUrls); }
+          catch {
+            await discoverSupport();
+            selection = await selectSources([...new Set(sourceUrls)].slice(0, 24));
+          }
         }
         const evidence = EvidenceBundleSchema.parse({
           schemaVersion: 2,

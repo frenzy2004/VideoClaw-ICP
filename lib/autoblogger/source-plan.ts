@@ -36,6 +36,7 @@ export function buildSourcePlan(context: DraftingContext) {
   };
   return {
     readerTask: context.candidate.primaryKeyword,
+    articleTitle: context.candidate.title,
     audience: context.candidate.icp,
     sources: sourceGroups(context.sourceFacts).map(group => ({
       sourceIds: group.map(source => source.id),
@@ -49,7 +50,7 @@ export function buildSourcePlan(context: DraftingContext) {
     originalWork: [
       { role: 'decision_tool', instruction: 'Build a useful original decision worksheet for the reader task; do not mirror a source outline or present your recommendations as sourced requirements.' },
       { role: 'hypothetical_example', instruction: 'Show one explicitly hypothetical application of that worksheet, without invented product capabilities, real-world results or customer endorsements.' },
-      { role: 'troubleshooting', instruction: 'Offer task-relevant checks and fallback choices as your recommendations; do not introduce recording or other work the evidence and reader task do not call for.' },
+      { role: 'troubleshooting', instruction: 'Offer checks and fallback choices relevant to the keyword AND every task promised by articleTitle, grounded in the supplied facts. Do not introduce unrelated work merely because the publisher sells video software.' },
     ],
   };
 }
@@ -151,9 +152,24 @@ export function measureReviewedSourceUse(facts: SourceFact[], draft: GeneratedDr
     const binding = draft.claimBindings[bindingIndex];
     findings.push({
       code: 'content.source_budget', bindingIndex, location: binding.location, span: binding.span, sourceFactIds: binding.sourceFactIds,
-      message: `${page.sourceIds.join(', ')} accounts for ${page.derivedWords} reviewed source-derived public words; limit ${MAX_SOURCE_DERIVED_WORDS}.`,
+      message: `${page.sourceIds.join(', ')} accounts for ${page.derivedWords} reviewed source-derived public words; limit ${MAX_SOURCE_DERIVED_WORDS}. Remove at least ${page.derivedWords - TARGET_SOURCE_DERIVED_WORDS} derived words to reach the ${TARGET_SOURCE_DERIVED_WORDS}-word planning target before independent re-review.`,
       repairInstruction: 'Restructure the whole article using each entry in sourceUsage.sources and its bindingIndices, including FAQs, description and graphic text. Delete redundant source-derived coverage; replace only with genuinely original task-relevant decisions/examples, not relabelled paraphrases. Supported paragraphs may need removal. Rebuild all affected bindings and keep every source below its cumulative limit.',
     });
   }
   return { sources, findings };
+}
+
+/** Planning warnings must remain per-page: one page above the final ceiling
+ * cannot hide another page's exhausted review reserve. Invalid ledgers are not
+ * usable accounting, and genuine original guidance remains excluded above.
+ */
+export function sourceAllocationFindings(usage: ReturnType<typeof measureReviewedSourceUse>): DraftSafetyFinding[] {
+  if (usage.findings.some(finding => finding.code === 'content.source_usage_review')) return [];
+  return usage.sources
+    .filter(source => source.derivedWords > TARGET_SOURCE_DERIVED_WORDS && source.derivedWords <= MAX_SOURCE_DERIVED_WORDS)
+    .map(source => ({
+      code: 'content.source_allocation',
+      message: `Reviewed derivation from ${source.sourceIds.join(', ')} is ${source.derivedWords} words, above the ${TARGET_SOURCE_DERIVED_WORDS}-word planning target. Remove at least ${source.derivedWords - TARGET_SOURCE_DERIVED_WORDS} derived words to restore the review reserve before the final ${MAX_SOURCE_DERIVED_WORDS}-word limit.`,
+      repairInstruction: 'Restructure source-derived passages across the article, retaining necessary facts and genuinely original reader tools. Do not disguise paraphrases as original guidance or change citations to evade source accounting.',
+    }));
 }

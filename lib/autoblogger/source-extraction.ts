@@ -1,6 +1,6 @@
 import { createRequire } from 'node:module';
 
-export type SourceReadOptions = { query?: string; questions?: readonly string[] };
+export type SourceReadOptions = { query?: string; questions?: readonly string[]; articleTitle?: string };
 export type SourcePassage = {
   text: string; start: number; end: number;
   /** UTF-16 offset relative to passage.text, after its retained heading and
@@ -107,7 +107,7 @@ export function extractSourceBody(html: string, options: SourceReadOptions = {})
   const scope = bodyScope ?? main ?? nodes.find((node) => node.tagName === 'BODY') ?? root;
   const candidates: Array<{ text: string; bodyStart: number; order: number; score: number }> = [];
   const queryTokens = tokens(options.query ?? '');
-  const questionTokens = (options.questions ?? []).slice(0, 10).map(tokens);
+  const questionTokens = [...(options.questions ?? []).slice(0, 9), ...(options.articleTitle ? [options.articleTitle] : [])].map(tokens);
   const topicTerms = new Set([...queryTokens, ...questionTokens.flatMap((terms) => [...terms])]);
   let headingMatchesTopic = false;
   const seen = new Set<string>();

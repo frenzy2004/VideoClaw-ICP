@@ -1,4 +1,5 @@
 import type { AuthorityPolicy } from './sources';
+import { sourceTopicQuery } from './source-relevance';
 
 // First-party practitioner guidance is authoritative about its own workflow,
 // not independent market evidence, a competitor comparison, or a guarantee.
@@ -21,8 +22,16 @@ export const PRODUCTION_SOURCE_AUTHORITY_POLICIES: readonly AuthorityPolicy[] = 
   { hostname: 'www.videoclaw.com' },
 ];
 
-export function sourceDiscoveryQueries(keyword: string, observedQuestions: readonly string[]): string[] {
+export function sourceDiscoveryQueries(keyword: string, observedQuestions: readonly string[], articleTitle?: string): string[] {
   const sites = DISCOVERY_SCOPES.map(policy => `site:${policy.hostname}${policy.pathPrefix ?? ''}`).join(' OR ');
+  if (articleTitle?.trim()) {
+    // Full editorial titles plus long OR lists caused query relaxation and
+    // unrelated results in the live collector. Use one short topic query per
+    // publisher instead; title coverage is enforced in selection and review.
+    const topic = sourceTopicQuery(keyword);
+    if (!topic) throw new Error('Supporting source discovery requires a substantive topic.');
+    return DISCOVERY_SCOPES.map(policy => `${topic} site:${policy.hostname}${policy.pathPrefix ?? ''}`);
+  }
   return [...new Set([keyword, ...observedQuestions])].slice(0, 2).map(query => `${query} (${sites})`);
 }
 

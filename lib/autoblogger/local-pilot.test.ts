@@ -2,7 +2,8 @@ import { describe, expect, it } from 'vitest';
 import { CandidateSchema, candidateFingerprints } from './domain';
 import { createPersistentWorkerState, PersistentWorkerStateSchema, compactPersistentWorkerState } from './github-runtime';
 import { grantManualRetryApproval, markCandidateFailure, markCandidateScanned, reserveCandidate, reserveManualPilot, buildIncrementalQueue } from './recovery';
-import { reconcileLocalPilotCandidate, createModelAuditTransport, inspectLocalPilotInventory, parseLocalPilotArguments, readLocalPilotCandidateFile } from './local-pilot';
+import { reconcileLocalPilotCandidate, createModelAuditTransport, inspectLocalPilotInventory, parseLocalPilotArguments, readLocalPilotCandidateFile, validateEngineeringResumeEvidence, readLocalEngineeringResumeEvidence } from './local-pilot';
+import { createHash } from 'node:crypto';
 import { mkdtemp, mkdir, writeFile, chmod, symlink } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -368,6 +369,312 @@ describe('local artifact-only pilot preflight', () => {
       ['--run-id', 'new', '--approve-review-repair-retry', '--execute'], ['--run-id', args[5], ...args.slice(2)],
       ...['--approve-source-plan-retry', '--approve-target-extra-attempt', '--approve-review-repair-retry'].map(flag => [...args.slice(0, -1), flag, '--execute']),
       ['--run-id', 'new', '--approve-retry-from', 'old', '--approve-review-repair-retry', '--execute']]) expect(() => parseLocalPilotArguments(bad)).toThrow();
+  });
+
+  function failedSixthTargetFixture() {
+    const input = failedFifthTargetFixture();
+    const prepared = reconcileLocalPilotCandidate(input);
+    let state = reserveCandidate(prepared.state, other, input.runId, 'manual_pilot', input.approvedAt);
+    state = markCandidateFailure(state, other, input.runId, 'candidate_failed', true, input.approvedAt);
+    const fp = candidateFingerprints(other).candidate;
+    state.runs[input.runId] = { schemaVersion: 1, runId: input.runId, mode: 'manual_pilot', startedAt: input.approvedAt, selectedCandidateFingerprints: [fp], status: 'failed' };
+    state.failures.push({ runId: input.runId, candidateFingerprint: fp, code: 'candidate_failed', attempt: 6, observedAt: input.approvedAt, detail: 'Title/evidence alignment rejected attempt six.' });
+    return { ...input, state, runId: 'scope-alignment-retry', retryTargetFrom: input.runId,
+      approvedAt: '2026-09-07T06:00:00.000Z', approveReviewRepairRetry: false, approveScopeAlignmentRetry: true };
+  }
+
+  it('records, reloads and consumes one scope-alignment seventh grant with the entire audit chain intact', () => {
+    const input = failedSixthTargetFixture();
+    const before = structuredClone(input);
+    const fp = candidateFingerprints(other).candidate;
+    const prepared = reconcileLocalPilotCandidate(input);
+    expect(prepared.nextAttempt).toBe(7);
+    expect(prepared.state.manualTargetSwitch?.candidate).toEqual(other);
+    expect(prepared.state.manualTargetSwitch?.retry).toMatchObject({ reason: 'user_authorized_after_scope_alignment_fix',
+      priorRunId: 'review-repair-retry', runId: 'scope-alignment-retry', priorDecision: before.state.decisions[fp], consumedAt: null });
+    expect(prepared.state.manualTargetSwitch?.retryHistory).toEqual([...before.state.manualTargetSwitch!.retryHistory!, before.state.manualTargetSwitch!.retry]);
+    expect(prepared.state.manualTargetSwitch?.retryHistory).toHaveLength(5);
+    for (const key of ['decisions', 'runs', 'failures', 'manualRetryApproval', 'candidateFingerprints', 'dedupeHashes'] as const) expect(prepared.state[key]).toEqual(before.state[key]);
+    expect(prepared.state.failures.filter(f => f.candidateFingerprint === fp).map(f => f.attempt)).toEqual([1, 2, 3, 4, 5, 6]);
+    const reloaded = reconcileLocalPilotCandidate({ ...input, state: JSON.parse(JSON.stringify(prepared.state)) });
+    expect(reloaded.state).toEqual(prepared.state);
+    const queue = buildIncrementalQueue({ state: reserveManualPilot(reloaded.state, input.runId, input.approvedAt), backlog: reloaded.backlog,
+      runId: input.runId, mode: 'manual_pilot', now: input.approvedAt });
+    expect(queue.scan).toEqual([other]);
+    const reserved = reserveCandidate(queue.state, other, input.runId, 'manual_pilot', input.approvedAt);
+    expect(reserved.decisions[fp]).toMatchObject({ attempts: 7, status: 'leased', runId: input.runId });
+    expect(reserved.manualTargetSwitch?.retry?.consumedAt).toBe(input.approvedAt);
+    const compacted = compactPersistentWorkerState(reserved);
+    for (const key of ['manualTargetSwitch', 'manualRetryApproval', 'runs', 'failures'] as const) expect(compacted[key]).toEqual(reserved[key]);
+    expect(() => reserveCandidate(reserved, other, input.runId, 'manual_pilot', input.approvedAt)).toThrow();
+    expect(() => reserveCandidate(prepared.state, other, input.runId, 'scheduled', input.approvedAt)).toThrow();
+    expect(() => reserveCandidate(prepared.state, { ...other, title: 'Changed title' }, input.runId, 'manual_pilot', input.approvedAt)).toThrow();
+    expect(() => reserveCandidate(prepared.state, other, 'another-run', 'manual_pilot', input.approvedAt)).toThrow();
+    expect(buildIncrementalQueue({ state: prepared.state, backlog: prepared.backlog, runId: input.runId, mode: 'scheduled', now: input.approvedAt }).scan).toEqual([]);
+    expect(input).toEqual(before);
+  });
+
+  it.each(['no-flag', 'review-flag', 'source-flag', 'editorial-flag', 'both-flags', 'switch-flag', 'wrong-run'])(
+    'does not reload an unused seventh grant with %s', (problem) => {
+      const input = failedSixthTargetFixture();
+      const reload = { ...input, state: reconcileLocalPilotCandidate(input).state };
+      if (['no-flag', 'review-flag', 'source-flag', 'editorial-flag'].includes(problem)) reload.approveScopeAlignmentRetry = false;
+      if (problem === 'review-flag' || problem === 'both-flags') reload.approveReviewRepairRetry = true;
+      if (problem === 'source-flag') reload.approveSourcePlanRetry = true;
+      if (problem === 'editorial-flag') reload.approveTargetExtraAttempt = true;
+      if (problem === 'wrong-run') reload.runId = 'different';
+      if (problem === 'switch-flag') {
+        expect(() => reconcileLocalPilotCandidate({ ...reload, retryTargetFrom: undefined, switchTargetFrom: input.retryTargetFrom })).toThrow();
+      } else expect(() => reconcileLocalPilotCandidate(reload)).toThrow();
+    });
+
+  it.each(['missing-history', 'unconsumed-sixth-grant', 'wrong-sixth-reason', 'missing-sixth-failure', 'wrong-prior', 'old-approval', 'changed-title',
+    'artifact', 'drafted', 'validated', 'pr_opened', 'success', 'pilot', 'scheduled', 'missing-selection', 'reused-run', 'no-flag', 'review-flag', 'source-flag', 'editorial-flag'])(
+    'rejects a seventh grant with %s without changing history', (problem) => {
+      const input = failedSixthTargetFixture();
+      const fp = candidateFingerprints(other).candidate;
+      if (problem === 'missing-history') input.state.manualTargetSwitch!.retryHistory = [];
+      if (problem === 'unconsumed-sixth-grant') input.state.manualTargetSwitch!.retry!.consumedAt = null;
+      if (problem === 'wrong-sixth-reason') input.state.manualTargetSwitch!.retry!.reason = 'user_authorized_after_source_planning_fix';
+      if (problem === 'missing-sixth-failure') input.state.failures = input.state.failures.filter(f => f.runId !== input.retryTargetFrom);
+      if (problem === 'wrong-prior') input.retryTargetFrom = 'source-planned-retry';
+      if (problem === 'old-approval') input.approvedAt = at;
+      if (problem === 'changed-title') input.candidate = { ...other, title: 'Changed title' };
+      if (problem === 'artifact') input.state.contentHashes[fp] = 'a'.repeat(64);
+      if (problem === 'drafted' || problem === 'validated' || problem === 'pr_opened') input.state.candidates[fp] = {
+        status: problem, mode: 'manual_pilot', runId: input.retryTargetFrom, updatedAt: input.approvedAt };
+      if (problem === 'success') input.state.runs[input.retryTargetFrom].status = 'validated';
+      if (problem === 'pilot') input.state = reserveManualPilot(input.state, input.retryTargetFrom, input.approvedAt);
+      if (problem === 'scheduled') input.state.runs[input.retryTargetFrom].mode = 'scheduled';
+      if (problem === 'missing-selection') input.state.runs[input.retryTargetFrom].selectedCandidateFingerprints = [];
+      if (problem === 'reused-run') input.runId = 'alternative-pilot';
+      if (['no-flag', 'review-flag', 'source-flag', 'editorial-flag'].includes(problem)) input.approveScopeAlignmentRetry = false;
+      if (problem === 'review-flag') input.approveReviewRepairRetry = true;
+      if (problem === 'source-flag') input.approveSourcePlanRetry = true;
+      if (problem === 'editorial-flag') input.approveTargetExtraAttempt = true;
+      const before = structuredClone(input);
+      expect(() => reconcileLocalPilotCandidate(input)).toThrow();
+      expect(input).toEqual(before);
+    });
+
+  it.each([1, 2, 3, 4, 5])('rejects scope-alignment approval before attempt six has failed (prior attempt %s)', (attempt) => {
+    const input = [failedSwitchFixture, failedTargetRetryFixture, failedThirdTargetFixture, failedFourthTargetFixture, failedFifthTargetFixture][attempt - 1]();
+    expect(() => reconcileLocalPilotCandidate({ ...input, approveTargetExtraAttempt: false, approveSourcePlanRetry: false,
+      approveReviewRepairRetry: false, approveScopeAlignmentRetry: true })).toThrow();
+  });
+
+  it('retains the seventh terminal failure and rejects every eighth attempt and unaudited seventh record', () => {
+    const input = failedSixthTargetFixture();
+    const prepared = reconcileLocalPilotCandidate(input);
+    const fp = candidateFingerprints(other).candidate;
+    let state = reserveCandidate(prepared.state, other, input.runId, 'manual_pilot', input.approvedAt);
+    state = markCandidateFailure(state, other, input.runId, 'candidate_failed', true, input.approvedAt);
+    state.runs[input.runId] = { schemaVersion: 1, runId: input.runId, mode: 'manual_pilot', startedAt: input.approvedAt, selectedCandidateFingerprints: [fp], status: 'failed' };
+    state.failures.push({ runId: input.runId, candidateFingerprint: fp, code: 'candidate_failed', attempt: 7, observedAt: input.approvedAt, detail: 'Seventh attempt failed.' });
+    expect(PersistentWorkerStateSchema.safeParse(state).success).toBe(true);
+    expect(compactPersistentWorkerState(state).failures).toEqual(state.failures);
+    expect(state.decisions[fp]).toMatchObject({ status: 'terminal', attempts: 7 });
+    for (const flags of [{ approveScopeAlignmentRetry: true }, {}, { approveReviewRepairRetry: true }, { approveSourcePlanRetry: true }, { approveTargetExtraAttempt: true }]) {
+      expect(() => reconcileLocalPilotCandidate({ ...input, state, approveScopeAlignmentRetry: false, runId: 'eighth', retryTargetFrom: input.runId, ...flags })).toThrow();
+    }
+    expect(() => reserveCandidate(state, other, 'eighth', 'manual_pilot', input.approvedAt)).toThrow();
+    for (const problem of ['unconsumed', 'missing-history', 'wrong-reason', 'scheduled', 'publication', 'eighth', 'foreign-failure', 'foreign-decision']) {
+      const invalid = structuredClone(state);
+      if (problem === 'unconsumed') invalid.manualTargetSwitch!.retry!.consumedAt = null;
+      if (problem === 'missing-history') invalid.manualTargetSwitch!.retryHistory!.pop();
+      if (problem === 'wrong-reason') invalid.manualTargetSwitch!.retry!.reason = 'user_authorized_after_review_repair_fix';
+      if (problem === 'scheduled') invalid.runs[input.runId].mode = 'scheduled';
+      if (problem === 'publication') invalid.runs[input.runId].status = 'pr_opened';
+      if (problem === 'eighth') invalid.decisions[fp].attempts = 8;
+      if (problem === 'foreign-failure') invalid.failures.push({ ...invalid.failures.at(-1)!, runId: 'unapproved' });
+      if (problem === 'foreign-decision') invalid.decisions[fingerprint] = { ...invalid.decisions[fingerprint], attempts: 7 };
+      expect(PersistentWorkerStateSchema.safeParse(invalid).success, problem).toBe(false);
+    }
+  });
+
+  it('parses scope-alignment authority only with the exact candidate-file target retry and execute flags', () => {
+    const args = ['--run-id', 'scope-alignment-retry', '--candidate-file', 'artifacts/selected.json', '--retry-target-from', 'review-repair-retry', '--approve-scope-alignment-retry', '--execute'];
+    expect(parseLocalPilotArguments(args)).toEqual({ runId: args[1], candidateFile: args[3], retryTargetFrom: args[5], approveScopeAlignmentRetry: true });
+    for (const bad of [args.slice(0, -1), [...args.slice(0, 4), '--switch-target-from', ...args.slice(5)],
+      ['--run-id', 'new', '--approve-scope-alignment-retry', '--execute'], ['--run-id', args[5], ...args.slice(2)],
+      ...['--approve-source-plan-retry', '--approve-target-extra-attempt', '--approve-review-repair-retry', '--approve-scope-alignment-retry'].map(flag => [...args.slice(0, -1), flag, '--execute']),
+      ['--run-id', 'new', '--approve-retry-from', 'old', '--approve-scope-alignment-retry', '--execute']]) expect(() => parseLocalPilotArguments(bad)).toThrow();
+  });
+
+  function sourceFailureProof() {
+    const priorRunId = 'scope-alignment-retry';
+    const fp = candidateFingerprints(other).candidate;
+    const counts = { queued: 2, scanned: 1, shallowValidated: 1, metricsEnriched: 1, deepInspected: 0, eligible: 0, drafted: 0, validated: 0, pullRequestsOpened: 0 };
+    const failures = [{ candidateFingerprint: fp, code: 'deep_inspection_failed', detail: 'No usable sources.', retryable: false, attempt: 7 },
+      { code: 'no_eligible_opportunities', detail: 'No opportunity passed.', retryable: false }];
+    const report = { schemaVersion: 1, command: 'pilot', runId: priorRunId, mode: 'manual_pilot', status: 'failed',
+      startedAt: '2026-09-07T06:00:00.000Z', completedAt: '2026-09-07T06:01:00.000Z', limits: {}, counts, artifacts: [], failures };
+    const audit = { runId: priorRunId, execution: 'local_production_worker_artifact_only', publicationEnabled: false, scheduledRuntimeConfigured: false,
+      events: [
+        { at: report.startedAt, stage: 'preflight_passed', articleId: other.articleId, nextAttempt: 7, publicationEnabled: false },
+        { at: report.startedAt, stage: 'research_started', candidates: 1 },
+        { at: report.startedAt, stage: 'research_completed', observations: [{ articleId: other.articleId, query: other.primaryKeyword }] },
+        { at: report.startedAt, stage: 'source_inspection_started' },
+        { at: report.completedAt, stage: 'pilot_completed', status: 'failed', counts, failures },
+      ] };
+    return { report, audit, priorRunId, candidate: other, implementationHash: 'c'.repeat(64) };
+  }
+
+  function resumeEvidence(proof = sourceFailureProof()) {
+    return validateEngineeringResumeEvidence({ ...proof, reportText: JSON.stringify(proof.report), auditText: JSON.stringify(proof.audit) });
+  }
+
+  function failedSeventhTargetFixture() {
+    const input = failedSixthTargetFixture();
+    let state = reserveCandidate(reconcileLocalPilotCandidate(input).state, other, input.runId, 'manual_pilot', input.approvedAt);
+    state = markCandidateFailure(state, other, input.runId, 'deep_inspection_failed', false, '2026-09-07T06:01:00.000Z');
+    const fp = candidateFingerprints(other).candidate;
+    state.runs[input.runId] = { schemaVersion: 1, runId: input.runId, mode: 'manual_pilot', startedAt: input.approvedAt, selectedCandidateFingerprints: [], status: 'failed' };
+    state.failures.push({ runId: input.runId, candidateFingerprint: fp, code: 'deep_inspection_failed', attempt: 7, observedAt: '2026-09-07T06:01:00.000Z', detail: 'No usable sources.' });
+    return { ...input, state, runId: 'engineering-resume', retryTargetFrom: input.runId, approvedAt: '2026-09-07T07:00:00.000Z',
+      approveScopeAlignmentRetry: false, approveEngineeringResume: true, engineeringResumeEvidence: resumeEvidence() };
+  }
+
+  it('binds a closed zero-model source failure to literal report, audit and implementation hashes', () => {
+    const proof = sourceFailureProof();
+    const reportText = `${JSON.stringify(proof.report, null, 2)}\n`;
+    const auditText = `${JSON.stringify(proof.audit, null, 2)}\n`;
+    expect(validateEngineeringResumeEvidence({ ...proof, reportText, auditText })).toEqual({ priorRunId: proof.priorRunId,
+      candidateFingerprint: candidateFingerprints(other).candidate, articleId: other.articleId, reportStartedAt: proof.report.startedAt,
+      reportCompletedAt: proof.report.completedAt, auditCompletedAt: proof.report.completedAt,
+      reportHash: createHash('sha256').update(reportText).digest('hex'), auditHash: createHash('sha256').update(auditText).digest('hex'), implementationHash: 'c'.repeat(64) });
+  });
+
+  it.each(['missing-completion', 'missing-start', 'missing-preflight', 'model_stage_started', 'model_response_retained', 'native_validation_started', 'native_validation_completed',
+    'unknown-stage', 'extra-event', 'reordered', 'wrong-run', 'wrong-candidate', 'wrong-attempt', 'wrong-failure', 'success', 'scheduled', 'publication', 'configured-schedule',
+    'artifact', 'deepInspected', 'drafted', 'validated', 'pullRequestsOpened', 'counts-mismatch', 'failure-mismatch', 'open-report', 'bad-hash'])(
+    'rejects engineering resume evidence with %s', (problem) => {
+      const proof = sourceFailureProof();
+      if (problem === 'missing-completion') proof.audit.events.pop();
+      if (problem === 'missing-start') proof.audit.events.splice(3, 1);
+      if (problem === 'missing-preflight') proof.audit.events.shift();
+      if (/^(model_|native_)/u.test(problem) || problem === 'unknown-stage') proof.audit.events.splice(4, 0, { at: proof.report.completedAt, stage: problem });
+      if (problem === 'extra-event') proof.audit.events.push(proof.audit.events[0]);
+      if (problem === 'reordered') proof.audit.events.reverse();
+      if (problem === 'wrong-run') proof.audit.runId = 'other-run';
+      if (problem === 'wrong-candidate') proof.report.failures[0].candidateFingerprint = 'candidate:other';
+      if (problem === 'wrong-attempt') proof.report.failures[0].attempt = 6;
+      if (problem === 'wrong-failure') proof.report.failures[0].code = 'drafting_failed';
+      if (problem === 'success') proof.report.status = 'validated';
+      if (problem === 'scheduled') proof.report.mode = 'scheduled';
+      if (problem === 'publication') proof.audit.publicationEnabled = true;
+      if (problem === 'configured-schedule') proof.audit.scheduledRuntimeConfigured = true;
+      if (problem === 'artifact') proof.report.artifacts = [{}] as never[];
+      if (['deepInspected', 'drafted', 'validated', 'pullRequestsOpened'].includes(problem)) proof.report.counts[problem as 'drafted'] = 1;
+      if (problem === 'counts-mismatch') proof.audit.events.at(-1)!.counts = { ...proof.report.counts, scanned: 2 };
+      if (problem === 'failure-mismatch') proof.audit.events.at(-1)!.failures = [];
+      if (problem === 'open-report') proof.report.completedAt = '';
+      if (problem === 'bad-hash') proof.implementationHash = 'reviewed';
+      expect(() => resumeEvidence(proof)).toThrow();
+    });
+
+  it('grants and atomically consumes only attempt eight, preserving proof and all seven failures through compaction', () => {
+    const input = failedSeventhTargetFixture();
+    const before = structuredClone(input.state);
+    const fp = candidateFingerprints(other).candidate;
+    const prepared = reconcileLocalPilotCandidate(input);
+    expect(prepared.nextAttempt).toBe(8);
+    expect(prepared.state.manualTargetSwitch?.retry).toMatchObject({ reason: 'manual_engineering_resume', maxAttempt: 8,
+      evidence: input.engineeringResumeEvidence, priorRunId: input.retryTargetFrom, priorDecision: before.decisions[fp], consumedAt: null });
+    expect(prepared.state.manualTargetSwitch?.retryHistory).toEqual([...before.manualTargetSwitch!.retryHistory!, before.manualTargetSwitch!.retry]);
+    for (const key of ['decisions', 'runs', 'failures', 'manualRetryApproval'] as const) expect(prepared.state[key]).toEqual(before[key]);
+    expect(reconcileLocalPilotCandidate({ ...input, state: JSON.parse(JSON.stringify(prepared.state)) }).state).toEqual(prepared.state);
+    const queued = buildIncrementalQueue({ state: reserveManualPilot(prepared.state, input.runId, input.approvedAt), backlog: prepared.backlog,
+      runId: input.runId, mode: 'manual_pilot', now: input.approvedAt });
+    expect(queued.scan).toEqual([other]);
+    const reserved = reserveCandidate(queued.state, other, input.runId, 'manual_pilot', input.approvedAt);
+    expect(reserved.decisions[fp]).toMatchObject({ attempts: 8, status: 'leased', runId: input.runId });
+    expect(reserved.manualTargetSwitch?.retry?.consumedAt).toBe(input.approvedAt);
+    let failed = markCandidateFailure(reserved, other, input.runId, 'candidate_failed', true, input.approvedAt);
+    failed.manualPilot = null;
+    failed.runs[input.runId] = { schemaVersion: 1, runId: input.runId, mode: 'manual_pilot', startedAt: input.approvedAt, selectedCandidateFingerprints: [fp], status: 'failed' };
+    failed.failures.push({ runId: input.runId, candidateFingerprint: fp, code: 'candidate_failed', attempt: 8, observedAt: input.approvedAt, detail: 'Attempt eight failed.' });
+    failed = compactPersistentWorkerState(failed);
+    expect(failed.manualTargetSwitch).toEqual(reserved.manualTargetSwitch);
+    expect(failed.failures.filter(f => f.candidateFingerprint === fp).map(f => f.attempt)).toEqual([1, 2, 3, 4, 5, 6, 7, 8]);
+    expect(failed.decisions[fp]).toMatchObject({ attempts: 8, status: 'terminal' });
+    for (const flag of ['approveEngineeringResume', 'approveScopeAlignmentRetry', 'approveReviewRepairRetry', 'approveSourcePlanRetry', 'approveTargetExtraAttempt']) {
+      expect(() => reconcileLocalPilotCandidate({ ...input, state: failed, runId: 'ninth', retryTargetFrom: input.runId, approveEngineeringResume: false, [flag]: true })).toThrow();
+    }
+    for (const [state, runId, mode] of [[reserved, input.runId, 'manual_pilot'], [prepared.state, input.runId, 'scheduled'], [failed, 'ninth', 'manual_pilot']] as const) {
+      expect(() => reserveCandidate(state, other, runId, mode, input.approvedAt)).toThrow();
+    }
+    expect(input.state).toEqual(before);
+  });
+
+  it.each(['no-proof', 'no-flag', 'old-flag', 'two-flags', 'fresh-state', 'missing-history', 'unused-seven', 'wrong-seven-reason', 'non-source-failure',
+    'wrong-candidate', 'wrong-prior', 'reused-run', 'artifact', 'success', 'pilot', 'publication', 'scheduled', 'report-start', 'future-proof', 'missing-hash', 'bad-cap'])(
+    'rejects an eighth grant with %s', (problem) => {
+      const input = failedSeventhTargetFixture();
+      const fp = candidateFingerprints(other).candidate;
+      if (problem === 'no-proof') input.engineeringResumeEvidence = undefined as never;
+      if (problem === 'no-flag' || problem === 'old-flag') input.approveEngineeringResume = false;
+      if (problem === 'old-flag' || problem === 'two-flags') input.approveScopeAlignmentRetry = true;
+      if (problem === 'fresh-state') input.state = createPersistentWorkerState();
+      if (problem === 'missing-history') input.state.manualTargetSwitch!.retryHistory = [];
+      if (problem === 'unused-seven') input.state.manualTargetSwitch!.retry!.consumedAt = null;
+      if (problem === 'wrong-seven-reason') input.state.manualTargetSwitch!.retry!.reason = 'user_authorized_after_review_repair_fix';
+      if (problem === 'non-source-failure') input.state.failures.at(-1)!.code = 'candidate_failed';
+      if (problem === 'wrong-candidate') input.candidate = { ...other, title: 'Changed title' };
+      if (problem === 'wrong-prior') input.retryTargetFrom = 'review-repair-retry';
+      if (problem === 'reused-run') input.runId = input.retryTargetFrom;
+      if (problem === 'artifact') input.state.contentHashes[fp] = 'a'.repeat(64);
+      if (problem === 'success') input.state.runs[input.retryTargetFrom].status = 'validated';
+      if (problem === 'pilot') input.state = reserveManualPilot(input.state, input.retryTargetFrom, input.approvedAt);
+      if (problem === 'publication') input.state.pullRequests[fp] = { number: 1, url: 'https://example.com/pr/1', status: 'opened' };
+      if (problem === 'scheduled') input.state.runs[input.retryTargetFrom].mode = 'scheduled';
+      if (problem === 'report-start') input.engineeringResumeEvidence.reportStartedAt = at;
+      if (problem === 'future-proof') input.engineeringResumeEvidence.auditCompletedAt = '2027-01-01T00:00:00.000Z';
+      if (problem === 'missing-hash') input.engineeringResumeEvidence.auditHash = '';
+      if (problem === 'bad-cap') {
+        const state = reconcileLocalPilotCandidate(input).state;
+        state.manualTargetSwitch!.retry!.maxAttempt = 9 as never;
+        expect(PersistentWorkerStateSchema.safeParse(state).success).toBe(false);
+      } else expect(() => reconcileLocalPilotCandidate(input)).toThrow();
+    });
+
+  it.each(['reportHash', 'auditHash', 'implementationHash'])('cannot reload a grant after %s changes', (field) => {
+    const input = failedSeventhTargetFixture();
+    const state = reconcileLocalPilotCandidate(input).state;
+    expect(() => reconcileLocalPilotCandidate({ ...input, state, engineeringResumeEvidence: { ...input.engineeringResumeEvidence, [field]: 'f'.repeat(64) } })).toThrow();
+  });
+
+  it.each(['no-proof', 'no-cap', 'reportHash', 'auditHash', 'implementationHash', 'wrong-run', 'wrong-candidate', 'wrong-article', 'foreign-selection', 'duplicate-selection', 'ordinary-reason', 'ninth'])(
+    'rejects compact engineering resume state with %s', (problem) => {
+      const input = failedSeventhTargetFixture();
+      const state = reconcileLocalPilotCandidate(input).state;
+      const grant = state.manualTargetSwitch!.retry!;
+      if (problem === 'no-proof') delete grant.evidence;
+      if (problem === 'no-cap') delete grant.maxAttempt;
+      if (['reportHash', 'auditHash', 'implementationHash'].includes(problem)) Reflect.deleteProperty(grant.evidence!, problem);
+      if (problem === 'wrong-run') grant.evidence!.priorRunId = 'different';
+      if (problem === 'wrong-candidate') grant.evidence!.candidateFingerprint = 'candidate:other';
+      if (problem === 'wrong-article') grant.evidence!.articleId = 'other';
+      if (problem === 'foreign-selection') state.runs[input.retryTargetFrom].selectedCandidateFingerprints = ['candidate:other'];
+      if (problem === 'duplicate-selection') state.runs[input.retryTargetFrom].selectedCandidateFingerprints = [candidateFingerprints(other).candidate, candidateFingerprints(other).candidate];
+      if (problem === 'ordinary-reason') grant.reason = 'user_authorized_after_scope_alignment_fix';
+      if (problem === 'ninth') state.decisions[candidateFingerprints(other).candidate].attempts = 9;
+      expect(PersistentWorkerStateSchema.safeParse(state).success).toBe(false);
+    });
+
+  it('accepts engineering resume only with the exact candidate-file target retry command', () => {
+    const args = ['--run-id', 'engineering-resume', '--candidate-file', 'artifacts/selected.json', '--retry-target-from', 'scope-alignment-retry', '--approve-engineering-resume', '--execute'];
+    expect(parseLocalPilotArguments(args)).toEqual({ runId: args[1], candidateFile: args[3], retryTargetFrom: args[5], approveEngineeringResume: true });
+    for (const bad of [args.slice(0, -1), [...args.slice(0, 4), '--switch-target-from', ...args.slice(5)], ['--run-id', args[5], ...args.slice(2)],
+      ['--run-id', 'resume', '--approve-engineering-resume', '--execute'], ...['--approve-scope-alignment-retry', '--approve-engineering-resume'].map(flag => [...args.slice(0, -1), flag, '--execute'])]) {
+      expect(() => parseLocalPilotArguments(bad)).toThrow();
+    }
+  });
+
+  it('fails the local evidence reader on absent receipts or a path-like prior run ID', async () => {
+    const root = await mkdtemp(join(tmpdir(), 'engineering-resume-'));
+    await expect(readLocalEngineeringResumeEvidence(root, 'missing', other)).rejects.toThrow();
+    await expect(readLocalEngineeringResumeEvidence(root, '../escape', other)).rejects.toThrow();
   });
 
   it('reloads an unused fourth target approval only with the matching explicit extra-attempt flag', () => {

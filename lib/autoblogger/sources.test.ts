@@ -374,6 +374,21 @@ describe('source authority and evidence selection', () => {
       .rejects.toThrow(/two.*relevant.*body.*authoritative/i);
   });
 
+  it('retains title-task coverage instead of replacing practical sources with higher-frequency topic pages', async () => {
+    const generic = 'A product demo explains the buyer problem through a realistic workflow. The product demo introduces a useful business scenario to customers. Every product demo should leave time for questions from the buyer.';
+    const fixture = responseTransport([
+      'A product demo recording should show one complete workflow. Record a short audio sample and listen before capturing the full walkthrough.',
+      'Rehearse the product demo from the beginning before the buyer meeting.',
+      ...Array(4).fill(generic),
+      'Recording and rehearsal matter for the classroom lecture, not a product demonstration.',
+    ].map(body => ({ status: 200, headers: { 'content-type': 'text/html' }, body: `<p>${body}</p>` })));
+    const urls = ['record', 'rehearse', 'program1', 'program2', 'program3', 'program4', 'unrelated'].map(name => `https://authority.example/${name}`);
+    const checker = createSafeSourceChecker({ transport: fixture.transport, resolveHostname: publicResolver, authorityPolicies: [{ hostname: 'authority.example' }] });
+    const result = await checker.selectWithContent(urls, { query: 'product demo checklist', articleTitle: 'Product Demo Checklist: Plan, Record and Rehearse' });
+    expect(result.sourceDocuments).toHaveLength(4);
+    expect(result.sources.map(source => source.finalUrl)).toEqual(expect.arrayContaining(urls.slice(0, 2)));
+    expect(result.sources.map(source => source.finalUrl)).not.toContain(urls[6]);
+  });
   it('ranks a later stronger topical body above earlier topical pages without inflating repeated prose', async () => {
     const topical = 'A product demo should connect the buyer problem to a realistic workflow.';
     const strong = `${topical} Rehearse the product demo with a buyer scenario and leave time for questions.`;

@@ -11,6 +11,33 @@ function words(text: string): string[] {
     .map(word => !FRAMING.has(word) && word.length > 3 && word.endsWith('s') && !/(ss|us|is)$/.test(word) ? word.slice(0, -1) : word);
 }
 
+// Broader support discovery only, never a replacement for the exact demand
+// query. Retain substantive topic qualifiers while omitting format/framing words.
+export function sourceTopicQuery(query: string): string {
+  return query.normalize('NFKC').toLowerCase().trim().split(/\s+/u).filter(token => {
+    const word = token.replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, '');
+    return word && !FRAMING.has(word) && !FORMATS.has(word)
+      && !(word.endsWith('s') && FORMATS.has(word.slice(0, -1)));
+  }).join(' ');
+}
+
+/** Ranking only, after the unchanged core-topic gate. Preserve complementary
+ * title-task passages; lexical overlap is never semantic approval of a claim.
+ * Limited workflow inflections avoid losing "record" to "recording". */
+export function matchSourceTitleTasks(query: string, title: string, body: string): Set<string> {
+  const taskForm = (word: string) => {
+    if (['record', 'recording', 'recorded'].includes(word)) return 'record';
+    if (['rehearse', 'rehearsal', 'rehearsed', 'rehearsing'].includes(word)) return 'rehearse';
+    if (['plan', 'planned', 'planning'].includes(word)) return 'plan';
+    return word;
+  };
+  const queryTerms = new Set(words(query).map(taskForm));
+  const titleTerms = new Set(words(title).filter(word => !FRAMING.has(word) && !FORMATS.has(word))
+    .map(taskForm).filter(word => !queryTerms.has(word)));
+  const bodyTerms = new Set(words(body).map(taskForm));
+  return new Set([...titleTerms].filter(word => bodyTerms.has(word)));
+}
+
 /** All non-format query terms (including qualifiers) must occur in one bounded
  * sentence with additional prose. Do not combine unrelated sentences/FAQ terms.
  * Return only a lexical ranking score: it does not certify a claim's support.

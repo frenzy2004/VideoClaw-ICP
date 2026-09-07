@@ -873,6 +873,78 @@ describe('contextual product references and precise binding failures', () => {
   });
 
   const hypotheticalAntecedent = 'This example is hypothetical and is not a claim that any named product has these capabilities or outcomes.';
+  const customerGoal = 'Your goal is to make one customer situation easy to understand, show the action that addresses it, and ask for a specific next step.';
+  const clarificationAntecedent = 'That does not mean every founder must produce a polished advertisement.';
+  const viewerClarification = 'It means the viewer should be able to connect the painful situation to the demonstrated response without needing a long feature lecture.';
+  const practiceAsk = 'Third, practice the final ask until it sounds specific and natural.';
+  const attributedAdvice = 'Descript says a software demo video should include a compelling story or use case, and it also advises concise, focused demos.';
+
+  it.each([
+    [customerGoal],
+    ['The goal is to make a buyer problem easy to understand, show the action that addresses it, and ask for a clear next step.'],
+    [clarificationAntecedent, viewerClarification],
+    ['This does not mean each presenter should record a professional video.', 'It means the buyer should connect the customer problem to the proposed solution.'],
+    [practiceAsk],
+    ['Second, rehearse the closing request until it sounds clear and natural.'],
+  ])('resolves closed human planning and propositional explanation grammar: %j', (...spans) => {
+    expect(inspectGeneratedDraft(context, withSpans(spans))).toEqual([]);
+  });
+
+  const adviceContext: DraftingContext = { ...context, sourceFacts: [...context.sourceFacts, {
+    id: 'descript', label: 'descript.com', url: 'https://www.descript.com/blog/article/software-demo-videos', checkedAt: context.generatedAt,
+    facts: [{ id: 'demo-advice', text: 'A software demo video should include a compelling story or use case.' }],
+  }] };
+  function withAttributedAdvice(span: string) {
+    const draft = withSpans([span]);
+    draft.sourceReferences.push({ sourceId: 'descript' });
+    draft.claimBindings.find(binding => binding.span === span)!.sourceFactIds = ['demo-advice'];
+    return draft;
+  }
+
+  it('resolves coordinated publisher advice only against the cited source identity', () => {
+    expect(inspectGeneratedDraft(adviceContext, withAttributedAdvice(attributedAdvice))).toEqual([]);
+  });
+
+  it.each([
+    [customerGoal.replace('ask for a specific next step', 'automatically add captions')],
+    [customerGoal.replace('next step.', 'next step, and it automatically adds captions.')],
+    [customerGoal.replace('customer situation', 'VideoClaw workflow')],
+    [context.productClaims[0].text, customerGoal],
+    [viewerClarification],
+    ['The founder reviewed the recording.', viewerClarification],
+    ['Descript does not mean every founder must produce a polished advertisement.', viewerClarification],
+    [context.productClaims[0].text, clarificationAntecedent, viewerClarification],
+    [clarificationAntecedent, viewerClarification.replace('the viewer', 'the product')],
+    [clarificationAntecedent, viewerClarification.replace('lecture.', 'lecture, and it generates subtitles.')],
+    [practiceAsk.replace('the final ask', 'Descript')],
+    [practiceAsk.replace('the final ask', 'the recorder')],
+    [practiceAsk.replace('sounds specific and natural', 'automatically adds captions')],
+    [practiceAsk.replace('natural.', 'natural and automatically adds captions.')],
+    [context.productClaims[0].text, practiceAsk],
+  ])('does not grant planning exceptions to unknown subjects, capabilities or product context: %j', (...spans) => {
+    expect(inspectGeneratedDraft(context, withSpans(spans))).toContainEqual(expect.objectContaining({
+      code: 'content.claim_binding', span: spans.at(-1), reason: 'unapproved_product_reference',
+    }));
+  });
+
+  it.each([
+    attributedAdvice.replace('Descript', 'VideoClaw'),
+    attributedAdvice.replace('Descript', 'UnknownPublisher'),
+    attributedAdvice.replace('advises concise, focused demos', 'automatically adds captions'),
+    attributedAdvice.replace('focused demos.', 'focused demos and automatically exports videos.'),
+    attributedAdvice.replace('a compelling story or use case', 'a captioning tool that exports videos'),
+  ])('keeps a cited publisher from shielding a product capability or unknown attribution: %s', span => {
+    expect(inspectGeneratedDraft(adviceContext, withAttributedAdvice(span))).toContainEqual(expect.objectContaining({
+      code: 'content.claim_binding', span, reason: 'unapproved_product_reference',
+    }));
+  });
+
+  it('does not infer a publisher from uncited source inventory', () => {
+    expect(inspectGeneratedDraft(adviceContext, withSpans([attributedAdvice]))).toContainEqual(expect.objectContaining({
+      code: 'content.claim_binding', span: attributedAdvice, reason: 'unapproved_product_reference',
+    }));
+  });
+
   const checklistExplanation = 'It illustrates the checklist principle of matching the demo path to a buyer problem, a consistent story, a working demo setup, and a defined next step.';
 
   const decisionRouting = 'Use this decision filter: if a capability does not support the buyer problem, the value proposition, or the next step, move it to backup material.';
@@ -1181,6 +1253,82 @@ describe('literal claim coverage outside Markdown-rendered fields', () => {
       expect(inspectGeneratedDraft(context, value).filter(finding => finding.code === 'content.claim_binding')).toEqual([]);
     },
   );
+});
+
+describe('sentence boundaries in exact claim bindings', () => {
+  it.each([
+    'The guide is ready.It automatically adds captions.',
+    'The guide is ready.Once it automatically adds captions, export the video.',
+    'The guide is ready.IT automatically adds captions.',
+    'The guide shows it clearly.It automatically adds captions.',
+    'The guide shows it clearly and it automatically adds captions.',
+  ])('does not let a merged dotted span inherit an ordinary antecedent: %s', (span) => {
+    const value = boundSentences('/sections/0/markdown', span, [span]);
+    expect(inspectGeneratedDraft(context, value)).toContainEqual(expect.objectContaining({
+      code: 'content.claim_binding', reason: 'unapproved_product_reference',
+    }));
+  });
+  function boundSentences(location: string, text: string, spans: string[]) {
+    const value = withDraft({});
+    if (location === '/competitorGap') value.competitorGap = text;
+    else value.sections[0].markdown = text;
+    value.claimBindings = value.claimBindings.filter(binding => binding.location !== location);
+    value.claimBindings.push(...spans.map(span => ({ location, span, sourceFactIds: ['yc-bullets'], productClaimId: null })));
+    return value;
+  }
+
+  for (const location of ['/sections/0/markdown', '/competitorGap']) {
+    it.each(['Rivia.AI', 'Acme.Tools', 'alpha.AI', 'Studio.X', 'version 2.5', 'version 2.5.0'])(
+      `keeps a dotted token inside its complete sentence at ${location}: %s`, (name) => {
+        const spans = [`Review ${name} before recording.`, 'Check the agenda.'];
+        expect(inspectGeneratedDraft(context, boundSentences(location, spans.join(' '), spans))
+          .filter(finding => finding.code === 'content.claim_binding')).toEqual([]);
+      });
+
+    it.each([
+      ['Hypothetical example: “The owner checks renewal risk.”', 'The sentence is invented for illustration.'],
+      ['Hypothetical example: "The owner checks renewal risk."', 'The sentence is invented for illustration.'],
+      ["Hypothetical example: ‘The owner checks renewal risk.’", 'The sentence is invented for illustration.'],
+      ["Hypothetical example: 'The owner checks renewal risk.'", 'The sentence is invented for illustration.'],
+      ['Ask: “Is the agenda clear?”', 'Review the brief.'],
+      ['Instruction: “Review the brief!”', 'Check the agenda.'],
+      ['Example (“The owner checks renewal risk.”)', 'The sentence is invented for illustration.'],
+    ])(`retains closing punctuation while separating bound sentences at ${location}: %s`, (...spans) => {
+      expect(inspectGeneratedDraft(context, boundSentences(location, spans.join(' '), spans))
+        .filter(finding => finding.code === 'content.claim_binding')).toEqual([]);
+    });
+
+    it.each([' ', ''])(`does not let a bound sentence conceal an adjacent unbound claim at ${location} with separator %j`, (separator) => {
+      for (const first of ['Review the brief.', 'Review Rivia.AI guidance.', 'Example: “Review the brief.”']) {
+        const value = boundSentences(location, `${first}${separator}Revenue doubles.`, [first]);
+        expect(inspectGeneratedDraft(context, value)).toContainEqual(expect.objectContaining({ code: 'content.claim_binding', location, reason: 'missing_binding' }));
+      }
+    });
+
+    it(`cannot use a single binding to merge separate quoted claims at ${location}`, () => {
+      const text = 'Example: “Review the brief.” Revenue doubles.';
+      expect(inspectGeneratedDraft(context, boundSentences(location, text, [text]))).toEqual(expect.arrayContaining([
+        expect.objectContaining({ code: 'content.claim_binding', location, reason: 'span_mismatch' }),
+        expect.objectContaining({ code: 'content.claim_binding', location, span: 'Revenue doubles.', reason: 'missing_binding' }),
+      ]));
+    });
+  }
+
+  it('keeps Markdown rendering separate from literal text around dotted names', () => {
+    const text = 'Review **Rivia.AI** guidance.';
+    expect(inspectGeneratedDraft(context, boundSentences('/sections/0/markdown', text, ['Review Rivia.AI guidance.']))
+      .filter(finding => finding.code === 'content.claim_binding')).toEqual([]);
+    expect(inspectGeneratedDraft(context, boundSentences('/competitorGap', text, [text]))
+      .filter(finding => finding.code === 'content.claim_binding')).toEqual([]);
+    expect(inspectGeneratedDraft(context, boundSentences('/competitorGap', text, ['Review Rivia.AI guidance.'])))
+      .toContainEqual(expect.objectContaining({ code: 'content.claim_binding', reason: 'span_mismatch' }));
+  });
+
+  it('preserves the product gate after a quoted sentence boundary', () => {
+    const spans = ['Example: “Review the brief.”', 'VideoClaw automatically adds captions.'];
+    expect(inspectGeneratedDraft(context, boundSentences('/sections/0/markdown', spans.join(' '), spans)))
+      .toContainEqual(expect.objectContaining({ code: 'content.claim_binding', span: spans[1], reason: 'unapproved_product_reference' }));
+  });
 });
 
 describe('final serialized artifact inspection', () => {

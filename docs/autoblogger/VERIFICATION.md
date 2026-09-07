@@ -3,7 +3,26 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-## Latest source-discovery pilot and offline corrections — 2026-09-07
+## Current scope-alignment and source-query correction — 2026-09-07
+
+See the [current report](SCOPE-ALIGNMENT-PILOT-2026-09-07.md). Source selection now
+preserves complementary title-task evidence after the unchanged topic gate, and
+body research uses four short, separate publisher queries. The eighth live run
+completed research and all four model stages, but copying and cumulative source
+overuse prevented acceptance and native article QA. It remains a failed run.
+Before that continuation, **1,522 tests across 51 files**, lint, typecheck and build
+passed. Subsequent offline fixes address parsing false positives, whole-article
+budget routing, hidden planning warnings and duplicated evidence in repair inputs.
+These checks alone do not establish a clean live article. State is terminal at
+eight and has not been reset; no ninth-attempt path was introduced.
+
+Final branch verification after those fixes passed **1,591 tests across 51 files**,
+lint, regenerated-route typecheck, build and whitespace checks. Unchanged receipt
+inspection clears all 22 binding false positives while retaining the copied-passage
+rejection and 221/214/326-word overages. The original lander is unchanged at
+`b6b0833`; PR #55 remains unmerged and scheduling remains disabled.
+
+## Previous source-discovery pilot and offline corrections — 2026-09-07
 
 The [current report](SOURCE-DISCOVERY-PILOT-2026-09-07.md) records the separately
 authorized sixth artifact-only attempt, its failure, and the subsequent software
@@ -15,7 +34,7 @@ budget, issue registry and private-metadata checks did not fail this time.
 Follow-up tests cover article-level repair routing, ordinary editorial references
 and compact rejection summaries. Hash-verified offline inspection clears the three
 mechanical false positives without altering the saved draft or its rejected review.
-The state remains terminal at six; there is no seventh attempt or published article.
+At that checkpoint the state was terminal at six with no seventh-attempt path.
 See the report for exact provenance, final checks and the independent review.
 
 Final local checks passed: **1,412 tests across 51 files**, lint, typecheck with

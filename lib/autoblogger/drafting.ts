@@ -25,7 +25,7 @@ import {
 } from './content-bundle';
 import { isStrictIsoDateTime } from './date-time';
 import { containsSecretLikeValue } from './secrets';
-import { buildSourcePlan, measurePotentialSourceUse, measureReviewedSourceUse, MAX_SOURCE_DERIVED_WORDS, TARGET_SOURCE_DERIVED_WORDS } from './source-plan';
+import { buildSourcePlan, measurePotentialSourceUse, measureReviewedSourceUse, sourceAllocationFindings, MAX_SOURCE_DERIVED_WORDS, TARGET_SOURCE_DERIVED_WORDS } from './source-plan';
 
 const CritiqueIssueSchema = z.object({
   id: z.string().trim().min(1),
@@ -236,6 +236,10 @@ then give direct, practical instructions within that scope. Do not prefix each
 paragraph or FAQ with "Original recommendation:" or "Original editorial note:".
 Keep source-backed statements attributed to the named publisher, and visibly mark
 invented examples as hypothetical. Never remove a qualification needed for truth.
+Keep attributed source summaries separate from your original worksheet or checklist.
+Do not follow a mixed original list with a publisher citation that appears to endorse
+every item. Cite each source claim to its exact supporting facts; identify added
+recommendations as your advice in a separate paragraph or section.
 Private binding metadata and review rationales carry the audit detail; section
 context must make the distinction clear to readers without repeated disclaimers.
 The description must explain the reader's task and the concrete help in this article,
@@ -260,8 +264,10 @@ not every fact from the longest page. The complete facts remain available to che
 qualifiers. Anchors are planning suggestions, not new evidence or mandatory claims.
 Organize around the reader's decisions, a genuinely original worksheet, a visibly
 hypothetical worked example, and useful troubleshooting, not a competitor's outline.
-Use headings specific to readerTask; do not insert a recording workflow merely
-because this publisher sells video software. Never label a paraphrase original.
+Use headings specific to readerTask AND articleTitle. Cover every task promised by
+the fixed title from the initial draft, using relevant supplied evidence and scoped
+original recommendations. Do not insert unrelated workflows merely because this
+publisher sells video software. Never label a paraphrase original.
 Do not quote source wording in article prose. Keep total words derived from any one
 source around or below ${TARGET_SOURCE_DERIVED_WORDS}, leaving a review reserve before the final
 ${MAX_SOURCE_DERIVED_WORDS}-word limit across the article, including paraphrases and non-contiguous
@@ -278,6 +284,16 @@ Do not use fenced or indented code, raw HTML, reference-style links, autolinks, 
 If a link is needed, use an inline [label](URL) from the supplied allowed inventory.
 Bind each rendered sentence separately, not a whole multi-sentence paragraph; strip
 Markdown syntax from binding spans. Select the parent source of every bound fact.`;
+
+const FIXED_CANDIDATE_RULES = `All supplied candidate fields are immutable, including title, articleId, slug,
+primaryKeyword and icp. GeneratedDraftV2 has no article title field; the native
+article uses candidate.title unchanged. Do not propose changing the title to resolve
+a title/body scope mismatch. Require substantive supported body coverage for each
+task promised by the fixed title (for example, Record requires actionable recording
+coverage, not a passing mention or a reference-only edit). Use only supplied evidence
+and clearly scoped original recommendations grounded in relevant facts. Never invent
+source facts or product capabilities to fulfil the title. If supported coverage is
+not possible, the issue remains unresolved; do not waive independent final verification.`;
 
 const DRAFT_SYSTEM = `Create version 2 article-generation JSON for VideoClaw.
 Write an original useful article grounded in the supplied source facts and caller-approved product claims.
@@ -298,17 +314,8 @@ or "the product" cannot introduce an unapproved VideoClaw capability.
 The direct answer must be 40–60 words. Produce no Markdown H1, raw HTML, secrets,
 internal research/debug prose, or links outside the supplied inventory. Answer the
 three supplied FAQ questions exactly and reference every used product claim.
+${FIXED_CANDIDATE_RULES}
 ${ARTICLE_COMPOSITION_RULES}`;
-
-const FIXED_CANDIDATE_RULES = `All supplied candidate fields are immutable, including title, articleId, slug,
-primaryKeyword and icp. GeneratedDraftV2 has no article title field; the native
-article uses candidate.title unchanged. Do not propose changing the title to resolve
-a title/body scope mismatch. Require substantive supported body coverage for each
-task promised by the fixed title (for example, Record requires actionable recording
-coverage, not a passing mention or a reference-only edit). Use only supplied evidence
-and clearly scoped original recommendations grounded in relevant facts. Never invent
-source facts or product capabilities to fulfil the title. If supported coverage is
-not possible, the issue remains unresolved; do not waive independent final verification.`;
 
 const SUPPORT_REVIEW_RULES = `${FIXED_CANDIDATE_RULES}
 customerTrigger is private caller-configured campaign metadata from candidate.icp,
@@ -369,6 +376,8 @@ ones, from repairedDraft and the current bindingManifest; do not reuse original 
 decisions or assume that resolving an old issue proves support for the replacement.
 Use originalRepairTargets to locate the previously failed spans and evidence scope;
 their indices/hashes describe the OLD draft, never the current support manifest.
+Resolve their citedFactRefs by sourceId/factId in the complete top-level sourceFacts;
+read the full fact text and qualifiers rather than treating IDs as evidence.
 Approve only when all original issues are resolved, every repaired binding is supported,
 and there are no new issues. Do not repair or rewrite the draft.
 ${SUPPORT_REVIEW_RULES}`;
@@ -383,13 +392,17 @@ complete replacement object, with no commentary.
 ${FIXED_CANDIDATE_RULES}
 The originalIssues registry is the complete list of stable issue IDs that the
 independent verifier will check. Resolve all of them, including machine findings.
-articleLevelIssues contains unlocalized independent-critique issues. Address their
+articleLevelIssues contains independent-critique issues and aggregate source-budget
+requirements, which take priority over localized wording patches. Address their
 editorial requirements across the body and other affected fields, even when
 repairTargets is empty or only lists reference/binding fixes. For title scope,
 restructure sections to deliver the promised supported workflow; preserve the fixed
 candidate and exact FAQ questions. A localized span patch alone cannot resolve
 missing article-level coverage. Rebuild bindings from the changed visible text.
 Use repairTargets to address the exact unresolved location/span and cited facts.
+Each target's citedFactRefs resolves by sourceId/factId into the complete sourceFacts
+inventory supplied once at the top level. Read that fact's full text and qualifiers;
+an identifier alone is not evidence. Do not duplicate or infer missing facts.
 Remove or narrow assertions unsupported by those facts; do not invent supporting
 facts or substitute a merely related citation. Preserve unaffected supported prose
 for localized fixes only. When repairStrategy is restructure_article, sourceUsage
@@ -511,12 +524,12 @@ function supportFindings(
 function repairTargets(context: DraftingContext, draft: GeneratedDraftV2, findings: DraftSafetyFinding[]) {
   const manifest = bindingManifest(draft);
   const facts = context.sourceFacts.flatMap((source) => source.facts.map((fact) => ({
-    sourceId: source.id, factId: fact.id, text: fact.text,
+    sourceId: source.id, factId: fact.id,
     evidenceKind: fact.evidenceKind ?? 'serp_title_or_snippet',
   })));
   type RepairTarget = {
     bindingIndex?: number; bindingHash?: string; location: string; span: string;
-    sourceFactIds: string[]; citedFacts: typeof facts; findings: DraftSafetyFinding[];
+    sourceFactIds: string[]; citedFactRefs: typeof facts; findings: DraftSafetyFinding[];
   };
   const targets = new Map<string, RepairTarget>();
   for (const issue of findings) {
@@ -529,7 +542,7 @@ function repairTargets(context: DraftingContext, draft: GeneratedDraftV2, findin
     const target: RepairTarget = targets.get(key) ?? {
       bindingIndex: issue.bindingIndex, bindingHash: binding?.bindingHash,
       location: issue.location, span: issue.span, sourceFactIds,
-      citedFacts: facts.filter(({ factId }) => sourceFactIds.includes(factId)), findings: [],
+      citedFactRefs: facts.filter(({ factId }) => sourceFactIds.includes(factId)), findings: [],
     };
     target.findings.push(issue);
     targets.set(key, target);
@@ -740,15 +753,7 @@ export function createStructuredDrafter(options: StructuredDrafterOptions) {
       deterministicFindings.push(...potentialSourceUsage.findings);
       // This is an initial composition buffer, not a lower final acceptance cap.
       // Contextually grounded original guidance is not counted as derivation.
-      if (sourceUsage.findings.length === 0) {
-        deterministicFindings.push(...sourceUsage.sources
-          .filter(source => source.derivedWords > TARGET_SOURCE_DERIVED_WORDS)
-          .map(source => ({
-            code: 'content.source_allocation',
-            message: `Reviewed derivation from ${source.sourceIds.join(', ')} is ${source.derivedWords} words, above the ${TARGET_SOURCE_DERIVED_WORDS}-word planning target. Preserve margin before the final ${MAX_SOURCE_DERIVED_WORDS}-word limit.`,
-            repairInstruction: 'Restructure source-derived passages across the article, retaining necessary facts and genuinely original reader tools. Do not disguise paraphrases as original guidance or change citations to evade source accounting.',
-          })));
-      }
+      deterministicFindings.push(...sourceAllocationFindings(sourceUsage));
       // Check final formatting even when the critic rejects a structurally valid
       // draft, so the one repair sees all actionable findings in the same call.
       if (canMaterialize) {
@@ -764,9 +769,11 @@ export function createStructuredDrafter(options: StructuredDrafterOptions) {
       }
       const registry = buildRepairIssueRegistry(critique, [...deterministicFindings, ...bindingSupportFindings]);
       const targets = repairTargets(context, initial, registry.findings);
-      // Critic issues have no machine-resolved location. Keep their full scope
-      // separate from localized targets rather than guessing spans from free text.
-      const articleLevelIssues = critique.issues;
+      // Cumulative budgets are whole-article requirements even when their machine
+      // finding carries the final contributing span for traceability. Do not let
+      // that convenience location turn an aggregate failure into a local patch.
+      const articleLevelIssues = registry.issues.filter(issue => critique.issues.some(original => original.id === issue.id)
+        || ['content.source_budget', 'content.source_allocation'].includes(issue.code));
 
       const repaired = GeneratedDraftV2Schema.parse(await options.client.generate({
         name: 'videoclaw_article_repair_v2',

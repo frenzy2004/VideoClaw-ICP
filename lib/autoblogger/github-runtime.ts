@@ -38,7 +38,7 @@ const CompactFailureSchema = z.object({
   runId: z.string().trim().min(1).max(160),
   code: z.string().trim().min(1).max(120),
   // Above three is accepted only by the enclosing state's consumed-grant checks.
-  attempt: z.number().int().min(1).max(6),
+  attempt: z.number().int().min(1).max(8),
   candidateFingerprint: z.string().trim().min(1).max(500).optional(),
   observedAt: z.string().datetime(),
   detail: z.string().trim().min(1).max(500),
@@ -126,11 +126,26 @@ const ManualRetryApprovalSchema = z.object({
   consumedAt: z.string().datetime().nullable(),
 }).strict();
 
+export const EngineeringResumeEvidenceSchema = z.object({
+  priorRunId: z.string().regex(/^[A-Za-z0-9][A-Za-z0-9._-]{0,159}$/u),
+  candidateFingerprint: z.string().startsWith('candidate:').max(500),
+  articleId: z.string().min(1).max(128),
+  reportStartedAt: z.string().datetime(),
+  reportCompletedAt: z.string().datetime(),
+  auditCompletedAt: z.string().datetime(),
+  reportHash: z.string().regex(/^[0-9a-f]{64}$/u),
+  auditHash: z.string().regex(/^[0-9a-f]{64}$/u),
+  implementationHash: z.string().regex(/^[0-9a-f]{64}$/u),
+}).strict();
+export type EngineeringResumeEvidence = z.infer<typeof EngineeringResumeEvidenceSchema>;
+
 const ManualTargetRetrySchema = z.object({
-  reason: z.enum(['user_authorized_after_collector_fix', 'user_authorized_after_attribution_fix', 'user_authorized_after_editorial_fix', 'user_authorized_after_source_planning_fix', 'user_authorized_after_review_repair_fix']),
+  reason: z.enum(['user_authorized_after_collector_fix', 'user_authorized_after_attribution_fix', 'user_authorized_after_editorial_fix', 'user_authorized_after_source_planning_fix', 'user_authorized_after_review_repair_fix', 'user_authorized_after_scope_alignment_fix', 'manual_engineering_resume']),
   priorRunId: z.string().regex(/^[A-Za-z0-9][A-Za-z0-9._-]{0,159}$/u),
   runId: z.string().regex(/^[A-Za-z0-9][A-Za-z0-9._-]{0,159}$/u),
-  priorDecision: CandidateDecisionSchema.extend({ attempts: z.number().int().min(0).max(5) }),
+  priorDecision: CandidateDecisionSchema.extend({ attempts: z.number().int().min(0).max(7) }),
+  maxAttempt: z.literal(8).optional(),
+  evidence: EngineeringResumeEvidenceSchema.optional(),
   approvedAt: z.string().datetime(),
   consumedAt: z.string().datetime().nullable(),
 }).strict();
@@ -147,7 +162,7 @@ const ManualTargetSwitchSchema = z.object({
   approvedAt: z.string().datetime(),
   consumedAt: z.string().datetime().nullable(),
   retry: ManualTargetRetrySchema.optional(),
-  retryHistory: z.array(ManualTargetRetrySchema).max(4).optional(),
+  retryHistory: z.array(ManualTargetRetrySchema).max(6).optional(),
 }).strict();
 
 export const PersistentWorkerStateSchema = AutobloggerStateSchema.extend({
@@ -157,7 +172,7 @@ export const PersistentWorkerStateSchema = AutobloggerStateSchema.extend({
   queuedCandidates: z.array(CandidateSchema).max(500),
   candidateFingerprints: z.array(z.string().trim().min(1).max(500)).max(20_000),
   dedupeHashes: z.array(z.string().regex(/^[0-9a-f]{64}$/u)).max(30_000),
-  decisions: z.record(z.string(), CandidateDecisionSchema.extend({ attempts: z.number().int().min(0).max(6) })),
+  decisions: z.record(z.string(), CandidateDecisionSchema.extend({ attempts: z.number().int().min(0).max(8) })),
   provenance: z.record(z.string(), CompactProvenanceSchema),
   contentHashes: z.record(z.string(), z.string().regex(/^[0-9a-f]{64}$/)),
   pullRequests: z.record(z.string(), z.object({
@@ -192,8 +207,28 @@ export const PersistentWorkerStateSchema = AutobloggerStateSchema.extend({
       const extraAttempt = item.reason === 'user_authorized_after_editorial_fix';
       const sourcePlanRetry = item.reason === 'user_authorized_after_source_planning_fix';
       const reviewRepairRetry = item.reason === 'user_authorized_after_review_repair_fix';
-      const allowedAttempt = reviewRepairRetry
-        ? saved.attempts === 5 && retries[index - 1]?.reason === 'user_authorized_after_source_planning_fix' && index === retries.length - 1
+      const scopeAlignmentRetry = item.reason === 'user_authorized_after_scope_alignment_fix';
+      const engineeringResume = item.reason === 'manual_engineering_resume';
+      const evidence = item.evidence;
+      if (engineeringResume ? item.maxAttempt !== 8 || !evidence
+        || evidence.priorRunId !== item.priorRunId || evidence.candidateFingerprint !== fingerprint || evidence.articleId !== targetSwitch.candidate.articleId
+        || evidence.reportStartedAt !== prior?.startedAt || Date.parse(evidence.reportCompletedAt) < Date.parse(saved.updatedAt)
+        || Date.parse(evidence.auditCompletedAt) < Date.parse(evidence.reportCompletedAt) || Date.parse(item.approvedAt) < Date.parse(evidence.auditCompletedAt)
+        || saved.reason !== 'deep_inspection_failed'
+        || !state.failures.some(f => f.runId === item.priorRunId && f.candidateFingerprint === fingerprint && f.attempt === 7 && f.code === 'deep_inspection_failed')
+        : item.maxAttempt !== undefined || evidence !== undefined) fail('Engineering resume requires exact closed source-failure evidence and a fixed eighth-attempt cap.');
+      const allowedAttempt = engineeringResume
+        ? saved.attempts === 7 && retries[index - 1]?.reason === 'user_authorized_after_scope_alignment_fix' && index === retries.length - 1
+          // Deep inspection can fail before the worker selects an eligible candidate.
+          // Exact source-failure identity and the one-candidate audit supply that proof.
+          && !!prior && prior.selectedCandidateFingerprints.length <= 1
+        : scopeAlignmentRetry
+        ? saved.attempts === 6 && retries[index - 1]?.reason === 'user_authorized_after_review_repair_fix'
+          && (index === retries.length - 1 || retries[index + 1]?.reason === 'manual_engineering_resume')
+          && prior?.selectedCandidateFingerprints.length === 1
+        : reviewRepairRetry
+        ? saved.attempts === 5 && retries[index - 1]?.reason === 'user_authorized_after_source_planning_fix'
+          && (index === retries.length - 1 || retries[index + 1]?.reason === 'user_authorized_after_scope_alignment_fix')
           && prior?.selectedCandidateFingerprints.length === 1
         : sourcePlanRetry
         ? saved.attempts === 4 && retries[index - 1]?.reason === 'user_authorized_after_editorial_fix'
@@ -213,7 +248,7 @@ export const PersistentWorkerStateSchema = AutobloggerStateSchema.extend({
           && f.attempt === saved.attempts && Date.parse(f.observedAt) <= Date.parse(item.approvedAt))) fail('Target retry requires the retained failed attempt, exact identities and explicit later approval.');
       if (!item.consumedAt && (JSON.stringify(decision) !== JSON.stringify(saved)
         || state.runs[item.runId] || state.contentHashes[fingerprint] || state.candidates[fingerprint]?.status === 'validated'
-        || (reviewRepairRetry && ['drafted', 'pr_opened'].includes(state.candidates[fingerprint]?.status ?? ''))
+        || ((reviewRepairRetry || scopeAlignmentRetry || engineeringResume) && ['drafted', 'pr_opened'].includes(state.candidates[fingerprint]?.status ?? ''))
         || Object.values(state.decisions).some(d => d.runId === item.runId))) fail('Unused target retry must preserve its prior decision and cannot reuse a run or artifact.');
       if (item.consumedAt && Date.parse(item.consumedAt) < Date.parse(item.approvedAt)) fail('Target retry cannot precede approval.');
       runIds.add(item.runId);
@@ -248,7 +283,7 @@ export const PersistentWorkerStateSchema = AutobloggerStateSchema.extend({
   // Retain all consumed grants when another explicit approval is appended.
   // Each extra decision/failure must still match its own grant exactly.
   const targetExtras = [...(targetSwitch?.retryHistory ?? []), ...(targetSwitch?.retry ? [targetSwitch.retry] : [])]
-    .filter(item => item.consumedAt && ['user_authorized_after_editorial_fix', 'user_authorized_after_source_planning_fix', 'user_authorized_after_review_repair_fix'].includes(item.reason));
+    .filter(item => item.consumedAt && ['user_authorized_after_editorial_fix', 'user_authorized_after_source_planning_fix', 'user_authorized_after_review_repair_fix', 'user_authorized_after_scope_alignment_fix', 'manual_engineering_resume'].includes(item.reason));
   for (const [fingerprint, decision] of Object.entries(state.decisions)) {
     const exactTargetExtra = targetExtras.some(item => targetSwitch?.candidateFingerprint === fingerprint
       && item.runId === decision.runId && decision.attempts === item.priorDecision.attempts + 1 && decision.status !== 'retryable');

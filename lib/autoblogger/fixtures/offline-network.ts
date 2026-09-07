@@ -11,10 +11,15 @@ const escapeHtml = (text: string) => text.replaceAll('&', '&amp;').replaceAll('<
 /** Only external I/O is replaced. Actor envelopes, normalization, metrics and source checking stay real. */
 export function createOfflineNetwork(backlog: Candidate[], sourceFacts: string[]) {
   const byKeyword = new Map(backlog.map((candidate) => [candidate.primaryKeyword, candidate]));
+  const allowedSupportQueries = new Set(backlog.flatMap(candidate => [
+    `${candidate.primaryKeyword} site:ycombinator.com`, `${candidate.primaryKeyword} site:techstars.com`,
+    `${candidate.primaryKeyword} site:techsmith.com/blog/`, `${candidate.primaryKeyword} site:descript.com/blog/article/`,
+  ]));
   const requests: HttpRequest[] = [];
   const sourceRequests: SourceHttpRequest[] = [];
   const autocompleteKeywords: string[] = [];
   const serpKeywords: string[] = [];
+  const supportQueries: string[] = [];
   const metricKeywords: string[] = [];
   const runs = new Map<string, { dataset: string; items: unknown[] }>();
   const pages = new Map<string, { status: number; body: string; location?: string }>();
@@ -69,9 +74,14 @@ export function createOfflineNetwork(backlog: Candidate[], sourceFacts: string[]
         assert.equal(input.mobileResults, false);
         assert.equal(input.maxPagesPerQuery, 1);
         const keywords = (input.queries as string).trim().split('\n');
-        serpKeywords.push(...keywords);
         items = keywords.map((keyword) => {
+          if (allowedSupportQueries.has(keyword)) {
+            supportQueries.push(keyword);
+            return { searchQuery: { term: keyword, countryCode: 'US', languageCode: 'en', device: 'DESKTOP', page: 1 },
+              organicResults: [], peopleAlsoAsk: [], relatedQueries: [] };
+          }
           const candidate = candidateFor(keyword);
+          serpKeywords.push(keyword);
           const organicResults = Array.from({ length: 10 }, (_, index) => {
             const hostname = index % 2 === 0 ? 'primary.example' : 'secondary.example';
             const finalUrl = 'https://' + hostname + '/guides/' + candidate.slug + '/' + index;
@@ -151,5 +161,5 @@ export function createOfflineNetwork(backlog: Candidate[], sourceFacts: string[]
       })(),
     };
   };
-  return { json, source, resolveHostname, requests, sourceRequests, autocompleteKeywords, serpKeywords, metricKeywords };
+  return { json, source, resolveHostname, requests, sourceRequests, autocompleteKeywords, serpKeywords, supportQueries, metricKeywords };
 }

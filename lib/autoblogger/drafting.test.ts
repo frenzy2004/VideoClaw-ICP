@@ -468,7 +468,7 @@ describe('contextual review and targeted bounded repair', () => {
     expect(outcome).toMatchObject({ status: 'ready', repaired: true });
     expect(client.requests[2].input).toMatchObject({
       repairStrategy: 'restructure_article',
-      articleLevelIssues: [],
+      articleLevelIssues: expect.arrayContaining([expect.objectContaining({ code: 'content.source_allocation' })]),
       deterministicFindings: expect.arrayContaining([expect.objectContaining({ code: 'content.source_allocation' })]),
     });
   });
@@ -514,6 +514,7 @@ describe('contextual review and targeted bounded repair', () => {
     expect(client.requests).toHaveLength(4);
     expect(client.requests[2].input).toMatchObject({
       repairStrategy: 'restructure_article',
+      articleLevelIssues: expect.arrayContaining([expect.objectContaining({ code: 'content.source_budget' })]),
       sourceUsage: { sources: expect.arrayContaining([expect.objectContaining({ sourceIds: ['yc'], maxDerivedWords: 180 })]) },
       deterministicFindings: expect.arrayContaining([expect.objectContaining({ code: 'content.source_budget' })]),
     });
@@ -636,11 +637,17 @@ describe('contextual review and targeted bounded repair', () => {
     expect(client.requests).toHaveLength(4);
     const target = expect.objectContaining({
       bindingIndex, location, span, sourceFactIds: [fact.id],
-      citedFacts: [{ sourceId: 'yc', factId: fact.id, text: fact.text, evidenceKind: 'body' }],
+      citedFactRefs: [{ sourceId: 'yc', factId: fact.id, evidenceKind: 'body' }],
       findings: expect.arrayContaining([expect.objectContaining({ code: 'critique.support_rejected', message: expect.stringContaining(issue.message) })]),
     });
     expect(client.requests[2].input).toMatchObject({ repairTargets: expect.arrayContaining([target]) });
     expect(client.requests[3].input).toMatchObject({ originalRepairTargets: expect.arrayContaining([target]) });
+    for (const index of [2, 3]) {
+      expect(client.requests[index].input).toMatchObject({ sourceFacts: expect.arrayContaining([
+        expect.objectContaining({ id: 'yc', facts: expect.arrayContaining([fact]) }),
+      ]) });
+      expect(JSON.stringify(client.requests[index].input).match(new RegExp(fact.text, 'g'))).toHaveLength(1);
+    }
     if (!fix) expect(result).toMatchObject({ findings: expect.arrayContaining([
       expect.objectContaining({ code: 'critique.support_rejected', bindingIndex, location, span, sourceFactIds: [fact.id] }),
     ]) });

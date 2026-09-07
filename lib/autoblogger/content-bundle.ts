@@ -558,13 +558,32 @@ function inspectReferences(
   return findings;
 }
 
-function sentences(value: string): string[] {
-  return markdownNodeClaimText(parseMarkdown(value))
+function splitClaimSentences(value: string): string[] {
+  const normalized = value
     .replace(/\r\n?/g, '\n')
-    .replace(/[^\S\n]+/g, ' ')
-    .split(/(?<=[.!?])(?:[^\S\n]+|(?=[A-Z]))|\n+/u)
-    .map((sentence) => sentence.trim())
-    .filter(Boolean);
+    .replace(/[^\S\n]+/g, ' ');
+  return normalized.split(/\n+/u).flatMap(line => {
+    const result: string[] = [];
+    let start = 0;
+    for (const match of line.matchAll(/[.!?]["'”’»)\]]*/gu)) {
+      const index = match.index;
+      // An internal dot belongs to the token (dotted names, domains, decimals).
+      // Ambiguous no-space concatenations still require an exact whole-span
+      // binding; a binding for just the first claim cannot cover the added text.
+      if (line[index] === '.' && /[\p{L}\p{N}]/u.test(line[index - 1] ?? '')
+        && /[\p{L}\p{N}]/u.test(line[index + 1] ?? '')) continue;
+      const end = index + match[0].length;
+      if (end < line.length && !/[\sA-Z]/u.test(line[end])) continue;
+      result.push(line.slice(start, end).trim());
+      start = end;
+    }
+    result.push(line.slice(start).trim());
+    return result.filter(Boolean);
+  });
+}
+
+function sentences(value: string): string[] {
+  return splitClaimSentences(markdownNodeClaimText(parseMarkdown(value)));
 }
 
 function claimSpansAtLocation(value: string, location: string): string[] {
@@ -574,12 +593,7 @@ function claimSpansAtLocation(value: string, location: string): string[] {
   // Native text and metadata retain literal fences, definitions, tags and inline
   // markers; only actual Markdown body fields use Markdown sentence extraction.
   if (location === '/directAnswer' || /^\/sections\/\d+\/markdown$/.test(location)) return sentences(value);
-  return value
-    .replace(/\r\n?/g, '\n')
-    .replace(/[^\S\n]+/g, ' ')
-    .split(/(?<=[.!?])(?:[^\S\n]+|(?=[A-Z]))|\n+/u)
-    .map((sentence) => sentence.trim())
-    .filter(Boolean);
+  return splitClaimSentences(value);
 }
 
 function generatedLocationValue(draft: GeneratedDraftV2, location: string): string | undefined {
@@ -693,11 +707,26 @@ function attributedNonProductSubject(prefix: string, factTexts: string[]): boole
   )));
 }
 
+function hasAttributedEditorialCoordination(sentence: string, sourceUrls: string[]): boolean {
+  // A named publisher coordinates two advice predicates. Resolve its single
+  // pronoun only when the cited page identifies that publisher; neither the
+  // grammar nor the hostname establishes support for the advice itself.
+  const subject = sentence.match(/^([\p{Lu}][\p{L}\d]*) (?:says|notes|explains) (?:a|the) (?:software )?demo video should include a (?:compelling|clear) (?:story|use case)(?: or use case)?, and it (?:also )?(?:advises|recommends) (?:concise|focused|short)(?:, (?:concise|focused|short))? demos[.!]?$/u)?.[1];
+  return Boolean(subject && sourceUrls.some(url => {
+    try { return new URL(url).hostname.replace(/^www\./u, '').split('.')[0] === subject.toLowerCase(); }
+    catch { return false; }
+  }));
+}
+
 function hasEditorialObjectRouting(sentence: string): boolean {
   // These whole-sentence grammars identify "it" as the object of a human
   // planning action, not a software capability subject. No added assertion or
   // named product inherits the exception. Factual support is still reviewed.
   if ([...sentence.matchAll(/\bit\b/giu)].length !== 1) return false;
+  // Human planning goals and rehearsal instructions keep an explicit ordinary
+  // object. Closed complements prevent an added capability from inheriting it.
+  if (/^(?:your|the) goal is to make (?:one|a|the) (?:customer|buyer) (?:situation|problem) easy to understand, show the action that addresses it, and ask for a (?:specific|clear) next step[.!]?$/iu.test(sentence)
+    || /^(?:(?:first|second|third|finally), )?(?:practice|rehearse) the (?:final|closing) (?:ask|request) until it sounds (?:specific|clear) and natural[.!]?$/iu.test(sentence)) return true;
   const purpose = '(?:the|a|your) (?:buyer problem|customer problem|value proposition|next step|argument)';
   const purposes = `${purpose}(?:, ${purpose})*(?:,? (?:or|and) ${purpose})?`;
   const destination = '(?:the |a )?(?:backup material|appendix|recap|follow-up list)';
@@ -713,6 +742,8 @@ function hasOrdinaryExplanationAntecedent(sentence: string, previousSentence: st
   // A small noun-phrase grammar admits editorial explanations, not arbitrary
   // predicates after "It". Match both sentences in full so an added capability
   // clause, second actor, or unknown modifier cannot inherit this exception.
+  const clarification = /^it means (?:the|a|your) (?:viewer|audience|buyer|customer) should (?:be able to )?connect (?:the|a) (?:painful |customer |buyer )?(?:situation|problem) to (?:the|a) (?:demonstrated |proposed )?(?:response|solution)(?: without (?:needing|requiring) (?:a|an) (?:long |detailed )?(?:feature lecture|explanation|presentation))?[.!]?$/iu;
+  if (clarification.test(sentence)) return /^(?:that|this) does not mean (?:every|each|the) (?:founder|presenter|team) (?:must|should) (?:produce|record|create) (?:a|an) (?:polished |professional |finished |short )?(?:advertisement|video|demo|recording)[.!]?$/iu.test(previousSentence);
   const modifier = '(?:checklist|planning|review|demo|buyer|customer|consistent|working|defined|clear|next|short|simple|editorial)';
   const head = '(?:principle|approach|sequence|structure|purpose|scope|path|problem|story|setup|steps?|questions?|argument)';
   const nounPhrase = `(?:the|a|an|this|that) (?:${modifier} ){0,3}${head}`;
@@ -735,12 +766,29 @@ function containsProductAlias(
   localContext: string,
   priorProductContext: boolean,
   factTexts: string[],
+  sourceUrls: string[],
 ): boolean {
   if (containsExplicitProductAlias(sentence, claims)) return true;
   const productReferences = [...sentence.matchAll(/\b(?:the|this) product\b/giu)];
-  const pronoun = /\bit\b/iu.exec(sentence);
+  const pronouns = [...sentence.matchAll(/\bit\b/giu)];
+  const pronoun = pronouns[0];
   if (!pronoun && productReferences.length === 0) return false;
   const prefix = pronoun ? sentence.slice(0, pronoun.index) : '';
+  // A dotted token is retained for exact text coverage, not proof that the
+  // preceding ordinary noun governs a later assertion. If punctuation occurs
+  // before this pronoun inside one span, keep reference resolution ambiguous.
+  // This also protects concatenated clauses such as "ready.Once it ...";
+  // lexical names/abbreviations alone must not grant a capability exception.
+  // A later pronoun cannot inherit the first exemption for a new capability.
+  // Preserve only a terminal editorial object or a closed example label; the
+  // normal subject/context rules below still have to resolve the first pronoun.
+  const additionalReferencesAreEditorial = pronouns.length <= 2 && pronouns.slice(1).every(reference => {
+    const tail = sentence.slice(reference.index);
+    return (/^it[.!]?$/iu.test(tail)
+      && /\b(?:cut|defer|remove)(?: or (?:cut|defer|remove))?\s+$/iu.test(sentence.slice(0, reference.index)))
+      || /^it is an (?:illustrative )?example structure[.!]?$/iu.test(tail);
+  });
+  if (!additionalReferencesAreEditorial || pronouns.some(reference => /[.!?]/u.test(sentence.slice(0, reference.index)))) return true;
   // A grammatical dummy subject ("it can be useful to decide") and the object
   // of an explicit problem-addressing instruction are not software subjects.
   // Keep these narrow: no prior product context, second pronoun or added claim.
@@ -781,6 +829,7 @@ function containsProductAlias(
     if (!genericRolesOnly) return true;
   }
   if (!pronoun) return false;
+  if (hasAttributedEditorialCoordination(sentence, sourceUrls)) return false;
   if (softwareReferent.test(sentence)) return true;
 
   if (!/\bproduct\b/iu.test(sentence) && hasEditorialObjectRouting(sentence)) return false;
@@ -819,9 +868,9 @@ function inspectClaimBindings(
   draft: GeneratedDraftV2,
   visibleSourceIds: string[],
 ): DraftSafetyFinding[] {
-  const factsById = new Map<string, { sourceId: string; text: string }>();
+  const factsById = new Map<string, { sourceId: string; text: string; url: string }>();
   for (const source of context.sourceFacts) {
-    for (const fact of source.facts) factsById.set(fact.id, { sourceId: source.id, text: fact.text });
+    for (const fact of source.facts) factsById.set(fact.id, { sourceId: source.id, text: fact.text, url: source.url });
   }
   const claimById = new Map(context.productClaims.map((claim) => [claim.id, claim]));
   const expected = generatedClaimSentences(draft);
@@ -885,6 +934,7 @@ function inspectClaimBindings(
     } else if (containsProductAlias(
       binding.span, context.productClaims, localContext, productContext.get(key) ?? true,
       binding.sourceFactIds.map((id) => factsById.get(id)?.text ?? ''),
+      binding.sourceFactIds.map((id) => factsById.get(id)?.url ?? ''),
     )) {
       reject('unapproved_product_reference', 'Explicit or ambiguous VideoClaw reference requires an exact approved product claim; remove the unsupported assertion or make a genuinely non-product referent explicit.');
     }

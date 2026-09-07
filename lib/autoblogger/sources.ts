@@ -2,7 +2,7 @@ import { isIP } from 'node:net';
 import { createHash } from 'node:crypto';
 
 import { extractSourceBody, type SourceReadOptions, type SourcePassage } from './source-extraction';
-import { scoreSourceTopic, sourcePageIdentity } from './source-relevance';
+import { matchSourceTitleTasks, scoreSourceTopic, sourcePageIdentity } from './source-relevance';
 export type { SourceReadOptions, SourcePassage } from './source-extraction';
 
 import {
@@ -376,7 +376,7 @@ function createSourceChecker(options: SafeSourceCheckerOptions, allowHttpForTest
   }
 
   async function selectWithContent(urls: string[], readOptions: SourceReadOptions = {}): Promise<SourceSelectionWithContent> {
-    const relevant = new Map<string, { document: SourceDocument; score: number }>();
+    const relevant = new Map<string, { document: SourceDocument; score: number; titleTasks: Set<string> }>();
     const requested = new Set<string>();
     for (const url of urls) {
       let document: SourceDocument;
@@ -395,13 +395,29 @@ function createSourceChecker(options: SafeSourceCheckerOptions, allowHttpForTest
       const prior = relevant.get(key);
       if (!prior || Number(document.authoritative) > Number(prior.document.authoritative)
         || (document.authoritative === prior.document.authoritative && score > prior.score)) {
-        relevant.set(key, { document, score });
+        relevant.set(key, { document, score, titleTasks: matchSourceTitleTasks(readOptions.query ?? '', readOptions.articleTitle ?? '', bodyText) });
       }
     }
     // Rank the whole supplied candidate set; early reachable pages must not
     // crowd out later topical bodies. Keep complete excerpts/qualifiers intact.
     const ranked = [...relevant.values()].sort((a, b) => b.score - a.score);
-    const sourceDocuments = ranked.slice(0, 4).map(item => item.document);
+    let sourceDocuments = ranked.slice(0, 4).map(item => item.document);
+    if (ranked.some(item => item.titleTasks.size > 0)) {
+      // Reserve an authority first, then greedily cover new title terms among
+      // already topic-qualified bodies. Repeated keyword prose must not evict
+      // complementary practical evidence. Remaining slots use topic ranking.
+      const chosen: typeof ranked = [];
+      const covered = new Set<string>();
+      const novelty = (item: typeof ranked[number]) => [...item.titleTasks].filter(term => !covered.has(term)).length;
+      const add = (item: typeof ranked[number]) => { chosen.push(item); item.titleTasks.forEach(term => covered.add(term)); };
+      const authorities = ranked.filter(item => item.document.authoritative).sort((a, b) => novelty(b) - novelty(a) || b.score - a.score);
+      if (authorities[0]) add(authorities[0]);
+      while (chosen.length < Math.min(4, ranked.length)) {
+        const next = ranked.filter(item => !chosen.includes(item)).sort((a, b) => novelty(b) - novelty(a) || b.score - a.score)[0];
+        add(next);
+      }
+      sourceDocuments = chosen.map(item => item.document);
+    }
     const authority = ranked.find(item => item.document.authoritative)?.document;
     if (authority && sourceDocuments.length === 4 && !sourceDocuments.some(source => source.authoritative)) {
       sourceDocuments[sourceDocuments.length - 1] = authority;

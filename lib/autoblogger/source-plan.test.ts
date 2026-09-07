@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
 import { describe, expect, it } from 'vitest';
 import type { DraftingContext, GeneratedDraftV2, SourceFact } from './content-bundle';
-import { buildSourcePlan, measureReviewedSourceUse, measurePotentialSourceUse as measure } from './source-plan';
+import { buildSourcePlan, measureReviewedSourceUse, sourceAllocationFindings, measurePotentialSourceUse as measure } from './source-plan';
 import { extractSourceBody } from './source-extraction';
 
 function source(id: string, url = `https://example.com/${id}`): SourceFact {
@@ -26,6 +26,33 @@ function specimen(spans: Array<{ location: string; words: number; factIds?: stri
 }
 
 describe('source planning and cumulative reviewed usage', () => {
+  it('keeps a second source planning warning when another source already exceeds its final limit', () => {
+    const input = specimen([{ location: '/sections/0/markdown', words: 181 },
+      { location: '/sections/1/markdown', words: 144, factIds: ['b-demo'] }]);
+    const usage = measureReviewedSourceUse(facts, input.draft, input.evaluations);
+    expect(usage.findings).toEqual([expect.objectContaining({ code: 'content.source_budget' })]);
+    expect(sourceAllocationFindings(usage)).toEqual([expect.objectContaining({
+      code: 'content.source_allocation', message: expect.stringContaining('b is 144 words'),
+    })]);
+  });
+
+  it('does not turn invalid review accounting or long original guidance into planning warnings', () => {
+    const input = specimen([{ location: '/sections/0/markdown', words: 144 }]);
+    expect(sourceAllocationFindings(measureReviewedSourceUse(facts, input.draft, []))).toEqual([]);
+    const original = input.evaluations.map(e => ({ ...e, kind: 'original_guidance' as const }));
+    expect(sourceAllocationFindings(measureReviewedSourceUse(facts, input.draft, original))).toEqual([]);
+  });
+
+  it('carries the fixed title scope into planning without changing the keyword or manufacturing facts', () => {
+    const context = structuredClone(planningContext);
+    context.candidate.title = 'Product Demo Checklist: Plan, Record and Rehearse';
+    const before = structuredClone(context);
+    expect(buildSourcePlan(context)).toMatchObject({
+      readerTask: 'product demo checklist',
+      articleTitle: 'Product Demo Checklist: Plan, Record and Rehearse',
+    });
+    expect(context).toEqual(before);
+  });
   it('does not anchor an extracted H2 topic label attached to unrelated body prose', () => {
     const document = extractSourceBody('<h2>Product demo checklist</h2><p>The cafeteria serves lunch daily and closes early on Fridays.</p>');
     const a = source('a');

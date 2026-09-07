@@ -3,6 +3,25 @@ import { createSafeSourceChecker } from './sources';
 import { PRODUCTION_SOURCE_AUTHORITY_POLICIES, sourceDiscoveryQueries, isDiscoverySourceUrl } from './source-policy';
 
 describe('production source discovery policy', () => {
+  it.each([
+    ['SaaS product demo checklists', 'saas product demo'],
+    ['Kubernetes demo guide', 'kubernetes demo'],
+    ['Windows demo examples', 'windows demo'],
+    ['C++ demo checklist', 'c++ demo'],
+  ])('preserves substantive names and syntax in source queries: %s', (keyword, topic) => {
+    expect(sourceDiscoveryQueries(keyword, [], 'A practical demonstration')[0]).toBe(`${topic} site:ycombinator.com`);
+  });
+  it('uses separate short publisher queries while preserving substantive topic qualifiers', () => {
+    const queries = sourceDiscoveryQueries('product demo checklist', ['How to run a good product demo?'], 'Product Demo Checklist: Plan, Record and Rehearse');
+    expect(queries).toEqual([
+      'product demo site:ycombinator.com', 'product demo site:techstars.com',
+      'product demo site:techsmith.com/blog/', 'product demo site:descript.com/blog/article/',
+    ]);
+    expect(sourceDiscoveryQueries('product demo before launch checklist', [], 'Product Demo Before Launch')).toEqual([
+      'product demo before launch site:ycombinator.com', 'product demo before launch site:techstars.com',
+      'product demo before launch site:techsmith.com/blog/', 'product demo before launch site:descript.com/blog/article/',
+    ]);
+  });
   it('uses the exact topic and an observed question for two bounded practitioner/program searches', () => {
     const queries = sourceDiscoveryQueries('product demo checklist', ['How to structure a product demo?']);
     expect(queries).toHaveLength(2);
