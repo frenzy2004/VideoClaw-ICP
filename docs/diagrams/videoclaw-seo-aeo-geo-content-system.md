@@ -1,6 +1,6 @@
 # VideoClaw SEO / AEO / GEO content system
 
-Review-only checkpoint: **8 September 2026**. No production merge, deployment, publishing, indexing submission, or schedule activation is authorized in this work.
+Review-only checkpoint: **9 September 2026**. No production merge, deployment, publishing, indexing submission, or schedule activation is authorized in this work.
 
 ![VideoClaw worker, artifact-only pilot, and separate human publication gate](./videoclaw-seo-aeo-geo-content-system-v2.png)
 
@@ -33,7 +33,18 @@ The 250-opportunity backlog is an input, not a required count or proof of measur
 Apify evidence → one draft + critique + QA → Markdown / SVG / report artifact → STOP
 ```
 
-Latest software correction, 2026-09-09 Malaysia date:
+Latest live attempt, 2026-09-09 Malaysia date:
+
+```text
+Fresh Apify evidence → four fetched sources → two FAQ evidence checks fail → STOP
+```
+
+The [paid tutorial-video proof](../autoblogger/FAQ-PAID-PROOF-2026-09-09.md)
+made no OpenAI call and produced no accepted article or native QA result.
+The remaining blocker is FAQ evidence coverage/matching, not local credentials.
+All failed history remains intact. No production or schedule change occurred.
+
+Preceding software correction, 2026-09-09 Malaysia date:
 
 ```text
 Retrieve bodies → screen each FAQ → draft → critique with exact locations
@@ -46,7 +57,7 @@ body-answer screening before generation and code-enforced repair limits. No new
 live attempt, retry reset, generated lander PR or production action occurred.
 Lexical evidence screening is not factual approval; human approval remains required.
 
-Last live observation, 2026-09-08 Malaysia date:
+Previous live observation, 2026-09-08 Malaysia date:
 
 ```text
 EVIDENCE-FIRST: Screen → correct generic FAQ matching → recover observed questions → verify source bodies

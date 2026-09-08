@@ -3,7 +3,19 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-## Latest offline correction — 2026-09-09 Malaysia time
+## Latest paid live attempt — 2026-09-09 Malaysia time
+
+The [tutorial-video proof](FAQ-PAID-PROOF-2026-09-09.md) passed fresh lander
+inventory and paid Apify collection, then failed the FAQ body-evidence screen.
+Seven organic results and four retrieved pages did not satisfy two selected FAQ
+checks. Zero OpenAI requests, zero accepted articles, no native QA. Offline replay
+of the unchanged context reproduces both findings. Fresh scoped tests: 391 across
+three files passed. This does not establish the complete live milestone.
+
+All previous run/failure records are preserved. No original lander write,
+production action, retry reset, generated lander PR or schedule activation.
+
+## Previous offline correction — 2026-09-09 Malaysia time
 
 The [FAQ/repair report](FAQ-REPAIR-FIX-2026-09-09.md) separates the new code from
 the unchanged failed live run. Body-only, answer-shaped FAQ screening runs before
