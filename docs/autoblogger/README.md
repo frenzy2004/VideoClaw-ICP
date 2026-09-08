@@ -6,7 +6,9 @@ This worker is a controlled research-and-drafting system. It does not publish ar
 
 The initial 250-topic research library is an input, not a quota or publication gate. Each run scans at most 50 candidates, deeply checks at most 10, and produces at most 3 drafts with no more than 2 from one ICP.
 
-Latest operator checkpoint on 2026-09-08 Malaysia time: the [fresh webinar-repurposing test](FRESH-WEBINAR-PROOF-2026-09-08.md) found eight organic results but failed the three-relevant-PAA requirement. The candidate is terminal at its first attempt. No source-body inspection, OpenAI call, article or native QA occurred in that run. **The uninterrupted live article milestone remains unproven.** A separately authorized one-use fresh-candidate gate preserves the old grants, and a tested persistence fix records zero-eligible failures cleanly. **1,749 tests**, lint, typecheck and build pass. Publication and scheduling remain off.
+Latest operator checkpoint on 2026-09-08 Malaysia time: the [evidence-first content-repurposing proof](SCREENED-CONTENT-PROOF-2026-09-08.md) passed fresh research: nine organic results, three relevant observed FAQs and four automatically retrieved source bodies. All four GPT-5.5 requests completed. Final checks still failed: twelve product-reference false positives and 199 reviewed source-derived words against a 180-word ceiling. **No accepted article or native QA; the uninterrupted live milestone remains unproven.** The candidate is terminal at attempt one. Stop paid retries pending a checker/composition design review; no gate was bypassed. **1,800 tests**, lint, typecheck and build pass. Production and scheduling remain off.
+
+The preceding [webinar-repurposing test](FRESH-WEBINAR-PROOF-2026-09-08.md) remains a separate research rejection. Evidence-first screening resolved that obstacle for the new candidate; it did not establish paid keyword demand or repair quality.
 
 Previous checkpoint: the [awake-attempt and revalidation report](AWAKE-PROOF-2026-09-08.md) records the tenth product-demo attempt and its separate post-fix validation. The unchanged repaired article and original independent verdict passed the native lander's 32 blog tests, lint and build after reference-check corrections. That is post-fix revalidation, not an uninterrupted live worker success; it does not replace the latest rejected run.
 
@@ -112,6 +114,16 @@ Prepare durably writes each Markdown/SVG/bundle and generated `.publication.json
 The CLI prints one compact JSON summary to stdout. Markdown, SVG, bundle JSON, publication envelopes, and the bounded QA report are written under the selected artifact directory using file sync, atomic rename, and directory sync. Pilot consumption occurs only after the final report write succeeds. Errors (including initialization/argument failures) produce a redacted `failure-report.json` where the artifact directory is writable, with machine-readable stderr as the fallback.
 
 ### Local retry diagnostic
+
+For a separately authorized new topic after a consumed failed fresh-topic run,
+the local entry point accepts `--candidate-file PRIVATE_CANDIDATE_JSON
+--approve-next-candidate-from CLOSED_FAILED_FRESH_RUN_ID` alongside the required
+fresh `--run-id` and final `--execute`. This is not automatic renewal or permission
+to retry an old candidate. The predecessor must be a closed terminal first attempt;
+its exact approval, decision, run and failures are archived and hash-bound. A prior
+successful proof or publication blocks this path. A full queue is kept bounded
+without losing the exact selected identity. The latest grant is consumed and
+failed; no further execution is authorized by this documentation.
 
 `local-pilot-entry.ts` is a narrow, explicit artifact-only diagnostic for the retained
 `vc-c2-001` retry and existing local state. It is not an alternative unattended

@@ -36,15 +36,22 @@ Apify evidence → one draft + critique + QA → Markdown / SVG / report artifac
 Latest observation, 2026-09-08 Malaysia date:
 
 ```text
-FRESH TOPIC: Webinar repurposing → eight organic results → insufficient relevant PAA → rejection recorded → STOP
+EVIDENCE-FIRST: Four topics screened → one qualifies → fresh SERP + PAA + four source bodies
+LIVE: Draft → critique → one repair → final checker rejects references/source overuse → STOP
 ```
 
-The [fresh-topic report](../autoblogger/FRESH-WEBINAR-PROOF-2026-09-08.md) records
-one new-topic attempt, not an old-candidate retry. Research failed before source
-inspection, model generation or native QA. No new article resulted, and the
-uninterrupted live milestone remains unproven. Worker checks pass **1,749 tests**,
-lint, typecheck and build. Prior failures remain retained; no production or schedule
-action occurred.
+The [latest report](../autoblogger/SCREENED-CONTENT-PROOF-2026-09-08.md) records
+one content-repurposing attempt with nine organic results, three relevant observed
+FAQs, four automatically retrieved sources and four completed GPT-5.5 calls.
+Final checks rejected twelve ordinary-reference false positives and a source-use
+overage (199 versus 180 words). No accepted article or native QA resulted.
+The uninterrupted live milestone remains unproven. Worker checks pass **1,800
+tests**, lint, typecheck and build. Paid retries are paused for a checker and
+composition/repair design review; no sentence-specific bypass was added.
+
+The preceding [webinar report](../autoblogger/FRESH-WEBINAR-PROOF-2026-09-08.md)
+remains a separate research rejection. Its failed first attempt and all older
+history are preserved. No production or schedule action occurred.
 
 Previous, separate product-demo checkpoint:
 
@@ -216,7 +223,7 @@ Every article traces back to campaign, ICP, trigger, intent, keyword, SERP obser
 | --- | --- | --- |
 | Article and diagram updates | Original three review guides, older assisted local preview, and new unchanged-response Markdown/SVG review artifact; no production action | Team review; keep each artifact's provenance distinct |
 | Worker implementation | PR #1 open; offline and native fixture verification recorded separately | Implementation review |
-| Automated local article milestone | Ninth attempt completed fresh research, then local sleep overlapped the first model request and it timed out without a response; zero accepted bundles or native article validations | Worksheet-first copy quality still needs proof in an uninterrupted run. Candidate is terminal at nine, without a tenth path; no retry or history reset is authorized automatically |
+| Automated local article milestone | Latest content-repurposing attempt passed automatic research and four model stages, then failed reference and source-use checks; zero accepted bundles or native QA | Review the recurring pronoun-checker and composition/repair design before another paid attempt. New candidate terminal at one; all prior failures preserved; no automatic retry or reset |
 | Unattended Actions pilot | Not configured; no successful unattended article | Scoped read token, OpenAI Actions secret, reconciled state and reviewed worker |
 | Paid enrichment | Not connected; Apify research does not invent metrics | Provider access and a tested adapter |
 | Generated lander PRs | Not enabled | Merged blog contract, paid metrics, GitHub App and approved rollout |

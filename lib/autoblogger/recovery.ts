@@ -95,14 +95,23 @@ export function hasManualTargetSwitch(
 /** One new topic at attempt one; historical authorizations remain sealed in place. */
 export function grantManualFreshCandidate(
   stateInput: PersistentWorkerState, candidateInput: Candidate,
-  input: { runId: string; approvedAt: string },
+  input: { runId: string; approvedAt: string; previousFreshRunId?: string },
 ): PersistentWorkerState {
   const state = PersistentWorkerStateSchema.parse(stateInput);
   const candidate = CandidateSchema.parse(candidateInput);
-  if (state.manualFreshCandidateApproval || state.manualPilot !== null) throw new Error('Fresh candidate approval is one-use and requires no existing pilot.');
-  return PersistentWorkerStateSchema.parse({ ...state, manualFreshCandidateApproval: {
-    schemaVersion: 1, ...input, reason: 'user_authorized_new_topic_proof', candidate,
+  const prior = state.manualFreshCandidateApproval;
+  if (state.manualPilot !== null || (prior ? !prior.consumedAt || input.previousFreshRunId !== prior.runId : input.previousFreshRunId !== undefined)) {
+    throw new Error('Fresh successor requires the explicitly named consumed failed prior run and no existing pilot.');
+  }
+  const fp = prior && candidateFingerprints(prior.candidate).candidate;
+  const history = prior && fp ? [...(state.manualFreshCandidateHistory ?? []), {
+    approval: prior, decision: state.decisions[fp], run: state.runs[prior.runId],
+    failures: state.failures.filter(f => f.runId === prior.runId || f.candidateFingerprint === fp),
+  }] : undefined;
+  return PersistentWorkerStateSchema.parse({ ...state, ...(history ? { manualFreshCandidateHistory: history } : {}), manualFreshCandidateApproval: {
+    schemaVersion: 1, runId: input.runId, approvedAt: input.approvedAt, reason: 'user_authorized_new_topic_proof', candidate,
     priorHistoryHash: hashIdentity(JSON.stringify({ manualRetryApproval: state.manualRetryApproval, manualTargetSwitch: state.manualTargetSwitch })),
+    ...(history ? { priorFreshApprovalHash: hashIdentity(JSON.stringify(history)) } : {}),
     consumedAt: null,
   } });
 }

@@ -29,11 +29,46 @@ function fixture() {
 }
 
 describe('local artifact-only pilot preflight', () => {
+  it('requires an exact predecessor for a separately approved next candidate', () => {
+    const args = ['--run-id', 'screened-next', '--candidate-file', 'artifacts/selected.json', '--approve-next-candidate-from', 'fresh-webinar-proof-2026-09-08', '--execute'];
+    expect(parseLocalPilotArguments(args)).toEqual({ runId: args[1], candidateFile: args[3], approveNextCandidateFrom: args[5] });
+    for (const bad of [args.slice(0, -1), [...args, '--reset'], ['--run-id', args[5], ...args.slice(2)],
+      [...args.slice(0, -1), '--approve-fresh-candidate', '--execute'],
+      ['--run-id', 'next', '--approve-next-candidate-from', args[5], '--execute']]) {
+      expect(() => parseLocalPilotArguments(bad)).toThrow();
+    }
+  });
   it('accepts one explicit fresh-candidate run without combining retry permissions', () => {
     const args = ['--run-id', 'fresh-webinar-proof', '--candidate-file', 'artifacts/fresh.json', '--approve-fresh-candidate', '--execute'];
     expect(parseLocalPilotArguments(args)).toEqual({ runId: 'fresh-webinar-proof', candidateFile: 'artifacts/fresh.json', approveFreshCandidate: true });
     for (const bad of [args.slice(0, -1), [...args, '--reset'], [...args.slice(0, -1), '--retry-target-from', 'old', '--execute'],
       ['--run-id', 'fresh', '--approve-fresh-candidate', '--execute']]) expect(() => parseLocalPilotArguments(bad)).toThrow();
+  });
+
+  it('reconciles a screened successor without resetting its rejected predecessor', () => {
+    const prior = failedThirdTargetFixture();
+    const candidate = CandidateSchema.parse({ ...other, articleId: 'vc-c4-051', campaignId: 'gtm-content-repurposing-buyer',
+      primaryKeyword: 'webinar repurposing', title: 'Webinar Repurposing', slug: 'webinar-repurposing' });
+    const next = CandidateSchema.parse({ ...candidate, articleId: 'vc-c4-052', primaryKeyword: 'content repurposing', title: 'Content Repurposing', slug: 'content-repurposing' });
+    const approvedAt = '2026-09-08T00:00:00.000Z';
+    const first = reconcileLocalPilotCandidate({ state: prior.state, backlog: prior.backlog, candidate, runId: 'rejected-fresh', approveFreshCandidate: true, approvedAt });
+    const fp = candidateFingerprints(candidate).candidate;
+    let state = reserveCandidate(first.state, candidate, 'rejected-fresh', 'manual_pilot', approvedAt);
+    state = markCandidateFailure(state, candidate, 'rejected-fresh', 'missing_relevant_paa', false, approvedAt);
+    state.runs['rejected-fresh'] = { schemaVersion: 1, runId: 'rejected-fresh', mode: 'manual_pilot', startedAt: approvedAt, selectedCandidateFingerprints: [], status: 'failed' };
+    state.failures.push({ runId: 'rejected-fresh', candidateFingerprint: fp, code: 'no_eligible_opportunities', attempt: 1, observedAt: approvedAt, detail: 'No relevant questions.' });
+    const before = structuredClone(state);
+    const input = { state, backlog: first.backlog, candidate: next, runId: 'screened-next', approveNextCandidateFrom: 'rejected-fresh', approvedAt };
+    const prepared = reconcileLocalPilotCandidate(input);
+    expect(state).toEqual(before);
+    expect(prepared.state.runs).toEqual(before.runs);
+    expect(prepared.state.failures).toEqual(before.failures);
+    expect(prepared.state.decisions).toEqual(before.decisions);
+    expect(prepared.state.manualFreshCandidateApproval?.candidate).toEqual(next);
+    expect(prepared.nextAttempt).toBe(1);
+    for (const extra of [{ approveNextCandidateFrom: 'wrong-run' }, { approveFreshCandidate: true }, { retryTargetFrom: 'old' }, { candidate }]) {
+      expect(() => reconcileLocalPilotCandidate({ ...input, ...extra })).toThrow();
+    }
   });
 
   it('adds a never-attempted topic without editing the historical grants or backlog', () => {
@@ -57,6 +92,21 @@ describe('local artifact-only pilot preflight', () => {
     }
     const overlap = { ...candidate, primaryKeyword: other.primaryKeyword };
     expect(() => reconcileLocalPilotCandidate({ ...input, candidate: overlap })).toThrow();
+  });
+
+  it('keeps a full queue intact while the explicit candidate enters through the transient backlog', () => {
+    const prior = failedThirdTargetFixture();
+    const queuedCandidates = Array.from({ length: 500 }, (_, index) => CandidateSchema.parse({ ...other,
+      articleId: `vc-c5-${String(index + 1).padStart(3, '0')}`, campaignId: 'portfolio-media-platform',
+      primaryKeyword: `portfolio media fixture ${index}`, title: `Portfolio Media Fixture ${index}`, slug: `portfolio-media-fixture-${index}` }));
+    const candidate = CandidateSchema.parse({ ...other, articleId: 'vc-c4-052', campaignId: 'gtm-content-repurposing-buyer',
+      primaryKeyword: 'content repurposing', title: 'Content Repurposing', slug: 'content-repurposing' });
+    const state = { ...prior.state, queuedCandidates };
+    const prepared = reconcileLocalPilotCandidate({ state, backlog: prior.backlog, candidate, runId: 'full-queue-proof', approveFreshCandidate: true, approvedAt: '2026-09-08T00:00:00.000Z' });
+    expect(prepared.state.queuedCandidates).toEqual(queuedCandidates);
+    expect(prepared.backlog).toContainEqual(candidate);
+    expect(prepared.state.manualFreshCandidateApproval?.candidate).toEqual(candidate);
+    expect(state.queuedCandidates).toEqual(queuedCandidates);
   });
   function terminalFixture() {
     const input = fixture();

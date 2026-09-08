@@ -3,7 +3,34 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-## Latest fresh-topic live test — 2026-09-08 Malaysia time
+## Latest evidence-first live proof — 2026-09-08 Malaysia time
+
+The [content-repurposing proof](SCREENED-CONTENT-PROOF-2026-09-08.md) passed
+automatic research: nine organic results, three relevant observed FAQs and four
+retrieved source bodies. All four GPT-5.5 stages completed with HTTP 200. Final
+acceptance failed on twelve product-reference findings and 199 reviewed
+source-derived words from one page, above the unchanged 180-word ceiling.
+There is no accepted bundle or native QA result from this run.
+
+Read-only replay reproduces the same thirteen findings from hash-verified,
+unchanged receipts and all 97 matching binding hashes. No additional API call,
+manual rewriting or review override occurred. The new candidate is terminal at
+one; all 15 prior runs and 28 prior failures remain unchanged. The old lander and
+production are untouched, with no generated PR or schedule activation.
+
+The successor-authorization, inventory-only exception and full-queue preparation
+corrections passed **1,800 tests across 52 files**, lint, regenerated-route
+typecheck, build and whitespace checks before live execution. Independent review
+found no blocking defect in that scoped patch. This software verification is not
+evidence of an accepted live article. Paid retries are paused pending a review of
+the recurring reference-checker and composition/repair design problems.
+
+Final post-run checks again passed all **1,800 tests across 52 files** (108.33
+seconds), lint, typecheck, build and whitespace checks. Changed-content secret
+scans and local documentation links passed. The read-only checkpoint review found
+no factual discrepancy; no further live provider calls or artifact rewriting occurred.
+
+## Previous fresh-topic live test — 2026-09-08 Malaysia time
 
 The [webinar-repurposing test](FRESH-WEBINAR-PROOF-2026-09-08.md) attempted one
 different topic with fresh US/en Apify evidence. Eight organic results were found,
