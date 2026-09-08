@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
 import { describe, expect, it } from 'vitest';
 import type { DraftingContext, GeneratedDraftV2, SourceFact } from './content-bundle';
-import { buildSourcePlan, measureReviewedSourceUse, sourceAllocationFindings, measurePotentialSourceUse as measure } from './source-plan';
+import { buildSourcePlan, buildSourceRepairPlan, measureReviewedSourceUse, sourceAllocationFindings, measurePotentialSourceUse as measure } from './source-plan';
 import { extractSourceBody } from './source-extraction';
 
 function source(id: string, url = `https://example.com/${id}`): SourceFact {
@@ -13,12 +13,13 @@ function source(id: string, url = `https://example.com/${id}`): SourceFact {
   ] };
 }
 const facts = [source('a'), source('b')];
+type Review = Parameters<typeof measureReviewedSourceUse>[2][number];
 const planningContext = { candidate: { primaryKeyword: 'product demo checklist', icp: 'Founder preparing a buyer demonstration', intent: 'informational' }, sourceFacts: facts } as DraftingContext;
 function specimen(spans: Array<{ location: string; words: number; factIds?: string[] }>) {
   const draft = { claimBindings: spans.map(({ location, words, factIds }) => ({
     location, span: Array.from({ length: words }, (_, i) => `word${i}`).join(' '), sourceFactIds: factIds ?? ['a-demo'], productClaimId: null,
   })) } as GeneratedDraftV2;
-  const evaluations = draft.claimBindings.map((b, bindingIndex) => ({
+  const evaluations: Review[] = draft.claimBindings.map((b, bindingIndex) => ({
     bindingIndex, bindingHash: createHash('sha256').update(JSON.stringify([b.location, b.span, b.sourceFactIds, b.productClaimId])).digest('hex'),
     supported: true, kind: 'source_claim' as const, rationale: 'Source-derived statement.',
   }));
@@ -26,6 +27,18 @@ function specimen(spans: Array<{ location: string; words: number; factIds?: stri
 }
 
 describe('source planning and cumulative reviewed usage', () => {
+  it('gives initial composition one shared 120-word regional allowance per page, including FAQs and metadata', () => {
+    const context = { ...planningContext, sourceFacts: [...facts, source('alias', 'https://example.com/a/?ref=track')] };
+    const plan = buildSourcePlan(context);
+    expect(plan.sources).toHaveLength(2);
+    for (const page of plan.sources) {
+      expect(page.regions.reduce((sum, r) => sum + r.targetDerivedWords, 0)).toBe(120);
+      expect(Object.fromEntries(page.regions.map(r => [r.region, r.targetDerivedWords]))).toEqual({
+        directAnswer: 20, body: 60, headings: 5, faq: 20, description: 5, graphic: 10, other: 0,
+      });
+    }
+  });
+
   it('keeps a second source planning warning when another source already exceeds its final limit', () => {
     const input = specimen([{ location: '/sections/0/markdown', words: 181 },
       { location: '/sections/1/markdown', words: 144, factIds: ['b-demo'] }]);
@@ -173,6 +186,165 @@ describe('source planning and cumulative reviewed usage', () => {
     expect(measureReviewedSourceUse(facts, input.draft, input.evaluations).findings).toEqual(expect.arrayContaining([
       expect.objectContaining({ code: 'content.source_usage_review' }),
     ]));
+  });
+});
+
+describe('bounded source repair planning', () => {
+  it('aggregates repeated FAQs and every public region into one page budget with hash-bound removal targets', () => {
+    const input = specimen([
+      { location: '/directAnswer', words: 20 },
+      { location: '/sections/0/markdown', words: 60 },
+      { location: '/sections/0/heading', words: 5 },
+      { location: '/faqAnswers/0/answer', words: 15 },
+      { location: '/faqAnswers/0/answer', words: 20 },
+      { location: '/faqAnswers/1/answer', words: 15 },
+      { location: '/description', words: 15 },
+      { location: '/editorialGraphic/alt', words: 10 },
+      { location: '/editorialGraphic/steps/0/detail', words: 21 },
+      { location: '/customerTrigger', words: 200 },
+      { location: '/competitorGap', words: 200 },
+    ]);
+    const before = structuredClone({ context: planningContext, ...input });
+    const plan = buildSourceRepairPlan(planningContext, input.draft, input.evaluations);
+    expect(plan.status).toBe('ready');
+    expect(plan.findings).toEqual([expect.objectContaining({ code: 'content.source_budget' })]);
+    const page = plan.sources[0];
+    expect(page).toMatchObject({ derivedWords: 181, maxDerivedWords: 180, targetDerivedWords: 120, removeDerivedWords: 61 });
+    expect(Object.fromEntries(page.regions.map(r => [r.region, [r.derivedWords, r.targetDerivedWords, r.removeDerivedWords]]))).toEqual({
+      directAnswer: [20, 20, 0], body: [60, 60, 0], headings: [5, 5, 0],
+      faq: [50, 20, 30], description: [15, 5, 10], graphic: [31, 10, 21], other: [0, 0, 0],
+    });
+    expect(page.locations.find(l => l.location === '/faqAnswers/0/answer')).toMatchObject({
+      derivedWords: 35, targetDerivedWords: 5, removeDerivedWords: 30,
+      bindings: [
+        { bindingIndex: 3, bindingHash: input.evaluations[3].bindingHash, derivedWords: 15 },
+        { bindingIndex: 4, bindingHash: input.evaluations[4].bindingHash, derivedWords: 20 },
+      ],
+    });
+    expect(page.locations.find(l => l.location === '/faqAnswers/1/answer')?.removeDerivedWords).toBe(0);
+    expect(page.locations.find(l => l.location === '/description')?.removeDerivedWords).toBe(10);
+    expect(page.locations.find(l => l.location === '/editorialGraphic/steps/0/detail')?.removeDerivedWords).toBe(21);
+    expect(page.locations.some(l => ['/customerTrigger', '/competitorGap'].includes(l.location))).toBe(false);
+    expect(page.locations.reduce((sum, l) => sum + l.removeDerivedWords, 0)).toBe(61);
+    expect(plan.reviewBindings).toEqual(input.evaluations.map(({ bindingIndex, bindingHash }) => ({ bindingIndex, bindingHash })));
+    expect(buildSourceRepairPlan(planningContext, input.draft, [...input.evaluations].reverse())).toEqual(plan);
+    expect({ context: planningContext, ...input }).toEqual(before);
+    expect(JSON.stringify(plan)).not.toContain('word0');
+  });
+
+  it('shares the allowance across query variants and charges shared-source spans in full to both pages', () => {
+    const context = { ...planningContext, sourceFacts: [facts[0], source('alias', 'https://www.example.com/a/?ref=track#intro'), facts[1]] };
+    const input = specimen([
+      { location: '/sections/0/markdown', words: 90, factIds: ['a-demo', 'a-check', 'alias-demo', 'a-demo', 'b-demo'] },
+      { location: '/faqAnswers/0/answer', words: 91, factIds: ['alias-demo'] },
+    ]);
+    const plan = buildSourceRepairPlan(context, input.draft, input.evaluations);
+    expect(plan.sources).toHaveLength(2);
+    expect(plan.sources.map(p => [p.sourceIds, p.derivedWords, p.removeDerivedWords])).toEqual([
+      [['a', 'alias'], 181, 61], [['b'], 90, 0],
+    ]);
+    expect(plan.sources[0].locations[0].bindings).toHaveLength(1);
+    expect(plan.sources.every(p => p.regions.reduce((sum, r) => sum + r.targetDerivedWords, 0) === 120)).toBe(true);
+    expect(plan.reuseCandidates.map(p => p.sourceIds)).toEqual([['b']]);
+  });
+
+  it.each(['missing', 'stale', 'duplicate', 'unknown index', 'unknown kind', 'product mismatch', 'unknown fact', 'ambiguous fact'])('refuses %s reviews instead of planning around a classification failure', problem => {
+    const context = structuredClone(planningContext);
+    const input = specimen([{ location: '/sections/0/markdown', words: 181 }]);
+    if (problem === 'missing') input.evaluations = [];
+    if (problem === 'stale') input.draft.claimBindings[0].span += ' changed';
+    if (problem === 'duplicate') input.evaluations.push(input.evaluations[0]);
+    if (problem === 'unknown index') input.evaluations[0].bindingIndex = 99;
+    if (problem === 'unknown kind') input.evaluations[0].kind = 'unclassified' as Review['kind'];
+    if (problem === 'product mismatch') input.evaluations[0].kind = 'product_claim';
+    if (problem === 'unknown fact') context.sourceFacts[0].facts = [];
+    if (problem === 'ambiguous fact') context.sourceFacts[1].facts[1].id = 'a-demo';
+    const plan = buildSourceRepairPlan(context, input.draft, input.evaluations);
+    expect(plan).toMatchObject({ status: 'blocked', sources: [], reuseCandidates: [] });
+    expect(plan.findings).toEqual(expect.arrayContaining([expect.objectContaining({ code: 'content.source_usage_review' })]));
+  });
+
+  it('restores the reserve using the largest FAQ location and ranks reuse by lowest reviewed concentration', () => {
+    const context = { ...planningContext, sourceFacts: [...facts, source('c'), source('d'), source('off-topic')] };
+    context.sourceFacts[4].facts = [{ id: 'unrelated', text: 'A conference offers refreshments.', evidenceKind: 'body' }];
+    const input = specimen([
+      { location: '/directAnswer', words: 16 }, { location: '/sections/0/markdown', words: 72 },
+      { location: '/faqAnswers/0/answer', words: 21 }, { location: '/faqAnswers/1/answer', words: 11 },
+      { location: '/faqAnswers/2/answer', words: 46 },
+      { location: '/sections/1/markdown', words: 158, factIds: ['b-demo'] },
+      { location: '/sections/2/markdown', words: 50, factIds: ['c-demo'] },
+      { location: '/faqAnswers/3/answer', words: 46, factIds: ['d-demo'] },
+    ]);
+    const plan = buildSourceRepairPlan(context, input.draft, input.evaluations);
+    expect(plan.sources.map(p => p.removeDerivedWords)).toEqual([46, 38, 0, 0, 0]);
+    expect(plan.sources[0].locations.filter(l => l.removeDerivedWords > 0)).toEqual([
+      expect.objectContaining({ location: '/faqAnswers/2/answer', targetDerivedWords: 0, removeDerivedWords: 46 }),
+    ]);
+    expect(plan.reuseCandidates.map(p => [p.sourceIds, p.availableDerivedWords])).toEqual([[['d'], 74], [['c'], 70]]);
+    expect(plan.reuseCandidates[0].anchorFactIds).toEqual(['d-check', 'd-demo']);
+    for (const page of plan.sources) {
+      expect(page.regions.reduce((sum, r) => sum + r.targetDerivedWords, 0)).toBe(120);
+      expect(page.locations.reduce((sum, l) => sum + l.targetDerivedWords, 0)).toBeLessThanOrEqual(120);
+      expect(page.locations.reduce((sum, l) => sum + l.removeDerivedWords, 0)).toBe(page.removeDerivedWords);
+    }
+  });
+
+  it('plans counted source claims alongside their unresolved support rejection for the same repair pass', () => {
+    const input = specimen([
+      { location: '/directAnswer', words: 16 }, { location: '/sections/0/markdown', words: 72 },
+      { location: '/faqAnswers/0/answer', words: 78 },
+    ]);
+    input.evaluations[0].supported = false;
+    const before = structuredClone(input);
+    const plan = buildSourceRepairPlan(planningContext, input.draft, input.evaluations);
+    expect(plan.status).toBe('ready');
+    expect(plan.unsupportedBindingIndices).toEqual([0]);
+    expect(plan.findings).toEqual([expect.objectContaining({ code: 'critique.support_rejected', bindingIndex: 0 })]);
+    expect(plan.sources[0]).toMatchObject({ derivedWords: 166, removeDerivedWords: 46 });
+    expect(plan.sources[0].locations.find(l => l.location === '/faqAnswers/0/answer')).toMatchObject({
+      derivedWords: 78, targetDerivedWords: 32, removeDerivedWords: 46,
+    });
+    expect(input).toEqual(before);
+  });
+
+  it.each(['original_guidance', 'original_example'] as const)('reserves disputed %s exposure without rewriting the reviewed ledger or hiding the usable plan', kind => {
+    const input = specimen([
+      { location: '/sections/0/markdown', words: 79 },
+      { location: '/faqAnswers/0/answer', words: 70 },
+      { location: '/description', words: 5, factIds: ['b-demo'] },
+    ]);
+    input.evaluations[1].kind = kind;
+    input.evaluations[1].supported = false;
+    const plan = buildSourceRepairPlan(planningContext, input.draft, input.evaluations);
+    expect(plan.status).toBe('ready');
+    expect(plan.unsupportedBindingIndices).toEqual([1]);
+    expect(plan.findings).toEqual([expect.objectContaining({ code: 'critique.support_rejected', bindingIndex: 1 })]);
+    expect(plan.sources[0]).toMatchObject({ derivedWords: 79, groundedWords: 149, disputedWords: 70, unsafe: true });
+    expect(plan.sources[0].disputedLocations).toEqual([{
+      location: '/faqAnswers/0/answer', bindingIndex: 1, bindingHash: input.evaluations[1].bindingHash, words: 70,
+    }]);
+    expect(plan.sources[0].regions.reduce((sum, r) => sum + r.targetDerivedWords, 0)).toBe(120);
+    expect(plan.sources[0].locations).toHaveLength(1);
+    expect(plan.reuseCandidates.map(p => p.sourceIds)).toEqual([['b']]);
+  });
+
+  it('keeps grounded original guidance and examples out of derivation and removal targets', () => {
+    const input = specimen([
+      { location: '/sections/0/markdown', words: 79 },
+      { location: '/faqAnswers/0/answer', words: 500 },
+      { location: '/description', words: 200 },
+      { location: '/editorialGraphic/steps/0/detail', words: 300, factIds: ['b-demo'] },
+    ]);
+    input.evaluations[1].kind = 'original_guidance';
+    input.evaluations[2].kind = 'original_example';
+    input.evaluations[3].kind = 'original_guidance';
+    const plan = buildSourceRepairPlan(planningContext, input.draft, input.evaluations);
+    expect(plan.status).toBe('ready');
+    expect(plan.findings).toEqual([]);
+    expect(plan.sources[0]).toMatchObject({ derivedWords: 79, groundedWords: 779, removeDerivedWords: 0 });
+    expect(plan.sources[0].locations.map(l => l.location)).toEqual(['/sections/0/markdown']);
+    expect(plan.sources[1]).toMatchObject({ derivedWords: 0, groundedWords: 300, removeDerivedWords: 0, locations: [] });
+    expect(plan.reuseCandidates.map(p => [p.sourceIds, p.availableDerivedWords])).toEqual([[['b'], 120], [['a'], 41]]);
   });
 });
 

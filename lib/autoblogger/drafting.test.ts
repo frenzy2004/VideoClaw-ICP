@@ -16,7 +16,7 @@ import type {
   DraftingContext,
   GeneratedDraftV2,
 } from './content-bundle';
-import { GENERATED_DRAFT_V2_JSON_SCHEMA, inspectGeneratedDraft } from './content-bundle';
+import { GENERATED_DRAFT_V2_JSON_SCHEMA, inspectGeneratedDraft, productReferenceManifest } from './content-bundle';
 
 const candidate: Candidate = {
   schemaVersion: 1,
@@ -687,6 +687,16 @@ describe('contextual review and targeted bounded repair', () => {
       repairStrategy: 'restructure_article',
       articleLevelIssues: expect.arrayContaining([expect.objectContaining({ code: 'content.source_budget' })]),
       sourceUsage: { sources: expect.arrayContaining([expect.objectContaining({ sourceIds: ['yc'], maxDerivedWords: 180 })]) },
+      sourceRepairPlan: {
+        status: 'ready',
+        sources: expect.arrayContaining([expect.objectContaining({
+          sourceIds: ['yc'], targetDerivedWords: 120,
+          locations: expect.arrayContaining([
+            expect.objectContaining({ location: '/description', region: 'description' }),
+            expect.objectContaining({ location: '/faqAnswers/0/answer', region: 'faq' }),
+          ]),
+        })]),
+      },
       deterministicFindings: expect.arrayContaining([expect.objectContaining({ code: 'content.source_budget' })]),
     });
     for (const request of client.requests) {
@@ -976,6 +986,105 @@ describe('provider response schemas and runtime approval invariants', () => {
 });
 
 describe('structured drafting orchestration', () => {
+  it.each(['rendered heading', 'earlier FAQ sentence'])('finalizer retains %s product context', field => {
+    const value = structuredClone(draft);
+    const product = { id: 'fixture-export', text: 'VideoClaw exports video.', allowedSourceFactIds: ['fixture-product-fact'], subjectAliases: ['VideoClaw'] };
+    const localContext = structuredClone(context);
+    localContext.productClaims = [product];
+    localContext.sourceFacts[0].facts.push({ id: 'fixture-product-fact', text: product.text });
+    const spans = [product.text, 'The team reviews a webinar.', 'It guarantees perfect edits for the team.'];
+    const location = field === 'rendered heading' ? '/sections/0/markdown' : '/faqAnswers/0/answer';
+    if (field === 'rendered heading') {
+      value.sections[0] = { heading: product.text.replace('VideoClaw', '**Video**Claw'), markdown: `The team reviews a webinar. A speaker prepares the introduction. ${spans[2]}` };
+      value.claimBindings = value.claimBindings.filter(b => !b.location.startsWith('/sections/0/'));
+      value.claimBindings.push({ location: '/sections/0/heading', span: product.text, sourceFactIds: product.allowedSourceFactIds, productClaimId: product.id });
+      spans.splice(0, 2, 'The team reviews a webinar.', 'A speaker prepares the introduction.');
+    } else {
+      value.faqAnswers[0].answer = spans.join(' ');
+      value.claimBindings = value.claimBindings.filter(b => b.location !== location);
+    }
+    value.claimBindings.push(...spans.map(span => ({ location, span,
+      sourceFactIds: span === product.text ? product.allowedSourceFactIds : ['yc-bullets'],
+      productClaimId: span === product.text ? product.id : null })));
+    const referenceReviews = productReferenceManifest(localContext, value).map(entry => ({
+      bindingIndex: entry.bindingIndex, bindingHash: entry.bindingHash, contextHash: entry.contextHash,
+      classification: 'non_product', subject: 'the team', rationale: 'Fixture deliberately attempts to waive product context.',
+    }));
+    expect(finalizeReviewedRepair({ context: localContext, repaired: value, originalIssues: [], media,
+      verification: { schemaVersion: 1, approved: true, evaluations: [], newIssues: [], referenceReviews,
+        supportEvaluations: supportedBindings(value) },
+    })).toMatchObject({ status: 'blocked', findings: expect.arrayContaining([expect.objectContaining({ location, reason: 'unapproved_product_reference' })]) });
+  });
+
+  it.each(['FAQ question', 'article title'])('finalizer cannot waive product context from the %s', field => {
+    const value = structuredClone(draft);
+    const localContext = structuredClone(context);
+    const span = 'It guarantees perfect edits for the team, prepares the presentation, corrects every caption, and delivers a polished founder video without any additional review.';
+    const location = field === 'FAQ question' ? '/faqAnswers/0/answer' : '/description';
+    if (field === 'FAQ question') {
+      const question = 'What can VideoClaw do for the team?';
+      localContext.evidence.faqQuestions[0] = question;
+      localContext.evidence.serp.peopleAlsoAsk[0] = question;
+      value.faqAnswers[0] = { question, answer: span };
+    } else {
+      localContext.candidate.title = 'VideoClaw for the Team';
+      value.description = span;
+    }
+    value.claimBindings = value.claimBindings.filter(b => b.location !== location);
+    value.claimBindings.push({ location, span, sourceFactIds: ['yc-bullets'], productClaimId: null });
+    const referenceReviews = productReferenceManifest(localContext, value).map(entry => ({
+      bindingIndex: entry.bindingIndex, bindingHash: entry.bindingHash, contextHash: entry.contextHash,
+      classification: 'non_product', subject: 'the team', rationale: 'Fixture deliberately attempts to waive product context.',
+    }));
+    expect(finalizeReviewedRepair({ context: localContext, repaired: value, originalIssues: [], media,
+      verification: { schemaVersion: 1, approved: true, evaluations: [], newIssues: [], referenceReviews,
+        supportEvaluations: supportedBindings(value) },
+    })).toMatchObject({ status: 'blocked', findings: expect.arrayContaining([expect.objectContaining({ location, reason: 'unapproved_product_reference' })]) });
+  });
+
+  it.each(['supported', 'unsupported', 'missing review', 'stale context'])('keeps final repaired reference acceptance coupled to %s evidence', scenario => {
+    const value = structuredClone(draft);
+    const spans = ['The team reviews the webinar.', 'It records an introduction and sends the draft for approval.'];
+    value.sections[0].markdown = spans.join(' ');
+    value.claimBindings = value.claimBindings.filter(b => b.location !== '/sections/0/markdown');
+    value.claimBindings.push(...spans.map(span => ({ location: '/sections/0/markdown', span, sourceFactIds: ['yc-bullets'], productClaimId: null })));
+    const referenceReviews = productReferenceManifest(context, value).map(entry => ({
+      bindingIndex: entry.bindingIndex, bindingHash: entry.bindingHash,
+      contextHash: scenario === 'stale context' ? '0'.repeat(64) : entry.contextHash,
+      classification: 'non_product', subject: 'The team', rationale: 'A human team is the named actor in the preceding sentence.',
+    }));
+    const outcome = finalizeReviewedRepair({ context, repaired: value, originalIssues: [], media,
+      verification: { schemaVersion: 1, approved: true, evaluations: [], newIssues: [],
+        referenceReviews: scenario === 'missing review' ? [] : referenceReviews,
+        supportEvaluations: supportedBindings(value).map(e => value.claimBindings[e.bindingIndex].location === '/sections/0/markdown'
+          ? { ...e, supported: scenario !== 'unsupported', kind: 'original_example' } : e),
+      },
+    });
+    expect(outcome.status).toBe(scenario === 'supported' ? 'ready' : 'blocked');
+    if (scenario !== 'supported') expect(outcome).not.toHaveProperty('bundle');
+  });
+
+  it('uses a current independent referent review without skipping factual support or materialization checks', async () => {
+    const value = structuredClone(draft);
+    const spans = ['The team reviews the webinar.', 'It records an introduction and sends the draft for approval.'];
+    value.sections[0].markdown = spans.join(' ');
+    value.claimBindings = value.claimBindings.filter(b => b.location !== '/sections/0/markdown');
+    value.claimBindings.push(...spans.map(span => ({ location: '/sections/0/markdown', span, sourceFactIds: ['yc-bullets'], productClaimId: null })));
+    const referenceReviews = productReferenceManifest(context, value).map(entry => ({
+      bindingIndex: entry.bindingIndex, bindingHash: entry.bindingHash, contextHash: entry.contextHash,
+      classification: 'non_product', subject: 'The team', rationale: 'The visible adjacent team is the actor; this is hypothetical editorial work, not software capability.',
+    }));
+    const critique = { ...approvedCritique, referenceReviews, supportEvaluations: supportedBindings(value).map(e =>
+      value.claimBindings[e.bindingIndex].location === '/sections/0/markdown' ? { ...e, kind: 'original_example' as const } : e) };
+    const client = new FixtureStructuredClient([value, critique]);
+    const outcome = await createStructuredDrafter({ client, mediaAllowlist: [media] }).draft(context);
+    expect(outcome).toMatchObject({ status: 'ready', repaired: false });
+    if (outcome.status !== 'ready') throw new Error('Expected fully reviewed fixture');
+    expect(outcome.bundle.markdown).toContain(spans[1]);
+    expect(client.requests[1].input).toMatchObject({ referenceManifest: expect.arrayContaining([expect.objectContaining({ span: spans[1], explicitProductContext: false })]) });
+    expect(client.requests).toHaveLength(2);
+  });
+
   it('accepts a natural paraphrase only after complete independent support verification', async () => {
     const paraphrase = withSourceClaim('The application advice favors bullet points for speaking.');
     const critique: DraftCritiqueV1 = {

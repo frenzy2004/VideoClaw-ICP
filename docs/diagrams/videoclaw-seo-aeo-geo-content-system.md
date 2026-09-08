@@ -36,18 +36,23 @@ Apify evidence → one draft + critique + QA → Markdown / SVG / report artifac
 Latest observation, 2026-09-08 Malaysia date:
 
 ```text
-EVIDENCE-FIRST: Four topics screened → one qualifies → fresh SERP + PAA + four source bodies
-LIVE: Draft → critique → one repair → final checker rejects references/source overuse → STOP
+EVIDENCE-FIRST: Screen → correct generic FAQ matching → recover observed questions → verify source bodies
+LIVE: Fresh research → draft → critique → one repair → unsupported claims/source overuse rejected → STOP
 ```
 
-The [latest report](../autoblogger/SCREENED-CONTENT-PROOF-2026-09-08.md) records
-one content-repurposing attempt with nine organic results, three relevant observed
-FAQs, four automatically retrieved sources and four completed GPT-5.5 calls.
-Final checks rejected twelve ordinary-reference false positives and a source-use
-overage (199 versus 180 words). No accepted article or native QA resulted.
-The uninterrupted live milestone remains unproven. Worker checks pass **1,800
-tests**, lint, typecheck and build. Paid retries are paused for a checker and
-composition/repair design review; no sentence-specific bypass was added.
+The [latest report](../autoblogger/CONTEXT-BUDGET-PROOF-2026-09-08.md) records
+one video-marketing attempt with eight organic results, three observed topic FAQs,
+four automatically retrieved sources and four completed GPT-5.5 calls. Current
+context-bound reviews resolved six ordinary-reference ambiguities. Final checks
+still rejected three new unsupported assertions and source-use totals of 215/233
+versus the unchanged 180-word ceiling. No accepted article or native QA resulted.
+The uninterrupted live milestone remains unproven. Worker checks pass **1,850
+tests**, lint, typecheck and build. Per-region repair budgets are implemented, not
+proven effective at constraining generated copy. FAQ source coverage and repair
+expansion are the next engineering problems; no additional paid attempt is queued.
+
+The [previous content-repurposing report](../autoblogger/SCREENED-CONTENT-PROOF-2026-09-08.md)
+and its original failed state remain unchanged; it was not relabelled as successful.
 
 The preceding [webinar report](../autoblogger/FRESH-WEBINAR-PROOF-2026-09-08.md)
 remains a separate research rejection. Its failed first attempt and all older

@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import matter from 'gray-matter';
 import remarkParse from 'remark-parse';
 import { unified } from 'unified';
@@ -12,6 +13,7 @@ import {
   assertSourceFacts,
   inspectFinalMarkdown,
   inspectGeneratedDraft,
+  productReferenceManifest,
   materializeDraftBundle,
   renderEditorialSvg,
   selectProductMedia,
@@ -796,6 +798,134 @@ describe('contextual product references and precise binding failures', () => {
       ].reverse(),
     });
   }
+
+  const subject = 'The team';
+  const ordinary = 'The team reviews the webinar.';
+  const action = 'It records an introduction and sends the draft for approval.';
+  function referentReview(value: GeneratedDraftV2, span = action) {
+    const bindingIndex = value.claimBindings.findIndex(b => b.span === span);
+    const binding = value.claimBindings[bindingIndex];
+    return {
+      bindingIndex,
+      bindingHash: createHash('sha256').update(JSON.stringify([binding.location, binding.span, binding.sourceFactIds, binding.productClaimId])).digest('hex'),
+      contextHash: createHash('sha256').update(JSON.stringify([context.candidate.title, value, context.productClaims])).digest('hex'),
+      classification: 'non_product' as const, subject,
+      rationale: 'The adjacent visible subject is the human team, not VideoClaw or an unnamed software product.',
+    };
+  }
+
+  it('requires current independent contextual review to resolve a human-team pronoun', () => {
+    const value = withSpans([ordinary, action]);
+    expect(inspectGeneratedDraft(context, value)).toContainEqual(expect.objectContaining({ span: action, reason: 'unapproved_product_reference' }));
+    expect(inspectGeneratedDraft(context, value, [referentReview(value)]))
+      .not.toContainEqual(expect.objectContaining({ span: action, reason: 'unapproved_product_reference' }));
+  });
+
+  it.each(['stale binding', 'stale context', 'missing subject', 'ambiguous', 'product', 'duplicate'])('does not accept a %s reference review', kind => {
+    const value = withSpans([ordinary, action]);
+    const review = referentReview(value);
+    const altered = { ...review,
+      ...(kind === 'stale binding' ? { bindingHash: '0'.repeat(64) } : {}),
+      ...(kind === 'stale context' ? { contextHash: '0'.repeat(64) } : {}),
+      ...(kind === 'missing subject' ? { subject: 'An absent presenter' } : {}),
+      ...(['ambiguous', 'product'].includes(kind) ? { classification: kind } : {}),
+    };
+    expect(inspectGeneratedDraft(context, value, kind === 'duplicate' ? [review, review] : [altered]))
+      .toContainEqual(expect.objectContaining({ span: action, reason: 'unapproved_product_reference' }));
+  });
+
+  it.each([
+    ['The team reviews VideoClaw.', 'It automatically guarantees perfect edits.'],
+    ['The team reviews the webinar.', 'VideoClaw guarantees perfect edits.'],
+    ['The team reviews the webinar.', 'The app guarantees perfect edits.'],
+    ['The team reviews the webinar.', 'This product guarantees perfect edits.'],
+  ])('never lets contextual classification approve an explicit or adjacent product claim: %j', (before, span) => {
+    const value = withSpans([before, span]);
+    expect(inspectGeneratedDraft(context, value, [referentReview(value, span)]))
+      .toContainEqual(expect.objectContaining({ span, reason: 'unapproved_product_reference' }));
+  });
+
+  it.each(['The team', 'VideoClaw'])('retains graphic label context for a following detail: %s', label => {
+    const value = withDraft({ editorialGraphic: { ...generatedDraft.editorialGraphic,
+      steps: [{ label, detail: 'It records an introduction for the team.' }, ...generatedDraft.editorialGraphic.steps.slice(1)],
+    } });
+    value.claimBindings = value.claimBindings.filter(b => !b.location.startsWith('/editorialGraphic/steps/0/'));
+    value.claimBindings.push({ location: '/editorialGraphic/steps/0/label', span: label, sourceFactIds: ['yc-bullets'], productClaimId: null },
+      { location: '/editorialGraphic/steps/0/detail', span: value.editorialGraphic.steps[0].detail, sourceFactIds: ['yc-bullets'], productClaimId: null });
+    const entry = productReferenceManifest(context, value).find(e => e.location === '/editorialGraphic/steps/0/detail')!;
+    expect(entry.nearby).toContain(label);
+    const review = { ...referentReview(value, entry.span), subject: 'the team' };
+    const blocked = inspectGeneratedDraft(context, value, [review]).some(f => f.span === entry.span && f.reason === 'unapproved_product_reference');
+    expect(blocked).toBe(label === 'VideoClaw');
+  });
+
+  it('retains a product antecedent across a section boundary despite a claimed ordinary anchor', () => {
+    const value = withSpans([context.productClaims[0].text]);
+    value.sections[1] = { heading: 'Next step', markdown: 'It guarantees perfect edits for the team.' };
+    value.claimBindings = value.claimBindings.filter(b => !b.location.startsWith('/sections/1/'));
+    value.claimBindings.push({ location: '/sections/1/heading', span: 'Next step', sourceFactIds: ['yc-bullets'], productClaimId: null },
+      { location: '/sections/1/markdown', span: value.sections[1].markdown, sourceFactIds: ['yc-bullets'], productClaimId: null });
+    const review = { ...referentReview(value, value.sections[1].markdown), subject: 'the team' };
+    expect(inspectGeneratedDraft(context, value, [review])).toContainEqual(expect.objectContaining({ span: value.sections[1].markdown, reason: 'unapproved_product_reference' }));
+    expect(() => materializeDraftBundle(context, value, mediaAllowlist[0], [review])).toThrow('Unsafe generated draft');
+  });
+
+  it('reports an invalid section binding without crashing reference-manifest construction', () => {
+    const value = withDraft({ claimBindings: [...generatedDraft.claimBindings,
+      { location: '/sections/999/markdown', span: 'It guarantees perfect edits.', sourceFactIds: ['yc-bullets'], productClaimId: null }] });
+    expect(() => productReferenceManifest(context, value)).not.toThrow();
+    expect(inspectGeneratedDraft(context, value)).toContainEqual(expect.objectContaining({ location: '/sections/999/markdown', reason: 'span_mismatch' }));
+  });
+
+  it.each(['What can VideoClaw do for the team?', 'What should the team do next?'])('retains FAQ question context: %s', question => {
+    const value = structuredClone(generatedDraft);
+    const localContext = structuredClone(context);
+    localContext.evidence.faqQuestions[0] = question;
+    value.faqAnswers[0] = { question, answer: action };
+    value.claimBindings = value.claimBindings.filter(b => b.location !== '/faqAnswers/0/answer');
+    value.claimBindings.push({ location: '/faqAnswers/0/answer', span: action, sourceFactIds: ['yc-bullets'], productClaimId: null });
+    const entry = productReferenceManifest(localContext, value).find(e => e.location === '/faqAnswers/0/answer')!;
+    expect(entry.nearby).toContain(question);
+    const review = { ...referentReview(value), bindingHash: entry.bindingHash, contextHash: entry.contextHash };
+    const blocked = question.includes('VideoClaw');
+    expect(inspectGeneratedDraft(localContext, value, [review]).some(f => f.span === action && f.reason === 'unapproved_product_reference')).toBe(blocked);
+    if (blocked) expect(() => materializeDraftBundle(localContext, value, mediaAllowlist[0], [review])).toThrow('Unsafe generated draft');
+  });
+
+  it('retains the article title for a pronoun-led description', () => {
+    const value = structuredClone(generatedDraft);
+    const localContext = structuredClone(context);
+    localContext.candidate.title = 'VideoClaw for the Team';
+    value.description = 'It guarantees perfect edits for the team, prepares the presentation, corrects every caption, and delivers a polished founder video without any additional review.';
+    value.claimBindings = value.claimBindings.filter(b => b.location !== '/description');
+    value.claimBindings.push({ location: '/description', span: value.description, sourceFactIds: ['yc-bullets'], productClaimId: null });
+    const entry = productReferenceManifest(localContext, value).find(e => e.location === '/description')!;
+    expect(entry.explicitProductContext).toBe(true);
+    const review = { ...referentReview(value, value.description), bindingHash: entry.bindingHash, contextHash: entry.contextHash };
+    expect(inspectGeneratedDraft(localContext, value, [review])).toContainEqual(expect.objectContaining({ location: '/description', reason: 'unapproved_product_reference' }));
+    expect(() => materializeDraftBundle(localContext, value, mediaAllowlist[0], [review])).toThrow('Unsafe generated draft');
+  });
+
+  it.each(['rendered heading', 'earlier FAQ sentence'])('retains product context from %s after two ordinary spans', field => {
+    const value = structuredClone(generatedDraft);
+    const spans = [context.productClaims[0].text, 'The team reviews a webinar.', 'It guarantees perfect edits for the team.'];
+    const location = field === 'rendered heading' ? '/sections/0/markdown' : '/faqAnswers/0/answer';
+    if (field === 'rendered heading') {
+      value.sections[0] = { heading: context.productClaims[0].text.replace('VideoClaw', '**Video**Claw'), markdown: `The team reviews a webinar. A speaker prepares the introduction. ${spans[2]}` };
+      value.claimBindings = value.claimBindings.filter(b => !b.location.startsWith('/sections/0/'));
+      value.claimBindings.push({ location: '/sections/0/heading', span: spans[0], sourceFactIds: ['vc-text-editing'], productClaimId: 'vc-editing-claim' });
+      spans.splice(0, 2, 'The team reviews a webinar.', 'A speaker prepares the introduction.');
+    } else {
+      value.faqAnswers[0].answer = spans.join(' ');
+      value.claimBindings = value.claimBindings.filter(b => b.location !== location);
+    }
+    value.claimBindings.push(...spans.map(span => ({ location, span,
+      sourceFactIds: [span === context.productClaims[0].text ? 'vc-text-editing' : 'yc-bullets'],
+      productClaimId: span === context.productClaims[0].text ? 'vc-editing-claim' : null })));
+    const review = referentReview(value, spans[2]);
+    expect(inspectGeneratedDraft(context, value, [review])).toContainEqual(expect.objectContaining({ location, span: spans[2], reason: 'unapproved_product_reference' }));
+    expect(() => materializeDraftBundle(context, value, mediaAllowlist[0], [review])).toThrow('Unsafe generated draft');
+  });
 
   it.each([
     'This guide keeps a focused scope: it connects investor presentation goals with practical video preparation.',

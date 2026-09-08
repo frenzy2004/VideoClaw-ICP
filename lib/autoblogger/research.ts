@@ -276,6 +276,15 @@ export function selectRelevantPaaQuestions(keyword: string, questions: string[])
   while (topicTokens.length > 2 && QUESTION_PROCESS_MODIFIERS.has(topicTokens[topicTokens.length - 1])) {
     topicTokens.pop();
   }
+  // In a short compound such as "video marketing", dropping the medium leaves
+  // a different, overly broad topic. Longer topics ("founder pitch video")
+  // already retain two distinguishing terms. This is lexical screening, not a
+  // semantic endorsement of every selected question.
+  const requiresVideo = topicTokens.length === 1 && /\bvideos?\b/u.test(normalizeKeyword(topicKeyword));
+  if (requiresVideo) {
+    topicTokens.push('video');
+    keywordTokens.add('video');
+  }
   const minimumOverlap = Math.min(2, keywordTokens.size);
   if (topicTokens.length === 0) {
     throw new Error('Research requires three relevant People Also Ask questions.');
@@ -288,6 +297,7 @@ export function selectRelevantPaaQuestions(keyword: string, questions: string[])
     if (!trimmed || seen.has(normalized)) continue;
     seen.add(normalized);
     const questionTokens = relevantTokens(trimmed);
+    if (requiresVideo && /\bvideos?\b/u.test(normalized)) questionTokens.add('video');
     // Require the whole lexical topic: "product" + "checklist" is not
     // "product demo". Generic questions about that topic remain eligible.
     if (!topicTokens.every((token) => questionTokens.has(token))) continue;

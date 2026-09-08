@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import matter from 'gray-matter';
 import remarkGfm from 'remark-gfm';
 import remarkParse from 'remark-parse';
@@ -90,6 +91,16 @@ export const GeneratedDraftV2Schema = z.object({
 }).strict();
 
 export type GeneratedDraftV2 = z.infer<typeof GeneratedDraftV2Schema>;
+
+export const ProductReferenceReviewSchema = z.object({
+  bindingIndex: z.number().int().nonnegative(),
+  bindingHash: z.string().regex(/^[a-f0-9]{64}$/u),
+  contextHash: z.string().regex(/^[a-f0-9]{64}$/u),
+  classification: z.enum(['non_product', 'product', 'ambiguous']),
+  subject: z.string().trim().min(1).max(160),
+  rationale: z.string().trim().min(1).max(800),
+}).strict();
+export type ProductReferenceReview = z.infer<typeof ProductReferenceReviewSchema>;
 
 export const GENERATED_DRAFT_V2_JSON_SCHEMA = {
   type: 'object',
@@ -631,6 +642,77 @@ function generatedClaimSentences(draft: GeneratedDraftV2): Array<{ location: str
     .map((span) => ({ location, span })));
 }
 
+function referenceCheckContext(context: DraftingContext, draft: GeneratedDraftV2, bindingIndex: number) {
+  const binding = draft.claimBindings[bindingIndex];
+  // Visible prose order spans field boundaries: a heading, prior section or
+  // graphic label can supply the actor. Private campaign metadata cannot.
+  const visible = [
+    { location: '/title', span: context.candidate.title },
+    ...generatedClaimSentences(draft).filter(entry => entry.location !== '/competitorGap'),
+  ];
+  const position = visible.findIndex(entry => entry.location === binding.location && entry.span === binding.span);
+  const section = binding.location.match(/^\/sections\/(\d+)\//);
+  const faq = binding.location.match(/^\/faqAnswers\/(\d+)\//);
+  const step = binding.location.match(/^\/editorialGraphic\/steps\/(\d+)\//);
+  // Enclosing labels stay relevant even when an answer/body has several sentences.
+  const labels = [
+    ...(['/description', '/directAnswer'].includes(binding.location) ? [context.candidate.title] : []),
+    ...(section && draft.sections[Number(section[1])] ? claimSpansAtLocation(draft.sections[Number(section[1])].heading, `/sections/${section[1]}/heading`) : []),
+    ...(faq ? [draft.faqAnswers[Number(faq[1])]?.question] : []),
+    ...(binding.location.startsWith('/editorialGraphic/') ? [draft.editorialGraphic.title] : []),
+    ...(step ? [draft.editorialGraphic.steps[Number(step[1])]?.label] : []),
+  ].filter((label): label is string => label !== undefined);
+  // Each FAQ question establishes its own discourse; the final body section is
+  // not the antecedent of a new question explicitly naming a human actor.
+  const preceding = visible.slice(Math.max(0, position - 2), position + 1)
+    .filter(entry => !faq || entry.location.startsWith(`/faqAnswers/${faq[1]}/`));
+  const nearby = position < 0 ? [] : [...new Set([...labels, ...preceding.map(entry => entry.span)])];
+  return {
+    bindingIndex,
+    bindingHash: createHash('sha256').update(JSON.stringify([binding.location, binding.span, binding.sourceFactIds, binding.productClaimId])).digest('hex'),
+    // A changed heading or distant product context invalidates the whole review.
+    contextHash: createHash('sha256').update(JSON.stringify([context.candidate.title, draft, context.productClaims])).digest('hex'),
+    location: binding.location, span: binding.span, nearby,
+    explicitProductContext: position < 0 || nearby.some(text => containsExplicitProductAlias(text, context.productClaims)
+      || /\b(?:the|this|our) product\b/iu.test(text)),
+  };
+}
+
+/** Conservative detection requests review; it is not itself semantic resolution. */
+export function productReferenceManifest(context: DraftingContext, value: unknown) {
+  const draft = GeneratedDraftV2Schema.parse(value);
+  return inspectGeneratedDraft(context, draft)
+    .filter(finding => finding.reason === 'unapproved_product_reference' && finding.bindingIndex !== undefined)
+    .map(finding => referenceCheckContext(context, draft, finding.bindingIndex!));
+}
+
+function applyReferenceReviews(context: DraftingContext, draft: GeneratedDraftV2, findings: DraftSafetyFinding[], input: unknown[]) {
+  if (!input.length) return findings;
+  const parsed = z.array(ProductReferenceReviewSchema).safeParse(input);
+  if (!parsed.success || containsSecretLikeValue(input)) return [...findings, { code: 'content.reference_review', message: 'Invalid independent reference review.' }];
+  const pending = new Map(findings.filter(f => f.reason === 'unapproved_product_reference' && f.bindingIndex !== undefined).map(f => [f.bindingIndex!, f]));
+  const approved = new Set<number>();
+  const counts = new Map<number, number>();
+  for (const review of parsed.data) counts.set(review.bindingIndex, (counts.get(review.bindingIndex) ?? 0) + 1);
+  for (const review of parsed.data) {
+    if (!pending.has(review.bindingIndex)) {
+      findings.push({ code: 'content.reference_review', message: 'Reference review names a binding outside the current review manifest.' });
+      continue;
+    }
+    const current = referenceCheckContext(context, draft, review.bindingIndex);
+    const subject = normalizeKeyword(review.subject);
+    // Hashes prove receipt identity, not meaning. The independent reviewer must
+    // resolve the subject AND separately support the assertion. A naked pronoun,
+    // invented anchor or explicit nearby product context cannot grant an exception.
+    if (counts.get(review.bindingIndex) !== 1 || review.bindingHash !== current.bindingHash
+      || review.contextHash !== current.contextHash || review.classification !== 'non_product'
+      || current.explicitProductContext || /^(?:it|its|this|that|they|them|their|the product|this product)$/u.test(subject)
+      || !current.nearby.some(text => ` ${normalizeKeyword(text)} `.includes(` ${subject} `))) continue;
+    approved.add(review.bindingIndex);
+  }
+  return findings.filter(f => f.reason !== 'unapproved_product_reference' || !approved.has(f.bindingIndex!));
+}
+
 function containsExplicitProductAlias(sentence: string, claims: ProductClaim[]): boolean {
   const normalized = normalizeKeyword(sentence);
   const aliases = ['VideoClaw', ...claims.flatMap(({ subjectAliases }) => subjectAliases)]
@@ -1038,6 +1120,7 @@ function editorialFindings(context: DraftingContext, draft: GeneratedDraftV2): D
 export function inspectGeneratedDraft(
   context: DraftingContext,
   value: unknown,
+  referenceReviews: unknown[] = [],
 ): DraftSafetyFinding[] {
   const parsed = GeneratedDraftV2Schema.safeParse(value);
   if (!parsed.success) {
@@ -1093,7 +1176,7 @@ export function inspectGeneratedDraft(
     findings.push(finding('content.faq_mismatch', 'FAQ questions must exactly match the three PAA-grounded evidence questions.'));
   }
   findings.push(...inspectReferences(context, draft, publishableProse));
-  return uniqueFindings(findings);
+  return uniqueFindings(applyReferenceReviews(context, draft, findings, referenceReviews));
 }
 
 export function selectProductMedia(
@@ -1413,6 +1496,7 @@ export function materializeDraftBundle(
   context: DraftingContext,
   value: unknown,
   media: AllowlistedProductMedia,
+  referenceReviews: unknown[] = [],
 ): DraftBundle {
   assertSourceFacts(context.sourceFacts);
   const checkedFinalUrls = assertSourceFactsMatchCheckedSources(context);
@@ -1420,7 +1504,7 @@ export function materializeDraftBundle(
   const parsedMedia = AllowlistedProductMediaSchema.safeParse(media);
   if (!parsedMedia.success) throw new Error('Invalid media input.');
   const draft = GeneratedDraftV2Schema.parse(value);
-  const findings = inspectGeneratedDraft(context, draft);
+  const findings = inspectGeneratedDraft(context, draft, referenceReviews);
   if (findings.length > 0) {
     throw new Error(`Unsafe generated draft: ${findings.map(({ code }) => code).join(', ')}`);
   }

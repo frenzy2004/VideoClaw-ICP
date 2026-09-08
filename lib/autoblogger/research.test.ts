@@ -234,6 +234,22 @@ describe('missing PAA collector recovery', () => {
       expect(scanned.results[0].peopleAlsoAsk).toEqual(initial);
     });
 
+    it.each([true, false])('recovers short video-topic questions without using generic filler (recovers=%s)', async recovers => {
+      const videoCandidate = { ...candidate, primaryKeyword: 'video marketing' };
+      const initial = ['What is video marketing?', 'What is AI video marketing?', 'What is the 3-3-3 rule in marketing?'];
+      const third = 'What are examples of video marketing?';
+      const { researcher, requests } = boundary(initial, recovers ? [[third]] : [[initial[2]], [initial[2]]], videoCandidate);
+      const scan = await researcher.scan([videoCandidate]);
+      expect(requests).toHaveLength(recovers ? 1 : 2);
+      if (!recovers) {
+        await expect(researcher.inspect(scan.results)).rejects.toThrow(/three relevant/i);
+        return;
+      }
+      const deep = (await researcher.inspect(scan.results)).results[0];
+      expect(deep.evidence.faqQuestions).toEqual([...initial.slice(0, 2), third]);
+      expect(scan.results[0].paaObservations?.find(q => q.question === third)).toMatchObject({ query: 'video marketing', runId: 'paa-1', datasetId: 'paa-data-1' });
+    });
+
     it.each([false, true])('preserves the original how-to query and bounded FAQ recovery (needsRecovery=%s)', async (needsRecovery) => {
       const howToCandidate = { ...candidate, primaryKeyword: 'how to make a founder pitch video' };
       const questions = [
@@ -649,6 +665,18 @@ describe('bounded Apify execution', () => {
 });
 
 describe('staged researcher', () => {
+  it.each(['video marketing', 'video marketing for startups'])('does not reduce %s FAQs to generic marketing questions', keyword => {
+    const observed = ['What is video marketing?', 'What is AI video marketing?', 'What is the 3-3-3 rule in marketing?', 'What are 7 types of digital marketing?'];
+    expect(() => selectRelevantPaaQuestions(keyword, observed)).toThrow(/three relevant/i);
+    const recovered = [...observed, 'What are examples of video marketing?'];
+    expect(selectRelevantPaaQuestions(keyword, recovered)).toEqual([observed[0], observed[1], recovered[4]]);
+  });
+
+  it('retains the medium for short video-editing topics without requiring singular wording', () => {
+    const questions = ['What is editing?', 'How do you start editing videos?', 'What software helps with video editing?', 'What is a video editing workflow?'];
+    expect(selectRelevantPaaQuestions('video editing', questions)).toEqual(questions.slice(1));
+  });
+
   it('scans at most 50 and directly stages at most 10 US/en desktop first-page inspections', async () => {
     const starts: Array<{ actorId: string; input: Record<string, unknown> }> = [];
     const autocompleteItems = candidates(50).map((candidate) => ({

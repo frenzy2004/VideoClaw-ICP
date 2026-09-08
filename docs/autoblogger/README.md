@@ -6,7 +6,9 @@ This worker is a controlled research-and-drafting system. It does not publish ar
 
 The initial 250-topic research library is an input, not a quota or publication gate. Each run scans at most 50 candidates, deeply checks at most 10, and produces at most 3 drafts with no more than 2 from one ICP.
 
-Latest operator checkpoint on 2026-09-08 Malaysia time: the [evidence-first content-repurposing proof](SCREENED-CONTENT-PROOF-2026-09-08.md) passed fresh research: nine organic results, three relevant observed FAQs and four automatically retrieved source bodies. All four GPT-5.5 requests completed. Final checks still failed: twelve product-reference false positives and 199 reviewed source-derived words against a 180-word ceiling. **No accepted article or native QA; the uninterrupted live milestone remains unproven.** The candidate is terminal at attempt one. Stop paid retries pending a checker/composition design review; no gate was bypassed. **1,800 tests**, lint, typecheck and build pass. Production and scheduling remain off.
+Latest operator checkpoint on 2026-09-08 Malaysia time: the [context/budget correction and video-marketing proof](CONTEXT-BUDGET-PROOF-2026-09-08.md) passed fresh research and four GPT-5.5 calls. Current independent referent reviews cleared the mechanical reference findings. Final acceptance still failed on three new unsupported assertions and two source-use overages (215/233 versus 180 words). **No accepted article or native QA; the uninterrupted live milestone remains unproven.** The candidate is terminal at attempt one. **1,850 tests**, lint, typecheck and build pass. No additional paid attempt is queued; production and scheduling remain off. Next address per-FAQ source coverage and repair expansion, not missing production credentials.
+
+The previous [content-repurposing proof](SCREENED-CONTENT-PROOF-2026-09-08.md) remains a separate failed run. Its captured copy, independent verdict and state were not rewritten or relabelled as successful.
 
 The preceding [webinar-repurposing test](FRESH-WEBINAR-PROOF-2026-09-08.md) remains a separate research rejection. Evidence-first screening resolved that obstacle for the new candidate; it did not establish paid keyword demand or repair quality.
 
@@ -77,6 +79,8 @@ Built-in ImageGen can update the architecture illustration without an OpenAI API
 
 ## Safety boundary
 
+- Ambiguous product references require current, context-hashed independent referent reviews. These cannot waive explicit product claims, rejected factual support, copying or source limits. Per-region source repair allocations cover FAQs and metadata but do not guarantee model compliance; the latest live attempt failed that gate.
+- Short video-topic FAQ matching retains the video qualifier so generic marketing/editing questions cannot silently fill missing topic-specific slots. Exact observed wording and bounded collection provenance remain required; lexical relevance alone is not evidence that a source answers the question.
 - Reader-facing editorial checks reject descriptions that repeat the title or fall outside the worker's 80–200-character house range, and repeated process labels in public prose. This is not a Google ranking rule or a semantic-quality score. Findings enter the existing single repair; independent support review remains required.
 - FAQ selection uses observed wording only, distinguishes topic terms from article-format words, and prefers stronger topic matches. Lexical matching is conservative, not a guarantee of semantic relevance; missing three qualifying questions still blocks preparation.
 - Generated articles are always `status: review`, have all approval flags set to `false`, omit `publishedAt`, and point only to `/download`.

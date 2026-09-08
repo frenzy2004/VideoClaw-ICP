@@ -44,6 +44,7 @@ export function buildSourcePlan(context: DraftingContext) {
       maxDerivedWords: MAX_SOURCE_DERIVED_WORDS,
       targetDerivedWords: TARGET_SOURCE_DERIVED_WORDS,
       reserveDerivedWords: MAX_SOURCE_DERIVED_WORDS - TARGET_SOURCE_DERIVED_WORDS,
+      regions: Object.entries(REPAIR_REGION_WORDS).map(([region, targetDerivedWords]) => ({ region, targetDerivedWords })),
       // Anchor suggestions do not delete facts or certify relevance/support.
       anchorFactIds: anchors(group),
     })),
@@ -59,6 +60,127 @@ type SupportEvaluation = {
   bindingIndex: number; bindingHash: string; supported: boolean;
   kind: 'source_claim' | 'original_guidance' | 'original_example' | 'product_claim';
 };
+
+// One allowance per page, not per occurrence. Unused shares can move to other
+// regions in this priority order; direct answers and body coverage come first.
+const REPAIR_REGION_WORDS = { directAnswer: 20, body: 60, headings: 5, faq: 20, description: 5, graphic: 10, other: 0 };
+type RepairRegion = keyof typeof REPAIR_REGION_WORDS;
+type RepairLocation = {
+  location: string; region: RepairRegion;
+  derivedWords: number; targetDerivedWords: number; removeDerivedWords: number;
+  bindings: Array<{ bindingIndex: number; bindingHash: string; derivedWords: number }>;
+};
+
+function repairRegion(location: string): RepairRegion {
+  if (location === '/directAnswer') return 'directAnswer';
+  if (/^\/sections\/\d+\/markdown$/.test(location)) return 'body';
+  if (location === '/title' || /^\/sections\/\d+\/heading$/.test(location)) return 'headings';
+  if (location.startsWith('/faqAnswers/')) return 'faq';
+  if (location === '/description') return 'description';
+  if (location.startsWith('/editorialGraphic/')) return 'graphic';
+  return 'other'; // Unknown public fields still spend the same page allowance.
+}
+
+/** Read-only advice for exactly this reviewed draft; "ready" means usable
+ * accounting, never draft approval. No text, citations or classifications are
+ * changed. Reuse candidates/anchors do not establish claim or quote support;
+ * every edited binding needs independent review and the unchanged final gates.
+ * Rejected exemptions remain disputed, not derived. An unsafe page's allocations
+ * are incomplete until those bindings are repaired and independently reviewed.
+ */
+export function buildSourceRepairPlan(context: DraftingContext, draft: GeneratedDraftV2, evaluations: SupportEvaluation[]) {
+  const usage = measureReviewedSourceUse(context.sourceFacts, draft, evaluations);
+  // Use only reference-integrity findings from the potential diagnostic, never
+  // its exposure totals: contextual grounding must not become derivation.
+  const reviewFindings = [...usage.findings, ...measurePotentialSourceUse(context.sourceFacts, draft).findings];
+  for (const evaluation of evaluations) {
+    const binding = draft.claimBindings[evaluation.bindingIndex];
+    if (evaluation.supported === false) {
+      reviewFindings.push({ code: 'critique.support_rejected', bindingIndex: evaluation.bindingIndex,
+        message: `Binding ${evaluation.bindingIndex} remains unsupported; usable source accounting does not approve this claim or waive independent support review.` });
+    }
+    if (typeof evaluation.supported !== 'boolean'
+      || !['source_claim', 'original_guidance', 'original_example', 'product_claim'].includes(evaluation.kind)
+      || (binding && (binding.productClaimId !== null) !== (evaluation.kind === 'product_claim'))) {
+      reviewFindings.push({ code: 'content.source_usage_review', bindingIndex: evaluation.bindingIndex,
+        message: 'Source repair planning requires valid, current classifications.' });
+    }
+  }
+  // Keep raw source/model prose out of the plan, including budget findings.
+  const findings = reviewFindings.map(({ code, message, bindingIndex, location }) => ({ code, message, bindingIndex, location }));
+  if (findings.some(finding => finding.code === 'content.source_usage_review')) {
+    return { status: 'blocked' as const, findings, reviewBindings: [], unsupportedBindingIndices: [], sources: [], reuseCandidates: [] };
+  }
+  const reviewBindings = evaluations.map(({ bindingIndex, bindingHash }) => ({ bindingIndex, bindingHash }))
+    .sort((a, b) => a.bindingIndex - b.bindingIndex);
+  const unsupportedBindingIndices = evaluations.filter(evaluation => !evaluation.supported)
+    .map(evaluation => evaluation.bindingIndex).sort((a, b) => a - b);
+  const current = new Map(evaluations.map(evaluation => [evaluation.bindingIndex, evaluation]));
+  const sources = usage.sources.map(page => {
+    const factIds = new Set(context.sourceFacts.filter(source => page.sourceIds.includes(source.id)).flatMap(source => source.facts.map(fact => fact.id)));
+    const disputedLocations = unsupportedBindingIndices.filter(index => {
+      const binding = draft.claimBindings[index];
+      return ['original_guidance', 'original_example'].includes(current.get(index)!.kind)
+        && !['/customerTrigger', '/competitorGap'].includes(binding.location)
+        && binding.sourceFactIds.some(id => factIds.has(id));
+    }).map(index => ({ ...reviewBindings[index], location: draft.claimBindings[index].location,
+      words: draft.claimBindings[index].span.match(/[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)*/gu)?.length ?? 0 }));
+    const disputedWords = disputedLocations.reduce((sum, location) => sum + location.words, 0);
+    const byLocation = new Map<string, RepairLocation>();
+    for (const bindingIndex of page.bindingIndices) {
+      const binding = draft.claimBindings[bindingIndex];
+      const words = binding.span.match(/[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)*/gu)?.length ?? 0;
+      const contribution = byLocation.get(binding.location) ?? {
+        location: binding.location, region: repairRegion(binding.location),
+        derivedWords: 0, targetDerivedWords: 0, removeDerivedWords: 0, bindings: [],
+      } as RepairLocation;
+      contribution.derivedWords += words;
+      contribution.targetDerivedWords += words;
+      contribution.bindings.push({ ...reviewBindings[bindingIndex], derivedWords: words });
+      byLocation.set(binding.location, contribution);
+    }
+    const locations = [...byLocation.values()];
+    const regions = (Object.keys(REPAIR_REGION_WORDS) as RepairRegion[]).map(region => {
+      const derivedWords = locations.filter(location => location.region === region).reduce((sum, location) => sum + location.derivedWords, 0);
+      return { region, derivedWords, targetDerivedWords: Math.min(derivedWords, REPAIR_REGION_WORDS[region]), removeDerivedWords: 0 };
+    });
+    let remaining = TARGET_SOURCE_DERIVED_WORDS - regions.reduce((sum, region) => sum + region.targetDerivedWords, 0);
+    // First cover existing demand from unused shares, then restore any unused
+    // regional allowance. Targets total 120 even on empty/under-budget pages.
+    for (const demand of ['current', 'reserve']) {
+      for (const region of regions) {
+        const desired = demand === 'current' ? region.derivedWords : REPAIR_REGION_WORDS[region.region];
+        const extra = Math.min(remaining, Math.max(0, desired - region.targetDerivedWords));
+        region.targetDerivedWords += extra;
+        remaining -= extra;
+      }
+    }
+    for (const region of regions) {
+      region.removeDerivedWords = Math.max(0, region.derivedWords - region.targetDerivedWords);
+      let remove = region.removeDerivedWords;
+      // Prioritize the largest concentration; equal totals use binding order.
+      const concentrated = locations.filter(location => location.region === region.region)
+        .sort((a, b) => b.derivedWords - a.derivedWords || a.bindings[0].bindingIndex - b.bindings[0].bindingIndex);
+      for (const location of concentrated) {
+        location.removeDerivedWords = Math.min(remove, location.derivedWords);
+        location.targetDerivedWords -= location.removeDerivedWords;
+        remove -= location.removeDerivedWords;
+      }
+    }
+    return { ...page, targetDerivedWords: TARGET_SOURCE_DERIVED_WORDS, disputedWords, disputedLocations,
+      unsafe: disputedLocations.length > 0,
+      availableDerivedWords: Math.max(0, TARGET_SOURCE_DERIVED_WORDS - page.derivedWords - disputedWords),
+      removeDerivedWords: Math.max(0, page.derivedWords - TARGET_SOURCE_DERIVED_WORDS), regions, locations };
+  });
+  const anchors = buildSourcePlan(context).sources;
+  const reuseCandidates = sources.map((page, index) => ({
+    sourceIds: page.sourceIds, url: page.url, derivedWords: page.derivedWords,
+    availableDerivedWords: page.availableDerivedWords,
+    anchorFactIds: page.unsafe ? [] : anchors[index].anchorFactIds,
+  })).filter(page => page.availableDerivedWords > 0 && page.anchorFactIds.length > 0)
+    .sort((a, b) => a.derivedWords - b.derivedWords || sourcePageIdentity(a.url).localeCompare(sourcePageIdentity(b.url)));
+  return { status: 'ready' as const, findings, reviewBindings, unsupportedBindingIndices, sources, reuseCandidates };
+}
 
 /** Nonblocking sensitivity diagnostic, independent of critic classification.
  * Grounding is mandatory even for original advice: these totals are potential

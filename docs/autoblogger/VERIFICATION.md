@@ -3,7 +3,26 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-## Latest evidence-first live proof — 2026-09-08 Malaysia time
+## Latest context/budget live proof — 2026-09-08 Malaysia time
+
+The [current report](CONTEXT-BUDGET-PROOF-2026-09-08.md) records context-hashed
+reference review, whole-article repair allocations and a live-discovered short-topic
+FAQ-filter correction. All **1,850 tests across 52 files**, lint, regenerated-route
+typecheck, build and whitespace checks pass. Independent scoped reviews are clear.
+
+One fresh `video marketing` attempt completed automatic research and four GPT-5.5
+requests. All six repaired-draft referent reviews passed the retained gates, but
+three new unsupported assertions and two source-use overages blocked acceptance.
+The reviewed totals were 215 and 233 words against the unchanged 180-word ceiling.
+**No accepted bundle or native article QA; the live milestone remains unproven.**
+
+The repaired AI FAQ also substitutes a source-disclaimer for an actual definition;
+it is not suitable for publication. No manual rewriting, source injection, gate
+exception, second repair or additional live article attempt occurred. Hash-verified
+offline replay reproduces the eight final findings. All 16 prior runs and 29 prior
+failures remain unchanged. No production, lander PR or scheduling action occurred.
+
+## Previous evidence-first live proof — 2026-09-08 Malaysia time
 
 The [content-repurposing proof](SCREENED-CONTENT-PROOF-2026-09-08.md) passed
 automatic research: nine organic results, three relevant observed FAQs and four
