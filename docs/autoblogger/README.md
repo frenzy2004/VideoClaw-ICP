@@ -6,6 +6,8 @@ This worker is a controlled research-and-drafting system. It does not publish ar
 
 The initial 250-topic research library is an input, not a quota or publication gate. Each run scans at most 50 candidates, deeply checks at most 10, and produces at most 3 drafts with no more than 2 from one ICP.
 
+Latest code checkpoint: the [procedure-context FAQ fix](FAQ-CONTEXT-FIX-2026-09-09.md) recognises concrete body instructions under an explicit procedure heading. Replay now finds the existing screen-recording anchor, while the unsupported naming FAQ remains blocked. Full checks pass; no new paid attempt or state reset occurred. **This fixes the demonstrated matcher false negative, not the complete live article milestone.**
+
 Latest live checkpoint on 2026-09-09 Malaysia time: the user-authorized [paid tutorial-video proof](FAQ-PAID-PROOF-2026-09-09.md) collected seven organic results and four source bodies, then stopped on two FAQ-evidence findings **before any OpenAI call**. There is no accepted article or native QA result. One finding exposes passage-context limitations in the lexical matcher; this is a software/research blocker, not missing credentials. Failed history is preserved; production and scheduling remain untouched.
 
 The preceding [FAQ evidence and bounded repair correction](FAQ-REPAIR-FIX-2026-09-09.md) screens every FAQ against actual body passages before generation and enforces exact repair locations, unchanged surrounding copy/bindings and non-growing reviewed source use. The offline 50 → 10 → 3 fixture passes; a fixture artifact also passes the full lander's 32 blog tests, lint and Next build in a disposable checkout. **That checkpoint is software/fixture verification, not a successful live article.**

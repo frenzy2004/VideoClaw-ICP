@@ -480,6 +480,21 @@ describe('finalizeReviewedRepair', () => {
 });
 
 describe('consistent repair issue registry', () => {
+  it('carries a heading-scoped body anchor through the real preflight to the model boundary', async () => {
+    const input = structuredClone(context);
+    const question = 'How do I record my screen for a founder pitch video?';
+    input.evidence.faqQuestions[1] = question;
+    input.evidence.serp.peopleAlsoAsk[1] = question;
+    const heading = 'Record your founder pitch video ';
+    input.sourceFacts[0].facts.push({id: 'recording-procedure', text: heading + 'Open the capture panel. Click Screen Recording.', bodyStart: heading.length, evidenceKind: 'body'});
+    let request: StructuredOutputRequest | undefined;
+    const client: StructuredOutputClient = {async generate(value) {request = value; throw new Error('fixture model boundary reached');}};
+    await expect(createStructuredDrafter({client, mediaAllowlist: [media]}).draft(input)).rejects.toThrow('fixture model boundary reached');
+    expect(request!.input).toMatchObject({faqEvidencePlan: expect.arrayContaining([
+      {question, sourceFactIds: ['recording-procedure']},
+    ])});
+  });
+
   it('blocks a topical PAA question with no answer-shaped body evidence before any model call', async () => {
     const input = structuredClone(context);
     input.evidence.faqQuestions[1] = 'What is AI video marketing?';

@@ -3,7 +3,16 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-## Latest paid live attempt — 2026-09-09 Malaysia time
+## Latest matcher correction — 2026-09-09 Malaysia time
+
+The [procedure-context correction](FAQ-CONTEXT-FIX-2026-09-09.md) fixes the
+screen-recording false negative without treating a heading alone as evidence.
+Fresh full verification: 2,004 tests across 54 files, lint, build and typecheck
+pass. Replay of the unchanged paid-run input recognises `source-2-fact-6` and
+still blocks the naming FAQ before any model request. State/history is unchanged;
+there was no paid retry, article acceptance or original lander change.
+
+## Previous paid live attempt — 2026-09-09 Malaysia time
 
 The [tutorial-video proof](FAQ-PAID-PROOF-2026-09-09.md) passed fresh lander
 inventory and paid Apify collection, then failed the FAQ body-evidence screen.

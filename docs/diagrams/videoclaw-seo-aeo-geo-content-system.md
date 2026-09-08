@@ -44,6 +44,12 @@ made no OpenAI call and produced no accepted article or native QA result.
 The remaining blocker is FAQ evidence coverage/matching, not local credentials.
 All failed history remains intact. No production or schedule change occurred.
 
+Subsequent [matcher correction](../autoblogger/FAQ-CONTEXT-FIX-2026-09-09.md):
+the unchanged saved input now recognises the screen-recording body instructions
+using their explicit procedure heading as context. The naming FAQ still lacks
+an answer anchor, so replay remains blocked before generation. This is an offline
+code correction, not a new live attempt or a successful article.
+
 Preceding software correction, 2026-09-09 Malaysia date:
 
 ```text

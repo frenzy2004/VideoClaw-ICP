@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { faqBodyMatches } from './faq-evidence';
 
 import {
   createSafeSourceChecker,
@@ -331,6 +332,38 @@ describe('source authority and evidence selection', () => {
     expect(selection.sources.map(s => s.finalUrl)).toEqual(expect.arrayContaining([urls[5], urls[6]]));
     expect(selection.sources.map(s => s.finalUrl)).not.toContain(urls[4]);
     expect(selection.sources).toHaveLength(4);
+  });
+
+  it('retains a later procedure body whose relevant purpose is in its heading', async () => {
+    const generic = '<p>A tutorial video explains a task. Plan a tutorial video for the product audience. A tutorial video should stay focused.</p>';
+    const fixture = responseTransport([
+      ...Array(4).fill(generic),
+      '<p>A tutorial video explains a product workflow.</p><h2>Record your tutorial video</h2><p>Open the capture panel. Click Screen Recording. Select the desired window.</p>',
+    ].map(body => ({status: 200, headers: {'content-type': 'text/html'}, body})));
+    const urls = ['general1', 'general2', 'general3', 'general4', 'recording'].map(path => `https://authority.example/${path}`);
+    const checker = createSafeSourceChecker({transport: fixture.transport, resolveHostname: publicResolver, authorityPolicies: [{hostname: 'authority.example'}]});
+    const selection = await checker.selectWithContent(urls, {query: 'tutorial video', questions: ['How do I record my screen for a tutorial video?']});
+    expect(selection.sources.map(s => s.finalUrl)).toContain(urls[4]);
+    expect(selection.sources).toHaveLength(4);
+    const procedure = selection.sourceDocuments.find(s => s.finalUrl === urls[4])!.passages.find(p => p.text.includes('Click Screen Recording.'))!;
+    expect(procedure.text.slice(procedure.bodyStart)).toContain('Click Screen Recording.');
+    expect(procedure.text.slice(0, procedure.bodyStart)).toContain('Record your tutorial video');
+  });
+
+  it.each([
+    '<p>Click Help to learn how to record your screen.</p>',
+    '<ul><li>Select a screen layout</li><li>Record your webcam</li></ul>',
+    '<p>Open the capture panel. Turn off Screen Recording.</p>',
+    '<p>Recording your screen is currently unsupported.</p>',
+    '<p>Click Screen Recording Help to read the instructions.</p>',
+    '<p>Click Screen; recording your webcam starts automatically.</p>',
+  ])('keeps non-answer instructions rejected after actual HTML extraction: %s', async body => {
+    const fixture = responseTransport([{status: 200, headers: {'content-type': 'text/html'},
+      body: `<article><p>A tutorial video explains a product task to a viewer.</p><h2>Record your tutorial video</h2>${body}</article>`}]);
+    const checker = createSafeSourceChecker({transport: fixture.transport, resolveHostname: publicResolver, authorityPolicies: [{hostname: 'authority.example'}]});
+    const document = await checker.read('https://authority.example/recording', {query: 'tutorial video'});
+    expect(document.passages.some(p => p.text.includes('Record your tutorial video'))).toBe(true);
+    expect(document.passages.some(p => faqBodyMatches('How do I record my screen for a tutorial video?', p.text, p.bodyStart))).toBe(false);
   });
 
   it.each([2, 3, 4, 5, 6])('does not let an H%s topic heading qualify unrelated body prose', async level => {

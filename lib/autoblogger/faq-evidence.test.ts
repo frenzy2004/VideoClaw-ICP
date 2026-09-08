@@ -12,6 +12,83 @@ const source: SourceFact = {
 };
 
 describe('FAQ evidence preflight', () => {
+  it.each([
+    ['How do I record my screen for a tutorial video?', 'Step 7. Record your tutorial video ', 'Open the capture panel. Click Screen Recording. Select a window to capture.'],
+    ['How can I edit audio for a founder pitch video?', 'Edit your founder pitch video ', 'Open the editor. Use Audio Editing. Trim the selected track.'],
+    ['How do I export captions for a product demo?', 'Export your product demo ', 'Open the output panel. Select caption export. Save the subtitle file.'],
+    ['How do I record my screen for a tutorial video?', 'Record your tutorial video ', 'Record your screen.'],
+  ])('retains procedure-heading context for a concrete body instruction: %s', (question, heading, body) => {
+    expect(faqBodyMatches(question, heading + body, heading.length)).toBe(true);
+  });
+
+  it.each([
+    ['', 'Click Screen Recording.'],
+    ['Record your tutorial video ', ''],
+    ['Record your tutorial video ', 'This guide will explain screen recording in a later section.'],
+    ['Record your tutorial video ', 'Screen recording is available in many applications.'],
+    ['Record your tutorial video ', 'Do not record your screen.'],
+    ['Record your tutorial video ', 'Never click Screen Recording.'],
+    ['Record your tutorial video ', 'Select a screen layout. Record your webcam instead.'],
+    ['Record your tutorial video ', 'Click Screen Recording?'],
+    ['Record your tutorial video ', 'Select the latest monthly invoice.'],
+    ['Record your tutorial video ', 'Record your screen for a music video.'],
+    ['Record your tutorial video ', 'Learn how to click Screen Recording.'],
+    ['Record your tutorial video ', 'Click Help to learn how to record your screen.'],
+    ['Record your tutorial video ', 'Use the guide to find out how to record your screen.'],
+    ['Record your tutorial video ', 'Select a screen layout and record your webcam.'],
+    ['Record your tutorial video ', 'Select a screen layout Record your webcam'],
+    ['Record your tutorial video ', 'Open the capture panel. Turn off Screen Recording.'],
+    ['Record your tutorial video ', 'Select Disable Screen Recording.'],
+    ['Record your tutorial video ', 'Click Screen Recording to disable it.'],
+    ['Record your tutorial video ', 'Click the picture of the Screen Recording button.'],
+    ['Record your tutorial video ', 'Recording your screen is currently unsupported.'],
+    ['Record your tutorial video ', 'Record your screen resolution in the project notes.'],
+    ['Record your tutorial video ', 'Click Screen Recording Help to read the instructions.'],
+    ['Record your tutorial video ', 'Click Screen; recording your webcam starts automatically.'],
+    ['Record your tutorial video ', 'Click Screen: recording your webcam starts automatically.'],
+    ['Record your tutorial video ', 'Click Screen, recording your webcam starts automatically.'],
+    ['How do I record my screen for a tutorial video? ', 'Click Screen Recording.'],
+    ['Do not record your tutorial video ', 'Click Screen Recording.'],
+    ['Record your product demo ', 'Click Screen Recording.'],
+    ['Tutorial video costs ', 'Click Screen Recording.'],
+  ])('does not turn unrelated or non-instructional prose into a procedure answer: %s / %s', (heading, body) => {
+    expect(faqBodyMatches('How do I record my screen for a tutorial video?', heading + body, heading.length)).toBe(false);
+  });
+
+  it.each([
+    ['How can I edit audio for a founder pitch video?', 'Edit your founder pitch video ', 'Use Audio Editing to trim the selected track.'],
+    ['How do I export captions for a product demo?', 'Export your product demo ', 'Select caption export to save the subtitle file.'],
+  ])('declines compound instructions outside the bounded heading-context grammar: %s', (question, heading, body) => {
+    // These can be useful prose, but this lexical fallback cannot establish
+    // the full relationship safely. It only admits complete simple steps.
+    expect(faqBodyMatches(question, heading + body, heading.length)).toBe(false);
+  });
+
+  it('does not borrow a missing requested operation or modifier from the heading', () => {
+    const heading = 'Record your tutorial video ';
+    const text = heading + 'Click Screen Recording. Select the desired window.';
+    expect(faqBodyMatches('How do I automatically record my screen for a tutorial video?', text, heading.length)).toBe(false);
+    expect(faqBodyMatches('How do I record my screen using AI for a tutorial video?', text, heading.length)).toBe(false);
+    expect(faqBodyMatches('How do I record my screen without audio for a tutorial video?', text, heading.length)).toBe(false);
+  });
+
+  it('maps a complete procedural body fact without pooling separate facts or relabelling a naming gap', () => {
+    const heading = 'Record your tutorial video ';
+    const facts: SourceFact['facts'] = [
+      {id: 'procedure', text: heading + 'Open the capture panel. Click Screen Recording.', bodyStart: heading.length, evidenceKind: 'body'},
+      {id: 'heading-only', text: heading, bodyStart: heading.length, evidenceKind: 'body'},
+      {id: 'unscoped-body', text: 'Click Screen Recording.', evidenceKind: 'body'},
+      {id: 'snippet', text: heading + 'Click Screen Recording.', bodyStart: heading.length, evidenceKind: 'serp_snippet'},
+    ];
+    const input = [{...source, facts}];
+    const before = JSON.stringify(input);
+    expect(planFaqEvidence(['How do I record my screen for a tutorial video?', 'What is a tutorial video called?'], input)).toEqual([
+      {question: 'How do I record my screen for a tutorial video?', sourceFactIds: ['procedure']},
+      {question: 'What is a tutorial video called?', sourceFactIds: []},
+    ]);
+    expect(JSON.stringify(input)).toBe(before);
+  });
+
   it('maps answer-shaped body passages without treating topic overlap as AI support', () => {
     expect(planFaqEvidence(['What is video marketing?', 'What is AI video marketing?', 'How much does video marketing cost?'], [source]))
       .toEqual([
