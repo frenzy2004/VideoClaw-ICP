@@ -55,7 +55,8 @@ function scopedProcedureMatches(query: string, heading: string, sentences: strin
 export function faqBodyMatches(question: string, text: string, bodyStart = 0): boolean {
   if (!Number.isInteger(bodyStart) || bodyStart < 0 || bodyStart > text.length) return false;
   const query = normalize(question).trim().replace(/\?+$/u, '').trim();
-  const mode = /^how long\b/u.test(query) ? 'duration'
+  const naming = /^what (?:is|are) (.+?) called$/u.exec(query);
+  const mode = naming ? 'naming' : /^how long\b/u.test(query) ? 'duration'
     : /^how much\b/u.test(query) ? 'cost'
       : /^what are (?:the )?benefits\b/u.test(query) ? 'benefits'
         : /^what (?:is|are)\b/u.test(query) ? 'definition'
@@ -78,6 +79,23 @@ export function faqBodyMatches(question: string, text: string, bodyStart = 0): b
   if (!subject.length) return false;
   // A decimal point stays inside its sentence; ordinary punctuation still separates claims.
   const sentences = normalize(text.slice(bodyStart)).match(/(?:[^.!?]|(?<=\d)\.(?=\d))+[.!?]?/gu) ?? [];
+  if (naming) {
+    // A naming question requires an explicit alias assertion, not just a
+    // definition or a conditional subtype such as "if this is a screencast".
+    // Match the complete grammatical subject; never pool topic words.
+    const nameSubject = (value: string) => words(value.trim().replace(/^(?:a|an|the)\s+/u, '')).map(stem).join(' ');
+    return sentences.some(sentence => {
+      const statement = sentence.trim().replace(/[.!]$/u, '');
+      if (/\b(?:not|never|no|neither|nor|if|when|unless|provided|providing|assuming|only|some|sometimes|may|might|could|would|however|but|instead)\b/u.test(statement)) return false;
+      const assertion = /^(.+?)\s+(?:is|are)\s+(?:also\s+)?(?:called|known as|referred to as)\s+(.+)$/u.exec(statement)
+        ?? /^(.+?),\s+(?:also\s+)?(?:known|referred to) as\s+([^,]+),\s+.+$/u.exec(statement);
+      if (!assertion || nameSubject(assertion[1]) !== nameSubject(naming[1])) return false;
+      const alias = assertion[2];
+      // Admit a short explicit name, not an idiom or a trailing instruction.
+      return /^(?:an? |the )?[\p{L}\p{N}]+(?:[ -][\p{L}\p{N}]+){0,7}$/u.test(alias)
+        && !/\b(?:into|out|upon|on|to|for|under|by|because|after|before|is|are|something|anything|nothing|someone|we|you|they|it|this|that|which|who|where)\b/u.test(alias.replace(/how-to/gu, 'howto'));
+    });
+  }
   const directMatch = sentences.some(sentence => {
     if (sentence.trim().endsWith('?')) return false;
     // Repeating a question or promising a later explanation is not answer-shaped prose.

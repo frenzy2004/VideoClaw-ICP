@@ -13,6 +13,47 @@ const source: SourceFact = {
 
 describe('FAQ evidence preflight', () => {
   it.each([
+    ['What is a tutorial video called?', 'A tutorial video is also called an instructional video.'],
+    ['What are tutorial videos called?', 'Tutorial videos are known as instructional videos.'],
+    ['What is an instructional video called?', 'An instructional video is referred to as a how-to video.'],
+    ['What are tutorial videos called?', 'Tutorial videos, also known as instructional videos, teach a task step by step.'],
+  ])('recognises an explicit naming assertion about the exact subject: %s', (question, text) => {
+    expect(faqBodyMatches(question, text)).toBe(true);
+  });
+  it.each([
+    'A tutorial video is a video that teaches a task step by step.',
+    'If a tutorial video is a screencast, use screen recording software.',
+    'A tutorial video is not called an instructional video.',
+    'A tutorial video might be called an instructional video.',
+    'A tutorial video is called an instructional video only when it covers a task.',
+    'Some tutorial videos are called screencasts.',
+    'A tutorial video editor is called a video editor.',
+    'We will explain what a tutorial video is called in the next section.',
+    'Is a tutorial video called an instructional video?',
+    'A tutorial video is called an instructional video?',
+    'Record a tutorial video. A screen capture is also called a screencast.',
+    'A tutorial video is called into question by viewers.',
+    'A tutorial video is called neither an instructional video nor a screencast.',
+    'A tutorial video is called a screencast provided it records screens.',
+    'A tutorial video is called something we explain next.',
+    'A tutorial video is called an instructional video under certain conditions.',
+    'A tutorial video is called by another name.',
+  ])('does not turn a definition, subset, qualification or different subject into a naming answer: %s', text => {
+    expect(faqBodyMatches('What is a tutorial video called?', text)).toBe(false);
+  });
+  it('requires naming evidence in the body, with every subject qualifier and the original fact ID', () => {
+    const text = 'A tutorial video is also called an instructional video.';
+    const input = [{...source, facts: [
+      {id: 'name', text, evidenceKind: 'body' as const},
+      {id: 'snippet', text, evidenceKind: 'serp_snippet' as const},
+      {id: 'heading', text: text + ' Read the manual for recording instructions.', bodyStart: text.length + 1, evidenceKind: 'body' as const},
+    ]}];
+    expect(planFaqEvidence(['What is a tutorial video called?', 'What is an AI tutorial video called?'], input)).toEqual([
+      {question: 'What is a tutorial video called?', sourceFactIds: ['name']},
+      {question: 'What is an AI tutorial video called?', sourceFactIds: []},
+    ]);
+  });
+  it.each([
     ['How do I record my screen for a tutorial video?', 'Step 7. Record your tutorial video ', 'Open the capture panel. Click Screen Recording. Select a window to capture.'],
     ['How can I edit audio for a founder pitch video?', 'Edit your founder pitch video ', 'Open the editor. Use Audio Editing. Trim the selected track.'],
     ['How do I export captions for a product demo?', 'Export your product demo ', 'Open the output panel. Select caption export. Save the subtitle file.'],

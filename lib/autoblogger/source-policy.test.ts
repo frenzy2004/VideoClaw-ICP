@@ -13,7 +13,7 @@ describe('production source discovery policy', () => {
   });
   it('uses separate short publisher queries while preserving substantive topic qualifiers', () => {
     const queries = sourceDiscoveryQueries('product demo checklist', ['How to run a good product demo?'], 'Product Demo Checklist: Plan, Record and Rehearse');
-    expect(queries).toEqual([
+    expect(queries.slice(0, 4)).toEqual([
       'product demo site:ycombinator.com', 'product demo site:techstars.com',
       'product demo site:techsmith.com/blog/', 'product demo site:descript.com/blog/article/',
     ]);
@@ -21,6 +21,22 @@ describe('production source discovery policy', () => {
       'product demo before launch site:ycombinator.com', 'product demo before launch site:techstars.com',
       'product demo before launch site:techsmith.com/blog/', 'product demo before launch site:descript.com/blog/article/',
     ]);
+  });
+  it('searches each selected FAQ even when the normal article-title path is used', () => {
+    const questions = ['How to do tutorial video?', 'What is a tutorial video called?', 'How do I record my screen for a tutorial video?'];
+    const queries = sourceDiscoveryQueries('how to make a tutorial video', questions, 'How to Make a Tutorial Video for Your Product');
+    expect(queries.slice(4)).toEqual(questions);
+    expect(queries).toHaveLength(7);
+  });
+  it('bounds, deduplicates and flattens FAQ searches so one question cannot inject another query line', () => {
+    const queries = sourceDiscoveryQueries('tutorial video', [
+      '  What is a tutorial video called? ', 'WHAT IS A TUTORIAL VIDEO CALLED?',
+      'How do I record\nmy screen?', '   ', 'Why use a tutorial video?', 'What is a fourth question?',
+    ], 'Tutorial Video Workflow');
+    expect(queries.slice(4)).toEqual([
+      'What is a tutorial video called?', 'How do I record my screen?', 'Why use a tutorial video?',
+    ]);
+    expect(queries.join('\n').split('\n')).toHaveLength(7);
   });
   it('uses the exact topic and an observed question for two bounded practitioner/program searches', () => {
     const queries = sourceDiscoveryQueries('product demo checklist', ['How to structure a product demo?']);

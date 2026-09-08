@@ -3,7 +3,17 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-## Latest matcher correction — 2026-09-09 Malaysia time
+## Latest FAQ discovery/selection correction — 2026-09-09 Malaysia time
+
+The [discovery and selection report](FAQ-DISCOVERY-FIX-2026-09-09.md) records one
+seven-query paid support search and subsequent saved-result/fresh-body diagnostics.
+Automatic selection now provides three observed FAQs with body anchors and passes
+the real drafting preflight. The first model request was intercepted: zero OpenAI
+calls, no accepted article or native article QA, and no worker retry/state change.
+Fresh checks pass 2,031 tests across 54 files, lint, build and typecheck. Offline
+worker/static-renderer fixtures pass; these are not a full production Next build.
+
+## Previous matcher correction — 2026-09-09 Malaysia time
 
 The [procedure-context correction](FAQ-CONTEXT-FIX-2026-09-09.md) fixes the
 screen-recording false negative without treating a heading alone as evidence.

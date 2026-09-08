@@ -30,7 +30,20 @@ export function sourceDiscoveryQueries(keyword: string, observedQuestions: reado
     // publisher instead; title coverage is enforced in selection and review.
     const topic = sourceTopicQuery(keyword);
     if (!topic) throw new Error('Supporting source discovery requires a substantive topic.');
-    return DISCOVERY_SCOPES.map(policy => `${topic} site:${policy.hostname}${policy.pathPrefix ?? ''}`);
+    const queries = DISCOVERY_SCOPES.map(policy => `${topic} site:${policy.hostname}${policy.pathPrefix ?? ''}`);
+    const seen = new Set(queries.map(query => query.toLowerCase()));
+    // Search the actual selected questions, not inferred synonyms. Avoid the
+    // long OR restriction here too; question results still require the safe
+    // body reader and do not gain authority. One batch: four topic + at most three
+    // FAQ queries, sharing the existing 24-page fetch budget.
+    for (const question of observedQuestions) {
+      const query = question.normalize('NFKC').replace(/[\p{Cc}\p{Cf}\s]+/gu, ' ').trim();
+      if (!query || seen.has(query.toLowerCase())) continue;
+      seen.add(query.toLowerCase());
+      queries.push(query);
+      if (queries.length === DISCOVERY_SCOPES.length + 3) break;
+    }
+    return queries;
   }
   return [...new Set([keyword, ...observedQuestions])].slice(0, 2).map(query => `${query} (${sites})`);
 }

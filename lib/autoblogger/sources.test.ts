@@ -441,6 +441,23 @@ describe('source authority and evidence selection', () => {
       .rejects.toThrow(/two.*relevant.*body.*authoritative/i);
   });
 
+  it('does not evict a main-workflow page to collect more answers than the three output FAQs', async () => {
+    const bodies = [
+      'A tutorial video is a recording that teaches a task through a sequence of visible actions.',
+      'Tutorial video costs depend on recording time and the editing work required.',
+      'A tutorial video should last three minutes for this particular exercise.',
+      'A tutorial video is called an instructional video.',
+      'Record and export a tutorial video to prepare a version for local playback.',
+    ];
+    const urls = ['definition', 'cost', 'duration', 'unused-name', 'workflow'].map(name => `https://authority.example/${name}`);
+    const fixture = responseTransport(bodies.map(body => ({status: 200, headers: {'content-type': 'text/html'}, body: `<article><p>${body}</p></article>`})));
+    const checker = createSafeSourceChecker({transport: fixture.transport, resolveHostname: publicResolver, authorityPolicies: [{hostname: 'authority.example'}]});
+    const selection = await checker.selectWithContent(urls, {query: 'tutorial video', articleTitle: 'Tutorial Video: Record and Export',
+      questions: ['What is a tutorial video?', 'How much does a tutorial video cost?', 'How long should a tutorial video be?', 'What is a tutorial video called?']});
+    expect(selection.sources.map(source => source.finalUrl)).toEqual([urls[0], urls[1], urls[2], urls[4]]);
+    expect(fixture.requests).toHaveLength(5);
+  });
+
   it('retains title-task coverage instead of replacing practical sources with higher-frequency topic pages', async () => {
     const generic = 'A product demo explains the buyer problem through a realistic workflow. The product demo introduces a useful business scenario to customers. Every product demo should leave time for questions from the buyer.';
     const fixture = responseTransport([

@@ -390,8 +390,9 @@ describe('missing PAA collector recovery', () => {
     const queries = [
       'product demo site:ycombinator.com', 'product demo site:techstars.com',
       'product demo site:techsmith.com/blog/', 'product demo site:descript.com/blog/article/',
+      ...faq,
     ];
-    const good = ['https://www.techsmith.com/blog/demo/', 'https://www.descript.com/blog/article/demo'];
+    const good = ['https://www.techsmith.com/blog/demo/', 'https://independent.example/guide'];
     const requested: string[] = [];
     const checker = createSafeSourceChecker({
       authorityPolicies: PRODUCTION_SOURCE_AUTHORITY_POLICIES,
@@ -419,8 +420,13 @@ describe('missing PAA collector recovery', () => {
       getRun: async () => { throw new Error('Already complete'); },
       abortRun: async id => ({ id, status: 'ABORTED' }),
       getDatasetItems: async () => [
-        ...good.map((url, i) => row(queries[i], url)),
+        row(queries[0], good[0]),
+        row(faq[1], good[1]), // A supporting page found only by an observed FAQ.
         row('unrequested query', 'https://www.techsmith.com/blog/wrong-query/'),
+        row(queries[0], 'https://independent.example/not-the-publisher-query'),
+        row(faq[1], 'http://127.0.0.1/private'),
+        row(faq[1], 'https://127.0.0.1/private'),
+        row(faq[1], 'https://user:password@independent.example/credentials'),
         row(queries[0], 'https://www.descript.com/blog/article-spoof/outside'),
         row(queries[0], 'https://www.techsmith.com.evil.example/blog/spoof/'),
       ],
@@ -433,6 +439,7 @@ describe('missing PAA collector recovery', () => {
     }]);
     expect(result.results[0].evidence.sources.map(source => source.finalUrl)).toEqual(good);
     expect(result.results[0].sourceDocuments?.every(document => document.passages.length > 0)).toBe(true);
+    expect(result.results[0].evidence.sources.map(source => source.authoritative)).toEqual([true, false]);
     expect(result.results[0].evidence.serp.organicResultCount).toBe(1);
     expect(result.results[0].provenance.serp.runId).toBe('original');
     expect(result.results[0].provenance.supportSearches?.[0].runId).toBe('support');
@@ -466,6 +473,38 @@ describe('missing PAA collector recovery', () => {
     expect(fetched).toHaveLength(24);
     expect(fetched.slice(0, 3)).toEqual(['https://publisher.example/demo-0', 'https://www.ycombinator.com/companies/demo-0', 'https://www.descript.com/blog/article/record-0']);
     expect(result.results[0].evidence.serp.organicResultCount).toBe(20);
+  });
+  it.each([true, false])('uses only observed, topic-relevant body-supported FAQ alternatives; coverage available: %s', async supportedAlternative => {
+    const candidate = {...candidates(1)[0], primaryKeyword: 'how to make a tutorial video', title: 'How to Make a Tutorial Video for Your Product'};
+    const questions = ['How to do tutorial video?', 'What is a tutorial video called?', 'How do I record my screen for a tutorial video?',
+      'What is a tutorial video?', 'What is a marketing campaign?'];
+    const urls = ['https://www.descript.com/blog/article/tutorial', 'https://independent.example/tutorial'];
+    const bodies = [
+      '<article><section><p>To do a tutorial video, choose one task and prepare a clear example.</p></section><section><h2>Record your tutorial video</h2><p>Click Screen Recording. Select the application window.</p></section></article>',
+      '<article><section><p>A tutorial video can demonstrate a customer task using a sequence of recorded steps.</p></section>'
+        + (supportedAlternative ? '<section><p>A tutorial video is a recording that teaches one task through a sequence of visible actions.</p></section>' : '')
+        + '<section><p>A marketing campaign is a coordinated sequence of promotional activities for a defined audience.</p></section></article>',
+    ];
+    const checker = createSafeSourceChecker({authorityPolicies: PRODUCTION_SOURCE_AUTHORITY_POLICIES,
+      resolveHostname: async () => ['93.184.216.34'], transport: async request => ({
+        status: 200, headers: {'content-type': 'text/html'}, url: request.url, redirected: false,
+        peerAddress: request.allowedPeerAddresses[0], body: (async function* () {yield new TextEncoder().encode(bodies[urls.indexOf(request.url)]);})(),
+      })});
+    let starts = 0;
+    const apify: ApifyClient = {startActor: async (_actor, input) => {starts++; expect(String(input.queries).trim().split('\n')).toHaveLength(7); return successfulRun('support', 'support-data');},
+      getRun: async () => {throw Error('Already complete');}, getDatasetItems: async () => [], abortRun: async id => ({id, status: 'ABORTED'})};
+    const shallow = {candidate, suggestions: [], relatedQueries: [], peopleAlsoAsk: questions,
+      organicResults: urls.map(url => ({title: 'Tutorial guide', url, snippet: 'Not evidence.', resultType: 'article'})),
+      provenance: {discovery: {actorId: 'a', runId: 'a', datasetId: 'a', observedAt: '2026-09-04T08:01:00.000Z'},
+        serp: {actorId: SERP_ACTOR_ID, runId: 'original', datasetId: 'original-data', observedAt: '2026-09-04T08:01:00.000Z'}}};
+    const before = JSON.stringify(shallow);
+    const result = (await createResearcher({apify, sourceChecker: checker, execution: researchClock}).inspect([shallow])).results[0];
+    expect(result.evidence.faqQuestions).toEqual(supportedAlternative
+      ? ['How to do tutorial video?', 'How do I record my screen for a tutorial video?', 'What is a tutorial video?'] : questions.slice(0, 3));
+    expect(result.evidence.signals.peopleAlsoAsk).toEqual(questions);
+    expect(result.provenance.serp.runId).toBe('original');
+    expect(starts).toBe(1);
+    expect(JSON.stringify(shallow)).toBe(before);
   });
   it('recovers exact-query questions through one dedicated collection and keeps separate provenance', async () => {
     const candidate = {...candidates(1)[0],primaryKeyword:'demo day video checklist'};

@@ -315,10 +315,12 @@ describe.skipIf(nativeLanderPath === undefined)('native lander offline integrati
         .map((index) => `founder video product demo workflow ${index}`),
     );
     expect(fixture.network.serpKeywords).toEqual(fixture.network.autocompleteKeywords);
-    expect(fixture.network.supportQueries).toHaveLength(40);
-    expect(fixture.network.supportQueries.slice(0, 4)).toEqual([
+    expect(fixture.network.supportQueries).toHaveLength(70);
+    expect(fixture.network.supportQueries.slice(0, 7)).toEqual([
       'founder video product demo workflow 49 site:ycombinator.com', 'founder video product demo workflow 49 site:techstars.com',
       'founder video product demo workflow 49 site:techsmith.com/blog/', 'founder video product demo workflow 49 site:descript.com/blog/article/',
+      'What is founder video product demo workflow 49?', 'How do you plan founder video product demo workflow 49?',
+      'Why does founder video product demo workflow 49 matter?',
     ]);
     expect(fixture.network.metricKeywords).toEqual(fixture.network.autocompleteKeywords);
     // Increasing volume with otherwise equal signals makes this ranking independent of worker helpers.

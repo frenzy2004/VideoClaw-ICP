@@ -14,6 +14,7 @@ export function createOfflineNetwork(backlog: Candidate[], sourceFacts: string[]
   const allowedSupportQueries = new Set(backlog.flatMap(candidate => [
     `${candidate.primaryKeyword} site:ycombinator.com`, `${candidate.primaryKeyword} site:techstars.com`,
     `${candidate.primaryKeyword} site:techsmith.com/blog/`, `${candidate.primaryKeyword} site:descript.com/blog/article/`,
+    `What is ${candidate.primaryKeyword}?`, `How do you plan ${candidate.primaryKeyword}?`, `Why does ${candidate.primaryKeyword} matter?`,
   ]));
   const requests: HttpRequest[] = [];
   const sourceRequests: SourceHttpRequest[] = [];

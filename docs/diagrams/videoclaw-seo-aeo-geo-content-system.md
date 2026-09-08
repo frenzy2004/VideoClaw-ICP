@@ -20,7 +20,7 @@ The last step is a future gated mode, not permission to open generated lander PR
 | --- | --- | --- |
 | Candidates | Read the incremental backlog and discover related searches for five ICPs. Deduplicate against state and lander inventory, then round-robin eligible campaigns; a full five-campaign queue gets ten scan slots each. | Candidate identity, campaign, trigger and intent |
 | Validation | Recheck US/en Google SERPs through Apify, record organic competitors and suggestion/PAA/related-query signals, and request keyword metrics from a configured provider. | Exact query, locale, actor run, dataset and observation time; metric provenance separately |
-| Top 10 | Screen missing organic/suggestion/relevant-PAA/product-fit evidence before using a deep slot. Use four short, scoped publisher searches alongside the exact keyword SERP; share 24 fetch slots and retain complementary title-task bodies. Select at least two distinct pages including an authority. Format-word or heading matches alone do not establish body relevance; lexical relevance is not factual proof. | Source URLs, fetch times/hashes, body/heading boundaries, bounded context, separate support-query provenance, FAQ provenance and selection decision |
+| Top 10 | Screen missing organic/suggestion/relevant-PAA/product-fit evidence before using a deep slot. Use four scoped publisher queries plus up to three observed-FAQ queries; share 24 fetch slots. Select at least two distinct pages including an authority, then choose three body-supported FAQs from up to nine topic-relevant observations. FAQ results gain no authority automatically; format/heading overlap is not factual proof. | Source URLs, fetch times/hashes, body/heading boundaries, bounded context, separate support-query provenance, original question pool and final FAQ selection |
 | Up to 3 drafts | Body-only anchors guide original composition. Private campaign context comes from the configured ICP. Drafting, independent critique and machine checks share one repair-issue registry. Reviewed source use above the 120-word planning target triggers whole-article repair; final review retains the 180-word ceiling. Maximum two drafts from one ICP. | Source-use ledger, current binding classifications, stable issue IDs, critique result and hashes; Markdown only if accepted |
 | Native QA | Select allowlisted product media, generate a deterministic branded SVG and validate in a disposable lander checkout using its own contract, lint and build. | Media attribution and native QA report |
 | Draft PRs, later | Only the post-merge, fully credentialed mode can open one draft PR per article. All approval flags remain false. | PR number, artifact hash and outcome |
@@ -33,7 +33,19 @@ The 250-opportunity backlog is an input, not a required count or proof of measur
 Apify evidence → one draft + critique + QA → Markdown / SVG / report artifact → STOP
 ```
 
-Latest live attempt, 2026-09-09 Malaysia date:
+Latest research diagnostic, 2026-09-09 Malaysia date:
+
+```text
+Observed questions → targeted support searches → safe body retrieval
+→ three body-supported observed FAQs → draft preflight passes → STOP before paid model
+```
+
+The [FAQ discovery/selection correction](../autoblogger/FAQ-DISCOVERY-FIX-2026-09-09.md)
+clears the research/preflight gap using one paid search and saved-result replay.
+It does not create an accepted article or change the exhausted candidate's retry
+permissions. Full generation/critique/repair/native QA proof remains outstanding.
+
+Previous full live attempt, 2026-09-09 Malaysia date:
 
 ```text
 Fresh Apify evidence → four fetched sources → two FAQ evidence checks fail → STOP

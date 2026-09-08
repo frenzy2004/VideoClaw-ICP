@@ -19,6 +19,7 @@ import {
 import type { SafeSourceChecker, SourceDocument, SourceSelectionWithContent } from './sources';
 import { PAA_ACTOR_ID, normalizePaaRows, type PaaObservation } from './paa';
 import { isDiscoverySourceUrl, sourceDiscoveryQueries } from './source-policy';
+import { faqBodyMatches } from './faq-evidence';
 
 export const AUTOCOMPLETE_ACTOR_ID = 'automation-lab/google-autocomplete-scraper';
 export const SERP_ACTOR_ID = 'apify/google-search-scraper';
@@ -263,7 +264,7 @@ function relevantTokens(value: string): Set<string> {
   );
 }
 
-export function selectRelevantPaaQuestions(keyword: string, questions: string[]): string[] {
+function rankRelevantPaaQuestions(keyword: string, questions: string[]): string[] {
   const keywordTokens = relevantTokens(keyword);
   // Normalize only this leading query framing, never verbs throughout a topic
   // (e.g. "record") or the observed questions. Keep the original keyword's
@@ -308,9 +309,13 @@ export function selectRelevantPaaQuestions(keyword: string, questions: string[])
   if (selected.length >= 3) {
     // Stable ties retain observation order and the first exact observed string.
     return selected.sort((left, right) => right.overlap - left.overlap)
-      .slice(0, 3).map(({ question }) => question);
+      .map(({ question }) => question);
   }
   throw new Error('Research requires three relevant People Also Ask questions.');
+}
+
+export function selectRelevantPaaQuestions(keyword: string, questions: string[]): string[] {
+  return rankRelevantPaaQuestions(keyword, questions).slice(0, 3);
 }
 
 type NormalizedAutocomplete = {
@@ -526,15 +531,18 @@ export function createResearcher(options: ResearcherOptions) {
       const results: ResearchResult[] = [];
       for (const shallow of deepCandidates) {
         const { candidate } = shallow;
-        const faqQuestions = selectRelevantPaaQuestions(
+        // Retain a bounded pool of real topic-matched observations until body
+        // research is complete. Observation order alone cannot prove answers.
+        const faqPool = rankRelevantPaaQuestions(
           candidate.primaryKeyword,
           shallow.peopleAlsoAsk,
-        );
+        ).slice(0, 9);
+        let faqQuestions = faqPool.slice(0, 3);
         const sourceUrls = shallow.organicResults.map(({url}) => url);
         const provenance = {...shallow.provenance};
         let selection: SourceSelectionWithContent;
         const selectSources = async (urls: string[]): Promise<SourceSelectionWithContent> => options.sourceChecker.selectWithContent
-          ? options.sourceChecker.selectWithContent(urls, {query:candidate.primaryKeyword,questions:faqQuestions,articleTitle:candidate.title})
+          ? options.sourceChecker.selectWithContent(urls, {query:candidate.primaryKeyword,questions:faqPool,articleTitle:candidate.title})
           : {sources:await options.sourceChecker.select(urls),sourceDocuments:[]};
         const discoverSupport = async (articleTitle?: string) => {
           // Discovery, not injected facts. Body research covers the fixed title
@@ -554,8 +562,12 @@ export function createResearcher(options: ResearcherOptions) {
             if (queryIndex < 0
               || observation.country !== 'US' || observation.language !== 'en'
               || observation.device !== 'DESKTOP' || observation.page !== 1) continue;
+            const questionSearch = faqQuestions.some(question => normalizeKeyword(question) === normalizeKeyword(queries[queryIndex]));
             for (const result of observation.organicResults) {
-              if (isDiscoverySourceUrl(result.url)) groups[queryIndex + 1].push(result.url);
+              // Exact FAQ results have the same trust as ordinary keyword
+              // results: candidates for the safe body reader, not authorities.
+              // Publisher-scoped searches still reject out-of-scope results.
+              if (questionSearch || isDiscoverySourceUrl(result.url)) groups[queryIndex + 1].push(result.url);
             }
           }
           // Share the existing 24-fetch budget across organic and all support
@@ -580,6 +592,12 @@ export function createResearcher(options: ResearcherOptions) {
             selection = await selectSources([...new Set(sourceUrls)].slice(0, 24));
           }
         }
+        const supportedQuestions = faqPool.filter(question => selection.sourceDocuments.some(document =>
+          document.passages.some(passage => faqBodyMatches(question, passage.text, passage.bodyStart))));
+        // Preserve exact observed wording and original SERP/PAA provenance.
+        // Only replace the preferred set if three body-supported alternatives
+        // exist; otherwise retain its gaps for the fail-closed draft preflight.
+        if (supportedQuestions.length >= 3) faqQuestions = supportedQuestions.slice(0, 3);
         const evidence = EvidenceBundleSchema.parse({
           schemaVersion: 2,
           candidateFingerprint: candidateFingerprints(candidate).candidate,

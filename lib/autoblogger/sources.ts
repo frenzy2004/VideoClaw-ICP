@@ -415,7 +415,9 @@ function createSourceChecker(options: SafeSourceCheckerOptions, allowHttpForTest
       const choose = (start: number, chosen: typeof ranked) => {
         if (chosen.length === Math.min(4, ranked.length)) {
           if (!chosen.some(item => item.document.authoritative)) return;
-          const score = [new Set(chosen.flatMap(item => [...item.faqQuestions])).size,
+          // Only three FAQs are emitted. Once those can be answered, extra
+          // unused answers must not evict the article's main-workflow sources.
+          const score = [Math.min(3, new Set(chosen.flatMap(item => [...item.faqQuestions])).size),
             new Set(chosen.flatMap(item => [...item.titleTasks])).size,
             chosen.reduce((sum, item) => sum + item.score, 0)];
           const firstDifference = score.findIndex((value, index) => value !== bestScore[index]);
