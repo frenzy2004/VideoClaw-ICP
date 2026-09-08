@@ -299,6 +299,40 @@ describe('safe source checks', () => {
 });
 
 describe('source authority and evidence selection', () => {
+  it('selects a feasible combined FAQ and title cover rather than a redundant FAQ-only page', async () => {
+    const definition = 'Video marketing is the use of videos to promote products or services.';
+    const ai = 'AI video marketing refers to using artificial intelligence to produce marketing videos.';
+    const cost = 'Video marketing costs depend on crew and editing budget.';
+    const urls = ['faq-only', 'record', 'rehearse', 'edit', 'export'].map(path => `https://authority.example/${path}`);
+    const fixture = responseTransport([
+      `${definition} ${ai} ${cost}`,
+      `${definition} Record a video marketing example for the chosen audience.`,
+      `${ai} Rehearse the video marketing example before the buyer meeting.`,
+      `${cost} Edit the video marketing footage for clarity.`,
+      'Export the video marketing file after checking the final playback.',
+    ].map(body => ({ status: 200, headers: { 'content-type': 'text/html' }, body: `<p>${body}</p>` })));
+    const checker = createSafeSourceChecker({ transport: fixture.transport, resolveHostname: publicResolver, authorityPolicies: [{ hostname: 'authority.example' }] });
+    const selection = await checker.selectWithContent(urls, { query: 'video marketing', articleTitle: 'Video Marketing: Record, Rehearse, Edit and Export',
+      questions: ['What is video marketing?', 'What is AI video marketing?', 'How much does video marketing cost?'] });
+    expect(selection.sources.map(s => s.finalUrl).sort()).toEqual(urls.slice(1).sort());
+  });
+
+  it('reserves missing FAQ answer coverage instead of filling all slots with generic topic pages', async () => {
+    const generic = 'Video marketing is a promotional technique. Video marketing helps explain products. Plan a video marketing campaign for a chosen audience.';
+    const fixture = responseTransport([
+      ...Array(4).fill(`<p>${generic}</p>`),
+      '<h2>What is AI video marketing?</h2><p>Video marketing is a promotional technique with no discussion of artificial intelligence.</p>',
+      '<p>AI video marketing refers to using artificial intelligence to create or adapt marketing videos.</p>',
+      '<p>Video marketing costs depend on production crew and editing budget.</p>',
+    ].map(body => ({ status: 200, headers: { 'content-type': 'text/html' }, body })));
+    const urls = ['generic1', 'generic2', 'generic3', 'generic4', 'heading-only', 'ai', 'cost'].map(path => `https://authority.example/${path}`);
+    const checker = createSafeSourceChecker({ transport: fixture.transport, resolveHostname: publicResolver, authorityPolicies: [{ hostname: 'authority.example' }] });
+    const selection = await checker.selectWithContent(urls, { query: 'video marketing', questions: ['What is video marketing?', 'What is AI video marketing?', 'How much does video marketing cost?'] });
+    expect(selection.sources.map(s => s.finalUrl)).toEqual(expect.arrayContaining([urls[5], urls[6]]));
+    expect(selection.sources.map(s => s.finalUrl)).not.toContain(urls[4]);
+    expect(selection.sources).toHaveLength(4);
+  });
+
   it.each([2, 3, 4, 5, 6])('does not let an H%s topic heading qualify unrelated body prose', async level => {
     const html = `<h${level}>Product demo checklist</h${level}><p>The cafeteria serves lunch daily and closes early on Fridays.</p>`;
     const fixture = responseTransport(Array.from({ length: 2 }, () => ({ status: 200, headers: { 'content-type': 'text/html' }, body: html })));

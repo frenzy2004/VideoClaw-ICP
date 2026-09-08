@@ -27,6 +27,8 @@ import {
 } from './content-bundle';
 import { isStrictIsoDateTime } from './date-time';
 import { containsSecretLikeValue } from './secrets';
+import { planFaqEvidence } from './faq-evidence';
+import { buildRepairPolicy, inspectRepairDelta, inspectRepairSourceGrowth } from './repair-policy';
 import { buildSourcePlan, buildSourceRepairPlan, measurePotentialSourceUse, measureReviewedSourceUse, sourceAllocationFindings, MAX_SOURCE_DERIVED_WORDS, TARGET_SOURCE_DERIVED_WORDS } from './source-plan';
 
 const CritiqueIssueSchema = z.object({
@@ -34,6 +36,8 @@ const CritiqueIssueSchema = z.object({
   code: z.string().trim().min(1),
   message: z.string().trim().min(1),
   repairInstruction: z.string().trim().min(1),
+  // Legacy receipts stay readable; missing locations grant no edit authority.
+  locations: z.array(z.string().regex(/^\/(?:description|competitorGap|directAnswer|sections\/\d+\/(?:heading|markdown)|faqAnswers\/\d+\/answer|editorialGraphic\/(?:title|alt|steps\/\d+\/(?:label|detail)))$/u)).optional(),
 }).strict();
 
 const BindingSupportEvaluationSchema = z.object({
@@ -165,8 +169,9 @@ export const DRAFT_CRITIQUE_V1_JSON_SCHEMA = {
           code: { type: 'string', pattern: '.*\\S.*' },
           message: { type: 'string', pattern: '.*\\S.*' },
           repairInstruction: { type: 'string', pattern: '.*\\S.*' },
+          locations: { type: 'array', minItems: 1, items: { type: 'string', pattern: '^/(description|competitorGap|directAnswer|sections/[0-9]+/(heading|markdown)|faqAnswers/[0-9]+/answer|editorialGraphic/(title|alt|steps/[0-9]+/(label|detail)))$' } },
         },
-        required: ['id', 'code', 'message', 'repairInstruction'],
+        required: ['id', 'code', 'message', 'repairInstruction', 'locations'],
       },
     },
   },
@@ -204,8 +209,9 @@ export const DRAFT_REPAIR_VERIFICATION_V1_JSON_SCHEMA = {
           code: { type: 'string', pattern: '.*\\S.*' },
           message: { type: 'string', pattern: '.*\\S.*' },
           repairInstruction: { type: 'string', pattern: '.*\\S.*' },
+          locations: { type: 'array', minItems: 1, items: { type: 'string', pattern: '^/(description|competitorGap|directAnswer|sections/[0-9]+/(heading|markdown)|faqAnswers/[0-9]+/answer|editorialGraphic/(title|alt|steps/[0-9]+/(label|detail)))$' } },
         },
-        required: ['id', 'code', 'message', 'repairInstruction'],
+        required: ['id', 'code', 'message', 'repairInstruction', 'locations'],
       },
     },
   },
@@ -287,6 +293,11 @@ qualifiers. Anchors are planning suggestions, not new evidence or mandatory clai
 Budget factual summaries across the WHOLE article before writing. FAQs are public
 source-derived coverage, not a free repetition of the introduction or source notes.
 Answer each FAQ directly and concisely, normally 15–25 words, with exact qualifiers;
+faqEvidencePlan maps each observed question to answer-shaped body passages. Read
+those complete facts before answering, retaining qualifications. This lexical
+retrieval screen is not entailment or approval; the critic must independently
+verify each answer. Never fill missing support with a claim about what supplied
+sources do not cover, a non-answer, or internal research-process boilerplate.
 do not repeat the same definition, examples and benefits in several locations.
 Make metadata and graphic text describe your original reader tool, not repeat source
 claims. Reserve enough of every source's 120-word target for FAQs before the body.
@@ -416,6 +427,10 @@ const CRITIQUE_SYSTEM = `Act as an independent factual, legal-copy, safety, and 
 Evaluate the draft against the supplied candidate, evidence, source facts, approved
 product claims, and output rules. Do not rewrite it. Return approved only when there
 are no issues; otherwise provide unique issue IDs and concrete repair instructions.
+For each issue list exact affected JSON-pointer locations in locations. Identify
+only the fields needing a change, not the entire article. A missing workflow that
+cannot be repaired within an existing section is a blocking editorial redesign,
+not permission to add sections. For unsupported claims also reject their bindings.
 Never provide an acceptance predicate.
 ${SUPPORT_REVIEW_RULES}`;
 
@@ -432,84 +447,32 @@ Resolve their citedFactRefs by sourceId/factId in the complete top-level sourceF
 read the full fact text and qualifiers rather than treating IDs as evidence.
 Approve only when all original issues are resolved, every repaired binding is supported,
 and there are no new issues. Do not repair or rewrite the draft.
+Every new issue must name its exact affected locations, as JSON pointers.
 ${SUPPORT_REVIEW_RULES}`;
 
 const REPAIR_SYSTEM = `Repair the version 2 article-generation JSON exactly once.
-Use sourceRepairPlan.sources as a per-page editing budget, not just the overall
-word ceiling. For each page inspect regions, locations and the current binding
-indices/hashes. Reduce each location toward its targetDerivedWords, including FAQs
-and metadata. These are total words across all contributing spans at that location,
-not per sentence. Rebuild the article within the regional allocations, retaining
-only necessary source facts and their qualifications. The plan is accounting, not
-approval: rejected bindings still need factual correction. If planning is blocked
-by incomplete/stale review, do not infer a budget or ignore the original issues.
-Resolve unsupportedBindingIndices and every unsafe/disputed exemption before
-independent re-review. Disputed original-guidance labels do not establish original
-authorship or make their source exposure free; never relabel to avoid a limit.
-Use genuinely complementary facts from less-used sources only when they directly
-support the new claim; never move a citation to make the arithmetic look smaller.
-When cumulative source-use issues are present, discard the old exposition and
-compose a shorter working guide from the reader's decisions. Retaining the same
-sections with sentence-level substitutions did not resolve the source overuse.
-Keep only one 25–40-word attributed note per needed source page, in one location;
-remove repeated source summaries and derivative FAQ/graphic wording. Use at least
-two distinct checked sources. Build the remaining value as a genuinely original
-worksheet, a hypothetical application and conditional checks, not disguised
-paraphrase. Recompute all bindings after composition. Do not preserve an otherwise
-supported paragraph merely because the critic marked its individual facts supported.
-Address every independent-critique and deterministic-safety issue while preserving
-the supplied candidate, source inventory, exact FAQ questions, and approved claim
-bindings. Retain exact visible span/location bindings for all prose, use natural
-supported paraphrases and clearly labelled original guidance/examples, and never
-borrow paragraphs or expand snippet evidence into unseen body claims. Return a
-complete replacement object, with no commentary.
+This is a bounded correction, not a fresh composition. repairPolicy is enforced by
+code. Change ONLY its allowedLocations. Preserve all other text and bindings exactly;
+preserve section/graphic-step counts and order, FAQ questions, sourceReferences,
+customerTrigger and schemaVersion. Never add unrelated advice, timelines, numerical
+claims or outcomes. Return the complete object for serialization, not a patch.
 ${FIXED_CANDIDATE_RULES}
-The originalIssues registry is the complete list of stable issue IDs that the
-independent verifier will check. Resolve all of them, including machine findings.
-articleLevelIssues contains independent-critique issues and aggregate source-budget
-requirements, which take priority over localized wording patches. Address their
-editorial requirements across the body and other affected fields, even when
-repairTargets is empty or only lists reference/binding fixes. For title scope,
-restructure sections to deliver the promised supported workflow; preserve the fixed
-candidate and exact FAQ questions. A localized span patch alone cannot resolve
-missing article-level coverage. Rebuild bindings from the changed visible text.
-Use repairTargets to address the exact unresolved location/span and cited facts.
-Each target's citedFactRefs resolves by sourceId/factId into the complete sourceFacts
-inventory supplied once at the top level. Read that fact's full text and qualifiers;
-an identifier alone is not evidence. Do not duplicate or infer missing facts.
-Remove or narrow assertions unsupported by those facts; do not invent supporting
-facts or substitute a merely related citation. Preserve unaffected supported prose
-for localized fixes only. When repairStrategy is restructure_article, sourceUsage
-exceeds a cumulative allowance, or the critique finds excessive source derivation,
-rebuild the article structure across ALL affected locations; even individually
-supported paragraphs may need deletion or replacement. Use sourceUsage.sources and
-their bindingIndices to find repeated reliance across body, FAQs, metadata and
-graphic text. Do not resolve a budget failure by changing citations, calling copied
-advice original, or simply adding another source to the same borrowed passage.
-Create genuinely original reader decisions/examples or cut redundant source-derived
-coverage. Aim at the ${TARGET_SOURCE_DERIVED_WORDS}-word reviewed derivation target per page;
-the final hard limit remains ${MAX_SOURCE_DERIVED_WORDS}. Potential source exposure
-counts include contextual citations for original advice and are only a risk diagnostic,
-not proof of copying or a word limit on genuinely original guidance.
-A single-location patch is not sufficient for an aggregate violation.
-Recompute exact bindings for
-any changed rendered sentences, headings, or locations, retaining complete coverage.
-For each rejected assertion, inspect all occurrences and paraphrases across the
-entire article, not just the reported location: directAnswer, description, competitorGap, every section,
-FAQ answers, and editorialGraphic.steps as well as its title/alt. Remove or qualify
-the same unsupported idea wherever it appears. Fixing "record cleanly" in the opening
-does not resolve "a clean screen recording" elsewhere without supporting evidence.
-Audit unchanged bindings too: an earlier supported verdict is not proof that all
-assertions are supported. Check attribution in metadata and example/outcome lists
-against their exact cited facts before returning the replacement.
-Then finalize the visible text first and rebuild every affected claimBinding from
-that final text, including punctuation and graphic details. Do not preserve a stale binding
-whose span describes an earlier version, translate only one side, or append text after
-binding it. Check each location/span pair and complete sentence coverage in the final
-replacement object before returning it. Do not add self-approval or bypass any gate.
-VideoClaw assertions still require exact approved wording, productClaimId, and allowed
-fact IDs; never introduce unsupported capabilities, including via pronouns. Produce
-no secrets, internal research/debug prose, or links outside the supplied inventory.
+Resolve originalIssues and repairTargets within that edit scope. Read the complete
+cited facts and qualifiers. Narrow or remove unsupported assertions; do not invent
+evidence, swap citations, import new fact IDs into a location, or relabel source-derived
+copy as original. Preserve unaffected supported text. Rebuild only affected bindings
+against final visible text. If an issue needs a broader redesign, leave it unresolved;
+the verifier must reject it rather than the repair silently expanding scope.
+Use repairPolicy's location bounds and per-source ceilings. A source below the
+120-word planning target may NOT grow; a source above it must be reduced to 120.
+The independent verifier recalculates derivation for the whole article, including
+FAQ, metadata and graphic text. Shorter wording alone does not establish support.
+sourceRepairPlan helps locate concentrations; its reuse suggestions grant no new
+edit or citation permissions. Cumulative source cuts may affect several explicitly
+unlocked locations, but never unrelated sections or source inventories.
+Audit all bindings; the final independent review checks every assertion, including
+unchanged ones. Do not add self-approval, unsupported product claims, secrets,
+research-process boilerplate or links outside the supplied inventory.
 ${ARTICLE_COMPOSITION_RULES}`;
 
 function modelContext(context: DraftingContext): Record<string, unknown> {
@@ -857,7 +820,17 @@ export function createStructuredDrafter(options: StructuredDrafterOptions) {
         throw new Error('Selected media contains a secret-like value.');
       }
 
+      const faqEvidencePlan = planFaqEvidence(context.evidence.faqQuestions, context.sourceFacts);
+      const missingFaqEvidence = faqEvidencePlan.filter(item => !item.sourceFactIds.length);
+      if (missingFaqEvidence.length) {
+        return { status: 'blocked', reason: 'content_safety_failed', findings: missingFaqEvidence.map(item => ({
+          code: 'research.faq_evidence_missing',
+          message: `No answer-shaped verified body passage for observed FAQ: ${item.question}`,
+          repairInstruction: 'Retrieve a directly relevant body source before drafting; do not invent an answer or replace the observed question with an unobserved one.',
+        })) };
+      }
       const suppliedContext = modelContext(context);
+      suppliedContext.faqEvidencePlan = faqEvidencePlan;
       suppliedContext.sourcePlan = buildSourcePlan(context);
       const initial = GeneratedDraftV2Schema.parse(await options.client.generate({
         name: 'videoclaw_article_draft_v2',
@@ -913,11 +886,16 @@ export function createStructuredDrafter(options: StructuredDrafterOptions) {
       }
       const registry = buildRepairIssueRegistry(critique, [...deterministicFindings, ...bindingSupportFindings]);
       const targets = repairTargets(context, initial, registry.findings);
-      // Cumulative budgets are whole-article requirements even when their machine
-      // finding carries the final contributing span for traceability. Do not let
-      // that convenience location turn an aggregate failure into a local patch.
-      const articleLevelIssues = registry.issues.filter(issue => critique.issues.some(original => original.id === issue.id)
-        || ['content.source_budget', 'content.source_allocation'].includes(issue.code));
+      const sourceRepairPlan = buildSourceRepairPlan(context, initial, critique.supportEvaluations);
+      const localizedCritique = critique.issues.flatMap(issue => (issue.locations ?? []).map(location => ({
+        code: issue.code, message: issue.message, location, repairInstruction: issue.repairInstruction,
+      })));
+      const repairPolicy = buildRepairPolicy(initial, [...registry.findings, ...localizedCritique], sourceRepairPlan);
+      const articleLevelIssues = registry.issues.filter(issue => ['content.source_budget', 'content.source_allocation'].includes(issue.code));
+      if (repairPolicy.status !== 'ready') return { status: 'blocked', reason: 'content_safety_failed', findings: [
+        ...critiqueIssues(critique), ...registry.findings, ...repairPolicy.findings,
+        { code: 'repair.policy_invalid', message: 'Cannot attempt bounded repair without a complete current source review.' },
+      ] };
 
       const repaired = GeneratedDraftV2Schema.parse(await options.client.generate({
         name: 'videoclaw_article_repair_v2',
@@ -933,11 +911,10 @@ export function createStructuredDrafter(options: StructuredDrafterOptions) {
           bindingSupportFindings,
           repairTargets: targets,
           sourceUsage,
-          sourceRepairPlan: buildSourceRepairPlan(context, initial, critique.supportEvaluations),
+          sourceRepairPlan,
+          repairPolicy,
           potentialSourceUsage,
-          repairStrategy: articleLevelIssues.length > 0
-            || deterministicFindings.some(f => ['content.source_budget', 'content.source_allocation'].includes(f.code))
-            ? 'restructure_article' : 'targeted_repair',
+          repairStrategy: articleLevelIssues.length > 0 ? 'bounded_source_reduction' : 'targeted_repair',
         },
       })) as GeneratedDraftV2;
       const remainingFindings = inspectGeneratedDraft(context, repaired);
@@ -950,6 +927,8 @@ export function createStructuredDrafter(options: StructuredDrafterOptions) {
             : [{ code: 'content.secret', message: 'Repaired draft contains a secret-like value.' }],
         };
       }
+      const deltaFindings = inspectRepairDelta(initial, repaired, repairPolicy);
+      if (deltaFindings.length) return { status: 'blocked', reason: 'content_safety_failed', findings: deltaFindings };
       const repairedVerification = await options.client.generate({
         name: 'videoclaw_article_repair_verification_v1',
         schema: repairVerificationSchema(registry.issues),
@@ -963,10 +942,17 @@ export function createStructuredDrafter(options: StructuredDrafterOptions) {
           referenceManifest: productReferenceManifest(context, repaired),
         },
       });
-      return finalizeReviewedRepair({
+      const finalResult = finalizeReviewedRepair({
         context, repaired, originalIssues: registry.issues,
         verification: repairedVerification, media,
       });
+      const verification = DraftRepairVerificationV1Schema.parse(repairedVerification);
+      const growthFindings = inspectRepairSourceGrowth(sourceUsage,
+        measureReviewedSourceUse(context.sourceFacts, repaired, verification.supportEvaluations), repairPolicy);
+      if (growthFindings.length) return { status: 'blocked', reason: 'content_safety_failed', findings: [
+        ...(finalResult.status === 'blocked' && finalResult.reason === 'content_safety_failed' ? finalResult.findings : []), ...growthFindings,
+      ] };
+      return finalResult;
     },
   };
 }

@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto';
 
 import { extractSourceBody, type SourceReadOptions, type SourcePassage } from './source-extraction';
 import { matchSourceTitleTasks, scoreSourceTopic, sourcePageIdentity } from './source-relevance';
+import { faqBodyMatches } from './faq-evidence';
 export type { SourceReadOptions, SourcePassage } from './source-extraction';
 
 import {
@@ -376,7 +377,8 @@ function createSourceChecker(options: SafeSourceCheckerOptions, allowHttpForTest
   }
 
   async function selectWithContent(urls: string[], readOptions: SourceReadOptions = {}): Promise<SourceSelectionWithContent> {
-    const relevant = new Map<string, { document: SourceDocument; score: number; titleTasks: Set<string> }>();
+    if (urls.length > 24) throw new Error('Body selection exceeds the existing 24-URL research budget.');
+    const relevant = new Map<string, { document: SourceDocument; score: number; titleTasks: Set<string>; faqQuestions: Set<string> }>();
     const requested = new Set<string>();
     for (const url of urls) {
       let document: SourceDocument;
@@ -395,25 +397,52 @@ function createSourceChecker(options: SafeSourceCheckerOptions, allowHttpForTest
       const prior = relevant.get(key);
       if (!prior || Number(document.authoritative) > Number(prior.document.authoritative)
         || (document.authoritative === prior.document.authoritative && score > prior.score)) {
-        relevant.set(key, { document, score, titleTasks: matchSourceTitleTasks(readOptions.query ?? '', readOptions.articleTitle ?? '', bodyText) });
+        relevant.set(key, { document, score, titleTasks: matchSourceTitleTasks(readOptions.query ?? '', readOptions.articleTitle ?? '', bodyText),
+          faqQuestions: new Set((readOptions.questions ?? []).filter(question => document.passages.some(p => faqBodyMatches(question, p.text, p.bodyStart)))),
+        });
       }
     }
     // Rank the whole supplied candidate set; early reachable pages must not
     // crowd out later topical bodies. Keep complete excerpts/qualifiers intact.
     const ranked = [...relevant.values()].sort((a, b) => b.score - a.score);
     let sourceDocuments = ranked.slice(0, 4).map(item => item.document);
-    if (ranked.some(item => item.titleTasks.size > 0)) {
+    if (ranked.some(item => item.faqQuestions.size > 0)) {
+      // Evaluate the bounded four-page sets, not greedy individual novelty: a
+      // FAQ-only page can otherwise evict a workflow page even when a complete
+      // combined cover exists. At most C(24,4)=10,626 sets; no extra fetches.
+      let best: typeof ranked = [];
+      let bestScore = [-1, -1, -1];
+      const choose = (start: number, chosen: typeof ranked) => {
+        if (chosen.length === Math.min(4, ranked.length)) {
+          if (!chosen.some(item => item.document.authoritative)) return;
+          const score = [new Set(chosen.flatMap(item => [...item.faqQuestions])).size,
+            new Set(chosen.flatMap(item => [...item.titleTasks])).size,
+            chosen.reduce((sum, item) => sum + item.score, 0)];
+          const firstDifference = score.findIndex((value, index) => value !== bestScore[index]);
+          if (firstDifference >= 0 && score[firstDifference] > bestScore[firstDifference]) {
+            best = chosen.slice(); bestScore = score;
+          }
+          return;
+        }
+        for (let index = start; index <= ranked.length - (Math.min(4, ranked.length) - chosen.length); index++) {
+          chosen.push(ranked[index]); choose(index + 1, chosen); chosen.pop();
+        }
+      };
+      choose(0, []);
+      if (best.length) sourceDocuments = best.map(item => item.document);
+    } else if (ranked.some(item => item.titleTasks.size > 0)) {
       // Reserve an authority first, then greedily cover new title terms among
       // already topic-qualified bodies. Repeated keyword prose must not evict
       // complementary practical evidence. Remaining slots use topic ranking.
       const chosen: typeof ranked = [];
       const covered = new Set<string>();
       const novelty = (item: typeof ranked[number]) => [...item.titleTasks].filter(term => !covered.has(term)).length;
+      const compare = (a: typeof ranked[number], b: typeof ranked[number]) => novelty(b) - novelty(a) || b.score - a.score;
       const add = (item: typeof ranked[number]) => { chosen.push(item); item.titleTasks.forEach(term => covered.add(term)); };
-      const authorities = ranked.filter(item => item.document.authoritative).sort((a, b) => novelty(b) - novelty(a) || b.score - a.score);
+      const authorities = ranked.filter(item => item.document.authoritative).sort(compare);
       if (authorities[0]) add(authorities[0]);
       while (chosen.length < Math.min(4, ranked.length)) {
-        const next = ranked.filter(item => !chosen.includes(item)).sort((a, b) => novelty(b) - novelty(a) || b.score - a.score)[0];
+        const next = ranked.filter(item => !chosen.includes(item)).sort(compare)[0];
         add(next);
       }
       sourceDocuments = chosen.map(item => item.document);

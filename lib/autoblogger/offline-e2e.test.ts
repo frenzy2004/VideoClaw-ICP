@@ -44,7 +44,7 @@ function candidates(): Candidate[] {
 
 const visibleSpans = {
   initialDescription: 'This checked founder video workflow connects audience, evidence, recording, review, and playback.',
-  repairedDescription: 'This source-backed founder video workflow connects audience, evidence, recording, review, and playback.',
+  repairedDescription: 'This sourced founder video workflow connects audience, evidence, recording, review, and playback.',
   competitorGap: 'Address the gap between recording advice and evidence review.',
   answerOne: 'Choose one audience, define one next step, record short founder-led takes, and show one current product action with evidence the viewer can verify.',
   answerTwo: 'Review every factual statement against its cited source, add accurate captions, check pacing and sound, then test the complete playback path before sharing the final video.',
@@ -87,7 +87,7 @@ function generated(context: Pick<DraftingContext, 'candidate' | 'sourceFacts' | 
   const firstUrl = context.sourceFacts[0].url;
   const secondUrl = context.sourceFacts[1].url;
   const bindings = [
-    [repaired ? 'description-repaired' : 'description', '/description', repaired ? visibleSpans.repairedDescription : visibleSpans.initialDescription],
+    ['description', '/description', repaired ? visibleSpans.repairedDescription : visibleSpans.initialDescription],
     ['gap', '/competitorGap', visibleSpans.competitorGap],
     ['answer-1', '/directAnswer', visibleSpans.answerOne],
     ['answer-2', '/directAnswer', visibleSpans.answerTwo],
@@ -165,7 +165,7 @@ class RepairingFixtureClient implements StructuredOutputClient {
       return this.omitSupportEvaluation ? evaluations.slice(1) : evaluations;
     };
     if (request.name === 'videoclaw_article_critique_v1') {
-      return { schemaVersion: 1, approved: false, supportEvaluations: supportEvaluations(), issues: [{ id: 'editorial-1', code: 'editorial.specificity', message: 'Clarify the role of sources in the description.', repairInstruction: 'Paraphrase the source-led planning guidance in the description.' }] };
+      return { schemaVersion: 1, approved: false, supportEvaluations: supportEvaluations(), issues: [{ id: 'editorial-1', code: 'editorial.specificity', message: 'Clarify the role of sources in the description.', repairInstruction: 'Paraphrase the source-led planning guidance in the description.', locations: ['/description'] }] };
     }
     if (request.name === 'videoclaw_article_repair_v2') return generated(context, true);
     if (request.name === 'videoclaw_article_repair_verification_v1') {
@@ -462,7 +462,7 @@ describe('offline drafting rejection integration (no lander required)', () => {
     expect(report.failures).toEqual([expect.objectContaining({
       code: 'candidate_failed', detail: expect.stringContaining(code),
     })]);
-    expect(fixture.client.requests.at(-1)?.name).toBe('videoclaw_article_repair_verification_v1');
+    expect(fixture.client.requests.at(-1)?.name).toBe(omitSupport ? 'videoclaw_article_critique_v1' : 'videoclaw_article_repair_verification_v1');
     expect(fixture.lander.commands).toEqual([]);
     expect((await createFileStateStore(fixture.statePath).load()).state.contentHashes).toEqual({});
     await fixture.lander.assertReadOnly();

@@ -96,7 +96,14 @@ export function createOfflineNetwork(backlog: Candidate[], sourceFacts: string[]
             // a matching search title or generic recording advice is insufficient.
             const workflow = candidate.primaryKeyword.split(' ').at(-1);
             const topic = `Workflow ${workflow} for a founder product demo video starts with choosing the intended viewer and verifying the claims shown on screen.`;
-            const paragraphs = index < 2 ? [topic, ...sourceFacts.slice(index * split, (index + 1) * split)]
+            // Independently authored synthetic FAQ body evidence, not search
+            // snippets or facts injected by the worker/context builder.
+            const faqBodies = [
+              `${candidate.primaryKeyword} is a sequence for preparing and checking a founder product recording.`,
+              `Plan ${candidate.primaryKeyword} by choosing the viewer and preparing the example before recording.`,
+              `${candidate.primaryKeyword} helps a team review the complete recording before sharing it.`,
+            ];
+            const paragraphs = index < 2 ? [topic, ...faqBodies, ...sourceFacts.slice(index * split, (index + 1) * split)]
               : [`Workflow ${workflow} for a founder product demo video includes reviewing the completed recording before distribution.`];
             // Each catalog entry is an independent topic, not a qualification of
             // its neighbor. Make those boundaries explicit in the source HTML.

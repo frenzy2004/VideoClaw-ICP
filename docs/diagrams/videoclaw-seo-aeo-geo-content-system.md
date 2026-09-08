@@ -33,14 +33,27 @@ The 250-opportunity backlog is an input, not a required count or proof of measur
 Apify evidence → one draft + critique + QA → Markdown / SVG / report artifact → STOP
 ```
 
-Latest observation, 2026-09-08 Malaysia date:
+Latest software correction, 2026-09-09 Malaysia date:
+
+```text
+Retrieve bodies → screen each FAQ → draft → critique with exact locations
+→ bounded repair → delta gate → independent review → source-growth gate → native QA
+```
+
+The [FAQ/repair correction](../autoblogger/FAQ-REPAIR-FIX-2026-09-09.md) passes
+the offline worker fixture and a separate full native fixture validation. It adds
+body-answer screening before generation and code-enforced repair limits. No new
+live attempt, retry reset, generated lander PR or production action occurred.
+Lexical evidence screening is not factual approval; human approval remains required.
+
+Last live observation, 2026-09-08 Malaysia date:
 
 ```text
 EVIDENCE-FIRST: Screen → correct generic FAQ matching → recover observed questions → verify source bodies
 LIVE: Fresh research → draft → critique → one repair → unsupported claims/source overuse rejected → STOP
 ```
 
-The [latest report](../autoblogger/CONTEXT-BUDGET-PROOF-2026-09-08.md) records
+The [last live report](../autoblogger/CONTEXT-BUDGET-PROOF-2026-09-08.md) records
 one video-marketing attempt with eight organic results, three observed topic FAQs,
 four automatically retrieved sources and four completed GPT-5.5 calls. Current
 context-bound reviews resolved six ordinary-reference ambiguities. Final checks
@@ -48,8 +61,8 @@ still rejected three new unsupported assertions and source-use totals of 215/233
 versus the unchanged 180-word ceiling. No accepted article or native QA resulted.
 The uninterrupted live milestone remains unproven. Worker checks pass **1,850
 tests**, lint, typecheck and build. Per-region repair budgets are implemented, not
-proven effective at constraining generated copy. FAQ source coverage and repair
-expansion are the next engineering problems; no additional paid attempt is queued.
+proven effective at constraining generated copy in that run. The subsequent
+offline correction is described above; no additional paid attempt is queued.
 
 The [previous content-repurposing report](../autoblogger/SCREENED-CONTENT-PROOF-2026-09-08.md)
 and its original failed state remain unchanged; it was not relabelled as successful.

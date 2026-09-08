@@ -3,7 +3,28 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-## Latest context/budget live proof — 2026-09-08 Malaysia time
+## Latest offline correction — 2026-09-09 Malaysia time
+
+The [FAQ/repair report](FAQ-REPAIR-FIX-2026-09-09.md) separates the new code from
+the unchanged failed live run. Body-only, answer-shaped FAQ screening runs before
+generation; combined source selection preserves FAQ and title coverage. Repair
+is restricted to explicitly identified locations and cannot grow reviewed source
+use. Hash-verified saved responses fail these new gates without any paid call.
+
+Fresh worker checks: **1,959 tests across 54 files**, lint, build, regenerated-route
+typecheck and whitespace checks pass. Independent re-reviews are clear; the
+existing vinext mixed-import build warnings remain. Secret and documentation-link
+checks pass.
+
+The offline 50 → 10 → 3 fixture and pending-metrics artifact-only fixture pass.
+A separately exported fixture bundle passed all 32 unmodified native blog tests,
+lint, full Next build, workspace-integrity checks and cleanup against lander
+`b6b0833` in a disposable clone. Bundle SHA-256:
+`65b294eb8bcd41e05440e28409abc857e7e0fb199527149bc9adf33336c38065`.
+This is synthetic fixture/native-contract proof, not a live generated article.
+Live state is unchanged and no production or schedule action occurred.
+
+## Previous context/budget live proof — 2026-09-08 Malaysia time
 
 The [current report](CONTEXT-BUDGET-PROOF-2026-09-08.md) records context-hashed
 reference review, whole-article repair allocations and a live-discovered short-topic
