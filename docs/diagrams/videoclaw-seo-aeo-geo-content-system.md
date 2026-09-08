@@ -33,7 +33,20 @@ The 250-opportunity backlog is an input, not a required count or proof of measur
 Apify evidence → one draft + critique + QA → Markdown / SVG / report artifact → STOP
 ```
 
-Latest research diagnostic, 2026-09-09 Malaysia date:
+Latest full live attempt, 2026-09-09 Malaysia date:
+
+```text
+Fresh US/en research → eight organic results / four questions → four fetched source bodies
+→ two comparative FAQ evidence gaps → STOP before generation
+```
+
+The [explainer-video attempt](../autoblogger/EXPLAINER-LIVE-PROOF-2026-09-09.md)
+made zero OpenAI calls and produced no accepted article or native article QA.
+The prior tutorial diagnostic's passing FAQ set did not generalize to this new
+topic. The consumed one-use grant and all earlier history are preserved; no
+production or schedule action occurred. Full live end-to-end proof is outstanding.
+
+Preceding research diagnostic, 2026-09-09 Malaysia date:
 
 ```text
 Observed questions → targeted support searches → safe body retrieval
@@ -45,7 +58,7 @@ clears the research/preflight gap using one paid search and saved-result replay.
 It does not create an accepted article or change the exhausted candidate's retry
 permissions. Full generation/critique/repair/native QA proof remains outstanding.
 
-Previous full live attempt, 2026-09-09 Malaysia date:
+Earlier full live attempt, 2026-09-09 Malaysia date:
 
 ```text
 Fresh Apify evidence → four fetched sources → two FAQ evidence checks fail → STOP

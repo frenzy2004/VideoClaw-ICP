@@ -3,7 +3,24 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-## Latest FAQ discovery/selection correction — 2026-09-09 Malaysia time
+## Latest live worker attempt — 2026-09-09 Malaysia time
+
+The [explainer-video attempt](EXPLAINER-LIVE-PROOF-2026-09-09.md) passed fresh
+read-only lander inventory, live US/en research and automatic body retrieval.
+Two comparative FAQ questions still lacked matching body anchors. It failed
+before OpenAI generation: zero drafts, accepted bundles or native article QA.
+An unchanged-context offline replay reproduces both findings without model calls.
+All 18 prior runs/31 prior failures remain unchanged; totals are now 19/32.
+The new one-use grant is consumed and the candidate is terminal at attempt one.
+
+Fresh verification: 2,031 tests across 54 files, lint, typecheck and worker build
+pass. No production or schedule change. Two preliminary research batches timed
+out; the normal single-candidate worker used fresh, successful observations.
+Combined provider-reported charges were $0.03830; OpenAI requests were zero.
+**The uninterrupted live research → draft → critique/repair → native QA milestone
+is not yet proven.**
+
+## Previous FAQ discovery/selection correction — 2026-09-09 Malaysia time
 
 The [discovery and selection report](FAQ-DISCOVERY-FIX-2026-09-09.md) records one
 seven-query paid support search and subsequent saved-result/fresh-body diagnostics.
