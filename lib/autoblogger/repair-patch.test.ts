@@ -69,6 +69,8 @@ describe('bounded repair patch request', () => {
       [bind(body, 'Read the guide.')], 3, { 'fact-a': 3 }, ['https://example.com/a/very/long/path']],
     ['repeated occurrences and duplicate fact IDs', 'Choose a buyer. Choose a buyer.',
       [bind(body, 'Choose a buyer.', ['fact-a', 'fact-a'])], 6, { 'fact-a': 6 }, []],
+    ['single occurrence with duplicate fact IDs', 'Choose a buyer.',
+      [bind(body, 'Choose a buyer.', ['fact-a', 'fact-a'])], 3, { 'fact-a': 3 }, []],
     ['cumulative bindings per fact', 'Choose a buyer. Record the workflow.',
       [bind(body, 'Choose a buyer.'), bind(body, 'Record the workflow.', ['fact-a', 'fact-b'])],
       6, { 'fact-a': 6, 'fact-b': 3 }, []],
