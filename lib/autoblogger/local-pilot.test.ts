@@ -1249,6 +1249,22 @@ describe('local artifact-only pilot preflight', () => {
 });
 
 describe('unmodified production model transport auditing', () => {
+  it.each(['success', 'transport-failure'])('permits five explicitly bounded preparation-stage calls after %s, never six', async outcome => {
+    let dispatched = 0;
+    const transport = createModelAuditTransport(async () => {
+      dispatched++;
+      if (outcome === 'transport-failure') throw new Error('offline failure');
+      return {status: 200, headers: {}, body: {}};
+    }, async () => {}, undefined, {maxRequests: 5});
+    const request = {method: 'POST' as const, url: 'https://api.openai.com/v1/responses', headers: {}, body: '{}', signal: new AbortController().signal};
+    for (let call = 0; call < 5; call++) {
+      if (outcome === 'transport-failure') await expect(transport(request)).rejects.toThrow('offline failure');
+      else expect((await transport(request)).status).toBe(200);
+    }
+    await expect(transport(request)).rejects.toThrow(/limit|budget/i);
+    expect(dispatched).toBe(5);
+  });
+
   it.each(['success', 'http-failure', 'transport-failure'])('stops before the fifth Responses POST after %s, excluding Apify GET and POST', async (outcome) => {
     const dispatched: string[] = [];
     const requests: unknown[] = [];

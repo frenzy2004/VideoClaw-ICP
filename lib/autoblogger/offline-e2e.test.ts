@@ -144,10 +144,27 @@ class RepairingFixtureClient implements StructuredOutputClient {
   async generate(request: StructuredOutputRequest): Promise<unknown> {
     this.requests.push(request);
     const input = request.input as DraftingContext & {
+      contextHash?: string; candidateQuestions?: string[];
       draft?: GeneratedDraftV2; repairedDraft?: GeneratedDraftV2; originalIssues?: Array<{ id: string; code: string }>;
       bindingManifest?: Array<GeneratedDraftV2['claimBindings'][number] & { bindingIndex: number; bindingHash: string }>;
     };
     const context = input;
+    if (request.name === 'videoclaw_faq_evidence_v1') {
+      const keyword = input.candidate.primaryKeyword;
+      const bodies = [
+        `${keyword} is a sequence for preparing and checking a founder product recording.`,
+        `Plan ${keyword} by choosing the viewer and preparing the example before recording.`,
+        `${keyword} helps a team review the complete recording before sharing it.`,
+      ];
+      return {status: 'ready', contextHash: input.contextHash, reason: 'Synthetic offline source bodies cover three distinct intents.',
+        selections: input.candidateQuestions!.map((question, index) => {
+          const fact = input.sourceFacts.flatMap(source => source.facts).find(fact => fact.text === bodies[index]);
+          expect(fact?.evidenceKind).toBe('body');
+          return {question, intent: ['definition', 'planning', 'purpose'][index],
+            anchors: [{sourceFactId: fact!.id, excerpt: fact!.text}]};
+        }),
+      };
+    }
     if (request.name === 'videoclaw_article_draft_v2') return generated(context, false);
     const supportEvaluations = () => {
       expect(input.bindingManifest).toHaveLength(19);
@@ -367,7 +384,7 @@ describe.skipIf(nativeLanderPath === undefined)('native lander offline integrati
       })).toEqual({ status: 'artifact_only', reason: 'lander_base_not_ready' });
     }
     expect(fixture.client.requests.map(({ name }) => name)).toEqual(Array.from({ length: 3 }, () => [
-      'videoclaw_article_draft_v2', 'videoclaw_article_critique_v1',
+      'videoclaw_faq_evidence_v1', 'videoclaw_article_draft_v2', 'videoclaw_article_critique_v1',
       'videoclaw_article_repair_v2', 'videoclaw_article_repair_verification_v1',
     ]).flat());
     await assertArtifactsOnDisk(fixture, first);

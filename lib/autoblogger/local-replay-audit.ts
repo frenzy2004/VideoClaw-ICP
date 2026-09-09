@@ -79,13 +79,21 @@ export function createReplayAuditedClient(client: StructuredOutputClient, record
 }
 
 export function createReplayAuditedDrafter(
-  drafter: { draft(context: DraftingContext): Promise<DraftingOutcome> },
+  drafter: { prepareEvidence?(context: DraftingContext): Promise<DraftingContext>; draft(context: DraftingContext): Promise<DraftingOutcome> },
   record: LocalReplayRecorder,
   mediaAllowlist: AllowlistedProductMedia[],
   research: () => unknown,
 ) {
-  return { async draft(context: DraftingContext) {
-    await record('draft-context', { context, mediaAllowlist, research: research() });
-    return drafter.draft(context);
-  } };
+  return {
+    ...(drafter.prepareEvidence ? { async prepareEvidence(context: DraftingContext) {
+      await record('faq-preparation-input', {context, research: research()});
+      const prepared = await drafter.prepareEvidence!(context);
+      await record('faq-preparation-output', {context: prepared});
+      return prepared;
+    }} : {}),
+    async draft(context: DraftingContext) {
+      await record('draft-context', { context, mediaAllowlist, research: research() });
+      return drafter.draft(context);
+    },
+  };
 }

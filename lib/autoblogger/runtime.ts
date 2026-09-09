@@ -259,6 +259,9 @@ export async function writeAutobloggerArtifacts(report: unknown, directory: stri
       await writeArtifact(resolve(target, `${artifact.slug}.md`), artifact.bundle.markdown);
       if (artifact.bundle.svg !== null) await writeArtifact(resolve(target, `${artifact.slug}.svg`), artifact.bundle.svg);
       await writeArtifact(resolve(target, `${artifact.slug}.bundle.json`), `${JSON.stringify(artifact.bundle, null, 2)}\n`);
+      if (artifact.faqEvidencePlan) {
+        await writeArtifact(resolve(target, `${artifact.slug}.faq-evidence.json`), `${JSON.stringify(artifact.faqEvidencePlan, null, 2)}\n`);
+      }
       await writeArtifact(resolve(target, `${artifact.slug}.publication.json`), `${JSON.stringify({
         schemaVersion: 1,
         runId: run.runId,

@@ -480,6 +480,69 @@ describe('finalizeReviewedRepair', () => {
 });
 
 describe('consistent repair issue registry', () => {
+  it('prepares observed questions semantically before drafting, without an article-generation fallback', async () => {
+    const observed = structuredClone(context);
+    observed.evidence.signals.peopleAlsoAsk = [...observed.evidence.faqQuestions];
+    let request: StructuredOutputRequest | undefined;
+    const client: StructuredOutputClient = {async generate(value) {
+      request = value;
+      throw new Error('semantic preparation boundary');
+    }};
+    await expect(createStructuredDrafter({client, mediaAllowlist: [media]}).prepareEvidence(observed))
+      .rejects.toThrow('semantic preparation boundary');
+    expect(request!.name).toBe('videoclaw_faq_evidence_v1');
+  });
+
+  function prepareResponse(request: StructuredOutputRequest) {
+    const input = request.input as {contextHash: string};
+    return {status: 'ready', contextHash: input.contextHash, reason: 'Three observed intents with body anchors.',
+      selections: context.evidence.faqQuestions.map((question, index) => ({
+        question, intent: ['planning', 'contents', 'duration'][index],
+        anchors: [{sourceFactId: context.sourceFacts[0].facts[index + 1].id,
+          excerpt: context.sourceFacts[0].facts[index + 1].text}],
+      })),
+    };
+  }
+
+  it('retains prepared anchors through independent critique, repair and verification without granting approval', async () => {
+    const observed = structuredClone(context);
+    observed.evidence.signals.peopleAlsoAsk = [...observed.evidence.faqQuestions];
+    const issue = {id: 'faq-support', code: 'content.faq_support', message: 'FAQ still unsupported.',
+      repairInstruction: 'Support the answer with the supplied body facts.', locations: ['/faqAnswers/0/answer']};
+    const client = new FixtureStructuredClient([prepareResponse, draft,
+      {...approvedCritique, approved: false, issues: [issue]}, draft,
+      (request: StructuredOutputRequest) => {
+        const verification = verifyRequest()(request);
+        return {...verification, approved: false,
+          evaluations: verification.evaluations.map(item => ({...item, resolved: false})),
+        };
+      },
+    ]);
+    const drafter = createStructuredDrafter({client, mediaAllowlist: [media]});
+    const prepared = await drafter.prepareEvidence(observed);
+    const outcome = await drafter.draft(prepared);
+    expect(outcome).toMatchObject({status: 'blocked', reason: 'content_safety_failed'});
+    expect(outcome).not.toHaveProperty('bundle');
+    expect(client.requests.map(request => request.name)).toEqual([
+      'videoclaw_faq_evidence_v1', 'videoclaw_article_draft_v2', 'videoclaw_article_critique_v1',
+      'videoclaw_article_repair_v2', 'videoclaw_article_repair_verification_v1',
+    ]);
+    for (const request of client.requests.slice(1)) {
+      expect(request.input).toHaveProperty('faqEvidenceSelection', prepared.faqEvidencePlan);
+    }
+  });
+
+  it('rejects stale prepared facts before dispatching an article request', async () => {
+    const observed = structuredClone(context);
+    observed.evidence.signals.peopleAlsoAsk = [...observed.evidence.faqQuestions];
+    const client = new FixtureStructuredClient([prepareResponse]);
+    const drafter = createStructuredDrafter({client, mediaAllowlist: [media]});
+    const prepared = await drafter.prepareEvidence(observed);
+    prepared.sourceFacts[0].facts[1].text += ' Modified evidence.';
+    await expect(drafter.draft(prepared)).rejects.toThrow(/hash mismatch/);
+    expect(client.requests).toHaveLength(1);
+  });
+
   it('carries a heading-scoped body anchor through the real preflight to the model boundary', async () => {
     const input = structuredClone(context);
     const question = 'How do I record my screen for a founder pitch video?';

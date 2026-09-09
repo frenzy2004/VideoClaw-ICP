@@ -19,6 +19,7 @@ import {
 import { isStrictIsoDateTime, isoDateTimeToDateOnly } from './date-time';
 import { containsSecretLikeValue } from './secrets';
 import type { CheckedSource } from './sources';
+import type { FaqEvidencePlan } from './faq-preparation';
 
 const claimLocationPattern = /^\/(?:description|competitorGap|directAnswer|sections\/\d+\/(?:heading|markdown)|faqAnswers\/\d+\/answer|editorialGraphic\/(?:title|alt)|editorialGraphic\/steps\/\d+\/(?:label|detail))$/;
 
@@ -312,6 +313,7 @@ export type DraftingContext = {
   sourceFacts: SourceFact[];
   productClaims: ProductClaim[];
   generatedAt: string;
+  faqEvidencePlan?: FaqEvidencePlan;
 };
 
 export type AllowlistedProductMedia = {

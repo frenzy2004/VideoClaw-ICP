@@ -28,6 +28,8 @@ import {
 import { isStrictIsoDateTime } from './date-time';
 import { containsSecretLikeValue } from './secrets';
 import { planFaqEvidence } from './faq-evidence';
+import { prepareFaqEvidence, validateFaqEvidencePlan } from './faq-preparation';
+import { rankRelevantPaaQuestions } from './research';
 import { buildRepairPolicy, inspectRepairDelta, inspectRepairSourceGrowth } from './repair-policy';
 import { buildSourcePlan, buildSourceRepairPlan, measurePotentialSourceUse, measureReviewedSourceUse, sourceAllocationFindings, MAX_SOURCE_DERIVED_WORDS, TARGET_SOURCE_DERIVED_WORDS } from './source-plan';
 
@@ -294,8 +296,8 @@ Budget factual summaries across the WHOLE article before writing. FAQs are publi
 source-derived coverage, not a free repetition of the introduction or source notes.
 Answer each FAQ directly and concisely, normally 15–25 words, with exact qualifiers;
 faqEvidencePlan maps each observed question to answer-shaped body passages. Read
-those complete facts before answering, retaining qualifications. This lexical
-retrieval screen is not entailment or approval; the critic must independently
+those complete facts before answering, retaining qualifications. This retrieval
+proposal is not entailment or approval; the critic must independently
 verify each answer. Never fill missing support with a claim about what supplied
 sources do not cover, a non-answer, or internal research-process boilerplate.
 do not repeat the same definition, examples and benefits in several locations.
@@ -372,6 +374,10 @@ const SUPPORT_REVIEW_RULES = `${FIXED_CANDIDATE_RULES}
 customerTrigger is private caller-configured campaign metadata from candidate.icp,
 not an externally sourced claim. Code requires exact equality. Do not require an
 external citation for that field. This does not exempt competitorGap or public prose.
+FAQ preparation is a retrieval proposal, never approval. Independently check that
+all three FAQ questions address distinct relevant intents, that each answer directly
+answers its question, and that its cited body facts support its full meaning.
+Exact excerpts in preparation are private anchors, not permission to quote them.
 Independently evaluate EVERY entry in bindingManifest in its full draft context,
 including headings, metadata, FAQ answers, and graphic text. Return exactly one
 supportEvaluations item per entry, copying bindingIndex and bindingHash without alteration.
@@ -495,6 +501,7 @@ function modelContext(context: DraftingContext): Record<string, unknown> {
       })),
     })),
     productClaims: context.productClaims,
+    ...(context.faqEvidencePlan ? { faqEvidenceSelection: context.faqEvidencePlan } : {}),
   };
 }
 
@@ -726,6 +733,7 @@ function assertDraftingContext(context: DraftingContext): void {
   if (containsSecretLikeValue(modelContext(context))) {
     throw new Error('Model-bound drafting context contains a secret-like value.');
   }
+  if (context.faqEvidencePlan) validateFaqEvidencePlan(context, context.faqEvidencePlan);
 }
 
 export type FinalizeReviewedRepairInput = {
@@ -810,6 +818,18 @@ export function finalizeReviewedRepair(input: FinalizeReviewedRepairInput): Draf
 
 export function createStructuredDrafter(options: StructuredDrafterOptions) {
   return {
+    async prepareEvidence(context: DraftingContext): Promise<DraftingContext> {
+      assertDraftingContext(context);
+      const media = selectProductMedia(context.candidate, options.mediaAllowlist);
+      if (!media || containsSecretLikeValue(media)) {
+        throw new Error('FAQ preparation requires safe allowlisted product media.');
+      }
+      if (context.faqEvidencePlan) return context;
+      const questions = rankRelevantPaaQuestions(
+        context.candidate.primaryKeyword, context.evidence.signals.peopleAlsoAsk,
+      ).slice(0, 9);
+      return prepareFaqEvidence(context, options.client, questions);
+    },
     async draft(context: DraftingContext): Promise<DraftingOutcome> {
       assertDraftingContext(context);
       const media = selectProductMedia(context.candidate, options.mediaAllowlist);
@@ -820,7 +840,9 @@ export function createStructuredDrafter(options: StructuredDrafterOptions) {
         throw new Error('Selected media contains a secret-like value.');
       }
 
-      const faqEvidencePlan = planFaqEvidence(context.evidence.faqQuestions, context.sourceFacts);
+      const faqEvidencePlan = context.faqEvidencePlan
+        ? validateFaqEvidencePlan(context, context.faqEvidencePlan)
+        : planFaqEvidence(context.evidence.faqQuestions, context.sourceFacts);
       const missingFaqEvidence = faqEvidencePlan.filter(item => !item.sourceFactIds.length);
       if (missingFaqEvidence.length) {
         return { status: 'blocked', reason: 'content_safety_failed', findings: missingFaqEvidence.map(item => ({

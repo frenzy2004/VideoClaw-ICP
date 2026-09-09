@@ -65,6 +65,25 @@ describe('private local replay records', () => {
 });
 
 describe('local-only audit boundaries', () => {
+  it('retains preparation input and selected evidence before handing it to drafting', async () => {
+    const f = await fixture();
+    const context = {candidate: {articleId: 'fixture'}, evidence: {faqQuestions: ['old']}} as unknown as DraftingContext;
+    const prepared = {...context, evidence: {...context.evidence, faqQuestions: ['selected']}};
+    const wrapped = createReplayAuditedDrafter({
+      async prepareEvidence() { return prepared; },
+      async draft(received) {
+        const input = JSON.parse(await readFile(join(f.directory, 'faq-preparation-input/validation-report.json'), 'utf8'));
+        const output = JSON.parse(await readFile(join(f.directory, 'faq-preparation-output/validation-report.json'), 'utf8'));
+        expect(input.payload.context.evidence.faqQuestions).toEqual(['old']);
+        expect(output.payload.context.evidence.faqQuestions).toEqual(['selected']);
+        expect(received.evidence.faqQuestions).toEqual(['selected']);
+        return {status: 'blocked' as const, reason: 'content_safety_failed' as const, findings: []};
+      },
+    }, f.record, [], () => ({originalRun: 'serp'}));
+    const result = await wrapped.prepareEvidence!(context);
+    expect(await wrapped.draft(result)).toMatchObject({status: 'blocked'});
+  });
+
   it('persists the exact structured input before delegating without altering the request or response', async () => {
     const f = await fixture();
     const request = { name: 'article_critique', system: 'Original instructions', schema: { type: 'object' }, input: { bindingManifest: [{ bindingIndex: 0, bindingHash: 'original-hash' }], sourceFacts: [{ facts: [{ id: 'f1', text: 'Original fact.' }] }] } };

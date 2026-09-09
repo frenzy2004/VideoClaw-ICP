@@ -251,6 +251,9 @@ describe('runtime context and artifacts', () => {
       failures: [],
       artifacts: [{
         candidateFingerprint: 'candidate:x', articleId: 'vc-c1-101', slug: 'fixture-article', icp: 'founder', publication: 'artifact_only',
+        faqEvidencePlan: {schemaVersion: 1, contextHash: 'b'.repeat(64), candidateQuestions: ['Observed question?'],
+          selections: [{question: 'Observed question?', intent: 'definition',
+            anchors: [{sourceFactId: 'body-1', excerpt: 'Private exact body anchor for the evidence receipt.'}]}]},
         bundle: { schemaVersion: 1, candidateFingerprint: 'candidate:x', article: { slug: 'fixture-article' }, markdown: '---\nstatus: review\n---\nArticle', svg: '<svg xmlns="http://www.w3.org/2000/svg"/>' },
         validation: { status: 'passed', cleanup: 'completed', bundleHash: 'a'.repeat(64), landerRef: 'feature', commands: [] },
       }],
@@ -261,6 +264,10 @@ describe('runtime context and artifacts', () => {
     const compact = await readFile(join(root, 'run-report.json'), 'utf8');
     expect(compact).not.toContain('Article');
     expect(compact).not.toContain('<svg');
+    expect(compact).not.toContain('Private exact body anchor');
+    const evidencePath = join(root, 'fixture-article.faq-evidence.json');
+    expect(JSON.parse(await readFile(evidencePath, 'utf8'))).toEqual(report.artifacts[0].faqEvidencePlan);
+    expect((await stat(evidencePath)).mode & 0o777).toBe(0o600);
     await expect(stat(join(root, 'fixture-article.bundle.json'))).resolves.toBeTruthy();
     expect(JSON.parse(await readFile(join(root, 'fixture-article.publication.json'), 'utf8')))
       .toMatchObject({ runId: 'pilot-artifact', bundle: report.artifacts[0].bundle });

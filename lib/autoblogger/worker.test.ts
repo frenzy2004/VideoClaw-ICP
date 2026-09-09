@@ -20,7 +20,7 @@ import { createAutobloggerWorker, discoverCandidatesFromResearch } from './worke
 import { reserveCandidate, grantManualRetryApproval, grantManualTargetSwitch, grantManualTargetRetry, grantManualFreshCandidate, markCandidateScanned, markCandidateFailure } from './recovery';
 import { writeAutobloggerArtifacts } from './runtime';
 import { reconcileLocalPilotCandidate } from './local-pilot';
-import type { DraftSafetyFinding } from './content-bundle';
+import type { DraftSafetyFinding, DraftingContext } from './content-bundle';
 
 function candidate(index: number): Candidate {
   const campaignNumber = index % 3 === 0 ? 2 : index % 3 === 1 ? 1 : 3;
@@ -88,6 +88,7 @@ function fixture(input: {
   evidenceOverrides?: Partial<EvidenceBundle>;
   failScan?: boolean;
   failDraft?: boolean;
+  prepareEvidence?: (context: DraftingContext) => Promise<DraftingContext>;
   blockedFindings?: DraftSafetyFinding[];
   maxDrafts?: 1 | 2 | 3;
   targetCandidateFingerprint?: string;
@@ -172,6 +173,7 @@ function fixture(input: {
       },
     },
     drafter: {
+      ...(input.prepareEvidence ? {prepareEvidence: input.prepareEvidence} : {}),
       draft: async (context) => {
         if (input.failDraft) throw new Error('temporary model timeout');
         if (input.blockedFindings) return { status: 'blocked' as const, reason: 'content_safety_failed' as const, findings: input.blockedFindings };
@@ -227,6 +229,36 @@ function fixture(input: {
 }
 
 describe('persistent autoblogger worker', () => {
+  it('retains prepared FAQ selection in artifact attribution instead of the preliminary choices', async () => {
+    let preparation: DraftingContext['faqEvidencePlan'];
+    const f = fixture({backlogCount: 1, publicationEnabled: false, prepareEvidence: async context => {
+      const questions = [context.evidence.faqQuestions[2], context.evidence.faqQuestions[0], context.evidence.faqQuestions[1]];
+      preparation = {schemaVersion: 1, contextHash: 'a'.repeat(64), candidateQuestions: questions,
+        selections: questions.map((question, index) => ({question, intent: `intent ${index}`,
+          anchors: [{sourceFactId: 'fact-1', excerpt: 'Private source anchor retained only in the review artifact.'}]}))};
+      return {...context, faqEvidencePlan: preparation, evidence: {...context.evidence, faqQuestions: questions,
+        serp: {...context.evidence.serp, peopleAlsoAsk: questions}}};
+    }});
+    const report = await f.worker.execute({command: 'pilot', runId: 'prepared-faqs'});
+    expect(report.status).toBe('validated');
+    expect(report.artifacts[0]).toHaveProperty('faqEvidencePlan', preparation);
+    expect(JSON.stringify(f.getState())).not.toContain('Private source anchor');
+    expect(report.artifacts[0].publicationOrigin.evidence.faqQuestions).toEqual([
+      'Why does founder video evidence topic 0 matter?', 'What is founder video evidence topic 0?',
+      'How do you plan founder video evidence topic 0?',
+    ]);
+  });
+
+  it('never drafts or invokes native validation when evidence preparation refuses the candidate', async () => {
+    const f = fixture({backlogCount: 1, publicationEnabled: false,
+      prepareEvidence: async () => {throw new Error('insufficient FAQ evidence');}});
+    const report = await f.worker.execute({command: 'pilot', runId: 'unprepared-faqs'});
+    expect(report.status).toBe('failed');
+    expect(report.artifacts).toEqual([]);
+    expect(f.counters.drafted).toBe(0);
+    expect(f.counters.validated).toBe(0);
+  });
+
   function approvedRetry() {
     const item = { ...candidate(0), articleId: 'vc-c2-001' };
     const fp = candidateFingerprints(item).candidate;

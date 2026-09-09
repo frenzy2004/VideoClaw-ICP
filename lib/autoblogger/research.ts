@@ -266,7 +266,7 @@ function relevantTokens(value: string): Set<string> {
   );
 }
 
-function rankRelevantPaaQuestions(keyword: string, questions: string[]): string[] {
+export function rankRelevantPaaQuestions(keyword: string, questions: string[]): string[] {
   const keywordTokens = relevantTokens(keyword);
   // Normalize only this leading query framing, never verbs throughout a topic
   // (e.g. "record") or the observed questions. Keep the original keyword's

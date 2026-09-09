@@ -56,7 +56,10 @@ type Researcher = {
   inspect(candidates: ShallowResearchResult[]): Promise<ResearchBatch>;
 };
 
-type Drafter = { draft(context: DraftingContext): Promise<DraftingOutcome> };
+type Drafter = {
+  prepareEvidence?(context: DraftingContext): Promise<DraftingContext>;
+  draft(context: DraftingContext): Promise<DraftingOutcome>;
+};
 type InventoryEntry = RecoveryInventoryEntry & { number?: number; url?: string; headRef?: string };
 
 export type AutobloggerCommand = 'research' | 'pilot' | 'run';
@@ -75,6 +78,8 @@ export type AutobloggerArtifact = {
   researchProvenance?: ResearchProvenance;
   paaObservations?: PaaObservations;
   publicationOrigin: PublisherOrigin;
+  /** Private artifact only; never copied into persistent state or PR prose. */
+  faqEvidencePlan?: DraftingContext['faqEvidencePlan'];
   validation: Awaited<ReturnType<Publisher['validateBundle']>>;
   pullRequest?: { number: number; url: string; headRef: string };
 };
@@ -622,7 +627,9 @@ export function createAutobloggerWorker(options: AutobloggerWorkerOptions) {
         const candidate = item.result.candidate;
         const fingerprints = candidateFingerprints(candidate);
         try {
-          const context = options.buildDraftContext({ result: item.result, shallow: item.shallow, metrics: item.enrichment.metrics });
+          const initialContext = options.buildDraftContext({ result: item.result, shallow: item.shallow, metrics: item.enrichment.metrics });
+          const context = options.drafter.prepareEvidence
+            ? await options.drafter.prepareEvidence(initialContext) : initialContext;
           const drafting = await options.drafter.draft(context);
           if (drafting.status !== 'ready') {
             const findingCodes = drafting.reason === 'content_safety_failed'
@@ -638,7 +645,7 @@ export function createAutobloggerWorker(options: AutobloggerWorkerOptions) {
           let publicationResult: OpenDraftPullRequestResult | undefined;
           const publicationOrigin: PublisherOrigin = {
             candidate,
-            evidence: item.result.evidence,
+            evidence: context.evidence,
             provenance: context.provenance,
             keywordProvenance: item.enrichment.provenance,
             approvedMedia: {
@@ -679,6 +686,7 @@ export function createAutobloggerWorker(options: AutobloggerWorkerOptions) {
             ...(item.result.paaObservations ?? item.shallow.paaObservations
               ? { paaObservations: PaaObservationsSchema.parse(item.result.paaObservations ?? item.shallow.paaObservations) } : {}),
             publicationOrigin,
+            ...(context.faqEvidencePlan ? {faqEvidencePlan: context.faqEvidencePlan} : {}),
             validation,
             ...(pullRequest ? { pullRequest: { number: pullRequest.number, url: pullRequest.url, headRef: pullRequest.headRef } } : {}),
           });

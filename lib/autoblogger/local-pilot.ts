@@ -231,11 +231,13 @@ export function reconcileLocalPilotCandidate(input: LocalPilotCandidateInput) {
 
 export type ModelAuditRecord = { call: number; phase: string; httpStatus: number; response: unknown };
 export type ModelRequestAuditRecord = { call: number; phase: string; requestBody: string };
-export function createModelAuditTransport(transport: HttpTransport, record: (value: ModelAuditRecord) => Promise<void>, recordRequest?: (value: ModelRequestAuditRecord) => Promise<void>): HttpTransport {
+export function createModelAuditTransport(transport: HttpTransport, record: (value: ModelAuditRecord) => Promise<void>, recordRequest?: (value: ModelRequestAuditRecord) => Promise<void>, options: {maxRequests: 4 | 5} = {maxRequests: 4}): HttpTransport {
+  if (options.maxRequests !== 4 && options.maxRequests !== 5) throw new Error('Local pilot model budget must be four or five requests.');
+  const maxRequests = options.maxRequests;
   let calls = 0;
   return async (request) => {
     const isModel = request.method === 'POST' && request.url === 'https://api.openai.com/v1/responses';
-    if (isModel && calls >= 4) throw new Error('Local pilot Responses POST limit of 4 reached.');
+    if (isModel && calls >= maxRequests) throw new Error(`Local pilot Responses POST limit of ${maxRequests} reached.`);
     const call = isModel ? ++calls : 0;
     const name = isModel ? JSON.parse(request.body ?? '{}').text?.format?.name : undefined;
     const phase = typeof name === 'string' && /^[A-Za-z0-9_-]{1,120}$/u.test(name) ? name : 'unknown';
@@ -520,7 +522,7 @@ export async function runLocalArtifactPilot(options: LocalPilotArguments & { roo
       await replay(`response-${record.call}-${record.phase}`, record);
       await audit(record, `model-${record.call}-${record.phase}`);
       event('model_response_retained', { call: record.call, phase: record.phase, httpStatus: record.httpStatus });
-    }, (record) => replay(`wire-request-${record.call}-${record.phase}`, record));
+    }, (record) => replay(`wire-request-${record.call}-${record.phase}`, record), {maxRequests: 5});
     const researcher = createResearcher({ apify: createApifyClient({ token: process.env.APIFY_TOKEN, transport }), sourceChecker: createProductionSourceChecker() });
     const client = createOpenAIResponsesClient({ apiKey: process.env.OPENAI_API_KEY, transport });
     let replayResearch: Parameters<typeof buildDraftingContextFromResearch>[0] | undefined;
