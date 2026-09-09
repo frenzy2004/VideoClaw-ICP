@@ -506,7 +506,7 @@ describe('consistent repair issue registry', () => {
 
   function unchangedPatch(request: StructuredOutputRequest) {
     const input = request.input as {repairPolicy: {originalFingerprint: string; allowedLocations: string[]}};
-    return {schemaVersion: 1, originalFingerprint: input.repairPolicy.originalFingerprint,
+    return {schemaVersion: 2, originalFingerprint: input.repairPolicy.originalFingerprint,
       changes: Object.fromEntries(input.repairPolicy.allowedLocations.map(location => [location, null]))};
   }
 
@@ -531,7 +531,7 @@ describe('consistent repair issue registry', () => {
     expect(outcome).not.toHaveProperty('bundle');
     expect(client.requests.map(request => request.name)).toEqual([
       'videoclaw_faq_evidence_v1', 'videoclaw_article_draft_v2', 'videoclaw_article_critique_v1',
-      'videoclaw_article_repair_patch_v1', 'videoclaw_article_repair_verification_v1',
+      'videoclaw_article_repair_patch_v2', 'videoclaw_article_repair_verification_v1',
     ]);
     for (const request of client.requests.slice(1)) {
       expect(request.input).toHaveProperty('faqEvidenceSelection', prepared.faqEvidencePlan);
@@ -541,6 +541,102 @@ describe('consistent repair issue registry', () => {
       '/faqAnswers/0/answer': { maxRenderedWords: 18, maxCharacters: null,
         maxBoundWordsByFact: { 'fixture-faq': 18 }, allowedCitationUrls: [] },
     });
+    expect(client.requests[3].input).toHaveProperty('sentenceFields', {
+      '/faqAnswers/0/answer': { mode: 'sentences', sentences: { b8: {
+        span: draft.faqAnswers[0].answer, maxWords: 18,
+        sourceFactIds: ['fixture-faq'], productClaimId: null,
+      } } },
+    });
+    expect(outcome).toHaveProperty('findings', expect.arrayContaining([
+      expect.objectContaining({code: 'content.faq_support'}),
+    ]));
+  });
+
+  it.each([true, false])('independently reviews an assembled FAQ word edit with original citations (supported: %s)', async (supported) => {
+    const observed = structuredClone(context);
+    observed.evidence.signals.peopleAlsoAsk = [...observed.evidence.faqQuestions];
+    const location = '/faqAnswers/0/answer';
+    const answer = 'Support factual statements, keep delivery natural, and test final playback.';
+    const issue = {id: 'faq-clarity', code: 'copy.clarity', message: 'Shorten the FAQ answer.',
+      repairInstruction: 'Keep the factual support and playback advice concise.', locations: [location]};
+    const client = new FixtureStructuredClient([prepareResponse, draft,
+      {...approvedCritique, approved: false, issues: [issue]},
+      (request: StructuredOutputRequest) => {
+        const patch = unchangedPatch(request);
+        expect(request.schema).toMatchObject({properties: {schemaVersion: {const: 2}}});
+        return {...patch, changes: {...patch.changes, [location]: {b8: [
+          'Support', 'factual', 'statements,', 'keep', 'delivery', 'natural,', 'and', 'test', 'final', 'playback.',
+        ]}}};
+      },
+      (request: StructuredOutputRequest) => {
+        const {repairedDraft} = request.input as {repairedDraft: GeneratedDraftV2};
+        const verification = verifyRequest(repairedDraft)(request);
+        return {...verification, approved: supported,
+          supportEvaluations: verification.supportEvaluations.map(evaluation =>
+            repairedDraft.claimBindings[evaluation.bindingIndex].location === location
+              ? {...evaluation, supported, rationale: supported ? 'The concise guidance is supported.' : 'The answer remains unsupported.'}
+              : evaluation),
+        };
+      },
+    ]);
+    const drafter = createStructuredDrafter({client, mediaAllowlist: [media]});
+    const prepared = await drafter.prepareEvidence(observed);
+    const outcome = await drafter.draft(prepared);
+    expect(client.requests.map(({name}) => name)).toEqual([
+      'videoclaw_faq_evidence_v1', 'videoclaw_article_draft_v2', 'videoclaw_article_critique_v1',
+      'videoclaw_article_repair_patch_v2', 'videoclaw_article_repair_verification_v1',
+    ]);
+    const verificationInput = client.requests[4].input as {repairedDraft: GeneratedDraftV2};
+    const expectedBinding = {location, span: answer, sourceFactIds: ['fixture-faq'], productClaimId: null};
+    expect(verificationInput.repairedDraft).toEqual({
+      ...draft,
+      faqAnswers: [{...draft.faqAnswers[0], answer}, ...draft.faqAnswers.slice(1)],
+      claimBindings: [...draft.claimBindings.filter(binding => binding.location !== location), expectedBinding],
+    });
+    expect(verificationInput).toMatchObject({
+      originalIssues: [issue], faqEvidenceSelection: prepared.faqEvidencePlan,
+      bindingManifest: expect.arrayContaining([expect.objectContaining({
+        ...expectedBinding, bindingIndex: 20,
+        bindingHash: expect.not.stringMatching(supportedBindings()[8].bindingHash),
+      })]),
+    });
+    if (supported) {
+      expect(outcome).toMatchObject({status: 'ready', repaired: true});
+      if (outcome.status === 'ready') expect(outcome.bundle.markdown).toContain(answer);
+    } else {
+      expect(outcome).toMatchObject({status: 'blocked', reason: 'content_safety_failed',
+        findings: expect.arrayContaining([expect.objectContaining({code: 'critique.support_rejected', location})]),
+      });
+      expect(outcome).not.toHaveProperty('bundle');
+    }
+  });
+
+  it.each([
+    {problem: 'an unknown sentence ID', edit: {b999: ['Support', 'claims.']}},
+    {problem: 'a multiword token', edit: {b8: ['Support factual statements.']}},
+    {problem: 'a full-field override of sentence mode', edit: {text: 'Support claims.', bindings: []}},
+  ])('rejects $problem before independent verification', async ({edit}) => {
+    const observed = structuredClone(context);
+    observed.evidence.signals.peopleAlsoAsk = [...observed.evidence.faqQuestions];
+    const issue = {id: 'faq-support', code: 'content.faq_support', message: 'FAQ unsupported.',
+      repairInstruction: 'Correct the answer.', locations: ['/faqAnswers/0/answer']};
+    const client = new FixtureStructuredClient([prepareResponse, draft,
+      {...approvedCritique, approved: false, issues: [issue]},
+      (request: StructuredOutputRequest) => {
+        const patch = unchangedPatch(request);
+        return {...patch, changes: {...patch.changes, '/faqAnswers/0/answer': edit}};
+      },
+    ]);
+    const drafter = createStructuredDrafter({client, mediaAllowlist: [media]});
+    const outcome = await drafter.draft(await drafter.prepareEvidence(observed));
+    expect(outcome).toMatchObject({status: 'blocked', reason: 'content_safety_failed',
+      findings: [expect.objectContaining({code: 'repair.patch_invalid'})],
+    });
+    expect(outcome).not.toHaveProperty('bundle');
+    expect(client.requests.map(({name}) => name)).toEqual([
+      'videoclaw_faq_evidence_v1', 'videoclaw_article_draft_v2', 'videoclaw_article_critique_v1',
+      'videoclaw_article_repair_patch_v2',
+    ]);
   });
 
   it('rejects a prepared-path patch outside the allowed fields before requesting final verification', async () => {
@@ -558,7 +654,7 @@ describe('consistent repair issue registry', () => {
     expect(outcome).toMatchObject({status: 'blocked', reason: 'content_safety_failed'});
     expect(outcome).not.toHaveProperty('bundle');
     expect(client.requests).toHaveLength(4);
-    expect(client.requests.at(-1)?.name).toBe('videoclaw_article_repair_patch_v1');
+    expect(client.requests.at(-1)?.name).toBe('videoclaw_article_repair_patch_v2');
   });
 
   it('assembles a supported description repair and keeps untouched bindings for the independent verifier', async () => {
@@ -585,6 +681,7 @@ describe('consistent repair issue registry', () => {
     expect(assembled.description).toBe(draft.description);
     expect(assembled.claimBindings.filter(binding => binding.location !== '/description'))
       .toEqual(initial.claimBindings.filter(binding => binding.location !== '/description'));
+    expect(client.requests[3].input).toHaveProperty('sentenceFields', {'/description': {mode: 'field'}});
     expect(client.requests).toHaveLength(5);
   });
 

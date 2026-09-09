@@ -12,6 +12,7 @@ import { createApifyClient } from './apify-client';
 import { createFileStateStore } from './local-state';
 import { createPendingKeywordProvider, createSemrushKeywordProvider } from './keyword-providers';
 import type { StructuredOutputClient, StructuredOutputRequest } from './openai-responses';
+import type { createSentenceRepairRequest } from './repair-patch';
 import { createResearcher } from './research';
 import { createSafeSourceChecker } from './sources';
 import { buildDraftingContextFromResearch, writeAutobloggerArtifacts } from './runtime';
@@ -140,12 +141,14 @@ class RepairingFixtureClient implements StructuredOutputClient {
   requests: StructuredOutputRequest[] = [];
   rejectVerification = false;
   omitSupportEvaluation = false;
+  malformedSentenceEdit = false;
 
   async generate(request: StructuredOutputRequest): Promise<unknown> {
     this.requests.push(request);
     const input = request.input as DraftingContext & {
       contextHash?: string; candidateQuestions?: string[];
       repairPolicy?: {originalFingerprint: string; allowedLocations: string[]};
+      sentenceFields?: ReturnType<typeof createSentenceRepairRequest>['input']['sentenceFields'];
       draft?: GeneratedDraftV2; repairedDraft?: GeneratedDraftV2; originalIssues?: Array<{ id: string; code: string }>;
       bindingManifest?: Array<GeneratedDraftV2['claimBindings'][number] & { bindingIndex: number; bindingHash: string }>;
     };
@@ -186,19 +189,29 @@ class RepairingFixtureClient implements StructuredOutputClient {
       return { schemaVersion: 1, approved: false, supportEvaluations: supportEvaluations(), issues: [{ id: 'editorial-1', code: 'editorial.specificity', message: 'Clarify the role of sources in the description.', repairInstruction: 'Paraphrase the source-led planning guidance in the description.', locations: ['/description'] }] };
     }
     if (request.name === 'videoclaw_article_repair_v2') return generated(context, true);
-    if (request.name === 'videoclaw_article_repair_patch_v1') {
+    if (request.name === 'videoclaw_article_repair_patch_v2') {
       const repaired = generated(context, true);
       const textAt = (value: unknown, location: string) => location.slice(1).split('/').reduce(
         (entry: unknown, key) => (entry as Record<string, unknown>)[key], value,
       );
-      return {schemaVersion: 1, originalFingerprint: input.repairPolicy!.originalFingerprint,
-        changes: Object.fromEntries(input.repairPolicy!.allowedLocations.map(location => [location,
-          textAt(input.draft, location) === textAt(repaired, location) ? null : {
+      expect(input.sentenceFields).toMatchObject({'/description': {mode: 'sentences'}});
+      return {schemaVersion: 2, originalFingerprint: input.repairPolicy!.originalFingerprint,
+        changes: Object.fromEntries(input.repairPolicy!.allowedLocations.map(location => {
+          if (textAt(input.draft, location) === textAt(repaired, location)) return [location, null];
+          const field = input.sentenceFields![location];
+          if (field.mode === 'sentences') return [location, Object.fromEntries(
+            Object.entries(field.sentences).map(([key, {span}]) => {
+              const replacement = repaired.claimBindings[Number(key.slice(1))].span;
+              return [key, this.malformedSentenceEdit ? ['This sourced']
+                : span === replacement ? null : replacement.split(/\s+/u)];
+            }),
+          )];
+          return [location, {
             text: textAt(repaired, location),
             bindings: repaired.claimBindings.filter(binding => binding.location === location)
               .map(({span, sourceFactIds, productClaimId}) => ({span, sourceFactIds, productClaimId})),
-          },
-        ])),
+          }];
+        })),
       };
     }
     if (request.name === 'videoclaw_article_repair_verification_v1') {
@@ -206,6 +219,14 @@ class RepairingFixtureClient implements StructuredOutputClient {
         ? ['editorial.specificity', 'content.source_usage_review', 'critique.support_incomplete']
         : ['editorial.specificity']);
       expect(input.repairedDraft?.description).toBe(visibleSpans.repairedDescription);
+      const original = (this.requests.findLast(({name}) => name === 'videoclaw_article_critique_v1')!
+        .input as {draft: GeneratedDraftV2}).draft;
+      const originalBinding = original.claimBindings.find(({location}) => location === '/description')!;
+      const expectedBinding = {...originalBinding, span: visibleSpans.repairedDescription};
+      expect(input.repairedDraft).toEqual({...original, description: visibleSpans.repairedDescription,
+        claimBindings: [...original.claimBindings.filter(({location}) => location !== '/description'), expectedBinding],
+      });
+      expect(input.bindingManifest).toContainEqual(expect.objectContaining(expectedBinding));
       return { schemaVersion: 1, approved: !this.rejectVerification && !this.omitSupportEvaluation, supportEvaluations: supportEvaluations(),
         evaluations: input.originalIssues!.map(({ id, code }) => ({ issueId: id,
           resolved: code === 'editorial.specificity' ? !this.rejectVerification : !this.omitSupportEvaluation,
@@ -401,7 +422,7 @@ describe.skipIf(nativeLanderPath === undefined)('native lander offline integrati
     }
     expect(fixture.client.requests.map(({ name }) => name)).toEqual(Array.from({ length: 3 }, () => [
       'videoclaw_faq_evidence_v1', 'videoclaw_article_draft_v2', 'videoclaw_article_critique_v1',
-      'videoclaw_article_repair_patch_v1', 'videoclaw_article_repair_verification_v1',
+      'videoclaw_article_repair_patch_v2', 'videoclaw_article_repair_verification_v1',
     ]).flat());
     await assertArtifactsOnDisk(fixture, first);
     const saved = await createFileStateStore(fixture.statePath).load();
@@ -483,6 +504,25 @@ describe.skipIf(nativeLanderPath === undefined)('native lander offline integrati
 });
 
 describe('offline drafting rejection integration (no lander required)', () => {
+  it('blocks malformed sentence edits before final verification, lander commands or artifacts', async () => {
+    const fixture = await setup([candidates()[49]], false, false);
+    fixture.client.malformedSentenceEdit = true;
+    const report = await fixture.worker.execute({command: 'run', runId: 'offline-malformed-sentence'});
+    expect(report.status).toBe('failed');
+    expect(report.counts).toMatchObject({deepInspected: 1, drafted: 0, validated: 0});
+    expect(report.artifacts).toEqual([]);
+    expect(report.failures).toEqual([expect.objectContaining({
+      code: 'candidate_failed', detail: expect.stringContaining('repair.patch_invalid'),
+    })]);
+    expect(fixture.client.requests.map(({name}) => name)).toEqual([
+      'videoclaw_faq_evidence_v1', 'videoclaw_article_draft_v2', 'videoclaw_article_critique_v1',
+      'videoclaw_article_repair_patch_v2',
+    ]);
+    expect(fixture.lander.commands).toEqual([]);
+    expect((await createFileStateStore(fixture.statePath).load()).state.contentHashes).toEqual({});
+    await fixture.lander.assertReadOnly();
+  });
+
   it.each([
     { problem: 'an unresolved repair', code: 'editorial.specificity', omitSupport: false },
     { problem: 'missing per-binding support coverage', code: 'critique.support_incomplete', omitSupport: true },

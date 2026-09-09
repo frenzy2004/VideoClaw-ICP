@@ -31,7 +31,7 @@ import { planFaqEvidence } from './faq-evidence';
 import { prepareFaqEvidence, validateFaqEvidencePlan } from './faq-preparation';
 import { rankRelevantPaaQuestions } from './research';
 import { buildRepairPolicy, inspectRepairDelta, inspectRepairSourceGrowth } from './repair-policy';
-import { createRepairPatchRequest, applyRepairPatch } from './repair-patch';
+import { createSentenceRepairRequest, applySentenceRepair } from './repair-patch';
 import { buildSourcePlan, buildSourceRepairPlan, measurePotentialSourceUse, measureReviewedSourceUse, sourceAllocationFindings, MAX_SOURCE_DERIVED_WORDS, TARGET_SOURCE_DERIVED_WORDS } from './source-plan';
 
 const CritiqueIssueSchema = z.object({
@@ -486,9 +486,21 @@ const REPAIR_SYSTEM = `${REPAIR_RULES}
 Return the complete version 2 article-generation object, not a patch.`;
 
 const REPAIR_PATCH_SYSTEM = `${REPAIR_RULES}
-Return ONLY the version 1 field-replacement object specified by the schema.
+Return ONLY the version 2 repair patch specified by the schema.
 Echo originalFingerprint. Include every required changes key. Use null when a field
-and its bindings stay unchanged. Otherwise supply its entire replacement text and
+and its bindings stay unchanged. sentenceFields assigns each location a mode chosen
+by code; never change modes.
+In sentences mode, include every required bN sentence key. Use null to retain that
+exact original span, an empty array to delete it, or an array with one word per item
+to replace it. Stay within that sentence's maxWords. Each word contains only Unicode
+letters or numbers, optional internal straight/curly apostrophes, and optional trailing
+periods, commas, exclamation/question marks, semicolons or colons. Never put whitespace,
+hyphens, Markdown, HTML or links inside a word item. Code joins words with spaces and
+assembles the final text and bindings. Each bN owns its original sourceFactIds and
+productClaimId; never output or reassign those references. Retained spans keep their
+exact bytes and bindings. Deletions must leave required fields nonempty and preserve
+minimum answer lengths, including the direct answer's required length.
+In field mode, supply null or the entire replacement text and
 ALL bindings for that field, not just bindings for changed sentences. Copy retained
 sentence bindings exactly. Each binding uses only that original field's permitted
 sourceFactIds and productClaimId values. Bind every rendered word/sentence/heading;
@@ -946,9 +958,9 @@ export function createStructuredDrafter(options: StructuredDrafterOptions) {
         { code: 'repair.policy_invalid', message: 'Cannot attempt bounded repair without a complete current source review.' },
       ] };
 
-      const patchRequest = context.faqEvidencePlan ? createRepairPatchRequest(initial, repairPolicy) : null;
+      const patchRequest = context.faqEvidencePlan ? createSentenceRepairRequest(initial, repairPolicy) : null;
       const repairOutput = await options.client.generate({
-        name: patchRequest ? 'videoclaw_article_repair_patch_v1' : 'videoclaw_article_repair_v2',
+        name: patchRequest ? 'videoclaw_article_repair_patch_v2' : 'videoclaw_article_repair_v2',
         schema: patchRequest?.schema ?? generatedDraftSchema(context),
         system: patchRequest ? REPAIR_PATCH_SYSTEM : REPAIR_SYSTEM,
         input: {
@@ -970,7 +982,7 @@ export function createStructuredDrafter(options: StructuredDrafterOptions) {
       });
       let repaired: GeneratedDraftV2;
       if (patchRequest) {
-        const assembled = applyRepairPatch(initial, repairPolicy, repairOutput);
+        const assembled = applySentenceRepair(initial, repairPolicy, repairOutput);
         if (assembled.status === 'blocked') return {status: 'blocked', reason: 'content_safety_failed', findings: assembled.findings};
         repaired = assembled.draft;
       } else {
