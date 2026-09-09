@@ -29,19 +29,19 @@ getRepairLocationLimits(original: GeneratedDraftV2, policy: RepairPolicy):
   }>;
 ```
 
-- [ ] Write failing consumer tests for repairRequest.input.repairLimits: Markdown
+- [x] Write failing consumer tests for repairRequest.input.repairLimits: Markdown
   link destinations excluded from rendered words, repeated span occurrences
   counted, duplicate fact IDs not multiplied, Unicode/apostrophes counted by the
   existing tokenizer; exact description exception; stale baseline rejected.
 ```ts
 expect(request.input.repairLimits[location].maxBoundWordsByFact['fact-a']).toBe(6);
 ```
-- [ ] Implement helper with rendered(text, location) and boundCoverage(tokens,
+- [x] Implement helper with rendered(text, location) and boundCoverage(tokens,
   original bindings); reject invalid/stale baseline via inspectRepairDelta on
   original/original. Return only policy.allowedLocations without mutation.
-- [ ] Include repairLimits in createRepairPatchRequest input and type. Use the
+- [x] Include repairLimits in createRepairPatchRequest input and type. Use the
   patch prompt to explicitly require cumulative per-fact limits and unchanged
   entire citation sets. Output schema, assembler and acceptance gates unchanged.
-- [ ] Verify a generated prepared-path request forwards actual limits. Run focused
+- [x] Verify a generated prepared-path request forwards actual limits. Run focused
   policy, patch, drafting and offline tests; lint/typecheck. Commit only six scoped
   implementation files. Independent review, then main full checks/docs/push.

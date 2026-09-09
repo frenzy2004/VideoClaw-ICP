@@ -5,12 +5,13 @@ No lander source changes, article publishing, production merge, deployment or sc
 
 ## Bounded field repair — 2026-09-10 Malaysia time
 
-The [repair checkpoint](BOUNDED-REPAIR-PROOF-2026-09-10.md) records 2,339 tests
-across 57 files, no skips, passing lint/typecheck/build, and two independent review
-verdicts. One paid retained-input repair preserved immutable content but still
-failed six citation/word-growth checks. No final review, native article QA or
-automatic pilot success resulted. Exact numeric repair guidance is being added;
-the validator and failed history remain unchanged.
+The [repair checkpoint](BOUNDED-REPAIR-PROOF-2026-09-10.md) records **2,355 tests
+across 57 files**, no skips/failures, passing lint/typecheck/build and independent
+review with no outstanding findings. Field replacement and exact numeric guidance
+are implemented. The two paid retained-input diagnostics remain blocked: first
+six citation/word-growth findings, then nine word-growth findings. Neither reached
+final review or native article QA. No automatic pilot success, state reset or
+production action resulted; validator semantics and failed history are unchanged.
 
 ## Previous semantic FAQ integration — 2026-09-10 Malaysia time
 

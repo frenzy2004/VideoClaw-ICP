@@ -46,6 +46,47 @@ The follow-up [explicit repair limits correction](../superpowers/specs/2026-09-1
 supplies the existing validator's exact numeric allowances to the generator;
 it does not relax those limits. The failed diagnostic remains failed.
 
+## Explicit limits: verified software, second diagnostic still blocked
+
+`c1b81d2` exposes per-location rendered-word, per-fact aggregate-word, citation-URL
+and description-character allowances using the validator's existing accounting.
+The request explains that the description formatting exception replaces both word
+ceilings only when explicitly enabled. Unchanged sentences must retain their whole
+citation set. Output schema and acceptance gates are unchanged.
+
+Independent review found one minor test isolation gap, fixed in `08c8e1f`; scoped
+re-review found no outstanding findings. **Final full suite: 2,355 tests across
+57 files, zero failures/skips.** Lint, typecheck, worker build and whitespace checks
+pass. The six-file implementation had 17 failing regression assertions before
+implementation and 310 focused tests afterward. The final extra regression proves
+duplicate fact IDs cannot double a single occurrence's allowance.
+
+A second retained-input diagnostic used clean reviewed HEAD
+`08c8e1fc401f2b04a8c9e8869ebcfd07810b278a`. One initial invocation supplied an
+incorrect SHA and stopped at the clean-commit guard before credential loading or
+paid requests; the actual invocation used the verified SHA. Both original model
+requests still matched their hash-verified saved requests exactly.
+
+The new patch request supplied the exact numeric limits. Its HTTP 200 response from
+`gpt-5.5-2026-04-23` used **63,147 input and 7,526 output tokens**. It failed two
+field-word-growth and seven per-fact-word-growth findings, across description,
+direct answer, interview questions and one FAQ. Citation-set/immutable-binding
+findings did not recur, but no semantic approval can be inferred from that.
+
+This diagnostic also stopped **before** final independent review and native QA.
+No accepted article, second repair pass, new worker attempt or pilot success was
+recorded. There were no additional Apify calls. Private receipts are under ignored
+`artifacts/autoblogger/explicit-limits-live-diagnostic-2026-09-10/`.
+
+Two paid component diagnostics total: **124,311 input and 14,976 output tokens**.
+These are provider-reported token counts, not dollar estimates. Both remain blocked;
+neither is a fresh full-worker proof. A read-only check confirms the first bad patch
+still fails the same six checks after adding guidance, so no gate was weakened.
+
+Next correction remains in repair generation: produce supported edits within the
+existing allowances. Do not erase history, keep trying new candidate identities,
+manually rewrite the artifact, or claim that numerical guidance alone solved it.
+
 ## Integrity and remaining milestone
 
 Original state remains **20 runs, 33 failure records, no successful pilot**:
