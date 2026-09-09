@@ -3,7 +3,6 @@ import { GeneratedDraftV2Schema, type DraftSafetyFinding, type GeneratedDraftV2 
 import type { JsonSchema } from './openai-responses';
 import { inspectRepairDelta, type RepairPolicy } from './repair-policy';
 import { containsSecretLikeValue } from './secrets';
-import { sourcePageIdentity } from './source-relevance';
 
 type LocalBinding = Omit<GeneratedDraftV2['claimBindings'][number], 'location'>;
 type Replacement = { text: string; bindings: LocalBinding[] };
@@ -17,8 +16,11 @@ const PolicySchema = z.object({
   descriptionMaxChars: z.number().int().positive().max(200).nullable(),
   sources: z.array(z.object({
     page: nonblank.refine(page => {
+      // This is an already captured host[:port][/path], not an input URL.
+      // sourcePageIdentity removes one www prefix and is not idempotent.
+      if (!/^(?:\[[0-9a-f:.]+\]|[^/:?#@\s\\]+)(?::\d+)?(?:\/[^\s?#\\]*)?$/iu.test(page)) return false;
       try {
-        return ['http', 'https'].some(scheme => sourcePageIdentity(`${scheme}://${page}`) === page);
+        return new URL(`http://${page}`).hostname.length > 0;
       } catch { return false; }
     }), sourceIds: z.array(nonblank).min(1),
     initialDerivedWords: z.number().int().nonnegative(), maxDerivedWords: z.number().int().nonnegative(),

@@ -65,9 +65,10 @@ function freeze<T>(value: T): T {
 
 describe('bounded repair patch request', () => {
   it.each([
-    ['https://www.example.com', 'example.com'],
-    ['http://www.example.com:443', 'example.com:443'],
-  ])('accepts a real nonempty reviewed source plan with normalized page identities from %s', (origin, pageHost) => {
+    ['https://www.example.com', 'example.com', '?tracking=1'],
+    ['http://www.example.com:443', 'example.com:443', '?tracking=1'],
+    ['https://www.www.example.com', 'www.example.com', ''],
+  ])('accepts a real nonempty reviewed source plan with normalized page identities from %s', (origin, pageHost, query) => {
     const original = fixture();
     const candidate: DraftingContext['candidate'] = {
       schemaVersion: 1, articleId: 'vc-c2-011', campaignId: 'accelerator-demo-day-founder',
@@ -75,7 +76,7 @@ describe('bounded repair patch request', () => {
       title: 'Plan a product demo', slug: 'plan-product-demo', intent: 'informational', funnelStage: 'middle',
     };
     const sourceFacts: DraftingContext['sourceFacts'] = ['a', 'b', 'c'].map(id => ({
-      id, label: id, url: `${origin}/${id}/?tracking=1`, checkedAt: '2026-09-10T00:00:00.000Z',
+      id, label: id, url: `${origin}/${id}/${query}`, checkedAt: '2026-09-10T00:00:00.000Z',
       facts: [{ id: `fact-${id}`, text: 'Plan a product demo for one buyer.', evidenceKind: 'body' }],
     }));
     const context: DraftingContext = {
@@ -103,6 +104,27 @@ describe('bounded repair patch request', () => {
     const patch = patchFor(policy);
     patch.changes[body] = replacement();
     expect(applyRepairPatch(original, policy, patch).status).toBe('ready');
+  });
+
+  it.each(['https://example.com/a', 'example.com/a?query=1', 'example.com/a#fragment',
+    'user@example.com/a', 'example.com:99999/a', '/example.com/a', 'example.com\\a', 'example.com/a b',
+  ])('rejects malformed page identity %s while retaining policy bounds', page => {
+    const original = fixture();
+    const policy = { ...policyFor(original), sources: [{ page, sourceIds: ['a'], initialDerivedWords: 10, maxDerivedWords: 10 }] };
+    expect(() => createRepairPatchRequest(original, policy)).toThrow();
+    expect(applyRepairPatch(original, policy, patchFor(policy)).status).toBe('blocked');
+  });
+
+  it.each([
+    { sourceIds: [], initialDerivedWords: 10, maxDerivedWords: 10 },
+    { sourceIds: ['a'], initialDerivedWords: -1, maxDerivedWords: 0 },
+    { sourceIds: ['a'], initialDerivedWords: 10, maxDerivedWords: 11 },
+    { sourceIds: ['a'], initialDerivedWords: 10, maxDerivedWords: 1.5 },
+  ])('retains source inventory and word-bound validation for %j', source => {
+    const original = fixture();
+    const policy = { ...policyFor(original), sources: [{ page: 'www.example.com/a', ...source }] };
+    expect(() => createRepairPatchRequest(original, policy)).toThrow();
+    expect(applyRepairPatch(original, policy, patchFor(policy)).status).toBe('blocked');
   });
 
   it('exposes exact required locations and only their original fact/product inventories', () => {
