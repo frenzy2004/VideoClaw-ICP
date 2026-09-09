@@ -65,7 +65,7 @@ The old failed report and payload were not changed or relabelled as successful.
 Private diagnostic receipts remain under
 `artifacts/autoblogger/support-faq-recovery-2026-09-09/` and are not committed.
 
-Final post-review receipt: `final-result/validation-report.json`, checked
+Initial post-review receipt: `final-result/validation-report.json`, checked
 `2026-09-09T00:53:02.012Z`. Context SHA-256:
 `5eee8549be118bebd0ec82ba11a7d0eda09ca62debb781cdc3983c38c21f7f89`.
 The original failed-input payload SHA-256 remains
@@ -98,6 +98,39 @@ Existing gray-matter direct-eval and vinext mixed-import build warnings remain.
 Private-credential, historical-state, unchanged-lander and local-document-link
 checks pass. No new generated article exists, so no new live-article native QA
 pass is claimed; full-suite native-contract fixtures are separate evidence.
+
+## Follow-up: camera-orientation regression and fresh verification
+
+The working branch already contained the recovery implementation at `1b8290c`.
+Fresh verification confirmed that recovery, and independent review found one
+additional false negative: the new standalone `top` comparison filter also
+rejected the camera-orientation phrase `top-down` despite a direct procedural
+body instruction.
+
+Seven regression cases were added before the correction. The three positive
+cases (ASCII, Unicode hyphen and nonbreaking hyphen) failed on the existing code.
+The matcher now excludes only that exact compound from the `top` comparison
+token; full body matching and snippet exclusion still apply. `best top-down`,
+`top-performing`, `top-downloaded` and `top camera` remain blocked. Independent
+re-review verified the fix and reported no new findings in the two-file diff.
+
+Final fresh checks: **2,167 tests across 55 files**, no failures or skipped tests,
+plus lint, typecheck and worker build pass. Existing build warnings remain.
+
+The corrected researcher again replayed the saved support dataset and fetched
+page bodies automatically. It selected the same three distinct observed FAQs
+(creation, types, cost), each with body anchors, and passed the real drafter's
+preflight. The model request was intercepted deliberately: **zero new paid actors
+or OpenAI requests; no article generated or new native article QA performed**.
+This is a saved-search/fresh-body diagnostic, not a fresh SERP or full worker run.
+
+Receipt: `post-orientation-result/validation-report.json`, checked
+`2026-09-09T15:15:37.808Z`; context SHA-256:
+`9fb71a25b83b163d821a327dd6aae2e2b024ece992956e79a9f20e1bb0d59b3e`.
+The private `orientation-red.json` and `orientation-final-tests.json` retain the
+failing and passing test evidence. State remains byte-for-byte unchanged at the
+hash below; all 19 runs and 32 failures are preserved. The original lander remains
+clean, and no publication or schedule authority was exercised.
 
 ## What is needed now
 

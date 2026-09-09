@@ -16,6 +16,29 @@ const source: SourceFact = {
 const explainerCost = 'According to a 2024 Wyzowl research, the average cost of an explainer video is $5,400.';
 const explainerTypes = 'You can use any type of explainer video, including animations, live actions, and AI-generated content.';
 
+describe('camera orientation is not a superiority claim', () => {
+  // A blanket top-token ban drops a real procedural body anchor. Typography
+  // must not change the meaning; neither may the exception admit comparisons.
+  it.each(['top-down', 'top\u2010down', 'top\u2011down'])('retains body support for %s recording', orientation => {
+    const question = `How do I record a ${orientation} video?`;
+    const text = `To record a ${orientation} video, use an overhead camera.`;
+    expect(faqBodyMatches(question, text)).toBe(true);
+    expect(planFaqEvidence([question], [{...source, facts: [
+      {id: 'camera-orientation', text, evidenceKind: 'body'},
+      {id: 'snippet-only', text, evidenceKind: 'serp_snippet'},
+    ]}])).toEqual([{question, sourceFactIds: ['camera-orientation']}]);
+  });
+
+  it.each([
+    ['How do I record the best top-down video?', 'To record the best top-down video, use an overhead camera.'],
+    ['How do I record the top-performing video?', 'To record the top-performing video, use an overhead camera.'],
+    ['How do I record the top-downloaded video?', 'To record the top-downloaded video, use an overhead camera.'],
+    ['What is the top video camera?', 'The top video camera is an overhead camera with a wide lens.'],
+  ])('still rejects unsupported comparison wording: %s', (question, text) => {
+    expect(faqBodyMatches(question, text)).toBe(false);
+  });
+});
+
 describe('FAQ question intent keys', () => {
   it('deduplicates make/create cost intent while retaining the full subject and other question wording', () => {
     expect(faqQuestionKey).toBeTypeOf('function');

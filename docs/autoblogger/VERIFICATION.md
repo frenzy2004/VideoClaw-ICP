@@ -3,7 +3,21 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-## Latest software correction — 2026-09-09 Malaysia time
+## Latest follow-up verification — 2026-09-09 Malaysia time
+
+The [FAQ recovery follow-up](SUPPORT-FAQ-RECOVERY-2026-09-09.md#follow-up-camera-orientation-regression-and-fresh-verification)
+fixes the review-discovered `top-down` camera-orientation false positive. Three
+new positive regression cases failed before the narrow correction; four negative
+comparison cases remain blocked. Full final verification passes **2,167 tests
+across 55 files**, zero skipped, plus lint, typecheck and worker build. Independent
+re-review found no remaining issue in the two-file follow-up.
+
+Saved-support/fresh-body verification again selects three grounded observed FAQs
+and reaches the intercepted model boundary. This proves the FAQ-stage correction,
+not a generated article or a full live worker run. No new paid actors, OpenAI calls,
+state changes, lander edits or production/schedule actions occurred.
+
+## Previous software correction — 2026-09-09 Malaysia time
 
 The [support-search FAQ recovery report](SUPPORT-FAQ-RECOVERY-2026-09-09.md)
 records recovery of questions already present in support SERPs, exact observation

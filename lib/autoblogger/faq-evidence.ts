@@ -122,8 +122,10 @@ function scopedProcedureMatches(query: string, heading: string, sentences: strin
 export function faqBodyMatches(question: string, text: string, bodyStart = 0): boolean {
   if (!Number.isInteger(bodyStart) || bodyStart < 0 || bodyStart > text.length) return false;
   const query = normalizedQuestion(question);
-  // This lexical screen cannot establish comparative superiority.
-  if (/\b(?:best|worst|top|most|least|cheapest|priciest|greatest|easiest|fastest)\b/u.test(query)) return false;
+  // This lexical screen cannot establish comparative superiority. The fixed
+  // camera-orientation term "top-down" is not a ranking; keep its body-evidence
+  // checks below intact, including when written with typographic hyphens.
+  if (/\b(?:best|worst|top(?![-\u2010\u2011]down\b)|most|least|cheapest|priciest|greatest|easiest|fastest)\b/u.test(query)) return false;
   const naming = /^what (?:is|are) (.+?) called$/u.exec(query);
   const mode = naming ? 'naming' : /^how long\b/u.test(query) ? 'duration'
     : /^how much\b/u.test(query) ? 'cost'
