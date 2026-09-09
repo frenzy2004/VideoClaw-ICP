@@ -175,7 +175,34 @@ describe('sentence-owned repair', () => {
     expect(result.status === 'ready' && result.draft.claimBindings.find(b => b.span === "Don't hurry!")).toEqual(bind(body, "Don't hurry!", ['fact-b'], 'product-b'));
   });
 
+  it.each([
+    ['straight', 'Ask "Which buyer problem matters?"', 'Record "What changed?"', 'Ask buyers.  \nRecord "What changed?"'],
+    ['curly', 'Ask “Which buyer problem matters?”', 'Record “What changed?”', 'Ask buyers.  \nRecord “What changed?”'],
+  ])('classifies %s quoted questions as sentences and preserves original quoted ranges and retained bytes', (_name, first, second, expected) => {
+    const original = fixture();
+    original.sections[0].markdown = `${first}  \n${second}`;
+    original.claimBindings.splice(0, 2, bind(body, first), bind(body, second, ['fact-b'], 'product-b'));
+    const before = structuredClone(original);
+    const policy = policyFor(original);
+    const request = createSentenceRepairRequest(original, policy);
+    expect(request.input.sentenceFields[body]).toEqual({ mode: 'sentences', sentences: {
+      b0: { span: first, maxWords: 5, sourceFactIds: ['fact-a'], productClaimId: null },
+      b1: { span: second, maxWords: 3, sourceFactIds: ['fact-b'], productClaimId: 'product-b' },
+    } });
+    const output = patchFor(policy);
+    expect(applySentenceRepair(original, policy, output)).toEqual({ status: 'ready', draft: before });
+    output.changes[body] = { b0: ['Ask', 'buyers.'], b1: null };
+    const result = applySentenceRepair(freeze(original), policy, output);
+    expect(result.status === 'ready' && result.draft.sections[0].markdown).toBe(expected);
+    expect(result.status === 'ready' && result.draft.claimBindings.filter(b => b.location === body)).toEqual([
+      bind(body, 'Ask buyers.'), bind(body, second, ['fact-b'], 'product-b'),
+    ]);
+    expect(result.status === 'ready' && result.draft.claimBindings.filter(b => b.location !== body)).toEqual(before.claimBindings.slice(2));
+    expect(original).toEqual(before);
+  });
+
   it.each(['Choose buyers', 'buyer-problem', '<b>buyer</b>', '**buyer**', 'buyer&nbsp;problem',
+    '"buyer"', '“buyer”', '“buyer', 'buyer”', '"', '“', '”',
     'one/two', 'one.two', 'one_two', 'buyer\n', '\tbuyer', 'buyer\u200b', 'buyer\u0000', '', '.', '💡',
   ])('rejects disguised or nonword token %j without modifying the draft', token => {
     const original = fixture();
@@ -228,6 +255,9 @@ describe('sentence-owned repair', () => {
     ['autolink', 'Visit www.example.com.', ['Visit www.example.com.']],
     ['ordered list', '1. Choose buyers.', ['Choose buyers.']],
     ['uncovered punctuation', 'Choose buyers. ;', ['Choose buyers.']],
+    ['straight-quoted emphasis', '"Choose **buyers**."', ['"Choose buyers."']],
+    ['curly-quoted link', '“Choose [buyers](https://example.com/a).”', ['“Choose buyers.”']],
+    ['worksheet blanks', 'Choose ____ buyers.', ['Choose ____ buyers.']],
   ])('uses compatible full-field repair for %s', (_name, text, spans) => {
     const original = fixture();
     original.sections[0].markdown = text;

@@ -185,7 +185,9 @@ const localSentenceWord = z.string().regex(sentenceWord).refine(word => !/\s/u.t
 // Conservative literal mapping only: formatting, uncovered punctuation, repeated
 // spans and ambiguous ranges keep the existing full-field contract.
 function sentenceRanges(original: GeneratedDraftV2, location: string, text: string): SentenceRange[] | null {
-  if (!text.trim().split(/\s+/u).every(word => sentenceWord.test(word))
+  // Quotes are plain text for classification; range matching still uses original bytes.
+  const lexicalText = text.replace(/["“”]/gu, '');
+  if (!lexicalText.trim().split(/\s+/u).every(word => sentenceWord.test(word))
     || /(?:^|\n)(?: {4}|\t| {0,3}\d+[.)][ \t])/u.test(text)) return null;
   const ranges: SentenceRange[] = [];
   for (const [index, binding] of original.claimBindings.entries()) {
