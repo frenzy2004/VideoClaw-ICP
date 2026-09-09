@@ -174,3 +174,134 @@ export function applyRepairPatch(original: GeneratedDraftV2, policy: RepairPolic
     return { status: 'blocked', findings: [{ code: 'repair.patch_invalid', message: invalidMessage }] };
   }
 }
+
+type SentenceInfo = LocalBinding & { maxWords: number };
+type SentenceField = { mode: 'sentences'; sentences: Record<string, SentenceInfo> } | { mode: 'field' };
+type SentenceChanges = Record<string, string[] | null>;
+type SentenceRange = { key: string; start: number; end: number; binding: LocalBinding; maxWords: number };
+const sentenceWord = /^[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)*[.,!?;:]*$/u;
+const localSentenceWord = z.string().regex(sentenceWord).refine(word => !/\s/u.test(word));
+
+// Conservative literal mapping only: formatting, uncovered punctuation, repeated
+// spans and ambiguous ranges keep the existing full-field contract.
+function sentenceRanges(original: GeneratedDraftV2, location: string, text: string): SentenceRange[] | null {
+  if (!text.trim().split(/\s+/u).every(word => sentenceWord.test(word))
+    || /(?:^|\n)(?: {4}|\t| {0,3}\d+[.)][ \t])/u.test(text)) return null;
+  const ranges: SentenceRange[] = [];
+  for (const [index, binding] of original.claimBindings.entries()) {
+    if (binding.location !== location) continue;
+    const words = binding.span.match(/[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)*/gu) ?? [];
+    const start = text.indexOf(binding.span);
+    if (!words.length || start < 0 || text.indexOf(binding.span, start + 1) !== -1) return null;
+    ranges.push({ key: `b${index}`, start, end: start + binding.span.length, maxWords: words.length,
+      binding: { span: binding.span, sourceFactIds: [...binding.sourceFactIds], productClaimId: binding.productClaimId },
+    });
+  }
+  if (!ranges.length) return null;
+  let end = 0;
+  for (const range of [...ranges].sort((a, b) => a.start - b.start)) {
+    if (range.start < end || /\S/u.test(text.slice(end, range.start))) return null;
+    end = range.end;
+  }
+  return /\S/u.test(text.slice(end)) ? null : ranges;
+}
+
+function sentenceContract(original: GeneratedDraftV2, policy: RepairPolicy) {
+  const v1 = contract(original, policy);
+  const sentenceFields: Record<string, SentenceField> = {};
+  const rangesByLocation = new Map<string, SentenceRange[]>();
+  const localFields: Record<string, z.ZodType<Replacement | SentenceChanges | null>> = {};
+  const providerFields: Record<string, JsonSchema> = {};
+  for (const location of policy.allowedLocations) {
+    const ranges = location === '/description' && policy.descriptionMaxChars !== null
+      ? null : sentenceRanges(original, location, v1.input.repairFields[location].text);
+    if (!ranges) {
+      sentenceFields[location] = { mode: 'field' };
+      localFields[location] = v1.local.shape.changes.shape[location];
+      providerFields[location] = v1.schema.properties.changes.properties[location];
+      continue;
+    }
+    rangesByLocation.set(location, ranges);
+    sentenceFields[location] = { mode: 'sentences', sentences: Object.fromEntries(ranges.map(range => [range.key, {
+      ...range.binding, sourceFactIds: [...range.binding.sourceFactIds], maxWords: range.maxWords,
+    }])) };
+    localFields[location] = z.object(Object.fromEntries(ranges.map(range => [
+      range.key, z.array(localSentenceWord).max(range.maxWords).nullable(),
+    ]))).strict().nullable();
+    providerFields[location] = { anyOf: [{ type: 'null' }, {
+      type: 'object', additionalProperties: false, required: ranges.map(range => range.key),
+      properties: Object.fromEntries(ranges.map(range => [range.key, { anyOf: [
+        { type: 'null' }, { type: 'array', maxItems: range.maxWords, items: { type: 'string', pattern: '^\\S+$' } },
+      ] }])),
+    }] };
+  }
+  return {
+    v1, rangesByLocation,
+    input: { ...v1.input, repairLimits: getRepairLocationLimits(original, policy), sentenceFields },
+    local: z.object({ schemaVersion: z.literal(2), originalFingerprint: z.literal(policy.originalFingerprint),
+      changes: z.object(localFields).strict(),
+    }).strict(),
+    schema: { ...v1.schema, properties: { ...v1.schema.properties,
+      schemaVersion: { type: 'integer', const: 2 },
+      changes: { type: 'object', additionalProperties: false, properties: providerFields, required: [...policy.allowedLocations] },
+    } } satisfies JsonSchema,
+  };
+}
+
+/** Assign code-owned sentence ranges while preserving v1 for complex fields. */
+export function createSentenceRepairRequest(original: GeneratedDraftV2, policy: RepairPolicy): {
+  schema: JsonSchema;
+  input: {
+    originalFingerprint: string;
+    repairFields: Record<string, unknown>;
+    repairLimits: ReturnType<typeof getRepairLocationLimits>;
+    sentenceFields: Record<string, SentenceField>;
+  };
+} {
+  try {
+    const { schema, input } = sentenceContract(original, policy);
+    return { schema, input };
+  } catch {
+    throw new Error(invalidMessage);
+  }
+}
+
+/** Assemble bounded words with their original citations, then enforce v1 gates. */
+export function applySentenceRepair(original: GeneratedDraftV2, policy: RepairPolicy, output: unknown):
+  { status: 'ready'; draft: GeneratedDraftV2 } | { status: 'blocked'; findings: DraftSafetyFinding[] } {
+  try {
+    const { v1, local, rangesByLocation } = sentenceContract(original, policy);
+    assertJson(output);
+    if (containsSecretLikeValue(output)) throw new Error(invalidMessage);
+    const patch = local.parse(output);
+    const changes: Record<string, Replacement | null> = {};
+    for (const [location, edit] of Object.entries(patch.changes)) {
+      const ranges = rangesByLocation.get(location);
+      if (edit === null || !ranges) {
+        changes[location] = edit as Replacement | null;
+        continue;
+      }
+      const sentences = edit as SentenceChanges;
+      if (ranges.every(range => sentences[range.key] === null)) {
+        changes[location] = null;
+        continue;
+      }
+      let text = v1.input.repairFields[location].text;
+      for (const range of [...ranges].sort((a, b) => b.start - a.start)) {
+        const words = sentences[range.key];
+        if (words !== null) text = text.slice(0, range.start) + words.join(' ') + text.slice(range.end);
+      }
+      // Keep local bindings in their original order, independent of prose order.
+      const bindings = ranges.flatMap(range => {
+        const words = sentences[range.key];
+        return words === null ? [range.binding]
+          : words.length ? [{ ...range.binding, span: words.join(' ') }] : [];
+      });
+      changes[location] = { text, bindings };
+    }
+    const assembledV1Patch = v1.local.parse({ schemaVersion: 1, originalFingerprint: patch.originalFingerprint, changes });
+    return applyRepairPatch(original, policy, assembledV1Patch);
+  } catch {
+    return { status: 'blocked', findings: [{ code: 'repair.patch_invalid', message: invalidMessage }] };
+  }
+}
