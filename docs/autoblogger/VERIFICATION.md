@@ -3,7 +3,13 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-## Latest readiness verification — 2026-09-09 Malaysia time
+## Semantic FAQ integration — 2026-09-10 Malaysia time
+
+The [semantic preparation checkpoint](SEMANTIC-FAQ-PROOF-2026-09-10.md) passes
+2,257 tests across 56 files, zero skipped, plus lint, typecheck and worker build.
+The actual live artifact milestone is separate and remains pending.
+
+## Previous readiness verification — 2026-09-09 Malaysia time
 
 The [distinct FAQ report](DISTINCT-FAQ-READINESS-2026-09-09.md) records two live
 research screens, a make/create duplicate-intent regression and the independently

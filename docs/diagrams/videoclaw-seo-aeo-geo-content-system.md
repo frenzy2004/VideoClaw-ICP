@@ -1,6 +1,6 @@
 # VideoClaw SEO / AEO / GEO content system
 
-Review-only checkpoint: **9 September 2026**. No production merge, deployment, publishing, indexing submission, or schedule activation is authorized in this work.
+Review-only checkpoint: **10 September 2026**. No production merge, deployment, publishing, indexing submission, or schedule activation is authorized in this work.
 
 ![VideoClaw worker, artifact-only pilot, and separate human publication gate](./videoclaw-seo-aeo-geo-content-system-v2.png)
 
@@ -30,10 +30,16 @@ The 250-opportunity backlog is an input, not a required count or proof of measur
 ## 2. Current pilot: exactly one artifact, no lander write
 
 ```text
-Apify evidence → one draft + critique + QA → Markdown / SVG / report artifact → STOP
+Apify + page bodies → three observed FAQs with exact body anchors → draft → critique / one repair → native QA → private artifact → STOP
 ```
 
-Latest readiness checks, 2026-09-09 Malaysia date:
+The [semantic preparation checkpoint](../autoblogger/SEMANTIC-FAQ-PROOF-2026-09-10.md)
+adds one bounded structured retrieval call, mechanically checked source anchors
+and a private receipt. It does not approve answers or waive independent critique.
+Maximum five model calls; no automatic publishing. All 2,257 tests pass; the live
+article milestone remains separate from this software/fixture verification.
+
+Previous readiness checks, 2026-09-09 Malaysia date:
 
 ```text
 Two fresh topic screens → retrieved source bodies → distinct supported FAQs insufficient → STOP
