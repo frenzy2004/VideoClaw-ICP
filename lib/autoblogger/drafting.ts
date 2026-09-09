@@ -31,6 +31,7 @@ import { planFaqEvidence } from './faq-evidence';
 import { prepareFaqEvidence, validateFaqEvidencePlan } from './faq-preparation';
 import { rankRelevantPaaQuestions } from './research';
 import { buildRepairPolicy, inspectRepairDelta, inspectRepairSourceGrowth } from './repair-policy';
+import { createRepairPatchRequest, applyRepairPatch } from './repair-patch';
 import { buildSourcePlan, buildSourceRepairPlan, measurePotentialSourceUse, measureReviewedSourceUse, sourceAllocationFindings, MAX_SOURCE_DERIVED_WORDS, TARGET_SOURCE_DERIVED_WORDS } from './source-plan';
 
 const CritiqueIssueSchema = z.object({
@@ -456,12 +457,12 @@ and there are no new issues. Do not repair or rewrite the draft.
 Every new issue must name its exact affected locations, as JSON pointers.
 ${SUPPORT_REVIEW_RULES}`;
 
-const REPAIR_SYSTEM = `Repair the version 2 article-generation JSON exactly once.
+const REPAIR_RULES = `Repair the version 2 article-generation JSON exactly once.
 This is a bounded correction, not a fresh composition. repairPolicy is enforced by
 code. Change ONLY its allowedLocations. Preserve all other text and bindings exactly;
 preserve section/graphic-step counts and order, FAQ questions, sourceReferences,
 customerTrigger and schemaVersion. Never add unrelated advice, timelines, numerical
-claims or outcomes. Return the complete object for serialization, not a patch.
+claims or outcomes.
 ${FIXED_CANDIDATE_RULES}
 Resolve originalIssues and repairTargets within that edit scope. Read the complete
 cited facts and qualifiers. Narrow or remove unsupported assertions; do not invent
@@ -480,6 +481,22 @@ Audit all bindings; the final independent review checks every assertion, includi
 unchanged ones. Do not add self-approval, unsupported product claims, secrets,
 research-process boilerplate or links outside the supplied inventory.
 ${ARTICLE_COMPOSITION_RULES}`;
+
+const REPAIR_SYSTEM = `${REPAIR_RULES}
+Return the complete version 2 article-generation object, not a patch.`;
+
+const REPAIR_PATCH_SYSTEM = `${REPAIR_RULES}
+Return ONLY the version 1 field-replacement object specified by the schema.
+Echo originalFingerprint. Include every required changes key. Use null when a field
+and its bindings stay unchanged. Otherwise supply its entire replacement text and
+ALL bindings for that field, not just bindings for changed sentences. Copy retained
+sentence bindings exactly. Each binding uses only that original field's permitted
+sourceFactIds and productClaimId values. Bind every rendered word/sentence/heading;
+do not remove attribution from retained or paraphrased words. Keep each field at or
+below its original word count except the explicit description formatting allowance.
+Code preserves all other text, structure and bindings; never output the full article.
+Do not treat null as issue resolution: the independent verifier still checks every
+original issue and every assertion after the replacements have been assembled.`;
 
 function modelContext(context: DraftingContext): Record<string, unknown> {
   return {
@@ -919,10 +936,11 @@ export function createStructuredDrafter(options: StructuredDrafterOptions) {
         { code: 'repair.policy_invalid', message: 'Cannot attempt bounded repair without a complete current source review.' },
       ] };
 
-      const repaired = GeneratedDraftV2Schema.parse(await options.client.generate({
-        name: 'videoclaw_article_repair_v2',
-        schema: generatedDraftSchema(context),
-        system: REPAIR_SYSTEM,
+      const patchRequest = context.faqEvidencePlan ? createRepairPatchRequest(initial, repairPolicy) : null;
+      const repairOutput = await options.client.generate({
+        name: patchRequest ? 'videoclaw_article_repair_patch_v1' : 'videoclaw_article_repair_v2',
+        schema: patchRequest?.schema ?? generatedDraftSchema(context),
+        system: patchRequest ? REPAIR_PATCH_SYSTEM : REPAIR_SYSTEM,
         input: {
           ...suppliedContext,
           draft: initial,
@@ -937,8 +955,17 @@ export function createStructuredDrafter(options: StructuredDrafterOptions) {
           repairPolicy,
           potentialSourceUsage,
           repairStrategy: articleLevelIssues.length > 0 ? 'bounded_source_reduction' : 'targeted_repair',
+          ...patchRequest?.input,
         },
-      })) as GeneratedDraftV2;
+      });
+      let repaired: GeneratedDraftV2;
+      if (patchRequest) {
+        const assembled = applyRepairPatch(initial, repairPolicy, repairOutput);
+        if (assembled.status === 'blocked') return {status: 'blocked', reason: 'content_safety_failed', findings: assembled.findings};
+        repaired = assembled.draft;
+      } else {
+        repaired = GeneratedDraftV2Schema.parse(repairOutput);
+      }
       const remainingFindings = inspectGeneratedDraft(context, repaired);
       if (containsSecretLikeValue(repaired)) {
         return {

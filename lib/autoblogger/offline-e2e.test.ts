@@ -145,6 +145,7 @@ class RepairingFixtureClient implements StructuredOutputClient {
     this.requests.push(request);
     const input = request.input as DraftingContext & {
       contextHash?: string; candidateQuestions?: string[];
+      repairPolicy?: {originalFingerprint: string; allowedLocations: string[]};
       draft?: GeneratedDraftV2; repairedDraft?: GeneratedDraftV2; originalIssues?: Array<{ id: string; code: string }>;
       bindingManifest?: Array<GeneratedDraftV2['claimBindings'][number] & { bindingIndex: number; bindingHash: string }>;
     };
@@ -185,6 +186,21 @@ class RepairingFixtureClient implements StructuredOutputClient {
       return { schemaVersion: 1, approved: false, supportEvaluations: supportEvaluations(), issues: [{ id: 'editorial-1', code: 'editorial.specificity', message: 'Clarify the role of sources in the description.', repairInstruction: 'Paraphrase the source-led planning guidance in the description.', locations: ['/description'] }] };
     }
     if (request.name === 'videoclaw_article_repair_v2') return generated(context, true);
+    if (request.name === 'videoclaw_article_repair_patch_v1') {
+      const repaired = generated(context, true);
+      const textAt = (value: unknown, location: string) => location.slice(1).split('/').reduce(
+        (entry: unknown, key) => (entry as Record<string, unknown>)[key], value,
+      );
+      return {schemaVersion: 1, originalFingerprint: input.repairPolicy!.originalFingerprint,
+        changes: Object.fromEntries(input.repairPolicy!.allowedLocations.map(location => [location,
+          textAt(input.draft, location) === textAt(repaired, location) ? null : {
+            text: textAt(repaired, location),
+            bindings: repaired.claimBindings.filter(binding => binding.location === location)
+              .map(({span, sourceFactIds, productClaimId}) => ({span, sourceFactIds, productClaimId})),
+          },
+        ])),
+      };
+    }
     if (request.name === 'videoclaw_article_repair_verification_v1') {
       expect(input.originalIssues?.map(({ code }) => code)).toEqual(this.omitSupportEvaluation
         ? ['editorial.specificity', 'content.source_usage_review', 'critique.support_incomplete']
@@ -385,7 +401,7 @@ describe.skipIf(nativeLanderPath === undefined)('native lander offline integrati
     }
     expect(fixture.client.requests.map(({ name }) => name)).toEqual(Array.from({ length: 3 }, () => [
       'videoclaw_faq_evidence_v1', 'videoclaw_article_draft_v2', 'videoclaw_article_critique_v1',
-      'videoclaw_article_repair_v2', 'videoclaw_article_repair_verification_v1',
+      'videoclaw_article_repair_patch_v1', 'videoclaw_article_repair_verification_v1',
     ]).flat());
     await assertArtifactsOnDisk(fixture, first);
     const saved = await createFileStateStore(fixture.statePath).load();

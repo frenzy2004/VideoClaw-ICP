@@ -504,13 +504,19 @@ describe('consistent repair issue registry', () => {
     };
   }
 
+  function unchangedPatch(request: StructuredOutputRequest) {
+    const input = request.input as {repairPolicy: {originalFingerprint: string; allowedLocations: string[]}};
+    return {schemaVersion: 1, originalFingerprint: input.repairPolicy.originalFingerprint,
+      changes: Object.fromEntries(input.repairPolicy.allowedLocations.map(location => [location, null]))};
+  }
+
   it('retains prepared anchors through independent critique, repair and verification without granting approval', async () => {
     const observed = structuredClone(context);
     observed.evidence.signals.peopleAlsoAsk = [...observed.evidence.faqQuestions];
     const issue = {id: 'faq-support', code: 'content.faq_support', message: 'FAQ still unsupported.',
       repairInstruction: 'Support the answer with the supplied body facts.', locations: ['/faqAnswers/0/answer']};
     const client = new FixtureStructuredClient([prepareResponse, draft,
-      {...approvedCritique, approved: false, issues: [issue]}, draft,
+      {...approvedCritique, approved: false, issues: [issue]}, unchangedPatch,
       (request: StructuredOutputRequest) => {
         const verification = verifyRequest()(request);
         return {...verification, approved: false,
@@ -525,11 +531,57 @@ describe('consistent repair issue registry', () => {
     expect(outcome).not.toHaveProperty('bundle');
     expect(client.requests.map(request => request.name)).toEqual([
       'videoclaw_faq_evidence_v1', 'videoclaw_article_draft_v2', 'videoclaw_article_critique_v1',
-      'videoclaw_article_repair_v2', 'videoclaw_article_repair_verification_v1',
+      'videoclaw_article_repair_patch_v1', 'videoclaw_article_repair_verification_v1',
     ]);
     for (const request of client.requests.slice(1)) {
       expect(request.input).toHaveProperty('faqEvidenceSelection', prepared.faqEvidencePlan);
     }
+    expect(client.requests[4].input).toHaveProperty('repairedDraft', draft);
+  });
+
+  it('rejects a prepared-path patch outside the allowed fields before requesting final verification', async () => {
+    const observed = structuredClone(context);
+    observed.evidence.signals.peopleAlsoAsk = [...observed.evidence.faqQuestions];
+    const issue = {id: 'faq-support', code: 'content.faq_support', message: 'FAQ unsupported.',
+      repairInstruction: 'Correct the answer.', locations: ['/faqAnswers/0/answer']};
+    const client = new FixtureStructuredClient([prepareResponse, draft,
+      {...approvedCritique, approved: false, issues: [issue]},
+      (request: StructuredOutputRequest) => ({...unchangedPatch(request),
+        changes: {...unchangedPatch(request).changes, '/customerTrigger': null}}),
+    ]);
+    const drafter = createStructuredDrafter({client, mediaAllowlist: [media]});
+    const outcome = await drafter.draft(await drafter.prepareEvidence(observed));
+    expect(outcome).toMatchObject({status: 'blocked', reason: 'content_safety_failed'});
+    expect(outcome).not.toHaveProperty('bundle');
+    expect(client.requests).toHaveLength(4);
+    expect(client.requests.at(-1)?.name).toBe('videoclaw_article_repair_patch_v1');
+  });
+
+  it('assembles a supported description repair and keeps untouched bindings for the independent verifier', async () => {
+    const observed = structuredClone(context);
+    observed.evidence.signals.peopleAlsoAsk = [...observed.evidence.faqQuestions];
+    const initial = titleOnlyDraft();
+    const client = new FixtureStructuredClient([prepareResponse, initial,
+      {...approvedCritique, supportEvaluations: supportedBindings(initial)},
+      (request: StructuredOutputRequest) => {
+        const patch = unchangedPatch(request);
+        return {...patch, changes: {...patch.changes, '/description': {text: draft.description,
+          bindings: draft.claimBindings.filter(binding => binding.location === '/description')
+            .map(({span, sourceFactIds, productClaimId}) => ({span, sourceFactIds, productClaimId})),
+        }}};
+      },
+      (request: StructuredOutputRequest) => verifyRequest(
+        (request.input as {repairedDraft: GeneratedDraftV2}).repairedDraft,
+      )(request),
+    ]);
+    const drafter = createStructuredDrafter({client, mediaAllowlist: [media]});
+    const outcome = await drafter.draft(await drafter.prepareEvidence(observed));
+    expect(outcome).toMatchObject({status: 'ready', repaired: true});
+    const assembled = (client.requests[4].input as {repairedDraft: GeneratedDraftV2}).repairedDraft;
+    expect(assembled.description).toBe(draft.description);
+    expect(assembled.claimBindings.filter(binding => binding.location !== '/description'))
+      .toEqual(initial.claimBindings.filter(binding => binding.location !== '/description'));
+    expect(client.requests).toHaveLength(5);
   });
 
   it('rejects stale prepared facts before dispatching an article request', async () => {
