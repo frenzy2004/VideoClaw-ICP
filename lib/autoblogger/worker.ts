@@ -676,7 +676,8 @@ export function createAutobloggerWorker(options: AutobloggerWorkerOptions) {
             keywordProvenance: item.enrichment.provenance,
             serpProvenance: item.result.provenance.serp,
             researchProvenance: ResearchProvenanceSchema.parse(item.result.provenance),
-            ...(item.shallow.paaObservations ? { paaObservations: PaaObservationsSchema.parse(item.shallow.paaObservations) } : {}),
+            ...(item.result.paaObservations ?? item.shallow.paaObservations
+              ? { paaObservations: PaaObservationsSchema.parse(item.result.paaObservations ?? item.shallow.paaObservations) } : {}),
             publicationOrigin,
             validation,
             ...(pullRequest ? { pullRequest: { number: pullRequest.number, url: pullRequest.url, headRef: pullRequest.headRef } } : {}),

@@ -3,6 +3,26 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
+## Latest software correction — 2026-09-09 Malaysia time
+
+The [support-search FAQ recovery report](SUPPORT-FAQ-RECOVERY-2026-09-09.md)
+records recovery of questions already present in support SERPs, exact observation
+provenance, cost-intent deduplication and bounded cost/taxonomy evidence matching.
+Saved Apify responses plus newly fetched source bodies produce three supported
+observed FAQs and reach the first model boundary. **Zero new paid actors or
+OpenAI calls, accepted articles, native article QA passes or retry resets.**
+
+Final verification passes **2,160 tests across 55 files**, zero skipped, with
+`npm test -- --maxWorkers=2`; lint, regenerated-route typecheck, worker build and
+whitespace checks also pass. Initial default-parallel runs hit the existing
+content-map timeout; the test passed unchanged in isolation and the final full
+run. No timeout was raised. A stricter-driver regression caught by two unchanged
+source-selection tests was fixed, not hidden by changing their expectations.
+Independent re-review found no remaining P1/P2 in the scoped patch. Existing
+dependency build warnings remain. State stays at 19 runs/32 failures, lander
+`b6b0833` stays clean, and the schedule remains disabled. Full live article proof
+is still outstanding, as distinct from this verified research correction.
+
 ## Latest live worker attempt — 2026-09-09 Malaysia time
 
 The [explainer-video attempt](EXPLAINER-LIVE-PROOF-2026-09-09.md) passed fresh

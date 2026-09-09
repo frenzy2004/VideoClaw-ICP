@@ -83,6 +83,7 @@ function fixture(input: {
   backlogCount?: number;
   observe?: (item: Candidate) => ShallowResearchResult;
   inspectProvenance?: (item: ShallowResearchResult) => ShallowResearchResult['provenance'];
+  inspectObservations?: ShallowResearchResult['paaObservations'];
   metricsOverrides?: (index: number) => Partial<KeywordMetrics>;
   evidenceOverrides?: Partial<EvidenceBundle>;
   failScan?: boolean;
@@ -132,6 +133,7 @@ function fixture(input: {
           results: [{
             candidate: item.candidate,
             provenance: input.inspectProvenance?.(item) ?? item.provenance,
+            ...(input.inspectObservations ? {paaObservations: input.inspectObservations} : {}),
             evidence: EvidenceBundleSchema.parse({
               schemaVersion: 2,
               candidateFingerprint: candidateFingerprints(item.candidate).candidate,
@@ -625,6 +627,23 @@ describe('persistent autoblogger worker', () => {
     expect(artifact.serpProvenance.runId).toBe('serp-run');
     expect(written).not.toContain('RAW_ANSWER_MUST_NOT_BE_RETAINED');
     expect(getState().provenance[candidateFingerprints(candidate(1)).candidate]).toMatchObject({ paa: paaCollector, supportSearches: [supportCollector] });
+  });
+
+  it('retains deep support-query PAA metadata instead of reverting to shallow-only observations', async () => {
+    const question = 'How do you plan founder video evidence topic 1?';
+    const observations = [{...supportCollector, query: 'What is founder video evidence topic 1?',
+      question, parentQuestion: null, country: 'US' as const,
+      language: 'en' as const, position: 2, answer: 'RAW_DEEP_ANSWER_MUST_NOT_BE_RETAINED'}];
+    const f = fixture({backlog: [candidate(1)], observe: withPaa, inspectProvenance: withSupport,
+      inspectObservations: observations});
+    const report = await f.worker.execute({command: 'pilot', runId: 'deep-paa-provenance'});
+    expect(report.status).toBe('validated');
+    expect(report.artifacts[0].paaObservations).toEqual([{
+      ...supportCollector, query: 'What is founder video evidence topic 1?', question,
+      parentQuestion: null, country: 'US', language: 'en', position: 2,
+    }]);
+    expect(report.artifacts[0].serpProvenance.runId).toBe('serp-run');
+    expect(JSON.stringify(report)).not.toContain('RAW_DEEP_ANSWER_MUST_NOT_BE_RETAINED');
   });
 
   describe.each(['run', 'pilot', 'research'] as const)('%s shallow selection', (command) => {

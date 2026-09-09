@@ -33,6 +33,20 @@ The 250-opportunity backlog is an input, not a required count or proof of measur
 Apify evidence → one draft + critique + QA → Markdown / SVG / report artifact → STOP
 ```
 
+Latest software diagnostic, 2026-09-09 Malaysia date:
+
+```text
+Saved support SERPs → retain observed creation / types / cost questions
+→ fresh body retrieval → three FAQ anchors → draft preflight passes → STOP before model
+```
+
+The [support-search recovery report](../autoblogger/SUPPORT-FAQ-RECOVERY-2026-09-09.md)
+records this correction and the two review PR links. Support questions retain
+their own query/run/time and original position; the search seed is not treated
+as a PAA expansion parent. Equivalent cost questions fill one intent slot.
+No new paid actor or model request, accepted article or native article QA was
+produced. Full live proof and the separate team/access dependencies remain open.
+
 Latest full live attempt, 2026-09-09 Malaysia date:
 
 ```text

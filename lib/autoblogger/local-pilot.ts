@@ -549,6 +549,7 @@ export async function runLocalArtifactPilot(options: LocalPilotArguments & { roo
           const batch = await researcher.inspect(candidates);
           await audit({ results: batch.results.map((result) => ({
             articleId: result.candidate.articleId, researchProvenance: ResearchProvenanceSchema.parse(result.provenance),
+            ...(result.paaObservations ? {paaObservations: PaaObservationsSchema.parse(result.paaObservations)} : {}),
             sourceDocuments: result.sourceDocuments?.map(({ url, finalUrl, checkedAt, status, authoritative, contentType, bodySha256, text, passages }) => ({ url, finalUrl, checkedAt, status, authoritative, contentType, bodySha256, textCharacters: text.length, passageCount: passages.length })),
           })) }, 'source-inspection');
           event('source_inspection_completed', { results: batch.results.length });

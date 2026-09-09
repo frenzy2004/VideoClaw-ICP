@@ -19,7 +19,8 @@ import {
 import type { SafeSourceChecker, SourceDocument, SourceSelectionWithContent } from './sources';
 import { PAA_ACTOR_ID, normalizePaaRows, type PaaObservation } from './paa';
 import { isDiscoverySourceUrl, sourceDiscoveryQueries } from './source-policy';
-import { faqBodyMatches } from './faq-evidence';
+import { faqBodyMatches, faqQuestionKey } from './faq-evidence';
+import { containsSecretLikeValue } from './secrets';
 
 export const AUTOCOMPLETE_ACTOR_ID = 'automation-lab/google-autocomplete-scraper';
 export const SERP_ACTOR_ID = 'apify/google-search-scraper';
@@ -49,6 +50,7 @@ export type ResearchResult = {
   candidate: Candidate;
   evidence: EvidenceBundle;
   sourceDocuments?: SourceDocument[];
+  paaObservations?: PaaObservation[];
   provenance: {
     discovery: ApifyObservationProvenance;
     serp: ApifyObservationProvenance;
@@ -295,8 +297,10 @@ function rankRelevantPaaQuestions(keyword: string, questions: string[]): string[
   for (const question of questions) {
     const trimmed = question.trim();
     const normalized = normalizeKeyword(trimmed);
-    if (!trimmed || seen.has(normalized)) continue;
-    seen.add(normalized);
+    const key = faqQuestionKey(trimmed);
+    if (!trimmed || trimmed.length > 500 || /[\u0000-\u001f\u007f-\u009f\p{Cf}]/u.test(trimmed)
+      || containsSecretLikeValue(trimmed) || seen.has(key)) continue;
+    seen.add(key);
     const questionTokens = relevantTokens(trimmed);
     if (requiresVideo && /\bvideos?\b/u.test(normalized)) questionTokens.add('video');
     // Require the whole lexical topic: "product" + "checklist" is not
@@ -533,11 +537,13 @@ export function createResearcher(options: ResearcherOptions) {
         const { candidate } = shallow;
         // Retain a bounded pool of real topic-matched observations until body
         // research is complete. Observation order alone cannot prove answers.
-        const faqPool = rankRelevantPaaQuestions(
+        let faqPool = rankRelevantPaaQuestions(
           candidate.primaryKeyword,
           shallow.peopleAlsoAsk,
         ).slice(0, 9);
         let faqQuestions = faqPool.slice(0, 3);
+        const observedQuestions = [...shallow.peopleAlsoAsk];
+        const supplementaryPaa: PaaObservation[] = [];
         const sourceUrls = shallow.organicResults.map(({url}) => url);
         const provenance = {...shallow.provenance};
         let selection: SourceSelectionWithContent;
@@ -555,14 +561,47 @@ export function createResearcher(options: ResearcherOptions) {
             saveHtml: false, saveHtmlToKeyValueStore: false,
             websiteContentScraper: {enable: false},
           }, execution);
-          const observations = support.items.map((item) => normalizeSerpItem(item, support.provenance) as NormalizedSerp);
+          // A malformed/out-of-market support row contributes nothing; it must
+          // neither poison the other observations nor become accepted evidence.
+          const observations = support.items.flatMap((item) => {
+            try {
+              const observation = normalizeSerpItem(item, support.provenance) as NormalizedSerp;
+              const rawQuestions = (item as {peopleAlsoAsk?: unknown}).peopleAlsoAsk;
+              // Capture the raw ordinal before normalization removes empty or
+              // duplicate entries. Retain question text only, never answers.
+              const questions = Array.isArray(rawQuestions) ? rawQuestions.slice(0, 30).flatMap((entry: unknown, index: number) => {
+                const record = entry && typeof entry === 'object' ? entry as {question?: unknown; title?: unknown} : null;
+                const question = typeof entry === 'string' ? entry : record?.question ?? record?.title;
+                return typeof question === 'string' ? [{question: question.trim(), position: index + 1}] : [];
+              }) : [];
+              return [{observation, questions}];
+            }
+            catch { return []; }
+          });
           const groups = [sourceUrls.slice(), ...queries.map(() => [] as string[])];
-          for (const observation of observations) {
-            const queryIndex = queries.findIndex((query) => normalizeKeyword(query) === normalizeKeyword(observation.query));
+          // Keyword fingerprints intentionally discard punctuation, but search
+          // operators and quotes are meaningful in a provider query identity.
+          const queryKey = (query: string) => query.trim().toLocaleLowerCase('en-US');
+          for (const {observation, questions} of observations) {
+            const queryIndex = queries.findIndex((query) => queryKey(query) === queryKey(observation.query));
             if (queryIndex < 0
               || observation.country !== 'US' || observation.language !== 'en'
               || observation.device !== 'DESKTOP' || observation.page !== 1) continue;
-            const questionSearch = faqQuestions.some(question => normalizeKeyword(question) === normalizeKeyword(queries[queryIndex]));
+            const questionSearch = faqQuestions.some(question => queryKey(question) === queryKey(queries[queryIndex]));
+            // These questions belong to the actual support query, NOT the
+            // target keyword SERP. Preserve that relationship and never retain
+            // the provider's answer text as a verified source fact.
+            for (const {question, position} of questions) {
+              if (supplementaryPaa.length >= 30) break;
+              const existing = new Set(observedQuestions.map(faqQuestionKey));
+              if (existing.has(faqQuestionKey(question))) continue;
+              const ranked = rankRelevantPaaQuestions(candidate.primaryKeyword, [...observedQuestions, question]);
+              if (!ranked.includes(question)) continue;
+              observedQuestions.push(question);
+              supplementaryPaa.push({ ...support.provenance, query: observation.query, question,
+                // A search seed is not evidence of a PAA expansion parent.
+                parentQuestion: null, country: 'US', language: 'en', position });
+            }
             for (const result of observation.organicResults) {
               // Exact FAQ results have the same trust as ordinary keyword
               // results: candidates for the safe body reader, not authorities.
@@ -581,6 +620,7 @@ export function createResearcher(options: ResearcherOptions) {
           }
           sourceUrls.splice(0, sourceUrls.length, ...balanced);
           provenance.supportSearches = [support.provenance];
+          faqPool = rankRelevantPaaQuestions(candidate.primaryKeyword, observedQuestions).slice(0, 9);
         };
         if (options.sourceChecker.selectWithContent) {
           await discoverSupport(candidate.title);
@@ -603,7 +643,7 @@ export function createResearcher(options: ResearcherOptions) {
           candidateFingerprint: candidateFingerprints(candidate).candidate,
           signals: {
             autocomplete: shallow.suggestions,
-            peopleAlsoAsk: shallow.peopleAlsoAsk,
+            peopleAlsoAsk: observedQuestions,
             relatedSearches: shallow.relatedQueries,
           },
           serp: {
@@ -613,7 +653,14 @@ export function createResearcher(options: ResearcherOptions) {
           sources: selection.sources,
           faqQuestions,
         });
-        results.push({ candidate, evidence, provenance, ...(selection.sourceDocuments.length ? {sourceDocuments:selection.sourceDocuments} : {}) });
+        const selectedQuestions = new Set(faqQuestions.map(faqQuestionKey));
+        const paaObservations = [...(shallow.paaObservations ?? []), ...supplementaryPaa]
+          .sort((left, right) => Number(selectedQuestions.has(faqQuestionKey(right.question)))
+            - Number(selectedQuestions.has(faqQuestionKey(left.question))))
+          .slice(0, 30);
+        results.push({ candidate, evidence, provenance,
+          ...(paaObservations.length ? {paaObservations} : {}),
+          ...(selection.sourceDocuments.length ? {sourceDocuments:selection.sourceDocuments} : {}) });
       }
       return {
         scannedCount: shallowInput.length,

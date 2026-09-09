@@ -5,6 +5,73 @@ const normalize = (text: string) => text.normalize('NFKC').toLowerCase().replace
 const words = (text: string) => normalize(text).match(/[\p{L}\p{N}]+/gu) ?? [];
 const stem = (word: string) => word.length > 4 && word.endsWith('s') ? word.slice(0, -1) : word;
 const subjectWords = (text: string) => words(text).filter(word => !STOP.has(word)).map(stem);
+const normalizedQuestion = (text: string) => normalize(text.replace(/\s+/gu, ' ')).trim().replace(/\?+$/u, '').trim();
+// Retain word order, punctuation and qualifiers (including "for"/"without").
+// Only a leading article and the existing noun inflection are normalized.
+const fullSubject = (text: string) => normalize(text).trim().replace(/^(?:a|an|the)\s+/u, '')
+  .replace(/\s+/gu, ' ').replace(/[\p{L}\p{N}]+/gu, stem);
+
+function costSubject(query: string): string | null {
+  const match = /^how much does it cost to (?:make|create) (.+)$/u.exec(query)
+    ?? /^how much (?:does|do) (.+?) cost$/u.exec(query);
+  const subject = match ? fullSubject(match[1]) : '';
+  return subject && !/^(?:it|this|that|these|those|you|we|they)$/u.test(subject) ? subject : null;
+}
+
+/** Deduplicate only the recognized cost grammar, using the matcher's full subject. */
+export function faqQuestionKey(question: string): string {
+  const query = normalizedQuestion(question);
+  const subject = costSubject(query);
+  return subject ? `cost:${subject}` : query;
+}
+
+function directAssertion(sentence: string): boolean {
+  return !sentence.trim().endsWith('?')
+    && !/\b(?:not|never|no|neither|nor|cannot|except|if|when|unless|provided|assuming|suppose|supposing|imagine|hypothetical|hypothetically|fictional|may|might|could|would|will|later|next|elsewhere|instead|rather|learn|discover|explain|cover|discuss|answer)\b|\b\w+n['’]t\b/u.test(sentence)
+    && !/\b(?:under certain conditions|in theory|as an example)\b/u.test(sentence);
+}
+
+const COST_AMOUNT = String.raw`[$€£]\s*(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d{1,2})?`;
+const COST_VALUE = new RegExp(String.raw`^(?:(?:(?:is|are)\s+)?${COST_AMOUNT}|ranges? from ${COST_AMOUNT} to ${COST_AMOUNT})$`, 'u');
+const COST_DRIVER = /^(?:the )?(?:(?:production )?crew|editing (?:time|budget|work required)|recording time|distribution budget|production scope|campaign scope|production budget|length|video type|complexity)$/u;
+
+function costMatches(subject: string, sentence: string): boolean {
+  if (!directAssertion(sentence)) return false;
+  // Keep qualifications in scope BEFORE removing an attribution prefix. An
+  // invented/example scenario is not evidence of an actual price or driver.
+  if (/\b(?:examples?|illustrativ\w*|illustration|imaginary|invented|fabricated|mock|simulat\w*|scenario|placeholder)\b|\bmade[ -]up\b/u.test(sentence)) return false;
+  // A bounded attribution may precede the saved price assertion. The entire
+  // grammatical cost subject must still match, not words elsewhere in a claim.
+  const statement = sentence.trim().replace(/[.!]$/u, '').replace(/^according to [^,]{1,100},\s*/u, '');
+  const of = /^(?:the )?(?:average )?costs? of (.+?)\s+(is|are|depends?|varies|vary|ranges?)\s+(.+)$/u.exec(statement);
+  const direct = /^(.+?)\s+costs?\s+(.+)$/u.exec(statement);
+  const target = of?.[1] ?? direct?.[1];
+  const predicate = of ? `${of[2]} ${of[3]}` : direct?.[2];
+  if (!target || !predicate || fullSubject(target) !== subject) return false;
+  // Consume the entire predicate. A price prefix cannot hide a disclaimer or
+  // teaser, and a range must actually name both monetary endpoints.
+  if (COST_VALUE.test(predicate)) return true;
+  const dependency = /^(?:depends? on|var(?:y|ies) (?:with|by))\s+(.+)$/u.exec(predicate);
+  if (!dependency) return false;
+  // Only explicit, recognized production drivers count. Generic "factors",
+  // unnamed dependencies and labels with trailing prose remain unsupported.
+  const drivers = dependency[1].split(/,\s*(?:and\s+)?|\s+and\s+/u);
+  return drivers.length <= 8 && drivers.every(driver => COST_DRIVER.test(driver));
+}
+
+function typesMatch(subject: string, sentence: string): boolean {
+  if (!directAssertion(sentence)) return false;
+  const statement = sentence.trim().replace(/[.!]$/u, '');
+  const assertion = /^(?:the )?(?:(?:different|main) )?types of (.+?)\s+(?:include|are)\s+(.+)$/u.exec(statement)
+    ?? /^you can use any type of (.+?),\s+including\s+(.+)$/u.exec(statement);
+  if (!assertion || fullSubject(assertion[1]) !== subject) return false;
+  // Complete short labels in one assertion; no headings, inferred antecedents,
+  // count-only claims, continuations, or lists assembled across sentences.
+  const labels = assertion[2].split(/,\s*(?:and\s+)?|\s+and\s+/u);
+  return labels.length >= 2 && labels.length <= 8 && labels.every(label =>
+    /^[\p{L}\p{N}]+(?:[ -][\p{L}\p{N}]+){0,3}$/u.test(label)
+    && !/\b(?:is|are|can|should|must|to|for|with|without|that|which|we|you|they|something|anything|nothing|etc)\b/u.test(label));
+}
 
 /** A procedure heading may supply the purpose, never the requested operation
  * or its object. Those must occur together in an actual imperative body step.
@@ -54,7 +121,9 @@ function scopedProcedureMatches(query: string, heading: string, sentences: strin
  */
 export function faqBodyMatches(question: string, text: string, bodyStart = 0): boolean {
   if (!Number.isInteger(bodyStart) || bodyStart < 0 || bodyStart > text.length) return false;
-  const query = normalize(question).trim().replace(/\?+$/u, '').trim();
+  const query = normalizedQuestion(question);
+  // This lexical screen cannot establish comparative superiority.
+  if (/\b(?:best|worst|top|most|least|cheapest|priciest|greatest|easiest|fastest)\b/u.test(query)) return false;
   const naming = /^what (?:is|are) (.+?) called$/u.exec(query);
   const mode = naming ? 'naming' : /^how long\b/u.test(query) ? 'duration'
     : /^how much\b/u.test(query) ? 'cost'
@@ -79,6 +148,12 @@ export function faqBodyMatches(question: string, text: string, bodyStart = 0): b
   if (!subject.length) return false;
   // A decimal point stays inside its sentence; ordinary punctuation still separates claims.
   const sentences = normalize(text.slice(bodyStart)).match(/(?:[^.!?]|(?<=\d)\.(?=\d))+[.!?]?/gu) ?? [];
+  if (mode === 'cost') {
+    const target = costSubject(query);
+    return !!target && sentences.some(sentence => costMatches(target, sentence));
+  }
+  const types = /^what are (?:the )?(?:(?:different|main) )?types of (.+)$/u.exec(query);
+  if (types) return sentences.some(sentence => typesMatch(fullSubject(types[1]), sentence));
   if (naming) {
     // A naming question requires an explicit alias assertion, not just a
     // definition or a conditional subtype such as "if this is a screencast".
@@ -107,8 +182,6 @@ export function faqBodyMatches(question: string, text: string, bodyStart = 0): b
     if (!subject.every(term => tokens.has(term))) return false;
     if (/\b(?:not|never)\s+(?:defined|covered|explained|discussed)|\b(?:does not|doesn't)\s+(?:define|cover|explain)/u.test(sentence)) return false;
     if (mode === 'duration') return /\b(?:\d+(?:\.\d+)?|one|two|three|five|ten|sixty)\s*(?:[-–]\s*\d+(?:\.\d+)?\s*)?(?:second|minute|hour)s?\b/u.test(sentence);
-    if (mode === 'cost') return /\b(?:costs?|budgets?|pric(?:e|es|ing)|expenses?|expensive)\b/u.test(sentence)
-      && /\b(?:depends?|var(?:y|ies)|ranges?|from|includes?)\b|[$€£]\s*\d/u.test(sentence);
     if (mode === 'benefits') {
       const listing = /\bincludes?\b/u.exec(sentence);
       if (!listing) return false;
