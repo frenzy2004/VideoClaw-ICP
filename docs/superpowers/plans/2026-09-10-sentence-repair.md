@@ -43,7 +43,7 @@ export function applySentenceRepair(original: GeneratedDraftV2, policy: RepairPo
 
 Consumes the existing private `contract`, `assertJson`, `textLeaves` helpers and public `applyRepairPatch`. Retain v1 exports and behavior. The new output root is `{schemaVersion:2,originalFingerprint,changes}` with every allowed location required. For sentence fields the value is null or a strict object with every `bN` key required, each null or a bounded string array. For field mode use the old nullable replacement schema unchanged. Return a safe generic invalid-patch finding for malformed data, never model text.
 
-- [ ] Write a failing behavior test using a real GeneratedDraftV2 fixture and buildRepairPolicy. For `Choose one buyer problem. Record the workflow.` with bindings at indices 0 and 1, submit `{b0:['Choose','one','buyer.'], b1:null}`. Assert exact text `Choose one buyer. Record the workflow.` and unchanged fact/product IDs. Also assert the original is unchanged.
+- [x] Write a failing behavior test using a real GeneratedDraftV2 fixture and buildRepairPolicy. For `Choose one buyer problem. Record the workflow.` with bindings at indices 0 and 1, submit `{b0:['Choose','one','buyer.'], b1:null}`. Assert exact text `Choose one buyer. Record the workflow.` and unchanged fact/product IDs. Also assert the original is unchanged.
 
 ```ts
 expect(result).toMatchObject({status:'ready', draft:{sections:[
@@ -54,8 +54,8 @@ expect(result.status === 'ready' && result.draft.claimBindings[0]).toMatchObject
 });
 ```
 
-- [ ] Run `npm test -- lib/autoblogger/sentence-repair.test.ts --maxWorkers=2`; observe missing-feature failure before implementation.
-- [ ] Add the pure contract/assembler with conservative safe-text mapping. Count words with the same Unicode word definition as repair-policy. Check unique exact occurrences, non-overlap, and whitespace-only uncovered ranges. Use existing contract's local v1 shape for final validation; do not create generic pointer traversal. Construct candidate v1 replacements from code-owned ranges and citations and call `applyRepairPatch`.
+- [x] Run `npm test -- lib/autoblogger/sentence-repair.test.ts --maxWorkers=2`; observe missing-feature failure before implementation.
+- [x] Add the pure contract/assembler with conservative safe-text mapping. Count words with the same Unicode word definition as repair-policy. Check unique exact occurrences, non-overlap, and whitespace-only uncovered ranges. Use existing contract's local v1 shape for final validation; do not create generic pointer traversal. Construct candidate v1 replacements from code-owned ranges and citations and call `applyRepairPatch`.
 
 ```ts
 const words = span.match(/[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)*/gu) ?? [];
@@ -64,8 +64,8 @@ const words = span.match(/[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)*/gu) ?? [];
 return applyRepairPatch(original, policy, assembledV1Patch);
 ```
 
-- [ ] Test oversized arrays; embedded multiword/hyphen/HTML tokens; unicode/apostrophes; added citation keys; missing sentence keys; stale fingerprint; null byte preservation; permitted single-sentence deletion; rejected empty whole field; repeated/overlapping/nonliteral spans selecting full-field mode; links/emphasis/entities selecting full-field mode; old description expansion; secret/accessor/prototype rejection. Tests must assert outcomes and preserved values, not only request names.
-- [ ] Run new tests plus `repair-patch.test.ts` and `repair-policy.test.ts`; record results, self-review, commit only owned files.
+- [x] Test oversized arrays; embedded multiword/hyphen/HTML tokens; unicode/apostrophes; added citation keys; missing sentence keys; stale fingerprint; null byte preservation; permitted single-sentence deletion; rejected empty whole field; repeated/overlapping/nonliteral spans selecting full-field mode; links/emphasis/entities selecting full-field mode; old description expansion; secret/accessor/prototype rejection. Tests must assert outcomes and preserved values, not only request names.
+- [x] Run new tests plus `repair-patch.test.ts` and `repair-policy.test.ts`; record results, self-review, commit only owned files.
 
 ### Task 2: Prepared workflow integration
 
@@ -73,7 +73,7 @@ return applyRepairPatch(original, policy, assembledV1Patch);
 
 **Interfaces:** Consume `createSentenceRepairRequest`/`applySentenceRepair` from Task 1; existing nonprepared workflow unchanged. `sentenceFields` is included with `repairLimits` in the repair input.
 
-- [ ] Update the prepared fixture's nullable patch version to 2 and request expectation to `videoclaw_article_repair_patch_v2`. Add a fixture repair using a shorter FAQ word-array edit; verify final review receives that edit and original citations. Keep the unresolved-support fixture failing after independent verification. Run focused tests to observe failure against v1 integration.
+- [x] Update the prepared fixture's nullable patch version to 2 and request expectation to `videoclaw_article_repair_patch_v2`. Add a fixture repair using a shorter FAQ word-array edit; verify final review receives that edit and original citations. Keep the unresolved-support fixture failing after independent verification. Run focused tests to observe failure against v1 integration.
 
 ```ts
 const patchRequest = context.faqEvidencePlan ? createSentenceRepairRequest(initial, repairPolicy) : null;
@@ -81,9 +81,9 @@ const patchRequest = context.faqEvidencePlan ? createSentenceRepairRequest(initi
 const assembled = applySentenceRepair(initial, repairPolicy, repairOutput);
 ```
 
-- [ ] Wire the interfaces into the prepared path. Update system instructions: code-selected mode; `bN` null retains; arrays contain one word per item; empty deletes but required fields/minimum answer lengths must remain; sentence IDs own fixed source/product references; full-field mode retains old explicit limits. Do not remove original issues/source plans or any downstream checks.
-- [ ] Adapt offline-e2e fixture output to support sentence-mode edits through real assembly, not a bypass. Verify malformed edits create no bundle and trigger no final verification; unknown/unprepared legacy behavior stays covered.
-- [ ] Run `npm test -- lib/autoblogger/drafting.test.ts lib/autoblogger/offline-e2e.test.ts --maxWorkers=2`, self-review and commit only owned files.
+- [x] Wire the interfaces into the prepared path. Update system instructions: code-selected mode; `bN` null retains; arrays contain one word per item; empty deletes but required fields/minimum answer lengths must remain; sentence IDs own fixed source/product references; full-field mode retains old explicit limits. Do not remove original issues/source plans or any downstream checks.
+- [x] Adapt offline-e2e fixture output to support sentence-mode edits through real assembly, not a bypass. Verify malformed edits create no bundle and trigger no final verification; unknown/unprepared legacy behavior stays covered.
+- [x] Run `npm test -- lib/autoblogger/drafting.test.ts lib/autoblogger/offline-e2e.test.ts --maxWorkers=2`, self-review and commit only owned files.
 
 ### Task 3: Verification and truthful evidence handoff
 

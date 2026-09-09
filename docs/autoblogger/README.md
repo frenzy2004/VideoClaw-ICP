@@ -6,7 +6,9 @@ This worker is a controlled research-and-drafting system. It does not publish ar
 
 The initial 250-topic research library is an input, not a quota or publication gate. Each run scans at most 50 candidates, deeply checks at most 10, and produces at most 3 drafts with no more than 2 from one ICP.
 
-Current checkpoint: [bounded field repair, explicit limits and paid diagnostics](BOUNDED-REPAIR-PROOF-2026-09-10.md). The field-replacement contract preserves unchanged text/bindings and supplies exact numeric allowances. **2,355 tests, lint, typecheck and worker build pass; independent review has no outstanding findings.** The latest paid retained-input diagnostic still failed nine word-growth checks, before final independent review or native article QA. Repair generation must produce supported edits within those limits. No successful automatic article, pilot reset, lander write or production action is claimed. Earlier checkpoints below are historical.
+Current checkpoint: [sentence-owned repair](SENTENCE-REPAIR-PROOF-2026-09-10.md). Prepared drafts use bounded sentence edits with code-owned citations; complex fields retain explicit full-field repair. **2,442 tests, lint, typecheck and worker build pass.** Module and integration reviews found no outstanding defects. A new paid component diagnostic is still to be performed; there is no new accepted article or full-worker success claim. Scheduling is off, and production/state are unchanged. Earlier checkpoints below are historical.
+
+Previous checkpoint: [bounded field repair, explicit limits and paid diagnostics](BOUNDED-REPAIR-PROOF-2026-09-10.md). The two paid component diagnostics remain failed, most recently on nine word-growth checks before final independent review or native article QA. Their records are preserved.
 
 Previous checkpoint: [semantic FAQ preparation and live attempt](SEMANTIC-FAQ-PROOF-2026-09-10.md). Preparation passed with actual observed questions/body anchors; drafting and critique completed, but the full-object repair failed. That worker attempt remains failed.
 

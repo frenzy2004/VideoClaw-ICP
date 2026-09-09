@@ -3,7 +3,16 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-## Bounded field repair — 2026-09-10 Malaysia time
+## Sentence-owned repair — 2026-09-10 Malaysia time
+
+The [sentence-repair checkpoint](SENTENCE-REPAIR-PROOF-2026-09-10.md) records
+**2,442 tests across 58 files**, zero failures/skips, passing lint/typecheck/worker
+build and clean module/integration reviews. Prepared repairs retain citations in
+code; complex fields keep full-field repair. Existing dependency build warnings
+remain. Paid component verification is still to be performed. No full-worker
+success, accepted article, native live-article QA or production change is claimed.
+
+## Previous bounded field repair — 2026-09-10 Malaysia time
 
 The [repair checkpoint](BOUNDED-REPAIR-PROOF-2026-09-10.md) records **2,355 tests
 across 57 files**, no skips/failures, passing lint/typecheck/build and independent
