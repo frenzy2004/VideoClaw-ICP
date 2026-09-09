@@ -7,10 +7,12 @@ No lander source changes, article publishing, production merge, deployment or sc
 
 The [sentence-repair checkpoint](SENTENCE-REPAIR-PROOF-2026-09-10.md) records
 **2,442 tests across 58 files**, zero failures/skips, passing lint/typecheck/worker
-build and clean module/integration reviews. Prepared repairs retain citations in
-code; complex fields keep full-field repair. Existing dependency build warnings
-remain. Paid component verification is still to be performed. No full-worker
-success, accepted article, native live-article QA or production change is claimed.
+build and clean module/integration/final reviews. Prepared repairs retain citations
+in code; complex fields keep full-field repair. Existing dependency build warnings
+remain. The paid component test passed mechanical repair and reached independent
+verification, but source overuse and unsupported caption assertions still blocked
+acceptance. No full-worker success, accepted article, native live-article QA or
+production change is claimed. Original state and failed receipts are unchanged.
 
 ## Previous bounded field repair — 2026-09-10 Malaysia time
 

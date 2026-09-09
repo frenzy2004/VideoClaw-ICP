@@ -66,7 +66,67 @@ Private machine-readable results are in
 `artifacts/autoblogger/sentence-repair-verification-2026-09-10/tests.json`.
 
 The worker build and offline fixtures do not establish native QA for a real model
-draft. Paid article verification is recorded separately when performed.
+draft. The final combined review of `6b7f300..32386a0` found no Critical, Important
+or Minor defects and approved component-test readiness, not article acceptance.
+
+## Paid component diagnostic: mechanical repair passes, editorial gate blocks
+
+The new diagnostic ran against clean `32386a0`, using the exact hash-verified
+research context, draft and initial critique from the failed testimonial run.
+Current initial requests matched their saved requests exactly. No fresh research,
+manual evidence injection, copy rewriting, worker attempt or retry grant occurred.
+
+Both new requests returned HTTP 200 from `gpt-5.5-2026-04-23`:
+
+| Request | Input tokens | Output tokens |
+| --- | ---: | ---: |
+| Sentence repair v2 | 68,951 | 2,362 |
+| Independent final verification | 37,471 | 11,665 |
+
+The patch passed assembly and all per-field/per-fact delta checks that blocked
+the earlier diagnostics. It reached final independent verification. This proves
+the mechanical repair correction on the saved inputs, not the whole milestone.
+
+Final verification still blocked the article for source overuse and unsupported
+caption assertions in two retained passages. Source accounting was:
+
+| Source | Initial reviewed words | Final reviewed words | Repair ceiling |
+| --- | ---: | ---: | ---: |
+| VocalVideo | 199 | 189 | 120 |
+| Shopify | 368 | 290 | 120 |
+| Teraleap | 108 | 175 | 108 |
+| Descript | 64 | 95 | 64 |
+
+These are reviewed derivation counts, not total prose lengths or plagiarism scores.
+VocalVideo and Shopify remain above the 180-word hard limit. All four fail the
+non-growing repair ceilings. No final gate was disabled to accept them.
+
+A separate read-only comparison found 112 byte-identical retained bindings. Seven
+received different derivation classifications between reviews; two previously
+accepted retained caption passages were rejected by the final reviewer. Thus the
+higher reviewed counts do not by themselves establish that new prose was added.
+The disagreement also does not prove either verdict correct or authorize ignoring
+the final check. One caption sentence asserts an unsupported buyer-viewing premise;
+the graphic instruction must be assessed separately as guidance versus fact.
+
+**No accepted Markdown artifact, native article QA, pilot-success marker, generated
+PR or production action resulted.** The two-call diagnostic is finished; there was
+no second repair pass. Private receipts remain ignored under
+`artifacts/autoblogger/sentence-repair-live-diagnostic-2026-09-10/`.
+
+## Integrity and next correction
+
+The original state is unchanged at 20 runs / 33 failure records / no pilot success:
+`afa9448ad5ab8a9813fbfd5b7aa1b0acc31a7570629896e9ae59ebeccdbbb6f9`.
+Original receipts and the read-only lander checkout are unchanged. Scheduling was
+verified `false`. All edits stay in the worker PR.
+
+Next work is budget-aware content reduction and consistent claim/derivation review,
+not another loosening of the sentence-patch checks. The generator must actually
+remove redundant source-derived material; the initial reviewer must catch factual
+premises before the single repair, while distinguishing them from original advice.
+Retain the failed receipts and ceilings; do not relabel this diagnostic as a clean
+full-worker run or reset an exhausted candidate.
 
 ## Completion standard
 

@@ -89,8 +89,16 @@ const assembled = applySentenceRepair(initial, repairPolicy, repairOutput);
 
 **Files:** New proof document under `docs/autoblogger/`; update current README/VERIFICATION references only if supported by results. Private diagnostic artifacts remain ignored.
 
-- [ ] Run `npm test -- --maxWorkers=2 --reporter=json --outputFile=artifacts/autoblogger/sentence-repair-verification-2026-09-10/tests.json`, then lint, typecheck and build. Record exact counts/warnings, not historical values.
-- [ ] Review the implementation diff with an independent reviewer and fix actionable defects before paid verification.
-- [ ] Adapt the existing ignored explicit-limits diagnostic harness to a new ignored directory and the new v2 request name. Retain exact saved context/draft/critic, verify their hashes, cap at one new repair plus one final verification, and leave state SHA unchanged. Only invoke native lander validation if the real drafter returns ready. No state reset or generated PR.
-- [ ] Record result with model/token/provenance and clear component-versus-full-worker distinction. Correct the earlier feasibility receipt interpretation: the word-array response tokens each count as one; its probe logging regex was overescaped. Preserve the original receipt.
-- [ ] Commit code/docs and push the existing worker feature branch. Never report full engineering completion unless an actual automatic worker article reaches native QA without injected evidence or writing.
+- [x] Run `npm test -- --maxWorkers=2 --reporter=json --outputFile=artifacts/autoblogger/sentence-repair-verification-2026-09-10/tests.json`, then lint, typecheck and build. Record exact counts/warnings, not historical values.
+- [x] Review the implementation diff with an independent reviewer and fix actionable defects before paid verification.
+- [x] Adapt the existing ignored explicit-limits diagnostic harness to a new ignored directory and the new v2 request name. Retain exact saved context/draft/critic, verify their hashes, cap at one new repair plus one final verification, and leave state SHA unchanged. Only invoke native lander validation if the real drafter returns ready. No state reset or generated PR.
+- [x] Record result with model/token/provenance and clear component-versus-full-worker distinction. Correct the earlier feasibility receipt interpretation: the word-array response tokens each count as one; its probe logging regex was overescaped. Preserve the original receipt.
+- [x] Commit code/docs and push the existing worker feature branch. Never report full engineering completion unless an actual automatic worker article reaches native QA without injected evidence or writing.
+
+## Outcome
+
+Mechanical repair is implemented and independently reviewed. The paid component
+test passed assembly/delta checks but final editorial verification blocked source
+overuse and two retained caption assertions. No native article QA or full-worker
+success occurred. See `docs/autoblogger/SENTENCE-REPAIR-PROOF-2026-09-10.md`; the
+larger automatic-article milestone remains open.
