@@ -3,7 +3,21 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-## Latest follow-up verification — 2026-09-09 Malaysia time
+## Latest readiness verification — 2026-09-09 Malaysia time
+
+The [distinct FAQ report](DISTINCT-FAQ-READINESS-2026-09-09.md) records two live
+research screens, a make/create duplicate-intent regression and the independently
+reviewed qualifier-preservation fix. Both observed defects had failing consumer
+tests before correction. Final verification passes **2,170 tests across 55 files**,
+zero skipped, plus lint, typecheck and worker build. The scoped suite passes 304.
+
+Neither topic qualified for a full article attempt. Research cost $0.06730 in
+provider-reported charges; OpenAI calls, full worker attempts and native article
+QA runs were zero. The saved-body diagnostic is explicitly offline. State stays
+byte-for-byte unchanged at 19 runs/32 failures. Production, PR #55 and scheduling
+are untouched. This is a verified software correction, not the live milestone.
+
+## Previous follow-up verification — 2026-09-09 Malaysia time
 
 The [FAQ recovery follow-up](SUPPORT-FAQ-RECOVERY-2026-09-09.md#follow-up-camera-orientation-regression-and-fresh-verification)
 fixes the review-discovered `top-down` camera-orientation false positive. Three

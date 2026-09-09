@@ -68,6 +68,26 @@ async function inspect(rows: unknown[], input = shallow) {
 }
 
 describe('support-search observed FAQ recovery', () => {
+  it('does not satisfy three FAQs with make/create versions of one instructional question', () => {
+    const questions = ['How to make a testimonial video?', 'How to create a testimonial video?',
+      'How long should a testimonial video be?'];
+    expect(() => selectRelevantPaaQuestions('testimonial video', questions)).toThrow(/three relevant/);
+    expect(selectRelevantPaaQuestions('testimonial video', [...questions, 'What is a testimonial video?']))
+      .toEqual(['How to make a testimonial video?', 'How long should a testimonial video be?', 'What is a testimonial video?']);
+  });
+
+  it('preserves distinct instructional qualifiers instead of deduplicating by topic alone', () => {
+    const questions = ['How to make a testimonial video with audio?',
+      'How to create a testimonial video without audio?', 'How to edit a testimonial video?'];
+    expect(selectRelevantPaaQuestions('testimonial video', questions)).toEqual(questions);
+  });
+
+  it('does not stem distinct tool names into the same creation intent', () => {
+    const questions = ['How to make a testimonial video with Canva?',
+      'How to create a testimonial video with Canvas?', 'How long should a testimonial video be?'];
+    expect(selectRelevantPaaQuestions('testimonial video', questions)).toEqual(questions);
+  });
+
   it('does not count make/create cost variants as two distinct FAQ intents', () => {
     expect(() => selectRelevantPaaQuestions('explainer video', [creation,
       'How much does it cost to make an explainer video?',

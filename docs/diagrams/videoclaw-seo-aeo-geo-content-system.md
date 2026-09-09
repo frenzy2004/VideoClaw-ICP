@@ -33,7 +33,19 @@ The 250-opportunity backlog is an input, not a required count or proof of measur
 Apify evidence → one draft + critique + QA → Markdown / SVG / report artifact → STOP
 ```
 
-Latest software diagnostic, 2026-09-09 Malaysia date:
+Latest readiness checks, 2026-09-09 Malaysia date:
+
+```text
+Two fresh topic screens → retrieved source bodies → distinct supported FAQs insufficient → STOP
+```
+
+The [distinct FAQ report](../autoblogger/DISTINCT-FAQ-READINESS-2026-09-09.md)
+records a make/create duplicate-selection fix with qualifier preservation.
+2,170 tests, lint, typecheck and worker build pass. Neither topic produced a full
+worker attempt, model request, accepted article or native article QA. State is
+unchanged; the next blocker is FAQ evidence matching, not local credentials.
+
+Previous software diagnostic, 2026-09-09 Malaysia date:
 
 ```text
 Saved support SERPs → retain observed creation / types / cost questions
@@ -297,7 +309,7 @@ Every article traces back to campaign, ICP, trigger, intent, keyword, SERP obser
 | --- | --- | --- |
 | Article and diagram updates | Original three review guides, older assisted local preview, and new unchanged-response Markdown/SVG review artifact; no production action | Team review; keep each artifact's provenance distinct |
 | Worker implementation | PR #1 open; offline and native fixture verification recorded separately | Implementation review |
-| Automated local article milestone | Latest content-repurposing attempt passed automatic research and four model stages, then failed reference and source-use checks; zero accepted bundles or native QA | Review the recurring pronoun-checker and composition/repair design before another paid attempt. New candidate terminal at one; all prior failures preserved; no automatic retry or reset |
+| Automated local article milestone | Latest two-topic readiness screen found insufficient distinct body-supported FAQ intents; duplicate make/create selection fixed. Zero new model calls, full worker attempts or native article QA | Review semantic FAQ evidence matching before further paid article attempts. All prior failures and exhausted grants remain unchanged; no automatic retry or reset |
 | Unattended Actions pilot | Not configured; no successful unattended article | Scoped read token, OpenAI Actions secret, reconciled state and reviewed worker |
 | Paid enrichment | Not connected; Apify research does not invent metrics | Provider access and a tested adapter |
 | Generated lander PRs | Not enabled | Merged blog contract, paid metrics, GitHub App and approved rollout |

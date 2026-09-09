@@ -18,11 +18,18 @@ function costSubject(query: string): string | null {
   return subject && !/^(?:it|this|that|these|those|you|we|they)$/u.test(subject) ? subject : null;
 }
 
-/** Deduplicate only the recognized cost grammar, using the matcher's full subject. */
+/** Deduplicate bounded cost and creation grammar, retaining the full subject. */
 export function faqQuestionKey(question: string): string {
   const query = normalizedQuestion(question);
   const subject = costSubject(query);
-  return subject ? `cost:${subject}` : query;
+  if (subject) return `cost:${subject}`;
+  // "Make" and "create" in a how-to are one instructional intent, not two
+  // FAQ slots. Keep operations such as editing, and all audience/tool qualifiers,
+  // distinct; ambiguous modal/capability questions retain their original key.
+  const creation = /^how to (?:make|create) (.+)$/u.exec(query);
+  // Do not stem this subject: a final "s" can distinguish tool names (Canva
+  // versus Canvas), not just noun number. Normalize only the leading article.
+  return creation ? `creation:${creation[1].replace(/^(?:a|an|the)\s+/u, '')}` : query;
 }
 
 function directAssertion(sentence: string): boolean {
