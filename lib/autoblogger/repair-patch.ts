@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { GeneratedDraftV2Schema, type DraftSafetyFinding, type GeneratedDraftV2 } from './content-bundle';
 import type { JsonSchema } from './openai-responses';
-import { inspectRepairDelta, type RepairPolicy } from './repair-policy';
+import { getRepairLocationLimits, inspectRepairDelta, type RepairPolicy } from './repair-policy';
 import { containsSecretLikeValue } from './secrets';
 
 type LocalBinding = Omit<GeneratedDraftV2['claimBindings'][number], 'location'>;
@@ -135,11 +135,14 @@ function contract(original: GeneratedDraftV2, policy: RepairPolicy) {
 
 /** Build the provider contract from the exact reviewed original, without I/O. */
 export function createRepairPatchRequest(original: GeneratedDraftV2, policy: RepairPolicy): {
-  schema: JsonSchema; input: { originalFingerprint: string; repairFields: Record<string, unknown> };
+  schema: JsonSchema; input: {
+    originalFingerprint: string; repairFields: Record<string, unknown>;
+    repairLimits: ReturnType<typeof getRepairLocationLimits>;
+  };
 } {
   try {
     const { schema, input } = contract(original, policy);
-    return { schema, input };
+    return { schema, input: { ...input, repairLimits: getRepairLocationLimits(original, policy) } };
   } catch {
     // Parser diagnostics and policy/model text can contain private values.
     throw new Error(invalidMessage);

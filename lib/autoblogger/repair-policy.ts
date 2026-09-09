@@ -174,6 +174,34 @@ function boundCoverage(tokens: string[], bindings: Binding[]) {
   return { covered, counts };
 }
 
+export type RepairLocationLimit = {
+  maxRenderedWords: number;
+  maxCharacters: number | null;
+  maxBoundWordsByFact: Record<string, number>;
+  allowedCitationUrls: string[];
+};
+
+/** Request guidance from the delta gate's exact original accounting. A non-null
+ * description maxCharacters replaces both word ceilings; those counts then only
+ * describe the baseline. This does not replace independent review or any gate.
+ */
+export function getRepairLocationLimits(original: GeneratedDraftV2, policy: RepairPolicy): Record<string, RepairLocationLimit> {
+  if (inspectRepairDelta(original, original, policy).length) {
+    throw new Error('Repair limits require a valid baseline and its current repair policy.');
+  }
+  const locations = textLocations(original);
+  return Object.fromEntries(policy.allowedLocations.map(location => {
+    const text = rendered(locations.get(location) ?? '', location);
+    const bindings = original.claimBindings.filter(binding => binding.location === location);
+    return [location, {
+      maxRenderedWords: text.words,
+      maxCharacters: location === '/description' ? policy.descriptionMaxChars : null,
+      maxBoundWordsByFact: Object.fromEntries(boundCoverage(text.tokens, bindings).counts),
+      allowedCitationUrls: [...text.urls],
+    }];
+  }));
+}
+
 /** Call on schema-validated drafts, before independent review. Keep the normal
  * schema, full binding coverage, citation, product and semantic review gates.
  * Allowed edits may paraphrase; lexical bounds cannot prove their truth.

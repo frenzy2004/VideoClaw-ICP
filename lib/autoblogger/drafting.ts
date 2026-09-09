@@ -492,8 +492,18 @@ and its bindings stay unchanged. Otherwise supply its entire replacement text an
 ALL bindings for that field, not just bindings for changed sentences. Copy retained
 sentence bindings exactly. Each binding uses only that original field's permitted
 sourceFactIds and productClaimId values. Bind every rendered word/sentence/heading;
-do not remove attribution from retained or paraphrased words. Keep each field at or
-below its original word count except the explicit description formatting allowance.
+do not remove attribution from retained or paraphrased words. Use repairLimits for
+each location: stay within maxRenderedWords and every maxBoundWordsByFact ceiling.
+Per-fact limits are cumulative across ALL bindings and rendered occurrences in that
+field; splitting bindings or repeating a span does not create extra allowance.
+Markdown link destinations do not count as rendered words in Markdown fields.
+Keep citation destinations within allowedCitationUrls. An unchanged sentence must
+retain its ENTIRE original sourceFactIds set and productClaimId, including after
+punctuation or case edits. Dropping a citation does not reduce source derivation.
+Clarifying a referent may require shortening other words bound to the same fact.
+Only when /description has non-null maxCharacters, use that character allowance
+instead of BOTH word ceilings; its word counts then describe the baseline only.
+All binding, evidence and independently reviewed per-source constraints still apply.
 Code preserves all other text, structure and bindings; never output the full article.
 Do not treat null as issue resolution: the independent verifier still checks every
 original issue and every assertion after the replacements have been assembled.`;

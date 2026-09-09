@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import { describe, expect, it } from 'vitest';
 import type { DraftingContext, DraftSafetyFinding, GeneratedDraftV2, SourceFact } from './content-bundle';
 import { buildSourceRepairPlan, measureReviewedSourceUse } from './source-plan';
-import { buildRepairPolicy, inspectRepairDelta, inspectRepairSourceGrowth } from './repair-policy';
+import { buildRepairPolicy, getRepairLocationLimits, inspectRepairDelta, inspectRepairSourceGrowth } from './repair-policy';
 
 type Binding = GeneratedDraftV2['claimBindings'][number];
 type Review = Parameters<typeof measureReviewedSourceUse>[2][number];
@@ -61,6 +61,52 @@ function freeze<T>(value: T): T {
   }
   return value;
 }
+
+describe('repair location limits', () => {
+  it('returns only allowed locations without mutating or sharing the frozen baseline', () => {
+    const original = draft();
+    original.sections[0].markdown = 'Read [the guide](https://example.com/a).';
+    original.claimBindings[1].span = 'Read the guide.';
+    const policy = freeze(policyFor(original, [target('/sections/0/markdown'), target('/directAnswer')]));
+    const before = structuredClone(original);
+    expect(getRepairLocationLimits).toBeTypeOf('function');
+    const limits = getRepairLocationLimits(freeze(original), policy);
+    expect(limits).toEqual({
+      '/directAnswer': { maxRenderedWords: 6, maxCharacters: null, maxBoundWordsByFact: {}, allowedCitationUrls: [] },
+      '/sections/0/markdown': { maxRenderedWords: 3, maxCharacters: null,
+        maxBoundWordsByFact: { 'a-one': 3 }, allowedCitationUrls: ['https://example.com/a'] },
+    });
+    limits['/sections/0/markdown'].maxBoundWordsByFact['a-one'] = 999;
+    limits['/sections/0/markdown'].allowedCitationUrls.push('https://example.com/new');
+    expect(getRepairLocationLimits(original, policy)['/sections/0/markdown']).toEqual({
+      maxRenderedWords: 3, maxCharacters: null, maxBoundWordsByFact: { 'a-one': 3 }, allowedCitationUrls: ['https://example.com/a'],
+    });
+    expect(original).toEqual(before);
+    expect(getRepairLocationLimits(original, policyFor(original))).toEqual({});
+  });
+
+  it.each(['stale', 'blocked', 'invalid coverage'])('rejects a %s baseline before exposing limits', kind => {
+    const original = draft();
+    if (kind === 'invalid coverage') original.claimBindings[1].span = 'Unrelated words.';
+    const policy = policyFor(original, [target('/sections/0/markdown')]);
+    if (kind === 'stale') original.sections[1].heading = 'Changed after review';
+    const invalidPolicy = kind === 'blocked' ? { ...policy, status: 'blocked' as const } : policy;
+    expect(getRepairLocationLimits).toBeTypeOf('function');
+    expect(() => getRepairLocationLimits(original, invalidPolicy)).toThrow();
+  });
+
+  it('does not apply description character allowances to another location', () => {
+    const original = draft();
+    const policy = policyFor(original, [
+      { ...target('/description'), code: 'content.description_length' },
+      { ...target('/sections/0/markdown'), code: 'content.description_length' },
+    ]);
+    expect(getRepairLocationLimits).toBeTypeOf('function');
+    const limits = getRepairLocationLimits(original, policy);
+    expect(limits['/description'].maxCharacters).toBe(200);
+    expect(limits['/sections/0/markdown'].maxCharacters).toBeNull();
+  });
+});
 
 describe('bounded repair locations and shape', () => {
   it('accepts focused narrowing with narrowed evidence and unchanged surrounding copy', () => {

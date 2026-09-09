@@ -537,6 +537,10 @@ describe('consistent repair issue registry', () => {
       expect(request.input).toHaveProperty('faqEvidenceSelection', prepared.faqEvidencePlan);
     }
     expect(client.requests[4].input).toHaveProperty('repairedDraft', draft);
+    expect(client.requests[3].input).toHaveProperty('repairLimits', {
+      '/faqAnswers/0/answer': { maxRenderedWords: 18, maxCharacters: null,
+        maxBoundWordsByFact: { 'fixture-faq': 18 }, allowedCitationUrls: [] },
+    });
   });
 
   it('rejects a prepared-path patch outside the allowed fields before requesting final verification', async () => {

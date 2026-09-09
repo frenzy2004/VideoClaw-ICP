@@ -65,6 +65,66 @@ function freeze<T>(value: T): T {
 
 describe('bounded repair patch request', () => {
   it.each([
+    ['Markdown destinations', 'Read [the guide](https://example.com/a/very/long/path).',
+      [bind(body, 'Read the guide.')], 3, { 'fact-a': 3 }, ['https://example.com/a/very/long/path']],
+    ['repeated occurrences and duplicate fact IDs', 'Choose a buyer. Choose a buyer.',
+      [bind(body, 'Choose a buyer.', ['fact-a', 'fact-a'])], 6, { 'fact-a': 6 }, []],
+    ['cumulative bindings per fact', 'Choose a buyer. Record the workflow.',
+      [bind(body, 'Choose a buyer.'), bind(body, 'Record the workflow.', ['fact-a', 'fact-b'])],
+      6, { 'fact-a': 6, 'fact-b': 3 }, []],
+    ['Unicode and apostrophes', "Don’t skip café-quality 视频 checks. Don't rush.",
+      [bind(body, "Don’t skip café-quality 视频 checks. Don't rush.")], 8, { 'fact-a': 8 }, []],
+  ])('supplies exact accounting for %s', (_name, text, bindings, maxRenderedWords, maxBoundWordsByFact, allowedCitationUrls) => {
+    const original = fixture();
+    original.sections[0].markdown = text;
+    original.claimBindings = [...bindings, ...original.claimBindings.filter(binding => binding.location !== body)];
+    const request = createRepairPatchRequest(original, policyFor(original, [body]));
+    expect(request.input).toHaveProperty('repairLimits', {
+      [body]: { maxRenderedWords, maxCharacters: null, maxBoundWordsByFact, allowedCitationUrls },
+    });
+  });
+
+  it.each([
+    ['/directAnswer', 2], ['/sections/0/heading', 2], [faq, 6],
+  ])('uses the native rendering rules at %s', (location, maxRenderedWords) => {
+    const original = fixture();
+    const text = 'Read [guide](https://example.com/a).';
+    if (location === '/directAnswer') original.directAnswer = text;
+    else if (location === faq) original.faqAnswers[0].answer = text;
+    else original.sections[0].heading = text;
+    original.claimBindings = original.claimBindings.filter(binding => binding.location !== location);
+    original.claimBindings.push(bind(location, location === faq ? text : 'Read guide.'));
+    const request = createRepairPatchRequest(original, policyFor(original, [location]));
+    expect(request.input).toHaveProperty('repairLimits', {
+      [location]: { maxRenderedWords, maxCharacters: null,
+        maxBoundWordsByFact: { 'fact-a': maxRenderedWords }, allowedCitationUrls: ['https://example.com/a'] },
+    });
+  });
+
+  it.each(['content.description_duplicate', 'content.description_length', 'critic'])('exposes the exact description exception for %s', code => {
+    const original = fixture();
+    const reviewPlan = { status: 'ready' as const, sources: [], findings: [], unsupportedBindingIndices: [], reuseCandidates: [],
+      reviewBindings: original.claimBindings.map((b, bindingIndex) => ({ bindingIndex,
+        bindingHash: createHash('sha256').update(JSON.stringify([b.location, b.span, b.sourceFactIds, b.productClaimId])).digest('hex'),
+      })),
+    };
+    const policy = buildRepairPolicy(original, [{ code, message: 'Fix description.', location: '/description' }], reviewPlan);
+    const request = createRepairPatchRequest(original, policy);
+    expect(request.input).toHaveProperty('repairLimits', {
+      '/description': { maxRenderedWords: 4, maxCharacters: code === 'critic' ? null : 200,
+        maxBoundWordsByFact: { 'fact-b': 4 }, allowedCitationUrls: [] },
+    });
+    const patch = patchFor(policy);
+    // Both word counts may grow under the existing character exception.
+    patch.changes['/description'] = replacement('A practical demo guide for the buyer.', ['fact-b']);
+    expect(applyRepairPatch(original, policy, patch).status).toBe(code === 'critic' ? 'blocked' : 'ready');
+    patch.changes['/description'] = replacement('A ' + 'x '.repeat(99), ['fact-b']);
+    expect(applyRepairPatch(original, policy, patch).status).toBe(code === 'critic' ? 'blocked' : 'ready');
+    patch.changes['/description'] = replacement('A ' + 'x '.repeat(99) + 'x', ['fact-b']);
+    expect(applyRepairPatch(original, policy, patch).status).toBe('blocked');
+  });
+
+  it.each([
     ['https://www.example.com', 'example.com', '?tracking=1'],
     ['http://www.example.com:443', 'example.com:443', '?tracking=1'],
     ['https://www.www.example.com', 'www.example.com', ''],
@@ -138,6 +198,9 @@ describe('bounded repair patch request', () => {
       [faq]: { text: 'Plan for the buyer.', bindings: [{
         span: 'Plan for the buyer.', sourceFactIds: ['fact-c'], productClaimId: 'product-c',
       }] },
+    }, repairLimits: {
+      [body]: { maxRenderedWords: 9, maxCharacters: null, maxBoundWordsByFact: { 'fact-a': 9 }, allowedCitationUrls: [] },
+      [faq]: { maxRenderedWords: 4, maxCharacters: null, maxBoundWordsByFact: { 'fact-c': 4 }, allowedCitationUrls: [] },
     } });
     expect(request.schema).toMatchObject({ type: 'object', additionalProperties: false,
       required: ['schemaVersion', 'originalFingerprint', 'changes'],
