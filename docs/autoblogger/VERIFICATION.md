@@ -3,7 +3,16 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-## Semantic FAQ integration — 2026-09-10 Malaysia time
+## Bounded field repair — 2026-09-10 Malaysia time
+
+The [repair checkpoint](BOUNDED-REPAIR-PROOF-2026-09-10.md) records 2,339 tests
+across 57 files, no skips, passing lint/typecheck/build, and two independent review
+verdicts. One paid retained-input repair preserved immutable content but still
+failed six citation/word-growth checks. No final review, native article QA or
+automatic pilot success resulted. Exact numeric repair guidance is being added;
+the validator and failed history remain unchanged.
+
+## Previous semantic FAQ integration — 2026-09-10 Malaysia time
 
 The [semantic preparation checkpoint](SEMANTIC-FAQ-PROOF-2026-09-10.md) passes
 2,257 tests across 56 files, zero skipped, plus lint, typecheck and worker build.

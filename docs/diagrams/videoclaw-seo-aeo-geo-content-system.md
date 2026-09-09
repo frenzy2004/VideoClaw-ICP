@@ -36,10 +36,14 @@ Apify + page bodies → three observed FAQs with exact body anchors → draft �
 The [semantic preparation checkpoint](../autoblogger/SEMANTIC-FAQ-PROOF-2026-09-10.md)
 adds one bounded structured retrieval call, mechanically checked source anchors
 and a private receipt. It does not approve answers or waive independent critique.
-Maximum five model calls; no automatic publishing. All 2,257 tests pass. The live
-attempt passed preparation/drafting/critique, then failed repair scope/binding
-checks. No accepted artifact or native article QA. Field-level repair output is
-the next correction; the full live article milestone remains unproven.
+Maximum five model calls; no automatic publishing. The live attempt passed
+preparation/drafting/critique, then failed repair scope/binding checks.
+
+The [field-repair correction](../autoblogger/BOUNDED-REPAIR-PROOF-2026-09-10.md)
+preserves immutable content in code and passed 2,339 tests. One paid retained-input
+diagnostic still failed six citation/word-growth checks inside edited fields;
+exact numeric allowances are being added to repair guidance. No accepted article,
+final review or native article QA resulted. The full live milestone remains open.
 
 Previous readiness checks, 2026-09-09 Malaysia date:
 
@@ -317,7 +321,7 @@ Every article traces back to campaign, ICP, trigger, intent, keyword, SERP obser
 | --- | --- | --- |
 | Article and diagram updates | Original three review guides, older assisted local preview, and new unchanged-response Markdown/SVG review artifact; no production action | Team review; keep each artifact's provenance distinct |
 | Worker implementation | PR #1 open; offline and native fixture verification recorded separately | Implementation review |
-| Automated local article milestone | Latest two-topic readiness screen found insufficient distinct body-supported FAQ intents; duplicate make/create selection fixed. Zero new model calls, full worker attempts or native article QA | Review semantic FAQ evidence matching before further paid article attempts. All prior failures and exhausted grants remain unchanged; no automatic retry or reset |
+| Automated local article milestone | Semantic FAQ preparation passed live; the full worker attempt failed repair. Field-patch diagnostic preserves immutable bindings but still fails edited-field citation/word limits | Verify exact numeric repair guidance, then prove accepted content through native QA. Prior failures and exhausted grants remain unchanged; no automatic retry or reset |
 | Unattended Actions pilot | Not configured; no successful unattended article | Scoped read token, OpenAI Actions secret, reconciled state and reviewed worker |
 | Paid enrichment | Not connected; Apify research does not invent metrics | Provider access and a tested adapter |
 | Generated lander PRs | Not enabled | Merged blog contract, paid metrics, GitHub App and approved rollout |
