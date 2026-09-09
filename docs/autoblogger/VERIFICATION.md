@@ -7,7 +7,9 @@ No lander source changes, article publishing, production merge, deployment or sc
 
 The [semantic preparation checkpoint](SEMANTIC-FAQ-PROOF-2026-09-10.md) passes
 2,257 tests across 56 files, zero skipped, plus lint, typecheck and worker build.
-The actual live artifact milestone is separate and remains pending.
+The live attempt passed preparation/drafting/critique but failed the repair delta
+gate. No accepted article or native article QA; state is 20 runs/33 failures with
+no pilot success marker. The actual live artifact milestone remains unproven.
 
 ## Previous readiness verification — 2026-09-09 Malaysia time
 

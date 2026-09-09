@@ -36,8 +36,10 @@ Apify + page bodies → three observed FAQs with exact body anchors → draft �
 The [semantic preparation checkpoint](../autoblogger/SEMANTIC-FAQ-PROOF-2026-09-10.md)
 adds one bounded structured retrieval call, mechanically checked source anchors
 and a private receipt. It does not approve answers or waive independent critique.
-Maximum five model calls; no automatic publishing. All 2,257 tests pass; the live
-article milestone remains separate from this software/fixture verification.
+Maximum five model calls; no automatic publishing. All 2,257 tests pass. The live
+attempt passed preparation/drafting/critique, then failed repair scope/binding
+checks. No accepted artifact or native article QA. Field-level repair output is
+the next correction; the full live article milestone remains unproven.
 
 Previous readiness checks, 2026-09-09 Malaysia date:
 
