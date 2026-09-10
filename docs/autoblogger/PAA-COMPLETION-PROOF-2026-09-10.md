@@ -114,3 +114,34 @@ duplicate final selection; it is not reclassified as successful.
 Full verification: **2,530 tests across 58 files pass**, zero failures/skips,
 plus lint, typecheck and build. Focused independent review found no actionable
 issues. The uninterrupted fresh-worker article milestone remains unproven.
+
+## Fresh software-selection worker attempt — failed cleanly
+
+Run `testimonial-software-live-proof-2026-09-10`, code `c54d79b`, candidate
+`vc-c4-d-2fbdd963fccf4d84`, primary query `video testimonial software`.
+This commercial selection intent is distinct from templates, examples and
+interview-question planning. Software selection appeared in earlier observed PAA;
+only the new candidate identity entered this run, not saved evidence or copy.
+
+Read-only startup checks confirmed the lander review base still matched
+`b6b0833c78443b44b12bf6d33f05baa7ac8427d3`. The fresh run collected eight
+organic results and eleven raw observed questions, then entered one bounded deep
+inspection. Even with supplementary searches it did not establish three relevant
+distinct FAQ questions and failed before source-body reads or OpenAI requests.
+There were no drafts, native QA runs, accepted articles or generated PRs.
+
+| Collection | Run | Dataset |
+| --- | --- | --- |
+| Autocomplete | `PqWelIko2Xfl6Lyxf` | `nYhMfwrweYXNxbrK7` |
+| US/en SERP | `5qVCa3A0DXgHrqb2W` | `B0RHZer4bXhEKJQ2M` |
+| PAA first attempt | `1FQedULgO5dpLq2H1` | `afIPlp3KGmgkpMDTt` |
+| PAA second attempt | `6KCdCRReRwTvyWFmS` | `fDOXTUpUqdgdOBPwa` |
+| Deep support search | `dOmcNDUDjeoO9tPOv` | `OioNXeH8jlSFmFhA7` |
+
+The failure now correctly records **one attempted deep inspection** and retains
+the completed support-search run/dataset in compact persistent provenance.
+The candidate is terminal at attempt one, with a null lease expiry and no pilot
+consumption. Current state: 24 runs, 40 failure records, `manualPilot: null`.
+SHA-256: `4de5a23d222f141e292da968be40934fcaa5caaa99ce13a1928afd56d30ae885`.
+No old candidate, failed receipt or retry count was rewritten. This is live
+verification of safe failure accounting, not a successful full article.

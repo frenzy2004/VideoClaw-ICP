@@ -165,3 +165,29 @@ This proves saved-review materialization and native QA, **not** an uninterrupted
 fresh worker run. It does not consume the pilot or authorize a lander PR.
 The subsequent fresh examples attempt and discovery fix are recorded in
 [bounded PAA completion](PAA-COMPLETION-PROOF-2026-09-10.md).
+
+## Subsequent editorial review — approval still withheld
+
+A separate read-only editorial review identified quality issues not caught by
+the earlier automated verdict/native checks:
+
+- The worksheet requests two proof details while later guidance says to split
+  two proof points. Distinguish multiple supporting details from multiple buyer
+  questions instead of presenting inconsistent instructions.
+- Troubleshooting has short standalone commands without the problems that should
+  trigger them; future generated copy needs usable problem → action guidance.
+- The worked example contains evaluator-facing commentary about avoiding a
+  universal claim, beyond its already clear hypothetical-example label.
+- The graphic's “Trim proof” wording is ambiguous; clarify trimming footage,
+  not removing supporting evidence.
+
+No copy, graphic, recorded verdict or approval was changed to conceal these
+findings. The artifact remains a native-QA-passing **review draft**, not an
+editorially approved or publication-ready article.
+
+The lander renderer does visibly render the frontmatter source list in its page
+code; missing inline Markdown links alone do not mean sources are absent from
+the rendered article. Its diagram container also enforces a 760px minimum width
+and horizontal scrolling. A tiny-text concern from proportional standalone SVG
+display is not established as a live mobile bug. No new browser verification or
+lander modification is claimed in this review.

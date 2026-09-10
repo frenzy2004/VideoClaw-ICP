@@ -8,6 +8,8 @@ The initial 250-topic research library is an input, not a quota or publication g
 
 Current checkpoint: [bounded PAA completion and failure receipts](PAA-COMPLETION-PROOF-2026-09-10.md), with **2,530 tests plus lint/typecheck/build** passing. Deep discovery can complete an initial zero-to-two-question pool; three relevant distinct questions remain mandatory before drafting. Failed attempts retain safe completed support-search receipts and count toward the ten-slot limit; malformed receipts cannot strand a lease. A separate live research-only diagnostic retrieved four pages and revealed a creation-alias duplicate, now rejected without rewriting observations. The latest fresh examples worker run remains failed; no retry reset occurred.
 
+The latest fresh software-selection worker run entered deep discovery, then failed for insufficient relevant FAQs before OpenAI or drafting. Its support receipt and one attempted deep slot were saved correctly; state is 24 runs / 40 failures with no pilot consumption. This is safe rejection, not a completed article.
+
 The [template article's saved-review native revalidation](FAQ-METADATA-PROOF-2026-09-10.md#saved-review-native-revalidation--passed) passed native blog checks, lint and build and produced local review-only Markdown/SVG artifacts. This is a real accepted component result, **not an uninterrupted fresh whole-worker proof**. Earlier checkpoints below are historical.
 
 Previous checkpoint: [review ownership and article-quality proof](REVIEW-OWNERSHIP-2026-09-10.md) retains the source-budget diagnostic, failed questions run, C4 relevance correction and three-topic research-only pre-screen.

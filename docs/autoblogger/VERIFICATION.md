@@ -15,6 +15,12 @@ A live research-only diagnostic retrieved four pages, without model calls or
 state writes. Its duplicate make/create noun-order FAQ pair is now rejected by
 the final preparation receipt as well as collection; other qualifiers stay distinct.
 
+The subsequent fresh software-selection worker run reached one deep inspection
+and correctly retained its support-search receipt on failure. It stopped for
+insufficient relevant FAQs before source-body reads/OpenAI/drafting. State is
+24 runs / 40 failure records, candidate terminal at one, no active lease or pilot
+consumption. This validates failure accounting without claiming article success.
+
 Saved-review template materialization passes the native lander's blog check,
 lint and build in an isolated checkout, with unchanged copy and independent
 verdict. The subsequent fresh examples run failed shallow PAA screening and
