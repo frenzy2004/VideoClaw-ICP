@@ -143,6 +143,25 @@ across 58 files**, zero failures/skips, plus lint, typecheck and worker build.
 Independent focused review passed 493 content-bundle tests and eight additional
 boundary probes, with no actionable findings. Existing build warnings remain.
 
-The next native check must reuse the unchanged independently reviewed repaired
-copy and captured ceilings, not a new model verdict, and report itself as saved-
-review revalidation rather than a successful new worker run.
+## Saved-review native revalidation — passed
+
+`template-native-revalidation-2026-09-10` ran at worker `3184aeb` against
+lander `b6b0833c78443b44b12bf6d33f05baa7ac8427d3`. It reused the exact repaired
+copy, independent verdict and captured source-use ceilings. No new research,
+generation, model request, manual copy edit or persistent-state write occurred.
+
+Clone, checkout, head resolution, isolation, install, native `check:blog`, lint,
+build and workspace-integrity checks all exited zero. The disposable checkout
+was cleaned up. Original repositories, earlier receipts and state were unchanged.
+
+The resulting local `review-article.md` and `review-graphic.svg` are under
+`artifacts/autoblogger/template-native-revalidation-2026-09-10/`. Status remains
+`review`, all four approvals are false, no publication date is set, and the CTA
+is `/download`. Markdown SHA-256:
+`ad53e4726763d5cc0e3298cee06d202f8ee587b67e2ab90102364e78107c8052`.
+Bundle hash: `8e5e0e6fe2371d1d4363e3b27f3e19ebfae98a23a82994bbfec073e404eca146`.
+
+This proves saved-review materialization and native QA, **not** an uninterrupted
+fresh worker run. It does not consume the pilot or authorize a lander PR.
+The subsequent fresh examples attempt and discovery fix are recorded in
+[bounded PAA completion](PAA-COMPLETION-PROOF-2026-09-10.md).

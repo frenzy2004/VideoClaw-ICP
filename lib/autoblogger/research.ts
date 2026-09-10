@@ -90,6 +90,14 @@ export type ResearchBatch = {
   results: ResearchResult[];
 };
 
+/** Carries completed collection receipts, never retrieved page bodies. */
+export class ResearchInspectionError extends Error {
+  constructor(error: unknown, readonly provenance: ResearchResult['provenance']) {
+    super(redactSensitive(error instanceof Error ? error.message : String(error)).slice(0, 500));
+    this.name = 'ResearchInspectionError';
+  }
+}
+
 type ResearcherOptions = {
   apify: ApifyClient;
   sourceChecker: Pick<SafeSourceChecker, 'select' | 'selectWithContent'>;
@@ -266,7 +274,7 @@ function relevantTokens(value: string): Set<string> {
   );
 }
 
-export function rankRelevantPaaQuestions(keyword: string, questions: string[]): string[] {
+function rankPaaCandidates(keyword: string, questions: string[]): string[] {
   const keywordTokens = relevantTokens(keyword);
   // Normalize only this leading query framing, never verbs throughout a topic
   // (e.g. "record") or the observed questions. Keep the original keyword's
@@ -290,7 +298,7 @@ export function rankRelevantPaaQuestions(keyword: string, questions: string[]): 
   }
   const minimumOverlap = Math.min(2, keywordTokens.size);
   if (topicTokens.length === 0) {
-    throw new Error('Research requires three relevant People Also Ask questions.');
+    return [];
   }
   const selected: Array<{ question: string; overlap: number }> = [];
   const seen = new Set<string>();
@@ -310,12 +318,16 @@ export function rankRelevantPaaQuestions(keyword: string, questions: string[]): 
     if (overlap < minimumOverlap) continue;
     selected.push({ question: trimmed, overlap });
   }
-  if (selected.length >= 3) {
-    // Stable ties retain observation order and the first exact observed string.
-    return selected.sort((left, right) => right.overlap - left.overlap)
-      .map(({ question }) => question);
-  }
-  throw new Error('Research requires three relevant People Also Ask questions.');
+  // Partial observations may seed one bounded discovery batch. They are not
+  // eligible FAQs until the unchanged three-question gate below passes.
+  return selected.sort((left, right) => right.overlap - left.overlap)
+    .map(({ question }) => question);
+}
+
+export function rankRelevantPaaQuestions(keyword: string, questions: string[]): string[] {
+  const selected = rankPaaCandidates(keyword, questions);
+  if (selected.length < 3) throw new Error('Research requires three relevant People Also Ask questions.');
+  return selected;
 }
 
 export function selectRelevantPaaQuestions(keyword: string, questions: string[]): string[] {
@@ -537,7 +549,7 @@ export function createResearcher(options: ResearcherOptions) {
         const { candidate } = shallow;
         // Retain a bounded pool of real topic-matched observations until body
         // research is complete. Observation order alone cannot prove answers.
-        let faqPool = rankRelevantPaaQuestions(
+        let faqPool = rankPaaCandidates(
           candidate.primaryKeyword,
           shallow.peopleAlsoAsk,
         ).slice(0, 9);
@@ -561,6 +573,9 @@ export function createResearcher(options: ResearcherOptions) {
             saveHtml: false, saveHtmlToKeyValueStore: false,
             websiteContentScraper: {enable: false},
           }, execution);
+          // Preserve the completed paid-search receipt even if its rows cannot
+          // complete the FAQ pool or subsequent source verification fails.
+          provenance.supportSearches = [support.provenance];
           // A malformed/out-of-market support row contributes nothing; it must
           // neither poison the other observations nor become accepted evidence.
           const observations = support.items.flatMap((item) => {
@@ -595,7 +610,7 @@ export function createResearcher(options: ResearcherOptions) {
               if (supplementaryPaa.length >= 30) break;
               const existing = new Set(observedQuestions.map(faqQuestionKey));
               if (existing.has(faqQuestionKey(question))) continue;
-              const ranked = rankRelevantPaaQuestions(candidate.primaryKeyword, [...observedQuestions, question]);
+              const ranked = rankPaaCandidates(candidate.primaryKeyword, [...observedQuestions, question]);
               if (!ranked.includes(question)) continue;
               observedQuestions.push(question);
               supplementaryPaa.push({ ...support.provenance, query: observation.query, question,
@@ -619,48 +634,55 @@ export function createResearcher(options: ResearcherOptions) {
             }
           }
           sourceUrls.splice(0, sourceUrls.length, ...balanced);
-          provenance.supportSearches = [support.provenance];
           faqPool = rankRelevantPaaQuestions(candidate.primaryKeyword, observedQuestions).slice(0, 9);
         };
-        if (options.sourceChecker.selectWithContent) {
-          await discoverSupport(candidate.title);
-          selection = await selectSources([...new Set(sourceUrls)].slice(0, 24));
-        } else {
-          try { selection = await selectSources(sourceUrls); }
-          catch {
-            await discoverSupport();
+        try {
+          if (options.sourceChecker.selectWithContent || faqPool.length < 3) {
+            await discoverSupport(candidate.title);
             selection = await selectSources([...new Set(sourceUrls)].slice(0, 24));
+          } else {
+            try { selection = await selectSources(sourceUrls); }
+            catch {
+              await discoverSupport();
+              selection = await selectSources([...new Set(sourceUrls)].slice(0, 24));
+            }
           }
+          // Discovery may have completed an initially partial pool. Never emit
+          // a short/irrelevant FAQ set to the worker or the drafting preflight.
+          faqPool = rankRelevantPaaQuestions(candidate.primaryKeyword, observedQuestions).slice(0, 9);
+          faqQuestions = faqPool.slice(0, 3);
+          const supportedQuestions = faqPool.filter(question => selection.sourceDocuments.some(document =>
+            document.passages.some(passage => faqBodyMatches(question, passage.text, passage.bodyStart))));
+          // Preserve exact observed wording and original SERP/PAA provenance.
+          // Only replace the preferred set if three body-supported alternatives
+          // exist; otherwise retain its gaps for the fail-closed draft preflight.
+          if (supportedQuestions.length >= 3) faqQuestions = supportedQuestions.slice(0, 3);
+          const evidence = EvidenceBundleSchema.parse({
+            schemaVersion: 2,
+            candidateFingerprint: candidateFingerprints(candidate).candidate,
+            signals: {
+              autocomplete: shallow.suggestions,
+              peopleAlsoAsk: observedQuestions,
+              relatedSearches: shallow.relatedQueries,
+            },
+            serp: {
+              organicResultCount: shallow.organicResults.length,
+              peopleAlsoAsk: faqQuestions,
+            },
+            sources: selection.sources,
+            faqQuestions,
+          });
+          const selectedQuestions = new Set(faqQuestions.map(faqQuestionKey));
+          const paaObservations = [...(shallow.paaObservations ?? []), ...supplementaryPaa]
+            .sort((left, right) => Number(selectedQuestions.has(faqQuestionKey(right.question)))
+              - Number(selectedQuestions.has(faqQuestionKey(left.question))))
+            .slice(0, 30);
+          results.push({ candidate, evidence, provenance,
+            ...(paaObservations.length ? {paaObservations} : {}),
+            ...(selection.sourceDocuments.length ? {sourceDocuments:selection.sourceDocuments} : {}) });
+        } catch (error) {
+          throw new ResearchInspectionError(error, provenance);
         }
-        const supportedQuestions = faqPool.filter(question => selection.sourceDocuments.some(document =>
-          document.passages.some(passage => faqBodyMatches(question, passage.text, passage.bodyStart))));
-        // Preserve exact observed wording and original SERP/PAA provenance.
-        // Only replace the preferred set if three body-supported alternatives
-        // exist; otherwise retain its gaps for the fail-closed draft preflight.
-        if (supportedQuestions.length >= 3) faqQuestions = supportedQuestions.slice(0, 3);
-        const evidence = EvidenceBundleSchema.parse({
-          schemaVersion: 2,
-          candidateFingerprint: candidateFingerprints(candidate).candidate,
-          signals: {
-            autocomplete: shallow.suggestions,
-            peopleAlsoAsk: observedQuestions,
-            relatedSearches: shallow.relatedQueries,
-          },
-          serp: {
-            organicResultCount: shallow.organicResults.length,
-            peopleAlsoAsk: faqQuestions,
-          },
-          sources: selection.sources,
-          faqQuestions,
-        });
-        const selectedQuestions = new Set(faqQuestions.map(faqQuestionKey));
-        const paaObservations = [...(shallow.paaObservations ?? []), ...supplementaryPaa]
-          .sort((left, right) => Number(selectedQuestions.has(faqQuestionKey(right.question)))
-            - Number(selectedQuestions.has(faqQuestionKey(left.question))))
-          .slice(0, 30);
-        results.push({ candidate, evidence, provenance,
-          ...(paaObservations.length ? {paaObservations} : {}),
-          ...(selection.sourceDocuments.length ? {sourceDocuments:selection.sourceDocuments} : {}) });
       }
       return {
         scannedCount: shallowInput.length,

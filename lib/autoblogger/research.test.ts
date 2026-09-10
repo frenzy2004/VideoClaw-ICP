@@ -14,6 +14,41 @@ import { createSafeSourceChecker } from './sources';
 import { PRODUCTION_SOURCE_AUTHORITY_POLICIES } from './source-policy';
 const researchClock={nowMs:()=>Date.parse('2026-09-04T08:15:00.000Z')};
 
+describe('bounded PAA completion during deep discovery', () => {
+  const questions = ['How to make a testimonial video?', 'What is a testimonial video?', 'How long should a testimonial video be?'];
+  it.each([0, 1, 2])('completes %s initial questions with one attributable support search', async count => {
+    const candidate = {...candidates(1)[0], primaryKeyword:'testimonial video examples', title:'Testimonial Video Examples'};
+    let starts=0, query='';
+    const apify: ApifyClient = {
+      startActor: async (actor,input) => {
+        expect(actor).toBe(SERP_ACTOR_ID); starts++;
+        const queries=String(input.queries).trim().split('\n');
+        expect(queries.length).toBeLessThanOrEqual(7); query=queries[0];
+        return successfulRun('support-run','support-data');
+      },
+      getRun:async()=>{throw new Error('Already complete');},
+      getDatasetItems:async()=>[{searchQuery:{term:query,device:'DESKTOP',page:1,countryCode:'US',languageCode:'en'},
+        organicResults:[],peopleAlsoAsk:questions.map(question=>({question})),relatedQueries:[]}],
+      abortRun:async id=>({id,status:'ABORTED'}),
+    };
+    const urls=['https://www.descript.com/blog/article/testimonial','https://independent.example/testimonial'];
+    const input={candidate,suggestions:[candidate.primaryKeyword],relatedQueries:[],peopleAlsoAsk:questions.slice(0,count),
+      organicResults:urls.map(url=>({url,title:'Testimonial guide',snippet:'Observed page.',resultType:'article'})),
+      provenance:{discovery:{actorId:'a',runId:'a',datasetId:'a',observedAt:'2026-09-04T08:01:00.000Z'},
+        serp:{actorId:SERP_ACTOR_ID,runId:'original-run',datasetId:'original-data',observedAt:'2026-09-04T08:01:00.000Z'}}};
+    const original=structuredClone(input);
+    const researcher=createResearcher({apify,execution:researchClock,sourceChecker:{select:async()=>{throw new Error('Body selection required');},
+      selectWithContent:async()=>({sources:urls.map((url,index)=>({originalUrl:url,finalUrl:url,authoritative:index===0})),sourceDocuments:[]})}});
+    const result=(await researcher.inspect([input])).results[0];
+    expect(starts).toBe(1);
+    expect(result.evidence.faqQuestions).toEqual(questions);
+    expect(result.provenance.serp.runId).toBe('original-run');
+    expect(result.paaObservations).toHaveLength(3-count);
+    expect(result.paaObservations?.every(observation=>observation.runId==='support-run' && observation.query===query)).toBe(true);
+    expect(input).toEqual(original);
+  });
+});
+
 describe('bounded zero-organic SERP recovery', () => {
   const questions = [
     'How do you plan a founder video topic?',

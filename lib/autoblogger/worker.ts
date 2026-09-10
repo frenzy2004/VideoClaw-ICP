@@ -33,7 +33,7 @@ import type {
   Publisher,
   PublisherOrigin,
 } from './publisher';
-import { selectRelevantPaaQuestions, type ResearchBatch, type ResearchResult, type ShallowResearchBatch, type ShallowResearchResult } from './research';
+import { ResearchInspectionError, selectRelevantPaaQuestions, type ResearchBatch, type ResearchResult, type ShallowResearchBatch, type ShallowResearchResult } from './research';
 import {
   buildIncrementalQueue,
   candidateIdentityList,
@@ -49,7 +49,7 @@ import {
   type RecoveryInventoryEntry,
 } from './recovery';
 import { recordRun } from './state';
-import { redactSensitive } from './secrets';
+import { containsSecretLikeValue, redactSensitive } from './secrets';
 
 type Researcher = {
   scan(candidates: Candidate[]): Promise<ShallowResearchBatch>;
@@ -292,11 +292,8 @@ function shallowIneligibilityReasons(observation: ShallowResearchResult): string
     reasons.push('missing_suggestion_signal');
   }
   if (observation.organicResults.length === 0) reasons.push('missing_serp');
-  try {
-    selectRelevantPaaQuestions(observation.candidate.primaryKeyword, observation.peopleAlsoAsk);
-  } catch {
-    reasons.push('missing_relevant_paa');
-  }
+  // The top ten may use bounded deep discovery to complete intermittent PAA.
+  // The complete topical three-question gate is enforced on its output below.
   if (!evaluateProductRelevance(observation.candidate)) reasons.push('missing_product_relevance');
   return reasons;
 }
@@ -353,6 +350,7 @@ function artifactHash(bundle: DraftBundle): string {
 }
 
 function compactResearchProvenance(value: ResearchResult['provenance']) {
+  if (containsSecretLikeValue(value)) throw new Error('Unsafe collection receipt rejected.');
   const { serp, serpAttempts, paa, paaAttempts, supportSearches } = ResearchProvenanceSchema.parse(value);
   return {
     serp: { runId: serp.runId, datasetId: serp.datasetId, observedAt: serp.observedAt },
@@ -547,19 +545,33 @@ export function createAutobloggerWorker(options: AutobloggerWorkerOptions) {
       const deep: DeepOpportunity[] = [];
       for (const ranked of rankedShallow) {
         const fingerprint = candidateFingerprints(ranked.observation.candidate).candidate;
+        const enrichment = enrichmentByFingerprint.get(fingerprint) as KeywordEnrichment;
         try {
+          // Count attempted deep slots, including failed collection/verification.
+          report.counts.deepInspected += 1;
           const inspected = await options.researcher.inspect([ranked.observation]);
           const result = inspected.results[0];
           if (!result || inspected.deepInspectionCount !== 1) throw new Error('Deep inspection returned no evidence bundle.');
-          const enrichment = enrichmentByFingerprint.get(fingerprint) as KeywordEnrichment;
           // Supporting searches are collected during deep inspection, after the
-          // shallow provenance write. Retain them even if drafting later fails.
+          // shallow write. Retain them before rejecting incomplete evidence.
           state = { ...state, provenance: { ...state.provenance, [fingerprint]: {
             ...compactResearchProvenance(result.provenance), keyword: enrichment.provenance,
           } } };
+          if (result.evidence.faqQuestions.length !== 3) throw new Error('Deep inspection requires exactly three relevant People Also Ask questions.');
+          selectRelevantPaaQuestions(result.candidate.primaryKeyword, result.evidence.faqQuestions);
           deep.push({ result, shallow: ranked.observation, enrichment, score: ranked.score + deepEvidenceScore(result) });
-          report.counts.deepInspected += 1;
         } catch (error) {
+          if (error instanceof ResearchInspectionError) {
+            // Provider metadata is untrusted even on the error path. A bad
+            // receipt must not throw out of failure bookkeeping and strand a
+            // lease. Keep the already-persisted safe shallow receipt instead.
+            const receipt = ResearchProvenanceSchema.safeParse(error.provenance);
+            if (receipt.success && !containsSecretLikeValue(receipt.data)) {
+              state = { ...state, provenance: { ...state.provenance, [fingerprint]: {
+                ...compactResearchProvenance(receipt.data), keyword: enrichment.provenance,
+              } } };
+            }
+          }
           state = markCandidateFailure(state, ranked.observation.candidate, input.runId, 'deep_inspection_failed', true, now().toISOString());
           report.failures.push({ candidateFingerprint: fingerprint, code: 'deep_inspection_failed', detail: safeDetail(error), retryable: state.decisions[fingerprint].status === 'retryable', attempt: state.decisions[fingerprint].attempts });
         }

@@ -6,7 +6,9 @@ This worker is a controlled research-and-drafting system. It does not publish ar
 
 The initial 250-topic research library is an input, not a quota or publication gate. Each run scans at most 50 candidates, deeply checks at most 10, and produces at most 3 drafts with no more than 2 from one ICP.
 
-Current checkpoint: [FAQ metadata correction and fresh worker evidence](FAQ-METADATA-PROOF-2026-09-10.md). The fresh template run failed; a subsequent retained-input diagnostic passed critique, repair, final review and source-use limits. Native blog tests/lint passed, but build exposed empty secondary keywords. The observed-keyword serialization fix passes **2,514 tests plus lint/typecheck/build**, without changing candidate identity or copy. Post-fix native revalidation remains separate from a new whole-worker proof. Earlier checkpoints below are historical.
+Current checkpoint: [bounded PAA completion and failure receipts](PAA-COMPLETION-PROOF-2026-09-10.md), with **2,523 tests plus lint/typecheck/build** passing. Deep discovery can complete an initial zero-to-two-question pool; three relevant questions remain mandatory before drafting. Failed attempts retain safe completed support-search receipts and count toward the ten-slot limit; malformed receipts cannot strand a lease. The latest fresh examples worker run remains failed; no retry reset occurred.
+
+The [template article's saved-review native revalidation](FAQ-METADATA-PROOF-2026-09-10.md#saved-review-native-revalidation--passed) passed native blog checks, lint and build and produced local review-only Markdown/SVG artifacts. This is a real accepted component result, **not an uninterrupted fresh whole-worker proof**. Earlier checkpoints below are historical.
 
 Previous checkpoint: [review ownership and article-quality proof](REVIEW-OWNERSHIP-2026-09-10.md) retains the source-budget diagnostic, failed questions run, C4 relevance correction and three-topic research-only pre-screen.
 

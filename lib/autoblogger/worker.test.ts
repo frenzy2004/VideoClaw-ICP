@@ -15,7 +15,7 @@ import {
 } from './domain';
 import { createPersistentWorkerState, PersistentWorkerStateSchema, type PersistentWorkerState } from './github-runtime';
 import { createPendingKeywordProvider, type KeywordProvider } from './keyword-providers';
-import type { ShallowResearchResult } from './research';
+import { createResearcher, SERP_ACTOR_ID, type ShallowResearchResult } from './research';
 import { createAutobloggerWorker, discoverCandidatesFromResearch } from './worker';
 import { reserveCandidate, grantManualRetryApproval, grantManualTargetSwitch, grantManualTargetRetry, grantManualFreshCandidate, markCandidateScanned, markCandidateFailure } from './recovery';
 import { writeAutobloggerArtifacts } from './runtime';
@@ -82,6 +82,7 @@ function fixture(input: {
   backlog?: Candidate[];
   backlogCount?: number;
   observe?: (item: Candidate) => ShallowResearchResult;
+  inspect?: Parameters<typeof createAutobloggerWorker>[0]['researcher']['inspect'];
   inspectProvenance?: (item: ShallowResearchResult) => ShallowResearchResult['provenance'];
   inspectObservations?: ShallowResearchResult['paaObservations'];
   metricsOverrides?: (index: number) => Partial<KeywordMetrics>;
@@ -128,6 +129,7 @@ function fixture(input: {
         const item = items[0];
         const index = Number(item.candidate.slug.split('-').at(-1));
         counters.inspected.push(index);
+        if (input.inspect) return input.inspect(items);
         return {
           scannedCount: 1,
           deepInspectionCount: 1,
@@ -631,6 +633,163 @@ describe('persistent autoblogger worker', () => {
     });
   });
 
+  it('counts a failed real deep inspection and retains its completed support receipt when PAA remains incomplete', async () => {
+    const target = candidate(1);
+    const complete = shallow(target);
+    const partial = { ...complete, peopleAlsoAsk: complete.peopleAlsoAsk.slice(0, 1) };
+    const original = structuredClone(partial);
+    let supportStarts = 0;
+    let supportQuery = '';
+    let sourceReads = 0;
+    const rejectSourceRead = async () => {
+      sourceReads += 1;
+      throw new Error('Incomplete PAA must block before source body reads.');
+    };
+    const researcher = createResearcher({
+      execution: { nowMs: () => Date.parse('2026-09-05T00:03:00.000Z') },
+      apify: {
+        startActor: async (actorId, input) => {
+          supportStarts += 1;
+          expect(actorId).toBe(SERP_ACTOR_ID);
+          expect(input).toMatchObject({ countryCode: 'us', languageCode: 'en', maxPagesPerQuery: 1, mobileResults: false });
+          const queries = String(input.queries).trim().split('\n');
+          expect(queries.length).toBeLessThanOrEqual(7);
+          supportQuery = queries[0];
+          return { id: 'incomplete-support-run', status: 'SUCCEEDED', defaultDatasetId: 'incomplete-support-data', finishedAt: '2026-09-05T00:02:00.000Z' };
+        },
+        getRun: async () => { throw new Error('The support run is already complete.'); },
+        getDatasetItems: async (datasetId) => {
+          expect(datasetId).toBe('incomplete-support-data');
+          return [{
+            searchQuery: { term: supportQuery, device: 'DESKTOP', page: 1, countryCode: 'US', languageCode: 'en' },
+            organicResults: [],
+            peopleAlsoAsk: [{ question: complete.peopleAlsoAsk[1], answer: 'RAW_INCOMPLETE_PAA_ANSWER_MUST_NOT_BE_RETAINED' }],
+            relatedQueries: [],
+          }];
+        },
+        abortRun: async (id) => ({ id, status: 'ABORTED' }),
+      },
+      sourceChecker: { select: rejectSourceRead, selectWithContent: rejectSourceRead },
+    });
+    const f = fixture({ backlog: [target], observe: () => partial, inspect: researcher.inspect });
+
+    const report = await f.worker.execute({ command: 'pilot', runId: 'incomplete-support-receipt' });
+
+    expect(supportStarts).toBe(1);
+    expect(sourceReads).toBe(0);
+    expect(f.counters.inspected).toEqual([1]);
+    expect(report.status).toBe('failed');
+    expect(report.counts).toMatchObject({ drafted: 0, validated: 0, pullRequestsOpened: 0 });
+    expect(f.counters).toMatchObject({ drafted: 0, validated: 0, opened: 0 });
+    expect(report.artifacts).toEqual([]);
+    expect(report.failures).toContainEqual(expect.objectContaining({ code: 'deep_inspection_failed' }));
+    expect(partial).toEqual(original);
+    expect(JSON.stringify({ report, state: f.getState() })).not.toContain('RAW_INCOMPLETE_PAA_ANSWER_MUST_NOT_BE_RETAINED');
+    expect.soft(report.counts.deepInspected).toBe(1);
+    expect.soft(f.getState().provenance[candidateFingerprints(target).candidate]).toMatchObject({
+      serp: { runId: 'serp-run', datasetId: 'serp-data' },
+      supportSearches: [{ actorId: SERP_ACTOR_ID, runId: 'incomplete-support-run', datasetId: 'incomplete-support-data', observedAt: '2026-09-05T00:02:00.000Z' }],
+    });
+  });
+
+  it.each([
+    { label: 'date-only timestamp', supportRunId: 'malformed-support-run', datasetId: 'malformed-support-data', finishedAt: '2026-09-05' },
+    { label: 'secret-like run ID', supportRunId: 'apify_api_SYNTHETIC_REVIEW_RUN_ONLY', datasetId: 'synthetic-support-data', finishedAt: '2026-09-05T00:02:00.000Z' },
+    { label: 'secret-like dataset ID', supportRunId: 'synthetic-support-run', datasetId: 'apify_api_SYNTHETIC_REVIEW_DATASET_ONLY', finishedAt: '2026-09-05T00:02:00.000Z' },
+  ])('saves a failed real deep attempt without an unsafe receipt or stranded lease: $label', async ({ supportRunId, datasetId, finishedAt }) => {
+    const target = candidate(1);
+    const fingerprint = candidateFingerprints(target).candidate;
+    const complete = withPaa(target);
+    const partial = { ...complete, peopleAlsoAsk: complete.peopleAlsoAsk.slice(0, 1) };
+    const original = structuredClone(partial);
+    let supportStarts = 0;
+    let datasetReads = 0;
+    let sourceReads = 0;
+    const rejectSourceRead = async () => {
+      sourceReads += 1;
+      throw new Error('Incomplete PAA must block before source body reads.');
+    };
+    const researcher = createResearcher({
+      execution: { nowMs: () => Date.parse('2026-09-05T00:03:00.000Z') },
+      apify: {
+        startActor: async (actorId) => {
+          supportStarts += 1;
+          expect(actorId).toBe(SERP_ACTOR_ID);
+          // These synthetic receipts pass collection's checks, but are not
+          // safe persisted provenance. Exercise the real inspection error path.
+          return { id: supportRunId, status: 'SUCCEEDED', defaultDatasetId: datasetId, finishedAt };
+        },
+        getRun: async () => { throw new Error('The support run is already complete.'); },
+        getDatasetItems: async (requestedDatasetId) => {
+          datasetReads += 1;
+          expect(requestedDatasetId).toBe(datasetId);
+          return [];
+        },
+        abortRun: async (id) => ({ id, status: 'ABORTED' }),
+      },
+      sourceChecker: { select: rejectSourceRead, selectWithContent: rejectSourceRead },
+    });
+    const f = fixture({
+      backlog: [target], observe: () => partial, inspect: researcher.inspect,
+      beforeSave: (state) => {
+        expect(JSON.stringify(state.provenance)).not.toContain(supportRunId);
+        expect(JSON.stringify(state.provenance)).not.toContain(datasetId);
+      },
+    });
+    const runId = 'malformed-support-receipt';
+    const execution = f.worker.execute({ command: 'pilot', runId });
+
+    await expect(execution).resolves.toMatchObject({
+      status: 'failed', artifacts: [],
+      counts: { deepInspected: 1, drafted: 0, validated: 0, pullRequestsOpened: 0 },
+      failures: expect.arrayContaining([expect.objectContaining({ code: 'deep_inspection_failed', candidateFingerprint: fingerprint })]),
+    });
+    const report = await execution;
+    expect(supportStarts).toBe(1);
+    expect(datasetReads).toBe(1);
+    expect(sourceReads).toBe(0);
+    expect(f.counters).toMatchObject({ inspected: [1], drafted: 0, validated: 0, opened: 0 });
+    expect(f.counters.saved).toBeGreaterThan(1);
+    const saved = f.getState();
+    expect(saved.runs[runId]).toMatchObject({ status: 'failed' });
+    expect(saved.decisions[fingerprint]).toMatchObject({
+      status: 'retryable', reason: 'deep_inspection_failed', attempts: 1, leaseExpiresAt: null,
+    });
+    expect(saved.provenance[fingerprint]).toMatchObject({
+      serp: { runId: 'serp-run', datasetId: 'serp-data', observedAt: '2026-09-05T00:00:00.000Z' },
+      paa: { runId: 'paa-run', datasetId: 'paa-data' },
+    });
+    expect(saved.provenance[fingerprint]).not.toHaveProperty('supportSearches');
+    expect(JSON.stringify({ report, saved })).not.toContain(supportRunId);
+    expect(JSON.stringify({ report, saved })).not.toContain(datasetId);
+    expect(saved.manualPilot).toBeNull();
+    expect(partial).toEqual(original);
+  });
+
+  it('retains a returned deep support receipt before rejecting its invalid FAQ set', async () => {
+    const target = candidate(1);
+    const f = fixture({
+      backlog: [target],
+      observe: withPaa,
+      inspectProvenance: withSupport,
+      evidenceOverrides: { faqQuestions: [] },
+    });
+
+    const report = await f.worker.execute({ command: 'pilot', runId: 'invalid-faq-support-receipt' });
+
+    expect(f.counters.inspected).toEqual([1]);
+    expect(report.status).toBe('failed');
+    expect(report.counts).toMatchObject({ deepInspected: 1, drafted: 0, validated: 0, pullRequestsOpened: 0 });
+    expect(f.counters).toMatchObject({ drafted: 0, validated: 0, opened: 0 });
+    expect(report.artifacts).toEqual([]);
+    expect(report.failures).toContainEqual(expect.objectContaining({ code: 'deep_inspection_failed' }));
+    expect(f.getState().provenance[candidateFingerprints(target).candidate]).toMatchObject({
+      serp: { runId: 'serp-run', datasetId: 'serp-data' },
+      paa: { runId: 'paa-run', datasetId: 'paa-data' },
+      supportSearches: [{ actorId: 'support-search', runId: 'support-run', datasetId: 'support-data', observedAt: '2026-09-05T00:02:00.000Z' }],
+    });
+  });
+
   it('writes full collector provenance and question-only PAA observations to artifact reports', async () => {
     const root = await mkdtemp(join(tmpdir(), 'autoblogger-provenance-'));
     const { worker, getState } = fixture({
@@ -678,21 +837,21 @@ describe('persistent autoblogger worker', () => {
     expect(JSON.stringify(report)).not.toContain('RAW_DEEP_ANSWER_MUST_NOT_BE_RETAINED');
   });
 
+  it('allows bounded deep discovery to complete a partial PAA set before drafting', async () => {
+    const item=candidate(1), complete=shallow(item);
+    const f=fixture({backlog:[item],observe:()=>({...complete,peopleAlsoAsk:complete.peopleAlsoAsk.slice(0,1)}),
+      evidenceOverrides:{signals:{autocomplete:complete.suggestions,peopleAlsoAsk:complete.peopleAlsoAsk,relatedSearches:complete.relatedQueries},
+        serp:{organicResultCount:2,peopleAlsoAsk:complete.peopleAlsoAsk},faqQuestions:complete.peopleAlsoAsk}});
+    const report=await f.worker.execute({command:'pilot',runId:'deep-completes-paa'});
+    expect(f.counters.inspected).toEqual([1]);
+    expect(report.counts).toMatchObject({deepInspected:1,drafted:1,validated:1});
+    expect(report.status).toBe('validated');
+  });
+
   describe.each(['run', 'pilot', 'research'] as const)('%s shallow selection', (command) => {
     it.each([
       { label: 'zero organic results', reasons: 'missing_serp', patch: { organicResults: [] } },
-      { label: 'no discovery signals', reasons: 'missing_suggestion_signal,missing_relevant_paa', patch: { suggestions: [], peopleAlsoAsk: [], relatedQueries: [] } },
-      { label: 'generic PAA', reasons: 'missing_relevant_paa', patch: { peopleAlsoAsk: [
-        'Which video codec is best for archival footage?',
-        'How does a startup register for payroll tax?',
-        'Why is video compression useful for television?',
-        'What is founder evidence topic planning?',
-      ] } },
-      { label: 'duplicate PAA', reasons: 'missing_relevant_paa', patch: { peopleAlsoAsk: [
-        'What is founder evidence topic planning?',
-        'WHAT IS FOUNDER EVIDENCE TOPIC PLANNING?',
-        ' What is founder evidence topic planning? ',
-      ] } },
+      { label: 'no discovery signals', reasons: 'missing_suggestion_signal', patch: { suggestions: [], peopleAlsoAsk: [], relatedQueries: [] } },
       { label: 'no product relevance', reasons: 'missing_product_relevance', patch: {} },
       { label: 'no product relevance and empty organic results', reasons: 'missing_serp,missing_product_relevance', patch: { organicResults: [] } },
     ])('excludes high-scoring candidates with $label before spending the ten deep slots', async ({ reasons, patch }) => {
@@ -735,6 +894,18 @@ describe('persistent autoblogger worker', () => {
       }
       expect(report.failures).toHaveLength(10);
       if (command === 'pilot') expect(getState().manualPilot?.status).toBe('prepared');
+    });
+
+    it.each(['generic', 'duplicate'])('still blocks %s deep PAA before drafting, within ten slots', async kind => {
+      const f=fixture({backlogCount:21, observe:item=>({...shallow(item),peopleAlsoAsk:kind==='generic'
+        ? ['Which video codec is best?', 'What are payroll taxes?', 'How does video compression work?']
+        : Array(3).fill(`What is ${item.primaryKeyword}?`)})});
+      const report=await f.worker.execute({command,runId:`deep-paa-${command}-${kind}`});
+      expect(f.counters.inspected).toHaveLength(10);
+      expect(report.counts).toMatchObject({deepInspected:10,eligible:0,drafted:0,validated:0,pullRequestsOpened:0});
+      expect(report.artifacts).toEqual([]);
+      expect(report.failures.filter(failure=>failure.code==='deep_inspection_failed')).toHaveLength(10);
+      expect(f.getState().manualPilot).toBeNull();
     });
   });
 
@@ -813,7 +984,7 @@ describe('persistent autoblogger worker', () => {
   it.each(['run', 'pilot', 'research'] as const)('bounds insufficient-data retries at three attempts in %s without deferring or resetting them', async (command) => {
     const item = candidate(0);
     const fingerprint = candidateFingerprints(item).candidate;
-    const reasons = 'missing_suggestion_signal,missing_relevant_paa';
+    const reasons = 'missing_suggestion_signal';
     const { worker, counters, getState } = fixture({
       backlog: [item],
       observe: (candidate) => ({ ...shallow(candidate), suggestions: [], peopleAlsoAsk: [], relatedQueries: [] }),
@@ -845,7 +1016,7 @@ describe('persistent autoblogger worker', () => {
   it.each([
     { label: 'missing sources', evidence: { sources: [] }, reason: 'missing_sources' },
     { label: 'a different candidate', evidence: { candidateFingerprint: candidateFingerprints(candidate(99)).candidate }, reason: 'evidence_candidate_mismatch' },
-    { label: 'missing FAQs', evidence: { faqQuestions: [] }, reason: 'missing_faqs' },
+    { label: 'missing FAQs', evidence: { faqQuestions: [] }, reason: 'deep_inspection_failed' },
   ])('still rejects deep evidence with $label after passing shallow checks', async ({ evidence, reason }) => {
     const { worker, counters, getState } = fixture({ backlogCount: 1, evidenceOverrides: evidence });
 

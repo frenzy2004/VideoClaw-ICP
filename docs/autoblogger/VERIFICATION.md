@@ -3,7 +3,21 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-## FAQ metadata and fresh template attempt — 2026-09-10 Malaysia time
+## Bounded PAA completion and failure receipts — 2026-09-10 Malaysia time
+
+The [current checkpoint](PAA-COMPLETION-PROOF-2026-09-10.md) passes **2,523 tests
+across 58 files**, zero failures/skips, plus lint, typecheck and worker build.
+Partial observation pools can enter bounded deep discovery; three relevant
+distinct questions and body-supported preparation still gate drafting. Completed
+safe support-search receipts survive failures, which count as attempted deep slots.
+Malformed or secret-like receipts cannot strand the candidate's lease.
+
+Saved-review template materialization passes the native lander's blog check,
+lint and build in an isolated checkout, with unchanged copy and independent
+verdict. The subsequent fresh examples run failed shallow PAA screening and
+remains failed. A successful uninterrupted fresh article is not claimed.
+
+## Previous FAQ metadata and fresh template attempt — 2026-09-10 Malaysia time
 
 The [current checkpoint](FAQ-METADATA-PROOF-2026-09-10.md) passes **2,514 tests
 across 58 files**, no failures/skips, plus lint, typecheck and worker build.
