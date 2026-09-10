@@ -247,7 +247,9 @@ function sentenceContract(original: GeneratedDraftV2, policy: RepairPolicy) {
     providerFields[location] = { anyOf: [{ type: 'null' }, {
       type: 'object', additionalProperties: false, required: ranges.map(range => range.key),
       properties: Object.fromEntries(ranges.map(range => [range.key, { anyOf: [
-        { type: 'null' }, { type: 'array', maxItems: range.maxWords, items: { type: 'string', pattern: '^\\S+$' } },
+        // Reject common multi-word packing at generation time. The stricter
+        // Unicode word validator above remains authoritative after generation.
+        { type: 'null' }, { type: 'array', maxItems: range.maxWords, items: { type: 'string', pattern: '^[^\\s_/-]+$' } },
       ] }])),
     }] };
   }

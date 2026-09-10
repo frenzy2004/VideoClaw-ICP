@@ -92,10 +92,31 @@ or failures, plus lint, typecheck and worker build. Existing dependency warnings
 remain. The local report is
 `artifacts/autoblogger/worksheet-owned-verification-2026-09-10/tests.json`.
 
-A new diagnostic may replay the exact original draft and the fresh critique from
-the preceding failed diagnostic, then pay for at most one repair and final review.
-Native lander validation can run in a disposable checkout only after acceptance.
-That remains a retained-input component test, not a fresh full-worker success.
+The subsequent diagnostic at `440c087` replayed the exact original draft and the
+fresh critique, then used one paid repair request (74,861 input / 3,026 output tokens,
+HTTP 200, same model). It stopped at patch validation: two returned array items
+packed several words together with underscores. No final review or native QA ran.
+Original state and receipts remained unchanged. Its private receipts are retained
+at `artifacts/autoblogger/worksheet-owned-live-diagnostic-2026-09-10/`.
+
+## Provider word-contract correction
+
+The provider's non-whitespace pattern permitted underscore compounds that the
+local word validator rejects. The generation pattern now excludes underscores,
+slashes and hyphens as well as whitespace. A failing boundary test reproduced the
+two actual compound-token failures; the correction preserves Unicode letters and
+apostrophes. The stricter local validator still applies. No invalid output was
+normalized into acceptance and no saved response was rewritten.
+
+Independent narrow review found no actionable issues. Fresh full verification:
+**2,464 tests across 58 files**, no failures/skips, passing lint, typecheck and worker
+build, with the existing dependency warnings. Local results:
+`artifacts/autoblogger/provider-word-contract-2026-09-10/tests.json`.
+
+The next capped diagnostic uses the same exact retained draft/critique, paying for
+at most one repair and final verification. Native lander validation can run in a
+disposable checkout only after acceptance. Any result remains a component test,
+not a fresh full-worker success.
 
 No worker state reset, new retry grant, lander write, generated PR, publication,
 deployment or schedule activation is authorized by this test. Failed receipts and

@@ -68,6 +68,18 @@ function expectInvalid(result: ReturnType<typeof applySentenceRepair>) {
 }
 
 describe('sentence-owned repair', () => {
+  it('prevents the provider from packing several words into one underscore, slash or hyphen token', () => {
+    const original = fixture();
+    const request = createSentenceRepairRequest(original, policyFor(original));
+    const schema = request.schema as { properties: { changes: { properties: Record<string, {
+      anyOf: [unknown, { properties: Record<string, { anyOf: [unknown, { items: { pattern: string } }] }> }];
+    }> } } };
+    const pattern = new RegExp(schema.properties.changes.properties[body].anyOf[1].properties.b0.anyOf[1].items.pattern, 'u');
+    for (const invalid of ['in_this_testimonial?', 'using_that_offering?', 'one/two', 'buyer-problem', 'two words']) {
+      expect(pattern.test(invalid), invalid).toBe(false);
+    }
+    for (const valid of ['buyer.', 'café', '视频', '2026', 'customer’s']) expect(pattern.test(valid), valid).toBe(true);
+  });
   it.each(['Choose one buyer: ____.', 'Choose ____ buyers.', 'Choose “____” buyers.'])('keeps plain worksheet blanks and sentence citations owned by code during a neighboring edit: %s', blank => {
     const original = fixture();
     original.sections[0].markdown = `${blank}\n\nRecord the workflow.`;
@@ -131,8 +143,8 @@ describe('sentence-owned repair', () => {
         changes: { additionalProperties: false, required: [faq, body], properties: {
           [body]: { anyOf: [{ type: 'null' }, { type: 'object', additionalProperties: false,
             required: ['b0', 'b1'], properties: {
-              b0: { anyOf: [{ type: 'null' }, { type: 'array', maxItems: 4, items: { type: 'string', pattern: '^\\S+$' } }] },
-              b1: { anyOf: [{ type: 'null' }, { type: 'array', maxItems: 3, items: { type: 'string', pattern: '^\\S+$' } }] },
+              b0: { anyOf: [{ type: 'null' }, { type: 'array', maxItems: 4, items: { type: 'string', pattern: '^[^\\s_/-]+$' } }] },
+              b1: { anyOf: [{ type: 'null' }, { type: 'array', maxItems: 3, items: { type: 'string', pattern: '^[^\\s_/-]+$' } }] },
             },
           }] },
         } },
