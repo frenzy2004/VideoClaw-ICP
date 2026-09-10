@@ -14,6 +14,7 @@ import {
   GENERATED_DRAFT_V2_JSON_SCHEMA,
   GeneratedDraftV2Schema,
   ProductReferenceReviewSchema,
+  canonicalizeCompoundClaimBindings,
   productReferenceManifest,
   assertSourceFacts,
   assertSourceFactsMatchCheckedSources,
@@ -1037,16 +1038,30 @@ export function createStructuredDrafter(options: StructuredDrafterOptions) {
             : [{ code: 'content.secret', message: 'Generated draft contains a secret-like value.' }],
         };
       }
-      const normalized = canonicalizeObservedFaqHeadingBindings(context, rawInitial);
+      const compound = canonicalizeCompoundClaimBindings(context, rawInitial);
+      const normalized = canonicalizeObservedFaqHeadingBindings(context, compound.draft);
       const initial = normalized.draft;
+      const hash = (value: unknown) => createHash('sha256').update(JSON.stringify(value)).digest('hex');
+      const compoundAudit = compound.splitBindingIndices.length ? {
+        kind: 'split_compound_claim_bindings_v1',
+        parsedDraftHash: hash(rawInitial), canonicalDraftHash: hash(compound.draft),
+        splitBindingIndices: compound.splitBindingIndices,
+        reason: 'Exact contiguous whole rendered sentences compiled into separate bindings; authored text and ordered source fact IDs are unchanged. Each sentence requires fresh independent review.',
+      } : undefined;
+      const audit = compoundAudit && normalized.audit ? {
+        kind: 'canonicalize_generated_draft_metadata_v1',
+        parsedDraftHash: hash(rawInitial), canonicalDraftHash: hash(initial),
+        // Each step's indices refer to its parsedDraftHash, in execution order.
+        steps: [compoundAudit, normalized.audit],
+      } : compoundAudit ?? normalized.audit;
       const critique = DraftCritiqueV1Schema.parse(await options.client.generate({
         name: 'videoclaw_article_critique_v1',
         schema: DRAFT_CRITIQUE_V1_JSON_SCHEMA,
         system: CRITIQUE_SYSTEM,
         input: { ...suppliedContext, draft: initial, editorialContext: editorialReviewContext(initial),
-          ...(normalized.audit ? {draftNormalization: {
-            ...normalized.audit,
-            receivedDraftHash: createHash('sha256').update(JSON.stringify(receivedDraft)).digest('hex'),
+          ...(audit ? {draftNormalization: {
+            ...audit,
+            receivedDraftHash: hash(receivedDraft),
           }} : {}),
           bindingManifest: bindingManifest(initial), referenceManifest: productReferenceManifest(context, initial) },
       }));

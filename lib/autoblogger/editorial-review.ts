@@ -38,6 +38,11 @@ export const EDITORIAL_REVIEW_JSON_SCHEMA = {
 } as const;
 
 export const EDITORIAL_QUALITY_RULES = `Keep the article's instructions consistent across the worksheet, steps and examples.
+Trace numbered steps in their stated order: check prerequisites, approval gates and
+operations that can undo earlier work. A gate or locked state invoked in an example
+must be established in the main instructions, with an owner and a clear condition.
+Structure-changing operations must precede the relevant approval/lock, or the text
+must explicitly explain reopening it. Do not infer an unstated checkpoint to pass.
 One claim may have several supporting details: distinguish those from different
 claims, audiences or buying questions rather than giving incompatible split rules.
 Each section must deliver the practical help its heading promises. Troubleshooting

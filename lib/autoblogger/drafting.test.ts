@@ -384,6 +384,197 @@ function verifyRequest(repaired = draft) {
   });
 }
 
+describe('compound claim metadata at the real critique boundary', () => {
+  const problem = 'Problem: reviewers comment on different versions.';
+  const remedy = 'Remedy: stop collecting scattered comments, label one version as current, and move all unresolved notes into the single review location before editing resumes.';
+  const faqPair = ['Yes.', 'Use the recipient requirements before recording.'];
+  const hash = (value: unknown) => createHash('sha256').update(JSON.stringify(value)).digest('hex');
+
+  function compoundDraft() {
+    const generated = structuredClone(draft);
+    // Rendering must come from the production Markdown parser (link + emphasis).
+    generated.sections[0].markdown = `- **Problem:** reviewers comment on different versions. ${remedy}\n\n${draft.sections[0].markdown}`;
+    generated.claimBindings.splice(5, 0, {location: '/sections/0/markdown', span: `${problem} ${remedy}`,
+      sourceFactIds: ['fixture-section-1', 'yc-bullets'], productClaimId: null});
+    generated.faqAnswers[0].answer = faqPair.join(' ');
+    generated.claimBindings.find(b => b.location === '/faqAnswers/0/answer')!.span = faqPair.join(' ');
+    return generated;
+  }
+
+  function expectedDraft(generated: GeneratedDraftV2) {
+    return {...generated, claimBindings: generated.claimBindings.flatMap((b, index) =>
+      index === 5 ? [problem, remedy].map(span => ({...b, span}))
+        : index === 9 ? faqPair.map(span => ({...b, span})) : [b])};
+  }
+
+  it.each(['ordinary', 'reordered keys', 'parse-normalized whitespace'])
+  ('splits exact rendered Problem/Remedy and FAQ pairs before fresh review (%s)', async variant => {
+    const value = compoundDraft();
+    const expected = expectedDraft(value);
+    const received = variant === 'reordered keys'
+      ? Object.fromEntries(Object.entries(value).reverse()) as GeneratedDraftV2 : value;
+    if (variant === 'parse-normalized whitespace') received.description = `  ${received.description}  `;
+    const original = structuredClone(received);
+    const client = new FixtureStructuredClient([received, (request: StructuredOutputRequest) => {
+      const input = request.input as {draft: GeneratedDraftV2; bindingManifest: unknown; editorialContext: unknown; draftNormalization: unknown};
+      expect(request.name).toBe('videoclaw_article_critique_v1');
+      expect(input.draft).toEqual(expected);
+      expect(input.bindingManifest).toEqual(expected.claimBindings.map((b, bindingIndex) => ({...b, bindingIndex,
+        bindingHash: hash([b.location, b.span, b.sourceFactIds, b.productClaimId])})));
+      expect(input.editorialContext).toMatchObject({draftHash: hash(expected)});
+      expect(input.draftNormalization).toMatchObject({
+        kind: 'split_compound_claim_bindings_v1', receivedDraftHash: hash(original),
+        parsedDraftHash: hash(GeneratedDraftV2Schema.parse(original)), canonicalDraftHash: hash(expected),
+        splitBindingIndices: [5, 9],
+      });
+      return {...approvedCritique, editorialReview: acceptedEditorial(input.draft), supportEvaluations: supportedBindings(input.draft)};
+    }]);
+    const result = await createStructuredDrafter({client, mediaAllowlist: [media]}).draft(context);
+    expect(result.status).toBe('ready');
+    expect(result).toMatchObject({repaired: false});
+    expect(client.requests).toHaveLength(2);
+    expect(received).toEqual(original);
+  });
+
+  it('blocks compound coverage when a child binding uses an aliased source-field location', async () => {
+    const generated = structuredClone(draft);
+    generated.sections[0].markdown = `${problem} ${remedy}\n\n${generated.sections[0].markdown}`;
+    generated.claimBindings.push(
+      {location: '/sections/0/markdown', span: `${problem} ${remedy}`, sourceFactIds: ['fixture-section-1'], productClaimId: null},
+      {location: '/sections/00/markdown', span: problem, sourceFactIds: ['fixture-section-1'], productClaimId: null},
+    );
+    const original = structuredClone(generated);
+    let reviewed: GeneratedDraftV2 | undefined;
+    const client = new FixtureStructuredClient([generated, (request: StructuredOutputRequest) => {
+      expect(request.name).toBe('videoclaw_article_critique_v1');
+      reviewed = (request.input as {draft: GeneratedDraftV2}).draft;
+      return {...approvedCritique, editorialReview: acceptedEditorial(reviewed), supportEvaluations: supportedBindings(reviewed)};
+    }, generated, verifyRequest(generated)]);
+    const result = await createStructuredDrafter({client, mediaAllowlist: [media]}).draft(context);
+    expect(result.status).toBe('blocked');
+    expect(reviewed).toEqual(original);
+    expect(client.requests[1].input).not.toHaveProperty('draftNormalization');
+    expect(generated).toEqual(original);
+  });
+
+  it('resolves a distinct whole Review span before testing partial substring overlap', async () => {
+    const generated = structuredClone(draft);
+    generated.sections[0].markdown = `Review\n\nReview the recording. Export the recording.\n\n${generated.sections[0].markdown}`;
+    generated.claimBindings.push(
+      {location: '/sections/0/markdown', span: 'Review', sourceFactIds: ['fixture-section-1'], productClaimId: null},
+      {location: '/sections/0/markdown', span: 'Review the recording. Export the recording.', sourceFactIds: ['fixture-section-1'], productClaimId: null},
+    );
+    const original = structuredClone(generated);
+    const expected = {...generated, claimBindings: [
+      ...generated.claimBindings.slice(0, -1),
+      {...generated.claimBindings.at(-1)!, span: 'Review the recording.'},
+      {...generated.claimBindings.at(-1)!, span: 'Export the recording.'},
+    ]};
+    let reviewed: GeneratedDraftV2 | undefined;
+    const client = new FixtureStructuredClient([generated, (request: StructuredOutputRequest) => {
+      expect(request.name).toBe('videoclaw_article_critique_v1');
+      reviewed = (request.input as {draft: GeneratedDraftV2}).draft;
+      return {...approvedCritique, editorialReview: acceptedEditorial(reviewed), supportEvaluations: supportedBindings(reviewed)};
+    }, generated, verifyRequest(generated)]);
+    const result = await createStructuredDrafter({client, mediaAllowlist: [media]}).draft(context);
+    expect(result).toMatchObject({status: 'ready', repaired: false});
+    expect(reviewed).toEqual(expected);
+    expect(client.requests[1].input).toMatchObject({draftNormalization: {splitBindingIndices: [22]},
+      editorialContext: {draftHash: hash(expected)}, bindingManifest: expect.arrayContaining([
+        expect.objectContaining({bindingIndex: 21, span: 'Review'}),
+        expect.objectContaining({bindingIndex: 22, span: 'Review the recording.'}),
+        expect.objectContaining({bindingIndex: 23, span: 'Export the recording.'}),
+      ])});
+    expect(client.requests).toHaveLength(2);
+    expect(generated).toEqual(original);
+  });
+
+  it('chains compound and observed FAQ heading corrections with reconstructable hashes', async () => {
+    const generated = compoundDraft();
+    const split = expectedDraft(generated);
+    const questionBinding = {location: '/faqAnswers/0/answer', span: generated.faqAnswers[0].question,
+      sourceFactIds: ['fixture-faq'], productClaimId: null};
+    generated.claimBindings.push(questionBinding);
+    const intermediate = {...split, claimBindings: [...split.claimBindings, questionBinding]};
+    const client = new FixtureStructuredClient([generated, (request: StructuredOutputRequest) => {
+      const input = request.input as {draft: GeneratedDraftV2; draftNormalization: unknown};
+      expect(input.draft).toEqual(split);
+      expect(input.draftNormalization).toMatchObject({
+        receivedDraftHash: hash(generated), parsedDraftHash: hash(generated), canonicalDraftHash: hash(split),
+        steps: [
+          {kind: 'split_compound_claim_bindings_v1', parsedDraftHash: hash(generated), canonicalDraftHash: hash(intermediate), splitBindingIndices: [5, 9]},
+          {kind: 'omit_redundant_observed_faq_heading_bindings_v1', parsedDraftHash: hash(intermediate), canonicalDraftHash: hash(split), removedBindingIndices: [intermediate.claimBindings.length - 1]},
+        ],
+      });
+      throw new Error('canonical critique boundary');
+    }]);
+    await expect(createStructuredDrafter({client, mediaAllowlist: [media]}).draft(context)).rejects.toThrow('canonical critique boundary');
+  });
+
+  it.each(['old editorial receipt', 'old binding manifest', 'omitted remedy review', 'rejected remedy support'])
+  ('cannot approve using %s after splitting', async variant => {
+    const generated = compoundDraft();
+    const canonical = expectedDraft(generated);
+    const evaluations = supportedBindings(canonical);
+    if (variant === 'omitted remedy review') evaluations.splice(6, 1);
+    if (variant === 'rejected remedy support') evaluations[6] = {...evaluations[6], supported: false, rationale: 'The cited facts do not support this remedy.'};
+    const critic = {...approvedCritique,
+      editorialReview: acceptedEditorial(variant === 'old editorial receipt' ? generated : canonical),
+      supportEvaluations: variant === 'old binding manifest' ? supportedBindings(generated) : evaluations};
+    const client = new FixtureStructuredClient([generated, critic, canonical, {...resolvedVerification(critic, canonical), supportEvaluations: evaluations}]);
+    const result = await createStructuredDrafter({client, mediaAllowlist: [media]}).draft(context);
+    expect(result.status).toBe('blocked');
+    if (result.status === 'blocked' && result.reason === 'content_safety_failed') expect(result.findings).toContainEqual(expect.objectContaining({
+      code: variant === 'old editorial receipt' ? 'critique.editorial_stale'
+        : variant === 'old binding manifest' ? 'critique.support_stale'
+          : variant === 'omitted remedy review' ? 'critique.support_incomplete' : 'critique.support_rejected',
+    }));
+  });
+
+  it.each(['reordered', 'partial', 'unknown text', 'noncontiguous', 'unknown location', 'noncanonical location',
+    'multiple locations', 'duplicate compound', 'overlapping sentence', 'overlapping compound', 'partial overlap',
+    'ambiguous occurrence', 'repeated child', 'product assertion', 'unknown fact', 'duplicate fact'])
+  ('leaves unsafe %s metadata intact and fails closed', async variant => {
+    const generated = structuredClone(draft);
+    const extra = {location: '/sections/0/markdown', span: `${problem} ${remedy}`,
+      sourceFactIds: ['fixture-section-1'], productClaimId: null as string | null};
+    generated.sections[0].markdown = `${extra.span}\n\n${generated.sections[0].markdown}`;
+    if (variant === 'reordered') extra.span = `${remedy} ${problem}`;
+    if (variant === 'partial') extra.span = `${problem} ${remedy.slice(0, -8).trim()}`;
+    if (variant === 'unknown text') extra.span += ' Invented text.';
+    if (variant === 'noncontiguous') generated.sections[0].markdown = `${problem} Keep this condition. ${remedy}`;
+    if (variant === 'unknown location') extra.location = '/sections/99/markdown';
+    if (variant === 'noncanonical location') extra.location = '/sections/00/markdown';
+    if (variant === 'multiple locations') {
+      generated.sections[0].markdown = problem;
+      generated.sections[1].markdown = remedy;
+    }
+    if (variant === 'duplicate compound') generated.claimBindings.push(structuredClone(extra));
+    if (variant === 'overlapping sentence') generated.claimBindings.push({...extra, span: remedy});
+    if (variant === 'overlapping compound') {
+      generated.sections[0].markdown += ' Keep this condition.';
+      generated.claimBindings.push({...extra, span: `${remedy} ${draft.claimBindings[5].span}`});
+    }
+    if (variant === 'partial overlap') generated.claimBindings.push({...extra, span: 'different versions. Remedy: stop collecting'});
+    if (variant === 'ambiguous occurrence') generated.sections[0].markdown += `\n\n${extra.span}`;
+    if (variant === 'repeated child') generated.sections[0].markdown += `\n\n${problem}`;
+    if (variant === 'product assertion') extra.productClaimId = 'not-approved';
+    if (variant === 'unknown fact') extra.sourceFactIds = ['unknown-fact'];
+    if (variant === 'duplicate fact') extra.sourceFactIds.push('fixture-section-1');
+    generated.claimBindings.push(extra);
+    const original = structuredClone(generated);
+    const client = new FixtureStructuredClient([generated, (request: StructuredOutputRequest) => {
+      expect((request.input as {draft: GeneratedDraftV2}).draft).toEqual(original);
+      expect(request.input).not.toHaveProperty('draftNormalization');
+      return {...approvedCritique, editorialReview: acceptedEditorial(generated), supportEvaluations: supportedBindings(generated)};
+    }, generated, verifyRequest(generated)]);
+    const result = await createStructuredDrafter({client, mediaAllowlist: [media]}).draft(context);
+    expect(result.status).toBe('blocked');
+    expect(generated).toEqual(original);
+  });
+
+});
+
 describe('required editorial acceptance at the consumer boundary', () => {
   it('does not accept a supported draft without an independent editorial receipt', async () => {
     const client = new FixtureStructuredClient([draft, {...approvedCritique, editorialReview: undefined}]);

@@ -644,6 +644,62 @@ function generatedClaimSentences(draft: GeneratedDraftV2): Array<{ location: str
     .map((span) => ({ location, span })));
 }
 
+/** Compile exact compound metadata only; source relationships still require a
+ * fresh independent review of every resulting sentence. Never change prose. */
+export function canonicalizeCompoundClaimBindings(context: DraftingContext, draft: GeneratedDraftV2) {
+  const unchanged = {draft, splitBindingIndices: [] as number[]};
+  if (!GeneratedDraftV2Schema.safeParse(draft).success) return unchanged;
+  // Reuse the coverage validator's canonical locations and rendered spans.
+  const locations = new Map<string, string[]>();
+  for (const {location, span} of generatedClaimSentences(draft)) {
+    const spans = locations.get(location) ?? [];
+    spans.push(span);
+    locations.set(location, spans);
+  }
+  const selected = new Set(draft.sourceReferences.map(source => source.sourceId));
+  const facts = new Set(context.sourceFacts.filter(source => selected.has(source.id)).flatMap(source => source.facts.map(fact => fact.id)));
+  const splitBindingIndices: number[] = [];
+  const claimBindings = draft.claimBindings.flatMap((binding, bindingIndex) => {
+    const visible = locations.get(binding.location);
+    if (!visible || binding.productClaimId !== null || visible.includes(binding.span)
+      || new Set(binding.sourceFactIds).size !== binding.sourceFactIds.length
+      || binding.sourceFactIds.some(id => !facts.has(id))) return [binding];
+    const parts = splitClaimSentences(binding.span);
+    if (parts.length < 2 || parts.join(' ') !== binding.span) return [binding];
+    const starts = visible.flatMap((_span, start) => parts.every((span, offset) => visible[start + offset] === span) ? [start] : []);
+    if (starts.length !== 1 || parts.some(span => visible.filter(text => text === span).length !== 1)) return [binding];
+    const rendered = visible.join(' ');
+    const start = visible.slice(0, starts[0]).reduce((offset, span) => offset + span.length + 1, 0);
+    const end = start + binding.span.length;
+    // Compare against the original inventory, so two overlapping compounds
+    // cannot become eligible merely because one was already split. Partial
+    // bindings also reserve their exact rendered occurrence and fail closed.
+    const overlaps = draft.claimBindings.some((other, index) => {
+      if (index === bindingIndex) return false;
+      // Match generatedLocationValue's numeric index resolution. An aliased
+      // binding at this field stays malformed and prevents canonicalization.
+      const otherLocation = other.location.replace(/\/(\d+)(?=\/)/gu, (_match, index: string) => `/${Number(index)}`);
+      if (otherLocation !== binding.location) return false;
+      if (other.location !== binding.location) return true;
+      // A whole rendered span such as "Review" occupies its own sentence, not
+      // the same substring in "Review the recording.". Only partial/compound
+      // metadata needs the conservative substring fallback below.
+      if (visible.includes(other.span)) return parts.includes(other.span);
+      for (let offset = rendered.indexOf(other.span); offset !== -1; offset = rendered.indexOf(other.span, offset + 1)) {
+        if (offset < end && offset + other.span.length > start) return true;
+      }
+      return false;
+    });
+    if (overlaps) return [binding];
+    splitBindingIndices.push(bindingIndex);
+    return parts.map(span => ({...binding, span, sourceFactIds: [...binding.sourceFactIds]}));
+  });
+  if (!splitBindingIndices.length) return unchanged;
+  const canonical = {...draft, claimBindings};
+  if (!GeneratedDraftV2Schema.safeParse(canonical).success) return unchanged;
+  return {draft: canonical, splitBindingIndices};
+}
+
 function referenceCheckContext(context: DraftingContext, draft: GeneratedDraftV2, bindingIndex: number) {
   const binding = draft.claimBindings[bindingIndex];
   // Visible prose order spans field boundaries: a heading, prior section or

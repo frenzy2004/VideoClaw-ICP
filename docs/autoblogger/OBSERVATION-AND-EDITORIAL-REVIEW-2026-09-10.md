@@ -65,3 +65,33 @@ The source reader now sends those two fixed public headers on every request, inc
 The unwrapped production reader subsequently fetched `https://www.techsmith.com/blog/video-editing-workflow/` and `https://www.techsmith.com/blog/how-to-edit-a-video/` with HTTP 200. It extracted 12 / 10 passages (7,810 / 7,970 characters), respectively; each scored 2 under the unchanged source-topic screen. This is live retrieval proof, not an article approval or a successful historical worker run.
 
 Latest verification: **2,557 tests across 58 files pass**, zero failures/skips; lint, typecheck and build pass. Scoped independent review found no actionable issue in the header change. The next diagnostic may reuse saved SERP observations and retrieve source bodies afresh without altering persistent worker state; it must be reported separately from uninterrupted fresh-worker proof.
+
+## Source retrieval through new generation — component diagnostic
+
+`editing-workflow-component-2026-09-10` replayed the exact saved SERP queries through the real researcher and retrieved page bodies afresh. No actor was started and no manual source facts were supplied. Automatic selection retained four relevant documents, including two TechSmith authorities. FAQ preparation, a new GPT-5.5 article generation and an independent critique each returned HTTP 200.
+
+The draft was correctly blocked before repair or native QA. Six troubleshooting paragraphs and one FAQ contained two rendered sentences in a single citation record. Coverage checks require sentence-level records, and the bounded repair correctly refused that invalid baseline. Three source-use overages were also present. The model's positive critique did not override those checks. The failed worker attempt remains failed; this diagnostic did not mutate state.
+
+## Exact citation-metadata compilation
+
+The compiler now splits a combined record only when its text is an exact, unique, contiguous sequence of complete rendered sentences at one canonical location. It uses the existing Markdown coverage parser. It preserves every authored character and the ordered source-fact IDs; partial, ambiguous, overlapping, reordered, unknown-fact and product-assertion records remain unchanged and fail existing checks. Schema limits still apply.
+
+Compilation happens before independent critique. The request carries the new sentence manifest, current editorial hash, original/parsed/canonical draft hashes and the split indices. An old verdict cannot approve the resulting records. The existing redundant-FAQ-heading normalization remains in the auditable chain. No repair pass, model-call allowance, evidence requirement or source-use ceiling was added.
+
+An independent editorial read also identified an approval checkpoint used by the worked example but not established in the main instructions. The review instruction now explicitly traces prerequisites, order, ownership and locked states across instructions and examples. That instruction is not itself evidence of article quality; the fresh reviewer must assess the actual copy.
+
+`compound-binding-component-2026-09-10` is the bounded diagnostic for this correction: it reuses the unedited original generation, then requests a fresh critique, at most one repair and a fresh final verification. It may run native QA only after all content gates pass. Its receipts must remain labeled **saved-generation component diagnostic**, never an uninterrupted fresh worker run.
+
+The new critique reviewed all 65 canonical sentence records and rejected the original copy for both the undefined picture-lock gate and inconsistent AI/fine-cut order. The one bounded repair returned HTTP 200 and reached fresh final verification. This proves the new metadata reaches an independent semantic review and the repair path; it does not yet prove final acceptance.
+
+Independent code review found two edge cases: numeric location aliases could evade overlap detection, and a separate complete `Review` label could be mistaken for a substring overlap. Both now have consumer regressions and fixes. The reviewer reran the original reproductions and confirmed closure. Public text is unchanged by normalization, stale reviews remain invalid, and partial bindings still fail closed.
+
+Current full-suite JSON receipt reports **2,583 / 2,583 passing tests**, no failures or pending tests; lint, typecheck and build pass. An earlier concurrent full-suite run reported one failure in its truncated output; the subsequent isolated run passed without a test-policy change. No diagnosis of that transient result is claimed. The saved-generation test remains an explicit local diagnostic, not an optional CI test dependent on private files. Runtime secrets are absent from the diff.
+
+## Bounded component result — source-use rejection retained
+
+The final verifier returned HTTP 200 and accepted all three editorial criteria with no new issues. A separate editorial read, performed without viewing that verdict, found no blocking copy issue; it suggested clarifying the narration stage as a nonblocking improvement. Neither judgment is publication approval.
+
+Code still rejected the repaired draft. Reviewed source-derived counts were 166 words for the Lucidlink workflow page, 153 for the TechSmith collaboration page and 259 for the TechSmith workflow page. Repair ceilings were respectively 120, 72 and 120; the last page also exceeded the 180-word final ceiling. Eight unchanged bindings changed from `original_guidance` in the initial review to `source_claim` in final review. Their wording combined or condensed source procedures, so the stricter judgment cannot be waived merely because the earlier critic used a different label. No accounting defect or safe exemption was established.
+
+The diagnostic spent exactly three new Responses calls: critique, one repair and final verification. It reused the original generation, made no actor starts, did not enter native QA, and produced no validated Markdown artifact. Raw failed receipts and persistent state remain unchanged (26 runs / 44 failure records, state SHA-256 `6dd9f7f5893b9e6149695cfe3f3adcb6ab9e71384d0be48b45a23e7ca6b0691e`). The second isolated full-suite confirmation again passed all 2,583 tests without skips. The citation-metadata and editorial-review fixes are verified; uninterrupted fresh article-to-native-QA proof remains outstanding.
