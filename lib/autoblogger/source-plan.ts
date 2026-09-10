@@ -61,8 +61,8 @@ type SupportEvaluation = {
   kind: 'source_claim' | 'original_guidance' | 'original_example' | 'product_claim';
 };
 
-// One allowance per page, not per occurrence. Unused shares can move to other
-// regions in this priority order; direct answers and body coverage come first.
+// Initial composition guidance only. Repair must instead honor the current
+// draft's non-growing ceiling and preserve space for required public fields.
 const REPAIR_REGION_WORDS = { directAnswer: 20, body: 60, headings: 5, faq: 20, description: 5, graphic: 10, other: 0 };
 type RepairRegion = keyof typeof REPAIR_REGION_WORDS;
 type RepairLocation = {
@@ -81,9 +81,48 @@ function repairRegion(location: string): RepairRegion {
   return 'other'; // Unknown public fields still spend the same page allowance.
 }
 
+function allocateRepairWords(locations: RepairLocation[], draft: GeneratedDraftV2,
+  current: Map<number, SupportEvaluation>, ceiling: number) {
+  for (const location of locations) {
+    const charged = new Set(location.bindings.map(binding => binding.bindingIndex));
+    const retainedOtherWords = draft.claimBindings.reduce((sum, binding, index) =>
+      binding.location === location.location && !charged.has(index) && current.get(index)?.supported
+        && ['original_guidance', 'original_example'].includes(current.get(index)!.kind)
+        ? sum + (binding.span.match(/[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)*/gu)?.length ?? 0) : sum, 0);
+    // These are composition reservations, not approval or new truth gates.
+    // Preserve the description: a word allowance cannot ensure its character
+    // minimum. Native checks still decide actual lengths and readable answers.
+    const requiredWords = location.region === 'directAnswer' ? 40
+      : location.region === 'faq' ? 12
+      : location.region === 'description' ? location.derivedWords + retainedOtherWords
+      : location.region === 'body' ? 0
+      : location.location.endsWith('/detail') ? 4
+      : location.location.endsWith('/alt') ? 3 : 1;
+    location.targetDerivedWords = Math.min(location.derivedWords, Math.max(0, requiredWords - retainedOtherWords));
+  }
+  const requiredDerivedWords = locations.reduce((sum, location) => sum + location.targetDerivedWords, 0);
+  let remaining = ceiling - requiredDerivedWords;
+  // A genuinely impossible reservation stays explicit. Never advertise an
+  // empty required answer as a feasible repair or increase the source ceiling.
+  const allocationFeasible = remaining >= 0;
+  for (const region of ['body', 'faq', 'directAnswer', 'headings', 'graphic', 'description', 'other']) {
+    const entries = locations.filter(location => location.region === region);
+    while (remaining > 0 && entries.some(location => location.targetDerivedWords < location.derivedWords)) {
+      for (const location of entries) {
+        if (remaining > 0 && location.targetDerivedWords < location.derivedWords) {
+          location.targetDerivedWords++;
+          remaining--;
+        }
+      }
+    }
+  }
+  for (const location of locations) location.removeDerivedWords = location.derivedWords - location.targetDerivedWords;
+  return { allocationFeasible, requiredDerivedWords };
+}
+
 /** Read-only advice for exactly this reviewed draft; "ready" means usable
  * accounting, never draft approval. No text, citations or classifications are
- * changed. Reuse candidates/anchors do not establish claim or quote support;
+ * changed. Composition reservations do not establish claim or quote support;
  * every edited binding needs independent review and the unchanged final gates.
  * Rejected exemptions remain disputed, not derived. An unsafe page's allocations
  * are incomplete until those bindings are repaired and independently reviewed.
@@ -140,46 +179,23 @@ export function buildSourceRepairPlan(context: DraftingContext, draft: Generated
       byLocation.set(binding.location, contribution);
     }
     const locations = [...byLocation.values()];
+    const targetDerivedWords = Math.min(page.derivedWords, TARGET_SOURCE_DERIVED_WORDS);
+    const allocation = allocateRepairWords(locations, draft, current, targetDerivedWords);
     const regions = (Object.keys(REPAIR_REGION_WORDS) as RepairRegion[]).map(region => {
-      const derivedWords = locations.filter(location => location.region === region).reduce((sum, location) => sum + location.derivedWords, 0);
-      return { region, derivedWords, targetDerivedWords: Math.min(derivedWords, REPAIR_REGION_WORDS[region]), removeDerivedWords: 0 };
+      const entries = locations.filter(location => location.region === region);
+      return { region,
+        derivedWords: entries.reduce((sum, location) => sum + location.derivedWords, 0),
+        targetDerivedWords: entries.reduce((sum, location) => sum + location.targetDerivedWords, 0),
+        removeDerivedWords: entries.reduce((sum, location) => sum + location.removeDerivedWords, 0) };
     });
-    let remaining = TARGET_SOURCE_DERIVED_WORDS - regions.reduce((sum, region) => sum + region.targetDerivedWords, 0);
-    // First cover existing demand from unused shares, then restore any unused
-    // regional allowance. Targets total 120 even on empty/under-budget pages.
-    for (const demand of ['current', 'reserve']) {
-      for (const region of regions) {
-        const desired = demand === 'current' ? region.derivedWords : REPAIR_REGION_WORDS[region.region];
-        const extra = Math.min(remaining, Math.max(0, desired - region.targetDerivedWords));
-        region.targetDerivedWords += extra;
-        remaining -= extra;
-      }
-    }
-    for (const region of regions) {
-      region.removeDerivedWords = Math.max(0, region.derivedWords - region.targetDerivedWords);
-      let remove = region.removeDerivedWords;
-      // Prioritize the largest concentration; equal totals use binding order.
-      const concentrated = locations.filter(location => location.region === region.region)
-        .sort((a, b) => b.derivedWords - a.derivedWords || a.bindings[0].bindingIndex - b.bindings[0].bindingIndex);
-      for (const location of concentrated) {
-        location.removeDerivedWords = Math.min(remove, location.derivedWords);
-        location.targetDerivedWords -= location.removeDerivedWords;
-        remove -= location.removeDerivedWords;
-      }
-    }
-    return { ...page, targetDerivedWords: TARGET_SOURCE_DERIVED_WORDS, disputedWords, disputedLocations,
+    return { ...page, ...allocation, targetDerivedWords, disputedWords, disputedLocations,
       unsafe: disputedLocations.length > 0,
-      availableDerivedWords: Math.max(0, TARGET_SOURCE_DERIVED_WORDS - page.derivedWords - disputedWords),
+      availableDerivedWords: 0,
       removeDerivedWords: Math.max(0, page.derivedWords - TARGET_SOURCE_DERIVED_WORDS), regions, locations };
   });
-  const anchors = buildSourcePlan(context).sources;
-  const reuseCandidates = sources.map((page, index) => ({
-    sourceIds: page.sourceIds, url: page.url, derivedWords: page.derivedWords,
-    availableDerivedWords: page.availableDerivedWords,
-    anchorFactIds: page.unsafe ? [] : anchors[index].anchorFactIds,
-  })).filter(page => page.availableDerivedWords > 0 && page.anchorFactIds.length > 0)
-    .sort((a, b) => a.derivedWords - b.derivedWords || sourcePageIdentity(a.url).localeCompare(sourcePageIdentity(b.url)));
-  return { status: 'ready' as const, findings, reviewBindings, unsupportedBindingIndices, sources, reuseCandidates };
+  // Keep the response shape, but do not suggest transferring claims to a source
+  // whose reviewed count and permitted fact IDs are locked by repairPolicy.
+  return { status: 'ready' as const, findings, reviewBindings, unsupportedBindingIndices, sources, reuseCandidates: [] };
 }
 
 /** Nonblocking sensitivity diagnostic, independent of critic classification.

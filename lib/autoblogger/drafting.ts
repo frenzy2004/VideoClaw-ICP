@@ -395,6 +395,19 @@ the bound facts, and not passed off as sourced facts, real events, or proven out
 A recommendation heading or scoped introduction can establish original-guidance
 context for subsequent instructions; do not demand an "Original recommendation:"
 prefix on every sentence. Hypothetical examples still need visible identification.
+Evaluate mixed spans clause by clause before choosing their single kind. A visibly
+original instruction can be supported as advice by relevant context without a fact
+expressly recommending that action. But factual premises embedded in advice (for
+example, "do this because most buyers behave this way") require evidence for that
+premise, including its prevalence or causal qualifier. A guidance heading cannot
+excuse that assertion. Identify the exact unsupported proposition in the rationale;
+do not invent a supporting fact or reject an original action merely for being absent
+from the cited facts. Named-source recommendations require explicit support for the
+attribution. Assess derivation separately: an imperative or worksheet heading does
+not turn a close paraphrase of source advice into original guidance. If a span mixes
+source paraphrase/factual claims with original advice, choose source_claim and count
+the complete span conservatively, but apply the appropriate support test to each
+clause. Use original_guidance only when the span actually contributes original advice.
 Check reader-facing quality too: reject a description that repeats the title or
 fails to explain the article's practical help, and reject repetitive process labels
 or disclaimers. Recommend restructuring into scoped guidance rather than removing
@@ -474,9 +487,19 @@ Use repairPolicy's location bounds and per-source ceilings. A source below the
 120-word planning target may NOT grow; a source above it must be reduced to 120.
 The independent verifier recalculates derivation for the whole article, including
 FAQ, metadata and graphic text. Shorter wording alone does not establish support.
-sourceRepairPlan helps locate concentrations; its reuse suggestions grant no new
+sourceRepairPlan helps locate concentrations; its reservations grant no new
 edit or citation permissions. Cumulative source cuts may affect several explicitly
 unlocked locations, but never unrelated sections or source inventories.
+For an over-budget source, supported repetitions at unlocked locations are affected
+text too: retaining them all does not resolve its cumulative budget issue. Use each
+sourceRepairPlan location target to plan the complete set of cuts before responding.
+Reserve useful direct/FAQ answers before repeated source explanation in the body.
+If allocationFeasible is false, those required reservations exceed the locked source
+ceiling; do not claim a feasible plan, raise that ceiling, or empty a required answer.
+Count an entire mixed span as source-derived when it includes factual/source-paraphrase
+clauses; a short original recommendation added to it does not exempt the span. An
+original action can use contextual grounding, but any empirical premise or named
+source attribution inside that advice still needs explicit evidence.
 Audit all bindings; the final independent review checks every assertion, including
 unchanged ones. Do not add self-approval, unsupported product claims, secrets,
 research-process boilerplate or links outside the supplied inventory.
