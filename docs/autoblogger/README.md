@@ -6,7 +6,7 @@ This worker is a controlled research-and-drafting system. It does not publish ar
 
 The initial 250-topic research library is an input, not a quota or publication gate. Each run scans at most 50 candidates, deeply checks at most 10, and produces at most 3 drafts with no more than 2 from one ICP.
 
-Latest checkpoint: [source retrieval corrections and live reader proof](SOURCE-RETRIEVAL-2026-09-11.md), with **2,629 tests plus lint/typecheck/build** passing. Closed word-form matching and a scoped first-party guide rule restore automatic selection of three actual page bodies. State has 27 runs / 46 failure records. One uninterrupted fresh article-to-native-QA proof remains outstanding; no article is approved by these tests.
+Latest checkpoint: [source retrieval corrections and live reader proof](SOURCE-RETRIEVAL-2026-09-11.md), with **2,629 tests plus lint/typecheck/build** passing. Closed word-form matching and a scoped first-party guide rule restore automatic selection of three actual page bodies. A subsequent buyer-intent run exposed a remaining contextual-source admission problem; state has 28 runs / 48 failure records. One uninterrupted fresh article-to-native-QA proof remains outstanding; no article is approved by these tests.
 
 Previous work: [observation admission, exact sentence citations and whole-article review](OBSERVATION-AND-EDITORIAL-REVIEW-2026-09-10.md). Observed FAQs reach mandatory semantic preparation, citation metadata is normalized before fresh independent review, and both reviews require current-draft editorial judgments. The saved-generation diagnostic passed editorial review but failed source-use budgets. Earlier checkpoints below retain their original test counts and failed-run history.
 
