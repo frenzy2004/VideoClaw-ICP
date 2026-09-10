@@ -33,7 +33,7 @@ import type {
   Publisher,
   PublisherOrigin,
 } from './publisher';
-import { ResearchInspectionError, selectRelevantPaaQuestions, type ResearchBatch, type ResearchResult, type ShallowResearchBatch, type ShallowResearchResult } from './research';
+import { ResearchInspectionError, rankObservedPaaQuestions, type ResearchBatch, type ResearchResult, type ShallowResearchBatch, type ShallowResearchResult } from './research';
 import {
   buildIncrementalQueue,
   candidateIdentityList,
@@ -384,6 +384,9 @@ export function createAutobloggerWorker(options: AutobloggerWorkerOptions) {
   return {
     async execute(input: { command: AutobloggerCommand; runId: string }): Promise<AutobloggerRunReport> {
       if (!/^[A-Za-z0-9][A-Za-z0-9._-]{0,159}$/u.test(input.runId)) throw new Error('runId is invalid.');
+      if (input.command !== 'research' && typeof options.drafter.prepareEvidence !== 'function') {
+        throw new Error('Article runs require body-backed semantic FAQ evidence preparation before drafting.');
+      }
       const mode: RunMode = input.command === 'pilot' ? 'manual_pilot' : 'scheduled';
       const startedAt = now().toISOString();
       const report = emptyReport(input.command, input.runId, mode, startedAt);
@@ -557,8 +560,11 @@ export function createAutobloggerWorker(options: AutobloggerWorkerOptions) {
           state = { ...state, provenance: { ...state.provenance, [fingerprint]: {
             ...compactResearchProvenance(result.provenance), keyword: enrichment.provenance,
           } } };
-          if (result.evidence.faqQuestions.length !== 3) throw new Error('Deep inspection requires exactly three relevant People Also Ask questions.');
-          selectRelevantPaaQuestions(result.candidate.primaryKeyword, result.evidence.faqQuestions);
+          if (result.evidence.faqQuestions.length !== 3) throw new Error('Deep inspection requires exactly three observed People Also Ask candidates.');
+          rankObservedPaaQuestions(result.candidate.primaryKeyword, result.evidence.faqQuestions);
+          if (result.evidence.faqQuestions.some(question => !result.evidence.signals.peopleAlsoAsk.includes(question))) {
+            throw new Error('Preliminary FAQ candidates must be exact observed People Also Ask questions.');
+          }
           deep.push({ result, shallow: ranked.observation, enrichment, score: ranked.score + deepEvidenceScore(result) });
         } catch (error) {
           if (error instanceof ResearchInspectionError) {
@@ -640,8 +646,9 @@ export function createAutobloggerWorker(options: AutobloggerWorkerOptions) {
         const fingerprints = candidateFingerprints(candidate);
         try {
           const initialContext = options.buildDraftContext({ result: item.result, shallow: item.shallow, metrics: item.enrichment.metrics });
-          const context = options.drafter.prepareEvidence
-            ? await options.drafter.prepareEvidence(initialContext) : initialContext;
+          // Startup refuses article runs without this stage; research-only runs
+          // return earlier. Lexical ranking never replaces semantic preparation.
+          const context = await options.drafter.prepareEvidence!(initialContext);
           const drafting = await options.drafter.draft(context);
           if (drafting.status !== 'ready') {
             const findingCodes = drafting.reason === 'content_safety_failed'

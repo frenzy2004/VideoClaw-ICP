@@ -90,6 +90,7 @@ function fixture(input: {
   failScan?: boolean;
   failDraft?: boolean;
   prepareEvidence?: (context: DraftingContext) => Promise<DraftingContext>;
+  omitPreparation?: boolean;
   blockedFindings?: DraftSafetyFinding[];
   maxDrafts?: 1 | 2 | 3;
   targetCandidateFingerprint?: string;
@@ -175,7 +176,7 @@ function fixture(input: {
       },
     },
     drafter: {
-      ...(input.prepareEvidence ? {prepareEvidence: input.prepareEvidence} : {}),
+      ...(input.omitPreparation ? {} : {prepareEvidence: input.prepareEvidence ?? (async context => context)}),
       draft: async (context) => {
         if (input.failDraft) throw new Error('temporary model timeout');
         if (input.blockedFindings) return { status: 'blocked' as const, reason: 'content_safety_failed' as const, findings: input.blockedFindings };
@@ -231,6 +232,35 @@ function fixture(input: {
 }
 
 describe('persistent autoblogger worker', () => {
+  it('refuses article runs without an evidence preparer before paid work or reservations', async () => {
+    const f = fixture({omitPreparation: true});
+    await expect(f.worker.execute({command: 'pilot', runId: 'missing-evidence-preparer'})).rejects.toThrow(/evidence preparation/i);
+    expect(f.counters).toMatchObject({scanned: 0, enriched: 0, drafted: 0, validated: 0, opened: 0, saved: 0});
+    expect(f.getState().manualPilot).toBeNull();
+  });
+
+  it('sends nonliteral observed questions to semantic preparation but never drafts when it refuses', async () => {
+    const questions = ['What is the best video testimonial software?', 'How do I record video testimonials?', 'Are video testimonials effective?'];
+    const f = fixture({backlog: [{...candidate(0), primaryKeyword: 'video testimonial software'}],
+      observe: item => ({...shallow(item), peopleAlsoAsk: questions}),
+      prepareEvidence: async () => {throw new Error('Insufficient body support for this buyer decision');}});
+    const report = await f.worker.execute({command: 'pilot', runId: 'semantic-preparation-refusal'});
+    expect(report.counts).toMatchObject({deepInspected: 1, eligible: 1, drafted: 0, validated: 0, pullRequestsOpened: 0});
+    expect(report.failures).toContainEqual(expect.objectContaining({code: 'candidate_failed', detail: expect.stringContaining('Insufficient body support')}));
+    expect(report.artifacts).toEqual([]);
+    expect(f.counters.drafted).toBe(0);
+  });
+
+  it('rejects an unobserved preliminary question before semantic preparation', async () => {
+    const f = fixture({backlogCount: 1, evidenceOverrides: {faqQuestions: [
+      ...shallow(candidate(0)).peopleAlsoAsk.slice(0, 2), 'What is the invented founder video evidence topic 0?',
+    ]}});
+    const report = await f.worker.execute({command: 'pilot', runId: 'unobserved-preliminary-question'});
+    expect(report.counts).toMatchObject({deepInspected: 1, eligible: 0, drafted: 0, validated: 0});
+    expect(report.failures).toContainEqual(expect.objectContaining({code: 'deep_inspection_failed'}));
+    expect(report.artifacts).toEqual([]);
+  });
+
   it('retains prepared FAQ selection in artifact attribution instead of the preliminary choices', async () => {
     let preparation: DraftingContext['faqEvidencePlan'];
     const f = fixture({backlogCount: 1, publicationEnabled: false, prepareEvidence: async context => {
@@ -896,15 +926,20 @@ describe('persistent autoblogger worker', () => {
       if (command === 'pilot') expect(getState().manualPilot?.status).toBe('prepared');
     });
 
-    it.each(['generic', 'duplicate'])('still blocks %s deep PAA before drafting, within ten slots', async kind => {
+    it.each(['generic', 'duplicate'])('never drafts from %s PAA: unique observations require semantic acceptance', async kind => {
       const f=fixture({backlogCount:21, observe:item=>({...shallow(item),peopleAlsoAsk:kind==='generic'
         ? ['Which video codec is best?', 'What are payroll taxes?', 'How does video compression work?']
-        : Array(3).fill(`What is ${item.primaryKeyword}?`)})});
+        : Array(3).fill(`What is ${item.primaryKeyword}?`)}),
+        prepareEvidence: async () => {throw new Error('Observed questions do not support this candidate intent');}});
       const report=await f.worker.execute({command,runId:`deep-paa-${command}-${kind}`});
       expect(f.counters.inspected).toHaveLength(10);
-      expect(report.counts).toMatchObject({deepInspected:10,eligible:0,drafted:0,validated:0,pullRequestsOpened:0});
+      expect(report.counts).toMatchObject({deepInspected:10,
+        eligible: kind === 'generic' && command !== 'research' ? 10 : 0,
+        drafted:0,validated:0,pullRequestsOpened:0});
       expect(report.artifacts).toEqual([]);
-      expect(report.failures.filter(failure=>failure.code==='deep_inspection_failed')).toHaveLength(10);
+      expect(report.failures.filter(failure=>failure.code==='deep_inspection_failed')).toHaveLength(kind === 'duplicate' ? 10 : 0);
+      expect(report.failures.filter(failure=>failure.code==='candidate_failed')).toHaveLength(
+        kind === 'generic' && command !== 'research' ? command === 'pilot' ? 1 : 3 : 0);
       expect(f.getState().manualPilot).toBeNull();
     });
   });

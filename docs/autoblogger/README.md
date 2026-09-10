@@ -6,6 +6,8 @@ This worker is a controlled research-and-drafting system. It does not publish ar
 
 The initial 250-topic research library is an input, not a quota or publication gate. Each run scans at most 50 candidates, deeply checks at most 10, and produces at most 3 drafts with no more than 2 from one ICP.
 
+Latest work: [observation admission and whole-article review](OBSERVATION-AND-EDITORIAL-REVIEW-2026-09-10.md). Observed FAQs now reach semantic preparation without a full-keyword lexical gate; article runs cannot skip that preparation. Both independent reviews require current-draft editorial judgments. Earlier checkpoints below retain their original test counts and failed-run history.
+
 Current checkpoint: [bounded PAA completion and failure receipts](PAA-COMPLETION-PROOF-2026-09-10.md), with **2,530 tests plus lint/typecheck/build** passing. Deep discovery can complete an initial zero-to-two-question pool; three relevant distinct questions remain mandatory before drafting. Failed attempts retain safe completed support-search receipts and count toward the ten-slot limit; malformed receipts cannot strand a lease. A separate live research-only diagnostic retrieved four pages and revealed a creation-alias duplicate, now rejected without rewriting observations. The latest fresh examples worker run remains failed; no retry reset occurred.
 
 The latest fresh software-selection worker run entered deep discovery, then failed for insufficient relevant FAQs before OpenAI or drafting. Its support receipt and one attempted deep slot were saved correctly; state is 24 runs / 40 failures with no pilot consumption. This is safe rejection, not a completed article.

@@ -29,7 +29,8 @@ import { isStrictIsoDateTime } from './date-time';
 import { containsSecretLikeValue } from './secrets';
 import { planFaqEvidence } from './faq-evidence';
 import { prepareFaqEvidence, validateFaqEvidencePlan } from './faq-preparation';
-import { rankRelevantPaaQuestions } from './research';
+import { rankObservedPaaQuestions } from './research';
+import { EDITORIAL_QUALITY_RULES, EDITORIAL_REVIEW_RULES, EDITORIAL_REVIEW_JSON_SCHEMA, editorialReviewContext, editorialReviewFindings } from './editorial-review';
 import { buildRepairPolicy, inspectRepairDelta, inspectRepairSourceGrowth } from './repair-policy';
 import { createSentenceRepairRequest, applySentenceRepair } from './repair-patch';
 import { buildSourcePlan, buildSourceRepairPlan, measurePotentialSourceUse, measureReviewedSourceUse, sourceAllocationFindings, MAX_SOURCE_DERIVED_WORDS, TARGET_SOURCE_DERIVED_WORDS } from './source-plan';
@@ -90,6 +91,8 @@ const DraftCritiqueV1Schema = z.object({
   supportEvaluations: z.array(BindingSupportEvaluationSchema).default([]),
   // Old receipts remain readable; omission can never resolve a flagged reference.
   referenceReviews: z.array(ProductReferenceReviewSchema).optional(),
+  // Saved legacy receipts remain parseable, but cannot establish editorial acceptance.
+  editorialReview: z.unknown().optional(),
 }).strict().superRefine((critique, context) => {
   if (critique.approved !== (critique.issues.length === 0)) {
     context.addIssue({
@@ -122,6 +125,7 @@ const DraftRepairVerificationV1Schema = z.object({
   newIssues: z.array(CritiqueIssueSchema),
   supportEvaluations: z.array(BindingSupportEvaluationSchema).default([]),
   referenceReviews: z.array(ProductReferenceReviewSchema).optional(),
+  editorialReview: z.unknown().optional(),
 }).strict().superRefine((verification, context) => {
   const evaluationIds = verification.evaluations.map(({ issueId }) => issueId);
   if (new Set(evaluationIds).size !== evaluationIds.length) {
@@ -162,6 +166,7 @@ export const DRAFT_CRITIQUE_V1_JSON_SCHEMA = {
     approved: { type: 'boolean' },
     supportEvaluations: BINDING_SUPPORT_EVALUATIONS_JSON_SCHEMA,
     referenceReviews: REFERENCE_REVIEWS_JSON_SCHEMA,
+    editorialReview: EDITORIAL_REVIEW_JSON_SCHEMA,
     issues: {
       type: 'array',
       items: {
@@ -178,7 +183,7 @@ export const DRAFT_CRITIQUE_V1_JSON_SCHEMA = {
       },
     },
   },
-  required: ['schemaVersion', 'approved', 'issues', 'supportEvaluations', 'referenceReviews'],
+  required: ['schemaVersion', 'approved', 'issues', 'supportEvaluations', 'referenceReviews', 'editorialReview'],
 } as const;
 
 export const DRAFT_REPAIR_VERIFICATION_V1_JSON_SCHEMA = {
@@ -189,6 +194,7 @@ export const DRAFT_REPAIR_VERIFICATION_V1_JSON_SCHEMA = {
     approved: { type: 'boolean' },
     supportEvaluations: BINDING_SUPPORT_EVALUATIONS_JSON_SCHEMA,
     referenceReviews: REFERENCE_REVIEWS_JSON_SCHEMA,
+    editorialReview: EDITORIAL_REVIEW_JSON_SCHEMA,
     evaluations: {
       type: 'array',
       items: {
@@ -218,7 +224,7 @@ export const DRAFT_REPAIR_VERIFICATION_V1_JSON_SCHEMA = {
       },
     },
   },
-  required: ['schemaVersion', 'approved', 'evaluations', 'newIssues', 'supportEvaluations', 'referenceReviews'],
+  required: ['schemaVersion', 'approved', 'evaluations', 'newIssues', 'supportEvaluations', 'referenceReviews', 'editorialReview'],
 } as const;
 
 export type MediaBlockingBrief = {
@@ -252,7 +258,8 @@ export type StructuredDrafterOptions = {
   mediaAllowlist: AllowlistedProductMedia[];
 };
 
-const ARTICLE_COMPOSITION_RULES = `Aim for about 900–1100 original, useful body words across directAnswer and sections,
+const ARTICLE_COMPOSITION_RULES = `${EDITORIAL_QUALITY_RULES}
+Aim for about 900–1100 original, useful body words across directAnswer and sections,
 excluding metadata, FAQ answers, graphics, bindings, and source inventory.
 Develop substantive supported explanations, practical recommendations, and clearly
 labelled hypothetical examples; do not pad, repeat, copy, or invent facts to hit length.
@@ -376,13 +383,17 @@ three supplied FAQ questions exactly and reference every used product claim.
 ${FIXED_CANDIDATE_RULES}
 ${ARTICLE_COMPOSITION_RULES}`;
 
-const SUPPORT_REVIEW_RULES = `${FIXED_CANDIDATE_RULES}
+const SUPPORT_REVIEW_RULES = `${EDITORIAL_REVIEW_RULES}
+${FIXED_CANDIDATE_RULES}
 customerTrigger is private caller-configured campaign metadata from candidate.icp,
 not an externally sourced claim. Code requires exact equality. Do not require an
 external citation for that field. This does not exempt competitorGap or public prose.
 FAQ preparation is a retrieval proposal, never approval. Independently check that
 all three FAQ questions address distinct relevant intents, that each answer directly
 answers its question, and that its cited body facts support its full meaning.
+Judge relevance against the candidate's primary keyword, intent and ICP yourself:
+observed pools may contain unrelated expansions, and ranking or prior selection
+cannot establish relevance or excuse an off-topic question with a supported answer.
 Exact excerpts in preparation are private anchors, not permission to quote them.
 Independently evaluate EVERY entry in bindingManifest in its full draft context,
 including headings, metadata, FAQ answers, and graphic text. Return exactly one
@@ -946,6 +957,7 @@ export function finalizeReviewedRepair(input: FinalizeReviewedRepairInput): Draf
   remainingFindings = inspectGeneratedDraft(context, repaired, verification.referenceReviews ?? []);
   remainingFindings.push(...repairVerificationFindings(originalIssues, verification));
   remainingFindings.push(...supportFindings(repaired, verification.supportEvaluations));
+  remainingFindings.push(...editorialReviewFindings(repaired, verification.editorialReview, [...originalIssues, ...verification.newIssues]));
   remainingFindings.push(...measureReviewedSourceUse(context.sourceFacts, repaired, verification.supportEvaluations).findings);
   if (remainingFindings.length > 0) {
     return {
@@ -979,7 +991,7 @@ export function createStructuredDrafter(options: StructuredDrafterOptions) {
         throw new Error('FAQ preparation requires safe allowlisted product media.');
       }
       if (context.faqEvidencePlan) return context;
-      const questions = rankRelevantPaaQuestions(
+      const questions = rankObservedPaaQuestions(
         context.candidate.primaryKeyword, context.evidence.signals.peopleAlsoAsk,
       ).slice(0, 9);
       return prepareFaqEvidence(context, options.client, questions);
@@ -1031,7 +1043,7 @@ export function createStructuredDrafter(options: StructuredDrafterOptions) {
         name: 'videoclaw_article_critique_v1',
         schema: DRAFT_CRITIQUE_V1_JSON_SCHEMA,
         system: CRITIQUE_SYSTEM,
-        input: { ...suppliedContext, draft: initial,
+        input: { ...suppliedContext, draft: initial, editorialContext: editorialReviewContext(initial),
           ...(normalized.audit ? {draftNormalization: {
             ...normalized.audit,
             receivedDraftHash: createHash('sha256').update(JSON.stringify(receivedDraft)).digest('hex'),
@@ -1046,8 +1058,13 @@ export function createStructuredDrafter(options: StructuredDrafterOptions) {
         };
       }
       deterministicFindings = inspectGeneratedDraft(context, initial, critique.referenceReviews ?? []);
+      const editorialFindings = editorialReviewFindings(initial, critique.editorialReview, critique.issues);
+      if (editorialFindings.some(finding => finding.code.startsWith('critique.editorial_'))) {
+        return {status: 'blocked', reason: 'content_safety_failed', findings: [...deterministicFindings, ...editorialFindings]};
+      }
       const bindingSupportFindings = supportFindings(initial, critique.supportEvaluations);
       const canMaterialize = deterministicFindings.length === 0;
+      deterministicFindings.push(...editorialFindings);
       const sourceUsage = measureReviewedSourceUse(context.sourceFacts, initial, critique.supportEvaluations);
       const potentialSourceUsage = measurePotentialSourceUse(context.sourceFacts, initial);
       deterministicFindings.push(...sourceUsage.findings);
@@ -1132,6 +1149,7 @@ export function createStructuredDrafter(options: StructuredDrafterOptions) {
           originalIssues: registry.verificationIssues,
           originalRepairTargets: repairTargets(context, initial, registry.verificationFindings),
           repairedDraft: repaired,
+          editorialContext: editorialReviewContext(repaired, initial),
           bindingManifest: bindingManifest(repaired),
           referenceManifest: productReferenceManifest(context, repaired),
         },

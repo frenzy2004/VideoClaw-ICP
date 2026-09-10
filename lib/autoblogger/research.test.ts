@@ -6,6 +6,7 @@ import {
   SERP_ACTOR_ID,
   createResearcher,
   runApifyActor,
+  rankObservedPaaQuestions,
   selectRelevantPaaQuestions,
 } from './research';
 import type { ApifyClient, ApifyRun } from './apify-client';
@@ -13,6 +14,70 @@ import { PAA_ACTOR_ID } from './paa';
 import { createSafeSourceChecker } from './sources';
 import { PRODUCTION_SOURCE_AUTHORITY_POLICIES } from './source-policy';
 const researchClock={nowMs:()=>Date.parse('2026-09-04T08:15:00.000Z')};
+
+describe('observed FAQ admission before semantic preparation', () => {
+  it('ranks real wording without rewriting, merging tool names or approving relevance', () => {
+    const questions = ['What are payroll taxes?', 'How do I record video testimonials?',
+      'How to make a testimonial video with Canvas?', 'How to make a testimonial video with Canva?',
+      'What is the best video testimonial software?'];
+    const ranked = rankObservedPaaQuestions('video testimonial software', questions);
+    expect(ranked[0]).toBe(questions[4]);
+    expect(ranked.at(-1)).toBe(questions[0]);
+    expect(new Set(ranked)).toEqual(new Set(questions));
+  });
+
+  it('excludes unsafe text and exact/creation aliases, preserving the first observation', () => {
+    const first = 'How to make a testimonial video?';
+    const other = ['Are video testimonials effective?', 'How do I record video testimonials?'];
+    const unsafe = ['', 'What is video\u0000?', 'What is video\u200b?', `What is ${'x'.repeat(501)}?`,
+      'What is video api_key=0123456789abcdef0123456789abcdef?'];
+    const ranked = rankObservedPaaQuestions('video testimonial software', [first, first.toUpperCase(),
+      'How to create a video testimonial?', ...unsafe, ...other]);
+    expect(new Set(ranked)).toEqual(new Set([first, ...other]));
+    expect(() => rankObservedPaaQuestions('video testimonial software', [first,
+      'How to create a video testimonial?', ...unsafe, other[0]])).toThrow(/three distinct observed/);
+  });
+  it('retains buyer questions without requiring them to repeat the commercial keyword suffix', async () => {
+    const candidate = {...candidates(1)[0], primaryKeyword: 'video testimonial software', title: 'Choose Video Testimonial Software'};
+    const exact = 'What is the best video testimonial software?';
+    const record = 'How do I record video testimonials?';
+    const effective = 'Are video testimonials effective?';
+    const urls = ['https://www.techsmith.com/blog/testimonial-videos/', 'https://vendor.example/testimonials'];
+    let query = '', starts = 0, reads = 0;
+    const apify: ApifyClient = {
+      startActor: async (actor, input) => {
+        expect(actor).toBe(SERP_ACTOR_ID);
+        starts++;
+        query = String(input.queries).trim().split('\n')[0];
+        return successfulRun('buyer-support-run', 'buyer-support-data');
+      },
+      getRun: async () => {throw new Error('Already complete');},
+      getDatasetItems: async () => [{searchQuery: {term: query, device: 'DESKTOP', page: 1, countryCode: 'US', languageCode: 'en'},
+        organicResults: [], relatedQueries: [], peopleAlsoAsk: [{question: record}, {question: effective}]}],
+      abortRun: async id => ({id, status: 'ABORTED'}),
+    };
+    const input = {candidate, suggestions: [candidate.primaryKeyword], relatedQueries: [], peopleAlsoAsk: [exact],
+      organicResults: urls.map(url => ({url, title: 'Testimonial recording', snippet: 'Observed page', resultType: 'article'})),
+      provenance: {discovery: {actorId: 'autocomplete', runId: 'discovery', datasetId: 'discovery', observedAt: '2026-09-04T08:01:00.000Z'},
+        serp: {actorId: SERP_ACTOR_ID, runId: 'primary', datasetId: 'primary-data', observedAt: '2026-09-04T08:01:00.000Z'}}};
+    const original = structuredClone(input);
+    const researcher = createResearcher({apify, execution: researchClock, sourceChecker: {
+      select: async () => {throw new Error('Body source retrieval required');},
+      selectWithContent: async (_urls, options) => {
+        reads++;
+        expect(options?.questions).toEqual([exact, record, effective]);
+        return {sources: urls.map((url, index) => ({originalUrl: url, finalUrl: url, authoritative: index === 0})), sourceDocuments: []};
+      },
+    }});
+    const result = (await researcher.inspect([input])).results[0];
+    expect(result.evidence.faqQuestions).toEqual([exact, record, effective]);
+    expect(result.paaObservations?.map(item => ({question: item.question, query: item.query, runId: item.runId})))
+      .toEqual([{question: record, query, runId: 'buyer-support-run'}, {question: effective, query, runId: 'buyer-support-run'}]);
+    expect(starts).toBe(1);
+    expect(reads).toBe(1);
+    expect(input).toEqual(original);
+  });
+});
 
 describe('bounded PAA completion during deep discovery', () => {
   const questions = ['How to make a testimonial video?', 'What is a testimonial video?', 'How long should a testimonial video be?'];
@@ -110,7 +175,7 @@ describe('testimonial creation aliases at the research boundary', () => {
         question: duration, query, runId: 'alias-support-run', datasetId: 'alias-support-data',
       })]);
     } else {
-      await expect(researcher.inspect([input])).rejects.toThrow(/three relevant/i);
+      await expect(researcher.inspect([input])).rejects.toThrow(/three distinct observed/i);
     }
     expect(starts).toBe(1);
     expect(sourceReads).toBe(hasDuration ? 1 : 0);
@@ -290,6 +355,28 @@ describe('missing PAA collector recovery', () => {
       };
     }
 
+    it('retains nonliteral candidate receipts through scan and inspect when a prior attempt filled the cap', async () => {
+      const buyer = {...candidate, primaryKeyword: 'video testimonial software'};
+      const exact = 'What is the best video testimonial software?';
+      const variants = ['How do I record video testimonials?', 'Are video testimonials effective?'];
+      const {researcher, requests} = boundary([exact], [
+        Array.from({length: 30}, (_, index) => `What are payroll tax rules for area ${index}?`), variants,
+      ], buyer);
+      const scanned = await researcher.scan([buyer]);
+      expect(requests).toHaveLength(2);
+      const result = scanned.results[0];
+      expect(result.paaObservations).toHaveLength(30);
+      const deep = (await researcher.inspect([result])).results[0];
+      expect(deep.evidence.faqQuestions).toEqual([exact, ...variants]);
+      for (const observed of [result, deep]) {
+        for (const [index, question] of variants.entries()) {
+          expect(observed.paaObservations?.find(item => item.question === question)).toMatchObject({
+            query: buyer.primaryKeyword, runId: 'paa-2', datasetId: 'paa-data-2', position: index + 1,
+          });
+        }
+      }
+    });
+
     it('recovers a missing topical FAQ in two bounded attempts and retains its exact observation at the cap', async () => {
       const initial = [...genericQuestions, adjacentQuestion];
       const { researcher, requests } = boundary(initial, [
@@ -317,14 +404,17 @@ describe('missing PAA collector recovery', () => {
         .toEqual([['paa-1', 'paa-data-1'], ['paa-2', 'paa-data-2']]);
     });
 
-    it('stops after two adjacent-only collections and still refuses inspection with fewer than three topical FAQs', async () => {
+    it('stops after two adjacent-only collections and retains provisional questions for semantic review', async () => {
       const initial = [...genericQuestions, adjacentQuestion];
       const { researcher, requests } = boundary(initial, [[adjacentQuestion], [adjacentQuestion]]);
       const scanned = await researcher.scan([candidate]);
       expect(requests).toHaveLength(2);
       expect(scanned.results[0].peopleAlsoAsk).toEqual(initial);
       expect(scanned.results[0].provenance.paaAttempts?.map(({ runId }) => runId)).toEqual(['paa-1', 'paa-2']);
-      await expect(researcher.inspect(scanned.results)).rejects.toThrow(/three relevant/i);
+      const deep = (await researcher.inspect(scanned.results)).results[0];
+      expect(deep.evidence.signals.peopleAlsoAsk).toEqual(initial);
+      expect(new Set(deep.evidence.faqQuestions)).toEqual(new Set(initial));
+      expect(deep.provenance.paaAttempts?.map(({ runId }) => runId)).toEqual(['paa-1', 'paa-2']);
     });
 
     it('uses sufficient observed SERP FAQs without starting the PAA collector', async () => {
@@ -338,7 +428,7 @@ describe('missing PAA collector recovery', () => {
       expect(scanned.results[0].peopleAlsoAsk).toEqual(initial);
     });
 
-    it.each([true, false])('recovers short video-topic questions without using generic filler (recovers=%s)', async recovers => {
+    it.each([true, false])('ranks short video-topic questions but leaves semantic acceptance to preparation (recovers=%s)', async recovers => {
       const videoCandidate = { ...candidate, primaryKeyword: 'video marketing' };
       const initial = ['What is video marketing?', 'What is AI video marketing?', 'What is the 3-3-3 rule in marketing?'];
       const third = 'What are examples of video marketing?';
@@ -346,7 +436,8 @@ describe('missing PAA collector recovery', () => {
       const scan = await researcher.scan([videoCandidate]);
       expect(requests).toHaveLength(recovers ? 1 : 2);
       if (!recovers) {
-        await expect(researcher.inspect(scan.results)).rejects.toThrow(/three relevant/i);
+        const deep = (await researcher.inspect(scan.results)).results[0];
+        expect(deep.evidence.faqQuestions).toEqual(initial);
         return;
       }
       const deep = (await researcher.inspect(scan.results)).results[0];
@@ -603,8 +694,8 @@ describe('missing PAA collector recovery', () => {
         serp: {actorId: SERP_ACTOR_ID, runId: 'original', datasetId: 'original-data', observedAt: '2026-09-04T08:01:00.000Z'}}};
     const before = JSON.stringify(shallow);
     const result = (await createResearcher({apify, sourceChecker: checker, execution: researchClock}).inspect([shallow])).results[0];
-    expect(result.evidence.faqQuestions).toEqual(supportedAlternative
-      ? ['How to do tutorial video?', 'How do I record my screen for a tutorial video?', 'What is a tutorial video?'] : questions.slice(0, 3));
+    // Retrieving a matching passage does not constitute semantic FAQ approval.
+    expect(result.evidence.faqQuestions).toEqual(questions.slice(0, 3));
     expect(result.evidence.signals.peopleAlsoAsk).toEqual(questions);
     expect(result.provenance.serp.runId).toBe('original');
     expect(starts).toBe(1);

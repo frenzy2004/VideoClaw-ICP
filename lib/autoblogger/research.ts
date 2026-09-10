@@ -19,7 +19,7 @@ import {
 import type { SafeSourceChecker, SourceDocument, SourceSelectionWithContent } from './sources';
 import { PAA_ACTOR_ID, normalizePaaRows, type PaaObservation } from './paa';
 import { isDiscoverySourceUrl, sourceDiscoveryQueries } from './source-policy';
-import { faqBodyMatches, faqQuestionKey } from './faq-evidence';
+import { faqQuestionKey } from './faq-evidence';
 import { containsSecretLikeValue } from './secrets';
 
 export const AUTOCOMPLETE_ACTOR_ID = 'automation-lab/google-autocomplete-scraper';
@@ -334,6 +334,38 @@ export function selectRelevantPaaQuestions(keyword: string, questions: string[])
   return rankRelevantPaaQuestions(keyword, questions).slice(0, 3);
 }
 
+/** Collection hints are not semantic acceptance. Retain real question variants
+ * for the body-anchored preparer instead of requiring every keyword noun in each
+ * FAQ. Neither ranking nor a successful source fetch approves an answer. */
+function observedPaaCandidates(keyword: string, questions: string[]): string[] {
+  const strong = new Map(rankPaaCandidates(keyword, questions).map((question, index) => [faqQuestionKey(question), index]));
+  // Light inflection folding affects ranking only: never question identity,
+  // exact observation membership, source matching or tool-name equivalence.
+  const hintTokens = (value: string) => normalizeKeyword(value).split(' ')
+    .filter(token => token.length > 1 && !QUESTION_STOP_WORDS.has(token))
+    .map(token => token.length > 4 && token.endsWith('s') ? token.slice(0, -1) : token);
+  const tokens = new Set(hintTokens(keyword));
+  const seen = new Set<string>();
+  return questions.filter(question => {
+    const key = faqQuestionKey(question);
+    if (!question.trim() || question.length > 500
+      || /[\u0000-\u001f\u007f-\u009f\p{Cf}]/u.test(question)
+      || containsSecretLikeValue(question) || seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  }).map((question, position) => ({
+    question, position, strong: strong.get(faqQuestionKey(question)),
+    overlap: new Set(hintTokens(question).filter(token => tokens.has(token))).size,
+  })).sort((a, b) => (a.strong ?? Number.MAX_SAFE_INTEGER) - (b.strong ?? Number.MAX_SAFE_INTEGER)
+    || b.overlap - a.overlap || a.position - b.position).map(item => item.question);
+}
+
+export function rankObservedPaaQuestions(keyword: string, questions: string[]): string[] {
+  const candidates = observedPaaCandidates(keyword, questions);
+  if (candidates.length < 3) throw new Error('Research requires three distinct observed People Also Ask questions before semantic review.');
+  return candidates;
+}
+
 type NormalizedAutocomplete = {
   keyword: string;
   suggestion: string;
@@ -491,8 +523,9 @@ export function createResearcher(options: ResearcherOptions) {
             result.relatedQueries = [...new Set([...result.relatedQueries, ...observed.relatedSearches])];
             const prior = result.paaObservations ?? [];
             const seen = new Set(prior.map(({question}) => normalizeKeyword(question)));
-            let selectedQuestions: string[] = [];
-            try { selectedQuestions = selectRelevantPaaQuestions(result.candidate.primaryKeyword, result.peopleAlsoAsk); } catch { /* Still incomplete; next attempt or cache may recover. */ }
+            // Preserve the later semantic candidate pool before truncation,
+            // including nonliteral variants and incomplete collections.
+            const selectedQuestions = observedPaaCandidates(result.candidate.primaryKeyword, result.peopleAlsoAsk).slice(0, 9);
             const selected = new Set(selectedQuestions.map(normalizeKeyword));
             result.paaObservations = [...prior, ...current.filter(({question}) => !seen.has(normalizeKeyword(question)))]
               .sort((left,right) => Number(selected.has(normalizeKeyword(right.question))) - Number(selected.has(normalizeKeyword(left.question))))
@@ -547,9 +580,9 @@ export function createResearcher(options: ResearcherOptions) {
       const results: ResearchResult[] = [];
       for (const shallow of deepCandidates) {
         const { candidate } = shallow;
-        // Retain a bounded pool of real topic-matched observations until body
-        // research is complete. Observation order alone cannot prove answers.
-        let faqPool = rankPaaCandidates(
+        // Retain bounded observations for semantic preparation. Lexical matches
+        // rank first, but wording differences are not evidence of irrelevance.
+        let faqPool = observedPaaCandidates(
           candidate.primaryKeyword,
           shallow.peopleAlsoAsk,
         ).slice(0, 9);
@@ -610,7 +643,7 @@ export function createResearcher(options: ResearcherOptions) {
               if (supplementaryPaa.length >= 30) break;
               const existing = new Set(observedQuestions.map(faqQuestionKey));
               if (existing.has(faqQuestionKey(question))) continue;
-              const ranked = rankPaaCandidates(candidate.primaryKeyword, [...observedQuestions, question]);
+              const ranked = observedPaaCandidates(candidate.primaryKeyword, [...observedQuestions, question]);
               if (!ranked.includes(question)) continue;
               observedQuestions.push(question);
               supplementaryPaa.push({ ...support.provenance, query: observation.query, question,
@@ -634,7 +667,7 @@ export function createResearcher(options: ResearcherOptions) {
             }
           }
           sourceUrls.splice(0, sourceUrls.length, ...balanced);
-          faqPool = rankRelevantPaaQuestions(candidate.primaryKeyword, observedQuestions).slice(0, 9);
+          faqPool = rankObservedPaaQuestions(candidate.primaryKeyword, observedQuestions).slice(0, 9);
         };
         try {
           if (options.sourceChecker.selectWithContent || faqPool.length < 3) {
@@ -647,16 +680,10 @@ export function createResearcher(options: ResearcherOptions) {
               selection = await selectSources([...new Set(sourceUrls)].slice(0, 24));
             }
           }
-          // Discovery may have completed an initially partial pool. Never emit
-          // a short/irrelevant FAQ set to the worker or the drafting preflight.
-          faqPool = rankRelevantPaaQuestions(candidate.primaryKeyword, observedQuestions).slice(0, 9);
+          // These are provisional observed choices. Body-anchored preparation
+          // and independent review must establish three relevant answerable FAQs.
+          faqPool = rankObservedPaaQuestions(candidate.primaryKeyword, observedQuestions).slice(0, 9);
           faqQuestions = faqPool.slice(0, 3);
-          const supportedQuestions = faqPool.filter(question => selection.sourceDocuments.some(document =>
-            document.passages.some(passage => faqBodyMatches(question, passage.text, passage.bodyStart))));
-          // Preserve exact observed wording and original SERP/PAA provenance.
-          // Only replace the preferred set if three body-supported alternatives
-          // exist; otherwise retain its gaps for the fail-closed draft preflight.
-          if (supportedQuestions.length >= 3) faqQuestions = supportedQuestions.slice(0, 3);
           const evidence = EvidenceBundleSchema.parse({
             schemaVersion: 2,
             candidateFingerprint: candidateFingerprints(candidate).candidate,
@@ -672,7 +699,9 @@ export function createResearcher(options: ResearcherOptions) {
             sources: selection.sources,
             faqQuestions,
           });
-          const selectedQuestions = new Set(faqQuestions.map(faqQuestionKey));
+          // Preparation may select any of the nine retained candidates, not
+          // just the provisional three. Preserve their observation receipts.
+          const selectedQuestions = new Set(faqPool.map(faqQuestionKey));
           const paaObservations = [...(shallow.paaObservations ?? []), ...supplementaryPaa]
             .sort((left, right) => Number(selectedQuestions.has(faqQuestionKey(right.question)))
               - Number(selectedQuestions.has(faqQuestionKey(left.question))))

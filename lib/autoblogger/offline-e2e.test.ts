@@ -147,6 +147,7 @@ class RepairingFixtureClient implements StructuredOutputClient {
     this.requests.push(request);
     const input = request.input as DraftingContext & {
       contextHash?: string; candidateQuestions?: string[];
+      editorialContext?: {draftHash: string};
       repairPolicy?: {originalFingerprint: string; allowedLocations: string[]};
       sentenceFields?: ReturnType<typeof createSentenceRepairRequest>['input']['sentenceFields'];
       draft?: GeneratedDraftV2; repairedDraft?: GeneratedDraftV2; originalIssues?: Array<{ id: string; code: string }>;
@@ -170,6 +171,12 @@ class RepairingFixtureClient implements StructuredOutputClient {
       };
     }
     if (request.name === 'videoclaw_article_draft_v2') return generated(context, false);
+    const editorialReview = () => ({
+      draftHash: input.editorialContext!.draftHash,
+      instructionConsistency: {passed: true, rationale: 'The synthetic planning and checking instructions are compatible.', issueIds: []},
+      sectionUsefulness: {passed: true, rationale: 'Both synthetic sections supply their promised planning and checking steps.', issueIds: []},
+      readerFacingProse: {passed: true, rationale: 'The synthetic prose addresses the founder without evaluator-facing self-approval.', issueIds: []},
+    });
     const supportEvaluations = () => {
       expect(input.bindingManifest).toHaveLength(19);
       expect(input.bindingManifest!.some(binding => binding.location === '/customerTrigger')).toBe(false);
@@ -186,7 +193,7 @@ class RepairingFixtureClient implements StructuredOutputClient {
       return this.omitSupportEvaluation ? evaluations.slice(1) : evaluations;
     };
     if (request.name === 'videoclaw_article_critique_v1') {
-      return { schemaVersion: 1, approved: false, supportEvaluations: supportEvaluations(), issues: [{ id: 'editorial-1', code: 'editorial.specificity', message: 'Clarify the role of sources in the description.', repairInstruction: 'Paraphrase the source-led planning guidance in the description.', locations: ['/description'] }] };
+      return { schemaVersion: 1, approved: false, editorialReview: editorialReview(), supportEvaluations: supportEvaluations(), issues: [{ id: 'editorial-1', code: 'editorial.specificity', message: 'Clarify the role of sources in the description.', repairInstruction: 'Paraphrase the source-led planning guidance in the description.', locations: ['/description'] }] };
     }
     if (request.name === 'videoclaw_article_repair_v2') return generated(context, true);
     if (request.name === 'videoclaw_article_repair_patch_v2') {
@@ -227,7 +234,7 @@ class RepairingFixtureClient implements StructuredOutputClient {
         claimBindings: [...original.claimBindings.filter(({location}) => location !== '/description'), expectedBinding],
       });
       expect(input.bindingManifest).toContainEqual(expect.objectContaining(expectedBinding));
-      return { schemaVersion: 1, approved: !this.rejectVerification && !this.omitSupportEvaluation, supportEvaluations: supportEvaluations(),
+      return { schemaVersion: 1, approved: !this.rejectVerification && !this.omitSupportEvaluation, editorialReview: editorialReview(), supportEvaluations: supportEvaluations(),
         evaluations: input.originalIssues!.map(({ id, code }) => ({ issueId: id,
           resolved: code === 'editorial.specificity' ? !this.rejectVerification : !this.omitSupportEvaluation,
           message: 'Deterministic offline verification fixture result.',

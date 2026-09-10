@@ -3,6 +3,8 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
+The [observation and editorial-review checkpoint](OBSERVATION-AND-EDITORIAL-REVIEW-2026-09-10.md) supersedes the collection-stage lexical gate described below. Collection proposes safe observed questions; mandatory body-anchored preparation and independent review establish semantic acceptance. Historical run outcomes remain unchanged.
+
 ## Bounded PAA completion and failure receipts — 2026-09-10 Malaysia time
 
 The [current checkpoint](PAA-COMPLETION-PROOF-2026-09-10.md) passes **2,530 tests

@@ -98,10 +98,10 @@ describe('support-search observed FAQ recovery', () => {
       'How much does it cost to create an explainer video?', definition,
     ])).toEqual([creation, 'How much does it cost to make an explainer video?', definition]);
   });
-  it('uses real support-query questions and carries their exact provenance through body-backed selection', async () => {
+  it('retains real support-query questions and bodies for subsequent semantic selection', async () => {
     const before = structuredClone(shallow);
     const {result, searches, bodyUrls, selectionQuestions} = await inspect([row([definition, duration])]);
-    expect(result.evidence.faqQuestions).toEqual([creation, definition, duration]);
+    expect(result.evidence.faqQuestions).toEqual(initial);
     expect(result.evidence.signals.peopleAlsoAsk).toEqual([...initial, definition, duration]);
     expect(selectionQuestions[0]).toContain(definition);
     expect(result.provenance.serp).toEqual(before.provenance.serp);
@@ -120,7 +120,8 @@ describe('support-search observed FAQ recovery', () => {
     const {metrics} = await createPendingKeywordProvider().enrich({keyword: 'explainer video', intent: 'informational', mode: 'manual_pilot'});
     const context = buildDraftingContextFromResearch({result, shallow, metrics, generatedAt: at});
     expect(context.evidence.candidateFingerprint).toBe(candidateFingerprints(shallow.candidate).candidate);
-    expect(planFaqEvidence(context.evidence.faqQuestions, context.sourceFacts).every(x => x.sourceFactIds.length > 0)).toBe(true);
+    expect(planFaqEvidence(context.evidence.faqQuestions, context.sourceFacts).some(x => x.sourceFactIds.length === 0)).toBe(true);
+    expect(planFaqEvidence([creation, definition, duration], context.sourceFacts).every(x => x.sourceFactIds.length > 0)).toBe(true);
   });
 
   it.each([
@@ -153,16 +154,16 @@ describe('support-search observed FAQ recovery', () => {
     ]);
   });
 
-  it('rejects unrelated, unsafe, overlong and duplicated questions without inventing replacements', async () => {
+  it('retains adjacent observations for review but rejects unsafe, overlong and duplicate text', async () => {
     const {result} = await inspect([row([
       'What is the most viewed educational video?', `What is an explainer video ${'x'.repeat(501)}?`,
       'What is an explainer video\u0000?', 'What is an explainer video\u200b?',
       'What is an explainer video api_key=0123456789abcdef0123456789abcdef?',
       definition, definition.toUpperCase(), duration,
     ])]);
-    expect(result.evidence.faqQuestions).toEqual([creation, definition, duration]);
-    expect(result.paaObservations?.map(x => x.question)).toEqual([definition, duration]);
-    expect(result.evidence.signals.peopleAlsoAsk).toEqual([...initial, definition, duration]);
+    expect(result.evidence.faqQuestions).toEqual(initial);
+    expect(result.paaObservations?.map(x => x.question)).toEqual(['What is the most viewed educational video?', definition, duration]);
+    expect(result.evidence.signals.peopleAlsoAsk).toEqual([...initial, 'What is the most viewed educational video?', definition, duration]);
   });
 
   it('does not promote a heading or PAA answer into body evidence', async () => {
@@ -189,7 +190,7 @@ describe('support-search observed FAQ recovery', () => {
       parentQuestion: null, country: 'US', language: 'en', position: i + 1,
     }))};
     const {result} = await inspect([row([definition, duration])], input);
-    expect(result.evidence.faqQuestions).toEqual([creation, definition, duration]);
+    expect(result.evidence.faqQuestions).toEqual(initial);
     expect(result.paaObservations).toHaveLength(30);
     expect(result.paaObservations?.find(x => x.question === creation)).toMatchObject({runId: 'prior-paa', query: 'explainer video'});
     expect(result.paaObservations?.find(x => x.question === duration)).toMatchObject({runId: 'support', query: creation});
