@@ -3,7 +3,21 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-## Required-answer and worksheet repair — 2026-09-10 Malaysia time
+## Review ownership and topic screening — 2026-09-10 Malaysia time
+
+The [current checkpoint](REVIEW-OWNERSHIP-2026-09-10.md) passes **2,495 tests
+across 58 files**, no failures/skips, plus lint, typecheck and worker build.
+Independent source-ownership, runtime-wiring and C4-relevance reviews found no
+outstanding issues. Existing dependency warnings remain.
+
+The retained-input paid diagnostic resolved semantic findings but failed exact
+source-use limits. The later fresh full worker run stopped at shallow screening:
+eight organic results, nine observed questions, no drafting or native QA. C4's
+testimonial-video false negative is now corrected; insufficient relevant PAA
+still blocks. The separate three-topic live pre-screen changed no state and made
+no OpenAI calls. **No successful uninterrupted live article is claimed.**
+
+## Previous required-answer and worksheet repair — 2026-09-10 Malaysia time
 
 The [current checkpoint](REQUIRED-ANSWER-REPAIR-2026-09-10.md) records **2,464
 tests across 58 files**, zero failures/skips, passing lint/typecheck/worker build,

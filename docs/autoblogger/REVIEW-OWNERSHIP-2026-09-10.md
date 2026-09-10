@@ -89,14 +89,65 @@ The complete follow-up check is 2,487 passing tests across 58 files, no failures
 or skips, with lint, typecheck and build passing. Existing dependency build
 warnings remain. This verifies the software, not the pending fresh live article.
 
-## Next live proof
+## Fresh full-worker attempt
 
-The next planned fresh topic is `testimonial video questions`, observed in the
-earlier real autocomplete result, with article identity
-`vc-c4-d-36c0a28bfc7bad3a`. It is distinct from the terminal `testimonial video`
-candidate. A fresh full-worker attempt will re-collect its SERPs, questions and
-page bodies; only its identity is supplied. It will use the existing explicit
-fresh-candidate authorization path, preserve the complete failed history, and
-remain artifact-only with at most five model requests and one repair.
+`testimonial-questions-live-proof-2026-09-10` ran at commit `4776307` for the
+previously observed query `testimonial video questions`, article identity
+`vc-c4-d-36c0a28bfc7bad3a`. Only candidate identity was supplied; the worker
+re-collected live US/en evidence. The explicit request profile was high reasoning,
+48,000 output tokens and 600,000ms timeout, but no model request was reached.
 
-**No success is claimed here before that fresh run completes.**
+The fresh scan collected eight organic results and nine PAA observations. It
+stopped at shallow screening with `missing_relevant_paa` and
+`missing_product_relevance`: zero deep inspections, zero drafts and zero native
+QA runs. Several questions concerned hiring interviews, fake reviews and legal
+consequences rather than customer testimonial videos. The three-relevant-FAQ
+requirement remains intact; nine observed questions does not mean nine suitable
+FAQs.
+
+| Collection | Run ID | Dataset ID |
+| --- | --- | --- |
+| Autocomplete | `wwtfaffE5TXq6DtVs` | `MIhbrgLCud287SX2K` |
+| Organic SERP | `zLghEcPOmOlcZo3RI` | `RrHldpNF1ao0SG3Z1` |
+| PAA first collection | `DbNPjXqc1Qkcrm33L` | `PiZpYG5GfKKnHGEqn` |
+| PAA second collection | `8LpNhQoUxPhEQfPFV` | `p9iSDvCH2ssjymZAa` |
+
+The candidate remains terminal at attempt one. State now contains 21 runs and
+35 failure records with `manualPilot: null`, hash
+`75d88bd9b44bcfb531ae9008e4708aebcea245384e73dfbd7fbbd4023f7701eb`.
+No old attempt, identity or receipt was reset. The lander checkout remains clean.
+
+## Narrow product-relevance correction
+
+C4's product screening now recognizes `testimonial video` and `video testimonial`
+as existing GTM/customer-video use cases. Four positive regression cases failed
+before the correction; four text-testimonial/hiring/legal negative controls
+continue to reject. The policy and worker suites pass 126 tests. Independent
+review found no actionable issue and confirmed that the scope already covers
+customer interviews. This correction neither changes candidate history nor
+waives PAA, source, paid-metric or publication gates.
+
+Full verification after this correction: **2,495 passing tests across 58 files**,
+zero failures/skips, and passing lint, typecheck and worker build. Existing
+dependency build warnings remain.
+
+## Research-only pre-screen
+
+`topic-prescreen-2026-09-10` used the unchanged production research client on
+three previously observed queries. Each returned eight organic results and ten
+autocomplete suggestions. `testimonial video template` and `testimonial video
+examples` each met the three-relevant-PAA screen; `customer testimonial video`
+did not. The template's selected observed questions concerned creation, an example
+and duration. Organic evidence is not paid volume/difficulty validation.
+
+Autocomplete run/dataset: `moDSuzW9LGn0bXCEn` / `cdiQToQGWYOnJ659Z`.
+Organic run/dataset: `QtM293mzHcJssmbbr` / `zBy6dE7UOEZycgPtg`.
+PAA runs/datasets: `3dXjx5Jbhm3GuDnnL` / `yYmUUr9fPoYefCrQb` and
+`0WFqS1PKNVZ6FjNQ3` / `4wtY6SB23M2jXaMwT`.
+
+No OpenAI calls, candidate grants, persistent state writes or native QA occurred
+during this pre-screen. The state hash above was unchanged. A full attempt must
+still re-collect evidence and produce its own draft rather than inject this scan.
+
+**The uninterrupted live article milestone is still unproven.** Research-only
+pre-screening of distinct observed topics is not a successful worker pilot.

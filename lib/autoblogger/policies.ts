@@ -121,7 +121,7 @@ const PRODUCT_RELEVANCE_PHRASES: Record<Candidate['campaignId'], readonly string
   'newly-funded-founder': ['founder video', 'launch video', 'funding announcement', 'product demo', 'gtm video'],
   'accelerator-demo-day-founder': ['demo day', 'pitch video', 'investor demo', 'live demo', 'product demo'],
   'video-production-comparison': ['video agency', 'video freelancer', 'video editor', 'ai video', 'video production'],
-  'gtm-content-repurposing-buyer': ['content repurposing', 'marketing video', 'gtm content', 'ai video', 'video workflow'],
+  'gtm-content-repurposing-buyer': ['content repurposing', 'marketing video', 'gtm content', 'ai video', 'video workflow', 'testimonial video', 'video testimonial'],
   'portfolio-media-platform': ['accelerator content', 'portfolio company', 'cohort content', 'founder media', 'startup portfolio'],
 };
 

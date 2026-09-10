@@ -9,6 +9,7 @@ import {
 import {
   RUN_LIMITS,
   evaluateEligibility,
+  evaluateProductRelevance,
   limitCandidatesForScan,
   limitDeepInspections,
   screenDuplicate,
@@ -30,6 +31,23 @@ function candidate(overrides: Partial<Candidate> = {}): Candidate {
     ...overrides,
   });
 }
+
+describe('GTM customer video relevance', () => {
+  it.each([
+    ['testimonial video questions', true],
+    ['video testimonial interview', true],
+    ['customer testimonial videos', true],
+    ['testimonial video editing', true],
+    ['testimonial questions', false],
+    ['job interview questions', false],
+    ['video interview questions', false],
+    ['court testimonial evidence', false],
+  ])('screens %s without requiring a magic phrase in the ICP field', (keyword, expected) => {
+    const value = candidate({ campaignId: 'gtm-content-repurposing-buyer',
+      primaryKeyword: keyword, title: keyword, icp: 'Startup GTM lead preparing a customer interview' });
+    expect(evaluateProductRelevance(value)).toBe(expected);
+  });
+});
 
 describe('duplicate screening', () => {
   it.each([
