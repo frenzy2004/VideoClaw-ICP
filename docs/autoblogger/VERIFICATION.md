@@ -5,12 +5,15 @@ No lander source changes, article publishing, production merge, deployment or sc
 
 ## Bounded PAA completion and failure receipts — 2026-09-10 Malaysia time
 
-The [current checkpoint](PAA-COMPLETION-PROOF-2026-09-10.md) passes **2,523 tests
+The [current checkpoint](PAA-COMPLETION-PROOF-2026-09-10.md) passes **2,530 tests
 across 58 files**, zero failures/skips, plus lint, typecheck and worker build.
 Partial observation pools can enter bounded deep discovery; three relevant
 distinct questions and body-supported preparation still gate drafting. Completed
 safe support-search receipts survive failures, which count as attempted deep slots.
 Malformed or secret-like receipts cannot strand the candidate's lease.
+A live research-only diagnostic retrieved four pages, without model calls or
+state writes. Its duplicate make/create noun-order FAQ pair is now rejected by
+the final preparation receipt as well as collection; other qualifiers stay distinct.
 
 Saved-review template materialization passes the native lander's blog check,
 lint and build in an isolated checkout, with unchanged copy and independent

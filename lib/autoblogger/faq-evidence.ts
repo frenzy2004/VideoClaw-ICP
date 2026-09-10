@@ -29,7 +29,12 @@ export function faqQuestionKey(question: string): string {
   const creation = /^how to (?:make|create) (.+)$/u.exec(query);
   // Do not stem this subject: a final "s" can distinguish tool names (Canva
   // versus Canvas), not just noun number. Normalize only the leading article.
-  return creation ? `creation:${creation[1].replace(/^(?:a|an|the)\s+/u, '')}` : query;
+  if (!creation) return query;
+  const creationSubject = creation[1].replace(/^(?:a|an|the)\s+/u, '')
+    // This bounded noun-order alias names the same creation object. Preserve
+    // every qualifier and never sort arbitrary subjects or rewrite observations.
+    .replace(/^video testimonial(?=$| (?:for|with|without|using|in|on|at|about|of)\b)/u, 'testimonial video');
+  return `creation:${creationSubject}`;
 }
 
 function directAssertion(sentence: string): boolean {

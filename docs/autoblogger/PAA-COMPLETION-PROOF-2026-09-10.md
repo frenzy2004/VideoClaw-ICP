@@ -74,5 +74,43 @@ drafts or PRs and do not retain raw PAA answer content. Three additional regress
 failed before correction for date-only timestamps and synthetic secret-like
 run/dataset IDs; all now preserve failure bookkeeping without persisting them.
 
-Fresh research-only validation is the next bounded check. It must leave the
-terminal candidate and state untouched and must not be reported as a worker pilot.
+## Fresh research-only diagnostic
+
+`paa-completion-live-diagnostic-2026-09-10` ran at `74643d7`: three Apify actor
+starts, eight organic results, four HTTP-200 source pages and 35 body passages.
+It made no OpenAI calls or persistent-state writes. The failed examples candidate
+was not reserved or retried; its history and the state hash above are unchanged.
+
+| Collection | Run | Dataset |
+| --- | --- | --- |
+| Autocomplete | `fT2PPMpwpzlrra8LN` | `KyevIaZRSMjZEeZt5` |
+| US/en SERP | `KK7ZU7MP1big45VHu` | `wjwRiim2fPYf7Q4zU` |
+| Support search | `0LmLYHKbULlQ5ybEX` | `RvuvhtLFyHFLHKZHS` |
+
+The live initial pool already contained three qualifying questions, so this run
+does **not** prove live recovery from fewer than three. That boundary is covered
+by the real-researcher fixture regressions, not represented as observed live.
+
+The run also revealed a duplicate final FAQ pair: “How to make a testimonial
+video?” and “How to create a video testimonial?” have the same creation intent.
+The earlier key normalized make/create but retained that noun-order variation.
+The collector's successful return is therefore not a final editorial-quality pass.
+
+## Narrow creation-alias correction
+
+Creation-question keys now canonicalize only the leading singular object
+`video testimonial` / `testimonial video`, at the end or before a preposition
+qualifier. All actual observed strings, source evidence, other subject order,
+operation and tool/audience qualifiers remain unchanged. This does not introduce
+general synonym rewriting, source-match relaxation or extra requests.
+
+Consumer regressions first reproduced duplicate acceptance; the final preparation
+receipt now rejects these aliases even when a model assigns different intent
+labels. A distinct duration question can fill the third slot, but without another
+distinct question the pipeline rejects the set. Canva/Canvas, edit/create and
+with/without remain separate. An unchanged-observation replay rejects the old
+duplicate final selection; it is not reclassified as successful.
+
+Full verification: **2,530 tests across 58 files pass**, zero failures/skips,
+plus lint, typecheck and build. Focused independent review found no actionable
+issues. The uninterrupted fresh-worker article milestone remains unproven.

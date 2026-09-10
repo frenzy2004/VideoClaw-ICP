@@ -49,6 +49,75 @@ describe('bounded PAA completion during deep discovery', () => {
   });
 });
 
+describe('testimonial creation aliases at the research boundary', () => {
+  it.each([false, true])('counts one creation slot and retains first wording (duration=%s)', async hasDuration => {
+    const candidate = { ...candidates(1)[0], primaryKeyword: 'testimonial video examples', title: 'Testimonial Video Examples' };
+    const first = 'How to make a testimonial video?';
+    const alias = 'How to create a video testimonial?';
+    const definition = 'What is a video testimonial?';
+    const duration = 'How long should a testimonial video be?';
+    const urls = ['https://www.descript.com/blog/article/testimonial', 'https://independent.example/testimonial'];
+    const input = {
+      candidate, suggestions: [candidate.primaryKeyword], relatedQueries: [], peopleAlsoAsk: [first, definition, alias],
+      organicResults: urls.map(url => ({ url, title: 'Testimonial guide', snippet: 'Observed page.', resultType: 'article' })),
+      provenance: {
+        discovery: { actorId: 'autocomplete', runId: 'original-discovery', datasetId: 'original-discovery-data', observedAt: '2026-09-04T08:01:00.000Z' },
+        serp: { actorId: SERP_ACTOR_ID, runId: 'original-serp', datasetId: 'original-serp-data', observedAt: '2026-09-04T08:01:00.000Z' },
+      },
+    };
+    const original = structuredClone(input);
+    let starts = 0;
+    let query = '';
+    let sourceReads = 0;
+    const apify: ApifyClient = {
+      startActor: async (actorId, request) => {
+        expect(actorId).toBe(SERP_ACTOR_ID);
+        starts += 1;
+        if (starts > 1) throw new Error('Unexpected second support batch.');
+        const queries = String(request.queries).trim().split('\n');
+        expect(queries.length).toBeLessThanOrEqual(7);
+        query = queries[0];
+        return successfulRun('alias-support-run', 'alias-support-data');
+      },
+      getRun: async () => { throw new Error('The support run is already complete.'); },
+      getDatasetItems: async datasetId => {
+        expect(datasetId).toBe('alias-support-data');
+        return [{
+          searchQuery: { term: query, device: 'DESKTOP', page: 1, countryCode: 'US', languageCode: 'en' },
+          organicResults: [], relatedQueries: [],
+          peopleAlsoAsk: hasDuration ? [{ question: duration }] : [],
+        }];
+      },
+      abortRun: async id => ({ id, status: 'ABORTED' }),
+    };
+    const researcher = createResearcher({
+      apify, execution: researchClock,
+      sourceChecker: {
+        select: async () => { throw new Error('Body selection required.'); },
+        selectWithContent: async () => {
+          sourceReads += 1;
+          return { sources: urls.map((url, index) => ({ originalUrl: url, finalUrl: url, authoritative: index === 0 })), sourceDocuments: [] };
+        },
+      },
+    });
+
+    if (hasDuration) {
+      const result = (await researcher.inspect([input])).results[0];
+      expect(result.evidence.faqQuestions).toEqual([first, definition, duration]);
+      expect(result.evidence.serp.peopleAlsoAsk).toEqual([first, definition, duration]);
+      expect(result.provenance.serp).toEqual(original.provenance.serp);
+      expect(result.paaObservations).toEqual([expect.objectContaining({
+        question: duration, query, runId: 'alias-support-run', datasetId: 'alias-support-data',
+      })]);
+    } else {
+      await expect(researcher.inspect([input])).rejects.toThrow(/three relevant/i);
+    }
+    expect(starts).toBe(1);
+    expect(sourceReads).toBe(hasDuration ? 1 : 0);
+    expect(input).toEqual(original);
+  });
+});
+
 describe('bounded zero-organic SERP recovery', () => {
   const questions = [
     'How do you plan a founder video topic?',

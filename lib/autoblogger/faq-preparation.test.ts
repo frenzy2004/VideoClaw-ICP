@@ -222,6 +222,20 @@ describe('prepareFaqEvidence', () => {
     await expect(prepareFaqEvidence(contextFixture(), fixture.client, questions)).rejects.toThrow(/distinct|duplicate/i);
   });
 
+  it('rejects creation aliases with reversed testimonial-video noun order', async () => {
+    // Exercise receipt identity independently of the critic's source semantics.
+    const context = contextFixture();
+    const aliases = ['How to make a testimonial video?', 'How to create a video testimonial?'];
+    const pool = [...questions, ...aliases];
+    context.evidence.signals.peopleAlsoAsk = pool;
+    const fixture = fixtureClient(response => {
+      response.selections[1].question = aliases[0];
+      response.selections[2].question = aliases[1];
+      return response;
+    });
+    await expect(prepareFaqEvidence(context, fixture.client, pool)).rejects.toThrow(/distinct|duplicate/i);
+  });
+
   it('preserves different tool qualifiers when checking question keys', async () => {
     const fixture = fixtureClient(response => {
       response.selections[1].question = questions[4];

@@ -40,6 +40,21 @@ describe('camera orientation is not a superiority claim', () => {
 });
 
 describe('FAQ question intent keys', () => {
+  it('deduplicates the bounded leading testimonial creation alias', () => {
+    expect(new Set([
+      faqQuestionKey('How to make a testimonial video?'),
+      faqQuestionKey('How to create a video testimonial?'),
+    ]).size).toBe(1);
+  });
+
+  it.each([
+    ['different tools', 'How to make a testimonial video in Canva?', 'How to create a video testimonial in Canvas?'],
+    ['different operations', 'How to edit a testimonial video?', 'How to create a video testimonial?'],
+    ['opposite qualifiers', 'How to make a testimonial video with music?', 'How to create a video testimonial without music?'],
+  ])('keeps testimonial creation keys distinct for %s', (_label, left, right) => {
+    expect(faqQuestionKey(left)).not.toBe(faqQuestionKey(right));
+  });
+
   it('deduplicates make/create cost intent while retaining the full subject and other question wording', () => {
     expect(faqQuestionKey).toBeTypeOf('function');
     const cases = [
