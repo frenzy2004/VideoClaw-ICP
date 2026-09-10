@@ -3,7 +3,20 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-## Review ownership and topic screening — 2026-09-10 Malaysia time
+## FAQ metadata and fresh template attempt — 2026-09-10 Malaysia time
+
+The [current checkpoint](FAQ-METADATA-PROOF-2026-09-10.md) passes **2,508 tests
+across 58 files**, no failures/skips, plus lint, typecheck and worker build.
+Existing dependency warnings remain. Thirteen focused cases exercise the actual
+critique boundary and received/parsed/canonical hash identities.
+
+The fresh template run reached generation and independent critique, but invalid
+FAQ heading metadata and source overuse blocked repair/native QA. Offline replay
+proves the metadata correction without changing article text, evidence or failed
+history; ambiguous references and source accounting still require fresh review.
+This is not a successful uninterrupted live article.
+
+## Previous review ownership and topic screening — 2026-09-10 Malaysia time
 
 The [current checkpoint](REVIEW-OWNERSHIP-2026-09-10.md) passes **2,495 tests
 across 58 files**, no failures/skips, plus lint, typecheck and worker build.

@@ -279,7 +279,12 @@ not repeat the candidate title. Aim for 120–160 characters; the worker accepts
 Do not pad the description or promise unsupported results. Bind its final text.
 customerTrigger is private campaign configuration, not a source claim: copy
 campaignContext.customerTrigger verbatim (from candidate.icp). Do not create a
-claimBinding for /customerTrigger. All public prose and competitorGap still require bindings.
+claimBinding for /customerTrigger. Authored public prose and competitorGap still require bindings.
+FAQ questions are caller-owned observed Google questions, not generated assertions.
+Copy them exactly, but bind ONLY each FAQ answer's sentences. Never create a binding
+for a question heading or place its text at /faqAnswers/N/answer: that location
+contains only the answer, not the question. Question provenance remains in the
+observed PAA evidence and answer-review context.
 Frame competitorGap as a proposed editorial synthesis of the selected sources,
 not a proven absence across competitors or a claim of measured search demand.
 Separate source-supported themes from original editorial additions in competitorGap;
@@ -610,6 +615,58 @@ function generatedDraftSchema(context: DraftingContext) {
     ...GENERATED_DRAFT_V2_JSON_SCHEMA.properties,
     customerTrigger: { type: 'string', enum: [context.candidate.icp] },
   } };
+}
+
+type DraftNormalization = {
+  draft: GeneratedDraftV2;
+  audit?: {
+    kind: 'omit_redundant_observed_faq_heading_bindings_v1';
+    parsedDraftHash: string;
+    canonicalDraftHash: string;
+    removedBindingIndices: number[];
+    reason: string;
+  };
+};
+
+/** A redundant heading entry is metadata, not an answer claim. Never rewrite
+ * public text, infer a citation, or normalize a saved independent verdict. The
+ * retained raw model response, existing schema parse and this audit reconstruct
+ * the exact correction. The first hash is the parsed DTO, not raw HTTP bytes.
+ */
+function canonicalizeObservedFaqHeadingBindings(context: DraftingContext, draft: GeneratedDraftV2): DraftNormalization {
+  const unchanged = {draft};
+  const findings = inspectGeneratedDraft(context, draft);
+  const removedBindingIndices: number[] = [];
+  const affected = new Set<string>();
+  for (const [index, binding] of draft.claimBindings.entries()) {
+    const match = /^\/faqAnswers\/([0-2])\/answer$/u.exec(binding.location);
+    if (!match || binding.productClaimId !== null) continue;
+    const faqIndex = Number(match[1]);
+    const faq = draft.faqAnswers[faqIndex];
+    if (faq.question !== context.evidence.faqQuestions[faqIndex]
+      || binding.span !== faq.question || faq.answer.includes(binding.span)) continue;
+    // The existing validator also checks known/selected/unique facts, duplicate
+    // bindings, product assertions and actual rendered sentence membership.
+    const diagnostics = findings.filter(finding => finding.bindingIndex === index);
+    if (diagnostics.length !== 1 || diagnostics[0].code !== 'content.claim_binding'
+      || diagnostics[0].reason !== 'span_mismatch') continue;
+    if (draft.claimBindings.filter(entry => entry.location === binding.location && entry.span === binding.span).length !== 1) continue;
+    removedBindingIndices.push(index);
+    affected.add(binding.location);
+  }
+  if (!removedBindingIndices.length) return unchanged;
+  const removed = new Set(removedBindingIndices);
+  const canonical = {...draft, claimBindings: draft.claimBindings.filter((_binding, index) => !removed.has(index))};
+  // Use the existing rendered sentence/coverage validator, not substring
+  // matching, to prove that every actual answer still has valid bindings.
+  if (inspectGeneratedDraft(context, canonical).some(finding =>
+    finding.code === 'content.claim_binding' && affected.has(finding.location ?? ''))) return unchanged;
+  const hash = (value: GeneratedDraftV2) => createHash('sha256').update(JSON.stringify(value)).digest('hex');
+  return {draft: canonical, audit: {
+    kind: 'omit_redundant_observed_faq_heading_bindings_v1',
+    parsedDraftHash: hash(draft), canonicalDraftHash: hash(canonical), removedBindingIndices,
+    reason: 'Exact observed FAQ question duplicated as answer metadata; all authored text and answer bindings remain unchanged.',
+  }};
 }
 
 function supportFindings(
@@ -951,14 +1008,15 @@ export function createStructuredDrafter(options: StructuredDrafterOptions) {
       const suppliedContext = modelContext(context);
       suppliedContext.faqEvidencePlan = faqEvidencePlan;
       suppliedContext.sourcePlan = buildSourcePlan(context);
-      const initial = GeneratedDraftV2Schema.parse(await options.client.generate({
+      const receivedDraft = await options.client.generate({
         name: 'videoclaw_article_draft_v2',
         schema: generatedDraftSchema(context),
         system: DRAFT_SYSTEM,
         input: suppliedContext,
-      }));
-      let deterministicFindings = inspectGeneratedDraft(context, initial);
-      if (containsSecretLikeValue(initial)) {
+      });
+      const rawInitial = GeneratedDraftV2Schema.parse(receivedDraft);
+      let deterministicFindings = inspectGeneratedDraft(context, rawInitial);
+      if (containsSecretLikeValue(rawInitial)) {
         return {
           status: 'blocked',
           reason: 'content_safety_failed',
@@ -967,11 +1025,18 @@ export function createStructuredDrafter(options: StructuredDrafterOptions) {
             : [{ code: 'content.secret', message: 'Generated draft contains a secret-like value.' }],
         };
       }
+      const normalized = canonicalizeObservedFaqHeadingBindings(context, rawInitial);
+      const initial = normalized.draft;
       const critique = DraftCritiqueV1Schema.parse(await options.client.generate({
         name: 'videoclaw_article_critique_v1',
         schema: DRAFT_CRITIQUE_V1_JSON_SCHEMA,
         system: CRITIQUE_SYSTEM,
-        input: { ...suppliedContext, draft: initial, bindingManifest: bindingManifest(initial), referenceManifest: productReferenceManifest(context, initial) },
+        input: { ...suppliedContext, draft: initial,
+          ...(normalized.audit ? {draftNormalization: {
+            ...normalized.audit,
+            receivedDraftHash: createHash('sha256').update(JSON.stringify(receivedDraft)).digest('hex'),
+          }} : {}),
+          bindingManifest: bindingManifest(initial), referenceManifest: productReferenceManifest(context, initial) },
       }));
       if (containsSecretLikeValue(critique)) {
         return {

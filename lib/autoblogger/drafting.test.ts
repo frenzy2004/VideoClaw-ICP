@@ -16,7 +16,7 @@ import type {
   DraftingContext,
   GeneratedDraftV2,
 } from './content-bundle';
-import { GENERATED_DRAFT_V2_JSON_SCHEMA, inspectGeneratedDraft, productReferenceManifest } from './content-bundle';
+import { GENERATED_DRAFT_V2_JSON_SCHEMA, GeneratedDraftV2Schema, inspectGeneratedDraft, productReferenceManifest } from './content-bundle';
 import { measureReviewedSourceUse } from './source-plan';
 
 const candidate: Candidate = {
@@ -239,6 +239,71 @@ function supportedBindings(value: GeneratedDraftV2 = draft): DraftCritiqueV1['su
       : `Fixture source ${binding.sourceFactIds.join(', ')} supports this span without added assertions.`,
   }));
 }
+
+describe('observed FAQ heading metadata at the real critique boundary', () => {
+  function withQuestionBindings() {
+    const generated = structuredClone(draft);
+    generated.claimBindings.push(...generated.faqAnswers.map(({question}, index) => ({
+      location: `/faqAnswers/${index}/answer`, span: question,
+      sourceFactIds: ['fixture-faq'], productClaimId: null,
+    })));
+    return generated;
+  }
+
+  it.each(['ordinary', 'reordered keys', 'parse-normalized whitespace'])
+  ('omits only redundant observed headings before reviewing unchanged article prose (%s)', async (variant) => {
+    const generated = variant === 'reordered keys'
+      ? Object.fromEntries(Object.entries(withQuestionBindings()).reverse()) as GeneratedDraftV2 : withQuestionBindings();
+    if (variant === 'parse-normalized whitespace') generated.description = `  ${generated.description}  `;
+    const original = structuredClone(generated);
+    const requests: StructuredOutputRequest[] = [];
+    const drafter = createStructuredDrafter({mediaAllowlist: [media], client: {async generate(request) {
+      requests.push(request);
+      if (request.name === 'videoclaw_article_draft_v2') return generated;
+      const input = request.input as Record<string, unknown>;
+      expect(request.name).toBe('videoclaw_article_critique_v1');
+      expect(input.draft).toEqual(draft);
+      expect(input.bindingManifest).toHaveLength(draft.claimBindings.length);
+      expect(input.draftNormalization).toMatchObject({
+        kind: 'omit_redundant_observed_faq_heading_bindings_v1',
+        receivedDraftHash: createHash('sha256').update(JSON.stringify(original)).digest('hex'),
+        parsedDraftHash: createHash('sha256').update(JSON.stringify(GeneratedDraftV2Schema.parse(original))).digest('hex'),
+        canonicalDraftHash: createHash('sha256').update(JSON.stringify(GeneratedDraftV2Schema.parse(draft))).digest('hex'),
+        removedBindingIndices: [draft.claimBindings.length, draft.claimBindings.length + 1, draft.claimBindings.length + 2],
+      });
+      throw new Error('independent critique boundary');
+    }}});
+    await expect(drafter.draft(context)).rejects.toThrow('independent critique boundary');
+    expect(generated).toEqual(original);
+    expect(requests).toHaveLength(2);
+  });
+
+  it.each(['unobserved question', 'wrong location', 'noncanonical location', 'product assertion', 'unknown fact',
+    'unselected source', 'duplicate fact', 'missing answer coverage', 'duplicate metadata', 'question inside answer'])
+  ('does not discard %s', async (variant) => {
+    const generated = structuredClone(draft);
+    const extra = {location: '/faqAnswers/0/answer', span: generated.faqAnswers[0].question,
+      sourceFactIds: ['fixture-faq'], productClaimId: null as string | null};
+    if (variant === 'unobserved question') generated.faqAnswers[0].question = extra.span = 'What is an unobserved question?';
+    if (variant === 'wrong location') extra.location = '/faqAnswers/1/answer';
+    if (variant === 'noncanonical location') extra.location = '/faqAnswers/00/answer';
+    if (variant === 'product assertion') extra.productClaimId = 'not-approved';
+    if (variant === 'unknown fact') extra.sourceFactIds = ['unknown-fact'];
+    if (variant === 'unselected source') generated.sourceReferences[0].sourceId = 'not-selected';
+    if (variant === 'duplicate fact') extra.sourceFactIds.push('fixture-faq');
+    if (variant === 'missing answer coverage') generated.claimBindings = generated.claimBindings.filter(b => b.location !== '/faqAnswers/0/answer');
+    if (variant === 'duplicate metadata') generated.claimBindings.push(structuredClone(extra));
+    if (variant === 'question inside answer') generated.faqAnswers[0].answer += ` ${extra.span}`;
+    generated.claimBindings.push(extra);
+    const drafter = createStructuredDrafter({mediaAllowlist:[media], client:{async generate(request) {
+      if (request.name === 'videoclaw_article_draft_v2') return generated;
+      expect((request.input as Record<string, unknown>).draft).toEqual(generated);
+      expect(request.input).not.toHaveProperty('draftNormalization');
+      throw new Error('unchanged invalid metadata boundary');
+    }}});
+    await expect(drafter.draft(context)).rejects.toThrow('unchanged invalid metadata boundary');
+  });
+});
 
 function withSourceClaim(span: string, factId = 'yc-bullets'): GeneratedDraftV2 {
   return {
