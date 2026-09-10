@@ -4,8 +4,10 @@
 
 The fresh template run completed automatic research, source retrieval, FAQ
 preparation, generation and independent critique. It failed before repair and
-native QA. The invalid FAQ metadata that prevented repair is now corrected in
-code and reproduced against the unchanged captured draft. **A successful
+native QA. The metadata correction then passed a separate paid critique/repair/
+verification diagnostic. Native blog tests and lint passed, but its build found
+an empty secondary-keyword array. The worker's serialization fallback is now
+corrected and tested; post-fix native revalidation is separate below. **A successful
 uninterrupted live article is still unproven.**
 
 Scope remains worker PR #1, `automation/persistent-autoblogger-v1` into
@@ -92,5 +94,55 @@ locations, missing answer coverage, unobserved questions and actual answer text.
 
 Independent review identified test typing and audit-hash naming issues; both were
 corrected, including separate received/parsed/canonical hashes and regressions.
-The follow-up paid retained-input repair diagnostic, if run, must be reported
-separately from a new whole-worker proof.
+The independent bounded re-review was clean; no remaining findings.
+
+## Paid retained-input repair diagnostic
+
+`faq-metadata-live-diagnostic-2026-09-10` ran at `299ec90`. It reused the exact
+captured research and original generated draft, not a fresh research/generation
+run. Updated composition instructions were recorded; evidence and the generation
+schema matched the original request. Code removed the three redundant heading
+bindings before a new independent critique. No previous verdict was reused.
+
+| Request | Input tokens | Output tokens |
+| --- | ---: | ---: |
+| Fresh critique | 27,080 | 15,251 |
+| One bounded repair | 48,159 | 17,655 |
+| Final independent verification | 24,715 | 15,116 |
+
+All returned HTTP 200. Mechanical repair, final semantic verification and exact
+source-use/growth checks passed. Final derived counts were **87 / 61 / 50 / 54**,
+all below their captured 120-word ceilings and the 180-word hard limits. No new
+semantic issues remained. The diagnostic reached native QA in an isolated clone
+of lander `b6b0833c78443b44b12bf6d33f05baa7ac8427d3`.
+
+Native `check:blog` and lint passed. The Next build correctly rejected
+`secondaryKeywords: []`, which violates the lander's minimum-one contract. The
+disposable checkout was cleaned up. The original lander, state and all previous
+receipts were unchanged; no accepted native artifact or worker success resulted.
+
+## Observed secondary-keyword serialization
+
+Explicit candidate secondary keywords remain unchanged. When absent, the
+materializer selects at most one distinct, on-topic query from captured
+autocomplete or related-search evidence. That complete normalized phrase must
+occur within a visible article span or FAQ question/title; no matching across
+field boundaries or using private competitor-gap/source-inventory text.
+Uncovered modifiers, unrelated queries and a duplicate primary keyword cannot
+fill the field. With no suitable observation, materialization fails explicitly.
+
+The captured template context contains the real autocomplete phrase `testimonial
+video example`, which is covered by its visible FAQ and reviewed answer. This
+fills metadata without changing the candidate identity, article copy, evidence,
+metric status or approvals. It does not assert measured search volume.
+
+Six new consumer regressions failed before correction. An initial assertion
+expected the descriptive error instead of the error class's finding code; it was
+corrected without changing the gate. Full verification now passes **2,514 tests
+across 58 files**, zero failures/skips, plus lint, typecheck and worker build.
+Independent focused review passed 493 content-bundle tests and eight additional
+boundary probes, with no actionable findings. Existing build warnings remain.
+
+The next native check must reuse the unchanged independently reviewed repaired
+copy and captured ceilings, not a new model verdict, and report itself as saved-
+review revalidation rather than a successful new worker run.

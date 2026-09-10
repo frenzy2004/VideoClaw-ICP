@@ -5,16 +5,20 @@ No lander source changes, article publishing, production merge, deployment or sc
 
 ## FAQ metadata and fresh template attempt — 2026-09-10 Malaysia time
 
-The [current checkpoint](FAQ-METADATA-PROOF-2026-09-10.md) passes **2,508 tests
+The [current checkpoint](FAQ-METADATA-PROOF-2026-09-10.md) passes **2,514 tests
 across 58 files**, no failures/skips, plus lint, typecheck and worker build.
 Existing dependency warnings remain. Thirteen focused cases exercise the actual
-critique boundary and received/parsed/canonical hash identities.
+critique boundary and received/parsed/canonical hash identities. Six additional
+cases cover observed secondary-keyword serialization and fail-closed behavior.
 
 The fresh template run reached generation and independent critique, but invalid
 FAQ heading metadata and source overuse blocked repair/native QA. Offline replay
 proves the metadata correction without changing article text, evidence or failed
 history; ambiguous references and source accounting still require fresh review.
-This is not a successful uninterrupted live article.
+The later paid diagnostic passed all draft/repair/review gates and reached native
+QA, where an empty secondary-keyword list failed build. That serializer defect
+is corrected; native revalidation must be reported separately. This is not a
+successful uninterrupted live article.
 
 ## Previous review ownership and topic screening — 2026-09-10 Malaysia time
 

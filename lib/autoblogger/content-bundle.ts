@@ -1494,6 +1494,31 @@ function funnelStage(stage: Candidate['funnelStage']): 'awareness' | 'considerat
   return { top: 'awareness', middle: 'consideration', bottom: 'decision' }[stage] as 'awareness' | 'consideration' | 'decision';
 }
 
+function secondaryKeywordsForArticle(context: DraftingContext, draft: GeneratedDraftV2): string[] {
+  if (context.candidate.secondaryKeywords.length) return [...context.candidate.secondaryKeywords];
+  const primary = normalizeKeyword(context.candidate.primaryKeyword);
+  const framing = new Set(['a', 'an', 'the', 'how', 'to', 'make', 'create', 'for', 'of', 'in', 'on', 'and', 'with',
+    'is', 'your', 'our', 'guide', 'guides', 'template', 'templates', 'example', 'examples', 'checklist', 'checklists']);
+  const topic = primary.split(' ').filter(token => !framing.has(token));
+  // An observed secondary phrase must actually be covered on the page. Do not
+  // concatenate fields: that could invent a match across sentence boundaries.
+  const publicSpans = [context.candidate.title, ...draft.faqAnswers.map(faq => faq.question),
+    ...generatedClaimSentences(draft).filter(entry => entry.location !== '/competitorGap').map(entry => entry.span)]
+    .map(span => ` ${normalizeKeyword(span)} `);
+  for (const observed of [...context.evidence.signals.autocomplete, ...context.evidence.signals.relatedSearches]) {
+    if (observed.length > 200 || containsSecretLikeValue(observed) || !isFormatControlFree(observed)) continue;
+    const keyword = normalizeKeyword(observed);
+    const tokens = new Set(keyword.split(' '));
+    if (!keyword || keyword === primary || !topic.length || !topic.every(token => tokens.has(token))) continue;
+    if (publicSpans.some(span => span.includes(` ${keyword} `))) return [keyword];
+  }
+  // Never duplicate the primary keyword or fabricate a query to satisfy the
+  // native contract. Preserve candidate identity; this is evidence enrichment
+  // in serialization, not a new candidate, demand claim, or publish approval.
+  throw new DraftMaterializationError([finding('content.secondary_keyword_missing',
+    'An observed, on-topic secondary keyword covered by the article is required; collect evidence rather than inventing metadata.')]);
+}
+
 export function materializeDraftBundle(
   context: DraftingContext,
   value: unknown,
@@ -1532,7 +1557,7 @@ export function materializeDraftBundle(
     customerTrigger: draft.customerTrigger,
     funnelStage: funnelStage(context.candidate.funnelStage),
     primaryKeyword: context.candidate.primaryKeyword,
-    secondaryKeywords: context.candidate.secondaryKeywords,
+    secondaryKeywords: secondaryKeywordsForArticle(context, draft),
     searchIntent: context.candidate.intent,
     competitorGap: draft.competitorGap,
     provenance: context.provenance,

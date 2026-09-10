@@ -468,6 +468,30 @@ describe('content bundle materialization', () => {
     )).toThrow(/media input/i);
   });
 
+  it.each(['autocomplete', 'relatedSearches'] as const)('fills an empty secondary-keyword list only from covered %s evidence', (signal) => {
+    const local = structuredClone(context);
+    local.candidate.secondaryKeywords = [];
+    local.evidence.signals.autocomplete = [];
+    local.evidence.signals.relatedSearches = [];
+    local.evidence.signals[signal] = [candidate.primaryKeyword, 'founder pitch video free download', 'founder pitch video'];
+    const original = structuredClone(local);
+    const bundle = materializeDraftBundle(local, generatedDraft, mediaAllowlist[0]);
+    expect(matter(bundle.markdown).data.secondaryKeywords).toEqual(['founder pitch video']);
+    expect(local).toEqual(original);
+    expect(bundle.article).toMatchObject({status:'review', approvals:{copy:false, factual:false, legal:false, visual:false}});
+  });
+
+  it.each(['no observations', 'primary only', 'uncovered modifier', 'unrelated phrase'])
+  ('blocks empty secondary keywords with %s instead of inventing metadata', (variant) => {
+    const local = structuredClone(context);
+    local.candidate.secondaryKeywords = [];
+    local.evidence.signals.autocomplete = variant === 'primary only' ? [candidate.primaryKeyword]
+      : variant === 'uncovered modifier' ? ['founder pitch video free download']
+      : variant === 'unrelated phrase' ? ['a tested next step'] : [];
+    local.evidence.signals.relatedSearches = [];
+    expect(() => materializeDraftBundle(local, generatedDraft, mediaAllowlist[0])).toThrow('content.secondary_keyword_missing');
+  });
+
   it('serializes the exact review-state lander fields and a deterministic escaped 1200x675 SVG', () => {
     const media = selectProductMedia(candidate, mediaAllowlist);
     if (!media) throw new Error('Fixture media mapping missing.');
