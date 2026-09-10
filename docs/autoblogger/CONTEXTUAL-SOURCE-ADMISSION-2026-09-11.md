@@ -43,3 +43,17 @@ The corrective code now exposes explicit `passageIndex` fields to the model. A w
 Latest state: **29 runs / 50 failure records**, no active pilot, SHA-256 `2760807b10bbdbf71929fd73a327ed6afe1f4639b384478579d714733d5d6739`. Full fresh article-to-native-QA proof remains outstanding. No failed candidate is reset or renamed to retry it.
 
 After the reference correction, **2,681 tests across 60 files pass**, zero failed/pending, plus lint, typecheck and build. Independent follow-up review found no P1/P2 issue in the correction. Evidence: `artifacts/autoblogger/contextual-source-reference-suite-2026-09-11.json`; 36 focused admission tests cover the new behavior. The staged diff was checked against both runtime credentials; neither is present. The generic secret-pattern screen matched environment-variable references and synthetic test fixtures, not exposed credentials.
+
+## Fresh comparison run on committed code
+
+`agency-comparison-live-proof-2026-09-11` ran at commit `2dc55ed` using unchanged, previously unattempted backlog record `vc-c3-001`, `video agency vs freelance video editor`. It collected eight organic results and nine initial questions, then passed source admission. Three source bodies were selected: a YC-hosted startup video-editor role (primary evidence for that role, not general market rates), Moonb's editing-cost guide and a LinkedIn practitioner primer. Source admission did not certify all claims on those pages.
+
+SERP: `sbcOhLrLdwAmv96cT` / `91AoAhiwhvj26ucbN`. Support search: `Ql1NXSnIhbwxIYTQR` / `PifkQWnzb2dgY6USx`. Autocomplete: `i32uOIjeDHdtssm5x` / `5MRTB01aNAGxscE3K`. PAA: `DYTGYsbQO8heNwX2Q` / `uxKQNc0Vn6lLNKwSI`, following `ZQNT7TtBk6FjdonUm` / `yorqaZbbN2mk5IMNj`.
+
+The second model call, FAQ preparation, returned `insufficient_evidence`. The full 19-question observation pool was also inspected: it predominantly concerned editing rules, editor rankings, AI replacing jobs and freelance charging, rather than three distinct supported questions about a startup's agency-versus-freelancer decision. This is a content-evidence rejection, not a retrieval failure. No FAQ was fabricated or rewritten to force eligibility; no article or native QA result was produced.
+
+Current state: **30 runs / 51 failure records**, no active pilot, SHA-256 `a2fa39b412e28aacd5d241ba910cf187c3534f58d1b056e7590ddc63d3f45910`. Both new attempts remain failed. Code remains verified by the 2,681-test suite and all build checks. Next: qualify a topic's observed questions and supporting sources before another full drafting attempt; do not recycle terminal identities or weaken FAQ requirements. The uninterrupted fresh article milestone remains open.
+
+## Skills used
+
+`systematic-debugging` guided root-cause isolation; `writing-plans` kept the contextual-review scope explicit; `test-driven-development` required failing regressions before changes; `dispatching-parallel-agents` isolated runtime wiring; `requesting-code-review` and `receiving-code-review` supplied independent review and tested corrections; `verification-before-completion` required full tests/build and honest separation of component evidence from whole-worker success.

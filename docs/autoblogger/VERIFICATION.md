@@ -3,7 +3,7 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-Latest: [contextual source admission](CONTEXTUAL-SOURCE-ADMISSION-2026-09-11.md). Fresh retrieval plus one model call admits four previously rejected guide pages. A later untouched backlog attempt remains failed on an exact quote's wrong paragraph index; code now resolves only unique same-page body matches and retains/revalidates the reported index. URL/request bounds, one shared audit sequence, six-call local cap, independent critique and one repair remain enforced. State is 29 runs / 50 failure records. Uninterrupted fresh worker-to-native-QA proof is still outstanding.
+Latest: [contextual source admission](CONTEXTUAL-SOURCE-ADMISSION-2026-09-11.md), **2,681 tests across 60 files**, zero failed/pending, plus lint/typecheck/build. Contextual source selection and auditable quote-index correction are verified. A fresh comparison attempt on committed code passed source verification but returned insufficient FAQ evidence; no article was forced through. State is 30 runs / 51 failure records. URL/request bounds, shared audit ordinals, six local calls, independent critique and one repair remain enforced. Uninterrupted fresh worker-to-native-QA proof is still outstanding.
 
 The preceding [source retrieval checkpoint](SOURCE-RETRIEVAL-2026-09-11.md) retains its historical 2,629-test verification and two failed worker attempts. No old failure has been relabeled as success.
 
