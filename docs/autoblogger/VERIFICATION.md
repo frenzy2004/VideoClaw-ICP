@@ -3,7 +3,9 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-Latest: [source retrieval checkpoint](SOURCE-RETRIEVAL-2026-09-11.md), **2,629 tests passing**, zero failures/pending, plus lint/typecheck/build. Fresh body retrieval from retained SERP URLs automatically selects three pages including one scoped first-party authority. The subsequent buyer-intent attempt remains failed on contextual-source admission; state is 28 runs / 48 failure records. Uninterrupted fresh worker-to-native-QA proof remains outstanding; failed records were not reset.
+Latest: [contextual source admission](CONTEXTUAL-SOURCE-ADMISSION-2026-09-11.md). Fresh retrieval plus one model call admits four previously rejected guide pages. A later untouched backlog attempt remains failed on an exact quote's wrong paragraph index; code now resolves only unique same-page body matches and retains/revalidates the reported index. URL/request bounds, one shared audit sequence, six-call local cap, independent critique and one repair remain enforced. State is 29 runs / 50 failure records. Uninterrupted fresh worker-to-native-QA proof is still outstanding.
+
+The preceding [source retrieval checkpoint](SOURCE-RETRIEVAL-2026-09-11.md) retains its historical 2,629-test verification and two failed worker attempts. No old failure has been relabeled as success.
 
 The preceding [observation and editorial-review checkpoint](OBSERVATION-AND-EDITORIAL-REVIEW-2026-09-10.md) supersedes the collection-stage lexical gate described below. Collection proposes safe observed questions; mandatory body-anchored preparation and independent review establish semantic acceptance. Historical run outcomes remain unchanged. Counts in the dated sections below describe those historical checkpoints, not the current suite.
 

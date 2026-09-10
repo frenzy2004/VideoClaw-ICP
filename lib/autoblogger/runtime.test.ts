@@ -1,15 +1,80 @@
 import { mkdir, mkdtemp, readFile, stat, symlink } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { CandidateSchema, EvidenceBundleSchema, KeywordMetricsSchema, candidateFingerprints } from './domain';
-import { writeAutobloggerArtifacts, buildDraftingContextFromResearch, loadBacklogCandidates, createProductionAutobloggerRuntime, createRuntimeDraftClient } from './runtime';
+import { writeAutobloggerArtifacts, buildDraftingContextFromResearch, loadBacklogCandidates, createProductionAutobloggerRuntime, createProductionSourceChecker, createRuntimeDraftClient } from './runtime';
 import { validateAutobloggerEnvironment } from './cli';
 import { createPersistentWorkerState } from './github-runtime';
 import type { HttpRequest, HttpTransport } from './http';
 import type { ResearchResult, ShallowResearchResult } from './research';
 import { createSafeSourceChecker } from './sources';
+import * as sourceModule from './sources';
+import * as runtimeHttp from './runtime-http';
+
+afterEach(() => vi.restoreAllMocks());
+
+const reviewUrls = ['https://www.ycombinator.com/library/video', 'https://example.com/video'];
+const reviewOptions = { query: 'demo day video', articleTitle: 'Demo Day Video', questions: [] };
+
+function offlineSourceTransport() {
+  vi.spyOn(runtimeHttp, 'createNodeDnsResolver').mockReturnValue(async () => ['93.184.216.34']);
+  vi.spyOn(runtimeHttp, 'createNodeSourceHttpTransport').mockReturnValue(async request => ({
+    status: 200, url: request.url, redirected: false, peerAddress: request.allowedPeerAddresses[0],
+    headers: { 'content-type': 'text/html' },
+    body: (async function* () { yield new TextEncoder().encode('<main><p>Rehearse the demo day video before presenting the product to the audience.</p></main>'); })(),
+  }));
+}
+
+it('uses the supplied source reviewer and propagates its failure without lexical fallback or retry', async () => {
+  offlineSourceTransport();
+  let calls = 0;
+  const checker = createProductionSourceChecker({ async generate() { calls++; throw new Error('offline source review failed'); } });
+  await expect(checker.selectWithContent(reviewUrls, reviewOptions)).rejects.toThrow('offline source review failed');
+  expect(calls).toBe(1);
+});
+
+it.each(['pilot', 'research'] as const)('wires configured article review while preserving credential-free research: %s', async command => {
+  offlineSourceTransport();
+  const checkerFactory = vi.spyOn(sourceModule, 'createSafeSourceChecker');
+  const root = await mkdtemp(join(tmpdir(), 'autoblogger-source-wiring-'));
+  await mkdir(join(root, '.git'));
+  const requests: HttpRequest[] = [];
+  const config = validateAutobloggerEnvironment(command, {
+    APIFY_TOKEN: 'fixture-apify', ...(command === 'pilot' ? { OPENAI_API_KEY: 'fixture-model' } : {}),
+    KEYWORD_PROVIDER: 'pending', GITHUB_TOKEN: 'fixture-state', GITHUB_REPOSITORY: 'owner/icp',
+    LANDER_REPOSITORY: root, LANDER_OWNER: 'owner', LANDER_NAME: 'lander', LANDER_BASE_REF: 'feature',
+    LANDER_READ_TOKEN: 'github_pat_read_inventory_fixture_123456',
+    OPENAI_REASONING_EFFORT: 'high', OPENAI_MAX_OUTPUT_TOKENS: '48000', OPENAI_TIMEOUT_MS: '600000',
+  });
+  const transport: HttpTransport = async request => {
+    requests.push(request);
+    const url = new URL(request.url);
+    if (url.hostname === 'api.openai.com') return { status: 503, headers: {}, body: { error: 'offline source review unavailable' } };
+    expect(url.hostname).toBe('api.github.com');
+    expect(request.method).toBe('GET');
+    let body: unknown;
+    if (url.pathname.endsWith('/git/ref/heads/feature')) body = { object: { sha: 'a'.repeat(40) } };
+    else if (url.pathname.endsWith('/pulls/55')) body = { state: 'open', merged: false, base: { ref: 'main' } };
+    else if (url.pathname.includes('/git/trees/')) body = { tree: [], truncated: false };
+    else if (url.pathname.endsWith('/pulls') || url.pathname.endsWith('/git/matching-refs/heads/')) body = [];
+    else throw new Error(`Unexpected endpoint: ${url.pathname}`);
+    return { status: 200, headers: {}, body };
+  };
+  await createProductionAutobloggerRuntime(config, process.cwd(), { transport });
+  const checker = checkerFactory.mock.results[0].value as ReturnType<typeof createSafeSourceChecker>;
+  if (command === 'pilot') {
+    await expect(checker.selectWithContent(reviewUrls, reviewOptions)).rejects.toThrow('offline source review unavailable');
+    const modelRequests = requests.filter(({ url }) => url === 'https://api.openai.com/v1/responses');
+    expect(modelRequests).toHaveLength(1);
+    expect(JSON.parse(modelRequests[0].body!)).toMatchObject({ model: 'gpt-5.5', reasoning: { effort: 'high' }, max_output_tokens: 48000 });
+  } else {
+    expect((await checker.selectWithContent(reviewUrls, reviewOptions)).sourceDocuments).toHaveLength(2);
+    expect(requests.every(({ url }) => new URL(url).hostname === 'api.github.com')).toBe(true);
+    await expect(createRuntimeDraftClient(config, transport).generate({ name: 'unconfigured', schema: {}, system: '', input: {} })).rejects.toThrow('OPENAI_API_KEY');
+  }
+});
 
 it('carries CLI quality settings through the production runtime to the Responses API', async () => {
   const config = validateAutobloggerEnvironment('pilot', {

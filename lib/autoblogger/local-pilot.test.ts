@@ -1,12 +1,26 @@
-import { describe, expect, it } from 'vitest';
-import { CandidateSchema, candidateFingerprints } from './domain';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { CandidateSchema, EvidenceBundleSchema, candidateFingerprints } from './domain';
 import { createPersistentWorkerState, PersistentWorkerStateSchema, compactPersistentWorkerState } from './github-runtime';
 import { grantManualRetryApproval, markCandidateFailure, markCandidateCompleted, markCandidateScanned, reserveCandidate, reserveManualPilot, buildIncrementalQueue } from './recovery';
-import { reconcileLocalPilotCandidate, createModelAuditTransport, inspectLocalPilotInventory, parseLocalPilotArguments, readLocalPilotCandidateFile, validateEngineeringResumeEvidence, readLocalEngineeringResumeEvidence, validateQualityRevalidationEvidence, readLocalQualityRevalidationEvidence } from './local-pilot';
+import { reconcileLocalPilotCandidate, createModelAuditTransport, inspectLocalPilotInventory, parseLocalPilotArguments, readLocalPilotCandidateFile, validateEngineeringResumeEvidence, readLocalEngineeringResumeEvidence, validateQualityRevalidationEvidence, readLocalQualityRevalidationEvidence, runLocalArtifactPilot } from './local-pilot';
 import { createHash } from 'node:crypto';
-import { mkdtemp, mkdir, writeFile, chmod, symlink } from 'node:fs/promises';
+import { mkdtemp, mkdir, readFile, readdir, realpath, writeFile, chmod, symlink } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import * as childProcess from 'node:child_process';
+import * as runtime from './runtime';
+import * as runtimeHttp from './runtime-http';
+import * as researchModule from './research';
+import * as draftingModule from './drafting';
+import type { SourceRelevanceReceipt } from './source-admission';
+
+vi.mock('node:child_process', async importOriginal => {
+  const actual = await importOriginal<typeof import('node:child_process')>();
+  const mocked = { ...actual, execFileSync: vi.fn(actual.execFileSync) };
+  return { ...mocked, default: mocked };
+});
+
+afterEach(() => { vi.resetAllMocks(); vi.restoreAllMocks(); vi.unstubAllEnvs(); });
 
 const original = CandidateSchema.parse({
   schemaVersion: 1, articleId: 'vc-c2-001', campaignId: 'accelerator-demo-day-founder', icp: 'accelerator-demo-day-founder',
@@ -1248,7 +1262,173 @@ describe('local artifact-only pilot preflight', () => {
   });
 });
 
+describe('local pilot source review and drafting wiring', () => {
+  it.each(['receipt', 'no-receipt', 'review-failure'] as const)('shares one replay audit sequence and keeps source diagnostics private: %s', async mode => {
+    // Entire execution uses a disposable filesystem, synthetic provider responses,
+    // and blocked subprocesses. No real checkout, credentials or paid APIs are used.
+    const temporary = await realpath(await mkdtemp(join(tmpdir(), 'autoblogger-pilot-wiring-')));
+    const root = join(temporary, 'worker');
+    const lander = join(temporary, 'videoclaw-lander-blog-launch');
+    const statePath = join(root, 'artifacts/autoblogger/local-pilot-2026-09-06/state.json');
+    const contextDirectory = join(root, 'artifacts/autoblogger/pilot-completion-2026-09-06/context');
+    await mkdir(join(root, 'artifacts/autoblogger/local-pilot-2026-09-06'), { recursive: true });
+    await mkdir(contextDirectory, { recursive: true });
+    await mkdir(join(lander, 'content/articles'), { recursive: true });
+    const input = fixture();
+    await writeFile(statePath, JSON.stringify(input.state));
+    await writeFile(join(contextDirectory, 'validation-report.json'), JSON.stringify({ context: { candidate: refined } }));
+    vi.spyOn(runtime, 'loadBacklogCandidates').mockResolvedValue(input.backlog);
+    vi.mocked(childProcess.execFileSync).mockImplementation(((file: string, args: string[]) => {
+      if (file === 'git') {
+        if (args[2] === 'check-ignore' || args[2] === 'status') return '';
+        if (args[2] === 'branch') return 'seo/founder-video-blog-launch';
+        if (args[2] === 'rev-parse') return 'a'.repeat(40);
+      }
+      if (file === 'gh' && args.includes('GET')) {
+        const path = args.at(-1)!;
+        if (path.includes('/git/ref/heads/')) return JSON.stringify({ object: { sha: 'a'.repeat(40) } });
+        if (path.endsWith('/pulls/55')) return JSON.stringify({ state: 'open', merged: false });
+        if (path.includes('/git/trees/')) return JSON.stringify({ tree: [], truncated: false });
+        if (args.includes('--paginate')) return '[[]]';
+      }
+      throw new Error(`Unexpected subprocess: ${file}`);
+    }) as typeof childProcess.execFileSync);
+    for (const name of ['GITHUB_EVENT_NAME', 'AUTOBLOG_SCHEDULE_ENABLED', 'LANDER_GITHUB_TOKEN', 'OPENAI_MODEL', 'OPENAI_REASONING_EFFORT', 'OPENAI_MAX_OUTPUT_TOKENS', 'OPENAI_TIMEOUT_MS']) vi.stubEnv(name, undefined);
+    vi.stubEnv('APIFY_TOKEN', 'fixture-apify');
+    vi.stubEnv('OPENAI_API_KEY', 'fixture-model');
+    const output: string[] = [];
+    vi.spyOn(process.stdout, 'write').mockImplementation(chunk => { output.push(String(chunk)); return true; });
+    const prose = 'Rehearse the demo day video checklist before presenting the product to the audience.';
+    const urls = ['https://www.ycombinator.com/library/video', ...Array.from({ length: 5 }, (_, index) => `https://example.com/video-${index}`)];
+    vi.spyOn(runtimeHttp, 'createNodeDnsResolver').mockReturnValue(async () => ['93.184.216.34']);
+    vi.spyOn(runtimeHttp, 'createNodeSourceHttpTransport').mockReturnValue(async request => ({
+      status: 200, url: request.url, redirected: false, peerAddress: request.allowedPeerAddresses[0],
+      headers: { 'content-type': 'text/html' },
+      body: (async function* () { yield new TextEncoder().encode(`<main><p>${prose}</p></main>`); })(),
+    }));
+    const phases: string[] = [];
+    let receipt: SourceRelevanceReceipt | undefined;
+    vi.spyOn(runtimeHttp, 'createNodeJsonHttpTransport').mockReturnValue(async request => {
+      expect(request.url).toBe('https://api.openai.com/v1/responses');
+      const body = JSON.parse(request.body!);
+      const phase = body.text.format.name;
+      phases.push(phase);
+      let response: unknown = {};
+      if (phase === 'videoclaw_source_relevance_v1') {
+        if (mode === 'review-failure') return { status: 503, headers: {}, body: { error: 'offline admission failure' } };
+        const inventory = JSON.parse(body.input[1].content[0].text) as { contextHash: string; documents: { id: string }[] };
+        response = { schemaVersion: 1, contextHash: inventory.contextHash,
+          decisions: inventory.documents.map(doc => ({ documentId: doc.id, relevant: true,
+            reason: 'This synthetic body explains video rehearsal.', anchors: [{ passageIndex: 0, excerpt: prose }] })) };
+      }
+      return { status: 200, headers: {}, body: { status: 'completed', output: [{ type: 'message', content: [{ type: 'output_text', text: JSON.stringify(response) }] }] } };
+    });
+    const questions = ['What is a demo day video checklist?', 'How do you plan a demo day video checklist?', 'Why does a demo day video checklist matter?'];
+    const shallow: researchModule.ShallowResearchResult = {
+      candidate: refined, suggestions: [refined.primaryKeyword], peopleAlsoAsk: questions, relatedQueries: [],
+      organicResults: urls.map(url => ({ url, title: refined.title, snippet: 'Synthetic search result.', resultType: 'article' })),
+      provenance: { discovery: { actorId: 'autocomplete', runId: 'discovery', datasetId: 'discovery-data', observedAt: at },
+        serp: { actorId: 'serp', runId: 'serp', datasetId: 'serp-data', observedAt: at } },
+    };
+    vi.spyOn(researchModule, 'createResearcher').mockImplementation(({ sourceChecker }) => ({
+      async scan() { return { scannedCount: 1, results: [shallow] }; },
+      async inspect() {
+        const selected = await sourceChecker.selectWithContent!(urls, { query: refined.primaryKeyword, articleTitle: refined.title, questions });
+        receipt = selected.sourceRelevanceReceipt;
+        return { scannedCount: 1, deepInspectionCount: 1, results: [{ candidate: refined, provenance: shallow.provenance,
+          sourceDocuments: selected.sourceDocuments, ...(mode === 'receipt' && receipt ? { sourceRelevanceReceipt: receipt } : {}),
+          evidence: EvidenceBundleSchema.parse({ schemaVersion: 2, candidateFingerprint: fingerprint,
+            signals: { autocomplete: shallow.suggestions, peopleAlsoAsk: questions, relatedSearches: [] },
+            serp: { organicResultCount: 2, peopleAlsoAsk: questions }, sources: selected.sources, faqQuestions: questions }),
+        }] };
+      },
+      async research() { throw new Error('Unexpected combined research call.'); },
+    }));
+    const draftPhases = ['videoclaw_article_draft_v2', 'videoclaw_article_critique_v1', 'videoclaw_article_repair_v2', 'videoclaw_article_repair_verification_v1'];
+    vi.spyOn(draftingModule, 'createStructuredDrafter').mockImplementation(({ client }) => ({
+      async prepareEvidence(context) {
+        await client.generate({ name: 'videoclaw_faq_evidence_v1', schema: {}, system: 'Synthetic FAQ preparation.', input: {} });
+        return context;
+      },
+      async draft() {
+        for (const name of draftPhases) await client.generate({ name, schema: {}, system: 'Synthetic drafting stage.', input: {} });
+        return { status: 'blocked', reason: 'content_safety_failed', findings: [{ code: 'fixture.completed', message: 'Synthetic audit sequence completed.', repairInstruction: 'No further calls.' }] };
+      },
+    }));
+    const report = await runLocalArtifactPilot({ root, runId: input.runId });
+    const expectedPhases = mode === 'review-failure' ? ['videoclaw_source_relevance_v1']
+      : ['videoclaw_source_relevance_v1', 'videoclaw_faq_evidence_v1', ...draftPhases];
+    expect(phases).toEqual(expectedPhases);
+    expect(report.status).toBe('failed');
+    expect(report.failures).toContainEqual(expect.objectContaining(mode === 'review-failure'
+      ? { code: 'deep_inspection_failed', detail: expect.stringContaining('offline admission failure') }
+      : { code: 'candidate_failed', detail: expect.stringContaining('fixture.completed') }));
+    const directory = join(root, 'artifacts/autoblogger', input.runId);
+    const audit = JSON.parse(await readFile(join(directory, 'execution-audit/validation-report.json'), 'utf8'));
+    const events = audit.events as { stage: string; phase?: string; call?: number }[];
+    expect(events.filter(event => event.stage === 'model_stage_started').map(event => event.phase)).toEqual(expectedPhases);
+    expect(events.filter(event => event.stage === 'model_response_retained').map(({ call, phase }) => ({ call, phase })))
+      .toEqual(expectedPhases.map((phase, index) => ({ call: index + 1, phase })));
+    const sourceStart = events.findIndex(event => event.stage === 'source_inspection_started');
+    expect(events[sourceStart + 1]).toMatchObject({ stage: 'model_stage_started', phase: 'videoclaw_source_relevance_v1' });
+    if (mode !== 'review-failure') expect(events[sourceStart + 3]).toMatchObject({ stage: 'source_inspection_completed' });
+    const replayNames = await readdir(join(directory, 'replay'));
+    expect(replayNames.filter(name => name.startsWith('request-'))).toHaveLength(expectedPhases.length);
+    for (const [index, phase] of expectedPhases.entries()) {
+      for (const prefix of ['request', 'wire-request', 'response']) {
+        const retained = JSON.parse(await readFile(join(directory, 'replay', `${prefix}-${index + 1}-${phase}`, 'validation-report.json'), 'utf8'));
+        expect(retained.payload.call).toBe(index + 1);
+        expect(prefix === 'request' ? retained.payload.request.name : retained.payload.phase).toBe(phase);
+      }
+    }
+    if (mode !== 'review-failure') {
+      const inspection = JSON.parse(await readFile(join(directory, 'source-inspection/validation-report.json'), 'utf8'));
+      if (mode === 'receipt') {
+        expect(inspection.results[0].sourceRelevanceReceipt).toEqual(receipt);
+        expect(inspection.results[0].sourceRelevanceReceipt.documents).toEqual(urls.map((url, index) => ({
+          documentId: `source-${index + 1}`, url, bodySha256: expect.stringMatching(/^[a-f0-9]{64}$/u), checkedAt: expect.any(String),
+        })));
+        expect(inspection.results[0].sourceDocuments).toHaveLength(4);
+      }
+      else expect(inspection.results[0]).not.toHaveProperty('sourceRelevanceReceipt');
+      expect(JSON.stringify(inspection.results[0].sourceDocuments)).not.toContain(prose);
+    }
+    for (const publicText of [JSON.stringify(report), await readFile(statePath, 'utf8'), output.join('')]) {
+      expect(publicText).not.toContain('sourceRelevanceReceipt');
+      expect(publicText).not.toContain(prose);
+    }
+  });
+});
+
 describe('unmodified production model transport auditing', () => {
+  it.each(['success', 'http-failure', 'transport-failure'])('permits six explicitly bounded admission-and-drafting calls after %s, never seven', async outcome => {
+    let dispatched = 0;
+    const records: unknown[] = [];
+    const requests: unknown[] = [];
+    const transport = createModelAuditTransport(async () => {
+      dispatched++;
+      if (outcome === 'transport-failure') throw new Error('offline failure');
+      return { status: outcome === 'http-failure' ? 503 : 200, headers: {}, body: {} };
+    }, async record => { records.push(record); }, async record => { requests.push(record); }, { maxRequests: 6 });
+    const phases = ['source_admission', 'faq_preparation', 'draft', 'critique', 'repair', 'verify'];
+    for (const phase of phases) {
+      const request = { method: 'POST' as const, url: 'https://api.openai.com/v1/responses', headers: {},
+        body: JSON.stringify({ text: { format: { name: phase } } }), signal: new AbortController().signal };
+      if (outcome === 'transport-failure') await expect(transport(request)).rejects.toThrow('offline failure');
+      else expect((await transport(request)).status).toBe(outcome === 'http-failure' ? 503 : 200);
+    }
+    await expect(transport({ method: 'POST', url: 'https://api.openai.com/v1/responses', headers: {},
+      body: '{}', signal: new AbortController().signal })).rejects.toThrow(/limit|budget/i);
+    expect(dispatched).toBe(6);
+    expect(requests).toEqual(phases.map((phase, index) => ({ call: index + 1, phase, requestBody: JSON.stringify({ text: { format: { name: phase } } }) })));
+    expect(records).toHaveLength(outcome === 'transport-failure' ? 0 : 6);
+  });
+
+  it.each([0, 3, 7, 100, 4.5, NaN, Infinity])('rejects unsupported model budget %s before dispatch', maxRequests => {
+    expect(() => createModelAuditTransport(async () => { throw new Error('must not dispatch'); }, async () => {}, undefined,
+      { maxRequests } as Parameters<typeof createModelAuditTransport>[3])).toThrow(/budget/i);
+  });
+
   it.each(['success', 'transport-failure'])('permits five explicitly bounded preparation-stage calls after %s, never six', async outcome => {
     let dispatched = 0;
     const transport = createModelAuditTransport(async () => {

@@ -23,13 +23,14 @@ import {
   createSemrushKeywordProvider,
 } from './keyword-providers';
 import { intakeCampaignMatrices } from './matrices';
-import { createOpenAIResponsesClient } from './openai-responses';
+import { createOpenAIResponsesClient, type StructuredOutputClient } from './openai-responses';
 import { createProcessCommandBoundary, createPublisher, type ArticleInventoryEntry } from './publisher';
 import { assertPublicationAuth, createPreparedPublicationRuntime } from './publication-runtime';
 import { createResearcher, type ResearchResult, type ShallowResearchResult } from './research';
 import { createNodeDnsResolver, createNodeJsonHttpTransport, createNodeSourceHttpTransport } from './runtime-http';
 import { containsSecretLikeValue } from './secrets';
 import { createSafeSourceChecker } from './sources';
+import { createSourceRelevanceReviewer } from './source-admission';
 import { PRODUCTION_SOURCE_AUTHORITY_POLICIES } from './source-policy';
 import { SOURCE_TEXT_LIMIT, SOURCE_PASSAGE_LIMIT, SOURCE_PASSAGE_CHARACTER_LIMIT } from './source-extraction';
 import { consumePreparedManualPilot } from './recovery';
@@ -325,11 +326,12 @@ function providerFor(config: AutobloggerRuntimeEnvironment, transport: ReturnTyp
   return createPendingKeywordProvider();
 }
 
-export function createProductionSourceChecker() {
+export function createProductionSourceChecker(client?: StructuredOutputClient) {
   return createSafeSourceChecker({
     transport: createNodeSourceHttpTransport(),
     resolveHostname: createNodeDnsResolver(),
     authorityPolicies: PRODUCTION_SOURCE_AUTHORITY_POLICIES,
+    ...(client ? { relevanceReviewer: createSourceRelevanceReviewer(client) } : {}),
   });
 }
 
@@ -369,7 +371,8 @@ export async function createProductionAutobloggerRuntime(
     owner: config.landerOwner, repository: config.landerName, baseRef: config.landerBaseRef,
     blogLaunchPullRequest: 55, auth: readAuth,
   });
-  const sourceChecker = createProductionSourceChecker();
+  const client = createRuntimeDraftClient(config, transport);
+  const sourceChecker = createProductionSourceChecker(config.openaiApiKey ? client : undefined);
   const researcher = createResearcher({
     apify: createApifyClient({ token: config.apifyToken as string, transport }),
     sourceChecker,
@@ -383,7 +386,6 @@ export async function createProductionAutobloggerRuntime(
     },
     command: createProcessCommandBoundary(),
   });
-  const client = createRuntimeDraftClient(config, transport);
   const backlog = await loadBacklogCandidates(root);
   const worker = createAutobloggerWorker({
     backlog,

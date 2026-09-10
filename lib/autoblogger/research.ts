@@ -21,6 +21,7 @@ import { PAA_ACTOR_ID, normalizePaaRows, type PaaObservation } from './paa';
 import { isDiscoverySourceUrl, sourceDiscoveryQueries } from './source-policy';
 import { faqQuestionKey } from './faq-evidence';
 import { containsSecretLikeValue } from './secrets';
+import type { SourceRelevanceReceipt } from './source-admission';
 
 export const AUTOCOMPLETE_ACTOR_ID = 'automation-lab/google-autocomplete-scraper';
 export const SERP_ACTOR_ID = 'apify/google-search-scraper';
@@ -50,6 +51,7 @@ export type ResearchResult = {
   candidate: Candidate;
   evidence: EvidenceBundle;
   sourceDocuments?: SourceDocument[];
+  sourceRelevanceReceipt?: SourceRelevanceReceipt;
   paaObservations?: PaaObservation[];
   provenance: {
     discovery: ApifyObservationProvenance;
@@ -707,6 +709,7 @@ export function createResearcher(options: ResearcherOptions) {
               - Number(selectedQuestions.has(faqQuestionKey(left.question))))
             .slice(0, 30);
           results.push({ candidate, evidence, provenance,
+            ...(selection.sourceRelevanceReceipt ? {sourceRelevanceReceipt:selection.sourceRelevanceReceipt} : {}),
             ...(paaObservations.length ? {paaObservations} : {}),
             ...(selection.sourceDocuments.length ? {sourceDocuments:selection.sourceDocuments} : {}) });
         } catch (error) {

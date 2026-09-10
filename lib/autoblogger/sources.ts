@@ -4,6 +4,7 @@ import { createHash } from 'node:crypto';
 import { extractSourceBody, type SourceReadOptions, type SourcePassage } from './source-extraction';
 import { matchSourceTitleTasks, scoreSourceTopic, sourcePageIdentity } from './source-relevance';
 import { faqBodyMatches } from './faq-evidence';
+import { validateSourceRelevanceReceipt, type SourceRelevanceReceipt, type SourceRelevanceReviewer } from './source-admission';
 export type { SourceReadOptions, SourcePassage } from './source-extraction';
 
 import {
@@ -50,6 +51,8 @@ export type SourceDocument = CheckedSource & {
 export type SourceSelectionWithContent = {
   sources: Array<{ originalUrl: string; finalUrl: string; authoritative: boolean }>;
   sourceDocuments: SourceDocument[];
+  /** Private retrieval evidence, never public article copy or approval. */
+  sourceRelevanceReceipt?: SourceRelevanceReceipt;
 };
 
 type ContentSourceChecker = SafeSourceChecker & Required<Pick<SafeSourceChecker, 'read' | 'selectWithContent'>>;
@@ -64,6 +67,7 @@ export type SafeSourceCheckerOptions = {
   resolveHostname: DnsResolver;
   authorityPolicies?: readonly AuthorityPolicy[];
   limits?: Partial<SourceCheckLimits>;
+  relevanceReviewer?: SourceRelevanceReviewer;
 };
 
 const DEFAULT_LIMITS: SourceCheckLimits = {
@@ -396,7 +400,7 @@ function createSourceChecker(options: SafeSourceCheckerOptions, allowHttpForTest
       // prose. Keep the original document/passages unchanged for evidence use.
       const bodyText = document.passages.map(passage => passage.text.slice(passage.bodyStart ?? 0)).join('\n\n');
       const score = scoreSourceTopic(readOptions.query ?? '', bodyText);
-      if (!score) continue;
+      if (!score && !options.relevanceReviewer) continue;
       const key = sourcePageIdentity(document.finalUrl);
       const prior = relevant.get(key);
       if (!prior || Number(document.authoritative) > Number(prior.document.authoritative)
@@ -404,6 +408,23 @@ function createSourceChecker(options: SafeSourceCheckerOptions, allowHttpForTest
         relevant.set(key, { document, score, titleTasks: matchSourceTitleTasks(readOptions.query ?? '', readOptions.articleTitle ?? '', bodyText),
           faqQuestions: new Set((readOptions.questions ?? []).filter(question => document.passages.some(p => faqBodyMatches(question, p.text, p.bodyStart)))),
         });
+      }
+    }
+    let sourceRelevanceReceipt: SourceRelevanceReceipt | undefined;
+    if (options.relevanceReviewer) {
+      const documents = [...relevant.values()].map(item => item.document);
+      if (documents.length < 2 || !documents.some(document => document.authoritative)) {
+        throw new Error('Research requires two usable body evidence sources including one authoritative source before relevance review.');
+      }
+      // Isolate the reviewer from the source inventory. A configured reviewer
+      // failure cannot fall back to lexical matching or promote an authority.
+      const receipt = await options.relevanceReviewer(structuredClone(documents), structuredClone(readOptions));
+      sourceRelevanceReceipt = validateSourceRelevanceReceipt(documents, readOptions, receipt);
+      const admitted = new Set(sourceRelevanceReceipt.decisions.filter(decision => decision.relevant)
+        .map(decision => decision.documentId));
+      for (const [index, document] of documents.entries()) {
+        const key = sourcePageIdentity(document.finalUrl);
+        if (!admitted.has(`source-${index + 1}`)) relevant.delete(key);
       }
     }
     // Rank the whole supplied candidate set; early reachable pages must not
@@ -463,6 +484,7 @@ function createSourceChecker(options: SafeSourceCheckerOptions, allowHttpForTest
     return {
       sources: sourceDocuments.map(({ url, finalUrl, authoritative }) => ({ originalUrl: url, finalUrl, authoritative })),
       sourceDocuments,
+      ...(sourceRelevanceReceipt ? {sourceRelevanceReceipt} : {}),
     };
   }
 

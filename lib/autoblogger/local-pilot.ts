@@ -231,8 +231,8 @@ export function reconcileLocalPilotCandidate(input: LocalPilotCandidateInput) {
 
 export type ModelAuditRecord = { call: number; phase: string; httpStatus: number; response: unknown };
 export type ModelRequestAuditRecord = { call: number; phase: string; requestBody: string };
-export function createModelAuditTransport(transport: HttpTransport, record: (value: ModelAuditRecord) => Promise<void>, recordRequest?: (value: ModelRequestAuditRecord) => Promise<void>, options: {maxRequests: 4 | 5} = {maxRequests: 4}): HttpTransport {
-  if (options.maxRequests !== 4 && options.maxRequests !== 5) throw new Error('Local pilot model budget must be four or five requests.');
+export function createModelAuditTransport(transport: HttpTransport, record: (value: ModelAuditRecord) => Promise<void>, recordRequest?: (value: ModelRequestAuditRecord) => Promise<void>, options: {maxRequests: 4 | 5 | 6} = {maxRequests: 4}): HttpTransport {
+  if (options.maxRequests !== 4 && options.maxRequests !== 5 && options.maxRequests !== 6) throw new Error('Local pilot model budget must be four, five or six requests.');
   const maxRequests = options.maxRequests;
   let calls = 0;
   return async (request) => {
@@ -515,6 +515,7 @@ export async function runLocalArtifactPilot(options: LocalPilotArguments & { roo
     await recheckQuality();
     await stateStore.save(prepared.state, initial.version);
     const http = createNodeJsonHttpTransport();
+    // One admission, one FAQ preparation, draft, critique, one repair and verification.
     const transport = createModelAuditTransport(async request => {
       if (request.method === 'POST') await recheckQuality();
       return http(request);
@@ -522,11 +523,12 @@ export async function runLocalArtifactPilot(options: LocalPilotArguments & { roo
       await replay(`response-${record.call}-${record.phase}`, record);
       await audit(record, `model-${record.call}-${record.phase}`);
       event('model_response_retained', { call: record.call, phase: record.phase, httpStatus: record.httpStatus });
-    }, (record) => replay(`wire-request-${record.call}-${record.phase}`, record), {maxRequests: 5});
-    const researcher = createResearcher({ apify: createApifyClient({ token: process.env.APIFY_TOKEN, transport }), sourceChecker: createProductionSourceChecker() });
+    }, (record) => replay(`wire-request-${record.call}-${record.phase}`, record), {maxRequests: 6});
     const client = createOpenAIResponsesClient({ apiKey: process.env.OPENAI_API_KEY, transport });
+    const auditedClient = createReplayAuditedClient({ async generate(request) { event('model_stage_started', { phase: request.name }); return client.generate(request); } }, replay);
+    const researcher = createResearcher({ apify: createApifyClient({ token: process.env.APIFY_TOKEN, transport }), sourceChecker: createProductionSourceChecker(auditedClient) });
     let replayResearch: Parameters<typeof buildDraftingContextFromResearch>[0] | undefined;
-    const drafter = createReplayAuditedDrafter(createStructuredDrafter({ client: createReplayAuditedClient({ async generate(request) { event('model_stage_started', { phase: request.name }); return client.generate(request); } }, replay), mediaAllowlist: MEDIA_ALLOWLIST }), replay, MEDIA_ALLOWLIST, () => replayResearch);
+    const drafter = createReplayAuditedDrafter(createStructuredDrafter({ client: auditedClient, mediaAllowlist: MEDIA_ALLOWLIST }), replay, MEDIA_ALLOWLIST, () => replayResearch);
     const native = createPublisher({ lander: { repository: lander, ref: LOCAL_PILOT_LANDER_REF, owner: 'INFR-Organisation', name: 'videoclaw-lander' }, command: createProcessCommandBoundary() });
     const worker = createAutobloggerWorker({
       backlog: prepared.backlog, stateStore, targetCandidateFingerprint: candidateFingerprints(prepared.candidate).candidate,
@@ -552,6 +554,7 @@ export async function runLocalArtifactPilot(options: LocalPilotArguments & { roo
           await audit({ results: batch.results.map((result) => ({
             articleId: result.candidate.articleId, researchProvenance: ResearchProvenanceSchema.parse(result.provenance),
             ...(result.paaObservations ? {paaObservations: PaaObservationsSchema.parse(result.paaObservations)} : {}),
+            ...(result.sourceRelevanceReceipt ? { sourceRelevanceReceipt: result.sourceRelevanceReceipt } : {}),
             sourceDocuments: result.sourceDocuments?.map(({ url, finalUrl, checkedAt, status, authoritative, contentType, bodySha256, text, passages }) => ({ url, finalUrl, checkedAt, status, authoritative, contentType, bodySha256, textCharacters: text.length, passageCount: passages.length })),
           })) }, 'source-inspection');
           event('source_inspection_completed', { results: batch.results.length });
