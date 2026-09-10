@@ -33,3 +33,35 @@ Before the fresh attempt, retained state has 24 runs, 40 failure records, no act
 ## Unchanged release boundary
 
 Work belongs only to [worker PR #1](https://github.com/frenzy2004/VideoClaw-ICP/pull/1). Local outputs remain review-only artifacts. No lander PR, production changes, publishing, deployment, indexing or schedule activation is authorized by these checks. Paid keyword metrics are still unavailable; no volume, difficulty or CPC is inferred from a SERP scrape.
+
+## Fresh recording run — failed at source selection
+
+`testimonial-recording-live-proof-2026-09-10` ran the committed `5886f9b` implementation with fresh provider requests. It collected seven organic results and ten observed Google questions, entered one deep inspection, then failed to establish two directly relevant usable body sources including an approved authority. It made no OpenAI request, generated no draft and performed no native article validation or publication.
+
+Exact live provenance:
+
+| Collection | Run | Dataset |
+| --- | --- | --- |
+| Autocomplete | `bfyrSpVvFBXxx4fWn` | `a7neExJpI1S8a7gdn` |
+| Exact US/en SERP | `21WdcktfLl7l19eCi` | `ZlfAky3wsbhp5xs8V` |
+| First PAA attempt | `wrgk3HpJPj03rJLsv` | `OOVGzv8VKTUI8Xi3T` |
+| Second PAA attempt | `xWae35e2djjnmOrc0` | `JUKZnE8LagXk49alx` |
+| Support search | `URT33JQfNgkEze0Fb` | `hTz6ex2ycLgLL07zp` |
+
+The receipt is retained under ignored `artifacts/autoblogger/testimonial-recording-live-proof-2026-09-10/`. State after this attempt has 25 runs, 42 failure records, no active pilot, and SHA-256 `998c3c899eeb8d763051f8e89806d96bac69f4d1a6bf09e8ea5e0b3213547047`.
+
+A separate read-only diagnostic replayed these saved provider results through automatic page retrieval without model calls, actor starts or state writes. The reachable approved sources provided adjacent marketing guidance rather than direct testimonial-recording instructions. Other fetches failed; a subsequent production-checker probe confirmed HTTP 403 for both TechSmith testimonial URLs. Temporary DNS failures also affected later requests. Independent review found no evidence justifying a source-gate relaxation or an extraction patch from the retained material. Some non-authority content was contextually useful; this does not satisfy the authoritative-source requirement.
+
+The subsequent candidate, `video editing workflow`, is an unvalidated seed for the C4 buyer task of standardizing an AI video workflow with human review. It is not asserted to have paid demand metrics or to have been discovered in the recording dataset. The fresh runner must obtain its own exact-query evidence and supporting bodies; prior article facts and prose are not inputs.
+
+## Editing-workflow attempt and identified-reader fix
+
+`video-editing-workflow-live-proof-2026-09-10` also failed at source selection before OpenAI or drafting. It collected eight organic results and ten Google questions. Exact SERP run/dataset: `M0x23yumlWK7LE1tZ` / `ZqJRPJPqcdnaaHxSr`; support run/dataset: `vwS1gvPeUwRsGNRUy` / `EWDFQrnfZLHgi1K15`. Its history remains failed at attempt one. State is now 26 runs / 44 failure records, no active pilot, SHA-256 `6dd9f7f5893b9e6149695cfe3f3adcb6ab9e71384d0be48b45a23e7ca6b0691e`.
+
+The later retrieval investigation identified a concrete interoperability defect: source requests sent no User-Agent. Two live A/B probes of the same TechSmith editing-workflow URL returned 403 for the unidentified request and 200 with an honest `VideoClawResearch/1.0 (+https://videoclaw.com)` User-Agent and `en-US,en;q=0.9` language preference. A generic browser identity did not solve it and is not used.
+
+The source reader now sends those two fixed public headers on every request, including redirects. It does not rotate identities, attach credentials, change authority policies, raise limits, bypass failed responses or relax body relevance. Tests first reproduced both failed `check`/`read` paths, then passed with the identification fix. A third test confirms a remaining 403 is rejected after one request.
+
+The unwrapped production reader subsequently fetched `https://www.techsmith.com/blog/video-editing-workflow/` and `https://www.techsmith.com/blog/how-to-edit-a-video/` with HTTP 200. It extracted 12 / 10 passages (7,810 / 7,970 characters), respectively; each scored 2 under the unchanged source-topic screen. This is live retrieval proof, not an article approval or a successful historical worker run.
+
+Latest verification: **2,557 tests across 58 files pass**, zero failures/skips; lint, typecheck and build pass. Scoped independent review found no actionable issue in the header change. The next diagnostic may reuse saved SERP observations and retrieve source bodies afresh without altering persistent worker state; it must be reported separately from uninterrupted fresh-worker proof.

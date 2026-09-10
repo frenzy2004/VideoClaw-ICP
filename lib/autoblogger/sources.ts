@@ -302,7 +302,11 @@ function createSourceChecker(options: SafeSourceCheckerOptions, allowHttpForTest
         response = await requestWithTimeout(options.transport, {
           method: 'GET',
           url: currentUrl.toString(),
-          headers: { Accept: 'text/html,application/xhtml+xml' },
+          // Identify this reader honestly. Some public publishers refuse
+          // unidentified requests; do not rotate browser identities on denial.
+          headers: { Accept: 'text/html,application/xhtml+xml',
+            'User-Agent': 'VideoClawResearch/1.0 (+https://videoclaw.com)',
+            'Accept-Language': 'en-US,en;q=0.9' },
           redirect: 'manual',
           allowedPeerAddresses,
           maxResponseBytes: limits.maxBodyBytes,

@@ -12,6 +12,44 @@ import type {
 
 const publicResolver: DnsResolver = async () => ['93.184.216.34'];
 
+describe('identified public source requests', () => {
+  it.each(['check', 'read'] as const)('identifies the research reader on every %s redirect without sending credentials', async method => {
+    const requests: SourceHttpRequest[] = [];
+    const checker = createSafeSourceChecker({resolveHostname: publicResolver,
+      transport: async request => {
+        requests.push(request);
+        const identified = request.headers['User-Agent'] === 'VideoClawResearch/1.0 (+https://videoclaw.com)'
+          && request.headers['Accept-Language'] === 'en-US,en;q=0.9';
+        return {url: request.url, redirected: false, peerAddress: request.allowedPeerAddresses[0],
+          status: !identified ? 403 : requests.length === 1 ? 302 : 200,
+          headers: {'content-type': 'text/html', ...(requests.length === 1 ? {location: 'https://publisher.example/canonical'} : {})},
+          body: byteStream('<article><p>A video editing workflow organizes footage before producing a rough cut for review.</p></article>')};
+      },
+    });
+    const result = await checker[method]('https://publisher.example/original');
+    expect(result).toMatchObject({status: 200, reachable: true, finalUrl: 'https://publisher.example/canonical'});
+    expect(requests).toHaveLength(2);
+    for (const request of requests) {
+      expect(request.headers).toEqual({Accept: 'text/html,application/xhtml+xml',
+        'User-Agent': 'VideoClawResearch/1.0 (+https://videoclaw.com)', 'Accept-Language': 'en-US,en;q=0.9'});
+      expect(request.redirect).toBe('manual');
+      expect(request.maxResponseBytes).toBe(1_000_000);
+      expect(request.allowedPeerAddresses).toEqual(['93.184.216.34']);
+    }
+  });
+
+  it('never treats a remaining access denial as evidence or retries with another identity', async () => {
+    let requests = 0;
+    const checker = createSafeSourceChecker({resolveHostname: publicResolver, transport: async request => {
+      requests++;
+      return {url: request.url, status: 403, redirected: false, peerAddress: request.allowedPeerAddresses[0],
+        headers: {'content-type': 'text/html'}, body: byteStream('<p>Access denied.</p>')};
+    }});
+    await expect(checker.read('https://publisher.example/guide')).rejects.toThrow(/successful response/);
+    expect(requests).toBe(1);
+  });
+});
+
 async function* byteStream(...chunks: string[]) {
   for (const chunk of chunks) yield new TextEncoder().encode(chunk);
 }
