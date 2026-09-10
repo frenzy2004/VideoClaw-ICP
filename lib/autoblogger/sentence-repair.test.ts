@@ -68,6 +68,26 @@ function expectInvalid(result: ReturnType<typeof applySentenceRepair>) {
 }
 
 describe('sentence-owned repair', () => {
+  it.each(['Choose one buyer: ____.', 'Choose ____ buyers.', 'Choose “____” buyers.'])('keeps plain worksheet blanks and sentence citations owned by code during a neighboring edit: %s', blank => {
+    const original = fixture();
+    original.sections[0].markdown = `${blank}\n\nRecord the workflow.`;
+    original.claimBindings[0].span = blank;
+    const policy = policyFor(original);
+    expect(createSentenceRepairRequest(original, policy).input.sentenceFields[body]).toMatchObject({
+      mode: 'sentences', sentences: { b0: { span: blank, sourceFactIds: ['fact-a'] } },
+    });
+    const output = patchFor(policy);
+    output.changes[body] = { b0: null, b1: ['Record', 'workflow.'] };
+    const result = applySentenceRepair(original, policy, output);
+    expect(result).toMatchObject({ status: 'ready', draft: { sections: [
+      { heading: 'Plan the demo', markdown: `${blank}\n\nRecord workflow.` },
+      original.sections[1],
+    ] } });
+    if (result.status === 'ready') expect(result.draft.claimBindings.filter(b => b.location === body)).toEqual([
+      original.claimBindings[0], bind(body, 'Record workflow.', ['fact-b'], 'product-b'),
+    ]);
+  });
+
   it('joins bounded words and preserves sentence-owned citations and the original', () => {
     const original = fixture();
     expect(GeneratedDraftV2Schema.safeParse(original).success).toBe(true);
@@ -257,7 +277,10 @@ describe('sentence-owned repair', () => {
     ['uncovered punctuation', 'Choose buyers. ;', ['Choose buyers.']],
     ['straight-quoted emphasis', '"Choose **buyers**."', ['"Choose buyers."']],
     ['curly-quoted link', '“Choose [buyers](https://example.com/a).”', ['“Choose buyers.”']],
-    ['worksheet blanks', 'Choose ____ buyers.', ['Choose ____ buyers.']],
+    ['underscore horizontal rule', 'Choose buyers.\n\n____', ['Choose buyers.']],
+    ['worksheet with emphasis', 'Choose **buyers**: ____.', ['Choose buyers: ____.']],
+    ['worksheet in a list', '1. Choose ____ buyers.', ['Choose ____ buyers.']],
+    ['worksheet in a quote', '> Choose ____ buyers.', ['Choose ____ buyers.']],
   ])('uses compatible full-field repair for %s', (_name, text, spans) => {
     const original = fixture();
     original.sections[0].markdown = text;

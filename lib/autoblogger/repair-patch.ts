@@ -1,4 +1,6 @@
 import { z } from 'zod';
+import { unified } from 'unified';
+import remarkParse from 'remark-parse';
 import { GeneratedDraftV2Schema, type DraftSafetyFinding, type GeneratedDraftV2 } from './content-bundle';
 import type { JsonSchema } from './openai-responses';
 import { getRepairLocationLimits, inspectRepairDelta, type RepairPolicy } from './repair-policy';
@@ -181,12 +183,24 @@ type SentenceChanges = Record<string, string[] | null>;
 type SentenceRange = { key: string; start: number; end: number; binding: LocalBinding; maxWords: number };
 const sentenceWord = /^[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)*[.,!?;:]*$/u;
 const localSentenceWord = z.string().regex(sentenceWord).refine(word => !/\s/u.test(word));
+const worksheetParser = unified().use(remarkParse);
 
 // Conservative literal mapping only: formatting, uncovered punctuation, repeated
 // spans and ambiguous ranges keep the existing full-field contract.
 function sentenceRanges(original: GeneratedDraftV2, location: string, text: string): SentenceRange[] | null {
   // Quotes are plain text for classification; range matching still uses original bytes.
-  const lexicalText = text.replace(/["“”]/gu, '');
+  let lexicalText = text.replace(/["“”]/gu, '');
+  const worksheetText = lexicalText.replace(/(?<!\S)_{3,}(?=[.,!?;:]*(?:\s|$))/gu, 'blank');
+  if (worksheetText !== lexicalText) {
+    // Classify literal fill-in blanks only after the actual Markdown parser
+    // proves the field is plain text paragraphs. A standalone underscore rule,
+    // emphasis, code, links or other structure must keep full-field repair.
+    if (location !== '/directAnswer' && !/^\/sections\/\d+\/markdown$/u.test(location)) return null;
+    const tree = worksheetParser.parse(text);
+    if (!tree.children.length || !tree.children.every(node => node.type === 'paragraph'
+      && node.children.every(child => child.type === 'text'))) return null;
+    lexicalText = worksheetText;
+  }
   if (!lexicalText.trim().split(/\s+/u).every(word => sentenceWord.test(word))
     || /(?:^|\n)(?: {4}|\t| {0,3}\d+[.)][ \t])/u.test(text)) return null;
   const ranges: SentenceRange[] = [];

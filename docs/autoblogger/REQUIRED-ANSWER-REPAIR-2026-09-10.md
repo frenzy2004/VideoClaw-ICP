@@ -53,14 +53,49 @@ typecheck and worker build pass. Existing gray-matter eval and vinext mixed-impo
 build warnings remain. Machine-readable results are local and ignored at
 `artifacts/autoblogger/required-answer-repair-verification-2026-09-10/final-tests.json`.
 
-## Live diagnostic boundary
+## Paid diagnostic at `5e39ea1`: stopped on worksheet citation transfer
 
-The next diagnostic is capped at three paid requests: a fresh critique, one repair
-and final verification. It reuses only the original hash-verified automated research
-context and generated draft. No historical critic approval is replayed. Native
-lander validation runs in a disposable checkout only if the worker accepts the
-bundle. A resulting artifact would still be a retained-input component result,
-not a fresh full-worker success.
+The three-request-capped diagnostic used two paid requests: fresh critique and one
+repair. Both returned HTTP 200 from `gpt-5.5-2026-04-23`. It reused only the original
+hash-verified automated research context and generated draft. No historical critic
+approval was replayed. The new critic caught the unsupported buyer-viewing premise
+before repair, but still rejected the graphic caption action; that ambiguity is
+not established as solved by a prompt change.
+
+| Request | Input tokens | Output tokens |
+| --- | ---: | ---: |
+| Fresh critique | 36,921 | 12,225 |
+| Repair | 73,765 | 3,821 |
+
+The full-field worksheet repair reassigned two facts to additional prose at
+`/sections/0/markdown`. The existing per-fact growth guard correctly rejected it.
+No final verification, native article QA or accepted Markdown resulted. The cap
+was not retried. Original state/repositories and receipts were verified unchanged.
+Private receipts: `artifacts/autoblogger/required-answer-live-diagnostic-2026-09-10/`.
+
+## Follow-up: code-owned worksheet sentences
+
+The remaining full-field mode was selected solely because of literal underscore
+fill-in blanks. The new correction admits them only after the Markdown parser
+proves the original field consists entirely of plain-text paragraphs. Classification
+substitution never changes source text, word allowances or stored ranges. The
+model cannot move sentence citations. Complex Markdown retains its original path;
+all delta, content, independent-review and native checks remain unchanged.
+
+The worksheet regression first failed, then passed after correction. Tests cover
+retained blank bytes/citations plus horizontal rules, emphasis, lists and quotes.
+On the exact failed input all 23 editable fields now use code-owned sentences.
+Independent narrow review found no actionable issues.
+
+Fresh follow-up verification passes **2,463 tests across 58 files**, with no skips
+or failures, plus lint, typecheck and worker build. Existing dependency warnings
+remain. The local report is
+`artifacts/autoblogger/worksheet-owned-verification-2026-09-10/tests.json`.
+
+A new diagnostic may replay the exact original draft and the fresh critique from
+the preceding failed diagnostic, then pay for at most one repair and final review.
+Native lander validation can run in a disposable checkout only after acceptance.
+That remains a retained-input component test, not a fresh full-worker success.
 
 No worker state reset, new retry grant, lander write, generated PR, publication,
 deployment or schedule activation is authorized by this test. Failed receipts and
