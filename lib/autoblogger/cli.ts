@@ -3,6 +3,7 @@ import { z } from 'zod';
 import type { AutobloggerCommand, AutobloggerRunReport } from './worker';
 import { redactSensitive } from './secrets';
 import { createGitHubReadOnlyAuth } from './github-runtime';
+import { resolveOpenAIRequestLimits } from './openai-responses';
 
 export type ParsedAutobloggerArguments =
   | { command: 'research' | 'pilot'; runId: string; artifactDir: string }
@@ -72,6 +73,11 @@ const RuntimeEnvironmentSchema = z.object({
   apifyToken: z.string().min(1).nullable(),
   openaiApiKey: z.string().nullable(),
   openaiModel: z.string().min(1),
+  openaiLimits: z.object({
+    reasoningEffort: z.enum(['none', 'low', 'medium', 'high', 'xhigh']),
+    maxOutputTokens: z.number().int().positive().max(128000),
+    timeoutMs: z.number().int().positive().max(600000),
+  }).strict().optional(),
   keywordProvider: z.enum(['pending', 'semrush', 'ahrefs']),
   keywordApiKey: z.string().nullable(),
   githubToken: z.string().min(1),
@@ -133,6 +139,7 @@ export function validateAutobloggerEnvironment(
     apifyToken: phase === 'publish' ? null : required(env, 'APIFY_TOKEN'),
     openaiApiKey: command === 'research' || phase === 'publish' ? null : required(env, 'OPENAI_API_KEY'),
     openaiModel: env.OPENAI_MODEL?.trim() || 'gpt-5.5',
+    openaiLimits: resolveOpenAIRequestLimits({ env }),
     keywordProvider,
     keywordApiKey,
     githubToken,

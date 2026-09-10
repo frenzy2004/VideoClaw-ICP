@@ -6,7 +6,9 @@ This worker is a controlled research-and-drafting system. It does not publish ar
 
 The initial 250-topic research library is an input, not a quota or publication gate. Each run scans at most 50 candidates, deeply checks at most 10, and produces at most 3 drafts with no more than 2 from one ICP.
 
-Current checkpoint: [required-answer budgets, worksheet citation ownership and live diagnostics](REQUIRED-ANSWER-REPAIR-2026-09-10.md). **2,464 tests, lint, typecheck and worker build pass; focused reviews are clear.** Repair planning now preserves required-answer space within non-growing source ceilings, plain worksheets keep code-owned citations, and generation rejects packed multi-word tokens. A higher-reasoning diagnostic passed mechanical repair and reached final review, but an unsupported publisher attribution and conflicting budget judgments still blocked acceptance. No accepted article or native article QA resulted. Worker defaults, scheduling, production and failed state/history are unchanged. Earlier checkpoints below are historical.
+Current checkpoint: [review ownership and article-quality proof](REVIEW-OWNERSHIP-2026-09-10.md). Numeric source accounting is separated from semantic review; publisher attribution is checked per publisher and proposition. The live diagnostic corrected all semantic issues but still failed source-use limits after nine unchanged spans were reclassified. **No accepted article or native QA resulted from that diagnostic.** Follow-up work clarifies derivation and exposes explicit bounded model-quality settings without changing defaults. Earlier checkpoints below are historical.
+
+Previous checkpoint: [required-answer budgets, worksheet citation ownership and live diagnostics](REQUIRED-ANSWER-REPAIR-2026-09-10.md) retains its 2,464-test verification and four unsuccessful component diagnostics.
 
 Previous checkpoint: [sentence-owned repair](SENTENCE-REPAIR-PROOF-2026-09-10.md) retains the earlier paid failure and its review disagreement; it was not a successful full-worker run.
 

@@ -44,6 +44,16 @@ const MATRIX_FILES = [
   ['portfolio-media-platform', 'docs/research/campaigns/portfolio-media-platform-article-matrix.md'],
 ] as const;
 
+/** The CLI's validated configuration is the only model configuration source. */
+export function createRuntimeDraftClient(
+  config: Pick<AutobloggerRuntimeEnvironment, 'openaiApiKey' | 'openaiModel' | 'openaiLimits'>,
+  transport: HttpTransport,
+) {
+  return config.openaiApiKey
+    ? createOpenAIResponsesClient({ apiKey: config.openaiApiKey, transport, env: { OPENAI_MODEL: config.openaiModel }, ...config.openaiLimits })
+    : { generate: async () => { throw new Error('OPENAI_API_KEY is required for drafting.'); } };
+}
+
 export const MEDIA_ALLOWLIST: AllowlistedProductMedia[] = [
   {
     id: 'founder-product-demo',
@@ -373,9 +383,7 @@ export async function createProductionAutobloggerRuntime(
     },
     command: createProcessCommandBoundary(),
   });
-  const client = config.openaiApiKey
-    ? createOpenAIResponsesClient({ apiKey: config.openaiApiKey, transport, env: { OPENAI_MODEL: config.openaiModel } })
-    : { generate: async () => { throw new Error('OPENAI_API_KEY is required for drafting.'); } };
+  const client = createRuntimeDraftClient(config, transport);
   const backlog = await loadBacklogCandidates(root);
   const worker = createAutobloggerWorker({
     backlog,

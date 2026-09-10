@@ -59,9 +59,9 @@ const BINDING_SUPPORT_EVALUATIONS_JSON_SCHEMA = {
     properties: {
       bindingIndex: { type: 'integer', minimum: 0 },
       bindingHash: { type: 'string', pattern: '^[a-f0-9]{64}$' },
-      supported: { type: 'boolean' },
-      kind: { type: 'string', enum: ['source_claim', 'original_guidance', 'original_example', 'product_claim'] },
       rationale: { type: 'string', pattern: '.*\\S.*' },
+      kind: { type: 'string', enum: ['source_claim', 'original_guidance', 'original_example', 'product_claim'] },
+      supported: { type: 'boolean' },
     },
     required: ['bindingIndex', 'bindingHash', 'supported', 'kind', 'rationale'],
   },
@@ -416,6 +416,16 @@ not turn a close paraphrase of source advice into original guidance. If a span m
 source paraphrase/factual claims with original advice, choose source_claim and count
 the complete span conservatively, but apply the appropriate support test to each
 clause. Use original_guidance only when the span actually contributes original advice.
+In the rationale, assess SUPPORT and DERIVATION separately before choosing kind.
+For original_guidance/original_example, identify the specific new operational choice,
+worksheet mechanism or hypothetical reasoning absent from the cited facts. Saying
+only "grounded in" or "supported by" those facts does not explain originality.
+Repeating, shortening, combining or narrowing a source's advice is source_claim even
+under a recommendations heading. If a fact advises avoiding scripted answers,
+"Do not hand the customer a script" is source_claim, not original_guidance. A guide's
+original decision worksheet may instead use that advice as context; identify the new
+decision tool itself. Definitions, factual premises and source-derived duration ranges
+stay source_claim even inside instructions. Apply this same test to unchanged spans.
 Check reader-facing quality too: reject a description that repeats the title or
 fails to explain the article's practical help, and reject repetitive process labels
 or disclaimers. Recommend restructuring into scoped guidance rather than removing

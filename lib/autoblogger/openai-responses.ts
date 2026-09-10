@@ -91,6 +91,31 @@ function boundedInteger(name: string, value: number, maximum: number): number {
   return value;
 }
 
+function configuredInteger(env: Record<string, string | undefined>, name: string, fallback: number): number {
+  if (!Object.hasOwn(env, name)) return fallback;
+  const value = env[name]?.trim();
+  if (!value || !/^[0-9]+$/.test(value)) throw new Error(`${name} must be a positive integer.`);
+  return Number(value);
+}
+
+export function resolveOpenAIRequestLimits(
+  options: Pick<OpenAIResponsesClientOptions, 'env' | 'timeoutMs' | 'maxOutputTokens' | 'reasoningEffort'>,
+) {
+  const env = options.env ?? process.env;
+  // Application limits are explicit and finite; provider rejection never triggers
+  // a retry, a different model, or a silent change to reasoning/output settings.
+  const timeoutMs = boundedInteger('timeoutMs', options.timeoutMs
+    ?? configuredInteger(env, 'OPENAI_TIMEOUT_MS', DEFAULT_OPENAI_TIMEOUT_MS), 600_000);
+  const maxOutputTokens = boundedInteger('maxOutputTokens', options.maxOutputTokens
+    ?? configuredInteger(env, 'OPENAI_MAX_OUTPUT_TOKENS', DEFAULT_OPENAI_MAX_OUTPUT_TOKENS), 128_000);
+  const reasoningEffort = options.reasoningEffort
+    ?? (Object.hasOwn(env, 'OPENAI_REASONING_EFFORT') ? env.OPENAI_REASONING_EFFORT?.trim() ?? '' : 'low');
+  if (!['none', 'low', 'medium', 'high', 'xhigh'].includes(reasoningEffort)) {
+    throw new Error('reasoningEffort must be none, low, medium, high, or xhigh.');
+  }
+  return { timeoutMs, maxOutputTokens, reasoningEffort: reasoningEffort as OpenAIReasoningEffort };
+}
+
 export function createOpenAIResponsesClient(
   options: OpenAIResponsesClientOptions,
 ): StructuredOutputClient {
@@ -98,14 +123,7 @@ export function createOpenAIResponsesClient(
   if (!apiKey) throw new Error('OpenAI API key is required.');
   const model = configuredModel(options.env ?? process.env);
   const endpoint = options.endpoint ?? OPENAI_RESPONSES_URL;
-  // Application limits are explicit and finite; provider rejection never triggers
-  // a retry, a different model, or a silent change to reasoning/output settings.
-  const timeoutMs = boundedInteger('timeoutMs', options.timeoutMs ?? DEFAULT_OPENAI_TIMEOUT_MS, 600_000);
-  const maxOutputTokens = boundedInteger('maxOutputTokens', options.maxOutputTokens ?? DEFAULT_OPENAI_MAX_OUTPUT_TOKENS, 128_000);
-  const reasoningEffort = options.reasoningEffort ?? 'low';
-  if (!['none', 'low', 'medium', 'high', 'xhigh'].includes(reasoningEffort)) {
-    throw new Error('reasoningEffort must be none, low, medium, high, or xhigh.');
-  }
+  const { timeoutMs, maxOutputTokens, reasoningEffort } = resolveOpenAIRequestLimits(options);
 
   return {
     async generate(request): Promise<unknown> {

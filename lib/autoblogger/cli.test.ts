@@ -63,6 +63,19 @@ describe('autoblogger CLI contract', () => {
     ]) expect(() => parseAutobloggerArguments(args)).toThrow();
   });
 
+  it('retains and validates quality settings at CLI initialization', () => {
+    const env = { APIFY_TOKEN: 'fixture-apify', OPENAI_API_KEY: 'fixture-model', KEYWORD_PROVIDER: 'pending',
+      GITHUB_TOKEN: 'fixture-state', GITHUB_REPOSITORY: 'owner/icp', LANDER_REPOSITORY: '/tmp/fixture-lander',
+      LANDER_OWNER: 'owner', LANDER_NAME: 'lander', LANDER_BASE_REF: 'feature', LANDER_READ_TOKEN: 'github_pat_read_inventory_fixture_123456',
+      OPENAI_REASONING_EFFORT: 'high', OPENAI_MAX_OUTPUT_TOKENS: '48000', OPENAI_TIMEOUT_MS: '600000' };
+    expect(validateAutobloggerEnvironment('pilot', env)).toMatchObject({
+      openaiLimits: { reasoningEffort: 'high', maxOutputTokens: 48000, timeoutMs: 600000 },
+    });
+    for (const bad of [{ OPENAI_REASONING_EFFORT: 'typo' }, { OPENAI_MAX_OUTPUT_TOKENS: '' }, { OPENAI_TIMEOUT_MS: '600001' }]) {
+      expect(() => validateAutobloggerEnvironment('pilot', { ...env, ...bad })).toThrow();
+    }
+  });
+
   it('requires neither OpenAI for research nor paid credentials for publishing', () => {
     const base = {
       APIFY_TOKEN: 'fixture-apify', KEYWORD_PROVIDER: 'pending', GITHUB_TOKEN: 'fixture-state',

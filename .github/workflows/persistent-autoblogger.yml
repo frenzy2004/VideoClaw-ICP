@@ -43,6 +43,9 @@ jobs:
       AUTOBLOG_MAX_DRAFTS: ${{ github.event_name == 'schedule' && '3' || inputs.max_drafts || '1' }}
       AUTOBLOG_SCHEDULE_ENABLED: ${{ vars.AUTOBLOG_SCHEDULE_ENABLED || 'false' }}
       OPENAI_MODEL: ${{ vars.OPENAI_MODEL || 'gpt-5.5' }}
+      OPENAI_REASONING_EFFORT: ${{ vars.OPENAI_REASONING_EFFORT || 'low' }}
+      OPENAI_MAX_OUTPUT_TOKENS: ${{ vars.OPENAI_MAX_OUTPUT_TOKENS || '24000' }}
+      OPENAI_TIMEOUT_MS: ${{ vars.OPENAI_TIMEOUT_MS || '240000' }}
       KEYWORD_PROVIDER: ${{ vars.KEYWORD_PROVIDER || 'pending' }}
       GITHUB_REPOSITORY: ${{ github.repository }}
       LANDER_REPOSITORY: ${{ github.workspace }}/.autoblogger-lander

@@ -4,12 +4,32 @@ import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
 import { CandidateSchema, EvidenceBundleSchema, KeywordMetricsSchema, candidateFingerprints } from './domain';
-import { writeAutobloggerArtifacts, buildDraftingContextFromResearch, loadBacklogCandidates, createProductionAutobloggerRuntime } from './runtime';
+import { writeAutobloggerArtifacts, buildDraftingContextFromResearch, loadBacklogCandidates, createProductionAutobloggerRuntime, createRuntimeDraftClient } from './runtime';
 import { validateAutobloggerEnvironment } from './cli';
 import { createPersistentWorkerState } from './github-runtime';
 import type { HttpRequest, HttpTransport } from './http';
 import type { ResearchResult, ShallowResearchResult } from './research';
 import { createSafeSourceChecker } from './sources';
+
+it('carries CLI quality settings through the production runtime to the Responses API', async () => {
+  const config = validateAutobloggerEnvironment('pilot', {
+    APIFY_TOKEN: 'fixture-apify', OPENAI_API_KEY: 'fixture-model', KEYWORD_PROVIDER: 'pending', GITHUB_TOKEN: 'fixture-state',
+    GITHUB_REPOSITORY: 'owner/icp', LANDER_REPOSITORY: '/tmp/fixture-lander', LANDER_OWNER: 'owner', LANDER_NAME: 'lander',
+    LANDER_BASE_REF: 'feature', LANDER_READ_TOKEN: 'github_pat_read_inventory_fixture_123456',
+    OPENAI_REASONING_EFFORT: 'high', OPENAI_MAX_OUTPUT_TOKENS: '48000', OPENAI_TIMEOUT_MS: '600000',
+  });
+  const requests: HttpRequest[] = [];
+  const client = createRuntimeDraftClient(config, async request => {
+    requests.push(request);
+    return { status: 200, headers: {}, body: { status: 'completed', output: [
+      { type: 'message', content: [{ type: 'output_text', text: '{}' }] },
+    ] } };
+  });
+  await expect(client.generate({ name: 'fixture', schema: { type: 'object' }, system: 'Fixture', input: {} })).resolves.toEqual({});
+  expect(requests).toHaveLength(1);
+  expect(requests[0].url).toBe('https://api.openai.com/v1/responses');
+  expect(JSON.parse(requests[0].body!)).toMatchObject({ model: 'gpt-5.5', reasoning: { effort: 'high' }, max_output_tokens: 48000 });
+});
 
 async function sourceDocumentsFor(urls: string[], body: string) {
   const checker = createSafeSourceChecker({

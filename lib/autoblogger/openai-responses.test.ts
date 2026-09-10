@@ -133,6 +133,51 @@ describe('OpenAI Responses structured-output client', () => {
     expect(requests).toHaveLength(1);
   });
 
+  it('applies explicit environment quality settings to the real request without changing models', async () => {
+    const requests: HttpRequest[] = [];
+    const client = createOpenAIResponsesClient({ apiKey: 'fixture',
+      env: { OPENAI_REASONING_EFFORT: 'high', OPENAI_MAX_OUTPUT_TOKENS: '48000', OPENAI_TIMEOUT_MS: '600000' },
+      transport: async request => { requests.push(request); return completedResponse('{}'); },
+    });
+    await client.generate({ name: 'fixture', schema, system: 'Fixture', input: {} });
+    expect(requests).toHaveLength(1);
+    expect(JSON.parse(requests[0].body!)).toMatchObject({ model: 'gpt-5.5', max_output_tokens: 48000, reasoning: { effort: 'high' }, store: false });
+  });
+
+  it.each([
+    { OPENAI_REASONING_EFFORT: '' }, { OPENAI_REASONING_EFFORT: 'invented' },
+    { OPENAI_MAX_OUTPUT_TOKENS: '' }, { OPENAI_MAX_OUTPUT_TOKENS: '0' }, { OPENAI_MAX_OUTPUT_TOKENS: '128001' },
+    { OPENAI_MAX_OUTPUT_TOKENS: '1.5' }, { OPENAI_MAX_OUTPUT_TOKENS: 'Infinity' }, { OPENAI_MAX_OUTPUT_TOKENS: 'NaN' },
+    { OPENAI_MAX_OUTPUT_TOKENS: '48e3' }, { OPENAI_TIMEOUT_MS: '' }, { OPENAI_TIMEOUT_MS: '0' },
+    { OPENAI_TIMEOUT_MS: '600001' }, { OPENAI_TIMEOUT_MS: '-100' }, { OPENAI_TIMEOUT_MS: '100ms' },
+  ])('refuses invalid environment limits before any request: %j', env => {
+    let calls = 0;
+    expect(() => createOpenAIResponsesClient({ apiKey: 'fixture', env,
+      transport: async () => { calls++; return completedResponse('{}'); },
+    })).toThrow();
+    expect(calls).toBe(0);
+  });
+
+  it('uses the environment timeout exactly once and preserves option precedence', async () => {
+    vi.useFakeTimers();
+    try {
+      const requests: HttpRequest[] = [];
+      const client = createOpenAIResponsesClient({ apiKey: 'fixture',
+        env: { OPENAI_TIMEOUT_MS: '300000', OPENAI_MAX_OUTPUT_TOKENS: '48000', OPENAI_REASONING_EFFORT: 'high' },
+        maxOutputTokens: 12000, reasoningEffort: 'medium',
+        transport: request => { requests.push(request); return new Promise(() => {}); },
+      });
+      const result = client.generate({ name: 'fixture', schema, system: 'Fixture', input: {} }).catch(String);
+      await vi.advanceTimersByTimeAsync(299999);
+      expect(requests[0].signal.aborted).toBe(false);
+      await vi.advanceTimersByTimeAsync(1);
+      expect(requests[0].signal.aborted).toBe(true);
+      expect(await result).toContain('timed out after 300000ms');
+      expect(requests).toHaveLength(1);
+      expect(JSON.parse(requests[0].body!)).toMatchObject({ max_output_tokens: 12000, reasoning: { effort: 'medium' } });
+    } finally { vi.useRealTimers(); }
+  });
+
   it.each([
     { maxOutputTokens: 0 }, { maxOutputTokens: -1 }, { maxOutputTokens: 1.5 },
     { maxOutputTokens: Infinity }, { maxOutputTokens: NaN }, { maxOutputTokens: 128_001 },
