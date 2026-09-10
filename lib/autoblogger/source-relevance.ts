@@ -11,6 +11,15 @@ function words(text: string): string[] {
     .map(word => !FRAMING.has(word) && word.length > 3 && word.endsWith('s') && !/(ss|us|is)$/.test(word) ? word.slice(0, -1) : word);
 }
 
+// Closed word families for topic retrieval only, not claim entailment. Do not
+// use prefix stemming: automotive, editorial and editor are different terms.
+// Preserve the original query, source text, excerpts and attribution records.
+const AUTOMATION_FORMS = new Set(['automate', 'automated', 'automating', 'automation', 'automatic', 'automatically']);
+const EDIT_FORMS = new Set(['edit', 'edited', 'editing']);
+function topicWords(text: string): string[] {
+  return words(text).map(word => AUTOMATION_FORMS.has(word) ? 'automate' : EDIT_FORMS.has(word) ? 'edit' : word);
+}
+
 // Broader support discovery only, never a replacement for the exact demand
 // query. Retain substantive topic qualifiers while omitting format/framing words.
 export function sourceTopicQuery(query: string): string {
@@ -47,13 +56,13 @@ export function matchSourceTitleTasks(query: string, title: string, body: string
  */
 export function scoreSourceTopic(query: string, text: string, bodyStart = 0): number {
   if (!Number.isInteger(bodyStart) || bodyStart < 0 || bodyStart > text.length) return 0;
-  const queryTerms = new Set(words(query).filter(word => !FRAMING.has(word)));
+  const queryTerms = new Set(topicWords(query).filter(word => !FRAMING.has(word)));
   const core = [...queryTerms].filter(word => !FORMATS.has(word));
   if (!core.some(word => !GENERIC.has(word))) return 0;
   const seen = new Set<string>();
   let score = 0;
   for (const sentence of text.slice(bodyStart).split(/[.!?\n]+/u)) {
-    const tokens = words(sentence);
+    const tokens = topicWords(sentence);
     const key = tokens.join(' ');
     if (tokens.length < 6 || tokens.length > 48 || seen.has(key)) continue;
     seen.add(key);

@@ -13,6 +13,10 @@ const DISCOVERY_SCOPES: AuthorityPolicy[] = [
 
 export const PRODUCTION_SOURCE_AUTHORITY_POLICIES: readonly AuthorityPolicy[] = [
   ...DISCOVERY_SCOPES.flatMap(policy => [policy, { ...policy, hostname: `www.${policy.hostname}` }]),
+  // First-party technical workflow guidance, not independent market evidence or
+  // an endorsement/correctness guarantee. Authority only; no discovery expansion.
+  { hostname: 'shotstack.io', pathPrefix: '/learn/' },
+  { hostname: 'www.shotstack.io', pathPrefix: '/learn/' },
   { hostname: 'www.nist.gov' },
   { hostname: 'www.ftc.gov' },
   { hostname: 'www.w3.org' },

@@ -48,6 +48,7 @@ describe('production source discovery policy', () => {
       expect(query).toContain('site:techstars.com');
       expect(query).toContain('site:techsmith.com/blog/');
       expect(query).toContain('site:descript.com/blog/article/');
+      expect(query).not.toContain('shotstack.io');
     }
   });
 
@@ -59,6 +60,8 @@ describe('production source discovery policy', () => {
   ])('accepts only scoped discovery URLs: %s', url => expect(isDiscoverySourceUrl(url)).toBe(true));
 
   it.each([
+    'https://shotstack.io/learn/automating-video-editing/',
+    'https://www.shotstack.io/learn/automating-video-editing/',
     'https://techsmith.com.evil.example/blog/demo/',
     'https://www.descript.com/blog/article-spoof/demo',
     'https://www.techsmith.com/blog-spoof/demo/',
@@ -90,5 +93,91 @@ describe('production source discovery policy', () => {
     expect(selected.sourceDocuments.every(document => document.passages.length > 0)).toBe(true);
     await expect(checker.selectWithContent([...documents.keys()].slice(1), { query: 'product demo checklist' }))
       .rejects.toThrow(/relevant|source/i);
+  });
+});
+
+describe('Shotstack first-party technical guidance authority', () => {
+  const guidance = '<article><p>A video editing workflow arranges clips on a timeline before rendering the final video.</p></article>';
+
+  it.each([
+    ['https://shotstack.io/learn/automating-video-editing/', true],
+    ['https://www.shotstack.io/learn/automating-video-editing/', true],
+    ['https://shotstack.io/', false],
+    ['https://www.shotstack.io/', false],
+    ['https://shotstack.io/pricing/', false],
+    ['https://www.shotstack.io/pricing/', false],
+    ['https://shotstack.io/dashboard/', false],
+    ['https://www.shotstack.io/dashboard/', false],
+    ['https://dashboard.shotstack.io/learn/automating-video-editing/', false],
+    ['https://evil.shotstack.io/learn/automating-video-editing/', false],
+    ['https://shotstack.io.evil.example/learn/automating-video-editing/', false],
+    ['https://www.shotstack.io.evil.example/learn/automating-video-editing/', false],
+    ['https://shotstack.io/learn', false],
+    ['https://www.shotstack.io/learn', false],
+    ['https://shotstack.io/learn-spoof/automating-video-editing/', false],
+    ['https://www.shotstack.io/learning/automating-video-editing/', false],
+  ])('scopes authority to exact hosts and the /learn/ path: %s', async (url, authoritative) => {
+    const checker = createSafeSourceChecker({
+      authorityPolicies: PRODUCTION_SOURCE_AUTHORITY_POLICIES,
+      resolveHostname: async () => ['93.184.216.34'],
+      transport: async request => ({
+        status: 200, headers: { 'content-type': 'text/html' }, url: request.url,
+        redirected: false, peerAddress: request.allowedPeerAddresses[0],
+        body: (async function* () { yield new TextEncoder().encode(guidance); })(),
+      }),
+    });
+    const document = await checker.read(url, { query: 'video editing workflow' });
+    expect(document).toMatchObject({ url, finalUrl: url, status: 200, reachable: true, authoritative });
+    expect(document.passages.length).toBeGreaterThan(0);
+  });
+
+  it.each([
+    'https://shotstack.io/',
+    'https://shotstack.io/pricing/',
+    'https://www.shotstack.io/dashboard/',
+    'https://shotstack.io/learn-spoof/automating-video-editing/',
+    'https://www.shotstack.io.evil.example/learn/automating-video-editing/',
+  ])('loses authority when a guide redirects outside its scope: %s', async finalUrl => {
+    const url = 'https://shotstack.io/learn/automating-video-editing/';
+    const checker = createSafeSourceChecker({
+      authorityPolicies: PRODUCTION_SOURCE_AUTHORITY_POLICIES,
+      resolveHostname: async () => ['93.184.216.34'],
+      transport: async request => ({
+        status: request.url === url ? 302 : 200,
+        headers: { 'content-type': 'text/html', ...(request.url === url ? { location: finalUrl } : {}) },
+        url: request.url, redirected: false, peerAddress: request.allowedPeerAddresses[0],
+        body: (async function* () { yield new TextEncoder().encode(guidance); })(),
+      }),
+    });
+    const document = await checker.read(url, { query: 'video editing workflow' });
+    expect(document).toMatchObject({ url, finalUrl, status: 200, reachable: true, authoritative: false });
+    expect(document.passages.length).toBeGreaterThan(0);
+  });
+
+  it.each([
+    ['topical prose', guidance, true],
+    ['topical heading with unrelated prose', '<article><h1>Video editing workflow</h1><p>The cohort attends a networking event before fundraising season begins.</p></article>', false],
+    ['empty body', '<html><nav>Home</nav></html>', false],
+  ])('requires usable topical body evidence from Shotstack: %s', async (_label, html, usable) => {
+    const url = 'https://shotstack.io/learn/automating-video-editing/';
+    const publisher = 'https://publisher.example/video-editing/';
+    const checker = createSafeSourceChecker({
+      authorityPolicies: PRODUCTION_SOURCE_AUTHORITY_POLICIES,
+      resolveHostname: async () => ['93.184.216.34'],
+      transport: async request => ({
+        status: 200, headers: { 'content-type': 'text/html' }, url: request.url,
+        redirected: false, peerAddress: request.allowedPeerAddresses[0],
+        body: (async function* () { yield new TextEncoder().encode(request.url === url ? html : guidance); })(),
+      }),
+    });
+    const selection = checker.selectWithContent([url, publisher], { query: 'video editing workflow' });
+    if (usable) {
+      await expect(selection).resolves.toMatchObject({ sources: [
+        { originalUrl: url, finalUrl: url, authoritative: true },
+        { originalUrl: publisher, finalUrl: publisher, authoritative: false },
+      ] });
+    } else {
+      await expect(selection).rejects.toThrow(/two.*relevant.*body.*authoritative/i);
+    }
   });
 });
