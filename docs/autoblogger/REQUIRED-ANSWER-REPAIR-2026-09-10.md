@@ -113,10 +113,65 @@ Independent narrow review found no actionable issues. Fresh full verification:
 build, with the existing dependency warnings. Local results:
 `artifacts/autoblogger/provider-word-contract-2026-09-10/tests.json`.
 
-The next capped diagnostic uses the same exact retained draft/critique, paying for
-at most one repair and final verification. Native lander validation can run in a
-disposable checkout only after acceptance. Any result remains a component test,
-not a fresh full-worker success.
+The capped diagnostic at `e09d55a` used one paid repair request: 74,861 input /
+2,097 output tokens, HTTP 200, same model. The tightened schema was accepted by the
+provider and no packed-word rejection occurred. The repair instead duplicated an
+existing worksheet sentence with a different code-owned fact set. Existing
+same-word provenance and exposure checks blocked it. No final review or native QA
+ran. Private receipts remain at
+`artifacts/autoblogger/provider-word-live-diagnostic-2026-09-10/`.
+
+## Higher-reasoning experiment: final review reached, article still blocked
+
+A separate capped experiment at the same clean `e09d55a` reused only the exact
+automated research context and generated draft. It paid for a fresh critique,
+one repair and final verification with the **same `gpt-5.5` model**, explicit high
+reasoning, a 48,000-output-token ceiling and a 600-second per-request timeout.
+These were diagnostic options; production/worker defaults were not changed.
+
+All three responses returned HTTP 200 from `gpt-5.5-2026-04-23`:
+
+| Request | Input tokens | Output tokens | Included reasoning tokens |
+| --- | ---: | ---: | ---: |
+| Fresh critique | 36,921 | 19,529 | 7,423 |
+| One repair | 65,229 | 8,752 | 7,768 |
+| Independent final verification | 38,184 | 20,944 | 7,557 |
+
+The initial review distinguished original caption advice from the unsupported
+viewing-context premise and caught a previously missed comparison about collection
+ease. The repair passed assembly and citation/word-growth checks and reached final
+review. This is measured progress, not article acceptance or native QA.
+
+Final review still rejected an attribution in the private `competitorGap`: the
+sentence attributed sharing guidance to Shopify, but that binding's Shopify facts
+covered prompts and editing rather than sharing. No missing fact was manually
+inserted and no second repair followed.
+
+It also produced conflicting source-budget judgments. Its qualitative issue
+verdicts said Shopify and TeraLeap remained over budget, while code applied to the
+same final review's complete binding classifications calculated:
+
+| Source | Initial reviewed derived words | Final ledger derived words | Repair ceiling |
+| --- | ---: | ---: | ---: |
+| VocalVideo | 148 | 47 | 120 |
+| Shopify | 290 | 30 | 120 |
+| TeraLeap | 157 | 0 | 120 |
+| Descript | 54 | 22 | 54 |
+
+This is a review inconsistency, not permission to select the convenient verdict.
+The budget verdicts also referenced private competitor-gap text, which is excluded
+from public word accounting. No verdict was overridden and no source-use gate was
+disabled. The unsupported publisher attribution independently remains unresolved.
+
+There is **no accepted article, native generated-article QA, successful worker
+pilot, generated lander PR or production change** from any of these diagnostics.
+Private receipts remain at
+`artifacts/autoblogger/reasoned-repair-live-diagnostic-2026-09-10/`.
+
+Next correction: reconcile source-budget judgments with the review's binding
+ledger and make the initial publisher-attribution check catch unsupported list
+items before the single repair. Do not reset the terminal candidate, manually
+rewrite this article, or equate these retained-input tests with a fresh full run.
 
 No worker state reset, new retry grant, lander write, generated PR, publication,
 deployment or schedule activation is authorized by this test. Failed receipts and

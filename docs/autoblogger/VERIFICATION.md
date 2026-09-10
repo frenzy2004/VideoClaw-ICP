@@ -3,7 +3,21 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-## Sentence-owned repair — 2026-09-10 Malaysia time
+## Required-answer and worksheet repair — 2026-09-10 Malaysia time
+
+The [current checkpoint](REQUIRED-ANSWER-REPAIR-2026-09-10.md) records **2,464
+tests across 58 files**, zero failures/skips, passing lint/typecheck/worker build,
+and focused independent reviews. Existing dependency warnings remain. Required
+answer reservations share the enforced source ceilings; plain worksheets retain
+code-owned citations; provider word constraints reject packed compounds.
+
+Four capped retained-input diagnostics were run. The last used explicitly higher
+reasoning with the same model, passed mechanical repair and reached final review.
+Acceptance still failed on a publisher attribution and inconsistent source-budget
+verdicts. No accepted article, native generated-article QA or full-worker success
+is claimed. Defaults, failed state/receipts, scheduling and production are unchanged.
+
+## Previous sentence-owned repair — 2026-09-10 Malaysia time
 
 The [sentence-repair checkpoint](SENTENCE-REPAIR-PROOF-2026-09-10.md) records
 **2,442 tests across 58 files**, zero failures/skips, passing lint/typecheck/worker
