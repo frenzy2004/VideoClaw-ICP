@@ -1006,6 +1006,54 @@ describe('contextual review and targeted bounded repair', () => {
     expect(client.requests).toHaveLength(2);
   });
 
+  it.each([100, 190])('keeps machine source counts out of the semantic verdict (%i-word initial passage)', async count => {
+    const initial = withSourceClaim(`${Array.from({ length: count }, (_, i) => `point${i}`).join(' ')}.`);
+    const repaired = withSourceClaim('The application advice favors bullet points for speaking.');
+    const critique = { ...approvedCritique, supportEvaluations: supportedBindings(initial) };
+    const client = new FixtureStructuredClient([initial, critique, repaired, (request: StructuredOutputRequest) => {
+      const result = verifyRequest(repaired)(request);
+      // Reproduce the live failure: a qualitative budget estimate contradicts
+      // the same review's supported source-claim ledger. Prevent the ambiguous
+      // request; never discard a negative response after receiving it.
+      for (const evaluation of result.evaluations) {
+        evaluation.resolved = false;
+        evaluation.message = 'The source still seems over budget across the article.';
+      }
+      result.approved = result.evaluations.length === 0;
+      return result;
+    }]);
+    const outcome = await createStructuredDrafter({ client, mediaAllowlist: [media] }).draft(context);
+    expect(outcome).toMatchObject({ status: 'ready', repaired: true });
+    const repair = client.requests[2].input as { originalIssues: DraftCritiqueV1['issues'] };
+    expect(repair.originalIssues).toContainEqual(expect.objectContaining({
+      code: count === 100 ? 'content.source_allocation' : 'content.source_budget',
+    }));
+    expect(client.requests[3].input).toMatchObject({ originalIssues: [], originalRepairTargets: [] });
+    const schema = client.requests[3].schema as typeof DRAFT_REPAIR_VERIFICATION_V1_JSON_SCHEMA;
+    expect(schema.properties.evaluations).toMatchObject({ minItems: 0, maxItems: 0 });
+  });
+
+  it('does not remove a semantic copying issue just because its code resembles a machine count', async () => {
+    const initial = withSourceClaim(`${Array.from({ length: 190 }, (_, i) => `point${i}`).join(' ')}.`);
+    const repaired = withSourceClaim('The application advice favors bullet points for speaking.');
+    const semanticIssue = { id: 'copy-claim', code: 'content.source_budget',
+      message: 'The worksheet disguises publisher advice as original.',
+      repairInstruction: 'Remove the borrowed advice.', locations: ['/sections/0/markdown'] };
+    const critique = { ...approvedCritique, approved: false, issues: [semanticIssue], supportEvaluations: supportedBindings(initial) };
+    const client = new FixtureStructuredClient([initial, critique, repaired, (request: StructuredOutputRequest) => {
+      const result = verifyRequest(repaired)(request);
+      result.approved = false;
+      result.evaluations.forEach(e => { e.resolved = e.issueId !== 'copy-claim'; });
+      return result;
+    }]);
+    const outcome = await createStructuredDrafter({ client, mediaAllowlist: [media] }).draft(context);
+    expect(client.requests[3].input).toMatchObject({ originalIssues: [semanticIssue] });
+    expect(outcome).toMatchObject({ status: 'blocked', findings: expect.arrayContaining([
+      expect.objectContaining({ issueId: 'copy-claim', code: 'content.source_budget' }),
+    ]) });
+    expect(outcome).not.toHaveProperty('bundle');
+  });
+
   it.each(['fenced', 'indented', 'definition'])('blocks %s FAQ text with missing bindings before repair even if the initial critic approves', async (format) => {
     const value = structuredClone(draft);
     const prose = Array.from({ length: 181 }, (_, i) => `detail${i}`).join(' ');
@@ -1240,7 +1288,46 @@ describe('contextual review and targeted bounded repair', () => {
     expect(client.requests[2].system).toContain('Never add unrelated advice');
     for (const index of [0, 2]) expect(client.requests[index].system).toContain('Write all public prose in English');
     for (const index of [1, 3]) expect(client.requests[index].system).toContain('ordinary non-VideoClaw referent');
-    for (const index of [1, 3]) expect(client.requests[index].system).toContain('For a list attributed to named publishers, require cited support for every item');
+  });
+
+  it.each([true, false])('routes a rejected private publisher attribution through bounded repair (fixed: %s)', async fixed => {
+    // Synthetic publisher facts and external semantic verdicts. This proves
+    // edit authority/routing, not a claim that a mock improves model detection.
+    const localContext = structuredClone(context);
+    localContext.sourceFacts[0].facts.push({ id: 'publisher-a-sharing', text: 'Publisher A recommends distributing the finished video.', evidenceKind: 'body' });
+    localContext.sourceFacts[1].facts.push({ id: 'publisher-b-questions', text: 'Publisher B recommends preparing interview questions.', evidenceKind: 'body' });
+    const initial = structuredClone(draft);
+    initial.competitorGap = 'Publisher A and Publisher B both recommend preparing interview questions and distributing the finished video.';
+    const gapBinding = initial.claimBindings.find(b => b.location === '/competitorGap')!;
+    gapBinding.span = initial.competitorGap;
+    gapBinding.sourceFactIds = ['publisher-a-sharing', 'publisher-b-questions'];
+    const repaired = structuredClone(initial);
+    if (fixed) {
+      repaired.competitorGap = 'Publisher A recommends distributing the finished video; Publisher B recommends preparing interview questions.';
+      repaired.claimBindings.find(b => b.location === '/competitorGap')!.span = repaired.competitorGap;
+    }
+    const issue = { id: 'publisher-pair', code: 'unsupported_named_source_attribution',
+      message: 'Publisher B has no bound support for distributing the finished video.',
+      repairInstruction: 'Separate each publisher and its supported recommendation.', locations: ['/competitorGap'] };
+    const rejectGap = (value: GeneratedDraftV2) => supportedBindings(value).map(e =>
+      value.claimBindings[e.bindingIndex].location === '/competitorGap'
+        ? { ...e, supported: false, rationale: issue.message } : e);
+    const critique = { ...approvedCritique, approved: false, issues: [issue], supportEvaluations: rejectGap(initial) };
+    const client = new FixtureStructuredClient([initial, critique, repaired, (request: StructuredOutputRequest) => {
+      const result = verifyRequest(repaired)(request);
+      if (!fixed) { result.approved = false; result.evaluations.forEach(e => { e.resolved = false; }); result.supportEvaluations = rejectGap(repaired); }
+      return result;
+    }]);
+    const outcome = await createStructuredDrafter({ client, mediaAllowlist: [media] }).draft(localContext);
+    expect(client.requests).toHaveLength(4);
+    expect(client.requests[2].input).toMatchObject({
+      repairPolicy: { allowedLocations: ['/competitorGap'] },
+      repairTargets: [expect.objectContaining({ location: '/competitorGap', sourceFactIds: ['publisher-a-sharing', 'publisher-b-questions'] })],
+    });
+    expect(outcome.status).toBe(fixed ? 'ready' : 'blocked');
+    if (!fixed) expect(outcome).toMatchObject({ findings: expect.arrayContaining([
+      expect.objectContaining({ code: 'critique.support_rejected', location: '/competitorGap' }),
+    ]) });
   });
 
   it('blocks stale repaired graphic bindings before verification and independently in the finalizer', async () => {

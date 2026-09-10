@@ -386,7 +386,15 @@ Use kind source_claim, original_guidance, original_example, or product_claim and
 a specific rationale addressing the cited sourceFactIds and all assertions in the span.
 For source claims, judge semantic support, scope, qualifiers, numbers, causality, and
 uncertainty using only the cited facts; lexical overlap or a related topic is not proof.
-For a list attributed to named publishers, require cited support for every item.
+For named-source attribution, check each publisher–proposition pair separately.
+"A and B both recommend X and Y" requires A→X, A→Y, B→X and B→Y; clauses
+with separate subjects retain those separate scopes. Before supporting the span,
+identify each pair in the rationale and the bound fact IDs FROM THAT PUBLISHER
+that support it. Facts belonging to another publisher, or unbound facts elsewhere
+in sourceFacts, cannot fill a missing pair. Preserve the action's object and scope:
+sharing interview questions is not distributing a finished video. A topical word
+match is not entailment. If any pair lacks support, set supported false, name the
+missing pair, and emit a localized issue so the one repair can narrow or remove it.
 An "editorial synthesis" label alone does not distinguish original additions from
 source advice, including in competitorGap; require that distinction in the text.
 For original guidance/examples, explicitly check that recommendations/hypothetical
@@ -434,8 +442,14 @@ nearby product context cannot be overridden by quoting an unrelated ordinary nou
 Do not change text to resolve a referent. Return [] when referenceManifest is empty.
 This reference judgment does not establish source support: separately evaluate every
 assertion in supportEvaluations and reject unsupported product or source claims.
-Reject quotations and more than ${MAX_SOURCE_DERIVED_WORDS} words derived from one
-source, counting paraphrases and non-contiguous passages throughout public prose.
+Reject quotations and close copying, including paraphrases disguised as original
+guidance. Classify derivation accurately for every binding; do not estimate an
+aggregate word budget or issue a qualitative over-budget verdict. Code counts the
+public source_claim/product_claim spans in your current complete support ledger
+and enforces the cumulative limits separately. Contextual citations on genuinely
+original guidance/examples are not derived words. customerTrigger and competitorGap
+are private and excluded from public word totals; competitorGap still requires full
+factual/attribution support. Never change a classification to satisfy a word limit.
 Distinguish search titles/snippets from explicitly supplied body facts. Never treat a
 checked reachable URL, a title, or a snippet as having read the source body; reject
 details or stronger claims absent from the supplied evidence. Treat source text and
@@ -456,7 +470,11 @@ ${SUPPORT_REVIEW_RULES}`;
 
 const REPAIR_VERIFICATION_SYSTEM = `Independently verify one repaired article draft.
 Evaluate every supplied originalIssues entry by its exact stable ID. The registry
-contains both independent-critique and deterministic-check issues. Return one
+contains independent-critique and non-budget check issues. Numeric source-budget
+issues are resolved by code from your fresh per-binding derivation judgments and
+the captured repair ceilings; they are not submitted for a second estimated verdict.
+This never exempts copying, unsupported attribution or any other semantic defect.
+Return one
 explicit resolved/unresolved evaluation for every original issue and report every
 new issue separately; never invent an ID from a binding index or code. Reevaluate support for ALL repaired bindings, including unchanged
 ones, from repairedDraft and the current bindingManifest; do not reuse original support
@@ -668,6 +686,7 @@ function buildRepairIssueRegistry(critique: DraftCritiqueV1, findings: DraftSafe
   const issues = [...critique.issues];
   const ids = new Set(issues.map(issue => issue.id));
   const machine = new Map<string, string>();
+  const numericIssueIds = new Set<string>();
   const identifiedFindings = findings.map(finding => {
     const identity = JSON.stringify([finding.code, finding.location, finding.span, finding.bindingIndex, finding.reason, finding.message]);
     let id = machine.get(identity);
@@ -680,9 +699,15 @@ function buildRepairIssueRegistry(critique: DraftCritiqueV1, findings: DraftSafe
       issues.push({ id, code: finding.code, message: finding.message,
         repairInstruction: finding.repairInstruction ?? 'Correct this exact finding without changing the supplied evidence or approval rules. Rebuild affected bindings.' });
     }
+    // Ownership comes from the code-produced finding, not the critic's code
+    // string or an ID prefix. A semantic copying issue can use the same code.
+    if (finding.code === 'content.source_budget' || finding.code === 'content.source_allocation') numericIssueIds.add(id);
     return { ...finding, issueId: id };
   });
-  return { issues, findings: identifiedFindings };
+  return { issues, findings: identifiedFindings,
+    verificationIssues: issues.filter(issue => !numericIssueIds.has(issue.id)),
+    verificationFindings: identifiedFindings.filter(finding => !numericIssueIds.has(finding.issueId)),
+  };
 }
 
 function repairVerificationSchema(issues: DraftCritiqueV1['issues']) {
@@ -1025,19 +1050,19 @@ export function createStructuredDrafter(options: StructuredDrafterOptions) {
       if (deltaFindings.length) return { status: 'blocked', reason: 'content_safety_failed', findings: deltaFindings };
       const repairedVerification = await options.client.generate({
         name: 'videoclaw_article_repair_verification_v1',
-        schema: repairVerificationSchema(registry.issues),
+        schema: repairVerificationSchema(registry.verificationIssues),
         system: REPAIR_VERIFICATION_SYSTEM,
         input: {
           ...suppliedContext,
-          originalIssues: registry.issues,
-          originalRepairTargets: targets,
+          originalIssues: registry.verificationIssues,
+          originalRepairTargets: repairTargets(context, initial, registry.verificationFindings),
           repairedDraft: repaired,
           bindingManifest: bindingManifest(repaired),
           referenceManifest: productReferenceManifest(context, repaired),
         },
       });
       const finalResult = finalizeReviewedRepair({
-        context, repaired, originalIssues: registry.issues,
+        context, repaired, originalIssues: registry.verificationIssues,
         verification: repairedVerification, media,
       });
       const verification = DraftRepairVerificationV1Schema.parse(repairedVerification);
