@@ -644,6 +644,54 @@ function generatedClaimSentences(draft: GeneratedDraftV2): Array<{ location: str
     .map((span) => ({ location, span })));
 }
 
+/** Compile a copied list marker out of metadata before independent review.
+ * The actual document AST and byte-exact item prefix must both match. This is
+ * not a general punctuation stripper and never changes prose or source IDs. */
+export function canonicalizeListClaimBindings(context: DraftingContext, draft: GeneratedDraftV2) {
+  const unchanged = {draft, compiledBindingIndices: [] as number[]};
+  if (!GeneratedDraftV2Schema.safeParse(draft).success) return unchanged;
+  const selected = new Set(draft.sourceReferences.map(source => source.sourceId));
+  const facts = new Set(context.sourceFacts.filter(source => selected.has(source.id)).flatMap(source => source.facts.map(fact => fact.id)));
+  const compiledBindingIndices: number[] = [];
+  const claimBindings = draft.claimBindings.map((binding, bindingIndex) => {
+    if (!(binding.location === '/directAnswer' || /^\/sections\/(?:0|[1-9]\d*)\/markdown$/u.test(binding.location))
+      || binding.productClaimId !== null || new Set(binding.sourceFactIds).size !== binding.sourceFactIds.length
+      || binding.sourceFactIds.some(id => !facts.has(id))) return binding;
+    const value = generatedLocationValue(draft, binding.location);
+    if (!value) return binding;
+    const visible = claimSpansAtLocation(value, binding.location);
+    if (visible.includes(binding.span)) return binding;
+    const parts = sentences(binding.span);
+    if (parts.length !== 1 || visible.filter(span => span === parts[0]).length !== 1) return binding;
+    let matches = 0;
+    walkMarkdown(parseMarkdown(value), node => {
+      const paragraph = node.children?.[0];
+      if (node.type !== 'listItem' || paragraph?.type !== 'paragraph') return;
+      const start = node.position?.start.offset;
+      const paragraphStart = paragraph.position?.start.offset;
+      const end = paragraph.position?.end.offset;
+      if (start === undefined || paragraphStart === undefined || end === undefined || paragraphStart <= start) return;
+      if (start + binding.span.length <= end && value.slice(start, start + binding.span.length) === binding.span
+        && splitClaimSentences(markdownNodeClaimText(paragraph))[0] === parts[0]) matches += 1;
+    });
+    if (matches !== 1) return binding;
+    const span = parts[0];
+    // Do not pick a winner for overlapping or duplicate metadata. Leave the
+    // existing exact coverage validator to reject it, including index aliases.
+    if (draft.claimBindings.some((other, index) => {
+      if (index === bindingIndex) return false;
+      const location = other.location.replace(/\/(\d+)(?=\/)/gu, (_match, index: string) => `/${Number(index)}`);
+      if (location !== binding.location) return false;
+      if (other.location !== binding.location) return true;
+      if (visible.includes(other.span)) return other.span === span;
+      return other.span === binding.span || other.span.includes(span) || span.includes(other.span);
+    })) return binding;
+    compiledBindingIndices.push(bindingIndex);
+    return {...binding, span, sourceFactIds: [...binding.sourceFactIds]};
+  });
+  return compiledBindingIndices.length ? {draft: {...draft, claimBindings}, compiledBindingIndices} : unchanged;
+}
+
 /** Compile exact compound metadata only; source relationships still require a
  * fresh independent review of every resulting sentence. Never change prose. */
 export function canonicalizeCompoundClaimBindings(context: DraftingContext, draft: GeneratedDraftV2) {

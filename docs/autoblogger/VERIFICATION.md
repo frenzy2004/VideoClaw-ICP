@@ -3,7 +3,9 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-Latest: [worker completion audit and FAQ/queue corrections](WORKER-COMPLETION-AUDIT-2026-09-12.md), **2,834 tests across 63 files**, zero failures/skips, plus lint/typecheck/build. A fresh aspect-ratio run failed FAQ anchor validation; the corrected body-only model input then passed a separate live FAQ-component check without changing source facts or state. Queue deferral, ordinary failed-run replay protection and durable research failure history are also corrected. State retains 41 runs / 66 failures, with no successful whole-worker pilot. Standard-runtime review receipts and state handoff remain incomplete. No production, publication or schedule change occurred.
+Latest: [list binding boundary correction](LIST-BINDING-REPAIR-2026-09-12.md), **2,851 tests across 63 files**, zero failures/skips, plus lint/typecheck/build. The saved audio-cleanup draft's sixteen marker-related coverage errors are resolved without rewriting prose or sources. This structural diagnostic does not relabel the failed live run as successful. State retains 42 runs / 67 failures and no consumed pilot. Standard-runtime receipts and state handoff remain incomplete. Production and scheduling are unchanged.
+
+Previous: [worker completion audit and FAQ/queue corrections](WORKER-COMPLETION-AUDIT-2026-09-12.md) retains its 2,834-test checkpoint and separately labeled FAQ component verification.
 
 Previous: [captions secondary-keyword correction](CAPTIONS-SECONDARY-EVIDENCE-2026-09-12.md) retains its failed fresh run and separately successful final-artifact native validation.
 

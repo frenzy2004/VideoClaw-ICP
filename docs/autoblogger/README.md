@@ -6,7 +6,9 @@ This worker is a controlled research-and-drafting system. It does not publish ar
 
 The initial 250-topic research library is an input, not a quota or publication gate. Each run scans at most 50 candidates, deeply checks at most 10, and produces at most 3 drafts with no more than 2 from one ICP.
 
-Latest checkpoint: [worker completion audit and FAQ/queue corrections](WORKER-COMPLETION-AUDIT-2026-09-12.md). FAQ anchor input now separates headings from body text; its live component check passes on unchanged captured research. Viable topics excluded by the deep cap remain queued, ordinary shallow failures are recorded durably, and research failures survive reruns. The combined suite passes 2,834 tests plus lint/typecheck/build. State retains 41 runs / 66 failures; no successful fresh pilot. Standard-runtime review receipts and history-preserving state handoff still require worker work.
+Latest checkpoint: [list binding boundary correction](LIST-BINDING-REPAIR-2026-09-12.md). The audio-cleanup run reached independent critique, then failed because eight copied list markers caused sixteen coverage errors. The compiler now resolves actual list syntax without changing prose or sources. The saved-input structural check and 2,851 tests pass, plus lint/typecheck/build. State retains 42 runs / 67 failures; no successful fresh pilot. Standard-runtime review receipts and history-preserving state handoff still require worker work.
+
+Previous checkpoint: [worker completion audit and FAQ/queue corrections](WORKER-COMPLETION-AUDIT-2026-09-12.md) retains its component verification and queue/failure-history corrections.
 
 Previous checkpoint: [captions secondary-keyword correction](CAPTIONS-SECONDARY-EVIDENCE-2026-09-12.md) retains its failed fresh run and separately successful final-artifact native validation.
 
@@ -89,7 +91,7 @@ The [previous product-demo retry](PRODUCT-DEMO-RETRY-2026-09-06.md), [collector 
 
 One older operator-assisted review article still exists separately. Its source audit, intervention and native QA are preserved in the [assisted-review report](ASSISTED-REVIEW-2026-09-06.md). It is not a successful `worker.execute()` result. The [research recovery report](RESEARCH-RECOVERY-2026-09-06.md) and [first pilot report](LIVE-PILOT-2026-09-06.md) retain earlier checkpoints.
 
-`APIFY_TOKEN` is connected to ICP Actions secrets; `OPENAI_API_KEY` works locally only and `LANDER_READ_TOKEN` is still absent. Local attempts used fresh GET-only interactive GitHub inventory without substituting a broad token into the unattended worker. State/history is preserved and must be reconciled before Actions use. The one-use local retry authorization is not an unattended retry override. PR #1 and lander PR #55 remain **open/unmerged**, and the schedule is disabled. No production action, generated lander PR or schedule activation is authorized. The ICP default branch is `seo-campaign`; GitHub schedules require the workflow there.
+`APIFY_TOKEN` and `OPENAI_API_KEY` are connected to ICP Actions secrets; `LANDER_READ_TOKEN` is still absent. No Actions pilot has been dispatched. Local attempts used fresh GET-only interactive GitHub inventory without substituting a broad token into the unattended worker. State/history is preserved and must be reconciled before Actions use. The one-use local retry authorization is not an unattended retry override. PR #1 and lander PR #55 remain **open/unmerged**, and the schedule is disabled. No production action, generated lander PR or schedule activation is authorized. The ICP default branch is `seo-campaign`; GitHub schedules require the workflow there.
 
 See the updated [three-lane system diagram](../diagrams/videoclaw-seo-aeo-geo-content-system.md) for the worker, current pilot and separate human release boundary.
 

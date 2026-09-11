@@ -384,6 +384,106 @@ function verifyRequest(repaired = draft) {
   });
 }
 
+describe('Markdown list binding compilation before critique', () => {
+  const sentence = 'Save the original video file and the current edit export in separate folders.';
+  const hash = (value: unknown) => createHash('sha256').update(JSON.stringify(value)).digest('hex');
+  function listDraft(marker = '1.') {
+    const generated = structuredClone(draft);
+    const span = `${marker} ${sentence}`;
+    generated.sections[0].markdown = `${span}\n\n${generated.sections[0].markdown}`;
+    generated.claimBindings.push({location: '/sections/0/markdown', span,
+      sourceFactIds: ['fixture-section-1', 'yc-bullets'], productClaimId: null});
+    return generated;
+  }
+
+  it.each(['1.', '8.', '12)', '-', '+', '*'])('compiles the actual %s list marker without rewriting prose or citations', async marker => {
+    const generated = listDraft(marker);
+    const original = structuredClone(generated);
+    const expected = structuredClone(generated);
+    expected.claimBindings.at(-1)!.span = sentence;
+    const client = new FixtureStructuredClient([generated, (request: StructuredOutputRequest) => {
+      const input = request.input as {draft: GeneratedDraftV2};
+      expect(input.draft).toEqual(expected);
+      expect(request.input).toMatchObject({draftNormalization: {
+        kind: 'compile_markdown_list_bindings_v1', parsedDraftHash: hash(generated), canonicalDraftHash: hash(expected),
+        compiledBindingIndices: [generated.claimBindings.length - 1],
+      }});
+      return {...approvedCritique, editorialReview: acceptedEditorial(input.draft), supportEvaluations: supportedBindings(input.draft)};
+    }]);
+    const result = await createStructuredDrafter({client, mediaAllowlist: [media]}).draft(context);
+    expect(result).toMatchObject({status: 'ready', repaired: false});
+    expect(generated).toEqual(original);
+    expect(client.requests).toHaveLength(2);
+  });
+
+  it.each(['invented marker', 'partial sentence', 'escaped marker', 'code block', 'plain FAQ',
+    'ambiguous occurrence', 'duplicate binding', 'existing rendered binding', 'unknown fact', 'product binding'])
+  ('does not compile %s as valid list coverage', async variant => {
+    const generated = listDraft('1)');
+    const extra = generated.claimBindings.at(-1)!;
+    if (variant === 'invented marker') extra.span = `7. ${sentence}`;
+    if (variant === 'partial sentence') extra.span = '1. Save the original video file';
+    if (variant === 'escaped marker') generated.sections[0].markdown = generated.sections[0].markdown.replace('1)', '1\\)');
+    if (variant === 'code block') generated.sections[0].markdown = `\`\`\`text\n${extra.span}\n\`\`\`\n\n${draft.sections[0].markdown}`;
+    if (variant === 'plain FAQ') {extra.location = '/faqAnswers/0/answer'; generated.faqAnswers[0].answer = extra.span;}
+    if (variant === 'ambiguous occurrence') generated.sections[0].markdown += `\n\n${extra.span}`;
+    if (variant === 'duplicate binding') generated.claimBindings.push(structuredClone(extra));
+    if (variant === 'existing rendered binding') generated.claimBindings.push({...extra, span: sentence});
+    if (variant === 'unknown fact') extra.sourceFactIds = ['unknown-fact'];
+    if (variant === 'product binding') extra.productClaimId = 'unknown-product';
+    const original = structuredClone(generated);
+    const client = new FixtureStructuredClient([generated, (request: StructuredOutputRequest) => {
+      expect((request.input as {draft: GeneratedDraftV2}).draft).toEqual(original);
+      expect(request.input).not.toHaveProperty('draftNormalization');
+      throw new Error('unchanged invalid list boundary');
+    }]);
+    await expect(createStructuredDrafter({client, mediaAllowlist: [media]}).draft(context)).rejects.toThrow('unchanged invalid list boundary');
+    expect(generated).toEqual(original);
+  });
+
+  it('rejects a pre-compilation review instead of relabeling its hashes', async () => {
+    const generated = listDraft();
+    const client = new FixtureStructuredClient([generated,
+      {...approvedCritique, editorialReview: acceptedEditorial(generated), supportEvaluations: supportedBindings(generated)}]);
+    const result = await createStructuredDrafter({client, mediaAllowlist: [media]}).draft(context);
+    expect(result).toMatchObject({status: 'blocked', findings: expect.arrayContaining([
+      expect.objectContaining({code: 'critique.editorial_stale'}),
+    ])});
+    expect(client.requests).toHaveLength(2);
+  });
+
+  it('does not bind a partial list prefix to a different paragraph', async () => {
+    const generated = listDraft();
+    generated.sections[0].markdown = `1. Save *the original video* file.\n\nSave *the original\n\n${draft.sections[0].markdown}`;
+    generated.claimBindings.at(-1)!.span = '1. Save *the original';
+    generated.claimBindings.push({location: '/sections/0/markdown', span: 'Save the original video file.',
+      sourceFactIds: ['fixture-section-1'], productClaimId: null});
+    const client = new FixtureStructuredClient([generated, (request: StructuredOutputRequest) => {
+      expect((request.input as {draft: GeneratedDraftV2}).draft).toEqual(generated);
+      expect(request.input).not.toHaveProperty('draftNormalization');
+      throw new Error('partial prefix remains invalid');
+    }]);
+    await expect(createStructuredDrafter({client, mediaAllowlist: [media]}).draft(context)).rejects.toThrow('partial prefix remains invalid');
+  });
+
+  it('keeps distinct complete sentences separate from substring overlap', async () => {
+    const generated = listDraft();
+    generated.sections[0].markdown = `1. Keep one copy.\n\nRecommendation: Keep one copy.\n\n${draft.sections[0].markdown}`;
+    generated.claimBindings.at(-1)!.span = '1. Keep one copy.';
+    generated.claimBindings.push({location: '/sections/0/markdown', span: 'Recommendation: Keep one copy.',
+      sourceFactIds: ['fixture-section-1'], productClaimId: null});
+    const expected = structuredClone(generated);
+    expected.claimBindings.at(-2)!.span = 'Keep one copy.';
+    const client = new FixtureStructuredClient([generated, (request: StructuredOutputRequest) => {
+      const actual = (request.input as {draft: GeneratedDraftV2}).draft;
+      expect(actual).toEqual(expected);
+      return {...approvedCritique, editorialReview: acceptedEditorial(actual), supportEvaluations: supportedBindings(actual)};
+    }]);
+    expect(await createStructuredDrafter({client, mediaAllowlist: [media]}).draft(context)).toMatchObject({status: 'ready', repaired: false});
+    expect(client.requests).toHaveLength(2);
+  });
+});
+
 describe('compound claim metadata at the real critique boundary', () => {
   const problem = 'Problem: reviewers comment on different versions.';
   const remedy = 'Remedy: stop collecting scattered comments, label one version as current, and move all unresolved notes into the single review location before editing resumes.';

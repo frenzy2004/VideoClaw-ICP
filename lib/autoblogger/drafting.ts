@@ -15,6 +15,7 @@ import {
   GeneratedDraftV2Schema,
   ProductReferenceReviewSchema,
   canonicalizeCompoundClaimBindings,
+  canonicalizeListClaimBindings,
   productReferenceManifest,
   assertSourceFacts,
   assertSourceFactsMatchCheckedSources,
@@ -1041,22 +1042,30 @@ export function createStructuredDrafter(options: StructuredDrafterOptions) {
             : [{ code: 'content.secret', message: 'Generated draft contains a secret-like value.' }],
         };
       }
-      const compound = canonicalizeCompoundClaimBindings(context, rawInitial);
+      const list = canonicalizeListClaimBindings(context, rawInitial);
+      const compound = canonicalizeCompoundClaimBindings(context, list.draft);
       const normalized = canonicalizeObservedFaqHeadingBindings(context, compound.draft);
       const initial = normalized.draft;
       const hash = (value: unknown) => createHash('sha256').update(JSON.stringify(value)).digest('hex');
+      const listAudit = list.compiledBindingIndices.length ? {
+        kind: 'compile_markdown_list_bindings_v1',
+        parsedDraftHash: hash(rawInitial), canonicalDraftHash: hash(list.draft),
+        compiledBindingIndices: list.compiledBindingIndices,
+        reason: 'Actual document list markers removed from exact copied binding prefixes only; authored text and ordered source fact IDs are unchanged. Fresh independent review is required.',
+      } : undefined;
       const compoundAudit = compound.splitBindingIndices.length ? {
         kind: 'split_compound_claim_bindings_v1',
-        parsedDraftHash: hash(rawInitial), canonicalDraftHash: hash(compound.draft),
+        parsedDraftHash: hash(list.draft), canonicalDraftHash: hash(compound.draft),
         splitBindingIndices: compound.splitBindingIndices,
         reason: 'Exact contiguous whole rendered sentences compiled into separate bindings; authored text and ordered source fact IDs are unchanged. Each sentence requires fresh independent review.',
       } : undefined;
-      const audit = compoundAudit && normalized.audit ? {
+      const audits = [listAudit, compoundAudit, normalized.audit].filter(item => item !== undefined);
+      const audit = audits.length > 1 ? {
         kind: 'canonicalize_generated_draft_metadata_v1',
         parsedDraftHash: hash(rawInitial), canonicalDraftHash: hash(initial),
         // Each step's indices refer to its parsedDraftHash, in execution order.
-        steps: [compoundAudit, normalized.audit],
-      } : compoundAudit ?? normalized.audit;
+        steps: audits,
+      } : audits[0];
       const critique = DraftCritiqueV1Schema.parse(await options.client.generate({
         name: 'videoclaw_article_critique_v1',
         schema: DRAFT_CRITIQUE_V1_JSON_SCHEMA,
