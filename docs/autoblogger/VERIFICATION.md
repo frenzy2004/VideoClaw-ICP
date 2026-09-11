@@ -3,7 +3,9 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-Latest: [voice-over attempt and procedure-context correction](VOICEOVER-REFERENCE-2026-09-12.md), **2,820 tests across 63 files**, zero failures/skips, plus lint/typecheck/build. Independent review's Markdown-reference finding was reproduced and fixed; recheck found no actionable issues. Exact saved drafting/review responses now yield a voice-over Markdown/SVG article passing 32 native blog tests, lint, build and integrity checks in an isolated lander. The fresh run reached approved final independent review but failed a deterministic context check; it remains failed. State retains 38 runs / 62 failures and no successful whole-worker pilot. No production or publication change occurred.
+Latest: [captions secondary-keyword correction](CAPTIONS-SECONDARY-EVIDENCE-2026-09-12.md), **2,823 tests across 63 files**, zero failures/skips, plus lint/typecheck/build. Independent review found no actionable issues. The unchanged final captions draft now passes materialization and isolated native blog checks, lint, build and integrity checks. Its fresh run reached approved final review but failed because the serializer omitted observed PAA evidence; the original run remains failed. State retains 39 runs / 63 failures and no successful whole-worker pilot. No production, publication or schedule change occurred.
+
+Previous: [voice-over attempt and procedure-context correction](VOICEOVER-REFERENCE-2026-09-12.md) retains its historical verification and separately labeled saved-response success.
 
 Previous: [explicit body-only source review](SHOT-LIST-TRANSPORT-2026-09-12.md#explicit-body-only-source-review) records the source-input correction and its separate live component proof.
 

@@ -1601,7 +1601,10 @@ function secondaryKeywordsForArticle(context: DraftingContext, draft: GeneratedD
   const publicSpans = [context.candidate.title, ...draft.faqAnswers.map(faq => faq.question),
     ...generatedClaimSentences(draft).filter(entry => entry.location !== '/competitorGap').map(entry => entry.span)]
     .map(span => ` ${normalizeKeyword(span)} `);
-  for (const observed of [...context.evidence.signals.autocomplete, ...context.evidence.signals.relatedSearches]) {
+  // PAA is observed search evidence too, including questions answered verbatim
+  // by the reviewed visible FAQs. Keep the same topical and coverage checks.
+  for (const observed of [...context.evidence.signals.autocomplete, ...context.evidence.signals.relatedSearches,
+    ...context.evidence.signals.peopleAlsoAsk]) {
     if (observed.length > 200 || containsSecretLikeValue(observed) || !isFormatControlFree(observed)) continue;
     const keyword = normalizeKeyword(observed);
     const tokens = new Set(keyword.split(' '));

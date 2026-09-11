@@ -6,7 +6,9 @@ This worker is a controlled research-and-drafting system. It does not publish ar
 
 The initial 250-topic research library is an input, not a quota or publication gate. Each run scans at most 50 candidates, deeply checks at most 10, and produces at most 3 drafts with no more than 2 from one ICP.
 
-Latest checkpoint: [voice-over attempt and procedure-context correction](VOICEOVER-REFERENCE-2026-09-12.md). Automatic research, source verification, FAQ preparation, draft, critique, one repair and final independent review completed. One deterministic reference-context check stopped the fresh run before native QA. Its correction passes 2,820 tests, lint/typecheck/build and independent review. Exact saved responses now produce a review-only voice-over Markdown/SVG article passing the lander's 32 blog checks, lint and build. State retains 38 runs / 62 failures, no successful pilot. Saved-response native success is not fresh uninterrupted proof.
+Latest checkpoint: [captions secondary-keyword correction](CAPTIONS-SECONDARY-EVIDENCE-2026-09-12.md). The fresh captions run reached approved independent final review, then failed because serialization omitted observed PAA from secondary-keyword evidence. The correction passes 2,823 tests, lint/typecheck/build and independent review. The unchanged final draft now materializes into review-only Markdown/SVG passing isolated native blog checks, lint and build. State retains 39 runs / 63 failures, no successful fresh pilot. Saved final-artifact validation is not fresh uninterrupted proof.
+
+Previous checkpoint: [voice-over attempt and procedure-context correction](VOICEOVER-REFERENCE-2026-09-12.md) records its failed fresh run and separately successful saved-response native revalidation.
 
 Previous checkpoint: [explicit body-only source review](SHOT-LIST-TRANSPORT-2026-09-12.md#explicit-body-only-source-review) records the source-input correction, its live component proof and earlier failed attempts.
 

@@ -468,17 +468,37 @@ describe('content bundle materialization', () => {
     )).toThrow(/media input/i);
   });
 
-  it.each(['autocomplete', 'relatedSearches'] as const)('fills an empty secondary-keyword list only from covered %s evidence', (signal) => {
+  it.each(['autocomplete', 'relatedSearches', 'peopleAlsoAsk'] as const)('fills an empty secondary-keyword list only from covered %s evidence', (signal) => {
     const local = structuredClone(context);
     local.candidate.secondaryKeywords = [];
     local.evidence.signals.autocomplete = [];
     local.evidence.signals.relatedSearches = [];
+    local.evidence.signals.peopleAlsoAsk = [];
     local.evidence.signals[signal] = [candidate.primaryKeyword, 'founder pitch video free download', 'founder pitch video'];
     const original = structuredClone(local);
     const bundle = materializeDraftBundle(local, generatedDraft, mediaAllowlist[0]);
     expect(matter(bundle.markdown).data.secondaryKeywords).toEqual(['founder pitch video']);
     expect(local).toEqual(original);
     expect(bundle.article).toMatchObject({status:'review', approvals:{copy:false, factual:false, legal:false, visual:false}});
+  });
+
+  it('retains an observed PAA question as secondary search evidence when the visible FAQ answers it', () => {
+    const local = structuredClone(context);
+    local.candidate.secondaryKeywords = [];
+    local.evidence.signals.autocomplete = [];
+    local.evidence.signals.relatedSearches = [];
+    local.evidence.signals.peopleAlsoAsk = ['How long should a founder pitch video be?'];
+    const bundle = materializeDraftBundle(local, generatedDraft, mediaAllowlist[0]);
+    expect(matter(bundle.markdown).data.secondaryKeywords).toEqual(['how long should a founder pitch video be']);
+  });
+
+  it('does not use an uncovered PAA modifier or invent evidence from a visible FAQ alone', () => {
+    const local = structuredClone(context);
+    local.candidate.secondaryKeywords = [];
+    local.evidence.signals.autocomplete = [];
+    local.evidence.signals.relatedSearches = [];
+    local.evidence.signals.peopleAlsoAsk = ['How long should a founder pitch video be for an IPO?'];
+    expect(() => materializeDraftBundle(local, generatedDraft, mediaAllowlist[0])).toThrow('content.secondary_keyword_missing');
   });
 
   it.each(['no observations', 'primary only', 'uncovered modifier', 'unrelated phrase'])
