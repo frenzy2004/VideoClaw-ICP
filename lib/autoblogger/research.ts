@@ -117,13 +117,14 @@ const DEFAULT_EXECUTION: ApifyExecutionOptions = {
   sleep: (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds)),
 };
 
-async function retry<T>(operation: () => Promise<T>, maxAttempts: number): Promise<T> {
+async function retry<T>(operation: () => Promise<T>, maxAttempts: number, beforeRetry: (failedAttempt: number) => Promise<void>): Promise<T> {
   let latestError: unknown;
   for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
     try {
       return await operation();
     } catch (error) {
       latestError = error;
+      if (attempt < maxAttempts) await beforeRetry(attempt);
     }
   }
   throw latestError;
@@ -177,6 +178,13 @@ export async function runApifyActor(
   const startedAt = options.nowMs();
   let startedRunId: string | undefined;
   let runSucceeded = false;
+  let stage = 'startActor';
+  const readBackoff = async (failedAttempt: number) => {
+    // Space existing read attempts, never repeat the paid start. Delays consume
+    // the same run deadline; request, attempt and polling ceilings are unchanged.
+    const delay = Math.min(10_000, Math.min(5_000, options.pollIntervalMs * 5) * 2 ** (failedAttempt - 1));
+    await withinRunDeadline(() => options.sleep(delay), options, startedAt, `${stage} backoff`);
+  };
   try {
     const startedRun = await withinRunDeadline(
       () => client.startActor(actorId, input),
@@ -188,18 +196,21 @@ export async function runApifyActor(
     let run = startedRun;
     let polls = 0;
     while (run.status !== 'SUCCEEDED') {
+      stage = 'run status';
       if (TERMINAL_FAILURES.has(run.status)) {
         throw new Error(`Apify run ${run.id} ended with ${run.status}.`);
       }
       if (polls >= options.maxPolls) throw new Error('Apify polling limit exceeded.');
       const elapsed = options.nowMs() - startedAt;
       if (elapsed >= options.timeoutMs) throw new Error('Apify run timed out.');
+      stage = 'polling sleep';
       await withinRunDeadline(
         () => options.sleep(Math.min(options.pollIntervalMs, options.timeoutMs - elapsed)),
         options,
         startedAt,
         'polling sleep',
       );
+      stage = 'getRun poll';
       run = await retry(
         () => withinRunDeadline(
           () => client.getRun(startedRun.id),
@@ -208,11 +219,13 @@ export async function runApifyActor(
           'getRun poll',
         ),
         options.maxAttempts,
+        readBackoff,
       );
       if (run.id !== startedRun.id) throw new Error('Apify polling returned a different run id.');
       polls += 1;
     }
     runSucceeded = true;
+    stage = 'dataset retrieval';
     if (!run.defaultDatasetId) throw new Error(`Apify run ${run.id} has no default dataset.`);
     const items = await retry(
       () => withinRunDeadline(
@@ -222,6 +235,7 @@ export async function runApifyActor(
         'dataset retrieval',
       ),
       options.maxAttempts,
+      readBackoff,
     );
     return {
       items,
@@ -248,7 +262,8 @@ export async function runApifyActor(
         if (cleanupTimer) clearTimeout(cleanupTimer);
       }
     }
-    throw new Error(`Apify research failed: ${redactSensitive(error)}`);
+    const detail = error instanceof Error ? error.message : String(error);
+    throw new Error(redactSensitive(`Apify research failed${startedRunId ? ` for run ${startedRunId}` : ''} during ${stage}: ${detail}`));
   }
 }
 
