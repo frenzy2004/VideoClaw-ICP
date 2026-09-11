@@ -155,6 +155,9 @@ class RepairingFixtureClient implements StructuredOutputClient {
     };
     const context = input;
     if (request.name === 'videoclaw_faq_evidence_v1') {
+      const faqInput = request.input as {
+        sourceFacts: Array<{facts: Array<{id: string; bodyText: string; headingContext: string}>}>;
+      };
       const keyword = input.candidate.primaryKeyword;
       const bodies = [
         `${keyword} is a sequence for preparing and checking a founder product recording.`,
@@ -163,10 +166,11 @@ class RepairingFixtureClient implements StructuredOutputClient {
       ];
       return {status: 'ready', contextHash: input.contextHash, reason: 'Synthetic offline source bodies cover three distinct intents.',
         selections: input.candidateQuestions!.map((question, index) => {
-          const fact = input.sourceFacts.flatMap(source => source.facts).find(fact => fact.text === bodies[index]);
-          expect(fact?.evidenceKind).toBe('body');
+          const fact = faqInput.sourceFacts.flatMap(source => source.facts).find(fact => fact.bodyText === bodies[index]);
+          expect(fact?.bodyText).toBe(bodies[index]);
+          expect(typeof fact?.headingContext).toBe('string');
           return {question, intent: ['definition', 'planning', 'purpose'][index],
-            anchors: [{sourceFactId: fact!.id, excerpt: fact!.text}]};
+            anchors: [{sourceFactId: fact!.id, excerpt: fact!.bodyText}]};
         }),
       };
     }

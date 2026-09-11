@@ -6,7 +6,9 @@ This worker is a controlled research-and-drafting system. It does not publish ar
 
 The initial 250-topic research library is an input, not a quota or publication gate. Each run scans at most 50 candidates, deeply checks at most 10, and produces at most 3 drafts with no more than 2 from one ICP.
 
-Latest checkpoint: [captions secondary-keyword correction](CAPTIONS-SECONDARY-EVIDENCE-2026-09-12.md). The fresh captions run reached approved independent final review, then failed because serialization omitted observed PAA from secondary-keyword evidence. The correction passes 2,823 tests, lint/typecheck/build and independent review. The unchanged final draft now materializes into review-only Markdown/SVG passing isolated native blog checks, lint and build. State retains 39 runs / 63 failures, no successful fresh pilot. Saved final-artifact validation is not fresh uninterrupted proof.
+Latest checkpoint: [worker completion audit and FAQ/queue corrections](WORKER-COMPLETION-AUDIT-2026-09-12.md). FAQ anchor input now separates headings from body text; its live component check passes on unchanged captured research. Viable topics excluded by the deep cap remain queued, ordinary shallow failures are recorded durably, and research failures survive reruns. The combined suite passes 2,834 tests plus lint/typecheck/build. State retains 41 runs / 66 failures; no successful fresh pilot. Standard-runtime review receipts and history-preserving state handoff still require worker work.
+
+Previous checkpoint: [captions secondary-keyword correction](CAPTIONS-SECONDARY-EVIDENCE-2026-09-12.md) retains its failed fresh run and separately successful final-artifact native validation.
 
 Previous checkpoint: [voice-over attempt and procedure-context correction](VOICEOVER-REFERENCE-2026-09-12.md) records its failed fresh run and separately successful saved-response native revalidation.
 

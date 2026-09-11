@@ -1129,12 +1129,97 @@ describe('persistent autoblogger worker', () => {
     expect(Object.values(getState().decisions).every((decision) => decision.status === 'terminal' && decision.attempts === 3)).toBe(true);
   });
 
+  it.each(['run', 'pilot', 'research'] as const)('records ordinary shallow failures once per run in %s', async (command) => {
+    const f = fixture({ backlogCount: 2, failScan: true });
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      const runId = `ordinary-scan-${command}-${attempt}`;
+      await expect(f.worker.execute({ command, runId })).rejects.toThrow(/network/);
+
+      expect(f.getState().runs[runId]).toEqual({
+        schemaVersion: 1, runId, mode: command === 'pilot' ? 'manual_pilot' : 'scheduled',
+        startedAt: '2026-09-05T00:00:00.000Z', selectedCandidateFingerprints: [], status: 'failed',
+      });
+      expect(f.getState().failures).toHaveLength(attempt * 2);
+      expect(f.getState().failures.filter(failure => failure.runId === runId)).toEqual([0, 1].map(index => ({
+        runId, candidateFingerprint: candidateFingerprints(candidate(index)).candidate,
+        code: 'shallow_research_failed', attempt, observedAt: '2026-09-05T00:00:00.000Z',
+        detail: 'Error: temporary network failure',
+      })));
+      const beforeReplay = structuredClone(f.getState());
+      const saves = f.counters.saved;
+      const replay = await f.worker.execute({ command, runId });
+      expect(replay.status).toBe('already_recorded');
+      expect(f.getState()).toEqual(beforeReplay);
+      expect(f.counters.saved).toBe(saves);
+    }
+    expect(Object.values(f.getState().decisions).every(decision => decision.status === 'terminal' && decision.attempts === 3)).toBe(true);
+    expect(f.getState().manualPilot).toBeNull();
+  });
+
+  it.each(['shallow', 'keyword', 'deep'] as const)('preserves ordinary %s failure history across research and run', async (stage) => {
+    const item = candidate(0);
+    const fingerprint = candidateFingerprints(item).candidate;
+    const code = stage === 'shallow' ? 'not_selected_for_deep_inspection'
+      : stage === 'keyword' ? 'keyword_enrichment_failed' : 'deep_inspection_failed';
+    const f = fixture({
+      backlog: [item],
+      ...(stage === 'shallow' ? { observe: (candidate: Candidate) => ({ ...shallow(candidate), suggestions: [], peopleAlsoAsk: [], relatedQueries: [] }) } : {}),
+      ...(stage === 'keyword' ? { keywordProvider: { enrich: async () => { throw new Error('temporary provider failure\nBearer synthetic-test-credential'); } } } : {}),
+      ...(stage === 'deep' ? { inspect: async () => { throw new Error('temporary source failure\nBearer synthetic-test-credential'); } } : {}),
+    });
+    for (const [index, command] of (['research', 'run', 'research'] as const).entries()) {
+      const attempt = index + 1;
+      const runId = `ordinary-history-${stage}-${attempt}`;
+      const previous = structuredClone(f.getState().failures);
+      const report = await f.worker.execute({ command, runId });
+
+      expect(report.status).toBe(command === 'research' ? 'researched' : 'failed');
+      expect(report.artifacts).toEqual([]);
+      expect(f.getState().failures.slice(0, previous.length)).toEqual(previous);
+      expect(f.getState().failures.filter(failure => failure.candidateFingerprint === fingerprint)).toHaveLength(attempt);
+      expect(f.getState().failures).toContainEqual({
+        runId, candidateFingerprint: fingerprint, code, attempt, observedAt: '2026-09-05T00:00:00.000Z',
+        detail: stage === 'shallow' ? 'missing_suggestion_signal'
+          : `Error: temporary ${stage === 'keyword' ? 'provider' : 'source'} failure [REDACTED]`,
+      });
+      expect(f.getState().decisions[fingerprint]).toMatchObject({ attempts: attempt, status: attempt < 3 ? 'retryable' : 'terminal' });
+      expect(JSON.stringify(f.getState().failures)).not.toContain('synthetic-test-credential');
+    }
+    expect(f.counters).toMatchObject({ drafted: 0, validated: 0, opened: 0 });
+  });
+
+  it.each(['run', 'pilot', 'research'] as const)('retains shallow-passing candidates excluded by the deep cap in %s', async (command) => {
+    const queued = Array.from({ length: 11 }, (_, index) => ({ ...candidate(index), funnelStage: 'middle' as const }));
+    const deferred = queued[0];
+    const fingerprint = candidateFingerprints(deferred).candidate;
+    const f = fixture({
+      backlog: [], initialState: { ...createPersistentWorkerState(), queuedCandidates: queued }, maxDrafts: 1,
+      observe: item => ({ ...shallow(item), suggestions: item.articleId === deferred.articleId ? [] : shallow(item).suggestions }),
+    });
+
+    const report = await f.worker.execute({ command, runId: `deep-cap-${command}` });
+
+    expect(report.counts).toMatchObject({ scanned: 11, deepInspected: 10 });
+    expect(f.counters.inspected).not.toContain(0);
+    expect(f.getState().decisions[fingerprint]).toMatchObject({ status: 'retryable', attempts: 0, leaseExpiresAt: null });
+    expect(f.getState().queuedCandidates).toContainEqual(deferred);
+    expect(report.failures).toEqual([]);
+
+    const rescanned: string[] = [];
+    const restarted = fixture({ backlog: [], initialState: f.getState(), observe: item => {
+      rescanned.push(item.articleId);
+      return shallow(item);
+    } });
+    await restarted.worker.execute({ command: 'research', runId: `after-deep-cap-${command}` });
+    expect(rescanned).toContain(deferred.articleId);
+  });
+
   it('retains deferred and retryable discovered candidates and enforces one draft when requested', async () => {
     const { worker, getState } = fixture({ maxDrafts: 1 });
     const result = await worker.execute({ command: 'run', runId: 'one-article-run' });
     expect(result.artifacts).toHaveLength(1);
     const retryable = Object.entries(getState().decisions).filter(([, value]) => value.status === 'retryable');
-    expect(retryable.length).toBe(9);
+    expect(retryable.length).toBe(49);
     expect(retryable.every(([key]) => getState().queuedCandidates.some((candidate) => candidateFingerprints(candidate).candidate === key))).toBe(true);
   });
 

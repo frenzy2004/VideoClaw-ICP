@@ -3,7 +3,9 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-Latest: [captions secondary-keyword correction](CAPTIONS-SECONDARY-EVIDENCE-2026-09-12.md), **2,823 tests across 63 files**, zero failures/skips, plus lint/typecheck/build. Independent review found no actionable issues. The unchanged final captions draft now passes materialization and isolated native blog checks, lint, build and integrity checks. Its fresh run reached approved final review but failed because the serializer omitted observed PAA evidence; the original run remains failed. State retains 39 runs / 63 failures and no successful whole-worker pilot. No production, publication or schedule change occurred.
+Latest: [worker completion audit and FAQ/queue corrections](WORKER-COMPLETION-AUDIT-2026-09-12.md), **2,834 tests across 63 files**, zero failures/skips, plus lint/typecheck/build. A fresh aspect-ratio run failed FAQ anchor validation; the corrected body-only model input then passed a separate live FAQ-component check without changing source facts or state. Queue deferral, ordinary failed-run replay protection and durable research failure history are also corrected. State retains 41 runs / 66 failures, with no successful whole-worker pilot. Standard-runtime review receipts and state handoff remain incomplete. No production, publication or schedule change occurred.
+
+Previous: [captions secondary-keyword correction](CAPTIONS-SECONDARY-EVIDENCE-2026-09-12.md) retains its failed fresh run and separately successful final-artifact native validation.
 
 Previous: [voice-over attempt and procedure-context correction](VOICEOVER-REFERENCE-2026-09-12.md) retains its historical verification and separately labeled saved-response success.
 

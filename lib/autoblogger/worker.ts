@@ -158,6 +158,20 @@ function recordPersistent(state: PersistentWorkerState, run: RunRecord): Persist
   return { ...state, runs: core.runs };
 }
 
+function recordReportFailures(state: PersistentWorkerState, report: AutobloggerRunReport, observedAt: string): PersistentWorkerState {
+  return {
+    ...state,
+    failures: [...state.failures, ...report.failures.map((failure) => ({
+      runId: report.runId,
+      code: failure.code,
+      attempt: Math.max(1, failure.attempt ?? 1),
+      ...(failure.candidateFingerprint ? { candidateFingerprint: failure.candidateFingerprint } : {}),
+      observedAt,
+      detail: failure.detail,
+    }))],
+  };
+}
+
 function identityKey(candidate: Candidate): string[] {
   return candidateIdentityList(candidate);
 }
@@ -449,20 +463,13 @@ export function createAutobloggerWorker(options: AutobloggerWorkerOptions) {
       } catch (error) {
         for (const candidate of queue.scan) {
           state = markCandidateFailure(state, candidate, input.runId, 'shallow_research_failed', true, now().toISOString());
+          const fingerprint = candidateFingerprints(candidate).candidate;
+          report.failures.push({ candidateFingerprint: fingerprint, code: 'shallow_research_failed',
+            attempt: state.decisions[fingerprint].attempts, detail: safeDetail(error) });
         }
         if (mode === 'manual_pilot' && state.manualPilot?.runId === input.runId) state = { ...state, manualPilot: null };
-        const retryApproval = state.manualRetryApproval;
-        const switchedTarget = state.manualTargetSwitch;
-        const switchedRun = switchedTarget?.runId === input.runId || switchedTarget?.retry?.runId === input.runId;
-        if (fresh || retryApproval?.runId === input.runId || switchedRun) {
-          const fingerprint = fresh ? candidateFingerprints(fresh.candidate).candidate
-            : switchedRun ? switchedTarget!.candidateFingerprint : retryApproval!.candidateFingerprint;
-          state = recordPersistent(state, { schemaVersion: 1, runId: input.runId, mode, startedAt, selectedCandidateFingerprints: [], status: 'failed' });
-          state = { ...state, failures: [...state.failures, {
-            runId: input.runId, candidateFingerprint: fingerprint,
-            code: 'shallow_research_failed', attempt: state.decisions[fingerprint].attempts, observedAt: now().toISOString(), detail: safeDetail(error),
-          }] };
-        }
+        state = recordPersistent(state, { schemaVersion: 1, runId: input.runId, mode, startedAt, selectedCandidateFingerprints: [], status: 'failed' });
+        state = recordReportFailures(state, report, now().toISOString());
         await options.stateStore.save(compactPersistentWorkerState(state), version);
         throw error;
       }
@@ -541,7 +548,7 @@ export function createAutobloggerWorker(options: AutobloggerWorkerOptions) {
       for (const observation of shallowBatch.results) {
         const fingerprint = candidateFingerprints(observation.candidate).candidate;
         if (!deepFingerprints.has(fingerprint) && state.decisions[fingerprint]?.status === 'scanned') {
-          state = markCandidateCompleted(state, observation.candidate, input.runId, 'not_selected_for_deep_inspection', now().toISOString());
+          state = deferCandidate(state, observation.candidate, input.runId, 'shallow_deferred_by_deep_cap', now().toISOString());
         }
       }
 
@@ -599,6 +606,7 @@ export function createAutobloggerWorker(options: AutobloggerWorkerOptions) {
           state.queuedCandidates,
         ) };
         state = recordPersistent(state, { schemaVersion: 1, runId: input.runId, mode, startedAt, selectedCandidateFingerprints: [], status: 'researched' });
+        state = recordReportFailures(state, report, now().toISOString());
         await options.stateStore.save(compactPersistentWorkerState(state), version);
         report.status = 'researched';
         report.completedAt = now().toISOString();
@@ -773,15 +781,8 @@ export function createAutobloggerWorker(options: AutobloggerWorkerOptions) {
           }),
           queue.scan.filter((candidate) => state.decisions[candidateFingerprints(candidate).candidate]?.status === 'retryable'),
         ),
-        failures: [...state.failures, ...report.failures.map((failure) => ({
-          runId: input.runId,
-          code: failure.code,
-          attempt: Math.max(1, failure.attempt ?? 1),
-          ...(failure.candidateFingerprint ? { candidateFingerprint: failure.candidateFingerprint } : {}),
-          observedAt: now().toISOString(),
-          detail: failure.detail,
-        }))],
       };
+      state = recordReportFailures(state, report, now().toISOString());
       await options.stateStore.save(compactPersistentWorkerState(state), version);
       report.status = runStatus;
       report.completedAt = now().toISOString();

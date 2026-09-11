@@ -86,6 +86,29 @@ async function preparedFixture() {
 }
 
 describe('prepareFaqEvidence', () => {
+  it('sends body-only anchor text separately from heading context without asking the model to count UTF-16 offsets', async () => {
+    const context = contextFixture();
+    const prefix = '🎬 Definition — ';
+    context.sourceFacts[0].facts[0].text = prefix + definition;
+    context.sourceFacts[0].facts[0].bodyStart = prefix.length;
+    const before = structuredClone(context);
+    const fixture = fixtureClient((response, request) => {
+      const input = request.input as {sourceFacts: Array<{facts: Array<{id: string; bodyText: string; headingContext: string}>}>};
+      expect(input.sourceFacts[0].facts).toEqual([
+        {id: 'definition', headingContext: prefix, bodyText: definition},
+        {id: 'procedure', headingContext: '', bodyText: procedure},
+      ]);
+      response.selections[0].anchors[0].excerpt = input.sourceFacts[0].facts[0].bodyText;
+      return response;
+    });
+    const prepared = await prepareFaqEvidence(context, fixture.client, questions);
+    expect(validateFaqEvidencePlan(prepared, prepared.faqEvidencePlan)[0]).toEqual({
+      question: questions[0], sourceFactIds: ['definition'],
+    });
+    expect(context).toEqual(before);
+    expect(prepared.sourceFacts).toEqual(before.sourceFacts);
+  });
+
   it('preserves quoted observed questions without embedding them in provider schema literals', async () => {
     const context = contextFixture();
     const pool = [...questions];
@@ -246,6 +269,7 @@ describe('prepareFaqEvidence', () => {
     ['unknown fact', (r: Response) => { r.selections[0].anchors[0].sourceFactId = 'missing'; return r; }],
     ['fabricated excerpt', (r: Response) => { r.selections[0].anchors[0].excerpt = 'This fabricated passage is definitely not in the source body.'; return r; }],
     ['heading excerpt', (r: Response) => { r.selections[0].anchors[0].excerpt = heading; return r; }],
+    ['heading plus body excerpt', (r: Response) => { r.selections[0].anchors[0].excerpt = heading + definition; return r; }],
     ['short excerpt', (r: Response) => { r.selections[0].anchors[0].excerpt = definition.slice(0, 29); return r; }],
     ['duplicate intent', (r: Response) => { r.selections[1].intent = '  DEFINITION  '; return r; }],
     ['blank intent', (r: Response) => { r.selections[1].intent = ' '; return r; }],
@@ -298,8 +322,8 @@ describe('prepareFaqEvidence', () => {
     const context = contextFixture();
     const before = structuredClone(context);
     const fixture = fixtureClient((response, request) => {
-      const input = request.input as { sourceFacts: DraftingContext['sourceFacts']; candidateQuestions: string[] };
-      input.sourceFacts[0].facts[0].text = 'Mutated client input';
+      const input = request.input as { sourceFacts: Array<{facts: Array<{bodyText: string}>}>; candidateQuestions: string[] };
+      input.sourceFacts[0].facts[0].bodyText = 'Mutated client input';
       input.candidateQuestions[0] = 'Mutated pool';
       return response;
     });

@@ -156,9 +156,10 @@ their exact observed spelling, order of selection, and tool/audience qualifiers.
 Use a different nonblank intent label (at most 80 characters) for each question.
 Equivalent make/create questions cannot occupy separate slots.
 For each selection supply 1–3 sourceFactId/excerpt anchors. Each excerpt must be an
-exact unchanged 30–600-character substring of that fact's body after bodyStart
-(UTF-16 offset; absent means zero). Headings, search snippets/titles and source-fetch
-success are not body evidence. Do not invent facts, questions or quotations.
+exact unchanged 30–600-character substring of that fact's bodyText. headingContext
+is supplied separately only to explain the surrounding topic; never include it in
+an excerpt. Headings, search snippets/titles and source-fetch success are not body
+evidence. Do not invent facts, questions or quotations.
 Return status ready with exactly three selections, or insufficient_evidence with
 zero selections if three supported distinct questions are unavailable. Always echo
 contextHash exactly and include a reason. Do not include extra fields or secrets.
@@ -176,11 +177,17 @@ export async function prepareFaqEvidence(
   const inventory = bodyInventory(snapshot);
   if (!inventory.size) throw new Error('Insufficient body evidence for FAQ preparation.');
   // Separate request objects from both caller-owned research and our snapshot.
+  // The model selects excerpts; code owns the UTF-16 body boundary. The full
+  // inventoried facts and context hash remain unchanged for receipt validation.
   const input = structuredClone({
     contextHash: hash, candidateQuestions: pool, candidate: snapshot.candidate,
     signals: snapshot.evidence.signals, provenance: snapshot.provenance,
     sourceFacts: snapshot.sourceFacts.map(({ id, label, url, checkedAt, facts }) => ({
-      id, label, url, checkedAt, facts: facts.filter(fact => inventory.has(fact.id)),
+      id, label, url, checkedAt, facts: facts.filter(fact => inventory.has(fact.id)).map(fact => ({
+        id: fact.id,
+        headingContext: fact.text.slice(0, fact.bodyStart ?? 0),
+        bodyText: inventory.get(fact.id)!,
+      })),
     })),
     checkedSources: snapshot.checkedSources, keywordMetrics: snapshot.keywordMetrics,
     generatedAt: snapshot.generatedAt,
