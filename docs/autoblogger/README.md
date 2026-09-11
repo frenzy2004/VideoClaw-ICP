@@ -6,7 +6,7 @@ This worker is a controlled research-and-drafting system. It does not publish ar
 
 The initial 250-topic research library is an input, not a quota or publication gate. Each run scans at most 50 candidates, deeply checks at most 10, and produces at most 3 drafts with no more than 2 from one ICP.
 
-Latest checkpoint: [history-preserving handoff](STATE-HANDOFF-2026-09-12.md). The [fresh end-to-end article proof](FRESH-WORKER-PROOF-2026-09-12.md) passed research, source/FAQ verification, drafting, independent critique/repair and native lander QA. The handoff fix now lets ordinary work continue without forgetting diagnostic history or reopening the consumed pilot. A validated private export retains all 43 runs and 67 failures. Fresh checks pass **2,922 tests plus lint/typecheck/build**. Remote state migration and credentialed unattended rollout remain pending. No production, PR #55 or schedule changes occurred.
+Latest checkpoint: [verified remote worker state](REMOTE-STATE-IMPORT-2026-09-12.md). The [fresh end-to-end article proof](FRESH-WORKER-PROOF-2026-09-12.md) passed research, source/FAQ verification, drafting, independent critique/repair and native lander QA. The history-preserving handoff now lives on the dedicated `autoblogger-state` branch and was verified through the real GitHub client: all 43 runs, 67 failures and the consumed pilot remain. Fresh checks pass **2,923 tests plus lint/typecheck/build**. Credentialed unattended rollout remains pending. No production, PR #55 or schedule changes occurred.
 
 Inspect the [review Markdown](proofs/podcast-clips-2026-09-12/turn-podcast-into-social-media-clips.md), graphic and compact proof under documentation; these are not added to the public article library.
 

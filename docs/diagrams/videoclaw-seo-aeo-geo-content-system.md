@@ -42,9 +42,10 @@ The [review Markdown](../autoblogger/proofs/podcast-clips-2026-09-12/turn-podcas
 and graphic were durably saved. Six completed model calls; zero generated lander
 PRs. State retains 43 runs / 67 failure records and the consumed successful pilot.
 The [history-preserving handoff](../autoblogger/STATE-HANDOFF-2026-09-12.md) is
-implemented and a private state export is verified. Diagnostic grants are retained
+implemented and [remote state import](../autoblogger/REMOTE-STATE-IMPORT-2026-09-12.md)
+is verified on `autoblogger-state:state.json`. Diagnostic grants are retained
 but no longer restrict unrelated ordinary work; another pilot remains forbidden.
-Remote state migration and credentialed unattended rollout remain pending.
+Credentialed unattended rollout remains pending; no worker was dispatched.
 
 ### Historical pilot checkpoints
 
