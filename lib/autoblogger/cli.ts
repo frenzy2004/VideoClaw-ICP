@@ -78,8 +78,9 @@ const RuntimeEnvironmentSchema = z.object({
     maxOutputTokens: z.number().int().positive().max(128000),
     timeoutMs: z.number().int().positive().max(600000),
   }).strict().optional(),
-  keywordProvider: z.enum(['pending', 'semrush', 'ahrefs']),
+  keywordProvider: z.enum(['pending', 'semrush', 'ahrefs', 'dataforseo']),
   keywordApiKey: z.string().nullable(),
+  dataForSeoCredentials: z.object({ login: z.string().min(1), password: z.string().min(1) }).strict().optional(),
   githubToken: z.string().min(1),
   githubRepository: z.string().regex(/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/),
   landerRepository: z.string().min(1),
@@ -104,6 +105,15 @@ function required(env: Record<string, string | undefined>, name: string): string
   return value;
 }
 
+export function requireDataForSeoCredentials(credentials?: { login?: string; password?: string }): { login: string; password: string } {
+  const { login, password } = credentials ?? {};
+  if (!login?.trim()) throw new Error('DATAFORSEO_LOGIN is required.');
+  if (/[:\r\n]/u.test(login)) throw new Error('DATAFORSEO_LOGIN must not contain a colon, CR, or LF.');
+  if (!password?.trim()) throw new Error('DATAFORSEO_PASSWORD is required.');
+  if (/[\r\n]/u.test(password)) throw new Error('DATAFORSEO_PASSWORD must not contain CR or LF.');
+  return { login, password };
+}
+
 export function validateAutobloggerEnvironment(
   command: AutobloggerCommand,
   env: Record<string, string | undefined>,
@@ -120,15 +130,17 @@ export function validateAutobloggerEnvironment(
   if (phase === 'publish') {
     if (landerBaseRef !== 'main') throw new Error('Publication requires LANDER_BASE_REF=main and merged PR #55.');
     if (!options.preparedDir) throw new Error('Publication requires a prepared directory.');
-    if (['APIFY_TOKEN', 'OPENAI_API_KEY', 'SEMRUSH_API_KEY', 'AHREFS_API_KEY'].some((key) => env[key]?.trim())) {
+    if (['APIFY_TOKEN', 'OPENAI_API_KEY', 'SEMRUSH_API_KEY', 'AHREFS_API_KEY', 'DATAFORSEO_LOGIN', 'DATAFORSEO_PASSWORD'].some((key) => env[key]?.trim())) {
       throw new Error('Publish must be isolated from model and paid provider secrets.');
     }
   }
   const keywordProvider = phase === 'publish' ? 'pending' : required(env, 'KEYWORD_PROVIDER');
-  if (!['pending', 'semrush', 'ahrefs'].includes(keywordProvider)) throw new Error('KEYWORD_PROVIDER must be pending, semrush, or ahrefs.');
+  if (!['pending', 'semrush', 'ahrefs', 'dataforseo'].includes(keywordProvider)) throw new Error('KEYWORD_PROVIDER must be pending, semrush, ahrefs, or dataforseo.');
   if (command === 'run' && phase === 'prepare' && keywordProvider === 'pending') {
-    throw new Error('Scheduled runs require Semrush or Ahrefs metrics.');
+    throw new Error('Scheduled runs require Semrush or Ahrefs or DataForSEO metrics.');
   }
+  const dataForSeoCredentials = keywordProvider === 'dataforseo'
+    ? requireDataForSeoCredentials({ login: env.DATAFORSEO_LOGIN, password: env.DATAFORSEO_PASSWORD }) : undefined;
   const keywordApiKey = keywordProvider === 'semrush'
     ? required(env, 'SEMRUSH_API_KEY')
     : keywordProvider === 'ahrefs' ? required(env, 'AHREFS_API_KEY') : null;
@@ -142,6 +154,7 @@ export function validateAutobloggerEnvironment(
     openaiLimits: resolveOpenAIRequestLimits({ env }),
     keywordProvider,
     keywordApiKey,
+    ...(dataForSeoCredentials ? { dataForSeoCredentials } : {}),
     githubToken,
     githubRepository: required(env, 'GITHUB_REPOSITORY'),
     landerRepository: required(env, 'LANDER_REPOSITORY'),
@@ -230,7 +243,10 @@ export async function runAutobloggerCli(input: {
     input.io.stdout(JSON.stringify(summary(report)));
     return report.status === 'failed' ? 1 : 0;
   } catch (error) {
-    const failure = { schemaVersion: 1, status: 'failed', error: redactSensitive(error).slice(0, 1_000) };
+    const { DATAFORSEO_LOGIN: login, DATAFORSEO_PASSWORD: password } = input.env;
+    const secrets = [login, password, ...(login && password ? [Buffer.from(`${login}:${password}`).toString('base64')] : [])]
+      .filter((value): value is string => Boolean(value));
+    const failure = { schemaVersion: 1, status: 'failed', error: redactSensitive(error, secrets).slice(0, 1_000) };
     if (failureArtifactDir) {
       try {
         await input.io.writeArtifacts(failure, failureArtifactDir);

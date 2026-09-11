@@ -122,6 +122,8 @@ jobs:
           OPENAI_API_KEY: ${{ env.AUTOBLOG_COMMAND != 'research' && secrets.OPENAI_API_KEY || '' }}
           SEMRUSH_API_KEY: ${{ env.KEYWORD_PROVIDER == 'semrush' && secrets.SEMRUSH_API_KEY || '' }}
           AHREFS_API_KEY: ${{ env.KEYWORD_PROVIDER == 'ahrefs' && secrets.AHREFS_API_KEY || '' }}
+          DATAFORSEO_LOGIN: ${{ env.KEYWORD_PROVIDER == 'dataforseo' && secrets.DATAFORSEO_LOGIN || '' }}
+          DATAFORSEO_PASSWORD: ${{ env.KEYWORD_PROVIDER == 'dataforseo' && secrets.DATAFORSEO_PASSWORD || '' }}
           GITHUB_TOKEN: ${{ github.token }}
         run: |
           args=("$AUTOBLOG_COMMAND" --run-id "$AUTOBLOG_RUN_ID" --artifact-dir "$AUTOBLOG_ARTIFACT_DIR/prepare")

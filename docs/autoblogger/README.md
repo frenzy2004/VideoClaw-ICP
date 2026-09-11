@@ -6,7 +6,7 @@ This worker is a controlled research-and-drafting system. It does not publish ar
 
 The initial 250-topic research library is an input, not a quota or publication gate. Each run scans at most 50 candidates, deeply checks at most 10, and produces at most 3 drafts with no more than 2 from one ICP.
 
-Latest checkpoint: [verified remote worker state](REMOTE-STATE-IMPORT-2026-09-12.md). The [fresh end-to-end article proof](FRESH-WORKER-PROOF-2026-09-12.md) passed research, source/FAQ verification, drafting, independent critique/repair and native lander QA. The history-preserving handoff now lives on the dedicated `autoblogger-state` branch and was verified through the real GitHub client: all 43 runs, 67 failures and the consumed pilot remain. Fresh checks pass **2,923 tests plus lint/typecheck/build**. Credentialed unattended rollout remains pending. No production, PR #55 or schedule changes occurred.
+Latest checkpoint: [DataForSEO adapter and runtime wiring](DATAFORSEO-ADAPTER-2026-09-12.md), verified offline with **2,988 tests plus lint/typecheck/build**. No authenticated DataForSEO lookup has run. The [fresh end-to-end article proof](FRESH-WORKER-PROOF-2026-09-12.md) already passed research, source/FAQ verification, drafting, independent critique/repair and native lander QA. The [verified state handoff](REMOTE-STATE-IMPORT-2026-09-12.md) retains all 43 runs, 67 failures and the consumed pilot on `autoblogger-state`. Credentialed unattended rollout remains pending. No production, PR #55 or schedule changes occurred.
 
 Inspect the [review Markdown](proofs/podcast-clips-2026-09-12/turn-podcast-into-social-media-clips.md), graphic and compact proof under documentation; these are not added to the public article library.
 
@@ -128,7 +128,7 @@ Each result retains the selected observation's actual provenance and both
 completed `serpAttempts`. Empty retry results still fail closed; they do not
 prove zero demand or permit substitution of an older organic snapshot.
 
-This is **not** a DataForSEO integration. Supported adapters remain `pending`, `semrush` and `ahrefs`. Do not set `KEYWORD_PROVIDER=dataforseo`, substitute the Apify token for provider credentials, or fill volume/difficulty/CPC using SERP counts or an unverified actor's estimates. Adding DataForSEO later requires a tested adapter and authenticated metrics; its lack does not block the pending-metrics pilot. Recurring and normal draft-PR mode still require observed paid metrics.
+Supported adapters are `pending`, `semrush`, `ahrefs` and now `dataforseo`. The DataForSEO adapter is implemented and fixture-tested, but not credentialed or live-verified. It requires its own `DATAFORSEO_LOGIN` and `DATAFORSEO_PASSWORD`; an Apify token cannot replace them. Never derive volume/difficulty/CPC from SERP counts or unverified estimates. Recurring and normal draft-PR mode still require observed paid metrics. The one pending-metrics pilot has already been consumed; do not run another.
 
 Unattended Actions setup (not the completed local research attempt):
 
@@ -248,7 +248,7 @@ Repository variables:
 | --- | --- | --- |
 | `AUTOBLOG_SCHEDULE_ENABLED` | `false` | Enables the Monday schedule only after approval. The scheduled job is gated before checkout or API use. |
 | `LANDER_BASE_REF` | `seo/founder-video-blog-launch` | Keeps output artifact-only until PR #55 is merged. Change to `main` only after verifying the merge. |
-| `KEYWORD_PROVIDER` | `pending` | Use `pending` for research and the one pilot. Use `semrush` or `ahrefs` for scheduled runs. |
+| `KEYWORD_PROVIDER` | `pending` | Use `pending` for research. The one pilot is consumed. Use credentialed `semrush`, `ahrefs` or `dataforseo` for approved paid-metric runs. |
 | `OPENAI_MODEL` | `gpt-5.5` | Exact Responses API model. Model failures are closed; there is no fallback. |
 
 Repository secrets:
@@ -256,9 +256,10 @@ Repository secrets:
 | Secret | Required for | Notes |
 | --- | --- | --- |
 | `APIFY_TOKEN` | `research`, `pilot`, `run --phase prepare` | Connected. Apify US/en autocomplete and first-page Google SERPs. Rotate the supplied burner token after the pilot. |
-| `OPENAI_API_KEY` | `pilot`, `run --phase prepare` | Pending. Structured draft, independent critique, one repair, and repair verification; never required for research. |
+| `OPENAI_API_KEY` | `pilot`, `run --phase prepare` | Connected. Structured draft, independent critique, one repair, and repair verification; never required for research. |
 | `SEMRUSH_API_KEY` | preparation with Semrush | Volume and keyword difficulty must both be observed. |
 | `AHREFS_API_KEY` | preparation with Ahrefs | Alternative to Semrush; volume and difficulty must both be observed. |
+| `DATAFORSEO_LOGIN` / `DATAFORSEO_PASSWORD` | preparation with DataForSEO | Not connected. API Basic credentials, exposed only to the selected prepare step. Volume and organic difficulty must both be observed. |
 | `LANDER_READ_TOKEN` | private checkout and prepare inventory (`research`, `pilot`, `run --phase prepare`) | Separate fine-grained PAT restricted to lander contents:read and pull requests:read (metadata read implicit). Required before PR #55 merges too; state and publication tokens are rejected. |
 | `LANDER_APP_ID` | post-merge `run` | GitHub App identity used by `actions/create-github-app-token`. |
 | `LANDER_APP_PRIVATE_KEY` | post-merge `run` | GitHub App private key. Never expose it as a normal environment or state value. |

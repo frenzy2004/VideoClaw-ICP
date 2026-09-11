@@ -299,9 +299,9 @@ Its page is `http://127.0.0.1:3002/blog/demo-day-video-checklist` on the operato
 
 Apify remains the research source. Its Google Search actor exposes organic results, related queries and People Also Ask; these describe the search landscape, not monthly search volume or a keyword-difficulty estimate. [Apify actor documentation](https://apify.com/apify/google-search-scraper)
 
-DataForSEO is a possible later metrics integration, not a connected provider in this version. Its [Google Ads search-volume endpoint](https://docs.dataforseo.com/v3/keywords_data/google_ads/search_volume/live/) and [Labs keyword-difficulty endpoint](https://docs.dataforseo.com/v3/dataforseo_labs/google/bulk_keyword_difficulty/live/) are separate services. The current worker accepts `pending`, `semrush` and `ahrefs`; it does not accept `dataforseo` or turn an Apify token into DataForSEO credentials.
+DataForSEO is now an implemented, offline-tested adapter, not yet a connected live provider. It uses the [Labs Google Keyword Overview endpoint](https://docs.dataforseo.com/v3/dataforseo_labs/google/keyword_overview/live/) for US/en volume, organic difficulty and USD CPC. Its own API login/password are required; Apify credentials are not interchangeable. The worker accepts `pending`, `semrush`, `ahrefs` and `dataforseo`.
 
-No new metrics adapter is claimed here. A third-party Apify actor would need verified upstream provenance, US scope, date, units and response validation before its metrics could be used. Until then the pilot stays pending and recurring/draft-PR mode remains blocked by the paid-metrics gate.
+The [adapter checkpoint](../autoblogger/DATAFORSEO-ADAPTER-2026-09-12.md) separates software verification from actual keyword evidence. Paid-metric runs still require observed volume and difficulty. The one artifact-only pilot is consumed; no additional pilot, generated lander PR, paid lookup or schedule activation is authorized by this diagram.
 
 ## 3. Site review and the human release boundary
 

@@ -82,7 +82,7 @@ const CompactProvenanceSchema = z.object({
   }).strict(),
   serpAttempts: z.array(ApifyCollectionProvenanceSchema).max(2).optional(),
   keyword: z.object({
-    provider: z.enum(['pending', 'semrush', 'ahrefs', 'similarweb']),
+    provider: z.enum(['pending', 'semrush', 'ahrefs', 'similarweb', 'dataforseo']),
     endpoint: z.string().url().max(1_000).nullable(),
     observedAt: z.string().datetime().nullable(),
     providerRequestId: z.string().trim().min(1).max(500).nullable(),

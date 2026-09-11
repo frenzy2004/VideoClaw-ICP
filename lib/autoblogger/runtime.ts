@@ -4,7 +4,7 @@ import { isAbsolute, relative, resolve, sep } from 'node:path';
 import matter from 'gray-matter';
 
 import { createApifyClient } from './apify-client';
-import type { AutobloggerCliRuntime, AutobloggerRuntimeEnvironment } from './cli';
+import { requireDataForSeoCredentials, type AutobloggerCliRuntime, type AutobloggerRuntimeEnvironment } from './cli';
 import {
   normalizeHttpUrl,
   type AllowlistedProductMedia,
@@ -12,6 +12,7 @@ import {
 } from './content-bundle';
 import { DraftBundleSchema, type Candidate, type KeywordMetrics } from './domain';
 import { createStructuredDrafter } from './drafting';
+import { createDataForSeoKeywordProvider } from './dataforseo';
 import {
   createGitHubPublisherBoundary,
   createGitHubReadOnlyAuth,
@@ -318,6 +319,9 @@ async function localLanderInventory(repository: string, root: string): Promise<A
 }
 
 function providerFor(config: AutobloggerRuntimeEnvironment, transport: ReturnType<typeof createNodeJsonHttpTransport>) {
+  if (config.keywordProvider === 'dataforseo') {
+    return createDataForSeoKeywordProvider({ ...requireDataForSeoCredentials(config.dataForSeoCredentials), transport });
+  }
   if (config.keywordProvider === 'semrush') {
     return createSemrushKeywordProvider({ apiKey: config.keywordApiKey as string, transport });
   }
@@ -344,6 +348,8 @@ export async function createProductionAutobloggerRuntime(
   root = process.cwd(),
   dependencies: { transport?: HttpTransport } = {},
 ): Promise<AutobloggerCliRuntime> {
+  const dataForSeoCredentials = config.keywordProvider === 'dataforseo'
+    ? requireDataForSeoCredentials(config.dataForSeoCredentials) : undefined;
   const transport = dependencies.transport ?? createNodeJsonHttpTransport();
   const [stateOwner, stateRepository] = config.githubRepository.split('/');
   const stateStore = createGitHubStateStore({
@@ -377,7 +383,9 @@ export async function createProductionAutobloggerRuntime(
   });
   const audit = createRuntimeAudit({
     write: (record, name) => writeAutobloggerArtifacts(record, resolve(root, config.artifactDir, 'audit', name), root),
-    secrets: [config.openaiApiKey, config.apifyToken, config.keywordApiKey, config.githubToken, config.landerReadToken],
+    secrets: [config.openaiApiKey, config.apifyToken, config.keywordApiKey, config.githubToken, config.landerReadToken,
+      ...(dataForSeoCredentials ? [dataForSeoCredentials.login, dataForSeoCredentials.password,
+        Buffer.from(`${dataForSeoCredentials.login}:${dataForSeoCredentials.password}`).toString('base64')] : [])],
   });
   const paidTransport = audit.paidTransport(transport);
   const client = audit.client(createRuntimeDraftClient(config, paidTransport));

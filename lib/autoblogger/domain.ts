@@ -50,7 +50,7 @@ export const EvidenceBundleSchema = z.object({
 
 export const KeywordMetricsSchema = z.object({
   schemaVersion: z.literal(1),
-  provider: z.enum(['pending', 'semrush', 'ahrefs', 'similarweb']),
+  provider: z.enum(['pending', 'semrush', 'ahrefs', 'similarweb', 'dataforseo']),
   observedAt: z.string().datetime().nullable(),
   volume: z.number().finite().nonnegative().nullable(),
   difficulty: z.number().finite().min(0).max(100).nullable(),

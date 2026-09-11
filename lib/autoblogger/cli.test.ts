@@ -6,6 +6,93 @@ import {
   validateAutobloggerEnvironment,
 } from './cli';
 
+const dataForSeoEnvironment = {
+  APIFY_TOKEN: 'fixture-apify', OPENAI_API_KEY: 'fixture-model', KEYWORD_PROVIDER: 'dataforseo',
+  DATAFORSEO_LOGIN: 'offline-login', DATAFORSEO_PASSWORD: ' offline:password ',
+  GITHUB_TOKEN: 'fixture-state', GITHUB_REPOSITORY: 'owner/icp', LANDER_REPOSITORY: '/tmp/fixture-lander',
+  LANDER_OWNER: 'owner', LANDER_NAME: 'lander', LANDER_BASE_REF: 'feature',
+  LANDER_READ_TOKEN: 'github_pat_read_inventory_fixture_123456',
+};
+
+describe('DataForSEO CLI configuration', () => {
+  it.each(['research', 'pilot', 'run'] as const)('accepts explicit selection for %s and preserves Basic credentials', command => {
+    expect(validateAutobloggerEnvironment(command, dataForSeoEnvironment)).toMatchObject({
+      keywordProvider: 'dataforseo', keywordApiKey: null, landerGitHubToken: null,
+      dataForSeoCredentials: { login: 'offline-login', password: ' offline:password ' },
+    });
+  });
+
+  it.each(['pending', 'semrush', 'ahrefs'])('does not carry unused DataForSEO credentials for %s', keywordProvider => {
+    const config = validateAutobloggerEnvironment('research', {
+      ...dataForSeoEnvironment, KEYWORD_PROVIDER: keywordProvider,
+      SEMRUSH_API_KEY: 'fixture-semrush', AHREFS_API_KEY: 'fixture-ahrefs',
+      DATAFORSEO_LOGIN: 'unused:invalid', DATAFORSEO_PASSWORD: '\n',
+    });
+    expect(config.keywordProvider).toBe(keywordProvider);
+    expect(config).not.toHaveProperty('dataForSeoCredentials');
+  });
+
+  it.each([
+    ['DATAFORSEO_LOGIN', undefined], ['DATAFORSEO_LOGIN', ''], ['DATAFORSEO_LOGIN', '  '],
+    ['DATAFORSEO_PASSWORD', undefined], ['DATAFORSEO_PASSWORD', ''], ['DATAFORSEO_PASSWORD', '  '],
+    ['DATAFORSEO_LOGIN', 'bad:login'], ['DATAFORSEO_LOGIN', 'bad\rlogin'], ['DATAFORSEO_LOGIN', 'bad\nlogin'],
+    ['DATAFORSEO_LOGIN', 'trailing-newline\n'], ['DATAFORSEO_PASSWORD', 'bad\rpassword'],
+    ['DATAFORSEO_PASSWORD', 'bad\npassword'], ['DATAFORSEO_PASSWORD', 'trailing-newline\n'],
+  ])('rejects invalid %s before creating a runtime (%#)', async (key, value) => {
+    let initialized = false;
+    const errors: string[] = [];
+    const artifacts: unknown[] = [];
+    const exit = await runAutobloggerCli({
+      argv: ['run', '--phase', 'prepare', '--run-id', 'invalid-credentials'],
+      env: { ...dataForSeoEnvironment, [key!]: value },
+      createRuntime: async () => { initialized = true; throw new Error('unexpected runtime initialization'); },
+      io: { stdout: () => undefined, stderr: line => errors.push(line), writeArtifacts: async value => { artifacts.push(value); } },
+    });
+    expect(exit).toBe(1);
+    expect(initialized).toBe(false);
+    expect(JSON.parse(errors[0]).error).toContain(key);
+    expect(artifacts).toEqual([JSON.parse(errors[0])]);
+  });
+
+  it.each(['DATAFORSEO_LOGIN', 'DATAFORSEO_PASSWORD'])('rejects %s in publish even when the other credential is absent', key => {
+    const publication = {
+      ...dataForSeoEnvironment, APIFY_TOKEN: undefined, OPENAI_API_KEY: undefined,
+      DATAFORSEO_LOGIN: undefined, DATAFORSEO_PASSWORD: undefined, [key]: 'isolated-credential',
+      LANDER_BASE_REF: 'main', LANDER_GITHUB_TOKEN: `ghs_${'fixture'.repeat(4)}`,
+      LANDER_TOKEN_EXPIRES_AT: '2026-09-05T00:40:00.000Z',
+    };
+    expect(() => validateAutobloggerEnvironment('run', publication, { phase: 'publish', preparedDir: 'prepared' }))
+      .toThrow(/isolated/i);
+  });
+
+  it('keeps publication credentials out of prepare and DataForSEO out of credential-free publish', () => {
+    expect(() => validateAutobloggerEnvironment('research', {
+      ...dataForSeoEnvironment, LANDER_GITHUB_TOKEN: `ghs_${'fixture'.repeat(4)}`,
+    })).toThrow(/publication App token/i);
+    const config = validateAutobloggerEnvironment('run', {
+      ...dataForSeoEnvironment, APIFY_TOKEN: undefined, OPENAI_API_KEY: undefined,
+      DATAFORSEO_LOGIN: '', DATAFORSEO_PASSWORD: '', LANDER_BASE_REF: 'main',
+      LANDER_GITHUB_TOKEN: `ghs_${'fixture'.repeat(4)}`, LANDER_TOKEN_EXPIRES_AT: '2026-09-05T00:40:00.000Z',
+    }, { phase: 'publish', preparedDir: 'prepared' });
+    expect(config.keywordProvider).toBe('pending');
+    expect(config).not.toHaveProperty('dataForSeoCredentials');
+  });
+
+  it('redacts exact DataForSEO credentials and Basic auth from CLI failures and failure artifacts', async () => {
+    const secrets = [dataForSeoEnvironment.DATAFORSEO_LOGIN, dataForSeoEnvironment.DATAFORSEO_PASSWORD,
+      Buffer.from(`${dataForSeoEnvironment.DATAFORSEO_LOGIN}:${dataForSeoEnvironment.DATAFORSEO_PASSWORD}`).toString('base64')];
+    const output: unknown[] = [];
+    const exit = await runAutobloggerCli({
+      argv: ['research', '--run-id', 'redacted-initialization'], env: dataForSeoEnvironment,
+      createRuntime: async () => { throw new Error(`initialization failed: ${secrets.join(' | ')}`); },
+      io: { stdout: line => output.push(line), stderr: line => output.push(line), writeArtifacts: async value => { output.push(value); } },
+    });
+    expect(exit).toBe(1);
+    expect(JSON.stringify(output)).toContain('initialization failed');
+    for (const secret of secrets) expect(JSON.stringify(output)).not.toContain(secret);
+  });
+});
+
 describe('autoblogger CLI contract', () => {
   it('parses only research, pilot, run, and validate with strict flags', () => {
     expect(parseAutobloggerArguments(['run', '--phase', 'prepare', '--run-id', 'gha-123', '--artifact-dir', 'artifacts/run']))

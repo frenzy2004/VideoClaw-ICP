@@ -3,7 +3,9 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-Latest: [verified remote worker state](REMOTE-STATE-IMPORT-2026-09-12.md). **2,923 tests across 67 files**, lint/typecheck/build pass. The real GitHub state client initialized only `autoblogger-state:state.json` and read back the complete handoff: all 43 runs, 67 failures and the consumed successful pilot. The original local state and base branch are unchanged. A missing client-identification header was reproduced against GitHub, fixed and regression-tested. Credentialed unattended rollout remains pending.
+Latest: [DataForSEO adapter](DATAFORSEO-ADAPTER-2026-09-12.md). **2,988 tests across 69 files**, lint/typecheck/build pass. Tests cover request identity, US/en scope, metric units, missing metrics, provider failures, credential isolation and persistent provenance. These are offline tests, not live keyword evidence; no provider credentials, rollout or schedule were enabled.
+
+Preceding: [verified remote worker state](REMOTE-STATE-IMPORT-2026-09-12.md), with 2,923 tests at that checkpoint. The real GitHub state client initialized only `autoblogger-state:state.json` and read back all 43 runs, 67 failures and the consumed successful pilot. The original local state and base branch remain unchanged. Credentialed unattended rollout remains pending.
 
 The preceding [fresh end-to-end worker proof](FRESH-WORKER-PROOF-2026-09-12.md), `podcast-clips-live-proof-2026-09-12`, completed live research → source/FAQ checks → generation → critique → one repair → independent verification → native lander QA → durable review-only artifact. The lander's 32 blog tests, lint and full build passed. This remains a local fresh-worker proof, not an unattended Actions or publication proof. Production and scheduling are unchanged.
 
