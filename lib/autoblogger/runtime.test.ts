@@ -1,4 +1,4 @@
-import { mkdir, mkdtemp, readFile, stat, symlink } from 'node:fs/promises';
+import { cp, mkdir, mkdtemp, readFile, readdir, stat, symlink } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
@@ -151,8 +151,10 @@ describe('runtime context and artifacts', () => {
     const config = validateAutobloggerEnvironment('research', {
       APIFY_TOKEN: 'fixture-apify', KEYWORD_PROVIDER: 'pending', GITHUB_TOKEN: stateToken, GITHUB_REPOSITORY: 'owner/icp',
       LANDER_REPOSITORY: root, LANDER_OWNER: 'owner', LANDER_NAME: 'lander', LANDER_BASE_REF: 'feature', LANDER_READ_TOKEN: readToken,
-    });
-    const runtime = await createProductionAutobloggerRuntime(config, process.cwd(), { transport });
+    }, { artifactDir: 'private-receipts' });
+    await cp(join(process.cwd(), 'docs/research/campaigns'), join(root, 'docs/research/campaigns'), { recursive: true });
+    const runtime = await createProductionAutobloggerRuntime(config, root, { transport });
+    await expect(stat(join(root, 'private-receipts'))).rejects.toThrow();
     expect(requests.some(({ url }) => url.endsWith('/pulls/12/files?per_page=100'))).toBe(true);
     const report = await runtime.execute({ command: 'research', runId: 'early-dedupe' });
     expect(report.counts).toMatchObject({ scanned: 0, drafted: 0 });
@@ -161,6 +163,13 @@ describe('runtime context and artifacts', () => {
     }
     expect(state.decisions[candidateFingerprints(reserved).candidate].reason).toBe('reconciliation_required');
     expect(state.pullRequests[candidateFingerprints(openPr).candidate]).toMatchObject({ number: 12 });
+    const auditFiles = (await readdir(join(root, 'private-receipts'), { recursive: true }))
+      .filter(name => name.endsWith('validation-report.json'));
+    const audit = await Promise.all(auditFiles.map(async name => JSON.parse(await readFile(join(root, 'private-receipts', name), 'utf8'))));
+    expect(audit).toEqual(expect.arrayContaining([
+      expect.objectContaining({ runId: 'early-dedupe', phase: 'execution', status: 'started' }),
+      expect.objectContaining({ runId: 'early-dedupe', phase: 'execution', status: 'completed', verdict: { status: 'researched' } }),
+    ]));
   });
 
   it('stops preparation on read-access failure before constructing a paid runtime', async () => {

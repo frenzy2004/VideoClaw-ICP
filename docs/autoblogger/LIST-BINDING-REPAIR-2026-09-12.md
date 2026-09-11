@@ -55,6 +55,37 @@ hashes are relabeled.
 No paid request was made for this correction. This is **not** a fresh worker
 success, a newly accepted article or native QA of this article.
 
+## Standard execution receipts
+
+Normal worker executions now retain compact records in the configured artifact
+directory, not only in the local diagnostic runner. Each execution/event has a
+separate path and records its run, phase, input/result hashes and independently
+returned review decisions. Source reads record final URL, timestamp and body
+hash before selection/admission can reject them. Article prose, raw page contents,
+transport headers and credential values are excluded from these records.
+
+Missing or unsafe required records prevent successful execution and further
+paid-provider dispatch. GitHub state persistence remains available for failure
+history. Original provider exceptions are preserved. Recording never rewrites
+the model input, output, source body, editorial verdict or approval state.
+
+Two review findings were reproduced and corrected: Apify's support-search
+fallback now checks the same latched integrity failure, and internal source
+selection emits per-read metadata outside the unavailable-page catch. Observer
+errors propagate instead of silently skipping the page. Tests also cover encoded
+credential URLs, path safety, per-execution isolation and response-write failures.
+
+Final combined checks pass **2,881 tests across 64 files**, zero failures/skips,
+plus lint, typecheck and build. The focused source/runtime suite passes 241 tests.
+Independent re-review of the six implementation/test files found no remaining
+actionable issue after the two corrections.
+External I/O in these tests is controlled; no live Actions run is claimed.
+The existing seven-day Actions artifact retention is unchanged.
+
+The uninterrupted fresh-worker proof and history-preserving state handoff remain
+unfinished. These software checks do not consume the pilot or change a failed
+run into a success.
+
 ## Runtime configuration
 
 Both `APIFY_TOKEN` and `OPENAI_API_KEY` are configured as worker Actions secrets;

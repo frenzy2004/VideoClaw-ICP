@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { createHash } from 'node:crypto';
 import { faqBodyMatches } from './faq-evidence';
 
 import {
@@ -13,6 +14,49 @@ import type {
 const publicResolver: DnsResolver = async () => ['93.184.216.34'];
 
 describe('identified public source requests', () => {
+  it.each(['read', 'selectWithContent'] as const)('reports only detached retrieval metadata during %s without changing the body', async method => {
+    const body = '<main><p>Rehearse the demo video before sharing the recording with the audience.</p></main>';
+    const metadata: unknown[] = [];
+    const fixture = responseTransport([
+      { status: 200, headers: { 'content-type': 'text/html' }, body },
+      { status: 403, headers: { 'content-type': 'text/html' }, body: '<p>Access denied.</p>' },
+    ]);
+    const checker = createSafeSourceChecker({ resolveHostname: publicResolver, transport: fixture.transport,
+      authorityPolicies: [{ hostname: 'authority.example' }],
+      onRetrievedMetadata: async receipt => {
+        metadata.push({ ...receipt });
+        // A callback cannot alter the source document through its metadata DTO.
+        receipt.finalUrl = 'https://changed.example/';
+        receipt.bodySha256 = '0'.repeat(64);
+      },
+    });
+    if (method === 'read') {
+      const document = await checker.read('https://authority.example/video');
+      expect(document.finalUrl).toBe('https://authority.example/video');
+      expect(document.bodySha256).toBe(createHash('sha256').update(body).digest('hex'));
+      expect(document.text).toContain('Rehearse the demo video');
+      expect(document.text.slice(document.passages[0].start, document.passages[0].end)).toBe(document.passages[0].text);
+    } else {
+      await expect(checker.selectWithContent(['https://authority.example/video', 'https://publisher.example/video'], { query: 'demo video' }))
+        .rejects.toThrow(/two directly relevant usable body evidence sources/);
+      expect(fixture.requests).toHaveLength(2);
+    }
+    expect(metadata).toEqual([{ finalUrl: 'https://authority.example/video', checkedAt: expect.stringMatching(/^\d{4}-.*Z$/),
+      bodySha256: createHash('sha256').update(body).digest('hex') }]);
+  });
+
+  it.each(['read', 'selectWithContent'] as const)('propagates metadata callback failure from %s before another fetch', async method => {
+    const error = new Error('Required metadata receipt failed');
+    const fixture = responseTransport([{ status: 200, headers: { 'content-type': 'text/html' },
+      body: '<main><p>Rehearse the demo video before sharing the recording with the audience.</p></main>' }]);
+    const checker = createSafeSourceChecker({ resolveHostname: publicResolver, transport: fixture.transport,
+      authorityPolicies: [{ hostname: 'authority.example' }], onRetrievedMetadata: async () => { throw error; } });
+    const operation = method === 'read' ? checker.read('https://authority.example/video')
+      : checker.selectWithContent(['https://authority.example/video', 'https://publisher.example/video'], { query: 'demo video' });
+    await expect(operation).rejects.toBe(error);
+    expect(fixture.requests).toHaveLength(1);
+  });
+
   it.each(['check', 'read'] as const)('identifies the research reader on every %s redirect without sending credentials', async method => {
     const requests: SourceHttpRequest[] = [];
     const checker = createSafeSourceChecker({resolveHostname: publicResolver,

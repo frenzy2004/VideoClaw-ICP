@@ -3,7 +3,7 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-Latest: [list binding boundary correction](LIST-BINDING-REPAIR-2026-09-12.md), **2,851 tests across 63 files**, zero failures/skips, plus lint/typecheck/build. The saved audio-cleanup draft's sixteen marker-related coverage errors are resolved without rewriting prose or sources. This structural diagnostic does not relabel the failed live run as successful. State retains 42 runs / 67 failures and no consumed pilot. Standard-runtime receipts and state handoff remain incomplete. Production and scheduling are unchanged.
+Latest: [list binding and execution-record corrections](LIST-BINDING-REPAIR-2026-09-12.md), **2,881 tests across 64 files**, zero failures/skips, plus lint/typecheck/build. The saved audio-cleanup draft's sixteen marker-related coverage errors are resolved without rewriting prose or sources. Standard-runtime source hashes and review decisions are retained; record failure blocks further paid dispatch. These controlled checks do not relabel the failed live run as successful. State retains 42 runs / 67 failures and no consumed pilot. Uninterrupted live proof and state handoff remain incomplete. Production and scheduling are unchanged.
 
 Previous: [worker completion audit and FAQ/queue corrections](WORKER-COMPLETION-AUDIT-2026-09-12.md) retains its 2,834-test checkpoint and separately labeled FAQ component verification.
 

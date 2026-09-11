@@ -6,7 +6,7 @@ This worker is a controlled research-and-drafting system. It does not publish ar
 
 The initial 250-topic research library is an input, not a quota or publication gate. Each run scans at most 50 candidates, deeply checks at most 10, and produces at most 3 drafts with no more than 2 from one ICP.
 
-Latest checkpoint: [list binding boundary correction](LIST-BINDING-REPAIR-2026-09-12.md). The audio-cleanup run reached independent critique, then failed because eight copied list markers caused sixteen coverage errors. The compiler now resolves actual list syntax without changing prose or sources. The saved-input structural check and 2,851 tests pass, plus lint/typecheck/build. State retains 42 runs / 67 failures; no successful fresh pilot. Standard-runtime review receipts and history-preserving state handoff still require worker work.
+Latest checkpoint: [list binding and execution-record corrections](LIST-BINDING-REPAIR-2026-09-12.md). The audio-cleanup run reached independent critique, then failed because eight copied list markers caused sixteen coverage errors. The compiler now resolves actual list syntax without changing prose or sources. The standard runtime retains source hashes and review decisions, and stops further paid dispatch if required records cannot be saved. The saved-input structural check and 2,881 tests pass, plus lint/typecheck/build. State retains 42 runs / 67 failures; no successful fresh pilot. Uninterrupted live proof and history-preserving state handoff remain unfinished.
 
 Previous checkpoint: [worker completion audit and FAQ/queue corrections](WORKER-COMPLETION-AUDIT-2026-09-12.md) retains its component verification and queue/failure-history corrections.
 

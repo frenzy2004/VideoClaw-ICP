@@ -1,5 +1,9 @@
 # Worker completion audit
 
+Subsequent checkpoint: [list bindings and standard execution receipts](LIST-BINDING-REPAIR-2026-09-12.md)
+corrects item 3 below and records the later failed live run. Counts in this audit
+describe its earlier checkpoint. State handoff and fresh full-worker proof remain open.
+
 Scope remains worker PR #1 into `seo-campaign`. No production/main changes,
 lander/PR #55 edits, publication, generated lander PRs, deployments or schedule
 activation are authorized by this checkpoint.

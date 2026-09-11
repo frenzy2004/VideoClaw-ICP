@@ -48,6 +48,8 @@ export type SourceDocument = CheckedSource & {
   passages: SourcePassage[];
 };
 
+export type SourceRetrievalMetadata = Pick<SourceDocument, 'finalUrl' | 'checkedAt' | 'bodySha256'>;
+
 export type SourceSelectionWithContent = {
   sources: Array<{ originalUrl: string; finalUrl: string; authoritative: boolean }>;
   sourceDocuments: SourceDocument[];
@@ -69,6 +71,9 @@ export type SafeSourceCheckerOptions = {
   authorityPolicies?: readonly AuthorityPolicy[];
   limits?: Partial<SourceCheckLimits>;
   relevanceReviewer?: SourceRelevanceReviewer;
+  /** Called after each successful body read, before selection/admission. Errors
+   * are required-receipt failures and must propagate, not skip this source. */
+  onRetrievedMetadata?(metadata: SourceRetrievalMetadata): void | Promise<void>;
 };
 
 const DEFAULT_LIMITS: SourceCheckLimits = {
@@ -376,7 +381,7 @@ function createSourceChecker(options: SafeSourceCheckerOptions, allowHttpForTest
     return (await retrieve(value, false)).source;
   }
 
-  async function read(value: string, readOptions: SourceReadOptions = {}): Promise<SourceDocument> {
+  async function readDocument(value: string, readOptions: SourceReadOptions = {}): Promise<SourceDocument> {
     const { source, body, contentType, checkedAt } = await retrieve(value, true);
     if (!source.reachable) throw new Error('Source body evidence requires a successful response.');
     const mime = contentType.split(';')[0].trim().toLowerCase();
@@ -392,6 +397,16 @@ function createSourceChecker(options: SafeSourceCheckerOptions, allowHttpForTest
     };
   }
 
+  async function observeMetadata(document: SourceDocument): Promise<SourceDocument> {
+    const { finalUrl, checkedAt, bodySha256 } = document;
+    await options.onRetrievedMetadata?.({ finalUrl, checkedAt, bodySha256 });
+    return document;
+  }
+
+  async function read(value: string, readOptions: SourceReadOptions = {}): Promise<SourceDocument> {
+    return observeMetadata(await readDocument(value, readOptions));
+  }
+
   async function selectWithContent(urls: string[], readOptions: SourceReadOptions = {}): Promise<SourceSelectionWithContent> {
     if (urls.length > 24) throw new Error('Body selection exceeds the existing 24-URL research budget.');
     const relevant = new Map<string, { document: SourceDocument; score: number; titleTasks: Set<string>; faqQuestions: Set<string> }>();
@@ -402,8 +417,10 @@ function createSourceChecker(options: SafeSourceCheckerOptions, allowHttpForTest
         const normalized = parseSourceUrl(url, allowHttpForTests).toString();
         if (requested.has(normalized)) continue;
         requested.add(normalized);
-        document = await read(normalized, readOptions);
+        document = await readDocument(normalized, readOptions);
       } catch { continue; }
+      // Receipt failures must escape the ordinary unavailable-source catch.
+      await observeMetadata(document);
       // Score only prose, never a retained H2–H6 heading joined to unrelated
       // prose. Keep the original document/passages unchanged for evidence use.
       const bodyText = document.passages.map(passage => passage.text.slice(passage.bodyStart ?? 0)).join('\n\n');

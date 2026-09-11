@@ -36,6 +36,7 @@ import { SOURCE_TEXT_LIMIT, SOURCE_PASSAGE_LIMIT, SOURCE_PASSAGE_CHARACTER_LIMIT
 import { consumePreparedManualPilot } from './recovery';
 import { createAutobloggerWorker, type AutobloggerRunReport } from './worker';
 import type { HttpTransport } from './http';
+import { createRuntimeAudit } from './runtime-audit';
 
 const MATRIX_FILES = [
   ['newly-funded-founder', 'docs/research/campaigns/newly-funded-founder-article-matrix.md'],
@@ -326,13 +327,16 @@ function providerFor(config: AutobloggerRuntimeEnvironment, transport: ReturnTyp
   return createPendingKeywordProvider();
 }
 
-export function createProductionSourceChecker(client?: StructuredOutputClient) {
-  return createSafeSourceChecker({
+export function createProductionSourceChecker(client?: StructuredOutputClient, audit?: ReturnType<typeof createRuntimeAudit>) {
+  const reviewer = client ? createSourceRelevanceReviewer(client) : undefined;
+  const checker = createSafeSourceChecker({
     transport: createNodeSourceHttpTransport(),
     resolveHostname: createNodeDnsResolver(),
     authorityPolicies: PRODUCTION_SOURCE_AUTHORITY_POLICIES,
-    ...(client ? { relevanceReviewer: createSourceRelevanceReviewer(client) } : {}),
+    ...(audit ? { onRetrievedMetadata: audit.retrievedSource } : {}),
+    ...(reviewer ? { relevanceReviewer: audit ? audit.sourceReviewer(reviewer) : reviewer } : {}),
   });
+  return audit ? audit.sourceChecker(checker) : checker;
 }
 
 export async function createProductionAutobloggerRuntime(
@@ -371,10 +375,15 @@ export async function createProductionAutobloggerRuntime(
     owner: config.landerOwner, repository: config.landerName, baseRef: config.landerBaseRef,
     blogLaunchPullRequest: 55, auth: readAuth,
   });
-  const client = createRuntimeDraftClient(config, transport);
-  const sourceChecker = createProductionSourceChecker(config.openaiApiKey ? client : undefined);
+  const audit = createRuntimeAudit({
+    write: (record, name) => writeAutobloggerArtifacts(record, resolve(root, config.artifactDir, 'audit', name), root),
+    secrets: [config.openaiApiKey, config.apifyToken, config.keywordApiKey, config.githubToken, config.landerReadToken],
+  });
+  const paidTransport = audit.paidTransport(transport);
+  const client = audit.client(createRuntimeDraftClient(config, paidTransport));
+  const sourceChecker = createProductionSourceChecker(config.openaiApiKey ? client : undefined, audit);
   const researcher = createResearcher({
-    apify: createApifyClient({ token: config.apifyToken as string, transport }),
+    apify: createApifyClient({ token: config.apifyToken as string, transport: paidTransport }),
     sourceChecker,
   });
   const publisher = createPublisher({
@@ -391,8 +400,8 @@ export async function createProductionAutobloggerRuntime(
     backlog,
     stateStore,
     researcher,
-    keywordProvider: providerFor(config, transport),
-    drafter: createStructuredDrafter({ client, mediaAllowlist: MEDIA_ALLOWLIST }),
+    keywordProvider: providerFor(config, paidTransport),
+    drafter: audit.drafter(createStructuredDrafter({ client, mediaAllowlist: MEDIA_ALLOWLIST })),
     buildDraftContext: ({ result, shallow, metrics }) => buildDraftingContextFromResearch({
       result,
       shallow,
@@ -413,7 +422,7 @@ export async function createProductionAutobloggerRuntime(
     persistArtifact: (artifact, report) => writeAutobloggerArtifacts({ ...report, artifacts: [artifact] }, config.artifactDir, root),
   });
   return {
-    execute: (input) => worker.execute(input),
+    execute: (input) => audit.execute(input, () => worker.execute(input)),
     async finalizeArtifacts(report) {
       if (report.status !== 'validated' || report.mode !== 'manual_pilot' || report.artifacts.length !== 1) return;
       const hash = createHash('sha256').update(JSON.stringify(report.artifacts[0].bundle)).digest('hex');
