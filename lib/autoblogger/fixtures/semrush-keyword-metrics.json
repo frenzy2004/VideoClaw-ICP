@@ -1,0 +1,20 @@
+{
+  "meta": {
+    "country": "US",
+    "keyword": "demo day video checklist",
+    "month": "2026-08",
+    "request_id": "semrush-request-123",
+    "status_code": 200,
+    "success": true
+  },
+  "data": {
+    "competitive_density": 42,
+    "cpc": "420",
+    "intents": ["INFORMATIONAL", "COMMERCIAL"],
+    "keyword_difficulty": 31,
+    "number_of_results": "1250000",
+    "search_volume": "90",
+    "serp_features": ["PEOPLE_ALSO_ASK"],
+    "trends": [80, 82, 85, 87, 89, 90, 91, 92, 93, 94, 95, 96]
+  }
+}
