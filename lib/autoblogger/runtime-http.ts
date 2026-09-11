@@ -12,12 +12,15 @@ import type {
   SourceHttpTransport,
 } from './http';
 import type { DnsResolver } from './sources';
+import {createResponseStreamDecoder, type ResponseStreamProgress} from './response-stream';
 
 const DEFAULT_JSON_BODY_LIMIT = 2_000_000;
+const DEFAULT_RESPONSE_STREAM_LIMIT = 8_000_000;
 const REDIRECT_STATUS = new Set([301, 302, 303, 307, 308]);
 
 type RuntimeHttpOptions = {
   maxResponseBytes?: number;
+  onResponseProgress?: (progress: ResponseStreamProgress) => void;
 };
 
 type LookupResult = { address: string; family: number };
@@ -79,8 +82,37 @@ function createJsonHttpTransport(options: RuntimeHttpOptions, allowHttpForTests:
   const maximum = numericLimit(options.maxResponseBytes, DEFAULT_JSON_BODY_LIMIT);
   return async (input: HttpRequest): Promise<HttpResponse> => {
     const url = parseUrl(input.url, allowHttpForTests);
+    const wantsStream = Object.entries(input.headers).some(([name, value]) => name.toLowerCase() === 'accept' && value === 'text/event-stream');
     return await new Promise<HttpResponse>((resolve, reject) => {
       const request = requester(url)(safeRequestOptions(url, input), (response) => {
+        if (wantsStream && (response.statusCode ?? 0) >= 200 && (response.statusCode ?? 0) < 300) {
+          if (!response.headers['content-type']?.toLowerCase().startsWith('text/event-stream')) {
+            response.destroy(); reject(new Error('Responses stream content type is invalid.')); return;
+          }
+          const stream = createResponseStreamDecoder(options.onResponseProgress);
+          const limit = numericLimit(options.maxResponseBytes, DEFAULT_RESPONSE_STREAM_LIMIT);
+          let bytes = 0, settled = false;
+          const finish = (body: unknown) => {
+            settled = true;
+            resolve({status: response.statusCode ?? 0, headers: headersRecord(response.headers), body});
+            response.destroy();
+          };
+          response.on('data', (chunk: Buffer) => {
+            if (settled) return;
+            try {
+              bytes += chunk.byteLength;
+              if (bytes > limit) throw new Error('Responses stream exceeds the byte limit.');
+              const result = stream.push(chunk);
+              if (result) finish(result);
+            } catch (error) { settled = true; response.destroy(); reject(error); }
+          });
+          response.once('error', reject);
+          response.once('end', () => {
+            if (settled) return;
+            try { finish(stream.finish()); } catch (error) { reject(error); }
+          });
+          return;
+        }
         const chunks: Buffer[] = [];
         let bytes = 0;
         response.on('data', (chunk: Buffer) => {

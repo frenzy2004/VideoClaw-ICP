@@ -514,7 +514,7 @@ export async function runLocalArtifactPilot(options: LocalPilotArguments & { roo
     }
     await recheckQuality();
     await stateStore.save(prepared.state, initial.version);
-    const http = createNodeJsonHttpTransport();
+    const http = createNodeJsonHttpTransport({onResponseProgress: progress => event('model_response_progress', progress)});
     // One admission, one FAQ preparation, draft, critique, one repair and verification.
     const transport = createModelAuditTransport(async request => {
       if (request.method === 'POST') await recheckQuality();

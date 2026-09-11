@@ -6,7 +6,9 @@ This worker is a controlled research-and-drafting system. It does not publish ar
 
 The initial 250-topic research library is an input, not a quota or publication gate. Each run scans at most 50 candidates, deeply checks at most 10, and produces at most 3 drafts with no more than 2 from one ICP.
 
-Latest checkpoint: [storyboard repair, reference and token-grammar corrections](STORYBOARD-REPAIR-2026-09-11.md), verified with 2,793 tests plus lint/typecheck/build and independent patch review. A saved-draft live diagnostic passed the repaired evidence checks but failed final review for a malformed mixed-script token, before native QA. The newer provider/local word grammar rejects that exact error while preserving original names. State retains 34 runs / 56 failures. The uninterrupted article-to-native-QA milestone remains open; component checks are not an accepted new article or production approval.
+Latest checkpoint: [shot-list transport investigation](SHOT-LIST-TRANSPORT-2026-09-12.md). The fresh worker run passed research, source verification and FAQ preparation, then timed out during drafting. One exact-input streamed diagnostic completed in 131 seconds; it is not an accepted article or a resumed worker run. The worker now consumes terminal SSE responses and emits text-free progress. State retains 35 runs / 57 failures. The uninterrupted article-to-native-QA milestone remains open.
+
+Previous checkpoint: [storyboard repair, reference and token-grammar corrections](STORYBOARD-REPAIR-2026-09-11.md) retains its 2,793-test verification and failed saved-draft diagnostic. Its exact malformed-token regression remains enforced.
 
 Previous checkpoint: [topic-aware discovery and observation-read recovery](TOPIC-SOURCE-DISCOVERY-2026-09-11.md) retains its 2,737-test verification and the two earlier collection failures.
 

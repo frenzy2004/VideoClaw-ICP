@@ -132,13 +132,14 @@ export function createOpenAIResponsesClient(
           method: 'POST',
           url: endpoint,
           headers: {
-            Accept: 'application/json',
+            Accept: 'text/event-stream',
             Authorization: `Bearer ${apiKey}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             model,
             store: false,
+            stream: true,
             max_output_tokens: maxOutputTokens,
             reasoning: { effort: reasoningEffort },
             input: [

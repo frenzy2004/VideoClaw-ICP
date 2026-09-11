@@ -98,7 +98,7 @@ describe('OpenAI Responses structured-output client', () => {
       method: 'POST',
       url: 'https://api.openai.com/v1/responses',
       headers: {
-        Accept: 'application/json',
+        Accept: 'text/event-stream',
         Authorization: 'Bearer sk-fixture-secret-value',
         'Content-Type': 'application/json',
       },
@@ -108,6 +108,7 @@ describe('OpenAI Responses structured-output client', () => {
       max_output_tokens: 24_000,
       reasoning: { effort: 'low' },
       store: false,
+      stream: true,
       text: {
         format: {
           type: 'json_schema',
