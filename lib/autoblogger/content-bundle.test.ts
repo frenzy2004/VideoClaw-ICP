@@ -845,6 +845,49 @@ describe('contextual product references and precise binding failures', () => {
       .not.toContainEqual(expect.objectContaining({ span: action, reason: 'unapproved_product_reference' }));
   });
 
+  it('retains an earlier object in the same numbered procedure for exact independent reference review', () => {
+    const spans = ['Record a short sample from approved copy.', 'Listen for problems that would distract a buyer.',
+      'Do not continue until the sample is usable.', 'If it fails, change one variable and test again.'];
+    const value = withSpans(spans);
+    value.sections[0].markdown = spans.map((span, index) => `${index + 1}. ${span}`).join('\n\n');
+    const review = {...referentReview(value, spans[3]), subject:'a short sample from approved copy'};
+    expect(inspectGeneratedDraft(context, value)).toContainEqual(expect.objectContaining({span:spans[3], reason:'unapproved_product_reference'}));
+    expect(inspectGeneratedDraft(context, value, [review]))
+      .not.toContainEqual(expect.objectContaining({span:spans[3], reason:'unapproved_product_reference'}));
+  });
+
+  it.each(['separate procedures', 'future object', 'earlier product context'])('does not use %s to waive a reference finding', mode => {
+    const first = 'Record a short sample from approved copy.';
+    const target = 'If it fails, change one variable and test again.';
+    const middle = ['Listen for distractions in the recording.', 'Check the input level before continuing.', 'Leave time for another test.'];
+    const spans = mode === 'future object' ? [...middle, target, first]
+      : mode === 'earlier product context' ? [first, 'The team also reviews VideoClaw.', ...middle, target]
+        : [first, ...middle, target];
+    const value = withSpans(spans);
+    value.sections[0].markdown = spans.map((span, index) => `${index + 1}. ${span}`).join('\n\n');
+    if(mode === 'separate procedures') value.sections[0].markdown = `1. ${first}\n\n---\n\n${[...middle,target].map((span,index)=>`${index+1}. ${span}`).join('\n\n')}`;
+    const review = {...referentReview(value, target), subject:'a short sample from approved copy'};
+    expect(inspectGeneratedDraft(context, value, [review]))
+      .toContainEqual(expect.objectContaining({span:target, reason:'unapproved_product_reference'}));
+  });
+
+  it.each(['linked product', 'hidden label', 'linked target'])('uses rendered numbered-procedure text with external reference definitions: %s', mode => {
+    const first = 'Record a short sample from approved copy.';
+    const target = 'If it fails, change one variable and test again.';
+    const spans = [...(mode === 'linked product' ? [context.productClaims[0].text] : []), first,
+      'Listen for distractions in the recording.', 'Check the input level before continuing.', 'Leave time for another test.', target];
+    const value = withSpans(spans);
+    value.sections[0].markdown = spans.map((span,index)=>`${index+1}. ${span}`).join('\n\n');
+    if(mode === 'linked product') value.sections[0].markdown = value.sections[0].markdown.replace('VideoClaw', 'Video[Claw][help]');
+    if(mode === 'hidden label') value.sections[0].markdown = value.sections[0].markdown.replace('a short sample from approved copy', '[a short sample from approved copy][the phantom sample]');
+    if(mode === 'linked target') value.sections[0].markdown = value.sections[0].markdown.replace('If it fails', 'If [it][help] fails');
+    value.sections[0].markdown += '\n\n[help]: https://www.ycombinator.com/video/\n[the phantom sample]: https://www.ycombinator.com/video/';
+    const review = {...referentReview(value,target),subject:mode === 'hidden label' ? 'the phantom sample' : 'a short sample from approved copy'};
+    const findings = inspectGeneratedDraft(context,value,[review]);
+    if(mode === 'linked target') expect(findings).not.toContainEqual(expect.objectContaining({span:target,reason:'unapproved_product_reference'}));
+    else expect(findings).toContainEqual(expect.objectContaining({span:target,reason:'unapproved_product_reference'}));
+  });
+
   it.each([
     ['Ask the product lead to check each screen.', 'the product lead'],
     ['Confirm the product flow before recording.', 'the product flow'],

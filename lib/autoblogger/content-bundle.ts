@@ -724,7 +724,24 @@ function referenceCheckContext(context: DraftingContext, draft: GeneratedDraftV2
   // not the antecedent of a new question explicitly naming a human actor.
   const preceding = visible.slice(Math.max(0, position - 2), position + 1)
     .filter(entry => !faq || entry.location.startsWith(`/faqAnswers/${faq[1]}/`));
-  const nearby = position < 0 ? [] : [...new Set([...labels, ...preceding.map(entry => entry.span)])];
+  // A numbered procedure can name an object several steps before referring to
+  // it again. Retain that procedure's visible prefix, not arbitrary earlier
+  // paragraphs, another list, future steps, FAQs or private campaign fields.
+  // This supplies context only: a current exact-anchor independent review and
+  // the explicit-product veto below are still mandatory.
+  const procedure: string[] = [];
+  if (/^\/sections\/\d+\/markdown$/.test(binding.location)) {
+    const markdown = generatedLocationValue(draft, binding.location)!;
+    for (const node of parseMarkdown(markdown).children ?? []) {
+      if (node.type !== 'list' || !node.ordered) continue;
+      // Keep document-resolved reference links: reparsing a detached slice
+      // exposes hidden labels and can hide names split across inline links.
+      const spans = splitClaimSentences(markdownNodeClaimText(node));
+      const index = spans.indexOf(binding.span);
+      if (index >= 0) procedure.push(...spans.slice(0, index + 1));
+    }
+  }
+  const nearby = position < 0 ? [] : [...new Set([...labels, ...procedure, ...preceding.map(entry => entry.span)])];
   return {
     bindingIndex,
     bindingHash: createHash('sha256').update(JSON.stringify([binding.location, binding.span, binding.sourceFactIds, binding.productClaimId])).digest('hex'),
