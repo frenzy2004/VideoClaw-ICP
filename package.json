@@ -22,6 +22,7 @@
     "autoblog:pilot": "pnpm autoblog pilot",
     "autoblog:run": "pnpm autoblog run",
     "autoblog:validate": "pnpm autoblog validate",
+    "autoblog:handoff": "tsx lib/autoblogger/state-handoff-entry.ts",
     "check:autoblogger": "vitest run lib/autoblogger && pnpm run typecheck"
   },
   "dependencies": {

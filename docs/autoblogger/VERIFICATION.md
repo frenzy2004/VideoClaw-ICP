@@ -3,7 +3,9 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-Latest: [fresh end-to-end worker proof](FRESH-WORKER-PROOF-2026-09-12.md). `podcast-clips-live-proof-2026-09-12` completed live research → source/FAQ checks → generation → critique → one repair → independent verification → native lander QA → durable review-only artifact. The lander's 32 blog tests, lint and full build passed. The worker's fresh **2,881 tests across 64 files**, lint/typecheck/build also pass. State retains 43 runs / 67 failures and one consumed successful pilot. This is a local fresh-worker proof, not an unattended Actions or publication proof. State handoff remains unfinished. Production and scheduling are unchanged.
+Latest: [history-preserving handoff](STATE-HANDOFF-2026-09-12.md). **2,922 tests across 67 files**, lint/typecheck/build pass. A real private export retains all 43 runs, 67 failures and the consumed successful pilot, with the source unchanged. Regression checks cover ordinary continuation, rediscovered aliases, stored-marker rollback, compaction and private export. Remote state migration and credentialed unattended rollout remain pending.
+
+The preceding [fresh end-to-end worker proof](FRESH-WORKER-PROOF-2026-09-12.md), `podcast-clips-live-proof-2026-09-12`, completed live research → source/FAQ checks → generation → critique → one repair → independent verification → native lander QA → durable review-only artifact. The lander's 32 blog tests, lint and full build passed. This remains a local fresh-worker proof, not an unattended Actions or publication proof. Production and scheduling are unchanged.
 
 Historical verification below retains the outcomes/counts at each dated checkpoint.
 

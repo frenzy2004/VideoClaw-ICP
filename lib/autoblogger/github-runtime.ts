@@ -3,7 +3,7 @@ import matter from 'gray-matter';
 import { z } from 'zod';
 
 import { AutobloggerStateSchema, createAutobloggerState } from './state';
-import { CandidateSchema, candidateFingerprints, RunRecordSchema } from './domain';
+import { CandidateSchema, candidateFingerprints, RunRecordSchema, type Candidate } from './domain';
 import { containsSecretLikeValue, redactSensitive } from './secrets';
 import { requestWithTimeout, type HttpRequest, type HttpResponse, type HttpTransport } from './http';
 import type {
@@ -197,8 +197,15 @@ const ManualFreshCandidateSnapshotSchema = z.object({
   failures: z.array(CompactFailureSchema).min(1).max(100),
 }).strict();
 
-export const PersistentWorkerStateSchema = AutobloggerStateSchema.extend({
+const PersistentWorkerStateFieldsSchema = AutobloggerStateSchema.extend({
   manualPilot: ManualPilotSchema.nullable(),
+  diagnosticRetirement: z.object({
+    schemaVersion: z.literal(1),
+    successfulRunId: z.string().regex(/^[A-Za-z0-9][A-Za-z0-9._-]{0,159}$/u),
+    retiredAt: z.string().datetime(),
+    retainedRunIds: z.array(z.string().min(1).max(160)).min(1).max(500),
+    historySha256: z.string().regex(/^[a-f0-9]{64}$/u),
+  }).strict().optional(),
   manualRetryApproval: ManualRetryApprovalSchema.optional(),
   manualTargetSwitch: ManualTargetSwitchSchema.optional(),
   manualFreshCandidateApproval: ManualFreshCandidateApprovalSchema.optional(),
@@ -215,10 +222,73 @@ export const PersistentWorkerStateSchema = AutobloggerStateSchema.extend({
     status: z.enum(['opened', 'already_exists', 'reconciliation_required']),
   }).strict()),
   failures: z.array(CompactFailureSchema).max(100),
-}).strict().superRefine((state, ctx) => {
+}).strict();
+
+type WorkerStateFields = z.infer<typeof PersistentWorkerStateFieldsSchema>;
+
+// Only diagnostic-owned decisions are frozen: ordinary queued/scanned topics
+// must remain available. All runs present at handoff retain their original audit.
+function diagnosticCandidateKeys(state: WorkerStateFields): string[] {
+  return [...new Set([
+    state.manualRetryApproval?.candidateFingerprint, state.manualTargetSwitch?.candidateFingerprint,
+    state.manualFreshCandidateApproval && candidateFingerprints(state.manualFreshCandidateApproval.candidate).candidate,
+    ...(state.manualFreshCandidateHistory ?? []).map(item => candidateFingerprints(item.approval.candidate).candidate),
+  ].filter((value): value is string => !!value))].sort();
+}
+
+export function isRetiredDiagnosticCandidate(state: WorkerStateFields, candidate: Candidate): boolean {
+  if (!state.diagnosticRetirement) return false;
+  const identities = new Set(Object.values(candidateFingerprints(candidate)));
+  return diagnosticCandidateKeys(state).some(key =>
+    state.decisions[key]?.identities.some(identity => identities.has(identity)));
+}
+
+function diagnosticHistory(state: WorkerStateFields) {
+  const candidateKeys = diagnosticCandidateKeys(state);
+  const runKeys = [...new Set(state.diagnosticRetirement?.retainedRunIds ?? Object.keys(state.runs))].sort();
+  const runs = new Set(runKeys);
+  const candidates = new Set(candidateKeys);
+  const select = (field: 'candidates' | 'decisions' | 'provenance' | 'contentHashes' | 'pullRequests') =>
+    candidateKeys.map(key => [key, state[field][key] ?? null]);
+  const records = {
+    manualPilot: state.manualPilot, manualRetryApproval: state.manualRetryApproval,
+    manualTargetSwitch: state.manualTargetSwitch, manualFreshCandidateApproval: state.manualFreshCandidateApproval,
+    manualFreshCandidateHistory: state.manualFreshCandidateHistory,
+    candidates: select('candidates'), decisions: select('decisions'), provenance: select('provenance'),
+    contentHashes: select('contentHashes'), pullRequests: select('pullRequests'),
+    runs: runKeys.map(key => [key, state.runs[key] ?? null]),
+    failures: state.failures.filter(item => runs.has(item.runId) || (item.candidateFingerprint && candidates.has(item.candidateFingerprint))),
+  };
+  return { candidateKeys, runKeys, hash: createHash('sha256').update(JSON.stringify(records)).digest('hex') };
+}
+
+export const PersistentWorkerStateSchema = PersistentWorkerStateFieldsSchema.superRefine((state, ctx) => {
   const approval = state.manualRetryApproval;
   const targetSwitch = state.manualTargetSwitch;
   const fresh = state.manualFreshCandidateApproval;
+  const retirement = state.diagnosticRetirement;
+  if (retirement) {
+    const pilot = state.manualPilot;
+    const fingerprint = fresh && candidateFingerprints(fresh.candidate).candidate;
+    const history = diagnosticHistory(state);
+    const retiredAt = Date.parse(retirement.retiredAt);
+    const invalidRetirement = !fresh?.consumedAt || !fingerprint || !pilot || pilot.status !== 'consumed'
+      || pilot.runId !== fresh.runId || retirement.successfulRunId !== fresh.runId
+      || !pilot.consumedAt || retiredAt < Date.parse(pilot.consumedAt)
+      || !pilot.artifactHash || state.contentHashes[fingerprint] !== pilot.artifactHash
+      || state.runs[fresh.runId]?.status !== 'validated' || state.decisions[fingerprint]?.status !== 'completed'
+      || retirement.historySha256 !== history.hash
+      || new Set(retirement.retainedRunIds).size !== retirement.retainedRunIds.length
+      || !retirement.retainedRunIds.includes(fresh.runId)
+      || history.runKeys.some(key => !state.runs[key] || Date.parse(state.runs[key].startedAt) > retiredAt)
+      || history.candidateKeys.some(key => {
+        const decision = state.decisions[key];
+        return !decision || !['terminal', 'completed'].includes(decision.status) || decision.leaseExpiresAt !== null
+          || Date.parse(decision.updatedAt) > retiredAt;
+      });
+    if (invalidRetirement) ctx.addIssue({ code: 'custom', path: ['diagnosticRetirement'],
+      message: 'Diagnostic retirement must preserve its consumed successful pilot, sealed history and deduplication identities.' });
+  }
   const freshHistory = state.manualFreshCandidateHistory ?? [];
   const historyIssue = (message: string) => ctx.addIssue({ code: 'custom', path: ['manualFreshCandidateHistory'], message });
   const historyHash = (length: number) => length ? identityHash(JSON.stringify(freshHistory.slice(0, length))) : undefined;
@@ -262,7 +332,7 @@ export const PersistentWorkerStateSchema = AutobloggerStateSchema.extend({
     archivedRuns.add(prior.runId);
     identities.forEach(id => archivedIdentities.add(id));
   }
-  if (freshHistory.length && (Object.entries(state.pullRequests).some(([fp, pr]) => {
+  if (!retirement && freshHistory.length && (Object.entries(state.pullRequests).some(([fp, pr]) => {
     const decision = state.decisions[fp];
     return pr.status !== 'already_exists' || decision?.attempts !== 0 || decision.status !== 'completed'
       || decision.runId !== 'startup-reconciliation' || !!state.candidates[fp] || !!state.contentHashes[fp];
@@ -296,7 +366,7 @@ export const PersistentWorkerStateSchema = AutobloggerStateSchema.extend({
       })) fail('Fresh approval requires sealed consumed history and closed failed historical targets.');
     if (identities.some(id => approval?.identities.includes(id) || (targetSwitch && Object.values(candidateFingerprints(targetSwitch.candidate)).includes(id)))
       || Object.entries(state.decisions).some(([fp, item]) => fp !== fingerprint
-        && (item.runId === fresh.runId || item.identities.some(id => identities.includes(id)) || ['leased', 'manual_attention'].includes(item.status)))
+        && (item.runId === fresh.runId || item.identities.some(id => identities.includes(id)) || (!retirement && ['leased', 'manual_attention'].includes(item.status))))
       || state.queuedCandidates.some(item => Object.values(candidateFingerprints(item)).some(id => identities.includes(id))
         && JSON.stringify(item) !== JSON.stringify(fresh.candidate))
       || Object.entries(state.candidates).some(([fp, item]) => fp !== fingerprint && item.runId === fresh.runId)
@@ -525,6 +595,23 @@ export const PersistentWorkerStateSchema = AutobloggerStateSchema.extend({
 
 export type PersistentWorkerState = z.infer<typeof PersistentWorkerStateSchema>;
 
+/** Local handoff preparation only: no file mutation, retry grant or remote I/O. */
+export function retireDiagnosticHistory(input: PersistentWorkerState, retiredAt: string): PersistentWorkerState {
+  const state = PersistentWorkerStateSchema.parse(input);
+  if (state.diagnosticRetirement) return state;
+  const pilot = state.manualPilot;
+  if (!state.manualFreshCandidateApproval?.consumedAt || pilot?.status !== 'consumed' || !pilot.consumedAt
+    || state.runs[pilot.runId]?.status !== 'validated') throw new Error('Retirement requires a consumed successful pilot.');
+  if (!Number.isFinite(Date.parse(retiredAt)) || Date.parse(retiredAt) < Date.parse(pilot.consumedAt)) {
+    throw new Error('Retirement cannot predate successful pilot consumption.');
+  }
+  const history = diagnosticHistory(state);
+  return PersistentWorkerStateSchema.parse({ ...state, diagnosticRetirement: {
+    schemaVersion: 1, successfulRunId: pilot.runId, retiredAt,
+    retainedRunIds: history.runKeys, historySha256: history.hash,
+  } });
+}
+
 export function createPersistentWorkerState(): PersistentWorkerState {
   return PersistentWorkerStateSchema.parse({
     ...createAutobloggerState(),
@@ -554,11 +641,14 @@ function retainFailureHistory(input: PersistentWorkerState): PersistentWorkerSta
   const failures = z.array(CompactFailureSchema).parse(input.failures);
   if (failures.length <= 100) return failures;
   const pinned = new Set<number>();
+  const retirementHistory = input.diagnosticRetirement ? diagnosticHistory(input) : undefined;
   const ordinary: number[] = [];
   failures.forEach((failure, index) => {
     // Keep every extra-attempt record for contextual validation below, even if
     // malformed authorization would otherwise hide it among discarded history.
-    if (failure.attempt > 3 || (input.manualRetryApproval && failure.runId === input.manualRetryApproval.priorRunId
+    if (retirementHistory?.runKeys.includes(failure.runId)
+      || (failure.candidateFingerprint && retirementHistory?.candidateKeys.includes(failure.candidateFingerprint))
+      || failure.attempt > 3 || (input.manualRetryApproval && failure.runId === input.manualRetryApproval.priorRunId
       && failure.attempt === 3 && failure.code === 'candidate_failed')
       || failure.runId === input.manualTargetSwitch?.runId || failure.runId === input.manualTargetSwitch?.retry?.runId
       || failure.runId === input.manualFreshCandidateApproval?.runId
@@ -602,6 +692,7 @@ export function compactPersistentWorkerState(input: PersistentWorkerState): Pers
   ])].sort();
   if (dedupeHashes.length > 30_000) throw new Error('Durable deduplication capacity reached; archive state before continuing. No identities were discarded.');
   const approvalRuns = new Set(parsed.manualRetryApproval ? [parsed.manualRetryApproval.priorRunId, parsed.manualRetryApproval.runId] : []);
+  for (const runId of parsed.diagnosticRetirement?.retainedRunIds ?? []) approvalRuns.add(runId);
   const projectionRunId = parsed.manualRetryApproval && parsed.candidates[parsed.manualRetryApproval.candidateFingerprint]?.runId;
   if (projectionRunId) approvalRuns.add(projectionRunId);
   if (parsed.manualTargetSwitch) approvalRuns.add(parsed.manualTargetSwitch.runId);
@@ -982,25 +1073,42 @@ export function createGitHubStateStore(input: GitHubStateStoreOptions): GitHubSt
   const path = input.path ?? STATE_PATH;
   const baseRef = input.baseRef ?? 'seo-campaign';
   const contentsPath = `${root}/contents/${path.split('/').map(encodeURIComponent).join('/')}?ref=${encodeURIComponent(branch)}`;
+  // Keep an immutable snapshot, not the caller's mutable loaded state.
+  let observedVersion: string | null | undefined;
+  let observedRetirement: string | undefined;
   return {
     async load() {
+      observedVersion = undefined;
+      observedRetirement = undefined;
       const response = await requestWithTimeout(options.transport, {
         method: 'GET',
         url: `${options.apiBase}${contentsPath}`,
         headers: authHeaders(input.token),
       }, options.timeoutMs);
-      if (response.status === 404) return { state: createPersistentWorkerState(), version: null };
+      if (response.status === 404) {
+        observedVersion = null;
+        return { state: createPersistentWorkerState(), version: null };
+      }
       if (response.status !== 200) throw new Error(`State load failed with HTTP ${response.status}.`);
       const body = record(response.body, 'GitHub state file');
       const content = decodeBlob(body);
       if (containsSecretLikeValue(content)) throw new Error('Persistent state contains a secret-like value.');
-      return {
+      const loaded = {
         state: PersistentWorkerStateSchema.parse(JSON.parse(content)),
         version: string(body.sha, 'GitHub state file SHA'),
       };
+      observedVersion = loaded.version;
+      observedRetirement = JSON.stringify(loaded.state.diagnosticRetirement);
+      return loaded;
     },
     async save(stateInput, expectedVersion) {
+      if (expectedVersion !== null && observedVersion !== expectedVersion) {
+        throw new Error('Persistent state update conflict; reload the current state before saving.');
+      }
       const state = compactPersistentWorkerState(PersistentWorkerStateSchema.parse(stateInput));
+      if (observedRetirement && observedRetirement !== JSON.stringify(state.diagnosticRetirement)) {
+        throw new Error('Diagnostic retirement is immutable; restoring earlier execution authority is forbidden.');
+      }
       if (containsSecretLikeValue(state)) throw new Error('Persistent state contains a secret-like value.');
       const content = Buffer.from(`${JSON.stringify(state)}\n`).toString('base64');
       if (expectedVersion === null) {
@@ -1030,7 +1138,9 @@ export function createGitHubStateStore(input: GitHubStateStoreOptions): GitHubSt
       if (![200, 201].includes(response.status)) throw new Error(`Persistent state update failed with HTTP ${response.status}.`);
       const result = record(response.body, 'GitHub state update');
       const updated = record(result.content, 'GitHub state content result');
-      return { version: string(updated.sha, 'GitHub state content SHA') };
+      observedVersion = string(updated.sha, 'GitHub state content SHA');
+      observedRetirement = JSON.stringify(state.diagnosticRetirement);
+      return { version: observedVersion };
     },
   };
 }

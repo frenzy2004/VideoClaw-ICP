@@ -35,6 +35,10 @@ export function createFileStateStore(pathInput: string): GitHubStateStore {
       const current = await load();
       if (current.version !== expectedVersion) throw new Error('Persistent state update conflict; rerun after reloading state.');
       const state = compactPersistentWorkerState(input);
+      if (current.state.diagnosticRetirement
+        && JSON.stringify(state.diagnosticRetirement) !== JSON.stringify(current.state.diagnosticRetirement)) {
+        throw new Error('Diagnostic retirement cannot be removed or replaced.');
+      }
       if (containsSecretLikeValue(state)) throw new Error('Local state contains a secret-like value.');
       const content = `${JSON.stringify(state)}\n`;
       await mkdir(dirname(path), { recursive: true, mode: 0o700 });

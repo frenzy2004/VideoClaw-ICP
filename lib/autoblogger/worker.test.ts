@@ -13,7 +13,8 @@ import {
   type EvidenceBundle,
   type KeywordMetrics,
 } from './domain';
-import { createPersistentWorkerState, PersistentWorkerStateSchema, type PersistentWorkerState } from './github-runtime';
+import { createPersistentWorkerState, PersistentWorkerStateSchema, retireDiagnosticHistory, type PersistentWorkerState } from './github-runtime';
+import { successfulDiagnosticFixture } from './test-fixtures/diagnostic-history';
 import { createPendingKeywordProvider, type KeywordProvider } from './keyword-providers';
 import { createResearcher, SERP_ACTOR_ID, type ShallowResearchResult } from './research';
 import { createAutobloggerWorker, discoverCandidatesFromResearch } from './worker';
@@ -232,6 +233,54 @@ function fixture(input: {
 }
 
 describe('persistent autoblogger worker', () => {
+  it('continues normal paid-metric article preparation after diagnostic retirement without changing the consumed pilot', async () => {
+    const initialState = retireDiagnosticHistory(await successfulDiagnosticFixture(), '2026-09-09T00:00:00.000Z');
+    const f = fixture({ initialState, backlogCount: 3, maxDrafts: 1, publicationEnabled: false,
+      now: () => new Date('2026-09-09T01:00:00.000Z') });
+    const report = await f.worker.execute({ command: 'run', runId: 'retired-normal-run' });
+    expect(report.status).toBe('validated');
+    expect(report.counts).toMatchObject({ scanned: 3, drafted: 1, validated: 1, pullRequestsOpened: 0 });
+    expect(f.getState().manualPilot).toEqual(initialState.manualPilot);
+    expect(f.getState().diagnosticRetirement).toEqual(initialState.diagnosticRetirement);
+    expect(f.getState().runs).toMatchObject(initialState.runs);
+    expect(f.getState().decisions).toMatchObject(initialState.decisions);
+  });
+
+  it('keeps pending-metric drafting blocked after diagnostic retirement', async () => {
+    const initialState = retireDiagnosticHistory(await successfulDiagnosticFixture(), '2026-09-09T00:00:00.000Z');
+    const f = fixture({ initialState, backlogCount: 1, keywordProvider: createPendingKeywordProvider(),
+      now: () => new Date('2026-09-09T01:00:00.000Z') });
+    const report = await f.worker.execute({ command: 'run', runId: 'retired-pending-metrics' });
+    expect(report.status).toBe('failed');
+    expect(report.counts.drafted).toBe(0);
+    expect(f.getState().manualPilot).toEqual(initialState.manualPilot);
+  });
+
+  it('discards rediscovered diagnostic aliases without stranding an unrelated researched run', async () => {
+    const initialState = retireDiagnosticHistory(await successfulDiagnosticFixture(), '2026-09-09T00:00:00.000Z');
+    const old = initialState.manualFreshCandidateApproval!.candidate;
+    const f = fixture({ initialState, backlogCount: 1,
+      observe: item => ({ ...shallow(item), suggestions: [old.primaryKeyword, 'new product launch video workflow'] }),
+      now: () => new Date('2026-09-09T01:00:00.000Z') });
+    const report = await f.worker.execute({ command: 'research', runId: 'retired-rediscovery' });
+    expect(report.status).toBe('researched');
+    expect(f.getState().runs['retired-rediscovery'].status).toBe('researched');
+    expect(f.getState().decisions[candidateFingerprints(candidate(0)).candidate].status).not.toBe('leased');
+    expect(f.getState().queuedCandidates.some(item => item.slug === old.slug)).toBe(false);
+    expect(f.getState().queuedCandidates.some(item => item.primaryKeyword === 'new product launch video workflow')).toBe(true);
+    expect(f.getState().manualPilot).toEqual(initialState.manualPilot);
+  });
+
+  it('preserves retired decisions when historical topics appear in the lander inventory', async () => {
+    const initialState = retireDiagnosticHistory(await successfulDiagnosticFixture(), '2026-09-09T00:00:00.000Z');
+    const old = initialState.manualFreshCandidateHistory![0].approval.candidate;
+    const f = fixture({ initialState, backlog: [old, candidate(0)], landerInventory: [{ articleId: old.articleId }],
+      now: () => new Date('2026-09-09T01:00:00.000Z') });
+    const report = await f.worker.execute({ command: 'research', runId: 'retired-inventory' });
+    expect(report.counts.scanned).toBe(1);
+    expect(f.getState().decisions[candidateFingerprints(old).candidate]).toEqual(initialState.decisions[candidateFingerprints(old).candidate]);
+  });
+
   it('refuses article runs without an evidence preparer before paid work or reservations', async () => {
     const f = fixture({omitPreparation: true});
     await expect(f.worker.execute({command: 'pilot', runId: 'missing-evidence-preparer'})).rejects.toThrow(/evidence preparation/i);

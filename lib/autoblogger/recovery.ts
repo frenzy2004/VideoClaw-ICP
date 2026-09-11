@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto';
 import { CandidateSchema, candidateFingerprints, type Candidate } from './domain';
 import {
   compactPersistentWorkerState,
+  isRetiredDiagnosticCandidate,
   PersistentWorkerStateSchema,
   type CandidateDecision,
   type PersistentWorkerState,
@@ -50,7 +51,7 @@ export function hasManualRetryApproval(
   mode: RunMode | undefined, nowIso: string,
 ): boolean {
   const approval = state.manualRetryApproval;
-  if (state.manualTargetSwitch || !approval || approval.consumedAt || mode !== 'manual_pilot' || runId !== approval.runId
+  if (state.diagnosticRetirement || state.manualTargetSwitch || !approval || approval.consumedAt || mode !== 'manual_pilot' || runId !== approval.runId
     || candidateFingerprints(candidate).candidate !== approval.candidateFingerprint
     || JSON.stringify(candidateIdentityList(candidate).sort()) !== JSON.stringify([...approval.identities].sort())
     || assertDate(nowIso) < assertDate(approval.approvedAt)) return false;
@@ -87,7 +88,7 @@ export function hasManualTargetSwitch(
 ): boolean {
   const approval = state.manualTargetSwitch;
   const active = approval?.retry ?? approval;
-  return !state.manualFreshCandidateApproval && !!approval && !!active && !active.consumedAt && mode === 'manual_pilot' && runId === active.runId
+  return !state.diagnosticRetirement && !state.manualFreshCandidateApproval && !!approval && !!active && !active.consumedAt && mode === 'manual_pilot' && runId === active.runId
     && JSON.stringify(CandidateSchema.parse(candidateInput)) === JSON.stringify(approval.candidate)
     && assertDate(nowIso) >= assertDate(active.approvedAt) && PersistentWorkerStateSchema.safeParse(state).success;
 }
@@ -122,7 +123,7 @@ export function hasManualFreshCandidate(
 ): boolean {
   const approval = state.manualFreshCandidateApproval;
   const candidate = CandidateSchema.safeParse(candidateInput);
-  return !!approval && !approval.consumedAt && mode === 'manual_pilot' && runId === approval.runId
+  return !state.diagnosticRetirement && !!approval && !approval.consumedAt && mode === 'manual_pilot' && runId === approval.runId
     && candidate.success && JSON.stringify(candidate.data) === JSON.stringify(approval.candidate)
     && Date.parse(nowIso) >= Date.parse(approval.approvedAt) && PersistentWorkerStateSchema.safeParse(state).success;
 }
@@ -222,11 +223,12 @@ export function reserveCandidate(
   const now = assertDate(updatedAt);
   if (!Number.isSafeInteger(leaseMs) || leaseMs <= 0) throw new Error('Candidate lease must be positive and bounded.');
   const candidate = CandidateSchema.parse(candidateInput);
+  if (isRetiredDiagnosticCandidate(state, candidate)) throw new Error('Retired diagnostic candidate cannot be retried.');
   const fingerprint = candidateFingerprints(candidate).candidate;
   const existing = state.decisions[fingerprint];
-  const targetSwitch = state.manualTargetSwitch;
+  const targetSwitch = state.diagnosticRetirement ? undefined : state.manualTargetSwitch;
   const fresh = hasManualFreshCandidate(state, candidate, runId, mode, updatedAt);
-  if (state.manualFreshCandidateApproval && !fresh) throw new Error('Fresh candidate approval is exact, manual-only and one-use.');
+  if (!state.diagnosticRetirement && state.manualFreshCandidateApproval && !fresh) throw new Error('Fresh candidate approval is exact, manual-only and one-use.');
   if (!fresh && targetSwitch && !hasManualTargetSwitch(state, candidate, runId, mode, updatedAt)) throw new Error('Target switch is exact, manual-only and one-use; reuse or another target is forbidden.');
   const manualRetry = hasManualRetryApproval(state, candidate, runId, mode, updatedAt);
   const targetRetry = !!targetSwitch?.retry && hasManualTargetSwitch(state, candidate, runId, mode, updatedAt);
@@ -445,6 +447,7 @@ export function buildIncrementalQueue(input: {
   const all: Candidate[] = [];
   for (const raw of [...state.queuedCandidates, ...input.backlog, ...(input.discoveries ?? [])]) {
     const candidate = CandidateSchema.parse(raw);
+    if (isRetiredDiagnosticCandidate(state, candidate)) continue;
     const fingerprint = candidateFingerprints(candidate).candidate;
     const identities = candidateIdentityList(candidate);
     const previousCandidate = identities.map((identity) => seenByIdentity.get(identity)).find(Boolean);

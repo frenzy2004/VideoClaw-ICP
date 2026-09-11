@@ -41,7 +41,10 @@ The actual lander's 32 blog tests, lint and full build passed in an isolated clo
 The [review Markdown](../autoblogger/proofs/podcast-clips-2026-09-12/turn-podcast-into-social-media-clips.md)
 and graphic were durably saved. Six completed model calls; zero generated lander
 PRs. State retains 43 runs / 67 failure records and the consumed successful pilot.
-History-preserving state handoff and unattended rollout remain unfinished.
+The [history-preserving handoff](../autoblogger/STATE-HANDOFF-2026-09-12.md) is
+implemented and a private state export is verified. Diagnostic grants are retained
+but no longer restrict unrelated ordinary work; another pilot remains forbidden.
+Remote state migration and credentialed unattended rollout remain pending.
 
 ### Historical pilot checkpoints
 

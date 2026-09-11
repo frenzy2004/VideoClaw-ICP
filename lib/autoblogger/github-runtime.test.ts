@@ -9,9 +9,11 @@ import {
   compactPersistentWorkerState,
   PaaObservationsSchema,
   ResearchProvenanceSchema,
+  retireDiagnosticHistory,
 } from './github-runtime';
 import { CandidateSchema, candidateFingerprints } from './domain';
 import { grantManualRetryApproval, grantManualTargetSwitch, reserveCandidate, markCandidateFailure } from './recovery';
+import { successfulDiagnosticFixture } from './test-fixtures/diagnostic-history';
 
 const auth = {
   kind: 'github_app_installation' as const,
@@ -377,6 +379,36 @@ describe('least-privilege GitHub publisher boundary', () => {
 });
 
 describe('compact same-repository state branch', () => {
+  it.each(['remove', 'replace'])('refuses to %s a stored retirement marker even with the current GitHub SHA', async mutation => {
+    const before = await successfulDiagnosticFixture();
+    const retired = retireDiagnosticHistory(before, '2026-09-09T00:00:00.000Z');
+    const fixture = queuedTransport([
+      json({ sha: 'current', encoding: 'base64', content: Buffer.from(JSON.stringify(retired)).toString('base64') }),
+      json({ content: { sha: 'next' } }),
+    ]);
+    const store = createGitHubStateStore({ transport: fixture.transport, owner: 'frenzy2004', repository: 'VideoClaw-ICP', token: 'fixture' });
+    const loaded = await store.load();
+    const changed = mutation === 'remove' ? before : { ...loaded.state, diagnosticRetirement: {
+      ...retired.diagnosticRetirement!, retiredAt: '2026-09-10T00:00:00.000Z',
+    } };
+    expect(PersistentWorkerStateSchema.safeParse(changed).success).toBe(true);
+    await expect(store.save(changed, loaded.version)).rejects.toThrow(/retirement/i);
+    expect(fixture.requests.map(request => request.method)).toEqual(['GET']);
+    await expect(store.save(retired, loaded.version)).resolves.toEqual({ version: 'next' });
+  });
+
+  it('does not let callers mutate the loaded marker to bypass GitHub retirement continuity', async () => {
+    const retired = retireDiagnosticHistory(await successfulDiagnosticFixture(), '2026-09-09T00:00:00.000Z');
+    const fixture = queuedTransport([
+      json({ sha: 'current', encoding: 'base64', content: Buffer.from(JSON.stringify(retired)).toString('base64') }),
+      json({ content: { sha: 'next' } }),
+    ]);
+    const store = createGitHubStateStore({ transport: fixture.transport, owner: 'frenzy2004', repository: 'VideoClaw-ICP', token: 'fixture' });
+    const loaded = await store.load();
+    delete loaded.state.diagnosticRetirement;
+    await expect(store.save(loaded.state, loaded.version)).rejects.toThrow(/retirement/i);
+    expect(fixture.requests.map(request => request.method)).toEqual(['GET']);
+  });
   const collector = { actorId: 'paa-collector', runId: 'paa-run', datasetId: 'paa-data', observedAt: '2026-09-05T00:00:00.000Z' };
   const provenance = {
     serp: { runId: 'organic-run', datasetId: 'organic-data', observedAt: collector.observedAt },
@@ -448,14 +480,19 @@ describe('compact same-repository state branch', () => {
   });
 
   it('fails closed on conflicts and rejects a state token for another repository', async () => {
-    const fixture = queuedTransport([json({ message: 'sha does not match' }, 409)]);
+    const fixture = queuedTransport([
+      json({ sha: 'stale-sha', encoding: 'base64', content: Buffer.from(JSON.stringify(createPersistentWorkerState())).toString('base64') }),
+      json({ message: 'sha does not match' }, 409),
+    ]);
     const store = createGitHubStateStore({
       transport: fixture.transport,
       owner: 'frenzy2004',
       repository: 'VideoClaw-ICP',
       token: 'ghs_same_repo_fixture_123456',
     });
-    await expect(store.save(createPersistentWorkerState(), 'stale-sha')).rejects.toThrow(/conflict/i);
+    const loaded = await store.load();
+    await expect(store.save(loaded.state, loaded.version)).rejects.toThrow(/conflict/i);
+    expect(fixture.requests.map(request => request.method)).toEqual(['GET', 'PUT']);
     expect(() => createGitHubStateStore({
       transport: fixture.transport,
       owner: 'frenzy2004',

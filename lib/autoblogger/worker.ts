@@ -17,6 +17,7 @@ import type { DraftingOutcome } from './drafting';
 import type { KeywordEnrichment, KeywordProvider, KeywordProvenance } from './keyword-providers';
 import {
   compactPersistentWorkerState,
+  isRetiredDiagnosticCandidate,
   createPersistentWorkerState,
   ResearchProvenanceSchema,
   PaaObservationsSchema,
@@ -202,11 +203,11 @@ function reconcileTargetInventory(
   let state = stateInput;
   for (const entry of options.landerInventory ?? []) {
     const candidate = matchingCandidate(entry, candidates);
-    if (candidate) state = markCandidateCompleted(state, candidate, 'startup-reconciliation', 'existing_lander_article', at);
+    if (candidate && !isRetiredDiagnosticCandidate(state, candidate)) state = markCandidateCompleted(state, candidate, 'startup-reconciliation', 'existing_lander_article', at);
   }
   for (const entry of options.openPullRequestInventory ?? []) {
     const candidate = matchingCandidate(entry, candidates);
-    if (!candidate) continue;
+    if (!candidate || isRetiredDiagnosticCandidate(state, candidate)) continue;
     state = markCandidateCompleted(state, candidate, 'startup-reconciliation', 'existing_open_pull_request', at);
     if (entry.number && entry.url) {
       state = {
@@ -222,7 +223,7 @@ function reconcileTargetInventory(
     const slug = ref.match(/^autoblog\/\d{4}-\d{2}-\d{2}-(.+)$/u)?.[1];
     if (!slug) continue;
     const candidate = matchingCandidate({ slug }, candidates);
-    if (candidate && state.decisions[candidateFingerprints(candidate).candidate]?.status !== 'completed') {
+    if (candidate && !isRetiredDiagnosticCandidate(state, candidate) && state.decisions[candidateFingerprints(candidate).candidate]?.status !== 'completed') {
       state = markCandidateFailure(state, candidate, 'startup-reconciliation', 'reconciliation_required', false, at);
     }
   }
@@ -410,9 +411,9 @@ export function createAutobloggerWorker(options: AutobloggerWorkerOptions) {
         report.status = 'already_recorded';
         return report;
       }
-      const approval = state.manualRetryApproval;
-      const targetSwitch = state.manualTargetSwitch;
-      const fresh = state.manualFreshCandidateApproval;
+      const approval = state.diagnosticRetirement ? undefined : state.manualRetryApproval;
+      const targetSwitch = state.diagnosticRetirement ? undefined : state.manualTargetSwitch;
+      const fresh = state.diagnosticRetirement ? undefined : state.manualFreshCandidateApproval;
       if (fresh) {
         if (options.targetCandidateFingerprint !== candidateFingerprints(fresh.candidate).candidate || options.publicationEnabled !== false
           || !hasManualFreshCandidate(state, fresh.candidate, input.runId, mode, startedAt)) {
@@ -590,7 +591,8 @@ export function createAutobloggerWorker(options: AutobloggerWorkerOptions) {
         }
       }
 
-      const discoveries = discoverCandidatesFromResearch(shallowBatch.results, [...options.backlog, ...state.queuedCandidates]);
+      const discoveries = discoverCandidatesFromResearch(shallowBatch.results, [...options.backlog, ...state.queuedCandidates])
+        .filter(candidate => !isRetiredDiagnosticCandidate(state, candidate));
       const retryable = queue.scan.filter((candidate) => state.decisions[candidateFingerprints(candidate).candidate]?.status === 'retryable');
       state = { ...state, queuedCandidates: mergeCandidateQueue(heldCandidates, queue.tail, retryable, discoveries) };
 
