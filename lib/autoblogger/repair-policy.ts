@@ -3,7 +3,7 @@ import remarkGfm from 'remark-gfm';
 import remarkParse from 'remark-parse';
 import { unified } from 'unified';
 import type { DraftSafetyFinding, GeneratedDraftV2 } from './content-bundle';
-import { MAX_SOURCE_DERIVED_WORDS, TARGET_SOURCE_DERIVED_WORDS, type buildSourceRepairPlan, type measureReviewedSourceUse } from './source-plan';
+import { MAX_SOURCE_DERIVED_WORDS, TARGET_SOURCE_DERIVED_WORDS, type buildSourceRepairPlan, measureReviewedSourceUse } from './source-plan';
 import { sourcePageIdentity } from './source-relevance';
 
 type Binding = GeneratedDraftV2['claimBindings'][number];
@@ -307,13 +307,70 @@ export function inspectRepairDelta(original: GeneratedDraftV2, repaired: Generat
   return findings;
 }
 
+type RepairDerivationContext = {
+  facts: Parameters<typeof measureReviewedSourceUse>[0];
+  original: GeneratedDraftV2;
+  repaired: GeneratedDraftV2;
+  initialReview: Parameters<typeof measureReviewedSourceUse>[2];
+  finalReview: Parameters<typeof measureReviewedSourceUse>[2];
+};
+
+/** Reclassification is still charged to the final source total, but identical
+ * retained fields did not add those words during repair. Never grant this
+ * comparison adjustment to edited prose, changed citations, stale ledgers or
+ * changed section/FAQ/graphic framing. This does not alter either verdict.
+ */
+function retainedReclassification(
+  originalUsage: SourceUsage, repairedUsage: SourceUsage, policy: RepairPolicy,
+  proof: RepairDerivationContext,
+): Map<string, number> {
+  const result = new Map<string, number>();
+  if (policy.status !== 'ready' || policy.originalFingerprint !== fingerprint(proof.original)
+    || inspectRepairDelta(proof.original, proof.repaired, policy).length) return result;
+  const before = measureReviewedSourceUse(proof.facts, proof.original, proof.initialReview);
+  const after = measureReviewedSourceUse(proof.facts, proof.repaired, proof.finalReview);
+  if (stable(before) !== stable(originalUsage) || stable(after) !== stable(repairedUsage)
+    || [...before.findings, ...after.findings].some(issue => issue.code !== 'content.source_budget')) return result;
+  const originalLocations = textLocations(proof.original), repairedLocations = textLocations(proof.repaired);
+  const framing = (draft: GeneratedDraftV2, location: string) => {
+    const section = /^\/sections\/(\d+)\//u.exec(location);
+    if (section) return draft.sections[Number(section[1])]?.heading;
+    const faq = /^\/faqAnswers\/(\d+)\//u.exec(location);
+    if (faq) return draft.faqAnswers[Number(faq[1])]?.question;
+    const step = /^\/editorialGraphic\/steps\/(\d+)\//u.exec(location);
+    if (step) return stable([draft.editorialGraphic.title, draft.editorialGraphic.steps[Number(step[1])]?.label]);
+    return location.startsWith('/editorialGraphic/') ? draft.editorialGraphic.title : '';
+  };
+  const initialByHash = new Map(proof.initialReview.map(entry => [entry.bindingHash, entry]));
+  const reclassified = new Set<number>();
+  for (const entry of proof.finalReview) {
+    const previous = initialByHash.get(entry.bindingHash);
+    if (!previous?.supported || !entry.supported
+      || !['original_guidance', 'original_example'].includes(previous.kind)
+      || !['source_claim', 'product_claim'].includes(entry.kind)) continue;
+    const binding = proof.repaired.claimBindings[entry.bindingIndex], location = binding.location;
+    const oldBindings = proof.original.claimBindings.filter(b => b.location === location);
+    const newBindings = proof.repaired.claimBindings.filter(b => b.location === location);
+    if (!originalLocations.has(location) || originalLocations.get(location) !== repairedLocations.get(location)
+      || framing(proof.original, location) !== framing(proof.repaired, location)
+      || stable(oldBindings.map(bindingHash).sort()) !== stable(newBindings.map(bindingHash).sort())) continue;
+    reclassified.add(entry.bindingIndex);
+  }
+  for (const source of after.sources) {
+    const count = source.bindingIndices.filter(index => reclassified.has(index))
+      .reduce((sum, index) => sum + wordCount(proof.repaired.claimBindings[index].span), 0);
+    if (count) result.set(sourcePageIdentity(source.url), count);
+  }
+  return result;
+}
+
 /** Post-review gate: independently supported claims still may not expand source
  * use. Always pass the INITIAL reviewed usage, not the previous repair's totals.
  * A captured policy also prevents a later ledger from increasing that ceiling.
  * Grounded original guidance is not derivation or extra derived-word allowance;
  * independent semantic review must still reject disguised source paraphrases.
  */
-export function inspectRepairSourceGrowth(originalUsage: SourceUsage, repairedUsage: SourceUsage, policy?: RepairPolicy): DraftSafetyFinding[] {
+export function inspectRepairSourceGrowth(originalUsage: SourceUsage, repairedUsage: SourceUsage, policy?: RepairPolicy, proof?: RepairDerivationContext): DraftSafetyFinding[] {
   const findings = [...originalUsage.findings.filter(entry => entry.code !== 'content.source_budget'), ...repairedUsage.findings];
   if (policy && policy.status !== 'ready') findings.push(...policy.findings, finding('repair.policy_invalid', 'Source growth requires a usable original repair policy.'));
   function pages(usage: SourceUsage) {
@@ -336,12 +393,14 @@ export function inspectRepairSourceGrowth(originalUsage: SourceUsage, repairedUs
   }
   const initial = pages(originalUsage);
   const repaired = pages(repairedUsage);
+  const reclassified = policy && proof ? retainedReclassification(originalUsage, repairedUsage, policy, proof) : new Map<string, number>();
   for (const [page, usage] of repaired) {
     const captured = policy?.sources.find(source => source.page === page);
     const ceiling = Math.min(initial.get(page)?.derivedWords ?? 0, TARGET_SOURCE_DERIVED_WORDS,
       policy ? captured?.maxDerivedWords ?? 0 : TARGET_SOURCE_DERIVED_WORDS);
-    if (usage.derivedWords > ceiling || (!initial.has(page) && usage.groundedWords > 0)) {
-      findings.push(finding('repair.source_growth', `${page} has ${usage.derivedWords} reviewed source-derived words; repair ceiling ${ceiling} (initial usage capped at ${TARGET_SOURCE_DERIVED_WORDS}).`));
+    const retained = reclassified.get(page) ?? 0;
+    if (usage.derivedWords > TARGET_SOURCE_DERIVED_WORDS || usage.derivedWords - retained > ceiling || (!initial.has(page) && usage.groundedWords > 0)) {
+      findings.push(finding('repair.source_growth', `${page} has ${usage.derivedWords} reviewed source-derived words; repair ceiling ${ceiling} (initial usage capped at ${TARGET_SOURCE_DERIVED_WORDS}).${retained ? ` ${retained} words were reclassified in unchanged fields, not newly written; the final total still cannot exceed ${TARGET_SOURCE_DERIVED_WORDS}.` : ''}`));
     }
     if (usage.derivedWords > MAX_SOURCE_DERIVED_WORDS && !repairedUsage.findings.some(entry => entry.code === 'content.source_budget')) {
       findings.push(finding('content.source_budget', `${page} exceeds the existing ${MAX_SOURCE_DERIVED_WORDS}-word hard source limit.`));

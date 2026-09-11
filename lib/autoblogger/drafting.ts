@@ -1178,7 +1178,8 @@ export function createStructuredDrafter(options: StructuredDrafterOptions) {
       });
       const verification = DraftRepairVerificationV1Schema.parse(repairedVerification);
       const growthFindings = inspectRepairSourceGrowth(sourceUsage,
-        measureReviewedSourceUse(context.sourceFacts, repaired, verification.supportEvaluations), repairPolicy);
+        measureReviewedSourceUse(context.sourceFacts, repaired, verification.supportEvaluations), repairPolicy,
+        {facts: context.sourceFacts, original: initial, repaired, initialReview: critique.supportEvaluations, finalReview: verification.supportEvaluations});
       if (growthFindings.length) return { status: 'blocked', reason: 'content_safety_failed', findings: [
         ...(finalResult.status === 'blocked' && finalResult.reason === 'content_safety_failed' ? finalResult.findings : []), ...growthFindings,
       ] };

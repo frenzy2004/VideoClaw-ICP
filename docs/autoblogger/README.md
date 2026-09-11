@@ -6,7 +6,7 @@ This worker is a controlled research-and-drafting system. It does not publish ar
 
 The initial 250-topic research library is an input, not a quota or publication gate. Each run scans at most 50 candidates, deeply checks at most 10, and produces at most 3 drafts with no more than 2 from one ICP.
 
-Latest checkpoint: [shot-list transport investigation](SHOT-LIST-TRANSPORT-2026-09-12.md). The fresh worker run passed research, source verification and FAQ preparation, then timed out during drafting. One exact-input streamed diagnostic completed in 131 seconds; it is not an accepted article or a resumed worker run. The worker now consumes terminal SSE responses and emits text-free progress. State retains 35 runs / 57 failures. The uninterrupted article-to-native-QA milestone remains open.
+Latest checkpoint: [shot-list transport and native revalidation](SHOT-LIST-TRANSPORT-2026-09-12.md). Streaming and retained-text accounting fixes pass 2,811 tests, lint/typecheck/build and independent patch review. Exact saved model responses now produce a review-only Markdown/SVG bundle that passes the lander's 32 blog tests, lint and build in isolation. No manual article editing or review-verdict changes occurred. The fresh worker attempt remains failed at its draft timeout, and state retains 35 runs / 57 failures. Saved-response native success does not complete the uninterrupted article-to-native-QA milestone.
 
 Previous checkpoint: [storyboard repair, reference and token-grammar corrections](STORYBOARD-REPAIR-2026-09-11.md) retains its 2,793-test verification and failed saved-draft diagnostic. Its exact malformed-token regression remains enforced.
 

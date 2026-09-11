@@ -3,7 +3,7 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-Latest: [shot-list transport investigation](SHOT-LIST-TRANSPORT-2026-09-12.md), **2,801 tests across 63 files**, zero failures/skips, plus lint/typecheck/build and independent patch review without P1/P2 findings. The fresh worker attempt failed at its draft deadline. A saved-input SSE diagnostic completed in 131 seconds without changing state or original evidence; independent article/native QA remains unproven. State retains 35 runs / 57 failures, no successful pilot. Saved-input diagnostics are not fresh uninterrupted proof.
+Latest: [shot-list transport and native revalidation](SHOT-LIST-TRANSPORT-2026-09-12.md), **2,811 tests across 63 files**, zero failures/skips, plus lint/typecheck/build and independent patch review without P1/P2 findings. Exact saved generation/review responses produce a review-only bundle passing 32 native blog tests, lint, build and integrity checks against an isolated lander checkout. No manual copy/review changes occurred. State retains 35 runs / 57 failures, no successful whole-worker pilot; the fresh draft-timeout failure is preserved. Saved-input native validation is not fresh uninterrupted proof.
 
 Previous: [storyboard repair, reference and token-grammar corrections](STORYBOARD-REPAIR-2026-09-11.md) retains its historical 2,793-test verification, independent patch review and blocked saved-draft result.
 

@@ -32,3 +32,19 @@ Official API references: [streaming events](https://developers.openai.com/api/do
 New tests were observed failing before the implementation. The full suite passes 2,801 tests across 63 files, with lint, typecheck and worker build passing. Existing Vinext dynamic-import warnings remain. Independent bounded review found no P1/P2 findings after 74 focused tests and six loopback probes. The tracked patch passes whitespace and secret-pattern checks; the read-only lander remains clean at `b6b0833c78443b44b12bf6d33f05baa7ac8427d3`.
 
 The full research → draft → critique/repair → native-QA milestone remains open. No lander source change, lander PR, production deployment, indexing, publication or schedule activation occurred.
+
+## Independent review diagnostic and accounting correction
+
+The saved streamed draft subsequently passed independent critique and, after one bounded repair, independent final verification. All three live requests completed through the worker's streaming transport. The diagnostic still returned blocked: `repair.source_growth` counted eight words from an unchanged heading against Epidemic Sound's original one-word allowance. Initial review classified that same heading as original guidance; final review classified it as source-derived. No extra words were written at that location.
+
+The accounting fix distinguishes reclassification of byte-identical fields from source words added by repair. It requires matching complete current review ledgers, the captured original policy, unchanged whole-field text and bindings, unchanged section/FAQ/graphic framing, and a passing repair-delta check. Such retained words are still fully charged to the final source total and reviewed for support/copying; they are excluded only from the comparison of newly written source words. Captured ceilings are not increased, edited prose gets no credit, and the final 120-word repair target / 180-word hard source cap remain in force. Verdicts and article text are never rewritten by this calculation.
+
+Ten test-first regressions cover unchanged headings, changed prose/evidence/location/framing, stale review/policy, full-source caps and attempted spending of retained credit on rewritten words. Full verification: **2,811 tests across 63 files**, zero failures/skips, lint/typecheck/build passing. Independent bounded review found no P1/P2 findings after 158 focused tests and 75 in-memory probes.
+
+## Exact saved-response native revalidation: passed
+
+`artifacts/autoblogger/shot-list-native-revalidation-2026-09-12/` replays the exact four captured generation/review responses through the corrected code. Every request matches its saved input. No new model request, evidence injection, manual article edit, state reset or candidate retry occurred.
+
+The real publisher validated the resulting bundle against an isolated lander checkout at `b6b0833c78443b44b12bf6d33f05baa7ac8427d3`: install, **32 native blog tests**, lint, build and workspace integrity all exited zero. Outputs are private, ignored `review-article.md` (1,519 body words) and `review-graphic.svg` (1200×675). Frontmatter has `status: review`, all four approvals false, no `publishedAt`, `/download` CTA and provider-pending paid metrics.
+
+The native revalidation's integrity receipt confirms unchanged worker/state/original receipts and read-only lander during execution. State remains 35 runs / 57 failures. This is an accepted saved-response review artifact, **not fresh uninterrupted whole-worker proof**. Both earlier failed run receipts remain failed; a new automatic research-through-native-QA run is still required.

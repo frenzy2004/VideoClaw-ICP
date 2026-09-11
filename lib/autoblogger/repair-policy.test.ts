@@ -473,6 +473,64 @@ describe('bounded repair text and provenance', () => {
 });
 
 describe('post-review source non-growth', () => {
+  it('distinguishes an unchanged heading reclassification from newly written source copy without raising the captured ceiling', () => {
+    const original = draft();
+    original.sections[0].heading = 'Copy ready shot list template for a spreadsheet';
+    original.claimBindings = [bind('/sections/0/heading', original.sections[0].heading)];
+    const repaired = structuredClone(original);
+    const initialReview = review(original, ['original_guidance']);
+    const finalReview = review(repaired, ['source_claim']);
+    const initialUsage = measureReviewedSourceUse(facts, original, initialReview);
+    const finalUsage = measureReviewedSourceUse(facts, repaired, finalReview);
+    const policy = buildRepairPolicy(original, [], buildSourceRepairPlan(context, original, initialReview));
+    const before = JSON.stringify([original, repaired, initialReview, finalReview, policy]);
+    expect(policy.sources[0].maxDerivedWords).toBe(0);
+    expect(finalUsage.sources[0].derivedWords).toBe(8);
+    expect(inspectRepairSourceGrowth(initialUsage, finalUsage, policy, {facts, original, repaired, initialReview, finalReview})).toEqual([]);
+    expect(JSON.stringify([original, repaired, initialReview, finalReview, policy])).toBe(before);
+  });
+
+  it.each(['text', 'evidence', 'location', 'context', 'stale review', 'wrong policy'])('does not exempt %s changes as retained reclassification', change => {
+    const original = draft();
+    original.sections[0].markdown = 'Plan the demo before recording.';
+    original.claimBindings = [bind('/sections/0/markdown', original.sections[0].markdown)];
+    const initialReview = review(original, ['original_guidance']);
+    const policy = buildRepairPolicy(original, [target('/sections/0/markdown'), target('/sections/0/heading')], buildSourceRepairPlan(context, original, initialReview));
+    const repaired = structuredClone(original);
+    if(change === 'text') {repaired.sections[0].markdown = 'Plan the video before recording.'; repaired.claimBindings[0].span = repaired.sections[0].markdown;}
+    if(change === 'evidence') repaired.claimBindings[0].sourceFactIds = ['a-two'];
+    if(change === 'location') {repaired.claimBindings[0].location = '/sections/1/markdown'; repaired.sections[1].markdown = repaired.sections[0].markdown;}
+    if(change === 'context') repaired.sections[0].heading = 'Advice from the publisher';
+    const finalReview = review(repaired, ['source_claim']);
+    if(change === 'stale review') initialReview[0].bindingHash = '0'.repeat(64);
+    const selectedPolicy = change === 'wrong policy' ? {...policy, originalFingerprint: '0'.repeat(64)} : policy;
+    const findings = inspectRepairSourceGrowth(measureReviewedSourceUse(facts, original, initialReview), measureReviewedSourceUse(facts, repaired, finalReview), selectedPolicy, {facts, original, repaired, initialReview, finalReview});
+    expect(findings.length).toBeGreaterThan(0);
+  });
+
+  it.each([121, 181])('retained reclassification still cannot exceed the repair target or hard source limit (%i words)', count => {
+    const original = draft(); original.sections[0].markdown = words(count);
+    original.claimBindings = [bind('/sections/0/markdown', original.sections[0].markdown)];
+    const repaired = structuredClone(original), initialReview = review(original, ['original_guidance']), finalReview = review(repaired, ['source_claim']);
+    const policy = buildRepairPolicy(original, [], buildSourceRepairPlan(context, original, initialReview));
+    const findings = inspectRepairSourceGrowth(measureReviewedSourceUse(facts, original, initialReview), measureReviewedSourceUse(facts, repaired, finalReview), policy, {facts, original, repaired, initialReview, finalReview});
+    expect(findings.some(f => f.code === 'repair.source_growth')).toBe(true);
+    if(count === 181) expect(findings.some(f => f.code === 'content.source_budget')).toBe(true);
+  });
+
+  it('cannot spend retained reclassification on newly derived rewritten words elsewhere', () => {
+    const original = draft();
+    original.sections[0].heading = 'Copy ready shot list template for a spreadsheet';
+    original.sections[0].markdown = 'Choose a buyer.';
+    original.claimBindings = [bind('/sections/0/heading', original.sections[0].heading), bind('/sections/0/markdown', original.sections[0].markdown)];
+    const repaired = structuredClone(original);
+    repaired.sections[0].markdown = 'Choose one actor.'; repaired.claimBindings[1].span = repaired.sections[0].markdown;
+    const initialReview = review(original, ['original_guidance', 'original_guidance']), finalReview = review(repaired);
+    const policy = buildRepairPolicy(original, [target('/sections/0/markdown')], buildSourceRepairPlan(context, original, initialReview));
+    const findings = inspectRepairSourceGrowth(measureReviewedSourceUse(facts, original, initialReview), measureReviewedSourceUse(facts, repaired, finalReview), policy, {facts, original, repaired, initialReview, finalReview});
+    expect(findings.some(f => f.code === 'repair.source_growth')).toBe(true);
+  });
+
   it.each([
     [87, 87, false], [87, 88, true], [87, 120, true], [87, 215, true],
     [121, 120, false], [144, 121, true], [181, 120, false], [215, 180, true],
