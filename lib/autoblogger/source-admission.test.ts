@@ -12,23 +12,43 @@ function document(host = 'example.com'): SourceDocument {
     authoritative:true, checkedAt:'2026-09-11T00:00:00.000Z', contentType:'text/html', bodySha256:'a'.repeat(64),
     text, passages:[{text, start:0, end:text.length, bodyStart:heading.length}]};
 }
-type Input = {contextHash:string; documents:Array<{id:string; passages:Array<{text:string; bodyStart:number}>}>};
+type Input = {contextHash:string; documents:Array<{id:string; passages:Array<{passageIndex:number; headingContext:string; bodyText:string}>}>};
 function answer(request: StructuredOutputRequest) {
   const input = request.input as Input;
   return {schemaVersion:1 as const, contextHash:input.contextHash, decisions:input.documents.map(doc => ({
     documentId:doc.id, relevant:true, reason:'The body describes automated editing tasks and an output-comparison decision.',
-    anchors:[{passageIndex:0, excerpt:doc.passages[0].text.slice(doc.passages[0].bodyStart)}],
+    anchors:[{passageIndex:0, excerpt:doc.passages[0].bodyText}],
   }))};
 }
 const options = {query:'best automated video editor', articleTitle:'Choose an Automated Video Editor for Your GTM Team'};
 
 describe('contextual source admission', () => {
+  it('presents selectable body text separately from heading context without asking the reviewer to count offsets', async () => {
+    const doc = document();
+    const heading = '🎬 Pre-production steps: ';
+    const body = 'Record a clean example before the shoot. Keep the original words, punctuation, and spacing.';
+    doc.text = heading + body;
+    doc.passages = [{text:doc.text, start:0, end:doc.text.length, bodyStart:heading.length}];
+    const original = structuredClone(doc);
+    const receipt = await createSourceRelevanceReviewer({generate:async request => {
+      const input = request.input as {contextHash:string; documents:Array<{id:string; passages:Array<{passageIndex:number; headingContext:string; bodyText:string}>}>};
+      const passage = input.documents[0].passages[0];
+      expect(passage).toEqual({passageIndex:0, headingContext:'🎬 Pre-production steps: ', bodyText:'Record a clean example before the shoot. Keep the original words, punctuation, and spacing.'});
+      return {schemaVersion:1, contextHash:input.contextHash, decisions:[{documentId:input.documents[0].id,
+        relevant:true, reason:'The body provides preparation instructions.', anchors:[{passageIndex:passage.passageIndex, excerpt:passage.bodyText}]}]};
+    }})([doc], options);
+    expect(receipt.decisions[0].anchors).toEqual([{passageIndex:0, excerpt:body}]);
+    expect(validateSourceRelevanceReceipt([doc], options, receipt)).toEqual(receipt);
+    expect(doc).toEqual(original);
+  });
+
   it('requests one context-bound review of exact retrieved passages, not keyword stuffing', async () => {
     const docs = [document()]; const before = structuredClone(docs);
     const generate = vi.fn(async (request: StructuredOutputRequest) => {
       expect(request.name).toBe('videoclaw_source_relevance_v1');
       expect(request.system).toMatch(/untrusted/i);
-      expect((request.input as Input).documents[0].passages[0].text).toBe(docs[0].text);
+      const passage = (request.input as Input).documents[0].passages[0];
+      expect(passage.headingContext + passage.bodyText).toBe(docs[0].text);
       expect((request.input as Input).documents[0].passages[0]).toHaveProperty('passageIndex', 0);
       return answer(request);
     });
@@ -51,7 +71,7 @@ describe('contextual source admission', () => {
     expect(generate).toHaveBeenCalledTimes(1);
   });
 
-  it.each(['stale', 'unknown', 'missing', 'duplicate', 'heading', 'invented', 'wrong-passage', 'no-anchor', 'negative-anchor', 'extra-field', 'blank-reason', 'secret'])
+  it.each(['stale', 'unknown', 'missing', 'duplicate', 'heading', 'heading-and-body', 'invented', 'wrong-passage', 'no-anchor', 'negative-anchor', 'extra-field', 'blank-reason', 'secret'])
   ('rejects %s output without retry or acceptance', async mode => {
     const generate = vi.fn(async (request: StructuredOutputRequest) => {
       const response = answer(request); const decision = response.decisions[0];
@@ -60,6 +80,7 @@ describe('contextual source admission', () => {
       if (mode === 'missing') response.decisions = [];
       if (mode === 'duplicate') response.decisions.push({...decision});
       if (mode === 'heading') decision.anchors[0].excerpt = 'Choosing video editing software';
+      if (mode === 'heading-and-body') decision.anchors[0].excerpt = 'Choosing video editing software ' + decision.anchors[0].excerpt;
       if (mode === 'invented') decision.anchors[0].excerpt = 'This fabricated claim was not retrieved from the actual source body.';
       if (mode === 'wrong-passage') decision.anchors[0].passageIndex = 2;
       if (mode === 'no-anchor') decision.anchors = [];
