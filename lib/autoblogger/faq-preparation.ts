@@ -112,7 +112,10 @@ function modelSchema(pool: readonly string[], factIds: string[]): JsonSchema {
   const selection = {
     type: 'object', additionalProperties: false,
     properties: {
-      question: { type: 'string', enum: [...pool] },
+      // Observed text belongs in model input, not schema literals: the provider
+      // can reject quoted enum values. Exact pool membership is still mandatory
+      // in validateFaqEvidencePlan before any prepared context is returned.
+      question: { type: 'string', minLength: 1, maxLength: Math.max(...pool.map(question => question.length)) },
       intent: { type: 'string', pattern: '\\S', minLength: 1, maxLength: 80 },
       anchors: { type: 'array', minItems: 1, maxItems: 3, items: {
         type: 'object', additionalProperties: false,

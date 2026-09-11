@@ -6,7 +6,9 @@ This worker is a controlled research-and-drafting system. It does not publish ar
 
 The initial 250-topic research library is an input, not a quota or publication gate. Each run scans at most 50 candidates, deeply checks at most 10, and produces at most 3 drafts with no more than 2 from one ICP.
 
-Latest checkpoint: [contextual source admission](CONTEXTUAL-SOURCE-ADMISSION-2026-09-11.md), verified with 2,681 tests plus lint/typecheck/build. The live component passes and the quote-index defect is corrected with auditable same-page lookup. A fresh comparison run on committed code passed source verification, then correctly rejected an insufficient relevant FAQ pool before drafting. State is 30 runs / 51 failures. One uninterrupted fresh article-to-native-QA proof remains outstanding; neither tests nor source admission constitute article approval.
+Latest checkpoint: [exact first-party source scope and quoted FAQs](EXACT-SOURCE-AND-QUOTED-FAQ-2026-09-11.md), verified with 2,703 tests plus lint/typecheck/build. A twelve-topic screen and live component checks isolated two corrections: exact-page primary documentation and quotation-safe FAQ transport. Four source bodies and three observed, anchored FAQs now pass component qualification. State remains 30 runs / 51 failures. A fresh uninterrupted article-to-native-QA proof is still required; no article or production approval is implied.
+
+Previous checkpoint: [contextual source admission](CONTEXTUAL-SOURCE-ADMISSION-2026-09-11.md), verified with 2,681 tests plus lint/typecheck/build. Its fresh comparison run passed source verification, then rejected insufficient relevant FAQs before drafting. That failed history remains unchanged.
 
 Previous checkpoint: [source retrieval corrections and live reader proof](SOURCE-RETRIEVAL-2026-09-11.md), verified with 2,629 tests plus lint/typecheck/build. Its closed word-form matching and scoped authority rule remain active. The newer contextual reviewer preserves all source-count, authority, copying, review and publication controls.
 

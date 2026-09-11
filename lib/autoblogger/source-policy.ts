@@ -17,6 +17,9 @@ export const PRODUCTION_SOURCE_AUTHORITY_POLICIES: readonly AuthorityPolicy[] = 
   // an endorsement/correctness guarantee. Authority only; no discovery expansion.
   { hostname: 'shotstack.io', pathPrefix: '/learn/' },
   { hostname: 'www.shotstack.io', pathPrefix: '/learn/' },
+  // Primary documentation of Sendible's own queue controls only. No authority
+  // for comparative claims, advertised ROI, other paths or VideoClaw features.
+  { hostname: 'www.sendible.com', exactPath: '/features/smart-queues' },
   { hostname: 'www.nist.gov' },
   { hostname: 'www.ftc.gov' },
   { hostname: 'www.w3.org' },

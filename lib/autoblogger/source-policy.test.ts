@@ -2,6 +2,73 @@ import { describe, expect, it } from 'vitest';
 import { createSafeSourceChecker } from './sources';
 import { PRODUCTION_SOURCE_AUTHORITY_POLICIES, sourceDiscoveryQueries, isDiscoverySourceUrl } from './source-policy';
 
+describe('exact-page first-party documentation authority', () => {
+  const page = 'https://www.sendible.com/features/smart-queues';
+  const body = '<article><p>A content queue schedules evergreen posts and lets the operator pause the queue or change its schedule.</p></article>';
+  const checker = (html = body, redirect?: string) => createSafeSourceChecker({
+    authorityPolicies: PRODUCTION_SOURCE_AUTHORITY_POLICIES,
+    resolveHostname: async () => ['93.184.216.34'],
+    transport: async request => ({
+      status: redirect && request.url === page ? 302 : 200,
+      headers: {'content-type':'text/html', ...(redirect && request.url === page ? {location:redirect} : {})},
+      url:request.url, redirected:false, peerAddress:request.allowedPeerAddresses[0],
+      body:(async function* () { yield new TextEncoder().encode(request.url === page ? html : body); })(),
+    }),
+  });
+
+  it.each([
+    [page, true],
+    [`${page}?ref=guide`, true],
+    ['https://www.sendible.com:8443/features/smart-queues', false],
+    [`${page}/unreviewed`, false],
+    [`${page}-comparison`, false],
+    ['https://www.sendible.com/features/', false],
+    ['https://www.sendible.com/compare/hootsuite', false],
+    ['https://www.sendible.com/pricing', false],
+    ['https://www.sendible.com.evil.example/features/smart-queues', false],
+  ])('uses the final exact document URL, not a host or path-prefix promotion: %s', async (url, authoritative) => {
+    await expect(checker().read(url, {query:'content queue'})).resolves.toMatchObject({reachable:true, finalUrl:url, authoritative});
+  });
+
+  it.each(['https://www.sendible.com/compare/hootsuite', 'https://www.sendible.com:8443/features/smart-queues'])('does not carry exact-page authority across an out-of-scope redirect: %s', async finalUrl => {
+    await expect(checker(body, finalUrl).read(page, {query:'content queue'}))
+      .resolves.toMatchObject({reachable:true, authoritative:false, finalUrl});
+  });
+
+  it.each([
+    ['relevant body', body, true],
+    ['heading only', '<article><h1>Content queue</h1><p>The garden has flowers and a wooden bench beside the fountain.</p></article>', false],
+    ['empty page', '<html><nav>Home</nav></html>', false],
+  ])('still requires usable topical body evidence: %s', async (_label, html, usable) => {
+    const selection = checker(html).selectWithContent([page, 'https://publisher.example/queue'], {query:'content queue'});
+    if (usable) await expect(selection).resolves.toMatchObject({sources:[
+      {finalUrl:page, authoritative:true}, {finalUrl:'https://publisher.example/queue', authoritative:false},
+    ]});
+    else await expect(selection).rejects.toThrow(/two.*relevant.*body.*authoritative/i);
+  });
+
+  it('does not add a new publisher discovery query or auto-approve discovery URLs', () => {
+    expect(isDiscoverySourceUrl(page)).toBe(false);
+    expect(sourceDiscoveryQueries('content queue', [], 'Content Queue Guide')).toEqual([
+      'content queue site:ycombinator.com', 'content queue site:techstars.com',
+      'content queue site:techsmith.com/blog/', 'content queue site:descript.com/blog/article/',
+    ]);
+  });
+
+  it.each([
+    {hostname:'www.sendible.com', exactPath:'features/smart-queues'},
+    {hostname:'www.sendible.com', exactPath:'/features/../smart-queues'},
+    {hostname:'www.sendible.com', exactPath:'/features/smart-queues?other=1'},
+    {hostname:'www.sendible.com', exactPath:'/features/smart-queues#other'},
+    {hostname:'www.sendible.com', exactPath:'/features/smart-queues', pathPrefix:'/features/'},
+  ])('rejects malformed or ambiguous exact-page configuration: %j', policy => {
+    expect(() => createSafeSourceChecker({
+      authorityPolicies:[policy], resolveHostname:async () => ['93.184.216.34'],
+      transport:async () => { throw new Error('Invalid configuration must not retrieve.'); },
+    })).toThrow(/Authority policy/);
+  });
+});
+
 describe('production source discovery policy', () => {
   it.each([
     ['SaaS product demo checklists', 'saas product demo'],

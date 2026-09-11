@@ -86,6 +86,45 @@ async function preparedFixture() {
 }
 
 describe('prepareFaqEvidence', () => {
+  it('preserves quoted observed questions without embedding them in provider schema literals', async () => {
+    const context = contextFixture();
+    const pool = [...questions];
+    pool[0] = 'What does "explainer video" mean?';
+    context.evidence.signals.peopleAlsoAsk = pool;
+    const provider = fixtureClient((response, request) => {
+      // Reproduce the live Responses API rejection at the external boundary;
+      // all real preparation and exact-membership checks run unchanged.
+      function rejectQuotedEnum(value: unknown): void {
+        if (!value || typeof value !== 'object') return;
+        if ('enum' in value && Array.isArray(value.enum)
+          && value.enum.some(item => typeof item === 'string' && item.includes('"'))) {
+          throw new Error('Invalid schema: quotation marks are not allowed in enum literals.');
+        }
+        for (const child of Object.values(value)) rejectQuotedEnum(child);
+      }
+      rejectQuotedEnum(request.schema);
+      response.selections[0].question = pool[0];
+      return response;
+    });
+    const result = await prepareFaqEvidence(context, provider.client, pool);
+    expect(result.evidence.faqQuestions[0]).toBe('What does "explainer video" mean?');
+    expect(validateFaqEvidencePlan(result, result.faqEvidencePlan)[0]).toEqual({
+      question:'What does "explainer video" mean?', sourceFactIds:['definition'],
+    });
+  });
+
+  it('rejects removing quotation marks from an observed question even if the model gives valid anchors', async () => {
+    const context = contextFixture();
+    const pool = [...questions];
+    pool[0] = 'What does "explainer video" mean?';
+    context.evidence.signals.peopleAlsoAsk = pool;
+    const provider = fixtureClient(response => {
+      response.selections[0].question = 'What does explainer video mean?';
+      return response;
+    });
+    await expect(prepareFaqEvidence(context, provider.client, pool)).rejects.toThrow(/outside.*observed.*pool/);
+  });
+
   it('accepts alternate definition wording with an exact body anchor and returns the legacy plan shape', async () => {
     expect(faqBodyMatches(questions[0], heading + definition, heading.length)).toBe(false);
     const prepared = await preparedFixture();
@@ -123,7 +162,10 @@ describe('prepareFaqEvidence', () => {
     const request = fixture.requests[0];
     expect(request.name).toBe('videoclaw_faq_evidence_v1');
     const schemaText = JSON.stringify(request.schema);
-    expect(schemaText).toContain(JSON.stringify({ type: 'string', enum: questions }));
+    expect(request.schema).toMatchObject({properties:{selections:{anyOf:[{
+      items:{properties:{question:{type:'string', minLength:1, maxLength:43}}},
+    }, expect.anything()]}}});
+    expect(request.input).toMatchObject({candidateQuestions:questions});
     expect(schemaText).toContain(JSON.stringify({ type: 'string', enum: ['definition', 'procedure', 'examples'] }));
     expect(request.schema).toMatchObject({ type: 'object', additionalProperties: false,
       required: ['status', 'contextHash', 'reason', 'selections'] });

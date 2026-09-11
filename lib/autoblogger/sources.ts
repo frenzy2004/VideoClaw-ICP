@@ -60,6 +60,7 @@ type ContentSourceChecker = SafeSourceChecker & Required<Pick<SafeSourceChecker,
 export type AuthorityPolicy = {
   hostname: string;
   pathPrefix?: string;
+  exactPath?: string;
 };
 
 export type SafeSourceCheckerOptions = {
@@ -268,17 +269,21 @@ function createSourceChecker(options: SafeSourceCheckerOptions, allowHttpForTest
   const authorityPolicies = (options.authorityPolicies ?? []).map((policy) => {
     const hostname = normalizedHostname(policy.hostname);
     if (!hostname || isIP(hostname) || hostname.includes('/')) throw new Error('Authority policy hostname is invalid.');
-    const pathPrefix = policy.pathPrefix ?? '/';
+    if (policy.exactPath !== undefined && policy.pathPrefix !== undefined) {
+      throw new Error('Authority policy cannot combine an exact path and a path prefix.');
+    }
+    const pathPrefix = policy.exactPath ?? policy.pathPrefix ?? '/';
     if (!pathPrefix.startsWith('/') || pathPrefix.includes('..') || pathPrefix.includes('?') || pathPrefix.includes('#')) {
       throw new Error('Authority policy path prefix is invalid.');
     }
-    return { hostname, pathPrefix };
+    return { hostname, pathPrefix, exactPath: policy.exactPath };
   });
 
   function isAuthoritative(url: URL): boolean {
     const hostname = normalizedHostname(url.hostname);
     return authorityPolicies.some((policy) => (
-      hostname === policy.hostname && url.pathname.startsWith(policy.pathPrefix)
+      hostname === policy.hostname && (policy.exactPath !== undefined
+        ? url.port === '' && url.pathname === policy.exactPath : url.pathname.startsWith(policy.pathPrefix))
     ));
   }
 
