@@ -23,3 +23,16 @@ The new regression suite produced 13 expected failures before the routing/catalo
 The real source reader fetched the two linked pages with HTTP 200, 11 retained body passages each and scoped authority recognition. This is a live body-reader component check, **not** completed article or uninterrupted worker proof. Private receipts: `artifacts/autoblogger/topic-source-body-check-2026-09-11` and `artifacts/autoblogger/topic-source-suite-2026-09-11.json`.
 
 Persistent failed-run history is unchanged at this checkpoint: 31 runs / 53 failure records, no active pilot. Systematic debugging identified the retrieval-policy mismatch; test-driven development reproduced it before changes, and verification distinguishes component results from the still-open end-to-end milestone.
+
+## Subsequent fresh worker attempts — not successful
+
+The patch was independently reviewed with no P1/P2 findings and committed as `eac3414`. Two unchanged, previously unattempted backlog records were then run through the real local artifact-only worker. Both fresh lander inventories verified review SHA `b6b0833c78443b44b12bf6d33f05baa7ac8427d3`; publication remained disabled. Neither attempt used saved source facts or manually rewritten article content.
+
+1. `repurposing-roles-live-proof-2026-09-11`, candidate `vc-c4-042`: started September 11 at 14:02:20 UTC. The Google collector run `NlzGAAMaiR9VpSBPg` ended `TIMED-OUT` at its configured 120-second limit, with no extracted results. Its log records a failed Google `goto` redirect resolution. Run metadata reports dataset `lqaoWd0YWLJ4tdxc8`, status message “Nothing extracted yet”, and a reported actor charge of $0.001 (not a total-account cost claim). This is a collector failure before source inspection, not a test of the new source-selection behavior.
+2. `repurposing-intake-live-proof-2026-09-11`, candidate `vc-c4-043`: started at 14:07:13 UTC and failed at 14:07:56 on an Apify HTTP request exceeding the existing 10,000 ms request limit. The error alone does not prove a platform-wide outage or identify its precise remote cause.
+
+Read-only reconciliation found that the second attempt's autocomplete actor `EpmseHK9WewKoX7AU` actually reached `SUCCEEDED` remotely at 14:07:54, dataset `8D11wLP9BH0wFnUS1`. No Google SERP actor start appeared in that attempt's time window. The worker still failed and did not consume those observations. Remote actor success is not worker success: transport/polling reliability remains an integration problem to investigate, not evidence that more credentials or relaxed content gates are needed.
+
+Both attempts failed shallow research before any OpenAI request, article draft or native lander QA. No uninterrupted article-to-native-QA success is claimed. No additional paid attempts were launched after the second failure; timeouts, retry limits, failed records and publication gates were not weakened to obtain a passing result.
+
+Latest state is **33 runs / 55 failure records**, no active pilot; SHA-256 `9bba46f8ae5a593d8bb294a0a1a8817effac2cbcc42c861102bb4360b8713dca`. Private failure and execution-audit receipts are under the two run directories in `artifacts/autoblogger/`. The next live proof needs successful fresh collection; no new credentials were requested, and production, the original lander checkout, PR #55 and scheduling remain untouched.

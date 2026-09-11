@@ -3,7 +3,7 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-Latest: [topic-aware source discovery](TOPIC-SOURCE-DISCOVERY-2026-09-11.md), **2,732 tests across 61 files**, zero failed/pending, plus lint/typecheck/build. Failing-then-passing tests cover topic routing, editorial path scope, body support and non-default-port rejection. Independent review found no P1/P2 patch issues. Two real body reads passed; those component checks are not an article-to-native-QA result. State is unchanged at 31 runs / 53 failure records. The fresh uninterrupted milestone remains open.
+Latest: [topic-aware source discovery](TOPIC-SOURCE-DISCOVERY-2026-09-11.md), **2,732 tests across 61 files**, zero failed/pending, plus lint/typecheck/build. Failing-then-passing tests cover topic routing, editorial path scope, body support and non-default-port rejection. Independent review found no P1/P2 patch issues. Two real body reads passed. Two subsequent fresh worker attempts failed in Apify collection before drafting (actor timeout, then HTTP timeout); these are retained failures, not end-to-end proof. Latest state is 33 runs / 55 failure records, no active pilot. Further paid attempts are paused. The fresh uninterrupted milestone remains open.
 
 Previous: [exact first-party source scope and quoted FAQs](EXACT-SOURCE-AND-QUOTED-FAQ-2026-09-11.md), 2,703 tests at that checkpoint. Its fresh whole-worker run on `14032e5` failed source selection against changed SERPs before drafting. The failure and exhausted candidate remain retained.
 

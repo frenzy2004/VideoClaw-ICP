@@ -6,7 +6,7 @@ This worker is a controlled research-and-drafting system. It does not publish ar
 
 The initial 250-topic research library is an input, not a quota or publication gate. Each run scans at most 50 candidates, deeply checks at most 10, and produces at most 3 drafts with no more than 2 from one ICP.
 
-Latest checkpoint: [topic-aware source discovery](TOPIC-SOURCE-DISCOVERY-2026-09-11.md), verified with 2,732 tests plus lint/typecheck/build and independent patch review. Supporting publishers now follow the keyword's subject within unchanged search and body-fetch budgets. Live body checks recognized two scoped practitioner guides. State remains 31 runs / 53 failures; the fresh uninterrupted article-to-native-QA milestone is still open. No accepted new article or production approval is claimed.
+Latest checkpoint: [topic-aware source discovery](TOPIC-SOURCE-DISCOVERY-2026-09-11.md), verified with 2,732 tests plus lint/typecheck/build and independent patch review. Supporting publishers now follow the keyword's subject within unchanged search and body-fetch budgets. Live body checks recognized two scoped practitioner guides. Two subsequent fresh whole-worker attempts failed during Apify collection (an actor timeout, then an HTTP timeout), before drafting or native QA. Latest state is 33 runs / 55 failures. Further paid attempts are paused; the uninterrupted article-to-native-QA milestone remains open. No accepted new article or production approval is claimed.
 
 Previous checkpoint: [exact first-party source scope and quoted FAQs](EXACT-SOURCE-AND-QUOTED-FAQ-2026-09-11.md). Its quoted-question component passed; the fresh queue article attempt failed because changed SERPs exposed missing source coverage. That failed history is retained, not reset.
 
