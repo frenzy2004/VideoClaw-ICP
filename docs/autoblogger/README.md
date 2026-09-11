@@ -6,7 +6,7 @@ This worker is a controlled research-and-drafting system. It does not publish ar
 
 The initial 250-topic research library is an input, not a quota or publication gate. Each run scans at most 50 candidates, deeply checks at most 10, and produces at most 3 drafts with no more than 2 from one ICP.
 
-Latest checkpoint: [exact first-party source scope and quoted FAQs](EXACT-SOURCE-AND-QUOTED-FAQ-2026-09-11.md), verified with 2,703 tests plus lint/typecheck/build. A twelve-topic screen and live component checks isolated two corrections: exact-page primary documentation and quotation-safe FAQ transport. Four source bodies and three observed, anchored FAQs now pass component qualification. State remains 30 runs / 51 failures. A fresh uninterrupted article-to-native-QA proof is still required; no article or production approval is implied.
+Latest checkpoint: [exact first-party source scope and quoted FAQs](EXACT-SOURCE-AND-QUOTED-FAQ-2026-09-11.md), verified with 2,703 tests plus lint/typecheck/build. Four source bodies and three observed, anchored FAQs pass component qualification. A fresh whole-worker run then collected changed search results and stopped because no admitted page was in the approved authority catalog. State is 31 runs / 53 failures. The next issue is source-discovery/catalog coverage, not a credential request or permission to reset the candidate. No accepted article, fresh end-to-end success or production approval is claimed.
 
 Previous checkpoint: [contextual source admission](CONTEXTUAL-SOURCE-ADMISSION-2026-09-11.md), verified with 2,681 tests plus lint/typecheck/build. Its fresh comparison run passed source verification, then rejected insufficient relevant FAQs before drafting. That failed history remains unchanged.
 

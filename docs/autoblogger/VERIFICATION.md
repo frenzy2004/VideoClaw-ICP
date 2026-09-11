@@ -3,7 +3,7 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-Latest: [exact first-party source scope and quoted FAQs](EXACT-SOURCE-AND-QUOTED-FAQ-2026-09-11.md), **2,703 tests across 60 files**, zero failed/pending, plus lint/typecheck/build. Exact-origin/page rules and quotation-preserving FAQ transport are covered by failing-then-passing regressions and independent review. Live source qualification and the unchanged-input FAQ component pass. State is still 30 runs / 51 failure records; no new article or native QA result is claimed. The fresh uninterrupted worker milestone remains open.
+Latest: [exact first-party source scope and quoted FAQs](EXACT-SOURCE-AND-QUOTED-FAQ-2026-09-11.md), **2,703 tests across 60 files**, zero failed/pending, plus lint/typecheck/build. Exact-origin/page rules and quotation-preserving FAQ transport have failing-then-passing regressions and independent review. The live components pass, but the fresh whole-worker run on `14032e5` failed source selection against changed SERPs before drafting. State is 31 runs / 53 failure records. Source-discovery/catalog coverage remains unresolved; no new article or native QA result is claimed. The fresh uninterrupted milestone remains open.
 
 Previous: [contextual source admission](CONTEXTUAL-SOURCE-ADMISSION-2026-09-11.md), 2,681 tests at that checkpoint. The failed comparison attempt and its insufficient FAQ evidence remain historical facts. All review, copying, retry and publication gates are preserved.
 

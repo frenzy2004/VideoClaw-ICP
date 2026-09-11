@@ -34,6 +34,18 @@ Full suite: **2,703 tests across 60 files**, zero failures/pending, plus lint, t
 
 Independent FAQ-patch review found no actionable P1/P2 issue; all 82 focused FAQ tests passed. This review does not approve any article or establish whole-worker success.
 
+## Fresh whole-worker run on committed code
+
+`queue-management-live-proof-2026-09-11` ran at `14032e5`, starting at `2026-09-11T13:42Z`. It used the unchanged backlog candidate, fresh interactive read-only lander inventory at `b6b0833c78443b44b12bf6d33f05baa7ac8427d3`, fresh US/en searches and newly retrieved source bodies. Model configuration was explicitly `gpt-5.5`, medium reasoning, 48,000 maximum output tokens and a ten-minute request timeout. No saved source facts or prior approvals were injected.
+
+It collected nine organic results and seventeen questions, attempted one deep inspection and received one successful model response. The source reviewer admitted fourteen of eighteen retrieved pages, but none was on the approved authority list. The run correctly failed before FAQ preparation, generation, native QA or publication. Its successful model call used 26,726 input and 5,011 output tokens (31,737 total).
+
+The exact new keyword SERP was read back from Apify after the failure. Sendible was not present in its nine organic results: the result set had changed since the component screen. Relevant newly retrieved bodies included Buffer, Optimizely and other publishers, while the already-approved TechSmith and Descript pages were rejected as off-topic. This is a coverage limitation in the current source-discovery/authority catalog, not evidence that the quoted-question fix failed or that Google has no useful sources. Further qualification must address that coverage without treating arbitrary publisher pages as independent proof or resetting this candidate.
+
+Fresh SERP run/dataset: `HPlbxiQ4eg40GCYy9` / `akBPICv5i9QnLKV3a`. Autocomplete: `rrDnIyidp9gZJbzIh` / `9JmhOkyMMFc0AvasF`. PAA: `dmTqRLiUZgbogusfR` / `k1SBKF5P9zgTN4AAn` and `LfeqaxsXLfrYB1WJz` / `CKO9giumqtDTfyjC2`. All failed-run receipts remain private under `artifacts/autoblogger/queue-management-live-proof-2026-09-11`.
+
+Latest state: **31 runs / 53 failure records**, no active pilot; SHA-256 `ccee047a26475bb7123b32b76b86a09d36804d0787334b8d0ab4e1a96ca4a8cf`. The new candidate is terminal at attempt one. No accepted article or uninterrupted end-to-end success is claimed. Worker and lander production branches, PR #55 and scheduling remain untouched.
+
 ## Workflow applied
 
 Systematic debugging separated source classification, provider timeout and schema failures. Brainstorming bounded the changes to existing interfaces; test-driven development reproduced the defects first. Independent review caught the origin-boundary issue. Official OpenAI documentation informed the structured-response boundary. Verification-before-completion keeps these component results separate from the outstanding whole-worker milestone.
