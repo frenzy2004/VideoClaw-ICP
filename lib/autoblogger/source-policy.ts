@@ -4,12 +4,32 @@ import { sourceTopicQuery } from './source-relevance';
 // First-party practitioner guidance is authoritative about its own workflow,
 // not independent market evidence, a competitor comparison, or a guarantee.
 // Restrict vendor sources to their editorial guides, not arbitrary host paths.
-const DISCOVERY_SCOPES: AuthorityPolicy[] = [
-  { hostname: 'ycombinator.com' },
-  { hostname: 'techstars.com' },
+const VIDEO_GUIDE_SCOPES: readonly AuthorityPolicy[] = [
   { hostname: 'techsmith.com', pathPrefix: '/blog/' },
   { hostname: 'descript.com', pathPrefix: '/blog/article/' },
 ];
+const FOUNDER_SCOPES: readonly AuthorityPolicy[] = [
+  { hostname: 'ycombinator.com' },
+  { hostname: 'techstars.com' },
+  ...VIDEO_GUIDE_SCOPES,
+];
+const CONTENT_GUIDE_SCOPES: readonly AuthorityPolicy[] = [
+  { hostname: 'buffer.com', pathPrefix: '/resources/' },
+  { hostname: 'optimizely.com', pathPrefix: '/optimization-glossary/' },
+];
+const CONTENT_SCOPES = [...CONTENT_GUIDE_SCOPES, ...VIDEO_GUIDE_SCOPES];
+const DISCOVERY_SCOPES = [...FOUNDER_SCOPES, ...CONTENT_GUIDE_SCOPES];
+
+// Retrieval routing only, never proof of relevance or a replacement keyword.
+// Use complete words from the keyword, not arbitrary text in a title or FAQ.
+function discoveryScopes(keyword: string): readonly AuthorityPolicy[] {
+  const words = new Set(keyword.normalize('NFKC').toLowerCase().match(/[\p{L}\p{N}]+/gu) ?? []);
+  const repurposing = ['repurpose', 'repurposes', 'repurposed', 'repurposing'].some(word => words.has(word))
+    && ['content', 'video', 'videos', 'webinar', 'webinars', 'podcast', 'podcasts', 'social'].some(word => words.has(word));
+  const contentOperations = words.has('content')
+    && ['operations', 'workflow', 'workflows', 'approval', 'queue', 'queues', 'calendar', 'distribution'].some(word => words.has(word));
+  return repurposing || contentOperations ? CONTENT_SCOPES : FOUNDER_SCOPES;
+}
 
 export const PRODUCTION_SOURCE_AUTHORITY_POLICIES: readonly AuthorityPolicy[] = [
   ...DISCOVERY_SCOPES.flatMap(policy => [policy, { ...policy, hostname: `www.${policy.hostname}` }]),
@@ -30,14 +50,15 @@ export const PRODUCTION_SOURCE_AUTHORITY_POLICIES: readonly AuthorityPolicy[] = 
 ];
 
 export function sourceDiscoveryQueries(keyword: string, observedQuestions: readonly string[], articleTitle?: string): string[] {
-  const sites = DISCOVERY_SCOPES.map(policy => `site:${policy.hostname}${policy.pathPrefix ?? ''}`).join(' OR ');
+  const scopes = discoveryScopes(keyword);
+  const sites = scopes.map(policy => `site:${policy.hostname}${policy.pathPrefix ?? ''}`).join(' OR ');
   if (articleTitle?.trim()) {
     // Full editorial titles plus long OR lists caused query relaxation and
     // unrelated results in the live collector. Use one short topic query per
     // publisher instead; title coverage is enforced in selection and review.
     const topic = sourceTopicQuery(keyword);
     if (!topic) throw new Error('Supporting source discovery requires a substantive topic.');
-    const queries = DISCOVERY_SCOPES.map(policy => `${topic} site:${policy.hostname}${policy.pathPrefix ?? ''}`);
+    const queries = scopes.map(policy => `${topic} site:${policy.hostname}${policy.pathPrefix ?? ''}`);
     const seen = new Set(queries.map(query => query.toLowerCase()));
     // Search the actual selected questions, not inferred synonyms. Avoid the
     // long OR restriction here too; question results still require the safe
@@ -48,7 +69,7 @@ export function sourceDiscoveryQueries(keyword: string, observedQuestions: reado
       if (!query || seen.has(query.toLowerCase())) continue;
       seen.add(query.toLowerCase());
       queries.push(query);
-      if (queries.length === DISCOVERY_SCOPES.length + 3) break;
+      if (queries.length === scopes.length + 3) break;
     }
     return queries;
   }

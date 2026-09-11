@@ -6,7 +6,9 @@ This worker is a controlled research-and-drafting system. It does not publish ar
 
 The initial 250-topic research library is an input, not a quota or publication gate. Each run scans at most 50 candidates, deeply checks at most 10, and produces at most 3 drafts with no more than 2 from one ICP.
 
-Latest checkpoint: [exact first-party source scope and quoted FAQs](EXACT-SOURCE-AND-QUOTED-FAQ-2026-09-11.md), verified with 2,703 tests plus lint/typecheck/build. Four source bodies and three observed, anchored FAQs pass component qualification. A fresh whole-worker run then collected changed search results and stopped because no admitted page was in the approved authority catalog. State is 31 runs / 53 failures. The next issue is source-discovery/catalog coverage, not a credential request or permission to reset the candidate. No accepted article, fresh end-to-end success or production approval is claimed.
+Latest checkpoint: [topic-aware source discovery](TOPIC-SOURCE-DISCOVERY-2026-09-11.md), verified with 2,732 tests plus lint/typecheck/build and independent patch review. Supporting publishers now follow the keyword's subject within unchanged search and body-fetch budgets. Live body checks recognized two scoped practitioner guides. State remains 31 runs / 53 failures; the fresh uninterrupted article-to-native-QA milestone is still open. No accepted new article or production approval is claimed.
+
+Previous checkpoint: [exact first-party source scope and quoted FAQs](EXACT-SOURCE-AND-QUOTED-FAQ-2026-09-11.md). Its quoted-question component passed; the fresh queue article attempt failed because changed SERPs exposed missing source coverage. That failed history is retained, not reset.
 
 Previous checkpoint: [contextual source admission](CONTEXTUAL-SOURCE-ADMISSION-2026-09-11.md), verified with 2,681 tests plus lint/typecheck/build. Its fresh comparison run passed source verification, then rejected insufficient relevant FAQs before drafting. That failed history remains unchanged.
 

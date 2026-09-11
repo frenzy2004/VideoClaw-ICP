@@ -280,10 +280,13 @@ function createSourceChecker(options: SafeSourceCheckerOptions, allowHttpForTest
   });
 
   function isAuthoritative(url: URL): boolean {
+    // Catalog entries approve the default HTTPS origin, not arbitrary services
+    // on the same hostname. Apply this to both prefix and exact-page policies.
+    if (url.port) return false;
     const hostname = normalizedHostname(url.hostname);
     return authorityPolicies.some((policy) => (
       hostname === policy.hostname && (policy.exactPath !== undefined
-        ? url.port === '' && url.pathname === policy.exactPath : url.pathname.startsWith(policy.pathPrefix))
+        ? url.pathname === policy.exactPath : url.pathname.startsWith(policy.pathPrefix))
     ));
   }
 

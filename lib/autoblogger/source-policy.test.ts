@@ -47,10 +47,10 @@ describe('exact-page first-party documentation authority', () => {
     else await expect(selection).rejects.toThrow(/two.*relevant.*body.*authoritative/i);
   });
 
-  it('does not add a new publisher discovery query or auto-approve discovery URLs', () => {
+  it('does not add Sendible discovery queries or auto-approve its discovery URLs', () => {
     expect(isDiscoverySourceUrl(page)).toBe(false);
     expect(sourceDiscoveryQueries('content queue', [], 'Content Queue Guide')).toEqual([
-      'content queue site:ycombinator.com', 'content queue site:techstars.com',
+      'content queue site:buffer.com/resources/', 'content queue site:optimizely.com/optimization-glossary/',
       'content queue site:techsmith.com/blog/', 'content queue site:descript.com/blog/article/',
     ]);
   });
