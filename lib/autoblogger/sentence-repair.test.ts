@@ -5,6 +5,9 @@ import { buildRepairPolicy, type RepairPolicy } from './repair-policy';
 import { applySentenceRepair, createRepairPatchRequest, createSentenceRepairRequest } from './repair-patch';
 
 type Binding = GeneratedDraftV2['claimBindings'][number];
+type SentenceProviderSchema = { properties: { changes: { properties: Record<string, {
+  anyOf: [unknown, { properties: Record<string, { anyOf: [unknown, { items: { pattern: string } }] }> }];
+}> } } };
 const body = '/sections/0/markdown';
 const faq = '/faqAnswers/0/answer';
 const bind = (location: string, span: string, sourceFactIds = ['fact-a'], productClaimId: string | null = null): Binding => (
@@ -78,7 +81,10 @@ describe('sentence-owned repair', () => {
     for (const invalid of ['in_this_testimonial?', 'using_that_offering?', 'one/two', 'buyer-problem', 'two words']) {
       expect(pattern.test(invalid), invalid).toBe(false);
     }
-    for (const valid of ['buyer.', 'café', '视频', '2026', 'customer’s']) expect(pattern.test(valid), valid).toBe(true);
+    for (const valid of ['buyer.', '2026', 'customer’s']) expect(pattern.test(valid), valid).toBe(true);
+    // Non-English literal words must belong to this original sentence; separate
+    // coverage below verifies that original Unicode names can still be retained.
+    for (const absent of ['café', '视频']) expect(pattern.test(absent), absent).toBe(false);
   });
   it.each(['Choose one buyer: ____.', 'Choose ____ buyers.', 'Choose “____” buyers.'])('keeps plain worksheet blanks and sentence citations owned by code during a neighboring edit: %s', blank => {
     const original = fixture();
@@ -143,8 +149,8 @@ describe('sentence-owned repair', () => {
         changes: { additionalProperties: false, required: [faq, body], properties: {
           [body]: { anyOf: [{ type: 'null' }, { type: 'object', additionalProperties: false,
             required: ['b0', 'b1'], properties: {
-              b0: { anyOf: [{ type: 'null' }, { type: 'array', maxItems: 4, items: { type: 'string', pattern: '^[^\\s_/-]+$' } }] },
-              b1: { anyOf: [{ type: 'null' }, { type: 'array', maxItems: 3, items: { type: 'string', pattern: '^[^\\s_/-]+$' } }] },
+              b0: { anyOf: [{ type: 'null' }, { type: 'array', maxItems: 4, items: { type: 'string', pattern: "^(?:(?:[A-Za-z]+(?:['’][A-Za-z]+)*|[0-9]+))[.,!?;:]*$" } }] },
+              b1: { anyOf: [{ type: 'null' }, { type: 'array', maxItems: 3, items: { type: 'string', pattern: "^(?:(?:[A-Za-z]+(?:['’][A-Za-z]+)*|[0-9]+))[.,!?;:]*$" } }] },
             },
           }] },
         } },
@@ -205,6 +211,35 @@ describe('sentence-owned repair', () => {
     const result = applySentenceRepair(original, policy, output);
     expect(result.status === 'ready' && result.draft.sections[0].markdown).toBe("Don’t skip café 视频 2026. Don't hurry!");
     expect(result.status === 'ready' && result.draft.claimBindings.find(b => b.span === "Don't hurry!")).toEqual(bind(body, "Don't hurry!", ['fact-b'], 'product-b'));
+  });
+
+  it.each(['too१tight', 'too1tight', '१', 'tight视频'])('rejects a newly invented mixed-script or alphanumeric word %s at both boundaries', token => {
+    const original = fixture();
+    const policy = policyFor(original);
+    const request = createSentenceRepairRequest(original, policy);
+    const schema = request.schema as SentenceProviderSchema;
+    const items = schema.properties.changes.properties[body].anyOf[1].properties.b0.anyOf[1].items;
+    expect(new RegExp(items.pattern, 'u').test(token)).toBe(false);
+    const output = patchFor(policy);
+    output.changes[body] = { b0: [token], b1: null };
+    expectInvalid(applySentenceRepair(original, policy, output));
+  });
+
+  it('permits original nonstandard literal words without granting arbitrary new ones', () => {
+    const original = fixture();
+    original.sections[0].markdown = 'Review B2B café examples. Record the workflow.';
+    original.claimBindings[0].span = 'Review B2B café examples.';
+    const policy = policyFor(original);
+    const request = createSentenceRepairRequest(original, policy);
+    const schema = request.schema as SentenceProviderSchema;
+    const items = schema.properties.changes.properties[body].anyOf[1].properties.b0.anyOf[1].items;
+    const pattern = new RegExp(items.pattern, 'u');
+    expect(pattern.test('B2B')).toBe(true);
+    expect(pattern.test('café.')).toBe(true);
+    expect(pattern.test('new१word')).toBe(false);
+    const output = patchFor(policy);
+    output.changes[body] = { b0: ['Review', 'B2B', 'café.'], b1: null };
+    expect(applySentenceRepair(original, policy, output).status).toBe('ready');
   });
 
   it.each([

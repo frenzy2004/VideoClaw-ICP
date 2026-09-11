@@ -44,3 +44,15 @@ Test-first regressions cover the observed failures and review-found edge cases. 
 - Tracked patch secret-pattern scan and `git diff --check` pass.
 - The read-only lander remains clean at `b6b0833c78443b44b12bf6d33f05baa7ac8427d3`.
 - The saved-draft paid diagnostic is separate from these checks and from the failed fresh worker run. No successful native article QA is claimed by this checkpoint.
+
+## Saved-draft paid diagnostic and generated-word correction
+
+On `42d7c97037e42691fb84f7cc6de4eede1a597730`, a separate diagnostic reused only the unchanged captured draft/input. It made three completed live model calls: a new independent critique, one repair, and final independent verification. The repaired object passed the delta/evidence accounting checks and reached final verification.
+
+Final verification rejected a malformed token in `/sections/3/markdown`, binding `b39`: `too१tight`. The diagnostic remains **blocked**. Native lander QA did not run, and no review Markdown artifact was accepted. No manual correction or second repair was applied to that run.
+
+The subsequent grammar correction makes provider-side and local sentence-token constraints agree. New tokens are English-letter words or ASCII digit literals; nonstandard words such as proper names, `café`, or `B2B` remain available only when already present in that original sentence. Null edits preserve original text. This is not a spellchecker or evidence approval.
+
+The exact captured malformed token now fails both the provider pattern and local repair assembly. Five new test-first cases cover invented mixed-script/letter-digit tokens and preservation of original nonstandard words. Final verification: **2,793 tests across 62 files**, zero failures/skips, plus lint/typecheck/build and independent bounded review with no remaining P1/P2 findings. Receipt: `artifacts/autoblogger/storyboard-word-grammar-suite-2026-09-11.json`.
+
+The diagnostic's integrity receipt confirms unchanged original captures, worker/lander checkouts during the run, and state hash `44cbead6244bf8eb8a56f5fb3f89d5a49bc72c3cb65b24916a792f42a607939b`. State remains 34 runs / 56 failures with no successful pilot. No live generation under the newer token grammar or fresh uninterrupted native-QA success is claimed here.

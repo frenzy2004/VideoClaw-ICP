@@ -183,7 +183,17 @@ type SentenceField = { mode: 'sentences'; sentences: Record<string, SentenceInfo
 type SentenceChanges = Record<string, string[] | null>;
 type SentenceRange = { key: string; start: number; end: number; binding: LocalBinding; maxWords: number };
 const sentenceWord = /^[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)*[.,!?;:]*$/u;
-const localSentenceWord = z.string().regex(sentenceWord).refine(word => !/\s/u.test(word));
+const englishRepairWord = "(?:[A-Za-z]+(?:['’][A-Za-z]+)*|[0-9]+)";
+
+// Generate English words/digit literals, not novel mixed-script tokens. Exact
+// nonstandard words already present in this sentence (names, café, B2B) remain
+// available; the regex cannot import a new name or silently rewrite a typo.
+function replacementWordPattern(span: string): string {
+  const ordinary = new RegExp(`^${englishRepairWord}$`, 'u');
+  const retained = [...new Set(span.match(/[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)*/gu) ?? [])]
+    .filter(word => !ordinary.test(word));
+  return `^(?:${[englishRepairWord, ...retained].join('|')})[.,!?;:]*$`;
+}
 const sentenceMarkdown = unified().use(remarkParse).use(remarkGfm);
 const markdownBody = (location: string) => location === '/directAnswer' || /^\/sections\/\d+\/markdown$/u.test(location);
 type MarkdownSentenceNode = {
@@ -271,14 +281,14 @@ function sentenceContract(original: GeneratedDraftV2, policy: RepairPolicy) {
       ...range.binding, sourceFactIds: [...range.binding.sourceFactIds], maxWords: range.maxWords,
     }])) };
     localFields[location] = z.object(Object.fromEntries(ranges.map(range => [
-      range.key, z.array(localSentenceWord).max(range.maxWords).nullable(),
+      range.key, z.array(z.string().regex(new RegExp(replacementWordPattern(range.binding.span), 'u'))
+        .refine(word => !/\s/u.test(word))).max(range.maxWords).nullable(),
     ]))).strict().nullable();
     providerFields[location] = { anyOf: [{ type: 'null' }, {
       type: 'object', additionalProperties: false, required: ranges.map(range => range.key),
       properties: Object.fromEntries(ranges.map(range => [range.key, { anyOf: [
-        // Reject common multi-word packing at generation time. The stricter
-        // Unicode word validator above remains authoritative after generation.
-        { type: 'null' }, { type: 'array', maxItems: range.maxWords, items: { type: 'string', pattern: '^[^\\s_/-]+$' } },
+        // The same bounded alphabet is enforced by the provider and locally.
+        { type: 'null' }, { type: 'array', maxItems: range.maxWords, items: { type: 'string', pattern: replacementWordPattern(range.binding.span) } },
       ] }])),
     }] };
   }

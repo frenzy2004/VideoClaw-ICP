@@ -3,7 +3,7 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-Latest: [storyboard repair and reference corrections](STORYBOARD-REPAIR-2026-09-11.md), **2,788 tests across 62 files**, zero failed/pending, plus lint/typecheck/build. Independent bounded review found no remaining P1/P2 issues. Regressions cover contextual product compounds, software-head vetoes, exact Markdown leaf mappings, evidence ceilings and explicit paragraph deletion without structural injection. The fresh storyboard attempt failed after repair and did not reach native QA. State retains 34 runs / 56 failures, no successful pilot. Saved-input diagnostics are not fresh uninterrupted proof.
+Latest: [storyboard repair, reference and token-grammar corrections](STORYBOARD-REPAIR-2026-09-11.md), **2,793 tests across 62 files**, zero failed/pending, plus lint/typecheck/build. Independent bounded review found no remaining P1/P2 issues. The saved-draft live diagnostic reached final verification but was blocked by a malformed token; the newer grammar rejects it at provider and local boundaries. No native article QA or new live generation under that grammar is claimed. State retains 34 runs / 56 failures, no successful pilot. Saved-input diagnostics are not fresh uninterrupted proof.
 
 Previous: [topic-aware discovery and observation-read recovery](TOPIC-SOURCE-DISCOVERY-2026-09-11.md) retains its historical 2,737-test result, read-only API diagnostics and two fresh collection failures.
 

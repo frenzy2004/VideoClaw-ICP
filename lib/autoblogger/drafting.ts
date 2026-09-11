@@ -560,8 +560,11 @@ and its bindings stay unchanged. sentenceFields assigns each location a mode cho
 by code; never change modes.
 In sentences mode, include every required bN sentence key. Use null to retain that
 exact original span, an empty array to delete it, or an array with one word per item
-to replace it. Stay within that sentence's maxWords. Each word contains only Unicode
-letters or numbers, optional internal straight/curly apostrophes, and optional trailing
+to replace it. Stay within that sentence's maxWords. New word items use English
+letters with optional internal straight/curly apostrophes, or ASCII digit literals.
+Other literal words are allowed only when already present in that original sentence,
+as constrained by its schema; never invent mixed-script or letter-digit spellings.
+Word items may include optional trailing
 periods, commas, exclamation/question marks, semicolons or colons. Never put whitespace,
 hyphens, Markdown, HTML or links inside a word item. Code joins words with spaces and
 assembles the final text and bindings. Each bN owns its original sourceFactIds and

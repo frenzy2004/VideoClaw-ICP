@@ -6,7 +6,7 @@ This worker is a controlled research-and-drafting system. It does not publish ar
 
 The initial 250-topic research library is an input, not a quota or publication gate. Each run scans at most 50 candidates, deeply checks at most 10, and produces at most 3 drafts with no more than 2 from one ICP.
 
-Latest checkpoint: [storyboard repair and reference corrections](STORYBOARD-REPAIR-2026-09-11.md), verified with 2,788 tests plus lint/typecheck/build and independent patch review. The fresh storyboard run reached its single repair, then failed five evidence-growth checks before native QA. Ordinary product compounds no longer force false claim repairs; plain Markdown sections now support sentence-owned evidence bounds. State retains 34 runs / 56 failures. The uninterrupted article-to-native-QA milestone remains open; component checks are not an accepted new article or production approval.
+Latest checkpoint: [storyboard repair, reference and token-grammar corrections](STORYBOARD-REPAIR-2026-09-11.md), verified with 2,793 tests plus lint/typecheck/build and independent patch review. A saved-draft live diagnostic passed the repaired evidence checks but failed final review for a malformed mixed-script token, before native QA. The newer provider/local word grammar rejects that exact error while preserving original names. State retains 34 runs / 56 failures. The uninterrupted article-to-native-QA milestone remains open; component checks are not an accepted new article or production approval.
 
 Previous checkpoint: [topic-aware discovery and observation-read recovery](TOPIC-SOURCE-DISCOVERY-2026-09-11.md) retains its 2,737-test verification and the two earlier collection failures.
 
