@@ -6,7 +6,15 @@ This worker is a controlled research-and-drafting system. It does not publish ar
 
 The initial 250-topic research library is an input, not a quota or publication gate. Each run scans at most 50 candidates, deeply checks at most 10, and produces at most 3 drafts with no more than 2 from one ICP.
 
-Latest checkpoint: [list binding and execution-record corrections](LIST-BINDING-REPAIR-2026-09-12.md). The audio-cleanup run reached independent critique, then failed because eight copied list markers caused sixteen coverage errors. The compiler now resolves actual list syntax without changing prose or sources. The standard runtime retains source hashes and review decisions, and stops further paid dispatch if required records cannot be saved. The saved-input structural check and 2,881 tests pass, plus lint/typecheck/build. State retains 42 runs / 67 failures; no successful fresh pilot. Uninterrupted live proof and history-preserving state handoff remain unfinished.
+Latest checkpoint: [fresh end-to-end worker proof](FRESH-WORKER-PROOF-2026-09-12.md). One unused backlog article completed live research, source-body verification, three supported FAQs, drafting, independent critique, one repair, independent verification and the actual lander's blog checks/lint/build. The [review Markdown](proofs/podcast-clips-2026-09-12/turn-podcast-into-social-media-clips.md), graphic and compact proof are committed under documentation, not the public article library. State retains 43 runs / 67 failures and one consumed successful pilot. Fresh checks pass 2,881 tests plus lint/typecheck/build. History-preserving state handoff and unattended rollout remain unfinished; no production, PR #55 or schedule changes occurred.
+
+## Historical checkpoints
+
+The entries below retain their original outcomes and counts. Statements such as
+"latest" or "unproven" inside these historical entries describe that checkpoint,
+not the current result linked above. No failed run has been relabeled successful.
+
+Previous checkpoint: [list binding and execution-record corrections](LIST-BINDING-REPAIR-2026-09-12.md) records the failed audio-cleanup run, its exact saved-input regression fix and standard-runtime audit corrections.
 
 Previous checkpoint: [worker completion audit and FAQ/queue corrections](WORKER-COMPLETION-AUDIT-2026-09-12.md) retains its component verification and queue/failure-history corrections.
 

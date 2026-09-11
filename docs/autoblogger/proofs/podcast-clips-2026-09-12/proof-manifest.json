@@ -1,0 +1,229 @@
+{
+  "schemaVersion": 1,
+  "runId": "podcast-clips-live-proof-2026-09-12",
+  "implementationCommit": "48ed68f1e5da7be62f19c56e7e1ef167cea6da74",
+  "status": "validated_review_artifact",
+  "startedAt": "2026-09-11T19:13:51.303Z",
+  "completedAt": "2026-09-11T19:21:49.993Z",
+  "files": [
+    {
+      "name": "turn-podcast-into-social-media-clips.md",
+      "sourceSha256": "ada7641c07c578c6968667b945fe25e59359152a2ff2fae7f77c8881f76a93dc",
+      "exportedSha256": "ada7641c07c578c6968667b945fe25e59359152a2ff2fae7f77c8881f76a93dc",
+      "sourceBytes": 9429,
+      "exportedBytes": 9429,
+      "exportNormalization": "none"
+    },
+    {
+      "name": "turn-podcast-into-social-media-clips.svg",
+      "sourceSha256": "5f141735e14e5572b5e3808465332946cfa4d97fbeef82c3df8467cdf99548b2",
+      "exportedSha256": "eb26720f6890d852660d8f12a7e2c4755d1453b56434c2e20d79909e7536a531",
+      "sourceBytes": 5738,
+      "exportedBytes": 5739,
+      "exportNormalization": "terminal_newline_only"
+    },
+    {
+      "name": "run-report.json",
+      "sourceSha256": "fb0c206bad990679e9ed7ff0c305a9e39bcd39c2bf9839ebb84aab5c1b89d507",
+      "exportedSha256": "fb0c206bad990679e9ed7ff0c305a9e39bcd39c2bf9839ebb84aab5c1b89d507",
+      "sourceBytes": 9908,
+      "exportedBytes": 9908,
+      "exportNormalization": "none"
+    }
+  ],
+  "bundleHash": "0c0b4d51ae15cfef63644b8ad223c7870c4b3752b2c365ea50b4e273da656583",
+  "landerBaseSha": "b6b0833c78443b44b12bf6d33f05baa7ac8427d3",
+  "priorStateSha256": "dab6b053dcc0a255b569ef8ee155f218ea3a8fd34930fd224012a617c76b76d8",
+  "finalStateSha256": "8332cb2bb5de560646b165c9843df6538f61797c97bf05ddcb376aee54f8419d",
+  "historicalRunsRetained": 42,
+  "totalRuns": 43,
+  "failureRecordsRetained": 67,
+  "manualPilot": {
+    "runId": "podcast-clips-live-proof-2026-09-12",
+    "status": "consumed",
+    "reservedAt": "2026-09-11T19:13:51.303Z",
+    "leaseExpiresAt": null,
+    "artifactHash": "0c0b4d51ae15cfef63644b8ad223c7870c4b3752b2c365ea50b4e273da656583",
+    "consumedAt": "2026-09-11T19:21:50.022Z"
+  },
+  "modelReceipts": [
+    {
+      "phase": "videoclaw_source_relevance_v1",
+      "responseId": "resp_0addea6b2c6e30ca016aa45376b8ac87d29e61906af4b5d88b",
+      "model": "gpt-5.5-2026-04-23",
+      "payloadSha256": "4677266d9571f9b181479a87139315a18f860d22589621af3f9531154585ba29",
+      "usage": {
+        "input_tokens": 21752,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 4161,
+        "output_tokens_details": {
+          "reasoning_tokens": 1873
+        },
+        "total_tokens": 25913
+      }
+    },
+    {
+      "phase": "videoclaw_faq_evidence_v1",
+      "responseId": "resp_080e686ba6c12633016aa4539f88c487d2ae5a24588ca1173f",
+      "model": "gpt-5.5-2026-04-23",
+      "payloadSha256": "2f8fd84186cb5926d94115cdd2e83a9db3c459f12b19d0c6ad471a99e89b8118",
+      "usage": {
+        "input_tokens": 6436,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 1542,
+        "output_tokens_details": {
+          "reasoning_tokens": 1034
+        },
+        "total_tokens": 7978
+      }
+    },
+    {
+      "phase": "videoclaw_article_draft_v2",
+      "responseId": "resp_0556883beaf7169e016aa453b04a9887d2af5cdfa9eeba716a",
+      "model": "gpt-5.5-2026-04-23",
+      "payloadSha256": "3f0b4afe260187ff2b05a18b8a9d22b13390fa1c99a35be2a100dfe617284522",
+      "usage": {
+        "input_tokens": 9210,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 8193,
+        "output_tokens_details": {
+          "reasoning_tokens": 2070
+        },
+        "total_tokens": 17403
+      }
+    },
+    {
+      "phase": "videoclaw_article_critique_v1",
+      "responseId": "resp_095d5a8fa22d49a4016aa45411a20087d2b3795024e14b1d38",
+      "model": "gpt-5.5-2026-04-23",
+      "payloadSha256": "252cc69772503f606867816730416a123511d06249f60720b420155e0c9dfd90",
+      "usage": {
+        "input_tokens": 23731,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 1792
+        },
+        "output_tokens": 8885,
+        "output_tokens_details": {
+          "reasoning_tokens": 1552
+        },
+        "total_tokens": 32616
+      }
+    },
+    {
+      "phase": "videoclaw_article_repair_patch_v2",
+      "responseId": "resp_067cd4d6b25d3344016aa4545f42d887d2b46ab0f8201e34b9",
+      "model": "gpt-5.5-2026-04-23",
+      "payloadSha256": "cf2fec1e91382f4e5e790d50c238fb54ec723252dcb7ba73f6e9a5604a50ab4f",
+      "usage": {
+        "input_tokens": 29999,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 637,
+        "output_tokens_details": {
+          "reasoning_tokens": 508
+        },
+        "total_tokens": 30636
+      }
+    },
+    {
+      "phase": "videoclaw_article_repair_verification_v1",
+      "responseId": "resp_07a5b3b69ffabfca016aa45466d6f887d292c97f92b36b0d62",
+      "model": "gpt-5.5-2026-04-23",
+      "payloadSha256": "f549e4e437afe6c1a33ca1e25b4dc38d58b437196b335956aeffee989b077c24",
+      "usage": {
+        "input_tokens": 24594,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 10621,
+        "output_tokens_details": {
+          "reasoning_tokens": 1034
+        },
+        "total_tokens": 35215
+      }
+    }
+  ],
+  "nativeCommands": [
+    {
+      "label": "clone",
+      "exitCode": 0,
+      "durationMs": 1691,
+      "timedOut": false
+    },
+    {
+      "label": "checkout",
+      "exitCode": 0,
+      "durationMs": 667,
+      "timedOut": false
+    },
+    {
+      "label": "resolve-head",
+      "exitCode": 0,
+      "durationMs": 6,
+      "timedOut": false
+    },
+    {
+      "label": "isolate-checkout",
+      "exitCode": 0,
+      "durationMs": 6,
+      "timedOut": false
+    },
+    {
+      "label": "install",
+      "exitCode": 0,
+      "durationMs": 3061,
+      "timedOut": false
+    },
+    {
+      "label": "check:blog",
+      "exitCode": 0,
+      "durationMs": 348,
+      "timedOut": false
+    },
+    {
+      "label": "lint",
+      "exitCode": 0,
+      "durationMs": 2046,
+      "timedOut": false
+    },
+    {
+      "label": "build",
+      "exitCode": 0,
+      "durationMs": 6376,
+      "timedOut": false
+    },
+    {
+      "label": "workspace-integrity",
+      "exitCode": 0,
+      "durationMs": 12,
+      "timedOut": false
+    }
+  ],
+  "tests": {
+    "passed": 2881,
+    "failed": 0,
+    "pending": 0
+  },
+  "keywordProvider": "pending",
+  "publication": "artifact_only",
+  "generatedLanderPullRequests": 0,
+  "limitations": [
+    "One local pilot, not an unattended Actions or throughput proof.",
+    "Paid keyword metrics remain unavailable.",
+    "Human copy/design approval remains required.",
+    "History-preserving state handoff remains unfinished."
+  ]
+}

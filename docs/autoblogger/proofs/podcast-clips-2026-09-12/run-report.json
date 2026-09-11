@@ -1,0 +1,301 @@
+{
+  "schemaVersion": 1,
+  "command": "pilot",
+  "runId": "podcast-clips-live-proof-2026-09-12",
+  "mode": "manual_pilot",
+  "status": "validated",
+  "startedAt": "2026-09-11T19:13:51.303Z",
+  "completedAt": "2026-09-11T19:21:49.993Z",
+  "limits": {
+    "maxCandidatesScanned": 50,
+    "maxDeepInspections": 10,
+    "maxDrafts": 3,
+    "maxDraftsPerIcp": 2,
+    "manualPilotDrafts": 1
+  },
+  "counts": {
+    "queued": 499,
+    "scanned": 1,
+    "shallowValidated": 1,
+    "metricsEnriched": 1,
+    "deepInspected": 1,
+    "eligible": 1,
+    "drafted": 1,
+    "validated": 1,
+    "pullRequestsOpened": 0
+  },
+  "artifacts": [
+    {
+      "candidateFingerprint": "candidate:gtm-content-repurposing-buyer:turn b2b podcast into campaign clips",
+      "intentFingerprint": "intent:479733a43ca938fb13c5890930c8d8b47ebb17c7e41c1a92594a3417e37a0bc6",
+      "articleId": "vc-c4-011",
+      "slug": "turn-podcast-into-social-media-clips",
+      "icp": "gtm-content-repurposing-buyer",
+      "publication": "artifact_only",
+      "metrics": {
+        "schemaVersion": 1,
+        "provider": "pending",
+        "observedAt": null,
+        "volume": null,
+        "difficulty": null,
+        "cpc": null,
+        "intent": "informational"
+      },
+      "keywordProvenance": {
+        "provider": "pending",
+        "endpoint": null,
+        "observedAt": null,
+        "providerRequestId": null,
+        "sourceObservedAt": null
+      },
+      "serpProvenance": {
+        "actorId": "apify/google-search-scraper",
+        "runId": "OM7aph3feejZT0oGJ",
+        "datasetId": "NqXo3JFAHf42DnDmd",
+        "observedAt": "2026-09-11T19:14:12.998Z"
+      },
+      "researchProvenance": {
+        "discovery": {
+          "actorId": "automation-lab/google-autocomplete-scraper",
+          "runId": "RcgcNb6NtIhiJwdd2",
+          "datasetId": "m0lM3mqIse722tg7r",
+          "observedAt": "2026-09-11T19:13:55.028Z"
+        },
+        "serp": {
+          "actorId": "apify/google-search-scraper",
+          "runId": "OM7aph3feejZT0oGJ",
+          "datasetId": "NqXo3JFAHf42DnDmd",
+          "observedAt": "2026-09-11T19:14:12.998Z"
+        },
+        "paa": {
+          "actorId": "santhej/people-also-ask-scraper",
+          "runId": "VTVYeHMRATXb8Hs85",
+          "datasetId": "qcf1ZRtV5MBE1M4wP",
+          "observedAt": "2026-09-11T19:14:44.540Z"
+        },
+        "paaAttempts": [
+          {
+            "actorId": "santhej/people-also-ask-scraper",
+            "runId": "hxEDs6jJIeKsQbTTP",
+            "datasetId": "dlKQZhvzwnk7Df2aG",
+            "observedAt": "2026-09-11T19:14:34.421Z"
+          },
+          {
+            "actorId": "santhej/people-also-ask-scraper",
+            "runId": "VTVYeHMRATXb8Hs85",
+            "datasetId": "qcf1ZRtV5MBE1M4wP",
+            "observedAt": "2026-09-11T19:14:44.540Z"
+          }
+        ],
+        "supportSearches": [
+          {
+            "actorId": "apify/google-search-scraper",
+            "runId": "12XsuLPKNC3OHkS4m",
+            "datasetId": "Few9A2K7C5Tt9cXCT",
+            "observedAt": "2026-09-11T19:15:51.930Z"
+          }
+        ]
+      },
+      "paaObservations": [
+        {
+          "actorId": "apify/google-search-scraper",
+          "runId": "12XsuLPKNC3OHkS4m",
+          "datasetId": "Few9A2K7C5Tt9cXCT",
+          "observedAt": "2026-09-11T19:15:51.930Z",
+          "query": "How can I convert my podcast to a video?",
+          "question": "How do I switch to video on my Apple podcast?",
+          "parentQuestion": null,
+          "country": "US",
+          "language": "en",
+          "position": 1
+        },
+        {
+          "actorId": "apify/google-search-scraper",
+          "runId": "12XsuLPKNC3OHkS4m",
+          "datasetId": "Few9A2K7C5Tt9cXCT",
+          "observedAt": "2026-09-11T19:15:51.930Z",
+          "query": "How can I convert my podcast to a video?",
+          "question": "Can a podcast have a video?",
+          "parentQuestion": null,
+          "country": "US",
+          "language": "en",
+          "position": 2
+        },
+        {
+          "actorId": "apify/google-search-scraper",
+          "runId": "12XsuLPKNC3OHkS4m",
+          "datasetId": "Few9A2K7C5Tt9cXCT",
+          "observedAt": "2026-09-11T19:15:51.930Z",
+          "query": "How can I convert my podcast to a video?",
+          "question": "Is there a free AI podcast video generator available?",
+          "parentQuestion": null,
+          "country": "US",
+          "language": "en",
+          "position": 3
+        },
+        {
+          "actorId": "apify/google-search-scraper",
+          "runId": "12XsuLPKNC3OHkS4m",
+          "datasetId": "Few9A2K7C5Tt9cXCT",
+          "observedAt": "2026-09-11T19:15:51.930Z",
+          "query": "How can I convert my podcast to a video?",
+          "question": "Which AI can convert audio into video?",
+          "parentQuestion": null,
+          "country": "US",
+          "language": "en",
+          "position": 4
+        },
+        {
+          "actorId": "apify/google-search-scraper",
+          "runId": "12XsuLPKNC3OHkS4m",
+          "datasetId": "Few9A2K7C5Tt9cXCT",
+          "observedAt": "2026-09-11T19:15:51.930Z",
+          "query": "Is there a podcast about B2B marketing?",
+          "question": "What is a B2B podcast?",
+          "parentQuestion": null,
+          "country": "US",
+          "language": "en",
+          "position": 4
+        },
+        {
+          "actorId": "apify/google-search-scraper",
+          "runId": "12XsuLPKNC3OHkS4m",
+          "datasetId": "Few9A2K7C5Tt9cXCT",
+          "observedAt": "2026-09-11T19:15:51.930Z",
+          "query": "What is the Rule of 7 in B2B marketing?",
+          "question": "What are the 7 P's of B2B marketing?",
+          "parentQuestion": null,
+          "country": "US",
+          "language": "en",
+          "position": 1
+        },
+        {
+          "actorId": "apify/google-search-scraper",
+          "runId": "12XsuLPKNC3OHkS4m",
+          "datasetId": "Few9A2K7C5Tt9cXCT",
+          "observedAt": "2026-09-11T19:15:51.930Z",
+          "query": "What is the Rule of 7 in B2B marketing?",
+          "question": "What is the rule of 7 in marketing?",
+          "parentQuestion": null,
+          "country": "US",
+          "language": "en",
+          "position": 2
+        },
+        {
+          "actorId": "apify/google-search-scraper",
+          "runId": "12XsuLPKNC3OHkS4m",
+          "datasetId": "Few9A2K7C5Tt9cXCT",
+          "observedAt": "2026-09-11T19:15:51.930Z",
+          "query": "What is the Rule of 7 in B2B marketing?",
+          "question": "What is 7 P's in marketing?",
+          "parentQuestion": null,
+          "country": "US",
+          "language": "en",
+          "position": 3
+        },
+        {
+          "actorId": "apify/google-search-scraper",
+          "runId": "12XsuLPKNC3OHkS4m",
+          "datasetId": "Few9A2K7C5Tt9cXCT",
+          "observedAt": "2026-09-11T19:15:51.930Z",
+          "query": "What is the Rule of 7 in B2B marketing?",
+          "question": "What are the 7 golden rules of sales?",
+          "parentQuestion": null,
+          "country": "US",
+          "language": "en",
+          "position": 4
+        },
+        {
+          "actorId": "apify/google-search-scraper",
+          "runId": "12XsuLPKNC3OHkS4m",
+          "datasetId": "Few9A2K7C5Tt9cXCT",
+          "observedAt": "2026-09-11T19:15:51.930Z",
+          "query": "Is there a podcast about B2B marketing?",
+          "question": "What are the four C's of B2B marketing?",
+          "parentQuestion": null,
+          "country": "US",
+          "language": "en",
+          "position": 2
+        },
+        {
+          "actorId": "apify/google-search-scraper",
+          "runId": "12XsuLPKNC3OHkS4m",
+          "datasetId": "Few9A2K7C5Tt9cXCT",
+          "observedAt": "2026-09-11T19:15:51.930Z",
+          "query": "Is there a podcast about B2B marketing?",
+          "question": "What are the top 5 marketing podcasts to listen to?",
+          "parentQuestion": null,
+          "country": "US",
+          "language": "en",
+          "position": 3
+        }
+      ],
+      "validation": {
+        "status": "passed",
+        "cleanup": "completed",
+        "bundleHash": "0c0b4d51ae15cfef63644b8ad223c7870c4b3752b2c365ea50b4e273da656583",
+        "landerRef": "seo/founder-video-blog-launch",
+        "checkedOutHeadSha": "b6b0833c78443b44b12bf6d33f05baa7ac8427d3",
+        "articlePath": "content/articles/turn-podcast-into-social-media-clips.md",
+        "svgPath": "public/media/blog/turn-podcast-into-social-media-clips.svg",
+        "commands": [
+          {
+            "label": "clone",
+            "exitCode": 0,
+            "durationMs": 1691,
+            "timedOut": false
+          },
+          {
+            "label": "checkout",
+            "exitCode": 0,
+            "durationMs": 667,
+            "timedOut": false
+          },
+          {
+            "label": "resolve-head",
+            "exitCode": 0,
+            "durationMs": 6,
+            "timedOut": false
+          },
+          {
+            "label": "isolate-checkout",
+            "exitCode": 0,
+            "durationMs": 6,
+            "timedOut": false
+          },
+          {
+            "label": "install",
+            "exitCode": 0,
+            "durationMs": 3061,
+            "timedOut": false
+          },
+          {
+            "label": "check:blog",
+            "exitCode": 0,
+            "durationMs": 348,
+            "timedOut": false
+          },
+          {
+            "label": "lint",
+            "exitCode": 0,
+            "durationMs": 2046,
+            "timedOut": false
+          },
+          {
+            "label": "build",
+            "exitCode": 0,
+            "durationMs": 6376,
+            "timedOut": false
+          },
+          {
+            "label": "workspace-integrity",
+            "exitCode": 0,
+            "durationMs": 12,
+            "timedOut": false
+          }
+        ]
+      }
+    }
+  ],
+  "failures": []
+}

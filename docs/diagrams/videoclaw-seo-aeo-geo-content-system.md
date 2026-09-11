@@ -1,6 +1,6 @@
 # VideoClaw SEO / AEO / GEO content system
 
-Review-only checkpoint: **10 September 2026**. No production merge, deployment, publishing, indexing submission, or schedule activation is authorized in this work.
+Review-only checkpoint: **12 September 2026**. No production merge, deployment, publishing, indexing submission, or schedule activation is authorized in this work.
 
 ![VideoClaw worker, artifact-only pilot, and separate human publication gate](./videoclaw-seo-aeo-geo-content-system-v2.png)
 
@@ -32,6 +32,21 @@ The 250-opportunity backlog is an input, not a required count or proof of measur
 ```text
 Apify + page bodies → three observed FAQs with exact body anchors → draft → critique / one repair → native QA → private artifact → STOP
 ```
+
+**Fresh live proof passed:** [podcast-clips worker run](../autoblogger/FRESH-WORKER-PROOF-2026-09-12.md).
+An unused original-backlog topic completed all stages without injected evidence
+or rewritten copy. Independent critique caught a competitor capability overclaim;
+one automatic repair resolved it and fresh verification approved the correction.
+The actual lander's 32 blog tests, lint and full build passed in an isolated clone.
+The [review Markdown](../autoblogger/proofs/podcast-clips-2026-09-12/turn-podcast-into-social-media-clips.md)
+and graphic were durably saved. Six completed model calls; zero generated lander
+PRs. State retains 43 runs / 67 failure records and the consumed successful pilot.
+History-preserving state handoff and unattended rollout remain unfinished.
+
+### Historical pilot checkpoints
+
+The observations below retain their outcomes at the time; earlier failure and
+"unproven" statements do not override the fresh proof above.
 
 The [semantic preparation checkpoint](../autoblogger/SEMANTIC-FAQ-PROOF-2026-09-10.md)
 adds one bounded structured retrieval call, mechanically checked source anchors
@@ -231,7 +246,7 @@ no new paid run or native QA pass is claimed. The observations below are histori
 - **Historical automatic attempt and separate revalidation:** a newly authorized product-demo attempt collected eight organic results, PAA questions and four source bodies, then completed all four model stages. Independent verification approved the repair. Deterministic grammar false positives stopped the live worker; after a test-first fix, offline replay of the same saved responses returned the unchanged review bundle, which passed native blog checks, lint and build. No article rewriting, manual evidence injection or new paid call was used in revalidation. That live run remains failed at attempt three; no successful pilot marker or generated lander PR exists. [Artifact report](../autoblogger/PRODUCT-DEMO-ARTIFACT-2026-09-06.md). The [previous retry](../autoblogger/PRODUCT-DEMO-RETRY-2026-09-06.md) remains a historical failure.
 - `KEYWORD_PROVIDER=pending` keeps volume, difficulty and CPC explicitly unknown. Paid metrics do not block this one pilot.
 - `LANDER_BASE_REF=seo/founder-video-blog-launch` validates against the unmerged blog contract, not production.
-- `APIFY_TOKEN` is present in ICP Actions secrets. `OPENAI_API_KEY` is now stored locally in an ignored environment file and verified against `gpt-5.5`; the scoped lander read token is still absent.
+- `APIFY_TOKEN` and `OPENAI_API_KEY` are present in ICP Actions secrets; the scoped lander read token is still absent. No Actions pilot has run.
 - The read token must be separate and fine-grained, restricted to lander contents:read and pull requests:read. Interactive GitHub access does not establish that the worker credential is installed.
 - Local attempts used the existing checkout, fresh GET-only interactive GitHub inventory and ignored local state; no publication backend was supplied. They did not modify remote state or configure unattended Actions. Preserve the failure history and reconcile the separately retained assisted artifact before another pilot.
 - Offline fixtures exercise this path but are **not** live generated article evidence.
@@ -310,7 +325,7 @@ Every article traces back to campaign, ICP, trigger, intent, keyword, SERP obser
 | --- | --- |
 | `VideoClaw-ICP` source branch | Worker, research library, tests and diagrams |
 | `autoblogger-state`, when Actions runs begin | Compact identities, decisions, run/dataset IDs, provider provenance, hashes, PR outcomes and bounded redacted failures; local pilot history must be reconciled first |
-| Ignored local pilot state and reports | This live attempt's decisions, provenance, bounded retries and source/PAA rejection report; not Git-backed |
+| Ignored local pilot state and reports | Original run histories, private source/model receipts and consumed pilot; compact successful proof and review files are exported to worker documentation |
 | Apify datasets | Raw search observations |
 | Seven-day workflow artifacts | Proposed Markdown, SVG, validated bundle and QA report |
 | `videoclaw-lander` review branch | Three manually reviewed drafts and blog renderer |
@@ -320,10 +335,10 @@ Every article traces back to campaign, ICP, trigger, intent, keyword, SERP obser
 
 | Work | Current state | Next dependency |
 | --- | --- | --- |
-| Article and diagram updates | Original three review guides, older assisted local preview, and new unchanged-response Markdown/SVG review artifact; no production action | Team review; keep each artifact's provenance distinct |
+| Article and diagram updates | Original three review guides, older assisted preview and a fresh automatically generated podcast-clips review artifact; no production action | Team review; keep each artifact's provenance distinct |
 | Worker implementation | PR #1 open; offline and native fixture verification recorded separately | Implementation review |
-| Automated local article milestone | Semantic FAQ preparation passed live; the full worker attempt failed repair. Field patch and exact numeric guidance are software-verified, but the latest paid diagnostic fails nine word-growth checks | Correct repair generation within existing allowances, then prove accepted content through native QA. Prior failures and exhausted grants remain unchanged; no automatic retry or reset |
-| Unattended Actions pilot | Not configured; no successful unattended article | Scoped read token, OpenAI Actions secret, reconciled state and reviewed worker |
+| Automated local article milestone | Passed fresh research, drafting, critique, one repair, verification and native QA; one durable review artifact, pilot consumed | Human copy/design review; no second pending-metrics pilot |
+| Unattended Actions execution | No successful unattended article; Apify/OpenAI secrets configured | Scoped read token, history-preserving state handoff and reviewed worker; paid metrics before further article runs |
 | Paid enrichment | Not connected; Apify research does not invent metrics | Provider access and a tested adapter |
 | Generated lander PRs | Not enabled | Merged blog contract, paid metrics, GitHub App and approved rollout |
 | Weekly automation | `AUTOBLOG_SCHEDULE_ENABLED=false`; Monday 16:00 UTC schedule is in the PR | Explicit activation approval and workflow on the default branch |
