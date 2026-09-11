@@ -285,14 +285,22 @@ describe('sentence-owned repair', () => {
     ['HTML', 'Choose <b>buyers</b>.', ['Choose buyers.']],
     ['code', '`Choose buyers.`', ['Choose buyers.']],
     ['autolink', 'Visit www.example.com.', ['Visit www.example.com.']],
-    ['ordered list', '1. Choose buyers.', ['Choose buyers.']],
     ['uncovered punctuation', 'Choose buyers. ;', ['Choose buyers.']],
     ['straight-quoted emphasis', '"Choose **buyers**."', ['"Choose buyers."']],
     ['curly-quoted link', '“Choose [buyers](https://example.com/a).”', ['“Choose buyers.”']],
     ['underscore horizontal rule', 'Choose buyers.\n\n____', ['Choose buyers.']],
     ['worksheet with emphasis', 'Choose **buyers**: ____.', ['Choose buyers: ____.']],
-    ['worksheet in a list', '1. Choose ____ buyers.', ['Choose ____ buyers.']],
     ['worksheet in a quote', '> Choose ____ buyers.', ['Choose ____ buyers.']],
+    ['formatted neighbor', '- Choose buyers.\n- **Record workflow.**', ['Choose buyers.', 'Record workflow.']],
+    ['strikethrough', 'Choose ~~buyers~~.', ['Choose buyers.']],
+    ['table', '| Choice |\n| --- |\n| Choose buyers. |', ['Choice', 'Choose buyers.']],
+    ['task list', '- [x] Choose buyers.', ['Choose buyers.']],
+    ['heading', '# Choose buyers.', ['Choose buyers.']],
+    ['escaped text', 'Choose \\*buyers\\*.', ['Choose *buyers*.']],
+    ['cross-leaf span', '- Choose buyers.\n- Record workflow.', ['Choose buyers.\n- Record workflow.']],
+    ['cross-paragraph span', 'Choose buyers.\n\nRecord workflow.', ['Choose buyers.\n\nRecord workflow.']],
+    ['uncovered list punctuation', '- Choose buyers.\n- ;', ['Choose buyers.']],
+    ['repeated list span', '- Choose buyers.\n- Choose buyers.', ['Choose buyers.']],
   ])('uses compatible full-field repair for %s', (_name, text, spans) => {
     const original = fixture();
     original.sections[0].markdown = text;
@@ -311,6 +319,120 @@ describe('sentence-owned repair', () => {
     expect(result.status === 'ready' && result.draft.claimBindings.filter(b => b.location === body)).toEqual([bind(body, 'Pick buyers.')]);
     output.changes[body] = { b0: ['Pick', 'buyers.'] };
     expectInvalid(applySentenceRepair(original, policy, output));
+  });
+
+  it.each([
+    ['paragraph ratio', 'Choose 16:9 framing.', 'Choose 16:9 framing.\n\nRecord the workflow.', 'Choose buyers.\n\nRecord the workflow.', 4],
+    ['hyphen literal', 'Choose buyer-led framing.', '- Choose buyer-led framing.\n- Record the workflow.', '- Choose buyers.\n- Record the workflow.', 4],
+    ['bullet list', 'Choose one buyer problem.', '- Choose one buyer problem.\n- Record the workflow.', '- Choose buyers.\n- Record the workflow.', 4],
+    ['ordered list', 'Choose one buyer problem.', '3. Choose one buyer problem.\n4. Record the workflow.', '3. Choose buyers.\n4. Record the workflow.', 4],
+    ['parenthesized list', 'Choose one buyer problem.', '1) Choose one buyer problem.\n2) Record the workflow.', '1) Choose buyers.\n2) Record the workflow.', 4],
+    ['worksheet list', 'Choose “____” buyers.', '+ Choose “____” buyers.\n+ Record the workflow.', '+ Choose buyers.\n+ Record the workflow.', 2],
+    ['nested list', 'Choose one buyer problem.', '* Choose one buyer problem.\n  * Record the workflow.', '* Choose buyers.\n  * Record the workflow.', 4],
+  ])('repairs %s with exact Markdown bytes and code-owned sentence evidence', (_name, first, text, expected, maxWords) => {
+    const original = fixture();
+    original.sections[0].markdown = text;
+    original.claimBindings[0].span = first;
+    // Binding order need not match the order of the text leaves.
+    original.claimBindings = [original.claimBindings[1], original.claimBindings[0], ...original.claimBindings.slice(2)];
+    const before = structuredClone(original);
+    const policy = policyFor(original);
+    const request = createSentenceRepairRequest(original, policy);
+    expect(request.input.sentenceFields[body]).toEqual({ mode: 'sentences', sentences: {
+      b0: { span: 'Record the workflow.', maxWords: 3, sourceFactIds: ['fact-b'], productClaimId: 'product-b' },
+      b1: { span: first, maxWords, sourceFactIds: ['fact-a'], productClaimId: null },
+    } });
+    const output = patchFor(policy);
+    output.changes[body] = { b0: null, b1: null };
+    expect(applySentenceRepair(original, policy, output)).toEqual({ status: 'ready', draft: before });
+    output.changes[body] = { b0: null, b1: ['Choose', 'buyers.'] };
+    const result = applySentenceRepair(freeze(original), freeze(policy), freeze(output));
+    expect(result.status).toBe('ready');
+    if (result.status === 'ready') {
+      expect(result.draft.sections[0].markdown).toBe(expected);
+      expect(result.draft.claimBindings.filter(b => b.location === body)).toEqual([
+        before.claimBindings[0], bind(body, 'Choose buyers.'),
+      ]);
+      expect(result.draft.claimBindings.filter(b => b.location !== body)).toEqual(before.claimBindings.slice(2));
+    }
+    expect(original).toEqual(before);
+  });
+
+  it('maps Markdown in directAnswer while leaving literal FAQ text in field mode', () => {
+    const original = fixture();
+    original.directAnswer = original.faqAnswers[0].answer = '- Choose 16:9 framing.';
+    original.claimBindings.push(bind('/directAnswer', 'Choose 16:9 framing.'));
+    original.claimBindings[3].span = '- Choose 16:9 framing.';
+    const policy = policyFor(original, ['/directAnswer', faq]);
+    const request = createSentenceRepairRequest(original, policy);
+    expect(request.input.sentenceFields['/directAnswer']).toMatchObject({ mode: 'sentences' });
+    expect(request.input.sentenceFields[faq]).toEqual({ mode: 'field' });
+    const output = patchFor(policy);
+    output.changes['/directAnswer'] = { b5: ['Choose', 'landscape', 'framing.'] };
+    const result = applySentenceRepair(original, policy, output);
+    expect(result.status === 'ready' && result.draft.directAnswer).toBe('- Choose landscape framing.');
+  });
+
+  it('rejects an original with an unbound list item before selecting a repair mode', () => {
+    const original = fixture();
+    original.sections[0].markdown = '- Choose one buyer problem.\n- Unbound advice.';
+    original.claimBindings.splice(1, 1);
+    expect(() => createSentenceRepairRequest(original, policyFor(original))).toThrow();
+  });
+
+  it('deletes a sentence within a list item without consuming markers or neighboring bytes', () => {
+    const original = fixture();
+    original.sections[0].markdown = '- Choose one buyer problem.  Record the workflow.';
+    const policy = policyFor(original);
+    const output = patchFor(policy);
+    output.changes[body] = { b0: null, b1: [] };
+    const result = applySentenceRepair(original, policy, output);
+    expect(result.status === 'ready' && result.draft.sections[0].markdown).toBe('- Choose one buyer problem.  ');
+    expect(result.status === 'ready' && result.draft.claimBindings.filter(b => b.location === body)).toEqual([original.claimBindings[0]]);
+  });
+
+  it.each(['first', 'last'])('permits explicit deletion of the %s paragraph without changing surviving evidence', position => {
+    const original = fixture();
+    original.sections[0].markdown = 'Choose one buyer problem.\n\nRecord the workflow.';
+    const policy = policyFor(original);
+    const output = patchFor(policy);
+    output.changes[body] = position === 'first' ? { b0: [], b1: null } : { b0: null, b1: [] };
+    const result = applySentenceRepair(original, policy, output);
+    expect(result.status).toBe('ready');
+    if (result.status === 'ready') {
+      const survivor = original.claimBindings[position === 'first' ? 1 : 0];
+      expect(result.draft.sections[0].markdown.trim()).toBe(survivor.span);
+      expect(result.draft.claimBindings.filter(binding => binding.location === body)).toEqual([survivor]);
+    }
+  });
+
+  it.each([
+    ['word growth', { b0: ['Choose', 'one', 'buyer', 'problem', 'now.'], b1: [] }],
+    ['field override', replacement('Choose buyers.', ['fact-b'])],
+    ['fact reassignment', { b0: { words: ['Choose', 'buyers.'], sourceFactIds: ['fact-b'] }, b1: null }],
+    ['new list syntax', { b0: ['1.', 'Choose', 'buyers.'], b1: null }],
+    ['empty list item', { b0: [], b1: null }],
+  ])('rejects %s in Markdown sentence mode', (_name, change) => {
+    const original = fixture();
+    original.sections[0].markdown = '- Choose one buyer problem.\n- Record the workflow.';
+    const policy = policyFor(original);
+    const output = patchFor(policy);
+    output.changes[body] = change;
+    expectInvalid(applySentenceRepair(original, policy, output));
+  });
+
+  it('still blocks evidence growth from repeated rendered words after Markdown sentence assembly', () => {
+    const original = fixture();
+    original.sections[0].markdown = '- Choose one buyer problem.\n- Record the workflow.';
+    const policy = policyFor(original);
+    const output = patchFor(policy);
+    // Each replacement fits its own ceiling, but duplicates now expose fact-b
+    // across six rendered words instead of its original three.
+    output.changes[body] = { b0: ['Record', 'the', 'workflow.'], b1: null };
+    const result = applySentenceRepair(original, policy, output);
+    expect(result.status === 'blocked' && result.findings).toContainEqual(expect.objectContaining({
+      code: 'repair.evidence_growth', location: body, sourceFactIds: ['fact-b'],
+    }));
   });
 
   it('supports hybrid edits while enforcing the original field citation inventory and growth gate', () => {

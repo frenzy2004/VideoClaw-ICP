@@ -3,7 +3,9 @@
 Scope: `automation/persistent-autoblogger-v1` into `VideoClaw-ICP:seo-campaign`.
 No lander source changes, article publishing, production merge, deployment or schedule activation are part of this verification. Earlier offline checkpoints and the later authorized live local attempt are distinguished below.
 
-Latest: [topic-aware discovery and observation-read recovery](TOPIC-SOURCE-DISCOVERY-2026-09-11.md), **2,737 tests across 62 files**, zero failed/pending, plus lint/typecheck/build. Regressions cover source routing/scope and bounded recovery of the same Apify job without another paid start. Independent review found no P1/P2 patch issues. Live body reads and six read-only API status checks passed. The two fresh worker collection failures remain failures, not end-to-end proof. State is unchanged at 33 runs / 55 failure records, no active pilot. The fresh uninterrupted milestone remains open.
+Latest: [storyboard repair and reference corrections](STORYBOARD-REPAIR-2026-09-11.md), **2,788 tests across 62 files**, zero failed/pending, plus lint/typecheck/build. Independent bounded review found no remaining P1/P2 issues. Regressions cover contextual product compounds, software-head vetoes, exact Markdown leaf mappings, evidence ceilings and explicit paragraph deletion without structural injection. The fresh storyboard attempt failed after repair and did not reach native QA. State retains 34 runs / 56 failures, no successful pilot. Saved-input diagnostics are not fresh uninterrupted proof.
+
+Previous: [topic-aware discovery and observation-read recovery](TOPIC-SOURCE-DISCOVERY-2026-09-11.md) retains its historical 2,737-test result, read-only API diagnostics and two fresh collection failures.
 
 Previous: [exact first-party source scope and quoted FAQs](EXACT-SOURCE-AND-QUOTED-FAQ-2026-09-11.md), 2,703 tests at that checkpoint. Its fresh whole-worker run on `14032e5` failed source selection against changed SERPs before drafting. The failure and exhausted candidate remain retained.
 

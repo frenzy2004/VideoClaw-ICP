@@ -732,8 +732,31 @@ function referenceCheckContext(context: DraftingContext, draft: GeneratedDraftV2
     contextHash: createHash('sha256').update(JSON.stringify([context.candidate.title, draft, context.productClaims])).digest('hex'),
     location: binding.location, span: binding.span, nearby,
     explicitProductContext: position < 0 || nearby.some(text => containsExplicitProductAlias(text, context.productClaims)
-      || /\b(?:the|this|our) product\b/iu.test(text)),
+      || hasUnresolvedProductHead(text)),
   };
+}
+
+// "Product" may modify a human role or planning artifact instead of naming the
+// software itself. Keep the conservative detector/review manifest unchanged;
+// these compounds only permit a current, exact-anchor independent reference
+// review. They do not establish claim support or grant a product capability.
+function hasUnresolvedProductHead(text: string): boolean {
+  for (const match of text.matchAll(/\b(?:the|this|our) product\b/giu)) {
+    if (/^our\b/iu.test(match[0])) return true;
+    const suffix = text.slice(match.index! + match[0].length);
+    // A software head can precede the compound or follow several modifiers
+    // ("demo review tools"). Keep the veto across the whole span; this
+    // exception never resolves singular or plural software nouns.
+    if (/\b(?:apps?|applications?|platforms?|tools?|software|services?|editors?|assistants?|agents?|automation|systems?|bots?)\b/iu.test(text)
+      || /\bproducts?\b/iu.test(suffix)) return true;
+    const compound = suffix.match(/^\s+(?:accuracy owner|lead|flow|demo(?: storyboard)?)\b/iu);
+    // Require an actual noun-phrase boundary, not a prefix of an unknown head
+    // such as "product demo creation software". Unrecognized continuations and
+    // possessives stay unresolved instead of being guessed non-product.
+    if (!compound || !/^(?:\s*$|[.,;:!?]|\s+(?:is|are|was|were|has|have|can|could|should|must|will|would|approves?|checks?|confirms?|clears?|changes?|reviews?|to|in|on|at|for|before|after|with|without|and|or|but|who|that|which)(?=\s|$))/iu
+      .test(suffix.slice(compound[0].length))) return true;
+  }
+  return false;
 }
 
 /** Conservative detection requests review; it is not itself semantic resolution. */

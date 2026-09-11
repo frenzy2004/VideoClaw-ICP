@@ -845,6 +845,50 @@ describe('contextual product references and precise binding failures', () => {
       .not.toContainEqual(expect.objectContaining({ span: action, reason: 'unapproved_product_reference' }));
   });
 
+  it.each([
+    ['Ask the product lead to check each screen.', 'the product lead'],
+    ['Confirm the product flow before recording.', 'the product flow'],
+    ['Build the product demo storyboard in order.', 'the product demo storyboard'],
+    ['The product accuracy owner approves the script.', 'the product accuracy owner'],
+  ])('lets a current independent review resolve an ordinary product compound: %s', (span, anchor) => {
+    const value = withSpans([span]);
+    const entry = productReferenceManifest(context, value).find(item => item.span === span)!;
+    expect(entry).toBeDefined();
+    expect(entry.explicitProductContext).toBe(false);
+    expect(inspectGeneratedDraft(context, value)).toContainEqual(expect.objectContaining({ span, reason: 'unapproved_product_reference' }));
+    expect(inspectGeneratedDraft(context, value, [{ ...referentReview(value, span), subject: anchor }]))
+      .not.toContainEqual(expect.objectContaining({ span, reason: 'unapproved_product_reference' }));
+  });
+
+  it.each([
+    'The product lead says VideoClaw guarantees perfect edits.',
+    'The product demo shows this app guarantees perfect edits.',
+    'The product lead says the product guarantees perfect edits.',
+    'Our product lead guarantees perfect edits.',
+    'The product lead software guarantees perfect edits.',
+    'The product demo tool guarantees perfect edits.',
+    'The product demo-tool guarantees perfect edits.',
+    'The product demo creation software guarantees perfect edits.',
+    'The product flow editing tool automatically removes background noise.',
+    'The product lead virtual assistant guarantees perfect edits.',
+    'The product demo review software guarantees perfect edits.',
+    'The product demo on-demand generation software guarantees perfect edits.',
+    'The product flow review assistant guarantees perfect edits.',
+    'The product demo review tools guarantee perfect edits.',
+    'The product flow review assistants guarantee perfect edits.',
+    'The product demo review editors guarantee perfect edits.',
+    'The product flow review systems guarantee perfect edits.',
+    'An automated editing system reviews the product demo and guarantees perfect edits.',
+    'The product flow review product guarantees perfect edits.',
+    "The product lead's tool guarantees perfect edits.",
+    'The product automatically guarantees perfect edits.',
+  ])('does not let a compound anchor waive an actual product context: %s', span => {
+    const value = withSpans([span]);
+    const anchor = span.match(/the product (?:demo|flow|lead)/iu)?.[0] ?? 'the product';
+    expect(inspectGeneratedDraft(context, value, [{ ...referentReview(value, span), subject: anchor }]))
+      .toContainEqual(expect.objectContaining({ span, reason: 'unapproved_product_reference' }));
+  });
+
   it.each(['stale binding', 'stale context', 'missing subject', 'ambiguous', 'product', 'duplicate'])('does not accept a %s reference review', kind => {
     const value = withSpans([ordinary, action]);
     const review = referentReview(value);

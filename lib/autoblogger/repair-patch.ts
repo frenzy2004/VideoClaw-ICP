@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
+import remarkGfm from 'remark-gfm';
 import { GeneratedDraftV2Schema, type DraftSafetyFinding, type GeneratedDraftV2 } from './content-bundle';
 import type { JsonSchema } from './openai-responses';
 import { getRepairLocationLimits, inspectRepairDelta, type RepairPolicy } from './repair-policy';
@@ -183,26 +184,48 @@ type SentenceChanges = Record<string, string[] | null>;
 type SentenceRange = { key: string; start: number; end: number; binding: LocalBinding; maxWords: number };
 const sentenceWord = /^[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)*[.,!?;:]*$/u;
 const localSentenceWord = z.string().regex(sentenceWord).refine(word => !/\s/u.test(word));
-const worksheetParser = unified().use(remarkParse);
+const sentenceMarkdown = unified().use(remarkParse).use(remarkGfm);
+const markdownBody = (location: string) => location === '/directAnswer' || /^\/sections\/\d+\/markdown$/u.test(location);
+type MarkdownSentenceNode = {
+  type: string; value?: string; children?: MarkdownSentenceNode[];
+  position?: { start: { offset?: number }; end: { offset?: number } };
+  checked?: boolean | null; ordered?: boolean | null; start?: number | null;
+};
 
-// Conservative literal mapping only: formatting, uncovered punctuation, repeated
-// spans and ambiguous ranges keep the existing full-field contract.
-function sentenceRanges(original: GeneratedDraftV2, location: string, text: string): SentenceRange[] | null {
-  // Quotes are plain text for classification; range matching still uses original bytes.
-  let lexicalText = text.replace(/["“”]/gu, '');
-  const worksheetText = lexicalText.replace(/(?<!\S)_{3,}(?=[.,!?;:]*(?:\s|$))/gu, 'blank');
-  if (worksheetText !== lexicalText) {
-    // Classify literal fill-in blanks only after the actual Markdown parser
-    // proves the field is plain text paragraphs. A standalone underscore rule,
-    // emphasis, code, links or other structure must keep full-field repair.
-    if (location !== '/directAnswer' && !/^\/sections\/\d+\/markdown$/u.test(location)) return null;
-    const tree = worksheetParser.parse(text);
-    if (!tree.children.length || !tree.children.every(node => node.type === 'paragraph'
-      && node.children.every(child => child.type === 'text'))) return null;
-    lexicalText = worksheetText;
+// Only literal text leaves in paragraphs/lists have an unambiguous raw range.
+// GFM parsing also identifies tables, task lists, autolinks and strikethrough,
+// all of which remain field mode. Never strip or reserialize Markdown.
+function markdownSentenceLeaves(text: string) {
+  const leaves: Array<{ start: number; end: number }> = [];
+  const shape: unknown[] = [];
+  const children: Record<string, readonly string[]> = {
+    root: ['paragraph', 'list'], list: ['listItem'],
+    listItem: ['paragraph', 'list'], paragraph: ['text'],
+  };
+  function visit(node: MarkdownSentenceNode): boolean {
+    shape.push([node.type, node.ordered ?? null, node.start ?? null, node.children?.length ?? 0]);
+    if (node.type === 'text') {
+      const start = node.position?.start.offset, end = node.position?.end.offset;
+      if (start === undefined || end === undefined || text.slice(start, end) !== node.value) return false;
+      leaves.push({ start, end });
+      return true;
+    }
+    return node.checked == null && !!node.children?.length && node.children.every(child =>
+      children[node.type]?.includes(child.type) && visit(child));
   }
-  if (!lexicalText.trim().split(/\s+/u).every(word => sentenceWord.test(word))
-    || /(?:^|\n)(?: {4}|\t| {0,3}\d+[.)][ \t])/u.test(text)) return null;
+  return visit(sentenceMarkdown.parse(text)) && leaves.length ? { leaves, shape: JSON.stringify(shape) } : null;
+}
+
+// Every binding must occur once within one literal leaf, and every non-whitespace
+// leaf byte must be covered. Only parser-owned structural bytes may sit outside.
+function sentenceRanges(original: GeneratedDraftV2, location: string, text: string): SentenceRange[] | null {
+  // Preserve the existing literal path, including its whitespace-only gaps.
+  const lexicalText = text.replace(/["“”]/gu, '');
+  const literal = lexicalText.trim().split(/\s+/u).every(word => sentenceWord.test(word))
+    && !/(?:^|\n)(?: {4}|\t| {0,3}\d+[.)][ \t])/u.test(text);
+  const mapped = markdownBody(location) ? markdownSentenceLeaves(text) : null;
+  if (!mapped && !literal) return null;
+  const leaves = mapped?.leaves ?? [{ start: 0, end: text.length }];
   const ranges: SentenceRange[] = [];
   for (const [index, binding] of original.claimBindings.entries()) {
     if (binding.location !== location) continue;
@@ -214,12 +237,18 @@ function sentenceRanges(original: GeneratedDraftV2, location: string, text: stri
     });
   }
   if (!ranges.length) return null;
-  let end = 0;
-  for (const range of [...ranges].sort((a, b) => a.start - b.start)) {
-    if (range.start < end || /\S/u.test(text.slice(end, range.start))) return null;
-    end = range.end;
+  const ordered = [...ranges].sort((a, b) => a.start - b.start);
+  let index = 0;
+  for (const leaf of leaves) {
+    let end = leaf.start;
+    while (index < ordered.length && ordered[index].start < leaf.end) {
+      const range = ordered[index++];
+      if (range.start < end || range.end > leaf.end || /\S/u.test(text.slice(end, range.start))) return null;
+      end = range.end;
+    }
+    if (/\S/u.test(text.slice(end, leaf.end))) return null;
   }
-  return /\S/u.test(text.slice(end)) ? null : ranges;
+  return index === ranges.length ? ranges : null;
 }
 
 function sentenceContract(original: GeneratedDraftV2, policy: RepairPolicy) {
@@ -305,9 +334,23 @@ export function applySentenceRepair(original: GeneratedDraftV2, policy: RepairPo
         continue;
       }
       let text = v1.input.repairFields[location].text;
+      let deletionBaseline = text;
       for (const range of [...ranges].sort((a, b) => b.start - a.start)) {
         const words = sentences[range.key];
         if (words !== null) text = text.slice(0, range.start) + words.join(' ') + text.slice(range.end);
+        if (words?.length === 0) deletionBaseline = deletionBaseline.slice(0, range.start) + deletionBaseline.slice(range.end);
+      }
+      // Bounded tokens such as "1." can still introduce a list at a block start.
+      // Reject structural reinterpretation and deletion of a whole list item.
+      const originalMarkdown = markdownBody(location) && markdownSentenceLeaves(v1.input.repairFields[location].text);
+      if (originalMarkdown) {
+        // Explicit deletion may remove an entire paragraph. Compare against
+        // the original with ONLY those deletions, not a model-owned structure.
+        const expected = markdownSentenceLeaves(deletionBaseline);
+        const mapped = markdownSentenceLeaves(text);
+        if (!expected || !mapped || mapped.shape !== expected.shape) {
+          throw new Error(invalidMessage);
+        }
       }
       // Keep local bindings in their original order, independent of prose order.
       const bindings = ranges.flatMap(range => {
