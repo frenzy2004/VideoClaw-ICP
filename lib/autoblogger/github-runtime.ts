@@ -757,6 +757,7 @@ function integer(value: unknown, label: string): number {
 function authHeaders(token: string): Record<string, string> {
   if (!token.trim()) throw new Error('An explicit GitHub token is required.');
   return {
+    'User-Agent': 'videoclaw-autoblogger-v1',
     Accept: 'application/vnd.github+json',
     Authorization: `Bearer ${token}`,
     'X-GitHub-Api-Version': API_VERSION,

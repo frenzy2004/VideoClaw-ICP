@@ -379,6 +379,32 @@ describe('least-privilege GitHub publisher boundary', () => {
 });
 
 describe('compact same-repository state branch', () => {
+  it('identifies the client on every state read, branch initialization and write request', async () => {
+    const state = createPersistentWorkerState();
+    const body = { sha: 'created-state-sha', encoding: 'base64', content: Buffer.from(JSON.stringify(state)).toString('base64') };
+    const fixture = queuedTransport([
+      json({ message: 'Not Found' }, 404),
+      json({ object: { sha: 'a'.repeat(40) } }),
+      json({ ref: 'refs/heads/autoblogger-state' }, 201),
+      json({ content: { sha: 'created-state-sha' } }, 201),
+      json(body),
+    ]);
+    const store = createGitHubStateStore({ owner: 'frenzy2004', repository: 'VideoClaw-ICP', token: 'fixture',
+      transport: async request => {
+        // GitHub rejects requests lacking a valid application/user identity.
+        const agent = Object.entries(request.headers).find(([key]) => key.toLowerCase() === 'user-agent')?.[1];
+        if (!agent?.trim()) return json({ message: 'User-Agent required' }, 403);
+        return fixture.transport(request);
+      },
+    });
+    const before = await store.load();
+    expect(before.version).toBeNull();
+    const saved = await store.save(state, before.version);
+    expect((await store.load()).version).toBe(saved.version);
+    expect(fixture.requests.map(request => request.method)).toEqual(['GET', 'GET', 'POST', 'PUT', 'GET']);
+    for (const request of fixture.requests) expect(request.headers['User-Agent']).toMatch(/videoclaw/);
+  });
+
   it.each(['remove', 'replace'])('refuses to %s a stored retirement marker even with the current GitHub SHA', async mutation => {
     const before = await successfulDiagnosticFixture();
     const retired = retireDiagnosticHistory(before, '2026-09-09T00:00:00.000Z');
