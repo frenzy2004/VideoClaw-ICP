@@ -1,0 +1,129 @@
+{
+  "id": "vc-manual250-c5-021",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.canto.com/blog/version-control-for-digital-assets/",
+      "supports": "The latest file and the approved file can serve different sharing needs.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.canto.com/hc/en-us/articles/23002260134801-Download-previous-Version-of-an-Asset",
+      "supports": "Previous versions remain available to view and download unless explicitly deleted.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Is the latest version always the approved version?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should captions and thumbnails be versioned too?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should be retained after a wrong-version correction?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Identify the exact released asset and bind approval to that version across the portfolio. Distinct from c3 revision etiquette and from rolling out changes to reusable template structures. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact US/en SERP evidence is being collected by main; query remains a candidate hypothesis. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities.",
+    "Mixed intent: DAM version control applies broadly; this draft addresses company-specific approval and released media packages."
+  ],
+  "serp": {
+    "id": "vc-manual250-c5-021",
+    "keyword": "digital asset management version control",
+    "found": true,
+    "query": "digital asset management version control",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:01.735Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Digital Asset Management Version Control",
+        "url": "https://www.bynder.com/en/glossary/digital-asset-management-version-control/",
+        "domain": "bynder.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "What Is Digital Asset Management?",
+        "url": "https://www.ibm.com/think/topics/digital-asset-management",
+        "domain": "ibm.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Version control: the smarter way to manage ecommerce assets",
+        "url": "https://www.dash.app/blog/digital-asset-management-version-control",
+        "domain": "dash.app",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "The Importance of Version Control",
+        "url": "https://www.acquia.com/glossary/version-control",
+        "domain": "acquia.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "The Importance of Version Control in Digital Asset ...",
+        "url": "https://www.blueberry-ai.com/blog/why-version-control-matters-in-digital-assets-management-systems",
+        "domain": "blueberry-ai.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "The Art of Version Control in DAM",
+        "url": "https://www.aprimo.com/resource-library/article/the-art-of-version-control-in-dam",
+        "domain": "aprimo.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Version Control: Manage Changes with Confidence",
+        "url": "https://www.orangelogic.com/version-control-in-digital-asset-management",
+        "domain": "orangelogic.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "11 Best Digital Asset Management Systems on the Market ...",
+        "url": "https://www.celum.com/en/blog/digital-asset-management-systems/",
+        "domain": "celum.com",
+        "resultType": "article"
+      },
+      {
+        "position": 9,
+        "title": "Digital Asset Management Software for the Enterprise",
+        "url": "https://www.opentext.com/products/digital-asset-management",
+        "domain": "opentext.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": [
+      "Digital asset management version control examples",
+      "Google Drive digital asset management",
+      "Best digital asset management software for marketing",
+      "Image asset management",
+      "Lightroom digital asset management",
+      "Digital asset organizer",
+      "Media asset management software",
+      "Online digital asset management"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

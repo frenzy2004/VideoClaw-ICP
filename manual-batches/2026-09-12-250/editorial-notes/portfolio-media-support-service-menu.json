@@ -1,0 +1,134 @@
+{
+  "id": "vc-manual250-c5-011",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.atlassian.com/itsm/service-request-management/service-catalog",
+      "supports": "A service catalog can list marketing services as well as IT services.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.atlassian.com/software/jira/templates/marketing-service-management",
+      "supports": "The marketing template combines request types, a portal, tracking and a knowledge base.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "How many services should the first menu contain?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does a service menu promise delivery dates?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What happens to a request that fits no entry?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Define requestable services, prerequisites and exclusions for an existing portfolio media program. Unlike retained c5-002's broad support model, the deliverable is a founder-facing service catalog, not a staffing or vendor decision. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact US/en SERP evidence is being collected by main; query remains a candidate hypothesis. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities.",
+    "Mixed intent: the broad service-catalog query also serves IT and internal service teams; article stays with portfolio media request offerings."
+  ],
+  "serp": {
+    "id": "vc-manual250-c5-011",
+    "keyword": "marketing service catalog",
+    "found": true,
+    "query": "marketing service catalog",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:01.735Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "146 free templates of Services catalog",
+        "url": "https://www.flipsnack.com/templates/search?q=Services+catalog",
+        "domain": "flipsnack.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Inspiring Catalog Marketing Examples",
+        "url": "https://flippingbook.com/blog/marketing-tips/catalog-marketing-examples",
+        "domain": "flippingbook.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "How to Create a Service Catalog (Step by Step Guide)",
+        "url": "https://www.port.io/blog/how-to-create-a-service-catalog",
+        "domain": "port.io",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "Service Catalog",
+        "url": "https://www.pinterest.com/ideas/service-catalog/899671832412/",
+        "domain": "pinterest.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Catalog Marketing: Strategies, Examples & Success Tips",
+        "url": "https://www.publitas.com/blog/what-is-catalog-marketing-how-brands-turn-browsing-into-buying/",
+        "domain": "publitas.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Digital marketing catalog Images - Free Download on ...",
+        "url": "https://www.magnific.com/free-photos-vectors/digital-marketing-catalog",
+        "domain": "magnific.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "How to Build Your MSP Service Catalog",
+        "url": "https://www.logmein.com/blog/how-to-build-your-msp-service-catalog",
+        "domain": "logmein.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "Catalog Marketing Examples + When to Use Them",
+        "url": "https://www.conquestgraphics.com/blog/conquest-graphics/2022/01/06/catalog-marketing-examples-when-to-use-them?srsltid=AfmBOoqU34B6w5iUmQp14P3QHRDqoqfKGbCITZdF4J4LILFyzLQFMNyF",
+        "domain": "conquestgraphics.com",
+        "resultType": "article"
+      },
+      {
+        "position": 9,
+        "title": "Service catalog",
+        "url": "https://en.wikipedia.org/wiki/Service_catalog",
+        "domain": "en.wikipedia.org",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is a service catalogue example?",
+      "What companies still send out catalogues?",
+      "Can you give me an example of catalog marketing?",
+      "What is included in a service catalog?"
+    ],
+    "relatedQueries": [
+      "Marketing service catalog template",
+      "Free marketing service catalog",
+      "Marketing service catalog pdf",
+      "Catalog marketing examples",
+      "Catalogue marketing",
+      "Best marketing service catalog",
+      "Service catalog examples",
+      "Product catalogue examples pdf"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

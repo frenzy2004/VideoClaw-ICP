@@ -1,0 +1,107 @@
+{
+  "id": "vc-manual250-c2-013",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.ycombinator.com/faq",
+      "supports": "The application FAQ describes its route for material updates after submission.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.google.com/drive/answer/2409045?co=GENIE.Platform%3DDesktop&hl=en-419",
+      "supports": "Drive provides version management and a keep-forever option for file revisions.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Can I edit a submitted YC application whenever I want?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should I overwrite the video at the old link?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What if only one product step changed?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: A scene replacement manifest separates genuine product changes from cosmetic re-edits and explains delivery consequences. Competing page bodies have not been audited for this draft.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c2-013",
+    "keyword": "update accelerator application demo video",
+    "found": true,
+    "query": "update accelerator application demo video",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Program Google for Startup Accelerator",
+        "url": "https://www.youtube.com/watch?v=t5e251YrRng",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 2,
+        "title": "AWS Global Accelerator Hands-on | Multi-Region Load ...",
+        "url": "https://www.youtube.com/watch?v=F3gHpan6s0o",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 3,
+        "title": "Video Accelerator Pro - Apps on Google Play",
+        "url": "https://play.google.com/store/apps/details?id=com.alejo.video_accelerator_pro&hl=en",
+        "domain": "play.google.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "CASSINI Business Accelerator",
+        "url": "https://www.cassini.eu/accelerator/",
+        "domain": "cassini.eu",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Improve Web Performance with AWS Global Accelerator",
+        "url": "https://aws.amazon.com/video/watch/0184486abb6/",
+        "domain": "aws.amazon.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Move your fintech forward with the Visa Accelerator Program",
+        "url": "https://africa.visa.com/en_MW/visa-everywhere/innovation/visa-accelerator.html",
+        "domain": "africa.visa.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Techstars Accelerator Application Preview",
+        "url": "https://www.techstars.com/application-preview",
+        "domain": "techstars.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Mastering the SaaS Accelerator - Mastering the Marketplace",
+        "url": "https://microsoft.github.io/Mastering-the-Marketplace/saas-accelerator/",
+        "domain": "microsoft.github.io",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

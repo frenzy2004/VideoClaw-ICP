@@ -43,6 +43,102 @@
       "method": "web_page_body_review",
       "checkedAt": "2026-09-12",
       "support": "Portfolio review, skill and collaboration criteria inspected; no rates or outcome figures imported."
+    },
+    {
+      "url": "https://founders.firstround.com/template-of-sheet",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Public offer-template page describes its Network, structured mentoring and founder forums. No company-specific performance claims reused."
+    },
+    {
+      "url": "https://calendly.com/blog/office-hours/",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Office-hours availability, buffers and minimum-notice controls inspected."
+    },
+    {
+      "url": "https://prsay.prsa.org/2021/03/29/media-training-lessons-from-oprah-winfreys-interview-with-prince-harry-and-meghan-markle/",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Interview preparation, factual briefing and difficult-question rehearsal guidance inspected."
+    },
+    {
+      "url": "https://www.peerspace.com/pages/listings/6723e5598687373c1ca21d07",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Host listing distinguishes room-only from equipment/staff package; no rates imported or availability assumed."
+    },
+    {
+      "url": "https://blog.hubspot.com/blog/tabid/6307/bid/31406/How-to-Map-Lead-Nurturing-Content-to-Each-Stage-in-the-Sales-Cycle.aspx",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Content mapping to audience and buying stage inspected; no outcome estimates imported."
+    },
+    {
+      "url": "https://blog.hubspot.com/customers/hubspot-lead-nurturing",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "HubSpot describes nurture categories and content goals; workflow is vendor-specific."
+    },
+    {
+      "url": "https://support.google.com/a/users/answer/12380484?hl=en",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Shared-drive membership, role permissions and limited-access folder controls inspected."
+    },
+    {
+      "url": "https://hbr.org/guidelines-for-authors",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Publisher criteria inspected."
+    },
+    {
+      "url": "https://www.faa.gov/uas/commercial_operators/become_a_drone_pilot",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Part107 remote-pilot certification and recency requirements inspected."
+    },
+    {
+      "url": "https://www.faa.gov/uas/getting_started/where_can_i_fly/airspace_restrictions/flying_near_airports",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Controlled-airspace authorization and airport safety provisions inspected."
+    },
+    {
+      "url": "https://www.ycombinator.com/video/",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Founders-only format, separate product demo, all-founders participation and recorded-call option inspected."
+    },
+    {
+      "url": "https://www.ycombinator.com/faq",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Submitted applications cannot be continuously edited; material-update route inspected."
+    },
+    {
+      "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0062314",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Computer-versus-cloud recording layout behavior inspected."
+    },
+    {
+      "url": "https://explore.sxsw.com/hubfs/SXSWEDU2025PanelPickerGuide-c.pdf",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "2025 guide's format, audience and proposal fields inspected. Historical example, not current event dates or entry rules."
+    },
+    {
+      "url": "https://www.canto.com/blog/version-control-for-digital-assets/",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Version history, originals and approved-versus-latest asset distinctions inspected; no efficiency figures reused."
+    },
+    {
+      "url": "https://www.gainsight.com/blog/how-to-conduct-effective-quarterly-business-reviews-qbrs/",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "QBR discussion of customer outcomes and future goals inspected; no renewal-effect numbers reused."
     }
   ]
 }

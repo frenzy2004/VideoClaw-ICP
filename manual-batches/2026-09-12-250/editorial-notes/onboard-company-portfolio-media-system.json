@@ -1,0 +1,129 @@
+{
+  "id": "vc-manual250-c5-016",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://a16z.com/what-is-new-media-in-2026/",
+      "supports": "The firm describes coordinating company media services and distributing work through owned channels.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.atlassian.com/software/jira/templates/marketing-service-management",
+      "supports": "The marketing template combines request types, a portal, tracking and a knowledge base.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does onboarding need to start with a funding announcement?",
+      "basis": "editorial"
+    },
+    {
+      "question": "When is a company activated?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Which contacts belong in the initial record?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Activate a new company in an already-running media service: establish the company record, contacts, access and first successful request. Unlike founder onboarding videos or funding announcements, the reader operates portfolio infrastructure. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact US/en SERP evidence is being collected by main; query remains a candidate hypothesis. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities.",
+    "Mixed intent: portfolio company onboarding spans finance and reporting; this draft covers activation in an existing media-support service.",
+    "The candidate Visible PDF could not be inspected; it is not cited in this draft."
+  ],
+  "serp": {
+    "id": "vc-manual250-c5-016",
+    "keyword": "portfolio company onboarding",
+    "found": true,
+    "query": "portfolio company onboarding",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:01.735Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Portfolio Company Onboarding",
+        "url": "https://vector-advisory.com/service/portfolio-company-onboarding/",
+        "domain": "vector-advisory.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Automating Portfolio Company Onboarding - Automatter",
+        "url": "https://automatter.substack.com/p/automating-portfolio-company-onboarding",
+        "domain": "automatter.substack.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Portfolio Company Onboarding | Mysite",
+        "url": "https://www.fiedotinconsulting.com/portfolio-company-onboarding",
+        "domain": "fiedotinconsulting.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "The Critical Role of Onboarding in Private Equity | Max ...",
+        "url": "https://www.linkedin.com/posts/maxime_unlocking-value-early-the-critical-role-activity-7260698416043745280-3StH",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 5,
+        "title": "Onboarding Excellence: Best Practices for Fund Manager ...",
+        "url": "https://www.venturefundblueprint.com/articles/onboarding-excellence-best-practices-for-fund-manager-and-portfolio-interactions",
+        "domain": "venturefundblueprint.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "The Private Equity Playbook: Essential Steps for Seamless ...",
+        "url": "https://dufourmax.medium.com/the-private-equity-playbook-essential-steps-for-seamless-portfolio-onboarding-3451d1e98ddd",
+        "domain": "dufourmax.medium.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Best Practices for Onboarding Portfolio Companies to Your VC ...",
+        "url": "https://www.youtube.com/watch?v=tdosk_yY4eA",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 8,
+        "title": "Onboarding Training Portfolio - Custom Training",
+        "url": "https://neoskill.com/onboarding-training-portfolio-custom-training-neoskill/",
+        "domain": "neoskill.com",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "Tips For Onboarding Portfolio Companies",
+        "url": "https://hackernoon.com/tips-for-onboarding-portfolio-companies-3cc2af0c5de",
+        "domain": "hackernoon.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What are the 5 pillars of onboarding?",
+      "What are the 7 steps of portfolio management?",
+      "What does it mean to be a portfolio company?",
+      "What should be included in a company portfolio?"
+    ],
+    "relatedQueries": [
+      "Portfolio company onboarding template",
+      "Portfolio company onboarding process"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

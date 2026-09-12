@@ -1,0 +1,121 @@
+{
+  "id": "vc-manual250-c3-019",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://shootsta.com/video-types/commercial",
+      "supports": "Inspected provider page: Shootsta offers on-location local crews with separate editing support. Advertised turnaround, prices, customer results and network size are not independently validated or used as benchmarks.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.lensrentals.com/",
+      "supports": "Inspected provider page: orders ship for a requested arrival date and equipment is returned when the rental ends. No delivery or savings guarantee is inferred.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Is a local video crew always less expensive?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can our usual director supervise a local crew remotely?",
+      "basis": "editorial"
+    },
+    {
+      "question": "When is it worth sending the existing team?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: A two-route production plan can expose travel and direction dependencies before buyers choose where to source a crew.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c3-019",
+    "keyword": "hire local video crew or fly in production team",
+    "found": true,
+    "query": "hire local video crew or fly in production team",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Hiring Locals vs. Bringing Your Own Team : r/Filmmakers",
+        "url": "https://www.reddit.com/r/Filmmakers/comments/1o2y3j0/hiring_locals_vs_bringing_your_own_team/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Hire a Video & Film Crew in Brazil",
+        "url": "https://www.brazilbaseproductions.com/video-and-film-crew-brazil",
+        "domain": "brazilbaseproductions.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Global Film Crews, Camera Crews & Video Production Staff",
+        "url": "https://crewscontrol.com/services/locations/",
+        "domain": "crewscontrol.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Local Video Production Crew Cost: 2026 Rates & Breakdown",
+        "url": "https://www.teamunitymedia.com/blogs/local-video-production-crew-cost",
+        "domain": "teamunitymedia.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Video Production Crewing | Video Crews | Freelance Camera ...",
+        "url": "https://videoproduction.maslowmedia.com/",
+        "domain": "videoproduction.maslowmedia.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "How to Hire a Video Crew: The Complete Guide for 2026",
+        "url": "https://ineedproduction.com/how-to-hire-a-video-crew/",
+        "domain": "ineedproduction.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Hire a Corporate Videographer in Sao Paulo, Brazil",
+        "url": "https://acrew4u.com/brazil-sao-paulo-camera-crew-hire-and-videographers-2/",
+        "domain": "acrew4u.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Local Film Crew Hire Basics: How to find the right people",
+        "url": "https://indiefilmfactory.com/2026/06/02/local-film-crew-hire/amp/",
+        "domain": "indiefilmfactory.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Who hires the crew on a film?",
+      "What is the hardest job on a film set?",
+      "What is the role of a production crew?",
+      "What are the 7 stages of film production?"
+    ],
+    "relatedQueries": [
+      "Hire local video crew or fly in production team reddit",
+      "Hire local video crew or fly in production team in usa",
+      "Hire local video crew or fly in production team near me",
+      "Is production hub worth it",
+      "Film crew for hire near me",
+      "Film production websites",
+      "Production hub meaning",
+      "Production Hub jobs"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

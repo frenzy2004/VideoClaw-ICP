@@ -1,0 +1,123 @@
+{
+  "id": "vc-manual250-c1-017",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://hbr.org/tip/2019/04/getting-booked-as-a-podcast-guest",
+      "supports": "Listening helps assess show fit.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://riverside.com/blog/podcast-interview-preparation",
+      "supports": "Riverside's host guidance considers audience interests and guest preparation.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should my pitch lead with the funding round?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Do I need previous podcast appearances?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should I offer a complete script for the interview?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: connect a founder's specific experience to an episode a host can actually develop, including questions and listener takeaways.",
+  "reviewNotes": [
+    "Exact US/en SERP evidence is being collected separately; keyword volume, difficulty, and CPC are unknown."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-017",
+    "keyword": "how to pitch yourself as a podcast guest",
+    "found": true,
+    "query": "how to pitch yourself as a podcast guest",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Advice on pitching myself as a podcast guest",
+        "url": "https://www.reddit.com/r/smallbusiness/comments/1npfqrs/advice_on_pitching_myself_as_a_podcast_guest/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "5 Tips for Pitching a Guest for a Podcast - The OnePitch Tea",
+        "url": "https://blog.onepitch.co/5-tips-for-pitching-a-guest-for-a-podcast",
+        "domain": "blog.onepitch.co",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "10 Step Guide to How to Write the Perfect Podcast Guest ...",
+        "url": "https://philfraser.co.uk/perfect-podcast-guest-pitch-email/",
+        "domain": "philfraser.co.uk",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "How to Pitch Yourself as a Podcast Guest (and Actually Get ...",
+        "url": "https://www.linkedin.com/pulse/how-pitch-yourself-podcast-guest-actually-get-booked-sara-lohse-afc--dlipc",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 5,
+        "title": "How To Pitch Yourself For A Podcast",
+        "url": "https://jasminestar.com/how-to-pitch-yourself-for-a-podcast/",
+        "domain": "jasminestar.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "How to Pitch a Podcast That You Want to Be a Guest On",
+        "url": "https://www.podmatch.com/blog/how-to-pitch-a-podcast-that-you-want-to-be-a-guest-on",
+        "domain": "podmatch.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "How To Pitch Podcasts And Be A Great Podcast Guest With ...",
+        "url": "https://www.thecreativepenn.com/2025/06/23/how-to-pitch-podcasts-and-be-a-great-podcast-guest-with-matty-dalrymple/",
+        "domain": "thecreativepenn.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "7 Steps to Write a Podcast Pitch That Gets You Booked",
+        "url": "https://www.cision.com/resources/articles/podcast-pitch/",
+        "domain": "cision.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Do you get paid for being a guest on a podcast?",
+      "Is it too late to start a podcast in 2026?",
+      "How much does a podcast with 5000 listeners make?",
+      "How do you pitch your podcast?"
+    ],
+    "relatedQueries": [
+      "How to pitch yourself as a podcast guest sample",
+      "How to pitch yourself as a podcast guest examples",
+      "How to pitch yourself as a podcast guest pdf",
+      "How to pitch yourself as a podcast guest reddit",
+      "Podcast guest pitch template",
+      "Podcast pitch examples",
+      "Podcast pitch template",
+      "Podcast email examples"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

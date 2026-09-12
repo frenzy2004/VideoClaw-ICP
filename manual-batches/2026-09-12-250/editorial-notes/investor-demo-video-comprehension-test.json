@@ -1,0 +1,115 @@
+{
+  "id": "vc-manual250-c2-014",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://review.firstround.com/heres-what-you-can-really-expect-when-pitching-your-seed-stage-startup-at-a-vc-partner-meeting/",
+      "supports": "The article recommends testing whether unfamiliar listeners can explain the business.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.ycombinator.com/blog/how-to-design-a-better-pitch-deck/",
+      "supports": "The design guidance emphasizes legibility, simplicity and obvious meaning.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should I explain the product before the test?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How many testers prove the demo works?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can the same person test the revised cut?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: A timestamped divergence log turns viewer misunderstanding into specific capture or editing decisions. Competing page bodies have not been audited for this draft.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c2-014",
+    "keyword": "how to get feedback on a product demo",
+    "found": true,
+    "query": "how to get feedback on a product demo",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Your Product Demo Sucks Because It's Focused on ...",
+        "url": "https://review.firstround.com/your-product-demos-suck-because-theyre-focused-on-your-product/",
+        "domain": "review.firstround.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Product demos: a golden opportunity to collect customer ...",
+        "url": "https://www.fizz.co.uk/blog/product-demos-a-golden-opportunity-to-collect-customer-feedback/",
+        "domain": "fizz.co.uk",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "Tips for an Effective Product Demo",
+        "url": "https://www.romanpichler.com/blog/product-demo-tips/",
+        "domain": "romanpichler.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "Potential customers are asking me for a product demo. But ...",
+        "url": "https://www.reddit.com/r/startups/comments/xwdvyf/potential_customers_are_asking_me_for_a_product/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "How to deliver an effective product demo",
+        "url": "https://www.productmarketingalliance.com/how-to-deliver-an-effective-product-demo/",
+        "domain": "productmarketingalliance.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "5 Ways to Get More Product Demos (2026)",
+        "url": "https://ventureharbour.com/5-ways-get-product-demos-b2b-enterprise-software-service/",
+        "domain": "ventureharbour.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "What feedback should you ask for after a product demo?",
+        "url": "https://www.linkedin.com/advice/0/what-feedback-should-you-ask-after-product-demo-n7o0c",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 8,
+        "title": "Interactive Product Demos in 2026: What Actually Converts",
+        "url": "https://userpilot.com/blog/interactive-product-demo/",
+        "domain": "userpilot.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How to do a good product demo?",
+      "What are the biggest demo mistakes?",
+      "How to encourage customers to give feedback?",
+      "How to convince a customer to buy a product sample?"
+    ],
+    "relatedQueries": [
+      "How to get feedback on a product demo reddit",
+      "How to get feedback on a product demo without a"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

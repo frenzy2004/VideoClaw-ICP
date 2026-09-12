@@ -1,0 +1,118 @@
+{
+  "id": "vc-manual250-c1-018",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://sessionize.com/playbook/submit-your-session-for-an-event",
+      "supports": "Sessionize recommends a concise relevant session description and an experience-based speaker biography.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://explore.sxsw.com/hubfs/SXSWEDU2025PanelPickerGuide-c.pdf",
+      "supports": "This historical organizer guide separates session descriptions, takeaways, and formats; current event rules must be checked.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should a founder conference talk promote the product?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What makes a learning outcome useful?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I reuse the same proposal for different events?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: turn a founder's operating experience into a teachable session with visible learning outcomes and an original audience exercise.",
+  "reviewNotes": [
+    "Exact US/en SERP evidence is being collected separately; keyword volume, difficulty, and CPC are unknown."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-018",
+    "keyword": "conference talk proposal for startup founders",
+    "found": true,
+    "query": "conference talk proposal for startup founders",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How To Write CfP Submissions That Get Your Tech ...",
+        "url": "https://www.lenareinhard.com/articles/how-to-write-cfp-submissions-that-get-your-tech-conference-talk-accepte",
+        "domain": "lenareinhard.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "Conference Talk Proposal Examples",
+        "url": "https://thoughtbot.com/blog/conference-talk-proposal-examples",
+        "domain": "thoughtbot.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "Craft A Conference Talk Proposal That Sparks Joy - Anvil Works",
+        "url": "https://anvil.works/blog/conference-talks-that-spark-joy",
+        "domain": "anvil.works",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "How to propose a talk for a conference - Medium",
+        "url": "https://mkoerbi.medium.com/how-to-propose-a-talk-for-a-conference-e1401308fb4f",
+        "domain": "mkoerbi.medium.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Crafting Compelling Conference Proposals from Concept to ...",
+        "url": "https://www.youtube.com/watch?v=ihgk5xWXorU",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 6,
+        "title": "Tips for submitting a proposal for a conference talk",
+        "url": "https://elixirforum.com/t/tips-for-submitting-a-proposal-for-a-conference-talk/23085",
+        "domain": "elixirforum.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "How to Prepare for Startup Conferences",
+        "url": "https://www.reddit.com/r/startups/comments/6ze9kd/how_to_prepare_for_startup_conferences/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "How to find an expert to prepare for investor meetings ...",
+        "url": "https://www.facebook.com/groups/LeanStartupCircleEgypt/posts/3749622041946026/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What are 5 things all proposals should include?",
+      "What are some good topics for a conference?",
+      "What are some good ideas for an event proposal?",
+      "What are the 7 parts of a project proposal template?"
+    ],
+    "relatedQueries": [
+      "Conference talk proposal for startup founders template",
+      "Conference talk proposal for startup founders sample",
+      "Conference talk proposal for startup founders example"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

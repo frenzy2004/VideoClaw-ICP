@@ -1,0 +1,105 @@
+{
+  "id": "vc-manual250-c4-020",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://wistia.com/blog/ai-webinar-transcript-content",
+      "supports": "The publisher includes standalone newsletter sections among transcript-based outputs.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://blog.hubspot.com/marketing/how-to-create-email-newsletters-ht",
+      "supports": "The guidance describes valuable primary content and a clear principal action.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should the newsletter summarize the full recording?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I add my own exercise to an expert’s idea?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does every section need a video link?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Distill one expert insight into a useful standalone newsletter section with context and a reader takeaway. Distinct from c5's portfolio company update newsletter and from a multi-email nurture sequence. No ranking-page comparison or demand conclusion is asserted.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending."
+  ],
+  "serp": {
+    "id": "vc-manual250-c4-020",
+    "keyword": "repurpose video content for email newsletter",
+    "found": true,
+    "query": "repurpose video content for email newsletter",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:32:56.760Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "A newsletter video maker that ships in 15 minutes every send",
+        "url": "https://www.ngram.com/use-cases/newsletter-video",
+        "domain": "ngram.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "How to Create Video Content for Email Marketing Campaigns",
+        "url": "https://www.reframex.ai/how-to-create-video-content-for-email-marketing-campaigns/",
+        "domain": "reframex.ai",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Video Content for Newsletters: Turn Clips Into Subscribers",
+        "url": "https://recapo.ai/blog/video-content-for-newsletter-creators/",
+        "domain": "recapo.ai",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "How to Start Using Video in Email Marketing",
+        "url": "https://www.twilio.com/en-us/blog/insights/video-email-marketing",
+        "domain": "twilio.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Newsletter Video Maker: Turn Emails into Video Summaries",
+        "url": "https://tapvid.ai/feature/newsletter-video",
+        "domain": "tapvid.ai",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Videos in Email Marketing: Why They Work and How to ...",
+        "url": "https://wistia.com/blog/video-in-emails",
+        "domain": "wistia.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "How To Turn A YouTube Video Into A Banger Email ...",
+        "url": "https://writewithai.substack.com/p/how-to-turn-a-youtube-video-into",
+        "domain": "writewithai.substack.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": [
+      "Repurpose video content for email newsletter template",
+      "Repurpose video content for email newsletter free"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

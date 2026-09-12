@@ -1,0 +1,115 @@
+{
+  "id": "vc-manual250-c3-018",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.bls.gov/ooh/media-and-communication/film-and-video-editors-and-camera-operators.htm",
+      "supports": "Inspected official duties section: editors organize and assemble footage; camera operators capture it and collaborate with production leadership. No salary or staffing benchmark is used.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.bls.gov/ooh/media-and-communication/broadcast-and-sound-engineering-technicians.htm",
+      "supports": "Inspected official duties section: technicians operate and monitor equipment, record speech, and synchronize sound with images. No crew-size rule is inferred.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Can one videographer handle a business interview?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How many crew members do I need?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Is a larger crew always better?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: A time-based duty map can reveal staffing conflicts that a generic solo-versus-team comparison misses.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c3-018",
+    "keyword": "solo videographer vs production crew",
+    "found": true,
+    "query": "solo videographer vs production crew",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Solo Videographer vs. Production Company : r/videography",
+        "url": "https://www.reddit.com/r/videography/comments/1pf5fdh/solo_videographer_vs_production_company/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Do you need one videographer or a full production crew?",
+        "url": "https://westream.uk/do-you-need-one-videographer-or-a-full-crew",
+        "domain": "westream.uk",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Solo Videographer vs Production Company in Dubai (2026)",
+        "url": "https://videography.ae/blog/solo-videographer-vs-production-company-dubai/",
+        "domain": "videography.ae",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "Whether you're choosing a solo videographer, or going ...",
+        "url": "https://www.linkedin.com/pulse/whether-youre-choosing-solo-videographer-going-more-production-kelly",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 5,
+        "title": "Videographer vs Video Production Company: Which to Hire?",
+        "url": "https://www.minifridgemedia.com/blog/videographer-vs-video-production-company/",
+        "domain": "minifridgemedia.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Videographer types and pricing: which crew do you ...",
+        "url": "https://www.lv-prod.com/blog/videographer-types-and-pricing-guide/",
+        "domain": "lv-prod.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Videographer vs Video Production Company: What's the ...",
+        "url": "https://bwproductionsllc.com/blog-posts/videographer-vs-video-production-company-whats-the-difference",
+        "domain": "bwproductionsllc.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Pros & cons of starting a one-person production crew",
+        "url": "https://medium.com/@vjnetworkzoomintv/pros-cons-of-starting-a-one-person-production-crew-353c66e1e80d",
+        "domain": "medium.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is the difference between video production and videographer?",
+      "Is AI going to replace videographers?",
+      "What pays more, videography or photography?",
+      "Can you be a self-taught videographer?"
+    ],
+    "relatedQueries": [
+      "Solo videographer vs production crew reddit",
+      "Solo videographer vs production crew cost"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

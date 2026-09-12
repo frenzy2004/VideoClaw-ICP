@@ -1,0 +1,135 @@
+{
+  "id": "vc-manual250-c5-017",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.google.com/a/users/answer/12380484?hl=en",
+      "supports": "Shared-drive access depends on memberships, direct grants and restrictions; temporary blocks may retain underlying grants.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.bynder.com/hc/en-us/articles/360013931739-Best-Practices-for-Digital-Asset-Management",
+      "supports": "The guide covers asset versions, user permissions, library cleanup and user training.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Is a separate company folder enough to protect working files?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should all final assets be visible to the whole portfolio?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How should temporary reviewer access end?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Design and verify company-specific access boundaries in a shared library. This is information separation across independent companies, not a production handoff checklist or visual brand guideline. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact US/en SERP evidence is being collected by main; query remains a candidate hypothesis. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities.",
+    "Mixed intent: DAM permissions can be an IT topic; this draft is limited to multi-company media collaboration.",
+    "Application access is not treated as permission to publish or as a legal confidentiality guarantee."
+  ],
+  "serp": {
+    "id": "vc-manual250-c5-017",
+    "keyword": "digital asset management permissions",
+    "found": true,
+    "query": "digital asset management permissions",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:01.735Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "User permissions and access control in Digital Asset ...",
+        "url": "https://www.resourcespace.com/blog/dam-user-permissions-access-control",
+        "domain": "resourcespace.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "User Permissions in Digital Asset Management",
+        "url": "https://www.orangelogic.com/user-permissions-in-digital-asset-management",
+        "domain": "orangelogic.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "What Is Digital Asset Management?",
+        "url": "https://www.ibm.com/think/topics/digital-asset-management",
+        "domain": "ibm.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "How to Manage User Permissions in DAM",
+        "url": "https://www.keyshot.com/blog/dam-user-permissions/?srsltid=AfmBOoqoxn-B_x98OHPDACaIyNq0Xk96OAPGavDzWsZkDjkTsR_f-KdW",
+        "domain": "keyshot.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Guide to Digital Asset Management (DAM) for Enterprises",
+        "url": "https://www.microsoft.com/en-us/microsoft-365/content-management-solutions/digital-asset-management",
+        "domain": "microsoft.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Delving into permissions, assets, and access",
+        "url": "https://www.bynder.com/en/blog/dam-permissions/",
+        "domain": "bynder.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Security and Compliance in Digital Asset Management",
+        "url": "https://www.aprimo.com/resource-library/article/security-and-compliance-in-digital-asset-management",
+        "domain": "aprimo.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "What Is Digital Asset Management? DAM Software Guide ...",
+        "url": "https://www.acquia.com/blog/digital-asset-management",
+        "domain": "acquia.com",
+        "resultType": "article"
+      },
+      {
+        "position": 9,
+        "title": "Understanding Access Permissions in Digital Asset ...",
+        "url": "https://dbgallery.com/blog/understanding-access-permissions/",
+        "domain": "dbgallery.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is digital asset management used for?",
+      "How to manage user permissions?",
+      "What are the 5 P's of asset management?",
+      "What are some examples of digital asset management?"
+    ],
+    "relatedQueries": [
+      "Digital asset management permissions in dam",
+      "Digital asset management permissions pdf",
+      "Google Drive digital asset management",
+      "Media asset management software",
+      "Best digital asset management software for marketing",
+      "Image asset management",
+      "Lightroom digital asset management",
+      "Digital asset organizer"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

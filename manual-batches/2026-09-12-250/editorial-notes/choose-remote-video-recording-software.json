@@ -1,0 +1,121 @@
+{
+  "id": "vc-manual250-c3-017",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.riverside.com/hc/en-us/articles/5260131045917-Video-and-audio-file-formats-Overview",
+      "supports": "Inspected help page: local high-quality separate tracks, combined edits and internet-dependent cloud recordings are distinct file types.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.riverside.com/hc/en-us/articles/19508681766557-What-is-a-partial-high-quality-track",
+      "supports": "Inspected help page: incomplete uploads create partial tracks; cloud recordings may be a lower-quality fallback with different editing capabilities.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Are separate tracks better than a combined recording?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does local recording eliminate internet problems?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should I buy the highest-resolution plan?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: A two-participant recording and recovery test can evaluate the source files a buyer's editor will actually receive.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c3-017",
+    "keyword": "how to choose remote video recording software",
+    "found": true,
+    "query": "how to choose remote video recording software",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "5 Best Remote Video Recording Software in 2026! ...",
+        "url": "https://famewall.io/blog/remote-video-recording-software/",
+        "domain": "famewall.io",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "Collaborative Video Recording Software: How to Choose ...",
+        "url": "https://streamyard.com/blog/collaborative-video-recording-software",
+        "domain": "streamyard.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "Best Video Recording Software [Updated 2023]",
+        "url": "https://squadcast.fm/blog/choosing-the-best-video-recording-software/",
+        "domain": "squadcast.fm",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "Best Remote Podcast Recording Platforms? (Riverside vs ...",
+        "url": "https://www.reddit.com/r/podcasting/comments/1jinlwh/best_remote_podcast_recording_platforms_riverside/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "How I Record Remote Podcasts (Best Tools & Settings for ...",
+        "url": "https://www.buzzsprout.com/blog/record-podcast-remotely",
+        "domain": "buzzsprout.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Remote Video Production for Small Businesses",
+        "url": "https://mazloy.com/blog/remote-video-production",
+        "domain": "mazloy.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Recording Software: Guides, Research & Expert Insights",
+        "url": "https://riverside.com/category/recording-software",
+        "domain": "riverside.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "8 Best Remote Podcast Recording Software",
+        "url": "https://saspod.com/blog/post/best-remote-podcast-recording-software",
+        "domain": "saspod.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How to choose the right recording software?",
+      "What is the best software for remote podcast recording?",
+      "Which recording software is best for beginners?",
+      "What is the best software for live streaming recording?"
+    ],
+    "relatedQueries": [
+      "How to choose remote video recording software reddit",
+      "How to choose remote video recording software for pc",
+      "Best remote podcast recording software",
+      "How to record a podcast remotely for free",
+      "Best podcast recording software free",
+      "Zencastr",
+      "Remote audio recording software",
+      "Best way to record a podcast remotely"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

@@ -1,0 +1,114 @@
+{
+  "id": "vc-manual250-c2-015",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.techstars.com/blog/founder-advice/five-things-every-techstars-mentor-should-know",
+      "supports": "Mentoring guidance emphasizes goals and evidence of progress.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.google.com/drive/answer/2409045?co=GENIE.Platform%3DDesktop&hl=en-419",
+      "supports": "Drive provides version management and a keep-forever option for file revisions.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Do both clips have to run side by side?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What if we cannot run the old build?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I claim the product is faster from the edited comparison?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: A repeatable paired-capture protocol separates implemented product progress from presentation polish. Competing page bodies have not been audited for this draft.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c2-015",
+    "keyword": "before and after product demo",
+    "found": true,
+    "query": "before and after product demo",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Product Demos: How to Create Demos That Convert (With ...",
+        "url": "https://knowlify.com/articles/product-demos-complete-guide",
+        "domain": "knowlify.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "How To Nail a Product Demo to an Enterprise Customer",
+        "url": "https://medium.com/@_product/how-to-nail-an-enterprise-product-demo-e40f3c194f2c",
+        "domain": "medium.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "12 Best Product Demo Video Examples in 2026 (With ...",
+        "url": "https://vidico.com/news/best-product-demo-video-examples/",
+        "domain": "vidico.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "Have you ever seen a product demo video and be like man",
+        "url": "https://www.linkedin.com/posts/jonathan-liem_have-you-ever-seen-a-product-demo-video-and-activity-7292432750626713601-MJu7",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 5,
+        "title": "WTF Do I do after a demo?? : r/sales",
+        "url": "https://www.reddit.com/r/sales/comments/17459cl/wtf_do_i_do_after_a_demo/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "What To Do Before, During & After A Sales Demo - SalesChakra",
+        "url": "https://saleschakra.com/en/what-to-do-before-during-after-a-sales-demo/",
+        "domain": "saleschakra.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Top Tips for Product Demonstration Videos and Examples ...",
+        "url": "https://www.atlassian.com/blog/loom/product-demonstration",
+        "domain": "atlassian.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How to give a good product demo?",
+      "Can you give me an example of a product demo?",
+      "How do I create a demo?",
+      "What are the types of demo?"
+    ],
+    "relatedQueries": [
+      "Before and after product demo template",
+      "Before and after product demo examples",
+      "Product demo video examples",
+      "Product demo video maker free",
+      "How to record a product demo",
+      "Video demo example",
+      "Best product demo videos",
+      "Interactive demo examples"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

@@ -1,14 +1,14 @@
-# Manual review library: 60 of 250 articles
+# Manual review library: 99 of 250 articles
 
-Target: fifty per ICP. Original fifty are retained unchanged; 10 additional articles assembled. These are unpublished editorial drafts, not demand-validated or team-approved posts. All volume, difficulty and CPC values remain provider-pending.
+Target: fifty per ICP. Original fifty are retained unchanged; 49 additional articles assembled. These are unpublished editorial drafts, not demand-validated or team-approved posts. All volume, difficulty and CPC values remain provider-pending.
 
 | ICP campaign | Complete drafts | Target |
 |---|---:|---:|
-| newly-funded-founder | 10 | 50 |
-| accelerator-demo-day-founder | 10 | 50 |
-| video-production-comparison | 14 | 50 |
-| gtm-content-repurposing-buyer | 16 | 50 |
-| portfolio-media-platform | 10 | 50 |
+| newly-funded-founder | 19 | 50 |
+| accelerator-demo-day-founder | 16 | 50 |
+| video-production-comparison | 20 | 50 |
+| gtm-content-repurposing-buyer | 22 | 50 |
+| portfolio-media-platform | 22 | 50 |
 
 | ID | Markdown article | Primary query | Body words | Status |
 |---|---|---|---:|---|
@@ -62,13 +62,52 @@ Target: fifty per ICP. Original fifty are retained unchanged; 10 additional arti
 | vc-manual50-c5-008 | [Founder Content Workshop: Help a Cohort Leave With a Usable Draft](../2026-09-12-50/articles/founder-content-workshop.md) | content creation workshop for startup founders | 1230 | review |
 | vc-manual50-c5-009 | [Video Brand Guidelines for a Multi-Company Portfolio Program](../2026-09-12-50/articles/portfolio-video-brand-guidelines.md) | video brand guidelines | 1212 | review |
 | vc-manual50-c5-010 | [Accelerator Program Metrics: Evaluate the Media Support Program](../2026-09-12-50/articles/accelerator-media-program-metrics.md) | accelerator program metrics | 1255 | review |
+| vc-manual250-c1-011 | [Pitch a Startup Story Journalists Can Use](../2026-09-12-250/articles/pitch-startup-story-to-journalists.md) | how to pitch a startup story to journalists | 1076 | review |
+| vc-manual250-c1-012 | [Build a Small Media List for Your Startup](../2026-09-12-250/articles/build-startup-media-list.md) | how to build a media list for a startup | 1062 | review |
+| vc-manual250-c1-013 | [Press Embargo vs Exclusive: A Founder’s Decision Guide](../2026-09-12-250/articles/press-embargo-vs-exclusive-founder.md) | press embargo vs exclusive | 1057 | review |
+| vc-manual250-c1-014 | [Prepare for Your First Founder Media Interview](../2026-09-12-250/articles/first-founder-media-interview-preparation.md) | media interview preparation for startup founders | 1030 | review |
+| vc-manual250-c1-015 | [Ask for a Press Correction With Clear Evidence](../2026-09-12-250/articles/request-startup-press-correction.md) | how to ask a journalist for a correction | 1062 | review |
+| vc-manual250-c1-016 | [Pitch a Contributed Article From Founder Experience](../2026-09-12-250/articles/founder-contributed-article-proposal.md) | how to pitch a contributed article | 1040 | review |
+| vc-manual250-c1-017 | [Pitch Yourself as a Podcast Guest With a Useful Angle](../2026-09-12-250/articles/founder-podcast-guest-pitch.md) | how to pitch yourself as a podcast guest | 1042 | review |
+| vc-manual250-c1-018 | [Write a Conference Talk Proposal as a Startup Founder](../2026-09-12-250/articles/startup-founder-conference-talk-proposal.md) | conference talk proposal for startup founders | 1052 | review |
+| vc-manual250-c1-019 | [Write a Founder Bio That Establishes Relevant Expertise](../2026-09-12-250/articles/startup-founder-bio-expertise.md) | startup founder bio examples | 1096 | review |
+| vc-manual250-c2-011 | [Match Accelerator Application Videos to the Right Fields](../2026-09-12-250/articles/accelerator-application-video-field-map.md) | accelerator application video requirements | 1135 | review |
+| vc-manual250-c2-012 | [Record an Application Video With Remote Cofounders](../2026-09-12-250/articles/remote-cofounder-application-video.md) | YC application video founders different locations | 1137 | review |
+| vc-manual250-c2-013 | [Update an Application Demo When the Product Changes](../2026-09-12-250/articles/update-accelerator-application-demo-video.md) | update accelerator application demo video | 1113 | review |
+| vc-manual250-c2-014 | [Find Where Investors Lose the Thread in Your Demo](../2026-09-12-250/articles/investor-demo-video-comprehension-test.md) | how to get feedback on a product demo | 1111 | review |
+| vc-manual250-c2-015 | [Show Accelerator Progress With Paired Demo Recordings](../2026-09-12-250/articles/accelerator-progress-paired-demo-recordings.md) | before and after product demo | 1112 | review |
+| vc-manual250-c2-016 | [Correct an Investor Video Without Leaving Conflicting Claims](../2026-09-12-250/articles/correct-investor-video-visible-claims.md) | correct a mistake in a video | 1060 | review |
 | vc-manual250-c3-011 | [How to Run a Paid Video Editor Test Project](../2026-09-12-250/articles/paid-video-editor-test-project.md) | paid video editor test project | 1148 | review |
 | vc-manual250-c3-012 | [How to Evaluate a Video Production Portfolio](../2026-09-12-250/articles/evaluate-video-production-portfolio.md) | how to evaluate a video production portfolio | 1128 | review |
 | vc-manual250-c3-013 | [Video Production Retainer vs Project: Which Fits?](../2026-09-12-250/articles/video-production-retainer-vs-project.md) | video production retainer vs project | 1143 | review |
 | vc-manual250-c3-014 | [Unlimited Video Editing: Check the Queue Before Buying](../2026-09-12-250/articles/unlimited-video-editing-queue-capacity.md) | how does unlimited video editing work | 1130 | review |
+| vc-manual250-c3-015 | [Rent or Buy Camera Equipment for Business Videos?](../2026-09-12-250/articles/rent-or-buy-camera-equipment-business-video.md) | rent or buy camera equipment for business videos | 1091 | review |
+| vc-manual250-c3-016 | [Rent a Video Studio or Film in Your Office?](../2026-09-12-250/articles/video-studio-rental-vs-office-filming.md) | rent a video studio or film in the office | 1130 | review |
+| vc-manual250-c3-017 | [Choose Remote Recording Software Your Editor Can Use](../2026-09-12-250/articles/choose-remote-video-recording-software.md) | how to choose remote video recording software | 1089 | review |
+| vc-manual250-c3-018 | [Solo Videographer or Production Crew: Size the Shoot](../2026-09-12-250/articles/solo-videographer-vs-production-crew.md) | solo videographer vs production crew | 1091 | review |
+| vc-manual250-c3-019 | [Hire a Local Video Crew or Fly Your Team In?](../2026-09-12-250/articles/local-video-crew-vs-traveling-team.md) | hire local video crew or fly in production team | 1103 | review |
+| vc-manual250-c3-020 | [Hiring a Drone Videographer: What to Verify](../2026-09-12-250/articles/hiring-drone-videographer-verification.md) | what to check when hiring a drone videographer | 1125 | review |
 | vc-manual250-c4-011 | [Turn a Video Transcript Into a Useful Blog Post](../2026-09-12-250/articles/turn-video-transcript-into-useful-blog-post.md) | turn video transcript into blog post | 1110 | review |
 | vc-manual250-c4-012 | [Extract Clear Product Stills From Existing Video](../2026-09-12-250/articles/extract-clear-product-stills-from-video.md) | how to extract high quality stills from video | 1111 | review |
 | vc-manual250-c4-013 | [Edit a Recorded Panel So Each Speaker Is Easy to Follow](../2026-09-12-250/articles/edit-recorded-panel-multiple-speakers.md) | how to edit a panel discussion video | 1143 | review |
 | vc-manual250-c4-014 | [Write Podcast Show Notes From the Actual Conversation](../2026-09-12-250/articles/podcast-show-notes-from-conversation.md) | how to write podcast show notes | 1134 | review |
 | vc-manual250-c4-015 | [Turn Recorded Q&A Into a Buyer FAQ](../2026-09-12-250/articles/recorded-qa-to-buyer-faq.md) | turn webinar questions into FAQ | 1102 | review |
 | vc-manual250-c4-016 | [Turn Sales Call Insights Into Objection Battlecards](../2026-09-12-250/articles/sales-call-insights-objection-battlecards.md) | create sales battlecards from sales calls | 1119 | review |
+| vc-manual250-c4-017 | [Build a Useful Follow-Up From a Recorded Sales Demo](../2026-09-12-250/articles/recorded-sales-demo-follow-up.md) | product demo follow up video email | 1102 | review |
+| vc-manual250-c4-018 | [Build a Buying Committee Content Pack From Existing Assets](../2026-09-12-250/articles/buying-committee-content-pack.md) | content for B2B buying committee | 1116 | review |
+| vc-manual250-c4-019 | [Build a Nurture Sequence From Content You Already Have](../2026-09-12-250/articles/nurture-sequence-from-existing-content.md) | lead nurturing email sequence using existing content | 1115 | review |
+| vc-manual250-c4-020 | [Turn Expert Recordings Into a Newsletter Worth Reading](../2026-09-12-250/articles/expert-recordings-to-newsletter.md) | repurpose video content for email newsletter | 1125 | review |
+| vc-manual250-c4-021 | [Use Existing Content to Re-Engage Stalled B2B Leads](../2026-09-12-250/articles/existing-content-reengage-stalled-leads.md) | re engagement email content for B2B leads | 1095 | review |
+| vc-manual250-c4-022 | [Turn a Customer QBR Into a Renewal Recap](../2026-09-12-250/articles/customer-qbr-to-renewal-recap.md) | customer QBR recap video | 1082 | review |
+| vc-manual250-c5-011 | [Build a Portfolio Media Support Service Menu](../2026-09-12-250/articles/portfolio-media-support-service-menu.md) | marketing service catalog | 1166 | review |
+| vc-manual250-c5-012 | [Prioritize Media Requests Across Portfolio Companies](../2026-09-12-250/articles/prioritize-portfolio-media-requests.md) | creative request management | 1201 | review |
+| vc-manual250-c5-013 | [Schedule Portfolio Media Office Hours Without Overbooking](../2026-09-12-250/articles/portfolio-media-office-hours-scheduling.md) | office hours scheduling | 1178 | review |
+| vc-manual250-c5-014 | [Unblock Portfolio Media Reviews With Work Limits](../2026-09-12-250/articles/portfolio-media-review-work-limits.md) | content approval bottlenecks | 1185 | review |
+| vc-manual250-c5-015 | [Resolve Launch Clashes Across Portfolio Companies](../2026-09-12-250/articles/resolve-portfolio-launch-calendar-clashes.md) | shared marketing calendar | 1153 | review |
+| vc-manual250-c5-016 | [Onboard a New Company to Your Portfolio Media System](../2026-09-12-250/articles/onboard-company-portfolio-media-system.md) | portfolio company onboarding | 1176 | review |
+| vc-manual250-c5-017 | [Separate Company Access in a Shared Portfolio Media Library](../2026-09-12-250/articles/separate-company-access-media-library.md) | digital asset management permissions | 1147 | review |
+| vc-manual250-c5-018 | [Label Portfolio Photos With the Right People and Credits](../2026-09-12-250/articles/label-portfolio-photos-people-credits.md) | photo caption metadata | 1179 | review |
+| vc-manual250-c5-019 | [Keep a Portfolio Company Directory Current](../2026-09-12-250/articles/maintain-portfolio-company-directory.md) | portfolio company directory | 1161 | review |
+| vc-manual250-c5-020 | [Design Tags for a Multi-Company Media Library](../2026-09-12-250/articles/portfolio-media-library-tag-taxonomy.md) | digital asset management taxonomy | 1142 | review |
+| vc-manual250-c5-021 | [Make Approved Portfolio Media Versions Unambiguous](../2026-09-12-250/articles/portfolio-media-release-version-control.md) | digital asset management version control | 1108 | review |
+| vc-manual250-c5-022 | [Track Expiring Media Rights Across a Portfolio](../2026-09-12-250/articles/portfolio-media-rights-expiry-calendar.md) | digital asset expiration dates | 1130 | review |

@@ -1,0 +1,122 @@
+{
+  "id": "vc-manual250-c5-015",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://asana.com/templates/marketing-calendar",
+      "supports": "A shared marketing calendar maps activities to dates, owners and channels.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://a16z.com/what-is-new-media-in-2026/",
+      "supports": "The firm describes coordinating company media services and distributing work through owned channels.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Must companies move their launch dates to fit the fund calendar?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should a tentative reservation mean?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How should a last-minute change be communicated?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Resolve collisions between separate company launches competing for the same fund-owned distribution slots. Unlike retained c1-006 and c4-008, this reconciles multiple organizations' calendars rather than planning one campaign; unlike c5-034, it does not synchronize one shared embargo. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact US/en SERP evidence is being collected by main; query remains a candidate hypothesis. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities.",
+    "Mixed intent: shared marketing calendar is broad; the work product resolves competing multi-company commitments rather than planning an individual campaign."
+  ],
+  "serp": {
+    "id": "vc-manual250-c5-015",
+    "keyword": "shared marketing calendar",
+    "found": true,
+    "query": "shared marketing calendar",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:01.735Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Marketing calendars: What they are + how to build one",
+        "url": "https://www.airtable.com/articles/how-to-create-a-marketing-calendar",
+        "domain": "airtable.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "Free Social Media Calendar Template for Marketing Teams ...",
+        "url": "https://asana.com/templates/social-media-calendar",
+        "domain": "asana.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Plan your campaigns with the marketing calendar",
+        "url": "https://knowledge.hubspot.com/campaigns/use-your-marketing-calendar",
+        "domain": "knowledge.hubspot.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Free Marketing Calendar Templates in All Formats",
+        "url": "https://www.smartsheet.com/9-free-marketing-calendar-templates-excel?srsltid=AfmBOopWOmdPnEZTgAfLJIlPMnASGYvulSJoWLHLKK2KG6UKIaAUS4cg",
+        "domain": "smartsheet.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Free Marketing Calendar Template & Examples",
+        "url": "https://www.teamgantt.com/marketing-templates/marketing-schedule-template",
+        "domain": "teamgantt.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Marketing Calendar Guide: Plan Campaigns And Track ...",
+        "url": "https://monday.com/blog/marketing/marketing-calendar/",
+        "domain": "monday.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Best Digital Marketing Calendar for SMBs + Template",
+        "url": "https://www.pipedrive.com/en/blog/digital-marketing-calendar",
+        "domain": "pipedrive.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "2026 Marketing Calendar | Key Marketing Dates",
+        "url": "https://www.energypr.co.uk/blog/marketing-calendar/",
+        "domain": "energypr.co.uk",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": [
+      "Shared marketing calendar template",
+      "Shared marketing calendar template free",
+      "Shared marketing calendar template excel",
+      "Marketing calendar template Excel",
+      "Shared marketing calendar pdf",
+      "Social media calendar template Excel",
+      "Annual marketing calendar template",
+      "Digital marketing calendar"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

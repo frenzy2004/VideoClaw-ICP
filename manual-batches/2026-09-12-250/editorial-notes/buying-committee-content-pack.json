@@ -1,0 +1,130 @@
+{
+  "id": "vc-manual250-c4-018",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.vidyard.com/video-in-motion-benchmark-report/",
+      "supports": "The mid-funnel section discusses content for stakeholders joining an evaluation.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://blog.hubspot.com/customers/hubspot-lead-nurturing",
+      "supports": "The publisher describes adapting its content to different roles.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should every stakeholder receive the same assets?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How many assets belong in the pack?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should the internal champion forward?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Choose different evidence for an end user, technical evaluator and budget owner within one customer account. This solves internal buyer sharing, not investor pitching, a portfolio media program or general clip distribution. No ranking-page comparison or demand conclusion is asserted.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending."
+  ],
+  "serp": {
+    "id": "vc-manual250-c4-018",
+    "keyword": "content for B2B buying committee",
+    "found": true,
+    "query": "content for B2B buying committee",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:32:56.760Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "B2B Buying: How Top CSOs and CMOs Optimize the Journey",
+        "url": "https://www.gartner.com/en/sales/insights/b2b-buying-journey",
+        "domain": "gartner.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "B2B Buying Committee Content Strategy",
+        "url": "https://wpvip.com/blog/b2b-buying-committee-content-strategy/",
+        "domain": "wpvip.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "​Buying Committee: Definition, Examples & Use Cases - Saber",
+        "url": "https://www.saber.app/glossary/buying-committee",
+        "domain": "saber.app",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Mapping the B2B Buying Committee: 10 Roles, Strategies, ...",
+        "url": "https://tractioncomplete.com/articles/mapping-the-b2b-buying-committee/",
+        "domain": "tractioncomplete.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Navigating the Rise of the Buying Committee in B2B Sales",
+        "url": "https://www.madisonlogic.com/blog/navigating-the-fall-of-the-individual-buyer-and-the-rise-of-the-buying-committee/",
+        "domain": "madisonlogic.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Buyer Persona and Buying Committee in B2B Marketing",
+        "url": "https://www.trespimedios.co/en/blogs-trespi/buyer-persona-and-buying-committee-in-b2b-marketing",
+        "domain": "trespimedios.co",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "6 strategies for engaging the buying group through account ...",
+        "url": "https://www.demandbase.com/faq/b2b-buying-committee/",
+        "domain": "demandbase.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "The B2B Buying Committee Problem",
+        "url": "https://contrastedmarketing.com/blog/b2b-buying-committee-problem/",
+        "domain": "contrastedmarketing.com",
+        "resultType": "article"
+      },
+      {
+        "position": 9,
+        "title": "How Best Answer Content Strategy Wins B2B Buying ...",
+        "url": "https://www.toprankmarketing.com/blog/buying-committee-best-answer/",
+        "domain": "toprankmarketing.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is the rule of 7 in B2B?",
+      "What are the 8 steps of the B2B buying process?",
+      "What are some examples of B2B content marketing?",
+      "What are the four C's of B2B marketing?"
+    ],
+    "relatedQueries": [
+      "Free content for b2b buying committee",
+      "Gartner B2B buying journey",
+      "B2B buying process",
+      "Gartner b2b buying journey 2026",
+      "B2b buying behaviour",
+      "The new B2B buying journey",
+      "B2b buying how top csos and cmos optimize the journey",
+      "B2B customer journey McKinsey"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

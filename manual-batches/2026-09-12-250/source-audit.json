@@ -1,8 +1,53 @@
 {
   "schemaVersion": 1,
   "kind": "source_transport_audit_not_editorial_approval",
-  "articlesAvailable": 8,
+  "articlesAvailable": 49,
   "receipts": [
+    {
+      "url": "https://a16z.com/what-is-new-media-in-2026/",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:39:10.065Z",
+      "finalUrl": "https://a16z.com/what-is-new-media-in-2026/",
+      "httpStatus": 200,
+      "bodySha256": "18736fd48f5335e9864c5e74f7d490991dfd96f5f200b7762725dc047687ded0",
+      "extractedWords": 636
+    },
+    {
+      "url": "https://asana.com/templates/marketing-calendar",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:39:10.623Z",
+      "finalUrl": "https://asana.com/templates/marketing-calendar",
+      "httpStatus": 200,
+      "bodySha256": "bd5c15f52276294ab9caf5caaab1a8908ac4f11deedebc6ef964a042650bb6fe",
+      "extractedWords": 1123
+    },
+    {
+      "url": "https://blog.hubspot.com/blog/tabid/6307/bid/31406/How-to-Map-Lead-Nurturing-Content-to-Each-Stage-in-the-Sales-Cycle.aspx",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T02:39:09.801Z",
+      "error": "Error: Source has no usable body evidence."
+    },
+    {
+      "url": "https://blog.hubspot.com/customers/hubspot-lead-nurturing",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T02:39:09.765Z",
+      "error": "Error: Source has no usable body evidence."
+    },
+    {
+      "url": "https://blog.hubspot.com/marketing/how-to-create-email-newsletters-ht",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:41:59.376Z",
+      "finalUrl": "https://blog.hubspot.com/marketing/how-to-create-email-newsletters-ht",
+      "httpStatus": 200,
+      "bodySha256": "7c7ad43b9af9270fae92e07247a7c7aea566e1301e8ce080f0952300685647eb",
+      "extractedWords": 32
+    },
+    {
+      "url": "https://calendly.com/blog/office-hours/",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T02:39:09.876Z",
+      "error": "Error: Source has no usable body evidence."
+    },
     {
       "url": "https://creators.spotify.com/resources/create/podcast-episode-descriptions",
       "status": "body_retrieved",
@@ -11,6 +56,69 @@
       "httpStatus": 200,
       "bodySha256": "034585a021eb76849bcc1fafcb475e2ac3c7d6caf6660f886282addb40e65aa8",
       "extractedWords": 25
+    },
+    {
+      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:41:58.397Z",
+      "finalUrl": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+      "httpStatus": 200,
+      "bodySha256": "03631c40f599d6506ff3e0023c16dbb78fc5c5e72052fb15490dbcad9f4f169d",
+      "extractedWords": 1284
+    },
+    {
+      "url": "https://docs.wistia.com/docs/embed-links",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:39:09.602Z",
+      "finalUrl": "https://docs.wistia.com/docs/embed-links",
+      "httpStatus": 200,
+      "bodySha256": "7127741e01e4954552dd871b638b0a964610b538626e86811e39e7b962ac49a7",
+      "extractedWords": 1026
+    },
+    {
+      "url": "https://experienceleague.adobe.com/en/docs/experience-manager-learn/assets/metadata/tagging-and-taxonomy",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:42:00.144Z",
+      "finalUrl": "https://experienceleague.adobe.com/en/docs/experience-manager-learn/assets/metadata/tagging-and-taxonomy",
+      "httpStatus": 200,
+      "bodySha256": "7c7c66f83ca412149dc0aaa7ac59729e253d2361f1837da9d1d7fae7f1be667b",
+      "extractedWords": 188
+    },
+    {
+      "url": "https://explore.sxsw.com/hubfs/SXSWEDU2025PanelPickerGuide-c.pdf",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T02:44:48.705Z",
+      "error": "Error: Source response body exceeds the byte limit."
+    },
+    {
+      "url": "https://founders.firstround.com/template-of-sheet",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T02:39:09.827Z",
+      "error": "Error: Source has no usable body evidence."
+    },
+    {
+      "url": "https://hbr.org/guidelines-for-authors",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T02:41:58.233Z",
+      "error": "Error: Source has no usable body evidence."
+    },
+    {
+      "url": "https://hbr.org/tip/2019/04/getting-booked-as-a-podcast-guest",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:41:58.234Z",
+      "finalUrl": "https://hbr.org/tip/2019/04/getting-booked-as-a-podcast-guest",
+      "httpStatus": 200,
+      "bodySha256": "74cd71cf5f253145e42c298a5a876de16b28dce6a882edf5571e64db772f8501",
+      "extractedWords": 254
+    },
+    {
+      "url": "https://help.lensrentals.com/26505-other-questions/204151-do-you-sell-used-equipment",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:39:08.612Z",
+      "finalUrl": "https://help.lensrentals.com/26505-other-questions/204151-do-you-sell-used-equipment",
+      "httpStatus": 200,
+      "bodySha256": "0d33cab211a46cb3fedeaebc2e132fcdb2a4aec4d10332ed280b84ddb92bd350",
+      "extractedWords": 80
     },
     {
       "url": "https://helpx.adobe.com/ie/premiere/desktop/edit-projects/set-up-multi-camera-sequences-for-editing/create-a-multi-camera-source-sequence.html",
@@ -46,6 +154,15 @@
       "extractedWords": 1234
     },
     {
+      "url": "https://mailchimp.com/help/re-engage-inactive-subscribers/",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:44:49.882Z",
+      "finalUrl": "https://mailchimp.com/help/re-engage-inactive-subscribers/",
+      "httpStatus": 200,
+      "bodySha256": "6842ceced6c92b2d9e3ca2666ed47e59eebdec845d44e55b835322edef86e85f",
+      "extractedWords": 26
+    },
+    {
       "url": "https://podcasters.apple.com/support/825-how-to-create-an-episode",
       "status": "body_retrieved",
       "checkedAt": "2026-09-12T02:34:29.172Z",
@@ -53,6 +170,129 @@
       "httpStatus": 200,
       "bodySha256": "274423c22a035f50f1c8995bf433701421a2720c5adc8bbfe26a9adfd209664a",
       "extractedWords": 278
+    },
+    {
+      "url": "https://prsay.prsa.org/2021/03/29/media-training-lessons-from-oprah-winfreys-interview-with-prince-harry-and-meghan-markle/",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T02:39:08.397Z",
+      "error": "Error: Source has no usable body evidence."
+    },
+    {
+      "url": "https://review.firstround.com/heres-what-you-can-really-expect-when-pitching-your-seed-stage-startup-at-a-vc-partner-meeting/",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:44:48.678Z",
+      "finalUrl": "https://review.firstround.com/heres-what-you-can-really-expect-when-pitching-your-seed-stage-startup-at-a-vc-partner-meeting/",
+      "httpStatus": 200,
+      "bodySha256": "6d8a88490a8ad8f29407646a47838bc027794b2de8ed4669b37ec770b22f8318",
+      "extractedWords": 530
+    },
+    {
+      "url": "https://riverside.com/blog/podcast-interview-preparation",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:41:58.450Z",
+      "finalUrl": "https://riverside.com/blog/podcast-interview-preparation",
+      "httpStatus": 200,
+      "bodySha256": "f6ae7cc0e26ced072a3b6237495cc83eba7aa82c977e969b727495b6a904277e",
+      "extractedWords": 638
+    },
+    {
+      "url": "https://sessionize.com/playbook/submit-your-session-for-an-event",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:44:49.746Z",
+      "finalUrl": "https://sessionize.com/playbook/submit-your-session-for-an-event",
+      "httpStatus": 200,
+      "bodySha256": "50b6aa45c4d06db1c27c961428d3a16e7a89568368999523021cb0c366f638bc",
+      "extractedWords": 1033
+    },
+    {
+      "url": "https://shootsta.com/video-types/commercial",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:41:59.276Z",
+      "finalUrl": "https://shootsta.com/video-types/commercial",
+      "httpStatus": 200,
+      "bodySha256": "7f91cf611e1238f9f548c8c68c5a6bb1418fa89c3e20dd9cf5cd11a71dd40859",
+      "extractedWords": 797
+    },
+    {
+      "url": "https://support.apple.com/en-mide/guide/keynote/tan81813d552/mac",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:44:49.743Z",
+      "finalUrl": "https://support.apple.com/en-mide/guide/keynote/tan81813d552/mac",
+      "httpStatus": 200,
+      "bodySha256": "0169f59a5c1e26200755ac5eda48f5c04221b7d163d70fcc58ae7b99fcd9badc",
+      "extractedWords": 159
+    },
+    {
+      "url": "https://support.bynder.com/hc/en-us/articles/20331272932626-Taxonomy-Tips-for-your-DAM",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T02:41:59.483Z",
+      "error": "Error: Source body evidence requires a successful response."
+    },
+    {
+      "url": "https://support.bynder.com/hc/en-us/articles/360013931059-How-To-Mark-Assets-As-Archived",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:44:50.177Z",
+      "finalUrl": "https://support.bynder.com/hc/en-us/articles/360013931059-How-To-Mark-Assets-As-Archived",
+      "httpStatus": 200,
+      "bodySha256": "0cb6b0173681ca0858a1ffbe875854954eb2ec49234285efb2c8db2df94843a0",
+      "extractedWords": 549
+    },
+    {
+      "url": "https://support.bynder.com/hc/en-us/articles/360013931739-Best-Practices-for-Digital-Asset-Management",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:39:10.178Z",
+      "finalUrl": "https://support.bynder.com/hc/en-us/articles/360013931739-Best-Practices-for-Digital-Asset-Management",
+      "httpStatus": 200,
+      "bodySha256": "693776e63e1deb63ec9f4b58d65c6818e40da0c3d3e3ad7f831d59b345ca764d",
+      "extractedWords": 380
+    },
+    {
+      "url": "https://support.canto.com/hc/en-us/articles/23001802813841-Set-Expiration-Dates",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:44:50.127Z",
+      "finalUrl": "https://support.canto.com/hc/en-us/articles/23001802813841-Set-Expiration-Dates",
+      "httpStatus": 200,
+      "bodySha256": "1e120e224c56e0b6de09563949f0b19074fd08b0ebbfbcd9f89e9b4781de302b",
+      "extractedWords": 174
+    },
+    {
+      "url": "https://support.canto.com/hc/en-us/articles/23002260134801-Download-previous-Version-of-an-Asset",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:44:49.892Z",
+      "finalUrl": "https://support.canto.com/hc/en-us/articles/23002260134801-Download-previous-Version-of-an-Asset",
+      "httpStatus": 200,
+      "bodySha256": "4221bda2b769b8e5197f0a150db750b19f97178fb50ca56f6391e9911ad36ecb",
+      "extractedWords": 84
+    },
+    {
+      "url": "https://support.google.com/a/users/answer/12380484?hl=en",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T02:39:10.333Z",
+      "error": "Error: Source response body exceeds the byte limit."
+    },
+    {
+      "url": "https://support.google.com/drive/answer/2409045?co=GENIE.Platform%3DDesktop&hl=en-419",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T02:41:59.044Z",
+      "error": "Error: Source response body exceeds the byte limit."
+    },
+    {
+      "url": "https://support.riverside.com/hc/en-us/articles/19508681766557-What-is-a-partial-high-quality-track",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:39:09.138Z",
+      "finalUrl": "https://support.riverside.com/hc/en-us/articles/19508681766557-What-is-a-partial-high-quality-track",
+      "httpStatus": 200,
+      "bodySha256": "4143e23c68ade6156a0cc45b042528b0b1604f59b3f6a41d5ebe51f199d6d798",
+      "extractedWords": 379
+    },
+    {
+      "url": "https://support.riverside.com/hc/en-us/articles/5260131045917-Video-and-audio-file-formats-Overview",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:39:08.887Z",
+      "finalUrl": "https://support.riverside.com/hc/en-us/articles/5260131045917-Video-and-audio-file-formats-Overview",
+      "httpStatus": 200,
+      "bodySha256": "b55748597baeaff373027cd7aa35457d0f5a952f220027efc61574c416af91f0",
+      "extractedWords": 209
     },
     {
       "url": "https://support.upwork.com/hc/en-us/articles/44564821903763-Understanding-milestones-on-fixed-price-contracts",
@@ -64,6 +304,21 @@
       "extractedWords": 556
     },
     {
+      "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0062314",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T02:41:59.322Z",
+      "error": "Error: Source has no usable body evidence."
+    },
+    {
+      "url": "https://vidico.com/news/video-retainer-packages/",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:39:09.365Z",
+      "finalUrl": "https://vidico.com/news/video-retainer-packages/",
+      "httpStatus": 200,
+      "bodySha256": "5380ee4e4381970d28e138dcbd65910ac78f8213a807d992b8e317b58aa84466",
+      "extractedWords": 1196
+    },
+    {
       "url": "https://wistia.com/blog/ai-webinar-transcript-content",
       "status": "body_retrieved",
       "checkedAt": "2026-09-12T02:34:28.583Z",
@@ -71,6 +326,15 @@
       "httpStatus": 200,
       "bodySha256": "385175ec69f294ac6afc4443988d7d9ba63e00adaa1d90021a9f50115e0c5576",
       "extractedWords": 583
+    },
+    {
+      "url": "https://www.ap.org/about/news-values-and-principles/telling-the-story/",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:41:58.247Z",
+      "finalUrl": "https://www.ap.org/about/news-values-and-principles/telling-the-story/",
+      "httpStatus": 200,
+      "bodySha256": "f113cc6e85a09a46b3a2c1fe57facff69e2d9a304a3229293b3ddcd86d6dc22d",
+      "extractedWords": 1297
     },
     {
       "url": "https://www.atlassian.com/itsm/service-request-management/service-catalog",
@@ -85,6 +349,15 @@
       "error": "Error: Source response body exceeds the byte limit."
     },
     {
+      "url": "https://www.bls.gov/ooh/media-and-communication/broadcast-and-sound-engineering-technicians.htm",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:41:58.885Z",
+      "finalUrl": "https://www.bls.gov/ooh/media-and-communication/broadcast-and-sound-engineering-technicians.htm",
+      "httpStatus": 200,
+      "bodySha256": "b0d1039174201dd7eacf53e9e58e8c36ef662ea8658e2c6ca62a11c5d007d2c1",
+      "extractedWords": 624
+    },
+    {
       "url": "https://www.bls.gov/ooh/media-and-communication/film-and-video-editors-and-camera-operators.htm",
       "status": "body_retrieved",
       "checkedAt": "2026-09-12T02:34:28.602Z",
@@ -94,10 +367,181 @@
       "extractedWords": 69
     },
     {
+      "url": "https://www.canto.com/blog/version-control-for-digital-assets/",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T02:44:49.917Z",
+      "error": "Error: Source has no usable body evidence."
+    },
+    {
+      "url": "https://www.canto.com/glossary/metadata-management/",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:41:59.661Z",
+      "finalUrl": "https://www.canto.com/glossary/metadata-management/",
+      "httpStatus": 200,
+      "bodySha256": "b18ab3fb5aa3cdc81749f32cb7baede03780fe7783b3733c0e47f42b347170c8",
+      "extractedWords": 6
+    },
+    {
+      "url": "https://www.faa.gov/uas/commercial_operators/become_a_drone_pilot",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T02:41:59.159Z",
+      "error": "Error: Source body evidence requires a successful response."
+    },
+    {
+      "url": "https://www.faa.gov/uas/getting_started/where_can_i_fly/airspace_restrictions/flying_near_airports",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T02:41:59.190Z",
+      "error": "Error: Source body evidence requires a successful response."
+    },
+    {
+      "url": "https://www.gainsight.com/blog/how-to-conduct-effective-quarterly-business-reviews-qbrs/",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T02:44:49.748Z",
+      "error": "Error: Source has no usable body evidence."
+    },
+    {
+      "url": "https://www.gong.io/blog/how-to-handle-any-sales-objection",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:39:09.419Z",
+      "finalUrl": "https://www.gong.io/blog/how-to-handle-any-sales-objection",
+      "httpStatus": 200,
+      "bodySha256": "4b5eac8143cd1f3b5c834350e421c38af72cc3d02cb30ceba7533d6af5336cd5",
+      "extractedWords": 157
+    },
+    {
+      "url": "https://www.gong.io/blog/sales-battle-card-example",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:39:09.448Z",
+      "finalUrl": "https://www.gong.io/blog/sales-battle-card-example",
+      "httpStatus": 200,
+      "bodySha256": "1bdb1ce14cd190e9fc0b2e0fcb525b5a536269f0913140a685b06665a20e4892",
+      "extractedWords": 1307
+    },
+    {
+      "url": "https://www.intercom.com/help/en/articles/56645-how-to-write-great-help-articles",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:39:09.437Z",
+      "finalUrl": "https://www.intercom.com/help/en/articles/56645-how-to-write-great-help-articles",
+      "httpStatus": 200,
+      "bodySha256": "999cb62937b378a69d56a041b0b54c8bfde2db29c2bcce345ba137ea64ddffb2",
+      "extractedWords": 864
+    },
+    {
+      "url": "https://www.iptc.org/std/photometadata/specification/IPTC-PhotoMetadata-2025.1.html",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T02:42:00.144Z",
+      "error": "Error: Source has no usable body evidence."
+    },
+    {
+      "url": "https://www.lensrentals.com/",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:39:09.001Z",
+      "finalUrl": "https://www.lensrentals.com/",
+      "httpStatus": 200,
+      "bodySha256": "c9703b761fba04f08550d86eac550bb9c4c55b6182713acdae4b0bdc5306c6de",
+      "extractedWords": 70
+    },
+    {
+      "url": "https://www.peerspace.com/pages/listings/66aeb9ec2e10626459938c0f",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:39:08.936Z",
+      "finalUrl": "https://www.peerspace.com/pages/listings/66aeb9ec2e10626459938c0f",
+      "httpStatus": 200,
+      "bodySha256": "dd4f84fa666c42acf509d4e859c9864c9551d7920162ecafc5e338a5d6b79c67",
+      "extractedWords": 386
+    },
+    {
+      "url": "https://www.peerspace.com/pages/listings/6723e5598687373c1ca21d07",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T02:39:08.547Z",
+      "error": "Error: Source body evidence requires a successful response."
+    },
+    {
+      "url": "https://www.prsa.org/professional-development/prsa-resources/ethics",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:39:08.106Z",
+      "finalUrl": "https://www.prsa.org/professional-development/prsa-resources/ethics",
+      "httpStatus": 200,
+      "bodySha256": "85d5dc7d5b3943782cf30b03179b608c823d56d84098e5bdbe5407d92e1b610d",
+      "extractedWords": 1166
+    },
+    {
+      "url": "https://www.qwoted.com/am-i-an-expert-how-to-know-if-you-should-pitch-an-opportunity/",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:44:48.790Z",
+      "finalUrl": "https://www.qwoted.com/am-i-an-expert-how-to-know-if-you-should-pitch-an-opportunity/",
+      "httpStatus": 200,
+      "bodySha256": "8dd9deb8cba0db46dee5e5550fc448dbddd9f512ae5cb93bb8cbb08240e56966",
+      "extractedWords": 973
+    },
+    {
+      "url": "https://www.qwoted.com/best-practices-for-pitching-journalists/",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:39:07.814Z",
+      "finalUrl": "https://www.qwoted.com/best-practices-for-pitching-journalists/",
+      "httpStatus": 200,
+      "bodySha256": "c790cc8de7f4ec648a23e298ac7f57843b2f81d20d5db754ea0306b6ad32a369",
+      "extractedWords": 573
+    },
+    {
+      "url": "https://www.techstars.com/application-preview",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:41:59.103Z",
+      "finalUrl": "https://www.techstars.com/application-preview",
+      "httpStatus": 200,
+      "bodySha256": "6146f0651dc6d1b64a8b8fef8273b1da762ad42e0616c76b0e8ece71248830df",
+      "extractedWords": 424
+    },
+    {
+      "url": "https://www.techstars.com/blog/founder-advice/five-things-every-techstars-mentor-should-know",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:44:49.444Z",
+      "finalUrl": "https://www.techstars.com/blog/founder-advice/five-things-every-techstars-mentor-should-know",
+      "httpStatus": 200,
+      "bodySha256": "76018ffa21db75bcb53324bb4124df199b28f8bce6033dd12ab62b590e60b8e3",
+      "extractedWords": 1089
+    },
+    {
+      "url": "https://www.techstars.com/blog/founder-advice/investors-don-t-fund-confusion",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:44:49.307Z",
+      "finalUrl": "https://www.techstars.com/blog/founder-advice/investors-don-t-fund-confusion",
+      "httpStatus": 200,
+      "bodySha256": "0fa326962f1724565a65d0b326311e853171c55310502cd8e13dfde0720e352e",
+      "extractedWords": 438
+    },
+    {
       "url": "https://www.upwork.com/hire/video-editors/how-to-hire/",
       "status": "automatic_retrieval_unavailable",
       "checkedAt": "2026-09-12T02:34:28.534Z",
       "error": "Error: Source body evidence requires a successful response."
+    },
+    {
+      "url": "https://www.videohusky.com/",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:39:08.442Z",
+      "finalUrl": "https://www.videohusky.com/",
+      "httpStatus": 200,
+      "bodySha256": "55daa25ae0f38d9b1e79f4ed0c4d53f518d22d55517017e2bf67f3b9a01d3118",
+      "extractedWords": 758
+    },
+    {
+      "url": "https://www.videohusky.com/best-video-editing-service/",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:39:08.353Z",
+      "finalUrl": "https://www.videohusky.com/best-video-editing-service/",
+      "httpStatus": 200,
+      "bodySha256": "190981d539a3ea44bac6dbe12c9d5912293810cdea13c36fc85f255d7e6e1fde",
+      "extractedWords": 1025
+    },
+    {
+      "url": "https://www.vidyard.com/video-in-motion-benchmark-report/",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:39:09.583Z",
+      "finalUrl": "https://www.vidyard.com/video-in-motion-benchmark-report/",
+      "httpStatus": 200,
+      "bodySha256": "ab78985226ad189eb7626d02a4acbc288c3cf1437e508570d5a9b6e48a2c5147",
+      "extractedWords": 54
     },
     {
       "url": "https://www.w3.org/WAI/media/av/transcripts/",
@@ -107,6 +551,54 @@
       "httpStatus": 200,
       "bodySha256": "66874304e38fa73498a3c4958b2309cd4255cc276133fb5c7b10e6f2e42828b0",
       "extractedWords": 824
+    },
+    {
+      "url": "https://www.ycombinator.com/blog/a-guide-to-pitching-funding-and-launch-stories/",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:39:07.898Z",
+      "finalUrl": "https://www.ycombinator.com/blog/a-guide-to-pitching-funding-and-launch-stories/",
+      "httpStatus": 200,
+      "bodySha256": "4ce4ca19ad52d7fea0111ef7ac5ec0b1e93b9609bbc29721a46b34416768d4f1",
+      "extractedWords": 857
+    },
+    {
+      "url": "https://www.ycombinator.com/blog/getting-press-for-your-startup",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:39:08.126Z",
+      "finalUrl": "https://www.ycombinator.com/blog/getting-press-for-your-startup",
+      "httpStatus": 200,
+      "bodySha256": "7d403d629bab701745302f8ff72d89dfab93d5cb3297df60918d1cc84aa08f58",
+      "extractedWords": 1041
+    },
+    {
+      "url": "https://www.ycombinator.com/blog/how-to-design-a-better-pitch-deck/",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:44:48.986Z",
+      "finalUrl": "https://www.ycombinator.com/blog/how-to-design-a-better-pitch-deck/",
+      "httpStatus": 200,
+      "bodySha256": "985914faec4b59739ff97a2db566fbcf20d51cda29543a766786f7a9d00f5d4c",
+      "extractedWords": 43
+    },
+    {
+      "url": "https://www.ycombinator.com/blog/the-yc-directory",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:42:00.334Z",
+      "finalUrl": "https://www.ycombinator.com/blog/the-yc-directory",
+      "httpStatus": 200,
+      "bodySha256": "7dfe1b30d06dc579a473ece6c63097c82b37a525af9458a5f720b91b940f5228",
+      "extractedWords": 342
+    },
+    {
+      "url": "https://www.ycombinator.com/faq",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T02:41:58.708Z",
+      "error": "Error: Source has no usable body evidence."
+    },
+    {
+      "url": "https://www.ycombinator.com/video/",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T02:41:58.493Z",
+      "error": "Error: Source has no usable body evidence."
     }
   ]
 }

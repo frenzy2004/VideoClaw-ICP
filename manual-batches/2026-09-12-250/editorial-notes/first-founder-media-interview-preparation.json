@@ -1,0 +1,123 @@
+{
+  "id": "vc-manual250-c1-014",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://prsay.prsa.org/2021/03/29/media-training-lessons-from-oprah-winfreys-interview-with-prince-harry-and-meghan-markle/",
+      "supports": "The practitioner recommends researching the interviewer, anticipating questions, and reviewing recorded practice.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.prsa.org/professional-development/prsa-resources/ethics",
+      "supports": "The code emphasizes accuracy and protecting confidential information.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should I memorize every answer?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should I say when I do not know?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I assume informal conversation is private?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: separate direct answers, concrete examples, uncertainty, and follow-up commitments in a founder-specific interview rehearsal.",
+  "reviewNotes": [
+    "Exact US/en SERP evidence is being collected separately; keyword volume, difficulty, and CPC are unknown."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-014",
+    "keyword": "media interview preparation for startup founders",
+    "found": true,
+    "query": "media interview preparation for startup founders",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How to Nail Media Interviews as a Startup Founder",
+        "url": "https://www.linkedin.com/posts/andrewmarshallpeterson_how-to-nail-media-interviews-as-a-startup-activity-7324225618101854208-epUg",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 2,
+        "title": "How To Prepare for a Media Interview as a Startup Founder",
+        "url": "https://www.speedinvest.com/knowledge/how-to-prepare-for-a-media-interview-as-a-startup-founder",
+        "domain": "speedinvest.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Interviewing at a startup",
+        "url": "https://www.ycombinator.com/library/F2-interviewing-at-a-startup",
+        "domain": "ycombinator.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "The 239 interview questions technical startup founders should ...",
+        "url": "https://blog.squadra.vc/articles/the-239-interview-questions-technical-startup-founders-should-ask-every-candidate",
+        "domain": "blog.squadra.vc",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "What should one ask in an interview with a pre-series ...",
+        "url": "https://www.reddit.com/r/ExperiencedDevs/comments/s6a8wa/what_should_one_ask_in_an_interview_with_a/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "A Cheatsheet to Ace Your Startup Job Interview! | Maroon Oak",
+        "url": "https://www.maroonoak.com/cheatsheet-to-ace-your-startup-job-interview/",
+        "domain": "maroonoak.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Art of the Interview: 3 Questions Startup Founders Love",
+        "url": "https://gothamghostwriters.com/art-of-the-interview-questions-for-startup-founders/",
+        "domain": "gothamghostwriters.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "How to prepare for interviews at startups vs large companies",
+        "url": "https://www.linkedin.com/posts/jordancarver_big-differences-between-interview-prep-for-activity-7381690335019769856-awpa",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is the 30-60-90 rule in an interview?",
+      "What are some good interview questions for startup founders?",
+      "What are the 5 C's of interviewing?",
+      "What is the 80/20 rule in interviewing?"
+    ],
+    "relatedQueries": [
+      "Best media interview preparation for startup founders",
+      "Questions to ask a startup founder in an interview",
+      "Startup coding interview questions",
+      "Interview startup",
+      "Taro interview prep",
+      "Are startup interviews easier",
+      "Questions for startups",
+      "Questions to ask a startup before joining"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

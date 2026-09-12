@@ -1,0 +1,123 @@
+{
+  "id": "vc-manual250-c1-012",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.ycombinator.com/blog/a-guide-to-pitching-funding-and-launch-stories/",
+      "supports": "The guide recommends checking a journalist's actual coverage for subject fit.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.qwoted.com/best-practices-for-pitching-journalists/",
+      "supports": "The guidance connects a pitch to a named reporter's work and relevant expertise.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "How many reporters should a founder put on a media list?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can an old article establish that a reporter is still relevant?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should I buy a contact database before doing this exercise?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: show the evidence behind a small reporter shortlist rather than equating a large contact database with relevance.",
+  "reviewNotes": [
+    "Exact US/en SERP evidence is being collected separately; keyword volume, difficulty, and CPC are unknown."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-012",
+    "keyword": "how to build a media list for a startup",
+    "found": true,
+    "query": "how to build a media list for a startup",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How do I create a media list? : r/PublicRelations",
+        "url": "https://www.reddit.com/r/PublicRelations/comments/1ip4vvt/how_do_i_create_a_media_list/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Media List 101: Build Yours Like a Pro (With Template ...",
+        "url": "https://www.cision.com/resources/articles/build-media-list-template-examples/",
+        "domain": "cision.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "How to Build a Killer Media List: Best Tools & Examples for ...",
+        "url": "https://prowly.com/magazine/media-list-building/",
+        "domain": "prowly.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "5 Tips for Building a PR Media List to Get Press for Your ...",
+        "url": "https://eucalyptmedia.com/blog/entry/5-tips-for-building-a-pr-media-list-to-get-press-for-your-startup",
+        "domain": "eucalyptmedia.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "How to: build a business media list",
+        "url": "https://www.mediahq.com/blog/how-to-build-a-business-media-list",
+        "domain": "mediahq.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Media Contact Lists: My Template And How To Use It",
+        "url": "http://www.hailleygriffis.com/guide-pr-media-list/",
+        "domain": "hailleygriffis.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "The Art of Building a Media List",
+        "url": "https://umarcomm.umn.edu/blog/2020/01/10/art-building-media-list",
+        "domain": "umarcomm.umn.edu",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "How to Build a Media List for Your Startup (Without an Agency ...",
+        "url": "https://blog.onepitch.co/build-media-list-startup",
+        "domain": "blog.onepitch.co",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How do I create a media list?",
+      "What does a media list look like?",
+      "What does ### mean in journalism?",
+      "What are the four C's in journalism?"
+    ],
+    "relatedQueries": [
+      "How to build a media list for a startup template",
+      "How to build a media list for a startup pdf",
+      "How to build a media list for a startup reddit",
+      "How to build a media list for a startup online",
+      "How to build a media list for a startup free",
+      "Media list template",
+      "What is a media list in PR",
+      "How to create a media list"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

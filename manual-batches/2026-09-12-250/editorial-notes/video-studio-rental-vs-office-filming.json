@@ -1,0 +1,130 @@
+{
+  "id": "vc-manual250-c3-016",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.peerspace.com/pages/listings/6723e5598687373c1ca21d07",
+      "supports": "Inspected host listing: base studio rental excludes equipment and staff, with a separately described inclusive option. No quoted rate is used or generalized.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.peerspace.com/pages/listings/66aeb9ec2e10626459938c0f",
+      "supports": "Inspected host listing: engineer support, recording equipment and file-delivery options are advertised as inclusions. Availability and acoustic performance were not independently tested.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Is filming in the office always cheaper?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does a studio rental include a camera operator?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How do I check whether a studio is quiet enough?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Paired site surveys can compare actual recording conditions and package inclusions before a buyer books a space.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c3-016",
+    "keyword": "rent a video studio or film in the office",
+    "found": true,
+    "query": "rent a video studio or film in the office",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Video Studio Rental Miami | Professional Spaces for Film & ...",
+        "url": "https://giggster.com/find/miami--fl/video-studio",
+        "domain": "giggster.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "32 Best Video Studios for Rent Near Me",
+        "url": "https://www.peerspace.com/plan/video-studio",
+        "domain": "peerspace.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Is It Worth It to CREATE Your Own FILM STUDIO or Should You ...",
+        "url": "https://www.youtube.com/watch?v=ZR9GNw12GLU",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 4,
+        "title": "Flex Office Space for Multimedia Companies",
+        "url": "https://m3studiosmiami.com/flex-office-space/",
+        "domain": "m3studiosmiami.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "TOP 10 BEST Video Studio Rental in Miami, FL",
+        "url": "https://www.yelp.com/search?find_desc=Video+Studio+Rental&find_loc=Miami%2C+FL",
+        "domain": "yelp.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Map",
+        "url": "https://www.google.com/search?q=rent+a+video+studio+or+film+in+the+office&sca_esv=84bb5e68fac1764f&hl=en&gl=US&udm=1&lsack=ZLmkarPDIN3kxc8Pyeah4As&sa=X&ved=2ahUKEwizhfnu_-eWAxVdcvEDHUlzCLwQtgN6BAhVEAM",
+        "domain": "google.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Photo & Video Studio Rental in Miami - Storefront",
+        "url": "https://www.thestorefront.com/search/miami/photo-shooting",
+        "domain": "thestorefront.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Why rent a studio every time you need to film?  With the right ...",
+        "url": "https://www.instagram.com/reel/DVyx80qgoAu/",
+        "domain": "instagram.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 9,
+        "title": "Top Video Production Studios For Rent In Miami",
+        "url": "https://bonomotion.com/top-video-production-studios-for-rent-in-miami/",
+        "domain": "bonomotion.com",
+        "resultType": "other"
+      },
+      {
+        "position": 10,
+        "title": "Production Office Facilities / Office Rental in Florida",
+        "url": "https://www.productionhub.com/directory/profiles/production-office-facilities/us/florida",
+        "domain": "productionhub.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How much do recording studios cost to rent?",
+      "How much does a 2 hour studio session cost?",
+      "Is it better to rent or buy a camera?",
+      "How much does it cost to rent a photo studio?"
+    ],
+    "relatedQueries": [
+      "Rent a video studio or film in the office near me",
+      "Rent a video studio or film in the office for a day",
+      "Rent a video studio or film in the office cheap"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

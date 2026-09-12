@@ -4,6 +4,9 @@ Work in progress on `content/manual-review-batch-250`, based on the existing
 fifty-article review branch at `900053a`. Target: **250 total complete articles,
 50 per ICP**, comprising the unchanged first fifty and 200 additional drafts.
 
+[Draft PR #3](https://github.com/frenzy2004/VideoClaw-ICP/pull/3) contains this
+expansion and is stacked on [the retained first-50 PR #2](https://github.com/frenzy2004/VideoClaw-ICP/pull/2).
+
 See [INDEX.md](INDEX.md) for the current assembled count and direct Markdown
 links. Counts are incremental; this document does not claim the target is met.
 Only `--final` checks can verify 250 total and 50 per campaign.

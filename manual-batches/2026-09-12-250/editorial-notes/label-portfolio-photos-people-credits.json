@@ -1,0 +1,128 @@
+{
+  "id": "vc-manual250-c5-018",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.iptc.org/std/photometadata/specification/IPTC-PhotoMetadata-2025.1.html",
+      "supports": "The standard distinguishes image description, creation date, credit and person information.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.canto.com/glossary/metadata-management/",
+      "supports": "Asset metadata can describe content, relationships, usage administration and technical properties.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Can a guest list establish who appears in a photo?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does a photographer credit establish publication permission?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should the caption be checked again after cropping?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Attach verified people, scene descriptions and supplied credits to a mixed-company photo collection before reuse. Distinct from event filming, interview questions and general asset taxonomy: the job is accurate photo identification and caption assembly. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact US/en SERP evidence is being collected by main; query remains a candidate hypothesis. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities.",
+    "Mixed intent: photo caption metadata also serves photographers and archives; the work product addresses mixed-company event collections.",
+    "No face identification or legal permission inference is proposed."
+  ],
+  "serp": {
+    "id": "vc-manual250-c5-018",
+    "keyword": "photo caption metadata",
+    "found": true,
+    "query": "photo caption metadata",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:01.735Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Add captions to photos metadata : r/photography",
+        "url": "https://www.reddit.com/r/photography/comments/1f3p49t/add_captions_to_photos_metadata/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Add and edit metadata titles and captions",
+        "url": "https://helpx.adobe.com/lightroom/web/share-your-work/review-and-download/add-and-edit-title-and-caption.html",
+        "domain": "helpx.adobe.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Add Title and Caption Metadata to JPEG Files",
+        "url": "https://www.keptlight.com/add-title-and-caption-metadata-to-jpeg-files/",
+        "domain": "keptlight.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Tags and Captions - How to Label Your Digital Photos ...",
+        "url": "https://www.picturesandstories.com/news/2014/4/21/tags-and-captions-how-to-label-your-digital-photos-using-metadata",
+        "domain": "picturesandstories.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Title vs Caption in Metadata",
+        "url": "https://www.lightroomqueen.com/community/threads/title-vs-caption-in-metadata.18538/",
+        "domain": "lightroomqueen.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "The Best Way to Add a Description (Caption) ...",
+        "url": "https://www.scanyourentirelife.com/best-way-add-description-caption-your-scanned-photos/",
+        "domain": "scanyourentirelife.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Add or edit titles, captions, and more in Photos on iCloud.com",
+        "url": "https://support.apple.com/guide/icloud/add-or-edit-a-title-caption-or-other-metadata-mm54e2d3fb7a/icloud",
+        "domain": "support.apple.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "Image metadata · ImageApprovals",
+        "url": "https://www.imageapprovals.com/glossary/image-metadata",
+        "domain": "imageapprovals.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How do I find the metadata of a photo?",
+      "What are the five types of metadata?",
+      "Can you fake metadata on a photo?",
+      "What can metadata on a photo tell you?"
+    ],
+    "relatedQueries": [
+      "Photo caption metadata iphone",
+      "Photo caption metadata free",
+      "Photo caption metadata app",
+      "How to edit metadata in Lightroom cc",
+      "Adding metadata to photos",
+      "Lightroom metadata",
+      "View metadata in Lightroom",
+      "Adding metadata in lightroom"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

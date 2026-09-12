@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "kind": "manual_review_batch",
-  "count": 60,
-  "newCount": 10,
+  "count": 99,
+  "newCount": 49,
   "retainedCount": 50,
   "targetCount": 250,
   "productionChanges": false,
@@ -1523,6 +1523,426 @@
       "sourceBatch": "2026-09-12-50"
     },
     {
+      "id": "vc-manual250-c1-011",
+      "campaign": "newly-funded-founder",
+      "title": "Pitch a Startup Story Journalists Can Use",
+      "keyword": "how to pitch a startup story to journalists",
+      "slug": "pitch-startup-story-to-journalists",
+      "words": 1076,
+      "articleSha256": "2f55bd91eaf0ea241fc54f3af4a8af62adf7cce824ab26f9a7ee920b73463f53",
+      "graphicSha256": "b90f9b2a87c6f59c91b64498472e45f5cffe7094b6d0c862729441b1a6433b94",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Does every startup development deserve a pitch?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Should I attach a founder video to the first email?",
+          "basis": "editorial"
+        },
+        {
+          "question": "How should I follow up after no response?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c1-012",
+      "campaign": "newly-funded-founder",
+      "title": "Build a Small Media List for Your Startup",
+      "keyword": "how to build a media list for a startup",
+      "slug": "build-startup-media-list",
+      "words": 1062,
+      "articleSha256": "556151fbccda796442e01c1ea97aa63cc0e0ae859b3638309935ea7fdfd2987b",
+      "graphicSha256": "4d768e909d31bb695ea04a3053b3896c059e1d59b26cdc6cc5910e30618ede5f",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "How many reporters should a founder put on a media list?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can an old article establish that a reporter is still relevant?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Should I buy a contact database before doing this exercise?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c1-013",
+      "campaign": "newly-funded-founder",
+      "title": "Press Embargo vs Exclusive: A Founder’s Decision Guide",
+      "keyword": "press embargo vs exclusive",
+      "slug": "press-embargo-vs-exclusive-founder",
+      "words": 1057,
+      "articleSha256": "f43f70d93fcc6379d456ae87a76e1372b9d0176efb1f9a4f530bda86a89048e6",
+      "graphicSha256": "f0d7fd78ad7755a398ef972738795f78c107c4b8f4714e70d9ad5fd4f03e0004",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Does writing embargo in an email bind the journalist?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can I offer an exclusive interview while others cover the news?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What should I do if a journalist declines?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c1-014",
+      "campaign": "newly-funded-founder",
+      "title": "Prepare for Your First Founder Media Interview",
+      "keyword": "media interview preparation for startup founders",
+      "slug": "first-founder-media-interview-preparation",
+      "words": 1030,
+      "articleSha256": "e6cf5898d3a8ca04823310cd80825788f81d0ac4098f411db357842bbe6ac38d",
+      "graphicSha256": "d33a676175d8bae387b6c4283fa00e12845f64750435f71ffd5785d5a13a132b",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Should I memorize every answer?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What should I say when I do not know?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can I assume informal conversation is private?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c1-015",
+      "campaign": "newly-funded-founder",
+      "title": "Ask for a Press Correction With Clear Evidence",
+      "keyword": "how to ask a journalist for a correction",
+      "slug": "request-startup-press-correction",
+      "words": 1062,
+      "articleSha256": "64a6649ad5bb5b7e801796ee214320414cd906b3b412e890ceaf6d72f28705b7",
+      "graphicSha256": "0fb205ad44473bae6317c851be11c66c95229f2b8815642ceba12decd27d2032",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Can I request a correction because I dislike the headline?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Should I send a long explanation of the whole company?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What if the mistake started in our own materials?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c1-016",
+      "campaign": "newly-funded-founder",
+      "title": "Pitch a Contributed Article From Founder Experience",
+      "keyword": "how to pitch a contributed article",
+      "slug": "founder-contributed-article-proposal",
+      "words": 1040,
+      "articleSha256": "0e697da2b6b03999f63a4b37e07398e278c2c0ccc6c96e1f6f16a4a07115ef0a",
+      "graphicSha256": "986e1b43994e2eff1258f1ee76c6e6c0a53c5206c8a9600105ebf6ceee26463c",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Is a contributed article the same as a press pitch?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can the proposal mention my product?",
+          "basis": "editorial"
+        },
+        {
+          "question": "How much of the article should I write before pitching?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c1-017",
+      "campaign": "newly-funded-founder",
+      "title": "Pitch Yourself as a Podcast Guest With a Useful Angle",
+      "keyword": "how to pitch yourself as a podcast guest",
+      "slug": "founder-podcast-guest-pitch",
+      "words": 1042,
+      "articleSha256": "92a4b051fc326a9f9d5014442f66050409ba9a95b620ba11b69244e49d42e681",
+      "graphicSha256": "2848e582794363bdebb983964df41798e6b07ce5fd2d1da2cb34813b5e877ef2",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Should my pitch lead with the funding round?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Do I need previous podcast appearances?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Should I offer a complete script for the interview?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c1-018",
+      "campaign": "newly-funded-founder",
+      "title": "Write a Conference Talk Proposal as a Startup Founder",
+      "keyword": "conference talk proposal for startup founders",
+      "slug": "startup-founder-conference-talk-proposal",
+      "words": 1052,
+      "articleSha256": "5bd569a180aac3870b53353014602d2f86d93fe5f23874204bc7915280da1bf6",
+      "graphicSha256": "4b7908fbf8e52f5ae81dbb0235b4122700a5097abc71dd79c96b0b75fb931214",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Should a founder conference talk promote the product?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What makes a learning outcome useful?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can I reuse the same proposal for different events?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c1-019",
+      "campaign": "newly-funded-founder",
+      "title": "Write a Founder Bio That Establishes Relevant Expertise",
+      "keyword": "startup founder bio examples",
+      "slug": "startup-founder-bio-expertise",
+      "words": 1096,
+      "articleSha256": "3916533111db7d3f39e92ccd2430c0838f152ddf1b02fc8c83be5618c32a2548",
+      "graphicSha256": "cd54f8c03aa80d30e66c70861b1f47e93edfed9fb6406337dcd1d7a442355ae2",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Should a founder bio mention funding?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can I call myself a leading expert?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Should every event use the same biography?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c2-011",
+      "campaign": "accelerator-demo-day-founder",
+      "title": "Match Accelerator Application Videos to the Right Fields",
+      "keyword": "accelerator application video requirements",
+      "slug": "accelerator-application-video-field-map",
+      "words": 1135,
+      "articleSha256": "49bc9b2439dca589960c77c8b4a880fa6535b3318583807595d841a37088f6b7",
+      "graphicSha256": "6989d4c1edd1ff82c9cf4152a4e5cfdf578a85881af68f75c9db968099076c9f",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Can I submit the same video to every accelerator?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Does a product demo replace a team introduction?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What should I verify after uploading?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c2-012",
+      "campaign": "accelerator-demo-day-founder",
+      "title": "Record an Application Video With Remote Cofounders",
+      "keyword": "YC application video founders different locations",
+      "slug": "remote-cofounder-application-video",
+      "words": 1137,
+      "articleSha256": "054d34b6a469a9ca424795c293f741902b862dc4ffe047acab76d2fe5d804a4d",
+      "graphicSha256": "5e5a870e53a99cb8536c10f468cbc0825e67727bd6f639e6082a148359a38e78",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Can remote founders appear in a YC application video?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Why does my saved recording show only one person?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Should we stitch together separate founder speeches?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c2-013",
+      "campaign": "accelerator-demo-day-founder",
+      "title": "Update an Application Demo When the Product Changes",
+      "keyword": "update accelerator application demo video",
+      "slug": "update-accelerator-application-demo-video",
+      "words": 1113,
+      "articleSha256": "0798ae2111e8e7c0837da97417ab7f4e89339a0a67b3b2ea73f57e37d8f77645",
+      "graphicSha256": "590b84e4aa248f1a08ee9e208771d2658ae5d944a62fc12557411889bbc4a838",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Can I edit a submitted YC application whenever I want?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Should I overwrite the video at the old link?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What if only one product step changed?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c2-014",
+      "campaign": "accelerator-demo-day-founder",
+      "title": "Find Where Investors Lose the Thread in Your Demo",
+      "keyword": "how to get feedback on a product demo",
+      "slug": "investor-demo-video-comprehension-test",
+      "words": 1111,
+      "articleSha256": "4c13c9e188c6cd6f1d4d1ea9345ce36e966440ed6f9b2dda3b0e808eda6dc599",
+      "graphicSha256": "9fd6a529644aa40d2597e3291d6fa2f2e5b2a8da1b2405b73df4d27d9ac93fb8",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Should I explain the product before the test?",
+          "basis": "editorial"
+        },
+        {
+          "question": "How many testers prove the demo works?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can the same person test the revised cut?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c2-015",
+      "campaign": "accelerator-demo-day-founder",
+      "title": "Show Accelerator Progress With Paired Demo Recordings",
+      "keyword": "before and after product demo",
+      "slug": "accelerator-progress-paired-demo-recordings",
+      "words": 1112,
+      "articleSha256": "c0786887ab0fae6c285cc6dde5879633eef8d2233adec5a1e8da1129b75e73f1",
+      "graphicSha256": "578025af40de9b46bc736157a33bf3a8d130de2a5c076af8e685427580a9b197",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Do both clips have to run side by side?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What if we cannot run the old build?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can I claim the product is faster from the edited comparison?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c2-016",
+      "campaign": "accelerator-demo-day-founder",
+      "title": "Correct an Investor Video Without Leaving Conflicting Claims",
+      "keyword": "correct a mistake in a video",
+      "slug": "correct-investor-video-visible-claims",
+      "words": 1060,
+      "articleSha256": "5265b39184656bfefc59a53bd0e88bcca2140ca1b22c09918c0a22ea6319bffa",
+      "graphicSha256": "86b081ccc4b9c0e81f99214f6eada92be8d9d1472e4cc9d6dcf41f8eb537e5d2",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Can I fix the mistake only in the video description?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Should I rerecord the whole presentation?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What if someone downloaded the old video?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
       "id": "vc-manual250-c3-011",
       "campaign": "video-production-comparison",
       "title": "How to Run a Paid Video Editor Test Project",
@@ -1627,6 +2047,174 @@
         },
         {
           "question": "Should I buy a second editing subscription?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c3-015",
+      "campaign": "video-production-comparison",
+      "title": "Rent or Buy Camera Equipment for Business Videos?",
+      "keyword": "rent or buy camera equipment for business videos",
+      "slug": "rent-or-buy-camera-equipment-business-video",
+      "words": 1091,
+      "articleSha256": "1dad19dafdeb4ead9a74e47a9d469a25acc07edc46836cccc52cd2ea84ba21f0",
+      "graphicSha256": "ed76cac18b7201ee64937f3d2b0a49fc74bf6bbbb6b0d3177f44ac6f5f1934c6",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "How many shoots make buying a camera worthwhile?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Should I rent before buying?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Does owning equipment replace hiring a videographer?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c3-016",
+      "campaign": "video-production-comparison",
+      "title": "Rent a Video Studio or Film in Your Office?",
+      "keyword": "rent a video studio or film in the office",
+      "slug": "video-studio-rental-vs-office-filming",
+      "words": 1130,
+      "articleSha256": "276303d6e53c6d81181490aeae3845559094fea654caf36258187e5632d389ba",
+      "graphicSha256": "28afce25dd5c594446fb969b90c68e3f69676f91cece9db27688044cefc9bca8",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Is filming in the office always cheaper?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Does a studio rental include a camera operator?",
+          "basis": "editorial"
+        },
+        {
+          "question": "How do I check whether a studio is quiet enough?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c3-017",
+      "campaign": "video-production-comparison",
+      "title": "Choose Remote Recording Software Your Editor Can Use",
+      "keyword": "how to choose remote video recording software",
+      "slug": "choose-remote-video-recording-software",
+      "words": 1089,
+      "articleSha256": "f94aea90d24c0c5c8a4a6d55468a99590272e7ae958c402d9a3c1b193469d0ac",
+      "graphicSha256": "43d81c12f6ee56e9cad3d85ea2b9e7e88c66cc5ef915972e6f425a3cd7113ca5",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Are separate tracks better than a combined recording?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Does local recording eliminate internet problems?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Should I buy the highest-resolution plan?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c3-018",
+      "campaign": "video-production-comparison",
+      "title": "Solo Videographer or Production Crew: Size the Shoot",
+      "keyword": "solo videographer vs production crew",
+      "slug": "solo-videographer-vs-production-crew",
+      "words": 1091,
+      "articleSha256": "2f6af48b2b8e26caedf3de1e41b4fc3e91af4cebd46ba1b7458407a1279578be",
+      "graphicSha256": "71510d86b357c1053bd046da38f9b5388eee21397eb864111a0792bf731f5d1b",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Can one videographer handle a business interview?",
+          "basis": "editorial"
+        },
+        {
+          "question": "How many crew members do I need?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Is a larger crew always better?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c3-019",
+      "campaign": "video-production-comparison",
+      "title": "Hire a Local Video Crew or Fly Your Team In?",
+      "keyword": "hire local video crew or fly in production team",
+      "slug": "local-video-crew-vs-traveling-team",
+      "words": 1103,
+      "articleSha256": "35aad780e387a5489b8e81f2d7ac29000e4a25e0f67a75bcb2563c53854ca653",
+      "graphicSha256": "60695a1f0060a7339ce6a911d091033201f6a1b70c7c8cc9f6606b9f59e65299",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Is a local video crew always less expensive?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can our usual director supervise a local crew remotely?",
+          "basis": "editorial"
+        },
+        {
+          "question": "When is it worth sending the existing team?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c3-020",
+      "campaign": "video-production-comparison",
+      "title": "Hiring a Drone Videographer: What to Verify",
+      "keyword": "what to check when hiring a drone videographer",
+      "slug": "hiring-drone-videographer-verification",
+      "words": 1125,
+      "articleSha256": "69b27b691c4d591a4c960bd89609046a0c1395eb123b1107d18d5f45ed0e96a1",
+      "graphicSha256": "e1c0938237f1f7e412de673cb8fa7d1f3fa2ce607f7e5bd2d08f958bf0e43a92",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Does a Part 107 certificate mean a pilot can film anywhere?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What credential evidence should I request?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What if the drone cannot fly on the shoot day?",
           "basis": "editorial"
         }
       ],
@@ -1795,6 +2383,510 @@
         },
         {
           "question": "What if the objection reveals a product gap?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c4-017",
+      "campaign": "gtm-content-repurposing-buyer",
+      "title": "Build a Useful Follow-Up From a Recorded Sales Demo",
+      "keyword": "product demo follow up video email",
+      "slug": "recorded-sales-demo-follow-up",
+      "words": 1102,
+      "articleSha256": "be4a23b5722c880b50145060bb1a4f8963c09c0cbb8b22d949d11c604476c37d",
+      "graphicSha256": "67d1e7a5f0aa994e680affdc807b5abe5077507d6076a30f6638ed6dabd6b618",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Should I send the full recording or short excerpts?",
+          "basis": "editorial"
+        },
+        {
+          "question": "How do I mention questions that remain unanswered?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can I reuse the same recap for another prospect?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c4-018",
+      "campaign": "gtm-content-repurposing-buyer",
+      "title": "Build a Buying Committee Content Pack From Existing Assets",
+      "keyword": "content for B2B buying committee",
+      "slug": "buying-committee-content-pack",
+      "words": 1116,
+      "articleSha256": "7168e1bf0b9740ba685a2ef19bba3a73360a8e64ab1d53ea2c83fb71ccdf0373",
+      "graphicSha256": "3de4abca56930c3e7354708f145a839dec3a7f1a10689f29ac6c85c1b46a31b3",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Should every stakeholder receive the same assets?",
+          "basis": "editorial"
+        },
+        {
+          "question": "How many assets belong in the pack?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What should the internal champion forward?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c4-019",
+      "campaign": "gtm-content-repurposing-buyer",
+      "title": "Build a Nurture Sequence From Content You Already Have",
+      "keyword": "lead nurturing email sequence using existing content",
+      "slug": "nurture-sequence-from-existing-content",
+      "words": 1115,
+      "articleSha256": "00ce65d36135dfdc22192f83325ad3dda5444f4a7276327df34c40f4f5b1f461",
+      "graphicSha256": "efa196005455009f719cbd4b03a07f12484e3e094f74325cd180e23069e3a22b",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "How many emails should the sequence contain?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can I reuse a long video in a nurture email?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Does clicking a product video mean a lead is sales-ready?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c4-020",
+      "campaign": "gtm-content-repurposing-buyer",
+      "title": "Turn Expert Recordings Into a Newsletter Worth Reading",
+      "keyword": "repurpose video content for email newsletter",
+      "slug": "expert-recordings-to-newsletter",
+      "words": 1125,
+      "articleSha256": "a3a6349f578a20fbf25c15e27bd405d5d10e21fdc9fb1cab83277c77d33505ca",
+      "graphicSha256": "a9f0828d511c0d9f203471418aa7b741398f697c83f71e41c764b4f418a70b82",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Should the newsletter summarize the full recording?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can I add my own exercise to an expert’s idea?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Does every section need a video link?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c4-021",
+      "campaign": "gtm-content-repurposing-buyer",
+      "title": "Use Existing Content to Re-Engage Stalled B2B Leads",
+      "keyword": "re engagement email content for B2B leads",
+      "slug": "existing-content-reengage-stalled-leads",
+      "words": 1095,
+      "articleSha256": "8f366f14adadf28238167b19596bb0691a6c24f32c29d7a0a41900885ac0cd89",
+      "graphicSha256": "afeccc0799e1f1f9ff256d124fb32a592d7d083bfa42c4148daddeafc1f9fba6",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Is a new company announcement enough reason to re-engage a lead?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What if I do not know why the conversation stalled?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Should I keep following up if the video is not opened?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c4-022",
+      "campaign": "gtm-content-repurposing-buyer",
+      "title": "Turn a Customer QBR Into a Renewal Recap",
+      "keyword": "customer QBR recap video",
+      "slug": "customer-qbr-to-renewal-recap",
+      "words": 1082,
+      "articleSha256": "31204f2e7c8b0b1828304f2b823b87d362e9dbb39ae3bf8eb2121da9c8328c6d",
+      "graphicSha256": "2095c935f5a9ce1cf8dafc7d711b6552010233ed66b0afbdf32b4c295af4fe24",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Should the recap include only positive moments?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can I turn the QBR recap into a public case study?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What if a next step was suggested but not agreed?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c5-011",
+      "campaign": "portfolio-media-platform",
+      "title": "Build a Portfolio Media Support Service Menu",
+      "keyword": "marketing service catalog",
+      "slug": "portfolio-media-support-service-menu",
+      "words": 1166,
+      "articleSha256": "a4ec9758f949120fa1df3010c01ad4c2f406accad325ebd7a73a1d80b4b00e2d",
+      "graphicSha256": "2cc62c6dc72b97a47033a50b6cb6abad93757c915cda8cd870d02b66908cd710",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "How many services should the first menu contain?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Does a service menu promise delivery dates?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What happens to a request that fits no entry?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c5-012",
+      "campaign": "portfolio-media-platform",
+      "title": "Prioritize Media Requests Across Portfolio Companies",
+      "keyword": "creative request management",
+      "slug": "prioritize-portfolio-media-requests",
+      "words": 1201,
+      "articleSha256": "081bc8563e873affe78905002561854941245a6b5dc67071924e7d07bc9faa4a",
+      "graphicSha256": "a4290b6fcebf1b6a3e87b1319a2d8e019d321fb3fe157dac4b8ffaf34954c8b3",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Should the oldest request always go first?",
+          "basis": "editorial"
+        },
+        {
+          "question": "How should incomplete urgent requests be handled?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can founders appeal their queue position?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c5-013",
+      "campaign": "portfolio-media-platform",
+      "title": "Schedule Portfolio Media Office Hours Without Overbooking",
+      "keyword": "office hours scheduling",
+      "slug": "portfolio-media-office-hours-scheduling",
+      "words": 1178,
+      "articleSha256": "f413c9403b0f456a56605fc14ee6913a23572c570b440b5fe1b4496b675e073c",
+      "graphicSha256": "9f2415446b78bf43149b0ca77f75d4f854927237be52d0d23f360b14fee24377",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "How long should a media office-hour appointment be?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can several companies attend one session?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What should happen after a no-show?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c5-014",
+      "campaign": "portfolio-media-platform",
+      "title": "Unblock Portfolio Media Reviews With Work Limits",
+      "keyword": "content approval bottlenecks",
+      "slug": "portfolio-media-review-work-limits",
+      "words": 1185,
+      "articleSha256": "07e30cc6b898416cf2934033fc477db0dfab35692c2e72efe36db8abb0dddd23",
+      "graphicSha256": "4e8278b3bafc15b6bccbb008f0f8fe9e918073dad5603ca36d9387fe691b03c5",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Should blocked reviews count toward the work limit?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What is a useful review packet?",
+          "basis": "editorial"
+        },
+        {
+          "question": "How should the first work limit be chosen?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c5-015",
+      "campaign": "portfolio-media-platform",
+      "title": "Resolve Launch Clashes Across Portfolio Companies",
+      "keyword": "shared marketing calendar",
+      "slug": "resolve-portfolio-launch-calendar-clashes",
+      "words": 1153,
+      "articleSha256": "517f585d7a05556184bd462ac7bb89097a563d787eeddbc3261130b8e76ee78c",
+      "graphicSha256": "9ae69b91aaec64ab0b62738035c9dd6ddec0eabfb13dde2aa704a66e8cf963ef",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Must companies move their launch dates to fit the fund calendar?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What should a tentative reservation mean?",
+          "basis": "editorial"
+        },
+        {
+          "question": "How should a last-minute change be communicated?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c5-016",
+      "campaign": "portfolio-media-platform",
+      "title": "Onboard a New Company to Your Portfolio Media System",
+      "keyword": "portfolio company onboarding",
+      "slug": "onboard-company-portfolio-media-system",
+      "words": 1176,
+      "articleSha256": "83b8e369e304cfad708ebc0cfb3101c2855a1a07cdf6eb24a3dd9ef6324d0e52",
+      "graphicSha256": "58de0d10eaf211d3657835bbae88b582f260598e7a21688be9061a94586a7bc1",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Does onboarding need to start with a funding announcement?",
+          "basis": "editorial"
+        },
+        {
+          "question": "When is a company activated?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Which contacts belong in the initial record?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c5-017",
+      "campaign": "portfolio-media-platform",
+      "title": "Separate Company Access in a Shared Portfolio Media Library",
+      "keyword": "digital asset management permissions",
+      "slug": "separate-company-access-media-library",
+      "words": 1147,
+      "articleSha256": "8dc5ff4b19c8641e7e222a48f37a51bff96d2f3ee4ac7a268465f5157b6a38e9",
+      "graphicSha256": "e67677dc1d6731a3f74a8a4ff4379216132ce2ce4b45a411cb09ae2b1c05e4b1",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Is a separate company folder enough to protect working files?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Should all final assets be visible to the whole portfolio?",
+          "basis": "editorial"
+        },
+        {
+          "question": "How should temporary reviewer access end?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c5-018",
+      "campaign": "portfolio-media-platform",
+      "title": "Label Portfolio Photos With the Right People and Credits",
+      "keyword": "photo caption metadata",
+      "slug": "label-portfolio-photos-people-credits",
+      "words": 1179,
+      "articleSha256": "0f8bd9d1b0ae4b1b792523f1a3472d304d5c3534233bb8763115c51c4c2d1e96",
+      "graphicSha256": "9f2886eba49331319fa7f578999bbf82978387e63d3fbf97ecf5b86d89d5921a",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Can a guest list establish who appears in a photo?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Does a photographer credit establish publication permission?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Should the caption be checked again after cropping?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c5-019",
+      "campaign": "portfolio-media-platform",
+      "title": "Keep a Portfolio Company Directory Current",
+      "keyword": "portfolio company directory",
+      "slug": "maintain-portfolio-company-directory",
+      "words": 1161,
+      "articleSha256": "e9112db331602ad756b8ce84962366dd6d5164419de8fbc409e2d8711adbe3c6",
+      "graphicSha256": "4815387df8b59d366146ebfb3f2fb49302f4e87b72dacb7722abaa741072b98d",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Should a company website outage change its directory status?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What should happen when a company changes its name?",
+          "basis": "editorial"
+        },
+        {
+          "question": "How much information should the directory contain?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c5-020",
+      "campaign": "portfolio-media-platform",
+      "title": "Design Tags for a Multi-Company Media Library",
+      "keyword": "digital asset management taxonomy",
+      "slug": "portfolio-media-library-tag-taxonomy",
+      "words": 1142,
+      "articleSha256": "8f55fbf49a7ee3345eb019aa22363a635d2871aab0f7b4d42a74b19dc3153914",
+      "graphicSha256": "67e60756315cdd385ee0ebf30699171e834dabf96e42a323cd97d15e9a4cca45",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Should company names be part of every tag?",
+          "basis": "editorial"
+        },
+        {
+          "question": "How should synonyms be handled?",
+          "basis": "editorial"
+        },
+        {
+          "question": "When should a new metadata field be added?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c5-021",
+      "campaign": "portfolio-media-platform",
+      "title": "Make Approved Portfolio Media Versions Unambiguous",
+      "keyword": "digital asset management version control",
+      "slug": "portfolio-media-release-version-control",
+      "words": 1108,
+      "articleSha256": "63ff5ffc15695457dee1b17bbbc9edb106faa34dbb4a8a2e0b8b7cba6544cec6",
+      "graphicSha256": "f4afa6e814fe2c20c71d92181f533e1b2a0736fde117f80045a74e0a028ed426",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Is the latest version always the approved version?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Should captions and thumbnails be versioned too?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What should be retained after a wrong-version correction?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c5-022",
+      "campaign": "portfolio-media-platform",
+      "title": "Track Expiring Media Rights Across a Portfolio",
+      "keyword": "digital asset expiration dates",
+      "slug": "portfolio-media-rights-expiry-calendar",
+      "words": 1130,
+      "articleSha256": "a656c5ee4dbdfcc43fd61586cb14bbd6bd1fa5e5bf12a6c038fa1032c246670b",
+      "graphicSha256": "2884158b51afb3a3553e009ce2910ddbd7dfaa056fbb412bb8bcd46179748a72",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Can an expiry date in the library remove published copies elsewhere?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What if the supplied use terms are unclear?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Does retiring an asset mean deleting its history?",
           "basis": "editorial"
         }
       ],
