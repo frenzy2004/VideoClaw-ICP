@@ -1,0 +1,125 @@
+{
+  "id": "vc-manual250-c4-028",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://wistia.com/blog/webinar-formats",
+      "supports": "Email capture can be used with on-demand webinar recordings.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://developers.google.com/search/docs/appearance/video",
+      "supports": "Dedicated watch pages differ from pages where video supplements other content.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should every webinar replay require registration?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can the worksheet be gated while the video stays open?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should we measure besides registrations?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Decide whether a replay needs unrestricted viewing, an optional form or a registration gate based on the visitor's job and lead follow-up use. This is an access-path decision, not retained c4-001's broader repurposing plan. No ranking-page comparison or demand conclusion is asserted.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending.",
+    "Observed PAA includes broad webinar questions, not the gating decision; FAQs remain editorial. No access model is claimed to guarantee indexing or lead quality."
+  ],
+  "serp": {
+    "id": "vc-manual250-c4-028",
+    "keyword": "should on demand webinars be gated",
+    "found": true,
+    "query": "should on demand webinars be gated",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:32:56.760Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Gated vs ungated webinar replays? : r/DigitalMarketing",
+        "url": "https://www.reddit.com/r/DigitalMarketing/comments/1qklh9t/gated_vs_ungated_webinar_replays/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Gated vs Ungated Content: What B2B Data Shows",
+        "url": "https://lead-spot.net/research/gated-vs-ungated-content-why-high-value-gated-assets-still-win-big-in-b2b-demand-gen/",
+        "domain": "lead-spot.net",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "How to Craft an Effective On-Demand Webinar Strategy",
+        "url": "https://www.on24.com/blog/how-to-craft-an-effective-on-demand-webinar-strategy/",
+        "domain": "on24.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "Gated vs Ungated Content in B2B Demand Generation",
+        "url": "https://aviddemand.com/blog/gated-vs-ungated-content-in-b2b-demand-generation/",
+        "domain": "aviddemand.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Webinars for Demand Generation: Tips and Tricks | WorkCast",
+        "url": "https://info.workcast.com/blog/webinars-for-demand-generation-tips-and-tricks-workcast",
+        "domain": "info.workcast.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Should You Gate Your Content? Pros & Cons Guide",
+        "url": "https://foundryco.com/blog/to-gate-or-not-to-gate-the-gated-content-showdown/",
+        "domain": "foundryco.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Gated Content vs Non Gated Content : Which is better?",
+        "url": "https://www.b2bmarketingworld.com/content-marketing/gated-content-vs-non-gated-content/",
+        "domain": "b2bmarketingworld.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Gated Content vs Ungated Content: Pick your GTM side ...",
+        "url": "https://www.revenuehero.io/blog/gated-content-vs-ungated-content",
+        "domain": "revenuehero.io",
+        "resultType": "article"
+      },
+      {
+        "position": 9,
+        "title": "What are ungated replays and on-demand - eWebinar Help",
+        "url": "https://ewebinar.com/help/ungated-replays-and-on-demand",
+        "domain": "ewebinar.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Are webinars still effective in 2026?",
+      "What does \"on-demand webinar\" mean?",
+      "What are the disadvantages of webinars?",
+      "What are some popular on-demand webinar platforms?"
+    ],
+    "relatedQueries": [
+      "Should on demand webinars be gated reddit",
+      "Should on demand webinars be gated debate"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

@@ -1,0 +1,121 @@
+{
+  "id": "vc-manual250-c2-021",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.apple.com/en-nz/guide/iphone/iph61f49e4bb/ios",
+      "supports": "Available recording formats and frame rates depend on the iPhone model.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.apple.com/en-ie/guide/final-cut-pro/verc1fabc30/mac",
+      "supports": "Clips from one take can be synchronized.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Do I need two cameras?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I combine the best parts of several runs?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should the founder speak during the hardware action?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: A same-run physical evidence shot plan preserves scale, continuity and operator work across wide and close views. Competing page bodies have not been audited for this draft.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c2-021",
+    "keyword": "hardware product demo video",
+    "found": true,
+    "query": "hardware product demo video",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Hardware Store Product Demos",
+        "url": "https://www.youtube.com/playlist?list=PLsNCkYhxyA6GLSwSAqyDjxMRp94qsp7Ti",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 2,
+        "title": "Hardware Demos: 30 Examples Focused On Product ...",
+        "url": "https://advids.co/blog/30-hardware-demo-video-examples-to-drive-action",
+        "domain": "advids.co",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "10 Product Demo Videos Worth Copying",
+        "url": "https://www.moonb.io/blog/product-demo-videos",
+        "domain": "moonb.io",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "Hardware Demo | Videos & Movies on Vimeo",
+        "url": "https://vimeo.com/30927243",
+        "domain": "vimeo.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 5,
+        "title": "12 Best Product Demo Video Examples in 2026 (With ...",
+        "url": "https://vidico.com/news/best-product-demo-video-examples/",
+        "domain": "vidico.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "13 Demo Video Examples & Best Practices (2026) | ngram.com",
+        "url": "https://www.ngram.com/blog/demo-video-examples",
+        "domain": "ngram.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Creating hardware product concept video - what tools to use?",
+        "url": "https://www.reddit.com/r/hwstartups/comments/120bkfg/creating_hardware_product_concept_video_what/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "10 Best Product Demo Video Examples (That You Can ...",
+        "url": "https://www.synthesia.io/post/product-demo-video-examples",
+        "domain": "synthesia.io",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is a product demo video?",
+      "What is the best product demo video?",
+      "How can I create a product demo video?",
+      "What is a demo video?"
+    ],
+    "relatedQueries": [
+      "Hardware product demo video download",
+      "Hardware product demo video free download",
+      "Software product demo video",
+      "SaaS product demo video examples",
+      "SaaS demo video template",
+      "Cool product demo videos",
+      "How to make a product demo video",
+      "SaaS demo video maker"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

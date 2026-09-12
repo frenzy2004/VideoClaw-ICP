@@ -1,0 +1,133 @@
+{
+  "id": "vc-manual250-c5-032",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.chathamhouse.org/about-us/contact-us",
+      "supports": "The contact page provides a dedicated press-office route for media enquiries.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://a16z.com/what-is-new-media-in-2026/",
+      "supports": "a16z distinguishes portfolio services from owned media channels.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Can the platform answer questions for a portfolio company?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should an acknowledgement promise?",
+      "basis": "editorial"
+    },
+    {
+      "question": "When is an enquiry complete?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Triage incoming press requests, identify authorized company contacts and track response ownership. Distinct from writing a founder press kit or pitching stories to reporters. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact US/en SERP evidence is being collected by main; query remains a candidate hypothesis. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities."
+  ],
+  "serp": {
+    "id": "vc-manual250-c5-032",
+    "keyword": "handling media enquiries",
+    "found": true,
+    "query": "handling media enquiries",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:01.735Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Media Inquiries: A Guide for Effective Communication",
+        "url": "https://www.cision.com/resources/insights/media-inquiries/",
+        "domain": "cision.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "8 + 1 Amazing Tips for Effectively Managing Media Enquiries",
+        "url": "https://www.linkedin.com/pulse/8-1-amazing-tips-effectively-managing-media-enquiries-bart-verhulst-qei1e",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 3,
+        "title": "Answering media enquiries",
+        "url": "https://www.ukri.org/councils/esrc/impact-toolkit-for-economic-and-social-sciences/how-to-do-media-relations/answering-media-enquiries/",
+        "domain": "ukri.org",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "How to manage your media inquiries",
+        "url": "https://presspage.com/blog/how-to-manage-your-media-inquiries-authentically-and-efficiently",
+        "domain": "presspage.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Quick Tips for Dealing with the Media",
+        "url": "https://www.tmsd.mb.ca/Crisis%20Plan/Section%2010/10-A%20Quick%20Tips%20for%20Dealing%20with%20the%20Media.pdf",
+        "domain": "tmsd.mb.ca",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Handling & Responding to Media Pressure",
+        "url": "https://conversationco.com.au/blog/handling-and-responding-to-media-pressure",
+        "domain": "conversationco.com.au",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "A Lawyer's Guide to Dealing with the Media",
+        "url": "https://www.cba.org/resources/cba-practicelink/a-lawyer-s-guide-to-dealing-with-the-media/",
+        "domain": "cba.org",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "10 Tips for Handling a Call from the Press",
+        "url": "https://www.sacredheart.edu/offices--departments-directory/marketing--communications/communications--content-strategy/10-tips-for-handling-a-call-from-the-press/",
+        "domain": "sacredheart.edu",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "How to respond when the media requests a reaction ...",
+        "url": "https://divisionsbc.ca/provincial/resources/communications/how-should-we-handle-calls-media-looking-us-react-story",
+        "domain": "divisionsbc.ca",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What does media enquiries mean?",
+      "What are the four C's in journalism?",
+      "What does ### mean in journalism?",
+      "How do I get news to pick up my story?"
+    ],
+    "relatedQueries": [
+      "Handling media enquiries template",
+      "Handling media enquiries email",
+      "Handling media enquiries pdf",
+      "Handling media enquiries examples",
+      "Media inquiries or enquiries",
+      "Media inquiry meaning",
+      "Media inquiries examples",
+      "Press inquiries meaning"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

@@ -59,7 +59,7 @@
   },
   "editorialGraphic": {
     "src": "/media/blog/separate-company-access-media-library.svg",
-    "alt": "A practical sequence for digital asset management permissions in a multi-company portfolio media program.",
+    "alt": "Role-by-space access matrix for shared resources and separate company libraries, checked with allowed, denied and direct-link sample tests.",
     "width": 1200,
     "height": 675
   },

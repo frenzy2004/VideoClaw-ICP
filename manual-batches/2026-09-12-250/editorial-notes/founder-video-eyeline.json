@@ -1,0 +1,109 @@
+{
+  "id": "vc-manual250-c1-025",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://wistia.com/blog/record-screen-and-webcam",
+      "supports": "The setup guidance recommends an eye-level webcam.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.descript.com/blog/article/how-to-read-a-script-like-a-pro-while-recording",
+      "supports": "The delivery guidance distinguishes natural lens contact from an intense stare.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should I look at the lens or my own picture?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should both cofounders look into the camera during an interview?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I glance at notes?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: Distinguish the gaze target for direct customer address from an interview and test note placement geometrically.",
+  "reviewNotes": [
+    "Exact US/en SERP evidence is being collected separately; keyword volume, difficulty, and CPC are unknown."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-025",
+    "keyword": "where to look when recording a video",
+    "found": true,
+    "query": "where to look when recording a video",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Where to look when making a video?! : r/NewTubers",
+        "url": "https://www.reddit.com/r/NewTubers/comments/nzh003/where_to_look_when_making_a_video/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "ZipTip – How to “look them in the eye” when recording videos",
+        "url": "https://www.zipperhq.com/2020/11/13/ziptip-how-to-maintain-better-eye-contact/",
+        "domain": "zipperhq.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Where to Look When You Record Yourself",
+        "url": "https://hundredfoldvideo.com/blog/where-to-look-when-you-record-yourself",
+        "domain": "hundredfoldvideo.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "Where Should I Look When Talking On Camera?",
+        "url": "https://www.proudbusinessproductions.com/blog/2020/1/18/where-should-i-look-when-talking-on-camera",
+        "domain": "proudbusinessproductions.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Replying to @Ally Rooker Where you should look when filming ...",
+        "url": "https://www.tiktok.com/@thekeirajones/video/7273921927599656234?lang=en",
+        "domain": "tiktok.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 6,
+        "title": "What can I do during recording to make my video look better?",
+        "url": "https://teaching.pitt.edu/resources/what-can-i-do-during-recording-to-make-my-video-look-better/",
+        "domain": "teaching.pitt.edu",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "When recording a video, where should you look?",
+      "Where to look at your phone when taking a selfie?",
+      "Do you look how you look in the mirror or back camera?",
+      "Do you look into the camera or the screen pictures?"
+    ],
+    "relatedQueries": [
+      "Where to look when recording a video iphone",
+      "Where to look when recording a video on phone",
+      "Where to look when recording a video reddit",
+      "Make eyes look at camera in video",
+      "Descript",
+      "Look AT this video 👀",
+      "NVIDIA Broadcast",
+      "Riverside fm eye contact"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

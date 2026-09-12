@@ -1,6 +1,14 @@
 import assert from 'node:assert/strict';
 
 export const normalize=(value:string)=>value.normalize('NFKC').trim().toLowerCase().replace(/\s+/g,' ');
+export function collectLocalLinks(html:string):string[]{
+  const links=new Set<string>();
+  for(const match of html.matchAll(/<a\b[^>]*\bhref="([^"]*)"[^>]*>/gi)){
+    const path=match[1].replaceAll('&amp;','&');
+    if(path.startsWith('/')&&!path.startsWith('//'))links.add(path);
+  }
+  return [...links];
+}
 type Identity={id:string;slug:string;title:string;keyword:string;campaign:string};
 export function mergeInventory<T extends Identity>(retained:T[],added:T[],final?:{campaigns:string[];perCampaign:number}):T[]{
   const combined=[...retained,...added];

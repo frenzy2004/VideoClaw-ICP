@@ -1,0 +1,114 @@
+{
+  "id": "vc-manual250-c1-028",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://wistia.com/blog/b-roll",
+      "supports": "The production team plans relevant supporting shots alongside spoken lines.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.adobe.com/creativecloud/video/discover/b-roll.html",
+      "supports": "B-roll supplements principal footage and can establish a scene or add meaning.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What B-roll should a founder record first?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can a shot of the team prove a customer result?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should every sentence have supporting footage?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: Tie each original supporting shot to a spoken claim and state what the image can and cannot establish.",
+  "reviewNotes": [
+    "Exact US/en SERP evidence is being collected separately; keyword volume, difficulty, and CPC are unknown."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-028",
+    "keyword": "how to shoot b roll for a founder video",
+    "found": true,
+    "query": "how to shoot b roll for a founder video",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "20 Essential B-Roll Shots Every Business Owner Needs ...",
+        "url": "https://medium.com/@khushboorajpal16/20-essential-b-roll-shots-every-business-owner-needs-repeat-these-forever-ec7a80e4d420",
+        "domain": "medium.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "How to Shoot Cinematic B Roll for Beginners",
+        "url": "https://www.youtube.com/watch?v=gTwXyinkshw",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 3,
+        "title": "How To Shoot B-Roll - Transom",
+        "url": "https://transom.org/2014/shooting-b-roll/",
+        "domain": "transom.org",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "How do you structure B-roll so it actually makes sense?",
+        "url": "https://www.reddit.com/r/videography/comments/1trzpig/how_do_you_structure_broll_so_it_actually_makes/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "B-Roll: The Secret Sauce of Any Great Video",
+        "url": "https://www.techsmith.com/blog/b-roll-secret-sauce-great-video/",
+        "domain": "techsmith.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "save this for b-roll ideas!🎥 . . . . #explore #contentcreation ...",
+        "url": "https://www.instagram.com/reel/DYevjRGsYWU/",
+        "domain": "instagram.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 7,
+        "title": "How to Shoot B-Roll for Travel Videos",
+        "url": "https://pascalbasel.com/how-to-shoot-b-roll-for-travel-videos/",
+        "domain": "pascalbasel.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "5 Tips for Shooting Better B-roll",
+        "url": "https://www.bitesite.ca/blog/5-tips-for-shooting-better-b-roll",
+        "domain": "bitesite.ca",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How to get good B-roll footage?",
+      "How do I add a B-roll to a video?",
+      "What does the 80/20 rule mean in video editing?",
+      "What are some engaging ideas for B-roll footage?"
+    ],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

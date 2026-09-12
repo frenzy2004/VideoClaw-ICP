@@ -38,7 +38,7 @@
   "faqs": [
     {
       "question": "Should blocked reviews count toward the work limit?",
-      "answer": "Keep the outstanding commitment visible. If the team formally pauses it, show the reason and effect on the queue rather than hiding it to make capacity appear available."
+      "answer": "Yes. Blocked and paused reviews remain started but unfinished, so both count toward total review WIP. In the example, admitting Ember raises the count from three to four under an explicit temporary exception; pausing Alder does not free a slot. A separate active-attention count must not replace total WIP."
     },
     {
       "question": "What is a useful review packet?",
@@ -59,7 +59,7 @@
   },
   "editorialGraphic": {
     "src": "/media/blog/portfolio-media-review-work-limits.svg",
-    "alt": "A practical sequence for content approval bottlenecks in a multi-company portfolio media program.",
+    "alt": "Company review board: three unfinished items include blocked Beacon; admitting urgent Ember temporarily raises WIP to four even when Alder pauses.",
     "width": 1200,
     "height": 675
   },
@@ -104,7 +104,7 @@ An item leaves the queue when that decision is recorded and the next action is c
 
 The [Kanban Guide](https://kanbanguides.org/the-kanban-guide/) defines work in progress between a workflow's start and finish and requires explicit controls. Here, those boundaries prevent review work from disappearing whenever someone sends a reminder or opens a new file version.
 
-Keep an item visible if it is blocked. Removing it from the board may make the limit look healthy while the commitment still exists. Show the blocker and decide whether to pause the commitment formally, reduce its scope or obtain the required decision.
+Blocked and paused items both count toward total review work in progress: they have started and have not met the exit condition. Pausing changes attention, not the unfinished count. Show the blocker and owner. If you also track an active-attention limit, label it separately; that narrower count never replaces total review WIP.
 
 ## Set a provisional limit by reviewer availability
 
@@ -112,13 +112,13 @@ Choose a limit small enough that the people responsible can actively manage the 
 
 A reviewer who can assess two short factual changes may not be able to assess two long interviews in the same window. You can separate simple factual checks from substantial narrative decisions, provided the categories remain understandable. Avoid assigning artificial point values unless the team can apply them consistently.
 
-Use the limit as a conversation rule: when the queue is full, a new item cannot enter without identifying what will finish, move or be explicitly displaced. The rule does not forbid urgent corrections. It makes their consequences visible.
+When total review WIP reaches its limit, finish a recorded decision before admitting another item, or authorize an explicit temporary exception. Moving or pausing an unfinished item does not free a slot. The coordinating editor controls admission, but each company's decision still requires its own authorized reviewer.
 
 In the first cycle, record what made items wait. Was the packet unclear, the reviewer unavailable, the question outside their authority or the draft still changing? Changing the limit will not solve every cause. Sometimes a better review packet is the smallest useful intervention.
 
 ## Walk through a fictional board
 
-Suppose a platform sets a provisional limit of three active company-review items for one coordinating editor. This is a fictional teaching example, not a capacity recommendation.
+Suppose a platform sets a provisional total review-WIP limit of three unfinished items for one coordinating editor. Alder, blocked Beacon and Cobalt all count: three unfinished, with two receiving active attention. This fictional limit does not imply that their company approvers are interchangeable.
 
 | Item | Current decision | State | Next useful action |
 | --- | --- | --- | --- |
@@ -130,9 +130,9 @@ Suppose a platform sets a provisional limit of three active company-review items
 
 The editor does not start Delta merely because its draft is available. First, Cobalt may be resolved through one precise question. Beacon needs a permission confirmation rather than another editorial pass. Alder needs factual answers, not a redesigned profile.
 
-If Ember requires an interruption, record which active item is paused and notify its company. The board should still show the total outstanding commitments. Moving Beacon into a hidden folder would not create genuine capacity.
+Ordinary branch: Cobalt's authorized approver records the decision, reducing total review WIP from three to two. Delta may then enter, restoring it to three. Nobody else can finish Cobalt's decision merely to manufacture capacity.
 
-After Cobalt's decision is recorded, Delta can enter with an appropriately bounded audience question. The point is to finish decisions, not keep all five documents visibly busy.
+Urgent branch: the coordinator authorizes Ember's admission as a temporary exception, raising total review WIP from three to four. Alder pauses and its company is notified; Alder still counts. Active attention shifts to Cobalt and Ember, while Beacon remains blocked. Record the exception owner, reason and ending condition: no further admission until WIP is below three. Finishing Ember returns four to three and ends the over-limit exception, but Delta still waits until another decision finishes. This prevents a pause from disguising extra unfinished work.
 
 ## Reduce avoidable review work
 

@@ -1,0 +1,118 @@
+{
+  "id": "vc-manual250-c5-026",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.canto.com/glossary/digital-asset-management-implementation/",
+      "supports": "Implementation includes asset migration, metadata mapping, permissions and user training.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.bynder.com/hc/en-us/articles/24265123462418-Guide-to-Uploading-Assets-in-Bynder",
+      "supports": "External uploads can be reviewed before storage; bulk upload methods can carry per-asset metadata.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Is matching the total file count enough?",
+      "basis": "editorial"
+    },
+    {
+      "question": "When should the larger migration pause?",
+      "basis": "editorial"
+    },
+    {
+      "question": "When can the old library be retired?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Reconcile files, metadata, permissions and links during a library move. This is migration execution for an already-chosen destination, not a software or vendor comparison. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact US/en SERP evidence is being collected by main; query remains a candidate hypothesis. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities.",
+    "Mixed intent: digital asset migration is operational; the draft covers a chosen media-library move and does not compare vendors or infrastructure."
+  ],
+  "serp": {
+    "id": "vc-manual250-c5-026",
+    "keyword": "digital asset migration",
+    "found": true,
+    "query": "digital asset migration",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:01.735Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How to execute an enterprise-scale DAM migration",
+        "url": "https://www.bynder.com/en/blog/3-steps-digital-asset-management-migration/",
+        "domain": "bynder.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "Digital Asset Management (DAM) Migration Guide",
+        "url": "https://stacksteam.com/guides/digital-asset-management-migration",
+        "domain": "stacksteam.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "A Beginner's Guide to Digital Asset Management Migration",
+        "url": "https://www.ibase.com/news/insight-a-beginners-guide-to-digital-asset-management-migration.html",
+        "domain": "ibase.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "The 3 key steps for successful DAM content migration",
+        "url": "https://www.fotoware.com/blog/the-3-steps-for-successful-dam-content-migration",
+        "domain": "fotoware.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Asset Migration",
+        "url": "https://www.resourcespace.com/glossary/asset_migration",
+        "domain": "resourcespace.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Asset Migration",
+        "url": "https://www.salsify.com/glossary/asset-migration-meaning",
+        "domain": "salsify.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "What to know before your DAM migration",
+        "url": "https://aetopia.com/blog/what-to-know-before-your-dam-migration.html",
+        "domain": "aetopia.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "How to migrate digital assets without losing your mind",
+        "url": "https://www.damcowboy.com/learn/migrating-digital-assets",
+        "domain": "damcowboy.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is digital migration?",
+      "What are some examples of DAM platforms?",
+      "What are the four types of data migration?",
+      "What is migration in cryptocurrency?"
+    ],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

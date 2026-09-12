@@ -1,0 +1,121 @@
+{
+  "id": "vc-manual250-c2-026",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.microsoft.com/en-us/powerpoint/add-bookmarks-to-points-of-interest-in-audio-and-video-clips",
+      "supports": "Media bookmarks identify playback locations in PowerPoint.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0064733",
+      "supports": "The built-in player shares a file with private playback controls.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should a bookmark land on the final result?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Do PowerPoint bookmarks follow a movie shared in another player?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What changes invalidate my replay index?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: A question-driven replay index includes context and return points instead of generic feature chapters. Competing page bodies have not been audited for this draft.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c2-026",
+    "keyword": "add bookmarks to a video",
+    "found": true,
+    "query": "add bookmarks to a video",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Add bookmarks to points of interest in audio and video clips",
+        "url": "https://support.microsoft.com/en-us/powerpoint/add-bookmarks-to-points-of-interest-in-audio-and-video-clips",
+        "domain": "support.microsoft.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "How Can I make bookmarks/chapters for a video?",
+        "url": "https://www.reddit.com/r/VideoEditing/comments/153sjdq/how_can_i_make_bookmarkschapters_for_a_video/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "YT Bookmarker - Chrome Web Store",
+        "url": "https://chromewebstore.google.com/detail/yt-bookmarker/docgcaajjlhikhllnlkfmffciiokggag",
+        "domain": "chromewebstore.google.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Add Chapters and Slides to Media in Video on Demand",
+        "url": "https://it.cornell.edu/vod/add-chapters-slides-vod",
+        "domain": "it.cornell.edu",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "How to Create Bookmarks Within Videos",
+        "url": "https://www.youtube.com/watch?v=lyqERGNtETs",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 6,
+        "title": "Media player to add bookmarks at specific times in a video?",
+        "url": "https://softwarerecs.stackexchange.com/questions/11942/media-player-to-add-bookmarks-at-specific-times-in-a-video",
+        "domain": "softwarerecs.stackexchange.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Adding a bookmark to video - VideoPad - Forums",
+        "url": "https://nch.invisionzone.com/topic/86736-adding-a-bookmark-to-video/",
+        "domain": "nch.invisionzone.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "How to Add Bookmarks to Video and Audio in PowerPoint ...",
+        "url": "https://www.howtogeek.com/bookmarks-video-audio-powerpoint/",
+        "domain": "howtogeek.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How do I add a bookmark in a video?",
+      "Can I add bookmarks to a YouTube video?",
+      "How to add bookmarks in VLC?",
+      "How do I add markers in a YouTube video?"
+    ],
+    "relatedQueries": [
+      "Add bookmarks to a video online",
+      "Add bookmarks to a video free",
+      "Add bookmarks to a video online free",
+      "How to bookmark YouTube videos on Android",
+      "How to bookmark YouTube videos with time",
+      "How to bookmark YouTube videos on iPad",
+      "How to bookmark a youtube video on iPhone",
+      "How to add bookmarks to youtube video"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

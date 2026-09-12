@@ -1,0 +1,123 @@
+{
+  "id": "vc-manual250-c1-026",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://wistia.com/blog/talking-head-video",
+      "supports": "Talking-head footage centers the speaker and commonly uses chest-up framing.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://wistia.com/blog/look-good-on-camera",
+      "supports": "The framing section discusses leaving space above the head.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should every founder video use the same crop?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How much headroom is correct?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Do I need a perfectly empty background?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: Provide original annotated layouts for different founder communication jobs and check the moving frame, not just a still.",
+  "reviewNotes": [
+    "Exact US/en SERP evidence is being collected separately; keyword volume, difficulty, and CPC are unknown."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-026",
+    "keyword": "how to frame a talking head video",
+    "found": true,
+    "query": "how to frame a talking head video",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "The Ultimate Guide to Talking Head Videos for Beginners",
+        "url": "https://www.youtube.com/watch?v=Qqt0hBDTzCo",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 2,
+        "title": "Talking head videos don't have to be boring! When it comes ...",
+        "url": "https://www.instagram.com/reel/DVEPAMoCSdr/?hl=en",
+        "domain": "instagram.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 3,
+        "title": "Architecting a Talking-Head Studio - Medium",
+        "url": "https://piethein.medium.com/architecting-a-talking-head-studio-a7a4ebbab9a3",
+        "domain": "piethein.medium.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "How do you create talking head videos?",
+        "url": "https://www.reddit.com/r/content_marketing/comments/1ooylsb/how_do_you_create_talking_head_videos/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "How to Make a Talking Head Video",
+        "url": "https://www.backstage.com/magazine/article/how-to-make-a-talking-head-video-78858/",
+        "domain": "backstage.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Film Yourself 101: How to Create a Talking Head Video",
+        "url": "https://www.skillshare.com/en/classes/film-yourself-101-how-to-create-a-talking-head-video/1306789744?srsltid=AfmBOor0ut0V5EOMfrj-yamNCO92SpFjM9OhIt15PwSmsVJeC87XQZCg",
+        "domain": "skillshare.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "How to frame a talking head | Shoot Marketing Video Like a Pro",
+        "url": "https://www.youtube.com/watch?v=3_0WNu-Vo0A",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 8,
+        "title": "How to Film Talking Head Videos That People *Actually* Watch",
+        "url": "https://www.youtube.com/watch?v=aLPqVr5zdmA&vl=en-US",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How to make a talking head video interesting?",
+      "What is the best camera for talking head videos?",
+      "What is the best aperture for a talking head video?",
+      "What is the talking head video format?"
+    ],
+    "relatedQueries": [
+      "How to frame a talking head video on iphone",
+      "Talking head video example",
+      "Talking head video editing",
+      "How to create a talking head video in CapCut",
+      "How to make a talking head video",
+      "Talking head video background",
+      "Talking head videos",
+      "Talking head video assets"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

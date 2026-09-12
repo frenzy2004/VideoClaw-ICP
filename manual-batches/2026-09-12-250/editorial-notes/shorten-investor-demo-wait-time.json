@@ -1,0 +1,123 @@
+{
+  "id": "vc-manual250-c2-019",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.apple.com/en-euro/guide/final-cut-pro/ver40b00150/mac",
+      "supports": "Changing clip playback speed changes duration and may move later timeline material.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://articles.sequoiacap.com/how-to-present-to-investors",
+      "supports": "The presentation guidance discusses demonstrations and workflows as ways to explain a solution.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Can I speed up a processing wait in an investor demo?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Is a note in the description enough?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I report the edited clip's duration as product speed?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: An elapsed-time ledger distinguishes a concise presentation from a product performance claim. Competing page bodies have not been audited for this draft.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c2-019",
+    "keyword": "speed up product demo video",
+    "found": true,
+    "query": "speed up product demo video",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How to Create Studio-Quality Product Demo Videos Using AI",
+        "url": "https://usemintly.com/blog/how-to-create-studioquality-product-demo-videos-using-ai",
+        "domain": "usemintly.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "Supademo: AI Interactive Product Demos",
+        "url": "https://supademo.com/",
+        "domain": "supademo.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Product Demo Video Maker (Online & Free)",
+        "url": "https://www.veed.io/create/promo-video/product-demo-video-maker",
+        "domain": "veed.io",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "How to Make a Product Demo Video",
+        "url": "https://www.youtube.com/watch?v=Oskk-xipi7Q",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 5,
+        "title": "SaaS Product Demo Videos: 7 Examples + How to Make ...",
+        "url": "https://www.moonb.io/blog/saas-product-demo-video",
+        "domain": "moonb.io",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Top Tips for Product Demonstration Videos and Examples ...",
+        "url": "https://www.atlassian.com/blog/loom/product-demonstration",
+        "domain": "atlassian.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "How to Make a Product Demo Video that Speeds Your Sales",
+        "url": "https://ripmediagroup.com/video-tips/how-to-make-a-product-demo-video-that-speeds-your-sales",
+        "domain": "ripmediagroup.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "10 Best Product Demo Video Examples (That You Can ...",
+        "url": "https://www.synthesia.io/post/product-demo-video-examples",
+        "domain": "synthesia.io",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "10 Best Product Demo Video Examples (That You Can ... - Velo",
+        "url": "https://usevelo.ai/blog/product-demo-video-examples/",
+        "domain": "usevelo.ai",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": [
+      "Speed up product demo video online",
+      "Speed up product demo video free",
+      "Product demo video maker free",
+      "Product demo video maker AI free",
+      "SaaS product demo video maker AI",
+      "Create product demo video",
+      "AI for product demo videos",
+      "Product demo video template"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

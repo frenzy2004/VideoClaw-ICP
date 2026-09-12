@@ -1,0 +1,114 @@
+{
+  "id": "vc-manual250-c1-024",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.shure.com/damfiles/default/global/documents/publications/en/performance-production/microphone_techniques_for_recording_english.pdf-bb0469316afdb6118691d2f3f5e3ff01.pdf",
+      "supports": "Pages 6 and 28–29 explain microphone distance and reflected room sound.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://wistia.com/blog/webcam-setup",
+      "supports": "The room-acoustics section discusses furnishings as a way to reduce echo.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Is room echo the same as hearing myself on a call?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should I move the microphone as close as possible?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What is the acceptance test?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: Separate room reflections from call echo and compare changes using the same passage and playback level.",
+  "reviewNotes": [
+    "Exact US/en SERP evidence is being collected separately; keyword volume, difficulty, and CPC are unknown."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-024",
+    "keyword": "how to reduce echo when recording video",
+    "found": true,
+    "query": "how to reduce echo when recording video",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Tricks to eliminate echo when recording voice overs?",
+        "url": "https://www.reddit.com/r/instructionaldesign/comments/y0ng14/tricks_to_eliminate_echo_when_recording_voice/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Echo & Reverb Remover: Studio Sound from Empty Room ...",
+        "url": "https://cleanvoice.ai/echo-reverb-remover/",
+        "domain": "cleanvoice.ai",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "AI Echo Remover for Video Online Free ｜ Vmake Labs",
+        "url": "https://vmake.ai/remove-echo-from-video",
+        "domain": "vmake.ai",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Remove Echo from Audio & Video Online Free",
+        "url": "https://voicecleaner.ai/echo-remover",
+        "domain": "voicecleaner.ai",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "How do I get rid of echo in a video?",
+        "url": "https://www.facebook.com/groups/252535418553355/posts/1781345509005664/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 6,
+        "title": "Remove Echo from Audio Online | AI Dereverb",
+        "url": "https://www.cleanaudio.io/remove-echo-from-audio",
+        "domain": "cleanaudio.io",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Reduce Voice ECHO and Amplify VOLUME of Audio with ...",
+        "url": "https://www.youtube.com/watch?v=zGZp-k1FVT0",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 8,
+        "title": "How to Remove Echo from Your Audio Using EchoRemover",
+        "url": "https://borisfx.com/blog/how-to-remove-echo-from-audio-using-echoremover/",
+        "domain": "borisfx.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How can I reduce echo in my video?",
+      "How to remove echo from audio recording?",
+      "How do I turn off echoing?",
+      "How to reduce echo sound?"
+    ],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

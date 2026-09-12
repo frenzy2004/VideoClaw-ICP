@@ -1,0 +1,116 @@
+{
+  "id": "vc-manual250-c2-018",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://opentelemetry.io/docs/concepts/signals/traces/",
+      "supports": "Spans represent operations and can carry events and context linking related work.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://articles.sequoiacap.com/how-to-present-to-investors",
+      "supports": "The presentation guidance discusses demonstrations and workflows as ways to explain a solution.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Do I need to build a user interface for an investor demo?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I use animation to explain the backend?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does a successful trace prove the product result is correct?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: A three-layer evidence storyboard makes invisible product work inspectable without presenting illustration as execution. Competing page bodies have not been audited for this draft.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c2-018",
+    "keyword": "how to demo a backend product",
+    "found": true,
+    "query": "how to demo a backend product",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How To Present Backend Demos : r/node",
+        "url": "https://www.reddit.com/r/node/comments/x6rvgr/how_to_present_backend_demos/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "How to present backend demos",
+        "url": "https://news.ycombinator.com/item?id=32729784",
+        "domain": "news.ycombinator.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "How To Demo The Backend In An Agile Way?",
+        "url": "https://matthiasorgler.com/articles/how-to-demo-the-backend-in-an-agile-way",
+        "domain": "matthiasorgler.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "How To Present Backend Demos",
+        "url": "https://rxhl.notion.site/How-To-Present-Backend-Demos-861303c09e3e48fcb33a2a6999260e59",
+        "domain": "rxhl.notion.site",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "How to Demo Software Internally",
+        "url": "https://www.sketchdev.io/blog/evolving-the-demo-process",
+        "domain": "sketchdev.io",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "How to create a frontend demo with no backend (AI Mocking)",
+        "url": "https://dev.to/emiliobuilding/how-to-create-a-frontend-demo-with-no-backend-ai-mocking-422n",
+        "domain": "dev.to",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Top 6 Sales Demo Software Tools and How to Choose One",
+        "url": "https://www.atlassian.com/blog/loom/sales-demo-software",
+        "domain": "atlassian.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "Build backends like a senior engineer - Here's how",
+        "url": "https://www.youtube.com/watch?v=RtucdRlGv1o&vl=en-US",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How to do a good product demo?",
+      "What are the top 5 backend languages?",
+      "What is the best tool to create product demos?",
+      "What is the best way to learn backend development?"
+    ],
+    "relatedQueries": [
+      "How to demo a backend product reddit",
+      "How to demo a backend product example",
+      "How to demo a backend product in agile"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

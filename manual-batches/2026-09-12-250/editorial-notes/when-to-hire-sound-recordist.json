@@ -1,0 +1,121 @@
+{
+  "id": "vc-manual250-c3-021",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.bls.gov/ooh/media-and-communication/broadcast-and-sound-engineering-technicians.htm",
+      "supports": "Inspected official duties section: technicians operate and monitor equipment, record speech, and synchronize sound with images. No crew-size rule is inferred.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.riverside.com/hc/en-us/articles/5260131045917-Video-and-audio-file-formats-Overview",
+      "supports": "Inspected help page: local high-quality separate tracks, combined edits and internet-dependent cloud recordings are distinct file types.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does a camera operator usually record sound too?",
+      "basis": "editorial"
+    },
+    {
+      "question": "When are separate audio tracks useful?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can sound repair replace a recordist?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: An audio-specific scope can help buyers purchase monitoring and isolated recordings rather than assume sound is covered by a camera quote.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c3-021",
+    "keyword": "do I need a sound recordist for a video shoot",
+    "found": true,
+    "query": "do I need a sound recordist for a video shoot",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "could I not hire sound recordist for a simpler shoot?",
+        "url": "https://www.reddit.com/r/Filmmakers/comments/1jqayba/realistically_could_i_not_hire_sound_recordist/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Sound Recordist On A Short Film Shoot - How To Prepare",
+        "url": "https://www.production-expert.com/production-expert-1/2020/6/18/how-to-prepare-for-a-short-film-shoot-as-the-sound-recordist-be-organised",
+        "domain": "production-expert.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "What does everyone use to record audio? I got some ...",
+        "url": "https://www.facebook.com/groups/27648968851/posts/10166827742683852/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 4,
+        "title": "Sound Recording for Video Production | Dream Engine",
+        "url": "https://www.dreamengine.com.au/video-production-process/sound-recordist/",
+        "domain": "dreamengine.com.au",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Production sound mixer",
+        "url": "https://en.wikipedia.org/wiki/Production_sound_mixer",
+        "domain": "en.wikipedia.org",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "The Basic Necessities: A Sound Guide for Production and ...",
+        "url": "https://agnesfilms.com/filmmaking-advice/the-basic-necessities-a-sound-guide-for-production-and-postproduction/",
+        "domain": "agnesfilms.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Sound Recordist",
+        "url": "https://www.actionontheside.tv/film-roles/sound-recordist",
+        "domain": "actionontheside.tv",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Sound recording for videographers",
+        "url": "https://julianlangham.co.uk/sound-recording-for-videographers/",
+        "domain": "julianlangham.co.uk",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What do you need for a video shoot?",
+      "Is a sound recorder necessary?",
+      "Can I record a video without sound?",
+      "What is the best sound recorder for filmmaking?"
+    ],
+    "relatedQueries": [
+      "Studio binder sound recording",
+      "Film sound recording equipment",
+      "How to record audio for short film",
+      "How to record audio for film",
+      "Microphone for video recording",
+      "How is sound recorded in movies",
+      "Sound in video",
+      "How to shoot video"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

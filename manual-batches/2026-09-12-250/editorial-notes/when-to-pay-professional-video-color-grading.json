@@ -1,0 +1,108 @@
+{
+  "id": "vc-manual250-c3-023",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.blackmagicdesign.com/products/davinciresolve/color",
+      "supports": "Inspected product documentation: image balancing, shot matching and color management address different finishing tasks. No claim that software can recover all source defects.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://helpx.adobe.com/premiere/desktop/correct-color/set-up-color-management/about-color-management.html",
+      "supports": "Inspected documentation: source media, working space and output color space are connected through color management; monitoring and delivery need a defined output.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Do all business videos need a separate colorist?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can grading fix overexposed or badly recorded footage?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How should I compare before-and-after samples?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: A six-shot finishing sample can connect a colorist's quote to visible problems and agreed viewing conditions.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c3-023",
+    "keyword": "is professional color grading worth it for business video",
+    "found": true,
+    "query": "is professional color grading worth it for business video",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Does color grading actually impact YouTube growth",
+        "url": "https://www.reddit.com/r/videography/comments/1qdmsy0/does_color_grading_actually_impact_youtube_growth/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Is color grading still worth it?",
+        "url": "https://www.instagram.com/cutroom.productions/reel/DcM6U8QBym6/",
+        "domain": "instagram.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 3,
+        "title": "Is Professional Colour Grading Worth It for Corporate Videos?",
+        "url": "https://www.hasanabdulla.co.uk/2026/08/12/professional-colour-grading-corporate-videos/",
+        "domain": "hasanabdulla.co.uk",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Is color grading an absolute must after you edit your video?",
+        "url": "https://www.facebook.com/groups/ottawafilmmakers/posts/3030390637034755/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 5,
+        "title": "You Don't Need Expensive Gear to Get Pro Color: Try This!",
+        "url": "https://www.youtube.com/watch?v=A7-RnVw_sQo",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 6,
+        "title": "Color Grading for Videographers",
+        "url": "https://www.behindtheshutter.com/color-grading-for-videographers/",
+        "domain": "behindtheshutter.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Color Grading: The Business",
+        "url": "https://icolorist.com/about-the-ica/color-grading-the-business/",
+        "domain": "icolorist.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is the best program for color grading video?",
+      "Is CapCut good for color grading?",
+      "Should I edit or color grade my video first?",
+      "What is the best video format for color grading?"
+    ],
+    "relatedQueries": [
+      "Is professional color grading worth it for business video reddit",
+      "Is professional color grading worth it for business video free"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

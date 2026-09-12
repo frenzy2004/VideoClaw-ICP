@@ -1,0 +1,119 @@
+{
+  "id": "vc-manual250-c3-026",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://stock.adobe.com/license-terms",
+      "supports": "Inspected license summary: videos have enhanced-license options; client transfers, standalone redistribution and editorial-only uses have distinct restrictions. Actual asset and contract terms govern.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.pexels.com/license/",
+      "supports": "Inspected license page: modifications are allowed within terms; implying endorsement by depicted people or brands is prohibited. Free availability is not unrestricted permission.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Can stock footage replace every business scene?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Is free stock footage unrestricted?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should I book the shoot before searching stock libraries?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: A scene-level sourcing map exposes proof and continuity gaps before a buyer reduces the shoot order.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c3-026",
+    "keyword": "stock footage vs custom video shoot",
+    "found": true,
+    "query": "stock footage vs custom video shoot",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Stock footage or your own video? How to make the right choice",
+        "url": "https://videodesign.com/en-ch/stock-footage-vs-custom-wann-sich-eigene-aufnahmen-lohnen-und-wann-nicht/",
+        "domain": "videodesign.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Stock Footage - Tips & Guide to Commercial Demand",
+        "url": "https://help.author.envato.com/hc/en-us/articles/360035608712-Stock-Footage-Tips-Guide-to-Commercial-Demand",
+        "domain": "help.author.envato.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "Custom Video Production: Brand-Safe Proof Stock Lacks",
+        "url": "https://www.visionair.com.au/video-production-vs-stock-video-which-should-you-choose/",
+        "domain": "visionair.com.au",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Stock Video vs. Custom Footage: When to Use Each for ...",
+        "url": "https://www.stockphotosecrets.com/questions-answers/stock-video-or-custom-footage-shutterstock.html",
+        "domain": "stockphotosecrets.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Stock Footage Vs Custom Footage for Videos",
+        "url": "https://www.facebook.com/fb-answers/stock-footage-vs-custom-footage-for-videos/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 6,
+        "title": "When (and How) to Use Stock Footage in Video Production",
+        "url": "https://fastcutvideo.com.au/when-and-how-to-use-stock-footage-in-video-production/",
+        "domain": "fastcutvideo.com.au",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "How to Shoot Stock Video | Adobe Creative Cloud",
+        "url": "https://www.youtube.com/watch?v=DzS-yEn40eA",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 8,
+        "title": "Stock Footage vs. Custom Filming: Making the Right Choice",
+        "url": "https://www.kcvideoclub.com/tips/stock-footage-vs-custom-filming-making-the-right-choice",
+        "domain": "kcvideoclub.com",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "5 Tips on Shooting Successful Stock Videos",
+        "url": "https://blog.depositphotos.com/5-tips-on-shooting-successful-stock-videos.html",
+        "domain": "blog.depositphotos.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is stock video footage?",
+      "How can I use stock footage legally?",
+      "What are the different types of stock footage?",
+      "Is stock footage copyright free?"
+    ],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

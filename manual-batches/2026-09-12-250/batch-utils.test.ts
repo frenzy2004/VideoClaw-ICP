@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { mergeInventory, selectEvidence } from './batch-utils';
+import { mergeInventory, selectEvidence, collectLocalLinks } from './batch-utils';
 
 const item=(n:number,campaign='c1')=>({id:`id-${n}`,slug:`slug-${n}`,title:`Title ${n}`,keyword:`query ${n}`,campaign});
 describe('incremental manual expansion',()=>{
@@ -23,5 +23,8 @@ describe('incremental manual expansion',()=>{
   it('allows pending evidence incrementally but refuses final completion',()=>{
     expect(selectEvidence(item(1),[])).toBeUndefined();
     expect(()=>selectEvidence(item(1),[],true)).toThrow(/Missing exact-term/);
+  });
+  it('collects actual local anchors without remote or asset destinations',()=>{
+    expect(collectLocalLinks('<a href="/blog/demo">Demo</a><a href="/blog/demo">Again</a><a href="/download?a=1&amp;b=2">App</a><a href="https://example.com">Source</a><a href="//example.com">Remote</a><link href="/style.css"/>')).toEqual(['/blog/demo','/download?a=1&b=2']);
   });
 });

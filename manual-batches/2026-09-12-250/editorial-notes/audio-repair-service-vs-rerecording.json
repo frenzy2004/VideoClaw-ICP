@@ -1,0 +1,112 @@
+{
+  "id": "vc-manual250-c3-022",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://downloads.izotope.com/docs/rx6/68-audio-problems/index.html",
+      "supports": "Inspected legacy technical documentation: clipping, hum, broadband noise and intermittent sounds are different defects. Used for diagnostic concepts, not current product feature or price claims.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://downloads.izotope.com/docs/rx6/22-de-clip/index.html",
+      "supports": "Inspected legacy module documentation: De-clip reconstructs waveform peaks above a selected threshold. This is a repair mechanism, not a guarantee that any damaged recording can be restored.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Can clipped speech always be repaired?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should I send for an audio repair quote?",
+      "basis": "editorial"
+    },
+    {
+      "question": "When should I stop paying for repair attempts?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: A representative repair sample and stop rule can turn uncertain audio salvage into a bounded purchase decision.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c3-022",
+    "keyword": "audio restoration service or rerecord video",
+    "found": true,
+    "query": "audio restoration service or rerecord video",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Audio Restoration Services | Professional Sound Repair",
+        "url": "https://www.thevoiceovergallery.co.uk/sound/audio-restoration-services/",
+        "domain": "thevoiceovergallery.co.uk",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Professional audio restoration services for poor",
+        "url": "https://www.facebook.com/groups/694161962019259/posts/1858974708871306/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 3,
+        "title": "Top Audio Restoration Pros for hire",
+        "url": "https://soundbetter.com/s/restoration",
+        "domain": "soundbetter.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "What Is Audio Restoration? Tips, Tricks, and More",
+        "url": "https://borisfx.com/blog/what-is-audio-restoration-tips-tricks-more/",
+        "domain": "borisfx.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Audio restoration",
+        "url": "https://en.wikipedia.org/wiki/Audio_restoration",
+        "domain": "en.wikipedia.org",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Audio restoration services",
+        "url": "https://www.audio-cleaning-online.com/english/audio-restoration/",
+        "domain": "audio-cleaning-online.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Audio Repair and Restoration — Where Do I Start?",
+        "url": "https://www.thebroadcastbridge.com/content/entry/613/audio-repair-and-restoration-where-do-i-start",
+        "domain": "thebroadcastbridge.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Best Professional Audio Restoration Service (Need it to be ...",
+        "url": "https://www.reddit.com/r/editors/comments/jusmog/best_professional_audio_restoration_service_need/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is the best audio restoration software?",
+      "How can I restore old audio recordings?",
+      "What is the best software for cleaning up audio recordings?",
+      "How do I get my recordings back?"
+    ],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

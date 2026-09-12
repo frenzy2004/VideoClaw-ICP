@@ -59,7 +59,7 @@
   },
   "editorialGraphic": {
     "src": "/media/blog/resolve-portfolio-launch-calendar-clashes.svg",
-    "alt": "A practical sequence for shared marketing calendar in a multi-company portfolio media program.",
+    "alt": "Three-company launch calendar showing independent announcement dates and the newsletter placement moved to resolve a shared distribution clash.",
     "width": 1200,
     "height": 675
   },

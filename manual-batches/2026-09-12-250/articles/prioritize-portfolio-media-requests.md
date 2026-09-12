@@ -59,7 +59,7 @@
   },
   "editorialGraphic": {
     "src": "/media/blog/prioritize-portfolio-media-requests.svg",
-    "alt": "A practical sequence for creative request management in a multi-company portfolio media program.",
+    "alt": "Eight-company editorial queue: Alder and Beacon start, Grove follows, normal requests use ready times, and two requests await inputs.",
     "width": 1200,
     "height": 675
   },
@@ -136,6 +136,8 @@ Imagine a platform has capacity to start two bounded editorial tasks. The follow
 | Harbor | Rework an undated company summary | Ready | Recently received | Normal queue |
 
 Alder goes first because the existing publication needs correction, not because Alder is the largest company. Beacon receives the second slot because its outside deadline is confirmed. Cobalt remains visibly next among normal requests; an urgent insertion does not silently erase its age.
+
+For a complete replay, this example ranks ready fixed-deadline work by the confirmed due time, then normal work by ready timestamp. Beacon is due Tuesday at noon; Grove is due Thursday at noon, so Grove follows the first two starts. Cobalt became ready Monday at 09:00; Ember and Harbor both became ready Monday at 10:00. The declared final tie-break is ascending intake reference: Ember R-107 precedes Harbor R-108. The ready sequence is therefore Alder, Beacon, Grove, Cobalt, Ember, Harbor. Delta and Finch have no ready position until their missing inputs arrive. All times are in the coordinator's stated local zone. This ordering is illustrative, not a universal priority policy.
 
 Delta's founder might say the clip is more important than Beacon's profile. That may be true for Delta, but the missing recording still prevents useful work. Offer a narrower task if one can proceed, such as checking the intended claim, and record that as a separate accepted result.
 

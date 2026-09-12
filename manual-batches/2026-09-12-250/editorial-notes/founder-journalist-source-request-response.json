@@ -1,0 +1,124 @@
+{
+  "id": "vc-manual250-c1-020",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.qwoted.com/best-practices-for-pitching-journalists/",
+      "supports": "Qwoted recommends relevance to the reporter's work and a concise, readable response.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.qwoted.com/am-i-an-expert-how-to-know-if-you-should-pitch-an-opportunity/",
+      "supports": "The article recommends verifiable subject knowledge and honesty about questions outside one's expertise.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should I answer every request related to my industry?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I provide a hypothetical example?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What if the journalist needs an answer faster than I can verify it?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: turn a specific journalist request into a concise attributable answer while making expertise, evidence, and limits visible.",
+  "reviewNotes": [
+    "Exact US/en SERP evidence is being collected separately; keyword volume, difficulty, and CPC are unknown."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-020",
+    "keyword": "how to respond to journalist source requests",
+    "found": true,
+    "query": "how to respond to journalist source requests",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How to reply to journalist call-for-sources to guarantee ...",
+        "url": "https://www.truesix.co/blog/how-to-reply-to-journalist-call-for-sources-to-guarantee-the-best-results",
+        "domain": "truesix.co",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "How to handle Media Request: A Guide for Startups",
+        "url": "https://www.wordsandpixels.co/startup-school/how-to-handle-a-request-from-a-journalist",
+        "domain": "wordsandpixels.co",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "5 tips for replying to journalist requests - Vuelio",
+        "url": "https://www.vuelio.com/uk/blog/5-tips-for-replying-to-journalist-requests/",
+        "domain": "vuelio.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "How to respond to journalist requests and gain coverage",
+        "url": "https://www.responsesource.com/blog/respond-journalist-requests-gain-coverage-guide-small-businesses/",
+        "domain": "responsesource.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Best Practices: The No-Surprises Rule, a Fair and Full ...",
+        "url": "https://ethicsandjournalism.org/resources/best-practices/best-practices-the-no-surprises-rule-a-fair-and-full-opportunity-to-respond/",
+        "domain": "ethicsandjournalism.org",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Responding to media requests – the basics",
+        "url": "https://dotstar.media/responding-to-media-requests-the-basics/",
+        "domain": "dotstar.media",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Journalist Requests: How to Find Them and Respond for ...",
+        "url": "https://www.buzzstream.com/blog/journalist-requests/",
+        "domain": "buzzstream.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "What's a tactful way to respond to a source who asks to see ...",
+        "url": "https://www.reddit.com/r/Journalism/comments/1cowlda/whats_a_tactful_way_to_respond_to_a_source_who/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "Responding to Media Inquiries",
+        "url": "https://www.wartburg.edu/marketing/media-inquiries/",
+        "domain": "wartburg.edu",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How to give a perfect reply?",
+      "What is the right of response in journalism?",
+      "How do journalists get their sources?",
+      "What are the 7 elements of newsworthiness?"
+    ],
+    "relatedQueries": [
+      "How to respond to journalist source requests sample",
+      "How to respond to journalist source requests email"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

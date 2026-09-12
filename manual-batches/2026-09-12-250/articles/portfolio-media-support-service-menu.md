@@ -59,7 +59,7 @@
   },
   "editorialGraphic": {
     "src": "/media/blog/portfolio-media-support-service-menu.svg",
-    "alt": "A practical sequence for marketing service catalog in a multi-company portfolio media program.",
+    "alt": "Six-entry portfolio media service menu, linking each founder request to required inputs, a bounded output and excluded work.",
     "width": 1200,
     "height": 675
   },
@@ -118,6 +118,8 @@ The following is a fictional menu for a platform that already provides limited e
 | Request a fund-channel feature | Public story and proposed audience | An editorial selection decision | Guaranteed placement or reach |
 
 For each entry, add an eligibility line and the request destination. If alumni and current companies have different access, explain the difference alongside the service. Do not make eligibility depend on knowing a particular partner.
+
+Completed fictional entry: “Review a company profile” is available to current cohort companies with a named company approver and an existing draft. Submit through the platform's Media Help form, selecting Profile Review; the editorial coordinator owns triage. Alumni use the Alumni Help route to confirm availability first. If the form is inaccessible or the request is misrouted, contact the platform support lead with the request reference. This names eligibility, intake and escalation without promising a turnaround time.
 
 Also name the response the requester should expect. An acknowledgement confirms receipt. A scoping response confirms that the team understands the work. Acceptance confirms that the platform has agreed to perform the defined service. These are different events; a catalog should not collapse them into a promise of completion.
 

@@ -59,7 +59,7 @@
   },
   "editorialGraphic": {
     "src": "/media/blog/maintain-portfolio-company-directory.svg",
-    "alt": "A practical sequence for portfolio company directory in a multi-company portfolio media program.",
+    "alt": "Company directory field dictionary and rebrand journal connecting old and new values to source checks and platform-controlled listing changes.",
     "width": 1200,
     "height": 675
   },
@@ -135,6 +135,14 @@ First, confirm the supplied changes and record their source. Keep the stable com
 Next, search the platform's owned records for the old name and link. The directory, founder biography, image caption, interview page and newsletter archive may each require a different action. A historical newsletter can retain the original wording while a current directory should show the new identity.
 
 Create a change journal with the old value, new value, affected destination and action. Mark items that require annotation rather than replacement. Do not silently rewrite a historical quote to match today's positioning.
+
+One filled fictional journal entry makes the handoff concrete:
+
+| Record / field | Old → new | Source / verified | Destination and action |
+| --- | --- | --- | --- |
+| ALD-01 / public name and directory path | Alder Labs, /companies/alder-labs → Alder, /companies/alder | Company contact's approved rebrand packet RB-07; checked 2026-09-10 | Platform owner updates the listing and redirects its own old directory path to /companies/alder; visitor test pending |
+
+The external website is a separate field: the confirmed destination changes from alderlabs.example to alder.example. These are fictional domains. The platform can update its outbound link, but cannot create or promise a redirect on the company's external domain. Record that external redirect question for the company's website owner rather than marking it complete in the platform journal.
 
 Finally, ask the company to check the current profile as a visitor would. A correct database entry is not enough if the public page still shows cached wording or links to the wrong site.
 

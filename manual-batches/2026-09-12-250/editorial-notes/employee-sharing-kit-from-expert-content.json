@@ -1,0 +1,124 @@
+{
+  "id": "vc-manual250-c4-026",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.linkedin.com/business/marketing/blog/content-marketing/why-content-marketing-needs-employee-advocacy",
+      "supports": "Curate sharing material around employees’ interests and audiences.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.linkedin.com/business/marketing/blog/brand/how-to-encourage-employees-to-advocate-for-your-brand-on-social",
+      "supports": "Support employees with practical guidance and trust.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should employees copy the same post?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What belongs in the kit?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What if someone has nothing personal to add?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Turn approved expert material into optional prompts employees can personalize meaningfully. This is employee participation in one company's GTM campaign, distinct from c1 founder positioning and c5 portfolio brand guidelines. No ranking-page comparison or demand conclusion is asserted.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending.",
+    "Optional employee distribution of a specific expert asset; not a founder-led publishing routine or portfolio-wide advocacy system."
+  ],
+  "serp": {
+    "id": "vc-manual250-c4-026",
+    "keyword": "employee advocacy content examples",
+    "found": true,
+    "query": "employee advocacy content examples",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:32:56.760Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "15 Employee Advocacy Examples To Guide Your Own ...",
+        "url": "https://www.aihr.com/blog/employee-advocacy-examples/",
+        "domain": "aihr.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "7 Inspiring Employee Advocacy Examples With ...",
+        "url": "https://www.supergrow.ai/blog/employee-advocacy-examples",
+        "domain": "supergrow.ai",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "Employee Advocacy Examples | Get inspired by our ...",
+        "url": "https://www.ambassify.com/resources/employee-advocacy-examples",
+        "domain": "ambassify.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "TOP 10 Employee Advocacy Examples for 2025",
+        "url": "https://business-explained.com/blog/top-10-employee-advocacy-examples-real-world-success-stories/",
+        "domain": "business-explained.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "8 Employee Advocacy Examples to Power Your Brand",
+        "url": "https://www.linkedin.com/posts/andreaslanz_8-employee-advocacy-examples-to-power-your-activity-7186661319855472640-ajtt",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 6,
+        "title": "Employee Advocacy - Examples, Benefits & Tips",
+        "url": "https://www.hays.com.au/employer-insights/recruitment-information/employee-advocacy",
+        "domain": "hays.com.au",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Employee Advocacy Examples: 8 Companies Winning on ...",
+        "url": "https://connectsafely.ai/articles/employee-advocacy-examples-linkedin-2026",
+        "domain": "connectsafely.ai",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "What are the best employee advocacy program examples?",
+        "url": "https://blog.hootsuite.com/employee-advocacy-program-examples/",
+        "domain": "blog.hootsuite.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What are the 7 pillars of advocacy?",
+      "Can you give me an example of advocacy?",
+      "What are some good advocacy topics?",
+      "What is an example of employee advocacy?"
+    ],
+    "relatedQueries": [
+      "Employee advocacy examples",
+      "Examples of advocacy in community",
+      "Employee advocacy program",
+      "Advocacy examples for students",
+      "Employee advocacy tools",
+      "Starbucks employee advocacy",
+      "Employee Advocacy Sprout Social",
+      "Adobe employee advocacy"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

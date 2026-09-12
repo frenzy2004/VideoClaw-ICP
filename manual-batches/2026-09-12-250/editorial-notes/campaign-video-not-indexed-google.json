@@ -1,0 +1,117 @@
+{
+  "id": "vc-manual250-c4-029",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.google.com/webmasters/answer/9495631?hl=en",
+      "supports": "The report covers indexed pages and documents click-dependent player discovery issues.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://developers.google.com/search/docs/appearance/video",
+      "supports": "A watch page centers on one video; indexing and specific search features are not guaranteed.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does an indexed page mean its video is indexed?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should every product page become a watch page?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I force Google to index the video?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Diagnose whether the page and video meet Google's video indexing requirements, then prepare concrete corrections. Distinct from choosing marketing metrics, clipping material or writing a transcript article. No ranking-page comparison or demand conclusion is asserted.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending.",
+    "Technical diagnostic intent, not a claim that all supplementary campaign embeds should be video-indexed. Observed PAA is mostly page-indexing intent; FAQs are editorial."
+  ],
+  "serp": {
+    "id": "vc-manual250-c4-029",
+    "keyword": "video not indexed Google watch page",
+    "found": true,
+    "query": "video not indexed Google watch page",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:32:56.760Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Video is not on a watch page, I have tried all the option but ...",
+        "url": "https://www.reddit.com/r/Wordpress/comments/1lggsfn/video_is_not_on_a_watch_page_i_have_tried_all_the/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Video indexing report - Search Console Help",
+        "url": "https://support.google.com/webmasters/answer/9495631?hl=en",
+        "domain": "support.google.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "How-to Fix Video Is NOT on a Watch Page Video Indexing ...",
+        "url": "https://www.rankya.com/google-search-console/how-to-fix-video-is-not-on-a-watch-page-issue/",
+        "domain": "rankya.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Google Search Console: “Video isn't on a watch page”",
+        "url": "https://help.raptive.com/hc/en-us/articles/50861204619547-Google-Search-Console-Video-isn-t-on-a-watch-page",
+        "domain": "help.raptive.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Fix : Video is not the main content of the page / Google Search ...",
+        "url": "https://www.youtube.com/watch?v=XgxE2RDrtP0",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 6,
+        "title": "3 Reasons Your Videos Were Dropped From Google's Index",
+        "url": "https://www.contentpowered.com/blog/video-dropped-googles-index/",
+        "domain": "contentpowered.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "How to fix video page indexing error",
+        "url": "https://www.facebook.com/groups/DumbSEOQuestions/posts/7827971720570411/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How to fix Google page indexing issues?",
+      "Why is my page not indexed by Google?",
+      "How can I fix a page that is \"Crawled - Currently Not Indexed\"?",
+      "How do I force Google to index a page?"
+    ],
+    "relatedQueries": [
+      "Video not indexed google watch page reddit",
+      "Video is not on a watch page",
+      "Video indexing ai",
+      "Google Search Console Video isn t on a watch page",
+      "Google video watch page",
+      "How to index YouTube video on Google",
+      "Video indexing Google",
+      "Google Search Console videos"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

@@ -59,7 +59,7 @@
   },
   "editorialGraphic": {
     "src": "/media/blog/portfolio-media-office-hours-scheduling.svg",
-    "alt": "A practical sequence for office hours scheduling in a multi-company portfolio media program.",
+    "alt": "Two-week office-hours grid with appointment lengths, preparation and follow-up time, plus a cancellation matched to a ready waitlisted request.",
     "width": 1200,
     "height": 675
   },

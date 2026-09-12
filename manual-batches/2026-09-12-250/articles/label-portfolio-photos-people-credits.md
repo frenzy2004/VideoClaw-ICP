@@ -59,7 +59,7 @@
   },
   "editorialGraphic": {
     "src": "/media/blog/label-portfolio-photos-people-credits.svg",
-    "alt": "A practical sequence for photo caption metadata in a multi-company portfolio media program.",
+    "alt": "Photo contact sheet connecting asset IDs to confirmed people, left-to-right positions, unresolved identity holds and exact supplied credits.",
     "width": 1200,
     "height": 675
   },
@@ -114,11 +114,13 @@ The following examples describe invented photographs. They illustrate a method r
 
 | Asset | Confirmed scene | Identification status | Supplied credit | Publication action |
 | --- | --- | --- | --- | --- |
-| PHOTO-101 | Alder founder demonstrates a prototype at a company table | Founder confirmed by company contact | Mira Chen Photography | Write a named caption |
+| PHOTO-101 | Alder founder demonstrates a prototype at a company table | Lena Ortiz, founder; company contact confirmed against PHOTO-101 on 2026-09-10 | Mira Chen Photography | Write a named caption |
 | PHOTO-102 | Beacon and Cobalt teams discuss a display | Two people confirmed; one unresolved | North Hall Events | Hold named group caption |
 | PHOTO-103 | Wide view of an operator roundtable | Event and date confirmed; individual names unnecessary | Platform event team | Use a general scene description |
 
-For PHOTO-101, a useful caption might be: “Alder founder Lena Ortiz demonstrates the company's prototype during the portfolio showcase.” The working record would also hold the date, the company's confirmation and the supplied credit. None of those details should be invented merely because the caption reads better with them.
+For PHOTO-101, the final fictional placement reads: “Alder founder Lena Ortiz demonstrates the company's prototype during the portfolio showcase.” Immediately beneath it, the credit line reads exactly “Mira Chen Photography,” following this example's supplied placement instruction. The record separately holds the supplied capture date and company confirmation; a review date must not be mistaken for the capture date.
+
+PHOTO-102's fictional positional record is: left, Ravi Sen, Beacon marketing lead, confirmed by Beacon's contact; center, Mei Tan, Cobalt product lead, confirmed by Cobalt's contact; right, identity unresolved. Both confirmations reference PHOTO-102 and are dated 2026-09-10. No final named group caption is released while the right-hand subject remains unresolved. If an approved alternative crop shows only the confirmed pair, check their new left-to-right order and display the exact credit “North Hall Events” in the required credit position.
 
 For PHOTO-102, do not assign the remaining guest-list name by elimination. Ask for confirmation or choose a frame where the unresolved person is not part of the intended subject. Cropping still requires checking whether the resulting image accurately represents the scene.
 

@@ -1,0 +1,121 @@
+{
+  "id": "vc-manual250-c3-031",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://elevenlabs.io/docs/help-center/product/voices/voice-cloning/can-i-create-a-professional-voice-clone-of-someone-elses-voice",
+      "supports": "Official body inspected 2026-09-12: the speaker creates and verifies their own Professional Voice Clone and may share it privately. Product-specific identity procedure, not blanket legal permission.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://elevenlabs.io/docs/help-center/legal/is-my-data-used-to-improve-eleven-labs-ai-models",
+      "supports": "Official body inspected 2026-09-12. Documents data-use opt-out applying to newly submitted data and a qualified Enterprise default. Does not promise retroactive deletion.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Can an agency create an ElevenLabs Professional Voice Clone for a consenting speaker?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does opting out of model improvement delete previously submitted data?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should happen when voice permission ends?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: A permission-chain worksheet separates the speaker's agreement, platform verification, business access and treatment of already generated recordings.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c3-031",
+    "keyword": "AI voice cloning consent for business videos",
+    "found": true,
+    "query": "AI voice cloning consent for business videos",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "AI Voice Cloning: Clone Your Voice in Minutes",
+        "url": "https://elevenlabs.io/voice-cloning",
+        "domain": "elevenlabs.io",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Free AI Voice Cloning: Clone Your Voice in Minutes",
+        "url": "https://invideo.io/tools/ai-voice-cloning/",
+        "domain": "invideo.io",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Free AI Voice Cloning : Clone Any Voice in 175+ Languages",
+        "url": "https://www.heygen.com/tool/ai-voice-cloning",
+        "domain": "heygen.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "AI Voice Cloning Regulation: Legal Updates and Concerns",
+        "url": "https://www.resemble.ai/resources/ai-voice-cloning-regulation-legal-updates-concerns",
+        "domain": "resemble.ai",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "AI voice cloning should empower businesses, not put them ...",
+        "url": "https://www.facebook.com/respeecher/posts/ai-voice-cloning-should-empower-businesses-not-put-them-at-riskusing-ai-generate/1209777624488815/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 6,
+        "title": "I'm a Voice Over Artist, a previous client has AI cloned my ...",
+        "url": "https://www.reddit.com/r/COPYRIGHT/comments/17jw0ob/im_a_voice_over_artist_a_previous_client_has_ai/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "How to Clone Your Voice with AI",
+        "url": "https://www.youtube.com/watch?v=AiRksVoiUAI",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 8,
+        "title": "Is AI Voice Cloning Legal? Consent, Rights & Risks",
+        "url": "https://vaniv.studio/en/blog/voice-cloning-law-ethics/",
+        "domain": "vaniv.studio",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Can AI clone a voice from a video?",
+      "How to protect against AI voice cloning?",
+      "What does AI voice cloning mean?",
+      "Can you replicate someone's voice with AI?"
+    ],
+    "relatedQueries": [
+      "Ai voice cloning consent for business videos reddit",
+      "Ai voice cloning consent for business videos free",
+      "Voice cloning AI free",
+      "Voice cloning AI free unlimited",
+      "Voice cloning free",
+      "Free AI voice cloning text to speech",
+      "AI voice cloning singing free",
+      "Hindi voice cloning AI free"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

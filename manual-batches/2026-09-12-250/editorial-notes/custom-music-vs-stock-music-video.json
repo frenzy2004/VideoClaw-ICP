@@ -1,0 +1,109 @@
+{
+  "id": "vc-manual250-c3-029",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.epidemicsound.com/business/agencies/",
+      "supports": "Primary service page inspected 2026-09-12. Advertises stems, instrumentals, structure adjustment and single-track or subscription options. No comparative superiority, pricing, or zero-risk claim adopted.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.copyright.gov/engage/musicians/",
+      "supports": "Official body inspected 2026-09-12: compositions and recordings are separate protected works, commonly owned and licensed separately. Supports rights questions, not a conclusion about a particular commission.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "When does a custom score justify a composer?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does custom music automatically belong to my company?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Why request stems and alternate mixes?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: A timecoded commission sheet reveals whether an actual musical mismatch justifies custom composition and separates creative deliverables from rights questions.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c3-029",
+    "keyword": "custom music vs stock music for video",
+    "found": true,
+    "query": "custom music vs stock music for video",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Custom Music or Stock Music? The Smart Way to Choose",
+        "url": "https://www.nathanfieldsmusic.com/blog/custom-vs-stock-music-video-project",
+        "domain": "nathanfieldsmusic.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "Custom vs Stock Music in SaaS: What the Data Shows - Fonetik",
+        "url": "https://thisisfonetik.com/custom-vs-stock-music-in-saas-what-the-data-shows/",
+        "domain": "thisisfonetik.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Why custom music beats stock music every time (for ...",
+        "url": "https://timbermusicsupply.com/stuff-to-know/2025/4/1/why-custom-music-beats-stock-music-every-time-for-filmmakers-who-care",
+        "domain": "timbermusicsupply.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "The Benefits of Using Stock Music in Video Production",
+        "url": "https://motioncue.com/stock-music-in-video-production/",
+        "domain": "motioncue.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Anyone else sick of stock music? : r/videography",
+        "url": "https://www.reddit.com/r/videography/comments/1feyso0/anyone_else_sick_of_stock_music/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "What Kind of Music Do You Need? Library, Custom, and ...",
+        "url": "https://www.antfood.com/labs/what-kind-of-music-do-you-need",
+        "domain": "antfood.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Soundstripe: Royalty Free Music for Video, Film, TV & Ads",
+        "url": "https://www.soundstripe.com/",
+        "domain": "soundstripe.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Is stock music copyrighted?",
+      "What famous song has no copyright?",
+      "Is it legal to use copyrighted music in personal videos?",
+      "How to add music to a video without losing quality?"
+    ],
+    "relatedQueries": [
+      "Custom music vs stock music for video reddit",
+      "Custom music vs stock music for video free",
+      "Custom music vs stock music for video download"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

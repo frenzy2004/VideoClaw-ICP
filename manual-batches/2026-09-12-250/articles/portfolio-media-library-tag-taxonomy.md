@@ -59,7 +59,7 @@
   },
   "editorialGraphic": {
     "src": "/media/blog/portfolio-media-library-tag-taxonomy.svg",
-    "alt": "A practical sequence for digital asset management taxonomy in a multi-company portfolio media program.",
+    "alt": "Eight populated media records and six retrieval tests, showing expected asset IDs, excluded near-matches and a current-release reference.",
     "width": 1200,
     "height": 675
   },
@@ -92,9 +92,7 @@ Collect examples from the people who retrieve media: platform editors, company m
 
 [Bynder's taxonomy guidance](https://support.bynder.com/hc/en-us/articles/20331272932626-Taxonomy-Tips-for-your-DAM) recommends examining user search terms and failed searches. Use that evidence to identify which distinctions matter in your library. A taxonomy designed only around the coordinator's mental model may be difficult for everyone else to use.
 
-Separate retrieval needs from reporting wishes. An industry label may help an editor find examples across the portfolio. A complex internal investment category may not help anyone select a media asset. Include the latter only if a real task requires it.
-
-Keep the original wording from the search examples. Those phrases will become test cases later, and they may reveal useful synonyms for your preferred labels.
+Separate retrieval needs from reporting wishes. Add internal categories only when a real task requires them. Keep users' original wording as test cases and potential search synonyms.
 
 ## Give each field one job
 
@@ -114,11 +112,12 @@ The following dictionary is an original example for a small portfolio media libr
 | --- | --- | --- | --- |
 | Company ID | Yes | ALD-01, BCN-02 | Use a stable identifier |
 | Asset type | Yes | Portrait, interview, product capture, event photo | Describe the asset itself |
-| Subject | Yes | Onboarding, product workflow, founder experience | Select a meaningful content topic |
+| Subject | Yes | Onboarding; Lena Ortiz, founder | Use a topic or verified named subject |
 | Release state | Yes | Working, company-approved, archived | Maintain through the release process |
 | Intended audience | When known | Prospective customer, new hire, portfolio operator | Do not infer from format alone |
 | Language | For spoken or written content | English, Spanish | Describe the actual version |
 | Related asset | When applicable | Source recording or released parent | Preserve the relationship |
+| Current release reference | For a versioned asset family | P1 | Copy the identifier from the existing release record |
 | Description | Yes | Short account of what is visible or discussed | Use plain language |
 
 Define what each value excludes. “Product capture” should not silently include a founder talking about the product if the visual distinction matters to retrieval. “Company-approved” should identify a recorded release state, not a general belief that the file looks finished.
@@ -127,20 +126,31 @@ Add synonyms for search without creating duplicate preferred labels. People may 
 
 ## Test six retrieval tasks
 
-Create a small sample of fictional assets and apply the dictionary. Then run tasks that require different combinations of fields.
+Use these filled fictional records. ALD means company ID ALD-01; BCN means BCN-02. “Approved” abbreviates the dictionary's company-approved Release state. A dash means not applicable, not unknown approval. Each Subject entry also supplies the short Description here.
 
-| Retrieval question | Likely fields | What a useful result proves |
-| --- | --- | --- |
-| Find Alder's current founder headshot | Company, type, release state | Identity and status work together |
-| Find an English onboarding interview | Subject, language, type | Topic is separate from company |
-| Find Beacon's product screen recording | Company, asset type | Format labels are specific |
-| Find media suitable for new hires | Audience, release state | Audience is not guessed from format |
-| Find the source behind this excerpt | Related asset | Asset relationships are preserved |
-| Find old versions for a historical review | Company, archive state | History is retrievable without appearing current |
+| ID | Company | Asset type | Subject / Description | Release state | Intended audience | Language | Related asset | Current release reference |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| P1 | ALD | Portrait | Lena Ortiz, founder | Approved | Press | — | — | P1 |
+| P0 | ALD | Portrait | Lena Ortiz, founder | Archived | Press | — | P1 | P1 |
+| P2 | ALD | Portrait | Omar Vale, engineer | Approved | Press | — | — | P2 |
+| I1 | BCN | Interview | Onboarding | Approved | Portfolio operator | English | — | I1 |
+| I2 | BCN | Interview | Onboarding | Approved | Portfolio operator | Spanish | I1 | I2 |
+| S1 | BCN | Product capture | Account setup screen | Approved | Prospective customer | English | — | S1 |
+| N1 | ALD | Interview | Team induction | Approved | New hire | English | — | N1 |
+| E1 | BCN | Excerpt | Onboarding | Working | Portfolio operator | English | I1 | — |
 
-Ask another person to perform the tasks without coaching. Record the terms they enter, the results they select and any ambiguity. A technically successful search can still return the wrong released version.
+The existing release record identifies P1 as current for Lena's portrait family. Taxonomy copies that reference; it does not grant release authority or decide which version should win.
 
-If several tasks require an extra field, consider adding it. If a field is never used and difficult to maintain, reconsider whether it belongs. Avoid expanding the dictionary merely because the application allows more metadata.
+| Retrieval question | Exact field/value test | Expected IDs | Excluded near-match |
+| --- | --- | --- | --- |
+| Find Alder founder Lena Ortiz's current headshot | Company=ALD; type=Portrait; Subject=Lena Ortiz, founder; Release state=Approved; ID=Current release reference | P1 | P0 is archived; P2 depicts an engineer |
+| Find an English onboarding interview | Type=Interview; Subject=Onboarding; Language=English | I1 | I2 is Spanish; E1 is an excerpt |
+| Find Beacon's product screen recording | Company=BCN; type=Product capture | S1 | I1 is an interview |
+| Find approved media intended for new hires | Intended audience=New hire; Release state=Approved | N1 | I1 targets portfolio operators |
+| Find E1's source | Read E1.Related asset=I1; retrieve ID=I1 | I1 | I2 is related to I1 but is not E1's recorded source |
+| Find Alder's archived portrait for history | Company=ALD; type=Portrait; Release state=Archived | P0 | P1 is the active approved portrait |
+
+Have another person replay these tests. Record unexpected matches, missing records and ambiguous field definitions. These are hand-worked expected results, not a claim that a search product has executed them. Expand the dictionary only when the retrieval job needs a distinction the existing fields cannot express.
 
 ## Handle exceptions without multiplying labels
 
@@ -162,7 +172,7 @@ Inspect a few newly uploaded assets for consistency. Ask whether another person 
 
 Keep the dictionary near the upload and search experience. A short example beside a field can be more useful than a long guide stored elsewhere. Explain why required fields matter using the retrieval tasks they enable.
 
-Success means people can find an appropriate, identifiable asset and understand its context. It does not mean every file has the largest possible number of tags. A small vocabulary that survives real searches is a better foundation than an elaborate classification nobody can apply consistently.
+Success means people can find an identifiable asset and understand its context, not that every file has the largest possible number of tags.
 
 Continue with [setting portfolio media guidelines](/blog/portfolio-video-brand-guidelines) and [organizing a repurposing workflow](/blog/video-content-repurposing-workflow).
 

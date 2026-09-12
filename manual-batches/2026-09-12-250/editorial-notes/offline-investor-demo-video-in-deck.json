@@ -1,0 +1,107 @@
+{
+  "id": "vc-manual250-c2-023",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.microsoft.com/en-us/powerpoint/insert-and-play-a-video-file-from-your-computer",
+      "supports": "PowerPoint distinguishes embedded local video from linked media.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/powerpoint/training/insert-a-video-from-youtube-or-another-site",
+      "supports": "Online video remains on its website and needs an internet connection to play.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does a video thumbnail mean the movie is embedded?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can a YouTube video inserted in PowerPoint play offline?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Is testing on my laptop enough for an event handover?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: A dependency map and cold disconnected test distinguish truly local playback from thumbnails, links and cached sessions. Competing page bodies have not been audited for this draft.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c2-023",
+    "keyword": "play video offline in PowerPoint",
+    "found": true,
+    "query": "play video offline in PowerPoint",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Insert a video from YouTube or another site",
+        "url": "https://support.microsoft.com/en-us/powerpoint/training/insert-a-video-from-youtube-or-another-site",
+        "domain": "support.microsoft.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Can embedded YouTube videos play offline in ...",
+        "url": "https://www.facebook.com/groups/lciCyberClubs/posts/452316568701545/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 3,
+        "title": "How to Fix Video Not Playing in PowerPoint",
+        "url": "https://slidemodel.com/how-to-fix-video-not-playing-in-powerpoint/",
+        "domain": "slidemodel.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "How To Embed A Video In PowerPoint From Any Source",
+        "url": "https://www.vyond.com/blog/how-to-add-video-to-powerpoint-presentations/",
+        "domain": "vyond.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Embed YouTube Video in PowerPoint Offline – And He Blogs",
+        "url": "https://andheblogs.andyrush.net/embed-youtube-video-in-powerpoint-offline/",
+        "domain": "andheblogs.andyrush.net",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "How to Embed a Video in PowerPoint and Elevate Your ...",
+        "url": "https://www.atlassian.com/blog/loom/how-to-embed-a-video-powerpoint",
+        "domain": "atlassian.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Why can't I play an MP4 video in PowerPoint?",
+      "How to play YouTube videos offline in PowerPoint?",
+      "How do you embed a video in PowerPoint and have it play automatically?",
+      "Does Microsoft PowerPoint have offline mode?"
+    ],
+    "relatedQueries": [
+      "Play video offline in powerpoint free",
+      "How to embed video in PowerPoint permanently",
+      "How to play video in PowerPoint automatically",
+      "How to embed video in PowerPoint from online",
+      "How to download a YouTube video for PowerPoint offline",
+      "How to add video in ppt from YouTube",
+      "How to add video in PPT in mobile",
+      "How to embed a YouTube video in PowerPoint with start and end time"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

@@ -59,7 +59,7 @@
   },
   "editorialGraphic": {
     "src": "/media/blog/onboard-company-portfolio-media-system.svg",
-    "alt": "A practical sequence for portfolio company onboarding in a multi-company portfolio media program.",
+    "alt": "Five-stage Alder onboarding map from a named company contact and access checks to a completed first request and an independent second request.",
     "width": 1200,
     "height": 675
   },

@@ -1,0 +1,127 @@
+{
+  "id": "vc-manual250-c5-024",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.google.com/a/users/answer/12380484?hl=en",
+      "supports": "Shared-drive access depends on memberships, direct grants and restrictions; temporary blocks may retain underlying grants.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.canto.com/hc/en-us/articles/23001802813841-Set-Expiration-Dates",
+      "supports": "Asset expiry can remove a file from Canto portals and uses the account time zone.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does removing an asset from the library recall downloaded copies?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should the withdrawn file be deleted immediately?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What belongs in the completion report?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Locate and withdraw downstream copies of one already-released asset, recording what cannot be recalled. Distinct from routine licence expiry, editorial revisions and stopping future scheduled posts. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact US/en SERP evidence is being collected by main; query remains a candidate hypothesis. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities.",
+    "Rights-adjacent: operational recall only; no universal takedown right or complete deletion guarantee is asserted."
+  ],
+  "serp": {
+    "id": "vc-manual250-c5-024",
+    "keyword": "revoke access to shared files",
+    "found": true,
+    "query": "revoke access to shared files",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:01.735Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Manage sharing and permissions in OneDrive ...",
+        "url": "https://support.microsoft.com/en-us/onedrive/sharepoint/manage-sharing-and-permissions-in-onedrive-and-sharepoint",
+        "domain": "support.microsoft.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Revoke Access to Shared Files",
+        "url": "https://getshared.com/blog/revoke-access-shared-files",
+        "domain": "getshared.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "Remove access from shared files and folders",
+        "url": "https://help.dropbox.com/share/remove-access",
+        "domain": "help.dropbox.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Is there a way to remove access to all files shared with one ...",
+        "url": "https://support.google.com/drive/thread/296787895/is-there-a-way-to-remove-access-to-all-files-shared-with-one-person-in-my-drive?hl=en",
+        "domain": "support.google.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "SharePoint Online: Allow users to revoke only their own ...",
+        "url": "https://www.reddit.com/r/sharepoint/comments/1uuckil/sharepoint_online_allow_users_to_revoke_only/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "How to Revoke File Access After It's Already Been Shared",
+        "url": "https://theodosian.com/blog/how-to-revoke-access-to-a-file-after-its-already-been-downloaded-or-shared",
+        "domain": "theodosian.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "How do I revert access to shared files?",
+        "url": "https://www.facebook.com/groups/256179001882562/posts/1311183383048780/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 8,
+        "title": "Revoke access to shared files by link - WD Community",
+        "url": "https://community.wd.com/t/revoke-access-to-shared-files-by-link/274870",
+        "domain": "community.wd.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How do I remove someone's access from a shared file?",
+      "How do I revoke access to a SharePoint file?",
+      "How do I restrict access to a shared folder?",
+      "How do I remove someone's access to a shared Word document?"
+    ],
+    "relatedQueries": [
+      "OneDrive",
+      "How to give OneDrive access to another user from admin center",
+      "How to remove access to a SharePoint file",
+      "How to remove someone from OneDrive shared folder",
+      "How to delete sharing links in onedrive",
+      "Google Drive",
+      "How to remove access to SharePoint Excel",
+      "How to change sharing permissions on Google Drive"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

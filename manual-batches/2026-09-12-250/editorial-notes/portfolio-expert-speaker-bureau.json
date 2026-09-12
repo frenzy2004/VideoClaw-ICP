@@ -1,0 +1,129 @@
+{
+  "id": "vc-manual250-c5-031",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.aaespeakers.com/",
+      "supports": "The bureau organizes speaker discovery by topic and describes matching speakers to event needs.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://founders.firstround.com/template-of-sheet",
+      "supports": "First Round describes a private portfolio resource portal and peer advice.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should the speaker roster be public?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does an introduction confirm a booking?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How should we choose between two qualified speakers?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Maintain a permissioned expert roster and match a speaking request to a qualified portfolio operator. Unlike founder interview questions, the job is matching and maintaining the bureau. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact US/en SERP evidence is being collected by main; query remains a candidate hypothesis. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities.",
+    "Mixed intent: speaker-bureau searches may seek commercial booking agencies. This article serves a portfolio operator's internal roster and introduction task; no demand validation."
+  ],
+  "serp": {
+    "id": "vc-manual250-c5-031",
+    "keyword": "speaker bureau database",
+    "found": true,
+    "query": "speaker bureau database",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:01.735Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Speakers bureau",
+        "url": "https://en.wikipedia.org/wiki/Speakers_bureau",
+        "domain": "en.wikipedia.org",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Speaker Bureau Management Platform",
+        "url": "https://www.extendmed.com/lp/speaker-bureau-mgmt",
+        "domain": "extendmed.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "How a Speaker Bureau's Feedback Database Saves You Time",
+        "url": "https://rightselectionspeakerbureau.com/stories/2026/09/how-a-speaker-bureau-s-client-feedback-database-saves-you-time",
+        "domain": "rightselectionspeakerbureau.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "National Speakers Bureau: Speakers Bureau for Corporate ...",
+        "url": "https://www.nsb.com/",
+        "domain": "nsb.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "International Association of Speakers Bureaus",
+        "url": "https://www.iasbweb.org/",
+        "domain": "iasbweb.org",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Keynote Speaker Database",
+        "url": "https://www.chartwellspeakers.com/categories/keynote-speakers/",
+        "domain": "chartwellspeakers.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Global Speakers Bureau: Motivational, Keynote and Public ...",
+        "url": "https://www.gspeakers.com/",
+        "domain": "gspeakers.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "APB Speakers: Keynote Speakers Bureau",
+        "url": "https://www.apbspeakers.com/",
+        "domain": "apbspeakers.com",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "30+ Speakers Bureaus To Consider As You Grow",
+        "url": "https://university.speakerflow.com/posts/speakers-bureaus-to-consider-as-you-grow",
+        "domain": "university.speakerflow.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": [
+      "Speaker bureau database free",
+      "How to join a speakers Bureau",
+      "What is a speaker bureau pharma",
+      "What is speaker agency in sociolinguistics",
+      "Speakers Bureau near me",
+      "Speakers bureaus list",
+      "Leading Authorities speakers Bureau",
+      "Speakers bureau toastmasters"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

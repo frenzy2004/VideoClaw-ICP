@@ -1,0 +1,109 @@
+{
+  "id": "vc-manual250-c1-027",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://riverside.com/blog/record-video-interview",
+      "supports": "Interview preparation includes explaining timing, topics, and the recording process to guests.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://wistia.com/blog/how-to-interview-podcast-guests-remotely",
+      "supports": "The studio team recommends listening and following up instead of rigidly reading questions.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "How do we avoid repeating each other?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Do both founders need equal speaking time?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should we do when we talk over each other?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: Assign distinct firsthand perspectives and recovery cues to two founders explaining the same decision.",
+  "reviewNotes": [
+    "Exact US/en SERP evidence is being collected separately; keyword volume, difficulty, and CPC are unknown."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-027",
+    "keyword": "how to film a two person interview",
+    "found": true,
+    "query": "how to film a two person interview",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Help please - how to light a two person interview",
+        "url": "https://www.reddit.com/r/videography/comments/ypphry/help_please_how_to_light_a_two_person_interview/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "How to shoot a 2-person interview",
+        "url": "https://help.shootsta.com/en/articles/setting-up-for-a-2-person-interview",
+        "domain": "help.shootsta.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "How to Set Up a 2 Person Interview: Cameras, Audio, and ...",
+        "url": "https://store.hollyland.com/blogs/creator-hub/set-up-a-2-person-interview?srsltid=AfmBOorkdActJwJxff0EI2pAdtfHXQklULgxELDjZ5cnvScDojXLiF05",
+        "domain": "store.hollyland.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "How to Prepare for a Corporate Video 2 Person Interview ...",
+        "url": "https://beverlyboy.com/corporate-video-production/how-to-prepare-for-a-corporate-video-2-person-interview-setup/",
+        "domain": "beverlyboy.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Technique for Two-Person Interview With a Single Camera ...",
+        "url": "https://www.dvinfo.net/forum/high-definition-video-editing-solutions/64458-technique-two-person-interview-single-camera.html",
+        "domain": "dvinfo.net",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "How to Shoot a Two Person Interview With One Camera",
+        "url": "https://www.youtube.com/watch?v=IC2CtezhZ6c",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is the 30-60-90 rule in an interview?",
+      "What is the 80/20 rule in interviewing?",
+      "What are the 5 C's of interviewing?",
+      "What is the best lighting setup for a 2-person interview?"
+    ],
+    "relatedQueries": [
+      "How to film a two person interview reddit",
+      "Two person interview setup",
+      "Two person interview lighting setup",
+      "3 camera 2 person interview setup",
+      "How to film two people talking",
+      "Filming an interview with two cameras",
+      "Multi camera interview setup",
+      "2-person podcast lighting setup"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

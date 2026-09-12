@@ -1,0 +1,114 @@
+{
+  "id": "vc-manual250-c2-029",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.apple.com/en-lamr/guide/imovie/mova1aaa682b/mac",
+      "supports": "Picture-in-picture overlays can be positioned, resized and timed.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.ycombinator.com/blog/how-to-design-a-better-pitch-deck/",
+      "supports": "The design guidance emphasizes legibility, simplicity and obvious meaning.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Which corner is best for the founder camera?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should the founder stay visible for the whole demo?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does a side panel solve overlay obstruction?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: An exclusion-zone map makes overlay placement follow changing product evidence instead of a universal corner rule. Competing page bodies have not been audited for this draft.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c2-029",
+    "keyword": "webcam overlay screen recording",
+    "found": true,
+    "query": "webcam overlay screen recording",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Webcam overlay: Mac Screen & Webcam Recording",
+        "url": "https://www.bandicam.com/mac/guide/webcam-overlay/?srsltid=AfmBOorhcgFKnCGNqWhhKXyEF_men31NsDtL-nUHB7qewaZDOZ-majIn",
+        "domain": "bandicam.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "Online screen and camera recorder",
+        "url": "https://clipchamp.com/en/screen-recorder/",
+        "domain": "clipchamp.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Screen Recorder with Webcam Overlay for Mac",
+        "url": "https://creavit.studio/screen-recorder-with-webcam",
+        "domain": "creavit.studio",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "How to Screen Record with Webcam Overlay",
+        "url": "https://www.screenify.studio/record/how-to/record-with-webcam",
+        "domain": "screenify.studio",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Best Screen Recorder with Facecam Overlay (Mac, 2026)",
+        "url": "https://screencharm.com/blog/screen-recorder-with-facecam",
+        "domain": "screencharm.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "How to Record Screen with Webcam Overlay | Debut Video ...",
+        "url": "https://www.youtube.com/watch?v=KdOgyxqjb9E",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 7,
+        "title": "Screen Recorder with Webcam Overlay (2026)",
+        "url": "https://zumie.io/screen-recorder-with-webcam-overlay",
+        "domain": "zumie.io",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How to screen record with overlay?",
+      "What is a webcam overlay?",
+      "How to screen record and record with webcam simultaneously?",
+      "How to make a webcam overlay?"
+    ],
+    "relatedQueries": [
+      "Webcam overlay screen recording free",
+      "Webcam overlay screen recording iphone",
+      "Webcam overlay screen recording online",
+      "Webcam screen recorder online",
+      "Camera screen recorder",
+      "Screen record with webcam windows 11",
+      "Screen recorder with webcam free",
+      "Clipchamp screen recorder with audio"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

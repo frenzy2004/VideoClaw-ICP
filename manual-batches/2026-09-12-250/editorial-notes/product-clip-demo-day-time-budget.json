@@ -1,0 +1,121 @@
+{
+  "id": "vc-manual250-c2-028",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.apple.com/en-mide/guide/keynote/tan81813d552/mac",
+      "supports": "Keynote can rerecord narration from a selected point and preview the saved presentation.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0064733",
+      "supports": "The built-in player shares a file with private playback controls.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should my movie use all the time reserved for the demo?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should I cut first when the clip is too long?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can a shorter movie prove the product is faster?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: A whole-sequence timing equation accounts for transition and result-hold time without duplicating pitch-script advice. Competing page bodies have not been audited for this draft.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c2-028",
+    "keyword": "product demo video length",
+    "found": true,
+    "query": "product demo video length",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How long was your demo video? : r/ycombinator",
+        "url": "https://www.reddit.com/r/ycombinator/comments/yrebul/how_long_was_your_demo_video/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Product demo video maker",
+        "url": "https://clipchamp.com/en/demo-video/",
+        "domain": "clipchamp.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "What Is a Product Demo Video? Types and Length",
+        "url": "https://trainn.co/glossaries/video-creation/what-is-product-demo-video/",
+        "domain": "trainn.co",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Top Tips for Product Demonstration Videos and Examples ...",
+        "url": "https://www.atlassian.com/blog/loom/product-demonstration",
+        "domain": "atlassian.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "How to Make a Product Demo Video That Converts",
+        "url": "https://www.moonb.io/blog/how-to-make-a-product-demo-video",
+        "domain": "moonb.io",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Product Demo Video Maker - Ship Demos in Minutes - ngram",
+        "url": "https://www.ngram.com/use-cases/product-demo-video",
+        "domain": "ngram.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Product Demo Video for Startups: Script, Length, and ...",
+        "url": "https://www.stackmatix.com/blog/product-demo-video-for-startups",
+        "domain": "stackmatix.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "How long should product demo videos be? - Rally Blog",
+        "url": "https://rally.space/blog/best-length-for-product-demo-videos",
+        "domain": "rally.space",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Is a 3 minute video too long for LinkedIn?",
+      "What is a product demo video?",
+      "Is a 3 minute video a short?",
+      "What is the best length for a promotional video?"
+    ],
+    "relatedQueries": [
+      "Product demo video length reddit",
+      "Product demo video examples",
+      "Product demo video maker free",
+      "Product demo video maker AI free",
+      "How to make demo video for teaching",
+      "YC demo video length",
+      "Product demo video with AI",
+      "How to create a demo video"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

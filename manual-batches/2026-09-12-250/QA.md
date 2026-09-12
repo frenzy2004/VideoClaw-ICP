@@ -32,6 +32,12 @@ Raw source transport failures are recorded honestly; separate web-body fallback
 receipts do not change those failed automatic results. Editorial approval is still
 false. The 8-word comparison is not an exhaustive plagiarism or intent audit.
 
+The later expanded HTTP check also follows body anchor destinations. Against
+this partial build it correctly finds 404s for related articles still being
+written (first observed: `/blog/founder-video-press-statement`). The earlier
+99-page HTTP result above did not include all body-anchor destinations. Full
+internal-link completion remains pending the complete 250-page build.
+
 ## Boundaries
 
 Only this new batch folder is changed in Git. Original fifty article/media hashes

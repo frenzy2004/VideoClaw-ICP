@@ -1,11 +1,21 @@
 {
   "schemaVersion": 1,
   "nativeBase": "b6b0833c78443b44b12bf6d33f05baa7ac8427d3",
-  "batchCount": 99,
-  "combinedArticleCount": 102,
+  "batchCount": 161,
+  "combinedArticleCount": 164,
   "publishedCount": 0,
   "generatedLanderPrs": 0,
   "checks": [
+    {
+      "id": "vc-manual250-c3-024",
+      "slug": "2d-vs-3d-animation-studio-selection",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/2d-vs-3d-animation-studio-selection"
+    },
     {
       "id": "vc-manual250-c2-011",
       "slug": "accelerator-application-video-field-map",
@@ -57,6 +67,16 @@
       "canonical": "/blog/accelerator-progress-paired-demo-recordings"
     },
     {
+      "id": "vc-manual250-c2-031",
+      "slug": "ai-investor-demo-repeat-trials",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/ai-investor-demo-repeat-trials"
+    },
+    {
       "id": "vc-manual50-c3-010",
       "slug": "ai-video-editing-limitations",
       "nativeContract": "pass",
@@ -87,6 +107,26 @@
       "canonical": "/blog/announce-startup-funding-with-video"
     },
     {
+      "id": "vc-manual250-c2-017",
+      "slug": "anonymize-customer-footage-investor-demo",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/anonymize-customer-footage-investor-demo"
+    },
+    {
+      "id": "vc-manual250-c3-022",
+      "slug": "audio-repair-service-vs-rerecording",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/audio-repair-service-vs-rerecording"
+    },
+    {
       "id": "vc-manual250-c1-012",
       "slug": "build-startup-media-list",
       "nativeContract": "pass",
@@ -95,6 +135,26 @@
       "faqs": 3,
       "media": "files_present",
       "canonical": "/blog/build-startup-media-list"
+    },
+    {
+      "id": "vc-manual250-c3-031",
+      "slug": "buying-ai-voice-consent-account-control",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/buying-ai-voice-consent-account-control"
+    },
+    {
+      "id": "vc-manual250-c3-033",
+      "slug": "buying-audio-description-services",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/buying-audio-description-services"
     },
     {
       "id": "vc-manual250-c4-018",
@@ -107,6 +167,16 @@
       "canonical": "/blog/buying-committee-content-pack"
     },
     {
+      "id": "vc-manual250-c4-029",
+      "slug": "campaign-video-not-indexed-google",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/campaign-video-not-indexed-google"
+    },
+    {
       "id": "vc-manual250-c3-017",
       "slug": "choose-remote-video-recording-software",
       "nativeContract": "pass",
@@ -117,6 +187,36 @@
       "canonical": "/blog/choose-remote-video-recording-software"
     },
     {
+      "id": "vc-manual250-c3-032",
+      "slug": "choose-video-dubbing-service",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/choose-video-dubbing-service"
+    },
+    {
+      "id": "vc-manual250-c3-030",
+      "slug": "choose-voice-actor-business-video-audition",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/choose-voice-actor-business-video-audition"
+    },
+    {
+      "id": "vc-manual250-c4-031",
+      "slug": "connect-youtube-shorts-full-product-story",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/connect-youtube-shorts-full-product-story"
+    },
+    {
       "id": "vc-manual250-c2-016",
       "slug": "correct-investor-video-visible-claims",
       "nativeContract": "pass",
@@ -125,6 +225,26 @@
       "faqs": 3,
       "media": "files_present",
       "canonical": "/blog/correct-investor-video-visible-claims"
+    },
+    {
+      "id": "vc-manual250-c2-030",
+      "slug": "cross-device-investor-demo-recording",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/cross-device-investor-demo-recording"
+    },
+    {
+      "id": "vc-manual250-c3-029",
+      "slug": "custom-music-vs-stock-music-video",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/custom-music-vs-stock-music-video"
     },
     {
       "id": "vc-manual50-c4-006",
@@ -217,6 +337,26 @@
       "canonical": "/blog/edit-recorded-panel-multiple-speakers"
     },
     {
+      "id": "vc-manual250-c4-034",
+      "slug": "embedded-video-landing-page-speed",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/embedded-video-landing-page-speed"
+    },
+    {
+      "id": "vc-manual250-c4-026",
+      "slug": "employee-sharing-kit-from-expert-content",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/employee-sharing-kit-from-expert-content"
+    },
+    {
       "id": "vc-manual250-c3-012",
       "slug": "evaluate-video-production-portfolio",
       "nativeContract": "pass",
@@ -257,6 +397,16 @@
       "canonical": "/blog/extract-clear-product-stills-from-video"
     },
     {
+      "id": "vc-manual250-c4-023",
+      "slug": "feature-demo-to-visual-release-notes",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/feature-demo-to-visual-release-notes"
+    },
+    {
       "id": "vc-manual250-c1-014",
       "slug": "first-founder-media-interview-preparation",
       "nativeContract": "pass",
@@ -265,6 +415,36 @@
       "faqs": 3,
       "media": "files_present",
       "canonical": "/blog/first-founder-media-interview-preparation"
+    },
+    {
+      "id": "vc-manual250-c1-021",
+      "slug": "founder-camera-confidence-practice",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/founder-camera-confidence-practice"
+    },
+    {
+      "id": "vc-manual250-c2-029",
+      "slug": "founder-camera-overlay-investor-demo",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/founder-camera-overlay-investor-demo"
+    },
+    {
+      "id": "vc-manual250-c1-029",
+      "slug": "founder-commentary-industry-news",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/founder-commentary-industry-news"
     },
     {
       "id": "vc-manual50-c5-008",
@@ -285,6 +465,16 @@
       "faqs": 3,
       "media": "files_present",
       "canonical": "/blog/founder-contributed-article-proposal"
+    },
+    {
+      "id": "vc-manual250-c1-020",
+      "slug": "founder-journalist-source-request-response",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/founder-journalist-source-request-response"
     },
     {
       "id": "vc-manual50-c1-002",
@@ -327,6 +517,66 @@
       "canonical": "/blog/founder-story-video-interview"
     },
     {
+      "id": "vc-manual250-c1-026",
+      "slug": "founder-talking-head-video-framing",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/founder-talking-head-video-framing"
+    },
+    {
+      "id": "vc-manual250-c1-025",
+      "slug": "founder-video-eyeline",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/founder-video-eyeline"
+    },
+    {
+      "id": "vc-manual250-c1-023",
+      "slug": "founder-video-home-office-lighting",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/founder-video-home-office-lighting"
+    },
+    {
+      "id": "vc-manual250-c1-030",
+      "slug": "founder-video-press-statement",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/founder-video-press-statement"
+    },
+    {
+      "id": "vc-manual250-c1-024",
+      "slug": "founder-video-room-echo",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/founder-video-room-echo"
+    },
+    {
+      "id": "vc-manual250-c1-022",
+      "slug": "founder-video-teleprompter-vs-outline",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/founder-video-teleprompter-vs-outline"
+    },
+    {
       "id": "vc-manual50-c3-003",
       "slug": "freelance-video-editor-rates",
       "nativeContract": "pass",
@@ -335,6 +585,16 @@
       "faqs": 3,
       "media": "files_present",
       "canonical": "/blog/freelance-video-editor-rates"
+    },
+    {
+      "id": "vc-manual250-c2-021",
+      "slug": "hardware-investor-demo-shot-list",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/hardware-investor-demo-shot-list"
     },
     {
       "id": "vc-manual250-c3-020",
@@ -355,6 +615,26 @@
       "faqs": 3,
       "media": "files_present",
       "canonical": "/blog/in-house-vs-outsourced-video-production"
+    },
+    {
+      "id": "vc-manual250-c2-026",
+      "slug": "investor-demo-evidence-bookmarks",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/investor-demo-evidence-bookmarks"
+    },
+    {
+      "id": "vc-manual250-c2-020",
+      "slug": "investor-demo-screen-readability",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/investor-demo-screen-readability"
     },
     {
       "id": "vc-manual250-c2-014",
@@ -387,6 +667,16 @@
       "canonical": "/blog/investor-update-video"
     },
     {
+      "id": "vc-manual250-c2-018",
+      "slug": "invisible-product-work-investor-demo",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/invisible-product-work-investor-demo"
+    },
+    {
       "id": "vc-manual250-c5-018",
       "slug": "label-portfolio-photos-people-credits",
       "nativeContract": "pass",
@@ -417,6 +707,56 @@
       "canonical": "/blog/maintain-portfolio-company-directory"
     },
     {
+      "id": "vc-manual250-c5-028",
+      "slug": "merge-duplicate-portfolio-media-files",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/merge-duplicate-portfolio-media-files"
+    },
+    {
+      "id": "vc-manual250-c5-026",
+      "slug": "migrate-portfolio-media-library",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/migrate-portfolio-media-library"
+    },
+    {
+      "id": "vc-manual250-c2-025",
+      "slug": "mobile-app-demo-event-projector",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/mobile-app-demo-event-projector"
+    },
+    {
+      "id": "vc-manual250-c3-025",
+      "slug": "motion-graphics-template-vs-custom-package",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/motion-graphics-template-vs-custom-package"
+    },
+    {
+      "id": "vc-manual250-c3-028",
+      "slug": "music-license-business-client-videos",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/music-license-business-client-videos"
+    },
+    {
       "id": "vc-manual250-c4-019",
       "slug": "nurture-sequence-from-existing-content",
       "nativeContract": "pass",
@@ -425,6 +765,16 @@
       "faqs": 3,
       "media": "files_present",
       "canonical": "/blog/nurture-sequence-from-existing-content"
+    },
+    {
+      "id": "vc-manual250-c2-023",
+      "slug": "offline-investor-demo-video-in-deck",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/offline-investor-demo-video-in-deck"
     },
     {
       "id": "vc-manual250-c5-016",
@@ -455,6 +805,16 @@
       "faqs": 3,
       "media": "files_present",
       "canonical": "/blog/paid-video-editor-test-project"
+    },
+    {
+      "id": "vc-manual250-c4-025",
+      "slug": "partner-comarketing-kit-from-recording",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/partner-comarketing-kit-from-recording"
     },
     {
       "id": "vc-manual50-c2-010",
@@ -507,6 +867,16 @@
       "canonical": "/blog/portfolio-company-newsletter"
     },
     {
+      "id": "vc-manual250-c5-031",
+      "slug": "portfolio-expert-speaker-bureau",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/portfolio-expert-speaker-bureau"
+    },
+    {
       "id": "vc-manual50-c5-005",
       "slug": "portfolio-founder-interviews",
       "nativeContract": "pass",
@@ -537,6 +907,16 @@
       "canonical": "/blog/portfolio-media-office-hours-scheduling"
     },
     {
+      "id": "vc-manual250-c5-025",
+      "slug": "portfolio-media-product-change-audit",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/portfolio-media-product-change-audit"
+    },
+    {
       "id": "vc-manual250-c5-021",
       "slug": "portfolio-media-release-version-control",
       "nativeContract": "pass",
@@ -545,6 +925,16 @@
       "faqs": 3,
       "media": "files_present",
       "canonical": "/blog/portfolio-media-release-version-control"
+    },
+    {
+      "id": "vc-manual250-c5-030",
+      "slug": "portfolio-media-resource-adoption-diagnosis",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/portfolio-media-resource-adoption-diagnosis"
     },
     {
       "id": "vc-manual250-c5-014",
@@ -607,6 +997,16 @@
       "canonical": "/blog/prioritize-portfolio-media-requests"
     },
     {
+      "id": "vc-manual250-c2-028",
+      "slug": "product-clip-demo-day-time-budget",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/product-clip-demo-day-time-budget"
+    },
+    {
       "id": "vc-manual50-c1-006",
       "slug": "product-launch-content-calendar",
       "nativeContract": "pass",
@@ -615,6 +1015,26 @@
       "faqs": 3,
       "media": "files_present",
       "canonical": "/blog/product-launch-content-calendar"
+    },
+    {
+      "id": "vc-manual250-c5-024",
+      "slug": "recall-withdrawn-portfolio-media-assets",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/recall-withdrawn-portfolio-media-assets"
+    },
+    {
+      "id": "vc-manual250-c1-027",
+      "slug": "record-cofounder-interview",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/record-cofounder-interview"
     },
     {
       "id": "vc-manual50-c2-006",
@@ -647,6 +1067,16 @@
       "canonical": "/blog/recorded-sales-demo-follow-up"
     },
     {
+      "id": "vc-manual250-c5-023",
+      "slug": "recording-private-portfolio-roundtables",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/recording-private-portfolio-roundtables"
+    },
+    {
       "id": "vc-manual250-c2-012",
       "slug": "remote-cofounder-application-video",
       "nativeContract": "pass",
@@ -655,6 +1085,16 @@
       "faqs": 3,
       "media": "files_present",
       "canonical": "/blog/remote-cofounder-application-video"
+    },
+    {
+      "id": "vc-manual250-c2-022",
+      "slug": "remote-investor-demo-computer-audio",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/remote-investor-demo-computer-audio"
     },
     {
       "id": "vc-manual250-c3-015",
@@ -687,6 +1127,16 @@
       "canonical": "/blog/request-startup-press-correction"
     },
     {
+      "id": "vc-manual250-c2-027",
+      "slug": "reset-investor-demo-account-state",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/reset-investor-demo-account-state"
+    },
+    {
       "id": "vc-manual50-c4-005",
       "slug": "resize-video-for-social-media",
       "nativeContract": "pass",
@@ -707,6 +1157,16 @@
       "canonical": "/blog/resolve-portfolio-launch-calendar-clashes"
     },
     {
+      "id": "vc-manual250-c5-032",
+      "slug": "route-portfolio-press-enquiries",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/route-portfolio-press-enquiries"
+    },
+    {
       "id": "vc-manual250-c4-016",
       "slug": "sales-call-insights-objection-battlecards",
       "nativeContract": "pass",
@@ -717,6 +1177,16 @@
       "canonical": "/blog/sales-call-insights-objection-battlecards"
     },
     {
+      "id": "vc-manual250-c5-027",
+      "slug": "search-portfolio-recordings-by-moment",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/search-portfolio-recordings-by-moment"
+    },
+    {
       "id": "vc-manual250-c5-017",
       "slug": "separate-company-access-media-library",
       "nativeContract": "pass",
@@ -725,6 +1195,46 @@
       "faqs": 3,
       "media": "files_present",
       "canonical": "/blog/separate-company-access-media-library"
+    },
+    {
+      "id": "vc-manual250-c5-033",
+      "slug": "separate-competing-company-media-work",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/separate-competing-company-media-work"
+    },
+    {
+      "id": "vc-manual250-c1-028",
+      "slug": "shoot-founder-video-b-roll",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/shoot-founder-video-b-roll"
+    },
+    {
+      "id": "vc-manual250-c2-019",
+      "slug": "shorten-investor-demo-wait-time",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/shorten-investor-demo-wait-time"
+    },
+    {
+      "id": "vc-manual250-c4-028",
+      "slug": "should-gate-on-demand-webinar-replay",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/should-gate-on-demand-webinar-replay"
     },
     {
       "id": "vc-manual50-c4-007",
@@ -827,6 +1337,56 @@
       "canonical": "/blog/startup-recruitment-video"
     },
     {
+      "id": "vc-manual250-c3-027",
+      "slug": "stock-footage-license-client-commercial-use",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/stock-footage-license-client-commercial-use"
+    },
+    {
+      "id": "vc-manual250-c3-026",
+      "slug": "stock-footage-vs-custom-video-shoot",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/stock-footage-vs-custom-video-shoot"
+    },
+    {
+      "id": "vc-manual250-c4-024",
+      "slug": "support-recordings-to-troubleshooting-articles",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/support-recordings-to-troubleshooting-articles"
+    },
+    {
+      "id": "vc-manual250-c5-029",
+      "slug": "test-findability-portfolio-media-resources",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/test-findability-portfolio-media-resources"
+    },
+    {
+      "id": "vc-manual250-c4-027",
+      "slug": "trade-show-video-loop-existing-demos",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/trade-show-video-loop-existing-demos"
+    },
+    {
       "id": "vc-manual50-c4-002",
       "slug": "turn-long-videos-into-short-clips",
       "nativeContract": "pass",
@@ -847,6 +1407,16 @@
       "canonical": "/blog/turn-video-transcript-into-useful-blog-post"
     },
     {
+      "id": "vc-manual250-c2-024",
+      "slug": "two-founder-investor-demo-handoff",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/two-founder-investor-demo-handoff"
+    },
+    {
       "id": "vc-manual250-c3-014",
       "slug": "unlimited-video-editing-queue-capacity",
       "nativeContract": "pass",
@@ -865,6 +1435,16 @@
       "faqs": 3,
       "media": "files_present",
       "canonical": "/blog/update-accelerator-application-demo-video"
+    },
+    {
+      "id": "vc-manual250-c4-030",
+      "slug": "useful-chapters-long-product-video",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/useful-chapters-long-product-video"
     },
     {
       "id": "vc-manual50-c5-002",
@@ -927,6 +1507,16 @@
       "canonical": "/blog/video-content-repurposing-workflow"
     },
     {
+      "id": "vc-manual250-c4-033",
+      "slug": "video-cta-placement-viewer-readiness",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/video-cta-placement-viewer-readiness"
+    },
+    {
       "id": "vc-manual50-c3-007",
       "slug": "video-editor-vs-motion-designer",
       "nativeContract": "pass",
@@ -935,6 +1525,16 @@
       "faqs": 3,
       "media": "files_present",
       "canonical": "/blog/video-editor-vs-motion-designer"
+    },
+    {
+      "id": "vc-manual250-c4-032",
+      "slug": "video-email-reliable-viewing-path",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/video-email-reliable-viewing-path"
     },
     {
       "id": "vc-manual50-c4-009",
@@ -995,6 +1595,26 @@
       "faqs": 3,
       "media": "files_present",
       "canonical": "/blog/video-studio-rental-vs-office-filming"
+    },
+    {
+      "id": "vc-manual250-c3-021",
+      "slug": "when-to-hire-sound-recordist",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/when-to-hire-sound-recordist"
+    },
+    {
+      "id": "vc-manual250-c3-023",
+      "slug": "when-to-pay-professional-video-color-grading",
+      "nativeContract": "pass",
+      "previewNoindex": true,
+      "production404": true,
+      "faqs": 3,
+      "media": "files_present",
+      "canonical": "/blog/when-to-pay-professional-video-color-grading"
     }
   ]
 }

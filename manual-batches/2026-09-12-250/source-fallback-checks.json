@@ -139,6 +139,138 @@
       "method": "web_page_body_review",
       "checkedAt": "2026-09-12",
       "support": "QBR discussion of customer outcomes and future goals inspected; no renewal-effect numbers reused."
+    },
+    {
+      "url": "https://articles.sequoiacap.com/how-to-present-to-investors",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Solution section recommends demonstrations, screenshots and workflows; no attention-span or fundraising-outcome figures adopted."
+    },
+    {
+      "url": "https://support.google.com/drive/answer/2409045?co=GENIE.Platform%3DDesktop&hl=en-419",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Version management and Keep forever instructions inspected; Google-native document history distinguished."
+    },
+    {
+      "url": "https://support.google.com/youtube/answer/157177?hl=en",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Private and unlisted visibility distinctions inspected; unlisted links can be reshared."
+    },
+    {
+      "url": "https://support.apple.com/en-ie/guide/final-cut-pro/verc1fabc30/mac",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Same-take multi-device synchronization and sync-point limitations inspected."
+    },
+    {
+      "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0063608",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Computer audio sharing and separate audio-only sharing instructions inspected."
+    },
+    {
+      "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0064733",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Local file sharing and playback controls hidden from participants inspected."
+    },
+    {
+      "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0068426",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Video optimization guidance and warning about static text/image distortion inspected."
+    },
+    {
+      "url": "https://helpx.adobe.com/fonts/web/font-licensing/font-licensing.html",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Client editing access requires appropriate font licensing; flattened/embedded output is distinguished."
+    },
+    {
+      "url": "https://helpx.adobe.com/premiere/desktop/correct-color/set-up-color-management/about-color-management.html",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Source, working and output spaces and monitoring/delivery relationship inspected."
+    },
+    {
+      "url": "https://helpx.adobe.com/stock/web/common-questions/usage-licensing.html",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Client-specific licensing and editorial-versus-commercial restrictions inspected; no general legal guarantee implied."
+    },
+    {
+      "url": "https://www.adobe.com/learn/after-effects/web/motion-graphics-brand-package?ntd=1",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Package consistency and template-editable text/color controls inspected; no universal update guarantee adopted."
+    },
+    {
+      "url": "https://blog.hubspot.com/blog/tabid/6307/bid/34188/what-in-the-heck-is-co-marketing.aspx?gad=1",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Definition describes partners jointly promoting a shared offer; no promised lead outcomes adopted."
+    },
+    {
+      "url": "https://support.zendesk.com/hc/en-us/articles/4408894140826-Getting-started-with-self-service-Part-3-Determining-what-articles-you-need-to-create",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Existing support tickets and macros as article-input sources inspected."
+    },
+    {
+      "url": "https://support.apple.com/en-au/guide/iphone/iph93af723b9/ios",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Compatible adapter/cable and selected display input workflow inspected."
+    },
+    {
+      "url": "https://support.apple.com/en-nz/guide/iphone/iph61f49e4bb/ios",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Recording-format and frame-rate availability varies by model; relevant settings section inspected."
+    },
+    {
+      "url": "https://www.atlassian.com/blog/loom/video-stitching",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "May 2022 feature announcement includes adding clips to update project recordings; historical example, not current plan entitlement."
+    },
+    {
+      "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0059819",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Recording notification and participant opt-out choices inspected; does not establish later publication rights."
+    },
+    {
+      "url": "https://www.chathamhouse.org/about-us/chatham-house-rule",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Identity/affiliation protection, indirect attribution and off-record distinction inspected."
+    },
+    {
+      "url": "https://helpx.adobe.com/ca/stock/contributor/help/artist-hub-migration/lighting-for-video.html",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Lighting color-temperature consistency guidance inspected."
+    },
+    {
+      "url": "https://riverside.com/university-videos/speak-to-the-lens-like-a-pro-7-key-tips-for-camera-confidence",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Page introduction covers eye contact, body language and warm-up; the embedded lesson was not watched."
+    },
+    {
+      "url": "https://www.atlassian.com/itsm/knowledge-management/self-service-success",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Content-audit, findability and accessible human-help recommendations inspected; no usage or outcome percentages adopted."
+    },
+    {
+      "url": "https://www.shure.com/damfiles/default/global/documents/publications/en/performance-production/microphone_techniques_for_recording_english.pdf-bb0469316afdb6118691d2f3f5e3ff01.pdf",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Microphone-distance and direct-versus-ambient sound guidance inspected; room-acoustic definitions read."
     }
   ]
 }

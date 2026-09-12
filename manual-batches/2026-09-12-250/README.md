@@ -32,10 +32,9 @@ schedule or deployment is changed.
 
 ## Reproduce local checks
 
-From this repository, run the assembly and content checks with `npx tsx`:
+From a fresh checkout, validate the committed articles with `npx tsx`:
 
 ```sh
-npx tsx manual-batches/2026-09-12-250/assemble.ts
 npx tsx manual-batches/2026-09-12-250/audit-content.ts
 npx tsx manual-batches/2026-09-12-250/validate-native.mts /tmp/videoclaw-manual50-REVIEW/lander
 ```
@@ -47,4 +46,8 @@ For completion, append `--final` to each command. Then run the clone's native
 checks, lint, preview build and local HTTP/browser audits.
 
 Author scratch inputs in `drafts/` are ignored; assembled `articles/` are the
-complete deliverable. Do not rerun paid collection merely to inspect this batch.
+complete deliverable and can be edited directly during review. `assemble.ts`
+is an authoring-time command requiring those local scratch inputs, not a
+fresh-checkout requirement. Do not rerun it after editing the committed article
+without updating its input pair; it would regenerate that article. Do not rerun
+paid collection merely to inspect this batch.

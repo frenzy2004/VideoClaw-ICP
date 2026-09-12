@@ -1,0 +1,124 @@
+{
+  "id": "vc-manual250-c4-034",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://web.dev/learn/performance/video-performance",
+      "supports": "Third-party video players can add JavaScript and other resource overhead.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://web.dev/articles/lazy-loading-video",
+      "supports": "Loading strategy depends on use case; LCP video should not be indiscriminately lazy-loaded.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should every video be lazy-loaded?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Will compressing the recording fix a slow embed?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should be measured after a change?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Reduce unnecessary initial loading while keeping the visitor's intended video easy to start. This is page performance triage, distinct from video indexing and file aspect-ratio adaptation. No ranking-page comparison or demand conclusion is asserted.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending.",
+    "Query and observed PAA include playback-speed ambiguity; body explicitly addresses page loading, not changing playback rate. Developer handoff advice, not runtime changes."
+  ],
+  "serp": {
+    "id": "vc-manual250-c4-034",
+    "keyword": "speed up landing page with embedded videos",
+    "found": true,
+    "query": "speed up landing page with embedded videos",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:32:56.760Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Using Videos on Your Website Without Slowing it Down",
+        "url": "https://www.kualo.com/knowledgebase/perf-speed/using-videos-on-your-website-without-slowing-it-down",
+        "domain": "kualo.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Embedding a YouTube video drops mobile PageSpeed ...",
+        "url": "https://www.reddit.com/r/webdev/comments/19ewd78/embedding_a_youtube_video_drops_mobile_pagespeed/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Speed up your website by loading video faster",
+        "url": "https://www.youtube.com/watch?v=n7rR9fdjWJE",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 4,
+        "title": "How to make landing page load faster - Images & Videos",
+        "url": "https://forum.squarespace.com/topic/319590-how-to-make-landing-page-load-faster/",
+        "domain": "forum.squarespace.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Speed Up Loading of Embedded Videos (not Lazy Loading)",
+        "url": "https://travis.media/blog/speed-up-loading-embedded-videos/",
+        "domain": "travis.media",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "How to get embedded videos to load faster",
+        "url": "https://www.quora.com/How-do-you-get-embedded-videos-to-load-faster",
+        "domain": "quora.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Does Embedding Videos Affect Website Speed?",
+        "url": "https://www.beknown.nyc/insights/does-embedding-videos-affect-website-speed",
+        "domain": "beknown.nyc",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "How can I speed up page load time with YouTube embeds?",
+        "url": "https://community.shopify.com/t/how-can-i-speed-up-page-load-time-with-youtube-embeds/60379",
+        "domain": "community.shopify.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How to speed up an embedded video?",
+      "How to make videos load faster on a website?",
+      "How do I change a video to 2x speed?",
+      "How can I speed up an existing video?"
+    ],
+    "relatedQueries": [
+      "Speed up landing page with embedded videos reddit",
+      "Speed up landing page with embedded videos online",
+      "Speed up landing page with embedded videos github",
+      "Speed up landing page with embedded videos free",
+      "Speed up landing page with embedded videos download",
+      "Youtube video embed online",
+      "Lite-youtube embed",
+      "Video embedder"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

@@ -1,0 +1,114 @@
+{
+  "id": "vc-manual250-c2-025",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.apple.com/en-au/guide/iphone/iph93af723b9/ios",
+      "supports": "A compatible adapter and cable connect iPhone to a selected display input.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.apple.com/en-gb/108399",
+      "supports": "Adapter compatibility matters; VGA does not carry audio.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does any USB-C phone work with a projector adapter?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Why is the app narrow on a wide event screen?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Why can the projector show video but not play sound?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: A phone-to-event-screen signal-path record tests the actual app, orientation and operator cues rather than a booth loop. Competing page bodies have not been audited for this draft.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c2-025",
+    "keyword": "show mobile app on projector",
+    "found": true,
+    "query": "show mobile app on projector",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Projector - HD Video Mirroring – Apps on Google Play",
+        "url": "https://play.google.com/store/apps/details?id=com.pnd.shareall&hl=en_IN",
+        "domain": "play.google.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "How to Connect a Smartphone to a Projector?",
+        "url": "https://global.xgimi.com/blogs/tips-tutorials/connect-smartphone-to-projector?srsltid=AfmBOopWM-MH_ytCKJZir2uNoDsfufTNGUvkOLn53OCFu2dpTRpTplk3",
+        "domain": "global.xgimi.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "Projector: Phone to TV Cast – Apps on ...",
+        "url": "https://play.google.com/store/apps/details?id=com.vsray.screen.mirroring.smartview.tv.cast&hl=en_IN",
+        "domain": "play.google.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Cast Easily with Projector App: 7 Tools for iOS Android",
+        "url": "https://www.soundcore.com/blogs/projectors/projector-app",
+        "domain": "soundcore.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "How to Connect Android Phones and Tablets to Projectors ...",
+        "url": "https://www.benq.com/en-in/business/resource/trends/connect-android-phone-to-tv.html?srsltid=AfmBOoqe208qdalqS9OC7PmPDQv6xOq-fYHJV71aytrJ7X3Lu2BI6kO-",
+        "domain": "benq.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Mobile Projector 4K Show Wall for Android - Download",
+        "url": "https://mobile-projector-4k-show-wall.en.softonic.com/android",
+        "domain": "mobile-projector-4k-show-wall.en.softonic.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "How to mirror the Android phone screen to PC/Projector",
+        "url": "https://community.dhis2.org/t/how-to-mirror-the-android-phone-screen-to-pc-projector/35521",
+        "domain": "community.dhis2.org",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How can I display my phone on a projector?",
+      "How do I get apps on my projector?",
+      "How can I mirror my Android screen to a projector?",
+      "How do I mirror my screen to a projector?"
+    ],
+    "relatedQueries": [
+      "Show mobile app on projector android",
+      "Show mobile app on projector samsung",
+      "Show mobile app on projector free",
+      "Show mobile app on projector apk",
+      "Flashlight Video Projector app for Android",
+      "Flashlight projector app",
+      "Phone to wall Projector app free download",
+      "Flashlight projector app on wall"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

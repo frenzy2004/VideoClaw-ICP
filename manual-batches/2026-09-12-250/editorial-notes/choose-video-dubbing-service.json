@@ -1,0 +1,121 @@
+{
+  "id": "vc-manual250-c3-032",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://experience.3playmedia.com/platform/dubbing/",
+      "supports": "Primary service body inspected 2026-09-12: human involvement differs by tier; initial template review is distinct from later translation and voice review. No pricing or quality superiority adopted.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.3playmedia.com/hc/en-us/articles/22503054883479-AI-Dubbing-Order-with-Transcription-Captioning",
+      "supports": "Primary help body inspected 2026-09-12, updated August 21 2026: translation profile and initial source transcription required; dubbing deadline additional to initial transcription deadline.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Can I approve a dub if I do not speak the language?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does human-reviewed dubbing always include final translation review?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should a dubbing sample contain?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: An independently reviewed sample separates translation, pronunciation and synchronization defects before committing to a language the buyer cannot judge.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c3-032",
+    "keyword": "how to choose a video dubbing service",
+    "found": true,
+    "query": "how to choose a video dubbing service",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Localize content across 90+ languages with AI dubbing",
+        "url": "https://elevenlabs.io/dubbing-studio",
+        "domain": "elevenlabs.io",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "AI Dubbing: Dub videos into any language for free",
+        "url": "https://www.canva.com/features/ai-dubbing/",
+        "domain": "canva.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "AI Dubbing - Free Video Dubbing Tool (140+ Languages)",
+        "url": "https://www.synthesia.io/features/ai-dubbing",
+        "domain": "synthesia.io",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Recommendations for the best AI dubbing service : r/artificial",
+        "url": "https://www.reddit.com/r/artificial/comments/1q3ut4t/recommendations_for_the_best_ai_dubbing_service/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "AI Dubbing for video localization - Adobe Firefly",
+        "url": "https://www.adobe.com/products/firefly/features/ai-dubbing.html",
+        "domain": "adobe.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Best Video Dubbing Service: Top 5 AI Localization ...",
+        "url": "https://www.rask.ai/blog/top-5-ai-dubbing-services-rask-ais-voiceclones-language-update",
+        "domain": "rask.ai",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Video Localization Services: Subtitles, Dubbing and ...",
+        "url": "https://translated.com/resources/video-localization-services-guide",
+        "domain": "translated.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "7 Top Online Tools for Dubbing Videos with AI Translations",
+        "url": "https://vimeo.com/ko/blog/post/tools-for-video-dubbing",
+        "domain": "vimeo.com",
+        "resultType": "video_or_social"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is the best video dubbing software?",
+      "Is it legal to use AI to dub videos?",
+      "What is the best app for dubbing videos?",
+      "Where can I dub videos for free?"
+    ],
+    "relatedQueries": [
+      "Video dubbing online free",
+      "Best video dubbing online free",
+      "AI video dubbing free unlimited",
+      "Free AI video dubbing",
+      "Automatic video dubbing",
+      "Free AI video dubbing Speechify",
+      "Video dubbing AI free download",
+      "YouTube video dubbing AI free"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

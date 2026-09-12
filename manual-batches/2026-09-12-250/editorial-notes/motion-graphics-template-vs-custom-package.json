@@ -1,0 +1,121 @@
+{
+  "id": "vc-manual250-c3-025",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.adobe.com/learn/after-effects/web/motion-graphics-brand-package?ntd=1",
+      "supports": "Inspected tutorial: a graphics package can expose selected text and color controls through Motion Graphics templates. No broad guarantee of automatic updates across existing instances is adopted.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://helpx.adobe.com/fonts/web/font-licensing/font-licensing.html",
+      "supports": "Inspected client-use FAQ: a client needing direct font access for editing needs its own appropriate license; flattened or properly embedded output is a different case.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "When is a ready-made motion template enough?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should a custom motion package include?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can the designer simply send the font files?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: An editability specimen can reveal whether a purchased template supports the buyer's recurring changes without repeated designer intervention.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c3-025",
+    "keyword": "motion graphics templates vs custom animation",
+    "found": true,
+    "query": "motion graphics templates vs custom animation",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Custom animation vs templates in social ads",
+        "url": "https://www.reddit.com/r/AfterEffects/comments/1raaf4v/custom_animation_vs_templates_in_social_ads_whats/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Free motion graphics templates",
+        "url": "https://jitter.video/templates/",
+        "domain": "jitter.video",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "How to Use Motion Graphics Templates for Faster Animation",
+        "url": "https://www.linkedin.com/advice/3/how-can-you-speed-up-your-animation-workflow-motion-graphics-apu6c",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 4,
+        "title": "Is it better for beginners to use templates in their motion ...",
+        "url": "https://www.quora.com/Is-it-better-for-beginners-to-use-templates-in-their-motion-graphics-projects",
+        "domain": "quora.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Motion Graphics Templates",
+        "url": "https://motionarray.com/motion-graphics-templates/",
+        "domain": "motionarray.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Custom Animation vs Template Animation: Which is Best ...",
+        "url": "https://splitarts.com/blog/custom-animation-vs-template-animation/",
+        "domain": "splitarts.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Phân Biệt Animation vs Motion Graphics: Tương Đồng ...",
+        "url": "https://www.deedeestudio.net/post/animation-vs-motion-graphics",
+        "domain": "deedeestudio.net",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Animation vs Motion Graphics: Which to Choose?",
+        "url": "https://hatchstudios.com/animation-vs-motion-graphics-which-one-should-your-business-choose/",
+        "domain": "hatchstudios.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Are motion graphics and animation the same?",
+      "Which is better, animation or graphic design?",
+      "Will AI replace motion graphic designers?",
+      "What are the four main types of animation?"
+    ],
+    "relatedQueries": [
+      "Motion graphics templates vs custom animation reddit",
+      "Free motion graphics templates vs custom animation",
+      "Motion graphics templates vs custom animation free download",
+      "Gfx Animation",
+      "Free SaaS video templates",
+      "Profile animation maker",
+      "Motion designer website",
+      "Template for logo animation"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

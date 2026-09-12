@@ -1,0 +1,128 @@
+{
+  "id": "vc-manual250-c5-030",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.canto.com/glossary/digital-asset-management-implementation/",
+      "supports": "Implementation includes asset migration, metadata mapping, permissions and user training.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.atlassian.com/jira-service-management-cloud/docs/see-how-your-knowledge-base-articles-are-performing/",
+      "supports": "Article reports include views, shares and helpfulness feedback.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does a low view count mean a resource is poor?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should we train everyone to use the media library?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How is this different from evaluating the media program?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Diagnose awareness, relevance, usability and usefulness barriers among existing users, then choose a bounded improvement. Unlike retained c5-010's program evaluation, this ends in a specific adoption intervention. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact US/en SERP evidence is being collected by main; query remains a candidate hypothesis. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities."
+  ],
+  "serp": {
+    "id": "vc-manual250-c5-030",
+    "keyword": "digital asset management user adoption",
+    "found": true,
+    "query": "digital asset management user adoption",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:01.735Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "What is digital asset management (DAM)? A complete guide",
+        "url": "https://www.opentext.com/what-is/digital-asset-management",
+        "domain": "opentext.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Best Practices to Overcome User Adoption Challenges ...",
+        "url": "https://digitalassetmanagementnews.org/features/best-practices-to-overcome-user-adoption-challenges-within-dam/",
+        "domain": "digitalassetmanagementnews.org",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "What Is Digital Asset Management? A Complete Guide",
+        "url": "https://ci-hub.com/blog/what-is-digital-asset-management",
+        "domain": "ci-hub.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "Digital Asset Management: Everything You Need to Know",
+        "url": "https://www.aprimo.com/resource-library/guide/digital-asset-management-everything-you-need-to-know",
+        "domain": "aprimo.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "What Is Digital Asset Management? DAM Software Guide ...",
+        "url": "https://www.acquia.com/blog/digital-asset-management",
+        "domain": "acquia.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Increasing DAM Adoption: Strategies for User Engagement",
+        "url": "https://stacksteam.com/blog/increasing-dam-adoption-strategies-for-user-engagement",
+        "domain": "stacksteam.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Digital Asset Management (DAM) in 2026: Use Cases & ...",
+        "url": "https://corp.kaltura.com/blog/digital-asset-management-2026/",
+        "domain": "corp.kaltura.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "8 Important Digital Asset Management Best Practices ...",
+        "url": "https://go.photoshelter.com/ask-photoshelter/8-important-digital-asset-management-best-practices-for-success/",
+        "domain": "go.photoshelter.com",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "The impact of digital asset management (DAM) for financial ...",
+        "url": "https://www.highspot.com/blog/digital-asset-management-financial-services/",
+        "domain": "highspot.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": [
+      "Digital asset management user adoption reddit",
+      "Digital asset management user adoption aprimo dam",
+      "Digital asset management user adoption pdf",
+      "Digital asset management system examples",
+      "OpenText digital asset management",
+      "Digital asset management tools",
+      "Digital asset management (DAM)",
+      "Digital asset management companies"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}
