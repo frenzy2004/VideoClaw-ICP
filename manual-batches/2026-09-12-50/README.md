@@ -5,6 +5,10 @@ It contains **50 complete Markdown articles, ten per ICP**, not fifty outlines o
 worker retries. Every article remains `review`, every approval flag is false,
 and none has a publication date.
 
+[Draft review PR #2](https://github.com/frenzy2004/VideoClaw-ICP/pull/2) targets the
+worker feature branch, not production. The complete content checkpoint is
+`18b6981`; subsequent documentation commits do not change article approval state.
+
 Start with [the article index](INDEX.md). Each row links to the complete Markdown
 source. The frontmatter retains the ICP, trigger, exact keyword, search intent,
 SERP provenance, sources, FAQs and media mapping. Those research fields are not

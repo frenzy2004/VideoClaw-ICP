@@ -49,4 +49,4 @@ Add two relevant related-guide links using exact batch slugs from topics.json. M
 - [x] Assemble fifty native-contract Markdown files and fifty topic-specific SVGs.
 - [x] Review source truth, content usefulness, duplicate intent and preview safety.
 - [x] Run native lander checks and local browser QA (scope and limits in QA.md).
-- [ ] Commit/push the separate content branch with an inventory and honest QA report.
+- [x] Commit/push the separate content branch with an inventory and honest QA report. Draft review PR: https://github.com/frenzy2004/VideoClaw-ICP/pull/2.
