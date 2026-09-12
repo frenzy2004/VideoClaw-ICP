@@ -1,0 +1,117 @@
+{
+  "id": "vc-manual250-c1-045",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://wistia.com/blog/how-to-use-video-to-improve-customer-satisfaction",
+      "supports": "Inspected first-party account explicitly includes a personal customer thank-you video. No retention or performance claim is adopted.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://wistia.com/blog/improve-sales-outreach-with-video",
+      "supports": "Inspected first-party practitioner guidance on personal video delivery and post-sale thanks. This article intentionally separates gratitude from that page's sales CTA advice and does not use its metrics.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What should a customer thank-you video mention?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should the founder ask for a testimonial in the same video?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can a private thank-you video be reused publicly?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: A completed gratitude brief and specific-versus-generic comparison distinguish a private acknowledgment from testimonial recruitment or promotional customer content.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Exact US/en SERP evidence is being collected separately; keyword volume, difficulty, and CPC are unknown."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-045",
+    "keyword": "customer thank you video",
+    "found": true,
+    "query": "customer thank you video",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "6 Thank You Video Examples (+ 4 Video Scripts You Can ...",
+        "url": "https://www.bonjoro.com/blog/post/6-thank-you-video-examples-and-scripts-you-can-use",
+        "domain": "bonjoro.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "Client thank you video creator",
+        "url": "https://www.visla.us/use-cases/client-thank-you-video",
+        "domain": "visla.us",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Customizable Thank You Video Templates",
+        "url": "https://invideo.io/templates/thank-you/",
+        "domain": "invideo.io",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Free Thank You Video Maker for Businesses & Brands",
+        "url": "https://vimeo.com/create/corporate/thank-you",
+        "domain": "vimeo.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 5,
+        "title": "The Ultimate Guide to Thank You Videos with Examples",
+        "url": "https://sproutvideo.com/blog/the-ultimate-guide-to-saying-thank-you-in-your-videos.html",
+        "domain": "sproutvideo.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Thank You Note Business Stock Videos",
+        "url": "https://www.gettyimages.com/videos/thank-you-note-business",
+        "domain": "gettyimages.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "5 Thank You Video Messages to Send to Clients and ...",
+        "url": "https://bombbomb.com/thank-you-video-messages-to-send/",
+        "domain": "bombbomb.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is a good video appreciation message?",
+      "How do you professionally thank a customer?",
+      "What is the best video about gratitude?",
+      "What to say in a thank you video?"
+    ],
+    "relatedQueries": [
+      "Free customer thank you video",
+      "Customer thank you video template",
+      "Thank you video animation",
+      "Customer thank you video funny",
+      "Thank you for making this beautiful video",
+      "Thank you video ideas",
+      "Thank you video download",
+      "Thank you video meme"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

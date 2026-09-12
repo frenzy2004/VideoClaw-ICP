@@ -1,0 +1,117 @@
+{
+  "id": "vc-manual250-c3-014",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.videohusky.com/",
+      "supports": "Inspected provider page: unlimited submitted projects are distinguished from an editor working on one video at a time; first drafts and revisions are separate stages.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.videohusky.com/best-video-editing-service/",
+      "supports": "Inspected service FAQ: advertised working hours, queue concurrency and input limits affect the offer. Inconsistent plan details are not resolved by assumption; exact purchase terms require confirmation.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does unlimited editing mean unlimited simultaneous projects?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How can I estimate monthly output?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should I buy a second editing subscription?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: A concrete queue simulation can distinguish unlimited submissions from the capacity required to meet overlapping deadlines.",
+  "searchIntentBasis": "Editorial classification: evaluating a video-production purchase, engagement or vendor decision; not verified demand.",
+  "reviewNotes": [
+    "W1 resolved in scratch pair: the four-job event table maps A-D to intake rows and compares one versus two slots. Review releases slots, active edits are not preempted, and urgent work precedes returned revisions and then ready new work. All events and rules are hypothetical, without durations or vendor timing promises."
+  ],
+  "serp": {
+    "id": "vc-manual250-c3-014",
+    "keyword": "how does unlimited video editing work",
+    "found": true,
+    "query": "how does unlimited video editing work",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "The Best Unlimited Video Editing Services (UPDATED 2026)",
+        "url": "https://www.hatchwise.com/best-unlimited-video-editing-services",
+        "domain": "hatchwise.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Unlimited Video Editing Services (2026)",
+        "url": "https://flocksy.com/unlimited-video-editing/",
+        "domain": "flocksy.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Visugu: Unlimited Video Editing | Video Editing Subscription ...",
+        "url": "https://visugu.com/",
+        "domain": "visugu.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Top 7 Unlimited Video Editing Companies in 2026",
+        "url": "https://www.capturevideoandmarketing.com/blog-news/top-7-unlimited-video-editing-companies-in-2025",
+        "domain": "capturevideoandmarketing.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "What Is Unlimited Video Editing? (Is It Worth It?)",
+        "url": "https://samfusion.com/unlimited-video-editing/",
+        "domain": "samfusion.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Unlimited Video Editing Service for B2B (24h Turnaround)",
+        "url": "https://contentbuck.com/unlimited-video-editing",
+        "domain": "contentbuck.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "9 Best Unlimited Video Editing Services",
+        "url": "https://startupresources.io/best-unlimited-video-editing-services/",
+        "domain": "startupresources.io",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What does the 80/20 rule mean in video editing?",
+      "Is 32 GB RAM enough for 4K video editing?",
+      "What is the 3:2:1 rule in video editing?",
+      "Which video editor is 100% free?"
+    ],
+    "relatedQueries": [
+      "Unlimited editing",
+      "Video editing services",
+      "Monthly video editing service",
+      "Video editing services for content creators",
+      "Cheap video editing services",
+      "YouTube editing services",
+      "Video editor package",
+      "Clipmaster editing"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

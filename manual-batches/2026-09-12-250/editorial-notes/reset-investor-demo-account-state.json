@@ -1,0 +1,126 @@
+{
+  "id": "vc-manual250-c2-027",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://playwright.dev/docs/auth",
+      "supports": "Shared authentication does not isolate changes to server-side state; saved state can contain sensitive material.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://playwright.dev/docs/browser-contexts",
+      "supports": "Browser contexts isolate browser-side sessions; multiple contexts support separate users.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does refreshing the browser reset a demo?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can two founders use separate browsers with the same demo account?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How do I verify readiness without running the demo again?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: A layered reset recipe distinguishes server data from browser sessions and verifies readiness without consuming the scenario. Competing page bodies have not been audited for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "FAQ provenance: these are original editorial questions, not observed PAA. Evidence links ground the cited technical facts or provide relevant background; the article-specific capture, review and delivery procedures are original editorial synthesis, not procedures mandated by those sources."
+  ],
+  "serp": {
+    "id": "vc-manual250-c2-027",
+    "keyword": "reset demo account between investor meetings",
+    "found": true,
+    "query": "reset demo account between investor meetings",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Can I change the balance of my demo account?",
+        "url": "https://www.tickmill.com/about/faq/can-i-change-the-balance-of-my-demo-account",
+        "domain": "tickmill.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Demo Trading Account FAQs - Help & Support - City Index",
+        "url": "https://www.cityindex.com/en-uk/help-and-support/fx-faqs-demo-account/",
+        "domain": "cityindex.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "How long does a demo account stay valid on the Vantage ...",
+        "url": "https://global.vantagehelpcenter.com/hc/en-us/articles/14312172816015-How-long-does-a-demo-account-stay-valid-on-the-Vantage-app-and-Can-I-reset-it",
+        "domain": "global.vantagehelpcenter.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "How to reset Demo account",
+        "url": "https://help.3commas.io/en/articles/3638281-how-to-reset-demo-account",
+        "domain": "help.3commas.io",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "How to use a Demo Trading Account Effectively - CFI",
+        "url": "https://cfi.ps/en/ps/blog/trading/how-to-use-a-demo-trading-account-effectively-test-strategies-without-risk",
+        "domain": "cfi.ps",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Demo Trading Account FAQs - Help and Support",
+        "url": "https://www.forex.com/en/help-and-support/demo-trading-accounts/",
+        "domain": "forex.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Reset Demo Account Balance — Options API",
+        "url": "https://developers.deriv.com/docs/options/reset-demo-balance/",
+        "domain": "developers.deriv.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "How to reset account balance in demo account?",
+        "url": "https://helpcenter.puprime.com/hc/en-001/articles/6041915248783-How-to-reset-account-balance-in-demo-account",
+        "domain": "helpcenter.puprime.com",
+        "resultType": "article"
+      },
+      {
+        "position": 9,
+        "title": "Demo trading tips from our analysts - IG UK",
+        "url": "https://www.ig.com/uk/learn-to-trade/ig-academy/tools-for-traders/demo-trading-tips",
+        "domain": "ig.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How to reset MT5 demo account balance?",
+      "How do I reset my demo account on Tradovate?",
+      "How to reset deriv demo account balance?",
+      "Can I withdraw my profit from a demo account?"
+    ],
+    "relatedQueries": [
+      "City Index demo account login",
+      "TradingView",
+      "City Index login"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

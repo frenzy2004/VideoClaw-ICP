@@ -1,0 +1,122 @@
+{
+  "id": "vc-manual250-c3-030",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.voices.com/help/knowledge/faq/live-directed-sessions",
+      "supports": "Primary help body inspected 2026-09-12: remote live collaboration and session, narration and licensing requirements in a quote. No universal session duration inferred.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.voices.com/company/terms-and-policies/client-on-platform-policy",
+      "supports": "Primary policy body inspected 2026-09-12: restricts use of talent audition audio without payment or express platform approval and use beyond job scope. Applies to Voices, not every talent agreement.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "How long should a voice audition be?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I use the winning audition in the finished video?",
+      "basis": "editorial"
+    },
+    {
+      "question": "When is a live directed session useful?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: A bounded pronunciation-and-emphasis audition makes performance differences observable without turning speculative auditions into unpaid production.",
+  "searchIntentBasis": "Editorial classification: evaluating a video-production purchase, engagement or vendor decision; not verified demand.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c3-030",
+    "keyword": "how to choose a voice actor for a business video",
+    "found": true,
+    "query": "how to choose a voice actor for a business video",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "9 Tips for Choosing a Voice Over Talent",
+        "url": "https://peopleproductions.com/people-productions-insights/how-to-choose-a-video-voice-over/",
+        "domain": "peopleproductions.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "How to choose the right Voice Over Artist for your campaign",
+        "url": "https://www.linkedin.com/pulse/how-choose-right-voice-over-artist-your-campaign-posy-brewer",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 3,
+        "title": "Hire Voice Actors and Voice Over Talent",
+        "url": "https://www.voices.com/voice-actors",
+        "domain": "voices.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Why Hire a Professional Voice Actor for Your Business?",
+        "url": "https://www.thevoicerealm.com/blog/why-hire-a-professional-voice-actor-for-your-business/",
+        "domain": "thevoicerealm.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "How to Find and Hire the Right Voice Actor for Your Business",
+        "url": "https://robertstarling.com/how-to-find-and-hire-the-right-voice-actor-for-your-business/",
+        "domain": "robertstarling.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "How to choose the perfect voice for your video",
+        "url": "https://murf.ai/blog/how-to-choose-voice-for-video",
+        "domain": "murf.ai",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "How to Find Talent for Corporate Video Voice Over",
+        "url": "https://www.outspokenvoices.com/blog/how-to-find-talent-for-corporate-video-voice-over",
+        "domain": "outspokenvoices.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "Getting Started As A Voice Actor | Spotlight",
+        "url": "https://www.spotlight.com/news-and-advice/the-essentials/getting-started-as-a-voice-actor/",
+        "domain": "spotlight.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Where can I get voice actors for a commercial?",
+      "How much to charge for 3 hours of voice acting?",
+      "What do professional voice actors use to record?",
+      "How much does it cost to hire a voice actor?"
+    ],
+    "relatedQueries": [
+      "How to choose a voice actor for a business video online",
+      "How to choose a voice actor for a business video free",
+      "Voice over for advertisements",
+      "How to make money from voice acting",
+      "Voice over actor rates",
+      "How much do voice actors get paid per line",
+      "English voice actor",
+      "Indonesian voice actors"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

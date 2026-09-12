@@ -1,0 +1,122 @@
+{
+  "id": "vc-manual250-c2-050",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://cam.start.canon/en/C010/manual/html/UG-03_Shooting-1_0110.html",
+      "supports": "The model-specific guide describes shutter adjustment for flicker and warns that preview and recorded results may differ.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.apple.com/en-nz/guide/iphone/iph61f49e4bb/ios",
+      "supports": "Available recording formats and frame rates depend on the iPhone model.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Is one shutter setting a universal fix for display flicker?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can the live camera preview prove that flicker is fixed?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should a blinking indicator be made steady for the video?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Make physically filmed screens and indicators observable without changing what the prototype appears to do. Distinct from digital UI text readability and the broader hardware shot plan. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact-query SERP integration belongs to main; this draft does not validate search demand. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities.",
+    "Mixed intent: screen flicker searches also concern software and monitor faults. This draft only addresses physically filmed prototype displays and indicators.",
+    "Canon settings are model-specific; the matrix is explicitly fictional and does not prescribe universal shutter or frame-rate values."
+  ],
+  "serp": {
+    "id": "vc-manual250-c2-050",
+    "keyword": "screen flickering when recording video",
+    "found": true,
+    "query": "screen flickering when recording video",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "why do screens/lights flicker in videos taken by phone or ...",
+        "url": "https://www.reddit.com/r/explainlikeimfive/comments/vecw40/eli5_why_do_screenslights_flicker_in_videos_taken/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "How to Stop an LED Display Flickering on Camera",
+        "url": "https://divoom.com/blogs/setup-ideas/stop-led-display-flickering-on-camera?srsltid=AfmBOorD8CU9IdXr4IRlquy1xxRcXAu9G8_BGQXJoS4BJfjatFqpzd8x",
+        "domain": "divoom.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "Why does the recorded screen video flicker when I ... - Zowie",
+        "url": "https://zowie.benq.com/en-in/support/faq/product/explanation/zowiemonitor-faq-kn-00001.html",
+        "domain": "zowie.benq.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "How do people video record iPad and computer screen so ...",
+        "url": "https://www.quora.com/How-do-people-video-record-iPad-and-computer-screen-so-well-not-screen-capture-with-a-camera-but-when-I-do-it-I-get-the-video-flickering",
+        "domain": "quora.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "How to fix glitching and flickering screen?",
+        "url": "https://learn.microsoft.com/en-us/answers/questions/3976035/how-to-fix-glitching-and-flickering-screen",
+        "domain": "learn.microsoft.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "How to Stop Light Flickering in Your Videos",
+        "url": "https://borisfx.com/blog/how-to-stop-light-flickering-in-your-videos/",
+        "domain": "borisfx.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "In camera flicker when recording projected video screen",
+        "url": "https://forum.dataton.com/topic/42643-in-camera-flicker-when-recording-projected-video-screen/",
+        "domain": "forum.dataton.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How to remove flicker while recording video?",
+      "Why is my screen flickering when watching videos?",
+      "Why do screens flicker in videos?",
+      "How to stop flickering in iPhone while recording video?"
+    ],
+    "relatedQueries": [
+      "Screen flickering when recording video reddit",
+      "Screen flickering when recording video on phone",
+      "Screen flickering when recording video samsung",
+      "Screen flickering when recording video iphone",
+      "Screen flickering when recording video android",
+      "How to stop light flickering in video iPhone",
+      "How to fix camera flickering android",
+      "Why do screens flicker on camera"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

@@ -1,0 +1,126 @@
+{
+  "id": "vc-manual250-c5-020",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.bynder.com/hc/en-us/articles/20331272932626-Taxonomy-Tips-for-your-DAM",
+      "supports": "Bynder recommends asking how people search, what terms they use and where searches fail.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://experienceleague.adobe.com/en/docs/experience-manager-learn/assets/metadata/tagging-and-taxonomy",
+      "supports": "Tags let people find related assets without knowing the exact filename.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should company names be part of every tag?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How should synonyms be handled?",
+      "basis": "editorial"
+    },
+    {
+      "question": "When should a new metadata field be added?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Build a controlled vocabulary for cross-portfolio asset retrieval while preserving company identity. Unlike retained c5-009, the task is classification and search, not visual consistency. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact US/en SERP evidence is being collected by main; query remains a candidate hypothesis. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities.",
+    "Mixed intent: digital asset management taxonomy is a broad operational query; examples and field decisions are specific to a multi-company media library."
+  ],
+  "serp": {
+    "id": "vc-manual250-c5-020",
+    "keyword": "digital asset management taxonomy",
+    "found": true,
+    "query": "digital asset management taxonomy",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:01.735Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Digital Asset Management Taxonomy for Beginners",
+        "url": "https://www.mediavalet.com/blog/digital-asset-management-taxonomy",
+        "domain": "mediavalet.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "What is taxonomy in digital asset management (DAM)?",
+        "url": "https://www.orangelogic.com/taxonomy-in-digital-asset-management",
+        "domain": "orangelogic.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "DAM Taxonomy: How to Categorize and Classify Digital ...",
+        "url": "https://www.keyshot.com/blog/dam-taxonomy/?srsltid=AfmBOoqWlY9TiahWUDt8Uq1myWzqm9x3tYEPNJ2qjBH0IcVKCWj3lTNO",
+        "domain": "keyshot.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "Your guide to building a digital asset library taxonomy in ...",
+        "url": "https://www.bynder.com/en/blog/building-digital-asset-library-taxonomy/",
+        "domain": "bynder.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Build a Strong Digital Asset Management Taxonomy in 5 ...",
+        "url": "https://brandfolder.com/resources/digital-asset-management-taxonomy/",
+        "domain": "brandfolder.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Beginner's Guide to DAM Taxonomy",
+        "url": "https://www.hyland.com/en/resources/articles/dam-taxonomy",
+        "domain": "hyland.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Best practices for designing a digital asset taxonomy for e- ...",
+        "url": "https://www.woodwing.com/blog/best-practices-digital-asset-taxonomy-design-ecommerce-retail-brands",
+        "domain": "woodwing.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "Understanding taxonomy and metadata in digital asset ...",
+        "url": "https://support.assetbank.co.uk/hc/en-gb/articles/115006310927-Understanding-taxonomy-and-metadata-in-digital-asset-management",
+        "domain": "support.assetbank.co.uk",
+        "resultType": "article"
+      },
+      {
+        "position": 9,
+        "title": "Organize Digital Assets: Metadata & Taxonomy",
+        "url": "https://www.aprimo.com/blog/organize-digital-assets-metadata-taxonomy",
+        "domain": "aprimo.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What are the 5 P's of asset management?",
+      "What are the top 10 digital asset management systems?",
+      "Is aem a cms or DAM?",
+      "What are the different categories of digital assets?"
+    ],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

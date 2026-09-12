@@ -1,0 +1,124 @@
+{
+  "id": "vc-manual250-c1-022",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://wistia.com/blog/presentation-videos",
+      "supports": "A teleprompter can display either a script or talking points.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.descript.com/blog/article/how-to-read-a-script-like-a-pro-while-recording",
+      "supports": "Reading aloud helps reveal wording that does not sound conversational.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does a teleprompter always require a complete script?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should stay scripted in a customer message?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How should I judge the three recordings?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: Compare delivery aids against the same customer message, with explicit accuracy and recovery tests rather than software recommendations.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Exact US/en SERP evidence is being collected separately; keyword volume, difficulty, and CPC are unknown."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-022",
+    "keyword": "teleprompter vs bullet points for video",
+    "found": true,
+    "query": "teleprompter vs bullet points for video",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Do you memorize lines or use a teleprompter? : r/NewTubers",
+        "url": "https://www.reddit.com/r/NewTubers/comments/18h0i60/do_you_memorize_lines_or_use_a_teleprompter/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Script vs Teleprompter vs Outline - THE Method That Feels ...",
+        "url": "https://vidpromom.com/script-vs-teleprompter-vs-outline-the-method-that-feels-natural-ep-67/",
+        "domain": "vidpromom.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "How to write a script for a teleprompter?",
+        "url": "https://teleprompterpad.com/blogs/article/how-to-write-teleprompter-script?srsltid=AfmBOoo8g8pwhAHOjmDisdfJVJETL3kBZi1kN61KAe8sQZ1JEAibjC2Q",
+        "domain": "teleprompterpad.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "Teleprompter vs Memorizing Scripts: Which Works Better?",
+        "url": "https://evelize.com/blog/teleprompter-vs-memorizing-scripts-which-works-better",
+        "domain": "evelize.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Four Tips for Using a Teleprompter",
+        "url": "https://positivelightmedia.com/four-tips-for-using-a-teleprompter/",
+        "domain": "positivelightmedia.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Should You Use a Teleprompter? A Practical Decision Guide",
+        "url": "https://solprompter.com/blog/should-you-use-a-teleprompter/",
+        "domain": "solprompter.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Teleprompter vs Bullet Points: Which Is Better for Video?",
+        "url": "https://birdcue.com/blog/teleprompter-vs-bullet-points",
+        "domain": "birdcue.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "Should I use a teleprompter, or should I memorize my script ...",
+        "url": "https://www.instagram.com/p/C4qJlWviBfc/",
+        "domain": "instagram.com",
+        "resultType": "video_or_social"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Do most YouTubers use a teleprompter?",
+      "Does Donald Trump use a teleprompter for his speeches?",
+      "What are the drawbacks of using a prompter?",
+      "What to use instead of a teleprompter?"
+    ],
+    "relatedQueries": [
+      "Teleprompter vs bullet points for video script",
+      "Teleprompter vs bullet points for video free",
+      "Teleprompter vs bullet points for video reddit",
+      "Teleprompter for YouTube videos",
+      "Using a teleprompter",
+      "Teleprompter reddit",
+      "What does a teleprompter do",
+      "Is a teleprompter worth it"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

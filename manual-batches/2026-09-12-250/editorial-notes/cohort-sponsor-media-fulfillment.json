@@ -1,0 +1,116 @@
+{
+  "id": "vc-manual250-c5-037",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.sponsorpact.com/sample-report",
+      "supports": "The illustrative report connects individual commitments to status and attached proof.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://sponsorshipcollective.com/blog/how-to-build-a-post-event-sponsorship-fulfillment-report-that-drives-renewals/",
+      "supports": "The author's guidance compares promised benefits with delivered outcomes and supporting evidence.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Can extra activity replace a missed sponsor benefit?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does a photograph prove audience reach?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should a report hide unresolved items until everything is complete?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Reconcile promised sponsor media benefits with actual delivery and documented exceptions. Unlike event filming or program metrics, the output is a fulfillment record for specific commitments. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact US/en SERP evidence is being collected by main; query remains a candidate hypothesis. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities.",
+    "Provider-pending; sponsorship queries include sales, ROI and contract intent. This draft only reconciles agreed media deliverables, not legal obligations or commercial valuation."
+  ],
+  "serp": {
+    "id": "vc-manual250-c5-037",
+    "keyword": "sponsorship fulfillment report",
+    "found": true,
+    "query": "sponsorship fulfillment report",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:01.735Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Sponsorship Fulfillment Report Guide | PDF | Communication",
+        "url": "https://www.scribd.com/document/439448494/Fulfillment-report-template",
+        "domain": "scribd.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Super Simple Fulfillment Report Template",
+        "url": "https://sponsorshipcollective.com/blog/super-simple-fulfillment-report-template/",
+        "domain": "sponsorshipcollective.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "Sponsor Fulfillment Reports: How to Impress Partners and ...",
+        "url": "https://raiseadream.com/sponsor-fulfillment-reports-how-to-impress-partners-and-funders/",
+        "domain": "raiseadream.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Encyclopedia of Sports Management and Marketing",
+        "url": "https://sk.sagepub.com/ency/edvol/download/sportsmagementmarketing/chpt/sponsorship-fulfillment-report.pdf",
+        "domain": "sk.sagepub.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Sponsorship Fulfillment Report Template - Nonprofit.Courses",
+        "url": "https://www.nonprofit.courses/course/super-simple-fulfillment-report-template-by-sponsorship-collective/",
+        "domain": "nonprofit.courses",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "How a Sponsorship Fulfillment Report Saved my Life",
+        "url": "https://sponsorshipcollective.com/blog/sponsorship-fulfillment-report-saved-life/",
+        "domain": "sponsorshipcollective.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Free Sales Event Sponsorship Fulfillment Report Template ...",
+        "url": "https://www.template.net/edit-online/331084/sales-event-sponsorship-fulfillment-report",
+        "domain": "template.net",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What are the 5 sponsorship levels?",
+      "What are the four main types of sponsorships?",
+      "What is an example of a sponsor message?",
+      "What are the 10 elements of a successful sponsorship proposal?"
+    ],
+    "relatedQueries": [
+      "Sponsorship fulfillment report template",
+      "Sponsorship fulfillment report sample",
+      "Sponsorship fulfillment report pdf"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

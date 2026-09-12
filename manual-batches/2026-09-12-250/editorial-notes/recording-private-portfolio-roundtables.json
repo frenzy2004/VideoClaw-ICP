@@ -1,0 +1,136 @@
+{
+  "id": "vc-manual250-c5-023",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.chathamhouse.org/about-us/chatham-house-rule",
+      "supports": "The Rule protects attribution, including indirect identification; off-the-record discussion is a different mode.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0059819",
+      "supports": "Zoom documents recording prompts and participant choices; prompts do not define later publication rights.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does the Chatham House Rule automatically allow recording?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should a host do when a sensitive topic arises during recording?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can a useful private discussion become a public recap afterward?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Decide before a closed portfolio meeting whether recording, attribution and later sharing are appropriate. Unlike retained c5-004's reusable mentor webinar, the primary job is selecting the meeting's disclosure mode. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact US/en SERP evidence is being collected by main; query remains a candidate hypothesis. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities.",
+    "023 is the pre-event recording and facilitation decision; 043 separately edits an already-authorized written lesson.",
+    "Rights-adjacent: no legal recording-consent formula, confidentiality guarantee or implied publication permission."
+  ],
+  "serp": {
+    "id": "vc-manual250-c5-023",
+    "keyword": "Chatham House Rule recording",
+    "found": true,
+    "query": "Chatham House Rule recording",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:01.735Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Chatham House Rule",
+        "url": "https://www.chathamhouse.org/about-us/chatham-house-rule",
+        "domain": "chathamhouse.org",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Chatham House Rule - Practical Law",
+        "url": "https://uk.practicallaw.thomsonreuters.com/7-201-2615?transitionType=Default&contextData=(sc.Default)",
+        "domain": "uk.practicallaw.thomsonreuters.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Chatham House rules - or does it?",
+        "url": "https://www.linkedin.com/pulse/chatham-house-rules-does-guy-clapperton-acipr",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 4,
+        "title": "Chatham House Rule",
+        "url": "https://www.rff.org/about/chatham-house-rule/",
+        "domain": "rff.org",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Chatham House Rule | Freedom of Expression - Stanford",
+        "url": "https://freespeech.stanford.edu/policies-and-guidance/privacy/chatham-house-rule",
+        "domain": "freespeech.stanford.edu",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Off the record or not? The real meaning of the Chatham House ...",
+        "url": "https://www.cognitomedia.com/off-the-record-or-not-the-real-meaning-of-the-chatham-house-rule-for-financial-events/",
+        "domain": "cognitomedia.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Chatham House Rule",
+        "url": "https://en.wikipedia.org/wiki/Chatham_House_Rule",
+        "domain": "en.wikipedia.org",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "The Chatham House Rule",
+        "url": "https://psychsafety.com/the-chatham-house-rule/",
+        "domain": "psychsafety.com",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "The Chatham House Rule",
+        "url": "https://www.aei.org/commentary/the-chatham-house-rule/",
+        "domain": "aei.org",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Is Chatham House left wing?",
+      "What are the limitations of the Chatham House Rule?",
+      "What is the difference between the Chatham House Rule and the Vegas rule?",
+      "What are the controversies surrounding Chatham House?"
+    ],
+    "relatedQueries": [
+      "Chatham House Rules example",
+      "Chatham house rule recording example",
+      "Chatham house rule recording online",
+      "Chatham house rule recording pdf",
+      "Chatham house rule recording free",
+      "Chatham house rules pdf",
+      "Chatham house rule vs off the record",
+      "Chatham House rules origin"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

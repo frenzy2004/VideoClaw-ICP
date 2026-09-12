@@ -1,0 +1,124 @@
+{
+  "id": "vc-manual250-c2-020",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.ycombinator.com/blog/how-to-design-a-better-pitch-deck/",
+      "supports": "The design guidance emphasizes legibility, simplicity and obvious meaning.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0068426",
+      "supports": "Zoom advises disabling video optimization for nonvideo sharing because static text and images can distort.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Will exporting at a higher resolution fix tiny interface text?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should I zoom in on every click?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How do I test readability on a video call?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: A critical-detail map ties framing and recipient tests to the precise screen evidence investors need to inspect. Competing page bodies have not been audited for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "FAQ evidence precision: reframing, selective close views and recipient read-back are original editorial tests. YC supplies general legibility context; Zoom supplies sharing-mode guidance, not a documented read-aloud test."
+  ],
+  "serp": {
+    "id": "vc-manual250-c2-020",
+    "keyword": "screen recording text too small",
+    "found": true,
+    "query": "screen recording text too small",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How to Fix Text Too Small to Read on Your Screen",
+        "url": "https://www.justanswer.com/computer/od1fs-text-size-screen-small-read.html",
+        "domain": "justanswer.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Settings for Screen Recording very small file sizes : r/obs",
+        "url": "https://www.reddit.com/r/obs/comments/1eh14m9/settings_for_screen_recording_very_small_file/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Screen Recording - File size too large! Help..",
+        "url": "https://discussions.apple.com/thread/251467126",
+        "domain": "discussions.apple.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Change the size of text in Windows",
+        "url": "https://support.microsoft.com/en-us/windows/change-the-size-of-text-in-windows-1d5830c3-eee3-8eaa-836b-abcc37d99b9a",
+        "domain": "support.microsoft.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "How Can I Make the Text on My Screen Larger?",
+        "url": "https://www.youtube.com/watch?v=DQX5yg_EK2U",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 6,
+        "title": "Why Are Screen Recordings So Big? 5 Ways to Shrink",
+        "url": "https://www.screenify.studio/blog/2026-04-23-screen-recording-file-too-large",
+        "domain": "screenify.studio",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Text size shows too large or small in Sage software",
+        "url": "https://gb-kb.sage.com/portal/app/portlets/results/view2.jsp?k2dockey=200427112605356",
+        "domain": "gb-kb.sage.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "How to adjust the text size on your device screens because ...",
+        "url": "https://www.popsci.com/diy/how-to-adjust-text-size/",
+        "domain": "popsci.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Why is my screen text so small?",
+      "How do I change the screen recording size?",
+      "How do I put text size back to normal?",
+      "How to increase screen recording volume?"
+    ],
+    "relatedQueries": [
+      "Screen recording text too small android",
+      "Screen recording text too small reddit",
+      "Screen recording text too small windows 10",
+      "Screen recording text too small iphone",
+      "How to change font size on computer screen Windows 10",
+      "Shortcut key to increase font size in Windows 11",
+      "Windows 11 font size too small",
+      "How to change font size on computer screen Windows 11"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

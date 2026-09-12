@@ -1,0 +1,118 @@
+{
+  "id": "vc-manual250-c1-049",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.descript.com/blog/article/learn-to-read-without-sounding-like-youre-reading",
+      "supports": "Reading aloud and marking delivery cues such as emphasis and pauses; no software feature or performance claim is used.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.descript.com/blog/article/how-to-read-a-script-like-a-pro-while-recording",
+      "supports": "Recording in segments allows a speaker to reset and adjust delivery; the annotated founder exercise is original.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "How can a founder avoid sounding like they are reading?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should voiceover pauses follow the punctuation exactly?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Do I need to rerecord the whole voiceover after a mistake?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Perform a voiceover with thought groups, emphasis, and pauses that match planned visuals. This concerns narration delivery, separate from room-echo diagnosis, script-versus-outline choice, and editing existing long-form content. No ranking-page comparison or demand conclusion is asserted.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending.",
+    "Mixed-intent voiceover query narrowed to original founder narration performance. Excludes room acoustics, teleprompter selection, localization, and video repurposing. Source advice is used narrowly; no broad claims from source humor or promotional copy are adopted."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-049",
+    "keyword": "how to record a natural voiceover",
+    "found": true,
+    "query": "how to record a natural voiceover",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How to sound more natural when doing Voice-Overs?",
+        "url": "https://www.reddit.com/r/youtubers/comments/1ejvyd3/how_to_sound_more_natural_when_doing_voiceovers/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "How to Record a Voice Over: Complete Guide",
+        "url": "https://www.techsmith.com/blog/voice-over/",
+        "domain": "techsmith.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "AI Voice Generator | Create Voiceovers with Ultra-Realistic ...",
+        "url": "https://www.naturalreaders.com/commercial/",
+        "domain": "naturalreaders.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "AI Voice Generator: Text to Speech Online",
+        "url": "https://www.canva.com/features/ai-voice-generator/",
+        "domain": "canva.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "How I Create Pro Voice-Overs in Minutes (Using AI & My ...",
+        "url": "https://www.jimgrootes.com/how-i-create-pro-voice-overs-in-minutes-using-ai-my-own-voice/",
+        "domain": "jimgrootes.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "How to Record Voiceovers with Tips from Professional ...",
+        "url": "https://sproutvideo.com/blog/how-to-create-a-professional-voiceover-on-the-cheap.html",
+        "domain": "sproutvideo.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "AI Voice Generator - Create Realistic Voiceovers for FREE",
+        "url": "https://www.synthesia.io/features/ai-voice-generator",
+        "domain": "synthesia.io",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How do you record your own voiceover?",
+      "What is the best way to record my voice over?",
+      "What do I need to record voice overs at home?",
+      "How do I record a live conversation?"
+    ],
+    "relatedQueries": [
+      "Best way to record voiceover on iPhone",
+      "How to record a voice over for a video",
+      "How to do a voiceover on iPhone",
+      "Voice over tips for Beginners",
+      "How to voice over a video on Android",
+      "How to do a voiceover TikTok",
+      "How to do a voiceover on YouTube",
+      "Natural Reader Commercial login"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

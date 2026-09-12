@@ -1,0 +1,117 @@
+{
+  "id": "vc-manual250-c1-011",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.ycombinator.com/blog/getting-press-for-your-startup",
+      "supports": "Seibel distinguishes timely company developments from undated profile requests.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.qwoted.com/best-practices-for-pitching-journalists/",
+      "supports": "Qwoted recommends referencing a reporter's work and explaining relevant expertise.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does every startup development deserve a pitch?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should I attach a founder video to the first email?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How should I follow up after no response?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: help founders choose a reportable development and build a compact evidence-backed pitch after their funding news has passed.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Exact US/en SERP evidence is being collected separately; keyword volume, difficulty, and CPC are unknown."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-011",
+    "keyword": "how to pitch a startup story to journalists",
+    "found": true,
+    "query": "how to pitch a startup story to journalists",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Crafting Effective News Story Pitches for Busy Journalists",
+        "url": "https://www.linkedin.com/posts/rosietaylor_advice-on-how-to-pitch-news-stories-these-activity-7426934270105006080-Zh7e",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 2,
+        "title": "7 Tips for Founders on Pitching Their Startups to Journalists",
+        "url": "https://longjump.vc/updates/7-tips-for-founders-on-pitching-their-startups-to-journalists",
+        "domain": "longjump.vc",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "How to pitch journalists as a startup founder - Omoniyi Faith",
+        "url": "https://faithomoniyi.medium.com/how-to-pitch-journalists-as-a-startup-founder-c4f3e37e1d4f",
+        "domain": "faithomoniyi.medium.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Beginner: How do you pitch to a journalist?",
+        "url": "https://www.reddit.com/r/PublicRelations/comments/1benhc3/beginner_how_do_you_pitch_to_a_journalist/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Pitching a Story",
+        "url": "https://ruralhealth.und.edu/communication/pitching",
+        "domain": "ruralhealth.und.edu",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Guide to Media Pitching",
+        "url": "https://muckrack.com/resources/guides/media-pitching",
+        "domain": "muckrack.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "How to Get Press for Your Startup",
+        "url": "https://chrisneumann.com/archives/how-to-get-press-for-your-startup",
+        "domain": "chrisneumann.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How to pitch a startup idea?",
+      "What are the four C's in journalism?",
+      "What does ### mean in journalism?",
+      "Will the news pay you for a story?"
+    ],
+    "relatedQueries": [
+      "How to pitch a startup story to journalists example",
+      "How to pitch a startup story to journalists free",
+      "Story pitch examples journalism",
+      "How to pitch as a freelance journalist",
+      "Media pitch examples",
+      "How to write a pitch to a journalist",
+      "How to write an email pitch to a journalist",
+      "How to pitch an article to a magazine"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

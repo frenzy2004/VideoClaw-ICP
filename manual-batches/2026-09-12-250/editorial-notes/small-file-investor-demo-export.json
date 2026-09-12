@@ -1,0 +1,117 @@
+{
+  "id": "vc-manual250-c2-039",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.apple.com/guide/quicktime-player/export-movies-qtp20e395859/10.5/mac/26",
+      "supports": "QuickTime exports MOV rather than MP4; H.264 and HEVC export options differ.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/powerpoint/compress-your-media-files",
+      "supports": "PowerPoint media compression is Windows-only and removes embedded subtitles and alternate audio tracks.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What file size should an investor demo use?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can PowerPoint compression affect subtitles?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should I compress an already compressed copy again?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: Compression instructions may optimize bytes without a scene-specific proof floor and recipient-side reading comparison. Competing page bodies have not been audited for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "FAQs are editorial questions, not observed PAA. Source links provide factual or contextual grounding; the article-specific worksheets and procedural recommendations are original editorial synthesis."
+  ],
+  "serp": {
+    "id": "vc-manual250-c2-039",
+    "keyword": "compress screen recording without losing quality",
+    "found": true,
+    "query": "compress screen recording without losing quality",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Compress Screen Recording",
+        "url": "https://screenapp.io/features/video-compressor",
+        "domain": "screenapp.io",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Is there a way to reduce the screen recording size by either ...",
+        "url": "https://www.reddit.com/r/mac/comments/1k5484t/is_there_a_way_to_reduce_the_screen_recording/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Video Compressor - Free Video File ...",
+        "url": "https://www.veed.io/tools/video-compressor",
+        "domain": "veed.io",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Video Compressor Online",
+        "url": "https://clideo.com/compress-video",
+        "domain": "clideo.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Screen Recording - File size too large! Help..",
+        "url": "https://discussions.apple.com/thread/251467126",
+        "domain": "discussions.apple.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Free Video Compressor & Resizer Online - Reduce File Size",
+        "url": "https://kommodo.ai/tools/compress",
+        "domain": "kommodo.ai",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Why Are Screen Recordings So Big? 5 Ways to Shrink",
+        "url": "https://www.screenify.studio/blog/2026-04-23-screen-recording-file-too-large",
+        "domain": "screenify.studio",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How do I reduce the file size of a screen recording?",
+      "How to reduce MB of video without losing quality?",
+      "How to compress 200 MB video to 20MB?",
+      "How to shrink file size without losing quality?"
+    ],
+    "relatedQueries": [
+      "Compress screen recording without losing quality reddit",
+      "Compress screen recording without losing quality free",
+      "Compress screen recording without losing quality online",
+      "Compress screen recording without losing quality iphone",
+      "Compress screen recording without losing quality windows 10",
+      "HandBrake",
+      "Compress Screen recording online free",
+      "How to compress screen recording video iphone"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

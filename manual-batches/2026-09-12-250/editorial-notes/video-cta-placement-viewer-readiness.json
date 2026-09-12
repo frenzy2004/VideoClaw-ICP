@@ -1,0 +1,111 @@
+{
+  "id": "vc-manual250-c4-033",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.wistia.com/en/articles/8283756-call-to-action",
+      "supports": "Wistia supports clickable CTAs at a specified video timestamp.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://docs.wistia.com/docs/embed-links",
+      "supports": "Embed links can control playback and connect viewing experiences.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Must the CTA appear at the end?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Is text inside the video clickable?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does a higher CTA click rate prove a better video?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Choose a useful action and place it at a moment when the video has supplied the necessary context. This is a conversion interaction design job, separate from Shorts navigation or generic metric selection. No ranking-page comparison or demand conclusion is asserted.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending.",
+    "CTA timing and navigation; no claimed optimal timestamp or guaranteed conversion improvement."
+  ],
+  "serp": {
+    "id": "vc-manual250-c4-033",
+    "keyword": "where to put call to action in video",
+    "found": true,
+    "query": "where to put call to action in video",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:32:56.760Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "7 Video Call to Action Examples That Actually Work",
+        "url": "https://playplay.com/blog/video-cta-examples/",
+        "domain": "playplay.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "Add videos to your calls-to-action (CTAs)",
+        "url": "https://knowledge.hubspot.com/ctas/add-video-to-your-cta",
+        "domain": "knowledge.hubspot.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Writing Calls to Action that Get Clicks (+ Examples)",
+        "url": "https://animoto.com/blog/video-marketing/call-to-action-examples",
+        "domain": "animoto.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "How to Add a Video CTA to Increase Conversions",
+        "url": "https://wistia.com/blog/using-video-ctas",
+        "domain": "wistia.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "How to Add Call to Action on YouTube Video",
+        "url": "https://www.youtube.com/playlist?list=PLiTbG2ZOkJNdVujd9-26g_H7dPQZzhoQ8",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 6,
+        "title": "How to End Your Video with Action: Strong CTA Examples",
+        "url": "https://www.vidyard.com/blog/end-video-strong-call-action-examples/",
+        "domain": "vidyard.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is a call to action in a video?",
+      "Where should a CTA be placed on a website?",
+      "How do I add CTA to TikTok?",
+      "What is a CTA in video editing?"
+    ],
+    "relatedQueries": [
+      "Where to put call to action in video reddit",
+      "Video cta examples",
+      "CTA video template",
+      "Call to action video",
+      "Youtube cta examples",
+      "50 powerful call to action phrases",
+      "How to add call to action on YouTube video",
+      "Call to action advertising examples"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

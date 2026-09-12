@@ -1,0 +1,113 @@
+{
+  "id": "vc-manual250-c3-020",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.faa.gov/uas/commercial_operators/become_a_drone_pilot",
+      "supports": "Inspected official page: Part 107 operations require a Remote Pilot Certificate and applicable recurrent training. Certification alone does not authorize a specific proposed flight.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.faa.gov/uas/getting_started/where_can_i_fly/airspace_restrictions/flying_near_airports",
+      "supports": "Inspected official page: controlled-airspace operations near airports require authorization with operational limitations; LAANC and FAA DroneZone are described authorization routes.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does a Part 107 certificate mean a pilot can film anywhere?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What credential evidence should I request?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What if the drone cannot fly on the shoot day?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: A location-specific operator evidence packet can connect creative requirements with credential and authorization questions before booking.",
+  "searchIntentBasis": "Editorial classification: evaluating a video-production purchase, engagement or vendor decision; not verified demand.",
+  "reviewNotes": [
+    "Educational procurement guidance. Flight-specific permission, operating conditions and local requirements must be confirmed by the qualified operator; the article does not authorize any flight."
+  ],
+  "serp": {
+    "id": "vc-manual250-c3-020",
+    "keyword": "what to check when hiring a drone videographer",
+    "found": true,
+    "query": "what to check when hiring a drone videographer",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Book Drone Videography Services",
+        "url": "https://dronesaferegister.org.uk/drone-videography",
+        "domain": "dronesaferegister.org.uk",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Don't Hire A Videographer Who Flies A Drone Without ...",
+        "url": "https://kevinlushphotography.com/dont-hire-a-videographer-who-flies-a-drone-without-a-license/",
+        "domain": "kevinlushphotography.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Would drone videography/photography be a good career ...",
+        "url": "https://www.reddit.com/r/drones/comments/17q9ms0/would_drone_videographyphotography_be_a_good/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Drone Services Pricing: An Introductory Guide",
+        "url": "https://www.dronepilotgroundschool.com/drone-services-pricing/",
+        "domain": "dronepilotgroundschool.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "5 Things To Consider Before Hiring A Drone Pilot",
+        "url": "https://www.v1dronemedia.com/hiring-a-drone-pilot?srsltid=AfmBOop8TFeID7l1n3doQUFE_wlfjA1QgIiwma5RAPOKtZR61-EGpzHu",
+        "domain": "v1dronemedia.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "What to look for when hiring a drone professional",
+        "url": "https://www.reiq.com/articles/property-sales/what-to-look-for-when-hiring-a-drone-professional",
+        "domain": "reiq.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Things to Look for when Hiring an Aerial Photographer",
+        "url": "https://www.topshotap.com/what-to-look-for-when-hiring-an-aerial-photographer/",
+        "domain": "topshotap.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How much should I charge for drone videography?",
+      "What is the 1:1 rule for drones?",
+      "What are some tips for getting good drone videography?",
+      "How much money does a drone photographer make?"
+    ],
+    "relatedQueries": [
+      "What to check when hiring a drone videographer near",
+      "What to check when hiring a drone videographer job",
+      "Drone videography near me",
+      "Drone Pilot jobs"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

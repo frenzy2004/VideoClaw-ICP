@@ -1,0 +1,750 @@
+[
+  {
+    "id": "vc-manual250-c1-011",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "The funding announcement has passed, and the founder needs a fresh customer-relevant story for trade press.",
+    "funnelStage": "awareness",
+    "keyword": "how to pitch a startup story to journalists",
+    "title": "Pitch a Startup Story Journalists Can Use",
+    "slug": "pitch-startup-story-to-journalists",
+    "distinctIntent": "Find a reportable news angle in an actual company development and turn it into one targeted editorial pitch. The job is earning coverage after the raise, separate from the retained funding-announcement video and press-kit asset inventory.",
+    "originalWorksheet": "An original news-angle workbench with three hypothetical company developments, a reader consequence for each, supporting facts, a reason the story matters now, and a completed short pitch for the strongest angle.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.ycombinator.com/blog/getting-press-for-your-startup",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. YC's founder advice treats timely company developments and reporter relationships as inputs to a press pitch; its outcome anecdotes are not benchmarks."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-012",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "The founder is preparing outreach but cannot tell which reporters actually cover the startup's customer problem.",
+    "funnelStage": "awareness",
+    "keyword": "how to build a media list for a startup",
+    "title": "Build a Small Media List for Your Startup",
+    "slug": "build-startup-media-list",
+    "distinctIntent": "Identify a relevant reporter shortlist by reading recent bylines, beats, and audience coverage. The work ends with recipient selection, not writing a press pitch, assembling visual assets, or comparing PR providers.",
+    "originalWorksheet": "A reporter-fit research sheet with article URL, publication date, beat, reader overlap, evidence the reporter covers this problem, a possible introduction route, and a shortlist rationale. Example rows use fictional reporters, never invented real contacts.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.ycombinator.com/blog/a-guide-to-pitching-funding-and-launch-stories/",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. The search excerpt recommends checking journalists' recent coverage for subject fit; historic outlet lists require fresh verification."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-013",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "A journalist requests exclusive access to upcoming company news while other reporters are already being contacted.",
+    "funnelStage": "consideration",
+    "keyword": "press embargo vs exclusive",
+    "title": "Press Embargo vs Exclusive: A Founder’s Decision Guide",
+    "slug": "press-embargo-vs-exclusive-founder",
+    "distinctIntent": "Choose and define the scope of a media access arrangement, including whether to offer timing access or sole access. This is a reporter-negotiation decision, not another funding announcement plan or investor disclosure article.",
+    "originalWorksheet": "A branching decision exercise with three situations, an exact-exclusive-scope field, an embargo timestamp including timezone, an acceptance record, and a fallback if the reporter declines.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.ycombinator.com/blog/a-guide-to-pitching-funding-and-launch-stories/",
+        "supports": "Relevant page passage inspected on 2026-09-12. The embargo section distinguishes shared advance access from an exclusive and advises explicit agreement before sharing the full media kit."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-014",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "The founder has accepted a first press interview and expects questions about customer value, competitors, and unresolved product issues.",
+    "funnelStage": "awareness",
+    "keyword": "media interview preparation for startup founders",
+    "title": "Prepare for Your First Founder Media Interview",
+    "slug": "first-founder-media-interview-preparation",
+    "distinctIntent": "Prepare for an independent journalist's questioning while giving direct answers and acknowledging unknowns. This differs from a recorded founder origin story, camera production, or rehearsal of an investor pitch.",
+    "originalWorksheet": "An interview response ladder containing a direct answer, a supporting example, an uncertainty boundary, and a follow-up commitment; include a mock reporter exchange and a diagnosis of an evasive answer.",
+    "sourceCandidates": [
+      {
+        "url": "https://prsay.prsa.org/2021/03/29/media-training-lessons-from-oprah-winfreys-interview-with-prince-harry-and-meghan-markle/",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. PRSA's media-training commentary discusses preparation for difficult interview questions; it does not establish startup-specific performance outcomes."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-015",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "Published coverage contains a specific factual error about the startup's product or customer availability.",
+    "funnelStage": "awareness",
+    "keyword": "how to ask a journalist for a correction",
+    "title": "Ask for a Press Correction With Clear Evidence",
+    "slug": "request-startup-press-correction",
+    "distinctIntent": "Request correction of a documented error in third-party reporting. It addresses post-publication factual repair, separate from pre-publication pitch preparation, customer complaints, or rewriting the company's own announcement.",
+    "originalWorksheet": "A correction packet containing the exact disputed sentence, the verifiable replacement fact, dated evidence, a concise request email, and a log separating factual errors from disagreements over editorial framing.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.ap.org/about/news-values-and-principles/telling-the-story/",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. AP's published standards describe visible correction notices and source verification; another outlet's own correction policy must be checked before use."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-016",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "The founder has a useful operating lesson and wants to propose an original contributed article to a business publication.",
+    "funnelStage": "consideration",
+    "keyword": "how to pitch a contributed article",
+    "title": "Pitch a Contributed Article From Founder Experience",
+    "slug": "founder-contributed-article-proposal",
+    "distinctIntent": "Package an original argument for an editor to assess as a bylined contribution. This is a publication proposal, distinct from obtaining reported coverage, publishing an origin story, or creating a recurring social content routine.",
+    "originalWorksheet": "An original proposal page containing a central claim, a concrete reader decision, three supporting observations, a counterargument, an author qualification note, and an outline showing what the reader can do afterward.",
+    "sourceCandidates": [
+      {
+        "url": "https://hbr.org/guidelines-for-authors",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. Publisher criteria include subject expertise and evidence."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-017",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "A founder wants to appear on a relevant industry podcast after funding but has no previous guest booking process.",
+    "funnelStage": "consideration",
+    "keyword": "how to pitch yourself as a podcast guest",
+    "title": "Pitch Yourself as a Podcast Guest With a Useful Angle",
+    "slug": "founder-podcast-guest-pitch",
+    "distinctIntent": "Propose an episode a host can build around the founder's experience and the show's audience. The job is securing a guest conversation, not producing a podcast, repurposing an episode, or collecting a press-kit asset set.",
+    "originalWorksheet": "A show-to-episode fit card with a previously covered theme, an unanswered listener question, an original episode promise, three conversation turns, and a short booking email; include one fictional worked example.",
+    "sourceCandidates": [
+      {
+        "url": "https://hbr.org/tip/2019/04/getting-booked-as-a-podcast-guest",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. HBR's tip discusses choosing shows and preparing an email pitch."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-018",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "An industry conference opens speaker submissions and the funded founder wants to teach prospective customers something useful.",
+    "funnelStage": "consideration",
+    "keyword": "conference talk proposal for startup founders",
+    "title": "Write a Conference Talk Proposal as a Startup Founder",
+    "slug": "startup-founder-conference-talk-proposal",
+    "distinctIntent": "Earn an educational speaking slot by proposing audience learning outcomes and a substantive session. Excludes accelerator stages, investor demonstrations, live demo contingency planning, and filming conference content.",
+    "originalWorksheet": "A conference submission prototype with session title, audience prerequisite, abstract, three learning outcomes, a teaching sequence, and an exercise the audience completes; demonstrate converting a product pitch into a lesson.",
+    "sourceCandidates": [
+      {
+        "url": "https://sessionize.com/playbook/submit-your-session-for-an-event",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. Sessionize's submission guidance asks for a useful session description and experience relevant to the event; event-specific requirements still need checking."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-019",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "A journalist or event organizer asks for a short founder biography, and the existing company story is too long.",
+    "funnelStage": "awareness",
+    "keyword": "startup founder bio examples",
+    "title": "Write a Founder Bio That Establishes Relevant Expertise",
+    "slug": "startup-founder-bio-expertise",
+    "distinctIntent": "Compress verifiable experience into an audience-relevant professional biography. This is a short author or speaker identity asset, not a founder-story narrative, recruitment video, or general media-kit inventory.",
+    "originalWorksheet": "A credential-selection sieve and three original biography lengths built from one fictional founder fact set, with annotations explaining which experience is relevant and which unsupported prestige language was removed.",
+    "sourceCandidates": [
+      {
+        "url": "https://sessionize.com/playbook/submit-your-session-for-an-event",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. Sessionize recommends explaining why a speaker's knowledge and experience match the event and provides biography fields."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-020",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "A reporter requests expert input on a question the founder can answer from direct experience.",
+    "funnelStage": "awareness",
+    "keyword": "how to respond to journalist source requests",
+    "title": "Answer a Journalist’s Expert Source Request",
+    "slug": "founder-journalist-source-request-response",
+    "distinctIntent": "Respond to an existing editorial question with usable expertise and clear availability. This differs from pitching the startup's own news because the journalist has already selected the subject and requested specific evidence.",
+    "originalWorksheet": "A request-to-answer grid with the actual question, relevant firsthand experience, a concise attributable response, evidence link, conflict disclosure if applicable, and deadline; include a fictional off-target reply rewritten to answer the request.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.qwoted.com/best-practices-for-pitching-journalists/",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. Qwoted's source guidance discusses relevant, timely replies to journalists' requests; booking or placement rates are not established."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-021",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "The founder keeps postponing customer-facing recordings because speaking to a lens feels uncomfortable.",
+    "funnelStage": "awareness",
+    "keyword": "how to get comfortable on camera",
+    "title": "Get Comfortable on Camera Before Your First Founder Video",
+    "slug": "founder-camera-confidence-practice",
+    "distinctIntent": "Build comfort through a small practice progression that produces one usable, direct-to-customer take. This addresses camera avoidance, not a founder-story script, investor rehearsal, or buying filming equipment.",
+    "originalWorksheet": "An original exposure ladder moving from an unrecorded answer to a private test and then a short usable take, with a playback scorecard for clarity and comfort rather than appearance.",
+    "sourceCandidates": [
+      {
+        "url": "https://riverside.fm/university-videos/speak-to-the-lens-like-a-pro-7-key-tips-for-camera-confidence",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. Riverside's creator lesson covers camera confidence, warm-up, body language, and eye contact."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-022",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "The founder needs accurate wording but sounds stiff when reading a customer message.",
+    "funnelStage": "consideration",
+    "keyword": "teleprompter vs bullet points for video",
+    "title": "Teleprompter or Bullet Points for a Founder Video?",
+    "slug": "founder-video-teleprompter-vs-outline",
+    "distinctIntent": "Choose a delivery aid based on wording sensitivity and conversational fluency. This compares ways of speaking during recording, not production vendors, software subscriptions, or explainer-script frameworks.",
+    "originalWorksheet": "A three-take comparison using the same fictional customer message as a full script, a beat outline, and a hybrid; record missed facts, eye movement, and naturalness before choosing.",
+    "sourceCandidates": [
+      {
+        "url": "https://wistia.com/blog/presentation-videos",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. Wistia describes using either a script or a basic talking-point outline while recording."
+      },
+      {
+        "url": "https://www.descript.com/blog/article/learn-to-read-without-sounding-like-youre-reading",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. Descript discusses reading text so it sounds spoken."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-023",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "The founder's face looks dark or uneven in a home-office recording despite a bright room.",
+    "funnelStage": "awareness",
+    "keyword": "home office lighting for video recording",
+    "title": "Light a Founder Video With the Room You Already Have",
+    "slug": "founder-video-home-office-lighting",
+    "distinctIntent": "Arrange existing window and room light to make a founder's face legible and consistent. Excludes buying a lighting kit, agency comparison, and a general recording checklist.",
+    "originalWorksheet": "A room-position experiment with three seat-and-window arrangements, face visibility observations, shadow direction, daylight drift, and a chosen setup sketch.",
+    "sourceCandidates": [
+      {
+        "url": "https://wistia.com/blog/webcam-setup",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. Wistia explains natural and artificial light placement for webcam recordings."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-024",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "The founder's words sound distant and reverberant in an otherwise usable talking-head recording.",
+    "funnelStage": "consideration",
+    "keyword": "how to reduce echo when recording video",
+    "title": "Reduce Room Echo in Your Founder Video",
+    "slug": "founder-video-room-echo",
+    "distinctIntent": "Diagnose room reflections and improve the relationship between the speaker, microphone, and surroundings. This concerns captured sound, separate from voiceover performance, remote call echo, or choosing audio vendors.",
+    "originalWorksheet": "A listen-and-change experiment with a fixed spoken passage, room location, microphone distance, soft furnishings, and a repeatable acceptance test on ordinary playback speakers.",
+    "sourceCandidates": [
+      {
+        "url": "https://service.shure.com/articles/en_US/Knowledge/critical-distance-and-microphone-placement",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. Shure explains reverberant sound and microphone placement relative to the room's critical distance."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-025",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "The founder watches their own preview or looks down at notes, making direct customer messages feel disconnected.",
+    "funnelStage": "consideration",
+    "keyword": "where to look when recording a video",
+    "title": "Find a Natural Eyeline for Your Founder Video",
+    "slug": "founder-video-eyeline",
+    "distinctIntent": "Choose and rehearse the correct gaze target for a direct address versus an interview. This isolates eyeline geometry, distinct from overcoming camera anxiety, framing the whole shot, and editing eye contact with AI.",
+    "originalWorksheet": "An eyeline map showing lens, preview, notes, and interviewer positions, plus paired test recordings and a worksheet for choosing a natural reference point.",
+    "sourceCandidates": [
+      {
+        "url": "https://riverside.fm/webcam-test",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. Riverside recommends positioning the webcam at eye level."
+      },
+      {
+        "url": "https://wistia.com/blog/record-screen-and-webcam",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. Wistia's recording advice discusses eye-level webcam positioning."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-026",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "The founder's shot has distracting background objects, awkward headroom, or gestures cut off by the frame.",
+    "funnelStage": "awareness",
+    "keyword": "how to frame a talking head video",
+    "title": "Frame a Founder Video So the Message Stays Clear",
+    "slug": "founder-talking-head-video-framing",
+    "distinctIntent": "Compose the original talking-head shot around face, hands, and background before recording. Excludes resizing existing videos, choosing cameras, and the separate problem of where the speaker looks.",
+    "originalWorksheet": "Three annotated shot layouts for a seated update, a standing statement, and an interview, with headroom, gesture space, background inspection, and a pre-record frame test.",
+    "sourceCandidates": [
+      {
+        "url": "https://riverside.fm/blog/how-to-make-a-video-high-quality",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. Riverside explains framing and the rule of thirds for video composition."
+      },
+      {
+        "url": "https://wistia.com/blog/webcam-setup",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. Wistia discusses arranging a webcam recording setup."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-027",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "Two cofounders want to explain a company decision but interrupt each other or repeat the same account.",
+    "funnelStage": "awareness",
+    "keyword": "how to film a two person interview",
+    "title": "Record a Cofounder Interview With Two Clear Perspectives",
+    "slug": "record-cofounder-interview",
+    "distinctIntent": "Record a balanced two-speaker conversation in which each founder contributes distinct knowledge. This is turn-taking and coverage for a single-company interview, not portfolio interview questions or a solo founder origin story.",
+    "originalWorksheet": "A perspective-and-turn map assigning one concrete question to each founder, shared follow-ups, a simple shot diagram, and a recovery cue for interruptions; include a fictional exchange.",
+    "sourceCandidates": [
+      {
+        "url": "https://riverside.fm/blog/how-to-film-an-interview",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. Riverside's filming guide covers interview preparation, camera coverage, and recording participants."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-028",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "The founder's planned video refers to real work that viewers cannot understand from a talking head alone.",
+    "funnelStage": "awareness",
+    "keyword": "how to shoot b roll for a founder video",
+    "title": "Shoot B-Roll That Makes a Founder Video More Specific",
+    "slug": "shoot-founder-video-b-roll",
+    "distinctIntent": "Capture original supporting shots that show the actual work or context behind a founder's words. This is filming purposeful coverage, not repurposing a recording, generating a founder story, or selecting stock footage suppliers.",
+    "originalWorksheet": "A claim-to-shot list with one wide view, one action, and one detail for a fictional workflow; note what each image proves, what it cannot prove, and how to film the sequence.",
+    "sourceCandidates": [
+      {
+        "url": "https://wistia.com/blog/b-roll",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. Wistia describes planning B-roll alongside spoken lines and using detail shots in a visual sequence."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-029",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "An industry development creates a short-lived opportunity for the founder to explain a customer consequence from firsthand expertise.",
+    "funnelStage": "awareness",
+    "keyword": "newsjacking for startups",
+    "title": "Add Useful Founder Commentary to Industry News",
+    "slug": "founder-commentary-industry-news",
+    "distinctIntent": "Decide whether and how to contribute an original interpretation of external news while the event is relevant. This is a timely explanatory response, distinct from pitching company news or answering a reporter's already-issued source request.",
+    "originalWorksheet": "A commentary decision canvas with event fact, direct expertise, affected customer decision, what remains unknown, expiration of relevance, and publish-or-pass reasoning; include an original short commentary example on a fictional product ecosystem change.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.davidmeermanscott.com/hubfs/documents/Newsjacking-free-excerpt.pdf",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. An author-hosted excerpt introduces contributing ideas to breaking news; the proposed relevance and uncertainty checks are original synthesis, not verified effectiveness claims."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-030",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "The founder needs an attributable on-camera statement responding to a specific public development.",
+    "funnelStage": "consideration",
+    "keyword": "how to record a video press statement",
+    "title": "Record a Founder Video Statement for the Press",
+    "slug": "founder-video-press-statement",
+    "distinctIntent": "Create a self-contained, dated company statement that journalists can quote accurately. This differs from a funding announcement campaign, an interviewer-led media appearance, and reactive commentary about unrelated industry news.",
+    "originalWorksheet": "An original statement script and shot plan with identity, verified development, customer consequence, known limits, and a contact route; add an excerpt test to catch sentences that become misleading alone.",
+    "sourceCandidates": [
+      {
+        "url": "https://emergency.cdc.gov/cerc/ppt/CERC_Spokesperson.pdf",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. CDC's spokesperson guidance concerns clear public statements and empathy in emergency contexts; the startup application is editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-031",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "The funded company changes direction and the founder needs to explain the transition directly to existing customers.",
+    "funnelStage": "awareness",
+    "keyword": "startup pivot announcement video",
+    "title": "Explain a Startup Pivot in a Customer Video",
+    "slug": "startup-pivot-customer-video",
+    "distinctIntent": "Record a customer-facing explanation of changed priorities using visible before-and-after commitments. Excludes investor updates, a company origin story, and generic rebrand copy.",
+    "originalWorksheet": "A split-column visual for continuing and changing commitments, a founder narration outline, and a scene-by-scene comprehension check using a fictional pivot with clearly identified customer next steps.",
+    "sourceCandidates": [
+      {
+        "url": "https://newsletter.posthog.com/p/read-this-before-you-pivot",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. PostHog discusses startup changes of direction; it is context, not evidence for a video outcome."
+      },
+      {
+        "url": "https://wistia.com/blog/presentation-videos",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. Wistia describes recording presentations with narration and supporting visuals."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-032",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "The company is changing its name or visual identity after funding and customers may mistake the new brand for another business.",
+    "funnelStage": "awareness",
+    "keyword": "how to announce a company rebrand to customers",
+    "title": "Announce a Rebrand Without Confusing Customers",
+    "slug": "startup-rebrand-customer-continuity",
+    "distinctIntent": "Help customers recognize the same company across an identity change and understand any practical effects. The core task is recognition continuity, distinct from a strategic pivot, funding publicity, or selecting brand production services.",
+    "originalWorksheet": "A recognition bridge containing old and new names, the reason for the change, customer-visible changes, continuing service facts to verify, trusted destinations, and a fictional announcement annotated by likely reader confusion.",
+    "sourceCandidates": [
+      {
+        "url": "https://kit.com/rebranding-in-public",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. Kit documents its own transition from ConvertKit through a public rebrand series; it is a first-party communication example, not a universal rebrand outcome."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-033",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "The founder wants to explain recent progress after funding without turning the customer message into another fundraising announcement.",
+    "funnelStage": "awareness",
+    "keyword": "founder update video for customers",
+    "title": "Record a Founder Update Existing Customers Care About",
+    "slug": "founder-customer-update-video",
+    "distinctIntent": "Record a periodic direct customer update showing one change, what was learned, and what customers can expect next. It serves current customer understanding, not investor reporting, release-note writing, or a repurposing calendar.",
+    "originalWorksheet": "An original update rundown pairing one customer question with a current artifact, founder interpretation, remaining limitation, and a next checkpoint; include a fictional two-scene example.",
+    "sourceCandidates": [
+      {
+        "url": "https://wistia.com/blog/how-to-use-video-to-improve-customer-satisfaction",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. Wistia discusses personal video messages as a way to relay information to customers."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-034",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "Prospects ask for future features after the raise, and the founder is considering making development plans public.",
+    "funnelStage": "consideration",
+    "keyword": "public roadmap for startups",
+    "title": "Publish a Startup Roadmap Without Accidental Promises",
+    "slug": "startup-public-roadmap-expectations",
+    "distinctIntent": "Define what public planning statuses mean and how customers should interpret uncertainty. This is communication about future possibilities, distinct from launch promotion, release notes about shipped work, or tutorial production.",
+    "originalWorksheet": "An original roadmap status dictionary with example item cards, confidence language, date-handling rules, feedback invitations, and a worked revision when an item changes direction.",
+    "sourceCandidates": [
+      {
+        "url": "https://buffer.com/resources/transparent-product-roadmap/",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. Buffer's first-party article describes opening its product roadmap to public feedback; current tools and product behavior are not assumed."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-035",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "The startup has made an avoidable mistake and customers need acknowledgment and a concrete response from the founder.",
+    "funnelStage": "awareness",
+    "keyword": "how to record a company apology video",
+    "title": "Record a Founder Apology That Addresses the Harm",
+    "slug": "founder-customer-apology-video",
+    "distinctIntent": "Deliver an on-camera apology that names the customer impact and accountable next actions. This is a completed mistake's response, distinct from a live outage update, a neutral press statement, or general presentation confidence.",
+    "originalWorksheet": "A responsibility-first script exercise with acknowledgment, plain apology, remedy already underway, remaining uncertainty, and follow-up; compare three fictional lines that evade responsibility with precise replacements.",
+    "sourceCandidates": [
+      {
+        "url": "https://emergency.cdc.gov/cerc/ppt/CERC_Spokesperson.pdf",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. CDC discusses empathy and spokesperson conduct in crisis communication; adapting those principles to a startup apology is an editorial recommendation."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-036",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "Newly hired employees have accepted offers and the founder wants to welcome them before their first day.",
+    "funnelStage": "awareness",
+    "keyword": "new employee welcome video from CEO",
+    "title": "Record a Founder Welcome for New Hires",
+    "slug": "founder-new-hire-welcome-video",
+    "distinctIntent": "Create a recorded welcome that helps confirmed new hires understand their place and first point of contact. This differs from a recruitment video intended to attract candidates and from customer onboarding tutorials.",
+    "originalWorksheet": "A welcome video beat sheet with direct greeting, why the role matters, one real working norm, first-day reassurance, and a human contact; identify a reusable core and a separately recorded personal opening without a derivative-asset workflow.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.bamboohr.com/blog/videos-for-onboarding",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. BambooHR describes welcome videos that introduce mission and the employee's contribution."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-037",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "Early customers assume the startup can handle workflows its current product cannot yet support.",
+    "funnelStage": "awareness",
+    "keyword": "how to communicate product limitations",
+    "title": "Explain Product Limits Before Customers Discover Them",
+    "slug": "startup-product-limitations-message",
+    "distinctIntent": "Turn known product constraints into clear suitability boundaries for prospects. The goal is expectation setting before adoption, distinct from a broad explainer, vendor selection, an outage notice, or technical support instructions.",
+    "originalWorksheet": "A fit-boundary table with a customer task, supported conditions, a known limit, a possible workaround, and who should wait; include three original rewrites of vague capability statements.",
+    "sourceCandidates": [
+      {
+        "url": "https://newsletter.posthog.com/p/why-we-sell-features-not-benefits",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. PostHog's essay explains why concrete product details matter to technical evaluators; the limits table is original synthesis and does not document any VideoClaw capability."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-038",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "The founder is booked for a remote interview and must ensure the host receives a complete usable recording.",
+    "funnelStage": "awareness",
+    "keyword": "how to record a remote video interview",
+    "title": "Record a Remote Founder Interview Without Missing Audio",
+    "slug": "remote-founder-interview-recording",
+    "distinctIntent": "Prepare and capture a remote guest interview with clear responsibilities for checks, local recordings where supported, and upload completion. Excludes podcast booking, two cofounders sharing an in-room interview, and comparisons of recording services.",
+    "originalWorksheet": "A guest-host capture agreement with a short preflight call, headphone check, test playback, interruption protocol, and end-of-session completion confirmation; include a fictional connection-drop recovery exercise.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.riverside.fm/hc/en-us/articles/5706937784861-Host-checklist-and-tips-Recording-on-computer",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. Riverside's host guidance covers participant preparation, headphones, recording indicators, and connection interruptions."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-039",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "The founder needs to capture a native portrait message while away from a normal recording desk.",
+    "funnelStage": "consideration",
+    "keyword": "how to record a vertical video on your phone",
+    "title": "Record a Vertical Founder Video on Your Phone",
+    "slug": "record-vertical-founder-video-phone",
+    "distinctIntent": "Set up and record an original portrait-format direct address on a phone, keeping hands, lens, and message stable. This is mobile capture, not cropping existing videos or recording an investor product demo.",
+    "originalWorksheet": "A mobile capture route with phone orientation, support, lens identification, a short focus-and-sound test, delivery markers, and full playback; show a fictional hand-held setup improved using an existing stable surface.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.apple.com/guide/iphone/record-a-video-iph61f49e4bb/ios",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. Apple documents iPhone video recording controls; exact controls vary with device and software version."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-040",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "The startup signs a technology or commercial partnership and needs to explain the immediate customer value without overstating the relationship.",
+    "funnelStage": "awareness",
+    "keyword": "startup partnership announcement",
+    "title": "Make a Partnership Announcement Useful to Customers",
+    "slug": "startup-partnership-announcement-customer-value",
+    "distinctIntent": "Explain the scope of a real partnership, customer eligibility, and what can be done now. The task is a joint offer explanation, not another funding announcement, a portfolio program, or recycling existing campaign media.",
+    "originalWorksheet": "A partnership value map with each company's contribution, the shared customer job, availability, exclusions, an example customer path, and a joint announcement outline that distinguishes agreement from delivered functionality.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.notion.com/blog/how-notion-builds-partnerships-using-notion-and-how-you-can-too",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. Notion's first-party account distinguishes technology, consulting, startup, and affiliate partnerships and discusses taking a partnership to market."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-041",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "The founder has useful customer relationships but no structured invitation for a continuing group of strategic advisors.",
+    "funnelStage": "consideration",
+    "keyword": "startup customer advisory board invitation",
+    "title": "Invite Customers to Your First Advisory Board",
+    "slug": "startup-customer-advisory-board-invitation",
+    "distinctIntent": "Invite a small set of customers into recurring strategic feedback and explain the value of participation. Unlike design partners, members advise priorities and market understanding rather than committing to a specific product-development pilot.",
+    "originalWorksheet": "A council invitation package with a participant profile, an explicit time request, a member value proposition, a first meeting agenda, and a feedback-return note showing how advice will be acknowledged.",
+    "sourceCandidates": [
+      {
+        "url": "https://review.firstround.com/start-up-on-the-right-foot-build-a-customer-advisory-board/",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. First Round's interview with a founder describes recruiting an advisory board from customer-development relationships and setting participation expectations."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-042",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "The founder wants to answer an industry's questions in a live public discussion and a relevant community allows AMAs.",
+    "funnelStage": "consideration",
+    "keyword": "how to host a founder AMA",
+    "title": "Host a Founder AMA Around Real Customer Questions",
+    "slug": "founder-ama-customer-questions",
+    "distinctIntent": "Plan and run an open question session with community-specific participation rules and honest answers. It is a live community dialogue, not a webinar repurposing task, investor Q&A, or an accelerator alumni program.",
+    "originalWorksheet": "An AMA facilitation sheet with an expertise boundary, opening introduction, question routing, examples of useful and promotional answers, and a closing note for unanswered questions; verify the chosen community's rules separately.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.reddithelp.com/hc/en-us/articles/115002427523-What-is-an-AMA-and-how-do-I-host-one",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. Reddit Help explains the AMA post format and hosting; applicability depends on the particular community and its current moderation rules."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-043",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "People are waiting for access and the founder must explain why the announced availability has moved.",
+    "funnelStage": "awareness",
+    "keyword": "product launch delay video message",
+    "title": "Explain a Launch Delay in a Founder Video",
+    "slug": "founder-launch-delay-video",
+    "distinctIntent": "Record a clear delay explanation that distinguishes demonstrated progress from an uncertain release date. This handles a pre-launch promise through direct address and a current visual artifact, not an email template, launch calendar, or generic customer update.",
+    "originalWorksheet": "A delay-message storyboard with the missed expectation, a factual reason, an inspectable progress artifact, a reliable next update commitment, and a viewer option; label all example dates as fictional.",
+    "sourceCandidates": [
+      {
+        "url": "https://buttondown.com/blog/pre-launch-newsletter-guide",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. Buttondown discusses communication before launch; its channel is email, so the video adaptation is original synthesis."
+      },
+      {
+        "url": "https://wistia.com/blog/how-to-use-video-to-improve-customer-satisfaction",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. Wistia describes relaying customer information through personal recordings."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-044",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "A founder's industry talk has been accepted as a prerecorded educational session.",
+    "funnelStage": "awareness",
+    "keyword": "how to record a conference presentation video",
+    "title": "Record a Conference Talk That Teaches Without a Live Room",
+    "slug": "founder-recorded-conference-talk",
+    "distinctIntent": "Deliver a standalone teaching video whose examples and spoken transitions work without an in-room audience. This is completing an accepted customer-facing session, separate from writing the proposal, pitching investors, or repurposing event footage.",
+    "originalWorksheet": "A teaching timeline with one learner task, three explanation beats, an original exercise, pause cues, visual changes, and an end-to-end rehearsal scored by what a test viewer can do afterward.",
+    "sourceCandidates": [
+      {
+        "url": "https://wistia.com/blog/presentation-videos",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. Wistia explains recording a presentation with camera, screen, and narration."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-045",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "A customer has contributed specific feedback or helped the startup through an early milestone.",
+    "funnelStage": "awareness",
+    "keyword": "customer thank you video",
+    "title": "Make a Founder Thank-You Video Feel Personal",
+    "slug": "founder-customer-thank-you-video",
+    "distinctIntent": "Record a brief acknowledgment of that customer's actual contribution without asking for a testimonial or making the message a promotion. This is relationship maintenance, distinct from public customer proof, onboarding, and general progress updates.",
+    "originalWorksheet": "An original gratitude brief with the actual contribution, what it helped the team understand, a direct acknowledgment, and a closing without a sales request; include a fictional specific-versus-generic comparison.",
+    "sourceCandidates": [
+      {
+        "url": "https://wistia.com/blog/how-to-use-video-to-improve-customer-satisfaction",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. Wistia explicitly describes sending a personal thank-you video to a customer."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-046",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "A founder has a working product and wants technical early adopters to try it and discuss it on Hacker News.",
+    "funnelStage": "consideration",
+    "keyword": "how to launch a startup on Show HN",
+    "title": "Prepare a Show HN Post People Can Actually Try",
+    "slug": "startup-show-hn-tryable-product-post",
+    "distinctIntent": "Prepare a tryable submission and a maker discussion that fit Show HN's actual rules. This is public customer discovery through hands-on access, not an investor demo, a pitch video, or a generic social launch schedule.",
+    "originalWorksheet": "A visitor trial-path rehearsal from the post to one usable result, a maker introduction explaining a technical tradeoff, and a response plan for technical feedback; include a readiness branch for products still behind a waitlist.",
+    "sourceCandidates": [
+      {
+        "url": "https://news.ycombinator.com/showhn.html",
+        "supports": "Relevant page passage inspected on 2026-09-12. Show HN requires work people can try, expects the maker to discuss it, discourages access barriers, excludes landing pages and fundraisers, and prohibits asking friends for votes or comments."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-047",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "The founder's finished video needs a recognizable preview that sets accurate expectations before playback.",
+    "funnelStage": "consideration",
+    "keyword": "how to choose a video thumbnail",
+    "title": "Choose a Founder Video Thumbnail That Matches the Message",
+    "slug": "founder-video-thumbnail",
+    "distinctIntent": "Create a truthful still-and-title pairing for one original founder video. This is packaging the viewing decision, not benchmark reporting, repurposing formats, or comparing editing tools.",
+    "originalWorksheet": "A three-option thumbnail storyboard with frame choice, minimal text, viewer expectation, and a small-screen legibility check; reject any option whose promise is absent from the recording.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.google.com/youtube/answer/12340300?hl=en-GB",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. YouTube's guidance addresses readable thumbnail text and title or thumbnail presentation."
+      },
+      {
+        "url": "https://support.google.com/youtube/answer/72431?hl=en-GB",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. YouTube documents custom thumbnail uploads and associated requirements."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-048",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "The founder wants industry analysts to understand the company's product and market position after funding.",
+    "funnelStage": "consideration",
+    "keyword": "how to prepare an analyst briefing for a startup",
+    "title": "Prepare Your Startup’s First Industry Analyst Briefing",
+    "slug": "startup-industry-analyst-briefing",
+    "distinctIntent": "Prepare a vendor briefing for a research analyst's coverage needs. This differs from a journalist pitch or investor presentation because its purpose is informing an analyst's market research, with no implied endorsement or promised coverage.",
+    "originalWorksheet": "An analyst briefing dossier with coverage fit, a company snapshot, market context, current product scope, evidence, unanswered questions, and a concise agenda; include an explicit distinction between briefing and endorsement.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.gartner.com/en/contact/vendor-briefings",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. Gartner states that analysts accept briefings at their discretion based on research interest and provides a vendor request process; neither acceptance nor a research mention is guaranteed."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-049",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "The founder needs to narrate original visual material but a read-through sounds flat or does not fit the scenes.",
+    "funnelStage": "consideration",
+    "keyword": "how to record a natural voiceover",
+    "title": "Record a Natural Voiceover for a Founder Video",
+    "slug": "founder-video-voiceover-delivery",
+    "distinctIntent": "Perform a voiceover with thought groups, emphasis, and pauses that match planned visuals. This concerns narration delivery, separate from room-echo diagnosis, script-versus-outline choice, and editing existing long-form content.",
+    "originalWorksheet": "An original annotated narration passage with breath marks, stressed words, visual cue points, two delivery attempts, and a pickup list for sentences that need a fresh take.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.descript.com/blog/article/learn-to-read-without-sounding-like-youre-reading",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. Descript discusses making written narration sound spoken."
+      },
+      {
+        "url": "https://www.descript.com/blog/article/how-to-read-a-script-like-a-pro-while-recording",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. Descript covers writing for the ear, emphasis, and breath points."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c1-050",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "Prospects have recently declined to buy, and the founder needs to understand whether the public story created the wrong expectations.",
+    "funnelStage": "awareness",
+    "keyword": "win loss interviews for startup messaging",
+    "title": "Use Lost-Deal Interviews to Repair Startup Messaging",
+    "slug": "startup-lost-deal-messaging-interviews",
+    "distinctIntent": "Reconstruct a completed buying decision to find message gaps, false expectations, and real reasons for choosing an alternative. This is retrospective research with non-buyers, distinct from early problem discovery, message comprehension testing, and testimonial interviews.",
+    "originalWorksheet": "A lost-deal decision timeline with initial expectation, materials encountered, comparison moments, actual decision criteria, buyer-reported reason, and a message-repair hypothesis; include neutral follow-ups that do not reopen the sale.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.clozd.com/blog/win-loss-101-what-to-ask-buyers-in-win-loss-interviews",
+        "supports": "Live search discovery on 2026-09-12; full page uninspected. Clozd describes structured but adaptable buyer interviews and avoiding questions that steer responses; the startup message-repair output is original synthesis."
+      }
+    ]
+  }
+]

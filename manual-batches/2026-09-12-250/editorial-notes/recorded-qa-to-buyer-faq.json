@@ -1,0 +1,119 @@
+{
+  "id": "vc-manual250-c4-015",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://wistia.com/blog/ai-webinar-transcript-content",
+      "supports": "Timestamped source ideas and source checking support answer extraction.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.intercom.com/help/en/articles/56645-how-to-write-great-help-articles",
+      "supports": "Customer goals and language guide useful question wording.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "When can two questions be merged?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should I do with unanswered questions?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I use a chat question that nobody read aloud?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Separate repeated questions, conditional answers and unresolved questions to build an answer page for prospective customers. This is FAQ extraction and answer qualification, not retained c4-001's overall webinar campaign. No ranking-page comparison or demand conclusion is asserted.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending."
+  ],
+  "serp": {
+    "id": "vc-manual250-c4-015",
+    "keyword": "turn webinar questions into FAQ",
+    "found": true,
+    "query": "turn webinar questions into FAQ",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:32:56.760Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Turn Webinar Q&A into FAQ Pages",
+        "url": "https://indiegtm.com/tools/faq-page-from-webinar/",
+        "domain": "indiegtm.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Using Q and A in a Zoom webinar",
+        "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0064380",
+        "domain": "support.zoom.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "How to host the perfect webinar Q&A [GUIDE]",
+        "url": "https://univid.io/blog/how-to-host-perfect-digital-webinar-qa/",
+        "domain": "univid.io",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "Use webinars for Q&A sessions",
+        "url": "https://www.webinargeek.com/use-cases/q-and-a",
+        "domain": "webinargeek.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Organizing questions and answers in webinars",
+        "url": "https://insights.tt-s.com/en/organizing-questions-and-answers-in-webinars",
+        "domain": "insights.tt-s.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "5 Ways to Repurpose Webinars in 2026",
+        "url": "https://www.youtube.com/watch?v=NCBavTwIK6w",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 7,
+        "title": "Webinar Q&A Best Practices Guide - M365 FM Podcast",
+        "url": "https://www.m365.fm/blog/mastering-qa-in-webinars-for-greater-engagement/",
+        "domain": "m365.fm",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "Question and answer (Q&A) sessions in meetings and ...",
+        "url": "https://help.webex.com/en-us/article/nakt8px/Question-and-answer-(Q&A)-sessions-in-meetings-and-webinars",
+        "domain": "help.webex.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": [
+      "Turn webinar questions into faq template",
+      "Zoom webinar best practices",
+      "Zoom webinar trial",
+      "Zoom webinar participant video",
+      "How to host a paid webinar on Zoom",
+      "Zoom webinar can they see me",
+      "Hosting zoom webinar tutorial",
+      "What is a webinar on Zoom"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

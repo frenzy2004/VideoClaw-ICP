@@ -1,0 +1,129 @@
+{
+  "id": "vc-manual250-c5-038",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://framework.finops.org/framework/capabilities/allocation/",
+      "supports": "Allocation distinguishes shared from dedicated costs and documents the approach to shared services.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.finops.org/wg/identifying-shared-costs/",
+      "supports": "Shared-cost methods can use equal, fixed-proportion or variable allocation and should be explained to stakeholders.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does an internal allocation mean companies should be invoiced?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Which allocation basis is best?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should happen when usage data is missing?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Apportion an already-incurred shared media cost using explicit allocation rules and traceable inputs. Unlike c3-008's production budget, this reconciles shared consumption and does not set vendor rates. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact US/en SERP evidence is being collected by main; query remains a candidate hypothesis. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities.",
+    "Mixed-intent / weak-product-fit candidate: shared cost allocation commonly concerns finance or IT. The concrete work product is an internal multi-company media cost worksheet; no demand validation.",
+    "Financial-adjacent operational synthesis, not accounting, tax, billing or legal advice. Fictional cost units are not prices or rates."
+  ],
+  "serp": {
+    "id": "vc-manual250-c5-038",
+    "keyword": "shared cost allocation",
+    "found": true,
+    "query": "shared cost allocation",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:01.735Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "5.2 Allocation of shared costs - Viewpoint - PwC",
+        "url": "https://viewpoint.pwc.com/dt/us/en/pwc/accounting_guides/carve-out-financial-statements/carve-out-financial-statements/Chapter-5-Income/5-2-Allocation-of-shared.html",
+        "domain": "viewpoint.pwc.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Managing Shared Cloud Costs",
+        "url": "https://www.finops.org/wg/identifying-shared-costs/",
+        "domain": "finops.org",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Cost allocation methods and when and where to use them",
+        "url": "https://www.phocassoftware.com/resources/blog/cost-allocation",
+        "domain": "phocassoftware.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "NGO Shared Cost Allocation | Multi-Donor Compliance Guide",
+        "url": "https://abvius.org/en/articles/ngo-shared-cost-allocation-multi-donor-compliance",
+        "domain": "abvius.org",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Cost Allocation Methods",
+        "url": "https://www.infracost.io/resources/glossary/cost-allocation-methods",
+        "domain": "infracost.io",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Cost Allocation Guidance: Appendix A: Methodology ...",
+        "url": "https://osp.finance.harvard.edu/resource/costallocationmethodologyexamplesjanuary2021pdf",
+        "domain": "osp.finance.harvard.edu",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Shared Cost Reallocation | Finout Docs",
+        "url": "https://docs.finout.io/user-guide/inform/shared-cost-reallocation",
+        "domain": "docs.finout.io",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "How to Choose an IT Cost Allocation Model for Shared ...",
+        "url": "https://www.betsol.com/blog/it-cost-allocation-models-for-shared-services/",
+        "domain": "betsol.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What are the three main types of cost allocation?",
+      "What are the three types of allocations?",
+      "What are the four purposes of cost allocation?",
+      "What is the formula for calculating cost allocation?"
+    ],
+    "relatedQueries": [
+      "Shared cost allocation example",
+      "Shared cost allocation formula",
+      "Shared cost allocation in accounting",
+      "Shared cost allocation methodology",
+      "Cost allocation methods",
+      "Cost allocation examples",
+      "Cost allocation formula",
+      "Standard cost allocation"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

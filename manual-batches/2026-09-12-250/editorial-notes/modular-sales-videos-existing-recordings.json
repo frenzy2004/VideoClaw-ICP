@@ -1,0 +1,126 @@
+{
+  "id": "vc-manual250-c4-049",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.atlassian.com/blog/loom/video-stitching",
+      "supports": "Describes personalized introductions combined with shared recorded material.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://helpx.adobe.com/premiere/desktop/edit-projects/edit-nested-sequences/about-nested-sequences.html",
+      "supports": "Source sequence edits affect nested instances; duration and joins require review.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Is any folder of clips modular content?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should every module contain a sales CTA?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Will changing a source module update published videos?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Make existing video segments interchangeable by defining self-contained openings, endings and transition requirements, then assemble several coherent sales cuts. Distinct from c4-016's written battlecards, c4-017's recap of one meeting and c4-018's packet of separate assets because this produces reusable edit modules and newly assembled videos. No ranking-page comparison or demand conclusion is asserted.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending.",
+    "Video assembly modularity, distinct from c4-016 written battlecards, c4-017 one-off demo follow-up, and c4-018 buying-committee packets."
+  ],
+  "serp": {
+    "id": "vc-manual250-c4-049",
+    "keyword": "how to create modular video content",
+    "found": true,
+    "query": "how to create modular video content",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:32:56.760Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How to Create Modular Content (with Examples)",
+        "url": "https://www.seoptimer.com/blog/modular-content/",
+        "domain": "seoptimer.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "How To Use The Modular Content Strategy Step-By-Step",
+        "url": "https://www.youtube.com/watch?v=cNK5LE6AViQ",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 3,
+        "title": "Modular Content Strategy: Definition, Benefits & Examples",
+        "url": "https://www.storyblok.com/mp/modular-content-strategy",
+        "domain": "storyblok.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "The power of modular content: turn one shoot into endless ...",
+        "url": "https://www.adpipe.com/resources/the-power-of-modular-content",
+        "domain": "adpipe.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "The enterprise guide to modular content: Scaling ...",
+        "url": "https://www.coremedia.com/blog/the-enterprise-guide-to-modular-content-scaling-personalized-experiences",
+        "domain": "coremedia.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "How modular content creates the building blocks of ...",
+        "url": "https://www.linkedin.com/pulse/how-modular-content-creates-building-blocks-andrew-lomas-6tm3e",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 7,
+        "title": "Why your brand needs modular content",
+        "url": "https://www.contentful.com/blog/modular-content/",
+        "domain": "contentful.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "How Can Brands Get More Video Content Without ...",
+        "url": "https://www.lemonlight.com/blog/how-can-brands-get-more-video-content-without-increasing-costs/",
+        "domain": "lemonlight.com",
+        "resultType": "article"
+      },
+      {
+        "position": 9,
+        "title": "Modular Content Marketing: 5 Steps To Create Reusable ...",
+        "url": "https://www.clintmally.com/courses/modular-content-marketing",
+        "domain": "clintmally.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is the best way to create video content?",
+      "What is modular content?",
+      "How to create a modular design?",
+      "What are the 7 steps in creating a content strategy?"
+    ],
+    "relatedQueries": [
+      "How to create modular video content for youtube",
+      "How to create modular video content example"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

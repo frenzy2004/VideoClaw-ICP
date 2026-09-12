@@ -1,0 +1,124 @@
+{
+  "id": "vc-manual250-c2-041",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.microsoft.com/en-us/powerpoint/insert-and-play-a-video-file-from-your-computer",
+      "supports": "PowerPoint distinguishes embedded local video from linked media.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.apple.com/guide/quicktime-player/export-movies-qtp20e395859/10.5/mac/26",
+      "supports": "QuickTime exports MOV rather than MP4; H.264 and HEVC export options differ.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Which video format does Microsoft recommend for PowerPoint?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I rename a MOV file to MP4?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Is a standalone-player test enough for a video embedded in a deck?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: Format lists may omit the receiving-machine matrix that separates file decoding, embedded playback and audio routing. Competing page bodies have not been audited for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "FAQs are editorial questions, not observed PAA. Source links provide factual or contextual grounding; the article-specific worksheets and procedural recommendations are original editorial synthesis."
+  ],
+  "serp": {
+    "id": "vc-manual250-c2-041",
+    "keyword": "video format for PowerPoint on Mac and Windows",
+    "found": true,
+    "query": "video format for PowerPoint on Mac and Windows",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Video and audio file formats supported in PowerPoint",
+        "url": "https://support.microsoft.com/en-us/powerpoint/video-and-audio-file-formats-supported-in-powerpoint",
+        "domain": "support.microsoft.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Insert and play a video file from your computer",
+        "url": "https://support.microsoft.com/en-us/powerpoint/insert-and-play-a-video-file-from-your-computer",
+        "domain": "support.microsoft.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "powerpoint-video-formats.docx",
+        "url": "https://www.slideshare.net/slideshow/powerpointvideoformatsdocx/256009746",
+        "domain": "slideshare.net",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Converting playable video files from a mac to a PC for ...",
+        "url": "https://www.reddit.com/r/editors/comments/5t8xak/converting_playable_video_files_from_a_mac_to_a/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Best Powerpoint Presentation Video Formats (Quick Guide)",
+        "url": "https://filmora.wondershare.com/video-editing/powerpoint-presentation-video-format.html",
+        "domain": "filmora.wondershare.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "PowerPoint: Exporting a Video/Audio Narration as an MP4 ...",
+        "url": "https://kb.uwec.edu/articles/powerpoint-exporting-a-video-audio-narration-as-an-mp4-file-windows-and-macos",
+        "domain": "kb.uwec.edu",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Video in PowerPoint: What Works and What Won't",
+        "url": "https://adventmedia.us/about/insights/video-in-powerpoint",
+        "domain": "adventmedia.us",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "How to prepare PowerPoint on Mac for live-AV",
+        "url": "https://www.presentationtools.com/mac-for-powerpoint/",
+        "domain": "presentationtools.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Which video format is compatible with PowerPoint?",
+      "How to change PPT to MP4 on Mac?",
+      "Does PowerPoint play MP4 videos?",
+      "How to put video in PowerPoint Mac?"
+    ],
+    "relatedQueries": [
+      "Free video format for powerpoint on mac and windows",
+      "How to add video to PowerPoint for all slides",
+      "PowerPoint video format converter online",
+      "How to embed video in PowerPoint from online",
+      "PowerPoint cannot insert a video from the selected file",
+      "How to insert video in powerpoint 64 bit codec",
+      "Extension of PowerPoint 2010",
+      "How to play video in PowerPoint automatically"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

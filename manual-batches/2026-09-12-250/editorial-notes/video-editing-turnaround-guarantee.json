@@ -1,0 +1,124 @@
+{
+  "id": "vc-manual250-c3-042",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.videohusky.com/",
+      "supports": "Inspected provider page: unlimited submitted projects are distinguished from an editor working on one video at a time; first drafts and revisions are separate stages.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.upwork.com/hc/en-us/articles/44564821903763-Understanding-milestones-on-fixed-price-contracts",
+      "supports": "Inspected page body: a milestone has a deliverable, payment and due date; Upwork documents funding and approval mechanics specific to its platform.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does a first-draft turnaround promise cover the final video?",
+      "basis": "editorial"
+    },
+    {
+      "question": "When should the delivery clock start?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Is a fast delivery claim a guarantee?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: A promised-clock worksheet makes the starting event, paused time and final deliverable explicit before a buyer relies on an advertised turnaround.",
+  "searchIntentBasis": "Editorial classification: evaluating a video-production purchase, engagement or vendor decision; not verified demand.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c3-042",
+    "keyword": "video editing turnaround time guarantee",
+    "found": true,
+    "query": "video editing turnaround time guarantee",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "What is considered a quick turnaround in video editing? & ...",
+        "url": "https://www.reddit.com/r/editors/comments/xm5uwt/what_is_considered_a_quick_turnaround_in_video/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "How Long Does It Take to Edit a Video?",
+        "url": "https://www.tastyedits.com/how-long-does-it-take-to-edit-a-video/",
+        "domain": "tastyedits.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Video Editing Turnaround Times: What Is Normal in 2026",
+        "url": "https://increditors.com/video-editing-turnaround-times-what-to-expect-from-agencies/",
+        "domain": "increditors.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Fast Turnaround Video Editing",
+        "url": "https://www.openhousepictures.co.uk/fast-turnaround-video-editing",
+        "domain": "openhousepictures.co.uk",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Best Video Editing Services in 2026: Fast, Easy, and ...",
+        "url": "https://www.awesomic.com/blog/video-editing-services",
+        "domain": "awesomic.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Turnaround time estimates - Help Center - beCreatives",
+        "url": "https://help.becreatives.co/turnaround-time-estimates",
+        "domain": "help.becreatives.co",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Video Editing Turnaround Time: What 9 Agencies Publish",
+        "url": "https://echopulse.media/blog/video-editing-turnaround-time",
+        "domain": "echopulse.media",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "Video Editing Turnaround Time: What Is Realistic for ...",
+        "url": "https://www.gigxomi.com/blog/video-editing-turnaround-time-what-is-realistic-for-different-projects",
+        "domain": "gigxomi.com",
+        "resultType": "article"
+      },
+      {
+        "position": 9,
+        "title": "Unlimited Video Editing Subscription | 14 Day Free Trial",
+        "url": "https://www.mtmagency.in/unlimited-video-editing",
+        "domain": "mtmagency.in",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is the 3:2:1 rule in video editing?",
+      "What does the 80/20 rule mean in video editing?",
+      "How long should it take to edit a 1 hour video?",
+      "How long should it take to edit a 3 minute video?"
+    ],
+    "relatedQueries": [
+      "Video editing turnaround time guarantee reddit",
+      "Video editing turnaround time guarantee free",
+      "Best video editing turnaround time guarantee"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

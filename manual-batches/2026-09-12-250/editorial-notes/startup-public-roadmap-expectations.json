@@ -1,0 +1,131 @@
+{
+  "id": "vc-manual250-c1-034",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://buffer.com/resources/transparent-product-roadmap/",
+      "supports": "Buffer discusses the risk of customers building plans around public roadmap items.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://github.com/github/roadmap",
+      "supports": "GitHub distinguishes exploratory phases and states that its roadmap is not a delivery promise.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does a disclaimer make every roadmap date safe to publish?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should happen when an item is dropped?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should customer votes determine the roadmap?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: Provide an original status dictionary and worked card revision that keeps planning uncertainty beside the relevant item.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Exact US/en SERP evidence is being collected separately; keyword volume, difficulty, and CPC are unknown."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-034",
+    "keyword": "public roadmap for startups",
+    "found": true,
+    "query": "public roadmap for startups",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Public Product Roadmap in 2023 | Railsware Blog",
+        "url": "https://railsware.com/blog/public-roadmap/",
+        "domain": "railsware.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "15 Best Public Roadmap Examples for SaaS in 2026",
+        "url": "https://www.featurebase.app/blog/public-roadmap-examples",
+        "domain": "featurebase.app",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "The Startup Roadmap - SCORE",
+        "url": "https://www.score.org/startup-roadmap/",
+        "domain": "score.org",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Startup Roadmap: 9 Steps to Repeatable, Scalable and ...",
+        "url": "https://www.forentrepreneurs.com/startup-roadmap/",
+        "domain": "forentrepreneurs.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Tability's Public Start Up Roadmap",
+        "url": "https://trello.com/templates/product-management/tabilitys-public-start-up-roadmap-tixmANrR",
+        "domain": "trello.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Startup Roadmap Example — A Strategic Approach",
+        "url": "https://www.jibility.com/blog/startup-strategy-roadmap",
+        "domain": "jibility.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Public Roadmap for Startups",
+        "url": "https://www.featul.com/use-cases/startup-roadmap",
+        "domain": "featul.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "The Startup Product Roadmap",
+        "url": "https://atomicobject.com/client-resources/startup-product-roadmap",
+        "domain": "atomicobject.com",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "What Is a Public Product Roadmap and When Should You ...",
+        "url": "https://www.savio.io/blog/what-is-a-public-product-roadmap-and-when-should-you-use-one/",
+        "domain": "savio.io",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is the 80/20 rule for startups?",
+      "Is it true that 90% of startups fail?",
+      "What are the 7 stages of startup?",
+      "What is a startup roadmap?"
+    ],
+    "relatedQueries": [
+      "Public roadmap for startups template",
+      "Free public roadmap for startups",
+      "Public roadmap for startups pdf",
+      "Startup roadmap template",
+      "Startup Roadmap pdf",
+      "Startup business roadmap",
+      "Public roadmap tool",
+      "Score startup roadmap"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

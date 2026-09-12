@@ -1,0 +1,127 @@
+{
+  "id": "vc-manual250-c1-048",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.gartner.com/en/contact/vendor-briefings",
+      "supports": "Briefings provide research input and do not center on analyst feedback; agendas and worksheets here are original.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://go.forrester.com/help/analyst-briefing/",
+      "supports": "Acceptance depends on research relevance and availability; materials are requested before the meeting.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Is an analyst briefing the same as an investor pitch?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should a startup send before the briefing?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does completing a briefing mean the analyst endorses the startup?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Prepare a vendor briefing for a research analyst's coverage needs. This differs from a journalist pitch or investor presentation because its purpose is informing an analyst's market research, with no implied endorsement or promised coverage. No ranking-page comparison or demand conclusion is asserted.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending.",
+    "Mixed-intent analyst query is explicitly limited to industry research vendor briefings, not securities analysts, fundraising, or press pitching. No endorsement or placement outcome is asserted."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-048",
+    "keyword": "how to prepare an analyst briefing for a startup",
+    "found": true,
+    "query": "how to prepare an analyst briefing for a startup",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "My Tips For Crushing Your Analyst Briefings And Wowing ...",
+        "url": "https://www.forrester.com/blogs/my-tips-for-crushing-your-analyst-briefings-and-wowing-the-analyst/",
+        "domain": "forrester.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "Analyst Briefings 101: How to Drive Value for Your ...",
+        "url": "https://www.arinsights.com/resource/analyst-briefings-101-how-to-drive-value-for-your-business-and-analysts",
+        "domain": "arinsights.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "Nailing Your Introductory Analyst Briefing",
+        "url": "https://www.linkedin.com/pulse/nailing-your-introductory-analyst-briefing-robert-karel-y4ugc",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 4,
+        "title": "Analyst Briefing Best Practices: 6 Steps to Success",
+        "url": "https://altitudemarketing.com/blog/analyst-briefing-best-practices/",
+        "domain": "altitudemarketing.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Analyst Briefing Preparation Guide for Growth Teams",
+        "url": "https://prime-techpr.com/brand-awareness/analyst-briefing-preparation-guide/",
+        "domain": "prime-techpr.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "A guide to analyst relations for startups",
+        "url": "https://www.craigkerstiens.com/2015/07/25/a-guide-to-analyst-relations-for-startups/",
+        "domain": "craigkerstiens.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Build a Strong Analyst Relations Foundation",
+        "url": "https://www.infotech.com/research/ss/build-a-strong-analyst-relations-foundation",
+        "domain": "infotech.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "How to structure an analyst briefing? - IIAR",
+        "url": "https://analystrelations.org/2011/10/31/how-to-structure-a-briefing/",
+        "domain": "analystrelations.org",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "Advice for your first analyst briefing, from the analysts ...",
+        "url": "https://www.starsight.biz/2023/08/10/top-briefing-tips-from-analysts/",
+        "domain": "starsight.biz",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is Gartner's Vendor Briefing?",
+      "What is a vendor briefing?",
+      "What exactly does an analyst do?",
+      "What are the steps in the business analysis process?"
+    ],
+    "relatedQueries": [
+      "How to prepare an analyst briefing for a startup example",
+      "How to prepare an analyst briefing for a startup interview",
+      "Forrester briefing request"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

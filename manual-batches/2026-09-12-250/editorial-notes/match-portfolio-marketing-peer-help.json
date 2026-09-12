@@ -1,0 +1,141 @@
+{
+  "id": "vc-manual250-c5-036",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://help.togetherplatform.com/hc/en-us/articles/22171219164315-What-is-Colleague-Connect",
+      "supports": "Peer matching can use skills and goals without requiring a seniority gap.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://founders.firstround.com/template-of-sheet",
+      "supports": "First Round describes private resources and structured mentorship.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does the helper need to be more senior?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should every match become recurring mentoring?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What belongs in the closure note?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Broker opt-in peer help around a specific media operating problem and capture the resolution privately. Unlike an alumni-community strategy or webinar, this is a question-to-expert matching service. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact US/en SERP evidence is being collected by main; query remains a candidate hypothesis. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities."
+  ],
+  "serp": {
+    "id": "vc-manual250-c5-036",
+    "keyword": "peer mentoring matching",
+    "found": true,
+    "query": "peer mentoring matching",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:01.735Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "The Potential of Peer to Peer Mentoring and How to Design ...",
+        "url": "https://chronus.com/blog/peer-to-peer-mentoring",
+        "domain": "chronus.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "Why “Someone like me” Matters in Mentor Matching",
+        "url": "https://www.evidencebasedmentoring.org/how-the-right-mentor-match-can-make-success-feel-possible/",
+        "domain": "evidencebasedmentoring.org",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "How to Build a Successful Peer Mentoring Program",
+        "url": "https://rqplatform.com/resources/blogs/how-to-build-a-successful-peer-mentoring-program-7-steps",
+        "domain": "rqplatform.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "Mentor-Mentee Matching",
+        "url": "http://www.peersuccess.org/mentor-mentee-matching.html",
+        "domain": "peersuccess.org",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Peer Mentoring: A Complete Guide to Launching Impactful ...",
+        "url": "https://www.qooper.io/blog/peer-mentoring",
+        "domain": "qooper.io",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Questionnaire for Profiles of Peer Mentor Programs",
+        "url": "https://www.ipfcc.org/bestpractices/peer-support-questionnaire.html",
+        "domain": "ipfcc.org",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Mentoring Matching: Why the Algorithm Behind Your Pairs ...",
+        "url": "https://mentorpro.com/news-item/mentoring-matching/",
+        "domain": "mentorpro.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "How to match mentors and mentees - Teleskope",
+        "url": "https://www.teleskope.io/post/how-to-match-mentors-and-mentees",
+        "domain": "teleskope.io",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "Peer Mentoring Guide - DSHS",
+        "url": "https://www.dshs.wa.gov/sites/default/files/publications/documents/22-1840.pdf",
+        "domain": "dshs.wa.gov",
+        "resultType": "other"
+      },
+      {
+        "position": 10,
+        "title": "Scholarly articles for peer mentoring matching",
+        "url": "https://scholar.google.com/scholar?q=peer+mentoring+matching&hl=en&as_sdt=0&as_vis=1&oi=scholart",
+        "domain": "scholar.google.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What are the 5 C's of mentoring?",
+      "What are 10 killer questions to ask a mentor?",
+      "How do you match a mentor and mentee?",
+      "What are the best practices for peer mentoring?"
+    ],
+    "relatedQueries": [
+      "Peer mentoring matching template",
+      "Peer mentoring matching pdf",
+      "Peer mentoring matching examples",
+      "Peer mentoring matching programs",
+      "Peer mentoring examples",
+      "Peer-to-peer mentoring in schools",
+      "Peer mentoring in the classroom",
+      "What is peer mentoring in college"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

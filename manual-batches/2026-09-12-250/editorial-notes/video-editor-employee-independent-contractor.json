@@ -1,0 +1,117 @@
+{
+  "id": "vc-manual250-c3-045",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.irs.gov/businesses/small-businesses-self-employed/employee-common-law-employee",
+      "supports": "Official body inspected 2026-09-12: federal tax common-law analysis examines control and independence, not the contractual label alone, across behavioral, financial and relationship facts.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.irs.gov/businesses/small-businesses-self-employed/behavioral-control",
+      "supports": "Official body inspected 2026-09-12: instructions, evaluation and training provide behavioral-control evidence. Not a complete labor-law or state classification test.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.dir.ca.gov/dlse/faq_independentcontractor.htm",
+      "supports": "Official body inspected 2026-09-12: California discusses ABC and Borello tests with occupation and relationship exceptions requiring specific conditions; no automatic video-editor exemption inferred.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does calling the editor a contractor determine their status?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does the editor owning a computer prove independence?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I use this worksheet to classify a video editor?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: A non-diagnostic facts packet records the real arrangement for separate tax and employment-law review instead of offering a misleading contractor score.",
+  "searchIntentBasis": "Editorial classification: evaluating a video-production purchase, engagement or vendor decision; not verified demand.",
+  "reviewNotes": [
+    "Non-diagnostic classification fact gathering only. IRS and California DIR bodies inspected. DOL rulemaking pages returned access errors; no current federal labor-rule status or universal state test asserted."
+  ],
+  "serp": {
+    "id": "vc-manual250-c3-045",
+    "keyword": "video editor employee or independent contractor",
+    "found": true,
+    "query": "video editor employee or independent contractor",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "$21-$48/hr Independent Contractor Video Editor Jobs",
+        "url": "https://www.ziprecruiter.com/Jobs/Independent-Contractor-Video-Editor",
+        "domain": "ziprecruiter.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Independent contractor vs. film crew vs. employee",
+        "url": "https://creativecow.net/forums/thread/independent-contractor-vs-film-crew-vs-employee/",
+        "domain": "creativecow.net",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Employee or Independent Contractor!?",
+        "url": "https://www.quantsolutions.co/employeeorindependentcontractor/",
+        "domain": "quantsolutions.co",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "[Question] Are professional video editors generally ...",
+        "url": "https://www.reddit.com/r/editors/comments/qr9nxf/question_are_professional_video_editors_generally/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Q: What is an independent contractor video editor?",
+        "url": "https://www.ziprecruiter.com/e/independent-contractor-video-editor-what-are-independent-contractor-video-editors",
+        "domain": "ziprecruiter.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Video Editor Freelance Jobs: Work Remote & Earn Online",
+        "url": "https://www.upwork.com/freelance-jobs/video-editing/",
+        "domain": "upwork.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Freelancer vs Employee in Film: What the Law Actually Says",
+        "url": "https://thoolie.com/2025/08/21/freelancer-vs-employee-filmmaking/?srsltid=AfmBOoo-75xi4UV6-qpDo0L8OYPxi6KtxWv0zPHoSB-UKHY_c4IXGQfZ",
+        "domain": "thoolie.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Can I freelance as a video editor?",
+      "Which is better, independent contractor or employee?",
+      "Is AI replacing video editors?",
+      "How much should I charge as a freelance video editor?"
+    ],
+    "relatedQueries": [
+      "Video editor employee or independent contractor reddit",
+      "Video editor employee or independent contractor salary",
+      "Video editor employee or independent contractor quiz"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

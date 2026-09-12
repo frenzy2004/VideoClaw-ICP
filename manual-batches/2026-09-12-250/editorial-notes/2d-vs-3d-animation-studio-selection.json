@@ -1,0 +1,113 @@
+{
+  "id": "vc-manual250-c3-024",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.adobe.com/uk/express/learn/blog/how-is-3d-animation-made",
+      "supports": "Inspected explainer: 3D production can involve modeling, rigging, animation, lighting and rendering. General cost, realism and performance claims are not adopted.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.bls.gov/ooh/arts-and-design/multimedia-artists-and-animators.htm",
+      "supports": "Inspected official duties section: animation can involve specialized artists, teamwork, research and revisions. No salary or production-time benchmark is used.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Is 2D animation always less expensive than 3D?",
+      "basis": "editorial"
+    },
+    {
+      "question": "When does a business video benefit from 3D?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can one video combine 2D and 3D?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Scene-level routing and update dependencies can make an animation-medium decision more concrete than generic cost and style comparisons.",
+  "searchIntentBasis": "Editorial classification: evaluating a video-production purchase, engagement or vendor decision; not verified demand.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c3-024",
+    "keyword": "2d vs 3d animation for business video",
+    "found": true,
+    "query": "2d vs 3d animation for business video",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "2D vs 3D Animation for Modern Business Marketing",
+        "url": "https://hatchstudios.com/2d-vs-3d-animation-which-one-is-better-for-your-business/",
+        "domain": "hatchstudios.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "2D vs 3D Animation: Choose the Right Style for Your ...",
+        "url": "https://justanimations.com/2d-vs-3d-animation/",
+        "domain": "justanimations.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "2D vs 3D: Which Animation Fits Your Brand?",
+        "url": "https://kensa.agency/blog/2d-vs-3d-animation/",
+        "domain": "kensa.agency",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "2D vs 3D Animation: Which Is Best for Your Business Video?",
+        "url": "https://www.interactivv.com/blog/2d-vs-3d-animation-which-is-best-for-your-business-video/",
+        "domain": "interactivv.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "How to Choose Between 2D and 3D Animation for Your ...",
+        "url": "https://ripmediagroup.com/3d-animation/how-to-choose-between-2d-and-3d-animation-for-your-marketing-videos",
+        "domain": "ripmediagroup.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "2D vs 3D Animation: Which is Best for Your Business ...",
+        "url": "https://eilandigital.com/newsletter/2d-vs-3d-animation/",
+        "domain": "eilandigital.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "2D vs. 3D Animation: Which Is Better for Business?",
+        "url": "https://levitatemedia.com/learn/2d-vs-3d-animation",
+        "domain": "levitatemedia.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "2D vs 3D Animation: Which One Should Your Business ...",
+        "url": "https://www.prayananimation.com/blog/2d-vs-3d-animation-which-one-should-your-business-choose/",
+        "domain": "prayananimation.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Is 2D animation better than 3D animation?",
+      "Why did Disney quit 2D?",
+      "Is 2D animation in demand?",
+      "Is it cheaper to do 2D or 3D animation?"
+    ],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

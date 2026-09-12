@@ -1,0 +1,111 @@
+{
+  "id": "vc-manual250-c4-025",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://blog.hubspot.com/blog/tabid/6307/bid/34188/what-in-the-heck-is-co-marketing.aspx?gad=1",
+      "supports": "Co-marketing involves partners promoting a shared offer.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://mailchimp.com/help/add-video-to-an-email/",
+      "supports": "Linked thumbnails provide a viewing path when embedded email playback is unsupported.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should both partners publish identical copy?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How many clips should a partner kit contain?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should remain fixed when a partner edits the copy?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Package a shared offer with complementary partner introductions, useful excerpts and destination-specific copy. This concerns a single commercial partnership, not c5's multi-company portfolio operating system. No ranking-page comparison or demand conclusion is asserted.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending.",
+    "Scope is one commercial co-marketing campaign, not a portfolio operating system."
+  ],
+  "serp": {
+    "id": "vc-manual250-c4-025",
+    "keyword": "co marketing content kit template",
+    "found": true,
+    "query": "co marketing content kit template",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:32:56.760Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Free and customizable media kit templates",
+        "url": "https://www.canva.com/media-kits/templates/",
+        "domain": "canva.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Free Download: Content Marketing Planning Kit",
+        "url": "https://offers.hubspot.com/content-planning-template",
+        "domain": "offers.hubspot.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "How to Build a Killer Marketing Kit (with free template!)",
+        "url": "https://www.canny-creative.com/blog/build-marketing-kit-with-template/",
+        "domain": "canny-creative.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "Marketing Kit designs, themes, templates and ...",
+        "url": "https://dribbble.com/tags/marketing-kit",
+        "domain": "dribbble.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "The 61 Best Free Content Marketing Templates to Drive ...",
+        "url": "https://www.smartsheet.com/free-content-marketing-templates?srsltid=AfmBOorXNzOgtVKV11YQCvaIyeiOu6JZPyrFWXQMkDJ6v5XsHH9ifZ23",
+        "domain": "smartsheet.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "18 Content Marketing Templates to Supercharge Your ...",
+        "url": "https://rachelandreago.com/content-marketing-templates/",
+        "domain": "rachelandreago.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Marketing content plan template Vectors",
+        "url": "https://www.magnific.com/vectors/marketing-content-plan-template",
+        "domain": "magnific.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Top 9 Media Kit Templates for Digital Marketers",
+        "url": "https://www.notion.com/templates/collections/top-9-media-kit-templates-for-digital-marketers?srsltid=AfmBOoo7WqUKo4Jmlj7dk7mOJYkHly0XXT3xlHw6L9lHFl7pOQZiSMA_",
+        "domain": "notion.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

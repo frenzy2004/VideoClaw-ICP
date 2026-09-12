@@ -1,0 +1,119 @@
+{
+  "id": "vc-manual250-c5-034",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://otc.accessnewswire.com/blog/press-releases-tips/embargoed-press-release",
+      "supports": "Embargo instructions specify a release date, time and time zone; accidental early publication is possible.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://asana.com/templates/marketing-calendar",
+      "supports": "A shared marketing calendar maps activities to dates, owners and channels.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does an embargo label guarantee that material will stay private?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should happen when the release time changes?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Is a journalist part of the platform's publishing schedule?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Synchronize an agreed release time and changes across independent publishing parties. Unlike retained c1-001's funding announcement, the operator job is multi-party release control. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact US/en SERP evidence is being collected by main; query remains a candidate hypothesis. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities.",
+    "No legal advice about embargo enforceability. The article concerns an already-agreed multi-party release, not unrelated launch-calendar conflicts."
+  ],
+  "serp": {
+    "id": "vc-manual250-c5-034",
+    "keyword": "embargoed press release",
+    "found": true,
+    "query": "embargoed press release",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:01.735Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "News embargo",
+        "url": "https://en.wikipedia.org/wiki/News_embargo",
+        "domain": "en.wikipedia.org",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Best Practices for Embargoed Press Releases",
+        "url": "https://pr.co/blog/best-practices-for-embargoed-press-releases",
+        "domain": "pr.co",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "What Is an Embargoed Press Release? (Including Examples)",
+        "url": "https://www.ereleases.com/pr-fuel/what-is-an-embargoed-press-release/",
+        "domain": "ereleases.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Etiquette for Sending News Under Embargo",
+        "url": "https://www.reddit.com/r/PublicRelations/comments/1m5mo99/etiquette_for_sending_news_under_embargo/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "What Is an Embargoed Press Release? How-To, Template ...",
+        "url": "https://prlab.co/blog/embargoed-press-release-meaning-examples-and-how-to-use/",
+        "domain": "prlab.co",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Let me test your knowledge of journalism. What is an ...",
+        "url": "https://www.facebook.com/hopewelljournalist/posts/let-me-test-your-knowledge-of-journalismwhat-is-an-embargoed-press-release/601868271537264/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 7,
+        "title": "7 embargo rules from a journalist who hates them (hi, it's me!)",
+        "url": "https://jonisweet.substack.com/p/how-to-use-embargoes-in-pr",
+        "domain": "jonisweet.substack.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Embargo policy",
+        "url": "https://plos.org/media/embargo-policy/",
+        "domain": "plos.org",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What does it mean when a press release is embargoed?",
+      "How do I embargo a press release?",
+      "Can you give me an example of an embargoed press release?",
+      "How long do embargoes typically last?"
+    ],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

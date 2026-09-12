@@ -1,0 +1,125 @@
+{
+  "id": "vc-manual250-c4-045",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.vidyard.com/blog/explainer-videos/",
+      "supports": "Object animation can illustrate a complex process.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/powerpoint/training/animate-text-or-objects",
+      "supports": "PowerPoint provides object effects, order, and timing controls.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should I animate every bullet on the source slides?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Do I need to show the actual product interface?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How do I test the explainer?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Translate an existing conceptual process into a sequence of visual states, showing relationships and changes instead of reading slide bullets. Distinct from c1's startup explainer script and c4-005's resizing of finished footage. No ranking-page comparison or demand conclusion is asserted.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending.",
+    "Practical process explanation from existing slides, not a founder pitch or newly funded startup explainer script."
+  ],
+  "serp": {
+    "id": "vc-manual250-c4-045",
+    "keyword": "turn presentation slides into explainer video",
+    "found": true,
+    "query": "turn presentation slides into explainer video",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:32:56.760Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Convert PPT to Video with AI Narration",
+        "url": "https://www.heygen.com/en-in/tool/powerpoint-to-video",
+        "domain": "heygen.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "PPT to Video Converter - Fast, Simple and AI-Powered",
+        "url": "https://pictory.ai/ppt-to-video",
+        "domain": "pictory.ai",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "PPT to Video Converter - Free PowerPoint to MP4 with AI",
+        "url": "https://slidespeak.co/free-tools/convert-powerpoint-to-video-ai",
+        "domain": "slidespeak.co",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "FREE PowerPoint to Video Converter with AI",
+        "url": "https://www.synthesia.io/powerpoint-to-video",
+        "domain": "synthesia.io",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Convert PowerPoint To Video With AI",
+        "url": "https://www.automate.video/",
+        "domain": "automate.video",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "PPT to Video - Create Explainer Videos",
+        "url": "https://kpainter.ai/ppt-to-video",
+        "domain": "kpainter.ai",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Convert PPT to video for free",
+        "url": "https://www.canva.com/features/ppt-to-video-converter/",
+        "domain": "canva.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "PPT to Video Converter – Turn Boring PPTs into Stunning ...",
+        "url": "https://www.animaker.com/ppt-to-video",
+        "domain": "animaker.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How can I convert my PowerPoint slides to a video?",
+      "Is there an AI that can create explainer videos?",
+      "Can I turn a PowerPoint slideshow into a video?",
+      "How to turn PowerPoint into video with narration?"
+    ],
+    "relatedQueries": [
+      "Turn presentation slides into explainer video online free",
+      "Turn presentation slides into explainer video free",
+      "PPT to video",
+      "Convert PPT to video online free",
+      "Convert PPT to video with audio online free",
+      "PowerPoint to video AI free",
+      "How to convert ppt to video with voice over",
+      "Free AI tool to convert PPT to video with audio"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

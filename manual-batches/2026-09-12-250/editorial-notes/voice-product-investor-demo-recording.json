@@ -1,0 +1,115 @@
+{
+  "id": "vc-manual250-c2-049",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0063608",
+      "supports": "Computer sound is a separately selectable sharing path; duplicate device playback can create feedback.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.apple.com/en-ie/guide/final-cut-pro/verc1fabc30/mac",
+      "supports": "Same-take clips can be aligned using audio, timecode or markers; a match still needs checking.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should founder narration and the user command be labeled separately?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can clips from different takes be synchronized into one apparent interaction?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should clarification questions be removed to shorten the demo?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Record a complete spoken-input/product-response interaction with attribution and timing intact. Distinct from general audio mixing: the investor must distinguish founder speech, user command and generated response. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact-query SERP integration belongs to main; this draft does not validate search demand. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities.",
+    "Distinct from c2-048 sound balancing and c2-030 cross-device layout: this preserves spoken-input attribution, turn-taking and the actual product response.",
+    "No inference of response-time, reliability or autonomous capability from the fictional capture plan."
+  ],
+  "serp": {
+    "id": "vc-manual250-c2-049",
+    "keyword": "record voice assistant demo",
+    "found": true,
+    "query": "record voice assistant demo",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Product Demos AI Voices | ElevenLabs Voice Library",
+        "url": "https://elevenlabs.io/voice-library/product-demos",
+        "domain": "elevenlabs.io",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "voice - How to record a google assistant demo?",
+        "url": "https://stackoverflow.com/questions/49592229/how-to-record-a-google-assistant-demo",
+        "domain": "stackoverflow.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Crossing the uncanny valley of conversational voice | Sesame",
+        "url": "https://www.sesame.com/blog/crossing-the-uncanny-valley-of-voice",
+        "domain": "sesame.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "Record Voiceover",
+        "url": "https://docs.supademo.com/customize/voiceovers/record-voiceover",
+        "domain": "docs.supademo.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "AI Voice Recorder with Transcription Online",
+        "url": "https://felo.ai/tools/ai-voice-recorder-transcription",
+        "domain": "felo.ai",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Live Demo · AI Voice Assistant - NRB Consulting",
+        "url": "https://nrbconsulting.co.uk/ai-voice-assistant-demo",
+        "domain": "nrbconsulting.co.uk",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Voice Recorder For All Platforms | Wondershare DemoCreator",
+        "url": "https://democreator.wondershare.com/voice-recorder.html",
+        "domain": "democreator.wondershare.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "AI Voice Assistant Demo: Instant Voice Cloning with Zoidberg",
+        "url": "https://www.linkedin.com/videos/p0px_i-finally-recorded-a-quick-demo-showing-off-activity-7436929610803613696-IJva",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

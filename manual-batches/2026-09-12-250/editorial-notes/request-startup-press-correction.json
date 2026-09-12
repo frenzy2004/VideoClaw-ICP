@@ -1,0 +1,128 @@
+{
+  "id": "vc-manual250-c1-015",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.ap.org/about/news-values-and-principles/telling-the-story/",
+      "supports": "AP describes explicit correction notices for factual errors across written and audiovisual reporting.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.prsa.org/professional-development/prsa-resources/ethics",
+      "supports": "The code calls for prompt correction of erroneous communications for which a practitioner is responsible.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Can I request a correction because I dislike the headline?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should I send a long explanation of the whole company?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What if the mistake started in our own materials?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: give founders an evidence-first correction packet that distinguishes a factual error from an unwelcome editorial interpretation.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Exact US/en SERP evidence is being collected separately; keyword volume, difficulty, and CPC are unknown."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-015",
+    "keyword": "how to ask a journalist for a correction",
+    "found": true,
+    "query": "how to ask a journalist for a correction",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How Do You Ask a Journalist for a Correction?",
+        "url": "https://www.notified.com/blog/how-do-you-ask-a-journalist-for-a-correction",
+        "domain": "notified.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "Should you ask a journalist for a correction?",
+        "url": "https://www.linkedin.com/posts/warrenweeksmedia_should-we-ask-a-journalist-for-a-correction-activity-7320454326684897313-sfcy",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 3,
+        "title": "Asking a journalist for a correction 101 | PRmoment.com",
+        "url": "https://www.prmoment.com/pr-insight/asking-a-journalist-for-a-correction-101",
+        "domain": "prmoment.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Media Tip: How to Ask a Journalist for a Correction",
+        "url": "https://www.jaffepr.com/blog/media-corrections-when-ask",
+        "domain": "jaffepr.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Advice on requesting a correction from a major news outlet",
+        "url": "https://www.reddit.com/r/Journalism/comments/1s9nshe/advice_on_requesting_a_correction_from_a_major/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "A PR pro's guide to requesting corrections from journalists",
+        "url": "https://www.prweek.com/article/1892012/pr-pros-guide-requesting-corrections-journalists",
+        "domain": "prweek.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "When, if ever, should you ask a journalist for a correction?",
+        "url": "https://honner.com.au/insights/when-if-ever-should-you-ask-a-journalist-for-a-correction/",
+        "domain": "honner.com.au",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "How to Ask for Media Corrections",
+        "url": "https://www.rep-ink.com/inksights/what-to-do-when-the-media-gets-it-wrong/",
+        "domain": "rep-ink.com",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "How to Ask Journalists for Corrections Without Burning Bridges",
+        "url": "https://jonisweet.substack.com/p/how-to-ask-journalists-for-corrections",
+        "domain": "jonisweet.substack.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How to politely ask for correction?",
+      "How do I contact a journalist about a story?",
+      "What is it called when a newspaper corrects a mistake?",
+      "What are good questions to ask a journalist?"
+    ],
+    "relatedQueries": [
+      "How to ask a journalist for a correction sample",
+      "How to ask a journalist for a correction email",
+      "How to ask a journalist for a correction pdf",
+      "How to ask a journalist for a correction letter",
+      "How to ask a journalist for a correction examples"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

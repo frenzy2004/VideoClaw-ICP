@@ -1,0 +1,125 @@
+{
+  "id": "vc-manual250-c4-035",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.linkedin.com/help/linkedin/answer/a427551/retargeting?lang=en-US",
+      "supports": "Eligible audience sources include video-ad viewing and specified engagement.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.linkedin.com/help/lms/answer/a427086/",
+      "supports": "Documents viewing thresholds, lookback choices, matched-account minimum, and views versus accounts.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Can I retarget everyone who watched an organic video?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What if the audience is too small?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should a follow-up repeat the original clip?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Assign a next piece of evidence to a prior viewing context and define audience exclusions and eligibility checks. Unlike a content calendar, this is a conditional paid distribution sequence; the article plans no actual ad spend. No ranking-page comparison or demand conclusion is asserted.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending.",
+    "Planning only; no campaign activation, budget recommendations, forecast, or claim that organic views equal matched retargeting accounts."
+  ],
+  "serp": {
+    "id": "vc-manual250-c4-035",
+    "keyword": "LinkedIn video retargeting strategy",
+    "found": true,
+    "query": "LinkedIn video retargeting strategy",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:32:56.760Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Create a video audience with Matched Audiences",
+        "url": "https://www.linkedin.com/help/lms/answer/a427086",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 2,
+        "title": "Retargeting Strategies for Linkedin Ads",
+        "url": "https://www.linkedin.com/top-content/marketing/linkedin-content-and-ads/retargeting-strategies-for-linkedin-ads/",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 3,
+        "title": "Best practices for video ads | LinkedIn Ad Tips",
+        "url": "https://business.linkedin.com/advertise/ads/sponsored-content/video-ads/tips",
+        "domain": "business.linkedin.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "LinkedIn Retargeting Guide for High Intent Audiences",
+        "url": "https://www.interteammarketing.com/blog/linkedin-retargeting-guide",
+        "domain": "interteammarketing.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "How to Retarget Video Views With LinkedIn Ads",
+        "url": "https://www.socialmediaexaminer.com/how-to-retarget-video-views-with-linkedin-ads/",
+        "domain": "socialmediaexaminer.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "LinkedIn Video Ads: Best Practices, Benchmarks & ...",
+        "url": "https://zenabm.com/blog/linkedin-video-ads-best-practices",
+        "domain": "zenabm.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "LinkedIn Retargeting Strategies: How to Re-Engage B2B ...",
+        "url": "https://donemaker.com/linkedin-retargeting-strategies-how-to-re-engage/",
+        "domain": "donemaker.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "What is retargeting? | LinkedIn Marketing Solutions",
+        "url": "https://business.linkedin.com/advertise/resources/marketing-terms/retargeting",
+        "domain": "business.linkedin.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is the 3/2/1 rule on LinkedIn?",
+      "Can you do retargeting on LinkedIn?",
+      "What is the 4-1-1 rule on LinkedIn?",
+      "What is the 95-5 rule on LinkedIn?"
+    ],
+    "relatedQueries": [
+      "Linkedin video retargeting strategy reddit",
+      "Linkedin video retargeting strategy example",
+      "LinkedIn video ads",
+      "LinkedIn video ad specs",
+      "LinkedIn retargeting",
+      "LinkedIn video best practices 2026",
+      "LinkedIn video ad examples",
+      "Linkedin video ideas"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

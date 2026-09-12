@@ -1,0 +1,117 @@
+{
+  "id": "vc-manual250-c2-033",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://help.figma.com/hc/en-us/articles/360040314193-Guide-to-prototyping-in-Figma",
+      "supports": "Interactive prototypes preview designed user flows; that is distinct from proving a deployed backend.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://a16z.com/insights-for-enterprise-ai-builders/",
+      "supports": "The article distinguishes compelling AI demonstrations from production-ready systems.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Is a single prototype label at the start enough?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does a clickable prototype prove the backend works?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should I use coming soon as the label?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: A scene status map identifies mixed implementation boundaries without relying on one vague prototype disclaimer. Competing page bodies have not been audited for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "FAQ provenance: these are original editorial questions, not observed PAA. Evidence links ground the cited technical facts or provide relevant background; the article-specific capture, review and delivery procedures are original editorial synthesis, not procedures mandated by those sources."
+  ],
+  "serp": {
+    "id": "vc-manual250-c2-033",
+    "keyword": "label prototype in investor demo video",
+    "found": true,
+    "query": "label prototype in investor demo video",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Show your startup: 4 types of demo to make investors see, ...",
+        "url": "https://www.matt-boardman.com/blog//show-your-startup-4-types-of-demo-investors-elevator-pitch",
+        "domain": "matt-boardman.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "How to Build and Demo a Prototype That Impresses Investors",
+        "url": "https://partnershipsbuddy.com/guides/working-prototype",
+        "domain": "partnershipsbuddy.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "Investor Demo – AI-Driven Prototyping Package",
+        "url": "https://www.reeinvent.com/investor-demo",
+        "domain": "reeinvent.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "How to Validate Your App Idea and Pitch to Investors with ...",
+        "url": "https://www.youtube.com/watch?v=lXjkE5E13XU",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 5,
+        "title": "Demo for Potential Investor : r/startups",
+        "url": "https://www.reddit.com/r/startups/comments/1ghn5rw/demo_for_potential_investor/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "How to Make a Demo Video for Your Investor Pitch (No ...",
+        "url": "https://demopolish.com/blog/demo-video-investor-pitch/",
+        "domain": "demopolish.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Designing for the stranger's thumb in prototype testing",
+        "url": "https://www.linkedin.com/posts/moyosore-ibrahim-b10641252_uxdesign-productdesign-investorready-activity-7500797768752467968-fV7g",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 8,
+        "title": "Demo Videos for Investor Pitches in 2026 (2x Close Rate)",
+        "url": "https://demosmith.ai/blog/demo-video-investor-pitch",
+        "domain": "demosmith.ai",
+        "resultType": "article"
+      },
+      {
+        "position": 9,
+        "title": "Animated Product Demo Examples: Four Proof Categories",
+        "url": "https://tapvid.ai/blog/animated-product-demo-examples",
+        "domain": "tapvid.ai",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

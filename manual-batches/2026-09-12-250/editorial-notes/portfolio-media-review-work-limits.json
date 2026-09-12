@@ -1,0 +1,127 @@
+{
+  "id": "vc-manual250-c5-014",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.atlassian.com/software/jira/templates/marketing-service-management",
+      "supports": "The marketing template combines request types, a portal, tracking and a knowledge base.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://kanbanguides.org/the-kanban-guide/",
+      "supports": "The guide defines work in progress between start and finish and calls for explicit flow policies.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should blocked reviews count toward the work limit?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What is a useful review packet?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How should the first work limit be chosen?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Control work entering review and resolve aging blockers before starting more assets. Unlike retained c3-005 on feedback rounds, this addresses queue flow across independent companies. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact US/en SERP evidence is being collected by main; query remains a candidate hypothesis. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities.",
+    "Mixed intent: content approval includes single-company editing; this article concerns cross-company review flow, not feedback etiquette.",
+    "Original provisional limits and queue examples are fictional, not productivity benchmarks."
+  ],
+  "serp": {
+    "id": "vc-manual250-c5-014",
+    "keyword": "content approval bottlenecks",
+    "found": true,
+    "query": "content approval bottlenecks",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:01.735Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How to escape the social media approval bottleneck ...",
+        "url": "https://www.heyorca.com/blog/how-to-escape-the-social-media-approval-bottleneck-without-losing-your-sanity",
+        "domain": "heyorca.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "Top 6 Methods to Reduce Approvals Bottlenecks",
+        "url": "https://4castplus.com/top-6-methods-to-reduce-approvals-bottlenecks/",
+        "domain": "4castplus.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "How to deal with approval bottleneck? : r/marketing",
+        "url": "https://www.reddit.com/r/marketing/comments/173wmjw/how_to_deal_with_approval_bottleneck/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "How to Build a Content Approval Workflow That Doesn't ...",
+        "url": "https://scoop.app/blog/influencer/marketing/content-approval-workflow-no-bottlenecks.html",
+        "domain": "scoop.app",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Manual Approval Bottlenecks: Causes and Fixes",
+        "url": "https://altaflow.com/blog/manual-approval-bottlenecks-causes-and-fixes",
+        "domain": "altaflow.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "3 ways to avoid review bottlenecks during the content ...",
+        "url": "https://www.vodori.com/blog/three-ways-to-avoid-content-review-bottlenecks",
+        "domain": "vodori.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "AI Content Approval Process Statistics: 20 Editorial ...",
+        "url": "https://writebros.ai/resources/ai-content-approval-process-statistics",
+        "domain": "writebros.ai",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "Two-for-One: Overcoming Bottlenecks in Approval Processes",
+        "url": "https://blog.noreja.com/en/approval-bottlenecks/",
+        "domain": "blog.noreja.com",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "Content Approval Software - Workflow",
+        "url": "https://www.cflowapps.com/content-approval-process/",
+        "domain": "cflowapps.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How do you resolve a bottleneck?",
+      "What is content approval and how does it work?",
+      "What is a bottleneck in workflow?",
+      "How to identify bottlenecks in a process?"
+    ],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

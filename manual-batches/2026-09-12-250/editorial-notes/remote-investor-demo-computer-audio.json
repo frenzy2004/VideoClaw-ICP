@@ -1,0 +1,117 @@
+{
+  "id": "vc-manual250-c2-022",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0063608",
+      "supports": "Computer sound sharing is separate from microphone input.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0064733",
+      "supports": "The built-in player shares a file with private playback controls.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Why can I hear the product but investors cannot?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should I play the demo through speakers into my microphone?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does a microphone check also test the video sound?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: An isolated recipient test distinguishes digital product sound from microphone pickup and validates route changes. Competing page bodies have not been audited for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "FAQ provenance: these are original editorial questions, not observed PAA. Evidence links ground the cited technical facts or provide relevant background; the article-specific capture, review and delivery procedures are original editorial synthesis, not procedures mandated by those sources."
+  ],
+  "serp": {
+    "id": "vc-manual250-c2-022",
+    "keyword": "share video sound on Zoom",
+    "found": true,
+    "query": "share video sound on Zoom",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Sharing background music or computer audio on Zoom",
+        "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0063608",
+        "domain": "support.zoom.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "Sharing a recorded video with sound during your meeting",
+        "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0064733",
+        "domain": "support.zoom.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "How to Share and Play a Video with Sound During a Zoom ...",
+        "url": "https://mitsloanedtech.mit.edu/support/how-to-share-and-play-a-video-with-sound-during-a-zoom-meeting/",
+        "domain": "mitsloanedtech.mit.edu",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "How to Share and Play a Video with Sound During a Zoom ...",
+        "url": "https://www.chaffey.edu/faculty-staff/csn/docs/quick-tips-2024/quick-tip-november-2024.pdf",
+        "domain": "chaffey.edu",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Zoom: Share Device Sound During Screen Share | IT@UMN",
+        "url": "https://it.umn.edu/services-technologies/how-tos/zoom-share-device-sound-during-screen",
+        "domain": "it.umn.edu",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "How to Share Screen or Share Video with Audio in Zoom",
+        "url": "https://www.youtube.com/watch?v=kuGh3GhMw6w",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 7,
+        "title": "Sharing your screen or desktop on Zoom",
+        "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0060596",
+        "domain": "support.zoom.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Can I share a video on Zoom with sound?",
+      "Why is there no sound when I share a video on Zoom?",
+      "How to share sound while sharing screen?",
+      "Where is the share sound button on Zoom?"
+    ],
+    "relatedQueries": [
+      "How to share video on Zoom with audio on mobile",
+      "How to share sound on Zoom without sharing screen on phone",
+      "Share video sound on zoom android",
+      "How to share YouTube video on Zoom with sound",
+      "How to share video in Zoom meeting in mobile",
+      "How to play a video on Zoom without sharing screen",
+      "Zoom share audio with screen",
+      "How to share sound on Zoom without sharing screen on laptop"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

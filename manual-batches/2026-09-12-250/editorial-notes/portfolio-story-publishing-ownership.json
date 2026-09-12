@@ -1,0 +1,135 @@
+{
+  "id": "vc-manual250-c5-045",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://a16z.com/what-is-new-media-in-2026/",
+      "supports": "a16z distinguishes portfolio services from owned media channels.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls",
+      "supports": "Canonical signals express a preferred URL for duplicate or similar pages; they are not publication permission.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should the fund always publish the full company story?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does naming an originating publisher settle legal ownership?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does a preferred source URL guarantee search visibility?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Assign the originating publisher and amplification roles according to audience, ownership of facts and ability to maintain the story. Unlike a founder LinkedIn strategy, this is a cross-organization publishing decision. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact US/en SERP evidence is being collected by main; query remains a candidate hypothesis. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities.",
+    "Mixed intent: owned-media queries include broad marketing strategy. This article's product is a cross-organization publishing-ownership sheet, not a channel-growth plan."
+  ],
+  "serp": {
+    "id": "vc-manual250-c5-045",
+    "keyword": "owned media distribution",
+    "found": true,
+    "query": "owned media distribution",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:01.735Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "The difference between paid, owned and earned media",
+        "url": "https://www.smartinsights.com/digital-marketing-strategy/customer-acquisition-strategy/new-media-options/",
+        "domain": "smartinsights.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "What is owned media? | AppsFlyer mobile glossary",
+        "url": "https://www.appsflyer.com/glossary/owned-media/",
+        "domain": "appsflyer.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Owned Media Distribution - Brandesis",
+        "url": "https://www.brandesis.com/terms/owned-media-distribution/",
+        "domain": "brandesis.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "What Is Owned Media? Definition, Benefits and Examples",
+        "url": "https://www.prnewswire.co.uk/resources/articles/what-is-owned-media-definition-benefits-and-examples/",
+        "domain": "prnewswire.co.uk",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "A Guide to Owned, Paid, and Earned Media Distribution ...",
+        "url": "https://goodmanlantern.com/blog/guide-to-owned-paid-and-earned-media-distribution-channels/",
+        "domain": "goodmanlantern.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Paid Media, Owned Media, Earned Media",
+        "url": "https://www.textbroker.co.uk/paid-media-owned-media-earned-media",
+        "domain": "textbroker.co.uk",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "What is Owned Media (with Examples)",
+        "url": "https://prowly.com/magazine/owned-media/",
+        "domain": "prowly.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "How to Maximize Your Owned Media Channels in an ABM ...",
+        "url": "https://www.madisonlogic.com/blog/owned-media-channels/",
+        "domain": "madisonlogic.com",
+        "resultType": "article"
+      },
+      {
+        "position": 9,
+        "title": "What is Owned Media? | AdKit Glossary",
+        "url": "https://adkit.so/glossary/owned-media",
+        "domain": "adkit.so",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is an example of owned media?",
+      "What is considered owned media?",
+      "What is the 3-3-3 rule in marketing?",
+      "How do I differentiate between owned and paid media?"
+    ],
+    "relatedQueries": [
+      "Owned media distribution strategy",
+      "Owned media distribution examples",
+      "Owned media distribution companies",
+      "Owned media examples",
+      "Paid, owned earned media examples",
+      "Earned vs owned media",
+      "Earned owned and paid media",
+      "Paid, owned and earned media in digital marketing"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

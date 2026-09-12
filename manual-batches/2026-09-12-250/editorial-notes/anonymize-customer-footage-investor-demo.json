@@ -1,0 +1,117 @@
+{
+  "id": "vc-manual250-c2-017",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://csrc.nist.gov/pubs/sp/800/188/final",
+      "supports": "The abstract distinguishes de-identification from masking and identifies re-identification risk.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.google.com/youtube/answer/157177?hl=en",
+      "supports": "Unlisted videos can be viewed and reshared by anyone with the link; private sharing is different.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does blurring customer names make footage anonymous?",
+      "basis": "editorial"
+    },
+    {
+      "question": "When should I record the workflow again?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Is an unlisted video restricted to my investors?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: A scene-level exposure map connects privacy edits to preserved product evidence rather than treating blur as anonymity. Competing page bodies have not been audited for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "FAQ evidence precision: the recapture answer is original editorial reasoning informed by NIST's general exposure-risk discussion, not a NIST editing procedure. The unlisted-sharing answer is supported by YouTube."
+  ],
+  "serp": {
+    "id": "vc-manual250-c2-017",
+    "keyword": "anonymize data in screen recording",
+    "found": true,
+    "query": "anonymize data in screen recording",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Data anonymization and PII redaction",
+        "url": "https://condens.io/help/security-and-privacy/security-and-privacy-features/data-anonymization/",
+        "domain": "condens.io",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Customer Screen Recording Hiding Sensitive Data",
+        "url": "https://www.reddit.com/r/ProductManagement/comments/13bjdce/customer_screen_recording_hiding_sensitive_data/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Hide Email Address and more while screen recording with ...",
+        "url": "https://www.blurweb.app/use-cases/hide-email-address-and-more-while-screen-recording-with-blurweb-app",
+        "domain": "blurweb.app",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Data Anonymisation: Images and Recordings - NTU LibGuides",
+        "url": "https://libguides.ntu.edu.sg/c.php?g=927336&p=6713432",
+        "domain": "libguides.ntu.edu.sg",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "How to Blur Sensitive Data in Screen Recordings Using ...",
+        "url": "https://www.vmaker.com/blog/blur-sensitive-data-in-screen-recording/",
+        "domain": "vmaker.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "What software blurs student info in screen recordings?",
+        "url": "https://www.facebook.com/groups/higheredlearningcollective/posts/841432826487417/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 7,
+        "title": "Hide Sensitive Information When Screen Sharing: 7 Ways",
+        "url": "https://datablur.app/blog/hide-sensitive-information-screen-share",
+        "domain": "datablur.app",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Can OnlyFans detect screen recording?",
+      "Can screen recording be traced?",
+      "What are the privacy concerns of screen recording?",
+      "How to tell if someone is screen recording you?"
+    ],
+    "relatedQueries": [
+      "How to blur a screen recording on iPhone",
+      "How to blur a screen recording on Android",
+      "Vmaker Recorder",
+      "Screen Studio",
+      "Screen studio highlight",
+      "Camtasia",
+      "ScreenPal",
+      "Loom"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

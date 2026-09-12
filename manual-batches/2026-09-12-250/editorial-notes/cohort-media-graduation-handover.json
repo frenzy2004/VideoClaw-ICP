@@ -1,0 +1,134 @@
+{
+  "id": "vc-manual250-c5-047",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.google.com/a/users/answer/7212025?hl=en",
+      "supports": "Google distinguishes individual My Drive ownership from team-owned shared-drive files.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.canto.com/glossary/digital-asset-management-implementation/",
+      "supports": "Implementation includes asset migration, metadata mapping, permissions and user training.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Is sending a folder link enough to complete handover?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should companies receive the whole cohort library?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What happens to unfinished items at graduation?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Close a cohort's media service by delivering each company's approved package and documenting remaining shared responsibilities. Unlike a staff departure or an alumni-community program, the output is a company-by-company exit transfer. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact US/en SERP evidence is being collected by main; query remains a candidate hypothesis. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities."
+  ],
+  "serp": {
+    "id": "vc-manual250-c5-047",
+    "keyword": "digital asset handover",
+    "found": true,
+    "query": "digital asset handover",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:01.735Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Effective Digital Asset Handover Guide for Business Sellers",
+        "url": "https://comelli.net.au/effective-digital-asset-handover-guide-for-business-sellers/",
+        "domain": "comelli.net.au",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "The Digital Asset Handover Clause: Legal Frameworks for ...",
+        "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6265540",
+        "domain": "papers.ssrn.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "What Is Digital Asset Management?",
+        "url": "https://www.ibm.com/think/topics/digital-asset-management",
+        "domain": "ibm.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Digital Asset Transfer Authority: DATA",
+        "url": "https://datauthority.org/",
+        "domain": "datauthority.org",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Digital Asset Handover Template for Client Projects - RunoSO",
+        "url": "https://www.runoso.in/blog/digital-asset-handover-template-clients",
+        "domain": "runoso.in",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "How Digital Checkouts Streamline Your Business",
+        "url": "https://aptien.com/en/kb/articles/how-the-digital-handover-form-works",
+        "domain": "aptien.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Digital asset management",
+        "url": "https://en.wikipedia.org/wiki/Digital_asset_management",
+        "domain": "en.wikipedia.org",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Digital Asset Solutions",
+        "url": "https://www.statestreet.com/ca/en/solutions/digital-assets",
+        "domain": "statestreet.com",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "Revolutionizing Digital Asset Handover: Innovation, Security ...",
+        "url": "https://etqansports.com/revolutionizing-digital-asset-handover-innovation-security-and-usability-in-the-modern-age/",
+        "domain": "etqansports.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What happens to digital assets after someone dies?",
+      "What is an example of a digital asset?",
+      "What are some examples of digital asset management?",
+      "What is the format of an asset handover mail?"
+    ],
+    "relatedQueries": [
+      "Digital asset handover template",
+      "Digital asset handover form",
+      "Digital asset organizer",
+      "Online digital asset management",
+      "Google Drive digital asset management",
+      "Media asset management software",
+      "Best digital asset management software for marketing",
+      "Lightroom digital asset management"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

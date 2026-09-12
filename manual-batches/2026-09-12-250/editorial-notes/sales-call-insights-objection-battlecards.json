@@ -1,0 +1,130 @@
+{
+  "id": "vc-manual250-c4-016",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.gong.io/blog/sales-battle-card-example",
+      "supports": "Practical talk tracks and relevant proof are distinguished from generic pitches.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.gong.io/blog/how-to-handle-any-sales-objection",
+      "supports": "The publisher session includes questioning as an objection-handling technique; outcome claims are not adopted.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does a successful call prove the talk track works?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should I copy the seller’s response word for word?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What if the objection reveals a product gap?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Extract the objection, clarifying question and supported response into an internal conversation aid. Unlike c4-010's customer case study, this organizes a sales response rather than a customer success narrative; it does not authorize publishing private calls. No ranking-page comparison or demand conclusion is asserted.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending."
+  ],
+  "serp": {
+    "id": "vc-manual250-c4-016",
+    "keyword": "create sales battlecards from sales calls",
+    "found": true,
+    "query": "create sales battlecards from sales calls",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:32:56.760Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How to Create Effective Sales Battlecards That Win Deals ...",
+        "url": "https://klue.com/topics/create-effective-sales-battlecards",
+        "domain": "klue.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "How to Create Sales Battle Cards that Win Deals",
+        "url": "https://www.dialpad.com/blog/sales-battle-cards/",
+        "domain": "dialpad.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "What is a sales battle card?",
+        "url": "https://business.linkedin.com/sell/resources/sales-terms/battle-card",
+        "domain": "business.linkedin.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "Sales Battlecards: Examples To Inspire B2B Sellers",
+        "url": "https://www.highspot.com/blog/sales-battlecards/",
+        "domain": "highspot.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Ace Your Sales Pitch with Battlecards: Here's How To ...",
+        "url": "https://www.kompyte.com/blog/create-sales-battlecards",
+        "domain": "kompyte.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Sales Battle Cards with Real-Time Competitive Insights",
+        "url": "https://www.contify.com/resources/blog/transforming-sales-battlecards-with-cutting-edge-technology/",
+        "domain": "contify.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "7 Free Sales Battlecard Templates for B2B Sales Teams",
+        "url": "https://www.sybill.ai/blogs/free-sales-battlecard-templates",
+        "domain": "sybill.ai",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "Sales Battlecards with AI: How, Why, & When to Use Them",
+        "url": "https://www.copy.ai/blog/sales-battlecards",
+        "domain": "copy.ai",
+        "resultType": "article"
+      },
+      {
+        "position": 9,
+        "title": "What are Sales Battlecards?",
+        "url": "https://www.mindtickle.com/blog/what-are-sales-battlecards-and-how-can-your-sales-team-benefit-from-them/",
+        "domain": "mindtickle.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What are some effective battlecards for sales?",
+      "How to create a battle card?",
+      "What to say on a sales call?"
+    ],
+    "relatedQueries": [
+      "Sales battlecard template",
+      "Battle cards marketing",
+      "Sales battlecard template free",
+      "Product battlecard",
+      "Battlecard template ppt",
+      "Battle cards game",
+      "Crayon battlecards",
+      "Competitor battlecard template"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

@@ -1,0 +1,125 @@
+{
+  "id": "vc-manual250-c4-047",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://blog.hubspot.com/marketing/content-gap-analysis",
+      "supports": "Frames content gaps around overlooked audience questions and information.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.zendesk.com/hc/en-us/articles/4408894140826-Getting-started-with-self-service-Part-3-Determining-what-articles-you-need-to-create",
+      "supports": "Existing support interactions can inform useful explanatory content.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Is a hard-to-find answer the same as missing content?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should the audit begin with competitors’ video libraries?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should a new-video brief contain?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Audit question coverage and distinguish an absent answer from an answer that is merely hard to find. Unlike c4-008's calendar or c4-003's production workflow, the output is an evidence-backed gap diagnosis. No ranking-page comparison or demand conclusion is asserted.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending.",
+    "Sales answer coverage within one existing video library, not a portfolio-wide governance system or general content calendar."
+  ],
+  "serp": {
+    "id": "vc-manual250-c4-047",
+    "keyword": "sales content gap analysis",
+    "found": true,
+    "query": "sales content gap analysis",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:32:56.760Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Content gap analysis: A step-by-step guide",
+        "url": "https://www.semrush.com/blog/content-gap-analysis/",
+        "domain": "semrush.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "Content Gap Analysis",
+        "url": "https://www.linkedin.com/top-content/writing/writing-for-seo-success/content-gap-analysis/",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 3,
+        "title": "How to Avoid Gaps in Your Content Strategy",
+        "url": "https://www.searchstax.com/blog/content-gap-analysis/",
+        "domain": "searchstax.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "How To Do a Content Gap Analysis",
+        "url": "https://www.brafton.com/blog/strategy/content-gap-analysis/",
+        "domain": "brafton.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Content Gap Analysis: The Complete Guide",
+        "url": "https://backlinko.com/hub/seo/content-gap",
+        "domain": "backlinko.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "What is a Content Gap Analysis?",
+        "url": "https://neilpatel.com/blog/content-gaps/",
+        "domain": "neilpatel.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Content Gap by Ahrefs: Find Keywords via Competitor ...",
+        "url": "https://ahrefs.com/content-gap",
+        "domain": "ahrefs.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Understanding Content Gap Analysis For Small Businesses",
+        "url": "https://www.jetspace.work/understanding-content-gap-analysis-for-small-businesses",
+        "domain": "jetspace.work",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How to do a content gap analysis?",
+      "What are the 5 quality gaps in the Gap Model?",
+      "What are the four types of gap analysis?",
+      "What should be included in a gap analysis?"
+    ],
+    "relatedQueries": [
+      "Sales content gap analysis template",
+      "Content gap analysis tool",
+      "Content gap analysis tool free",
+      "What is content gap in YouTube",
+      "Content gap TikTok",
+      "YouTube content gap finder",
+      "SEO gap analysis",
+      "Keyword gap analysis"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

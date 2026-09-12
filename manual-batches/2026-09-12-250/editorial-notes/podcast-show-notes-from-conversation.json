@@ -1,0 +1,124 @@
+{
+  "id": "vc-manual250-c4-014",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://creators.spotify.com/resources/create/podcast-episode-descriptions",
+      "supports": "Episode descriptions communicate what prospective listeners can expect.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://podcasters.apple.com/support/825-how-to-create-an-episode",
+      "supports": "RSS-hosted episode updates are handled through the hosting provider.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should I write show notes before recording?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Do show notes need timestamps?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should I include every resource mentioned?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Package an existing episode for listener selection and reference retrieval using an accurate description, guest context and resource links. This is episode metadata, not another long-video-to-clips article. No ranking-page comparison or demand conclusion is asserted.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending."
+  ],
+  "serp": {
+    "id": "vc-manual250-c4-014",
+    "keyword": "how to write podcast show notes",
+    "found": true,
+    "query": "how to write podcast show notes",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:32:56.760Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "The power of show notes to draw an audience",
+        "url": "https://www.deadsetstudios.com/news/how-to-write-great-podcast-show-notes",
+        "domain": "deadsetstudios.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "How to write show notes for a podcast?",
+        "url": "https://www.facebook.com/groups/BuzzsproutCommunity/posts/25179091988350611/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 3,
+        "title": "Best practices for writing show notes? : r/podcasting",
+        "url": "https://www.reddit.com/r/podcasting/comments/srih6f/best_practices_for_writing_show_notes/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "How to Write Podcast Show Notes [5 Best Templates 2026]",
+        "url": "https://www.buzzsprout.com/blog/podcast-show-notes",
+        "domain": "buzzsprout.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Podcast Show Notes Template: How to Write ...",
+        "url": "https://www.sweetfishmedia.com/blog/podcast-show-notes-template",
+        "domain": "sweetfishmedia.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "How to Write Podcast Show Notes That Drive Business ...",
+        "url": "https://www.podcaststudioglasgow.com/podcast-studio-glasgow-blog/podcast-show-notes-what-they-are-how-to-write-them-and-why-they-matter-for-seo",
+        "domain": "podcaststudioglasgow.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "5 Time-Saving Steps for Creating Quality Podcast Show ...",
+        "url": "https://www.captivate.fm/learn-podcasting/podcast-show-notes",
+        "domain": "captivate.fm",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "How to Write Podcast Show Notes",
+        "url": "https://blog.podbean.com/how-to-write-podcast-show-notes/",
+        "domain": "blog.podbean.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What are show notes for a podcast?",
+      "How to make notes into a podcast?",
+      "How do I find show notes for a podcast?",
+      "What is a good closing statement for a podcast?"
+    ],
+    "relatedQueries": [
+      "How to write podcast show notes template",
+      "How to write podcast show notes reddit",
+      "How to write podcast show notes examples",
+      "Where to find podcast show notes",
+      "Podcast show notes template PDF",
+      "What are show notes",
+      "Shownotes or show notes",
+      "Podcast notes pdf"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

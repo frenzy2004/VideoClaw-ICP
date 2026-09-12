@@ -1,0 +1,115 @@
+{
+  "id": "vc-manual250-c3-015",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.lensrentals.com/",
+      "supports": "Inspected provider page: orders ship for a requested arrival date and equipment is returned when the rental ends. No delivery or savings guarantee is inferred.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://help.lensrentals.com/26505-other-questions/204151-do-you-sell-used-equipment",
+      "supports": "Inspected help page: Lensrentals sells used inventory and offers purchase from a rental through Keeper. Eligibility and actual purchase quotes require confirmation.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "How many shoots make buying a camera worthwhile?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should I rent before buying?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does owning equipment replace hiring a videographer?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: A complete-kit acquisition calculation can expose logistics and unused ownership costs hidden by camera-body price comparisons.",
+  "searchIntentBasis": "Editorial classification: evaluating a video-production purchase, engagement or vendor decision; not verified demand.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c3-015",
+    "keyword": "rent or buy camera equipment for business videos",
+    "found": true,
+    "query": "rent or buy camera equipment for business videos",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Photography and Video Gear, Should You Buy or Rent?",
+        "url": "https://fstoppers.com/business/photography-and-video-gear-should-you-buy-or-rent-377217",
+        "domain": "fstoppers.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Rent Cameras, Lenses, and Video Gear • LensProToGo",
+        "url": "https://www.lensprotogo.com/",
+        "domain": "lensprotogo.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Benefits of renting equipment vs buying for in-house ...",
+        "url": "https://www.reddit.com/r/videography/comments/o2pel4/benefits_of_renting_equipment_vs_buying_for/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Top 7 reputable and affordable video camera rental ...",
+        "url": "https://rightmedia.vn/en/cheap-video-camera-rental-in-ho-chi-minh-city/",
+        "domain": "rightmedia.vn",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "SHOULD YOU RENT OR BUY GEAR? (EP.141)",
+        "url": "https://www.youtube.com/watch?v=i7hHSwdsBWI",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 6,
+        "title": "Renting Vs Buying Camera Equipment",
+        "url": "https://boltproductions.com/blog/renting-vs-buying-camera-equipment/",
+        "domain": "boltproductions.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "How to Build a Camera Rental Business I Wedio",
+        "url": "https://www.facebook.com/WedioGlobal/videos/how-to-build-a-camera-rental-business-i-wedio/7267952586644301/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Is it better to rent or buy a camera?",
+      "What is the best camera for making professional videos?",
+      "What is a good budget camera for videography?",
+      "Can you rent a vlogging camera?"
+    ],
+    "relatedQueries": [
+      "Rent or buy camera equipment for business videos reddit",
+      "Rent or buy camera equipment for business videos online",
+      "Borrow a camera",
+      "Rent DSLR",
+      "Brooklyn camera rental",
+      "NYC film equipment rental",
+      "Canon 100 300 rental",
+      "Rent Fujifilm cameras"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

@@ -1,0 +1,812 @@
+[
+  {
+    "id": "vc-manual250-c2-011",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "Submitting an accelerator application with separate founder and product video fields",
+    "funnelStage": "consideration",
+    "keyword": "accelerator application video requirements",
+    "title": "Match Accelerator Application Videos to the Right Fields",
+    "slug": "accelerator-application-video-field-map",
+    "distinctIntent": "Route media to the correct admissions field and detect an inappropriate promotional cut. Unlike the retained founder-pitch creation guide, this resolves program-specific submission requirements.",
+    "originalWorksheet": "Original requirement-to-file map with official instruction, founders-only or product content, file destination, omissions and a YC/Techstars comparison.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.ycombinator.com/video/",
+        "supports": "Relevant page text inspected on 2026-09-12. YC separates founder communication video from product demonstrations. The proposed worksheet is original editorial synthesis."
+      },
+      {
+        "url": "https://www.techstars.com/application-preview",
+        "supports": "Relevant page text inspected on 2026-09-12. Techstars lists team, deck and product materials separately. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-012",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "Cofounders cannot be in the same room for their accelerator application recording",
+    "funnelStage": "consideration",
+    "keyword": "YC application video founders different locations",
+    "title": "Record an Application Video With Remote Cofounders",
+    "slug": "remote-cofounder-application-video",
+    "distinctIntent": "Assemble one coherent founders-only application take from separate locations. This is a distributed capture job, distinct from writing a founder pitch and from handing off control during a live investor demo.",
+    "originalWorksheet": "Original remote take sheet with founder order, common framing, turn cues, recording layout, audio checks and one continuous application take; use program instructions for duration.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.ycombinator.com/video/",
+        "supports": "Relevant page text inspected on 2026-09-12. YC explicitly permits recording a video call when founders cannot be together. The proposed worksheet is original editorial synthesis."
+      },
+      {
+        "url": "https://support.apple.com/en-ie/guide/final-cut-pro/verc1fabc30/mac",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Apple documents synchronizing clips from separate recording devices. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-013",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "Product or team footage in a submitted accelerator application has become materially outdated",
+    "funnelStage": "consideration",
+    "keyword": "update accelerator application demo video",
+    "title": "Update an Application Demo When the Product Changes",
+    "slug": "update-accelerator-application-demo-video",
+    "distinctIntent": "Prepare a clearly dated replacement recording and a material-change note for the existing application. Unlike recurring investor updates, this repairs the specific media an admissions reviewer will evaluate.",
+    "originalWorksheet": "Original video replacement manifest mapping old scene to changed capability, replacement timestamp, product version, submission destination and concise change notice.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.ycombinator.com/faq",
+        "supports": "Relevant page text inspected on 2026-09-12. YC provides an official route for material changes after submission. The proposed worksheet is original editorial synthesis."
+      },
+      {
+        "url": "https://support.google.com/drive/answer/2409045?co=GENIE.Platform%3DDesktop&hl=en-419",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Drive documents replacing a file through its version-management feature. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-014",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "Mentors disagree about which part of a recorded investor demo is confusing",
+    "funnelStage": "consideration",
+    "keyword": "how to get feedback on a product demo",
+    "title": "Find Where Investors Lose the Thread in Your Demo",
+    "slug": "investor-demo-video-comprehension-test",
+    "distinctIntent": "Locate comprehension failures using a fresh viewer's account of a fixed recording. Unlike the retained speaking-rehearsal routine or c3 editing revision management, the result diagnoses missing visual cause and effect.",
+    "originalWorksheet": "Original blind-viewing test: stop at selected timestamps, ask what happened and why, compare the answer to the demonstrated action, then identify one missing visual cue per failure.",
+    "sourceCandidates": [
+      {
+        "url": "https://review.firstround.com/heres-what-you-can-really-expect-when-pitching-your-seed-stage-startup-at-a-vc-partner-meeting/",
+        "supports": "Relevant page text inspected on 2026-09-12. First Round describes asking unfamiliar viewers to repeat a pitch back to reveal misunderstandings. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-015",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "Founder wants to show product progress between accelerator entry and Demo Day",
+    "funnelStage": "consideration",
+    "keyword": "before and after product demo",
+    "title": "Show Accelerator Progress With Paired Demo Recordings",
+    "slug": "accelerator-progress-paired-demo-recordings",
+    "distinctIntent": "Capture comparable old and current product behavior so investors can see what changed. Distinct from investor-update narration and c4 promotional case studies; this controls the comparability of two demonstrations.",
+    "originalWorksheet": "Original paired-capture protocol specifying identical input, task, viewing scale, environment differences, recording dates and changed behavior; include a side-by-side storyboard with limitations.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.techstars.com/blog/founder-advice/five-things-every-techstars-mentor-should-know",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Techstars discusses founder-specific goals during an accelerator. The proposed worksheet is original editorial synthesis."
+      },
+      {
+        "url": "https://support.apple.com/en-ie/guide/final-cut-pro/verc1fabc30/mac",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Apple documents clip synchronization using markers, timecode and audio. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-016",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "An already-edited investor video contains an incorrect figure or outdated product claim",
+    "funnelStage": "consideration",
+    "keyword": "correct a mistake in a video",
+    "title": "Correct an Investor Video Without Leaving Conflicting Claims",
+    "slug": "correct-investor-video-visible-claims",
+    "distinctIntent": "Repair the same factual statement wherever it appears in an existing recording. This is a media correction job, not advice on financial metrics, pitch structure or general revision management.",
+    "originalWorksheet": "Original frame-level correction map spanning spoken line, screen text, product shot, caption and description, with replacement evidence and a check of the corrected export.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.techstars.com/blog/founder-advice/investors-don-t-fund-confusion",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Techstars describes the credibility problem of conflicting fundraising materials. The proposed worksheet is original editorial synthesis."
+      },
+      {
+        "url": "https://support.apple.com/en-mide/guide/keynote/tan81813d552/mac",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Apple documents rerecording presentation narration from a selected location. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-017",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "A founder needs to show permitted customer footage privately without exposing identifying details",
+    "funnelStage": "consideration",
+    "keyword": "anonymize data in screen recording",
+    "title": "Anonymize Customer Footage for an Investor Demo",
+    "slug": "anonymize-customer-footage-investor-demo",
+    "distinctIntent": "Prepare a bounded, permissioned customer-evidence excerpt for a private investor demonstration. Unlike c1 testimonial interviewing, this addresses identifying visual and spoken details in existing footage.",
+    "originalWorksheet": "Original exposure map covering names, voices, faces, account screens and contextual clues, paired with permitted-use scope and a reviewer test of what remains inferable; do not promise anonymity from blur alone.",
+    "sourceCandidates": [
+      {
+        "url": "https://csrc.nist.gov/pubs/sp/800/188/final",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. NIST addresses de-identification and re-identification risk; the full publication remains uninspected. The proposed worksheet is original editorial synthesis."
+      },
+      {
+        "url": "https://support.google.com/youtube/answer/157177?hl=en",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. YouTube documents different access models for private and unlisted videos. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-018",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "Infrastructure or backend behavior cannot be understood from the product interface alone",
+    "funnelStage": "consideration",
+    "keyword": "how to demo a backend product",
+    "title": "Show Invisible Product Work in an Investor Demo",
+    "slug": "invisible-product-work-investor-demo",
+    "distinctIntent": "Make hidden processing visible alongside a real investor demonstration, while separating measured behavior from explanatory illustration. Unlike the retained generic explainer script, the work is a visual bridge between an observed input and output.",
+    "originalWorksheet": "Original synchronized storyboard linking real input, labeled mechanism illustration, actual output and proof source; label illustrative animation so it cannot be mistaken for captured execution.",
+    "sourceCandidates": [
+      {
+        "url": "https://a16z.com/insights-for-enterprise-ai-builders/",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. a16z describes orchestration and production work behind AI interfaces. The proposed worksheet is original editorial synthesis."
+      },
+      {
+        "url": "https://articles.sequoiacap.com/how-to-present-to-investors",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Sequoia discusses using screenshots and workflow to explain products that are difficult to demonstrate. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-019",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "A genuine product operation takes longer than the available investor video slot",
+    "funnelStage": "consideration",
+    "keyword": "speed up product demo video",
+    "title": "Shorten Long Demo Waits Without Faking Product Speed",
+    "slug": "shorten-investor-demo-wait-time",
+    "distinctIntent": "Compress waiting time while preserving the real elapsed duration and process continuity. Unlike shortening a pitch script, this solves the evidentiary effect of retiming product footage.",
+    "originalWorksheet": "Original elapsed-time edit map with real start/end times, retained action, omitted wait, speed indicator and on-screen disclosure; include an example separating playback length from execution time.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.apple.com/my/final-cut-pro/specs/",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Apple lists retiming and source-timecode display capabilities. The proposed worksheet is original editorial synthesis."
+      },
+      {
+        "url": "https://www.ycombinator.com/blog/this-brief-guide-is-a-summary-of-what-startup-founders-need-to-know-about-raising-the-seed-funds-critical-to-getting-their-company-off-the-ground",
+        "supports": "Relevant page text inspected on 2026-09-12. YC advises truthful investor communication. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-020",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "Fine interface labels become unreadable when the demo is projected or shared remotely",
+    "funnelStage": "consideration",
+    "keyword": "screen recording text too small",
+    "title": "Make Product Screens Readable in an Investor Demo",
+    "slug": "investor-demo-screen-readability",
+    "distinctIntent": "Preserve necessary interface details at the investor's actual viewing size. Distinct from the retained recording setup article and c4 social resizing: the task is recovering comprehension of the demonstrated UI.",
+    "originalWorksheet": "Original critical-detail map with required labels, result area, zoom/crop decision, viewer display size and recognition test; include a fictional dashboard before/after composition.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.ycombinator.com/blog/how-to-design-a-better-pitch-deck/",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. YC emphasizes legibility for distant Demo Day viewers. The proposed worksheet is original editorial synthesis."
+      },
+      {
+        "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0068426",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Zoom warns that video optimization can distort static text and images. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-021",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "A physical prototype must be demonstrated to investors who cannot inspect it in person",
+    "funnelStage": "consideration",
+    "keyword": "hardware product demo video",
+    "title": "Capture a Hardware Demo Investors Can Inspect",
+    "slug": "hardware-investor-demo-shot-list",
+    "distinctIntent": "Show the physical setup, action and observable result with enough scale and continuity to evaluate the demonstration. Distinct from software recording and from fixing camera flicker.",
+    "originalWorksheet": "Original hardware evidence shot plan with wide setup, scale reference, input, continuous action, measured result and relevant operating conditions; preserve a complete reference take.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.apple.com/en-nz/guide/iphone/iph61f49e4bb/ios",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Apple documents camera frame-rate, resolution and stabilization options. The proposed worksheet is original editorial synthesis."
+      },
+      {
+        "url": "https://support.apple.com/en-ie/guide/final-cut-pro/verc1fabc30/mac",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Apple describes synchronizing recordings made on multiple devices. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-022",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "Remote investors hear the founder but cannot hear the product's computer-generated sound",
+    "funnelStage": "consideration",
+    "keyword": "share video sound on Zoom",
+    "title": "Make Remote Investors Hear Your Product Demo Audio",
+    "slug": "remote-investor-demo-computer-audio",
+    "distinctIntent": "Route application sound separately from the founder microphone and verify the remote recipient's experience. This is a live audio-path problem, not a general recording tutorial or a prerecorded mix.",
+    "originalWorksheet": "Original two-channel signal map and recipient test for founder voice, application sound, stereo/mono choice, duplicate-device echo and level balance.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0063608",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Zoom documents sharing computer audio and avoiding feedback from simultaneous phone and computer playback. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-023",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "The accelerator event computer must play the founder's demo without internet access",
+    "funnelStage": "consideration",
+    "keyword": "play video offline in PowerPoint",
+    "title": "Make Your Demo Video Play Offline From the Pitch Deck",
+    "slug": "offline-investor-demo-video-in-deck",
+    "distinctIntent": "Remove network and missing-file dependencies before planned event playback. Unlike the retained on-stage demo-failure article, this assembles and tests the primary offline media package before the event.",
+    "originalWorksheet": "Original offline dependency map covering embedded versus linked media, local files and required assets, followed by a disconnected playback test on the actual presentation computer.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.microsoft.com/en-us/powerpoint/insert-and-play-a-video-file-from-your-computer",
+        "supports": "Relevant page text inspected on 2026-09-12. Microsoft distinguishes embedded media from linked files and notes links can break. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-024",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "Two founders alternate between explanation and product operation in one investor presentation",
+    "funnelStage": "consideration",
+    "keyword": "two presenters product demo",
+    "title": "Plan a Two-Founder Investor Demo Handoff",
+    "slug": "two-founder-investor-demo-handoff",
+    "distinctIntent": "Assign live speaking, slide and product-control transitions between cofounders. Distinct from the remote application recording and general pitch rehearsal; the output is a control choreography.",
+    "originalWorksheet": "Original handoff score with current speaker, current operator, verbal cue, control transfer, visible state and safe continuation if a handoff is missed.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0061986",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Zoom supports assigning slide progression to other participants. The proposed worksheet is original editorial synthesis."
+      },
+      {
+        "url": "https://www.ycombinator.com/blog/hosting-a-virtual-event",
+        "supports": "Relevant page text inspected on 2026-09-12. YC recommends clarifying who controls slide progression. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-025",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "Founder has an investor showcase table where visitors arrive midway through a video",
+    "funnelStage": "consideration",
+    "keyword": "show mobile app on projector",
+    "title": "Show a Mobile App Demo on the Event Screen",
+    "slug": "mobile-app-demo-event-projector",
+    "distinctIntent": "Connect one live mobile app to an event display and verify orientation, viewing area, connectivity and readable interaction. This is event display setup, not c4's reusable trade-show loop or c2-030's recorded cross-device product narrative.",
+    "originalWorksheet": "A phone-to-event-screen signal-path diagram and rehearsal record for the exact device, cable or casting path, projector and app orientation, with a legibility test and source-device control checklist.",
+    "sourceCandidates": []
+  },
+  {
+    "id": "vc-manual250-c2-026",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "An investor asks to revisit a specific moment in a product recording during Q&A",
+    "funnelStage": "consideration",
+    "keyword": "add bookmarks to a video",
+    "title": "Make Investor Demo Evidence Easy to Replay",
+    "slug": "investor-demo-evidence-bookmarks",
+    "distinctIntent": "Provide rapid access to already-recorded evidence without replaying the full demo. Unlike the retained investor-question preparation article, this builds the playback navigation artifact.",
+    "originalWorksheet": "Original question-to-timecode index with bookmark label, pre-roll needed for context, start/end, proof shown and return point; test retrieval with questions asked out of order.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.microsoft.com/en-US/PowerPoint/add-bookmarks-to-points-of-interest-in-audio-and-video-clips",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. PowerPoint bookmarks can jump to specific points in video or audio. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-027",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "A sequence of investor demos changes account state and contaminates the next presentation",
+    "funnelStage": "consideration",
+    "keyword": "reset demo account between investor meetings",
+    "title": "Reset Your Product Demo Between Investor Meetings",
+    "slug": "reset-investor-demo-account-state",
+    "distinctIntent": "Restore the same approved product starting state between live sessions or recording takes. Distinct from constructing fictional data: this prevents previous actions, roles and outputs from changing the next demonstration.",
+    "originalWorksheet": "Original state-reset runbook with starting records, expected role, session state, actions to undo, server-side reset owner and proof that the next run begins correctly; use a dedicated demo environment.",
+    "sourceCandidates": [
+      {
+        "url": "https://playwright.dev/docs/auth",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Playwright explains isolated browser contexts and the sensitivity of saved authenticated state; it does not reset application databases. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-028",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "A fixed Demo Day pitch slot must include a product clip and room for the founder's transitions",
+    "funnelStage": "consideration",
+    "keyword": "product demo video length",
+    "title": "Fit a Product Clip Into a Fixed Demo Day Slot",
+    "slug": "product-clip-demo-day-time-budget",
+    "distinctIntent": "Allocate actual playback, transition and result-reading time inside the event's confirmed slot. Separate from writing a 60-second founder script or broadly rehearsing a pitch.",
+    "originalWorksheet": "Original media time budget subtracting opening transition, clip duration, result hold and closing transition from the verified slot; show what can be removed without cutting causal steps.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.apple.com/en-mide/guide/keynote/tan81813d552/mac",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Keynote records presentation playback and narration timing. The proposed worksheet is original editorial synthesis."
+      },
+      {
+        "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0064733",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Zoom's shared-video controls show elapsed and total playback time. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-029",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "Founder face video obscures buttons or results in a recorded investor demonstration",
+    "funnelStage": "consideration",
+    "keyword": "webcam overlay screen recording",
+    "title": "Place the Founder Camera Without Hiding Product Proof",
+    "slug": "founder-camera-overlay-investor-demo",
+    "distinctIntent": "Compose simultaneous founder and product footage without covering necessary UI evidence. Distinct from social aspect-ratio resizing and from explaining the product's story.",
+    "originalWorksheet": "Original overlay exclusion map marking interaction zones, result areas and acceptable presenter positions, with scene-by-scene moves and a reduced-size viewer test.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.ycombinator.com/blog/how-to-design-a-better-pitch-deck/",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. YC's visual guidance stresses clear, obvious presentation content. The proposed worksheet is original editorial synthesis."
+      },
+      {
+        "url": "https://www.apple.com/my/final-cut-pro/specs/",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Apple lists compositing and editing capabilities; the exclusion-map method is not a product feature. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-030",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "Investor needs to see a mobile action trigger a change on a separate desktop interface",
+    "funnelStage": "consideration",
+    "keyword": "record mobile and desktop screen together",
+    "title": "Show a Cross-Device Product Flow in One Demo",
+    "slug": "cross-device-investor-demo-recording",
+    "distinctIntent": "Demonstrate cause and effect across two devices with synchronized evidence. Distinct from a single-workflow screen recording or a two-presenter control handoff.",
+    "originalWorksheet": "Original cross-device capture plan with a shared event marker, device timelines, synchronization offsets, visible input/result pairing and unedited reference segment.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.apple.com/en-ie/guide/final-cut-pro/verc1fabc30/mac",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Apple documents synchronization based on audio, markers and timecode. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-031",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "An AI startup's polished demo shows one successful run but omits variation",
+    "funnelStage": "consideration",
+    "keyword": "show AI demo results honestly to investors",
+    "title": "Show Variation in an AI Investor Demo",
+    "slug": "ai-investor-demo-repeat-trials",
+    "distinctIntent": "Design footage that distinguishes one selected example from repeated observed outcomes. Unlike c3 AI-tool evaluations, this is evidence presentation for the founder's own product, not procurement.",
+    "originalWorksheet": "Original repeat-trial video slate with fixed task, trial identifiers, same input conditions, success/failure labels, selected-take disclosure and links to uncut runs; do not invent test results.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Anthropic discusses task-based evaluation and explicit grading for agents. The proposed worksheet is original editorial synthesis."
+      },
+      {
+        "url": "https://a16z.com/insights-for-enterprise-ai-builders/",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. a16z distinguishes an impressive AI demonstration from dependable production behavior. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-032",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "A software demo needs plausible records without revealing real customer information",
+    "funnelStage": "consideration",
+    "keyword": "sample data for investor product demo",
+    "title": "Build Fictional Data for an Investor Demo Recording",
+    "slug": "fictional-data-investor-demo-recording",
+    "distinctIntent": "Construct the actual data props needed for a comprehensible recorded demonstration. Unlike desktop privacy controls or between-meeting resets, this designs consistent fictional entities and outputs.",
+    "originalWorksheet": "Original demo-data recipe with related accounts, realistic tasks, normal/edge cases, expected outputs and visible fictional-data labels; exclude unapproved production data as an input.",
+    "sourceCandidates": [
+      {
+        "url": "https://csrc.nist.gov/pubs/sp/800/188/final",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. NIST addresses synthetic data and disclosure risk; the full publication remains uninspected. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-033",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "An investor demo mixes working features, clickable mockups and simulated outputs",
+    "funnelStage": "consideration",
+    "keyword": "label prototype in investor demo video",
+    "title": "Label What Works in a Prototype Investor Demo",
+    "slug": "label-prototype-investor-demo",
+    "distinctIntent": "Make current implementation state visible in the footage at the moment it matters. Distinct from a future roadmap or recovery after a live demo failure.",
+    "originalWorksheet": "Original prototype-state storyboard pairing each working, simulated or unimplemented segment with an on-screen label and a transition line; ensure labels survive crops and export.",
+    "sourceCandidates": [
+      {
+        "url": "https://a16z.com/insights-for-enterprise-ai-builders/",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. a16z discusses the gap between demos and completed production products. The proposed worksheet is original editorial synthesis."
+      },
+      {
+        "url": "https://www.ycombinator.com/blog/this-brief-guide-is-a-summary-of-what-startup-founders-need-to-know-about-raising-the-seed-funds-critical-to-getting-their-company-off-the-ground",
+        "supports": "Relevant page text inspected on 2026-09-12. YC cautions against misleading investor communication. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-034",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "A working demo result depends on manual founder actions hidden behind the interface",
+    "funnelStage": "consideration",
+    "keyword": "show human intervention in product demo",
+    "title": "Show the Human Work Behind an Automated-Looking Demo",
+    "slug": "human-intervention-investor-demo-video",
+    "distinctIntent": "Expose actual operator intervention within a functioning product demonstration. Distinct from labeling unbuilt prototypes: the result may be real while the process still requires human labor.",
+    "originalWorksheet": "Original dual-lane video storyboard matching software events to operator actions, with intervention timestamps, current boundaries and clearly separated future automation claims.",
+    "sourceCandidates": [
+      {
+        "url": "https://paulgraham.com/ds.html",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Graham describes early services performed manually before automation. The proposed worksheet is original editorial synthesis."
+      },
+      {
+        "url": "https://support.apple.com/en-ie/guide/final-cut-pro/verc1fabc30/mac",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Apple documents aligning recordings from separate sources. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-035",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "Founder must choose a demonstration format for an investor session with specific interaction constraints",
+    "funnelStage": "consideration",
+    "keyword": "live vs recorded product demo for investors",
+    "title": "Choose Live or Recorded Proof for an Investor Demo",
+    "slug": "live-or-recorded-investor-product-proof",
+    "distinctIntent": "Select live, recorded or hybrid product demonstration based on the evidence the investor must inspect. This is execution-format selection, not production-resource buying or the retained deck-versus-pitch-video choice.",
+    "originalWorksheet": "Original proof-format decision table using required interaction, product variability, venue constraints and whether a recording can answer the actual question; include a hybrid cue map without repeating failure recovery.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0064733",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Zoom documents a dedicated way to present recorded video. The proposed worksheet is original editorial synthesis."
+      },
+      {
+        "url": "https://articles.sequoiacap.com/how-to-present-to-investors",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Sequoia discusses live demonstrations and visual alternatives. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-036",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "Investor demo contains material intended only for named recipients",
+    "funnelStage": "consideration",
+    "keyword": "share video privately",
+    "title": "Share an Investor Demo With the Intended Viewers",
+    "slug": "private-investor-demo-video-access",
+    "distinctIntent": "Choose and verify a recipient access configuration for one private product recording. Distinct from public promotion and c5 library governance; explain forwarding limits without promising copy prevention.",
+    "originalWorksheet": "Original sender/recipient access test covering named viewer, unexpected viewer, signed-out browser, forwarded link, downloadable copy and removal of access; record actual observed behavior.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.google.com/youtube/answer/157177?hl=en",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. YouTube distinguishes public, private and unlisted visibility; unlisted links are shareable. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-037",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "A prospective investor needs subtitles in another language for an existing demo",
+    "funnelStage": "consideration",
+    "keyword": "demo website with screen reader",
+    "title": "Demonstrate a Product With a Screen Reader",
+    "slug": "investor-demo-product-screen-reader",
+    "distinctIntent": "Prepare and show a genuine screen-reader interaction as product proof in an investor demo. The job is making focus movement, announcements and task completion understandable, not translating captions or claiming an accessibility certification.",
+    "originalWorksheet": "A short assistive-technology demo script with starting focus, keyboard action, expected announcement, actual output, task result and a clear distinction between a successful example and comprehensive accessibility testing.",
+    "sourceCandidates": []
+  },
+  {
+    "id": "vc-manual250-c2-038",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "Founder wants a recording of an investor demo discussion for accurate internal follow-through",
+    "funnelStage": "consideration",
+    "keyword": "record Zoom meeting with consent",
+    "title": "Record an Investor Demo Discussion With Clear Permission",
+    "slug": "record-investor-demo-discussion-permission",
+    "distinctIntent": "Plan a bounded recording of a private investor demonstration and questions. Unlike marketing repurposing or prepared investor-update videos, the output supports the participants' own follow-through.",
+    "originalWorksheet": "Original recording agreement and capture plan specifying purpose, who is recorded, start/stop cue, recipients, retention and a notes-only fallback if anyone declines; do not treat a platform prompt as a legal conclusion.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0059819",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Zoom documents recording consent prompts and participant opt-out controls. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-039",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "Investor cannot stream a large demo smoothly over a slow connection",
+    "funnelStage": "consideration",
+    "keyword": "compress screen recording without losing quality",
+    "title": "Make a Smaller Investor Demo That Keeps the Proof Clear",
+    "slug": "small-file-investor-demo-export",
+    "distinctIntent": "Produce a lower-bandwidth viewing copy and test whether the product evidence remains understandable. Distinct from c4 social resizing and from cross-platform codec compatibility.",
+    "originalWorksheet": "Original export comparison sheet with file size, duration, estimated transfer time at an explicitly assumed connection rate, critical-label readability and motion continuity; select from tested outputs.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.apple.com/guide/quicktime-player/export-movies-qtp20e395859/10.5/mac/26",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. QuickTime offers resolution and codec export choices with size and compatibility tradeoffs. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-040",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "Accelerator requests a narrated presentation movie because the founder cannot present live",
+    "funnelStage": "consideration",
+    "keyword": "export narrated PowerPoint as video",
+    "title": "Export a Narrated Investor Deck With Correct Timing",
+    "slug": "narrated-investor-deck-video-export",
+    "distinctIntent": "Create an asynchronous video from an approved slide presentation while retaining narration/build timing. Unlike the retained founder-pitch scripting guide, this handles an existing deck's recording and export behavior.",
+    "originalWorksheet": "Original narration-to-slide cue sheet with slide entry, build event, spoken segment, media insert, pause and exported playback check; include a rerecord-from-point procedure.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.apple.com/en-mide/guide/keynote/tan81813d552/mac",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Apple documents recorded slideshow narration, partial rerecording and video export. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-041",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "Demo video works on the founder's Mac but must play on the venue's different computer",
+    "funnelStage": "consideration",
+    "keyword": "video format for PowerPoint on Mac and Windows",
+    "title": "Check Demo Video Compatibility on the Event Computer",
+    "slug": "demo-video-event-computer-compatibility",
+    "distinctIntent": "Resolve container, codec and audio compatibility for the receiving event machine. Unlike offline packaging, this addresses whether a complete local file decodes and plays correctly.",
+    "originalWorksheet": "Original receiving-machine test matrix with actual player/version, container, video codec, audio codec, first/last-frame playback, sound and tested export; never recommend merely renaming an extension.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.microsoft.com/en-us/powerpoint/insert-and-play-a-video-file-from-your-computer",
+        "supports": "Relevant page text inspected on 2026-09-12. Microsoft recommends MP4 with H.264 video and AAC audio for PowerPoint. The proposed worksheet is original editorial synthesis."
+      },
+      {
+        "url": "https://support.apple.com/guide/quicktime-player/export-movies-qtp20e395859/10.5/mac/26",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. QuickTime distinguishes MOV export and H.264 versus HEVC choices. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-042",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "An accelerator AV operator will trigger the founder's video during the pitch",
+    "funnelStage": "consideration",
+    "keyword": "video playback cue sheet",
+    "title": "Hand Your Demo Clip to the Event AV Operator",
+    "slug": "demo-day-founder-video-av-cue-sheet",
+    "distinctIntent": "Transfer one founder's exact playback instructions to the event operator. Distinct from c5's event-wide filming plan and from a broad Demo Day checklist.",
+    "originalWorksheet": "Original single-company cue sheet with file identity, start cue, audio expectation, first frame, end hold, next slide and receipt/test confirmation; use the event's actual delivery specification.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.ycombinator.com/blog/hosting-a-virtual-event",
+        "supports": "Relevant page text inspected on 2026-09-12. YC event guidance discusses presentation ownership and coordinated transitions. The proposed worksheet is original editorial synthesis."
+      },
+      {
+        "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0064733",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Zoom's playback controls illustrate start, pause and seek responsibilities. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-043",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "Founder needs private notes while showing a demo or narrated deck to investors",
+    "funnelStage": "consideration",
+    "keyword": "hide presenter notes when sharing screen",
+    "title": "Keep Presenter Notes Out of the Investor's View",
+    "slug": "investor-demo-private-presenter-view",
+    "distinctIntent": "Configure and test separate presenter and recipient views so internal notes do not appear in the shared presentation. Distinct from removing customer data inside the demo itself.",
+    "originalWorksheet": "Original display-assignment diagram identifying slide window, notes window, shared surface and preview, with tests for entering/exiting full-screen and switching to the product.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.apple.com/en-mide/guide/keynote/tan81813d552/mac",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Keynote provides a configurable presenter display during recording. The proposed worksheet is original editorial synthesis."
+      },
+      {
+        "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0061986",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Zoom supports sharing presentation windows and has presentation-mode requirements. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-044",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "Live product demonstration risks exposing notifications, account switchers or unrelated browser windows",
+    "funnelStage": "consideration",
+    "keyword": "hide notifications when screen sharing",
+    "title": "Keep Private Desktop Content Out of an Investor Demo",
+    "slug": "investor-demo-desktop-exposure-test",
+    "distinctIntent": "Prevent incidental desktop exposure along the exact demo navigation path. Unlike fictional dataset construction and prerecorded customer anonymization, this tests live surfaces outside the intended product view.",
+    "originalWorksheet": "Original exposure rehearsal mapping notification, autocomplete, menu, browser profile and window-switch states to a removal or containment action, verified from the recipient view.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0063608",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Zoom can share a selected application and computer sound. The proposed worksheet is original editorial synthesis."
+      },
+      {
+        "url": "https://playwright.dev/docs/auth",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Playwright notes authenticated browser state can contain sensitive session material. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-045",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "Investor asks to verify that an edited demo shows one real continuous execution",
+    "funnelStage": "consideration",
+    "keyword": "uncut product demo",
+    "title": "Keep an Uncut Proof Take Behind Your Investor Demo",
+    "slug": "uncut-investor-demo-proof-take",
+    "distinctIntent": "Preserve a traceable continuous recording behind a shortened investor cut. Distinct from AI trial selection and time compression: this binds the edited claims to one complete source run.",
+    "originalWorksheet": "Original evidence edit decision list mapping final scene to source timecode, run identity, cut reason and reference take, with explicit discontinuity notes and permissioned access.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.apple.com/my/final-cut-pro/specs/",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Apple lists source-timecode display and editing capabilities. The proposed worksheet is original editorial synthesis."
+      },
+      {
+        "url": "https://support.apple.com/en-ie/guide/final-cut-pro/verc1fabc30/mac",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Apple documents timecode and marker-based synchronization. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-046",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "Founder plans to publish a Demo Day recording containing fundraising details",
+    "funnelStage": "awareness",
+    "keyword": "can I post my demo day pitch video publicly",
+    "title": "Review Round Details Before Posting a Demo Day Video",
+    "slug": "public-demo-day-video-round-details",
+    "distinctIntent": "Identify recording-specific offering content before changing the audience from event attendees to unrestricted viewers. Distinct from the retained social schedule: this produces an exact media review packet.",
+    "originalWorksheet": "Original timestamped distribution review with spoken offering language, on-screen figures, captions, event audience and proposed public destination; send company-specific exemption questions to qualified counsel.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.sec.gov/resources-small-businesses/capital-raising-building-blocks/general-solicitation",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. SEC describes general solicitation and conditional treatment of qualifying Demo Day communications. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-047",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "Subtitles exist in the edit but disappear when the investor video is played from the event deck",
+    "funnelStage": "consideration",
+    "keyword": "PowerPoint video subtitles not showing",
+    "title": "Make Demo Subtitles Survive Event Playback",
+    "slug": "demo-subtitles-event-playback-delivery",
+    "distinctIntent": "Deliver captions through the actual event player and confirm they appear in presentation mode. Unlike c4's general caption review and the translation topic, this solves subtitle packaging and activation.",
+    "originalWorksheet": "Original subtitle delivery matrix comparing player-supported track, sidecar and burned-in copy, with default visibility, language choice, fullscreen behavior and a receiving-computer test.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.microsoft.com/en-us/PowerPoint/add-closed-captions-or-subtitles-to-media-in-powerpoint",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. PowerPoint documents insertion of caption files for supported media. The proposed worksheet is original editorial synthesis."
+      },
+      {
+        "url": "https://support.microsoft.com/en-us/powerpoint/accessibility-features-in-video-and-audio-playback-on-powerpoint",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Microsoft documents selecting available subtitle tracks during playback. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-048",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "Recorded founder narration drowns out product sounds that investors need to hear",
+    "funnelStage": "consideration",
+    "keyword": "balance voiceover and background audio",
+    "title": "Balance Narration and Product Sound in an Investor Demo",
+    "slug": "investor-demo-narration-product-sound-mix",
+    "distinctIntent": "Mix a finished investor recording so important product sounds remain audible without obscuring speech. Distinct from live computer-audio routing and camera capture synchronization.",
+    "originalWorksheet": "Original sound-priority score marking spoken explanation, evidentiary product sound, optional ambience, foreground changes and a speaker/headphone review; avoid one loudness target for every source.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.apple.com/en-ae/guide/imovie/mov84788882d/mac",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. iMovie can lower competing clips relative to a chosen foreground clip. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-049",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "A voice-controlled product must prove the relationship between a spoken command and its result",
+    "funnelStage": "consideration",
+    "keyword": "record voice assistant demo",
+    "title": "Capture a Voice Product Demo From Command to Result",
+    "slug": "voice-product-investor-demo-recording",
+    "distinctIntent": "Record a complete spoken-input/product-response interaction with attribution and timing intact. Distinct from general audio mixing: the investor must distinguish founder speech, user command and generated response.",
+    "originalWorksheet": "Original utterance-to-response capture score with speaker labels, visible input state, response onset, interruption behavior and unedited interaction segment; disclose substituted or edited audio.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.apple.com/en-ie/guide/final-cut-pro/verc1fabc30/mac",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Apple documents aligning audio and video from different capture sources. The proposed worksheet is original editorial synthesis."
+      },
+      {
+        "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0063608",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Zoom distinguishes computer-generated audio from other meeting sound. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c2-050",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing founder video, product-demo media or investor presentation playback",
+    "customerTrigger": "A hardware prototype's display or LED indicators flicker or show bands on camera",
+    "funnelStage": "consideration",
+    "keyword": "screen flickering when recording video",
+    "title": "Fix Flicker When Filming a Prototype for Investors",
+    "slug": "prototype-display-flicker-investor-demo",
+    "distinctIntent": "Make physically filmed screens and indicators observable without changing what the prototype appears to do. Distinct from digital UI text readability and the broader hardware shot plan.",
+    "originalWorksheet": "Original controlled capture test matrix varying supported shutter/frame-rate settings and lighting one factor at a time, while checking indicator timing, banding and motion; avoid universal camera-setting promises.",
+    "sourceCandidates": [
+      {
+        "url": "https://cam.start.canon/en/C010/manual/c010.pdf",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Canon's manual describes testing shutter settings for high-frequency flicker; full manual uninspected. The proposed worksheet is original editorial synthesis."
+      },
+      {
+        "url": "https://support.apple.com/en-nz/guide/iphone/iph61f49e4bb/ios",
+        "supports": "Search excerpt inspected on 2026-09-12; full page uninspected. Apple documents model-dependent camera frame rates and recording options. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  }
+]

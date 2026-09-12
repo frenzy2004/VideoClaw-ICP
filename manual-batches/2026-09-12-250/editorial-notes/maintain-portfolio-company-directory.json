@@ -1,0 +1,128 @@
+{
+  "id": "vc-manual250-c5-019",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.ycombinator.com/blog/the-yc-directory",
+      "supports": "YC's directory announcement describes filters for batch, industry, status, region and company size.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.canto.com/glossary/metadata-management/",
+      "supports": "Asset metadata can describe content, relationships, usage administration and technical properties.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should a company website outage change its directory status?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should happen when a company changes its name?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How much information should the directory contain?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Maintain evergreen company identity records and propagate verified factual changes to the public directory. This does not create a startup press kit or an investor pitch. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact US/en SERP evidence is being collected by main; query remains a candidate hypothesis. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities.",
+    "Candidate query is specific to portfolio discovery; demand and ranking opportunity remain unvalidated.",
+    "Historical YC directory counts are intentionally excluded."
+  ],
+  "serp": {
+    "id": "vc-manual250-c5-019",
+    "keyword": "portfolio company directory",
+    "found": true,
+    "query": "portfolio company directory",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:01.735Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "The List of Portfolio Companies | SBI Investment Co., Ltd.",
+        "url": "https://www.sbinvestment.co.jp/en/portfolio/list/",
+        "domain": "sbinvestment.co.jp",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Portfolio",
+        "url": "https://500.co/portfolio",
+        "domain": "500.co",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Current and former portfolio companies",
+        "url": "https://www.baincapitalprivateequity.com/portfolio/current-and-former-portfolio-companies",
+        "domain": "baincapitalprivateequity.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Portfolios | Private Equity",
+        "url": "https://www.gipartners.com/private-equity/portfolio",
+        "domain": "gipartners.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Current and Former Private Equity Portfolio Companies",
+        "url": "https://berkshirepartners.com/current-and-former-portfolio-companies/",
+        "domain": "berkshirepartners.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Category:Private equity portfolio companies",
+        "url": "https://en.wikipedia.org/wiki/Category:Private_equity_portfolio_companies",
+        "domain": "en.wikipedia.org",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Investment Portfolio",
+        "url": "https://www.carlyle.com/portfolio",
+        "domain": "carlyle.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Project A – Portfolio companies",
+        "url": "https://www.project-a.vc/companies",
+        "domain": "project-a.vc",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "Our Companies | Vista's Private Equity Portfolio",
+        "url": "https://www.vistaequitypartners.com/about/companies/",
+        "domain": "vistaequitypartners.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": [
+      "Investment company in Japan",
+      "SBI Holdings",
+      "Bain Capital portfolio companies list",
+      "SBI Investment Team",
+      "Fintech Business Innovation LPS"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

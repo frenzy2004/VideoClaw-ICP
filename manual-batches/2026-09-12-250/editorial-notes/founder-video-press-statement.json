@@ -1,0 +1,124 @@
+{
+  "id": "vc-manual250-c1-030",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.cdc.gov/cerc/media/pdfs/CERC_Spokesperson.pdf",
+      "supports": "The public-health guidance advises acknowledging uncertainty rather than over-reassuring.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.ap.org/about/news-values-and-principles/telling-the-story/",
+      "supports": "AP permits limited technical improvement without changing the content of video.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Is a recorded statement a substitute for answering journalists?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should a statement include a date?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What is the excerpt test?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: Pair an original statement script with an excerpt-integrity test and a dated source handoff.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Exact US/en SERP evidence is being collected separately; keyword volume, difficulty, and CPC are unknown."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-030",
+    "keyword": "how to record a video press statement",
+    "found": true,
+    "query": "how to record a video press statement",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "What is a video press release?",
+        "url": "https://www.maxim-pr.co.uk/news/what-is-a-video-press-release",
+        "domain": "maxim-pr.co.uk",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "How can I add a video to a press release? – Support",
+        "url": "https://help.mynewsdesk.com/faq/add-video-to-press-release/",
+        "domain": "help.mynewsdesk.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "How to Optimize Video for Your Press Release",
+        "url": "https://www.businesswire.com/resources-education/videos/optimize-videos-press-release",
+        "domain": "businesswire.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Why you should turn every press release into a video",
+        "url": "https://storykit.io/blog/why-you-should-turn-every-press-release-into-a-video",
+        "domain": "storykit.io",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Create Press Release Videos with Templates | Free & Online",
+        "url": "https://www.flexclip.com/create/press-release-video.html",
+        "domain": "flexclip.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "2360 Press Release Stock Video Footage",
+        "url": "https://www.shutterstock.com/video/search/press-release",
+        "domain": "shutterstock.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Creating a press release: How-tos, templates, and tips",
+        "url": "https://www.canva.com/docs/press-releases/",
+        "domain": "canva.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Press Release – Example Learn how to write a ...",
+        "url": "https://www.facebook.com/EnglishWithRaniMam/posts/press-release-examplelearn-how-to-write-a-press-release-to-inform-the-public-abo/1257016793205885/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How can I record a video message?",
+      "What are the 5 W's in a press release?",
+      "Where can I submit a press release for free?",
+      "How much does it cost to have a press release written?"
+    ],
+    "relatedQueries": [
+      "Write a press release",
+      "Press release video",
+      "Sample press release format",
+      "Draft press release",
+      "Press release Style guide",
+      "APA press release format",
+      "Best practices for writing press releases",
+      "Press release writing practice"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

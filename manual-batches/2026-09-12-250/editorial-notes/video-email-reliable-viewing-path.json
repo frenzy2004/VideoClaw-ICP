@@ -1,0 +1,118 @@
+{
+  "id": "vc-manual250-c4-032",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://mailchimp.com/help/add-video-to-an-email/",
+      "supports": "Email clients commonly require a linked thumbnail rather than embedded playback.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://mailchimp.com/help/add-alt-text-to-images/",
+      "supports": "Alt text supports unavailable images; display should be tested in email clients.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Do recipients watch the video inside the email?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Is a linked image enough?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should a video email test include?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Design the thumbnail, fallback text and destination so the existing video is reachable when embedded playback is unsupported. Unlike the newsletter and nurture articles, this solves delivery mechanics. No ranking-page comparison or demand conclusion is asserted.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending.",
+    "Delivery and fallback mechanics; not an email nurture sequence or claim of universal native inbox playback."
+  ],
+  "serp": {
+    "id": "vc-manual250-c4-032",
+    "keyword": "how to put video in marketing email",
+    "found": true,
+    "query": "how to put video in marketing email",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:32:56.760Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How to Embed Video in Your Email Marketing Campaigns",
+        "url": "https://www.litmus.com/blog/video-in-email",
+        "domain": "litmus.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "The Right Way to Use Video in Email Marketing - Validity Blog",
+        "url": "https://www.validity.com/blog/the-right-way-to-use-video-in-email-marketing/",
+        "domain": "validity.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "Embedding video in email : r/marketing",
+        "url": "https://www.reddit.com/r/marketing/comments/1hfqwrq/embedding_video_in_email/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "How to Use Videos in Your Email Marketing Strategy",
+        "url": "https://vimeo.com/blog/post/video-in-email-marketing",
+        "domain": "vimeo.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 5,
+        "title": "Your Guide to Embedding Video in Email Marketing",
+        "url": "https://www.campaignmonitor.com/resources/guides/video-in-email/",
+        "domain": "campaignmonitor.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Video Email Marketing: Use Video to Boost Engagement",
+        "url": "https://www.vidyard.com/blog/video-email-marketing/",
+        "domain": "vidyard.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Videos in Email Marketing: Why They Work and How to ...",
+        "url": "https://wistia.com/blog/video-in-emails",
+        "domain": "wistia.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Can I insert a video in an email?",
+      "Why won't a video attach to an email?",
+      "Can I include a video in a Mailchimp email?",
+      "How do I submit a video in an email?"
+    ],
+    "relatedQueries": [
+      "How to put video in marketing email examples",
+      "How to put video in marketing email gmail",
+      "Insert video into email Outlook",
+      "How to embed video in email gmail",
+      "How to insert mp4 video in Outlook email body",
+      "Compress video for email",
+      "Can you embed video in email",
+      "How to add video in email"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

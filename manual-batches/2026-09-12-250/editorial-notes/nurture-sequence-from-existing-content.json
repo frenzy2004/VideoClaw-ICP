@@ -1,0 +1,131 @@
+{
+  "id": "vc-manual250-c4-019",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://blog.hubspot.com/customers/hubspot-lead-nurturing",
+      "supports": "The publisher describes organizing nurturing by distinct purposes.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://blog.hubspot.com/blog/tabid/6307/bid/31406/How-to-Map-Lead-Nurturing-Content-to-Each-Stage-in-the-Sales-Cycle.aspx",
+      "supports": "The guide maps content to changing questions and identifies missing assets.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "How many emails should the sequence contain?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I reuse a long video in a nurture email?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does clicking a product video mean a lead is sales-ready?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Sequence existing explanations and proof according to what a lead still needs to understand, with entry and exit conditions. Unlike retained c4-008's calendar, this is a behavior-based email path rather than publishing dates. No ranking-page comparison or demand conclusion is asserted.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending."
+  ],
+  "serp": {
+    "id": "vc-manual250-c4-019",
+    "keyword": "lead nurturing email sequence using existing content",
+    "found": true,
+    "query": "lead nurturing email sequence using existing content",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:32:56.760Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How to Create Killer Lead Nurturing Emails (+Examples!)",
+        "url": "https://www.wordstream.com/blog/lead-nurturing-emails",
+        "domain": "wordstream.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "11 great examples of lead nurturing emails",
+        "url": "https://business.adobe.com/blog/basics/lead-nurturing-emails",
+        "domain": "business.adobe.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "The ultimate lead nurturing guide for 2026 (strategy & ...",
+        "url": "https://www.zendesk.com/blog/sales/lead-management-101-everything-need-know-get-started/ultimate-guide-lead-nurturing/",
+        "domain": "zendesk.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "How to Write an Email Nurture Sequence: A Guide for Marketers",
+        "url": "https://woodpecker.co/blog/email-nurture-sequence/",
+        "domain": "woodpecker.co",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "12 Lead Nurturing Email Examples to Create a Winning ...",
+        "url": "https://www.sendlane.com/blog/lead-nurturing-email-examples",
+        "domain": "sendlane.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Convert more leads with email nurture campaigns",
+        "url": "https://www.youtube.com/watch?v=c42AaJn2xfI",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 7,
+        "title": "Email Lead Nurturing: Sequences, Examples & Best ...",
+        "url": "https://martal.ca/email-lead-nurturing/",
+        "domain": "martal.ca",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "9 Effective Nurture Email Campaign Examples",
+        "url": "https://www.mailerlite.com/blog/nurture-email-campaign-sequence",
+        "domain": "mailerlite.com",
+        "resultType": "article"
+      },
+      {
+        "position": 9,
+        "title": "How to Write Lead Nurturing Email Sequences That Convert?",
+        "url": "https://fluentcrm.com/blog/writing-effective-lead-nurturing-email-sequences/",
+        "domain": "fluentcrm.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is the recommended email sequence for lead nurturing?",
+      "What is the 12 second rule for emails?",
+      "Can you provide some examples of lead nurturing emails?",
+      "What are the 5 C's of email etiquette?"
+    ],
+    "relatedQueries": [
+      "Lead nurturing email sequence using existing content sample",
+      "Lead nurturing email sequence using existing content example",
+      "B2B lead nurturing email examples",
+      "Nurture email example",
+      "Email nurture campaign best practices",
+      "Building an effective lead nurturing system",
+      "Lead nurturing software",
+      "Promotional email"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

@@ -1,0 +1,131 @@
+{
+  "id": "vc-manual250-c2-034",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://paulgraham.com/ds.html",
+      "supports": "The essay describes early manual work behind processes founders plan to automate.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.apple.com/en-ie/guide/final-cut-pro/verc1fabc30/mac",
+      "supports": "Clips from one take can be synchronized.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does human-assisted mean the product is only a prototype?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Must I expose the whole operator console?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I remove the operator's waiting time?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: A two-lane responsibility score makes real operator work visible without conflating it with a simulated prototype. Competing page bodies have not been audited for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "FAQ provenance: these are original editorial questions, not observed PAA. Evidence links ground the cited technical facts or provide relevant background; the article-specific capture, review and delivery procedures are original editorial synthesis, not procedures mandated by those sources."
+  ],
+  "serp": {
+    "id": "vc-manual250-c2-034",
+    "keyword": "show human intervention in product demo",
+    "found": true,
+    "query": "show human intervention in product demo",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "AI Proves No Human Intervention in Product Demos",
+        "url": "https://www.linkedin.com/posts/kevinsmithai_my-ai-records-its-own-product-demos-now-activity-7490443951057960961-XMhP",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 2,
+        "title": "How to deliver an effective product demo",
+        "url": "https://www.productmarketingalliance.com/how-to-deliver-an-effective-product-demo/",
+        "domain": "productmarketingalliance.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Top Tips for Product Demonstration Videos and Examples ...",
+        "url": "https://www.atlassian.com/blog/loom/product-demonstration",
+        "domain": "atlassian.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "How do you make demo videos or product walkthroughs ...",
+        "url": "https://www.reddit.com/r/ProductManagement/comments/1nftt72/how_do_you_make_demo_videos_or_product/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Product demo: what it is and why it matters (2026)",
+        "url": "https://www.karumi.ai/blog/what-is-a-product-demo",
+        "domain": "karumi.ai",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "The 7-Sentence Product Demo Framework",
+        "url": "https://gtmnow.com/product-demo/",
+        "domain": "gtmnow.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "What is the best product demo on the web?",
+        "url": "https://www.quora.com/What-is-the-best-product-demo-on-the-web",
+        "domain": "quora.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "How to Make an Interactive Product Demo (2026)",
+        "url": "https://www.youtube.com/watch?v=dW63gtNH0JY",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 9,
+        "title": "8 Of The Best Product Demos Ever And Why They're So ...",
+        "url": "https://www.forbes.com/sites/michellegreenwald/2014/06/04/8-of-the-best-product-demos-ever-and-why-theyre-so-effective/",
+        "domain": "forbes.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Can you give me an example of a product demo?",
+      "What are the biggest demo mistakes?",
+      "How to do a good product demo?",
+      "How to demonstrate a product?"
+    ],
+    "relatedQueries": [
+      "Show human intervention in product demo example",
+      "Product demonstration examples",
+      "Product demonstration meaning",
+      "SaaS product demo video examples",
+      "Demo examples",
+      "How to record a product demo",
+      "Best product demos",
+      "Cool product demo videos"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

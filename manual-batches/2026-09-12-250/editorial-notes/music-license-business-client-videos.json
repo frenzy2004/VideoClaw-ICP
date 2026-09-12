@@ -1,0 +1,117 @@
+{
+  "id": "vc-manual250-c3-028",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.epidemicsound.com/solutions/",
+      "supports": "Primary page body inspected 2026-09-12. Provider says content published during an active subscription remains licensed; this broad summary does not establish plan-specific coverage for every business use.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.copyright.gov/engage/musicians/",
+      "supports": "Official body inspected 2026-09-12: compositions and recordings are separate protected works, commonly owned and licensed separately. Supports rights questions, not a conclusion about a particular commission.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does downloading a track during a subscription cover a later upload?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Why ask about both composition and recording rights?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Will cancelling a subscription remove music from an existing video?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: A dated coverage timeline distinguishes a downloaded track from permission for specific publications and future edits.",
+  "searchIntentBasis": "Editorial classification: evaluating a video-production purchase, engagement or vendor decision; not verified demand.",
+  "reviewNotes": [
+    "Music licensing is a fact-gathering guide, not legal advice. Candidate Pro-plan help page could not be inspected and is not cited; no Pro-plan exclusions or prices are asserted."
+  ],
+  "serp": {
+    "id": "vc-manual250-c3-028",
+    "keyword": "music subscription license for business videos",
+    "found": true,
+    "query": "music subscription license for business videos",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Musicbed: Music Licensing for Video, Film & Advertising",
+        "url": "https://www.musicbed.com/",
+        "domain": "musicbed.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Music Vine: Music Licensing For Video Production And Film",
+        "url": "https://musicvine.com/",
+        "domain": "musicvine.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "The Mainstream Music Platform Built for YouTube Creators",
+        "url": "https://lickd.co/",
+        "domain": "lickd.co",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Simple Music License For Small Business Videos By ...",
+        "url": "https://www.foximusic.com/music-for-small-business-videos-simple-royalty-free-licensing-foximusic/",
+        "domain": "foximusic.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Licensing",
+        "url": "https://www.bmi.com/licensing",
+        "domain": "bmi.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Royalty Free Music for Video Creators",
+        "url": "https://artlist.io/royalty-free-music",
+        "domain": "artlist.io",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Music licenses for online videos : r/musicbusiness",
+        "url": "https://www.reddit.com/r/musicbusiness/comments/1ueoc0e/music_licenses_for_online_videos/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How to license music for commercial use?",
+      "Can I legally play Spotify in my business?",
+      "How to use licensed music in videos?",
+      "Can I purchase a song to use in a video?"
+    ],
+    "relatedQueries": [
+      "Music subscription license for business videos review",
+      "Music subscription license for business videos cost",
+      "Buy music license for commercial use",
+      "Best music licensing sites for filmmakers",
+      "Mainstream music licensing for YouTube",
+      "Musicbed submit music",
+      "Music licensing for film and TV",
+      "How to buy copyright music for YouTube"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

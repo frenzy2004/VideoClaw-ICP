@@ -1,0 +1,116 @@
+{
+  "id": "vc-manual250-c3-012",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.upwork.com/hire/video-editors/how-to-hire/",
+      "supports": "Inspected page body: Upwork recommends assessing editing craft, portfolio fit, and collaboration. No hiring demand, rates, or outcomes are inferred.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.bls.gov/ooh/media-and-communication/film-and-video-editors-and-camera-operators.htm",
+      "supports": "Inspected official duties section: editors organize and assemble footage; camera operators capture it and collaborate with production leadership. No salary or staffing benchmark is used.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Is a showreel enough to choose a production company?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What if a vendor cannot share client work?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should I reject a vendor with no work in my industry?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Sample attribution and comparable production constraints can turn portfolio browsing into a documented shortlist decision.",
+  "searchIntentBasis": "Editorial classification: evaluating a video-production purchase, engagement or vendor decision; not verified demand.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c3-012",
+    "keyword": "how to evaluate a video production portfolio",
+    "found": true,
+    "query": "how to evaluate a video production portfolio",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How to compare & evaluate video production proposals",
+        "url": "https://www.linkedin.com/pulse/how-compare-evaluate-video-production-proposals-steve-platt",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 2,
+        "title": "Video Production Firm: Evaluating Portfolios - SID Video",
+        "url": "https://www.soundideavideoproduction.co.za/2024/09/17/video-production-firm-evaluating-portfolios/",
+        "domain": "soundideavideoproduction.co.za",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "How to Evaluate a Video Editor's Portfolio Before Hiring",
+        "url": "https://hiretalent.ph/blog/evaluate-video-editor-portfolio",
+        "domain": "hiretalent.ph",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "Video Editor Portfolio Guide with Real Examples",
+        "url": "https://vimeo.com/blog/post/video-editor-portfolio",
+        "domain": "vimeo.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 5,
+        "title": "Tips for Reviewing a Video Portfolio",
+        "url": "https://www.theblueowlproject.com/post/what-to-look-for-in-a-video-editing-portfolio",
+        "domain": "theblueowlproject.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "What Makes a Great Video Portfolio",
+        "url": "https://clideo.com/resources/what-makes-a-great-video-portfolio",
+        "domain": "clideo.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "A Step-by-Step Guide to Building a Film Portfolio as a Film ...",
+        "url": "https://www.sae.edu/gbr/insights/a-step-by-step-guide-to-building-a-film-portfolio-as-a-film-student/",
+        "domain": "sae.edu",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "How to Create a Professional Media Portfolio That Stands ...",
+        "url": "https://audiovisuallab.co.za/journal/professional-media-portfolio-guide/",
+        "domain": "audiovisuallab.co.za",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is the 3:2:1 rule in video editing?",
+      "What to include in a video portfolio?",
+      "What does the 80/20 rule mean in video editing?",
+      "How does a video editor portfolio look like?"
+    ],
+    "relatedQueries": [
+      "How to evaluate a video production portfolio sample",
+      "How to evaluate a video production portfolio example"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

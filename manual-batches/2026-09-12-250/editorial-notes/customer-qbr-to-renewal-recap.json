@@ -1,0 +1,126 @@
+{
+  "id": "vc-manual250-c4-022",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.gainsight.com/blog/how-to-conduct-effective-quarterly-business-reviews-qbrs/",
+      "supports": "QBRs review progress and establish upcoming goals; renewal statistics are not used.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.vidyard.com/video-in-motion-benchmark-report/",
+      "supports": "The post-sale section includes QBR recap videos as a customer use case.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should the recap include only positive moments?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I turn the QBR recap into a public case study?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What if a next step was suggested but not agreed?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Condense a private account review into agreed outcomes, unresolved gaps and next-period commitments. This is customer continuity evidence, distinct from public c4-010 case studies and c4-006 first-use onboarding. No ranking-page comparison or demand conclusion is asserted.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending.",
+    "This article concerns a private customer recap, not a public testimonial or a promise about renewal performance."
+  ],
+  "serp": {
+    "id": "vc-manual250-c4-022",
+    "keyword": "customer QBR recap video",
+    "found": true,
+    "query": "customer QBR recap video",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:32:56.760Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Improve the Customer Experience with Quick Renewal Recap ...",
+        "url": "https://www.youtube.com/watch?v=nmxe94gqEEU&vl=en",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 2,
+        "title": "QBRs Explained: Run Effective Quarterly Reviews",
+        "url": "https://www.youtube.com/watch?v=Jw-hDwr3mYM",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 3,
+        "title": "The Essential Guide to Quarterly Business Reviews (QBRs)",
+        "url": "https://www.gainsight.com/essential-guide/quarterly-business-reviews-qbrs/",
+        "domain": "gainsight.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "How to Build a QBR Deck Step-by-Step (Customer Success ...",
+        "url": "https://www.youtube.com/watch?v=K7jl0eCmMoo",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 5,
+        "title": "Video for Customer Success",
+        "url": "https://www.vidyard.com/video-for-customer-success/",
+        "domain": "vidyard.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Tailor your QBR to the customer's business goals",
+        "url": "https://www.linkedin.com/learning/customer-success-acing-your-quarterly-business-review/tailor-your-qbr-to-the-customer-s-business-goals",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 7,
+        "title": "AI Video Creator for Customer Success | ngram.com",
+        "url": "https://www.ngram.com/solutions/customer-success-teams",
+        "domain": "ngram.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "How to Crush a Mock QBR in a Customer Success Interview",
+        "url": "https://www.youtube.com/watch?v=9KS2V2pDXdE",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 9,
+        "title": "Quarterly Business Review (QBR)",
+        "url": "https://www.vyond.com/showcase/video/quarterly-business-review-qbr/",
+        "domain": "vyond.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How can I create a recap video?",
+      "What are customer QBRs?",
+      "How to do a QBR presentation?",
+      "What is a recap video?"
+    ],
+    "relatedQueries": [
+      "Customer qbr recap video template",
+      "Customer qbr recap video reddit"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

@@ -1,0 +1,109 @@
+{
+  "id": "vc-manual250-c3-013",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://vidico.com/news/video-retainer-packages/",
+      "supports": "Inspected provider page: Vidico describes its monthly arrangement and unused-budget rollover. Its category-wide pricing, savings and customer performance claims are excluded.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.videohusky.com/",
+      "supports": "Inspected provider page: unlimited submitted projects are distinguished from an editor working on one video at a time; first drafts and revisions are separate stages.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Is a retainer always cheaper than individual projects?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should rollover mean in a video retainer?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can a startup combine a retainer with project work?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: A quiet-month and busy-month commitment test can reveal when reserved production capacity fits the buyer's actual workload.",
+  "searchIntentBasis": "Editorial classification: evaluating a video-production purchase, engagement or vendor decision; not verified demand.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c3-013",
+    "keyword": "video production retainer vs project",
+    "found": true,
+    "query": "video production retainer vs project",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Video production retainer: Everything you need to know",
+        "url": "https://www.twostory.com.au/video-production-retainer/",
+        "domain": "twostory.com.au",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "What is a video production retainer and how does it work?",
+        "url": "https://www.kenzostudio.uk/insights-articles/what-is-a-video-production-retainer-and-how-does-it-work",
+        "domain": "kenzostudio.uk",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Video Retainer Packages: Scope & Monthly Output",
+        "url": "https://www.kpicreatives.com/systems/content-systems/video-retainer-packages",
+        "domain": "kpicreatives.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Scale Your Content With a Video Production Retainer ...",
+        "url": "https://www.simply-thrilled.com/post/video-production-retainer-contract",
+        "domain": "simply-thrilled.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Monthly Retainer for Video Content: How much should I ...",
+        "url": "https://www.reddit.com/r/videography/comments/12irtsa/monthly_retainer_for_video_content_how_much/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Video Retainer vs Project: Which to Choose",
+        "url": "https://www.madebydot.com/glossary/retainer-vs-project/",
+        "domain": "madebydot.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Video production retainer pricing: is it worth it?",
+        "url": "https://crftvideo.com/video-production-retainer/",
+        "domain": "crftvideo.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What are retainers in videography?",
+      "What are the four stages of video production?",
+      "What is a retainer vs hourly rate?",
+      "Is AI going to replace videographers?"
+    ],
+    "relatedQueries": [
+      "Video production retainer vs project cost",
+      "Video production retainer vs project price"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

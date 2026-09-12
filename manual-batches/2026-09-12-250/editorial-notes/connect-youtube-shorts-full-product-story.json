@@ -1,0 +1,118 @@
+{
+  "id": "vc-manual250-c4-031",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.google.com/youtube/answer/14075157",
+      "supports": "Related videos require advanced access and an eligible public or unlisted item from the channel.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.google.com/youtube/answer/13748639?hl=en",
+      "supports": "Shorts descriptions and comments do not provide clickable pasted URLs.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Can the related-video link point directly to our website?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What if the related-video setting is unavailable?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should every Short link to the same full demo?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Give an existing Short a relevant next video and ensure its promise matches the destination. Distinct from cutting Shorts, resizing footage or choosing general campaign CTAs because it implements an in-platform navigation path. No ranking-page comparison or demand conclusion is asserted.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending.",
+    "YouTube navigation mechanism, not a claim of automatic audience transfer or direct external linking. FAQs remain editorial."
+  ],
+  "serp": {
+    "id": "vc-manual250-c4-031",
+    "keyword": "link YouTube Shorts to full video",
+    "found": true,
+    "query": "link YouTube Shorts to full video",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:32:56.760Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How do you link a \"Full Video\" from a YouTube Short?",
+        "url": "https://www.reddit.com/r/NewTubers/comments/16owqjy/how_do_you_link_a_full_video_from_a_youtube_short/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Add a related video to your YouTube Shorts",
+        "url": "https://support.google.com/youtube/answer/14075157?hl=en",
+        "domain": "support.google.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "YouTube Option to Link Shorts Clips to Longer Video ...",
+        "url": "https://metricool.com/youtube-previews-new-option-to-link-shorts-to-longer-videos/",
+        "domain": "metricool.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "How to convert YouTube Shorts views into long-form ...",
+        "url": "https://blog.youtube/creator-and-artist-stories/youtube-related-videos-traffic-guide/",
+        "domain": "blog.youtube",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Free Long to Short Video Converter",
+        "url": "https://wayin.ai/tools/long-video-to-short-video/",
+        "domain": "wayin.ai",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Free AI Video to Shorts Converter | YouTube to Shorts",
+        "url": "https://www.choppity.com/tools/youtube-to-shorts-converter/",
+        "domain": "choppity.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Convert YouTube Shorts to Video | Free YouTube Shorts ...",
+        "url": "https://www.youtube-for.com/",
+        "domain": "youtube-for.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How do I link a YouTube short to a full video?",
+      "How many views do I need to make $10,000 a month on YouTube?",
+      "How can I convert a YouTube link to a short link?",
+      "How do I change a YouTube Shorts video to a normal video?"
+    ],
+    "relatedQueries": [
+      "Full video link",
+      "Youtube shorts link free",
+      "How to link a short to a long form video",
+      "Related video YouTube Shorts",
+      "How to add related video in YouTube Shorts",
+      "YouTube Short videos link",
+      "Related videos YouTube",
+      "YouTube link to short video AI free"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

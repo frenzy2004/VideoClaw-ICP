@@ -1,0 +1,117 @@
+{
+  "id": "vc-manual250-c1-040",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.notion.com/blog/how-notion-builds-partnerships-using-notion-and-how-you-can-too",
+      "supports": "Notion distinguishes several partnership types with different customer contributions.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.notion.com/help/slack",
+      "supports": "The integration documentation describes specific actions, setup, and permission conditions.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Can we announce a partnership before the integration is available?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should the announcement say about eligibility?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What makes a founder quote useful?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: Distinguish an agreement from delivered functionality and show the exact eligible customer path.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Exact US/en SERP evidence is being collected separately; keyword volume, difficulty, and CPC are unknown."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-040",
+    "keyword": "startup partnership announcement",
+    "found": true,
+    "query": "startup partnership announcement",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "DPIIT collaborates with Cashfree Payments to strengthen ...",
+        "url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2296491&reg=3&lang=1",
+        "domain": "pib.gov.in",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Partnership",
+        "url": "https://www.startupindia.gov.in/content/sih/en/partnership.html",
+        "domain": "startupindia.gov.in",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Govt signs strategic MoUs with key industry leaders to ...",
+        "url": "https://newsonair.gov.in/govt-signs-five-mous-to-strengthen-indias-startup-ecosystem/",
+        "domain": "newsonair.gov.in",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "India Expands Startup Support Through Strategic Industry ...",
+        "url": "https://opengovasia.com/india-expands-startup-support-through-strategic-industry-partnerships/?c=in",
+        "domain": "opengovasia.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Startup Policy Forum | Partnerships",
+        "url": "https://www.indiaspf.org/partnerships",
+        "domain": "indiaspf.org",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Partnership | Partner With Us",
+        "url": "https://www.startupindia.gov.in/sih/partnership-with-us",
+        "domain": "startupindia.gov.in",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "MeityStartupHub",
+        "url": "https://msh.meity.gov.in/",
+        "domain": "msh.meity.gov.in",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Press Release",
+        "url": "https://www.startupindia.gov.in/content/sih/en/startup-scheme/press-release.html",
+        "domain": "startupindia.gov.in",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "Samsung R&D Institutes in India Invite Startups to Co- ...",
+        "url": "https://news.samsung.com/in/samsung-rd-institutes-in-india-invite-startups-to-co-create-the-future-of-mobile-innovation",
+        "domain": "news.samsung.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

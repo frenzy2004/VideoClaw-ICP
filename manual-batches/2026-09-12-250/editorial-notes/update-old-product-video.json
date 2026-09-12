@@ -1,0 +1,127 @@
+{
+  "id": "vc-manual250-c4-042",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.atlassian.com/blog/loom/video-stitching",
+      "supports": "Describes combining recorded sections and updating existing video material.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.wistia.com/en/articles/8274050-replacing-your-media",
+      "supports": "Distinguishes overwrite and swap analytics behavior; separate copies are not automatically replaced.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does a visual redesign require rerecording everything?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Will replacing the video update every copy?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can old analytics still be compared after an update?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Locate and replace stale segments, then check continuity, destinations and measurement consequences. This is a single-asset repair job, distinct from c5 portfolio lifecycle systems and from recording a new tutorial. No ranking-page comparison or demand conclusion is asserted.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending.",
+    "Single-asset repair task, not portfolio-wide lifecycle governance. Host-specific replacement and analytics behavior is explicitly bounded."
+  ],
+  "serp": {
+    "id": "vc-manual250-c4-042",
+    "keyword": "update old product demo video",
+    "found": true,
+    "query": "update old product demo video",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:32:56.760Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "10 Best Product Demo Video Makers & Production Tools ...",
+        "url": "https://www.howdygo.com/blog/product-demo-video-production",
+        "domain": "howdygo.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "Product Demo Video: 9 Steps to Create One",
+        "url": "https://www.colossyan.com/posts/demo-video/",
+        "domain": "colossyan.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "10 Best Product Demo Video Examples (That You Can ... - Velo",
+        "url": "https://usevelo.ai/blog/product-demo-video-examples/",
+        "domain": "usevelo.ai",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "How to Create Software Demo Videos, with 8 Examples",
+        "url": "https://vimeo.com/blog/post/software-video-demos",
+        "domain": "vimeo.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 5,
+        "title": "Top Tips for Product Demonstration Videos and Examples ...",
+        "url": "https://www.atlassian.com/blog/loom/product-demonstration",
+        "domain": "atlassian.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "10 Product Demo Videos Worth Copying",
+        "url": "https://www.moonb.io/blog/product-demo-videos",
+        "domain": "moonb.io",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Product Demo Videos",
+        "url": "https://www.youtube.com/playlist?list=PL0y2jFkSskZi3-OKKibO61EY9MH8WTXje",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 8,
+        "title": "5 Examples of Amazing Product Demo Videos for Every ...",
+        "url": "https://goconsensus.com/blog/5-examples-of-amazing-product-demo-videos-for-every-type-of-product-html",
+        "domain": "goconsensus.com",
+        "resultType": "article"
+      },
+      {
+        "position": 9,
+        "title": "How do you make demo videos or product walkthroughs ...",
+        "url": "https://www.reddit.com/r/ProductManagement/comments/1nftt72/how_do_you_make_demo_videos_or_product/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": [
+      "Update old product demo video youtube",
+      "Update old product demo video free",
+      "Update old product demo video download",
+      "Product demo video maker",
+      "Demo video download",
+      "How to create a demo video for software",
+      "Loom",
+      "Screen Studio"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

@@ -1,0 +1,129 @@
+{
+  "id": "vc-manual250-c5-027",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.panopto.com/features/video-search/",
+      "supports": "The product describes searching spoken words and jumping to the matching moment.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.panopto.com/features/video-editing/",
+      "supports": "The product describes indexing spoken and displayed words and exposing a generated transcript.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does a transcript match mean a recording answers the question?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should happen when a recording is edited?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should private recordings appear in general portfolio search?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Create and test a time-linked transcript index across approved recordings so a founder can locate a specific explanation. Unlike retained c4 clipping tasks, no derivative clips are produced; unlike c5-029, the search target is a moment inside a recording rather than a portal resource. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact US/en SERP evidence is being collected by main; query remains a candidate hypothesis. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities.",
+    "Mixed intent: transcript search spans education and enterprise knowledge; this draft indexes approved portfolio learning recordings.",
+    "The index does not create clips or extend publication permission; automatic transcription accuracy is not assumed."
+  ],
+  "serp": {
+    "id": "vc-manual250-c5-027",
+    "keyword": "search video transcripts",
+    "found": true,
+    "query": "search video transcripts",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:01.735Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Filmot - Search in Youtube captions and subtitles",
+        "url": "https://filmot.com/",
+        "domain": "filmot.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Possible to search videos by words from CC or Transcript?",
+        "url": "https://www.reddit.com/r/youtube/comments/17lo56m/possible_to_search_videos_by_words_from_cc_or/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "YouTube Transcript Generator | Extract & Download Video ...",
+        "url": "https://www.youtube-transcript.io/",
+        "domain": "youtube-transcript.io",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "View video transcripts - YouTube Help",
+        "url": "https://support.google.com/youtube/answer/15930243?hl=en",
+        "domain": "support.google.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "How to Search YouTube Transcripts : Simple 2 Step Guide",
+        "url": "https://www.rev.com/resources/how-to-search-youtube-transcripts",
+        "domain": "rev.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "YouTube Transcript Search — Find Any Moment in ...",
+        "url": "https://transcriptr.ai/tools/youtube-transcript-search",
+        "domain": "transcriptr.ai",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Find Spoken Words in Videos — Local Transcript Search",
+        "url": "https://clipcatalogpro.com/features/transcript-search",
+        "domain": "clipcatalogpro.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Search Any YouTube Transcript by Word, Quote or Topic",
+        "url": "https://you-tldr.com/youtube-transcript-search",
+        "domain": "you-tldr.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How to find a transcript of a video?",
+      "Can you search YouTube video transcripts?",
+      "Can ChatGPT transcribe video?",
+      "How can I search for text in a video?"
+    ],
+    "relatedQueries": [
+      "Search video transcripts online",
+      "Search video transcripts free",
+      "Search video transcripts reddit",
+      "How to search YouTube transcript on phone",
+      "Search in YouTube transcript",
+      "Unlisted video search",
+      "YouTube transcript search extension",
+      "How to search YouTube transcript on iphone"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

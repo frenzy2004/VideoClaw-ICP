@@ -1,0 +1,122 @@
+{
+  "id": "vc-manual250-c3-048",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://help.frame.io/en/articles/9101026-uploading-your-media",
+      "supports": "Official body inspected 2026-09-12, dated June 16 2026: folder structure retained, original files stored alongside viewing encodes, web upload limits exist. Speed claims not adopted.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://help.frame.io/en/articles/9101084-how-can-i-download-files",
+      "supports": "Official body inspected 2026-09-12: recipient can select original or smaller proxy and use browser or Transfer app routes. No performance comparison asserted.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Is a streaming preview enough for an editor?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should a transfer test contain?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does a successful upload prove delivery?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: An end-to-end transport trial distinguishes a playable preview from intact original-media delivery and exposes recipient friction before purchase.",
+  "searchIntentBasis": "Editorial classification: evaluating a video-production purchase, engagement or vendor decision; not verified demand.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c3-048",
+    "keyword": "best way to send large video files to an editor",
+    "found": true,
+    "query": "best way to send large video files to an editor",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "What's the best way to send source files to a remote video ...",
+        "url": "https://www.reddit.com/r/videography/comments/u9kym5/whats_the_best_way_to_send_source_files_to_a/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "How to Send Large Files for Video Editing: A Simple Guide ...",
+        "url": "https://www.jimgrootes.com/how-to-send-large-files-for-video-editing-a-simple-guide-for-clients-and-creators/",
+        "domain": "jimgrootes.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Fast, Easy Large File Transfer For Content Creators",
+        "url": "https://masv.io/industry/content-creators",
+        "domain": "masv.io",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "What's the best way to send and receive large video files ...",
+        "url": "https://www.quora.com/Whats-the-best-way-to-send-and-receive-large-video-files-Im-planning-on-editing-videos-for-a-few-clients-I-dont-want-them-to-have-to-spend-money-on-a-service-that-allows-for-this-and-I-dont-want-them-to-see-each",
+        "domain": "quora.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "How Do YouTubers Send Files to Their Editors?",
+        "url": "https://www.guru.com/blog/how-do-youtubers-send-files-to-their-editors/",
+        "domain": "guru.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "What is the best way to send large video files to an editor?",
+        "url": "https://www.facebook.com/groups/109019229448565/posts/2010507662633036/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 7,
+        "title": "Securely Send Long Videos Without a Compressor",
+        "url": "https://www.dropbox.com/features/share/send-long-videos",
+        "domain": "dropbox.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "The file transfer tool video editors actually use",
+        "url": "https://wetransfer.com/resources/comparison/best-file-transfer-for-video-editors",
+        "domain": "wetransfer.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How do I send video files that are too large?",
+      "What is the best way to transfer large video files?",
+      "How do I upload a video if it's too big?",
+      "How to transfer 20 GB video?"
+    ],
+    "relatedQueries": [
+      "Best way to send large video files to an editor online",
+      "Best way to send large video files to an editor free",
+      "Google Drive",
+      "WeTransfer",
+      "Dropbox",
+      "Best way to send footage to an editor",
+      "How do youtubers send videos to editors",
+      "CapCut"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

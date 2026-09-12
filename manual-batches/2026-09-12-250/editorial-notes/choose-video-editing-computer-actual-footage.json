@@ -1,0 +1,115 @@
+{
+  "id": "vc-manual250-c3-034",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://helpx.adobe.com/premiere/desktop/get-started/technical-requirements/adobe-premiere-pro-technical-requirements.html",
+      "supports": "Official requirements body inspected 2026-09-12: minimum specifications target HD and recommended specifications include higher resolutions; separate memory, GPU, storage and network requirements. No measured performance claimed.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://helpx.adobe.com/premiere/desktop/get-started/technical-requirements/processor-memory-and-gpu-recommendations.html",
+      "supports": "Official body inspected 2026-09-12: hardware decoding technology can affect H.264/HEVC playback. Outdated model-specific capacity and efficiency figures on the page are not adopted.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Are minimum system requirements enough for an editing purchase?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should I test native footage or proxies?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can a stronger GPU solve every playback problem?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: A workload-specific acceptance run replaces unsupported computer rankings with buyer-defined waiting limits and comparable observations.",
+  "searchIntentBasis": "Editorial classification: evaluating a video-production purchase, engagement or vendor decision; not verified demand.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c3-034",
+    "keyword": "how to choose a computer for video editing",
+    "found": true,
+    "query": "how to choose a computer for video editing",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "I don't know what I'm doing, I need the right computer for ...",
+        "url": "https://www.reddit.com/r/davinciresolve/comments/1gz259o/i_dont_know_what_im_doing_i_need_the_right/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "The best desktop PCs for video editors that money can buy",
+        "url": "https://www.creativebloq.com/features/best-computer-for-video-editing",
+        "domain": "creativebloq.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "The Best Laptops for Video Editing We've Tested in 2026",
+        "url": "https://www.pcmag.com/picks/the-best-laptops-for-video-editing",
+        "domain": "pcmag.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Choosing A Computer for Video Editing",
+        "url": "https://www.desktop-documentaries.com/computer-for-video-editing.html",
+        "domain": "desktop-documentaries.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "How to Choose Computers for Video Editing and Production",
+        "url": "https://www.lenovo.com/au/en/knowledgebase/how-to-choose-computers-for-video-editing-and-production/?srsltid=AfmBOorNAidEy0W0bhlB0eULZH8QkRb9jPa7ytXur_d_whQ_2gBuaGLq",
+        "domain": "lenovo.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Best video editing computer 2026: Pro PC picks for ...",
+        "url": "https://www.techradar.com/news/best-video-editing-computer",
+        "domain": "techradar.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Best Video Editing Computers UK: Specs & Buying Guide",
+        "url": "https://box.co.uk/blog/best-computer-video-editing-specs-setup-buying-guide",
+        "domain": "box.co.uk",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What kind of computer should I get for video editing?",
+      "What does the 80/20 rule mean in video editing?",
+      "Which computer is best for video editing?",
+      "What is the 3:2:1 rule in video editing?"
+    ],
+    "relatedQueries": [
+      "Best desktop computer for video editing on a budget",
+      "How to choose a computer for video editing reddit",
+      "How to choose a computer for video editing laptop",
+      "How to choose a computer for video editing for beginners",
+      "How to choose a computer for video editing gaming",
+      "4K video editing PC",
+      "Best desktop PC for video editing",
+      "Best laptop PC for video editing"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

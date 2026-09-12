@@ -1,0 +1,135 @@
+{
+  "id": "vc-manual250-c5-013",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://calendly.com/blog/office-hours/",
+      "supports": "Scheduling controls include appointment duration, buffers, minimum notice and booking limits.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://founders.firstround.com/template-of-sheet",
+      "supports": "First Round describes a private portfolio resource portal and peer advice.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "How long should a media office-hour appointment be?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can several companies attend one session?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should happen after a no-show?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Allocate existing advisory appointments through prerequisites, slot lengths, waitlists and cancellation rules. This solves appointment utilization, not workshop teaching, mentor-webinar repurposing or vendor selection. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact US/en SERP evidence is being collected by main; query remains a candidate hypothesis. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities.",
+    "Mixed intent: office-hours scheduling also serves education and general advising; this draft is bounded to portfolio media decisions."
+  ],
+  "serp": {
+    "id": "vc-manual250-c5-013",
+    "keyword": "office hours scheduling",
+    "found": true,
+    "query": "office hours scheduling",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:01.735Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Online Scheduling for Office Hours? : r/Professors",
+        "url": "https://www.reddit.com/r/Professors/comments/jj4tmz/online_scheduling_for_office_hours/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Calendly: Meeting Scheduling Software and AI Meeting Tools",
+        "url": "https://calendly.com/",
+        "domain": "calendly.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Scheduling Virtual Office Hours",
+        "url": "https://www.youtube.com/watch?v=KVlMK6WAE9I",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 4,
+        "title": "Office Hour Scheduling via Google Calendar",
+        "url": "https://onehe.org/eu-activity/office-hour-scheduling-via-google-calendar/",
+        "domain": "onehe.org",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Online appointment scheduling with Google Calendar",
+        "url": "https://workspace.google.com/intl/en_my/resources/appointment-scheduling/",
+        "domain": "workspace.google.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Office hour scheduling software | Reservio Business",
+        "url": "https://www.reservio.com/office-hours-software",
+        "domain": "reservio.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Student self-scheduling for faculty office hours",
+        "url": "https://doodle.com/en/faculty-office-hours-self-scheduling-for-students/",
+        "domain": "doodle.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "How to Create Office Hours",
+        "url": "https://newsupport.conexed.com/knowledge/create-office-hours",
+        "domain": "newsupport.conexed.com",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "Online Bookings and Appointment Scheduling | Microsoft 365",
+        "url": "https://www.microsoft.com/en-my/microsoft-365/business/scheduling-and-booking-app",
+        "domain": "microsoft.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is the best app for scheduling work hours?",
+      "Can you give me an example of a work schedule?",
+      "How to professionally schedule a meeting?",
+      "Does Microsoft Office have a scheduling tool?"
+    ],
+    "relatedQueries": [
+      "Office hours scheduling app",
+      "Office hours scheduling online",
+      "Appointment scheduling",
+      "Calendar appointment scheduling",
+      "Free office hours scheduling",
+      "Free online appointment scheduling",
+      "Free appointment scheduling app for small business",
+      "Scheduling calendar"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

@@ -1,0 +1,124 @@
+{
+  "id": "vc-manual250-c1-042",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.reddithelp.com/hc/en-us/articles/115002427523-What-is-an-AMA-and-how-do-I-host-one",
+      "supports": "Inspected hosting guidance requires checking community rules, contacting moderators, authentic participation, and a variety of answers.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/en-us/articles/15484368382612-Hosting-events-large-and-small",
+      "supports": "Inspected moderation guidance addresses community fit, guest verification, moderator assistance, and time-zone clarity.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Can a founder host an AMA in any relevant subreddit?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should a founder do with a critical customer question?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should unanswered questions become promised follow-ups?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: A filled facilitation sheet shows how to handle practical, critical, confidential, and unanswered questions without turning the event into a product pitch.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Exact US/en SERP evidence is being collected separately; keyword volume, difficulty, and CPC are unknown."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-042",
+    "keyword": "how to host a founder AMA",
+    "found": true,
+    "query": "how to host a founder AMA",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "r/startups AMA Guide: Hosting a Successful Ask Me Anything",
+        "url": "https://www.reddit.com/r/startups/wiki/ama/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Hosting a Reddit AMA (best practices)",
+        "url": "https://medium.com/@brianmaurer/hosting-a-reddit-ama-best-practices-83209148ed40",
+        "domain": "medium.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "5 Steps To Running A Smooth AMA On Social Media",
+        "url": "https://justdrivemedia.com/blog/5-steps-to-running-a-smooth-ama-on-social-media",
+        "domain": "justdrivemedia.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "15 Tips For Hosting An AMA Session For Your Business",
+        "url": "https://www.forbes.com/councils/forbescommunicationscouncil/2022/06/07/15-tips-for-hosting-an-ama-session-for-your-business/",
+        "domain": "forbes.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "How to Host a Successful Reddit AMA (That WON'T Sink ...",
+        "url": "https://contentfac.com/how-to-host-a-successful-reddit-ama-that-wont-sink-your-brand/",
+        "domain": "contentfac.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "AMA - How to raise VC",
+        "url": "https://www.entrepreneursforimpact.com/ama-how-to-raise-vc",
+        "domain": "entrepreneursforimpact.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "What is an AMA and how do I host one? - Reddit Help",
+        "url": "https://support.reddithelp.com/hc/en-us/articles/115002427523-What-is-an-AMA-and-how-do-I-host-one",
+        "domain": "support.reddithelp.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "Here's How to Host a SUCCESSFUL Reddit AMA!",
+        "url": "https://www.youtube.com/watch?v=zyvesOR2kDo",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 9,
+        "title": "Reddit AMA Playbook for B2B Founders: How to Run an ...",
+        "url": "https://www.conbersa.ai/learn/reddit-ama-playbook-for-founders",
+        "domain": "conbersa.ai",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is a live AMA?",
+      "What does \"AMA session\" mean?",
+      "What is \"Ask Me Anything\" on Reddit?"
+    ],
+    "relatedQueries": [
+      "How to host a founder ama reddit",
+      "How to host an AMA on Reddit"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

@@ -1,0 +1,124 @@
+{
+  "id": "vc-manual250-c2-030",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.apple.com/en-eg/guide/quicktime-player/qtp356b55534/mac",
+      "supports": "QuickTime can record the screen of a connected iPhone or iPad.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.apple.com/en-ie/guide/final-cut-pro/verc1fabc30/mac",
+      "supports": "Clips from one take can be synchronized.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Must both devices appear side by side throughout?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I align the recordings by their device clocks?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I use the phone result from a different take?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: A two-lane event sheet separates content identity, synchronization and readable presentation of the same product run. Competing page bodies have not been audited for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "FAQ provenance: these are original editorial questions, not observed PAA. Evidence links ground the cited technical facts or provide relevant background; the article-specific capture, review and delivery procedures are original editorial synthesis, not procedures mandated by those sources."
+  ],
+  "serp": {
+    "id": "vc-manual250-c2-030",
+    "keyword": "record mobile and desktop screen together",
+    "found": true,
+    "query": "record mobile and desktop screen together",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Capture Your Phone Screen In OBS - PC or Mac - No Lag",
+        "url": "https://www.youtube.com/watch?v=UeSSeHpytpk",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 2,
+        "title": "Explain Anything Faster with Screen Recording, Screenshots ...",
+        "url": "https://screenrec.com/",
+        "domain": "screenrec.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Is there a way i can record my PC screen using Android?",
+        "url": "https://www.reddit.com/r/obs/comments/8e35ww/is_there_a_way_i_can_record_my_pc_screen_using/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Free Screen Recorder",
+        "url": "https://www.loom.com/screen-recorder",
+        "domain": "loom.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Record Phone Screen on PC | NO ROOT 2018 Tutorial",
+        "url": "https://www.youtube.com/watch?v=JDICdqKkER0",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 6,
+        "title": "Can i record and how pc screen with phone?",
+        "url": "https://www.facebook.com/groups/PCPROBLEMSOLUTIONS/posts/26564009366606695/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 7,
+        "title": "How to Screen Record on Any Device",
+        "url": "https://www.splashtop.com/blog/screen-recording",
+        "domain": "splashtop.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "How To Do a Screen Recording: Desktop and Mobile",
+        "url": "https://www.atlassian.com/blog/loom/how-to-do-a-screen-recording",
+        "domain": "atlassian.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Can I record both my screen and my Camera at the same time?",
+      "Can I mirror my PC screen to my phone?",
+      "How to record with two screens?",
+      "How do I record my screen and myself at the same time on Windows?"
+    ],
+    "relatedQueries": [
+      "Record mobile and desktop screen together windows 10",
+      "Record mobile and desktop screen together android",
+      "Scrcpy",
+      "View phone screen on PC via USB",
+      "How to record phone screen on PC",
+      "How to record yourself and your screen at the same time Windows 10",
+      "How to record yourself and your screen at the same time iPhone",
+      "Android screen to OBS via USB"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

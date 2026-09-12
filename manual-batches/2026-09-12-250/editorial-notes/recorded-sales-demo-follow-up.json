@@ -1,0 +1,122 @@
+{
+  "id": "vc-manual250-c4-017",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.vidyard.com/video-in-motion-benchmark-report/",
+      "supports": "The mid-funnel section discusses contextual video for new stakeholders; performance statistics are excluded.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://docs.wistia.com/docs/embed-links",
+      "supports": "Supported embed links can control video playback position.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should I send the full recording or short excerpts?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How do I mention questions that remain unanswered?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I reuse the same recap for another prospect?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Assemble a customer-specific recap from an existing demonstration and agreed next steps. This is post-meeting customer follow-up, distinct from c2 investor follow-up and from recording an initial product demo. No ranking-page comparison or demand conclusion is asserted.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending."
+  ],
+  "serp": {
+    "id": "vc-manual250-c4-017",
+    "keyword": "product demo follow up video email",
+    "found": true,
+    "query": "product demo follow up video email",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:32:56.760Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How to write a killer demo follow-up email (with examples)",
+        "url": "https://www.karumi.ai/blog/how-to-write-a-killer-demo-follow-up-email",
+        "domain": "karumi.ai",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "Follow-Up Techniques For After A Sales Demo",
+        "url": "https://www.linkedin.com/top-content/sales/mastering-the-art-of-follow-up/follow-up-techniques-for-after-a-sales-demo/",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 3,
+        "title": "Sales Demo Followup Video Maker - Close Deals Faster",
+        "url": "https://www.ngram.com/use-cases/sales-demo-followup",
+        "domain": "ngram.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Demo Follow-Up Email: 9 Templates That Close Deals ...",
+        "url": "https://www.puppydog.io/blog/demo-follow-up-email-templates",
+        "domain": "puppydog.io",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "The Sales Demo Follow Up Email Template",
+        "url": "https://www.mrrunlocked.com/p/the-sales-demo-follow-up-email-template",
+        "domain": "mrrunlocked.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Why Sales Teams Should Create Follow-Up Video Demos",
+        "url": "https://www.leadfeeder.com/blog/sales-prospecting/create-follow-up-video-demos/",
+        "domain": "leadfeeder.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "How To Write a Demo Follow-up Email (7+ Bonus Templates)",
+        "url": "https://www.klenty.com/blog/follow-up-email-after-a-demo/",
+        "domain": "klenty.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "Demo Follow-up Email Guide: Templates and Tips",
+        "url": "https://supademo.com/blog/demo-follow-up-email",
+        "domain": "supademo.com",
+        "resultType": "article"
+      },
+      {
+        "position": 9,
+        "title": "5 Examples of Interactive Demo Email Follow Ups",
+        "url": "https://www.navattic.com/blog/interactive-demo-email-follows-ups",
+        "domain": "navattic.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": [
+      "Product demo follow up video email template",
+      "Product demo follow up video email sample",
+      "Product demo follow up video email example",
+      "Product demo follow up video email subject"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

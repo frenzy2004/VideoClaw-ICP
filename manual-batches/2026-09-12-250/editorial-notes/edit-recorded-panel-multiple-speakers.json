@@ -1,0 +1,113 @@
+{
+  "id": "vc-manual250-c4-013",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://helpx.adobe.com/ie/premiere/desktop/edit-projects/set-up-multi-camera-sequences-for-editing/create-a-multi-camera-source-sequence.html",
+      "supports": "Synchronization choices and audio configuration for multi-camera sources.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://helpx.adobe.com/ie/premiere/desktop/edit-projects/set-up-multi-camera-sequences-for-editing/create-and-edit-a-multi-camera-target-sequence.html",
+      "supports": "Switching angles and refining camera-cut timing.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Do I need to switch cameras whenever someone speaks?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I remove the moderator’s questions?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How should I handle overlapping speakers?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Maintain speaker attribution, question-and-answer continuity and understandable disagreement while switching among synchronized recordings. The deliverable is a coherent multi-speaker panel edit, distinct from retained c4-002's standalone clip extraction, c4-015's written FAQ and c2's investor presentation tasks. No ranking-page comparison or demand conclusion is asserted.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending.",
+    "Mixed query intent includes general event editing; article stays with GTM expert-panel reuse and does not cover vendor selection."
+  ],
+  "serp": {
+    "id": "vc-manual250-c4-013",
+    "keyword": "how to edit a panel discussion video",
+    "found": true,
+    "query": "how to edit a panel discussion video",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:32:56.760Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How To Structure A Panel Discussion",
+        "url": "https://www.youtube.com/watch?v=jNJqUbVjNNU",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 2,
+        "title": "How to Moderate a Panel Discussion—Virtually",
+        "url": "https://www.toastmasters.org/magazine/magazine-issues/2020/june/how-to-moderate-a-panel-discussion-virtually",
+        "domain": "toastmasters.org",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Tips for filming a panel discussion at a conference?",
+        "url": "https://www.reddit.com/r/videography/comments/13evi5p/tips_for_filming_a_panel_discussion_at_a/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "What Makes a Great Panel Discussion Video?",
+        "url": "https://www.motlowpromedia.com/blog/panel-discussion-video",
+        "domain": "motlowpromedia.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "How to Moderate a Panel Discussion",
+        "url": "https://www.youtube.com/playlist?list=PLTaLDJfFoTHTf8TzZ-7gzjZ7Yw3fNCKUR",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 6,
+        "title": "The Ultimate Playlist of Panel Moderator and Panelist ...",
+        "url": "https://www.powerfulpanels.com/the-ultimate-playlist-of-panel-moderator-and-panelist-quick-video-tips/",
+        "domain": "powerfulpanels.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "A moderator's guide to panel discussions",
+        "url": "https://vimeo.com/blog/post/panel-discussion-guide",
+        "domain": "vimeo.com",
+        "resultType": "video_or_social"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How to format a panel discussion?",
+      "How to edit video recordings?",
+      "What are some fun questions I can ask panelists?",
+      "How to edit a video in a professional way?"
+    ],
+    "relatedQueries": [
+      "How to edit a panel discussion video online",
+      "Panel discussion example",
+      "Moderate a panel discussion Toastmasters evaluation"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

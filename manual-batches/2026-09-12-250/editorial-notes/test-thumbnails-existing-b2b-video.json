@@ -1,0 +1,120 @@
+{
+  "id": "vc-manual250-c4-038",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.google.com/youtube/answer/72431?hl=en",
+      "supports": "Provides current thumbnail upload and image requirements.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.google.com/youtube/answer/16391400",
+      "supports": "Supports thumbnail-only tests, eligibility checks, watch-time-share results, and inconclusive outcomes.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Can I test only the thumbnail and keep the title fixed?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does the most-clicked image automatically win?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should I do with an inconclusive test?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Compare visual packaging while preserving the video itself and interpreting inconclusive outcomes honestly. Distinct from testing the opening edit because the intervention occurs before a viewer starts playback. No ranking-page comparison or demand conclusion is asserted.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending.",
+    "Old thumbnail help URL redirects to current title-and-thumbnail A/B documentation. Article intentionally limits scope to thumbnail-only mode; no stale size or duration guarantees."
+  ],
+  "serp": {
+    "id": "vc-manual250-c4-038",
+    "keyword": "YouTube thumbnail test and compare",
+    "found": true,
+    "query": "YouTube thumbnail test and compare",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:32:56.760Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "A/B test titles & thumbnails - YouTube Help",
+        "url": "https://support.google.com/youtube/answer/16391400?hl=en",
+        "domain": "support.google.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "YouTube Thumbnail Tester & Previewer",
+        "url": "https://www.testmythumbnails.com/",
+        "domain": "testmythumbnails.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Is Youtube's New \"Test & Compare Thumbnails\" Useful For ...",
+        "url": "https://www.reddit.com/r/PartneredYoutube/comments/1ddwppc/is_youtubes_new_test_compare_thumbnails_useful/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "YouTube Thumbnail Tester — Free Preview Tool",
+        "url": "https://kolfind.com/thumbnail-tester",
+        "domain": "kolfind.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "YouTube Thumbnail Checker: Free Score, A/B Compare & ...",
+        "url": "https://creaticalc.com/youtube-thumbnail-checker",
+        "domain": "creaticalc.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "YouTube's New Thumbnail Test & Compare Feature",
+        "url": "https://www.magiclinks.com/blog/what-creators-need-to-know-youtubes-thumbnail-test-and-compare",
+        "domain": "magiclinks.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Thumbnail Test - Run A/B Tests for YouTube Videos",
+        "url": "https://thumbnailtest.com/",
+        "domain": "thumbnailtest.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "YouTube Thumbnail Preview and Tester Tool",
+        "url": "https://www.tubebuddy.com/thumbnail-preview",
+        "domain": "tubebuddy.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": [
+      "Youtube thumbnail test and compare online free",
+      "Youtube thumbnail test and compare online",
+      "Youtube thumbnail test and compare reddit",
+      "Youtube thumbnail test and compare free",
+      "Youtube thumbnail test and compare app",
+      "YouTube thumbnail analyzer free",
+      "A/B test YouTube thumbnails free",
+      "YouTube thumbnail rating checker"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

@@ -1,0 +1,124 @@
+{
+  "id": "vc-manual250-c2-012",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.ycombinator.com/video/",
+      "supports": "YC distinguishes its founders-only application video from the product demo field.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0062314",
+      "supports": "Computer recordings follow the recorder's layout; cloud layouts use separate host settings.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Can remote founders appear in a YC application video?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Why does my saved recording show only one person?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should we stitch together separate founder speeches?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: A remote take sheet addresses recording layout and conversational handoffs without becoming another pitch script. Competing page bodies have not been audited for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "FAQ provenance: these are original editorial questions, not observed PAA. Evidence links ground the cited technical facts or provide relevant background; the article-specific capture, review and delivery procedures are original editorial synthesis, not procedures mandated by those sources."
+  ],
+  "serp": {
+    "id": "vc-manual250-c2-012",
+    "keyword": "YC application video founders different locations",
+    "found": true,
+    "query": "YC application video founders different locations",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "The Application Video",
+        "url": "https://www.ycombinator.com/video",
+        "domain": "ycombinator.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "YC Founder Video : r/ycombinator",
+        "url": "https://www.reddit.com/r/ycombinator/comments/1ikb8om/yc_founder_video/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "How to Write a YC Application: Everything I Learnt Doing It ...",
+        "url": "https://medium.com/@ParthMakwanaPM/how-to-write-a-yc-application-everything-i-learnt-doing-it-for-the-first-time-06eef96fe911",
+        "domain": "medium.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Ultimate YC Application Video Guide for Founders",
+        "url": "https://zyner.io/blog/yc-application-video-guide",
+        "domain": "zyner.io",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Apply to Y Combinator: Step-by-Step Guide for Founders",
+        "url": "https://startupfundraising.com/library/articles/how-to-apply-to-y-combinator",
+        "domain": "startupfundraising.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Are Co-Founders in the Same City Really an Advantage to a ...",
+        "url": "https://news.ycombinator.com/item?id=251853",
+        "domain": "news.ycombinator.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "11 Tips for your 2026 Y-Combinator Application Founder ...",
+        "url": "https://www.nanoflick.com/resources/guides/y-combinator-founder-video",
+        "domain": "nanoflick.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "Y Combinator: Does all the founders need to be present in ...",
+        "url": "https://www.quora.com/Y-Combinator-Does-all-the-founders-need-to-be-present-in-the-video",
+        "domain": "quora.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Is YC still prestigious?",
+      "Does YC give 500k upfront?",
+      "Can I submit multiple YC applications?",
+      "Does YC accept solo founders?"
+    ],
+    "relatedQueries": [
+      "Yc application video founders different locations reddit",
+      "Yc application video founders different locations map",
+      "Successful YC application videos",
+      "YC application video examples",
+      "Yc application demo video",
+      "YC application video tips",
+      "Yc application video game",
+      "YC application deadline"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

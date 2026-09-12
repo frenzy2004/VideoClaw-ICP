@@ -1,0 +1,110 @@
+{
+  "id": "vc-manual250-c4-024",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.intercom.com/help/en/articles/56645-how-to-write-great-help-articles",
+      "supports": "Help content should focus on recognizable customer goals and problems.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.zendesk.com/hc/en-us/articles/4408894140826-Getting-started-with-self-service-Part-3-Determining-what-articles-you-need-to-create",
+      "supports": "Resolved tickets and support macros can inform knowledge-base articles.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should the article follow the support call in order?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can a video replace the written troubleshooting steps?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should happen when the fix does not work?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Convert a recorded resolution into symptom-based diagnosis, prerequisites and recovery branches. Unlike c4-007's tutorial, this helps a stuck user select the correct fix rather than learn a normal workflow. No ranking-page comparison or demand conclusion is asserted.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending."
+  ],
+  "serp": {
+    "id": "vc-manual250-c4-024",
+    "keyword": "turn support videos into knowledge base articles",
+    "found": true,
+    "query": "turn support videos into knowledge base articles",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:32:56.760Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Videos to Knowledge Base Articles - KB Documentation Tool",
+        "url": "https://www.docsie.io/solutions/videos-to-knowledge-base-articles/",
+        "domain": "docsie.io",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Step 3: Create your knowledge base articles",
+        "url": "https://www.youtube.com/watch?v=CPJyxvWKEUY",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 3,
+        "title": "Creating Knowledge Base Videos: Tips, Tools, and Examples",
+        "url": "https://www.helpscout.com/blog/video-knowledge-base/",
+        "domain": "helpscout.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "AI-powered knowledge base for faster self-service",
+        "url": "https://www.zendesk.com/service/knowledge-base/",
+        "domain": "zendesk.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Generate Knowledge Base Articles from Videos",
+        "url": "https://www.brainfishai.com/changelog/generate-knowledge-base-articles-from-videos",
+        "domain": "brainfishai.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Knowledge Base Videos & IT Support",
+        "url": "https://www.tutorial.ai/solutions/knowledge-base-videos/",
+        "domain": "tutorial.ai",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "How to Use Videos in Knowledge Base Articles for Better CX",
+        "url": "https://blog.happyfox.com/using-videos-in-your-knowledge-base-articles/",
+        "domain": "blog.happyfox.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "The Video Knowledge Base Loop",
+        "url": "https://www.cincopa.com/learn/video-knowledge-base-loop",
+        "domain": "cincopa.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

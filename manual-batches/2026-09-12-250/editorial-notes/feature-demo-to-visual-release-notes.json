@@ -1,0 +1,119 @@
+{
+  "id": "vc-manual250-c4-023",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://updates.wistia.com/publications/find-and-apply-customizations-more-easily-with-a-redesigned-customize-panel",
+      "supports": "A first-party release announcement contrasts an earlier layout with a new organization.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.atlassian.com/blog/loom/video-stitching",
+      "supports": "A historical first-party feature announcement explains concrete uses, including updating recordings.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Do I need footage of the old interface?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should a release-note video teach the entire feature?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How do I handle a limited rollout?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Explain a specific change to an already familiar product by contrasting the previous behavior with the new behavior and its availability. Distinct from a startup launch video, launch calendar or first-use tutorial. No ranking-page comparison or demand conclusion is asserted.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending."
+  ],
+  "serp": {
+    "id": "vc-manual250-c4-023",
+    "keyword": "product update video release notes",
+    "found": true,
+    "query": "product update video release notes",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:32:56.760Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Turning release notes into short product update videos ...",
+        "url": "https://www.reddit.com/r/ProductManagement/comments/1qc6d01/turning_release_notes_into_short_product_update/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Video Product Release Notes",
+        "url": "https://www.youtube.com/playlist?list=PLEBxNMZ7Mu3-enjSX39kOdFIitl5ABHNj",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 3,
+        "title": "How to Write Release Notes Your Users Will Actually Read",
+        "url": "https://www.productplan.com/learn/release-notes-best-practices",
+        "domain": "productplan.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Product Updates / Release Notes for Studio and VX",
+        "url": "https://support.brandlive.com/hc/en-us/sections/360002801151-Product-Updates-Release-Notes-for-Studio-and-VX",
+        "domain": "support.brandlive.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "How to Write Great Product Release Notes: A Guide",
+        "url": "https://www.launchnotes.com/release-notes/how-to-write",
+        "domain": "launchnotes.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "What's New in Granicus: Release Notes",
+        "url": "https://support.granicus.com/s/article/Release-Notes",
+        "domain": "support.granicus.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "How To Announce Product Updates In 2026 (and why Less ...",
+        "url": "https://userpilot.com/blog/product-updates-guide/",
+        "domain": "userpilot.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "Release notes tool for product changes updates",
+        "url": "https://www.getbeamer.com/release-notes",
+        "domain": "getbeamer.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": [
+      "Product update video release notes reddit",
+      "Product update video release notes github",
+      "Product update video release notes android",
+      "Release notes template",
+      "Release notes examples PDF",
+      "Best release notes examples",
+      "Slack release notes",
+      "Software release notes template Word"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

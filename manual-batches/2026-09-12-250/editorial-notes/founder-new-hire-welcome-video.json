@@ -1,0 +1,114 @@
+{
+  "id": "vc-manual250-c1-036",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.bamboohr.com/blog/videos-for-onboarding",
+      "supports": "Welcome videos can introduce the company's mission and the employee's contribution.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://handbook.gitlab.com/handbook/company/culture/all-remote/onboarding/",
+      "supports": "GitLab identifies a named onboarding buddy as a point of contact for new hires.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Is this a recruitment video?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should the founder explain every policy?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How can the message stay personal?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: Separate a founder's human welcome from recruitment, policy training, and account setup, with a completed beat sheet.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Exact US/en SERP evidence is being collected separately; keyword volume, difficulty, and CPC are unknown."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-036",
+    "keyword": "new employee welcome video from CEO",
+    "found": true,
+    "query": "new employee welcome video from CEO",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "CEO welcome",
+        "url": "https://www.youtube.com/playlist?list=PLazI-EoELc92wD62vvj-Kx945Qyj4tEvE",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 2,
+        "title": "7 Inspiring Employee Onboarding Video Examples",
+        "url": "https://www.idomoo.com/blog/7-inspiring-employee-onboarding-video-examples/",
+        "domain": "idomoo.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "How to make the PERFECT onboarding welcome video ... - Blog",
+        "url": "https://blog.talentech.com/en/how-to-make-the-perfect-onboarding-welcome-video-for-new-hires",
+        "domain": "blog.talentech.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "President Noelle's Welcome Video for New Employee",
+        "url": "https://www.youtube.com/watch?v=u_HLcHsZi5E",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 5,
+        "title": "How to Make Induction Videos More Welcoming for New Hires",
+        "url": "https://channel1.com.au/how-to-make-induction-videos-more-welcoming-for-new-hires/",
+        "domain": "channel1.com.au",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Inspiring Employee Onboarding Videos: Top 15 Examples",
+        "url": "https://www.guidde.com/blog/employee-onboarding-video",
+        "domain": "guidde.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "13 Great Employee Onboarding Videos Examples",
+        "url": "https://playplay.com/blog/employee-introduction-videos/",
+        "domain": "playplay.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is an onboarding video?",
+      "What is the first thing a new CEO should do?",
+      "How do I welcome a new employee?",
+      "What is a good welcome message for a new employee?"
+    ],
+    "relatedQueries": [
+      "New employee welcome video from ceo youtube",
+      "New employee welcome video from ceo funny",
+      "New employee welcome video from ceo 2021",
+      "Corporate welcome video",
+      "CEO videos on youtube"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

@@ -1,0 +1,116 @@
+{
+  "id": "vc-manual250-c4-027",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.vidyard.com/blog/explainer-videos/",
+      "supports": "Looping explainers can be used at trade show booths.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/powerpoint/training/create-a-self-running-presentation",
+      "supports": "PowerPoint supports kiosk looping and rehearsed slide timings.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does a booth loop need audio?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How long should each segment be?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can we reuse a sales demo unchanged?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Assemble a continuous booth presentation that remains understandable when a visitor joins mid-loop and cannot hear narration. Distinct from c2 stage pitches and from simply resizing social clips. No ranking-page comparison or demand conclusion is asserted.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending.",
+    "Trade show visitor comprehension and unattended playback; not an investor Demo Day presentation."
+  ],
+  "serp": {
+    "id": "vc-manual250-c4-027",
+    "keyword": "trade show booth video loop",
+    "found": true,
+    "query": "trade show booth video loop",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:32:56.760Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Trade Show Video Production",
+        "url": "https://vulcanmedia.com/service/tradeshow-videos/",
+        "domain": "vulcanmedia.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Trade Show Booth Stock Video Footage for Free Download",
+        "url": "https://www.vecteezy.com/free-videos/trade-show-booth",
+        "domain": "vecteezy.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Trade Show Loop Video | Indianapolis, Indiana & nearby",
+        "url": "https://radbotvideo.com/company-trade-show-booth-loop-video/",
+        "domain": "radbotvideo.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Trade Show Video Best Practices: 8 Top Tips",
+        "url": "https://cardinalexpo.com/blog/trade-show-video-best-practices/",
+        "domain": "cardinalexpo.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Trade Show Video Loop Guidelines - Texas Pictures",
+        "url": "https://www.texas-pictures.com/tradeshow_loops.html",
+        "domain": "texas-pictures.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "AI Trade Show Loop Video Generator",
+        "url": "https://morphic.com/resources/videos/trade-show-loop-video-videos",
+        "domain": "morphic.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Trade Show Videos",
+        "url": "https://epipheo.com/services/trade-show-video/",
+        "domain": "epipheo.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Trade Show Booth Video Production",
+        "url": "https://www.blackboxproductions.tv/service-trade-show-videos",
+        "domain": "blackboxproductions.tv",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": [
+      "Trade show booth video loop youtube",
+      "Trade show booth video loop free",
+      "Trade show booth video loop free download",
+      "Trade show booth video loop download"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

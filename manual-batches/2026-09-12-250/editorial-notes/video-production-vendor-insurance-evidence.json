@@ -1,0 +1,124 @@
+{
+  "id": "vc-manual250-c3-041",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://film.ca.gov/state-permits/insurance-requirements/",
+      "supports": "Official current page inspected 2026-09-12: state-property filming requests require specified insurance evidence including a separate additional-insured endorsement, with additional activity-specific requirements. Not generalized nationally.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://app.leg.wa.gov/Wac/default.aspx?cite=284-30-355",
+      "supports": "Official current rule body inspected 2026-09-12. For its stated Washington scope, a certificate does not confer rights beyond the referenced policy and must not purport to alter coverage. Used as jurisdiction-specific illustration.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Is a certificate of insurance enough to confirm coverage?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does every video shoot need the same insurance limits?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should I do when the insured name differs from the vendor name?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: A requirement-to-evidence sheet reconciles named parties, endorsements and filming scope without treating a certificate as a coverage determination.",
+  "searchIntentBasis": "Editorial classification: evaluating a video-production purchase, engagement or vendor decision; not verified demand.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c3-041",
+    "keyword": "video production company certificate of insurance",
+    "found": true,
+    "query": "video production company certificate of insurance",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Film & Video Production Insurance: Get Free Quotes",
+        "url": "https://www.insureon.com/photography-video-business-insurance/production-studios",
+        "domain": "insureon.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Producer's Guide: Certificates of Insurance in Film",
+        "url": "https://www.wrapbook.com/blog/producers-guide-certificates-of-insurance-film",
+        "domain": "wrapbook.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "Film & Video Production Insurance",
+        "url": "https://www.thimble.com/industry/photo-video-business-insurance/film-producer",
+        "domain": "thimble.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Production Insurance? : r/Filmmakers",
+        "url": "https://www.reddit.com/r/Filmmakers/comments/1c5lpsu/production_insurance/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Insurance Requirements - California Film Commission - CA.gov",
+        "url": "https://film.ca.gov/state-permits/insurance-requirements/",
+        "domain": "film.ca.gov",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Business Insurance for Film & Video Production Company",
+        "url": "https://www.techinsurance.com/photography-video-insurance/video-production-studio",
+        "domain": "techinsurance.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Videographer Insurance Starting at $12/Month | FFI",
+        "url": "https://www.fullframeinsurance.com/videographer-insurance",
+        "domain": "fullframeinsurance.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "How to Buy Video Production Insurance",
+        "url": "https://www.videouniversity.com/articles/how-to-buy-video-production-insurance/",
+        "domain": "videouniversity.com",
+        "resultType": "article"
+      },
+      {
+        "position": 9,
+        "title": "Production Insurance",
+        "url": "https://www.frontrowinsurance.com/production-insurance/",
+        "domain": "frontrowinsurance.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": [
+      "Video production company certificate of insurance sample",
+      "Video production company certificate of insurance requirements",
+      "Video production company certificate of insurance cost",
+      "Video production company certificate of insurance california",
+      "Film production insurance",
+      "Short term film production insurance",
+      "Film production insurance companies",
+      "Thimble film insurance"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

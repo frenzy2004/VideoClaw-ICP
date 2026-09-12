@@ -1,0 +1,111 @@
+{
+  "id": "vc-manual250-c1-021",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://wistia.com/blog/look-good-on-camera",
+      "supports": "Wistia discusses open body language, vocal warm-up, and pauses during on-camera delivery.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://riverside.com/university-videos/speak-to-the-lens-like-a-pro-7-key-tips-for-camera-confidence",
+      "supports": "The creator lesson identifies confidence, eye contact, body language, and warm-up as related recording topics.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Do I need to feel completely confident before publishing?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should I practice first?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How many takes should I record?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: give camera-shy founders a bounded practice progression for direct customer communication rather than an investor pitch rehearsal.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Exact US/en SERP evidence is being collected separately; keyword volume, difficulty, and CPC are unknown."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-021",
+    "keyword": "how to get comfortable on camera",
+    "found": true,
+    "query": "how to get comfortable on camera",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "[Question] How did you finally get comfortable in front of a ...",
+        "url": "https://www.reddit.com/r/youtubers/comments/bkh0lb/question_how_did_you_finally_get_comfortable_in/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "3 tips to help get comfortable on camera",
+        "url": "https://launchthedamnthing.com/blog/3-tips-to-get-comfortable-on-camera",
+        "domain": "launchthedamnthing.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "How to get comfortable in front of a video camera",
+        "url": "https://lindaugelow.com/video-camera-comfortable/",
+        "domain": "lindaugelow.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "How to Get More Comfortable on Camera",
+        "url": "https://www.techsmith.com/blog/get-comfortable-on-camera/",
+        "domain": "techsmith.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "15 Tips to Get More Comfortable on Camera",
+        "url": "https://www.servemethesky.com/blog/get-comfortable-on-camera",
+        "domain": "servemethesky.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "How to Make People Comfortable In Front of the Camera",
+        "url": "https://www.impactplus.com/learn/how-to-make-people-comfortable-on-camera",
+        "domain": "impactplus.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Getting Comfortable On Screen | Online Teaching",
+        "url": "https://onlineteaching.umich.edu/articles/getting-comfortable-on-screen/",
+        "domain": "onlineteaching.umich.edu",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How to look comfortable on camera?",
+      "How to not feel awkward on camera?",
+      "Why am I so uncomfortable in front of a camera?",
+      "Why do I look bad in front camera but good in mirror?"
+    ],
+    "relatedQueries": [
+      "How to get comfortable on camera reddit",
+      "30 Day talking to camera Challenge"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

@@ -1,0 +1,118 @@
+{
+  "id": "vc-manual250-c4-044",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.w3.org/WAI/media/av/transcripts/",
+      "supports": "Descriptive transcripts include important visual information beyond spoken content.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://podcasters.apple.com/support/825-how-to-create-an-episode",
+      "supports": "Episode publishing requirements depend on the hosting and delivery workflow, including RSS.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Is exporting the audio enough?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should every visual detail be narrated?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can we reuse the original transcript?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Make an existing recording understandable without its pictures by replacing visual dependencies and restructuring audio transitions. This differs from podcast metadata and from extracting short clips. No ranking-page comparison or demand conclusion is asserted.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending.",
+    "Audio-first editorial adaptation; not podcast show-note creation, which is covered separately by c4-014."
+  ],
+  "serp": {
+    "id": "vc-manual250-c4-044",
+    "keyword": "turn video into audio podcast",
+    "found": true,
+    "query": "turn video into audio podcast",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:32:56.760Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Converting my video into audio for podcast?",
+        "url": "https://www.reddit.com/r/podcast/comments/wyyka9/converting_my_video_into_audio_for_podcast/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Free AI Podcast Generator | Instant Podcast from Any Content",
+        "url": "https://monica.im/ai-podcast",
+        "domain": "monica.im",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "AI Podcast Generator – Turn Any Content into a Podcast Free",
+        "url": "https://notegpt.io/ai-podcast-generator",
+        "domain": "notegpt.io",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Convert audio to video",
+        "url": "https://podcast.adobe.com/en/convert-audio-to-video-with-adobe-podcast",
+        "domain": "podcast.adobe.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "How to turn your video into audio for podcast in 2024",
+        "url": "https://www.churchofengland.org/how-turn-your-video-audio-podcast-2024",
+        "domain": "churchofengland.org",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "AI Podcast Video Generator: Create AI Video Podcasts",
+        "url": "https://www.visionstory.ai/features/video-podcast",
+        "domain": "visionstory.ai",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Convert Podcast to Video Online | AI-Powered Tool",
+        "url": "https://exemplary.ai/podcast-to-video",
+        "domain": "exemplary.ai",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Can ChatGPT create a podcast audio?",
+      "Is there a way to convert video into audio?",
+      "Can AI convert anything into a podcast?",
+      "Which app is best for converting video to audio?"
+    ],
+    "relatedQueries": [
+      "Turn video into audio podcast free",
+      "Convert audio podcast to video free",
+      "Turn notes into podcast free",
+      "AI podcast video Generator free",
+      "Podcast AI",
+      "AI podcast generator",
+      "Free AI podcast generator",
+      "Turn PDF into podcast free"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

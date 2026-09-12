@@ -1,0 +1,134 @@
+{
+  "id": "vc-manual250-c5-029",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.atlassian.com/itsm/knowledge-management/self-service-success",
+      "supports": "The guide recommends auditing stale content, improving findability and retaining human help.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.bynder.com/hc/en-us/articles/20331272932626-Taxonomy-Tips-for-your-DAM",
+      "supports": "Bynder recommends asking how people search, what terms they use and where searches fail.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "How many people should take part in a findability test?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What makes a useful test task?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does a failed search mean the portal needs new software?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Evaluate resource retrieval using realistic founder tasks and repair labels, navigation or missing content. Distinct from asset tagging: the unit is a user search task, not a stored media file. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact US/en SERP evidence is being collected by main; query remains a candidate hypothesis. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities."
+  ],
+  "serp": {
+    "id": "vc-manual250-c5-029",
+    "keyword": "knowledge base search",
+    "found": true,
+    "query": "knowledge base search",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:01.735Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Knowledge Base Software & Hosted Help Center for Your ...",
+        "url": "https://www.knowledgebase.com/",
+        "domain": "knowledgebase.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "How does Knowledge Base search work?",
+        "url": "https://www.servicenow.com/community/knowledge-managers/how-does-knowledge-base-search-work/m-p/353061",
+        "domain": "servicenow.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Search knowledge articles",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/search-knowledge-articles-csh",
+        "domain": "learn.microsoft.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Searchable knowledge base: How to make one, top tools & ...",
+        "url": "https://www.meilisearch.com/blog/searchable-knowledge-base",
+        "domain": "meilisearch.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Knowledge base content search overview",
+        "url": "https://help.mypurecloud.com/articles/knowledge-base-content-search-overview/",
+        "domain": "help.mypurecloud.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "What is a Knowledge Base | Why You Need One and ...",
+        "url": "https://www.egain.com/what-is-knowledge-base/",
+        "domain": "egain.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "What Is a Knowledge Base?",
+        "url": "https://www.ontotext.com/knowledgehub/fundamentals/what-is-a-knowledge-base/",
+        "domain": "ontotext.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "What is a Knowledge Base? A Complete Guide",
+        "url": "https://www.salesforce.com/in/service/knowledge-base/",
+        "domain": "salesforce.com",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "What Is a Knowledge Base? A Definition",
+        "url": "https://www.solarwinds.com/resources/it-glossary/knowledge-base",
+        "domain": "solarwinds.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is an example of a kms?",
+      "Is knowledge base free?",
+      "What are examples of knowledge bases?",
+      "What is the purpose of a knowledge base?"
+    ],
+    "relatedQueries": [
+      "Knowledge base search free",
+      "Knowledge base examples",
+      "KnowledgeBase",
+      "Knowledge base website",
+      "Knowledge base design",
+      "Knowledgebase Rockwell",
+      "Knowledge base AI",
+      "Google knowledge base"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

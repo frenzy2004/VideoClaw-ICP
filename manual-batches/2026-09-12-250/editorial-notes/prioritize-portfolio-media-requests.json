@@ -1,0 +1,131 @@
+{
+  "id": "vc-manual250-c5-012",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.atlassian.com/software/jira/templates/marketing-service-management",
+      "supports": "The marketing template combines request types, a portal, tracking and a knowledge base.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://kanbanguides.org/the-kanban-guide/",
+      "supports": "The guide defines work in progress between start and finish and calls for explicit flow policies.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should the oldest request always go first?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How should incomplete urgent requests be handled?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can founders appeal their queue position?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Choose the next company request from a ready backlog using urgency, readiness, blocked dependencies and an explicit tie-break. Distinct from a general portfolio strategy, content calendar or choosing production resources. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact US/en SERP evidence is being collected by main; query remains a candidate hypothesis. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities.",
+    "Mixed intent: creative request management applies to many teams; the draft addresses sequencing across independently operated portfolio companies."
+  ],
+  "serp": {
+    "id": "vc-manual250-c5-012",
+    "keyword": "creative request management",
+    "found": true,
+    "query": "creative request management",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:01.735Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "how to manage creative requests effectively",
+        "url": "https://asana.com/resources/how-manage-creative-requests",
+        "domain": "asana.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "How does your team manage creative requests from other ...",
+        "url": "https://www.reddit.com/r/Design/comments/1mk8oee/how_does_your_team_manage_creative_requests_from/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Creative Request Management Systems",
+        "url": "https://manageitpros.com/use-case/creative-request-management",
+        "domain": "manageitpros.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Best Creative Request Management Tools for US Teams",
+        "url": "https://revuesuite.com/blog/creative-request-management-tools-us",
+        "domain": "revuesuite.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Streamlining Creative Project Request Processes",
+        "url": "https://www.linkedin.com/top-content/project-management/project-management-workflow-efficiency/streamlining-creative-project-request-processes/",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 6,
+        "title": "World-Class Creative Project Management Software",
+        "url": "https://www.wrike.com/teams/creative-project-management/",
+        "domain": "wrike.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Free Creative Request Form Template for Design ...",
+        "url": "https://www.airtable.com/templates/creative-request-form/expokSKFt8jUoTmRf",
+        "domain": "airtable.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "12 Most Important Creative Project Management Software ...",
+        "url": "https://punchlist.com/article/best-project-management-tools-for-creative-teams/",
+        "domain": "punchlist.com",
+        "resultType": "article"
+      },
+      {
+        "position": 9,
+        "title": "Essential Guide to Creative Project Management - Simple.io",
+        "url": "https://www.simple.io/blog/guide-to-creative-project-management",
+        "domain": "simple.io",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What does a creative manager do?",
+      "What are the responsibilities of a creative team?",
+      "What does a creative project manager do?"
+    ],
+    "relatedQueries": [
+      "Creative request management tools",
+      "Creative request management template",
+      "Creative request management examples",
+      "Creative request management course",
+      "Asana creative request form"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

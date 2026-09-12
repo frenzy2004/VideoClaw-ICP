@@ -1,0 +1,124 @@
+{
+  "id": "vc-manual250-c1-019",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://sessionize.com/playbook/submit-your-session-for-an-event",
+      "supports": "The guide recommends explaining why a speaker's knowledge and experience fit the event.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.qwoted.com/am-i-an-expert-how-to-know-if-you-should-pitch-an-opportunity/",
+      "supports": "Qwoted connects expertise to relevant verifiable knowledge and transparent limits.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should a founder bio mention funding?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I call myself a leading expert?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should every event use the same biography?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: show how to select evidence of expertise and adapt one factual biography to different editorial uses without inflating credentials.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Exact US/en SERP evidence is being collected separately; keyword volume, difficulty, and CPC are unknown."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-019",
+    "keyword": "startup founder bio examples",
+    "found": true,
+    "query": "startup founder bio examples",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How to write a founder's bio for a startup if I don't have any ...",
+        "url": "https://www.quora.com/How-do-I-write-a-founders-bio-for-a-startup-if-I-dont-have-any-previous-experience-in-the-industry",
+        "domain": "quora.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Professional Bio Examples: 29 Work Bios I Keep in My ...",
+        "url": "https://blog.hubspot.com/marketing/professional-bio-examples",
+        "domain": "blog.hubspot.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "How to Build an Effective Startup Founder Profile",
+        "url": "https://writrox.com/startup-founder-profile/",
+        "domain": "writrox.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "25 Small Business Bio Examples That Build Trust and ...",
+        "url": "https://www.mobilocard.com/post/small-business-bio-examples?srsltid=AfmBOorT84fwC_8dCHrNAaU8dMi14npRXz8281Csu1MeOtDFjy7xjj_B",
+        "domain": "mobilocard.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "5 great entrepreneur biographies to inspire your startup",
+        "url": "https://medium.com/@cdgrams/5-great-entrepreneur-biographies-to-inspire-your-startup-70f4b2478f41",
+        "domain": "medium.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "9 Instagram Bio Ideas for Business",
+        "url": "https://www.socialmediaexaminer.com/9-instagram-bio-ideas-for-business/",
+        "domain": "socialmediaexaminer.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "5 Professional Short Bio Examples + How to Write One",
+        "url": "https://selfpublishing.com/short-bio-examples/",
+        "domain": "selfpublishing.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Top 50 startup founders in India | Jatin Saini | 202 comments",
+        "url": "https://www.linkedin.com/posts/jatin-saini_top-50-startup-founders-in-india-activity-7333330429460017152-MY4x",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What are good bio examples?",
+      "What are some good bio ideas for entrepreneurs?",
+      "What is a 3 line bio?",
+      "What is the best short bio?"
+    ],
+    "relatedQueries": [
+      "Simple short bio example yourself",
+      "Startup founder bio examples for instagram",
+      "Short professional bio examples",
+      "Bio about myself examples",
+      "Simple short bio example yourself for Instagram",
+      "Simple short bio example yourself for work",
+      "Sales bio examples",
+      "Simple short bio example yourself for social media"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

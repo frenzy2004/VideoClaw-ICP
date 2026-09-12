@@ -1,0 +1,128 @@
+{
+  "id": "vc-manual250-c5-048",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://learn.microsoft.com/en-us/training/",
+      "supports": "Microsoft Learn distinguishes guided topic paths from individual task-focused modules.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.panopto.com/features/video-search/",
+      "supports": "The product describes searching spoken words and jumping to the matching moment.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should all roles follow the same learning path?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does watching every video prove completion?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How should an outdated resource be handled?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Assemble existing approved learning resources into role- and task-specific sequences with prerequisites and application tasks. Unlike repurposing a mentor webinar, this organizes multiple resources into a learning path. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact US/en SERP evidence is being collected by main; query remains a candidate hypothesis. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities.",
+    "Mixed-intent / weak-product-fit candidate: learning paths is a broad education and LMS query. This draft's concrete output organizes approved multi-company media-support videos; no demand validation."
+  ],
+  "serp": {
+    "id": "vc-manual250-c5-048",
+    "keyword": "learning paths",
+    "found": true,
+    "query": "learning paths",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:01.735Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "All Learning Paths | LinkedIn Learning, formerly Lynda.com",
+        "url": "https://www.linkedin.com/learning/paths",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 2,
+        "title": "Learning Paths: Home",
+        "url": "https://learningpaths.com/",
+        "domain": "learningpaths.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Learning Paths: Definition, Benefits & Examples",
+        "url": "https://www.knowledgeworker.com/en/blog/learning-paths",
+        "domain": "knowledgeworker.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "Learning Paths: What They Are & How They Build Skills",
+        "url": "https://www.talentlms.com/blog/learning-paths/",
+        "domain": "talentlms.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Learning Paths Academy - Preschool & Childcare in Virginia",
+        "url": "https://learningpathsacademy.com/",
+        "domain": "learningpathsacademy.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "🎯 Learning Paths: Complete Guide to Creating Them",
+        "url": "https://www.iseazy.com/blog/learning-pathways/",
+        "domain": "iseazy.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "What is a Learning Pathway? Using Learning Paths ...",
+        "url": "https://www.docebo.com/learning-network/blog/learning-pathway/",
+        "domain": "docebo.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "Learning Paths",
+        "url": "https://www.e-abclearning.com/learning-paths/",
+        "domain": "e-abclearning.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is a learning path?",
+      "Are Google learning paths free?",
+      "What are some examples of learning paths?",
+      "What is another word for \"learning path\"?"
+    ],
+    "relatedQueries": [
+      "Learning paths in education",
+      "Learning paths examples",
+      "Learning paths servicenow",
+      "Types of learning paths",
+      "Learning paths Microsoft",
+      "Learning paths symbaloo",
+      "LinkedIn Learning paths",
+      "Learning path Labcorp"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

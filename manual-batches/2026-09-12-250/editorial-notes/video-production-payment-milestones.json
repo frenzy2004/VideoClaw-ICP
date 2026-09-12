@@ -1,0 +1,113 @@
+{
+  "id": "vc-manual250-c3-039",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.upwork.com/hc/en-us/articles/44564821903763-Understanding-milestones-on-fixed-price-contracts",
+      "supports": "Inspected page body: a milestone has a deliverable, payment and due date; Upwork documents funding and approval mechanics specific to its platform.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.copyright.gov/title17/92chap2.html",
+      "supports": "Official Section 202 body inspected 2026-09-12: ownership of a material object is distinct from copyright. Section 204 provides transfer formalities; no particular transaction is adjudicated.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What percentage deposit should I pay a video company?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Are milestone funds always held in escrow?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does final payment automatically transfer all rights and files?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: A milestone evidence schedule distinguishes booking commitments, creative approvals and final delivery instead of recommending unsupported deposit percentages.",
+  "searchIntentBasis": "Editorial classification: evaluating a video-production purchase, engagement or vendor decision; not verified demand.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c3-039",
+    "keyword": "video production payment milestones",
+    "found": true,
+    "query": "video production payment milestones",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Using Milestone Payments to Get Paid More Reliably",
+        "url": "https://mixinglight.com/color-grading-tutorials/getting-paid-more-reliably-as-a-creative-professional-with-milestone-payments/",
+        "domain": "mixinglight.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Essential Video Production Contracts: What Y...",
+        "url": "https://www.ecgprod.com/necessary-video-production-contracts/",
+        "domain": "ecgprod.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "What To Look for In Video Production Contracts",
+        "url": "https://www.jlbmedia.com/blog/what-to-look-for-in-video-production-contracts",
+        "domain": "jlbmedia.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "Business Software for Videographers",
+        "url": "https://www.maroo.us/solutions/videographers",
+        "domain": "maroo.us",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "8 Steps to Create a Great Video Production Contract",
+        "url": "https://mesuite.com/blog/how-to-create-a-video-production-contract/",
+        "domain": "mesuite.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Video production costs: how to spend less and do more",
+        "url": "https://www.lucidlink.com/blog/video-production-cost",
+        "domain": "lucidlink.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Digital marketing agency deposits: How much, and when?",
+        "url": "https://sakasandcompany.com/project-milestones-and-deposits/",
+        "domain": "sakasandcompany.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Is production funding the shoot before getting paid the norm?",
+        "url": "https://www.reddit.com/r/advertising/comments/1k11ruq/is_production_funding_the_shoot_before_getting/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What are the five stages of video production?",
+      "How much should I charge for video production?",
+      "How much should I charge for a 5 minute video?",
+      "How much to charge for a 30 second video edit?"
+    ],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

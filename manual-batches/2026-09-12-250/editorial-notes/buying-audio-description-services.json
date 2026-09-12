@@ -1,0 +1,129 @@
+{
+  "id": "vc-manual250-c3-033",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.3playmedia.com/platform/audio-description/",
+      "supports": "Primary body inspected 2026-09-12: description workflow includes visual-information script, human or synthetic narration and audio mixing. Provider compliance and universal coverage claims excluded.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.w3.org/WAI/media/av/description/",
+      "supports": "Primary WAI guidance inspected 2026-09-12: description communicates essential visuals including text; separate timed text or audio requires player support. No jurisdictional legal conclusion.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Are captions the same as audio description?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should I order a separate audio track or a described video?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does buying audio description prove legal compliance?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: An order specimen connects essential visual moments to narration space and the actual player rather than treating captions as a substitute.",
+  "searchIntentBasis": "Editorial classification: evaluating a video-production purchase, engagement or vendor decision; not verified demand.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c3-033",
+    "keyword": "how to choose audio description services",
+    "found": true,
+    "query": "how to choose audio description services",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Audio Description for shows and movies",
+        "url": "https://help.netflix.com/en/node/25079",
+        "domain": "help.netflix.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "I started using audio description on Netflix and what a ...",
+        "url": "https://www.facebook.com/groups/5305113754/posts/10165799900698755/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 3,
+        "title": "is there a way to disable audio description when i start ...",
+        "url": "https://www.reddit.com/r/netflix/comments/135553a/is_there_a_way_to_disable_audio_description_when/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Audio Description Resource Guide",
+        "url": "https://www.loc.gov/nls/services-and-resources/informational-publications/audio-description-resource-guide/",
+        "domain": "loc.gov",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "How to turn on audio description on Netflix",
+        "url": "https://www.youtube.com/watch?v=D7KEg6GqBt0",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 6,
+        "title": "Audio description for videos | Digital Accessibility​ Services",
+        "url": "https://accessibility.huit.harvard.edu/audio-description",
+        "domain": "accessibility.huit.harvard.edu",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "How To Turn On Audio Description",
+        "url": "https://www.myvision.org.uk/how-to-turn-on-audio-description/",
+        "domain": "myvision.org.uk",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "The Ultimate Guide to Audio Description",
+        "url": "https://www.3playmedia.com/popular-topics/audio-description/",
+        "domain": "3playmedia.com",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "Change Audio Language and Description on Prime Video",
+        "url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=GQ4468BXX9PLQADD",
+        "domain": "amazon.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What are the different types of audio descriptions?",
+      "Why is Netflix narrating everything?",
+      "Can anyone go to an audio described performance?",
+      "How do I get my TV to stop narrating the show?"
+    ],
+    "relatedQueries": [
+      "How to choose audio description services reddit",
+      "How to choose audio description services on tv",
+      "How to choose audio description services netflix",
+      "How to choose audio description services on roku",
+      "Netflix Audio Description won t turn off",
+      "Netflix Audio Description turn off",
+      "How to turn on audio description on netflix",
+      "How to turn off Audio Description on Netflix smart TV"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

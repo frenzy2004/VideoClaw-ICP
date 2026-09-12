@@ -1,0 +1,128 @@
+{
+  "id": "vc-manual250-c5-025",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.canto.com/glossary/metadata-management/",
+      "supports": "Asset metadata can describe content, relationships, usage administration and technical properties.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.atlassian.com/itsm/knowledge-management/self-service-success",
+      "supports": "The guide recommends auditing stale content, improving findability and retaining human help.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should all old media be rewritten after a product change?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should be checked besides the main video?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What if approved replacement wording is not ready?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Trace a company change to dependent media and select update, annotate or retire actions. Unlike a new launch plan, this maintains a network of previously published assets. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact US/en SERP evidence is being collected by main; query remains a candidate hypothesis. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities.",
+    "Mixed intent: content audit checklist is broad; this article is a product-change impact procedure across portfolio-owned media, not an SEO traffic audit."
+  ],
+  "serp": {
+    "id": "vc-manual250-c5-025",
+    "keyword": "content audit checklist",
+    "found": true,
+    "query": "content audit checklist",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:01.735Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Content Inventory and Auditing 101",
+        "url": "https://www.nngroup.com/articles/content-audits/",
+        "domain": "nngroup.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "How to do a website content audit in 2026 (with template)",
+        "url": "https://www.semrush.com/blog/content-audit/",
+        "domain": "semrush.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "Content Audit Templates and Guidance | Digital Experience",
+        "url": "https://dxtraining.iowa.gov/build-your-website/voice-tone-and-style-guide/content-quality-checklist/content-audit-templates-and-guidance",
+        "domain": "dxtraining.iowa.gov",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "How to Do a Website Content Audit",
+        "url": "https://www.orbitmedia.com/blog/website-content-audit/",
+        "domain": "orbitmedia.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Content Audit | UO Digital Strategy",
+        "url": "https://digital.uoregon.edu/project-kickoff/content-audit",
+        "domain": "digital.uoregon.edu",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "How to Conduct a Content Audit | YaleSites",
+        "url": "https://yalesites.yale.edu/explore-resources/working-with-content/how-to-conduct-a-content-audit",
+        "domain": "yalesites.yale.edu",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "How to perform a content audit? Use this free template",
+        "url": "https://www.linkedin.com/pulse/how-perform-content-audit-use-free-template-tekla-szymanski-szcle",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 8,
+        "title": "Follow Our Content Audit Process (Template Included)",
+        "url": "https://ahrefs.com/blog/content-audit/",
+        "domain": "ahrefs.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What are the 5 C's of auditing?",
+      "How to perform a content audit?",
+      "What should be included in an audit checklist?",
+      "What are the 7 steps in the audit process?"
+    ],
+    "relatedQueries": [
+      "Free content audit checklist",
+      "Content audit checklist pdf",
+      "Content audit checklist template free",
+      "Content audit checklist template word",
+      "Content audit checklist excel",
+      "Content audit example",
+      "Content audit meaning",
+      "Content audit tool"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

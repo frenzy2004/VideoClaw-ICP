@@ -1,0 +1,119 @@
+{
+  "id": "vc-manual250-c1-043",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://buttondown.com/blog/pre-launch-newsletter-guide",
+      "supports": "Inspected founder-authored guidance recommends honest behind-the-scenes communication before release. The delay-video storyboard is an original adaptation, not its email method.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.cdc.gov/cerc/media/pdfs/CERC_Spokesperson.pdf",
+      "supports": "Inspected public-health communication guidance on acknowledging uncertainty and avoiding overreassurance; this article makes a limited, explicitly identified adaptation to launch communication.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should a launch-delay video announce a replacement release date?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What can a founder show when the product is not ready?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does a founder video replace direct contact with affected customers?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: A completed delay storyboard separates the missed date, a narrowly demonstrated improvement, unfinished work, and an update commitment without implying launch readiness.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Exact US/en SERP evidence is being collected separately; keyword volume, difficulty, and CPC are unknown."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-043",
+    "keyword": "product launch delay video message",
+    "found": true,
+    "query": "product launch delay video message",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "4 Steps to a Successful Product Launch Video",
+        "url": "https://editshare.com/post/4-steps-to-a-successful-product-launch-video/",
+        "domain": "editshare.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Delayed product introduction",
+        "url": "https://www.sciencedirect.com/science/article/abs/pii/S0167923612001248",
+        "domain": "sciencedirect.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "Product Launch Video: 10 Examples & Ideas",
+        "url": "https://dmakproductions.com/blog/product-launch-video/",
+        "domain": "dmakproductions.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "10 Best AI-Powered Product Launch Video Examples in 2026",
+        "url": "https://www.arcade.software/post/product-launch-video-examples",
+        "domain": "arcade.software",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "60 Product Launch Message Examples for Your Next Big ...",
+        "url": "https://textus.com/blog/product-launch-message-examples",
+        "domain": "textus.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Launch Delayed? Resources to Help You Prepare for the ...",
+        "url": "https://responsory.com/blog/launch-delayed-resources-to-help-you-be-prepared-for-the-right-time/",
+        "domain": "responsory.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Product Launch Delay: Communicate Without Panic",
+        "url": "https://www.linkedin.com/advice/0/your-product-launch-delayed-how-can-you-communicate-4e7se",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 8,
+        "title": "Launch Messages: 26 In-App & Email Examples for 2026",
+        "url": "https://userpilot.com/blog/launch-messages/",
+        "domain": "userpilot.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is a good message to launch a new product?",
+      "How do I announce a product launch?",
+      "What are the 7 steps of product launch?",
+      "How do I write a press release for a new product launch?"
+    ],
+    "relatedQueries": [
+      "Product launch delay video message youtube",
+      "Product reveal video",
+      "Best launch videos"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

@@ -1,0 +1,117 @@
+{
+  "id": "vc-manual250-c2-031",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents",
+      "supports": "Agent outputs can vary across trials; outcome inspection is distinct from a transcript.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://a16z.com/insights-for-enterprise-ai-builders/",
+      "supports": "The article distinguishes compelling AI demonstrations from production-ready systems.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Can I show a selected successful AI run?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does the AI saying it completed the task prove success?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Is a revised prompt another identical trial?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: A recorded trial ledger exposes selection and interventions without misrepresenting a small demo set as a reliability benchmark. Competing page bodies have not been audited for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "FAQ provenance: these are original editorial questions, not observed PAA. Evidence links ground the cited technical facts or provide relevant background; the article-specific capture, review and delivery procedures are original editorial synthesis, not procedures mandated by those sources."
+  ],
+  "serp": {
+    "id": "vc-manual250-c2-031",
+    "keyword": "show AI demo results honestly to investors",
+    "found": true,
+    "query": "show AI demo results honestly to investors",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "On-Demand Webinar: The AI-Powered Investment Firm & Live ...",
+        "url": "https://www.fnz.com/insights/webinar-the-ai-powered-investment-firm-live-demo",
+        "domain": "fnz.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "AI starts to show investment returns",
+        "url": "https://www.youtube.com/watch?v=g-hzHThQF7c",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 3,
+        "title": "Artificial Intelligence for Capital Raising | Top 7 AI Tools ...",
+        "url": "https://www.youtube.com/watch?v=Rolx12IqRpc",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 4,
+        "title": "Demo-AI-driven Investment Strategies for Traditional ...",
+        "url": "https://www.boosted.ai/resources/demo-ai-driven-investment-strategies-for-traditional-investors",
+        "domain": "boosted.ai",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Investor Demo – AI-Driven Prototyping Package",
+        "url": "https://www.reeinvent.com/investor-demo",
+        "domain": "reeinvent.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "AI tools for Investors: What Works, What Doesn't, and What ...",
+        "url": "https://justonelap.com/video-ai-tools-for-investors-what-works-what-doesnt-and-what-to-watch/",
+        "domain": "justonelap.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "How AI Generates Investor-Ready Reports",
+        "url": "https://www.lucid.now/blog/how-ai-generates-investor-ready-reports/",
+        "domain": "lucid.now",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "How to Use Product Demos to Convince Angel Investors",
+        "url": "https://www.hustlefund.vc/post/angel-squad-how-to-use-product-demos-to-convince-angel-investors",
+        "domain": "hustlefund.vc",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "Early AI investor returns earn average human grade",
+        "url": "https://www.reuters.com/commentary/breakingviews/early-ai-investor-returns-earn-average-human-grade-2025-11-07/",
+        "domain": "reuters.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

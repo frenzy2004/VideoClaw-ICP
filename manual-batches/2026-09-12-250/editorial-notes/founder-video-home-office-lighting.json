@@ -1,0 +1,124 @@
+{
+  "id": "vc-manual250-c1-023",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://wistia.com/blog/webcam-setup",
+      "supports": "Window position and changing daylight affect how the face is lit.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://helpx.adobe.com/ca/stock/contributor/help/artist-hub-migration/lighting-for-video.html",
+      "supports": "The contributor guidance discusses consistency between warmer and cooler light sources.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Do I need a new light before recording?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should the background be brighter than my face?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should I save about the chosen setup?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: Offer a recorded room-position experiment with concrete acceptance criteria instead of a shopping list.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Exact US/en SERP evidence is being collected separately; keyword volume, difficulty, and CPC are unknown."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-023",
+    "keyword": "home office lighting for video recording",
+    "found": true,
+    "query": "home office lighting for video recording",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Struggling with home office lighting for video calls",
+        "url": "https://www.reddit.com/r/homeoffice/comments/1qcssi7/struggling_with_home_office_lighting_for_video/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Video Conference Lighting for Zoom with Stand, 30 Modes ...",
+        "url": "https://www.amazon.com/LitONES-Conference-Adjustable-Brightness-Versatile/dp/B0CBWW3YLR",
+        "domain": "amazon.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "The best lighting for video conferencing, according to experts",
+        "url": "https://blog.webex.com/collaboration/video-conferencing/best-lighting/",
+        "domain": "blog.webex.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "The 2 Best Ring Lights of 2026 | Reviews by Wirecutter",
+        "url": "https://www.nytimes.com/wirecutter/reviews/best-ring-lights/",
+        "domain": "nytimes.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Best lights for Zoom calls in 2026",
+        "url": "https://www.digitalcameraworld.com/buying-guides/best-lights-for-zoom-calls",
+        "domain": "digitalcameraworld.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Zoom & Video Conference Lighting Kit",
+        "url": "https://lumecube.com/products/video-conference-lighting-kit-for-remote-workers?srsltid=AfmBOopGSt8mXQyeauvNxCn8Ax7GQXa4POlrYJIu6d11pGCrk7tgrIzW",
+        "domain": "lumecube.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Camera Lighting For Podcasting",
+        "url": "https://www.bestbuy.com/site/shop/camera-lighting-for-podcasting",
+        "domain": "bestbuy.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Best Lighting for Video Calls, Streaming & Home Office in ...",
+        "url": "https://www.standesk.eu/post/best-lighting-for-video-calls-streaming-home-office",
+        "domain": "standesk.eu",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What kind of lighting is best for video recording at home?",
+      "What is the best light for video recording?",
+      "What is the best lighting for home office video calls?",
+      "What is the 5'7\" lighting rule?"
+    ],
+    "relatedQueries": [
+      "Home office lighting for video recording iphone",
+      "Home office lighting for video recording reddit",
+      "Best home office lighting for video recording",
+      "Best lighting for video conferencing at home",
+      "Best desk light for video calls",
+      "Best lighting for video calls with glasses",
+      "Lume Cube Video Conference Lighting Kit",
+      "Video Conference Light for Laptop"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

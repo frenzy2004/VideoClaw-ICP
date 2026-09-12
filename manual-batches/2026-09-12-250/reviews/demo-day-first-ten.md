@@ -1,0 +1,148 @@
+# Demo Day: independent first-ten review
+
+2026-09-12 · manual250reviewbatch · finite scope: **vc-manual250-c2-011–020**
+
+## Outcome and boundaries
+
+**All ten Markdown/JSON pairs read in full: 20 files, including all 30 FAQs. None missing or unreviewed. No blocking factual or technical defect identified in the reviewed versions. Four warning groups require editorial attention below.** This is a review finding, not approval, publication authorization or a certification of the underlying products.
+
+Independently inspected relevant live primary-page bodies for all 20 cited article-source references, covering **16 unique URLs**. Consulted the existing [source-fallback-checks.json](../source-fallback-checks.json) for transport context, then checked actual passage support rather than treating those receipts as a substitute for reading. All 16 yielded relevant body content; none is labeled unreachable based on a transport failure.
+
+Compared the full 40-topic c2 manifest and retained 50-topic manifest, plus relevant-topic screening of the other four new-topic manifests. Only c2-011–020 draft bodies were reviewed. c2-024's draft and Zoom-route investigation remain entirely outside this batch; its manifest entry was used only to distinguish its live-handoff intent.
+
+Only this report is written. No draft, code, Git, runtime, schedule, credential, production or external-state edits; no new agents, paid APIs, publishing, merging, deployment or PR actions. Native-contract mechanics remain with the main reviewer. No application was submitted and no actual product, editor or video-call session was operated.
+
+## Reviewed articles, reader jobs and work products
+
+IDs abbreviate the common prefix `vc-manual250-`. Both links in each row were read completely. All sidecars have exactly three relevant FAQs marked editorial; that is not observed People Also Ask evidence.
+
+| ID | Reviewed pair | Specific reader job / practical evidence | Findings | Sources |
+|---|---|---|---|---|
+| c2-011 | [accelerator-application-video-field-map.md](../articles/accelerator-application-video-field-map.md) + [accelerator-application-video-field-map.json](../editorial-notes/accelerator-application-video-field-map.json) | Route founders, product and deck assets to the correct application destination. Five-row YC/Techstars map, missing-asset card, viewer-path test and submission receipt. Separates official instructions from production preferences. | No blocker identified. | S1, S2 |
+| c2-012 | [remote-cofounder-application-video.md](../articles/remote-cofounder-application-video.md) + [remote-cofounder-application-video.json](../editorial-notes/remote-cofounder-application-video.json) | Capture one distributed founders-only take. Three-founder turn sheet, saved-layout test, normal-voice/handoff checks and complete-file playback. Uses current Zoom layout documentation, not unrelated synchronization instructions. | No blocker identified. | S1, S3 |
+| c2-013 | [update-accelerator-application-demo-video.md](../articles/update-accelerator-application-demo-video.md) + [update-accelerator-application-demo-video.json](../editorial-notes/update-accelerator-application-demo-video.json) | Replace stale application evidence through the permitted update route. Four-scene fictional manifest, changed workflow capture, bounded change note and old/new destination checks. | No blocker identified; W3. | S4, S5 |
+| c2-014 | [investor-demo-video-comprehension-test.md](../articles/investor-demo-video-comprehension-test.md) + [investor-demo-video-comprehension-test.json](../editorial-notes/investor-demo-video-comprehension-test.json) | Locate missing visual cause and effect. Literal answer key, three different viewing passes and four timestamped divergences with specific repairs. Distinguishes observation from a proposed repair hypothesis. | No blocker identified. | S6, S7 |
+| c2-015 | [accelerator-progress-paired-demo-recordings.md](../articles/accelerator-progress-paired-demo-recordings.md) + [accelerator-progress-paired-demo-recordings.json](../editorial-notes/accelerator-progress-paired-demo-recordings.json) | Make a genuine old/current product comparison. Same fictional J-17 task, starting role/state, completion criterion and timing-treatment protocol; genuine historical baseline and labeled holds. | No blocker identified; W1's inference caveat. | S8, S5 |
+| c2-016 | [correct-investor-video-visible-claims.md](../articles/correct-investor-video-visible-claims.md) + [correct-investor-video-visible-claims.json](../editorial-notes/correct-investor-video-visible-claims.json) | Repair one false meaning across six surfaces. Timecoded automatic-versus-human-approval correction map, replacement note and muted/audio-only/full-view checks. Does not equate correction with later product progress. | No blocker identified. | S9, S10 |
+| c2-017 | [anonymize-customer-footage-investor-demo.md](../articles/anonymize-customer-footage-investor-demo.md) + [anonymize-customer-footage-investor-demo.json](../editorial-notes/anonymize-customer-footage-investor-demo.json) | Reduce identifying exposure in permitted customer footage. Six-surface exposure map, recapture branch, moving-mask/transient-frame review and delivery controls. Explicitly denies anonymity/compliance guarantees. | No blocker identified; W1, W2. | S11, S12 |
+| c2-018 | [invisible-product-work-investor-demo.md](../articles/invisible-product-work-investor-demo.md) + [invisible-product-work-investor-demo.json](../editorial-notes/invisible-product-work-investor-demo.json) | Show hidden processing through actual input and output. Five-scene document-parser storyboard distinguishes capture, diagnostic evidence and illustration; keeps same-run provenance. | No blocker identified; W1. | S13, S14 |
+| c2-019 | [shorten-investor-demo-wait-time.md](../articles/shorten-investor-demo-wait-time.md) + [shorten-investor-demo-wait-time.json](../editorial-notes/shorten-investor-demo-wait-time.json) | Shorten presentation waits without changing the apparent product evidence. Interval-treatment table, elapsed/playback arithmetic and attached disclosure test. Preserves human action, retry context and the uncut source. | No blocker identified; W3. | S15, S14 |
+| c2-020 | [investor-demo-screen-readability.md](../articles/investor-demo-screen-readability.md) + [investor-demo-screen-readability.json](../editorial-notes/investor-demo-screen-readability.json) | Make necessary interface evidence readable at recipient size. Four-scene critical-detail map, scaling example, capture-first fixes and recipient read-back. Distinguishes live UI sharing from movie playback. | No blocker identified; W1. | S7, S16 |
+
+## Blocking corrections
+
+None established for these exact versions. In particular, the application rules, storage-versus-submission distinction, Zoom recording modes, Keynote rerecording, trace terminology, retiming behavior and unlisted-link warning have relevant primary-body support.
+
+The following warnings are not upgraded into blockers merely to produce a failing result: the articles already contain useful work products and appropriate limits. This does not waive the need for accurate evidence links or the main review's separate checks.
+
+## Warnings
+
+### W1 — Align FAQ evidence links with the actual claim
+
+The most definite mismatch is [anonymize-customer-footage-investor-demo.json:47](../editorial-notes/anonymize-customer-footage-investor-demo.json): “Is an unlisted video restricted to my investors?” explicitly attributes its answer to YouTube, but its `faqBasis.evidenceUrl` points to NIST. Point this entry to the already-inspected YouTube privacy page (S12). The answer and body attribution at Markdown line 62 are accurate; the citation mapping is wrong.
+
+Other bases are only indirect and should be made clearer:
+
+| File/passage | Current basis | Recommended precision |
+|---|---|---|
+| [anonymize-customer-footage-investor-demo.json:42](../editorial-notes/anonymize-customer-footage-investor-demo.json) — when to recapture | YouTube visibility settings | Visibility settings do not establish a recapture method. Treat this as original editorial reasoning informed by the exposure analysis; NIST is relevant background, not a video-editing procedure. |
+| [invisible-product-work-investor-demo.json:37](../editorial-notes/invisible-product-work-investor-demo.json) — whether a UI is needed | OpenTelemetry traces | Sequoia's infrastructure/demo passage is the closer source for this presentation decision (S14). OpenTelemetry supports the diagnostic layer, not investor-demo format selection. |
+| [investor-demo-screen-readability.json:42](../editorial-notes/investor-demo-screen-readability.json) — zooming on every click | Zoom optimization page | That page concerns sharing configuration, not editorial camera movement. Keep the answer as an editorial composition recommendation rather than attributing it to Zoom. |
+| [investor-demo-screen-readability.json:47](../editorial-notes/investor-demo-screen-readability.json) — video-call readability test | YC deck-design article | YC supports legibility; Zoom supplies the delivery-mode context. The recipient read-aloud procedure is the author's own practical test, not a documented YC video-call procedure. |
+
+Similarly, c2-015's side-by-side and speed FAQs link to general Techstars mentoring advice, and c2-019's description-only disclosure FAQ links to general Sequoia presentation advice. These are useful editorial inferences, not directly sourced technical instructions. Do not convert “editorial” into invented source authority or search-demand evidence.
+
+### W2 — Make the customer-footage exposure map explicitly cover faces and voices
+
+Locations: [anonymize-customer-footage-investor-demo.md:19](../articles/anonymize-customer-footage-investor-demo.md) and the sound review at line 54. The assigned worksheet calls for names, voices, faces, account screens and contextual clues. The current example is strongest on a scheduling screen's text, tenant URL, notifications and spoken names. It never explicitly checks a customer's face in a camera tile or a recognizable original voice when no name is spoken.
+
+Add a face/avatar/camera-tile row and a voice-identity row, with a decision to retain only when appropriate for the permitted use, remove the segment, or recapture/re-narrate a clearly labeled demonstration. Make the second review ask what remains identifiable, not only whether names disappeared. Alternatively, narrow the example's stated scope to screen-only material without customer faces or voices and explain that other footage needs additional review.
+
+This is an exposure-map completeness warning, not a conclusion that the clip is unlawful or that a treatment guarantees anonymity. The existing permission-first gate, combination-of-clues warning, export checks and fictional recapture fallback are valuable and should remain. NIST's inspected abstract supports the general masking/re-identification limitation; it is not a certification of this editing checklist.
+
+### W3 — Complete the timestamp examples that the articles ask readers to build
+
+- [update-accelerator-application-demo-video.md:15](../articles/update-accelerator-application-demo-video.md) asks for source time ranges, but the sample rows at lines 19–24 use scene names only. Add one fictional old-file/time-range → replacement-file/time-range row, build/date and submission destination. This would turn the manifest from a planning schema into an end-to-end worked replacement record; the current change-note example already adds useful value.
+- [shorten-investor-demo-wait-time.md:42](../articles/shorten-investor-demo-wait-time.md) asks for source start/end, actual duration, edit treatment and final duration. The arithmetic at line 44 is correct but the worked ledger is prose rather than an explicit interval mapping. For that same fictional example, the processing interval could be mapped from source 00:12–01:42 to presentation 00:12–00:21, with 90 seconds represented in 9 seconds at 10×.
+- At c2-019 lines 38 and 54–56, generic labels disclose that time changed but do not tell the viewer how much. Demonstrate a concrete label such as “90-second processing interval shown at 10×” for the fictional example. Use actual values for a real run; do not present edited runtime as typical product performance. This improves the “how long did it take?” check at line 64 without requiring a timing claim for every workflow-only demo.
+
+### W4 — Repeated example family and section rhythm
+
+The dispatch/assignment example recurs through c2-011, 013–015, 017 and 020. All ten use six main sections, a worksheet/map, verification advice, related links and the same bare download CTA. Their decision tools are materially different, and the repeated story is not itself a duplicate article.
+
+For cluster quality, consider varying one or two examples or explicitly framing the dispatch scenario as a shared case that isolates different recording problems. Do not add irrelevant content simply to vary the surface. Keep required CTA structure without inventing VideoClaw capabilities, hosted worksheets, prices, privacy guarantees or workflow automation to make the download seem more relevant.
+
+## Material intent separation
+
+Comparison is against topic manifests, not full bodies outside the ten reviewed pairs.
+
+| Reviewed ID | Nearest competing intent | Distinction preserved in the full body |
+|---|---|---|
+| c2-011 | retained c2-010 deck-versus-video; retained c2-001 pitch story | Routes assets to program-specific fields instead of choosing a general medium or writing the pitch. |
+| c2-012 | new c1-027 cofounder interview / c1-038 remote interview; new c2-024 live handoff | Captures one remote founders-only admissions take; does not choreograph a live investor-control handoff. c2-024 body was not inspected. |
+| c2-013 | retained c2-004 investor update; c2-016 correction | Repairs stale evidence in one submitted application through its permitted route; explicitly distinguishes an originally false claim. |
+| c2-014 | retained c2-007 speaking rehearsal; retained c3-005 revisions; c2-020 readability | Diagnoses interpreted meaning and missing cause/effect in a fixed clip, rather than delivery fluency, feedback administration or pixel legibility alone. |
+| c2-015 | retained c2-004 update / c4-010 case study; new c2-031 repeated AI trials | Controls an earlier/current demonstration pair. Does not infer reliability from repeated trials or claim customer business outcomes. |
+| c2-016 | c2-013 update; new c1-015 third-party press correction; new c2-034 human intervention | Repairs an already-wrong statement everywhere in owned media. The human-approval example serves correction, not a general intervention-demo tutorial. |
+| c2-017 | retained c1-007 testimonials; new c2-032 fictional data / c2-036 access / c2-044 desktop exposure | Treats identifying content inside existing permissioned footage; not interview design, dataset construction, link configuration alone or live desktop hygiene. |
+| c2-018 | retained c1-009 explainer / c2-002 demo workflow; new c2-030 cross-device capture | Bridges hidden execution to actual output while identifying illustration. Not a general script or synchronized two-device narrative. |
+| c2-019 | new c2-028 event time budget / c2-045 uncut source; retained c4-002 short clips | Changes waiting-time playback while preserving elapsed-time meaning. Source retention supports the edit but is not the whole deliverable. |
+| c2-020 | retained c2-006 recording setup / c4-005 social resizing; new c2-029 camera overlay / c2-039 small export / c2-050 physical flicker | Recovers must-read UI evidence at the recipient's actual picture size; not generic export, aspect-ratio or physically filmed-screen advice. |
+
+No material intent collision established with the retained 50 or these closest new-topic neighbors.
+
+## Live primary-body source receipts
+
+Checked on 2026-09-12. Each receipt names the passage actually inspected, the supported claim and its limits. These are publisher instructions, technical documentation or firsthand practitioner advice—not evidence of admission, fundraising or conversion outcomes.
+
+| Code | Source URL | Relevant body passage/support |
+|---|---|---|
+| S1 | [YC — The Application Video](https://www.ycombinator.com/video/) | Instructions: one-minute founders-speaking video, separate product demo, all founders, recorded call when apart, bullet points rather than recited script. Supports c2-011/012. No inference about Techstars duration or admissions odds. |
+| S2 | [Techstars — Application Preview](https://www.techstars.com/application-preview) | Company-information item 8 names product-demo video, pitch deck and team-introduction video. Supports c2-011's asset distinction; draft correctly tells readers to confirm detailed current form rules. |
+| S3 | [Zoom — Adjusting Recording Video Layouts](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0062314) | Opening explanation, computer Gallery View and Cloud Recording sections distinguish the recorder's view from host-configured cloud layouts. Supports c2-012; testing the saved file is a sensible application, not a guarantee that every mode records the local gallery. |
+| S4 | [YC — Frequently Asked Questions](https://www.ycombinator.com/faq) | Application Technical Support, submitted-application editing question: no continuous editing; material changes use the linked update route. Supports c2-013 without establishing that every product tweak qualifies. |
+| S5 | [Google Drive — Activity and File Versions](https://support.google.com/drive/answer/2409045?co=GENIE.Platform%3DDesktop&hl=en-419) | Save/restore, Keep forever and Upload new version sections; Google-native document history is distinguished. Supports c2-013/015 storage and preservation claims, not admissions updates or perpetual retention of every unpinned revision. |
+| S6 | [First Round — VC Partner Meeting Preparation](https://review.firstround.com/heres-what-you-can-really-expect-when-pitching-your-seed-stage-startup-at-a-vc-partner-meeting/) | Section 7's founder account recommends unfamiliar listeners and repeat-back to reveal misunderstanding. c2-014 transparently adapts that to timestamped demo testing. No statistical sample size or validated success rate is supplied. |
+| S7 | [YC — How to Design a Better Pitch Deck](https://www.ycombinator.com/blog/how-to-design-a-better-pitch-deck/) | Legibility, obviousness/stranger test and screenshot discussion support c2-014/020. Historical presentation advice, not current Demo Day duration or proof that every investor needs the same typography. The source's preference for simpler representations is not misrepresented as an endorsement of all screencasts. |
+| S8 | [Techstars — Five Things Every Mentor Should Know](https://www.techstars.com/blog/founder-advice/five-things-every-techstars-mentor-should-know) | Section 2: understand founder goals and how the team measures them. Supports the mentoring context in c2-015. The paired-capture protocol, temporal controls and layout choices are original editorial synthesis. |
+| S9 | [Techstars — Investors Don't Fund Confusion](https://www.techstars.com/blog/founder-advice/investors-don-t-fund-confusion) | Named mentor's mismatched application/deck example and cross-material consistency exercise. Supports c2-016's consistency rationale, not universal causation or a promised fundraising improvement. |
+| S10 | [Apple — Record Keynote Presentations on Mac](https://support.apple.com/en-mide/guide/keynote/tan81813d552/mac) | Record/preview steps and rerecord-from-specific-location instruction support c2-016. Draft appropriately warns to inspect later timing and distinguishes Keynote from editing a rendered movie. |
+| S11 | [NIST SP 800-188 — De-Identifying Government Datasets](https://csrc.nist.gov/pubs/sp/800/188/final) | **Publication landing-page abstract inspected**, including disclosure risk, quasi-identifiers and inadequacy of some masking tools. Supports c2-017's narrow caution. Full publication PDF was not reviewed; no claim that NIST endorses the video workflow or establishes legal compliance. |
+| S12 | [YouTube — Change Video Privacy Settings](https://support.google.com/youtube/answer/157177?hl=en) | Private/unlisted sections: unlisted links can be viewed and reshared by link holders; private sharing has a different audience model. Supports c2-017. Page also qualifies search absence when an unlisted video enters a public playlist. |
+| S13 | [OpenTelemetry — Traces](https://opentelemetry.io/docs/concepts/signals/traces/) | Traces, Context Propagation, Spans, Span Context and Span Events sections: operations, context/correlation and associated events. Supports c2-018's diagnostic terminology. A trace alone does not establish semantic correctness of the demo's output; the draft retains that distinction. |
+| S14 | [Sequoia — How to Present to Investors](https://articles.sequoiacap.com/how-to-present-to-investors) | Solution paragraph: demo when possible, screenshots/workflow for difficult cases including infrastructure; closing paragraph: leave discussion time. Supports c2-018/019. No attention-span numbers, term-sheet anecdote or fixed meeting-duration rule imported. |
+| S15 | [Apple — Change Clip Speed in Final Cut Pro](https://support.apple.com/en-euro/guide/final-cut-pro/ver40b00150/mac) | Constant-speed section: duration changes and default downstream ripple; custom settings can disable ripple. Supports c2-019's qualified “can move” statement, not a claim that every retime always shifts later clips. Source media and edited playback remain distinct. |
+| S16 | [Zoom — Optimizing a Shared Video in Full Screen](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0068426) | Opening restriction and final note: disable video optimization for nonvideo sharing because static text/images can distort. Supports c2-020's live-application versus movie distinction. Does not establish a universal readability setting or review c2-024's separate route. |
+
+## Technical, factual and originality checks
+
+- c2-019 arithmetic checked: 90 seconds at 10× becomes 9 seconds; 12 + 9 + 8 = 29 seconds before extra holds. The draft explicitly labels this fictional and separates processing time from playback time.
+- c2-020 scaling checked: 960/1920 = 0.5; a 20-pixel captured label becomes approximately 10 pixels under proportional scaling. It is correctly presented as geometry before other scaling effects, not a readability threshold.
+- Correct distinctions retained: storage version versus submitted attachment; original error versus later change; historical baseline versus staged reconstruction; captured execution versus illustration; internal step versus correct output; elapsed time versus edit duration; access restriction versus removal of identifying content.
+- No invented VideoClaw functionality, pricing, customer result, admission guarantee, investor-response guarantee or legal certainty identified. Product names, task identifiers, correction statements and demonstration values are explicitly fictional or conditional. No paid-plan entitlement is asserted.
+- Privacy guidance pauses unclear sharing, preserves permission boundaries, checks rendered output/captions/previews and avoids treating blur or unlisted hosting as complete protection. W2 improves the explicit exposure inventory; it does not negate those safeguards.
+- No raw HTML tags, event-handler markup, `javascript:` links or HTML data-URL patterns found in the reviewed files. No actual renderer or native-contract test performed.
+- No copied passage identified in the full-body reading against the inspected source passages. Within these ten Markdown bodies, a supporting normalized comparison found zero repeated paragraphs of at least 16 words and zero shared 16-word spans. Short CTA repetition remains; this is not a comprehensive web or whole-corpus plagiarism clearance.
+- Competitor-gap metadata is explicitly a hypothesis pending competing-page audits. No SERP positions, observed PAA, search demand, CPC or competitor-body superiority was independently established.
+- The sources support their narrow cited claims. Original procedures and FAQs need not be verbatim source instructions, but W1 records where their evidence mapping should stop implying otherwise.
+
+## Reviewed-version fingerprints
+
+SHA-256 hashes of the raw bytes read in full. Read-only recheck at **2026-09-12T03:09:19.465Z** compared all 20 captured hashes: **zero changes at that check**. Findings apply to these versions; subsequent author edits are outside this completed snapshot unless separately reviewed.
+
+| Exact ID | Slug / paired filename stem | Markdown SHA-256 | JSON SHA-256 |
+|---|---|---|---|
+| vc-manual250-c2-011 | accelerator-application-video-field-map | `bdf75287a377900a1d620aa77b9407de2245bb45cea5fab5c0199be0374dd484` | `b78470d835f7f5fdd4a0b6a72d20078bfcdba56ed657f0bb12f036da7d895dae` |
+| vc-manual250-c2-012 | remote-cofounder-application-video | `5ca5df0e0d9ae0d10973fe9b94763631b97284abf7fb726e979ea9b1be22ddab` | `efc648fd49eb5928fb9e6bed1f8d7198266536ce836792f405e06d3dc205c4c4` |
+| vc-manual250-c2-013 | update-accelerator-application-demo-video | `2b8a05ede7ab373c8d6062d5ab4724a5ea5bda358f7eb42c2b48ed2b793f162c` | `7c19f391f4e1449eab05fdb23dd6e11f62b4dfac122134de0af7ef4004e5087e` |
+| vc-manual250-c2-014 | investor-demo-video-comprehension-test | `0ac3ac0c6b3130d8b251f9a53592110725834f6a45a2fd887db5b0b893f48e01` | `f91c30c6cfd696830df49ed7f0fbd4c22f882a4921a1268972fba855fe1aea5b` |
+| vc-manual250-c2-015 | accelerator-progress-paired-demo-recordings | `92bc97a75ebe16d04012a91d253ead70ad4c3af4459243495d497a973947cd1b` | `16f1dc27789db9af7ec2d0f5219b95200eebcff23cc40c37cee642d05ef603d2` |
+| vc-manual250-c2-016 | correct-investor-video-visible-claims | `7f2729c0a52d382d97e5023726e7d1c35d4d4224d812897748c4ec4bd1e29e4c` | `89a680430091428d0030c5d75fb19589097dd524984ba7f38e378a9d54ced6cc` |
+| vc-manual250-c2-017 | anonymize-customer-footage-investor-demo | `5a56d89ee7bbb4d722f984b93c95d78d0d28e28ab215fd3488a286e62c330ed2` | `84f7050b0bf77e96a848c22fdcd867659816f405a457223ce7205f7005cca5be` |
+| vc-manual250-c2-018 | invisible-product-work-investor-demo | `eaaa1abe9534f8cc00972f421165c4d40a8c240b5dc970414a201761eec23105` | `f5c506bffa306cdb1cbb1d15fa369905a288c8ffa824e38eabcee917118eb4d8` |
+| vc-manual250-c2-019 | shorten-investor-demo-wait-time | `972c3d333f77d3d2cf9f15c8521bb495fe631add3d3312ce15587b284dde61ae` | `bd61c56ebbb748249b367433ed806c1db179ad8f27ed7cd37a5d7baca024c2ea` |
+| vc-manual250-c2-020 | investor-demo-screen-readability | `cf7addc48b5d093c547e3f56ea6de92253785821fb0edf4f447758443328e7e2` | `68b9fc467a24a8f4361efcc41e13eb03c4da76f207a678b131a51a88ee79e331` |
+
+Finite batch ends here. No monitoring or author-fix review is scheduled.
+
+> Review-snapshot note: linked Markdown now points to the committed article (body plus frontmatter), and linked JSON to its compact editorial notes. Original line labels and hashes describe the author scratch pair read at review time; FAQ answers are in committed Markdown frontmatter. These portable links do not imply that later edits were independently re-reviewed. See the separate resolution record for checked corrections.

@@ -1,0 +1,124 @@
+{
+  "id": "vc-manual250-c3-027",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://stock.adobe.com/license-terms",
+      "supports": "Inspected license summary: videos have enhanced-license options; client transfers, standalone redistribution and editorial-only uses have distinct restrictions. Actual asset and contract terms govern.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://helpx.adobe.com/stock/web/common-questions/usage-licensing.html",
+      "supports": "Inspected FAQ: an asset can be licensed for a client, but separate client uses require separate licensing; commercial and editorial material have different release context.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Can a freelancer license stock footage for my company?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does a model release make every commercial use acceptable?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I reuse a licensed clip for another client?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: A per-asset entitlement form connects the actual purchaser to the intended client use instead of treating royalty-free as blanket permission.",
+  "searchIntentBasis": "Editorial classification: evaluating a video-production purchase, engagement or vendor decision; not verified demand.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c3-027",
+    "keyword": "stock footage license for client videos",
+    "found": true,
+    "query": "stock footage license for client videos",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "What Legal Terms Should I Consider When Using Stock ...",
+        "url": "https://www.reddit.com/r/VideoEditing/comments/1eon68w/what_legal_terms_should_i_consider_when_using/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Can using stock footage in a video lead to copyright strikes ...",
+        "url": "https://www.facebook.com/groups/FCPXUsers/posts/7527702667341172/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 3,
+        "title": "Filmsupply: License Premium Cinematic Stock Footage",
+        "url": "https://www.filmsupply.com/",
+        "domain": "filmsupply.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Using stock media in client projects: How to avoid licensing ...",
+        "url": "https://www.storyblocks.com/resources/blog/how-to-license-stock-media-for-client-work",
+        "domain": "storyblocks.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Stock Video Licenses: We've Got You Covered",
+        "url": "https://blog.pond5.com/28339-licensing-free-stock-videos/",
+        "domain": "blog.pond5.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Best stock footage sites for commercial use in 2026",
+        "url": "https://elements.envato.com/learn/best-stock-footage-sites-commercial-use?srsltid=AfmBOooEABJggoyKVaTKLkViiXCxw-xjOuQOWWz9AFin8W0fOoxkxUmn",
+        "domain": "elements.envato.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "15 Best Stock Video Sites in 2026 | Premium Stock Footage",
+        "url": "https://www.studiobinder.com/blog/best-stock-video-sites-that-will-make-your-clients-happy/",
+        "domain": "studiobinder.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "Taking stock of your stock footage",
+        "url": "https://www.videomaker.com/article/c09/18785-taking-stock-of-your-stock-footage/",
+        "domain": "videomaker.com",
+        "resultType": "article"
+      },
+      {
+        "position": 9,
+        "title": "Royalty Stock Footage and Video ...",
+        "url": "https://artlist.io/stock-footage",
+        "domain": "artlist.io",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": [
+      "Stock footage license for client videos reddit",
+      "Stock footage license for client videos free",
+      "Stock footage license for client videos online",
+      "Stock footage license for client videos cost",
+      "Film stock footage free",
+      "How to buy movie license for youtube",
+      "Footage from movies",
+      "Pexels"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

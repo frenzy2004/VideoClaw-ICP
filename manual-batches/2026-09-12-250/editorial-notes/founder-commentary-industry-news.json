@@ -1,0 +1,115 @@
+{
+  "id": "vc-manual250-c1-029",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.davidmeermanscott.com/hubfs/documents/Newsjacking-free-excerpt.pdf",
+      "supports": "The author connects useful news commentary with a legitimate relationship to the event.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.prsa.org/professional-development/prsa-resources/ethics",
+      "supports": "The code emphasizes accuracy in public communication.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "When should a founder pass on a news story?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can commentary include a prediction?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should happen when the underlying news changes?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: Use a publish-or-pass decision canvas with expertise boundaries and an expiration check instead of chasing every trending story.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Exact US/en SERP evidence is being collected separately; keyword volume, difficulty, and CPC are unknown."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-029",
+    "keyword": "newsjacking for startups",
+    "found": true,
+    "query": "newsjacking for startups",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Newsjacking of Startup World | The Valuation Wars",
+        "url": "https://www.linkedin.com/pulse/newsjacking-startup-world-valuation-wars-vamsi-bhogi",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 2,
+        "title": "What Is Newsjacking for Startup Growth? - Viral-Impact",
+        "url": "https://www.viral-impact.com/knowledge/what-is-newsjacking-and-how-do-startups-use-it",
+        "domain": "viral-impact.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Is any small/solo business using newsjacking to raise ...",
+        "url": "https://www.reddit.com/r/startups/comments/16jdyon/is_any_smallsolo_business_using_newsjacking_to/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "How to Capture Audiences & Business Growth with ...",
+        "url": "https://blog.growthinstitute.com/marketing/newsjacking",
+        "domain": "blog.growthinstitute.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "4 Easy Ways for Startups to Get Media Coverage - Inc. Magazine",
+        "url": "https://www.inc.com/jeff-haden/4-easy-ways-for-startups-to-get-media-coverage.html",
+        "domain": "inc.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Newsjacking",
+        "url": "https://www.newsjacking.com/",
+        "domain": "newsjacking.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Newsjacking, or Reaching the Media via Search Engines",
+        "url": "https://www.youtube.com/watch?v=wd1j7eO-liQ",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 8,
+        "title": "What Is Newsjacking | Sprinklr Glossary",
+        "url": "https://www.sprinklr.com/social-media-glossary/newsjacking/",
+        "domain": "sprinklr.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is the 80/20 rule for startups?",
+      "Can you provide an example of newsjacking?",
+      "Is it true that 90% of startups fail?",
+      "What are the best sources for startup news?"
+    ],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

@@ -1,0 +1,122 @@
+{
+  "id": "vc-manual250-c3-040",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.peerspace.com/legal/terms/cancellation-policy",
+      "supports": "Official current-hosted policy fully inspected 2026-09-12, dated August 11 2025. Location policies vary, deadlines use space-local time, and rescheduling requires approval; only provider-specific examples, no universal fees.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.peerspace.com/en/articles/10119171-how-do-i-cancel-a-booking",
+      "supports": "Official help body inspected 2026-09-12: formal cancellation through the account is required; a message or support inquiry alone is not cancellation. No cancellation performed.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Is postponing a shoot always cheaper than cancelling?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does telling a host I want to cancel complete the cancellation?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does bad weather automatically waive cancellation fees?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: A cancel-versus-postpone table reconciles separate supplier commitments, notice deadlines and rescheduling credits without inventing standard fees.",
+  "searchIntentBasis": "Editorial classification: evaluating a video-production purchase, engagement or vendor decision; not verified demand.",
+  "reviewNotes": [
+    "Practical contract fact gathering only. AICP model PDF was inaccessible and is not cited; no universal fees, force-majeure conclusions or legal advice asserted."
+  ],
+  "serp": {
+    "id": "vc-manual250-c3-040",
+    "keyword": "video production cancellation and postponement fees",
+    "found": true,
+    "query": "video production cancellation and postponement fees",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Cancellation Fees? : r/videography",
+        "url": "https://www.reddit.com/r/videography/comments/nr1xvi/cancellation_fees/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Cancellation and Rescheduling Fees",
+        "url": "https://www.providfilms.com/cancellation-and-rescheduling-fees/",
+        "domain": "providfilms.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Cancellation & Postponement Policy",
+        "url": "https://trivisionstudios.com/cancellation-postponement-policy/",
+        "domain": "trivisionstudios.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Terms & Conditions",
+        "url": "https://www.flytecreativemedia.co.uk/terms-conditions/",
+        "domain": "flytecreativemedia.co.uk",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Terms & Conditions",
+        "url": "http://www.thevisualsteam.com/terms",
+        "domain": "thevisualsteam.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Video Production Terms and Conditions - MPA",
+        "url": "https://themediaplanningagency.com.au/video-production-terms-and-conditions/",
+        "domain": "themediaplanningagency.com.au",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Video Production Terms and Conditions",
+        "url": "https://www.gkmedia.ie/terms-conditions",
+        "domain": "gkmedia.ie",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Cancellation, Rescheduling & Deposits | PortlandVideoPro",
+        "url": "https://www.portlandvideoproduction.com/policy",
+        "domain": "portlandvideoproduction.com",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "How to Calculate Cancellation and Postponement Fees for ...",
+        "url": "https://www.splinde.io/blog/how-to-calculate-cancellation-and-postponement-fees-for-swiss-film-crew-(2026-guide)",
+        "domain": "splinde.io",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How much should you charge for a cancellation fee?",
+      "Is it illegal to charge a cancelation fee on a subscription?",
+      "Do I legally have to pay a cancellation fee?",
+      "Is it illegal for Adobe to charge a cancellation fee?"
+    ],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

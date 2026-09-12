@@ -1,0 +1,129 @@
+{
+  "id": "vc-manual250-c5-033",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.google.com/a/users/answer/12380484?hl=en",
+      "supports": "Shared-drive access depends on memberships, direct grants and restrictions; temporary blocks may retain underlying grants.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.chathamhouse.org/about-us/chatham-house-rule",
+      "supports": "The Rule protects attribution, including indirect identification; off-the-record discussion is a different mode.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Is separate file access enough?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can we reuse an example after removing the company name?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Who decides whether an editor should be reassigned?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Separate staff assignments, unreleased examples and editorial context when shared teams support competing companies. The output is a practical conflict-escalation exercise, not legal advice about confidentiality or competition. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact US/en SERP evidence is being collected by main; query remains a candidate hypothesis. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities.",
+    "Mixed intent and governance-adjacent topic. Keep the article operational; no legal confidentiality, competition or investment-duty conclusions."
+  ],
+  "serp": {
+    "id": "vc-manual250-c5-033",
+    "keyword": "competing portfolio companies",
+    "found": true,
+    "query": "competing portfolio companies",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:01.735Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Caution to Private Equity Firms Acquiring Competing ...",
+        "url": "https://www.vorys.com/publication-Caution-to-Private-Equity-Firms-Acquiring-Competing-Portfolio-Companies",
+        "domain": "vorys.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Board Positions and Competing Portfolio Companies",
+        "url": "https://www.wsgr.com/PDFSearch/BoardPositionsandCompetingPortfolioCompanies.pdf",
+        "domain": "wsgr.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Realizing a Competitive Advantage from Portfolio Company ...",
+        "url": "https://www.chronograph.pe/private-equity-competitive-advantage-from-portfolio-company-data/",
+        "domain": "chronograph.pe",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Private Equity Portfolio Management: Strategies for Success",
+        "url": "https://www.hebbia.com/resources/private-equity-portfolio-management",
+        "domain": "hebbia.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Portfolio Companies of Our Private Equity Vertical",
+        "url": "https://www.motilaloswalalt.com/private-equity-portfolio-company/",
+        "domain": "motilaloswalalt.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Portfolio",
+        "url": "https://500.co/portfolio",
+        "domain": "500.co",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "What is a portfolio company? | Pilot Glossary",
+        "url": "https://pilot.com/glossary/portfolio-company",
+        "domain": "pilot.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Portfolio company services | Deloitte Global",
+        "url": "https://www.deloitte.com/ce/en/industries/investment-management/about/private-equity/portfolio-company-services.html",
+        "domain": "deloitte.com",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "What is a portfolio company? What to include in a portfolio",
+        "url": "https://uk.indeed.com/career-advice/career-development/what-is-portfolio-company",
+        "domain": "uk.indeed.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Who are the big 3 private equity firms?",
+      "What did Warren Buffett say about private equity?",
+      "What is an example of a portfolio company?",
+      "Which company is best for portfolio management?"
+    ],
+    "relatedQueries": [
+      "Top competing portfolio companies",
+      "Competing portfolio companies list"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

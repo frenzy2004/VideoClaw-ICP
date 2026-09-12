@@ -1,0 +1,122 @@
+{
+  "id": "vc-manual250-c3-044",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://helpx.adobe.com/premiere/desktop/render-and-export/export-files/export-a-project-as-a-final-cut-pro-xml-file.html",
+      "supports": "Official body inspected 2026-09-12: linked media prerequisite, limited effect translation and translation log; audio adjustments and complex transitions may not transfer accurately. No guarantee of current Final Cut interoperability.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.upwork.com/hire/video-editors/how-to-hire/",
+      "supports": "Inspected page body: Upwork recommends assessing editing craft, portfolio fit, and collaboration. No hiring demand, rates, or outcomes are inferred.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Is a backup editor's portfolio enough?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should the main editor help during the backup test?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does paying for a test reserve future availability?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: A human cold-start drill measures whether a named substitute can resume the current job, separately from general skill tests or file-format portability.",
+  "searchIntentBasis": "Editorial classification: evaluating a video-production purchase, engagement or vendor decision; not verified demand.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c3-044",
+    "keyword": "backup video editor continuity plan",
+    "found": true,
+    "query": "backup video editor continuity plan",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Backup and Business Continuity Overview",
+        "url": "https://support.lucidlink.com/hc/en-us/articles/31125415209997-Backup-and-Business-Continuity-Overview",
+        "domain": "support.lucidlink.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "IT Disaster Recovery Plan",
+        "url": "https://www.ready.gov/business/emergency-plans/recovery-plan",
+        "domain": "ready.gov",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "What do you use to backup your edits? : r/editors",
+        "url": "https://www.reddit.com/r/editors/comments/vu87wm/what_do_you_use_to_backup_your_edits/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Best way to backup video editing project?",
+        "url": "https://www.facebook.com/groups/FCPXUsers/posts/24561523786865794/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 5,
+        "title": "Data Backup, Disaster Recovery, & Business Continuity",
+        "url": "https://www.vc3.com/guide/data-backup-disaster-recovery",
+        "domain": "vc3.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Continuity Plan - an overview | ScienceDirect Topics",
+        "url": "https://www.sciencedirect.com/topics/computer-science/continuity-plan",
+        "domain": "sciencedirect.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Business Continuity Backups",
+        "url": "https://eshop.macsales.com/blog/63440-business-continuity-backups/?srsltid=AfmBOop13aq4lWYawpnVSTACpEc0mxv3HqWtQvyhCVTe72Cf2tqlPuPL",
+        "domain": "eshop.macsales.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "Use backup and business continuity planning to protect data",
+        "url": "https://www.techtarget.com/data-technologies/tip/Use-backup-and-business-continuity-planning-to-protect-data",
+        "domain": "techtarget.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is the 3/2/1 rule for backing up?",
+      "What is the difference between DRP and BCP?",
+      "How often should a DRP be updated?",
+      "What's a good backup plan?"
+    ],
+    "relatedQueries": [
+      "Backup video editor continuity plan template",
+      "Backup video editor continuity plan example",
+      "IT disaster Recovery Plan PDF",
+      "Disaster recovery plan template",
+      "Simple disaster recovery plan example",
+      "Business continuity and disaster recovery plan example",
+      "Disaster Recovery and business Continuity Plan PDF",
+      "LucidLink backup"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

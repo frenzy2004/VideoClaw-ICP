@@ -1,0 +1,129 @@
+{
+  "id": "vc-manual250-c1-046",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://news.ycombinator.com/showhn.html",
+      "supports": "Inspected official rules: personally built work, hands-on access, maker availability, and no solicitation of votes or comments. The trial-path worksheet is original.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://news.ycombinator.com/newsguidelines.html",
+      "supports": "Inspected official guidance on nonpromotional participation, constructive discussion, and the prohibition on generated or AI-edited text.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Is a waitlist page enough for Show HN?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can a founder ask friends to comment on the launch?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I paste an AI-written maker introduction into Hacker News?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: A worked trial-path rehearsal separates a usable result from a waitlist and prepares a substantive maker discussion while explicitly respecting HN's human-authorship requirement.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Exact US/en SERP evidence is being collected separately; keyword volume, difficulty, and CPC are unknown."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-046",
+    "keyword": "how to launch a startup on Show HN",
+    "found": true,
+    "query": "how to launch a startup on Show HN",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Show HN: I built a tool to launch all your startup ideas ...",
+        "url": "https://news.ycombinator.com/item?id=44870563",
+        "domain": "news.ycombinator.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "How to launch a dev tool on Hacker News",
+        "url": "https://www.markepear.dev/blog/dev-tool-hacker-news-launch",
+        "domain": "markepear.dev",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "How to Submit to Hacker News (Show HN) (DR 91, 2026)",
+        "url": "https://ideaproof.io/launch-directories/hacker-news-show-hn",
+        "domain": "ideaproof.io",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "How to launch a startup on Hacker News - Just Ship It",
+        "url": "https://newsletter.marclou.com/p/how-to-launch-a-startup-on-hacker-news",
+        "domain": "newsletter.marclou.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Hacker News Posting Guide: Rules, Show HN, and Timing",
+        "url": "https://syften.com/blog/hacker-news-marketing/",
+        "domain": "syften.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "How to Launch on Hacker News and Get Traction (2026)",
+        "url": "https://okara.ai/blog/how-to-launch-on-hacker-news",
+        "domain": "okara.ai",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Has anyone successfully launched on HackerNews? (I will ...",
+        "url": "https://www.reddit.com/r/startups/comments/1kn4aux/has_anyone_successfully_launched_on_hackernews_i/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "How to crush your Hacker News launch",
+        "url": "https://dev.to/dfarrell/how-to-crush-your-hacker-news-launch-10jk",
+        "domain": "dev.to",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "Side question. Why not do a Launch HN instead of Show ...",
+        "url": "https://news.ycombinator.com/item?id=43109280",
+        "domain": "news.ycombinator.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How do I launch my startup?",
+      "How to come up with a startup idea?",
+      "How do I post on Hacker News?",
+      "How to manage a start-up business?"
+    ],
+    "relatedQueries": [
+      "How to launch a startup on show hn reddit",
+      "Hacker news",
+      "How to launch on Hacker News",
+      "Product Hunt",
+      "How to sell your micro startup",
+      "Indie Hackers"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

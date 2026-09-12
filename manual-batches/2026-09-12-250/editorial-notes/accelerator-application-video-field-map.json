@@ -1,0 +1,131 @@
+{
+  "id": "vc-manual250-c2-011",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.ycombinator.com/video/",
+      "supports": "YC distinguishes its founders-only application video from the product demo field.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.techstars.com/application-preview",
+      "supports": "The preview separates team, product-demo and pitch-deck materials.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Can I submit the same video to every accelerator?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does a product demo replace a team introduction?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should I verify after uploading?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: A destination-first worksheet helps founders route existing media and record only missing application assets. Competing page bodies have not been audited for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "FAQ provenance: these are original editorial questions, not observed PAA. Evidence links ground the cited technical facts or provide relevant background; the article-specific capture, review and delivery procedures are original editorial synthesis, not procedures mandated by those sources."
+  ],
+  "serp": {
+    "id": "vc-manual250-c2-011",
+    "keyword": "accelerator application video requirements",
+    "found": true,
+    "query": "accelerator application video requirements",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "EIC Accelerator Video Script Template",
+        "url": "https://www.rasph.com/eic-accelerator-video-script-template",
+        "domain": "rasph.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "EIC Accelerator - GUIDE FOR APPLICANTS",
+        "url": "https://eic.ec.europa.eu/document/download/9d96fbf3-4d85-4ad0-9483-c77ce348111d_en?filename=EIC%20Accelerator%20guide%20for%20applicants_WP26.pdf",
+        "domain": "eic.ec.europa.eu",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "EIC Accelerator Application Process Guide",
+        "url": "https://www.emdesk.com/horizon-2020-horizon-europe-basics-guide/eic-accelerator-application-process-step-by-step-guide",
+        "domain": "emdesk.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Techstars Accelerator Application Preview",
+        "url": "https://www.techstars.com/application-preview",
+        "domain": "techstars.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "EIC Accelerator: 5 essential tips for your Video Pitch",
+        "url": "https://evolutioneurope.eu/blog/eic-accelerator-tips-video-pitch/",
+        "domain": "evolutioneurope.eu",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Guide to applying to startup accelerators",
+        "url": "https://mercury.com/blog/applying-to-accelerators",
+        "domain": "mercury.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "How to Join the Techstars Accelerator: A Step-by-Step Guide",
+        "url": "https://pitchbob.io/library/accelerators/how-to-join-the-techstars-accelerator-a-step-by-step-guide-pitchbob-io",
+        "domain": "pitchbob.io",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "HOW TO GET INTO A STARTUP ACCELERATOR // FIVE ...",
+        "url": "https://www.youtube.com/watch?v=zpHOv0LbVtM",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 9,
+        "title": "Accelerator Application Form",
+        "url": "https://member.eonetwork.org/eo-accelerator/accelerator-application-form",
+        "domain": "member.eonetwork.org",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Can a solo founder join an accelerator?",
+      "What are the top 5 startup accelerators?",
+      "Is there a startup accelerator in 2026?",
+      "How does an accelerator make money?"
+    ],
+    "relatedQueries": [
+      "Startup accelerator application video requirements",
+      "EIC Accelerator",
+      "EIC Pre Accelerator",
+      "Techstars accelerator application 2026",
+      "EIC Accelerator short proposal template",
+      "EIC Accelerator 2026 deadlines",
+      "Eic accelerator 2026 call",
+      "EIC Fund investment guidelines"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

@@ -1,0 +1,131 @@
+{
+  "id": "vc-manual250-c2-048",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.apple.com/en-ae/guide/imovie/mov84788882d/mac",
+      "supports": "iMovie can lower other clips relative to a selected foreground clip.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://helpx.adobe.com/uk/premiere/desktop/add-audio-effects/adjust-volume-and-levels/automatically-duck-audio.html",
+      "supports": "Premiere ducking uses audio-type assignments and editable generated level keyframes.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should narration always be the loudest layer?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can automatic ducking make every mixing decision?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can lowering a distorted source repair it?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Mix a finished investor recording so important product sounds remain audible without obscuring speech. Distinct from live computer-audio routing and camera capture synchronization. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact-query SERP integration belongs to main; this draft does not validate search demand. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities.",
+    "Distinct from c2-022 live computer-audio routing and c2-049 voice-product capture. This article mixes an existing investor recording.",
+    "No universal loudness target, unsupported audio-performance claim or promised restoration of distorted source material."
+  ],
+  "serp": {
+    "id": "vc-manual250-c2-048",
+    "keyword": "balance voiceover and background audio",
+    "found": true,
+    "query": "balance voiceover and background audio",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How do you balance voice, sound effects, and background ...",
+        "url": "https://www.reddit.com/r/NewTubers/comments/1e9qu4a/how_do_you_balance_voice_sound_effects_and/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Balancing Voiceover with Background Music | AUDIO TUTORIAL",
+        "url": "https://www.youtube.com/watch?v=o58yLGiDASM",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 3,
+        "title": "What's the best way to balance voice and music?",
+        "url": "https://community.adobe.com/questions-729/what-s-the-best-way-to-balance-voice-and-music-1391233",
+        "domain": "community.adobe.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Simple Audio Workflow: Balance Voice & Music for Clean ...",
+        "url": "https://www.youtube.com/watch?v=fK4iQnEoJwA",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 5,
+        "title": "Adjusting the Audio Balance",
+        "url": "https://product.vyond.com/adjusting-the-audio-balance/",
+        "domain": "product.vyond.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Mastering Audio Balance: Keep Background Music in Check",
+        "url": "https://thinkbrandedmedia.com/blog/tips-for-perfect-audio-balance-preventing-background-music-from-overpowering-dialogue/",
+        "domain": "thinkbrandedmedia.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "How to Balance Background Music and Voice for a Better ...",
+        "url": "https://hoangbaokhoa.com/en/how-to-balance-background-music-and-voice-for-a-better-livestream-b2545.php?srsltid=AfmBOopWF4nJbarUvb9X7NvaAROJnVFHTfuoK98gwkZHK2SQByr4WrF_",
+        "domain": "hoangbaokhoa.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "How to Balance Music and Vocals in Premiere Pro",
+        "url": "https://www.youtube.com/watch?v=6mplsgCegtY",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 9,
+        "title": "How to Perfectly Blend Background Music with Dialogue ...",
+        "url": "https://www.instagram.com/reel/DUTjyY1AhXK/",
+        "domain": "instagram.com",
+        "resultType": "video_or_social"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How to mix background music and voice?",
+      "How do I fix my audio balance?",
+      "Why can I hear background music but not voices on my TV?",
+      "What does balance do in audio settings?"
+    ],
+    "relatedQueries": [
+      "Balance voiceover and background audio online",
+      "Audacity",
+      "Auphonic"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

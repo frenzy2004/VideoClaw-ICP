@@ -1,0 +1,117 @@
+{
+  "id": "vc-manual250-c3-049",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://help.runwayml.com/hc/en-us/articles/23987639973267-Will-unused-credits-carry-over-after-my-billing-day",
+      "supports": "Official body inspected 2026-09-12: monthly allowances reset, Max has stated limited rollover, purchased credits are treated differently, and monthly credits are consumed first. All article numeric examples fictional.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://help.runwayml.com/hc/en-us/articles/52067870667411-Max-plan-details",
+      "supports": "Official body inspected 2026-09-12: model selection changes credit consumption and a model-specific credit guide is linked. No actual plan allowance, rates or output yield adopted.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Can I estimate credits from my finished video's length?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Do unused AI video credits roll over?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should I do if my trial produces no usable clips?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Buyers need a model-specific attempt ledger and billing-calendar estimate tied to usable footage, rather than a comparison of headline credit allowances.",
+  "searchIntentBasis": "Editorial classification: evaluating a video-production purchase, engagement or vendor decision; not verified demand.",
+  "reviewNotes": [
+    "All numeric credit rates, allowances, output yields and calculations in the body are explicitly fictional illustrations, not vendor pricing, measured benchmarks or forecasts. FAQs are editorial, not observed PAA."
+  ],
+  "serp": {
+    "id": "vc-manual250-c3-049",
+    "keyword": "how many AI video credits do I need",
+    "found": true,
+    "query": "how many AI video credits do I need",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How many credits does each video generation use?",
+        "url": "https://www.reddit.com/r/runwayml/comments/1g4oz07/how_many_credits_does_each_video_generation_use/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Manage your AI credits with Google One",
+        "url": "https://support.google.com/googleone/answer/16287445?hl=en",
+        "domain": "support.google.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "How do credits work?",
+        "url": "https://help.runwayml.com/hc/en-us/articles/15124877443219-How-do-credits-work",
+        "domain": "help.runwayml.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "What are AI Credits?",
+        "url": "https://powtoonsupport.powtoon.com/hc/en-gb/articles/27363184001169-What-are-AI-Credits",
+        "domain": "powtoonsupport.powtoon.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Generative credits FAQ | Creative Cloud",
+        "url": "https://helpx.adobe.com/creative-cloud/apps/generative-ai/generative-credits-faq.html",
+        "domain": "helpx.adobe.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Which AI Tools Cost the Most? AI Credit Breakdown",
+        "url": "https://www.youtube.com/shorts/TRqB6xN-SCw",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 7,
+        "title": "How AI credits work",
+        "url": "https://help.figma.com/hc/en-us/articles/33459875669015-How-AI-credits-work",
+        "domain": "help.figma.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How many credits to make an AI video?",
+      "Is 3,000 AI credits a lot?",
+      "How many Google AI Studio credits do I have?",
+      "How many Canva AI credits do you get?"
+    ],
+    "relatedQueries": [
+      "How many ai video credits do i need reddit",
+      "How many ai credits do i have google",
+      "How many Adobe generative credits do I have",
+      "Google Flow credits per video",
+      "AI credits activity",
+      "What can you do with 1000 Google AI credits",
+      "Top up AI credits Google",
+      "1000 monthly ai credits how many videos"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

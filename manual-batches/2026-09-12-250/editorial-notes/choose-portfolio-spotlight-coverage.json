@@ -1,0 +1,134 @@
+{
+  "id": "vc-manual250-c5-035",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.ycombinator.com/blog/the-yc-directory",
+      "supports": "YC's directory announcement describes filters for batch, industry, status, region and company size.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://a16z.com/what-is-new-media-in-2026/",
+      "supports": "a16z distinguishes portfolio services from owned media channels.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should every company receive the same number of spotlights?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How is spotlight selection different from request prioritization?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should a deferred company be told?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Select companies to feature based on audience usefulness, story readiness and gaps in prior editorial coverage. Distinct from production request priority: this chooses an editorial subject, not the next service ticket. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact US/en SERP evidence is being collected by main; query remains a candidate hypothesis. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities."
+  ],
+  "serp": {
+    "id": "vc-manual250-c5-035",
+    "keyword": "editorial content selection",
+    "found": true,
+    "query": "editorial content selection",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:01.735Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "What is Editorial Content & How Is It Used in Marketing?",
+        "url": "https://nytlicensing.com/latest/marketing/editorial-content-and-how-use-it-content-marketing/",
+        "domain": "nytlicensing.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Editorial Content: Elevate your Brand",
+        "url": "https://mailchimp.com/resources/editorial-content/",
+        "domain": "mailchimp.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "The Ultimate Guide to Editorial Content Types and Formats",
+        "url": "https://masternewmedia.com/the-ultimate-guide-to-editorial-content-types-and-formats-9cf03de79d87",
+        "domain": "masternewmedia.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Editorial selection process",
+        "url": "https://clarivate.com/academia-government/scientific-and-academic-research/research-discovery-and-referencing/web-of-science/web-of-science-core-collection/editorial-selection-process/",
+        "domain": "clarivate.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Editorial Selection | The Peerian Journal",
+        "url": "https://peerianjournal.com/index.php/tpj/editorial-selection",
+        "domain": "peerianjournal.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Scholarly articles for editorial content selection",
+        "url": "https://scholar.google.com/scholar?q=editorial+content+selection&hl=en&as_sdt=0&as_vis=1&oi=scholart",
+        "domain": "scholar.google.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Editorial Choices: Meaning & Impact",
+        "url": "https://www.studysmarter.co.uk/explanations/media-studies/media-influence/editorial-choices/",
+        "domain": "studysmarter.co.uk",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "What is Editorial Content?",
+        "url": "https://powerdigitalmarketing.com/blog/what-is-editorial-content/",
+        "domain": "powerdigitalmarketing.com",
+        "resultType": "article"
+      },
+      {
+        "position": 9,
+        "title": "What is an Editorial Strategy? (and How to Develop Your ...",
+        "url": "https://hardskill.exchange/blog/what-is-an-editorial-strategy-and-how-to-develop-your-own/",
+        "domain": "hardskill.exchange",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is an example of editorial content?",
+      "What is considered editorial content?",
+      "What are the three main parts of an editorial?",
+      "What are the four types of editorial articles?"
+    ],
+    "relatedQueries": [
+      "Editorial content selection example",
+      "Editorial content examples",
+      "What is editorial content in journalism",
+      "Editorial content selection framework",
+      "Editorial social media",
+      "Editorial Format example",
+      "Editorial writing examples",
+      "Fashion editorial meaning"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

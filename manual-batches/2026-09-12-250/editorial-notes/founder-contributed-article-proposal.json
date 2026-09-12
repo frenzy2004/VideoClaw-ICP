@@ -1,0 +1,131 @@
+{
+  "id": "vc-manual250-c1-016",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://fastcompany.zendesk.com/hc/en-us/articles/360000291906-How-can-I-submit-an-editorial-contribution",
+      "supports": "Work Life asks for complete unpublished contributions rather than pitches or outlines.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+      "supports": "The guidance asks whether content adds original analysis and demonstrates firsthand expertise.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Is a contributed article the same as a press pitch?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can the proposal mention my product?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How much of the article should I write before pitching?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: help a founder build and test a specific argument before approaching an editor with a bylined article proposal.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Exact US/en SERP evidence is being collected separately; keyword volume, difficulty, and CPC are unknown."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-016",
+    "keyword": "how to pitch a contributed article",
+    "found": true,
+    "query": "how to pitch a contributed article",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How To Pitch an Article to A Magazine with No Experience",
+        "url": "https://bettermarketing.pub/how-to-pitch-an-article-to-a-magazine-with-no-experience-71b8386a645b",
+        "domain": "bettermarketing.pub",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Best practices for pitching contributed articles to the media",
+        "url": "https://www.trueventures.com/blog/best-practices-pitching-contributed-articles",
+        "domain": "trueventures.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "Can someone explain to me how to pitch an article like I'm ...",
+        "url": "https://www.reddit.com/r/freelanceWriters/comments/1ix7w8g/can_someone_explain_to_me_how_to_pitch_an_article/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "8 Tips for Pitching Articles to Editors",
+        "url": "https://www.linkedin.com/pulse/8-tips-pitching-articles-editors-damon-garn-ey5lc",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 5,
+        "title": "How To Pitch an Article (With Helpful Tips and Example)",
+        "url": "https://www.indeed.com/career-advice/career-development/how-to-pitch-an-article",
+        "domain": "indeed.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Freelance contributors: how to offer us a contribution",
+        "url": "https://www.theguardian.com/info/1999/nov/22/contributors-guide-and-contacts",
+        "domain": "theguardian.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "5 Best Practices for Writing Article Pitches: How to Email Pitch",
+        "url": "https://www.interodigital.com/blog/5-secrets-for-writing-successful-article-pitches/",
+        "domain": "interodigital.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "The $40000 Article Pitch",
+        "url": "https://writingcooperative.com/the-40-000-article-pitch-33f6284141dd",
+        "domain": "writingcooperative.com",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "How to Write a Contributed Article that Gets Published in ...",
+        "url": "https://blog.propllr.com/how-to-write-a-contributed-article-that-gets-published",
+        "domain": "blog.propllr.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How do I pitch an article?",
+      "How much does the Guardian pay for an article?",
+      "How much should I charge for a 500 word article?",
+      "What is a good pitch example?"
+    ],
+    "relatedQueries": [
+      "How to pitch a contributed article template",
+      "How to pitch a contributed article sample",
+      "How to pitch a contributed article example",
+      "Article pitch examples",
+      "Magazine article pitch examples",
+      "How to pitch an article to a magazine",
+      "Article pitch template",
+      "How to write a pitch for an article"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

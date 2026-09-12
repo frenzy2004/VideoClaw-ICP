@@ -1,0 +1,2265 @@
+{
+  "checkedAt": "2026-09-12T03:59:44.828Z",
+  "origin": "http://127.0.0.1:3004",
+  "articleCount": 250,
+  "mediaAssets": 256,
+  "internalLinkCount": 256,
+  "internalLinksAll200": true,
+  "unknownSlug404": true,
+  "download200": true,
+  "previewSitemapExcludesDrafts": true,
+  "previewRobotsDisallowAll": true,
+  "previewLlmsExcludesDrafts": true,
+  "checks": [
+    {
+      "slug": "announce-startup-funding-with-video",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "founder-led-marketing-video-routine",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "startup-launch-video-plan",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "founder-story-video-interview",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "startup-press-kit-video-assets",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "product-launch-content-calendar",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "customer-testimonial-video-questions",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "startup-recruitment-video",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "startup-explainer-video-script",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "founder-linkedin-content-strategy",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "demo-day-pitch-story",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "startup-demo-video-workflow",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "demo-day-preparation-checklist",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "investor-update-video",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "investor-pitch-questions",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "record-product-demo-for-pitch",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "pitch-rehearsal-recording-routine",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "demo-day-follow-up-email",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "demo-day-social-media-plan",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "pitch-deck-vs-pitch-video",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "video-agency-vs-freelancer",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "in-house-vs-outsourced-video-production",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "freelance-video-editor-rates",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "video-production-brief-template",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "video-revision-process",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "ai-video-editor-vs-traditional-editor",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "video-editor-vs-motion-designer",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "video-production-budget",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "outsourcing-video-editing-checklist",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "ai-video-editing-limitations",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "repurpose-webinar-content",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "turn-long-videos-into-short-clips",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "video-content-repurposing-workflow",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "video-captions-accessibility",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "resize-video-for-social-media",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "customer-onboarding-video",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "software-tutorial-video",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "video-content-calendar",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "video-marketing-metrics",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "video-case-study-template",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "accelerator-marketing-strategy",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "venture-capital-portfolio-marketing",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "demo-day-event-video",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "accelerator-mentor-webinar",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "portfolio-founder-interviews",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "portfolio-company-newsletter",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "startup-accelerator-alumni-community",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "founder-content-workshop",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "portfolio-video-brand-guidelines",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "accelerator-media-program-metrics",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "pitch-startup-story-to-journalists",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "build-startup-media-list",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "press-embargo-vs-exclusive-founder",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "first-founder-media-interview-preparation",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "request-startup-press-correction",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "founder-contributed-article-proposal",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "founder-podcast-guest-pitch",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "startup-founder-conference-talk-proposal",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "startup-founder-bio-expertise",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "founder-journalist-source-request-response",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "founder-camera-confidence-practice",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "founder-video-teleprompter-vs-outline",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "founder-video-home-office-lighting",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "founder-video-room-echo",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "founder-video-eyeline",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "founder-talking-head-video-framing",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "record-cofounder-interview",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "shoot-founder-video-b-roll",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "founder-commentary-industry-news",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "founder-video-press-statement",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "startup-pivot-customer-video",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "startup-rebrand-customer-continuity",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "founder-customer-update-video",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "startup-public-roadmap-expectations",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "founder-customer-apology-video",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "founder-new-hire-welcome-video",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "startup-product-limitations-message",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "remote-founder-interview-recording",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "record-vertical-founder-video-phone",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "startup-partnership-announcement-customer-value",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "startup-customer-advisory-board-invitation",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "founder-ama-customer-questions",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "founder-launch-delay-video",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "founder-recorded-conference-talk",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "founder-customer-thank-you-video",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "startup-show-hn-tryable-product-post",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "founder-video-thumbnail",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "startup-industry-analyst-briefing",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "founder-video-voiceover-delivery",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "startup-lost-deal-messaging-interviews",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "accelerator-application-video-field-map",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "remote-cofounder-application-video",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "update-accelerator-application-demo-video",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "investor-demo-video-comprehension-test",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "accelerator-progress-paired-demo-recordings",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "correct-investor-video-visible-claims",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "anonymize-customer-footage-investor-demo",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "invisible-product-work-investor-demo",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "shorten-investor-demo-wait-time",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "investor-demo-screen-readability",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "hardware-investor-demo-shot-list",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "remote-investor-demo-computer-audio",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "offline-investor-demo-video-in-deck",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "two-founder-investor-demo-handoff",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "mobile-app-demo-event-projector",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "investor-demo-evidence-bookmarks",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "reset-investor-demo-account-state",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "product-clip-demo-day-time-budget",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "founder-camera-overlay-investor-demo",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "cross-device-investor-demo-recording",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "ai-investor-demo-repeat-trials",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "fictional-data-investor-demo-recording",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "label-prototype-investor-demo",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "human-intervention-investor-demo-video",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "live-or-recorded-investor-product-proof",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "private-investor-demo-video-access",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "investor-demo-product-screen-reader",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "record-investor-demo-discussion-permission",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "small-file-investor-demo-export",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "narrated-investor-deck-video-export",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "demo-video-event-computer-compatibility",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "demo-day-founder-video-av-cue-sheet",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "investor-demo-private-presenter-view",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "investor-demo-desktop-exposure-test",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "uncut-investor-demo-proof-take",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "public-demo-day-video-round-details",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "demo-subtitles-event-playback-delivery",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "investor-demo-narration-product-sound-mix",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "voice-product-investor-demo-recording",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "prototype-display-flicker-investor-demo",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "paid-video-editor-test-project",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "evaluate-video-production-portfolio",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "video-production-retainer-vs-project",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "unlimited-video-editing-queue-capacity",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "rent-or-buy-camera-equipment-business-video",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "video-studio-rental-vs-office-filming",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "choose-remote-video-recording-software",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "solo-videographer-vs-production-crew",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "local-video-crew-vs-traveling-team",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "hiring-drone-videographer-verification",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "when-to-hire-sound-recordist",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "audio-repair-service-vs-rerecording",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "when-to-pay-professional-video-color-grading",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "2d-vs-3d-animation-studio-selection",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "motion-graphics-template-vs-custom-package",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "stock-footage-vs-custom-video-shoot",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "stock-footage-license-client-commercial-use",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "music-license-business-client-videos",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "custom-music-vs-stock-music-video",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "choose-voice-actor-business-video-audition",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "buying-ai-voice-consent-account-control",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "choose-video-dubbing-service",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "buying-audio-description-services",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "choose-video-editing-computer-actual-footage",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "individual-vs-team-video-editing-licenses",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "cloud-vs-desktop-video-editor-privacy",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "raw-footage-video-project-file-ownership",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "video-editor-project-export-portability-test",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "video-production-payment-milestones",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "video-shoot-cancellation-postponement-terms",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "video-production-vendor-insurance-evidence",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "video-editing-turnaround-guarantee",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "hiring-video-editor-different-time-zone",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "backup-video-editor-continuity-test",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "video-editor-employee-independent-contractor",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "first-in-house-video-editor-job-description",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "annual-vs-monthly-video-editing-software",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "choose-large-video-file-transfer-service",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "estimate-ai-video-credit-plan",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "renew-video-production-partner-review",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "turn-video-transcript-into-useful-blog-post",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "extract-clear-product-stills-from-video",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "edit-recorded-panel-multiple-speakers",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "podcast-show-notes-from-conversation",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "recorded-qa-to-buyer-faq",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "sales-call-insights-objection-battlecards",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "recorded-sales-demo-follow-up",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "buying-committee-content-pack",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "nurture-sequence-from-existing-content",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "expert-recordings-to-newsletter",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "existing-content-reengage-stalled-leads",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "customer-qbr-to-renewal-recap",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "feature-demo-to-visual-release-notes",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "support-recordings-to-troubleshooting-articles",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "partner-comarketing-kit-from-recording",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "employee-sharing-kit-from-expert-content",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "trade-show-video-loop-existing-demos",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "should-gate-on-demand-webinar-replay",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "campaign-video-not-indexed-google",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "useful-chapters-long-product-video",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "connect-youtube-shorts-full-product-story",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "video-email-reliable-viewing-path",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "video-cta-placement-viewer-readiness",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "embedded-video-landing-page-speed",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "retargeting-sequence-existing-video-assets",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "organic-video-to-focused-b2b-ad",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "test-two-video-openings",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "test-thumbnails-existing-b2b-video",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "utm-tracking-repurposed-video-links",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "check-ga4-embedded-video-tracking",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "retention-dips-video-edit-plan",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "update-old-product-video",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "localize-product-video-meaning",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "video-conversation-to-audio-episode",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "dense-slides-to-visual-process-explainer",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "screen-recording-to-product-gif",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "sales-content-gaps-existing-video-library",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "recorded-method-to-buyer-checklist",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "modular-sales-videos-existing-recordings",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "content-syndication-vs-repurposing-route",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "portfolio-media-support-service-menu",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "prioritize-portfolio-media-requests",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "portfolio-media-office-hours-scheduling",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "portfolio-media-review-work-limits",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "resolve-portfolio-launch-calendar-clashes",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "onboard-company-portfolio-media-system",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "separate-company-access-media-library",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "label-portfolio-photos-people-credits",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "maintain-portfolio-company-directory",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "portfolio-media-library-tag-taxonomy",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "portfolio-media-release-version-control",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "portfolio-media-rights-expiry-calendar",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "recording-private-portfolio-roundtables",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "recall-withdrawn-portfolio-media-assets",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "portfolio-media-product-change-audit",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "migrate-portfolio-media-library",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "search-portfolio-recordings-by-moment",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "merge-duplicate-portfolio-media-files",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "test-findability-portfolio-media-resources",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "portfolio-media-resource-adoption-diagnosis",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "portfolio-expert-speaker-bureau",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "route-portfolio-press-enquiries",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "separate-competing-company-media-work",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "coordinate-portfolio-announcement-embargo",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "choose-portfolio-spotlight-coverage",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "match-portfolio-marketing-peer-help",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "cohort-sponsor-media-fulfillment",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "allocate-shared-portfolio-media-costs",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "portfolio-resource-translation-change-tracking",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "track-portfolio-press-coverage",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "pause-restart-portfolio-media-posts",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "roll-out-portfolio-template-changes",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "anonymize-portfolio-peer-learning-notes",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "archive-portfolio-media-useful-history",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "portfolio-story-publishing-ownership",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "republish-portfolio-articles-source-attribution",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "cohort-media-graduation-handover",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "portfolio-learning-video-role-paths",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "check-portfolio-media-batch-ingestion",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "portfolio-media-needs-survey",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    }
+  ]
+}

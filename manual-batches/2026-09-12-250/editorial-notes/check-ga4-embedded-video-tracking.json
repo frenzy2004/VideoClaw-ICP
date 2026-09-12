@@ -1,0 +1,118 @@
+{
+  "id": "vc-manual250-c4-040",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.google.com/analytics/answer/9216061?hl=en",
+      "supports": "Automatic video events require supported YouTube embeds; documents start, progress milestones, completion, and parameters.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.google.com/analytics/answer/7201382?hl=en",
+      "supports": "DebugView requires debug mode and a selected device; privacy and consent conditions affect visibility.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does enhanced measurement cover every embedded player?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Why do I see a click but no video_start?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What causes duplicate video events?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Determine whether the embed supports the expected automatic events and verify actual playback-event collection. Distinct from UTM tagging, which measures incoming links, and from choosing a video KPI. No ranking-page comparison or demand conclusion is asserted.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending.",
+    "Technical diagnostic intent, not general GA4 outage or Ads conversion troubleshooting. No runtime edits performed; consent controls must remain intact."
+  ],
+  "serp": {
+    "id": "vc-manual250-c4-040",
+    "keyword": "GA4 video tracking not working",
+    "found": true,
+    "query": "GA4 video tracking not working",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:32:56.760Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "GTM is not able to track events in ga4 or you can say ...",
+        "url": "https://support.google.com/analytics/thread/384285265/gtm-is-not-able-to-track-events-in-ga4-or-you-can-say-gtm-is-not-sending-data-to-ga4?hl=en",
+        "domain": "support.google.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Track Videos with Google Analytics 4 and Google Tag ...",
+        "url": "https://www.analyticsmania.com/post/track-videos-with-google-analytics-4-and-google-tag-manager/",
+        "domain": "analyticsmania.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Google Analytics 4 not working? Here is how to fix it.",
+        "url": "https://optimizesmart.com/blog/google-analytics-4-not-working-here-is-how-to-fix-it/",
+        "domain": "optimizesmart.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "Google Analytics 4 Not Tracking? Replace the Data Stream",
+        "url": "https://www.pixelyoursite.com/ga4-replace-stream",
+        "domain": "pixelyoursite.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "GA4 Troubleshooting: Common Issues & How to Solve Them",
+        "url": "https://www.linkedin.com/pulse/ga4-troubleshooting-common-issues-how-solve-them-asik-mia-c4tac",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 6,
+        "title": "GA4 Video Tracking Guide: YouTube, Vimeo & HTML5",
+        "url": "https://incisiveranking.com/the-guide-to-video-tracking-with-ga4-and-gtm/?srsltid=AfmBOoqFNIihz8x7UllXOpcmBeSb0ZZBPzqBTbfxWBg3peQOk5iBn-CO",
+        "domain": "incisiveranking.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Can't track Vimeo event on GA4 as it won't trigger",
+        "url": "https://www.reddit.com/r/GoogleAnalytics/comments/15slo6d/cant_track_vimeo_event_on_ga4_as_it_wont_trigger/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Is Google Analytics not working today?",
+      "Why isn't my Google Ads conversion tracking working?",
+      "How to track events in GA4?",
+      "How to track LLM traffic in GA4?"
+    ],
+    "relatedQueries": [
+      "Ga4 video tracking not working android",
+      "Google Analytics",
+      "Google Tag Manager",
+      "Html5 video tracking google tag manager",
+      "YouTube video tracking",
+      "Vimeo tracking Google Tag Manager",
+      "Vimeo video tracking",
+      "GA4 site search"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

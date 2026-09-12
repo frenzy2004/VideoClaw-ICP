@@ -1,0 +1,124 @@
+{
+  "id": "vc-manual250-c2-016",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.techstars.com/blog/founder-advice/investors-don-t-fund-confusion",
+      "supports": "The article discusses contradictions between different fundraising materials.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.apple.com/en-mide/guide/keynote/tan81813d552/mac",
+      "supports": "Keynote can rerecord narration from a selected point and preview the saved presentation.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Can I fix the mistake only in the video description?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should I rerecord the whole presentation?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What if someone downloaded the old video?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: A frame-level correction map addresses contradictory audio, picture and distribution surfaces as one repair. Competing page bodies have not been audited for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "FAQ provenance: these are original editorial questions, not observed PAA. Evidence links ground the cited technical facts or provide relevant background; the article-specific capture, review and delivery procedures are original editorial synthesis, not procedures mandated by those sources."
+  ],
+  "serp": {
+    "id": "vc-manual250-c2-016",
+    "keyword": "correct a mistake in a video",
+    "found": true,
+    "query": "correct a mistake in a video",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Fixing a Mistake in A Video",
+        "url": "https://community.udemy.com/en/discussion/154760/fixing-a-mistake-in-a-video",
+        "domain": "community.udemy.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "How to damage control a mistake in a popular video?",
+        "url": "https://www.reddit.com/r/NewTubers/comments/16wd02s/how_to_damage_control_a_mistake_in_a_popular_video/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "How to correct a wrong video after uploading?",
+        "url": "https://www.facebook.com/groups/31425803023/posts/10159434767003024/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 4,
+        "title": "I made a spelling mistake in a video, how can I fix or cover ...",
+        "url": "https://www.justanswer.com/computer/5qbey-made-spelling-mistake-video-fix-cover.html",
+        "domain": "justanswer.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "7 Most Common Mistakes in Video Editing and How to Fix ...",
+        "url": "https://reviewnprep.com/blog/7-most-common-mistakes-in-video-editing-and-how-to-fix-them/",
+        "domain": "reviewnprep.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "5 video mistakes you can fix in editing",
+        "url": "https://natashalanedesignco.com/5-video-mistakes-you-can-fix-in-editing/",
+        "domain": "natashalanedesignco.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "How to Quickly Fix Small Video Mistakes Without Re- ...",
+        "url": "https://smartmediacutter.com/blog/fix-video-mistakes-without-rerendering/",
+        "domain": "smartmediacutter.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "AI Video Correction | Video Regenerate from Descript",
+        "url": "https://www.descript.com/video-regenerate",
+        "domain": "descript.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How can I edit an existing video?",
+      "How to fix a video error?",
+      "Can mistakes be corrected?",
+      "Can Chatgpt edit a video?"
+    ],
+    "relatedQueries": [
+      "Correct a mistake in a video online",
+      "Correct a mistake in a video iphone",
+      "Correct a mistake in a video online free",
+      "Correct a mistake in a video free",
+      "Descript",
+      "Video editor",
+      "YouTube Studio",
+      "YouTube Corrections feature"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

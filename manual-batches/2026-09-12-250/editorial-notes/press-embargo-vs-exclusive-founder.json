@@ -1,0 +1,128 @@
+{
+  "id": "vc-manual250-c1-013",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.ycombinator.com/blog/a-guide-to-pitching-funding-and-launch-stories/",
+      "supports": "An embargo and an exclusive differ; the guide advises explicit agreement and defined exclusive scope.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.ycombinator.com/blog/getting-press-for-your-startup",
+      "supports": "Seibel presents an exclusive as one possible approach to startup media outreach.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does writing embargo in an email bind the journalist?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I offer an exclusive interview while others cover the news?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should I do if a journalist declines?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: make the scope and timing decision concrete through scenarios rather than treating an embargo label as automatic agreement.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Exact US/en SERP evidence is being collected separately; keyword volume, difficulty, and CPC are unknown."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-013",
+    "keyword": "press embargo vs exclusive",
+    "found": true,
+    "query": "press embargo vs exclusive",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "The use of Embargoes and Exclusives in PR",
+        "url": "https://mavenagency.com/news-insights/insights/utilizing-embargoes-and-exclusives-in-pr/",
+        "domain": "mavenagency.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "Embargo vs. Exclusive: What You Need to Know",
+        "url": "https://www.erprgroup.com/erpr-group-blog/embargo-vs-exclusive-what-you-need-to-know",
+        "domain": "erprgroup.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "News embargo",
+        "url": "https://en.wikipedia.org/wiki/News_embargo",
+        "domain": "en.wikipedia.org",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Sarah Wheaton - My weekly rant to PR people",
+        "url": "https://www.linkedin.com/posts/sarah-wheaton-248b943_my-weekly-rant-to-pr-people-embargoes-and-activity-7368347646496784384-ZLIz",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 5,
+        "title": "How to Use Embargos & Exclusives in PR",
+        "url": "https://www.prnewswire.com/resources/articles/embargoes-exclusives-in-pr/",
+        "domain": "prnewswire.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "7 embargo rules from a journalist who hates them (hi, it's me!)",
+        "url": "https://jonisweet.substack.com/p/how-to-use-embargoes-in-pr",
+        "domain": "jonisweet.substack.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "How to use embargoes: our essential guide",
+        "url": "https://roxhillmedia.com/resources/pr-insights/how-to-use-embargoes/",
+        "domain": "roxhillmedia.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "Exclusive vs Embargoed Preview: A Crucial Distinction in PR",
+        "url": "https://storiesout.com/en/press-relations-blog/lexicon/exclusive-vs-embargoed-preview-pr/",
+        "domain": "storiesout.com",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "Exclusive v. Embargo: Which One Do You Use?",
+        "url": "https://plat4orm.com/blog/exclusive-v-embargo-which-one-do-you-use/",
+        "domain": "plat4orm.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What does a press embargo mean?",
+      "What is the difference between an embargo and an exclusive in PR?",
+      "What does an embargoed press release look like?",
+      "What is the embargo section of a press conference?"
+    ],
+    "relatedQueries": [
+      "Press embargo vs exclusive reddit",
+      "Press release Notes",
+      "Press release in public relations",
+      "Press release article",
+      "Press report"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

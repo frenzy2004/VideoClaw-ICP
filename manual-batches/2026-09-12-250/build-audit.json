@@ -1,0 +1,14 @@
+{
+  "checkedAt": "2026-09-12T04:02:49.053Z",
+  "nativeBase": "b6b0833c78443b44b12bf6d33f05baa7ac8427d3",
+  "batchArticles": 250,
+  "nativeTotalArticles": 253,
+  "nativeStaticRoutes": 275,
+  "allBatchPrerendered": true,
+  "allArticleAndGraphicHashesMatch": true,
+  "buildMode": "VERCEL_ENV=preview npm run build",
+  "buildPassed": true,
+  "buildConfigUnmodified": true,
+  "inventorySha256": "fbaa5917f20f27352b623efdc3041174ec980d2f51a839efe4f4a0f43be488a2",
+  "buildLogSha256": "f99f010cea7ad90f1673557803e6ce7122abf4a763fcdc823d69fd868a885970"
+}

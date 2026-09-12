@@ -1,0 +1,135 @@
+{
+  "id": "vc-manual250-c5-022",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.canto.com/hc/en-us/articles/23001802813841-Set-Expiration-Dates",
+      "supports": "Asset expiry can remove a file from Canto portals and uses the account time zone.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.bynder.com/hc/en-us/articles/360013931059-How-To-Mark-Assets-As-Archived",
+      "supports": "Archived assets have restricted visibility, and archiving can be scheduled.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Can an expiry date in the library remove published copies elsewhere?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What if the supplied use terms are unclear?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does retiring an asset mean deleting its history?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Schedule media review or expiry actions from dates and permitted uses already confirmed by the company or rights owner. This implements supplied instructions across destinations rather than interpreting licences or deciding whether a use is lawful. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact US/en SERP evidence is being collected by main; query remains a candidate hypothesis. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities.",
+    "Rights-adjacent topic: draft implements company-supplied instructions and does not interpret licences, prescribe retention periods or imply legal compliance."
+  ],
+  "serp": {
+    "id": "vc-manual250-c5-022",
+    "keyword": "digital asset expiration dates",
+    "found": true,
+    "query": "digital asset expiration dates",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:01.735Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Digital Rights Management in Assets",
+        "url": "https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/assets/manage/drm",
+        "domain": "experienceleague.adobe.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "On the Nature and Security of Expiring Digital Cash",
+        "url": "https://www.mdpi.com/1911-8074/18/8/452",
+        "domain": "mdpi.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "What Is Digital Asset Management?",
+        "url": "https://www.ibm.com/think/topics/digital-asset-management",
+        "domain": "ibm.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Deadline looms for digital asset businesses to apply for a ...",
+        "url": "https://www.asic.gov.au/about-asic/news-centre/news-items/deadline-looms-for-digital-asset-businesses-to-apply-for-a-licence",
+        "domain": "asic.gov.au",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Digital assets | Internal Revenue Service",
+        "url": "https://www.irs.gov/filing/digital-assets",
+        "domain": "irs.gov",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "What are expiration dates?",
+        "url": "https://community.acquia.com/acquiadam/s/article/What-are-expiration-dates",
+        "domain": "community.acquia.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Guide to Digital Asset Management (DAM) for Enterprises",
+        "url": "https://www.microsoft.com/en-us/microsoft-365/content-management-solutions/digital-asset-management",
+        "domain": "microsoft.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Digital Asset Rights Expiry",
+        "url": "https://www.advox.io/en/glossar/digital-asset-rights-expiry/",
+        "domain": "advox.io",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "The six stages of the digital asset lifecycle",
+        "url": "https://www.resourcespace.com/blog/dam-lifecycle-stages",
+        "domain": "resourcespace.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Does currency have an expiry date?",
+      "Does expiry date mean last day?",
+      "When was digital asset founded?",
+      "What is digital asset management (DAM)?"
+    ],
+    "relatedQueries": [
+      "Digital asset expiration dates example",
+      "Digital asset expiration dates 2022",
+      "Digital asset management system examples",
+      "Digital asset management software",
+      "Digital Asset Manager salary",
+      "Digital Asset Management jobs",
+      "Digital asset management tools",
+      "Digital asset management certification"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

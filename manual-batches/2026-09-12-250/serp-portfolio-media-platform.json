@@ -1,0 +1,3617 @@
+{
+  "schemaVersion": 1,
+  "kind": "manual_editorial_batch",
+  "provenance": {
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "observedAt": "2026-09-12T02:37:01.735Z"
+  },
+  "records": [
+    {
+      "id": "vc-manual250-c5-011",
+      "keyword": "marketing service catalog",
+      "found": true,
+      "query": "marketing service catalog",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "146 free templates of Services catalog",
+          "url": "https://www.flipsnack.com/templates/search?q=Services+catalog",
+          "domain": "flipsnack.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Inspiring Catalog Marketing Examples",
+          "url": "https://flippingbook.com/blog/marketing-tips/catalog-marketing-examples",
+          "domain": "flippingbook.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "How to Create a Service Catalog (Step by Step Guide)",
+          "url": "https://www.port.io/blog/how-to-create-a-service-catalog",
+          "domain": "port.io",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Service Catalog",
+          "url": "https://www.pinterest.com/ideas/service-catalog/899671832412/",
+          "domain": "pinterest.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Catalog Marketing: Strategies, Examples & Success Tips",
+          "url": "https://www.publitas.com/blog/what-is-catalog-marketing-how-brands-turn-browsing-into-buying/",
+          "domain": "publitas.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Digital marketing catalog Images - Free Download on ...",
+          "url": "https://www.magnific.com/free-photos-vectors/digital-marketing-catalog",
+          "domain": "magnific.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "How to Build Your MSP Service Catalog",
+          "url": "https://www.logmein.com/blog/how-to-build-your-msp-service-catalog",
+          "domain": "logmein.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "Catalog Marketing Examples + When to Use Them",
+          "url": "https://www.conquestgraphics.com/blog/conquest-graphics/2022/01/06/catalog-marketing-examples-when-to-use-them?srsltid=AfmBOoqU34B6w5iUmQp14P3QHRDqoqfKGbCITZdF4J4LILFyzLQFMNyF",
+          "domain": "conquestgraphics.com",
+          "resultType": "article"
+        },
+        {
+          "position": 9,
+          "title": "Service catalog",
+          "url": "https://en.wikipedia.org/wiki/Service_catalog",
+          "domain": "en.wikipedia.org",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is a service catalogue example?",
+        "What companies still send out catalogues?",
+        "Can you give me an example of catalog marketing?",
+        "What is included in a service catalog?"
+      ],
+      "relatedQueries": [
+        "Marketing service catalog template",
+        "Free marketing service catalog",
+        "Marketing service catalog pdf",
+        "Catalog marketing examples",
+        "Catalogue marketing",
+        "Best marketing service catalog",
+        "Service catalog examples",
+        "Product catalogue examples pdf"
+      ]
+    },
+    {
+      "id": "vc-manual250-c5-012",
+      "keyword": "creative request management",
+      "found": true,
+      "query": "creative request management",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "how to manage creative requests effectively",
+          "url": "https://asana.com/resources/how-manage-creative-requests",
+          "domain": "asana.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "How does your team manage creative requests from other ...",
+          "url": "https://www.reddit.com/r/Design/comments/1mk8oee/how_does_your_team_manage_creative_requests_from/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Creative Request Management Systems",
+          "url": "https://manageitpros.com/use-case/creative-request-management",
+          "domain": "manageitpros.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Best Creative Request Management Tools for US Teams",
+          "url": "https://revuesuite.com/blog/creative-request-management-tools-us",
+          "domain": "revuesuite.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Streamlining Creative Project Request Processes",
+          "url": "https://www.linkedin.com/top-content/project-management/project-management-workflow-efficiency/streamlining-creative-project-request-processes/",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 6,
+          "title": "World-Class Creative Project Management Software",
+          "url": "https://www.wrike.com/teams/creative-project-management/",
+          "domain": "wrike.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Free Creative Request Form Template for Design ...",
+          "url": "https://www.airtable.com/templates/creative-request-form/expokSKFt8jUoTmRf",
+          "domain": "airtable.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "12 Most Important Creative Project Management Software ...",
+          "url": "https://punchlist.com/article/best-project-management-tools-for-creative-teams/",
+          "domain": "punchlist.com",
+          "resultType": "article"
+        },
+        {
+          "position": 9,
+          "title": "Essential Guide to Creative Project Management - Simple.io",
+          "url": "https://www.simple.io/blog/guide-to-creative-project-management",
+          "domain": "simple.io",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What does a creative manager do?",
+        "What are the responsibilities of a creative team?",
+        "What does a creative project manager do?"
+      ],
+      "relatedQueries": [
+        "Creative request management tools",
+        "Creative request management template",
+        "Creative request management examples",
+        "Creative request management course",
+        "Asana creative request form"
+      ]
+    },
+    {
+      "id": "vc-manual250-c5-013",
+      "keyword": "office hours scheduling",
+      "found": true,
+      "query": "office hours scheduling",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Online Scheduling for Office Hours? : r/Professors",
+          "url": "https://www.reddit.com/r/Professors/comments/jj4tmz/online_scheduling_for_office_hours/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Calendly: Meeting Scheduling Software and AI Meeting Tools",
+          "url": "https://calendly.com/",
+          "domain": "calendly.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Scheduling Virtual Office Hours",
+          "url": "https://www.youtube.com/watch?v=KVlMK6WAE9I",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 4,
+          "title": "Office Hour Scheduling via Google Calendar",
+          "url": "https://onehe.org/eu-activity/office-hour-scheduling-via-google-calendar/",
+          "domain": "onehe.org",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Online appointment scheduling with Google Calendar",
+          "url": "https://workspace.google.com/intl/en_my/resources/appointment-scheduling/",
+          "domain": "workspace.google.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Office hour scheduling software | Reservio Business",
+          "url": "https://www.reservio.com/office-hours-software",
+          "domain": "reservio.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Student self-scheduling for faculty office hours",
+          "url": "https://doodle.com/en/faculty-office-hours-self-scheduling-for-students/",
+          "domain": "doodle.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "How to Create Office Hours",
+          "url": "https://newsupport.conexed.com/knowledge/create-office-hours",
+          "domain": "newsupport.conexed.com",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "Online Bookings and Appointment Scheduling | Microsoft 365",
+          "url": "https://www.microsoft.com/en-my/microsoft-365/business/scheduling-and-booking-app",
+          "domain": "microsoft.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is the best app for scheduling work hours?",
+        "Can you give me an example of a work schedule?",
+        "How to professionally schedule a meeting?",
+        "Does Microsoft Office have a scheduling tool?"
+      ],
+      "relatedQueries": [
+        "Office hours scheduling app",
+        "Office hours scheduling online",
+        "Appointment scheduling",
+        "Calendar appointment scheduling",
+        "Free office hours scheduling",
+        "Free online appointment scheduling",
+        "Free appointment scheduling app for small business",
+        "Scheduling calendar"
+      ]
+    },
+    {
+      "id": "vc-manual250-c5-014",
+      "keyword": "content approval bottlenecks",
+      "found": true,
+      "query": "content approval bottlenecks",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How to escape the social media approval bottleneck ...",
+          "url": "https://www.heyorca.com/blog/how-to-escape-the-social-media-approval-bottleneck-without-losing-your-sanity",
+          "domain": "heyorca.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "Top 6 Methods to Reduce Approvals Bottlenecks",
+          "url": "https://4castplus.com/top-6-methods-to-reduce-approvals-bottlenecks/",
+          "domain": "4castplus.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "How to deal with approval bottleneck? : r/marketing",
+          "url": "https://www.reddit.com/r/marketing/comments/173wmjw/how_to_deal_with_approval_bottleneck/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "How to Build a Content Approval Workflow That Doesn't ...",
+          "url": "https://scoop.app/blog/influencer/marketing/content-approval-workflow-no-bottlenecks.html",
+          "domain": "scoop.app",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Manual Approval Bottlenecks: Causes and Fixes",
+          "url": "https://altaflow.com/blog/manual-approval-bottlenecks-causes-and-fixes",
+          "domain": "altaflow.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "3 ways to avoid review bottlenecks during the content ...",
+          "url": "https://www.vodori.com/blog/three-ways-to-avoid-content-review-bottlenecks",
+          "domain": "vodori.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "AI Content Approval Process Statistics: 20 Editorial ...",
+          "url": "https://writebros.ai/resources/ai-content-approval-process-statistics",
+          "domain": "writebros.ai",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "Two-for-One: Overcoming Bottlenecks in Approval Processes",
+          "url": "https://blog.noreja.com/en/approval-bottlenecks/",
+          "domain": "blog.noreja.com",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "Content Approval Software - Workflow",
+          "url": "https://www.cflowapps.com/content-approval-process/",
+          "domain": "cflowapps.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How do you resolve a bottleneck?",
+        "What is content approval and how does it work?",
+        "What is a bottleneck in workflow?",
+        "How to identify bottlenecks in a process?"
+      ],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual250-c5-015",
+      "keyword": "shared marketing calendar",
+      "found": true,
+      "query": "shared marketing calendar",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Marketing calendars: What they are + how to build one",
+          "url": "https://www.airtable.com/articles/how-to-create-a-marketing-calendar",
+          "domain": "airtable.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "Free Social Media Calendar Template for Marketing Teams ...",
+          "url": "https://asana.com/templates/social-media-calendar",
+          "domain": "asana.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Plan your campaigns with the marketing calendar",
+          "url": "https://knowledge.hubspot.com/campaigns/use-your-marketing-calendar",
+          "domain": "knowledge.hubspot.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Free Marketing Calendar Templates in All Formats",
+          "url": "https://www.smartsheet.com/9-free-marketing-calendar-templates-excel?srsltid=AfmBOopWOmdPnEZTgAfLJIlPMnASGYvulSJoWLHLKK2KG6UKIaAUS4cg",
+          "domain": "smartsheet.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Free Marketing Calendar Template & Examples",
+          "url": "https://www.teamgantt.com/marketing-templates/marketing-schedule-template",
+          "domain": "teamgantt.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Marketing Calendar Guide: Plan Campaigns And Track ...",
+          "url": "https://monday.com/blog/marketing/marketing-calendar/",
+          "domain": "monday.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Best Digital Marketing Calendar for SMBs + Template",
+          "url": "https://www.pipedrive.com/en/blog/digital-marketing-calendar",
+          "domain": "pipedrive.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "2026 Marketing Calendar | Key Marketing Dates",
+          "url": "https://www.energypr.co.uk/blog/marketing-calendar/",
+          "domain": "energypr.co.uk",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Shared marketing calendar template",
+        "Shared marketing calendar template free",
+        "Shared marketing calendar template excel",
+        "Marketing calendar template Excel",
+        "Shared marketing calendar pdf",
+        "Social media calendar template Excel",
+        "Annual marketing calendar template",
+        "Digital marketing calendar"
+      ]
+    },
+    {
+      "id": "vc-manual250-c5-016",
+      "keyword": "portfolio company onboarding",
+      "found": true,
+      "query": "portfolio company onboarding",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Portfolio Company Onboarding",
+          "url": "https://vector-advisory.com/service/portfolio-company-onboarding/",
+          "domain": "vector-advisory.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Automating Portfolio Company Onboarding - Automatter",
+          "url": "https://automatter.substack.com/p/automating-portfolio-company-onboarding",
+          "domain": "automatter.substack.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Portfolio Company Onboarding | Mysite",
+          "url": "https://www.fiedotinconsulting.com/portfolio-company-onboarding",
+          "domain": "fiedotinconsulting.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "The Critical Role of Onboarding in Private Equity | Max ...",
+          "url": "https://www.linkedin.com/posts/maxime_unlocking-value-early-the-critical-role-activity-7260698416043745280-3StH",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 5,
+          "title": "Onboarding Excellence: Best Practices for Fund Manager ...",
+          "url": "https://www.venturefundblueprint.com/articles/onboarding-excellence-best-practices-for-fund-manager-and-portfolio-interactions",
+          "domain": "venturefundblueprint.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "The Private Equity Playbook: Essential Steps for Seamless ...",
+          "url": "https://dufourmax.medium.com/the-private-equity-playbook-essential-steps-for-seamless-portfolio-onboarding-3451d1e98ddd",
+          "domain": "dufourmax.medium.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Best Practices for Onboarding Portfolio Companies to Your VC ...",
+          "url": "https://www.youtube.com/watch?v=tdosk_yY4eA",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 8,
+          "title": "Onboarding Training Portfolio - Custom Training",
+          "url": "https://neoskill.com/onboarding-training-portfolio-custom-training-neoskill/",
+          "domain": "neoskill.com",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "Tips For Onboarding Portfolio Companies",
+          "url": "https://hackernoon.com/tips-for-onboarding-portfolio-companies-3cc2af0c5de",
+          "domain": "hackernoon.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What are the 5 pillars of onboarding?",
+        "What are the 7 steps of portfolio management?",
+        "What does it mean to be a portfolio company?",
+        "What should be included in a company portfolio?"
+      ],
+      "relatedQueries": [
+        "Portfolio company onboarding template",
+        "Portfolio company onboarding process"
+      ]
+    },
+    {
+      "id": "vc-manual250-c5-017",
+      "keyword": "digital asset management permissions",
+      "found": true,
+      "query": "digital asset management permissions",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "User permissions and access control in Digital Asset ...",
+          "url": "https://www.resourcespace.com/blog/dam-user-permissions-access-control",
+          "domain": "resourcespace.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "User Permissions in Digital Asset Management",
+          "url": "https://www.orangelogic.com/user-permissions-in-digital-asset-management",
+          "domain": "orangelogic.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "What Is Digital Asset Management?",
+          "url": "https://www.ibm.com/think/topics/digital-asset-management",
+          "domain": "ibm.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "How to Manage User Permissions in DAM",
+          "url": "https://www.keyshot.com/blog/dam-user-permissions/?srsltid=AfmBOoqoxn-B_x98OHPDACaIyNq0Xk96OAPGavDzWsZkDjkTsR_f-KdW",
+          "domain": "keyshot.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Guide to Digital Asset Management (DAM) for Enterprises",
+          "url": "https://www.microsoft.com/en-us/microsoft-365/content-management-solutions/digital-asset-management",
+          "domain": "microsoft.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Delving into permissions, assets, and access",
+          "url": "https://www.bynder.com/en/blog/dam-permissions/",
+          "domain": "bynder.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Security and Compliance in Digital Asset Management",
+          "url": "https://www.aprimo.com/resource-library/article/security-and-compliance-in-digital-asset-management",
+          "domain": "aprimo.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "What Is Digital Asset Management? DAM Software Guide ...",
+          "url": "https://www.acquia.com/blog/digital-asset-management",
+          "domain": "acquia.com",
+          "resultType": "article"
+        },
+        {
+          "position": 9,
+          "title": "Understanding Access Permissions in Digital Asset ...",
+          "url": "https://dbgallery.com/blog/understanding-access-permissions/",
+          "domain": "dbgallery.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is digital asset management used for?",
+        "How to manage user permissions?",
+        "What are the 5 P's of asset management?",
+        "What are some examples of digital asset management?"
+      ],
+      "relatedQueries": [
+        "Digital asset management permissions in dam",
+        "Digital asset management permissions pdf",
+        "Google Drive digital asset management",
+        "Media asset management software",
+        "Best digital asset management software for marketing",
+        "Image asset management",
+        "Lightroom digital asset management",
+        "Digital asset organizer"
+      ]
+    },
+    {
+      "id": "vc-manual250-c5-018",
+      "keyword": "photo caption metadata",
+      "found": true,
+      "query": "photo caption metadata",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Add captions to photos metadata : r/photography",
+          "url": "https://www.reddit.com/r/photography/comments/1f3p49t/add_captions_to_photos_metadata/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Add and edit metadata titles and captions",
+          "url": "https://helpx.adobe.com/lightroom/web/share-your-work/review-and-download/add-and-edit-title-and-caption.html",
+          "domain": "helpx.adobe.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Add Title and Caption Metadata to JPEG Files",
+          "url": "https://www.keptlight.com/add-title-and-caption-metadata-to-jpeg-files/",
+          "domain": "keptlight.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Tags and Captions - How to Label Your Digital Photos ...",
+          "url": "https://www.picturesandstories.com/news/2014/4/21/tags-and-captions-how-to-label-your-digital-photos-using-metadata",
+          "domain": "picturesandstories.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Title vs Caption in Metadata",
+          "url": "https://www.lightroomqueen.com/community/threads/title-vs-caption-in-metadata.18538/",
+          "domain": "lightroomqueen.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "The Best Way to Add a Description (Caption) ...",
+          "url": "https://www.scanyourentirelife.com/best-way-add-description-caption-your-scanned-photos/",
+          "domain": "scanyourentirelife.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Add or edit titles, captions, and more in Photos on iCloud.com",
+          "url": "https://support.apple.com/guide/icloud/add-or-edit-a-title-caption-or-other-metadata-mm54e2d3fb7a/icloud",
+          "domain": "support.apple.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "Image metadata · ImageApprovals",
+          "url": "https://www.imageapprovals.com/glossary/image-metadata",
+          "domain": "imageapprovals.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How do I find the metadata of a photo?",
+        "What are the five types of metadata?",
+        "Can you fake metadata on a photo?",
+        "What can metadata on a photo tell you?"
+      ],
+      "relatedQueries": [
+        "Photo caption metadata iphone",
+        "Photo caption metadata free",
+        "Photo caption metadata app",
+        "How to edit metadata in Lightroom cc",
+        "Adding metadata to photos",
+        "Lightroom metadata",
+        "View metadata in Lightroom",
+        "Adding metadata in lightroom"
+      ]
+    },
+    {
+      "id": "vc-manual250-c5-019",
+      "keyword": "portfolio company directory",
+      "found": true,
+      "query": "portfolio company directory",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "The List of Portfolio Companies | SBI Investment Co., Ltd.",
+          "url": "https://www.sbinvestment.co.jp/en/portfolio/list/",
+          "domain": "sbinvestment.co.jp",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Portfolio",
+          "url": "https://500.co/portfolio",
+          "domain": "500.co",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Current and former portfolio companies",
+          "url": "https://www.baincapitalprivateequity.com/portfolio/current-and-former-portfolio-companies",
+          "domain": "baincapitalprivateequity.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Portfolios | Private Equity",
+          "url": "https://www.gipartners.com/private-equity/portfolio",
+          "domain": "gipartners.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Current and Former Private Equity Portfolio Companies",
+          "url": "https://berkshirepartners.com/current-and-former-portfolio-companies/",
+          "domain": "berkshirepartners.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Category:Private equity portfolio companies",
+          "url": "https://en.wikipedia.org/wiki/Category:Private_equity_portfolio_companies",
+          "domain": "en.wikipedia.org",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Investment Portfolio",
+          "url": "https://www.carlyle.com/portfolio",
+          "domain": "carlyle.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Project A – Portfolio companies",
+          "url": "https://www.project-a.vc/companies",
+          "domain": "project-a.vc",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "Our Companies | Vista's Private Equity Portfolio",
+          "url": "https://www.vistaequitypartners.com/about/companies/",
+          "domain": "vistaequitypartners.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Investment company in Japan",
+        "SBI Holdings",
+        "Bain Capital portfolio companies list",
+        "SBI Investment Team",
+        "Fintech Business Innovation LPS"
+      ]
+    },
+    {
+      "id": "vc-manual250-c5-020",
+      "keyword": "digital asset management taxonomy",
+      "found": true,
+      "query": "digital asset management taxonomy",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Digital Asset Management Taxonomy for Beginners",
+          "url": "https://www.mediavalet.com/blog/digital-asset-management-taxonomy",
+          "domain": "mediavalet.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "What is taxonomy in digital asset management (DAM)?",
+          "url": "https://www.orangelogic.com/taxonomy-in-digital-asset-management",
+          "domain": "orangelogic.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "DAM Taxonomy: How to Categorize and Classify Digital ...",
+          "url": "https://www.keyshot.com/blog/dam-taxonomy/?srsltid=AfmBOoqWlY9TiahWUDt8Uq1myWzqm9x3tYEPNJ2qjBH0IcVKCWj3lTNO",
+          "domain": "keyshot.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Your guide to building a digital asset library taxonomy in ...",
+          "url": "https://www.bynder.com/en/blog/building-digital-asset-library-taxonomy/",
+          "domain": "bynder.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Build a Strong Digital Asset Management Taxonomy in 5 ...",
+          "url": "https://brandfolder.com/resources/digital-asset-management-taxonomy/",
+          "domain": "brandfolder.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Beginner's Guide to DAM Taxonomy",
+          "url": "https://www.hyland.com/en/resources/articles/dam-taxonomy",
+          "domain": "hyland.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Best practices for designing a digital asset taxonomy for e- ...",
+          "url": "https://www.woodwing.com/blog/best-practices-digital-asset-taxonomy-design-ecommerce-retail-brands",
+          "domain": "woodwing.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "Understanding taxonomy and metadata in digital asset ...",
+          "url": "https://support.assetbank.co.uk/hc/en-gb/articles/115006310927-Understanding-taxonomy-and-metadata-in-digital-asset-management",
+          "domain": "support.assetbank.co.uk",
+          "resultType": "article"
+        },
+        {
+          "position": 9,
+          "title": "Organize Digital Assets: Metadata & Taxonomy",
+          "url": "https://www.aprimo.com/blog/organize-digital-assets-metadata-taxonomy",
+          "domain": "aprimo.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What are the 5 P's of asset management?",
+        "What are the top 10 digital asset management systems?",
+        "Is aem a cms or DAM?",
+        "What are the different categories of digital assets?"
+      ],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual250-c5-021",
+      "keyword": "digital asset management version control",
+      "found": true,
+      "query": "digital asset management version control",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Digital Asset Management Version Control",
+          "url": "https://www.bynder.com/en/glossary/digital-asset-management-version-control/",
+          "domain": "bynder.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "What Is Digital Asset Management?",
+          "url": "https://www.ibm.com/think/topics/digital-asset-management",
+          "domain": "ibm.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Version control: the smarter way to manage ecommerce assets",
+          "url": "https://www.dash.app/blog/digital-asset-management-version-control",
+          "domain": "dash.app",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "The Importance of Version Control",
+          "url": "https://www.acquia.com/glossary/version-control",
+          "domain": "acquia.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "The Importance of Version Control in Digital Asset ...",
+          "url": "https://www.blueberry-ai.com/blog/why-version-control-matters-in-digital-assets-management-systems",
+          "domain": "blueberry-ai.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "The Art of Version Control in DAM",
+          "url": "https://www.aprimo.com/resource-library/article/the-art-of-version-control-in-dam",
+          "domain": "aprimo.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Version Control: Manage Changes with Confidence",
+          "url": "https://www.orangelogic.com/version-control-in-digital-asset-management",
+          "domain": "orangelogic.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "11 Best Digital Asset Management Systems on the Market ...",
+          "url": "https://www.celum.com/en/blog/digital-asset-management-systems/",
+          "domain": "celum.com",
+          "resultType": "article"
+        },
+        {
+          "position": 9,
+          "title": "Digital Asset Management Software for the Enterprise",
+          "url": "https://www.opentext.com/products/digital-asset-management",
+          "domain": "opentext.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Digital asset management version control examples",
+        "Google Drive digital asset management",
+        "Best digital asset management software for marketing",
+        "Image asset management",
+        "Lightroom digital asset management",
+        "Digital asset organizer",
+        "Media asset management software",
+        "Online digital asset management"
+      ]
+    },
+    {
+      "id": "vc-manual250-c5-022",
+      "keyword": "digital asset expiration dates",
+      "found": true,
+      "query": "digital asset expiration dates",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Digital Rights Management in Assets",
+          "url": "https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/assets/manage/drm",
+          "domain": "experienceleague.adobe.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "On the Nature and Security of Expiring Digital Cash",
+          "url": "https://www.mdpi.com/1911-8074/18/8/452",
+          "domain": "mdpi.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "What Is Digital Asset Management?",
+          "url": "https://www.ibm.com/think/topics/digital-asset-management",
+          "domain": "ibm.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Deadline looms for digital asset businesses to apply for a ...",
+          "url": "https://www.asic.gov.au/about-asic/news-centre/news-items/deadline-looms-for-digital-asset-businesses-to-apply-for-a-licence",
+          "domain": "asic.gov.au",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Digital assets | Internal Revenue Service",
+          "url": "https://www.irs.gov/filing/digital-assets",
+          "domain": "irs.gov",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "What are expiration dates?",
+          "url": "https://community.acquia.com/acquiadam/s/article/What-are-expiration-dates",
+          "domain": "community.acquia.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Guide to Digital Asset Management (DAM) for Enterprises",
+          "url": "https://www.microsoft.com/en-us/microsoft-365/content-management-solutions/digital-asset-management",
+          "domain": "microsoft.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Digital Asset Rights Expiry",
+          "url": "https://www.advox.io/en/glossar/digital-asset-rights-expiry/",
+          "domain": "advox.io",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "The six stages of the digital asset lifecycle",
+          "url": "https://www.resourcespace.com/blog/dam-lifecycle-stages",
+          "domain": "resourcespace.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Does currency have an expiry date?",
+        "Does expiry date mean last day?",
+        "When was digital asset founded?",
+        "What is digital asset management (DAM)?"
+      ],
+      "relatedQueries": [
+        "Digital asset expiration dates example",
+        "Digital asset expiration dates 2022",
+        "Digital asset management system examples",
+        "Digital asset management software",
+        "Digital Asset Manager salary",
+        "Digital Asset Management jobs",
+        "Digital asset management tools",
+        "Digital asset management certification"
+      ]
+    },
+    {
+      "id": "vc-manual250-c5-023",
+      "keyword": "Chatham House Rule recording",
+      "found": true,
+      "query": "Chatham House Rule recording",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Chatham House Rule",
+          "url": "https://www.chathamhouse.org/about-us/chatham-house-rule",
+          "domain": "chathamhouse.org",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Chatham House Rule - Practical Law",
+          "url": "https://uk.practicallaw.thomsonreuters.com/7-201-2615?transitionType=Default&contextData=(sc.Default)",
+          "domain": "uk.practicallaw.thomsonreuters.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Chatham House rules - or does it?",
+          "url": "https://www.linkedin.com/pulse/chatham-house-rules-does-guy-clapperton-acipr",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 4,
+          "title": "Chatham House Rule",
+          "url": "https://www.rff.org/about/chatham-house-rule/",
+          "domain": "rff.org",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Chatham House Rule | Freedom of Expression - Stanford",
+          "url": "https://freespeech.stanford.edu/policies-and-guidance/privacy/chatham-house-rule",
+          "domain": "freespeech.stanford.edu",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Off the record or not? The real meaning of the Chatham House ...",
+          "url": "https://www.cognitomedia.com/off-the-record-or-not-the-real-meaning-of-the-chatham-house-rule-for-financial-events/",
+          "domain": "cognitomedia.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Chatham House Rule",
+          "url": "https://en.wikipedia.org/wiki/Chatham_House_Rule",
+          "domain": "en.wikipedia.org",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "The Chatham House Rule",
+          "url": "https://psychsafety.com/the-chatham-house-rule/",
+          "domain": "psychsafety.com",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "The Chatham House Rule",
+          "url": "https://www.aei.org/commentary/the-chatham-house-rule/",
+          "domain": "aei.org",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Is Chatham House left wing?",
+        "What are the limitations of the Chatham House Rule?",
+        "What is the difference between the Chatham House Rule and the Vegas rule?",
+        "What are the controversies surrounding Chatham House?"
+      ],
+      "relatedQueries": [
+        "Chatham House Rules example",
+        "Chatham house rule recording example",
+        "Chatham house rule recording online",
+        "Chatham house rule recording pdf",
+        "Chatham house rule recording free",
+        "Chatham house rules pdf",
+        "Chatham house rule vs off the record",
+        "Chatham House rules origin"
+      ]
+    },
+    {
+      "id": "vc-manual250-c5-024",
+      "keyword": "revoke access to shared files",
+      "found": true,
+      "query": "revoke access to shared files",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Manage sharing and permissions in OneDrive ...",
+          "url": "https://support.microsoft.com/en-us/onedrive/sharepoint/manage-sharing-and-permissions-in-onedrive-and-sharepoint",
+          "domain": "support.microsoft.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Revoke Access to Shared Files",
+          "url": "https://getshared.com/blog/revoke-access-shared-files",
+          "domain": "getshared.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "Remove access from shared files and folders",
+          "url": "https://help.dropbox.com/share/remove-access",
+          "domain": "help.dropbox.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Is there a way to remove access to all files shared with one ...",
+          "url": "https://support.google.com/drive/thread/296787895/is-there-a-way-to-remove-access-to-all-files-shared-with-one-person-in-my-drive?hl=en",
+          "domain": "support.google.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "SharePoint Online: Allow users to revoke only their own ...",
+          "url": "https://www.reddit.com/r/sharepoint/comments/1uuckil/sharepoint_online_allow_users_to_revoke_only/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "How to Revoke File Access After It's Already Been Shared",
+          "url": "https://theodosian.com/blog/how-to-revoke-access-to-a-file-after-its-already-been-downloaded-or-shared",
+          "domain": "theodosian.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "How do I revert access to shared files?",
+          "url": "https://www.facebook.com/groups/256179001882562/posts/1311183383048780/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 8,
+          "title": "Revoke access to shared files by link - WD Community",
+          "url": "https://community.wd.com/t/revoke-access-to-shared-files-by-link/274870",
+          "domain": "community.wd.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How do I remove someone's access from a shared file?",
+        "How do I revoke access to a SharePoint file?",
+        "How do I restrict access to a shared folder?",
+        "How do I remove someone's access to a shared Word document?"
+      ],
+      "relatedQueries": [
+        "OneDrive",
+        "How to give OneDrive access to another user from admin center",
+        "How to remove access to a SharePoint file",
+        "How to remove someone from OneDrive shared folder",
+        "How to delete sharing links in onedrive",
+        "Google Drive",
+        "How to remove access to SharePoint Excel",
+        "How to change sharing permissions on Google Drive"
+      ]
+    },
+    {
+      "id": "vc-manual250-c5-025",
+      "keyword": "content audit checklist",
+      "found": true,
+      "query": "content audit checklist",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Content Inventory and Auditing 101",
+          "url": "https://www.nngroup.com/articles/content-audits/",
+          "domain": "nngroup.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "How to do a website content audit in 2026 (with template)",
+          "url": "https://www.semrush.com/blog/content-audit/",
+          "domain": "semrush.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "Content Audit Templates and Guidance | Digital Experience",
+          "url": "https://dxtraining.iowa.gov/build-your-website/voice-tone-and-style-guide/content-quality-checklist/content-audit-templates-and-guidance",
+          "domain": "dxtraining.iowa.gov",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "How to Do a Website Content Audit",
+          "url": "https://www.orbitmedia.com/blog/website-content-audit/",
+          "domain": "orbitmedia.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Content Audit | UO Digital Strategy",
+          "url": "https://digital.uoregon.edu/project-kickoff/content-audit",
+          "domain": "digital.uoregon.edu",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "How to Conduct a Content Audit | YaleSites",
+          "url": "https://yalesites.yale.edu/explore-resources/working-with-content/how-to-conduct-a-content-audit",
+          "domain": "yalesites.yale.edu",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "How to perform a content audit? Use this free template",
+          "url": "https://www.linkedin.com/pulse/how-perform-content-audit-use-free-template-tekla-szymanski-szcle",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 8,
+          "title": "Follow Our Content Audit Process (Template Included)",
+          "url": "https://ahrefs.com/blog/content-audit/",
+          "domain": "ahrefs.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What are the 5 C's of auditing?",
+        "How to perform a content audit?",
+        "What should be included in an audit checklist?",
+        "What are the 7 steps in the audit process?"
+      ],
+      "relatedQueries": [
+        "Free content audit checklist",
+        "Content audit checklist pdf",
+        "Content audit checklist template free",
+        "Content audit checklist template word",
+        "Content audit checklist excel",
+        "Content audit example",
+        "Content audit meaning",
+        "Content audit tool"
+      ]
+    },
+    {
+      "id": "vc-manual250-c5-026",
+      "keyword": "digital asset migration",
+      "found": true,
+      "query": "digital asset migration",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How to execute an enterprise-scale DAM migration",
+          "url": "https://www.bynder.com/en/blog/3-steps-digital-asset-management-migration/",
+          "domain": "bynder.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "Digital Asset Management (DAM) Migration Guide",
+          "url": "https://stacksteam.com/guides/digital-asset-management-migration",
+          "domain": "stacksteam.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "A Beginner's Guide to Digital Asset Management Migration",
+          "url": "https://www.ibase.com/news/insight-a-beginners-guide-to-digital-asset-management-migration.html",
+          "domain": "ibase.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "The 3 key steps for successful DAM content migration",
+          "url": "https://www.fotoware.com/blog/the-3-steps-for-successful-dam-content-migration",
+          "domain": "fotoware.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Asset Migration",
+          "url": "https://www.resourcespace.com/glossary/asset_migration",
+          "domain": "resourcespace.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Asset Migration",
+          "url": "https://www.salsify.com/glossary/asset-migration-meaning",
+          "domain": "salsify.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "What to know before your DAM migration",
+          "url": "https://aetopia.com/blog/what-to-know-before-your-dam-migration.html",
+          "domain": "aetopia.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "How to migrate digital assets without losing your mind",
+          "url": "https://www.damcowboy.com/learn/migrating-digital-assets",
+          "domain": "damcowboy.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is digital migration?",
+        "What are some examples of DAM platforms?",
+        "What are the four types of data migration?",
+        "What is migration in cryptocurrency?"
+      ],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual250-c5-027",
+      "keyword": "search video transcripts",
+      "found": true,
+      "query": "search video transcripts",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Filmot - Search in Youtube captions and subtitles",
+          "url": "https://filmot.com/",
+          "domain": "filmot.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Possible to search videos by words from CC or Transcript?",
+          "url": "https://www.reddit.com/r/youtube/comments/17lo56m/possible_to_search_videos_by_words_from_cc_or/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "YouTube Transcript Generator | Extract & Download Video ...",
+          "url": "https://www.youtube-transcript.io/",
+          "domain": "youtube-transcript.io",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "View video transcripts - YouTube Help",
+          "url": "https://support.google.com/youtube/answer/15930243?hl=en",
+          "domain": "support.google.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "How to Search YouTube Transcripts : Simple 2 Step Guide",
+          "url": "https://www.rev.com/resources/how-to-search-youtube-transcripts",
+          "domain": "rev.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "YouTube Transcript Search — Find Any Moment in ...",
+          "url": "https://transcriptr.ai/tools/youtube-transcript-search",
+          "domain": "transcriptr.ai",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Find Spoken Words in Videos — Local Transcript Search",
+          "url": "https://clipcatalogpro.com/features/transcript-search",
+          "domain": "clipcatalogpro.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Search Any YouTube Transcript by Word, Quote or Topic",
+          "url": "https://you-tldr.com/youtube-transcript-search",
+          "domain": "you-tldr.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How to find a transcript of a video?",
+        "Can you search YouTube video transcripts?",
+        "Can ChatGPT transcribe video?",
+        "How can I search for text in a video?"
+      ],
+      "relatedQueries": [
+        "Search video transcripts online",
+        "Search video transcripts free",
+        "Search video transcripts reddit",
+        "How to search YouTube transcript on phone",
+        "Search in YouTube transcript",
+        "Unlisted video search",
+        "YouTube transcript search extension",
+        "How to search YouTube transcript on iphone"
+      ]
+    },
+    {
+      "id": "vc-manual250-c5-028",
+      "keyword": "duplicate digital assets",
+      "found": true,
+      "query": "duplicate digital assets",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Data Detox: Cleaning Up Your Digital Asset Management",
+          "url": "https://www.aprimo.com/resource-library/article/data-detox-cleaning-up-your-dam",
+          "domain": "aprimo.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "Asset Duplicate Detection",
+          "url": "https://help.frontify.com/en/articles/6306338-asset-duplicate-detection",
+          "domain": "help.frontify.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "Identifying and eliminating digital asset duplicates",
+          "url": "https://omr.com/en/reviews/contenthub/eliminate-duplicates",
+          "domain": "omr.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Digital Asset Management ensures no money is wasted on ...",
+          "url": "https://www.linkedin.com/pulse/digital-asset-management-ensures-money-wasted-creating-craig-neyle",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 5,
+          "title": "The Same But Different – Understanding The Implications ...",
+          "url": "https://digitalassetmanagementnews.org/dam-education/the-same-but-different-understanding-the-implications-of-duplicate-asset-detection-functionality-in-dam-systems/",
+          "domain": "digitalassetmanagementnews.org",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Detect duplicate assets for Adobe Experience Manager as ...",
+          "url": "https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/assets/admin/detect-duplicate-assets",
+          "domain": "experienceleague.adobe.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "The investor's guide to digital assets",
+          "url": "https://www.ssga.com/us/en/intermediary/resources/education/etf-education/the-investors-guide-to-digital-assets",
+          "domain": "ssga.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "What Are Digital Assets? Definition & Types",
+          "url": "https://www.fireblocks.com/glossary/digital-assets",
+          "domain": "fireblocks.com",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "Digital Assets in Business: What They Are and How ...",
+          "url": "https://stripe.com/resources/more/digital-assets-in-business",
+          "domain": "stripe.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What are examples of digital assets?",
+        "How to deal with a deceased person's digital assets?",
+        "What is the best digital asset to invest in?",
+        "What exactly is a digital asset?"
+      ],
+      "relatedQueries": [
+        "Duplicate digital assets review",
+        "Duplicate digital assets examples"
+      ]
+    },
+    {
+      "id": "vc-manual250-c5-029",
+      "keyword": "knowledge base search",
+      "found": true,
+      "query": "knowledge base search",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Knowledge Base Software & Hosted Help Center for Your ...",
+          "url": "https://www.knowledgebase.com/",
+          "domain": "knowledgebase.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "How does Knowledge Base search work?",
+          "url": "https://www.servicenow.com/community/knowledge-managers/how-does-knowledge-base-search-work/m-p/353061",
+          "domain": "servicenow.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Search knowledge articles",
+          "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/search-knowledge-articles-csh",
+          "domain": "learn.microsoft.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Searchable knowledge base: How to make one, top tools & ...",
+          "url": "https://www.meilisearch.com/blog/searchable-knowledge-base",
+          "domain": "meilisearch.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Knowledge base content search overview",
+          "url": "https://help.mypurecloud.com/articles/knowledge-base-content-search-overview/",
+          "domain": "help.mypurecloud.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "What is a Knowledge Base | Why You Need One and ...",
+          "url": "https://www.egain.com/what-is-knowledge-base/",
+          "domain": "egain.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "What Is a Knowledge Base?",
+          "url": "https://www.ontotext.com/knowledgehub/fundamentals/what-is-a-knowledge-base/",
+          "domain": "ontotext.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "What is a Knowledge Base? A Complete Guide",
+          "url": "https://www.salesforce.com/in/service/knowledge-base/",
+          "domain": "salesforce.com",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "What Is a Knowledge Base? A Definition",
+          "url": "https://www.solarwinds.com/resources/it-glossary/knowledge-base",
+          "domain": "solarwinds.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is an example of a kms?",
+        "Is knowledge base free?",
+        "What are examples of knowledge bases?",
+        "What is the purpose of a knowledge base?"
+      ],
+      "relatedQueries": [
+        "Knowledge base search free",
+        "Knowledge base examples",
+        "KnowledgeBase",
+        "Knowledge base website",
+        "Knowledge base design",
+        "Knowledgebase Rockwell",
+        "Knowledge base AI",
+        "Google knowledge base"
+      ]
+    },
+    {
+      "id": "vc-manual250-c5-030",
+      "keyword": "digital asset management user adoption",
+      "found": true,
+      "query": "digital asset management user adoption",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "What is digital asset management (DAM)? A complete guide",
+          "url": "https://www.opentext.com/what-is/digital-asset-management",
+          "domain": "opentext.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Best Practices to Overcome User Adoption Challenges ...",
+          "url": "https://digitalassetmanagementnews.org/features/best-practices-to-overcome-user-adoption-challenges-within-dam/",
+          "domain": "digitalassetmanagementnews.org",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "What Is Digital Asset Management? A Complete Guide",
+          "url": "https://ci-hub.com/blog/what-is-digital-asset-management",
+          "domain": "ci-hub.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Digital Asset Management: Everything You Need to Know",
+          "url": "https://www.aprimo.com/resource-library/guide/digital-asset-management-everything-you-need-to-know",
+          "domain": "aprimo.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "What Is Digital Asset Management? DAM Software Guide ...",
+          "url": "https://www.acquia.com/blog/digital-asset-management",
+          "domain": "acquia.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Increasing DAM Adoption: Strategies for User Engagement",
+          "url": "https://stacksteam.com/blog/increasing-dam-adoption-strategies-for-user-engagement",
+          "domain": "stacksteam.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Digital Asset Management (DAM) in 2026: Use Cases & ...",
+          "url": "https://corp.kaltura.com/blog/digital-asset-management-2026/",
+          "domain": "corp.kaltura.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "8 Important Digital Asset Management Best Practices ...",
+          "url": "https://go.photoshelter.com/ask-photoshelter/8-important-digital-asset-management-best-practices-for-success/",
+          "domain": "go.photoshelter.com",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "The impact of digital asset management (DAM) for financial ...",
+          "url": "https://www.highspot.com/blog/digital-asset-management-financial-services/",
+          "domain": "highspot.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Digital asset management user adoption reddit",
+        "Digital asset management user adoption aprimo dam",
+        "Digital asset management user adoption pdf",
+        "Digital asset management system examples",
+        "OpenText digital asset management",
+        "Digital asset management tools",
+        "Digital asset management (DAM)",
+        "Digital asset management companies"
+      ]
+    },
+    {
+      "id": "vc-manual250-c5-031",
+      "keyword": "speaker bureau database",
+      "found": true,
+      "query": "speaker bureau database",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Speakers bureau",
+          "url": "https://en.wikipedia.org/wiki/Speakers_bureau",
+          "domain": "en.wikipedia.org",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Speaker Bureau Management Platform",
+          "url": "https://www.extendmed.com/lp/speaker-bureau-mgmt",
+          "domain": "extendmed.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "How a Speaker Bureau's Feedback Database Saves You Time",
+          "url": "https://rightselectionspeakerbureau.com/stories/2026/09/how-a-speaker-bureau-s-client-feedback-database-saves-you-time",
+          "domain": "rightselectionspeakerbureau.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "National Speakers Bureau: Speakers Bureau for Corporate ...",
+          "url": "https://www.nsb.com/",
+          "domain": "nsb.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "International Association of Speakers Bureaus",
+          "url": "https://www.iasbweb.org/",
+          "domain": "iasbweb.org",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Keynote Speaker Database",
+          "url": "https://www.chartwellspeakers.com/categories/keynote-speakers/",
+          "domain": "chartwellspeakers.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Global Speakers Bureau: Motivational, Keynote and Public ...",
+          "url": "https://www.gspeakers.com/",
+          "domain": "gspeakers.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "APB Speakers: Keynote Speakers Bureau",
+          "url": "https://www.apbspeakers.com/",
+          "domain": "apbspeakers.com",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "30+ Speakers Bureaus To Consider As You Grow",
+          "url": "https://university.speakerflow.com/posts/speakers-bureaus-to-consider-as-you-grow",
+          "domain": "university.speakerflow.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Speaker bureau database free",
+        "How to join a speakers Bureau",
+        "What is a speaker bureau pharma",
+        "What is speaker agency in sociolinguistics",
+        "Speakers Bureau near me",
+        "Speakers bureaus list",
+        "Leading Authorities speakers Bureau",
+        "Speakers bureau toastmasters"
+      ]
+    },
+    {
+      "id": "vc-manual250-c5-032",
+      "keyword": "handling media enquiries",
+      "found": true,
+      "query": "handling media enquiries",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Media Inquiries: A Guide for Effective Communication",
+          "url": "https://www.cision.com/resources/insights/media-inquiries/",
+          "domain": "cision.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "8 + 1 Amazing Tips for Effectively Managing Media Enquiries",
+          "url": "https://www.linkedin.com/pulse/8-1-amazing-tips-effectively-managing-media-enquiries-bart-verhulst-qei1e",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 3,
+          "title": "Answering media enquiries",
+          "url": "https://www.ukri.org/councils/esrc/impact-toolkit-for-economic-and-social-sciences/how-to-do-media-relations/answering-media-enquiries/",
+          "domain": "ukri.org",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "How to manage your media inquiries",
+          "url": "https://presspage.com/blog/how-to-manage-your-media-inquiries-authentically-and-efficiently",
+          "domain": "presspage.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Quick Tips for Dealing with the Media",
+          "url": "https://www.tmsd.mb.ca/Crisis%20Plan/Section%2010/10-A%20Quick%20Tips%20for%20Dealing%20with%20the%20Media.pdf",
+          "domain": "tmsd.mb.ca",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Handling & Responding to Media Pressure",
+          "url": "https://conversationco.com.au/blog/handling-and-responding-to-media-pressure",
+          "domain": "conversationco.com.au",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "A Lawyer's Guide to Dealing with the Media",
+          "url": "https://www.cba.org/resources/cba-practicelink/a-lawyer-s-guide-to-dealing-with-the-media/",
+          "domain": "cba.org",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "10 Tips for Handling a Call from the Press",
+          "url": "https://www.sacredheart.edu/offices--departments-directory/marketing--communications/communications--content-strategy/10-tips-for-handling-a-call-from-the-press/",
+          "domain": "sacredheart.edu",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "How to respond when the media requests a reaction ...",
+          "url": "https://divisionsbc.ca/provincial/resources/communications/how-should-we-handle-calls-media-looking-us-react-story",
+          "domain": "divisionsbc.ca",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What does media enquiries mean?",
+        "What are the four C's in journalism?",
+        "What does ### mean in journalism?",
+        "How do I get news to pick up my story?"
+      ],
+      "relatedQueries": [
+        "Handling media enquiries template",
+        "Handling media enquiries email",
+        "Handling media enquiries pdf",
+        "Handling media enquiries examples",
+        "Media inquiries or enquiries",
+        "Media inquiry meaning",
+        "Media inquiries examples",
+        "Press inquiries meaning"
+      ]
+    },
+    {
+      "id": "vc-manual250-c5-033",
+      "keyword": "competing portfolio companies",
+      "found": true,
+      "query": "competing portfolio companies",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Caution to Private Equity Firms Acquiring Competing ...",
+          "url": "https://www.vorys.com/publication-Caution-to-Private-Equity-Firms-Acquiring-Competing-Portfolio-Companies",
+          "domain": "vorys.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Board Positions and Competing Portfolio Companies",
+          "url": "https://www.wsgr.com/PDFSearch/BoardPositionsandCompetingPortfolioCompanies.pdf",
+          "domain": "wsgr.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Realizing a Competitive Advantage from Portfolio Company ...",
+          "url": "https://www.chronograph.pe/private-equity-competitive-advantage-from-portfolio-company-data/",
+          "domain": "chronograph.pe",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Private Equity Portfolio Management: Strategies for Success",
+          "url": "https://www.hebbia.com/resources/private-equity-portfolio-management",
+          "domain": "hebbia.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Portfolio Companies of Our Private Equity Vertical",
+          "url": "https://www.motilaloswalalt.com/private-equity-portfolio-company/",
+          "domain": "motilaloswalalt.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Portfolio",
+          "url": "https://500.co/portfolio",
+          "domain": "500.co",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "What is a portfolio company? | Pilot Glossary",
+          "url": "https://pilot.com/glossary/portfolio-company",
+          "domain": "pilot.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Portfolio company services | Deloitte Global",
+          "url": "https://www.deloitte.com/ce/en/industries/investment-management/about/private-equity/portfolio-company-services.html",
+          "domain": "deloitte.com",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "What is a portfolio company? What to include in a portfolio",
+          "url": "https://uk.indeed.com/career-advice/career-development/what-is-portfolio-company",
+          "domain": "uk.indeed.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Who are the big 3 private equity firms?",
+        "What did Warren Buffett say about private equity?",
+        "What is an example of a portfolio company?",
+        "Which company is best for portfolio management?"
+      ],
+      "relatedQueries": [
+        "Top competing portfolio companies",
+        "Competing portfolio companies list"
+      ]
+    },
+    {
+      "id": "vc-manual250-c5-034",
+      "keyword": "embargoed press release",
+      "found": true,
+      "query": "embargoed press release",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "News embargo",
+          "url": "https://en.wikipedia.org/wiki/News_embargo",
+          "domain": "en.wikipedia.org",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Best Practices for Embargoed Press Releases",
+          "url": "https://pr.co/blog/best-practices-for-embargoed-press-releases",
+          "domain": "pr.co",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "What Is an Embargoed Press Release? (Including Examples)",
+          "url": "https://www.ereleases.com/pr-fuel/what-is-an-embargoed-press-release/",
+          "domain": "ereleases.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Etiquette for Sending News Under Embargo",
+          "url": "https://www.reddit.com/r/PublicRelations/comments/1m5mo99/etiquette_for_sending_news_under_embargo/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "What Is an Embargoed Press Release? How-To, Template ...",
+          "url": "https://prlab.co/blog/embargoed-press-release-meaning-examples-and-how-to-use/",
+          "domain": "prlab.co",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Let me test your knowledge of journalism. What is an ...",
+          "url": "https://www.facebook.com/hopewelljournalist/posts/let-me-test-your-knowledge-of-journalismwhat-is-an-embargoed-press-release/601868271537264/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 7,
+          "title": "7 embargo rules from a journalist who hates them (hi, it's me!)",
+          "url": "https://jonisweet.substack.com/p/how-to-use-embargoes-in-pr",
+          "domain": "jonisweet.substack.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Embargo policy",
+          "url": "https://plos.org/media/embargo-policy/",
+          "domain": "plos.org",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What does it mean when a press release is embargoed?",
+        "How do I embargo a press release?",
+        "Can you give me an example of an embargoed press release?",
+        "How long do embargoes typically last?"
+      ],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual250-c5-035",
+      "keyword": "editorial content selection",
+      "found": true,
+      "query": "editorial content selection",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "What is Editorial Content & How Is It Used in Marketing?",
+          "url": "https://nytlicensing.com/latest/marketing/editorial-content-and-how-use-it-content-marketing/",
+          "domain": "nytlicensing.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Editorial Content: Elevate your Brand",
+          "url": "https://mailchimp.com/resources/editorial-content/",
+          "domain": "mailchimp.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "The Ultimate Guide to Editorial Content Types and Formats",
+          "url": "https://masternewmedia.com/the-ultimate-guide-to-editorial-content-types-and-formats-9cf03de79d87",
+          "domain": "masternewmedia.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Editorial selection process",
+          "url": "https://clarivate.com/academia-government/scientific-and-academic-research/research-discovery-and-referencing/web-of-science/web-of-science-core-collection/editorial-selection-process/",
+          "domain": "clarivate.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Editorial Selection | The Peerian Journal",
+          "url": "https://peerianjournal.com/index.php/tpj/editorial-selection",
+          "domain": "peerianjournal.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Scholarly articles for editorial content selection",
+          "url": "https://scholar.google.com/scholar?q=editorial+content+selection&hl=en&as_sdt=0&as_vis=1&oi=scholart",
+          "domain": "scholar.google.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Editorial Choices: Meaning & Impact",
+          "url": "https://www.studysmarter.co.uk/explanations/media-studies/media-influence/editorial-choices/",
+          "domain": "studysmarter.co.uk",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "What is Editorial Content?",
+          "url": "https://powerdigitalmarketing.com/blog/what-is-editorial-content/",
+          "domain": "powerdigitalmarketing.com",
+          "resultType": "article"
+        },
+        {
+          "position": 9,
+          "title": "What is an Editorial Strategy? (and How to Develop Your ...",
+          "url": "https://hardskill.exchange/blog/what-is-an-editorial-strategy-and-how-to-develop-your-own/",
+          "domain": "hardskill.exchange",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is an example of editorial content?",
+        "What is considered editorial content?",
+        "What are the three main parts of an editorial?",
+        "What are the four types of editorial articles?"
+      ],
+      "relatedQueries": [
+        "Editorial content selection example",
+        "Editorial content examples",
+        "What is editorial content in journalism",
+        "Editorial content selection framework",
+        "Editorial social media",
+        "Editorial Format example",
+        "Editorial writing examples",
+        "Fashion editorial meaning"
+      ]
+    },
+    {
+      "id": "vc-manual250-c5-036",
+      "keyword": "peer mentoring matching",
+      "found": true,
+      "query": "peer mentoring matching",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "The Potential of Peer to Peer Mentoring and How to Design ...",
+          "url": "https://chronus.com/blog/peer-to-peer-mentoring",
+          "domain": "chronus.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "Why “Someone like me” Matters in Mentor Matching",
+          "url": "https://www.evidencebasedmentoring.org/how-the-right-mentor-match-can-make-success-feel-possible/",
+          "domain": "evidencebasedmentoring.org",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "How to Build a Successful Peer Mentoring Program",
+          "url": "https://rqplatform.com/resources/blogs/how-to-build-a-successful-peer-mentoring-program-7-steps",
+          "domain": "rqplatform.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Mentor-Mentee Matching",
+          "url": "http://www.peersuccess.org/mentor-mentee-matching.html",
+          "domain": "peersuccess.org",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Peer Mentoring: A Complete Guide to Launching Impactful ...",
+          "url": "https://www.qooper.io/blog/peer-mentoring",
+          "domain": "qooper.io",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Questionnaire for Profiles of Peer Mentor Programs",
+          "url": "https://www.ipfcc.org/bestpractices/peer-support-questionnaire.html",
+          "domain": "ipfcc.org",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Mentoring Matching: Why the Algorithm Behind Your Pairs ...",
+          "url": "https://mentorpro.com/news-item/mentoring-matching/",
+          "domain": "mentorpro.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "How to match mentors and mentees - Teleskope",
+          "url": "https://www.teleskope.io/post/how-to-match-mentors-and-mentees",
+          "domain": "teleskope.io",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "Peer Mentoring Guide - DSHS",
+          "url": "https://www.dshs.wa.gov/sites/default/files/publications/documents/22-1840.pdf",
+          "domain": "dshs.wa.gov",
+          "resultType": "other"
+        },
+        {
+          "position": 10,
+          "title": "Scholarly articles for peer mentoring matching",
+          "url": "https://scholar.google.com/scholar?q=peer+mentoring+matching&hl=en&as_sdt=0&as_vis=1&oi=scholart",
+          "domain": "scholar.google.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What are the 5 C's of mentoring?",
+        "What are 10 killer questions to ask a mentor?",
+        "How do you match a mentor and mentee?",
+        "What are the best practices for peer mentoring?"
+      ],
+      "relatedQueries": [
+        "Peer mentoring matching template",
+        "Peer mentoring matching pdf",
+        "Peer mentoring matching examples",
+        "Peer mentoring matching programs",
+        "Peer mentoring examples",
+        "Peer-to-peer mentoring in schools",
+        "Peer mentoring in the classroom",
+        "What is peer mentoring in college"
+      ]
+    },
+    {
+      "id": "vc-manual250-c5-037",
+      "keyword": "sponsorship fulfillment report",
+      "found": true,
+      "query": "sponsorship fulfillment report",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Sponsorship Fulfillment Report Guide | PDF | Communication",
+          "url": "https://www.scribd.com/document/439448494/Fulfillment-report-template",
+          "domain": "scribd.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Super Simple Fulfillment Report Template",
+          "url": "https://sponsorshipcollective.com/blog/super-simple-fulfillment-report-template/",
+          "domain": "sponsorshipcollective.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "Sponsor Fulfillment Reports: How to Impress Partners and ...",
+          "url": "https://raiseadream.com/sponsor-fulfillment-reports-how-to-impress-partners-and-funders/",
+          "domain": "raiseadream.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Encyclopedia of Sports Management and Marketing",
+          "url": "https://sk.sagepub.com/ency/edvol/download/sportsmagementmarketing/chpt/sponsorship-fulfillment-report.pdf",
+          "domain": "sk.sagepub.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Sponsorship Fulfillment Report Template - Nonprofit.Courses",
+          "url": "https://www.nonprofit.courses/course/super-simple-fulfillment-report-template-by-sponsorship-collective/",
+          "domain": "nonprofit.courses",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "How a Sponsorship Fulfillment Report Saved my Life",
+          "url": "https://sponsorshipcollective.com/blog/sponsorship-fulfillment-report-saved-life/",
+          "domain": "sponsorshipcollective.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Free Sales Event Sponsorship Fulfillment Report Template ...",
+          "url": "https://www.template.net/edit-online/331084/sales-event-sponsorship-fulfillment-report",
+          "domain": "template.net",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What are the 5 sponsorship levels?",
+        "What are the four main types of sponsorships?",
+        "What is an example of a sponsor message?",
+        "What are the 10 elements of a successful sponsorship proposal?"
+      ],
+      "relatedQueries": [
+        "Sponsorship fulfillment report template",
+        "Sponsorship fulfillment report sample",
+        "Sponsorship fulfillment report pdf"
+      ]
+    },
+    {
+      "id": "vc-manual250-c5-038",
+      "keyword": "shared cost allocation",
+      "found": true,
+      "query": "shared cost allocation",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "5.2 Allocation of shared costs - Viewpoint - PwC",
+          "url": "https://viewpoint.pwc.com/dt/us/en/pwc/accounting_guides/carve-out-financial-statements/carve-out-financial-statements/Chapter-5-Income/5-2-Allocation-of-shared.html",
+          "domain": "viewpoint.pwc.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Managing Shared Cloud Costs",
+          "url": "https://www.finops.org/wg/identifying-shared-costs/",
+          "domain": "finops.org",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Cost allocation methods and when and where to use them",
+          "url": "https://www.phocassoftware.com/resources/blog/cost-allocation",
+          "domain": "phocassoftware.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "NGO Shared Cost Allocation | Multi-Donor Compliance Guide",
+          "url": "https://abvius.org/en/articles/ngo-shared-cost-allocation-multi-donor-compliance",
+          "domain": "abvius.org",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Cost Allocation Methods",
+          "url": "https://www.infracost.io/resources/glossary/cost-allocation-methods",
+          "domain": "infracost.io",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Cost Allocation Guidance: Appendix A: Methodology ...",
+          "url": "https://osp.finance.harvard.edu/resource/costallocationmethodologyexamplesjanuary2021pdf",
+          "domain": "osp.finance.harvard.edu",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Shared Cost Reallocation | Finout Docs",
+          "url": "https://docs.finout.io/user-guide/inform/shared-cost-reallocation",
+          "domain": "docs.finout.io",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "How to Choose an IT Cost Allocation Model for Shared ...",
+          "url": "https://www.betsol.com/blog/it-cost-allocation-models-for-shared-services/",
+          "domain": "betsol.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What are the three main types of cost allocation?",
+        "What are the three types of allocations?",
+        "What are the four purposes of cost allocation?",
+        "What is the formula for calculating cost allocation?"
+      ],
+      "relatedQueries": [
+        "Shared cost allocation example",
+        "Shared cost allocation formula",
+        "Shared cost allocation in accounting",
+        "Shared cost allocation methodology",
+        "Cost allocation methods",
+        "Cost allocation examples",
+        "Cost allocation formula",
+        "Standard cost allocation"
+      ]
+    },
+    {
+      "id": "vc-manual250-c5-039",
+      "keyword": "managing knowledge base translations",
+      "found": true,
+      "query": "managing knowledge base translations",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Translating the knowledge base",
+          "url": "https://www.servicenow.com/docs/r/platform-administration/system-localization/c_TranslateTheKnowledgeBase.html",
+          "domain": "servicenow.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "How to set up knowledge bases in multiple language...",
+          "url": "https://community.atlassian.com/forums/Jira-Service-Management/How-to-set-up-knowledge-bases-in-multiple-languages/qaq-p/1972376",
+          "domain": "community.atlassian.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Multi Lingual Knowledge Bases - A Guide",
+          "url": "https://slite.com/learn/multi-lingual-knowledge-base",
+          "domain": "slite.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Create knowledge base articles in multiple languages",
+          "url": "https://knowledge.hubspot.com/knowledge-base/create-knowledge-base-articles-in-multiple-languages",
+          "domain": "knowledge.hubspot.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Video Shorts: Knowledge Management: Bulk Translation",
+          "url": "https://www.youtube.com/watch?v=zID3-mM1GT4",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 6,
+          "title": "Multilingual Knowledge Base: Advanced Translation ...",
+          "url": "https://crowdin.com/blog/multilingual-knowledge-base",
+          "domain": "crowdin.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Multilingual Knowledge Base Software on Salesforce",
+          "url": "https://www.bookingninjas.com/features/people-and-portals/multilingual-knowledge-base",
+          "domain": "bookingninjas.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Translation Knowledge Management: Information ...",
+          "url": "https://translated.com/resources/translation-knowledge-management-system",
+          "domain": "translated.com",
+          "resultType": "article"
+        },
+        {
+          "position": 9,
+          "title": "Multilingual Knowledge Management",
+          "url": "https://www.serviceaide.com/resources/blog/multilingual-knowledge-management",
+          "domain": "serviceaide.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual250-c5-040",
+      "keyword": "track press coverage",
+      "found": true,
+      "query": "track press coverage",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Media Monitoring - Track Press Release Coverage",
+          "url": "https://b2press.com/media-monitoring",
+          "domain": "b2press.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Best Media Monitoring Tools for PR and Brand Performance",
+          "url": "https://www.launchmetrics.com/resources/blog/best-media-monitoring-tools",
+          "domain": "launchmetrics.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "A Step-by-Step Guide to Track Your Press Coverage - NOVOS",
+          "url": "https://thisisnovos.com/blog/how-to-track-press-coverage/",
+          "domain": "thisisnovos.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Top 3 Press Tracking Templates for Public Relations ...",
+          "url": "https://www.notion.com/templates/collections/top-3-press-tracking-templates-for-public-relations-specialists?srsltid=AfmBOornB_6EcYCiO8ri8GI5rQoWgRCiOkl8K9LV7ov_XKK4Ioay4Ehf",
+          "domain": "notion.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Press Coverage and Monitoring - CARMA",
+          "url": "https://carma.com/use-case/press-coverage-and-monitoring/",
+          "domain": "carma.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "6 Free Tools to See Where Your Press Coverage Shows Up",
+          "url": "https://brandfeatured.com/blog/free-tools-to-track-press-coverage-online",
+          "domain": "brandfeatured.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "What's your process for tracking media coverage and ...",
+          "url": "https://www.reddit.com/r/PublicRelations/comments/1pnscfs/whats_your_process_for_tracking_media_coverage/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "How to track press release coverage",
+          "url": "https://roxhillmedia.com/help/how-to-track-press-release-coverage/",
+          "domain": "roxhillmedia.com",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "What are the Best PR Coverage Trackers & How to Use ...",
+          "url": "https://onclusive.com/resources/blog/what-are-the-best-pr-coverage-trackers-how-to-use-them/",
+          "domain": "onclusive.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is press coverage?",
+        "How can I get press coverage?",
+        "What are the best PR monitoring tools?",
+        "What are some examples of media coverage?"
+      ],
+      "relatedQueries": [
+        "Track press coverage in media monitoring",
+        "Track press coverage example",
+        "Press coverage football",
+        "Media monitoring tools free"
+      ]
+    },
+    {
+      "id": "vc-manual250-c5-041",
+      "keyword": "pause scheduled social media posts",
+      "found": true,
+      "query": "pause scheduled social media posts",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Managing and Scheduling a Social Post | Help Center",
+          "url": "https://support.wix.com/en/article/social-posts-scheduling-a-social-post",
+          "domain": "support.wix.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "Notion Social Media Scheduler — Scheduled",
+          "url": "https://www.scheduled.so/",
+          "domain": "scheduled.so",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Social Media 101: Knowing when to pause your scheduled ...",
+          "url": "https://www.zoho.com/blog/social/crisis-101-how-brands-can-use-pause-resume-to-handle-curveballs.html",
+          "domain": "zoho.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Hootsuite Hits the Pause Button",
+          "url": "https://www.hootsuite.com/newsroom/press-releases/hootsuite-hits-the-pause-button?srsltid=AfmBOopVFnVFWer7jb9Tp1K75DGxV3-XWBxoCLNOTi4xBGn7j_-dX-5T",
+          "domain": "hootsuite.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Schedule a post",
+          "url": "https://www.facebook.com/help/389849807718635",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 6,
+          "title": "RecurPost: Social Media Scheduler & Management Tool",
+          "url": "https://recurpost.com/",
+          "domain": "recurpost.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "What is Social Media Scheduling? And How to Do It",
+          "url": "https://www.sprinklr.com/blog/social-media-scheduling/",
+          "domain": "sprinklr.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "Social Media Management for Beginners",
+          "url": "https://www.youtube.com/watch?v=yvaBgmgayew",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 9,
+          "title": "The Importance of Scheduling Posts",
+          "url": "https://jennstrends.com/the-importance-of-scheduling-posts/",
+          "domain": "jennstrends.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How do I stop a scheduled post?",
+        "What is the 5:3:2 rule for social media posts?",
+        "Can you pause social media?",
+        "Do scheduled posts get less views?"
+      ],
+      "relatedQueries": [
+        "Pause scheduled social media posts free",
+        "Scheduled Notion",
+        "Scheduled translate",
+        "Can Notion post to social media",
+        "Social media post Planner",
+        "Scheduled posts Instagram",
+        "How to pronounce scheduled",
+        "Scheduled meaning"
+      ]
+    },
+    {
+      "id": "vc-manual250-c5-042",
+      "keyword": "brand template management",
+      "found": true,
+      "query": "brand template management",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Free and customizable brand templates",
+          "url": "https://www.canva.com/templates/s/brand/",
+          "domain": "canva.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Brand Templating: Setup, Benefits & Examples [2026 Guide]",
+          "url": "https://www.marq.com/blog/brand-templating/",
+          "domain": "marq.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "Top 10 Brand Guidelines Templates for Brand Managers",
+          "url": "https://www.notion.com/templates/collections/top-10-brand-guidelines-templates-for-brand-managers?srsltid=AfmBOorHP9hhQgmsUmlkCRpWrG0J5anM6a2G5FdDFJ2wAaaV8pYrF52M",
+          "domain": "notion.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Branding Templates - HubSpot Free Resources Library",
+          "url": "https://www.hubspot.com/resources/templates/branding",
+          "domain": "hubspot.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Brand Guidelines Templates (Free + Best Picks)",
+          "url": "https://venngage.com/blog/brand-guidelines-templates/",
+          "domain": "venngage.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Best Brand Management Software for 2026",
+          "url": "https://www.frontify.com/en/guide/brand-management-software",
+          "domain": "frontify.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Free Branding Templates & Examples",
+          "url": "https://miro.com/templates/branding/",
+          "domain": "miro.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Create brand templates",
+          "url": "https://support.optimizely.com/hc/en-us/articles/19922122007565-Create-brand-templates",
+          "domain": "support.optimizely.com",
+          "resultType": "article"
+        },
+        {
+          "position": 9,
+          "title": "Branding Presentation & Brand Deck Templates - Chronicle HQ",
+          "url": "https://chroniclehq.com/templates/branding",
+          "domain": "chroniclehq.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is a brand template?",
+        "What are the 7 pillars of branding?",
+        "What are the 5 C's of branding?",
+        "What are the 7 types of brands?"
+      ],
+      "relatedQueries": [
+        "Brand template management pdf",
+        "Brand guidelines template",
+        "Free brand guidelines template PDF",
+        "Brand template management free",
+        "Brand template management free download",
+        "Brand guidelines template free download",
+        "Brand Board template Canva",
+        "Free brand kit template"
+      ]
+    },
+    {
+      "id": "vc-manual250-c5-043",
+      "keyword": "Chatham House Rule meeting notes",
+      "found": true,
+      "query": "Chatham House Rule meeting notes",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Chatham House Rule",
+          "url": "https://www.chathamhouse.org/about-us/chatham-house-rule",
+          "domain": "chathamhouse.org",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Chatham House Rule",
+          "url": "https://en.wikipedia.org/wiki/Chatham_House_Rule",
+          "domain": "en.wikipedia.org",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "The Chatham House Rule",
+          "url": "https://psychsafety.com/the-chatham-house-rule/",
+          "domain": "psychsafety.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Chatham House Rule",
+          "url": "https://www.rff.org/about/chatham-house-rule/",
+          "domain": "rff.org",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Code of conduct",
+          "url": "https://www.chathamhouse.org/events/code-conduct",
+          "domain": "chathamhouse.org",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Chatham House Rule - Practical Law",
+          "url": "https://uk.practicallaw.thomsonreuters.com/7-201-2615?transitionType=Default&contextData=(sc.Default)",
+          "domain": "uk.practicallaw.thomsonreuters.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Chatham House Rule (Full Explanation + Guide)",
+          "url": "https://www.facilitator.school/blog/chatham-house-rule",
+          "domain": "facilitator.school",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "CHATHAM HOUSE NOTES",
+          "url": "https://academic.oup.com/ia/issue-pdf/9/2/13124781",
+          "domain": "academic.oup.com",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "Chatham House Rule in the Age of AI: Trust Needs an ...",
+          "url": "https://www.linkedin.com/pulse/chatham-house-rule-age-ai-trust-needs-update-baird-srmp-r-kofc-xgcge",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is the Chatham House Rule?",
+        "What are some good house rules for meetings?",
+        "What are the criticisms of Chatham House?",
+        "What are the limitations of the Chatham House Rule?"
+      ],
+      "relatedQueries": [
+        "Chatham House Rules example",
+        "Chatham house rule meeting notes pdf",
+        "Chatham House rules origin",
+        "Chatham house rules pdf",
+        "Chatham House rules meaning",
+        "Are Chatham House rules legally binding",
+        "Chatham House rules alternatives",
+        "Chatham House rules vs off the record"
+      ]
+    },
+    {
+      "id": "vc-manual250-c5-044",
+      "keyword": "digital asset archiving",
+      "found": true,
+      "query": "digital asset archiving",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Digital Asset Registers - Archives sector",
+          "url": "https://www.nationalarchives.gov.uk/archives-sector/advice-and-guidance/managing-your-collection/preserving-digital-collections/digital-asset-registers/",
+          "domain": "nationalarchives.gov.uk",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "4 ways to get to grips with your digital asset archiving with ...",
+          "url": "https://www.wedia-group.com/blog/4-ways-to-get-to-grips-with-your-digital-asset-archiving-with-dam",
+          "domain": "wedia-group.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "Digital Asset Archiving: How to strategically archive your ...",
+          "url": "https://imagekit.io/blog/digital-asset-archiving/",
+          "domain": "imagekit.io",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Building an Effective DAM Retention Policy",
+          "url": "https://www.cyangate.com/blog/archiving-vs-deleting-building-an-effective-dam-retention-strategy/",
+          "domain": "cyangate.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "What is Archiving in Digital Asset Management software?",
+          "url": "https://www.orangelogic.com/archiving-in-digital-asset-management-software",
+          "domain": "orangelogic.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Digital Asset Management (DAM) Systems | Benefits & ...",
+          "url": "https://business.adobe.com/blog/basics/digital-asset-management",
+          "domain": "business.adobe.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Digital Asset Management Workflow in Libraries and ...",
+          "url": "https://www.soutron.com/en_us/blog/general/digital-asset-management-workflow/",
+          "domain": "soutron.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "Digital Asset Management for Archives and Collections",
+          "url": "https://formkiq.com/solutions/digital-asset-management/",
+          "domain": "formkiq.com",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "Digital asset management workflow: everything you need ...",
+          "url": "https://filecamp.com/blog/digital-asset-management-workflow/",
+          "domain": "filecamp.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What degree do I need to be a digital archivist?",
+        "Can you give me an example of a digital archive?",
+        "Are digital archivists in demand?",
+        "Is digital archive legal?"
+      ],
+      "relatedQueries": [
+        "Digital asset archiving template",
+        "Digital asset archiving tools",
+        "Digital asset archiving pdf",
+        "Digital asset archiving examples"
+      ]
+    },
+    {
+      "id": "vc-manual250-c5-045",
+      "keyword": "owned media distribution",
+      "found": true,
+      "query": "owned media distribution",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "The difference between paid, owned and earned media",
+          "url": "https://www.smartinsights.com/digital-marketing-strategy/customer-acquisition-strategy/new-media-options/",
+          "domain": "smartinsights.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "What is owned media? | AppsFlyer mobile glossary",
+          "url": "https://www.appsflyer.com/glossary/owned-media/",
+          "domain": "appsflyer.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Owned Media Distribution - Brandesis",
+          "url": "https://www.brandesis.com/terms/owned-media-distribution/",
+          "domain": "brandesis.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "What Is Owned Media? Definition, Benefits and Examples",
+          "url": "https://www.prnewswire.co.uk/resources/articles/what-is-owned-media-definition-benefits-and-examples/",
+          "domain": "prnewswire.co.uk",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "A Guide to Owned, Paid, and Earned Media Distribution ...",
+          "url": "https://goodmanlantern.com/blog/guide-to-owned-paid-and-earned-media-distribution-channels/",
+          "domain": "goodmanlantern.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Paid Media, Owned Media, Earned Media",
+          "url": "https://www.textbroker.co.uk/paid-media-owned-media-earned-media",
+          "domain": "textbroker.co.uk",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "What is Owned Media (with Examples)",
+          "url": "https://prowly.com/magazine/owned-media/",
+          "domain": "prowly.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "How to Maximize Your Owned Media Channels in an ABM ...",
+          "url": "https://www.madisonlogic.com/blog/owned-media-channels/",
+          "domain": "madisonlogic.com",
+          "resultType": "article"
+        },
+        {
+          "position": 9,
+          "title": "What is Owned Media? | AdKit Glossary",
+          "url": "https://adkit.so/glossary/owned-media",
+          "domain": "adkit.so",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is an example of owned media?",
+        "What is considered owned media?",
+        "What is the 3-3-3 rule in marketing?",
+        "How do I differentiate between owned and paid media?"
+      ],
+      "relatedQueries": [
+        "Owned media distribution strategy",
+        "Owned media distribution examples",
+        "Owned media distribution companies",
+        "Owned media examples",
+        "Paid, owned earned media examples",
+        "Earned vs owned media",
+        "Earned owned and paid media",
+        "Paid, owned and earned media in digital marketing"
+      ]
+    },
+    {
+      "id": "vc-manual250-c5-046",
+      "keyword": "content syndication best practices",
+      "found": true,
+      "query": "content syndication best practices",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Content Syndication Best Practices for 2026",
+          "url": "https://zernio.com/blog/content-syndication-best-practices",
+          "domain": "zernio.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "The Ultimate Guide to Content Syndication Lead Generation",
+          "url": "https://www.headleymedia.com/resources/the-ultimate-guide-to-content-syndication-lead-generation/",
+          "domain": "headleymedia.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "Building Your Content Syndication Strategy",
+          "url": "https://demandscience.com/ultimate-guide-content-syndication/strategies/",
+          "domain": "demandscience.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "The Complete Guide to Content Syndication for Marketing ...",
+          "url": "https://intentsify.io/blog/guide-content-syndication-infographic/",
+          "domain": "intentsify.io",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Content Syndication in B2B: Strategy, Types & Best Practices",
+          "url": "https://ondot.com/content-syndication-for-b2b-lead-generation/",
+          "domain": "ondot.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "What Is Content Syndication? The Basics + How to Do It",
+          "url": "https://www.semrush.com/blog/content-syndication/",
+          "domain": "semrush.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Content Syndication Best Practices for SaaS Businesses",
+          "url": "https://www.prospectbase.com/blog/content-syndication-best-practices-for-saas-business",
+          "domain": "prospectbase.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "What is Content Syndication – B2B Marketing Glossary | INFUSE",
+          "url": "https://infuse.com/glossary/content-syndication/",
+          "domain": "infuse.com",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "Effective Content Syndication Strategies: A Marketing Guide",
+          "url": "https://anteriad.com/ebooks/effective-content-syndication-strategies-a-marketing-guide-for-successful-campaigns",
+          "domain": "anteriad.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Is content syndication still effective?",
+        "What are the five C's of content marketing?",
+        "Can you give me an example of content syndication?",
+        "What are the 7 steps in creating a content strategy?"
+      ],
+      "relatedQueries": [
+        "Content syndication best practices examples",
+        "Content syndication examples",
+        "Content syndication platforms",
+        "Content syndication meaning",
+        "Outbrain"
+      ]
+    },
+    {
+      "id": "vc-manual250-c5-047",
+      "keyword": "digital asset handover",
+      "found": true,
+      "query": "digital asset handover",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Effective Digital Asset Handover Guide for Business Sellers",
+          "url": "https://comelli.net.au/effective-digital-asset-handover-guide-for-business-sellers/",
+          "domain": "comelli.net.au",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "The Digital Asset Handover Clause: Legal Frameworks for ...",
+          "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6265540",
+          "domain": "papers.ssrn.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "What Is Digital Asset Management?",
+          "url": "https://www.ibm.com/think/topics/digital-asset-management",
+          "domain": "ibm.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Digital Asset Transfer Authority: DATA",
+          "url": "https://datauthority.org/",
+          "domain": "datauthority.org",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Digital Asset Handover Template for Client Projects - RunoSO",
+          "url": "https://www.runoso.in/blog/digital-asset-handover-template-clients",
+          "domain": "runoso.in",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "How Digital Checkouts Streamline Your Business",
+          "url": "https://aptien.com/en/kb/articles/how-the-digital-handover-form-works",
+          "domain": "aptien.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Digital asset management",
+          "url": "https://en.wikipedia.org/wiki/Digital_asset_management",
+          "domain": "en.wikipedia.org",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Digital Asset Solutions",
+          "url": "https://www.statestreet.com/ca/en/solutions/digital-assets",
+          "domain": "statestreet.com",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "Revolutionizing Digital Asset Handover: Innovation, Security ...",
+          "url": "https://etqansports.com/revolutionizing-digital-asset-handover-innovation-security-and-usability-in-the-modern-age/",
+          "domain": "etqansports.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What happens to digital assets after someone dies?",
+        "What is an example of a digital asset?",
+        "What are some examples of digital asset management?",
+        "What is the format of an asset handover mail?"
+      ],
+      "relatedQueries": [
+        "Digital asset handover template",
+        "Digital asset handover form",
+        "Digital asset organizer",
+        "Online digital asset management",
+        "Google Drive digital asset management",
+        "Media asset management software",
+        "Best digital asset management software for marketing",
+        "Lightroom digital asset management"
+      ]
+    },
+    {
+      "id": "vc-manual250-c5-048",
+      "keyword": "learning paths",
+      "found": true,
+      "query": "learning paths",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "All Learning Paths | LinkedIn Learning, formerly Lynda.com",
+          "url": "https://www.linkedin.com/learning/paths",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 2,
+          "title": "Learning Paths: Home",
+          "url": "https://learningpaths.com/",
+          "domain": "learningpaths.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Learning Paths: Definition, Benefits & Examples",
+          "url": "https://www.knowledgeworker.com/en/blog/learning-paths",
+          "domain": "knowledgeworker.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Learning Paths: What They Are & How They Build Skills",
+          "url": "https://www.talentlms.com/blog/learning-paths/",
+          "domain": "talentlms.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Learning Paths Academy - Preschool & Childcare in Virginia",
+          "url": "https://learningpathsacademy.com/",
+          "domain": "learningpathsacademy.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "🎯 Learning Paths: Complete Guide to Creating Them",
+          "url": "https://www.iseazy.com/blog/learning-pathways/",
+          "domain": "iseazy.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "What is a Learning Pathway? Using Learning Paths ...",
+          "url": "https://www.docebo.com/learning-network/blog/learning-pathway/",
+          "domain": "docebo.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "Learning Paths",
+          "url": "https://www.e-abclearning.com/learning-paths/",
+          "domain": "e-abclearning.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is a learning path?",
+        "Are Google learning paths free?",
+        "What are some examples of learning paths?",
+        "What is another word for \"learning path\"?"
+      ],
+      "relatedQueries": [
+        "Learning paths in education",
+        "Learning paths examples",
+        "Learning paths servicenow",
+        "Types of learning paths",
+        "Learning paths Microsoft",
+        "Learning paths symbaloo",
+        "LinkedIn Learning paths",
+        "Learning path Labcorp"
+      ]
+    },
+    {
+      "id": "vc-manual250-c5-049",
+      "keyword": "bulk upload digital assets",
+      "found": true,
+      "query": "bulk upload digital assets",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Performing bulk upload and attach",
+          "url": "https://docs.tibco.com/pub/ebx-addon/5.6.3/doc/html/dama/user_guide/user_bulk_upload_attach.html",
+          "domain": "docs.tibco.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Bulk Ingestion - Aprimo - The Leader in Digital Asset ...",
+          "url": "https://www.aprimo.com/glossary/bulk-ingestion",
+          "domain": "aprimo.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Bulk import assets using Assets view",
+          "url": "https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/assets/assets-view/bulk-import-assets-view",
+          "domain": "experienceleague.adobe.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "‎Bulk Import Assets | Sprinklr Help Center",
+          "url": "https://www.sprinklr.com/help/articles/manage-assets/bulk-import-assets/641a9aaaa1367f1be7db826f",
+          "domain": "sprinklr.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Bulk import and export digital assets using manifests",
+          "url": "https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/import-export-manifest",
+          "domain": "learn.microsoft.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "How To Upload Assets Via The Mass Uploader",
+          "url": "https://support.bynder.com/hc/en-us/articles/360013870140-How-To-Upload-Assets-Via-The-Mass-Uploader",
+          "domain": "support.bynder.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Bulk folder upload, Folder synchronization, and several ...",
+          "url": "https://razuna.com/blog/bulk-folder-upload-folder-synchronization-and-several-enhanc-ujipgv/",
+          "domain": "razuna.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "Bulk Edit Tool - Experts In Digital Asset Management",
+          "url": "https://www.cyangate.com/otmm-app-store/bulk-edit-tool/",
+          "domain": "cyangate.com",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "How to Import Vendors in Bulk for Assets in the Back Office ...",
+          "url": "https://www.youtube.com/watch?v=YO1sM7TDItA",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What does \"bulk upload\" mean?",
+        "How do you bulk upload?",
+        "How to bulk upload photos?",
+        "How do I upload to Bynder?"
+      ],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual250-c5-050",
+      "keyword": "needs assessment survey",
+      "found": true,
+      "query": "needs assessment survey",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:01.735Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "8SjJ2NKr2HlOOh8Cv",
+      "datasetId": "lKgIzTUjGuJjzIubf",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Chapter 3., Section 7. Conducting Needs Assessment Surveys",
+          "url": "https://ctb.ku.edu/en/table-of-contents/assessment/assessing-community-needs-and-resources/conducting-needs-assessment-surveys/main",
+          "domain": "ctb.ku.edu",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Needs Assessment Survey Questions: Examples & Template",
+          "url": "https://akarisoftware.com/2023/11/17/needs-assessment-surveys-examples-template/",
+          "domain": "akarisoftware.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "1.3 The Needs Assessment Survey",
+          "url": "https://www.nedcc.org/free-resources/preservation-leaflets/1.-planning-and-prioritizing/1.3-the-needs-assessment-survey",
+          "domain": "nedcc.org",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Community Needs Assessment Survey",
+          "url": "https://www.ihda.org/wp-content/uploads/2018/12/Community-Needs-Assessment-Survey.pdf",
+          "domain": "ihda.org",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Needs Assessment Survey: 50 Questions to Ask",
+          "url": "https://www.poll-maker.com/needs-assessment-survey-questions",
+          "domain": "poll-maker.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Training Needs Assessment Demo Questionnaire",
+          "url": "https://hr-survey.com/Sample-Training-Needs-Assessment.htm",
+          "domain": "hr-survey.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "School Needs Assessment Survey - Microsoft Forms",
+          "url": "https://forms.cloud.microsoft/Pages/ShareFormPage.aspx?id=KSmbODBag0acjB0hQ01X53M_TMSJux5EpT-5cosZFutUQ0lBVThHQ0NJODA5NTlGNVRWMDlSN0s3Sy4u&sharetoken=zAR8BzKNQOf5BwCug9ZS",
+          "domain": "forms.cloud.microsoft",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "INFORMATION NEEDS ASSESSMENT SURVEY",
+          "url": "http://s3.amazonaws.com/lpcollective/tools/pdfs/000/000/005/original/LP_Resources_InformationNeedsAssesmentSurvey.pdf?1497639548",
+          "domain": "s3.amazonaws.com",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "Scholarly articles for needs assessment survey",
+          "url": "https://scholar.google.co.th/scholar?q=needs+assessment+survey&hl=en&as_sdt=0&as_vis=1&oi=scholart",
+          "domain": "scholar.google.co.th",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is a needs assessment survey?",
+        "What are the 5 steps in the needs assessment?",
+        "Can you give me an example of a needs assessment?",
+        "What questions are asked in a needs assessment?"
+      ],
+      "relatedQueries": [
+        "Needs assessment survey template",
+        "Needs assessment survey questions",
+        "Needs assessment questionnaire pdf",
+        "Sample community needs assessment survey questions",
+        "Needs assessment survey for students",
+        "Community needs assessment questionnaire pdf",
+        "Needs assessment questionnaire for college students",
+        "Needs assessment questionnaire for community"
+      ]
+    }
+  ]
+}
