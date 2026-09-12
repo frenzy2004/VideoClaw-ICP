@@ -60,7 +60,7 @@
   },
   "editorialGraphic": {
     "src": "/media/blog/merge-duplicate-portfolio-media-files.svg",
-    "alt": "A practical sequence for duplicate digital assets in a multi-company portfolio media program.",
+    "alt": "Duplicate adjudication sheet distinguishing identical files, corrected versions and restricted variants before repairing references.",
     "width": 1200,
     "height": 675
   },

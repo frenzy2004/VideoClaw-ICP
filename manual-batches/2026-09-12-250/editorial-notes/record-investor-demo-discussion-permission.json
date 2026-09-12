@@ -1,0 +1,116 @@
+{
+  "id": "vc-manual250-c2-038",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0059819",
+      "supports": "Recording prompts appear when recording starts or a participant joins a recorded meeting, subject to settings.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0068228",
+      "supports": "Notification controls vary by account and joining method; a phone consent prompt does not itself stop recording after no response.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does a Zoom prompt settle every recording-permission question?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should I do if someone does not want recording?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I later publish part of the discussion?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: Recording tutorials may describe the button without a meeting-specific purpose, audience, transition and unrecorded alternative. Competing page bodies have not been audited for this draft.",
+  "reviewNotes": [
+    "FAQs are editorial, not PAA or legal advice. Zoom supports notification mechanics only. The permission card, alternative and distribution review are original operational recommendations, not a legal sufficiency test. KB0068228 returned an unrelated Chinese page title but its full English body was 'Modifying recording notification prompts' and supported the cited statement; recheck rendered title during final link QA."
+  ],
+  "serp": {
+    "id": "vc-manual250-c2-038",
+    "keyword": "record Zoom meeting with consent",
+    "found": true,
+    "query": "record Zoom meeting with consent",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Providing consent to be recorded",
+        "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0059819",
+        "domain": "support.zoom.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "How to record Zoom meeting without permission?",
+        "url": "https://www.reddit.com/r/screenrecorders/comments/1n0gt0t/how_to_record_zoom_meeting_without_permission/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Enabling or disabling computer recording",
+        "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0063640",
+        "domain": "support.zoom.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "How to Record a Zoom Meeting: 3 Options for 2026",
+        "url": "https://www.read.ai/articles/how-to-record-a-zoom-meeting",
+        "domain": "read.ai",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "How to Record Zoom Meetings With or Without Permission",
+        "url": "https://riverside.com/blog/how-to-record-zoom-meetings",
+        "domain": "riverside.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Recording a Zoom Meeting | Help - Illinois State",
+        "url": "https://help.illinoisstate.edu/technology/support-topics/communication-and-collaboration-tools/zoom/recording-a-zoom-meeting",
+        "domain": "help.illinoisstate.edu",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Customizing the recording consent disclaimer",
+        "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0068402",
+        "domain": "support.zoom.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How do I give consent to be recorded in a Zoom meeting?",
+      "Can I record a Zoom meeting without permission?",
+      "How do I ask permission to record a meeting on Zoom?",
+      "Can you record a meeting without asking permission?"
+    ],
+    "relatedQueries": [
+      "Record zoom meeting with consent reddit",
+      "Record Zoom meeting as participant",
+      "Can you record Zoom meetings for free on phone",
+      "How to record Zoom workplace meeting",
+      "How to record a video on Zoom without a meeting",
+      "Record Zoom meeting with audio on phone",
+      "Zoom record",
+      "How to record Zoom meeting as a participant in laptop"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

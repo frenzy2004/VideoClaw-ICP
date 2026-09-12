@@ -1,0 +1,124 @@
+{
+  "id": "vc-manual250-c5-049",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.bynder.com/hc/en-us/articles/24265123462418-Guide-to-Uploading-Assets-in-Bynder",
+      "supports": "External uploads can be reviewed before storage; bulk upload methods can carry per-asset metadata.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.bynder.com/hc/en-us/articles/20331272932626-Taxonomy-Tips-for-your-DAM",
+      "supports": "Bynder recommends asking how people search, what terms they use and where searches fail.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does a successful upload mean an asset is accepted?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can working files enter the library?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should a corrected submission resend every file?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Accept, return or hold new media submissions using a batch receipt and company-specific completeness checks. Unlike c5-026 migration, this handles recurring new contributions; unlike c3 outsourcing handoff, the sender is a portfolio company supplying its own media. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact US/en SERP evidence is being collected by main; query remains a candidate hypothesis. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities."
+  ],
+  "serp": {
+    "id": "vc-manual250-c5-049",
+    "keyword": "bulk upload digital assets",
+    "found": true,
+    "query": "bulk upload digital assets",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:01.735Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Performing bulk upload and attach",
+        "url": "https://docs.tibco.com/pub/ebx-addon/5.6.3/doc/html/dama/user_guide/user_bulk_upload_attach.html",
+        "domain": "docs.tibco.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Bulk Ingestion - Aprimo - The Leader in Digital Asset ...",
+        "url": "https://www.aprimo.com/glossary/bulk-ingestion",
+        "domain": "aprimo.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Bulk import assets using Assets view",
+        "url": "https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/assets/assets-view/bulk-import-assets-view",
+        "domain": "experienceleague.adobe.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "‎Bulk Import Assets | Sprinklr Help Center",
+        "url": "https://www.sprinklr.com/help/articles/manage-assets/bulk-import-assets/641a9aaaa1367f1be7db826f",
+        "domain": "sprinklr.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Bulk import and export digital assets using manifests",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/commerce/dev-itpro/import-export-manifest",
+        "domain": "learn.microsoft.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "How To Upload Assets Via The Mass Uploader",
+        "url": "https://support.bynder.com/hc/en-us/articles/360013870140-How-To-Upload-Assets-Via-The-Mass-Uploader",
+        "domain": "support.bynder.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Bulk folder upload, Folder synchronization, and several ...",
+        "url": "https://razuna.com/blog/bulk-folder-upload-folder-synchronization-and-several-enhanc-ujipgv/",
+        "domain": "razuna.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "Bulk Edit Tool - Experts In Digital Asset Management",
+        "url": "https://www.cyangate.com/otmm-app-store/bulk-edit-tool/",
+        "domain": "cyangate.com",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "How to Import Vendors in Bulk for Assets in the Back Office ...",
+        "url": "https://www.youtube.com/watch?v=YO1sM7TDItA",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What does \"bulk upload\" mean?",
+      "How do you bulk upload?",
+      "How to bulk upload photos?",
+      "How do I upload to Bynder?"
+    ],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

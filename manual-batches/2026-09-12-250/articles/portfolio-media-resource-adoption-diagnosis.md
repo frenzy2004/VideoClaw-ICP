@@ -60,7 +60,7 @@
   },
   "editorialGraphic": {
     "src": "/media/blog/portfolio-media-resource-adoption-diagnosis.svg",
-    "alt": "A practical sequence for digital asset management user adoption in a multi-company portfolio media program.",
+    "alt": "Adoption diagnosis table matching awareness, relevance, usability and usefulness barriers to bounded interventions and application checks.",
     "width": 1200,
     "height": 675
   },

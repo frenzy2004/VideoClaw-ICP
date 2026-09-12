@@ -59,7 +59,7 @@
   },
   "editorialGraphic": {
     "src": "/media/blog/recall-withdrawn-portfolio-media-assets.svg",
-    "alt": "A practical sequence for revoke access to shared files in a multi-company portfolio media program.",
+    "alt": "Withdrawal register tracing an asset from the library to shared links and published copies, with a responsible owner for each recall action.",
     "width": 1200,
     "height": 675
   },

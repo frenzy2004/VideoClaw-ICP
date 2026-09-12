@@ -337,6 +337,193 @@
       "method": "web_page_body_review",
       "checkedAt": "2026-09-12",
       "support": "Historical advice about relevant background for journalists inspected; no reach promises or obsolete platform limits imported."
+    },
+    {
+      "url": "https://support.google.com/analytics/answer/10917952",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "UTM parameter meanings, creative differentiation and case-sensitive campaign values inspected."
+    },
+    {
+      "url": "https://support.google.com/analytics/answer/11242870",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Manual tagging versus integrated auto-tagging and dimension scope inspected; draft does not promise replacement of platform fields."
+    },
+    {
+      "url": "https://support.google.com/analytics/answer/7201382?hl=en",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Debug-mode requirement, personal-device testing and limited attribution in DebugView inspected."
+    },
+    {
+      "url": "https://support.google.com/analytics/answer/9216061?hl=en",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Automatic video engagement is scoped to YouTube embeds with JS API support; event triggers inspected."
+    },
+    {
+      "url": "https://support.google.com/google-ads/answer/10682377?hl=en",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Dedicated video experiments distinguished from other experiment types; no performance promises adopted."
+    },
+    {
+      "url": "https://support.google.com/websearch/answer/4815696?hl=en",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Google Alerts matching new results, language/region controls inspected; no monitoring completeness claim."
+    },
+    {
+      "url": "https://app.leg.wa.gov/Wac/default.aspx?cite=284-30-355",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Washington rule definitions, scope and certificate-versus-policy rights inspected; draft explicitly avoids a national rule or coverage opinion."
+    },
+    {
+      "url": "https://copyright.gov/circs/circ30.pdf",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Circular30 commissioned-work requirements inspected; draft does not equate invoice payment with authorship and calls for qualified contract review."
+    },
+    {
+      "url": "https://film.ca.gov/state-permits/insurance-requirements/",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "California state-property certificate and separate endorsement requirements inspected; draft preserves jurisdiction and activity limits."
+    },
+    {
+      "url": "https://www.ftc.gov/business-guidance/resources/start-security-guide-business",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Service-provider selection, stated expectations and follow-up/oversight section inspected."
+    },
+    {
+      "url": "https://www.chathamhouse.org/events/code-conduct",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Section5 distinguishes on-record, Rule-based use without identity/affiliation and off-record nonpublication; prior agreement requirement inspected."
+    },
+    {
+      "url": "https://helpx.adobe.com/business/teams/users-and-licenses/manage-users/assign-licenses.html",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Named-user product assignment in Admin Console inspected."
+    },
+    {
+      "url": "https://helpx.adobe.com/business/teams/users-and-licenses/manage-users/manage-team-in-the-creative-cloud-desktop-app.html",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "License removal/reassignment and separate asset-recovery route inspected; no implication that entitlements transfer projects."
+    },
+    {
+      "url": "https://helpx.adobe.com/premiere/desktop/get-started/technical-requirements/adobe-premiere-pro-technical-requirements.html",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Minimum HD versus recommended higher-resolution system requirements inspected; draft does not import fixed hardware shopping claims."
+    },
+    {
+      "url": "https://helpx.adobe.com/premiere/desktop/get-started/technical-requirements/processor-memory-and-gpu-recommendations.html",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Quick Sync decoding of H.264/HEVC inspected; unrelated efficiency figures not adopted."
+    },
+    {
+      "url": "https://helpx.adobe.com/premiere/desktop/render-and-export/export-files/export-a-project-as-a-final-cut-pro-xml-file.html",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Linked-media prerequisite, partial effects translation and audio/transition limitations inspected."
+    },
+    {
+      "url": "https://helpx.adobe.com/premiere/desktop/render-and-export/export-files/export-aaf-files.html",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Destination support and Media Composer relinking caveat inspected."
+    },
+    {
+      "url": "https://helpx.adobe.com/download-install/apps/licensing-activation/activate-deactivate-apps/account-sharing-policy.html",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Individual and team account non-sharing rule inspected in current policy body."
+    },
+    {
+      "url": "https://fastcompany.zendesk.com/hc/en-us/articles/360000291906-How-can-I-submit-an-editorial-contribution",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Current Work Life instructions require complete unpublished articles, not pitches/outlines; draft correctly uses its proposal internally for that destination."
+    },
+    {
+      "url": "https://mixergy.com/looking-for-founders-with-big-success-or-failure-stories-for-mixergy-interviews/",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Founder learning/success/failure selection invitation inspected; draft treats it as an older audience-fit example, not guaranteed current booking."
+    },
+    {
+      "url": "https://paulgraham.com/ds.html",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Manual section about work planned for later automation inspected; demonstration disclosure is editorial reasoning, not a quote from Graham."
+    },
+    {
+      "url": "https://handbook.gitlab.com/handbook/company/culture/all-remote/onboarding/",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Onboarding-buddy section inspected; draft adapts named human support without adopting productivity statistics."
+    },
+    {
+      "url": "https://sponsorshipcollective.com/blog/how-to-build-a-post-event-sponsorship-fulfillment-report-that-drives-renewals/",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Promised-versus-delivered benefit chart and supporting photos/samples inspected; draft rejects unsupported renewal/valuation claims."
+    },
+    {
+      "url": "https://support.google.com/youtube/answer/13338784?hl=en",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Prepared uploaded language tracks distinguished from auto dubbing; feature access and audio-file requirements inspected."
+    },
+    {
+      "url": "https://support.google.com/youtube/answer/15569972?hl=en",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Proper-name, idiom and jargon translation errors acknowledged in current automatic-dubbing guidance."
+    },
+    {
+      "url": "https://support.google.com/youtube/answer/16391400",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Thumbnail-only mode, up to three alternatives, desktop/advanced access and Shorts exclusions inspected."
+    },
+    {
+      "url": "https://support.google.com/youtube/answer/9314415?hl=en",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Dips, spikes and possible confusion interpretations inspected; draft treats motivation as a hypothesis."
+    },
+    {
+      "url": "https://support.google.com/youtube/answer/9717005?hl=en",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Comparison, dates, dimensions and unavailable-filter limits inspected."
+    },
+    {
+      "url": "https://support.zendesk.com/hc/en-us/articles/4408821388442-Managing-translations-for-categories-and-sections",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Separate translated category/section outdated flag and source-language restriction inspected."
+    },
+    {
+      "url": "https://support.zendesk.com/hc/en-us/articles/4408821505306-Managing-help-center-translations-for-articles",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Translated-article outdated flag and permission requirement inspected."
+    },
+    {
+      "url": "https://support.google.com/youtube/answer/72431?hl=en",
+      "method": "indexed_primary_body_review_not_direct_fetch",
+      "checkedAt": "2026-09-12",
+      "checkedAlternate": "https://support.google.com/youtube/answer/72431?hl=en-GB",
+      "support": "Direct en URL hit a Google challenge; official indexed Computer/English-GB body inspected. Thumbnail upload/format requirements exist; locale/platform snapshots differ, so no universal current Shorts rule or dimensions asserted. Direct URL still needs ordinary-reader recheck."
     }
   ]
 }

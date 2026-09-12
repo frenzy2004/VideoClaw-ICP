@@ -59,7 +59,7 @@
   },
   "editorialGraphic": {
     "src": "/media/blog/portfolio-media-rights-expiry-calendar.svg",
-    "alt": "A practical sequence for digital asset expiration dates in a multi-company portfolio media program.",
+    "alt": "Asset expiry calendar showing instructions, relevant dates, destination owners and decisions to renew, replace or hold use.",
     "width": 1200,
     "height": 675
   },

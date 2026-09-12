@@ -1,0 +1,126 @@
+{
+  "id": "vc-manual250-c4-046",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://helpx.adobe.com/express/web/video-creation-and-editing/change-file-formats/convert-to-gif.html",
+      "supports": "Adobe Express provides trimming, layout, and file-size options for GIF conversion.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://mailchimp.com/resources/how-to-make-the-most-out-of-email-gifs/",
+      "supports": "Recommends a useful first-frame fallback for clients that do not animate the GIF.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What makes a good product GIF?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should the loop be perfectly seamless?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What if the GIF is too large when the text stays readable?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Extract a meaningful micro-interaction and design a legible loop with a useful static fallback. This produces an animated image rather than a video email thumbnail or a resized social clip. No ranking-page comparison or demand conclusion is asserted.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending.",
+    "Microinteraction animation, distinct from c4-012 still extraction and c4-032 email playback paths. No universal GIF performance or compatibility claims."
+  ],
+  "serp": {
+    "id": "vc-manual250-c4-046",
+    "keyword": "turn screen recording into GIF",
+    "found": true,
+    "query": "turn screen recording into GIF",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:32:56.760Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Free Video to GIF Converter | Adobe Express",
+        "url": "https://www.adobe.com/express/feature/video/convert/video-to-gif",
+        "domain": "adobe.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Create GIFs from Your Screen Recordings",
+        "url": "https://www.veed.io/tools/screen-recorder/screen-to-gif",
+        "domain": "veed.io",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Free Video to GIF Converter: Convert MP4 to GIF online",
+        "url": "https://www.canva.com/features/mp4-to-gif-converter/",
+        "domain": "canva.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Chrome Capture - Screenshot & GIF",
+        "url": "https://chromewebstore.google.com/detail/chrome-capture-screenshot/ggaabchcecdbomdcnbahdfddfikjmphe",
+        "domain": "chromewebstore.google.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "MP4 video to GIF converter",
+        "url": "https://ezgif.com/video-to-gif",
+        "domain": "ezgif.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "How to Make a Screen Recording GIF in Microsoft PowerPoint ...",
+        "url": "https://www.youtube.com/watch?v=GR8vSYE_G0A",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 7,
+        "title": "Save Screen Recording as GIF : r/Windows11",
+        "url": "https://www.reddit.com/r/Windows11/comments/1foq4lw/save_screen_recording_as_gif/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Free Gif Screen Recorder",
+        "url": "https://www.loom.com/products/gif-screen-recorder",
+        "domain": "loom.com",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "N-Tech",
+        "url": "https://nicke.tech/n-studio?migrated=true",
+        "domain": "nicke.tech",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": [
+      "Turn video into GIF iPhone",
+      "Turn screen recording into gif free",
+      "Turn screen recording into gif online free",
+      "Turn screen recording into gif online",
+      "Compress GIF",
+      "Video to GIF converter",
+      "Screen to GIF",
+      "Free convert video to GIF"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

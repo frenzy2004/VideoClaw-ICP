@@ -108,6 +108,9 @@ Build an exposure map that includes persistent screen elements, temporary pop-up
 | Job details | Address, contact name and appointment context | Replace the scene with fictional records where feasible |
 | Browser chrome | Tenant URL and profile identity | Capture a narrower permitted area |
 | Spoken narration | Customer or employee names | Rerecord the affected explanation |
+| Face, avatar or camera tile | Recognizable person or customer identity | Retain only for the permitted use, remove the segment, or recapture |
+| Original voice | Speaker recognizable without a spoken name | Remove, or clearly label a recreated demonstration with new narration |
+| Captions and transcript | Names or contextual clues copied from earlier audio | Review the delivered text separately after audio changes |
 | Notification | Message preview and sender | Remove the contaminated segment or recapture |
 | Hosting preview | Filename or thumbnail repeats identity | Rename and regenerate the surrounding asset |
 
@@ -137,7 +140,7 @@ Avoid turning privacy treatment into an unsupported performance claim. A clean s
 
 Export the intended delivery version and review that file, not just the editing timeline. Pause around every masked region's entrance, movement, and exit. Watch at normal speed too; some exposures become noticeable only when a notification animates into view.
 
-Listen without watching. Names and identifying context can remain in narration even after the picture is treated. Then review captions and any transcript created for the clip. A caption file can preserve a spoken name that was later removed from the audio.
+Listen without watching. Ask who or what remains identifiable, including a recognizable original voice with no spoken name. Review faces, avatars and camera tiles on a separate picture pass. Then inspect captions and every delivered transcript: text generated before an audio edit can retain removed names. Re-narration is a labeled recreation, not a guarantee of anonymity.
 
 Inspect the thumbnail, title, filename, and description. A carefully edited movie can still expose its subject through a preview image selected from an untreated frame. Keep the source recording out of the folder or link intended for the investor.
 

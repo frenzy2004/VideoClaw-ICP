@@ -1,0 +1,109 @@
+{
+  "id": "vc-manual250-c2-040",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.microsoft.com/en-us/powerpoint/turn-your-presentation-into-a-video",
+      "supports": "PowerPoint video export can use recorded narration and slide timings.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.apple.com/en-mide/guide/keynote/tan81813d552/mac",
+      "supports": "Keynote can rerecord narration from a selected point and preview the saved presentation.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should I use recorded timings when exporting PowerPoint?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I repair one narration mistake?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Is the in-app preview enough to approve the export?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: Slide-export instructions may omit a visual-and-voice ledger for product clips, qualifications and the final investor-viewed file. Competing page bodies have not been audited for this draft.",
+  "reviewNotes": [
+    "FAQs are editorial questions, not observed PAA. Source links provide factual or contextual grounding; the article-specific worksheets and procedural recommendations are original editorial synthesis."
+  ],
+  "serp": {
+    "id": "vc-manual250-c2-040",
+    "keyword": "export narrated PowerPoint as video",
+    "found": true,
+    "query": "export narrated PowerPoint as video",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Turn your presentation into a video",
+        "url": "https://support.microsoft.com/en-us/powerpoint/turn-your-presentation-into-a-video",
+        "domain": "support.microsoft.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Exporting a PowerPoint Presentation as a Video",
+        "url": "https://www.ou.edu/cas-online/website/documents/Exporting%20Powerpoint%20as%20Video.pdf",
+        "domain": "ou.edu",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "How to save presentation including recording : r/powerpoint",
+        "url": "https://www.reddit.com/r/powerpoint/comments/1c7ab30/how_to_save_presentation_including_recording/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Save a presentation as a video​ in PowerPoint",
+        "url": "https://support.microsoft.com/en-us/powerpoint/training/save-a-presentation-as-a-video%E2%80%8B-in-powerpoint",
+        "domain": "support.microsoft.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "PowerPoint: Exporting a Video/Audio Narration as an MP4 ...",
+        "url": "https://kb.uwec.edu/articles/powerpoint-exporting-a-video-audio-narration-as-an-mp4-file-windows-and-macos",
+        "domain": "kb.uwec.edu",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Export Your Narrated PowerPoint as a Video - Detroit Mercy ...",
+        "url": "https://cetl.udmercy.edu/knowledge/support/add-and-organize-content/office-365/powerpoint/export-your-narrated-powerpoint-as-a-video",
+        "domain": "cetl.udmercy.edu",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How can I Export a PowerPoint presentation with audio as a video?",
+      "How do I turn a PowerPoint presentation into a video?",
+      "Why can't I save my PowerPoint as an MP4?",
+      "How to save PPT as video in PowerPoint?"
+    ],
+    "relatedQueries": [
+      "Save PowerPoint as video on Mac",
+      "How to save PowerPoint as video with music",
+      "How to save PowerPoint video after recording",
+      "How to record a PowerPoint presentation as a video with audio",
+      "Convert PPT to video with audio online free",
+      "Convert PPT to video online free",
+      "How to convert PPT to video in mobile",
+      "How to make a video presentation with PowerPoint"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

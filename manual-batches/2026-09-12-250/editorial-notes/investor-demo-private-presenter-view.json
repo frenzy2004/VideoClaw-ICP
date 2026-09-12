@@ -1,0 +1,116 @@
+{
+  "id": "vc-manual250-c2-043",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.microsoft.com/en-us/powerpoint/training/use-presenter-view-in-powerpoint",
+      "supports": "Presenter View shows notes and lets the presenter select its monitor.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.apple.com/en-gb/102025",
+      "supports": "Keynote separates presenter controls, but some conferencing apps still expose the presenter window inside a shared screen area.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does enabling Presenter View guarantee my notes stay hidden?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can Keynote's presenter window appear to remote viewers?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should I do after a display disconnects?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: Presenter-view setup guides may omit a transition map that separately tests remote viewers, room displays and product handoffs. Competing page bodies have not been audited for this draft.",
+  "reviewNotes": [
+    "FAQs are editorial questions, not observed PAA. Source links provide factual or contextual grounding; the article-specific worksheets and procedural recommendations are original editorial synthesis."
+  ],
+  "serp": {
+    "id": "vc-manual250-c2-043",
+    "keyword": "hide presenter notes when sharing screen",
+    "found": true,
+    "query": "hide presenter notes when sharing screen",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How do I screen share Powerpoint in presenter view ...",
+        "url": "https://www.reddit.com/r/Zoom/comments/jfjely/how_do_i_screen_share_powerpoint_in_presenter/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Start the presentation and see your notes in Presenter view",
+        "url": "https://support.microsoft.com/en-us/powerpoint/training/start-the-presentation-and-see-your-notes-in-presenter-view",
+        "domain": "support.microsoft.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Screen sharing a PowerPoint presentation",
+        "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0068635",
+        "domain": "support.zoom.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "Use PowerPoint Presenter View in Zoom with Only One Screen",
+        "url": "https://tech.medicine.wsu.edu/technology/powerpoint/presenter-view-zoom/",
+        "domain": "tech.medicine.wsu.edu",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Hide Notes Pane when sharing Powerpoint slide in Teams",
+        "url": "https://learn.microsoft.com/en-us/answers/questions/4387264/hide-notes-pane-when-sharing-powerpoint-slide-in-t",
+        "domain": "learn.microsoft.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "How to use PowerPoint presenter view without showing ...",
+        "url": "https://www.facebook.com/groups/teachpsych/posts/10158957613864349/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 7,
+        "title": "How to share my screen of PowerPoint in Cisco WebEx but ...",
+        "url": "https://www.quora.com/How-can-I-share-my-screen-of-PowerPoint-in-Cisco-WebEx-but-hide-my-notes-I-want-to-have-my-notes-just-for-me-to-read-from",
+        "domain": "quora.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How to hide speaker notes when presenting?",
+      "How to share a presentation without notes?",
+      "How to hide presenter notes on Microsoft Teams?",
+      "Can an audience see presenter notes in PowerPoint?"
+    ],
+    "relatedQueries": [
+      "Hide presenter notes when sharing screen powerpoint",
+      "How to use Presenter View on Zoom without showing notes",
+      "How to view notes in PowerPoint while presenting without others seeing",
+      "How to view notes in powerpoint while presenting on zoom",
+      "How to use presenter view on Zoom without showing notes Google Slides",
+      "How to use Presenter View on Zoom without showing notes Mac",
+      "How to hide notes in PowerPoint while presenting in Teams",
+      "How to screen share PowerPoint on Zoom without showing notes"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

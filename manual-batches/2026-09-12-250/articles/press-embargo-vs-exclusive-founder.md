@@ -109,7 +109,7 @@ Ask what the journalist receives that is valuable: time with a knowledgeable fou
 
 Also consider your constraints. A partner might already plan its own announcement. A customer may be available only for a narrow period. Your team may be unable to keep several external conversations coordinated. These facts should shape the first offer and every later request. If outreach is already underway, inventory it before promising exclusive access.
 
-## Work through three founder scenarios
+## Work through four founder scenarios
 
 The following situations are fictional and illustrate different decisions.
 

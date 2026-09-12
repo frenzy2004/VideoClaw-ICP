@@ -59,7 +59,7 @@
   },
   "editorialGraphic": {
     "src": "/media/blog/search-portfolio-recordings-by-moment.svg",
-    "alt": "A practical sequence for search video transcripts in a multi-company portfolio media program.",
+    "alt": "Transcript retrieval exercise linking a search phrase to the matching recording moment, checked surrounding context and permitted access.",
     "width": 1200,
     "height": 675
   },

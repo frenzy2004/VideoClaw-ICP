@@ -59,7 +59,7 @@
   },
   "editorialGraphic": {
     "src": "/media/blog/portfolio-media-release-version-control.svg",
-    "alt": "A practical sequence for digital asset management version control in a multi-company portfolio media program.",
+    "alt": "Release register linking each media version to its company decision, approved audience, current release and superseded copies.",
     "width": 1200,
     "height": 675
   },

@@ -134,10 +134,10 @@ If a recorded founder statement contains the relevant fact, point to the timesta
 
 Here is an original fictional example:
 
-> Subject: Factual correction request for the Fieldnote article  
->   
-> The article published on [date] says Fieldnote is available to every US business. The product was available only to invited pilot customers at the time of publication.  
->   
+> Subject: Factual correction request for the Fieldnote article
+>
+> The article published on [date] says Fieldnote is available to every US business. The product was available only to invited pilot customers at the time of publication.
+>
 > The attached dated availability notice states that limitation, and the current access page continues to describe the invitation process. Could you please review the sentence and correct the availability information? I can answer any questions about the pilot scope.
 
 The example uses fictional facts and placeholders. Replace them with the actual evidence, not a preferred marketing phrase.

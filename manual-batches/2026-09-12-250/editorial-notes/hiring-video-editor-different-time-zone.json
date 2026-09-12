@@ -1,0 +1,122 @@
+{
+  "id": "vc-manual250-c3-043",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.videohusky.com/best-video-editing-service/",
+      "supports": "Inspected service FAQ: advertised working hours, queue concurrency and input limits affect the offer. Inconsistent plan details are not resolved by assumption; exact purchase terms require confirmation.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.nist.gov/pml/time-and-frequency-division/popular-links/daylight-saving-time-dst",
+      "supports": "Official body inspected 2026-09-12, updated February 9 2026: US DST dates and regional exceptions, and operating-system time-zone correction. Dated overlap examples are original calculations, not vendor commitments.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Is hiring an overseas editor automatically faster?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Why use named time zones rather than EST or PST?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How much overlap do I need?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: A dated seven-day overlap grid tests decision availability and seasonal clock changes instead of assuming overnight editing always saves a day.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c3-043",
+    "keyword": "hiring a video editor in a different time zone",
+    "found": true,
+    "query": "hiring a video editor in a different time zone",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "The Top Countries to Hire Video Editors Overseas Depend ...",
+        "url": "https://www.linkedin.com/pulse/top-countries-hire-video-editors-overseas-depend-how-you-ruffini-kqo1f",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 2,
+        "title": "How hard is it to get a remote full time employment in a 1st ...",
+        "url": "https://www.reddit.com/r/editors/comments/1dvfah3/how_hard_is_it_to_get_a_remote_full_time/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Hire Remote Video Editors",
+        "url": "https://dailyremote.com/hire/video-editors",
+        "domain": "dailyremote.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Video Editor Jobs Remote : Opportunities and Challenges",
+        "url": "https://www.ituonline.com/blogs/video-editor-jobs-remote/",
+        "domain": "ituonline.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "How to Hire a Remote Video Editor 2023 (Step by Step)",
+        "url": "https://www.youtube.com/watch?v=IDruowt8NdE",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 6,
+        "title": "How do remote video editors typically collaborate with ...",
+        "url": "https://www.ziprecruiter.com/e/video-editor-worldwide-remote-how-do-remote-video-editors-typically-collaborate-with-creative-teams-spread-across-different-time-zones",
+        "domain": "ziprecruiter.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Digital nomads* Hi! Any idea where to find remote video ...",
+        "url": "https://www.facebook.com/groups/169551720401370/posts/1798341447522381/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 8,
+        "title": "EU-based remote video editor, available for US/EU time ...",
+        "url": "https://yt.careers/talent/QE7h4dqw",
+        "domain": "yt.careers",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "Top Countries to Hire Video Editors Overseas",
+        "url": "https://www.hireoverseas.com/blogs/top-countries-to-hire-video-editors-overseas",
+        "domain": "hireoverseas.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What does the 80/20 rule mean in video editing?",
+      "What is the 3:2:1 rule in video editing?",
+      "How much should I pay a video editor per hour?",
+      "Is AI replacing video editors?"
+    ],
+    "relatedQueries": [
+      "Hiring a video editor in a different time zone reddit",
+      "Hiring a video editor in a different time zone salary"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

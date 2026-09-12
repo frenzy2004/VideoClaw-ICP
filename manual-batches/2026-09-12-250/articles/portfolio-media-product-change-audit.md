@@ -59,7 +59,7 @@
   },
   "editorialGraphic": {
     "src": "/media/blog/portfolio-media-product-change-audit.svg",
-    "alt": "A practical sequence for content audit checklist in a multi-company portfolio media program.",
+    "alt": "Product-change audit connecting changed company facts to affected current media, historical context and assigned correction decisions.",
     "width": 1200,
     "height": 675
   },

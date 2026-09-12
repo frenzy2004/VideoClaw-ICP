@@ -111,6 +111,8 @@ Here is a fictional example for a dispatch product:
 
 Add a private column for the replacement source file. Keep timecodes tied to specific filenames: “00:28” is ambiguous when several cuts are open.
 
+A completed fictional record could read: old file dispatch-A.mp4, 00:18–00:39, build A captured September 1 → dispatch-B.mp4, 00:16–00:34, build B captured September 10. Replace the assignment step; retain both source files. Destination: the dated supplement submitted through the program's currently permitted update route, with its receipt recorded after submission. These dates describe the example, not an actual application.
+
 Do not preserve an old result shot merely because it looks clearer. If the new action produces a different result screen, capture that result in the same run.
 
 ## Record the change with enough unchanged context

@@ -131,8 +131,8 @@ The first email should let the reporter decide whether further reporting is wort
 
 Here is an original fictional example:
 
-> Subject: A new way for maintenance teams to share repair tasks  
-> Your recent article examined the information gaps between facilities teams and outside contractors. Fieldnote has introduced a workflow that lets a facilities manager share selected repair tasks without opening the full internal workspace.  
+> Subject: A new way for maintenance teams to share repair tasks
+> Your recent article examined the information gaps between facilities teams and outside contractors. Fieldnote has introduced a workflow that lets a facilities manager share selected repair tasks without opening the full internal workspace.
 > I can show the current workflow and explain the access boundaries. We can also discuss what it does not solve, including coordination when a contractor has no reliable connection. Would this development be relevant to your coverage?
 
 The example contains no claimed savings, invented customer endorsement, or assumed relationship. A real pitch should name the specific article and substitute verified product facts.

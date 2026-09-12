@@ -1,0 +1,109 @@
+{
+  "id": "vc-manual250-c1-041",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://review.firstround.com/start-up-on-the-right-foot-build-a-customer-advisory-board/",
+      "supports": "Inspected founder interview: continuing relationships can grow from customer-development conversations; participation expectations belong in the invitation.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.hubspot.com/company-news/hubspot-introduces-its-2026-customer-advisory-board",
+      "supports": "Inspected first-party announcement describes members bringing different functional and business perspectives to ongoing feedback.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "How is a customer advisory board different from a design partner program?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Who should a founder invite first?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should advisory board members receive public recognition?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: A filled invitation package connects a specific participant's experience to a bounded advisory commitment and shows the response members receive afterward.",
+  "reviewNotes": [
+    "Exact US/en SERP evidence is being collected separately; keyword volume, difficulty, and CPC are unknown."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-041",
+    "keyword": "startup customer advisory board invitation",
+    "found": true,
+    "query": "startup customer advisory board invitation",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Customer Advisory Board Guide for Startups",
+        "url": "https://www.crv.com/content/customer-advisory-board",
+        "domain": "crv.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Start Up on the Right Foot — Build a Customer Advisory ...",
+        "url": "https://review.firstround.com/start-up-on-the-right-foot-build-a-customer-advisory-board/",
+        "domain": "review.firstround.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "CUSTOMER ADVISORY BOARD INVITATION",
+        "url": "https://aw23.showroom.rains.com/guide/B142AE999635/Customer-Advisory-Board-Invitation",
+        "domain": "aw23.showroom.rains.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "How to Start a Customer Advisory Board",
+        "url": "https://uservoice.com/blog/cab-best-practices",
+        "domain": "uservoice.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Customer Advisory Board - why startups need it",
+        "url": "https://www.linkedin.com/pulse/customer-advisory-board-why-startups-need-andy-stinnes-fooke",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 6,
+        "title": "The Customer Advisory Board: A Founder's Guide",
+        "url": "https://startupfundraising.com/library/articles/the-customer-advisory-board",
+        "domain": "startupfundraising.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Invitation To Join Customer Advisory Board Email",
+        "url": "https://mailsoftly.com/email-templates/invitation-to-join-customer-advisory-board-email",
+        "domain": "mailsoftly.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "How do you ask someone to be on your advisory board ...",
+        "url": "https://www.quora.com/How-do-you-ask-someone-to-be-on-your-advisory-board-for-a-new-startup",
+        "domain": "quora.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

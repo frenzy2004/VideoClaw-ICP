@@ -1,0 +1,121 @@
+{
+  "id": "vc-manual250-c3-046",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.bls.gov/ooh/media-and-communication/film-and-video-editors-and-camera-operators.htm",
+      "supports": "Inspected official duties section: editors organize and assemble footage; camera operators capture it and collaborate with production leadership. No salary or staffing benchmark is used.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.upwork.com/hire/video-editors/how-to-hire/",
+      "supports": "Inspected page body: Upwork recommends assessing editing craft, portfolio fit, and collaboration. No hiring demand, rates, or outcomes are inferred.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should my first editor also handle filming and channel strategy?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should first-month outcomes look like?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How should I screen applicants?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: A vacancy package defines workload and managerial support after the hire decision, rather than bundling production, strategy and every creative specialty into one role.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c3-046",
+    "keyword": "first in house video editor job description",
+    "found": true,
+    "query": "first in house video editor job description",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "\"Editor\" job description.// : r/editors",
+        "url": "https://www.reddit.com/r/editors/comments/p6xa8u/editor_job_description/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Video Editor Job Description [Updated for 2026]",
+        "url": "https://www.indeed.com/hire/job-description/video-editor",
+        "domain": "indeed.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Free Video Editor Job Description Templates",
+        "url": "https://firsthr.app/templates/hiring/video-editor-job-description",
+        "domain": "firsthr.app",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Becoming a film/video editor | Salary, skills, requirements",
+        "url": "https://www.prospects.ac.uk/job-profiles/film-video-editor/",
+        "domain": "prospects.ac.uk",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Video Editor Job Description: Editing Footage, Not Design",
+        "url": "https://www.linkedin.com/posts/keke-beatz-558823260_hiring-a-video-editor-heres-what-you-need-activity-7437612236283744256-hg_R",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 6,
+        "title": "How to become a Video Editor - Skills & Job Description",
+        "url": "https://ph.jobstreet.com/career-advice/role/video-editor",
+        "domain": "ph.jobstreet.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Video Editor Job Description (+2025 Template)",
+        "url": "https://trytalenthackers.com/blog/template/video-editor-job-description/",
+        "domain": "trytalenthackers.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "FASTEST Way to Become a Video Editor and ACTUALLY Get ...",
+        "url": "https://www.youtube.com/watch?v=FxPF-WYwYUo",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What are the job responsibilities of a video editor?",
+      "What does the 80/20 rule mean in video editing?",
+      "What is the 3:2:1 rule in video editing?",
+      "Is AI replacing video editors?"
+    ],
+    "relatedQueries": [
+      "First in house video editor job description resume",
+      "First in house video editor job description reddit",
+      "First in house video editor job description and salary",
+      "Video editor description for freelancer",
+      "Video editor job description resume",
+      "Social media video editor job description",
+      "Video editor job description and salary",
+      "Video editor job description sample"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

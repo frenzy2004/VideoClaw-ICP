@@ -1,0 +1,135 @@
+{
+  "id": "vc-manual250-c5-043",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.chathamhouse.org/events/code-conduct",
+      "supports": "The code distinguishes on-record, non-attributable and off-record discussion and calls for clear meeting terms.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.chathamhouse.org/about-us/chatham-house-rule",
+      "supports": "The Rule covers direct and indirect attribution.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Is removing names enough to make a note non-identifying?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can an off-record discussion become a public lesson after editing?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What if the useful lesson depends on identifying details?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Evaluate whether an authorized written lesson can be shared without direct or indirect identification. Unlike deciding whether to record a roundtable, this transforms and tests a specific note after the conversation. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact US/en SERP evidence is being collected by main; query remains a candidate hypothesis. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities.",
+    "Distinct from c5-023: this transforms an already-authorized written lesson after a conversation, not a recording decision.",
+    "No legal anonymity, privacy-compliance or publication-rights assurances. Editorial identification review cannot guarantee anonymity."
+  ],
+  "serp": {
+    "id": "vc-manual250-c5-043",
+    "keyword": "Chatham House Rule meeting notes",
+    "found": true,
+    "query": "Chatham House Rule meeting notes",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:01.735Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Chatham House Rule",
+        "url": "https://www.chathamhouse.org/about-us/chatham-house-rule",
+        "domain": "chathamhouse.org",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Chatham House Rule",
+        "url": "https://en.wikipedia.org/wiki/Chatham_House_Rule",
+        "domain": "en.wikipedia.org",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "The Chatham House Rule",
+        "url": "https://psychsafety.com/the-chatham-house-rule/",
+        "domain": "psychsafety.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Chatham House Rule",
+        "url": "https://www.rff.org/about/chatham-house-rule/",
+        "domain": "rff.org",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Code of conduct",
+        "url": "https://www.chathamhouse.org/events/code-conduct",
+        "domain": "chathamhouse.org",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Chatham House Rule - Practical Law",
+        "url": "https://uk.practicallaw.thomsonreuters.com/7-201-2615?transitionType=Default&contextData=(sc.Default)",
+        "domain": "uk.practicallaw.thomsonreuters.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Chatham House Rule (Full Explanation + Guide)",
+        "url": "https://www.facilitator.school/blog/chatham-house-rule",
+        "domain": "facilitator.school",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "CHATHAM HOUSE NOTES",
+        "url": "https://academic.oup.com/ia/issue-pdf/9/2/13124781",
+        "domain": "academic.oup.com",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "Chatham House Rule in the Age of AI: Trust Needs an ...",
+        "url": "https://www.linkedin.com/pulse/chatham-house-rule-age-ai-trust-needs-update-baird-srmp-r-kofc-xgcge",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is the Chatham House Rule?",
+      "What are some good house rules for meetings?",
+      "What are the criticisms of Chatham House?",
+      "What are the limitations of the Chatham House Rule?"
+    ],
+    "relatedQueries": [
+      "Chatham House Rules example",
+      "Chatham house rule meeting notes pdf",
+      "Chatham House rules origin",
+      "Chatham house rules pdf",
+      "Chatham House rules meaning",
+      "Are Chatham House rules legally binding",
+      "Chatham House rules alternatives",
+      "Chatham House rules vs off the record"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

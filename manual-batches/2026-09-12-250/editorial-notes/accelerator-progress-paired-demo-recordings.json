@@ -28,7 +28,9 @@
     }
   ],
   "competitorGap": "Hypothesis: A repeatable paired-capture protocol separates implemented product progress from presentation polish. Competing page bodies have not been audited for this draft.",
-  "reviewNotes": [],
+  "reviewNotes": [
+    "FAQ evidence precision: sequential presentation, historical-baseline treatment and the distinction between edited runtime and product performance are original editorial reasoning. Techstars supports mentoring context and Google Drive supports file-version handling only."
+  ],
   "serp": {
     "id": "vc-manual250-c2-015",
     "keyword": "before and after product demo",

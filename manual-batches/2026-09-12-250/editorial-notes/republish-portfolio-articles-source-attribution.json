@@ -1,0 +1,131 @@
+{
+  "id": "vc-manual250-c5-046",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls",
+      "supports": "Canonical signals express a preferred URL for duplicate or similar pages; they are not publication permission.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://developers.google.com/search/docs/crawling-indexing/canonicalization-troubleshooting",
+      "supports": "Google may choose another canonical; its syndication guidance recommends partner indexing controls rather than relying on canonical links.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does linking to the source grant republication permission?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should every syndicated copy use a canonical link?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Who updates a republished article after a correction?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Record approved handling for an already-authorized second copy of an article: source attribution, permitted edits, update responsibility and a technical indexing handoff. This is an editorial distribution task rather than drafting a licence agreement. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact US/en SERP evidence is being collected by main; query remains a candidate hypothesis. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities.",
+    "Mixed legal/SEO intent. This is an editorial instruction sheet for an already-authorized copy, not a licence agreement, legal advice or ranking promise."
+  ],
+  "serp": {
+    "id": "vc-manual250-c5-046",
+    "keyword": "content syndication best practices",
+    "found": true,
+    "query": "content syndication best practices",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:01.735Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Content Syndication Best Practices for 2026",
+        "url": "https://zernio.com/blog/content-syndication-best-practices",
+        "domain": "zernio.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "The Ultimate Guide to Content Syndication Lead Generation",
+        "url": "https://www.headleymedia.com/resources/the-ultimate-guide-to-content-syndication-lead-generation/",
+        "domain": "headleymedia.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "Building Your Content Syndication Strategy",
+        "url": "https://demandscience.com/ultimate-guide-content-syndication/strategies/",
+        "domain": "demandscience.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "The Complete Guide to Content Syndication for Marketing ...",
+        "url": "https://intentsify.io/blog/guide-content-syndication-infographic/",
+        "domain": "intentsify.io",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Content Syndication in B2B: Strategy, Types & Best Practices",
+        "url": "https://ondot.com/content-syndication-for-b2b-lead-generation/",
+        "domain": "ondot.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "What Is Content Syndication? The Basics + How to Do It",
+        "url": "https://www.semrush.com/blog/content-syndication/",
+        "domain": "semrush.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Content Syndication Best Practices for SaaS Businesses",
+        "url": "https://www.prospectbase.com/blog/content-syndication-best-practices-for-saas-business",
+        "domain": "prospectbase.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "What is Content Syndication – B2B Marketing Glossary | INFUSE",
+        "url": "https://infuse.com/glossary/content-syndication/",
+        "domain": "infuse.com",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "Effective Content Syndication Strategies: A Marketing Guide",
+        "url": "https://anteriad.com/ebooks/effective-content-syndication-strategies-a-marketing-guide-for-successful-campaigns",
+        "domain": "anteriad.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Is content syndication still effective?",
+      "What are the five C's of content marketing?",
+      "Can you give me an example of content syndication?",
+      "What are the 7 steps in creating a content strategy?"
+    ],
+    "relatedQueries": [
+      "Content syndication best practices examples",
+      "Content syndication examples",
+      "Content syndication platforms",
+      "Content syndication meaning",
+      "Outbrain"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

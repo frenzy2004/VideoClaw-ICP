@@ -1,0 +1,114 @@
+{
+  "id": "vc-manual250-c1-037",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://newsletter.posthog.com/p/why-we-sell-features-not-benefits",
+      "supports": "PostHog's founder argues that concrete product details help technical readers evaluate suitability.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.notion.com/en-gb/help/use-pages-offline",
+      "supports": "Notion's help page states app requirements and specific offline exclusions.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Will explaining a limitation make the product sound unfinished?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should I mention a workaround?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I replace a limit with a roadmap promise?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: Translate verified constraints into customer task boundaries and show complete rewrites of vague capability claims.",
+  "reviewNotes": [
+    "Exact US/en SERP evidence is being collected separately; keyword volume, difficulty, and CPC are unknown."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-037",
+    "keyword": "how to communicate product limitations",
+    "found": true,
+    "query": "how to communicate product limitations",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How to Explain Product or Service Limitations to Clients",
+        "url": "https://www.linkedin.com/advice/0/how-do-you-explain-limitations-your-product-service-2zsnc",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 2,
+        "title": "How to Communicate Product Changes To Your Users",
+        "url": "https://uservoice.com/blog/communicate-product-changes",
+        "domain": "uservoice.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "What do you find is the most effective form of ...",
+        "url": "https://www.reddit.com/r/marketing/comments/1hplmw1/what_do_you_find_is_the_most_effective_form_of/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "How to communicate product value to potential customers",
+        "url": "https://canny.io/blog/communicate-product-value/",
+        "domain": "canny.io",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Blog: 5 Tips for Efficient Product Communication",
+        "url": "https://www.atamya.com/en/blog/product-communication/",
+        "domain": "atamya.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "How to communicate complex products - by Rory Woodbridge",
+        "url": "https://productmarketer.substack.com/p/how-to-write-about-complex-things",
+        "domain": "productmarketer.substack.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "How to Communicate with Customers During a Product Crisis",
+        "url": "https://jasonevanish.com/2019/05/20/calming-the-angry-elephant-how-to-communicate-with-customers-during-a-product-crisis/",
+        "domain": "jasonevanish.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Five simple ways to improve your product communications",
+        "url": "https://medium.com/growth-explorers/five-simple-ways-to-improve-your-product-communications-f8cb52946249",
+        "domain": "medium.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is the 2 2 2 rule in sales?",
+      "What is the best way to communicate the benefits of a product?",
+      "What are 5 ways to communicate effectively?",
+      "What are the 7 steps of product launch?"
+    ],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

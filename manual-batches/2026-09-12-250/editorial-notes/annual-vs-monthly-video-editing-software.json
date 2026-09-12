@@ -1,0 +1,128 @@
+{
+  "id": "vc-manual250-c3-047",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://helpx.adobe.com/account/individual/terms-policies-and-regulations/adobe-subscription-terms.html",
+      "supports": "Official body inspected 2026-09-12: distinguishes annual paid monthly, annual prepaid and month-to-month; US annual-paid-monthly early termination example inspected. No displayed prices or discounts adopted.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://helpx.adobe.com/account/individual/subscriptions-and-plans/renewals-and-cancellations/cancel-adobe-subscription.html",
+      "supports": "Official body inspected 2026-09-12, updated July 24 2026: direct and third-party purchases use different cancellation routes; each plan requires separate cancellation and confirmation.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does a monthly charge mean I can leave after one month?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Which plan is cheaper if video work might stop?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does uninstalling an editing app cancel its subscription?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: A commitment calendar separates billing frequency from contract length and tests stop-work scenarios without inventing vendor prices.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c3-047",
+    "keyword": "annual vs monthly video editing software subscription",
+    "found": true,
+    "query": "annual vs monthly video editing software subscription",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Do you think every video editing software will require a ...",
+        "url": "https://www.reddit.com/r/editors/comments/1otlrwu/do_you_think_every_video_editing_software_will/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Professional video editing software | Adobe Premiere",
+        "url": "https://www.adobe.com/products/premiere.html",
+        "domain": "adobe.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "How much I spend A MONTH on subscriptions (as a freelance ...",
+        "url": "https://www.youtube.com/watch?v=JG7Tz7jzkOY",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 4,
+        "title": "What are some good video editing softwares that don't ...",
+        "url": "https://www.quora.com/What-are-some-good-video-editing-softwares-that-don-t-require-monthly-subscriptions-but-arent-too-expensive",
+        "domain": "quora.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "What video editing software is easy to use and has a one- ...",
+        "url": "https://www.facebook.com/groups/727414274424726/posts/2120496608449812/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 6,
+        "title": "What are Adobe's video editing software? Introducing the ...",
+        "url": "https://note.com/adobe_design/n/nd3a970814fe5?hl=en",
+        "domain": "note.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Best Video Editing Subscription Services 2026",
+        "url": "https://shootsta.com/best-video-editing-subscription-services",
+        "domain": "shootsta.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Video Editing Subscription vs Software - Pixel8 Production",
+        "url": "https://www.pixel8production.com/blog/video-editing-subscription-vs-software",
+        "domain": "pixel8production.com",
+        "resultType": "article"
+      },
+      {
+        "position": 9,
+        "title": "Best Video Editing Software 2026: Tested Picks - Tech Insider",
+        "url": "https://tech-insider.org/ca/best-video-editing-software/",
+        "domain": "tech-insider.org",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What does the 80/20 rule mean in video editing?",
+      "What is the 3:2:1 rule in video editing?",
+      "What are the subscription options for video editing services?",
+      "Is DaVinci Resolve a one-time payment?"
+    ],
+    "relatedQueries": [
+      "Annual vs monthly video editing software subscription reddit",
+      "Annual vs monthly video editing software subscription cost",
+      "Annual vs monthly video editing software subscription free",
+      "Annual vs monthly video editing software subscription for pc",
+      "Adobe Premiere Pro price per month",
+      "Adobe premiere pro yearly price",
+      "Adobe Premiere video editor",
+      "Adobe Premiere Pro free download"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

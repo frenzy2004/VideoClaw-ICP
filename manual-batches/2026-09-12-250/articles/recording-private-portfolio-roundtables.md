@@ -59,7 +59,7 @@
   },
   "editorialGraphic": {
     "src": "/media/blog/recording-private-portfolio-roundtables.svg",
-    "alt": "A practical sequence for Chatham House Rule recording in a multi-company portfolio media program.",
+    "alt": "Roundtable recording decision sheet separating capture, participant information, access and later sharing permissions before the event.",
     "width": 1200,
     "height": 675
   },

@@ -1,0 +1,123 @@
+{
+  "id": "vc-manual250-c2-042",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.ycombinator.com/blog/hosting-a-virtual-event",
+      "supports": "YC recommends a speaker dry run and explicit slide-control arrangements.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/powerpoint/play-a-video-automatically-in-a-slide-show",
+      "supports": "Automatic playback begins on slide arrival; click-sequence playback uses an advance action.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What should the video start cue be?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does advancing to the video slide start playback?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What changes when I send a revised clip?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: General event checklists may omit a completed single-founder cue sheet that joins spoken landmarks with actual player behavior. Competing page bodies have not been audited for this draft.",
+  "reviewNotes": [
+    "FAQs are editorial questions, not observed PAA. Source links provide factual or contextual grounding; the article-specific worksheets and procedural recommendations are original editorial synthesis."
+  ],
+  "serp": {
+    "id": "vc-manual250-c2-042",
+    "keyword": "video playback cue sheet",
+    "found": true,
+    "query": "video playback cue sheet",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "What tools can be used to create music cue sheets ...",
+        "url": "https://www.facebook.com/groups/BCPANY/posts/3924388427805808/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 2,
+        "title": "what is a cue sheet and why do i need it : r/musichoarder",
+        "url": "https://www.reddit.com/r/musichoarder/comments/1m7tg6k/what_is_a_cue_sheet_and_why_do_i_need_it/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "CuePilot | Home",
+        "url": "https://www.cuepilot.com/",
+        "domain": "cuepilot.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Replayer: MP3 music playback with timed cues",
+        "url": "https://replayer.app/",
+        "domain": "replayer.app",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "What is a Production Cue Sheet? - Shoflo Blog",
+        "url": "https://blog.shoflo.tv/what-is-a-production-cue-sheet",
+        "domain": "blog.shoflo.tv",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Stage Cue | Professional Video Playback for Live Events",
+        "url": "https://stagecue.app/",
+        "domain": "stagecue.app",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Theatre Cue Player",
+        "url": "https://theatrecueplayer.app/",
+        "domain": "theatrecueplayer.app",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Cue sheet (computing)",
+        "url": "https://en.wikipedia.org/wiki/Cue_sheet_(computing)",
+        "domain": "en.wikipedia.org",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Is it cue sheet or queue sheet?",
+      "What is a cue sheet?",
+      "How to create a cue sheet?",
+      "How to generate a cue file?"
+    ],
+    "relatedQueries": [
+      "Video playback cue sheet download",
+      "Best video playback cue sheet",
+      "Video playback cue sheet free",
+      "What is a cue sheet in film",
+      "Cue sheet format",
+      "Cue sheet Template Excel",
+      "What is a cue sheet in theatre",
+      "What is a cue sheet in music"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

@@ -1,0 +1,123 @@
+{
+  "id": "vc-manual250-c1-038",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.riverside.com/hc/en-us/articles/5706937784861-Host-checklist-and-tips-Recording-on-computer",
+      "supports": "The checklist calls for a test recording and keeping the session open until track uploads finish.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://wistia.com/blog/how-to-interview-podcast-guests-remotely",
+      "supports": "The studio team describes local participant recordings and checking received files.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does hearing the guest mean their recording is safe?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should we do when the connection drops?",
+      "basis": "editorial"
+    },
+    {
+      "question": "When can the guest close the recording window?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: Make capture responsibility and completion explicit, including a worked connection-drop recovery, without comparing recording vendors.",
+  "reviewNotes": [
+    "Exact US/en SERP evidence is being collected separately; keyword volume, difficulty, and CPC are unknown."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-038",
+    "keyword": "how to record a remote video interview",
+    "found": true,
+    "query": "how to record a remote video interview",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "What is everyone using to record remote interviews?",
+        "url": "https://www.reddit.com/r/podcasting/comments/1ifanit/what_is_everyone_using_to_record_remote_interviews/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Best way to record remote interviews?",
+        "url": "https://www.facebook.com/groups/13344770373/posts/10170047928385374/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 3,
+        "title": "Recording an Interview - Media & Design Center",
+        "url": "https://guides.lib.unc.edu/media-design-center/recordinterview",
+        "domain": "guides.lib.unc.edu",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "How to Record a Video Interview: Equipment, Setup, and ...",
+        "url": "https://store.hollyland.com/blogs/creator-hub/record-a-video-interview?srsltid=AfmBOoqf1EGT-fEFUJfzvv8SCdRQKocOMkziFoTwQJzXHjsNex2NyucV",
+        "domain": "store.hollyland.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "What to Know When Filming Remote Interviews",
+        "url": "https://www.vidyard.com/blog/filming-remote-interviews/",
+        "domain": "vidyard.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "How to Record a Video Interview",
+        "url": "https://www.sparkhire.com/video-interviews/how-to-record/",
+        "domain": "sparkhire.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Record a Video Interview: Step-by-Step Guide for ...",
+        "url": "https://riverside.com/blog/record-video-interview",
+        "domain": "riverside.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "How To Record a Remote Podcast Interview using OBS and ...",
+        "url": "https://www.youtube.com/watch?v=qIRUw88_5Bg",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How do I record a video interview?",
+      "What is the 30-60-90 rule in an interview?",
+      "What are common mistakes to avoid during a remote interview?",
+      "Are you allowed to record virtual interviews?"
+    ],
+    "relatedQueries": [
+      "How to record a remote video interview on iphone",
+      "How to record a remote video interview reddit",
+      "How to record a remote video interview on phone",
+      "How to record a remote video interview for free",
+      "Zencastr",
+      "How to record an interview on your phone",
+      "Remote video podcast recording",
+      "Remote video recording"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

@@ -1,0 +1,125 @@
+{
+  "id": "vc-manual250-c4-043",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.google.com/youtube/answer/15569972?hl=en",
+      "supports": "Automatic dubs can contain errors involving proper nouns, idioms, and jargon.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.google.com/youtube/answer/13338784?hl=en",
+      "supports": "Prepared uploaded audio tracks differ from automatically generated dubs.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Is translating the transcript enough?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should product button names always be translated?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can automatic dubbing be published without review?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Adapt product terms, examples, audio and destination copy for another language while checking meaning and timing. Distinct from c4-004's caption accessibility review because translation requires semantic and locale decisions. No ranking-page comparison or demand conclusion is asserted.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending.",
+    "Semantic and locale adaptation; not a generic caption article, dubbing-vendor comparison, or claim of universal language availability."
+  ],
+  "serp": {
+    "id": "vc-manual250-c4-043",
+    "keyword": "localize product marketing videos",
+    "found": true,
+    "query": "localize product marketing videos",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:32:56.760Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "What Is Video Localization? A Strategic Guide for Global ...",
+        "url": "https://www.rws.com/blog/what-is-video-localization/",
+        "domain": "rws.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "How to Localize Product Videos for International Markets",
+        "url": "https://vidocu.ai/blog/how-to-localize-product-videos-for-international-markets",
+        "domain": "vidocu.ai",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "How to Localize Marketing Videos With AI",
+        "url": "https://lipdub.ai/blog/marketing-video-localization",
+        "domain": "lipdub.ai",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "How to best localize your marketing videos - VoiceTalks",
+        "url": "https://voice123.com/blog/marketing-trends-tactics/how-to-best-localize-your-marketing-videos/",
+        "domain": "voice123.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Maximizing impact with localized video: your complete guide",
+        "url": "https://www.acclaro.com/resources/maximizing-impact-with-localized-video-your-complete-guide",
+        "domain": "acclaro.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Top 8 reasons why companies should localize their ...",
+        "url": "https://blog.andovar.com/top-8-reasons-why-companies-should-localize-their-marketing-videos",
+        "domain": "blog.andovar.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "5 Steps to Successful Video Localization",
+        "url": "https://www.transperfect.com/blog/5-steps-successful-video-localization",
+        "domain": "transperfect.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "Product localization: How to truly make it work",
+        "url": "https://lokalise.com/blog/product-localization/",
+        "domain": "lokalise.com",
+        "resultType": "article"
+      },
+      {
+        "position": 9,
+        "title": "Localize Marketing Videos Globally in 7 Clear Steps",
+        "url": "https://www.vozo.ai/blogs/video-localization/localize-marketing-videos-international-campaigns",
+        "domain": "vozo.ai",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is localization marketing?",
+      "What kind of videos attract viewers?",
+      "What are some of the best marketing videos?",
+      "What app can I use to create marketing videos?"
+    ],
+    "relatedQueries": [
+      "Localize product marketing videos youtube",
+      "Synthesia localization"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

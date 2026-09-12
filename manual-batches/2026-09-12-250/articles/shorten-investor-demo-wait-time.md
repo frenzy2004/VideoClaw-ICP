@@ -131,6 +131,14 @@ In a fictional example, setup takes 12 seconds, processing takes 90 seconds, and
 
 Those numbers are illustrative arithmetic, not a product benchmark. Use your own recorded values and do not generalize one run into typical performance.
 
+| Fictional source interval | Original duration | Presentation interval | Treatment |
+| --- | --- | --- | --- |
+| run-A.mp4, 00:00–00:12 | 12 seconds | 00:00–00:12 | Normal speed setup |
+| run-A.mp4, 00:12–01:42 | 90 seconds | 00:12–00:21 | Processing shown at 10× |
+| run-A.mp4, 01:42–01:50 | 8 seconds | 00:21–00:29 | Normal speed result |
+
+For that exact example, display “90-second processing interval shown at 10×” during the accelerated section. The label names both clocks; “faster playback” alone does not tell the investor how long the operation actually took.
+
 [Apple's clip-speed documentation](https://support.apple.com/en-euro/guide/final-cut-pro/ver40b00150/mac) explains that retiming changes clip duration and can move later timeline material. After applying a speed change, inspect everything downstream: narration, captions, labels, and the result hold.
 
 Keep the source-time ledger separate from the final video's timecodes. Otherwise, “the result at 00:29” may be confused with the original operation's completion time.

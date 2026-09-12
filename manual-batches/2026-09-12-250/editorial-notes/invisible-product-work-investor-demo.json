@@ -28,7 +28,9 @@
     }
   ],
   "competitorGap": "Hypothesis: A three-layer evidence storyboard makes invisible product work inspectable without presenting illustration as execution. Competing page bodies have not been audited for this draft.",
-  "reviewNotes": [],
+  "reviewNotes": [
+    "FAQ evidence precision: UI selection and labeled illustration are editorial presentation recommendations; Sequoia provides relevant demo context, not this procedure. OpenTelemetry supports trace terminology, not semantic correctness of the product result."
+  ],
   "serp": {
     "id": "vc-manual250-c2-018",
     "keyword": "how to demo a backend product",

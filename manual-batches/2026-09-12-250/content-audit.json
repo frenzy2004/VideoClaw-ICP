@@ -1,15 +1,15 @@
 {
   "kind": "manual_batch_content_checks",
-  "checkedAt": "2026-09-12T03:13:17.682Z",
-  "articles": 196,
+  "checkedAt": "2026-09-12T03:23:40.389Z",
+  "articles": 232,
   "campaigns": {
-    "newly-funded-founder": 36,
-    "accelerator-demo-day-founder": 35,
-    "video-production-comparison": 41,
-    "gtm-content-repurposing-buyer": 42,
-    "portfolio-media-platform": 42
+    "newly-funded-founder": 41,
+    "accelerator-demo-day-founder": 43,
+    "video-production-comparison": 48,
+    "gtm-content-repurposing-buyer": 50,
+    "portfolio-media-platform": 50
   },
-  "totalBodyWords": 221952,
+  "totalBodyWords": 261955,
   "nearDuplicateMethod": "8-word shingle containment >=12%; not a plagiarism or intent-uniqueness guarantee",
   "nearDuplicates": [],
   "productionChanges": false,
@@ -419,7 +419,7 @@
       "bodyWords": 1076,
       "sources": 2,
       "faqs": 3,
-      "articleSha256": "2f55bd91eaf0ea241fc54f3af4a8af62adf7cce824ab26f9a7ee920b73463f53",
+      "articleSha256": "eeeba322ef5dc86c7bc31b3e1bc2770fc60519f5d94f7cdaeed9c484e1a4bedc",
       "graphicSha256": "b90f9b2a87c6f59c91b64498472e45f5cffe7094b6d0c862729441b1a6433b94"
     },
     {
@@ -435,7 +435,7 @@
       "bodyWords": 1307,
       "sources": 2,
       "faqs": 3,
-      "articleSha256": "49c51748c865caf946a7ef11a5fe7441ec1f4dd3d9ba19c57cd79d2e0ca175af",
+      "articleSha256": "3dad67e88d85abd9f4769dcc5af56285b751a27edcc35c6e4a1cede959fc23c5",
       "graphicSha256": "633de80fe2c8e3bcf83bc33b4bae33aa1b0abcf7b6042479c4b8b54ca400f7a5"
     },
     {
@@ -451,7 +451,7 @@
       "bodyWords": 1062,
       "sources": 2,
       "faqs": 3,
-      "articleSha256": "64a6649ad5bb5b7e801796ee214320414cd906b3b412e890ceaf6d72f28705b7",
+      "articleSha256": "58b401aa3df5763b983bf368e7c99d3e1a74ad7ee97e2c8b3856de604b579d8d",
       "graphicSha256": "0fb205ad44473bae6317c851be11c66c95229f2b8815642ceba12decd27d2032"
     },
     {
@@ -623,6 +623,46 @@
       "graphicSha256": "e8ed17529f89fd5f44e5793edecd61197ffcc8f479e97e59ebd3efccb65e245e"
     },
     {
+      "slug": "startup-product-limitations-message",
+      "bodyWords": 1086,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "d3c5d3b59c8f9e244325b1bcd96a242fbf530c3bd62a2bbe9ffe9be5888dd62b",
+      "graphicSha256": "2f3c65bc159253b9f25b7729faf561b1c19710ed419402850456dca2b6d41da2"
+    },
+    {
+      "slug": "remote-founder-interview-recording",
+      "bodyWords": 1100,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "1dbb1ad333e12989b824904be1768a9d67780b46b443f2dca283422a667013e9",
+      "graphicSha256": "45b19741bfd2c042f8620d7b6686786ea10a65bd0d368f5f5998f2b4404cc803"
+    },
+    {
+      "slug": "record-vertical-founder-video-phone",
+      "bodyWords": 1096,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "a6ee86bb175305e7053925dfd7ca7a1355b22401216357176d35c3eea169917c",
+      "graphicSha256": "11dc85ece1dc1ccc0e8cfd5cdb72a8f927d8a76a3af6d1ee5be1e2f929bfe4c7"
+    },
+    {
+      "slug": "startup-partnership-announcement-customer-value",
+      "bodyWords": 1062,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "d895720b450d42b80da2381778d50569d8d10c4294302115ac427de9fc287278",
+      "graphicSha256": "8b16479958d76e4f47630ddb23597067508daafc4b7441f7dd39938e1a40002a"
+    },
+    {
+      "slug": "startup-customer-advisory-board-invitation",
+      "bodyWords": 1147,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "95d34c3ddd27af9106d7357a6da60ac177f3679d4cd28a39fd30d740347fd658",
+      "graphicSha256": "6f08badb8f500874bf1dbdd28cf28f06122696f363e9c52916c698c9d17d6e9e"
+    },
+    {
       "slug": "accelerator-application-video-field-map",
       "bodyWords": 1135,
       "sources": 2,
@@ -640,10 +680,10 @@
     },
     {
       "slug": "update-accelerator-application-demo-video",
-      "bodyWords": 1113,
+      "bodyWords": 1170,
       "sources": 2,
       "faqs": 3,
-      "articleSha256": "0798ae2111e8e7c0837da97417ab7f4e89339a0a67b3b2ea73f57e37d8f77645",
+      "articleSha256": "53511aa4b9f19d8fe2f5186f4e49c6847fe3266d7db797fef2dba0d8158910cb",
       "graphicSha256": "590b84e4aa248f1a08ee9e208771d2658ae5d944a62fc12557411889bbc4a838"
     },
     {
@@ -672,10 +712,10 @@
     },
     {
       "slug": "anonymize-customer-footage-investor-demo",
-      "bodyWords": 1115,
+      "bodyWords": 1187,
       "sources": 2,
       "faqs": 3,
-      "articleSha256": "2f1751222e7d2b6103d12b6d925856f76659cbecf778496941035eaadeeb9b02",
+      "articleSha256": "20597d6d966abf9198333132ac58665a9745d1505fc70b1b5cfe754440d1bc6d",
       "graphicSha256": "d02d1f42f241cbd14341f1bb90efaef394424d482b580b9ca7929b09edbf66b2"
     },
     {
@@ -688,10 +728,10 @@
     },
     {
       "slug": "shorten-investor-demo-wait-time",
-      "bodyWords": 1059,
+      "bodyWords": 1126,
       "sources": 2,
       "faqs": 3,
-      "articleSha256": "9b5cf9a61761820acd4e86e48d8525e2a17963b9bfe065c84df52e95b6b1ab3a",
+      "articleSha256": "35e2d8e06133cac946f7d821bde39cb7b2bb06cd4d61286b3d20f33e11eb5515",
       "graphicSha256": "3d41d976d7784821d783e91a7c3aa76c5e51692fbb1c60d4256e59dcb291c9e3"
     },
     {
@@ -821,6 +861,70 @@
       "faqs": 3,
       "articleSha256": "42a743916984aef17653561ac5a8cbb9bacbab45de1cc23296354c2cdbd844d3",
       "graphicSha256": "a1954ccb813b29043038450b95ba14a0d4b98e9ee9613318656ee7354b9c0af7"
+    },
+    {
+      "slug": "private-investor-demo-video-access",
+      "bodyWords": 1105,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "aa70a1482bb5343c8ebaa6a49bf63742351a9e698f797e42f5c9552406e4ff3a",
+      "graphicSha256": "59d4b3ee3934d37999e58cfc7ead81d9acbe517c0f6c61d280a6f8e0db9d7580"
+    },
+    {
+      "slug": "investor-demo-product-screen-reader",
+      "bodyWords": 1116,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "30351cf1b843d5273963ede0f81d5bfa6d95a56b26a11a7e925e9a13d0dc56bc",
+      "graphicSha256": "552ec14547def7b763b8c61839f9be76425f7f60fedb8929af00b0f89de239c8"
+    },
+    {
+      "slug": "record-investor-demo-discussion-permission",
+      "bodyWords": 1098,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "f3b7bf73f6cf2edb39278f694ade3f5b3c5c5819fb610f3a52ee1ff5c2175d24",
+      "graphicSha256": "7e5261317c81e68eb4a7d221346b3e861226381c256890cd435ef1b8d9c80536"
+    },
+    {
+      "slug": "small-file-investor-demo-export",
+      "bodyWords": 1077,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "38cfc157a8e800c35641a48630d79c4063aee23b6c33fe337f972a7592a84bcc",
+      "graphicSha256": "f46ee6e18d11432aa7862c9865c3c231ccaebf325451c847f5598acf10052b5a"
+    },
+    {
+      "slug": "narrated-investor-deck-video-export",
+      "bodyWords": 1096,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "0df196710fec20761de8092b3806a21402e7dc058c431bb993f4ef7bc4b0f5a5",
+      "graphicSha256": "4fadee0499eb0f2a176d4b9c4688cd7fdb620eec3cc14338e86d63f9539ca549"
+    },
+    {
+      "slug": "demo-video-event-computer-compatibility",
+      "bodyWords": 1061,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "f5659d29f97aee714ea2d39cfda4bdc87f49c296826f8c5e520d20c7795b19b5",
+      "graphicSha256": "ab187b8c35d45117b634c4d94d28d91d6980504b7e0741a8accf590b391fb2f9"
+    },
+    {
+      "slug": "demo-day-founder-video-av-cue-sheet",
+      "bodyWords": 1069,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "cbc2c0ed283703b9db8a6bf102c9883821a585e1fe76b589190137bac0076cda",
+      "graphicSha256": "b4e6cef72f5bff4db6d16242a26150429d0e6d920a13e5dd1c9928c7c316023d"
+    },
+    {
+      "slug": "investor-demo-private-presenter-view",
+      "bodyWords": 1067,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "3a19f3e4991cba7a1b113e68637f279ba36c92ffb24c8dee6d0e3f0e38bd23c4",
+      "graphicSha256": "5688c6cd189b16849a1e46572dfc0a3076f46d24d839b35ee851c3db948f81da"
     },
     {
       "slug": "paid-video-editor-test-project",
@@ -1069,6 +1173,62 @@
       "faqs": 3,
       "articleSha256": "b5ddf40bb7c28fe621aa89f8aef19fa4a6f81689aaef039948ab620fbeefd37a",
       "graphicSha256": "3326703d06f444c3d5b8106b83408cfd7767cdca4a520e82382a97a467288b07"
+    },
+    {
+      "slug": "video-editing-turnaround-guarantee",
+      "bodyWords": 1022,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "cb11bb7a7c1538ecbf489f74136c6266f17ba9b41e55a26646ee080e66e10468",
+      "graphicSha256": "f6f42532d4a83d03207d806b317ca06f1aac91b20441b66c44f6e9feca47e197"
+    },
+    {
+      "slug": "hiring-video-editor-different-time-zone",
+      "bodyWords": 1026,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "ea35ffdf67b6136e0ef4ac452043880af7c8947285f054772df34936af3f89ae",
+      "graphicSha256": "d0c0dac45b49092358dd74c5fb6d64d2ba4d2d36ffa0fc9e6903b347dabd6914"
+    },
+    {
+      "slug": "backup-video-editor-continuity-test",
+      "bodyWords": 1016,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "b2d4998ccde1fe4ac5caf6d0f17ed79a9cb298704e0131cff76f27f15ad33bd0",
+      "graphicSha256": "935c2f3cd24f4939274bc3f4b7627a5ad151055a7cddd82a842c9b7331242463"
+    },
+    {
+      "slug": "video-editor-employee-independent-contractor",
+      "bodyWords": 1007,
+      "sources": 3,
+      "faqs": 3,
+      "articleSha256": "ef1279eb9ae1fa789ccd6206acc9c810866907571a2aee9fabee47db741d1b19",
+      "graphicSha256": "98f3e8c47ae50e4498d108ae903f5a4a7220ac2f929ac35fa4ef88daab90b161"
+    },
+    {
+      "slug": "first-in-house-video-editor-job-description",
+      "bodyWords": 1039,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "17cdd68d973f31e88467c96db40334519f30a14dc1da0a2cfd4a2dc4f91f809b",
+      "graphicSha256": "107cc375ef01d0d7f9a1dd81d0ba00565a6f3f175d3e77009e87c0616246b755"
+    },
+    {
+      "slug": "annual-vs-monthly-video-editing-software",
+      "bodyWords": 1014,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "8e4bee30375a5a7175e38f8b0abd4e52f7d1ab2906796803bcc45631787e4953",
+      "graphicSha256": "ca4d8e28704af6331285a09ce6f10149e5d81fe815b1c3e3fabbd04cef4db96f"
+    },
+    {
+      "slug": "choose-large-video-file-transfer-service",
+      "bodyWords": 1029,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "75f2ff5461103280ec9b410a5c1db309de6e900ca7a98fb63f26bb6b2896127c",
+      "graphicSha256": "616d992d1385cf24fcc199d6d9476626a1e6ee999c97ab3a6ae63e5a56f605d3"
     },
     {
       "slug": "turn-video-transcript-into-useful-blog-post",
@@ -1327,6 +1487,70 @@
       "graphicSha256": "7983b58f5b469cbb8ced362c0d7113c263f90c9b40d1fb3090fe7bd69aa3382c"
     },
     {
+      "slug": "localize-product-video-meaning",
+      "bodyWords": 1166,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "466c809d4228741a4f44d316644ff91c95e5815f182fa19ee79b0f4a9faefac6",
+      "graphicSha256": "ea76c756b3e5a086dcc968e9e1ffda9e4af8956ee2ea81a671f33ddcefdbd255"
+    },
+    {
+      "slug": "video-conversation-to-audio-episode",
+      "bodyWords": 1183,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "de9f10c4eae725579a59f6aa106370e3ec0ce373a3923d04b3e08de92f71458a",
+      "graphicSha256": "567f08cbb9e7b2bc7c8c79891773c790888e07e4fdb85554d69bedb5bb5f867b"
+    },
+    {
+      "slug": "dense-slides-to-visual-process-explainer",
+      "bodyWords": 1185,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "605dbd204e37f9bcfe560e90aa8b11fbee793367a8f7c1c1d554713a56ba3cc4",
+      "graphicSha256": "a8a7a6ae2c6a02d36ccb18ccb0000af8f490b0968220c62dfc440a59c2d8583e"
+    },
+    {
+      "slug": "screen-recording-to-product-gif",
+      "bodyWords": 1170,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "8d4ce64fb052aec6404ea20ac6c72b7c97e80c946ce0561df6c8a27d0f6e8009",
+      "graphicSha256": "2db92d3a85912fb2cc8b324a3d3a0bb5ec385cc327b65d8ba246699746348690"
+    },
+    {
+      "slug": "sales-content-gaps-existing-video-library",
+      "bodyWords": 1177,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "058ab59752ca269b0473b480f086f7b9fb1d605870f4c483927fcfefe4461f5e",
+      "graphicSha256": "29a1cdbfad1e49563bb6289078b45b9d178103cf6a9f8c9b9b2bb99d5677303e"
+    },
+    {
+      "slug": "recorded-method-to-buyer-checklist",
+      "bodyWords": 1206,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "ab108f1eb62166f0ff9e6af11cfe360be4906ec0b33a09b664d930fe528d8625",
+      "graphicSha256": "85a4dbf4544182b149ef51bfd78227027a61a3a0c728564d9f1e2dcf26209ba7"
+    },
+    {
+      "slug": "modular-sales-videos-existing-recordings",
+      "bodyWords": 1190,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "19cf3c9bb14930054ecc65c426fccf88d11a88143785a60cab2fc83ea850c77a",
+      "graphicSha256": "535519c489eaa99643bfce9f57948edc7383d410340c13519a2c43049ba37758"
+    },
+    {
+      "slug": "content-syndication-vs-repurposing-route",
+      "bodyWords": 1184,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "fc05cf3452a50e7679f3bfd397da9db5af6663cf37308b439868922f9103bbbe",
+      "graphicSha256": "381816f8dd21ff093136b36fa21806ffd2048a2f59ea2298ae02967f3aa27ce3"
+    },
+    {
       "slug": "portfolio-media-support-service-menu",
       "bodyWords": 1243,
       "sources": 2,
@@ -1411,80 +1635,80 @@
       "bodyWords": 1108,
       "sources": 2,
       "faqs": 3,
-      "articleSha256": "63ff5ffc15695457dee1b17bbbc9edb106faa34dbb4a8a2e0b8b7cba6544cec6",
-      "graphicSha256": "f4afa6e814fe2c20c71d92181f533e1b2a0736fde117f80045a74e0a028ed426"
+      "articleSha256": "772bd910a0d2fe92b1673d82cf82321342aff29e9fbef93c27dc0703930e1adb",
+      "graphicSha256": "cddaa8f7a1e8cee2bfad7b9aaaf56e9d4ecc197ae001076a1af0fcdb8be2a658"
     },
     {
       "slug": "portfolio-media-rights-expiry-calendar",
       "bodyWords": 1130,
       "sources": 2,
       "faqs": 3,
-      "articleSha256": "a656c5ee4dbdfcc43fd61586cb14bbd6bd1fa5e5bf12a6c038fa1032c246670b",
-      "graphicSha256": "2884158b51afb3a3553e009ce2910ddbd7dfaa056fbb412bb8bcd46179748a72"
+      "articleSha256": "2dc0f420aeed224f56bd103be8c5e8a260508fe8b7bb078e084051c29efa4c68",
+      "graphicSha256": "160596df9c97ef4ba38f8b82b820ca6ece7cf173a531c52cc1c85cb630fdc89a"
     },
     {
       "slug": "recording-private-portfolio-roundtables",
       "bodyWords": 1162,
       "sources": 2,
       "faqs": 3,
-      "articleSha256": "8fd71bf03beb0f56a1d9e0695d2cae3fc219b09f4279ca92bd3d82e93b6f504b",
-      "graphicSha256": "02dfeb7086ee0586926ccd01b6277cee9f573798eefca09dd02ac8dfd3e74f5e"
+      "articleSha256": "659af3d79bf49ad90da271c8a4472c7b625ba61f3b2b1d2cda51532af5bdeaa9",
+      "graphicSha256": "0fe3dc273a7e12846632dc5a62ffe7f299154f5fbca7ac919342b9f2fead477f"
     },
     {
       "slug": "recall-withdrawn-portfolio-media-assets",
       "bodyWords": 1097,
       "sources": 2,
       "faqs": 3,
-      "articleSha256": "806a4be794b84ce76110ec57f9ec507519c74bb9304d6e0c9ec1b6fa241c597f",
-      "graphicSha256": "f51b285936fe0e4b5c37bd204a4d6cf6204af85ef4690d7585e501a9af409880"
+      "articleSha256": "981d83f9de3f1dc1bfb930917e61602119e4667cb0598b7ce7025894bd380da2",
+      "graphicSha256": "43fc51257978038f1bf14aab5169d26782b3eb45d2cfc412cc789cf6a11dbb0f"
     },
     {
       "slug": "portfolio-media-product-change-audit",
       "bodyWords": 1106,
       "sources": 2,
       "faqs": 3,
-      "articleSha256": "4a409ad72187a76a501bed4649ca6014c586e6b81e8daaaff5d1b6976f174d96",
-      "graphicSha256": "7ec2df8478a04b1ed60c771887111ab8f53d17e47b1dbb4ff61b98b1ddda3f37"
+      "articleSha256": "3a2cc67efcf1eb501062b902b6058211272700466b08e0e65cef3b04029a0058",
+      "graphicSha256": "ac20c40fdfd1afbcce2e892accc4177c0f930a5b39b704962568de1e9aac3dfe"
     },
     {
       "slug": "migrate-portfolio-media-library",
       "bodyWords": 1097,
       "sources": 2,
       "faqs": 3,
-      "articleSha256": "3be4f1bc0063003a00246b300d7b4d30903d9fc7104a41741bbae9823abf18c8",
-      "graphicSha256": "87c144e230379199da167548a74c4b47c421c7da3fa84eb6c1004c8318b72acd"
+      "articleSha256": "095efc98a66a2429e7fa1043e0b4229a2f7af8048a83ea5569adadf352cd09b9",
+      "graphicSha256": "98b0bbed4325dd89b9fde68b165dbb7fa1c992c7f679ec10593de998f0d8da1e"
     },
     {
       "slug": "search-portfolio-recordings-by-moment",
       "bodyWords": 1098,
       "sources": 2,
       "faqs": 3,
-      "articleSha256": "381494dd4c884a62f9dda9d64d7c1bb50c813da4529aca9cd5e15106c0861f17",
-      "graphicSha256": "2b27d8e1dfd5e649d35834a65a7b524545d8d0e9f6379aeccad21bd853317e5b"
+      "articleSha256": "4ec8dbd6b7eae5f11d9451e032166e501507383f6bdbe467e95c4873b9c0d16e",
+      "graphicSha256": "2b5ea66fb6d0815a4e9080d501a6ee593c2c762a1b4ede3d2da5d3dc9b4d9e80"
     },
     {
       "slug": "merge-duplicate-portfolio-media-files",
       "bodyWords": 1161,
       "sources": 2,
       "faqs": 3,
-      "articleSha256": "90e933d0119c66f35e0c7678c7782e6aad2ee4639d72f512dea09ffff4525c32",
-      "graphicSha256": "a280a895111ed801da04534f0ce32cee7ea640af2baefd88fe6176ea461a97ba"
+      "articleSha256": "19e92dc666189eaf52f047652594bdda9d83cebd1bc67687c0bb132b95e934a3",
+      "graphicSha256": "30b26ae4a046c0b1e1ecfebb6073bf6316cba294bf44bab6387cd409b54810ec"
     },
     {
       "slug": "test-findability-portfolio-media-resources",
       "bodyWords": 1163,
       "sources": 2,
       "faqs": 3,
-      "articleSha256": "53ed1da63b960d6422eda91ec601b75d50ca3ec3853c1212f6a5d0cadd6ff5c1",
-      "graphicSha256": "5dae13ef42f3988d440212052dae1adacb58e304e9ca714509d1d3743abf1a90"
+      "articleSha256": "dd4a1ab983dbb1e3cbfed0492879922d689101a04e0d11b765f2ef3f60bc684f",
+      "graphicSha256": "598e5c951fbc64bd1adce29d94fb883bebdb3a0601698dcb0d28a781c07cec01"
     },
     {
       "slug": "portfolio-media-resource-adoption-diagnosis",
       "bodyWords": 1131,
       "sources": 2,
       "faqs": 3,
-      "articleSha256": "43d5a5c881619c11980528616062298c3f5b057525f2a3ad960c7e00ce0c1b67",
-      "graphicSha256": "8b805de85b80a01c2edfe0c5aedf1789e0cede189effcdcd62e3bb3f316a5787"
+      "articleSha256": "a0b44f8a199dcba797913d3403eed8fe556e8a98e9eae66322fadee6c965a776",
+      "graphicSha256": "6a06b7e2ae2a8273ee6efea4be97df6b98d252d8085443772043c12998dc75cf"
     },
     {
       "slug": "portfolio-expert-speaker-bureau",
@@ -1581,6 +1805,70 @@
       "faqs": 3,
       "articleSha256": "af337e5108e9c8b6b4bdd10c4b888f155ebec85615d2246460aa28c27abdaf18",
       "graphicSha256": "aa01249cc3faa6659d9350706d35af8b2fceeda62104d6036f387ebc8820c2c8"
+    },
+    {
+      "slug": "anonymize-portfolio-peer-learning-notes",
+      "bodyWords": 1162,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "3de5e018353390a01e51a5f04818b1c512fa0cb4a74204a207337aa1aeafd325",
+      "graphicSha256": "7e1f8457bc3dbd808dce2bb6346db160f4864f1d1b44bf190043bea00bdb5e8a"
+    },
+    {
+      "slug": "archive-portfolio-media-useful-history",
+      "bodyWords": 1137,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "d6496e1cddb86f5806c82daf09ce01153e109923b14e54f91817c27e228bc447",
+      "graphicSha256": "195525ab75f3cf74d578593c99de3d362beea7027c5ef88e89865d69c223eeda"
+    },
+    {
+      "slug": "portfolio-story-publishing-ownership",
+      "bodyWords": 1109,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "f1d48489668e2a1830ee67a7a4f9ba2177eb945605f1b6cb43e13b1115f5441a",
+      "graphicSha256": "3418d8e9c81d76d46987b3f74dc08555dac50ba95af0f6d535bc108fd2aef480"
+    },
+    {
+      "slug": "republish-portfolio-articles-source-attribution",
+      "bodyWords": 1110,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "2b3b783fcc02220ac8df64b275019ad3c2be83f87780391edc565ef8a4d0745d",
+      "graphicSha256": "cf13b981c8dfc7002251e29370a96bde98c5e5ead4b9e9cd95b4c6b0f4bc5873"
+    },
+    {
+      "slug": "cohort-media-graduation-handover",
+      "bodyWords": 1102,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "d7bcfb7cb9a2932ea36164298ae9a2335ba5e0108033e10142e3841546f5a90d",
+      "graphicSha256": "3feea3e1bdae53f8ac8505e737029d62e90478e06d39296b102f49c3650153d0"
+    },
+    {
+      "slug": "portfolio-learning-video-role-paths",
+      "bodyWords": 1122,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "758edf235faf45467fce46446129eb0fd97a349cd7a35ebcd3e97f3e107f056b",
+      "graphicSha256": "876e54fa149226ebf1a6871c19d48a5c336c9e1bfdb7ec9f9472159eb4d6502a"
+    },
+    {
+      "slug": "check-portfolio-media-batch-ingestion",
+      "bodyWords": 1135,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "6185730a182e74aaeae2262669e1f41a33bc0db2e27d86785ed0592a50b4b711",
+      "graphicSha256": "57afe2efd0f9bff62497dc3f749982c49e286d346b87cbc9c0efd404aa173406"
+    },
+    {
+      "slug": "portfolio-media-needs-survey",
+      "bodyWords": 1136,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "b3a6c71faa3207e9439a6039da04a5a64867bbdd6a20c62081adfb5fdbf555ca",
+      "graphicSha256": "f60a09e7472bd1f21065d668dbf752a2b87433f92e086d9af2612af28c86f2aa"
     }
   ]
 }

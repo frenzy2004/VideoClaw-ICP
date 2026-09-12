@@ -1,0 +1,126 @@
+{
+  "id": "vc-manual250-c4-050",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://blog.hubspot.com/marketing/how-to-syndicate-content",
+      "supports": "Defines syndication as republication of existing content on other sites.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://developers.google.com/search/docs/crawling-indexing/canonicalization-troubleshooting",
+      "supports": "Distinguishes syndication indexing controls from reliance on canonical links.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Is changing a headline enough to call an article repurposed?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can the same video support both routes?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does an attribution link guarantee the original ranks first?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Choose between republication and a materially adapted derivative, then prepare a destination-specific content brief. This is a reuse decision for a single article, not a co-marketing kit or a generic distribution calendar. No ranking-page comparison or demand conclusion is asserted.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending.",
+    "Mixed generic content terminology, anchored in video-derived assets and a bounded route decision. No ranking, backlink-value, legal, or syndication-performance guarantees."
+  ],
+  "serp": {
+    "id": "vc-manual250-c4-050",
+    "keyword": "content syndication vs repurposing",
+    "found": true,
+    "query": "content syndication vs repurposing",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:32:56.760Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "5 Benefits of Content Syndication for Your Business",
+        "url": "https://www.theinsightcollective.com/insights/benefits-of-content-syndication",
+        "domain": "theinsightcollective.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "Content Syndication vs. Content Repurposing",
+        "url": "https://www.martechcube.com/content-syndication-vs-content-repurposing/",
+        "domain": "martechcube.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "What is Content Syndication – B2B Marketing Glossary | INFUSE",
+        "url": "https://infuse.com/glossary/content-syndication/",
+        "domain": "infuse.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "How to repurpose existing content for syndication to a ...",
+        "url": "https://www.dwmedia.com/blog/how-to-repurpose-existing-content-for-syndication-to-a-small-audience/",
+        "domain": "dwmedia.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Decoding Content Strategies: Content Marketing vs. ...",
+        "url": "https://www.linkedin.com/pulse/decoding-content-strategies-marketing-vs-syndication-tripathy-nkmgf",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 6,
+        "title": "Content Syndication vs. Guest Blogging: What to Choose",
+        "url": "https://contentsyndication.org/content-syndication-vs-guest-blogging/",
+        "domain": "contentsyndication.org",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Content Syndication and SEO",
+        "url": "https://c-k.com/content-syndication-and-seo-why-reposting-exact-content-across-multiple-websites-is-a-bad-practice-and-can-result-in-penalties-from-google/",
+        "domain": "c-k.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Content Syndication: What It Is, and How It Can Work for B2B",
+        "url": "https://www.paved.com/blog/content-syndication-what-it-is-and-how-it-can-work-for-b2b/",
+        "domain": "paved.com",
+        "resultType": "article"
+      },
+      {
+        "position": 9,
+        "title": "Content Syndication: Complete Process and Examples",
+        "url": "https://learn.g2.com/content-syndication",
+        "domain": "learn.g2.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Is content syndication still effective?",
+      "Can you give me an example of content syndication?",
+      "What are the three C's of content creation?",
+      "What does \"content repurposing\" mean?"
+    ],
+    "relatedQueries": [
+      "Content syndication vs repurposing b2b marketing",
+      "Content syndication vs repurposing examples",
+      "Content syndication vs repurposing b2b"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

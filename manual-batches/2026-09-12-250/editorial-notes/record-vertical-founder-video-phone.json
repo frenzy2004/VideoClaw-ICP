@@ -1,0 +1,116 @@
+{
+  "id": "vc-manual250-c1-039",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.apple.com/guide/iphone/record-a-video-iph61f49e4bb/ios",
+      "supports": "Apple documents Video mode and notes that available formats vary by model.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.apple.com/guide/iphone/set-up-your-shot-iph3dc593597/26/ios/26",
+      "supports": "Apple documents camera grid and level controls for composition.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should I record horizontally and crop later?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Do I need the highest available recording setting?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Where should I look on a phone?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: Walk through original portrait capture from a hand-held baseline to a stable repeatable setup, without cropping existing footage.",
+  "reviewNotes": [
+    "Exact US/en SERP evidence is being collected separately; keyword volume, difficulty, and CPC are unknown."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-039",
+    "keyword": "how to record a vertical video on your phone",
+    "found": true,
+    "query": "how to record a vertical video on your phone",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Should You Record Videos Vertical Or Horizontal When ...",
+        "url": "https://www.youtube.com/watch?v=dDpZbCf2ZXE",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 2,
+        "title": "An app that lets you record both horizontal and vertical video at ...",
+        "url": "https://www.facebook.com/michsoledesign/videos/an-app-that-lets-you-record-both-horizontal-and-vertical-video-at-the-same-time-/3648612311943883/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 3,
+        "title": "Guide: How to Record Vertical Video on PC without a Watermark",
+        "url": "https://recorder.minitool.com/screen-record/record-vertical-video.html",
+        "domain": "recorder.minitool.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "How do you change a normal video into a short/phone ...",
+        "url": "https://www.reddit.com/r/NewTubers/comments/k6oflo/how_do_you_change_a_normal_video_into_a/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Vertical Video 101: The Ultimate Guide",
+        "url": "https://firework.com/blog/vertical-video",
+        "domain": "firework.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Is it possible to shoot landscape video while phone ...",
+        "url": "https://www.facebook.com/groups/ATMakers/posts/1654075718337194/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 7,
+        "title": "Why vertical videos make a difference in your content",
+        "url": "https://www.descript.com/blog/article/why-vertical-videos-make-a-difference-in-your-content",
+        "domain": "descript.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How do I record a video vertically?",
+      "Is vertical 16:9 or 9:16?",
+      "How do I make my video vertical?",
+      "Can I take a vertical video and make it horizontal?"
+    ],
+    "relatedQueries": [
+      "How to record a vertical video on your phone samsung",
+      "How to record a vertical video on your phone iphone",
+      "How to record a vertical video on your phone for free",
+      "How to make vertical video in iMovie on Mac",
+      "How to record a vertical video on mac",
+      "Make iMovie vertical on iPhone",
+      "How to make vertical videos",
+      "iMovie change aspect ratio on iPhone"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "kind": "source_transport_audit_not_editorial_approval",
-  "articlesAvailable": 148,
+  "articlesAvailable": 178,
   "receipts": [
     {
       "url": "https://a16z.com/insights-for-enterprise-ai-builders/",
@@ -29,6 +29,24 @@
       "httpStatus": 200,
       "bodySha256": "ec8c33ab10d8a2813246ba962318a563cf70c61c01bcb0239806a3790f96e872",
       "extractedWords": 1299
+    },
+    {
+      "url": "https://analysisfunction.civilservice.gov.uk/policy-store/a-user-centred-design-approach-to-surveys/",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:22:30.425Z",
+      "finalUrl": "https://analysisfunction.civilservice.gov.uk/policy-store/a-user-centred-design-approach-to-surveys/",
+      "httpStatus": 200,
+      "bodySha256": "f11c8784d049299a54415fb4bf72b28797e851e693a59b9ca3fc2d9f7866f1ab",
+      "extractedWords": 1180
+    },
+    {
+      "url": "https://analysisfunction.civilservice.gov.uk/policy-store/questionnaire-design-guidance/",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:22:30.430Z",
+      "finalUrl": "https://analysisfunction.civilservice.gov.uk/policy-store/questionnaire-design-guidance/",
+      "httpStatus": 200,
+      "bodySha256": "3b67eb005174720364250554aecb47ddc73e6ce38af49b2f6ec7a227c6861c37",
+      "extractedWords": 1219
     },
     {
       "url": "https://app.leg.wa.gov/Wac/default.aspx?cite=284-30-355",
@@ -67,6 +85,12 @@
       "url": "https://blog.hubspot.com/customers/hubspot-lead-nurturing",
       "status": "automatic_retrieval_unavailable",
       "checkedAt": "2026-09-12T02:39:09.765Z",
+      "error": "Error: Source has no usable body evidence."
+    },
+    {
+      "url": "https://blog.hubspot.com/marketing/content-gap-analysis",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T03:22:28.768Z",
       "error": "Error: Source has no usable body evidence."
     },
     {
@@ -143,6 +167,24 @@
       "httpStatus": 200,
       "bodySha256": "973e72b2c93e3ecb4bf4ad5bd5ca5afbca685ee4171a859d01eafb938cc3080e",
       "extractedWords": 1320
+    },
+    {
+      "url": "https://developers.google.com/search/docs/crawling-indexing/canonicalization-troubleshooting",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:22:29.299Z",
+      "finalUrl": "https://developers.google.com/search/docs/crawling-indexing/canonicalization-troubleshooting",
+      "httpStatus": 200,
+      "bodySha256": "8b0b362f118d7bad7858f97688fda3a2e714066f4fe2404525d81373e14d14af",
+      "extractedWords": 289
+    },
+    {
+      "url": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:22:29.597Z",
+      "finalUrl": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls",
+      "httpStatus": 200,
+      "bodySha256": "762195ed2d2a8ec7a6e1238207d2836f37a34dedd2946586c0e34d6438f3d454",
+      "extractedWords": 1225
     },
     {
       "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
@@ -307,6 +349,18 @@
       "extractedWords": 468
     },
     {
+      "url": "https://helpx.adobe.com/account/individual/subscriptions-and-plans/renewals-and-cancellations/cancel-adobe-subscription.html",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T03:22:27.884Z",
+      "error": "Error: Source body evidence requires a successful response."
+    },
+    {
+      "url": "https://helpx.adobe.com/account/individual/terms-policies-and-regulations/adobe-subscription-terms.html",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T03:22:27.885Z",
+      "error": "Error: Source body evidence requires a successful response."
+    },
+    {
       "url": "https://helpx.adobe.com/business/teams/users-and-licenses/manage-users/assign-licenses.html",
       "status": "automatic_retrieval_unavailable",
       "checkedAt": "2026-09-12T03:13:52.211Z",
@@ -331,6 +385,12 @@
       "error": "Error: Source body evidence requires a successful response."
     },
     {
+      "url": "https://helpx.adobe.com/express/web/video-creation-and-editing/change-file-formats/convert-to-gif.html",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T03:22:27.974Z",
+      "error": "Error: Source body evidence requires a successful response."
+    },
+    {
       "url": "https://helpx.adobe.com/fonts/web/font-licensing/font-licensing.html",
       "status": "automatic_retrieval_unavailable",
       "checkedAt": "2026-09-12T02:56:07.779Z",
@@ -352,6 +412,12 @@
       "url": "https://helpx.adobe.com/premiere/desktop/correct-color/set-up-color-management/about-color-management.html",
       "status": "automatic_retrieval_unavailable",
       "checkedAt": "2026-09-12T02:56:07.539Z",
+      "error": "Error: Source body evidence requires a successful response."
+    },
+    {
+      "url": "https://helpx.adobe.com/premiere/desktop/edit-projects/edit-nested-sequences/about-nested-sequences.html",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T03:22:28.506Z",
       "error": "Error: Source body evidence requires a successful response."
     },
     {
@@ -424,6 +490,12 @@
       "extractedWords": 1248
     },
     {
+      "url": "https://learn.microsoft.com/en-us/training/",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T03:22:29.522Z",
+      "error": "Error: Source has no usable body evidence."
+    },
+    {
       "url": "https://mailchimp.com/help/add-alt-text-to-images/",
       "status": "body_retrieved",
       "checkedAt": "2026-09-12T03:03:41.492Z",
@@ -451,6 +523,15 @@
       "extractedWords": 26
     },
     {
+      "url": "https://mailchimp.com/resources/how-to-make-the-most-out-of-email-gifs/",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:22:28.329Z",
+      "finalUrl": "https://mailchimp.com/resources/how-to-make-the-most-out-of-email-gifs/",
+      "httpStatus": 200,
+      "bodySha256": "f39bef64bd95a71ac43c1b179b166d1791b3e9ab02791eab7614fbe7884c5547",
+      "extractedWords": 1345
+    },
+    {
       "url": "https://mixergy.com/looking-for-founders-with-big-success-or-failure-stories-for-mixergy-interviews/",
       "status": "automatic_retrieval_unavailable",
       "checkedAt": "2026-09-12T03:13:52.161Z",
@@ -460,6 +541,12 @@
       "url": "https://newsletter.posthog.com/p/read-this-before-you-pivot",
       "status": "automatic_retrieval_unavailable",
       "checkedAt": "2026-09-12T03:03:38.606Z",
+      "error": "Error: Source has no usable body evidence."
+    },
+    {
+      "url": "https://newsletter.posthog.com/p/why-we-sell-features-not-benefits",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T03:22:24.853Z",
       "error": "Error: Source has no usable body evidence."
     },
     {
@@ -652,6 +739,36 @@
       "error": "Error: Source response body exceeds the byte limit."
     },
     {
+      "url": "https://support.apple.com/guide/iphone/record-a-video-iph61f49e4bb/ios",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T03:22:25.707Z",
+      "error": "Error: Source response body exceeds the byte limit."
+    },
+    {
+      "url": "https://support.apple.com/guide/iphone/set-up-your-shot-iph3dc593597/26/ios/26",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T03:22:25.862Z",
+      "error": "Error: Source response body exceeds the byte limit."
+    },
+    {
+      "url": "https://support.apple.com/guide/quicktime-player/export-movies-qtp20e395859/10.5/mac/26",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:22:26.851Z",
+      "finalUrl": "https://support.apple.com/guide/quicktime-player/export-movies-qtp20e395859/10.5/mac/26",
+      "httpStatus": 200,
+      "bodySha256": "8490908088160cc478a28d8bbba437d6bdce6368b44d221f94752d859406c860",
+      "extractedWords": 8
+    },
+    {
+      "url": "https://support.apple.com/guide/voiceover/by-dom-or-group-mode-vo2711/mac",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:22:26.969Z",
+      "finalUrl": "https://support.apple.com/guide/voiceover/by-dom-or-group-mode-vo2711/mac",
+      "httpStatus": 200,
+      "bodySha256": "7a54fbf57e0f847749e8ac5d353f5a3e933df89190bb2a8535f8dc283f678e9a",
+      "extractedWords": 430
+    },
+    {
       "url": "https://support.atlassian.com/jira-service-management-cloud/docs/see-how-your-knowledge-base-articles-are-performing/",
       "status": "body_retrieved",
       "checkedAt": "2026-09-12T02:56:10.371Z",
@@ -736,6 +853,12 @@
       "error": "Error: Source response body exceeds the byte limit."
     },
     {
+      "url": "https://support.google.com/a/users/answer/7212025?hl=en",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T03:22:33.947Z",
+      "error": "Error: Source check timed out."
+    },
+    {
       "url": "https://support.google.com/analytics/answer/10917952",
       "status": "automatic_retrieval_unavailable",
       "checkedAt": "2026-09-12T03:13:54.572Z",
@@ -764,6 +887,12 @@
       "status": "automatic_retrieval_unavailable",
       "checkedAt": "2026-09-12T02:41:59.044Z",
       "error": "Error: Source response body exceeds the byte limit."
+    },
+    {
+      "url": "https://support.google.com/drive/answer/2494822?co=GENIE.Platform%3DDesktop&hl=en",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T03:22:30.525Z",
+      "error": "Error: Source check timed out."
     },
     {
       "url": "https://support.google.com/google-ads/answer/10682377?hl=en",
@@ -853,6 +982,15 @@
       "extractedWords": 254
     },
     {
+      "url": "https://support.microsoft.com/en-us/powerpoint/compress-your-media-files",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:22:27.280Z",
+      "finalUrl": "https://support.microsoft.com/en-us/powerpoint/compress-your-media-files",
+      "httpStatus": 200,
+      "bodySha256": "bd7df13c9ff1891836cc70ff1d49f1df4da3a682cfa4db645dd896ae52b7f0a3",
+      "extractedWords": 200
+    },
+    {
       "url": "https://support.microsoft.com/en-us/powerpoint/insert-and-play-a-video-file-from-your-computer",
       "status": "body_retrieved",
       "checkedAt": "2026-09-12T02:56:06.632Z",
@@ -860,6 +998,24 @@
       "httpStatus": 200,
       "bodySha256": "84c452068b71091f1246444bb7e5b4f697921550c240292910b951a1148290b0",
       "extractedWords": 654
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/powerpoint/play-a-video-automatically-in-a-slide-show",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:22:27.704Z",
+      "finalUrl": "https://support.microsoft.com/en-us/powerpoint/play-a-video-automatically-in-a-slide-show",
+      "httpStatus": 200,
+      "bodySha256": "d5af4c92e094214c599a9c6df88835ea59d7346e60fe8b5a4e7d41c2e1702e76",
+      "extractedWords": 274
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/powerpoint/training/animate-text-or-objects",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:22:28.423Z",
+      "finalUrl": "https://support.microsoft.com/en-us/powerpoint/training/animate-text-or-objects",
+      "httpStatus": 200,
+      "bodySha256": "40e6d512ba6a0cc75b47d9dfccd9de1675bcb6aee20fdb6d1d1c37cb22905cde",
+      "extractedWords": 368
     },
     {
       "url": "https://support.microsoft.com/en-us/powerpoint/training/create-a-self-running-presentation",
@@ -878,6 +1034,15 @@
       "httpStatus": 200,
       "bodySha256": "ad4bfd96bfe7a831595f65dbd910b9fd12941629b2d7ed9e36d4e8a31e81721b",
       "extractedWords": 462
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/powerpoint/turn-your-presentation-into-a-video",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:22:27.383Z",
+      "finalUrl": "https://support.microsoft.com/en-us/powerpoint/turn-your-presentation-into-a-video",
+      "httpStatus": 200,
+      "bodySha256": "16ce7481b22ca65c1dd70bbe4e53621c2afa22f1fd090d0a0d657121e563a0e8",
+      "extractedWords": 741
     },
     {
       "url": "https://support.peerspace.com/en/articles/10119171-how-do-i-cancel-a-booking",
@@ -905,6 +1070,15 @@
       "httpStatus": 200,
       "bodySha256": "b55748597baeaff373027cd7aa35457d0f5a952f220027efc61574c416af91f0",
       "extractedWords": 209
+    },
+    {
+      "url": "https://support.riverside.com/hc/en-us/articles/5706937784861-Host-checklist-and-tips-Recording-on-computer",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:22:25.008Z",
+      "finalUrl": "https://support.riverside.com/hc/en-us/articles/5706937784861-Host-checklist-and-tips-Recording-on-computer",
+      "httpStatus": 200,
+      "bodySha256": "843e9382a063daaad55b0c874ce81612a1ced8fe6fcd825133a23ca43a3dddf3",
+      "extractedWords": 375
     },
     {
       "url": "https://support.upwork.com/hc/en-us/articles/44564821903763-Understanding-milestones-on-fixed-price-contracts",
@@ -979,6 +1153,12 @@
       "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0064733",
       "status": "automatic_retrieval_unavailable",
       "checkedAt": "2026-09-12T02:56:06.855Z",
+      "error": "Error: Source has no usable body evidence."
+    },
+    {
+      "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0068228",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T03:22:27.290Z",
       "error": "Error: Source has no usable body evidence."
     },
     {
@@ -1243,6 +1423,15 @@
       "extractedWords": 69
     },
     {
+      "url": "https://www.buckinghamshire.gov.uk/about/design-resources/help-users-complete-a-series-of-tasks-in-a-logical-order/",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:22:28.942Z",
+      "finalUrl": "https://www.buckinghamshire.gov.uk/about/design-resources/help-users-complete-a-series-of-tasks-in-a-logical-order/",
+      "httpStatus": 200,
+      "bodySha256": "c37f656b91903a87bab0cc53964cb0e4c96fb57f51697370cd2788a75b784c7c",
+      "extractedWords": 644
+    },
+    {
       "url": "https://www.canto.com/blog/version-control-for-digital-assets/",
       "status": "automatic_retrieval_unavailable",
       "checkedAt": "2026-09-12T02:44:49.917Z",
@@ -1331,6 +1520,15 @@
       "httpStatus": 200,
       "bodySha256": "4665425842f26c74a595294166ee1193d6a7c3ded0ede3792efb443c8faf1a20",
       "extractedWords": 1285
+    },
+    {
+      "url": "https://www.dir.ca.gov/dlse/faq_independentcontractor.htm",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:22:28.339Z",
+      "finalUrl": "https://www.dir.ca.gov/dlse/faq_independentcontractor.htm",
+      "httpStatus": 200,
+      "bodySha256": "48a0141bb6781fac17645af9996bc814bfd1b6ce9b6a8a0605aedc1a7174b498",
+      "extractedWords": 1070
     },
     {
       "url": "https://www.epidemicsound.com/business/agencies/",
@@ -1435,6 +1633,24 @@
       "error": "Error: Source has no usable body evidence."
     },
     {
+      "url": "https://www.irs.gov/businesses/small-businesses-self-employed/behavioral-control",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:22:27.698Z",
+      "finalUrl": "https://www.irs.gov/businesses/small-businesses-self-employed/behavioral-control",
+      "httpStatus": 200,
+      "bodySha256": "92ac472a0a05889f4d1dec1c22eb63f8544257bc7d5c99cf7782b523ea395777",
+      "extractedWords": 456
+    },
+    {
+      "url": "https://www.irs.gov/businesses/small-businesses-self-employed/employee-common-law-employee",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:22:27.690Z",
+      "finalUrl": "https://www.irs.gov/businesses/small-businesses-self-employed/employee-common-law-employee",
+      "httpStatus": 200,
+      "bodySha256": "4c302e1aca2aa8fcc7b79567d918b92a8c26a8971f2edf4d2b7885d4bf45602d",
+      "extractedWords": 336
+    },
+    {
       "url": "https://www.lensrentals.com/",
       "status": "body_retrieved",
       "checkedAt": "2026-09-12T02:39:09.001Z",
@@ -1487,6 +1703,39 @@
       "httpStatus": 200,
       "bodySha256": "30d6d3399d7dacf5c53905d193c1d179e175f3bf6632544ce4c8eb3a480f8edd",
       "extractedWords": 1256
+    },
+    {
+      "url": "https://www.nist.gov/pml/time-and-frequency-division/popular-links/daylight-saving-time-dst",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:22:27.439Z",
+      "finalUrl": "https://www.nist.gov/pml/time-and-frequency-division/popular-links/daylight-saving-time-dst",
+      "httpStatus": 200,
+      "bodySha256": "b707cbdbf5905c7a292194f8189332af17e4cc74edf0659b71f55050e7b0d1b7",
+      "extractedWords": 743
+    },
+    {
+      "url": "https://www.notion.com/blog/how-notion-builds-partnerships-using-notion-and-how-you-can-too",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:22:25.514Z",
+      "finalUrl": "https://www.notion.com/blog/how-notion-builds-partnerships-using-notion-and-how-you-can-too",
+      "httpStatus": 200,
+      "bodySha256": "8887e24cc527a486a8ddc05574552470f974f0712ab62503562614cd13d762d7",
+      "extractedWords": 696
+    },
+    {
+      "url": "https://www.notion.com/en-gb/help/use-pages-offline",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T03:22:25.146Z",
+      "error": "Error: Source response body exceeds the byte limit."
+    },
+    {
+      "url": "https://www.notion.com/help/slack",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:22:26.133Z",
+      "finalUrl": "https://www.notion.com/help/slack",
+      "httpStatus": 200,
+      "bodySha256": "543e1f2fd1625d83dac11bf77cfaac817e2a90652bdc53f8ad329318145fe4cf",
+      "extractedWords": 1388
     },
     {
       "url": "https://www.panopto.com/features/video-editing/",
@@ -1682,6 +1931,15 @@
       "httpStatus": 200,
       "bodySha256": "66874304e38fa73498a3c4958b2309cd4255cc276133fb5c7b10e6f2e42828b0",
       "extractedWords": 824
+    },
+    {
+      "url": "https://www.w3.org/WAI/test-evaluate/preliminary/",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:22:26.225Z",
+      "finalUrl": "https://www.w3.org/WAI/test-evaluate/preliminary/",
+      "httpStatus": 200,
+      "bodySha256": "eee1b3c27c4c7625142b950969d92498d5987799813651fdbcd05b5b7e595601",
+      "extractedWords": 1357
     },
     {
       "url": "https://www.ycombinator.com/blog/a-guide-to-pitching-funding-and-launch-stories/",

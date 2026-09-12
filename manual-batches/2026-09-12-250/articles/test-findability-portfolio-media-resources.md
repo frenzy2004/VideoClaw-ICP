@@ -60,7 +60,7 @@
   },
   "editorialGraphic": {
     "src": "/media/blog/test-findability-portfolio-media-resources.svg",
-    "alt": "A practical sequence for knowledge base search in a multi-company portfolio media program.",
+    "alt": "Five resource-finding tasks with expected destinations, observed user routes, diagnosed failures and specific repairs to retest.",
     "width": 1200,
     "height": 675
   },

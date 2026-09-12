@@ -59,7 +59,7 @@
   },
   "editorialGraphic": {
     "src": "/media/blog/migrate-portfolio-media-library.svg",
-    "alt": "A practical sequence for digital asset migration in a multi-company portfolio media program.",
+    "alt": "Library migration worksheet mapping source assets, metadata, permissions and linked destinations to checked records in the receiving system.",
     "width": 1200,
     "height": 675
   },

@@ -1,0 +1,119 @@
+{
+  "id": "vc-manual250-c4-048",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.w3.org/WAI/media/av/transcripts/",
+      "supports": "Important visual information may supplement the spoken content in a recording.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.buckinghamshire.gov.uk/about/design-resources/help-users-complete-a-series-of-tasks-in-a-logical-order/",
+      "supports": "Step-by-step content fits ordered actions with a defined start and end, not every type of guidance.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "How is a checklist different from a video summary?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should every point in the recording become a checkbox?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How do I know the checklist stands alone?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Convert instructional advice into observable actions, decisions and completion criteria for the buyer. This produces an application aid, distinct from c4-007's tutorial video and c5's founder content workshop. No ranking-page comparison or demand conclusion is asserted.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending.",
+    "Buyer-facing action aid from a recorded method, not generic ebook assembly or internal content-production governance."
+  ],
+  "serp": {
+    "id": "vc-manual250-c4-048",
+    "keyword": "turn content into downloadable checklist",
+    "found": true,
+    "query": "turn content into downloadable checklist",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:32:56.760Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Checklist - Free Online Checklist App & Checklist Maker",
+        "url": "https://checklist.com/",
+        "domain": "checklist.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Free Checklist Maker - Create Checklists Online",
+        "url": "https://www.canva.com/create/checklists/",
+        "domain": "canva.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Free AI Content Checklist Generator",
+        "url": "https://www.template.net/ai-checklist-generator/content",
+        "domain": "template.net",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Free AI Checklist Generator | Create Checklists Fast",
+        "url": "https://quillbot.com/ai-writing-tools/ai-checklist-generator",
+        "domain": "quillbot.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Free AI Checklist Generator",
+        "url": "https://venngage.com/ai-tools/checklist-generator",
+        "domain": "venngage.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "How to Create a Digital PDF Checklist in Canva",
+        "url": "https://www.youtube.com/watch?v=Nq9Knz8QtHQ",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 7,
+        "title": "Convert PDF to Checklist Free with AI",
+        "url": "https://www.taskade.com/convert/pdf/pdf-to-checklist",
+        "domain": "taskade.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "AI PDF Checklist Generator | Extract Action Plans",
+        "url": "https://products.documentize.ai/check-list",
+        "domain": "products.documentize.ai",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": [
+      "Checklist template",
+      "Checklist online",
+      "Checklist maker",
+      "Free online checklist",
+      "Free editable Checklist Template Word",
+      "Checklist generator free",
+      "Checklist maker free printable",
+      "Text to checklist"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

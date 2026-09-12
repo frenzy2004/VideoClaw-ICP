@@ -28,7 +28,9 @@
     }
   ],
   "competitorGap": "Hypothesis: A critical-detail map ties framing and recipient tests to the precise screen evidence investors need to inspect. Competing page bodies have not been audited for this draft.",
-  "reviewNotes": [],
+  "reviewNotes": [
+    "FAQ evidence precision: reframing, selective close views and recipient read-back are original editorial tests. YC supplies general legibility context; Zoom supplies sharing-mode guidance, not a documented read-aloud test."
+  ],
   "serp": {
     "id": "vc-manual250-c2-020",
     "keyword": "screen recording text too small",

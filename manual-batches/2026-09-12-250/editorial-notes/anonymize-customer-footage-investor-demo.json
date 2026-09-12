@@ -28,7 +28,9 @@
     }
   ],
   "competitorGap": "Hypothesis: A scene-level exposure map connects privacy edits to preserved product evidence rather than treating blur as anonymity. Competing page bodies have not been audited for this draft.",
-  "reviewNotes": [],
+  "reviewNotes": [
+    "FAQ evidence precision: the recapture answer is original editorial reasoning informed by NIST's general exposure-risk discussion, not a NIST editing procedure. The unlisted-sharing answer is supported by YouTube."
+  ],
   "serp": {
     "id": "vc-manual250-c2-017",
     "keyword": "anonymize data in screen recording",

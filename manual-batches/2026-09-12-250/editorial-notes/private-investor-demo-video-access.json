@@ -1,0 +1,114 @@
+{
+  "id": "vc-manual250-c2-036",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.google.com/youtube/answer/157177?hl=en",
+      "supports": "Unlisted videos can be viewed and reshared by anyone with the link; private sharing is different.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.google.com/drive/answer/2494822?co=GENIE.Platform%3DDesktop&hl=en",
+      "supports": "Named sharing uses account identities and roles; inherited folder access can affect file permissions.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Is an unlisted video private?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should I disable downloads?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How do I verify removed access?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: Private-sharing advice may explain settings without an observed six-path recipient test for a single investor recording. Competing page bodies have not been audited for this draft.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c2-036",
+    "keyword": "share video privately",
+    "found": true,
+    "query": "share video privately",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Private Video Sharing Platform",
+        "url": "https://jumpshare.com/private-video-sharing",
+        "domain": "jumpshare.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "How to share a private video securely",
+        "url": "https://vimeo.com/blog/post/share-unlisted-videos-with-private-links",
+        "domain": "vimeo.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 3,
+        "title": "What's the best way to share video with a single-use link?",
+        "url": "https://www.reddit.com/r/editors/comments/136uh6u/whats_the_best_way_to_share_video_with_a/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "How to Share Videos Privately in 2026 (7 Free & Fast Ways)",
+        "url": "https://filestage.io/blog/share-videos-privately/",
+        "domain": "filestage.io",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "How and where to upload, store, and share private videos ...",
+        "url": "https://proton.me/blog/private-video",
+        "domain": "proton.me",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Streamable: Upload Video Online - Free Video Hosting",
+        "url": "https://streamable.com/",
+        "domain": "streamable.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "How to Share Videos Privately: 4 Ways to Send Video Online",
+        "url": "https://sproutvideo.com/blog/how-to-share-videos-privately.html",
+        "domain": "sproutvideo.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Is it illegal to share private videos?",
+      "Is there a way to share videos anonymously?",
+      "What happens if you private a video?",
+      "Where can I host a private video for free?"
+    ],
+    "relatedQueries": [
+      "Share video online via link",
+      "Share video privately online",
+      "Upload video and share link free",
+      "Private video sharing platform free",
+      "Share video privately app",
+      "Private video link",
+      "Vimeo private video",
+      "Private video player"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

@@ -1,0 +1,130 @@
+{
+  "id": "vc-manual250-c2-037",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.apple.com/guide/voiceover/by-dom-or-group-mode-vo2711/mac",
+      "supports": "VoiceOver offers DOM-order and grouped-item navigation modes.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.w3.org/WAI/test-evaluate/preliminary/",
+      "supports": "Preliminary checks are not a comprehensive accessibility evaluation.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does one successful screen-reader demo prove accessibility?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should the founder speak over the screen reader?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What if the operator needs a mouse or another person's help?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: Screen-reader guidance may omit an investor-facing capture script that distinguishes expected announcements from the actual product output. Competing page bodies have not been audited for this draft.",
+  "reviewNotes": [
+    "FAQs are editorial questions, not observed PAA. Source links provide factual or contextual grounding; the article-specific worksheets and procedural recommendations are original editorial synthesis."
+  ],
+  "serp": {
+    "id": "vc-manual250-c2-037",
+    "keyword": "demo website with screen reader",
+    "found": true,
+    "query": "demo website with screen reader",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Screen Reader Testing Page - For Demos - Digital Accessibility",
+        "url": "https://digitalaccessibility.virginia.edu/screen-reader-testing-page-demos",
+        "domain": "digitalaccessibility.virginia.edu",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Screen Reader Demo for Digital Accessibility",
+        "url": "https://www.youtube.com/watch?v=dEbl5jvLKGQ",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 3,
+        "title": "An Introduction to Screen Readers | Deque Webinars",
+        "url": "https://accessibility.deque.com/live-webinar-introduction-to-screen-readers",
+        "domain": "accessibility.deque.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Screen reader testing: how to test your website's accessibility",
+        "url": "https://www.siteimprove.com/glossary/screen-reader-testing/",
+        "domain": "siteimprove.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Design your site for screen reader accessibility",
+        "url": "https://userway.org/blog/screen-reader/",
+        "domain": "userway.org",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Testing Accessibility with Screen Readers",
+        "url": "https://www.epicweb.dev/testing-accessibility-with-screen-readers",
+        "domain": "epicweb.dev",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Screen reader simulator",
+        "url": "https://silktide.com/toolbar/screen-reader-simulator/",
+        "domain": "silktide.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Web Accessibility Workshop Demo Page - UConn",
+        "url": "https://accessibility.its.uconn.edu/web-accessibility-workshop-demo-page/",
+        "domain": "accessibility.its.uconn.edu",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "Online Screen Reader Testing",
+        "url": "https://assistivlabs.com/use-cases/online-screen-reader-testing",
+        "domain": "assistivlabs.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How to test a website with a screen reader?",
+      "Is there a free screen reader website?",
+      "Can you give me an example of a screen reader?",
+      "How to make NVDA read a webpage?"
+    ],
+    "relatedQueries": [
+      "Free demo website with screen reader",
+      "Demo website with screen reader android",
+      "NVDA screen reader",
+      "Screen reader testing tools",
+      "Screen reader test online",
+      "Screen reader accessibility tool",
+      "Screen reader Demo",
+      "Screen reader for accessibility testing chrome"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}
