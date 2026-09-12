@@ -1,0 +1,123 @@
+{
+  "id": "vc-manual250-c2-035",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://articles.sequoiacap.com/how-to-present-to-investors",
+      "supports": "The presentation guidance discusses demonstrations and workflows as ways to explain a solution.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0064733",
+      "supports": "The built-in player shares a file with private playback controls.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Is a live demo always more convincing?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I combine a recorded overview with a live example?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does prerecorded mean the product is simulated?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: An inspection-job matrix chooses evidence format without turning into production-resource buying advice or failure recovery. Competing page bodies have not been audited for this draft.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c2-035",
+    "keyword": "live vs recorded product demo for investors",
+    "found": true,
+    "query": "live vs recorded product demo for investors",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Three Keys to Nailing Your Product Demo to Investors",
+        "url": "https://www.linkedin.com/pulse/three-keys-nailing-your-product-demo-investors-brian-ascher",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 2,
+        "title": "Product demonstrations: How to demo your product for investors",
+        "url": "https://learn.marsdd.com/article/product-demonstrations-how-to-demo-your-product-for-investors/",
+        "domain": "learn.marsdd.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "The Real Reason Live Demos Don't Belong in Fundraising ...",
+        "url": "https://medium.com/swlh/the-real-reason-live-demos-dont-belong-in-fundraising-pitches-ad70261bd840",
+        "domain": "medium.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "SaaS product demo types – when and where to use them",
+        "url": "https://nerdcow.co.uk/blog/saas-product-demo-types/",
+        "domain": "nerdcow.co.uk",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Live vs Recorded Demos [How to Pick + Best Tools]",
+        "url": "https://www.arcade.software/post/live-vs-recorded-demos",
+        "domain": "arcade.software",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "When pitching a consumer-facing startup to VCs, should ...",
+        "url": "https://www.quora.com/When-pitching-a-consumer-facing-startup-to-VCs-should-a-team-present-a-live-product-demo-or-a-recorded-screencast-demo-What-are-the-pros-and-cons",
+        "domain": "quora.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Live demos vs recorded demos in 2026: 5 factors that ...",
+        "url": "https://www.guideflow.com/blog/live-demos-vs-recorded-demos",
+        "domain": "guideflow.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "Are live demos a good idea for SaaS Sales? - Walnut.io",
+        "url": "https://www.walnut.io/blog/product-demos/are-live-demos-a-good-idea-for-saas-sales/",
+        "domain": "walnut.io",
+        "resultType": "article"
+      },
+      {
+        "position": 9,
+        "title": "How to Move Beyond SaaS Product Demo Videos [Plus ...",
+        "url": "https://www.navattic.com/blog/product-demo-videos",
+        "domain": "navattic.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What are the different types of demos?",
+      "How to do a good product demo?",
+      "What does \"product demo\" mean?",
+      "What are the benefits of using a demo?"
+    ],
+    "relatedQueries": [
+      "Live vs recorded product demo for investors saas",
+      "Live vs recorded product demo for investors reddit",
+      "Live vs recorded product demo for investors example"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

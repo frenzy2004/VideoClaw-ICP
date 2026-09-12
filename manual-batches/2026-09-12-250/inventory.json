@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "kind": "manual_review_batch",
-  "count": 161,
-  "newCount": 111,
+  "count": 196,
+  "newCount": 146,
   "retainedCount": 50,
   "targetCount": 250,
   "productionChanges": false,
@@ -1584,9 +1584,9 @@
       "title": "Press Embargo vs Exclusive: A Founder’s Decision Guide",
       "keyword": "press embargo vs exclusive",
       "slug": "press-embargo-vs-exclusive-founder",
-      "words": 1057,
-      "articleSha256": "f43f70d93fcc6379d456ae87a76e1372b9d0176efb1f9a4f530bda86a89048e6",
-      "graphicSha256": "f0d7fd78ad7755a398ef972738795f78c107c4b8f4714e70d9ad5fd4f03e0004",
+      "words": 1307,
+      "articleSha256": "49c51748c865caf946a7ef11a5fe7441ec1f4dd3d9ba19c57cd79d2e0ca175af",
+      "graphicSha256": "633de80fe2c8e3bcf83bc33b4bae33aa1b0abcf7b6042479c4b8b54ca400f7a5",
       "sourceCount": 2,
       "faqEvidence": [
         {
@@ -1668,8 +1668,8 @@
       "title": "Pitch a Contributed Article From Founder Experience",
       "keyword": "how to pitch a contributed article",
       "slug": "founder-contributed-article-proposal",
-      "words": 1040,
-      "articleSha256": "0e697da2b6b03999f63a4b37e07398e278c2c0ccc6c96e1f6f16a4a07115ef0a",
+      "words": 1160,
+      "articleSha256": "b759715db25a3ecd70ea8446236cb5466944d9d72cade662aec6a792327538c0",
       "graphicSha256": "986e1b43994e2eff1258f1ee76c6e6c0a53c5206c8a9600105ebf6ceee26463c",
       "sourceCount": 2,
       "faqEvidence": [
@@ -1696,8 +1696,8 @@
       "title": "Pitch Yourself as a Podcast Guest With a Useful Angle",
       "keyword": "how to pitch yourself as a podcast guest",
       "slug": "founder-podcast-guest-pitch",
-      "words": 1042,
-      "articleSha256": "92a4b051fc326a9f9d5014442f66050409ba9a95b620ba11b69244e49d42e681",
+      "words": 1181,
+      "articleSha256": "ab59b23101421e2403770a7884ec71ded9d7ca0760f0875ed17695f62503f969",
       "graphicSha256": "2848e582794363bdebb983964df41798e6b07ce5fd2d1da2cb34813b5e877ef2",
       "sourceCount": 2,
       "faqEvidence": [
@@ -1724,8 +1724,8 @@
       "title": "Write a Conference Talk Proposal as a Startup Founder",
       "keyword": "conference talk proposal for startup founders",
       "slug": "startup-founder-conference-talk-proposal",
-      "words": 1052,
-      "articleSha256": "5bd569a180aac3870b53353014602d2f86d93fe5f23874204bc7915280da1bf6",
+      "words": 1149,
+      "articleSha256": "73ebbbedff773ec6215fcb6cb5a1ea2b0a479b9bb00b79f0dc924985c87bc864",
       "graphicSha256": "4b7908fbf8e52f5ae81dbb0235b4122700a5097abc71dd79c96b0b75fb931214",
       "sourceCount": 2,
       "faqEvidence": [
@@ -1752,8 +1752,8 @@
       "title": "Write a Founder Bio That Establishes Relevant Expertise",
       "keyword": "startup founder bio examples",
       "slug": "startup-founder-bio-expertise",
-      "words": 1096,
-      "articleSha256": "3916533111db7d3f39e92ccd2430c0838f152ddf1b02fc8c83be5618c32a2548",
+      "words": 1160,
+      "articleSha256": "0d1efcb1aac2de9e82acc00cef611d7e4a743b34e6fc88395bf39934d41e65f7",
       "graphicSha256": "cd54f8c03aa80d30e66c70861b1f47e93edfed9fb6406337dcd1d7a442355ae2",
       "sourceCount": 2,
       "faqEvidence": [
@@ -2075,6 +2075,174 @@
         },
         {
           "question": "What is the excerpt test?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c1-031",
+      "campaign": "newly-funded-founder",
+      "title": "Explain a Startup Pivot in a Customer Video",
+      "keyword": "startup pivot announcement video",
+      "slug": "startup-pivot-customer-video",
+      "words": 1086,
+      "articleSha256": "fcbc0c6dacbb8170242d9c9a03a0b7d8183d7b95c4e962793a5f280cb9417221",
+      "graphicSha256": "8ffbf55154ca21f1627b0c6d965f08f1ddfe71a616b7b06e79dbba6aa43af4ee",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "What should a customer pivot video explain first?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can I say nothing changes for current customers?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What visual is useful in a pivot explanation?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c1-032",
+      "campaign": "newly-funded-founder",
+      "title": "Announce a Rebrand Without Confusing Customers",
+      "keyword": "how to announce a company rebrand to customers",
+      "slug": "startup-rebrand-customer-continuity",
+      "words": 1105,
+      "articleSha256": "2dd394bb5f9a6ac9acb778c92b065666ad826d1a83ef05c35e2fcf31aa08b64d",
+      "graphicSha256": "ba8742ab8260c53ae1dedaffe2f28c32e709cfaaa41b637989911ca71f688254",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Should the old name appear in the announcement?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can I say only the name is changing?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What should a founder rebrand video emphasize?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c1-033",
+      "campaign": "newly-funded-founder",
+      "title": "Record a Founder Update Existing Customers Care About",
+      "keyword": "founder update video for customers",
+      "slug": "founder-customer-update-video",
+      "words": 1086,
+      "articleSha256": "8f6791ff9eac82d69da68b86c11e4644222cbc12359731b66f64926393e9ef93",
+      "graphicSha256": "f0be6adcaddedd0819b22f664aa18eeb6ad58f60c5656cb7422d363f6eef5b43",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "What belongs in a founder customer update?",
+          "basis": "editorial"
+        },
+        {
+          "question": "How is this different from release notes?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Should every update announce progress?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c1-034",
+      "campaign": "newly-funded-founder",
+      "title": "Publish a Startup Roadmap Without Accidental Promises",
+      "keyword": "public roadmap for startups",
+      "slug": "startup-public-roadmap-expectations",
+      "words": 1076,
+      "articleSha256": "fc9abdccbc2f0e160fe98cd0b5c11761f48548f098b81775eee72df0d226793a",
+      "graphicSha256": "fb3c40d936dfdaafb1ed04a80e336500e38c5941cb52b3f558533bfa0ed33d81",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Does a disclaimer make every roadmap date safe to publish?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What should happen when an item is dropped?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Should customer votes determine the roadmap?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c1-035",
+      "campaign": "newly-funded-founder",
+      "title": "Record a Founder Apology That Addresses the Harm",
+      "keyword": "how to record a company apology video",
+      "slug": "founder-customer-apology-video",
+      "words": 1094,
+      "articleSha256": "48bac6881c6b0cf581df5ffd969deeb4b293bebd20fef6f046fce8092feef948",
+      "graphicSha256": "676fe5dc544438262821cf26b1375aa6d126c7c03e3cbfb6b935778711d96dd0",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Should the apology explain why the mistake happened?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can I promise it will never happen again?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Is the video enough?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c1-036",
+      "campaign": "newly-funded-founder",
+      "title": "Record a Founder Welcome for New Hires",
+      "keyword": "new employee welcome video from CEO",
+      "slug": "founder-new-hire-welcome-video",
+      "words": 1113,
+      "articleSha256": "8ca1cf0c7a29ef62c9c584e4a46c3f45cd49d3adde330918a1f58f0c76585be0",
+      "graphicSha256": "e8ed17529f89fd5f44e5793edecd61197ffcc8f479e97e59ebd3efccb65e245e",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Is this a recruitment video?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Should the founder explain every policy?",
+          "basis": "editorial"
+        },
+        {
+          "question": "How can the message stay personal?",
           "basis": "editorial"
         }
       ],
@@ -2663,6 +2831,118 @@
         },
         {
           "question": "Is a revised prompt another identical trial?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c2-032",
+      "campaign": "accelerator-demo-day-founder",
+      "title": "Build Fictional Data for an Investor Demo Recording",
+      "keyword": "sample data for investor product demo",
+      "slug": "fictional-data-investor-demo-recording",
+      "words": 1060,
+      "articleSha256": "b7b45de49b4a1eb23ab88915ed0d3584486e2489260857eeda63592417af0044",
+      "graphicSha256": "44e936ad00cc2b45353bbbcbb9410bcfbc9800236bfc9cf399290f6073fff9c6",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Is changing customer names enough to create fictional data?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can I use example.org in a demo?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Should I fill the dashboard with invented customers?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c2-033",
+      "campaign": "accelerator-demo-day-founder",
+      "title": "Label What Works in a Prototype Investor Demo",
+      "keyword": "label prototype in investor demo video",
+      "slug": "label-prototype-investor-demo",
+      "words": 1025,
+      "articleSha256": "9bd416785127645b7c3577e76030a0d45c1d03ac3672f4bef285c8a7fc58eeaf",
+      "graphicSha256": "d8f7da5853a583006bdb236763bb4ae3e22a8cd5f3c9b9f73f106d28c47141e5",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Is a single prototype label at the start enough?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Does a clickable prototype prove the backend works?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Should I use coming soon as the label?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c2-034",
+      "campaign": "accelerator-demo-day-founder",
+      "title": "Show the Human Work Behind an Automated-Looking Demo",
+      "keyword": "show human intervention in product demo",
+      "slug": "human-intervention-investor-demo-video",
+      "words": 1053,
+      "articleSha256": "67035e081d7f0dd16c9643e951b67fe0518b334b16bf52191c290ad3fe636ba2",
+      "graphicSha256": "b568d22ca86e0103a623daf482127d1a423d14ec8c793e8624f75f5199dee7e7",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Does human-assisted mean the product is only a prototype?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Must I expose the whole operator console?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can I remove the operator's waiting time?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c2-035",
+      "campaign": "accelerator-demo-day-founder",
+      "title": "Choose Live or Recorded Proof for an Investor Demo",
+      "keyword": "live vs recorded product demo for investors",
+      "slug": "live-or-recorded-investor-product-proof",
+      "words": 1066,
+      "articleSha256": "42a743916984aef17653561ac5a8cbb9bacbab45de1cc23296354c2cdbd844d3",
+      "graphicSha256": "a1954ccb813b29043038450b95ba14a0d4b98e9ee9613318656ee7354b9c0af7",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Is a live demo always more convincing?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can I combine a recorded overview with a live example?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Does prerecorded mean the product is simulated?",
           "basis": "editorial"
         }
       ],
@@ -3307,6 +3587,230 @@
         },
         {
           "question": "Does buying audio description prove legal compliance?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c3-034",
+      "campaign": "video-production-comparison",
+      "title": "Choose an Editing Computer Using Your Actual Footage",
+      "keyword": "how to choose a computer for video editing",
+      "slug": "choose-video-editing-computer-actual-footage",
+      "words": 1021,
+      "articleSha256": "d6d371bce845ea60c26bc4b3557782cbfd1a8a492be0581c5f240aeec1889bcd",
+      "graphicSha256": "dbed488c1b9b7900bef860ac47fa4f59525a5df38ff0c8ac6e3977c87bb6c877",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Are minimum system requirements enough for an editing purchase?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Should I test native footage or proxies?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can a stronger GPU solve every playback problem?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c3-035",
+      "campaign": "video-production-comparison",
+      "title": "Individual or Team Editing Licenses: Who Needs a Seat?",
+      "keyword": "individual vs team video editing software license",
+      "slug": "individual-vs-team-video-editing-licenses",
+      "words": 1031,
+      "articleSha256": "c46f55725b226e5229ebbec0332a1414e5cd2c6b7cd358ae75f84cd7cf82027f",
+      "graphicSha256": "c2d00d8566d44860bb74aa88f1492434223235de6d0572510f6bd5ed13753bea",
+      "sourceCount": 3,
+      "faqEvidence": [
+        {
+          "question": "Can two editors share one Adobe account if they work at different times?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Does every reviewer need a full editing license?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Does reassigning a license transfer the departing editor's files?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c3-036",
+      "campaign": "video-production-comparison",
+      "title": "Cloud or Desktop Video Editing for Sensitive Footage?",
+      "keyword": "cloud vs desktop video editor privacy",
+      "slug": "cloud-vs-desktop-video-editor-privacy",
+      "words": 1027,
+      "articleSha256": "539ec5c41498c34363089e0a84a27a764108096e06159aca9416a9ecea73c247",
+      "graphicSha256": "b51496b21faeefb425924116412ef712d0b5fdbf83e0d56888399b26b7d3e434",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Is desktop video editing always local?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Does a security badge answer every footage-privacy question?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What should I test before uploading sensitive footage?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c3-037",
+      "campaign": "video-production-comparison",
+      "title": "Who Owns the Raw Footage and Video Project Files?",
+      "keyword": "who owns raw footage and video project files",
+      "slug": "raw-footage-video-project-file-ownership",
+      "words": 1018,
+      "articleSha256": "ca27e0d34251f2427c20466406d75fa13e3306a1d1be9ff724ffb73ed12bdd93",
+      "graphicSha256": "3f25273d939b6a006c86ad1b20a995144c0a8cf7015770f5381ee3f56ed36255",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Does paying for a video mean I own all raw footage?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Does a work-for-hire label settle ownership?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can a vendor deliver every font, music track, and stock clip?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c3-038",
+      "campaign": "video-production-comparison",
+      "title": "Test Project Portability Before Buying a Video Editor",
+      "keyword": "video editing software project export compatibility",
+      "slug": "video-editor-project-export-portability-test",
+      "words": 1016,
+      "articleSha256": "2cb728ed30beb53b802de5c820fd89bfd83d4ccae6414255d1277ae169432e1d",
+      "graphicSha256": "fd2b647954e602e9cf6d6a85336eb0558da0720149eae218da0b71c639224a19",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Does XML export mean my project is fully portable?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Is a final MP4 a substitute for an editable project?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What should I test after importing an AAF?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c3-039",
+      "campaign": "video-production-comparison",
+      "title": "Set Video Production Payment Milestones Around Evidence",
+      "keyword": "video production payment milestones",
+      "slug": "video-production-payment-milestones",
+      "words": 1001,
+      "articleSha256": "c99aaaab5a0d9d711c2f93dacc6f095bdb5566670d446182e35428ae11123a8d",
+      "graphicSha256": "bc396adda050971b5c3506271b4c4b79967ff97cb73510b070478b4c82c81ba9",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "What percentage deposit should I pay a video company?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Are milestone funds always held in escrow?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Does final payment automatically transfer all rights and files?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c3-040",
+      "campaign": "video-production-comparison",
+      "title": "Video Shoot Cancellation Terms to Set Before Booking",
+      "keyword": "video production cancellation and postponement fees",
+      "slug": "video-shoot-cancellation-postponement-terms",
+      "words": 1029,
+      "articleSha256": "19892841862cd3603f476da6e96f7763f92336f181d1ca2041345b449ba31b39",
+      "graphicSha256": "7d9986c77b50c7219121513aeb5b081b917c5404c7ec9c1a6e83039b221c019c",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Is postponing a shoot always cheaper than cancelling?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Does telling a host I want to cancel complete the cancellation?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Does bad weather automatically waive cancellation fees?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c3-041",
+      "campaign": "video-production-comparison",
+      "title": "Video Production Insurance: Verify the Vendor's Coverage",
+      "keyword": "video production company certificate of insurance",
+      "slug": "video-production-vendor-insurance-evidence",
+      "words": 1030,
+      "articleSha256": "b5ddf40bb7c28fe621aa89f8aef19fa4a6f81689aaef039948ab620fbeefd37a",
+      "graphicSha256": "3326703d06f444c3d5b8106b83408cfd7767cdca4a520e82382a97a467288b07",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Is a certificate of insurance enough to confirm coverage?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Does every video shoot need the same insurance limits?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What should I do when the insured name differs from the vendor name?",
           "basis": "editorial"
         }
       ],
@@ -3987,6 +4491,230 @@
       "sourceBatch": "2026-09-12-250"
     },
     {
+      "id": "vc-manual250-c4-035",
+      "campaign": "gtm-content-repurposing-buyer",
+      "title": "Plan a Retargeting Sequence From Existing Video Assets",
+      "keyword": "LinkedIn video retargeting strategy",
+      "slug": "retargeting-sequence-existing-video-assets",
+      "words": 1134,
+      "articleSha256": "9f441d0123f576186533ff32e65687ba86cbcfaf73ed104c2db8b84cbc1a40b8",
+      "graphicSha256": "76de9b25b7b917d531006b0f57c6ad758e7237bd1459dc0eccf190aa6b2bad8a",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Can I retarget everyone who watched an organic video?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What if the audience is too small?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Should a follow-up repeat the original clip?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c4-036",
+      "campaign": "gtm-content-repurposing-buyer",
+      "title": "Turn an Organic Video Into a Focused B2B Ad",
+      "keyword": "turn organic video into paid ad",
+      "slug": "organic-video-to-focused-b2b-ad",
+      "words": 1145,
+      "articleSha256": "7cd8b82b76285ada68d88c8417b8e9635c43bf702db1b466b1b52f46e4823b95",
+      "graphicSha256": "e377c0250e53648a2ef41cfe4c55cdbd9d2a76965b1cc31d9414d244409f1465",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Does a popular organic clip automatically make a good ad?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What should remain unchanged in the adaptation?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Do we need a different landing page?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c4-037",
+      "campaign": "gtm-content-repurposing-buyer",
+      "title": "Test Two Video Openings Without Changing Everything Else",
+      "keyword": "A B test video hooks",
+      "slug": "test-two-video-openings",
+      "words": 1136,
+      "articleSha256": "ec567ff0dac95eb0396af3b6417958e65e892cf264ca78cbaa0a9f69a3d5ff9e",
+      "graphicSha256": "8f94d760a68fb5ff2d8f75a4cafe15c968921bc8513636d584ad04e2866216aa",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Can YouTube thumbnail testing compare two video openings?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can I compare two organic posts published on different days?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What if neither opening clearly wins?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c4-038",
+      "campaign": "gtm-content-repurposing-buyer",
+      "title": "Test Thumbnails for an Existing B2B Video",
+      "keyword": "YouTube thumbnail test and compare",
+      "slug": "test-thumbnails-existing-b2b-video",
+      "words": 1157,
+      "articleSha256": "53dd6e19ec22a6ecd20f5fe966cb2683834dbbac38c3726b71db9c8208f49068",
+      "graphicSha256": "df07d69dcb50fe91e792fbfb59bfc49fbfc9bd4c7a27e34487dcf882588142a4",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Can I test only the thumbnail and keep the title fixed?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Does the most-clicked image automatically win?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What should I do with an inconclusive test?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c4-039",
+      "campaign": "gtm-content-repurposing-buyer",
+      "title": "Track Repurposed Video Links With Clear UTM Names",
+      "keyword": "UTM tracking for video campaigns",
+      "slug": "utm-tracking-repurposed-video-links",
+      "words": 1152,
+      "articleSha256": "8fa332f54fa1c80a3f30e9d5ed4b4e9817efcc512c1494df7672c46198f97d7c",
+      "graphicSha256": "687d6c25fa0e4066c025e5e7b1257bd28eb25eb753fa3430a1086009407698d4",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Do UTM tags tell me whether someone watched the video?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Should every clip receive a new campaign name?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can I add manual tags to auto-tagged advertising links?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c4-040",
+      "campaign": "gtm-content-repurposing-buyer",
+      "title": "Check Whether GA4 Is Tracking Your Embedded Video",
+      "keyword": "GA4 video tracking not working",
+      "slug": "check-ga4-embedded-video-tracking",
+      "words": 1163,
+      "articleSha256": "2ef9778fbc77f8b54bd6e027843c0f05be0eb9d8e3643bcfd9b79e5f53018db1",
+      "graphicSha256": "9aab17278fb99673055220680804b03546ec3d2c5005a6890adfb4ff30246943",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Does enhanced measurement cover every embedded player?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Why do I see a click but no video_start?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What causes duplicate video events?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c4-041",
+      "campaign": "gtm-content-repurposing-buyer",
+      "title": "Use Retention Dips to Plan a Better Video Edit",
+      "keyword": "why viewers drop off video retention",
+      "slug": "retention-dips-video-edit-plan",
+      "words": 1156,
+      "articleSha256": "e1905e159be649f8a58ff66702d1766500403d1c4690aaf8384bf5a8c819be93",
+      "graphicSha256": "4f0db01babf967ea75bb478b878944689858b55c424c3af9a6b71cbaae851683",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Should I cut every section with a retention dip?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Does a spike always mean viewers love that moment?",
+          "basis": "editorial"
+        },
+        {
+          "question": "How can I tell whether the revision helped?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c4-042",
+      "campaign": "gtm-content-repurposing-buyer",
+      "title": "Update an Old Product Video Without Starting Over",
+      "keyword": "update old product demo video",
+      "slug": "update-old-product-video",
+      "words": 1173,
+      "articleSha256": "00fa8f77f3c2f8ad4dd7a397a6d33f8d1b8951296e7c98b244c874aacc9afd78",
+      "graphicSha256": "7983b58f5b469cbb8ced362c0d7113c263f90c9b40d1fb3090fe7bd69aa3382c",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Does a visual redesign require rerecording everything?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Will replacing the video update every copy?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can old analytics still be compared after an update?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
       "id": "vc-manual250-c5-011",
       "campaign": "portfolio-media-platform",
       "title": "Build a Portfolio Media Support Service Menu",
@@ -4623,6 +5351,258 @@
         },
         {
           "question": "Who decides whether an editor should be reassigned?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c5-034",
+      "campaign": "portfolio-media-platform",
+      "title": "Coordinate a Portfolio Announcement Embargo",
+      "keyword": "embargoed press release",
+      "slug": "coordinate-portfolio-announcement-embargo",
+      "words": 1114,
+      "articleSha256": "988abcc8424740028be86779151cf4071c5b90dcea284e3da6f4475a5b352c9a",
+      "graphicSha256": "a5a6900660c46f6dae64cc0a910e31c3ec84231ef790c85799d61fdd1aa25728",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Does an embargo label guarantee that material will stay private?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What should happen when the release time changes?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Is a journalist part of the platform's publishing schedule?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c5-035",
+      "campaign": "portfolio-media-platform",
+      "title": "Choose Portfolio Spotlights With a Coverage Map",
+      "keyword": "editorial content selection",
+      "slug": "choose-portfolio-spotlight-coverage",
+      "words": 1126,
+      "articleSha256": "d645fd6088ca8a1c712ce5873296a713a95e9037e57568c95ceabce079d46976",
+      "graphicSha256": "909bd9c78a6a8800da2bea892e9d26b47a126f2dd33c0d0b4fa8c0daec3e8cfe",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Should every company receive the same number of spotlights?",
+          "basis": "editorial"
+        },
+        {
+          "question": "How is spotlight selection different from request prioritization?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What should a deferred company be told?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c5-036",
+      "campaign": "portfolio-media-platform",
+      "title": "Match Portfolio Marketers for Useful Peer Help",
+      "keyword": "peer mentoring matching",
+      "slug": "match-portfolio-marketing-peer-help",
+      "words": 1126,
+      "articleSha256": "4d759538f2e4f269a0fc6a981f2399cba3c7f39003cb476500347a3c5bb195f2",
+      "graphicSha256": "9fb567bfe05d38c64b045da1cd817bc024f076d87bc93deb09b6b5d21297fa3c",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Does the helper need to be more senior?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Should every match become recurring mentoring?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What belongs in the closure note?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c5-037",
+      "campaign": "portfolio-media-platform",
+      "title": "Track Sponsor Media Commitments Across a Cohort",
+      "keyword": "sponsorship fulfillment report",
+      "slug": "cohort-sponsor-media-fulfillment",
+      "words": 1108,
+      "articleSha256": "a3a59ace460815111f7b842fd7d4ae12a8c45344670a447d9a32d0a2063c4732",
+      "graphicSha256": "3b5b1a38d4dd22db0aafe777f6b1c8e562846eea30ccf418d503aa6f5161eb03",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Can extra activity replace a missed sponsor benefit?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Does a photograph prove audience reach?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Should a report hide unresolved items until everything is complete?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c5-038",
+      "campaign": "portfolio-media-platform",
+      "title": "Allocate Shared Portfolio Media Costs Transparently",
+      "keyword": "shared cost allocation",
+      "slug": "allocate-shared-portfolio-media-costs",
+      "words": 1095,
+      "articleSha256": "6666eae6eddaf58908576062bc49dbcb200004b50204712d92351f63271f9609",
+      "graphicSha256": "f1fff9bab9f3f72ead52922583c074dd303c518852e21f00ed155cddea2075b4",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Does an internal allocation mean companies should be invoiced?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Which allocation basis is best?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What should happen when usage data is missing?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c5-039",
+      "campaign": "portfolio-media-platform",
+      "title": "Keep Portfolio Resource Translations in Sync",
+      "keyword": "managing knowledge base translations",
+      "slug": "portfolio-resource-translation-change-tracking",
+      "words": 1138,
+      "articleSha256": "082caed278c268498440c8dfe01bcbe59e835d5808b754c935f662e36ff3611f",
+      "graphicSha256": "a3c46f03a354da456e7f5e0be9f7e0056e342169b127bd47b8182a3fa35765d2",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Does every source edit require the same translation response?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Should navigation labels be tracked separately?",
+          "basis": "editorial"
+        },
+        {
+          "question": "When is a translation update complete?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c5-040",
+      "campaign": "portfolio-media-platform",
+      "title": "Track Portfolio Press Coverage Without Double Counting",
+      "keyword": "track press coverage",
+      "slug": "track-portfolio-press-coverage",
+      "words": 1099,
+      "articleSha256": "c2f335b8c1f66613e05b4f3d7b9bab24eee7da42c627a1dc1ad45a3ebf5f5215",
+      "graphicSha256": "4c4f448556b903868fb68e20abc78b59c3a08b365910c8e27ed7148613f3a826",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Should every URL count as an independent story?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Are search alerts verified coverage?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Does the clipping register measure program success?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c5-041",
+      "campaign": "portfolio-media-platform",
+      "title": "Pause and Restart Portfolio Posts During a Crisis",
+      "keyword": "pause scheduled social media posts",
+      "slug": "pause-restart-portfolio-media-posts",
+      "words": 1077,
+      "articleSha256": "aed1dbcf9a6e153a19b0cd12147f02285cfdb3ee1c0ccf3a6d49b1f93a83c3a9",
+      "graphicSha256": "4bfd628d991862dac7e1bc3a594a86852e60da24b15a52c478871e0ec44c5882",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Can the platform pause every company channel?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Does pausing scheduled content remove live posts?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Should all held posts resume together?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [],
+      "sourceBatch": "2026-09-12-250"
+    },
+    {
+      "id": "vc-manual250-c5-042",
+      "campaign": "portfolio-media-platform",
+      "title": "Update Shared Portfolio Templates Without Version Drift",
+      "keyword": "brand template management",
+      "slug": "roll-out-portfolio-template-changes",
+      "words": 1100,
+      "articleSha256": "af337e5108e9c8b6b4bdd10c4b888f155ebec85615d2246460aa28c27abdaf18",
+      "graphicSha256": "aa01249cc3faa6659d9350706d35af8b2fceeda62104d6036f387ebc8820c2c8",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Does updating a master change every company copy?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Must every old finished asset be replaced?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What proves that a company adopted the change?",
           "basis": "editorial"
         }
       ],

@@ -1,0 +1,108 @@
+{
+  "id": "vc-manual250-c4-036",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://business.linkedin.com/advertise/ads/sponsored-content/video-ads/tips",
+      "supports": "Campaign objectives should inform video creative and measurement.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://business.google.com/en-all/think/future-of-marketing/youtube-video-ad-creative/",
+      "supports": "Brand identity and clear direction are elements of Google’s creative guidance.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does a popular organic clip automatically make a good ad?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should remain unchanged in the adaptation?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Do we need a different landing page?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Rebuild context, proof and action for a cold advertising audience that has not followed the original discussion. This is creative adaptation, distinct from choosing production resources or sequencing retargeting audiences. No ranking-page comparison or demand conclusion is asserted.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending.",
+    "Creative adaptation only; not production-vendor selection, legal advice, ad activation, pricing, or a forecast based on organic engagement."
+  ],
+  "serp": {
+    "id": "vc-manual250-c4-036",
+    "keyword": "turn organic video into paid ad",
+    "found": true,
+    "query": "turn organic video into paid ad",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:32:56.760Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How to Turn Organic Content Into Ads",
+        "url": "https://www.linkedin.com/top-content/marketing/linkedin-content-and-ads/how-to-turn-organic-content-into-ads/",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 2,
+        "title": "Social Media Video Ads vs. Boosting Organic Content",
+        "url": "https://www.cloudcampaign.com/blog/social-media-video-ads-vs-boosting-organic-content",
+        "domain": "cloudcampaign.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "How do you balance organic & paid efforts for conversions ...",
+        "url": "https://www.reddit.com/r/marketing/comments/1egvlat/how_do_you_balance_organic_paid_efforts_for/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Use organic as PROOF! Why?? 👇👇 Many people pay for ...",
+        "url": "https://www.facebook.com/61564760404568/videos/use-organic-as-proof-why-many-people-pay-for-an-ad-as-soon-as-they-post-however-/1963396547831979/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 5,
+        "title": "Organic vs. Paid Ads: You Need Both",
+        "url": "https://fiercecreative.agency/blog/organic-vs-paid-ads-you-need-both",
+        "domain": "fiercecreative.agency",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Organic Video Content to Impact your Marketing Funnel",
+        "url": "https://www.thebelfortgroup.com/unleashing-the-power-of-organic-video-content-to-impact-your-marketing-funnel/",
+        "domain": "thebelfortgroup.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "HOW TO USE ORGANIC AND PAID Social Video",
+        "url": "https://www.brightcove.com/blog/how-use-organic-and-paid-social-video-more-marketing-impact",
+        "domain": "brightcove.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Is it legal to use AI to generate ads?",
+      "How much does a 30 second YouTube ad cost?",
+      "What's the difference between organic and paid ads?",
+      "How to make a paid ad?"
+    ],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

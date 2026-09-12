@@ -1,0 +1,133 @@
+{
+  "id": "vc-manual250-c5-042",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.bynder.com/hc/en-us/articles/360013873200-Manage-Print-Brand-Templates-and-Presets",
+      "supports": "Templates and presets have configurable fields, styles and permissions.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.canto.com/blog/version-control-for-digital-assets/",
+      "supports": "The latest file and the approved file can serve different sharing needs.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does updating a master change every company copy?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Must every old finished asset be replaced?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What proves that a company adopted the change?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Release a template change and identify which company copies require adoption, migration or retirement. Unlike brand guidelines, this handles dependency changes and rollout; unlike asset versioning, the change affects future outputs. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact US/en SERP evidence is being collected by main; query remains a candidate hypothesis. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities."
+  ],
+  "serp": {
+    "id": "vc-manual250-c5-042",
+    "keyword": "brand template management",
+    "found": true,
+    "query": "brand template management",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:01.735Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Free and customizable brand templates",
+        "url": "https://www.canva.com/templates/s/brand/",
+        "domain": "canva.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Brand Templating: Setup, Benefits & Examples [2026 Guide]",
+        "url": "https://www.marq.com/blog/brand-templating/",
+        "domain": "marq.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "Top 10 Brand Guidelines Templates for Brand Managers",
+        "url": "https://www.notion.com/templates/collections/top-10-brand-guidelines-templates-for-brand-managers?srsltid=AfmBOorHP9hhQgmsUmlkCRpWrG0J5anM6a2G5FdDFJ2wAaaV8pYrF52M",
+        "domain": "notion.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Branding Templates - HubSpot Free Resources Library",
+        "url": "https://www.hubspot.com/resources/templates/branding",
+        "domain": "hubspot.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Brand Guidelines Templates (Free + Best Picks)",
+        "url": "https://venngage.com/blog/brand-guidelines-templates/",
+        "domain": "venngage.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Best Brand Management Software for 2026",
+        "url": "https://www.frontify.com/en/guide/brand-management-software",
+        "domain": "frontify.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Free Branding Templates & Examples",
+        "url": "https://miro.com/templates/branding/",
+        "domain": "miro.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Create brand templates",
+        "url": "https://support.optimizely.com/hc/en-us/articles/19922122007565-Create-brand-templates",
+        "domain": "support.optimizely.com",
+        "resultType": "article"
+      },
+      {
+        "position": 9,
+        "title": "Branding Presentation & Brand Deck Templates - Chronicle HQ",
+        "url": "https://chroniclehq.com/templates/branding",
+        "domain": "chroniclehq.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is a brand template?",
+      "What are the 7 pillars of branding?",
+      "What are the 5 C's of branding?",
+      "What are the 7 types of brands?"
+    ],
+    "relatedQueries": [
+      "Brand template management pdf",
+      "Brand guidelines template",
+      "Free brand guidelines template PDF",
+      "Brand template management free",
+      "Brand template management free download",
+      "Brand guidelines template free download",
+      "Brand Board template Canva",
+      "Free brand kit template"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

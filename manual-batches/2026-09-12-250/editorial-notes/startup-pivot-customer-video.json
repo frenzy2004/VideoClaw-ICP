@@ -1,0 +1,110 @@
+{
+  "id": "vc-manual250-c1-031",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://newsletter.posthog.com/p/read-this-before-you-pivot",
+      "supports": "PostHog describes changes of direction in its own early history.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://wistia.com/blog/presentation-videos",
+      "supports": "Presentation recordings can combine a speaker with supporting visuals.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What should a customer pivot video explain first?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I say nothing changes for current customers?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What visual is useful in a pivot explanation?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: Use a before-and-after commitment visual and scene-level comprehension checks rather than an investor narrative.",
+  "reviewNotes": [
+    "Exact US/en SERP evidence is being collected separately; keyword volume, difficulty, and CPC are unknown."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-031",
+    "keyword": "startup pivot announcement video",
+    "found": true,
+    "query": "startup pivot announcement video",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Startup Experts Reveal Their Favorite Pivot Stories",
+        "url": "https://www.youtube.com/watch?v=DmehFuCMtvc",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 2,
+        "title": "What Is a Startup Pivot? Types, Examples, and When to ...",
+        "url": "https://www.startupscience.io/articles/startup-pivot",
+        "domain": "startupscience.io",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "How Do I Pivot My Startup?",
+        "url": "https://www.youtube.com/watch?v=1bmrMl8wFRk",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 4,
+        "title": "Pivot Till It Hurts: Making Mobile Video Profitable – Pocket ...",
+        "url": "https://www.disruptingjapan.com/pivot-till-hurts-making-mobile-video-profitable-pocket-supernova/",
+        "domain": "disruptingjapan.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "How to pivot your startup idea without killing it",
+        "url": "https://www.linkedin.com/posts/ashmaurya_the-pivot-paradox-did-you-know-23-of-activity-7303117907385888770-H_7E",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 6,
+        "title": "The art of the pivot, part 2: How, why and when to pivot",
+        "url": "https://www.lennysnewsletter.com/p/the-art-of-the-pivot-part-2-how-why",
+        "domain": "lennysnewsletter.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "SaaS Startup Pivoting: A Step-by-Step Guide for Founders ...",
+        "url": "https://www.gtmxventures.com/blog/how-to-pivot-your-saas-startup",
+        "domain": "gtmxventures.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is a pivot strategy in a startup?",
+      "What are the 7 stages of startup?",
+      "Who owns Pivot?",
+      "What is pivot strategy?"
+    ],
+    "relatedQueries": [
+      "How to pivot a startup",
+      "When to pivot"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

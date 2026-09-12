@@ -1,0 +1,120 @@
+{
+  "id": "vc-manual250-c5-039",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.zendesk.com/hc/en-us/articles/4408821505306-Managing-help-center-translations-for-articles",
+      "supports": "Article translations can be marked outdated and have a designated default language.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.zendesk.com/hc/en-us/articles/4408821388442-Managing-translations-for-categories-and-sections",
+      "supports": "Category and section translations have their own outdated status and source-language setting.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does every source edit require the same translation response?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should navigation labels be tracked separately?",
+      "basis": "editorial"
+    },
+    {
+      "question": "When is a translation update complete?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Propagate source changes through existing resource translations and prevent stale guidance appearing current. Distinct from translating or repurposing a GTM video. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact US/en SERP evidence is being collected by main; query remains a candidate hypothesis. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities.",
+    "Mixed intent: knowledge-base translation queries are broader than portfolio media. This draft maintains existing multi-language media-support instructions rather than teaching video localization."
+  ],
+  "serp": {
+    "id": "vc-manual250-c5-039",
+    "keyword": "managing knowledge base translations",
+    "found": true,
+    "query": "managing knowledge base translations",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:01.735Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Translating the knowledge base",
+        "url": "https://www.servicenow.com/docs/r/platform-administration/system-localization/c_TranslateTheKnowledgeBase.html",
+        "domain": "servicenow.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "How to set up knowledge bases in multiple language...",
+        "url": "https://community.atlassian.com/forums/Jira-Service-Management/How-to-set-up-knowledge-bases-in-multiple-languages/qaq-p/1972376",
+        "domain": "community.atlassian.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Multi Lingual Knowledge Bases - A Guide",
+        "url": "https://slite.com/learn/multi-lingual-knowledge-base",
+        "domain": "slite.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Create knowledge base articles in multiple languages",
+        "url": "https://knowledge.hubspot.com/knowledge-base/create-knowledge-base-articles-in-multiple-languages",
+        "domain": "knowledge.hubspot.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Video Shorts: Knowledge Management: Bulk Translation",
+        "url": "https://www.youtube.com/watch?v=zID3-mM1GT4",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 6,
+        "title": "Multilingual Knowledge Base: Advanced Translation ...",
+        "url": "https://crowdin.com/blog/multilingual-knowledge-base",
+        "domain": "crowdin.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Multilingual Knowledge Base Software on Salesforce",
+        "url": "https://www.bookingninjas.com/features/people-and-portals/multilingual-knowledge-base",
+        "domain": "bookingninjas.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Translation Knowledge Management: Information ...",
+        "url": "https://translated.com/resources/translation-knowledge-management-system",
+        "domain": "translated.com",
+        "resultType": "article"
+      },
+      {
+        "position": 9,
+        "title": "Multilingual Knowledge Management",
+        "url": "https://www.serviceaide.com/resources/blog/multilingual-knowledge-management",
+        "domain": "serviceaide.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

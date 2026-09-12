@@ -1,0 +1,119 @@
+{
+  "id": "vc-manual250-c2-032",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://csrc.nist.gov/pubs/sp/800/188/final",
+      "supports": "The abstract distinguishes de-identification from masking and identifies re-identification risk.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.iana.org/help/example-domains",
+      "supports": "Example domains are reserved for documentation, not production application dependencies.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Is changing customer names enough to create fictional data?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I use example.org in a demo?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should I fill the dashboard with invented customers?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: A relational filming-data recipe preserves cross-screen meaning while separating fictional props from customer evidence. Competing page bodies have not been audited for this draft.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c2-032",
+    "keyword": "sample data for investor product demo",
+    "found": true,
+    "query": "sample data for investor product demo",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Three Keys to Nailing Your Product Demo to Investors",
+        "url": "https://www.linkedin.com/pulse/three-keys-nailing-your-product-demo-investors-brian-ascher",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 2,
+        "title": "Investor-Ready: How to Demo Your Product Like a Pro",
+        "url": "https://phenomenonstudio.com/article/investor-ready-how-to-demo-your-product-like-a-pro/",
+        "domain": "phenomenonstudio.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "Demo for Potential Investor : r/startups",
+        "url": "https://www.reddit.com/r/startups/comments/1ghn5rw/demo_for_potential_investor/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "How to CRUSH Your Demo When Pitching Customers & ...",
+        "url": "https://www.youtube.com/watch?v=drDKvoPKVWo",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 5,
+        "title": "Product Demo Examples",
+        "url": "https://maybeundo.com/examples",
+        "domain": "maybeundo.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "How to Actually Demo Your Data Product | by Megan Rashid",
+        "url": "https://medium.com/design-bootcamp/let-me-screenshare-real-quick-9e4d77012e3",
+        "domain": "medium.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "10 Product Demo Examples That Stand Out & Convert",
+        "url": "https://cxl.com/blog/product-demo-examples/",
+        "domain": "cxl.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "Product demonstrations: How to demo your product for investors",
+        "url": "https://learn.marsdd.com/article/product-demonstrations-how-to-demo-your-product-for-investors/",
+        "domain": "learn.marsdd.com",
+        "resultType": "article"
+      },
+      {
+        "position": 9,
+        "title": "Pitch Deck Examples from 35+ Killer Startups",
+        "url": "https://slidebean.com/pitch-deck-examples",
+        "domain": "slidebean.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Can you give me an example of a product demonstration?",
+      "What are some examples of investor reports?",
+      "Can you give me an example of an investor?",
+      "Can you give me some examples of product videos?"
+    ],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

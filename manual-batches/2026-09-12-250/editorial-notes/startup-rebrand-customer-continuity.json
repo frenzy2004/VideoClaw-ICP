@@ -1,0 +1,130 @@
+{
+  "id": "vc-manual250-c1-032",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://kit.com/rebranding-in-public",
+      "supports": "Kit presents a public series about its rebrand and identifies its former name.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://kit.com/resources/blog/rebranding-in-public-why-we-are-becoming-kit",
+      "supports": "The company's explanation separates changing elements from continuing ones.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should the old name appear in the announcement?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I say only the name is changing?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should a founder rebrand video emphasize?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: Focus the announcement on customer recognition and verified continuity instead of visual identity celebration.",
+  "reviewNotes": [
+    "Exact US/en SERP evidence is being collected separately; keyword volume, difficulty, and CPC are unknown."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-032",
+    "keyword": "how to announce a company rebrand to customers",
+    "found": true,
+    "query": "how to announce a company rebrand to customers",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How to Announce a Rebrand Without Losing Customers",
+        "url": "https://brandedagency.com/blog/how-to-announce-a-rebrand",
+        "domain": "brandedagency.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "6 Rebranding Announcement Examples for Social Media",
+        "url": "https://wearesculpt.com/blog/rebranding-examples/",
+        "domain": "wearesculpt.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "How to do a rebranding announcement?",
+        "url": "https://wearemotto.com/blog/how-to-do-a-rebranding-announcement",
+        "domain": "wearemotto.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "Rebranding Announcement Design",
+        "url": "https://www.pinterest.com/ideas/rebranding-announcement-design/948153490925/",
+        "domain": "pinterest.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Rebranding: definition, how-tos, and examples",
+        "url": "https://www.canva.com/learn/rebranding/",
+        "domain": "canva.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "How to Announce Rebranding on Social Media",
+        "url": "https://www.smashbrand.com/articles/how-to-announce-rebranding-on-social-media/",
+        "domain": "smashbrand.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Rebranding Your Business: Step-By-Step Guide, Benefits",
+        "url": "https://www.business.com/articles/how-to-announce-rebranding/",
+        "domain": "business.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "10+ Rebranding & Redesign Announcement Email Examples",
+        "url": "https://userlist.com/blog/rebranding-announcement-emails/",
+        "domain": "userlist.com",
+        "resultType": "article"
+      },
+      {
+        "position": 9,
+        "title": "Rebranding Announcement: How to Write One (2025)",
+        "url": "https://www.shopify.com/blog/rebranding-announcement",
+        "domain": "shopify.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Can you provide an example of a rebranding announcement?",
+      "How do I write a company name change announcement to my customers?",
+      "How to rebrand without losing customers?",
+      "What's another term for rebranding?"
+    ],
+    "relatedQueries": [
+      "How to announce a company rebrand to customers template",
+      "How to announce a company rebrand to customers sample",
+      "How to announce a company rebrand to customers examples",
+      "Rebranding announcement examples",
+      "How to announce a company rebrand to customers on instagram",
+      "How to announce a company rebrand to customers email",
+      "Rebrand announcement Social Media post",
+      "Rebranding announcement post"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

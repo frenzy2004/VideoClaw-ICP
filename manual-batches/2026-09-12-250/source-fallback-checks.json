@@ -271,6 +271,72 @@
       "method": "web_page_body_review",
       "checkedAt": "2026-09-12",
       "support": "Microphone-distance and direct-versus-ambient sound guidance inspected; room-acoustic definitions read."
+    },
+    {
+      "url": "https://playwright.dev/docs/auth",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Saved authentication may contain sensitive cookies/headers; shared server-state mutation requires separate handling."
+    },
+    {
+      "url": "https://playwright.dev/docs/browser-contexts",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Browser contexts isolate browser-side storage; not a server-data reset."
+    },
+    {
+      "url": "https://support.google.com/webmasters/answer/9495631?hl=en",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Indexed-page scope and click-created-player position/size issue inspected; no guarantee of indexing."
+    },
+    {
+      "url": "https://support.google.com/youtube/answer/9884579?hl=en",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Manual chapter ordering, zero start and minimum length requirements inspected."
+    },
+    {
+      "url": "https://support.google.com/youtube/answer/13748639?hl=en",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Shorts description/comment URLs are not clickable; link-type table inspected."
+    },
+    {
+      "url": "https://support.google.com/youtube/answer/14075157",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Related video must be on the channel, public/unlisted; advanced-feature access requirement inspected."
+    },
+    {
+      "url": "https://www.voices.com/help/knowledge/faq/live-directed-sessions",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Live remote client/talent direction, agreement and session logistics inspected; no rate or duration guarantee imported."
+    },
+    {
+      "url": "https://newsletter.posthog.com/p/read-this-before-you-pivot",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "First-hand pivot discussion inspected; product/market distinction and relevant-user testing, not generalized success statistics."
+    },
+    {
+      "url": "https://www.chathamhouse.org/about-us/contact-us",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Separate press-office, out-of-hours and specialist contact routes inspected; used as a public routing example only."
+    },
+    {
+      "url": "https://www.cdc.gov/cerc/media/pdfs/CERC_Spokesperson.pdf",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Spokesperson guidance on uncertainty and avoiding over-reassurance inspected; no medical advice derived."
+    },
+    {
+      "url": "https://www.davidmeermanscott.com/hubfs/documents/Newsjacking-free-excerpt.pdf",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Historical advice about relevant background for journalists inspected; no reach promises or obsolete platform limits imported."
     }
   ]
 }

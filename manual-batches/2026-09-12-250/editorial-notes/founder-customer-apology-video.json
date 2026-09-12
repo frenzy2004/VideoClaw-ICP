@@ -1,0 +1,114 @@
+{
+  "id": "vc-manual250-c1-035",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.cdc.gov/cerc/media/pdfs/CERC_Spokesperson.pdf",
+      "supports": "The emergency-communication guidance emphasizes empathy and acknowledges uncertainty.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://about.gitlab.com/blog/postmortem-of-database-outage-of-january-31/",
+      "supports": "GitLab's CEO directly apologizes to affected users in the historical postmortem.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should the apology explain why the mistake happened?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I promise it will never happen again?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Is the video enough?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: Use responsibility-first rewrites and a remedy-status sheet before recording an apology for a completed mistake.",
+  "reviewNotes": [
+    "Exact US/en SERP evidence is being collected separately; keyword volume, difficulty, and CPC are unknown."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-035",
+    "keyword": "how to record a company apology video",
+    "found": true,
+    "query": "how to record a company apology video",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How to Make a Small Business Owner Apology Video",
+        "url": "https://www.facebook.com/fb-answers/how-to-make-a-small-business-owner-apology-video/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 2,
+        "title": "The Art of the Corporate Apology Video - Padilla",
+        "url": "https://padillaco.com/post/the-art-of-the-corporate-apology-video",
+        "domain": "padillaco.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "So sorry, now please watch: Identifying image repair ...",
+        "url": "https://www.sciencedirect.com/science/article/abs/pii/S0363811122000819",
+        "domain": "sciencedirect.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "4 Steps for Creating an Authentic Video Apology - Inc. Magazine",
+        "url": "https://www.inc.com/entrepreneurs-organization/4-steps-for-creating-an-authentic-video-apology.html",
+        "domain": "inc.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Free Online Apology Video Generator | Templates & AI Tools",
+        "url": "https://www.flexclip.com/create/apology-video.html",
+        "domain": "flexclip.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Apology videos and the art of saying sorry",
+        "url": "https://www.mediafirst.co.uk/blog/apology-videos-and-the-art-of-saying-sorry",
+        "domain": "mediafirst.co.uk",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Why is it so hard to make an apology video without getting ...",
+        "url": "https://www.quora.com/Why-is-it-so-hard-to-make-an-apology-video-without-getting-cancelled-How-will-you-apologize-to-fans-without-being-cancelled",
+        "domain": "quora.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Create an Apology Video with a Sorry Template",
+        "url": "https://www.capcut.com/explore/sorry-template",
+        "domain": "capcut.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How to make a proper apology video?",
+      "Do apology videos work?",
+      "How to render a sincere apology?",
+      "What are the 5 R's of an apology?"
+    ],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

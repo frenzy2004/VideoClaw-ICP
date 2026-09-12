@@ -1,0 +1,108 @@
+{
+  "id": "vc-manual250-c4-041",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.google.com/youtube/answer/9314415?hl=en",
+      "supports": "Dips can indicate skipping or exits; spikes can include rewatching due to unclear content.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.google.com/youtube/answer/9717005?hl=en",
+      "supports": "Provides date selection, comparisons, and available report breakdowns.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should I cut every section with a retention dip?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does a spike always mean viewers love that moment?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How can I tell whether the revision helped?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Translate observed retention patterns into testable editorial diagnoses, distinguishing confusion from loss of interest and source-mix effects. Unlike initial clip selection, this revises an existing asset after actual viewing evidence. No ranking-page comparison or demand conclusion is asserted.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending.",
+    "Post-publication diagnosis and edit planning, not universal retention benchmarks or a claim that every drop is harmful."
+  ],
+  "serp": {
+    "id": "vc-manual250-c4-041",
+    "keyword": "why viewers drop off video retention",
+    "found": true,
+    "query": "why viewers drop off video retention",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:32:56.760Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Why do you think about half of viewers drop off in the first ...",
+        "url": "https://www.reddit.com/r/NewTubers/comments/1f6uu26/discussion_why_do_you_think_about_half_of_viewers/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Understanding Audience Retention",
+        "url": "https://wistia.com/blog/understanding-audience-retention",
+        "domain": "wistia.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "Why Viewers Drop After 30 Seconds on YouTube",
+        "url": "https://narrationbox.com/blog/why-viewers-drop-off-after-30-seconds-youtube",
+        "domain": "narrationbox.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "YouTube Audience Retention: 9 Fixes for Viewer Drop-Off",
+        "url": "https://www.overseeros.com/blog/youtube-audience-retention-9-fixes-viewer-drop-off",
+        "domain": "overseeros.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "How to Stop Viewers Clicking Away in the First 30 Seconds",
+        "url": "https://youseo.app/en/blogs/how-to-stop-viewers-clicking-away-in-the-first-30-seconds",
+        "domain": "youseo.app",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "How Video Length Affects Viewer Retention",
+        "url": "https://longstories.ai/blog/video-length-viewer-retention",
+        "domain": "longstories.ai",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Why Video Viewers Stay Or Leave?",
+        "url": "https://noticetheelephant.com/why-video-viewers-stay-or-leave/",
+        "domain": "noticetheelephant.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Is 50% retention good on TikTok?",
+      "Is 2000 views in 1 day good?",
+      "What is the average viewer retention on YouTube?",
+      "Why do my YouTube views drop off?"
+    ],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

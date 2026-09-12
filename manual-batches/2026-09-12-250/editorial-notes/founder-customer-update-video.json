@@ -1,0 +1,113 @@
+{
+  "id": "vc-manual250-c1-033",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://wistia.com/blog/how-to-use-video-to-improve-customer-satisfaction",
+      "supports": "Wistia describes using personal videos to answer customer questions.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://buffer.com/resources/transparent-product-roadmap/",
+      "supports": "Buffer's first-party account invites customer feedback on its public planning.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What belongs in a founder customer update?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How is this different from release notes?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should every update announce progress?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: Use a question-to-artifact rundown for existing customers rather than a release list or investor progress report.",
+  "reviewNotes": [
+    "Exact US/en SERP evidence is being collected separately; keyword volume, difficulty, and CPC are unknown."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-033",
+    "keyword": "founder update video for customers",
+    "found": true,
+    "query": "founder update video for customers",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Founder Investor Update Video Maker - Send Yours ... - ngram",
+        "url": "https://www.ngram.com/use-cases/founder-investor-update",
+        "domain": "ngram.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "How to Write Investor Updates + Startup Metrics (CAC, LTV, ...",
+        "url": "https://www.youtube.com/watch?v=dgz-Ud4fq6w",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 3,
+        "title": "Create Videos for Start-ups, Products and Founders in ...",
+        "url": "https://www.heygen.com/en-in/founders",
+        "domain": "heygen.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "The Right Way to Update Your Investors (Most Founders Miss ...",
+        "url": "https://www.youtube.com/watch?v=8fMNao6kHfs",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 5,
+        "title": "How to Use Video Updates to Improve the Client Journey",
+        "url": "https://www.socialmediaexaminer.com/how-to-use-video-updates-to-improve-the-client-journey/",
+        "domain": "socialmediaexaminer.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Best Investor Update Tool? 8 Ranked for Founders (2026)",
+        "url": "https://valueaddvc.com/blog/top-8-investor-update-tools-for-founders-what-each-does-and-which-is-worth-paying-for",
+        "domain": "valueaddvc.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "How to Get Your First 10 Customers With Zero Budget",
+        "url": "https://www.youtube.com/watch?v=FsOaXL6KLAI",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 8,
+        "title": "A practical guide to customer onboarding videos",
+        "url": "https://www.vidyard.com/blog/customer-onboarding-videos/",
+        "domain": "vidyard.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": [
+      "Youtube founder update video for customers",
+      "Free founder update video for customers",
+      "Best founder update video for customers"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

@@ -1,0 +1,134 @@
+{
+  "id": "vc-manual250-c5-041",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.hootsuite.com/newsroom/press-releases/hootsuite-hits-the-pause-button",
+      "supports": "The historical announcement describes suspending scheduled posts without deleting them; it is not current plan guidance.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://asana.com/templates/marketing-calendar",
+      "supports": "A shared marketing calendar maps activities to dates, owners and channels.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Can the platform pause every company channel?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does pausing scheduled content remove live posts?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should all held posts resume together?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Coordinate a bounded pause of future posts and a deliberate restart across platform-owned and company-owned channels. Unlike an asset recall, the content has not yet been published. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact US/en SERP evidence is being collected by main; query remains a candidate hypothesis. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities.",
+    "Hootsuite citation is a dated 2021 feature example; current help-page inspection did not provide usable body text, so no current plan or interface claims are made."
+  ],
+  "serp": {
+    "id": "vc-manual250-c5-041",
+    "keyword": "pause scheduled social media posts",
+    "found": true,
+    "query": "pause scheduled social media posts",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:01.735Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "8SjJ2NKr2HlOOh8Cv",
+    "datasetId": "lKgIzTUjGuJjzIubf",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Managing and Scheduling a Social Post | Help Center",
+        "url": "https://support.wix.com/en/article/social-posts-scheduling-a-social-post",
+        "domain": "support.wix.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "Notion Social Media Scheduler — Scheduled",
+        "url": "https://www.scheduled.so/",
+        "domain": "scheduled.so",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Social Media 101: Knowing when to pause your scheduled ...",
+        "url": "https://www.zoho.com/blog/social/crisis-101-how-brands-can-use-pause-resume-to-handle-curveballs.html",
+        "domain": "zoho.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "Hootsuite Hits the Pause Button",
+        "url": "https://www.hootsuite.com/newsroom/press-releases/hootsuite-hits-the-pause-button?srsltid=AfmBOopVFnVFWer7jb9Tp1K75DGxV3-XWBxoCLNOTi4xBGn7j_-dX-5T",
+        "domain": "hootsuite.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Schedule a post",
+        "url": "https://www.facebook.com/help/389849807718635",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 6,
+        "title": "RecurPost: Social Media Scheduler & Management Tool",
+        "url": "https://recurpost.com/",
+        "domain": "recurpost.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "What is Social Media Scheduling? And How to Do It",
+        "url": "https://www.sprinklr.com/blog/social-media-scheduling/",
+        "domain": "sprinklr.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "Social Media Management for Beginners",
+        "url": "https://www.youtube.com/watch?v=yvaBgmgayew",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 9,
+        "title": "The Importance of Scheduling Posts",
+        "url": "https://jennstrends.com/the-importance-of-scheduling-posts/",
+        "domain": "jennstrends.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How do I stop a scheduled post?",
+      "What is the 5:3:2 rule for social media posts?",
+      "Can you pause social media?",
+      "Do scheduled posts get less views?"
+    ],
+    "relatedQueries": [
+      "Pause scheduled social media posts free",
+      "Scheduled Notion",
+      "Scheduled translate",
+      "Can Notion post to social media",
+      "Social media post Planner",
+      "Scheduled posts Instagram",
+      "How to pronounce scheduled",
+      "Scheduled meaning"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

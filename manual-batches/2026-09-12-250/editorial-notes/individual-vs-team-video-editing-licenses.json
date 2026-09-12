@@ -1,0 +1,133 @@
+{
+  "id": "vc-manual250-c3-035",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://helpx.adobe.com/download-install/apps/licensing-activation/activate-deactivate-apps/account-sharing-policy.html",
+      "supports": "Official policy body inspected 2026-09-12, updated June 4 2026. Both individual and team accounts are personal to the assigned user; sharing an account is against Adobe policy.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://helpx.adobe.com/business/teams/users-and-licenses/manage-users/assign-licenses.html",
+      "supports": "Official body inspected 2026-09-12, updated August 12 2026: administrators assign products to named users through Admin Console.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://helpx.adobe.com/business/teams/users-and-licenses/manage-users/manage-team-in-the-creative-cloud-desktop-app.html",
+      "supports": "Official body inspected 2026-09-12, updated September 11 2026: eligible team administrators can assign, unassign and reassign licenses; data recovery is a separate linked procedure.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Can two editors share one Adobe account if they work at different times?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does every reviewer need a full editing license?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does reassigning a license transfer the departing editor's files?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: A person-to-entitlement map separates editing, review, administration and departure needs instead of assuming every collaborator needs the same subscription.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c3-035",
+    "keyword": "individual vs team video editing software license",
+    "found": true,
+    "query": "individual vs team video editing software license",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Professional video editing software | Adobe Premiere",
+        "url": "https://www.adobe.com/products/premiere.html",
+        "domain": "adobe.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Which editing tool is best for collaboration? : r/VideoEditors",
+        "url": "https://www.reddit.com/r/VideoEditors/comments/1g07u04/which_editing_tool_is_best_for_collaboration/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "12 Best Collaborative Video Editing Software Picks (2025)",
+        "url": "https://playpause.io/blogs/collaborative-video-editing-software",
+        "domain": "playpause.io",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "What is the best video editing software for small teams?",
+        "url": "https://www.dropbox.com/resources/what-is-the-best-video-editing-software",
+        "domain": "dropbox.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Best video editing software for collaboration?",
+        "url": "https://www.facebook.com/groups/563297302882280/posts/907162168495790/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 6,
+        "title": "7 Best Video Editing Tools for Teams",
+        "url": "https://viasocket.com/discovery/blog/wu4rt7/video-and-audio-editing-software/7-best-video-editing-tools-for-teams",
+        "domain": "viasocket.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Best Video Editing Software in 2026 (Beginner to Pro)",
+        "url": "https://www.youtube.com/watch?v=mjYy5AL38rw",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 8,
+        "title": "Collaborative video editing software",
+        "url": "https://www.lucidlink.com/solutions/collaborative-video-editing",
+        "domain": "lucidlink.com",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "The 7 Best Collaborative Video Editing Tools",
+        "url": "https://vimeo.com/blog/post/collaborative-video-editing-tools",
+        "domain": "vimeo.com",
+        "resultType": "video_or_social"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Is there a collaborative video editing software?",
+      "What does the 80/20 rule mean in video editing?",
+      "What is a good one-time payment video editing software?",
+      "Which video editing software offers a lifetime license?"
+    ],
+    "relatedQueries": [
+      "Individual vs team video editing software license reddit",
+      "Individual vs team video editing software license free",
+      "Collaborative video editing software free",
+      "Adobe Premiere",
+      "Adobe Premiere Pro free download",
+      "Adobe Premiere video editor",
+      "Best video editing software for beginners",
+      "Adobe premiere pro yearly price"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

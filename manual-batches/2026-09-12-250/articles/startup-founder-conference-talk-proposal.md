@@ -39,7 +39,7 @@
   "faqs": [
     {
       "question": "Should a founder conference talk promote the product?",
-      "answer": "Choose a lesson that helps the audience without requiring a purchase. Use the company as context only where it helps explain the decision or example."
+      "answer": "As an editorial recommendation, teach a lesson that helps attendees without a purchase. The historical SXSW EDU 2025 guide specifically prohibited advertorial or brand-centered descriptions; check the current rules of the event you are submitting to."
     },
     {
       "question": "What makes a learning outcome useful?",
@@ -133,13 +133,15 @@ Test the outcomes with a colleague unfamiliar with the proposal. Ask what they e
 
 An exercise makes the proposal tangible. It also reveals whether the lesson is teachable or merely a collection of opinions.
 
-Here is a fictional activity for the pilot session:
+Here is a fictional activity for the pilot session. The pilot brief is: “Can a facilities coordinator assign one repair to an outside contractor, and can that contractor return a completion note without access to the full workspace?” Attendees already understand basic customer interviews; this exercise teaches scope decisions, not product setup.
 
 | Customer request | Supports the current learning question? | Changes the engagement? | Conversation needed |
 |---|---|---|---|
 | Add a missing field needed for the agreed task | Possibly | Not necessarily | Confirm why the field is needed |
 | Support a different department’s workflow | Unclear | Possibly | Clarify whether the audience has changed |
 | Produce a management report unrelated to the task | Probably not | Likely | Discuss a separate objective |
+
+Worked first row: suppose the missing field is the repair location. Without it, the contractor cannot identify the agreed task, so adding it supports this pilot question. A report comparing every department does not test the same question; discuss it separately. If the requested field were unrelated to the repair, the classification could change.
 
 The table is an original teaching example, not a report of real customers. During the session, attendees would fill in their reasoning rather than being told that every row has a universal answer.
 

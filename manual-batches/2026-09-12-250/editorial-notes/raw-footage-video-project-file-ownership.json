@@ -1,0 +1,112 @@
+{
+  "id": "vc-manual250-c3-037",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.copyright.gov/title17/92chap2.html",
+      "supports": "Official Section 202 body inspected 2026-09-12: ownership of a material object is distinct from copyright. Section 204 provides transfer formalities; no particular transaction is adjudicated.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://copyright.gov/circs/circ30.pdf",
+      "supports": "Official current-hosted circular fully inspected 2026-09-12, revision August 2024. Work-for-hire status depends on qualifying facts and, for qualifying commissioned categories, an express signed agreement; payment alone is not the test.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does paying for a video mean I own all raw footage?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does a work-for-hire label settle ownership?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can a vendor deliver every font, music track, and stock clip?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: A deliverable-and-rights schedule separates access to files from copyright and third-party permissions before the buyer accepts an ownership promise.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c3-037",
+    "keyword": "who owns raw footage and video project files",
+    "found": true,
+    "query": "who owns raw footage and video project files",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Who owns the rights to the footage I shoot? : r/videography",
+        "url": "https://www.reddit.com/r/videography/comments/sle6l6/who_owns_the_rights_to_the_footage_i_shoot/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Raw Video Footage Ownership in Production",
+        "url": "https://spoton.productions/who-owns-the-raw-video-footage/",
+        "domain": "spoton.productions",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Who Owns the Raw Footage? Video Rights, Explained",
+        "url": "https://www.createandelate.com/blog/who-owns-the-raw-footage/",
+        "domain": "createandelate.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "Who Owns the Footage After a Video Production? | DOT",
+        "url": "https://www.madebydot.com/insights/footage-ownership-and-buyouts/",
+        "domain": "madebydot.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Who Owns Video Footage? Copyright and Usage Explained",
+        "url": "https://www.joncontivisuals.com/blog/copyright-usage-raw-footage",
+        "domain": "joncontivisuals.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Raw Footage vs Project Files: Who Owns What?",
+        "url": "https://www.linkedin.com/posts/jeff-siebert-bananabones_we-get-this-question-from-time-to-time-activity-7369342225102708738-wYsT",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 7,
+        "title": "Who owns raw footage?",
+        "url": "https://video.stackexchange.com/questions/3481/who-owns-raw-footage",
+        "domain": "video.stackexchange.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "If you make videos for a living and an agency asks for 'raw ...",
+        "url": "https://www.quora.com/If-you-make-videos-for-a-living-and-an-agency-asks-for-raw-files-should-you-hand-them-over",
+        "domain": "quora.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How much to sell raw footage for?",
+      "Do videographers give out raw footage?",
+      "Which video has no copyright?",
+      "What is raw video footage called?"
+    ],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

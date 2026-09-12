@@ -1,0 +1,128 @@
+{
+  "id": "vc-manual250-c3-036",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.descript.com/security",
+      "supports": "Primary security page body inspected 2026-09-12. Describes cloud storage of media and transcripts after transcription and feature-specific data handling; no security certification or legal compliance inferred.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.ftc.gov/business-guidance/resources/start-security-guide-business",
+      "supports": "Official service-provider section inspected 2026-09-12: communicate security expectations, select appropriate providers, put requirements in writing and verify performance. Only supports security diligence, not overall vendor quality.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Is desktop video editing always local?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does a security badge answer every footage-privacy question?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should I test before uploading sensitive footage?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: A feature-level data-path map tests the actual configuration rather than assuming desktop branding means local-only processing.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c3-036",
+    "keyword": "cloud vs desktop video editor privacy",
+    "found": true,
+    "query": "cloud vs desktop video editor privacy",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Desktop AI Video Editors vs Cloud AI Editors",
+        "url": "https://try.wideframe.com/blog/desktop-ai-video-editors-vs-cloud-ai-video-editors",
+        "domain": "try.wideframe.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "Privacy-friendly opensource video editor ? : r/privacytoolsIO",
+        "url": "https://www.reddit.com/r/privacytoolsIO/comments/b4k2fb/privacyfriendly_opensource_video_editor/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Should you be editing your video in the cloud? 4 types of ...",
+        "url": "https://www.epiphan.com/blog/cloud-video-editing-platforms/?srsltid=AfmBOoq4BxLX-TGLbUTAmkgN0_62Gv1uFRfEJ-W32keqTjgJ8gJXBX8q",
+        "domain": "epiphan.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "Cloud video editing: how to collaborate faster from anywhere",
+        "url": "https://www.lucidlink.com/blog/cloud-video-editing",
+        "domain": "lucidlink.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Privacy-Focused Video Editing Alternatives",
+        "url": "https://basilai.app/privacy-app-alternatives/video-editing/",
+        "domain": "basilai.app",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "The Benefits of Video Editing Off Of the Cloud",
+        "url": "https://www.promax.com/blog/video-editing-off-of-the-cloud",
+        "domain": "promax.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "'Is it safer to use client-side browser tools for photo editing ...",
+        "url": "https://www.quora.com/Is-it-safer-to-use-client-side-browser-tools-for-photo-editing-instead-of-cloud-based-editors-to-protect-data-privacy",
+        "domain": "quora.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Traditional Vs Online Video Editing Software | Which is Better?",
+        "url": "https://www.youtube.com/watch?v=wtbirZb5_Xc",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 9,
+        "title": "Is it safe to upload videos in cloud tools like video editors?",
+        "url": "https://security.stackexchange.com/questions/213442/is-it-safe-to-upload-videos-in-cloud-tools-like-video-editors",
+        "domain": "security.stackexchange.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Which is the safest video editing app?",
+      "What does the 80/20 rule mean in video editing?",
+      "Is cloud storage good for video editing?",
+      "Should I get a laptop or desktop for video editing?"
+    ],
+    "relatedQueries": [
+      "Cloud vs desktop video editor privacy reddit",
+      "Free cloud video editing",
+      "Blackmagic Cloud",
+      "Cloud editing video",
+      "Cloud editing app",
+      "DaVinci Resolve",
+      "Clipchamp",
+      "Best cloud video Editor"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

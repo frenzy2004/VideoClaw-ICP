@@ -43,7 +43,7 @@
     },
     {
       "question": "Can I offer an exclusive interview while others cover the news?",
-      "answer": "You can propose that arrangement, but define exactly what is exclusive and confirm that the journalist accepts that narrower scope. An interview exclusive and an exclusive on the whole story are different offers."
+      "answer": "First inventory prior pitches, private material, access promises, and accepted terms. Offer only an interview component that remains genuinely available, disclose relevant prior outreach, and confirm the narrower scope. Preserve existing arrangements; decline a conflicting whole-story exclusive unless all affected parties expressly agree to changes."
     },
     {
       "question": "What should I do if a journalist declines?",
@@ -107,7 +107,7 @@ An exclusive may make sense when the reporting opportunity has enough depth for 
 
 Ask what the journalist receives that is valuable: time with a knowledgeable founder, a documented product development, or access to someone who can explain the customer context. The word exclusive does not compensate for a thin story.
 
-Also consider your constraints. A partner might already plan its own announcement. A customer may be available only for a narrow period. Your team may be unable to keep several external conversations coordinated. These facts should shape the offer before you contact anyone.
+Also consider your constraints. A partner might already plan its own announcement. A customer may be available only for a narrow period. Your team may be unable to keep several external conversations coordinated. These facts should shape the first offer and every later request. If outreach is already underway, inventory it before promising exclusive access.
 
 ## Work through three founder scenarios
 
@@ -119,6 +119,21 @@ The following situations are fictional and illustrate different decisions.
 
 **A development already discussed publicly.** A partner has posted the key facts on its website. The founder cannot meaningfully promise that the information has not been released. The useful offer becomes additional context or access, with an accurate explanation of what is already public.
 
+**A late request after private outreach.** Nothing is public, but Reporter C asks for the whole announcement exclusively. The founder first completes this fictional inventory:
+
+| Recipient | Already offered or shared | Accepted terms and timing | Current status |
+|---|---|---|---|
+| Reporter A | Announcement facts and advance briefing | Accepted publication hold until September 18, 10 a.m. Eastern | Briefing completed |
+| Reporter B | Same announcement pitch, no private documents | No timing restriction accepted | Awaiting response |
+| Reporter C | General introduction only | No arrangement yet | Requests whole-story exclusive |
+| Customer interview | Permission to participate, no reporter access offered | Customer available September 17 | Still unoffered |
+
+The whole-story exclusive is unavailable as described: A already has the facts and an accepted arrangement; B has an unrestricted pitch. The founder does not retroactively restrict B or silently cancel A's access.
+
+The founder tells C: “The announcement has already been pitched elsewhere, and another reporter has received an advance briefing under an agreed publication time. I cannot offer the announcement exclusively. A separate customer interview has not been offered to any reporter; I can discuss that narrower opportunity if it is useful.”
+
+If C accepts, the founder confirms the exact interview scope and timing without conflicting with A's arrangement. If C insists on the whole story, the founder declines. Any change to existing terms requires the affected participant's express agreement and a written record; silence is not consent.
+
 The key distinction is the reporting opportunity you can actually provide, not the announcement status you would prefer to have.
 
 ## Write the scope before making the offer
@@ -129,6 +144,7 @@ Use this original access worksheet to remove ambiguity.
 |---|---|
 | What is the subject? | The exact development being discussed |
 | What is already public? | Existing pages, statements, or customer access |
+| What has been offered privately? | Recipient, material, angle, access, accepted terms, timing, and status |
 | What is offered in advance? | Facts, documents, interviews, or recordings |
 | What is exclusive, if anything? | The whole story or a precisely named component |
 | When does the arrangement end? | A date, time, and timezone |

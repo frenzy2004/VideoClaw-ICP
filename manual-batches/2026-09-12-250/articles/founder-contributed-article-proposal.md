@@ -26,8 +26,8 @@
   "canonicalPath": "/blog/founder-contributed-article-proposal",
   "sources": [
     {
-      "label": "Guidelines for Contributors — Harvard Business Review",
-      "url": "https://hbr.org/guidelines-for-authors",
+      "label": "Editorial contribution instructions — Fast Company",
+      "url": "https://fastcompany.zendesk.com/hc/en-us/articles/360000291906-How-can-I-submit-an-editorial-contribution",
       "checkedAt": "2026-09-12"
     },
     {
@@ -47,7 +47,7 @@
     },
     {
       "question": "How much of the article should I write before pitching?",
-      "answer": "Prepare enough to demonstrate the thesis, evidence, structure, and reader benefit. Follow the publication's current submission instructions for whether it wants a proposal, outline, or full draft."
+      "answer": "Use the thesis, evidence map, and outline to prepare internally, then follow the destination's rules. For example, Fast Company's Work Life instructions ask for a complete unpublished article rather than a proposal."
     }
   ],
   "productMedia": {
@@ -105,7 +105,7 @@ Try this original drafting frame: “When a team faces [situation], it should co
 
 For the fictional pilot example, the argument might be: “When a pilot keeps expanding, agree on the question it must answer before adding more requested work.” The boundary could be that an exploratory partnership intentionally has a different purpose.
 
-[HBR emphasizes expertise and evidence](https://hbr.org/guidelines-for-authors). Your proposal should therefore make the relationship between your experience and your argument visible.
+Make the relationship between your experience and your argument visible: identify the decision you owned, the records you can inspect, and the limits of the lesson. This is the original proposal method used here.
 
 Avoid turning one company’s experience into a universal claim. You can offer a reasoned method without claiming it works for every team. Acknowledging the conditions under which it helped often makes the article more informative.
 
@@ -132,11 +132,13 @@ Build a compact proposal with five parts: the reader situation, the argument, th
 
 Here is an original fictional proposal:
 
-> Working title: The Pilot Needs a Question Before It Needs More Features  
->   
-> This article is for early product teams whose customer pilots keep expanding without a clear decision point. I will explain a method for separating work that answers the pilot’s central question from work that belongs in a later project.  
->   
+> Working title: The Pilot Needs a Question Before It Needs More Features
+>
+> This article is for early product teams whose customer pilots keep expanding without a clear decision point. I will explain a method for separating work that answers the pilot’s central question from work that belongs in a later project.
+>
 > The piece will use a fictionalized exercise, supported by my own documented operating experience, and address when an exploratory partnership should remain broader. Readers will leave with a one-page pilot question map they can adapt.
+
+To complete that fictional proposal, add a concrete outline: first reconstruct the original pilot question; then classify three incoming requests; work the decision map; examine an intentionally exploratory partnership; close with a customer-conversation prompt. The fictional author qualification is: “Maya Rao led Fieldnote's pilot planning and the request-review conversations used to develop this exercise.” This is an invented qualification for the example, not a real credential.
 
 In a real proposal, distinguish actual operating experience from the fictional exercise used to teach it. Do not imply that a composite example is a reported customer case.
 
@@ -156,7 +158,7 @@ The editor’s audience is the destination. Your biography explains why you can 
 
 ## Submit to the publication’s actual requirements
 
-Read the publication’s current instructions before preparing the final submission. Check the requested format, audience, topic scope, and any rules about prior publication or simultaneous submissions. Do not assume that one outlet’s process applies elsewhere.
+Read the publication’s current instructions before preparing the final submission. [Fast Company's Work Life instructions](https://fastcompany.zendesk.com/hc/en-us/articles/360000291906-How-can-I-submit-an-editorial-contribution) request complete unpublished articles, not pitches or outlines. For that destination, use this proposal canvas internally to develop the required draft; do not send it as a pitch. Other publications may request a proposal. Check the requested format, audience, topic scope, and any rules about prior publication or simultaneous submissions. Do not assume that one outlet’s process applies elsewhere.
 
 Tailor the proposal to material the outlet actually publishes. Identify a useful connection to its coverage without claiming that the publication has ignored your topic unless you have examined that claim carefully.
 

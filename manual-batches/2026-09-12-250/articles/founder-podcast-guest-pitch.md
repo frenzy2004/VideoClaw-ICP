@@ -26,8 +26,8 @@
   "canonicalPath": "/blog/founder-podcast-guest-pitch",
   "sources": [
     {
-      "label": "Getting Booked as a Podcast Guest — Harvard Business Review",
-      "url": "https://hbr.org/tip/2019/04/getting-booked-as-a-podcast-guest",
+      "label": "Founder interview invitation — Mixergy",
+      "url": "https://mixergy.com/looking-for-founders-with-big-success-or-failure-stories-for-mixergy-interviews/",
       "checkedAt": "2026-09-12"
     },
     {
@@ -93,7 +93,7 @@ A podcast’s category is only a starting point. Two shows about startups may se
 
 Listen to a complete relevant episode. Notice how much context the host provides, how deeply guests explain their decisions, and whether the conversation emphasizes tactics, personal experience, or industry analysis.
 
-[HBR recommends listening before assessing fit](https://hbr.org/tip/2019/04/getting-booked-as-a-podcast-guest). Apply that test by writing a specific audience description rather than assuming that every business show wants your fundraising story.
+[Mixergy's founder invitation](https://mixergy.com/looking-for-founders-with-big-success-or-failure-stories-for-mixergy-interviews/) illustrates an audience-specific selection lens: it seeks entrepreneurial experiences others can learn from, including failures. Treat this older invitation as an example, and check any show's current requirements. Describe the audience rather than assuming every business show wants your fundraising story.
 
 Record one question the host returned to and one question that remained open. These observations are more useful than a generic compliment about the show.
 
@@ -126,7 +126,20 @@ Use this original worksheet before drafting the email.
 | Relevant experience | Why you can contribute to this conversation |
 | Boundary | What you cannot responsibly generalize |
 
-For a fictional founder, the card might connect a show’s discussion of early customer relationships to a story about narrowing an overextended pilot. The examples could include a request that changed the project’s purpose and a conversation that clarified the actual learning goal.
+Here is a fully fictional completed card. Neither the show nor episode represents a real appearance:
+
+| Field | Worked entry |
+|---|---|
+| Listener situation | First-time product founders handling an expanding customer pilot |
+| Relevant episode | The fictional show “Working Decisions,” episode “The First Customer Is Not the Whole Market” |
+| Proposed question | When should a helpful pilot request become a separate engagement? |
+| Narrative tension | The founder wanted to help but could no longer say what the pilot would establish |
+| Concrete examples | A missing task field versus a request for another department's reporting workflow |
+| Discussion turns | Beginning: agree the pilot question; complication: a new department joins; lesson: separate learning from a new project |
+| Relevant experience | Fictional founder Maya Rao personally led the pilot request-review conversations |
+| Boundary | One illustrative pilot is not evidence of a universal customer-management result |
+
+This deliberately adapts the pilot lesson used in the contributed-article example into a different editorial product: a conversation with a narrative turn, not a bylined argument.
 
 These are invented teaching examples. Replace them with real experiences you can discuss, or label a hypothetical scenario openly.
 
@@ -136,10 +149,10 @@ If the card is mostly empty, improve the idea before contacting the host.
 
 Here is an original fictional booking email:
 
-> Subject: An episode idea about knowing what a pilot should prove  
->   
-> Your conversation about early customer relationships raised a question I have been working through: when does being helpful turn a pilot into an undefined project?  
->   
+> Subject: An episode idea about knowing what a pilot should prove
+>
+> Your fictional “Working Decisions” episode “The First Customer Is Not the Whole Market” raised a question I have been working through: when does being helpful turn a pilot into an undefined project?
+>
 > I am a founder who has had to separate essential pilot work from requests that belonged elsewhere. I could discuss the warning signs, a difficult customer conversation, and a question-setting exercise listeners can use. Would that fit a future episode?
 
 A real version should identify the actual episode and your relevant experience. Do not imply that the fictional example is a published appearance or customer result.

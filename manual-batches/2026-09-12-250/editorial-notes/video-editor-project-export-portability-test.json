@@ -1,0 +1,117 @@
+{
+  "id": "vc-manual250-c3-038",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://helpx.adobe.com/premiere/desktop/render-and-export/export-files/export-a-project-as-a-final-cut-pro-xml-file.html",
+      "supports": "Official body inspected 2026-09-12: linked media prerequisite, limited effect translation and translation log; audio adjustments and complex transitions may not transfer accurately. No guarantee of current Final Cut interoperability.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://helpx.adobe.com/premiere/desktop/render-and-export/export-files/export-aaf-files.html",
+      "supports": "Official body inspected 2026-09-12, updated August 18 2026. Interchange depends on destination support; relinking may be required, merged clips unsupported, and audio packaging options differ.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does XML export mean my project is fully portable?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Is a final MP4 a substitute for an editable project?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should I test after importing an AAF?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: A destination-tested interchange specimen distinguishes successful file export from a project another editor can modify without hidden reconstruction.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c3-038",
+    "keyword": "video editing software project export compatibility",
+    "found": true,
+    "query": "video editing software project export compatibility",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Are video editing software compatible with each other?",
+        "url": "https://www.reddit.com/r/VideoEditing/comments/o58ltw/are_video_editing_software_compatible_with_each/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Transfer project from one application to another",
+        "url": "https://video.stackexchange.com/questions/15156/transfer-project-from-one-application-to-another",
+        "domain": "video.stackexchange.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "How to Export Video in VSDC",
+        "url": "https://www.videosoftdev.com/how-to-export-project",
+        "domain": "videosoftdev.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Easily Switch Up RESOLVE & PREMIERE - Export Projects to ...",
+        "url": "https://www.youtube.com/watch?v=vcwe7o7A_W4",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 5,
+        "title": "VideoPad Video Editor",
+        "url": "https://www.nchsoftware.com/videopad/index.html?srsltid=AfmBOopsWJQIiqPNVHkPTOlLhzzT76pY4VJFnRPgYsAqdGAy3MvAZKv4",
+        "domain": "nchsoftware.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Best Open Source Video Editor SDKs: 2026 Roundup",
+        "url": "https://img.ly/blog/best-open-source-video-editor-sdks-2025-roundup/",
+        "domain": "img.ly",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Best Video Editing Software with Data Import and Export",
+        "url": "https://www.capterra.com/video-editing-software/features/data-import-export/",
+        "domain": "capterra.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "A Guide to Choosing the Right Video Editing Software for ...",
+        "url": "https://www.afritechedu.com/blog/a-guide-to-choosing-the-right-video-editing-software-for-your-project",
+        "domain": "afritechedu.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Is 32 GB RAM enough for 4K video editing?",
+      "What is export in video editing?",
+      "Which device is best for video editing projects?",
+      "What does the 80/20 rule mean in video editing?"
+    ],
+    "relatedQueries": [
+      "Video editing software project export compatibility windows 10",
+      "Video editing software project export compatibility download",
+      "DaVinci Resolve",
+      "LosslessCut"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

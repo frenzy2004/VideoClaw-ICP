@@ -134,7 +134,7 @@ Keep a small reserve of optional details. If an organizer requests a longer vers
 
 ## Build three versions from one fictional fact set
 
-Consider fictional founder Maya Rao. In this example, she leads Fieldnote, previously coordinated maintenance projects for a property operator, and now works on software for sharing repair tasks with outside contractors. These are invented facts used only to demonstrate the method.
+Use this complete fictional input inventory for Maya Rao: she founded and leads Fieldnote; she previously coordinated maintenance projects for a property operator and worked on contractor handoffs; that work sparked her interest in repair coordination; incomplete handoffs frequently raised responsibility and access questions in that fictional workplace. Her current team designs software for sharing a defined repair task without opening the entire internal workspace. Her proposed session teaches how to distinguish a handoff problem from a broader process issue. These are all invented inputs for the exercise, not real credentials or product claims. The biographies below select from this inventory without adding new facts.
 
 **Short introduction**
 
