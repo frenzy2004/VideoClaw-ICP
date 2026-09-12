@@ -10,7 +10,7 @@
     "private presenter view investor demo",
     "hide speaker notes screen share"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Hypothesis: Presenter-view setup guides may omit a transition map that separately tests remote viewers, room displays and product handoffs. Competing page bodies have not been audited for this draft.",
   "provenance": {
     "apifyRunId": "UZg3FufDQruZuQbdf",

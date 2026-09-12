@@ -11,7 +11,7 @@
     "media file consolidation",
     "digital asset deduplication"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis: Identify genuine duplicates and preserve metadata, permissions and references when consolidating them. Unlike taxonomy design or version control, the output resolves existing competing copies. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
   "provenance": {
     "apifyRunId": "8SjJ2NKr2HlOOh8Cv",

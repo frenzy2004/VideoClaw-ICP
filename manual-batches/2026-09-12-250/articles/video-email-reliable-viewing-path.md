@@ -10,7 +10,7 @@
     "video thumbnail in email",
     "email video fallback link"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial hypothesis: Design the thumbnail, fallback text and destination so the existing video is reachable when embedded playback is unsupported. Unlike the newsletter and nurture articles, this solves delivery mechanics. No ranking-page comparison or demand conclusion is asserted.",
   "provenance": {
     "apifyRunId": "YkY3hZ8cxUobSs1CI",

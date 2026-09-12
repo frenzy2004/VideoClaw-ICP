@@ -11,7 +11,7 @@
     "expert speaker matching",
     "portfolio speaker database"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis: Maintain a permissioned expert roster and match a speaking request to a qualified portfolio operator. Unlike founder interview questions, the job is matching and maintaining the bureau. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
   "provenance": {
     "apifyRunId": "8SjJ2NKr2HlOOh8Cv",

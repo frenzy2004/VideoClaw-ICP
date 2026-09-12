@@ -11,7 +11,7 @@
     "sponsor deliverables tracker",
     "cohort media commitments"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis: Reconcile promised sponsor media benefits with actual delivery and documented exceptions. Unlike event filming or program metrics, the output is a fulfillment record for specific commitments. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
   "provenance": {
     "apifyRunId": "8SjJ2NKr2HlOOh8Cv",

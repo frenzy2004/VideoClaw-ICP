@@ -11,7 +11,7 @@
     "editable video project delivery",
     "video copyright agreement"
   ],
-  "searchIntent": "informational",
+  "searchIntent": "commercial",
   "competitorGap": "Editorial hypothesis: A deliverable-and-rights schedule separates access to files from copyright and third-party permissions before the buyer accepts an ownership promise.",
   "provenance": {
     "apifyRunId": "g9D9OtyGPJA0waGDm",

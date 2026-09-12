@@ -11,7 +11,7 @@
     "editor working relationship review",
     "contractor control facts"
   ],
-  "searchIntent": "informational",
+  "searchIntent": "commercial",
   "competitorGap": "Editorial hypothesis: A non-diagnostic facts packet records the real arrangement for separate tax and employment-law review instead of offering a misleading contractor score.",
   "provenance": {
     "apifyRunId": "g9D9OtyGPJA0waGDm",

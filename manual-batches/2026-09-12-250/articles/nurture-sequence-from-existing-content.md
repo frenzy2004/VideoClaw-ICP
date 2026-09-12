@@ -10,7 +10,7 @@
     "content mapping for nurturing",
     "video email nurture sequence"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial hypothesis: Sequence existing explanations and proof according to what a lead still needs to understand, with entry and exit conditions. Unlike retained c4-008's calendar, this is a behavior-based email path rather than publishing dates. No ranking-page comparison or demand conclusion is asserted.",
   "provenance": {
     "apifyRunId": "YkY3hZ8cxUobSs1CI",
@@ -140,6 +140,19 @@ Document the interpretation attached to each event. A video start means playback
 Include exit conditions for a relevant human conversation, an explicit stop request, unsuitable audience membership or completion of the sequence’s useful purpose. Coordinate with the team responsible for other messages so a person does not receive contradictory requests.
 
 Test the route with fictional records before using it. Walk through an interested reader, a reader with a different requirement and a reader who takes no action. Each path should remain understandable without silently assigning them motives.
+
+Here is a filled routing example for the same fictional handoff sequence. Before every send, evaluate these rules from top to bottom: an explicit stop overrides everything; a relevant human conversation takes precedence over educational branches. The no-action path allows the requested guide and one diagnostic follow-up only. This is a chosen scenario boundary, not a timing benchmark.
+
+| Observed event | Condition checked | Next asset or stop |
+| --- | --- | --- |
+| Reader replies “Please stop” or unsubscribes | Stop instruction exists, even if the reader also clicked or requested an asset earlier | Stop this sequence; cancel its queued sends. Do not let another branch restart it. |
+| Account owner confirms an active conversation about this handoff problem | No stop instruction; relevant human discussion is underway | Exit the automated sequence. Let the conversation owner coordinate any appropriate asset. |
+| Interested reader replies “Send the comparison” after using the diagnostic | No higher-priority exit; explicit request matches the existing comparison | Send the recorded comparison of two completion signals. Do not infer budget or purchase readiness. |
+| Reader replies “We need approvals from an external partner” | No higher-priority exit; the current comparison covers internal handoffs only | Hold automated sends and route the requirement for human clarification; do not send an unsupported fit claim. |
+| Guide has been delivered; no request or reply is observed at the planned follow-up check | No higher-priority exit; diagnostic follow-up has not been sent | Send the single diagnostic follow-up, then proceed only to the final sequence check. |
+| Final sequence check finds no explicit request or reply after that follow-up | No higher-priority exit; the no-action allowance is exhausted | Stop the sequence. Do not recycle introductory assets or escalate to a sales message. |
+
+A click alone selects none of the explicit-request branches. These routes govern the next communication, not a judgment about the reader’s budget, authority or readiness.
 
 ## Learn from gaps in understanding
 

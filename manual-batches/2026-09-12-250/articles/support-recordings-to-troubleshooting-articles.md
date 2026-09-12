@@ -10,7 +10,7 @@
     "support recording to help article",
     "troubleshooting article structure"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial hypothesis: Convert a recorded resolution into symptom-based diagnosis, prerequisites and recovery branches. Unlike c4-007's tutorial, this helps a stuck user select the correct fix rather than learn a normal workflow. No ranking-page comparison or demand conclusion is asserted.",
   "provenance": {
     "apifyRunId": "YkY3hZ8cxUobSs1CI",

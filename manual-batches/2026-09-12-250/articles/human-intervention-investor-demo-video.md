@@ -10,7 +10,7 @@
     "human assisted product demo",
     "manual intervention investor video"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Hypothesis: A two-lane responsibility score makes real operator work visible without conflating it with a simulated prototype. Competing page bodies have not been audited for this draft.",
   "provenance": {
     "apifyRunId": "UZg3FufDQruZuQbdf",

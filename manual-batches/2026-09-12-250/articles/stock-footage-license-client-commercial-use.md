@@ -11,7 +11,7 @@
     "commercial footage permissions",
     "editorial use restrictions"
   ],
-  "searchIntent": "informational",
+  "searchIntent": "commercial",
   "competitorGap": "Editorial hypothesis: A per-asset entitlement form connects the actual purchaser to the intended client use instead of treating royalty-free as blanket permission.",
   "provenance": {
     "apifyRunId": "g9D9OtyGPJA0waGDm",

@@ -1,8 +1,15 @@
 import { describe, expect, it } from 'vitest';
-import { mergeInventory, selectEvidence, collectLocalLinks } from './batch-utils';
+import { mergeInventory, selectEvidence, collectLocalLinks, manualSearchIntent } from './batch-utils';
 
 const item=(n:number,campaign='c1')=>({id:`id-${n}`,slug:`slug-${n}`,title:`Title ${n}`,keyword:`query ${n}`,campaign});
 describe('incremental manual expansion',()=>{
+  it.each(['newly-funded-founder','accelerator-demo-day-founder','gtm-content-repurposing-buyer','portfolio-media-platform'])('keeps procedural %s jobs informational regardless of funnel',campaign=>{
+    expect(manualSearchIntent(campaign)).toBe('informational');
+  });
+  it('classifies the buying/comparison batch as commercial, not by funnel stage',()=>{
+    expect(manualSearchIntent('video-production-comparison')).toBe('commercial');
+    expect(()=>manualSearchIntent('unknown')).toThrow(/Unreviewed campaign/);
+  });
   it('retains existing entries and accepts a partial batch',()=>{
     const retained=[item(1)];
     expect(mergeInventory(retained,[item(2)])).toEqual([...retained,item(2)]);

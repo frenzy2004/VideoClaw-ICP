@@ -28,6 +28,7 @@
     }
   ],
   "competitorGap": "Editorial hypothesis: Extract the objection, clarifying question and supported response into an internal conversation aid. Unlike c4-010's customer case study, this organizes a sales response rather than a customer success narrative; it does not authorize publishing private calls. No ranking-page comparison or demand conclusion is asserted.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
   "reviewNotes": [
     "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending."
   ],

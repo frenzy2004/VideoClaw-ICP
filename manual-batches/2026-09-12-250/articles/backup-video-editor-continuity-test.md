@@ -11,7 +11,7 @@
     "editing continuity drill",
     "backup editor availability"
   ],
-  "searchIntent": "informational",
+  "searchIntent": "commercial",
   "competitorGap": "Editorial hypothesis: A human cold-start drill measures whether a named substitute can resume the current job, separately from general skill tests or file-format portability.",
   "provenance": {
     "apifyRunId": "g9D9OtyGPJA0waGDm",

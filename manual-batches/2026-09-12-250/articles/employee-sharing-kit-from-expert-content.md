@@ -10,7 +10,7 @@
     "employee advocacy video content",
     "employee social sharing template"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial hypothesis: Turn approved expert material into optional prompts employees can personalize meaningfully. This is employee participation in one company's GTM campaign, distinct from c1 founder positioning and c5 portfolio brand guidelines. No ranking-page comparison or demand conclusion is asserted.",
   "provenance": {
     "apifyRunId": "YkY3hZ8cxUobSs1CI",

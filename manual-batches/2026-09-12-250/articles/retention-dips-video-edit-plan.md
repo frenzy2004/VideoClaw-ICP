@@ -10,7 +10,7 @@
     "video retention dip analysis",
     "audience retention editing"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial hypothesis: Translate observed retention patterns into testable editorial diagnoses, distinguishing confusion from loss of interest and source-mix effects. Unlike initial clip selection, this revises an existing asset after actual viewing evidence. No ranking-page comparison or demand conclusion is asserted.",
   "provenance": {
     "apifyRunId": "YkY3hZ8cxUobSs1CI",

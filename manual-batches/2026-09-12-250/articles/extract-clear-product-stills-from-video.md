@@ -10,7 +10,7 @@
     "export video frame",
     "product screenshot from video"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial hypothesis: Select and export frames that show a meaningful product state, checking motion blur, interface legibility and context at the intended display size. This creates still images from video, distinct from c4-046's animated GIF loop, c4-038's thumbnail experiment and retained c4-005's video resizing. No ranking-page comparison or demand conclusion is asserted.",
   "provenance": {
     "apifyRunId": "YkY3hZ8cxUobSs1CI",

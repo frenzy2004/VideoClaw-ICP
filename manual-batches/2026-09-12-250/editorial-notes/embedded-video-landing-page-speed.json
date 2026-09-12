@@ -28,6 +28,7 @@
     }
   ],
   "competitorGap": "Editorial hypothesis: Reduce unnecessary initial loading while keeping the visitor's intended video easy to start. This is page performance triage, distinct from video indexing and file aspect-ratio adaptation. No ranking-page comparison or demand conclusion is asserted.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
   "reviewNotes": [
     "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending.",
     "Query and observed PAA include playback-speed ambiguity; body explicitly addresses page loading, not changing playback rate. Developer handoff advice, not runtime changes."

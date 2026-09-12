@@ -1,6 +1,14 @@
 import assert from 'node:assert/strict';
 
 export const normalize=(value:string)=>value.normalize('NFKC').trim().toLowerCase().replace(/\s+/g,' ');
+// Editorial labels for this locked manual batch, not a SERP-intent classifier.
+// Four campaign libraries teach a procedure; C3 evaluates a purchase/engagement.
+// Funnel position alone does not establish the intent of a how-to search.
+export function manualSearchIntent(campaign:string):'informational'|'commercial'{
+  if(campaign==='video-production-comparison')return 'commercial';
+  assert(['newly-funded-founder','accelerator-demo-day-founder','gtm-content-repurposing-buyer','portfolio-media-platform'].includes(campaign),'Unreviewed campaign intent');
+  return 'informational';
+}
 export function collectLocalLinks(html:string):string[]{
   const links=new Set<string>();
   for(const match of html.matchAll(/<a\b[^>]*\bhref="([^"]*)"[^>]*>/gi)){

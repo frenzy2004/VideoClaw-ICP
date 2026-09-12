@@ -11,7 +11,7 @@
     "article republication attribution",
     "republished content updates"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis: Record approved handling for an already-authorized second copy of an article: source attribution, permitted edits, update responsibility and a technical indexing handoff. This is an editorial distribution task rather than drafting a licence agreement. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
   "provenance": {
     "apifyRunId": "8SjJ2NKr2HlOOh8Cv",

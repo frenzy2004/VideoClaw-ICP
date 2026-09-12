@@ -28,6 +28,7 @@
     }
   ],
   "competitorGap": "Editorial hypothesis: Give an existing Short a relevant next video and ensure its promise matches the destination. Distinct from cutting Shorts, resizing footage or choosing general campaign CTAs because it implements an in-platform navigation path. No ranking-page comparison or demand conclusion is asserted.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
   "reviewNotes": [
     "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending.",
     "YouTube navigation mechanism, not a claim of automatic audience transfer or direct external linking. FAQs remain editorial."

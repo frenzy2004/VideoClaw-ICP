@@ -10,7 +10,7 @@
     "correct product demo claim",
     "replace incorrect video narration"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Hypothesis: A frame-level correction map addresses contradictory audio, picture and distribution surfaces as one repair. Competing page bodies have not been audited for this draft.",
   "provenance": {
     "apifyRunId": "UZg3FufDQruZuQbdf",

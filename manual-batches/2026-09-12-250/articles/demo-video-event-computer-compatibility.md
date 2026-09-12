@@ -10,7 +10,7 @@
     "PowerPoint demo video compatibility",
     "event computer video codec test"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Hypothesis: Format lists may omit the receiving-machine matrix that separates file decoding, embedded playback and audio routing. Competing page bodies have not been audited for this draft.",
   "provenance": {
     "apifyRunId": "UZg3FufDQruZuQbdf",

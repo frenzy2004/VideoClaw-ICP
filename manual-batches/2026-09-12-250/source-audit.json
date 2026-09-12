@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "kind": "source_transport_audit_not_editorial_approval",
-  "articlesAvailable": 178,
+  "articlesAvailable": 200,
   "receipts": [
     {
       "url": "https://a16z.com/insights-for-enterprise-ai-builders/",
@@ -103,6 +103,15 @@
       "extractedWords": 32
     },
     {
+      "url": "https://blog.hubspot.com/marketing/how-to-syndicate-content",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:44:03.495Z",
+      "finalUrl": "https://blog.hubspot.com/marketing/how-to-syndicate-content",
+      "httpStatus": 200,
+      "bodySha256": "fb404364ffe3caa4dd9e907529aebd62d0032af02b0f50129dcb746542ae1373",
+      "extractedWords": 35
+    },
+    {
       "url": "https://buffer.com/resources/transparent-product-roadmap/",
       "status": "body_retrieved",
       "checkedAt": "2026-09-12T03:13:51.525Z",
@@ -130,10 +139,28 @@
       "extractedWords": 1063
     },
     {
+      "url": "https://buttondown.com/blog/pre-launch-newsletter-guide",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:44:00.179Z",
+      "finalUrl": "https://buttondown.com/blog/pre-launch-newsletter-guide",
+      "httpStatus": 200,
+      "bodySha256": "b21e2033275b3a6d6545b7d66cc047c812ad14a1e5258cb54d81de29408266f8",
+      "extractedWords": 43
+    },
+    {
       "url": "https://calendly.com/blog/office-hours/",
       "status": "automatic_retrieval_unavailable",
       "checkedAt": "2026-09-12T02:39:09.876Z",
       "error": "Error: Source has no usable body evidence."
+    },
+    {
+      "url": "https://cam.start.canon/en/C010/manual/html/UG-03_Shooting-1_0110.html",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:44:02.978Z",
+      "finalUrl": "https://cam.start.canon/en/C010/manual/html/UG-03_Shooting-1_0110.html",
+      "httpStatus": 200,
+      "bodySha256": "59898ea881328eac41b2bf8d55d920501aa1a2762efed0193a75365f9307977c",
+      "extractedWords": 589
     },
     {
       "url": "https://copyright.gov/circs/circ30.pdf",
@@ -301,6 +328,15 @@
       "extractedWords": 932
     },
     {
+      "url": "https://go.forrester.com/help/analyst-briefing/",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:44:01.299Z",
+      "finalUrl": "https://go.forrester.com/help/analyst-briefing/",
+      "httpStatus": 200,
+      "bodySha256": "e303b59ed8c084dfd961cf5bc00b4c0d7e607f0d9388a348517990d388545550",
+      "extractedWords": 398
+    },
+    {
       "url": "https://handbook.gitlab.com/handbook/company/culture/all-remote/onboarding/",
       "status": "automatic_retrieval_unavailable",
       "checkedAt": "2026-09-12T03:13:51.780Z",
@@ -331,6 +367,21 @@
       "extractedWords": 601
     },
     {
+      "url": "https://help.frame.io/en/articles/9101026-uploading-your-media",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T03:44:04.204Z",
+      "error": "Error: Source has no usable body evidence."
+    },
+    {
+      "url": "https://help.frame.io/en/articles/9101084-how-can-i-download-files",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:44:04.208Z",
+      "finalUrl": "https://help.frame.io/en/articles/9101084-how-can-i-download-files",
+      "httpStatus": 200,
+      "bodySha256": "9ede706e8cf0ddb48b400c0a6372974efa9fc6a48964fc2b9c2f0aba1e3f407b",
+      "extractedWords": 36
+    },
+    {
       "url": "https://help.lensrentals.com/26505-other-questions/204151-do-you-sell-used-equipment",
       "status": "body_retrieved",
       "checkedAt": "2026-09-12T02:39:08.612Z",
@@ -338,6 +389,18 @@
       "httpStatus": 200,
       "bodySha256": "0d33cab211a46cb3fedeaebc2e132fcdb2a4aec4d10332ed280b84ddb92bd350",
       "extractedWords": 80
+    },
+    {
+      "url": "https://help.runwayml.com/hc/en-us/articles/23987639973267-Will-unused-credits-carry-over-after-my-billing-day",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T03:44:03.172Z",
+      "error": "Error: Source has no usable body evidence."
+    },
+    {
+      "url": "https://help.runwayml.com/hc/en-us/articles/52067870667411-Max-plan-details",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T03:44:03.192Z",
+      "error": "Error: Source has no usable body evidence."
     },
     {
       "url": "https://help.togetherplatform.com/hc/en-us/articles/22171219164315-What-is-Colleague-Connect",
@@ -463,6 +526,12 @@
       "error": "Error: Source body evidence requires a successful response."
     },
     {
+      "url": "https://helpx.adobe.com/uk/premiere/desktop/add-audio-effects/adjust-volume-and-levels/automatically-duck-audio.html",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T03:44:02.147Z",
+      "error": "Error: Source body evidence requires a successful response."
+    },
+    {
       "url": "https://kanbanguides.org/the-kanban-guide/",
       "status": "body_retrieved",
       "checkedAt": "2026-09-12T02:34:29.291Z",
@@ -538,6 +607,21 @@
       "error": "Error: Source has no usable body evidence."
     },
     {
+      "url": "https://news.ycombinator.com/newsguidelines.html",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T03:44:00.372Z",
+      "error": "Error: Source has no usable body evidence."
+    },
+    {
+      "url": "https://news.ycombinator.com/showhn.html",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:44:00.345Z",
+      "finalUrl": "https://news.ycombinator.com/showhn.html",
+      "httpStatus": 200,
+      "bodySha256": "5354d8ed9b3fd61d50b1141c023aaaf16f30391e3cc09c49461da54e344956c4",
+      "extractedWords": 307
+    },
+    {
       "url": "https://newsletter.posthog.com/p/read-this-before-you-pivot",
       "status": "automatic_retrieval_unavailable",
       "checkedAt": "2026-09-12T03:03:38.606Z",
@@ -610,6 +694,15 @@
       "extractedWords": 530
     },
     {
+      "url": "https://review.firstround.com/start-up-on-the-right-foot-build-a-customer-advisory-board/",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:44:00.005Z",
+      "finalUrl": "https://review.firstround.com/start-up-on-the-right-foot-build-a-customer-advisory-board/",
+      "httpStatus": 200,
+      "bodySha256": "36091f2a59f00b9406e978b666929b0a693610663f84c26b38ae29839370d66d",
+      "extractedWords": 521
+    },
+    {
       "url": "https://riverside.com/blog/podcast-interview-preparation",
       "status": "body_retrieved",
       "checkedAt": "2026-09-12T02:41:58.450Z",
@@ -676,6 +769,15 @@
       "extractedWords": 555
     },
     {
+      "url": "https://support.apple.com/en-ae/guide/imovie/mov84788882d/mac",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:44:02.329Z",
+      "finalUrl": "https://support.apple.com/en-ae/guide/imovie/mov84788882d/mac",
+      "httpStatus": 200,
+      "bodySha256": "17963a8a00d73561eb788a602a6e19cb23b9f9bbcc62ad2837456fa45c5ef770",
+      "extractedWords": 254
+    },
+    {
       "url": "https://support.apple.com/en-au/guide/iphone/iph93af723b9/ios",
       "status": "automatic_retrieval_unavailable",
       "checkedAt": "2026-09-12T02:56:07.501Z",
@@ -700,6 +802,15 @@
       "extractedWords": 887
     },
     {
+      "url": "https://support.apple.com/en-gb/102025",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:44:01.219Z",
+      "finalUrl": "https://support.apple.com/en-gb/102025",
+      "httpStatus": 200,
+      "bodySha256": "0097b890ff5c2c535f82534999d7195e6c8f074b4c135cc317ea06ef32420827",
+      "extractedWords": 522
+    },
+    {
       "url": "https://support.apple.com/en-gb/108399",
       "status": "body_retrieved",
       "checkedAt": "2026-09-12T02:56:07.798Z",
@@ -722,6 +833,15 @@
       "httpStatus": 200,
       "bodySha256": "e8e146e288980011e74ed48428861e9afeca8a40ef48665df35edbd2748427b7",
       "extractedWords": 623
+    },
+    {
+      "url": "https://support.apple.com/en-lamr/guide/mac-help/mchl613dc43f/mac",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:44:01.506Z",
+      "finalUrl": "https://support.apple.com/en-lamr/guide/mac-help/mchl613dc43f/mac",
+      "httpStatus": 200,
+      "bodySha256": "1c6e96fac378799bc4d232953c491a9b11a93e0c01f08106770fc9f1b388859a",
+      "extractedWords": 938
     },
     {
       "url": "https://support.apple.com/en-mide/guide/keynote/tan81813d552/mac",
@@ -913,6 +1033,12 @@
       "error": "Error: Source response body exceeds the byte limit."
     },
     {
+      "url": "https://support.google.com/youtube/answer/12340300?hl=en-GB",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T03:44:00.811Z",
+      "error": "Error: Source response body exceeds the byte limit."
+    },
+    {
       "url": "https://support.google.com/youtube/answer/13338784?hl=en",
       "status": "automatic_retrieval_unavailable",
       "checkedAt": "2026-09-12T03:13:59.296Z",
@@ -973,6 +1099,15 @@
       "error": "Error: Source response body exceeds the byte limit."
     },
     {
+      "url": "https://support.microsoft.com/en-us/powerpoint/accessibility-features-in-video-and-audio-playback-on-powerpoint",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:44:02.027Z",
+      "finalUrl": "https://support.microsoft.com/en-us/powerpoint/accessibility-features-in-video-and-audio-playback-on-powerpoint",
+      "httpStatus": 200,
+      "bodySha256": "0a516eb62c9bc9c0cdbbc16f3f391053d2014eff353486feb7a86c9f09f3aa4e",
+      "extractedWords": 419
+    },
+    {
       "url": "https://support.microsoft.com/en-us/powerpoint/add-bookmarks-to-points-of-interest-in-audio-and-video-clips",
       "status": "body_retrieved",
       "checkedAt": "2026-09-12T03:03:39.013Z",
@@ -980,6 +1115,15 @@
       "httpStatus": 200,
       "bodySha256": "46c9f22f8061c64b98ec2c536605159e23116ae0fe3e8bdbda4687e659006c13",
       "extractedWords": 254
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/PowerPoint/add-closed-captions-or-subtitles-to-media-in-powerpoint",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:44:02.259Z",
+      "finalUrl": "https://support.microsoft.com/en-us/powerpoint/add-closed-captions-or-subtitles-to-media-in-powerpoint",
+      "httpStatus": 200,
+      "bodySha256": "43f7357096518c01ef6cd9776fd0e41be63988f18315d116be28bace8711f250",
+      "extractedWords": 815
     },
     {
       "url": "https://support.microsoft.com/en-us/powerpoint/compress-your-media-files",
@@ -1036,6 +1180,15 @@
       "extractedWords": 462
     },
     {
+      "url": "https://support.microsoft.com/en-us/powerpoint/training/use-presenter-view-in-powerpoint",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:44:00.863Z",
+      "finalUrl": "https://support.microsoft.com/en-us/powerpoint/training/use-presenter-view-in-powerpoint",
+      "httpStatus": 200,
+      "bodySha256": "39a3478d3106a85408ac221e735e2bb9121b57ca485201dd8afc6b28282c903f",
+      "extractedWords": 217
+    },
+    {
       "url": "https://support.microsoft.com/en-us/powerpoint/turn-your-presentation-into-a-video",
       "status": "body_retrieved",
       "checkedAt": "2026-09-12T03:22:27.383Z",
@@ -1052,6 +1205,18 @@
       "httpStatus": 200,
       "bodySha256": "088a6f30e92f7ec25bf2c7906a9b5c91be222ae8c91aeb74792157c5cf176408",
       "extractedWords": 171
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/en-us/articles/115002427523-What-is-an-AMA-and-how-do-I-host-one",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T03:43:59.927Z",
+      "error": "Error: Source body evidence requires a successful response."
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/en-us/articles/15484368382612-Hosting-events-large-and-small",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T03:43:59.913Z",
+      "error": "Error: Source body evidence requires a successful response."
     },
     {
       "url": "https://support.riverside.com/hc/en-us/articles/19508681766557-What-is-a-partial-high-quality-track",
@@ -1129,6 +1294,12 @@
       "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0059819",
       "status": "automatic_retrieval_unavailable",
       "checkedAt": "2026-09-12T02:56:09.989Z",
+      "error": "Error: Source has no usable body evidence."
+    },
+    {
+      "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0060596",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T03:44:02.921Z",
       "error": "Error: Source has no usable body evidence."
     },
     {
@@ -1238,6 +1409,15 @@
       "httpStatus": 200,
       "bodySha256": "2dee4a69c6ccca08d6f3741cc03e3fb0335005ce665ff75a5f0c3a84a86b4b4e",
       "extractedWords": 1229
+    },
+    {
+      "url": "https://wistia.com/blog/improve-sales-outreach-with-video",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:44:00.219Z",
+      "finalUrl": "https://wistia.com/blog/improve-sales-outreach-with-video",
+      "httpStatus": 200,
+      "bodySha256": "e493cdf6bb4c940987b19eb99e0baf42262427641e0daa2e6a1536db589d27f6",
+      "extractedWords": 914
     },
     {
       "url": "https://wistia.com/blog/look-good-on-camera",
@@ -1352,6 +1532,15 @@
       "httpStatus": 200,
       "bodySha256": "f113cc6e85a09a46b3a2c1fe57facff69e2d9a304a3229293b3ddcd86d6dc22d",
       "extractedWords": 1297
+    },
+    {
+      "url": "https://www.apple.com/my/final-cut-pro/specs/",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:44:01.530Z",
+      "finalUrl": "https://www.apple.com/my/final-cut-pro/specs/",
+      "httpStatus": 200,
+      "bodySha256": "f615391eb4ad03f251162ce588ff97a0261411110c6fb7b9d3879b60bd094682",
+      "extractedWords": 1208
     },
     {
       "url": "https://www.atlassian.com/blog/loom/video-stitching",
@@ -1480,6 +1669,24 @@
       "error": "Error: Source body evidence requires a successful response."
     },
     {
+      "url": "https://www.clozd.com/blog/a-framework-for-creating-the-right-win-loss-analysis-questions",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:48:08.373Z",
+      "finalUrl": "https://www.clozd.com/blog/a-framework-for-creating-the-right-win-loss-analysis-questions",
+      "httpStatus": 200,
+      "bodySha256": "d45e82fff03691ffb2dfc5b209d29648e9b22291be9272f9ecfbed05844ec66e",
+      "extractedWords": 722
+    },
+    {
+      "url": "https://www.clozd.com/blog/win-loss-101-what-to-ask-buyers-in-win-loss-interviews",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:48:08.361Z",
+      "finalUrl": "https://www.clozd.com/blog/win-loss-101-what-to-ask-buyers-in-win-loss-interviews",
+      "httpStatus": 200,
+      "bodySha256": "db60d71900dacbfa91466f9bb94bbd18f0974ea3901346ac1f7310d2758a6c8b",
+      "extractedWords": 1287
+    },
+    {
       "url": "https://www.copyright.gov/engage/musicians/",
       "status": "body_retrieved",
       "checkedAt": "2026-09-12T03:03:39.337Z",
@@ -1511,6 +1718,15 @@
       "httpStatus": 200,
       "bodySha256": "363ea056f2797cb6a91a38e17a931356aa4b768918b25838d840cc2930a88a6d",
       "extractedWords": 135
+    },
+    {
+      "url": "https://www.descript.com/blog/article/learn-to-read-without-sounding-like-youre-reading",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:48:08.465Z",
+      "finalUrl": "https://www.descript.com/blog/article/learn-to-read-without-sounding-like-youre-reading",
+      "httpStatus": 200,
+      "bodySha256": "22f26236ced9d8320264ed4c331bf3225568c5f2773476d3ffa786bddbb702d2",
+      "extractedWords": 215
     },
     {
       "url": "https://www.descript.com/security",
@@ -1582,6 +1798,12 @@
       "error": "Error: Source has no usable body evidence."
     },
     {
+      "url": "https://www.gartner.com/en/contact/vendor-briefings",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T03:44:00.686Z",
+      "error": "Error: Source has no usable body evidence."
+    },
+    {
       "url": "https://www.gong.io/blog/how-to-handle-any-sales-objection",
       "status": "body_retrieved",
       "checkedAt": "2026-09-12T02:39:09.419Z",
@@ -1607,6 +1829,12 @@
       "httpStatus": 200,
       "bodySha256": "09dcd5afeda089f47a19cc5cf15337979c008cfefb4b2088f69d6a32eea337e6",
       "extractedWords": 98
+    },
+    {
+      "url": "https://www.hubspot.com/company-news/hubspot-introduces-its-2026-customer-advisory-board",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T03:44:00.034Z",
+      "error": "Error: Source has no usable body evidence."
     },
     {
       "url": "https://www.iana.org/help/example-domains",
@@ -1816,6 +2044,18 @@
       "extractedWords": 573
     },
     {
+      "url": "https://www.sec.gov/resources-small-businesses/capital-raising-building-blocks/general-solicitation",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T03:44:01.686Z",
+      "error": "Error: Source has no usable body evidence."
+    },
+    {
+      "url": "https://www.sec.gov/rules/final/2020/33-10884.pdf",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T03:44:01.806Z",
+      "error": "Error: Source response body exceeds the byte limit."
+    },
+    {
       "url": "https://www.shure.com/damfiles/default/global/documents/publications/en/performance-production/microphone_techniques_for_recording_english.pdf-bb0469316afdb6118691d2f3f5e3ff01.pdf",
       "status": "automatic_retrieval_unavailable",
       "checkedAt": "2026-09-12T02:56:05.134Z",
@@ -1922,6 +2162,15 @@
       "httpStatus": 200,
       "bodySha256": "9b199da7b539d348239b60dadc925b70af48a8dc9e82131c70b0ac3ed80b0f5f",
       "extractedWords": 1257
+    },
+    {
+      "url": "https://www.w3.org/WAI/media/av/planning/",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T03:44:00.082Z",
+      "finalUrl": "https://www.w3.org/WAI/media/av/planning/",
+      "httpStatus": 200,
+      "bodySha256": "b4838b8fd26c59b8b4af7b7b990fa345c6b4bb9596ec2ec6ab8fab4886a4b2d3",
+      "extractedWords": 863
     },
     {
       "url": "https://www.w3.org/WAI/media/av/transcripts/",

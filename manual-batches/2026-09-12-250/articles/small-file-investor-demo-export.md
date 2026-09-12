@@ -10,7 +10,7 @@
     "compress investor demo video",
     "small screen recording export"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Hypothesis: Compression instructions may optimize bytes without a scene-specific proof floor and recipient-side reading comparison. Competing page bodies have not been audited for this draft.",
   "provenance": {
     "apifyRunId": "UZg3FufDQruZuQbdf",

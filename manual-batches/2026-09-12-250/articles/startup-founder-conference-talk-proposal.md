@@ -11,7 +11,7 @@
     "startup talk abstract",
     "founder speaking proposal"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: turn a founder's operating experience into a teachable session with visible learning outcomes and an original audience exercise.",
   "provenance": {
     "apifyRunId": "TU557kwZekJRkYg0z",

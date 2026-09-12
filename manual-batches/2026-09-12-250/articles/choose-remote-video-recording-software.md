@@ -10,7 +10,7 @@
     "remote recording separate tracks",
     "remote interview software buyer test"
   ],
-  "searchIntent": "informational",
+  "searchIntent": "commercial",
   "competitorGap": "Editorial hypothesis: A two-participant recording and recovery test can evaluate the source files a buyer's editor will actually receive.",
   "provenance": {
     "apifyRunId": "g9D9OtyGPJA0waGDm",

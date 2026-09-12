@@ -10,7 +10,7 @@
     "multi speaker video editing",
     "panel recording edit"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial hypothesis: Maintain speaker attribution, question-and-answer continuity and understandable disagreement while switching among synchronized recordings. The deliverable is a coherent multi-speaker panel edit, distinct from retained c4-002's standalone clip extraction, c4-015's written FAQ and c2's investor presentation tasks. No ranking-page comparison or demand conclusion is asserted.",
   "provenance": {
     "apifyRunId": "YkY3hZ8cxUobSs1CI",

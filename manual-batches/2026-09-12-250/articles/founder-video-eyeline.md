@@ -11,7 +11,7 @@
     "founder video eye contact",
     "camera lens versus preview"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: Distinguish the gaze target for direct customer address from an interview and test note placement geometrically.",
   "provenance": {
     "apifyRunId": "TU557kwZekJRkYg0z",

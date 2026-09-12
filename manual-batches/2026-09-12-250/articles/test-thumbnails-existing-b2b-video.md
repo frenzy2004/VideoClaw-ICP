@@ -10,7 +10,7 @@
     "YouTube thumbnail only A B test",
     "B2B video thumbnail testing"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial hypothesis: Compare visual packaging while preserving the video itself and interpreting inconclusive outcomes honestly. Distinct from testing the opening edit because the intervention occurs before a viewer starts playback. No ranking-page comparison or demand conclusion is asserted.",
   "provenance": {
     "apifyRunId": "YkY3hZ8cxUobSs1CI",

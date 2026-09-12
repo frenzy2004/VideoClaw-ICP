@@ -11,7 +11,7 @@
     "portfolio story ownership",
     "originating publisher decision"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis: Assign the originating publisher and amplification roles according to audience, ownership of facts and ability to maintain the story. Unlike a founder LinkedIn strategy, this is a cross-organization publishing decision. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
   "provenance": {
     "apifyRunId": "8SjJ2NKr2HlOOh8Cv",

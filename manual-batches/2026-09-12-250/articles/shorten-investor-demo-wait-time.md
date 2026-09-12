@@ -10,7 +10,7 @@
     "speed up investor demo recording",
     "disclose time compression video"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Hypothesis: An elapsed-time ledger distinguishes a concise presentation from a product performance claim. Competing page bodies have not been audited for this draft.",
   "provenance": {
     "apifyRunId": "UZg3FufDQruZuQbdf",
@@ -59,7 +59,7 @@
   },
   "editorialGraphic": {
     "src": "/media/blog/shorten-investor-demo-wait-time.svg",
-    "alt": "A full source run and shorter presentation cut retain separate elapsed and playback times with visible disclosure.",
+    "alt": "A fictional source wait at 00:12–01:42 becomes 00:12–00:21 at ten times speed; setup and result remain at normal speed.",
     "width": 1200,
     "height": 675
   },

@@ -10,7 +10,7 @@
     "video hook split test",
     "A B test video intro"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial hypothesis: Design a controlled creative experiment in which the opening changes and the remaining video and delivery conditions are held as stable as possible. Distinct from c4-009's metric overview and from c3 tool evaluation. No ranking-page comparison or demand conclusion is asserted.",
   "provenance": {
     "apifyRunId": "YkY3hZ8cxUobSs1CI",

@@ -10,7 +10,7 @@
     "newsletter from webinar",
     "expert content newsletter"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial hypothesis: Distill one expert insight into a useful standalone newsletter section with context and a reader takeaway. Distinct from c5's portfolio company update newsletter and from a multi-email nurture sequence. No ranking-page comparison or demand conclusion is asserted.",
   "provenance": {
     "apifyRunId": "YkY3hZ8cxUobSs1CI",

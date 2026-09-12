@@ -11,7 +11,7 @@
     "production milestone acceptance",
     "staged video payments"
   ],
-  "searchIntent": "informational",
+  "searchIntent": "commercial",
   "competitorGap": "Editorial hypothesis: A milestone evidence schedule distinguishes booking commitments, creative approvals and final delivery instead of recommending unsupported deposit percentages.",
   "provenance": {
     "apifyRunId": "g9D9OtyGPJA0waGDm",

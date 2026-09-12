@@ -11,7 +11,7 @@
     "knowledge base usability",
     "media portal search"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis: Evaluate resource retrieval using realistic founder tasks and repair labels, navigation or missing content. Distinct from asset tagging: the unit is a user search task, not a stored media file. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
   "provenance": {
     "apifyRunId": "8SjJ2NKr2HlOOh8Cv",

@@ -10,7 +10,7 @@
     "founder webcam overlay demo",
     "picture in picture product evidence"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Hypothesis: An exclusion-zone map makes overlay placement follow changing product evidence instead of a universal corner rule. Competing page bodies have not been audited for this draft.",
   "provenance": {
     "apifyRunId": "UZg3FufDQruZuQbdf",

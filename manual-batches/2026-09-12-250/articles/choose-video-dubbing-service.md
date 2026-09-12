@@ -11,7 +11,7 @@
     "translation quality review",
     "bilingual production sample"
   ],
-  "searchIntent": "informational",
+  "searchIntent": "commercial",
   "competitorGap": "Editorial hypothesis: An independently reviewed sample separates translation, pronunciation and synchronization defects before committing to a language the buyer cannot judge.",
   "provenance": {
     "apifyRunId": "g9D9OtyGPJA0waGDm",

@@ -10,7 +10,7 @@
     "professional video colorist",
     "color grading service evaluation"
   ],
-  "searchIntent": "informational",
+  "searchIntent": "commercial",
   "competitorGap": "Editorial hypothesis: A six-shot finishing sample can connect a colorist's quote to visible problems and agreed viewing conditions.",
   "provenance": {
     "apifyRunId": "g9D9OtyGPJA0waGDm",

@@ -28,6 +28,7 @@
     }
   ],
   "competitorGap": "Editorial hypothesis: Assemble a customer-specific recap from an existing demonstration and agreed next steps. This is post-meeting customer follow-up, distinct from c2 investor follow-up and from recording an initial product demo. No ranking-page comparison or demand conclusion is asserted.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
   "reviewNotes": [
     "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending."
   ],

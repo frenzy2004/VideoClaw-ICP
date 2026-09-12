@@ -11,7 +11,7 @@
     "founder podcast appearance",
     "podcast episode proposal"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: connect a founder's specific experience to an episode a host can actually develop, including questions and listener takeaways.",
   "provenance": {
     "apifyRunId": "TU557kwZekJRkYg0z",

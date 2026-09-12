@@ -524,6 +524,54 @@
       "checkedAt": "2026-09-12",
       "checkedAlternate": "https://support.google.com/youtube/answer/72431?hl=en-GB",
       "support": "Direct en URL hit a Google challenge; official indexed Computer/English-GB body inspected. Thumbnail upload/format requirements exist; locale/platform snapshots differ, so no universal current Shorts rule or dimensions asserted. Direct URL still needs ordinary-reader recheck."
+    },
+    {
+      "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0061986",
+      "method": "web_page_body_review_with_routing_caveat",
+      "checkedAt": "2026-09-12",
+      "support": "Inspected official body titled Controlling slides shared by another participant, supporting the narrow slide-control claim. One direct response exposed an unrelated localized document title while its English body remained the slide-control instructions; official search also returned the correct body. This is a title/locale routing caveat, not a successful automatic transport receipt, and remains noted in article review metadata."
+    },
+    {
+      "url": "https://www.sec.gov/resources-small-businesses/capital-raising-building-blocks/general-solicitation",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "SEC body inspected: fact-specific solicitation determination and qualifying Demo Day conditions. Draft requests qualified counsel review and does not infer that the event label authorizes later public distribution."
+    },
+    {
+      "url": "https://www.sec.gov/rules/final/2020/33-10884.pdf",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Primary adopting-release text inspected at PDF pages 82–84 and Rule 148 text pages 341–342: limited offering communications and virtual participation restrictions support the narrow caution. No company-specific exemption conclusion is made."
+    },
+    {
+      "url": "https://news.ycombinator.com/newsguidelines.html",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Full official guidelines inspected, including no generated/AI-edited text, primarily promotional use and solicited votes. Draft explicitly tells readers not to paste its examples into Hacker News."
+    },
+    {
+      "url": "https://www.gartner.com/en/contact/vendor-briefings",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Official vendor-briefing body inspected: research input, analyst discretion, and feedback not being the focus. Draft does not promise advice, coverage or endorsement."
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/en-us/articles/115002427523-What-is-an-AMA-and-how-do-I-host-one",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Official AMA body inspected: community moderator contact and authentic participation with varied questions. Draft scopes these rules to Reddit and checks other platforms separately."
+    },
+    {
+      "url": "https://support.reddithelp.com/hc/en-us/articles/15484368382612-Hosting-events-large-and-small",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Official community-event body inspected: moderator approval/verification, keeping verification documents private, helper support and clear timing. Draft does not encourage public ID uploads."
+    },
+    {
+      "url": "https://www.hubspot.com/company-news/hubspot-introduces-its-2026-customer-advisory-board",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Actual announcement body inspected: board spans functional and business perspectives. Draft uses it only as an example of variety, not a recommended size or outcome guarantee."
     }
   ]
 }

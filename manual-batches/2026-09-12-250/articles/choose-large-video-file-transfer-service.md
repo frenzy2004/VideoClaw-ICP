@@ -11,7 +11,7 @@
     "large media file delivery",
     "video transfer acceptance test"
   ],
-  "searchIntent": "informational",
+  "searchIntent": "commercial",
   "competitorGap": "Editorial hypothesis: An end-to-end transport trial distinguishes a playable preview from intact original-media delivery and exposes recipient friction before purchase.",
   "provenance": {
     "apifyRunId": "g9D9OtyGPJA0waGDm",

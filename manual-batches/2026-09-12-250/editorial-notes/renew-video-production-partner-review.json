@@ -1,0 +1,110 @@
+{
+  "id": "vc-manual250-c3-050",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.upwork.com/hc/en-us/articles/44564821903763-Understanding-milestones-on-fixed-price-contracts",
+      "supports": "Inspected page body: a milestone has a deliverable, payment and due date; Upwork documents funding and approval mechanics specific to its platform.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.ftc.gov/business-guidance/resources/start-security-guide-business",
+      "supports": "Official service-provider section inspected 2026-09-12: communicate security expectations, select appropriate providers, put requirements in writing and verify performance. Only supports security diligence, not overall vendor quality.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should a video agency be judged by views or leads?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How should I record a late delivery when our brief changed?",
+      "basis": "editorial"
+    },
+    {
+      "question": "When is a paid retest better than renewing immediately?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: A renewal memo should separate supplier execution, buyer-caused friction and changed production needs, instead of substituting marketing metrics or a generic satisfaction score.",
+  "searchIntentBasis": "Editorial classification: evaluating a video-production purchase, engagement or vendor decision; not verified demand.",
+  "reviewNotes": [
+    "The original renewal worksheet is editorial synthesis. FTC guidance supports only the security-provider check, not an overall agency-performance standard. FAQs are editorial, not observed PAA."
+  ],
+  "serp": {
+    "id": "vc-manual250-c3-050",
+    "keyword": "how to evaluate video production agency performance",
+    "found": true,
+    "query": "how to evaluate video production agency performance",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "7 steps to Choose the Right Video Production Agency",
+        "url": "https://www.pitchy.io/blog/video-production/7-steps-to-choose-the-right-video-production-agency",
+        "domain": "pitchy.io",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "What to look for when hiring a video production agency?",
+        "url": "https://www.facebook.com/groups/bluecollarmillionaire/posts/1532274458906357/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 3,
+        "title": "Video Production Company Reviews: What You Need to ...",
+        "url": "https://www.2pointagency.com/glossary/video-production-company-reviews-what-you-need-to-know-before-choosing-the-right-service/",
+        "domain": "2pointagency.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "What To Look for in a Marketing Video Production Company",
+        "url": "https://charter.film/blog/what-to-look-for-in-a-video-production-company",
+        "domain": "charter.film",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Video Performance Metrics: How to Evaluate a...",
+        "url": "https://www.ecgprod.com/video-performance-metrics-evaluate-and-improve/",
+        "domain": "ecgprod.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "What Marketers Want: A Comparison of Expectations and ...",
+        "url": "https://winwinvideos.com/blog/what-marketers-want-a-comparison-of-expectations-and-realities-in-video-production-agencies/",
+        "domain": "winwinvideos.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "How to Evaluate Video Production Vendors",
+        "url": "https://www.zemma.co/blog/how-to-evaluate-video-production-vendors",
+        "domain": "zemma.co",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "Top Video Production Companies - Sep 2026 Rankings",
+        "url": "https://clutch.co/agencies/video-production",
+        "domain": "clutch.co",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

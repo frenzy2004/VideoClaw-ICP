@@ -10,7 +10,7 @@
     "screen recording product GIF",
     "software GIF loop"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial hypothesis: Extract a meaningful micro-interaction and design a legible loop with a useful static fallback. This produces an animated image rather than a video email thumbnail or a resized social clip. No ranking-page comparison or demand conclusion is asserted.",
   "provenance": {
     "apifyRunId": "YkY3hZ8cxUobSs1CI",

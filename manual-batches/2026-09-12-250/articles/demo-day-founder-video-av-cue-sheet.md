@@ -10,7 +10,7 @@
     "founder demo AV handoff",
     "demo day playback cue"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Hypothesis: General event checklists may omit a completed single-founder cue sheet that joins spoken landmarks with actual player behavior. Competing page bodies have not been audited for this draft.",
   "provenance": {
     "apifyRunId": "UZg3FufDQruZuQbdf",

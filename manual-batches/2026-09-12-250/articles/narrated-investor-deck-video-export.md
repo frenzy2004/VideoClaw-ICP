@@ -10,7 +10,7 @@
     "narrated investor deck export",
     "PowerPoint video timing check"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Hypothesis: Slide-export instructions may omit a visual-and-voice ledger for product clips, qualifications and the final investor-viewed file. Competing page bodies have not been audited for this draft.",
   "provenance": {
     "apifyRunId": "UZg3FufDQruZuQbdf",

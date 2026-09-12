@@ -10,7 +10,7 @@
     "marketing request prioritization",
     "creative request workflow"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis: Choose the next company request from a ready backlog using urgency, readiness, blocked dependencies and an explicit tie-break. Distinct from a general portfolio strategy, content calendar or choosing production resources. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
   "provenance": {
     "apifyRunId": "8SjJ2NKr2HlOOh8Cv",

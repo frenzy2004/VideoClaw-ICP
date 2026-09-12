@@ -10,7 +10,7 @@
     "accelerator team introduction video",
     "application product demo field"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Hypothesis: A destination-first worksheet helps founders route existing media and record only missing application assets. Competing page bodies have not been audited for this draft.",
   "provenance": {
     "apifyRunId": "UZg3FufDQruZuQbdf",

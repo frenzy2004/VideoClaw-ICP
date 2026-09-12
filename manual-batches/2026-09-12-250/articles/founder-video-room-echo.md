@@ -11,7 +11,7 @@
     "founder audio recording",
     "reverberant home office"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: Separate room reflections from call echo and compare changes using the same passage and playback level.",
   "provenance": {
     "apifyRunId": "TU557kwZekJRkYg0z",

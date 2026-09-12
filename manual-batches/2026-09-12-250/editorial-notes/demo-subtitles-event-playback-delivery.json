@@ -1,0 +1,129 @@
+{
+  "id": "vc-manual250-c2-047",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.microsoft.com/en-us/PowerPoint/add-closed-captions-or-subtitles-to-media-in-powerpoint",
+      "supports": "Microsoft documents importing caption files and version-dependent format support, including WebVTT and newer SRT support.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/powerpoint/accessibility-features-in-video-and-audio-playback-on-powerpoint",
+      "supports": "Supported embedded and inserted caption tracks can be selected through the Slide Show player's Audio and Subtitles control.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Why can captions appear in the editor but not at the event?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Where should the caption track be checked?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Is placing a caption file next to the movie enough?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: Deliver captions through the actual event player and confirm they appear in presentation mode. Unlike c4's general caption review and the translation topic, this solves subtitle packaging and activation. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Draft for editorial review; no publication approval.",
+    "Exact-query SERP integration belongs to main; this draft does not validate search demand. Volume/KD/CPC are provider-pending.",
+    "FAQs are editorial; no PAA provenance claimed.",
+    "Work products and fictional examples are original editorial proposals, not product capabilities.",
+    "Distinct from c4 caption-writing review and c2-041 codec compatibility: this checks subtitle packaging, selection and presentation-mode visibility.",
+    "Version-dependent Microsoft controls are described conditionally; no claim that every PowerPoint release accepts the same caption formats."
+  ],
+  "serp": {
+    "id": "vc-manual250-c2-047",
+    "keyword": "PowerPoint video subtitles not showing",
+    "found": true,
+    "query": "PowerPoint video subtitles not showing",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Subtitles Not Working - Microsoft Q&A",
+        "url": "https://learn.microsoft.com/en-us/answers/questions/5425005/subtitles-not-working",
+        "domain": "learn.microsoft.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "How to add live subtitles to PowerPoint (and a test ...",
+        "url": "https://www.echorivera.com/blog/demo-ppt-subtitles",
+        "domain": "echorivera.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "PowerPoint: Turning on subtitles - Ask Athena",
+        "url": "https://lits.knowledgeowl.com/help/software-how-to-4626",
+        "domain": "lits.knowledgeowl.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Present with real-time, automatic captions or subtitles in ...",
+        "url": "https://support.microsoft.com/en-us/powerpoint/present-with-real-time-automatic-captions-or-subtitles-in-powerpoint",
+        "domain": "support.microsoft.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "My PPT doesn't have a subtitles section- how do I get one? ...",
+        "url": "https://www.justanswer.com/computer/tfe8e-ppt-doesn-t-subtitles-section-one.html",
+        "domain": "justanswer.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Need captions/subtitles for recorded audio to be exported ...",
+        "url": "https://www.reddit.com/r/powerpoint/comments/1f25wr6/need_captionssubtitles_for_recorded_audio_to_be/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Missing audio or video subtitles – Digital Accessibility On- ...",
+        "url": "https://pressbooks.bccampus.ca/a11yondemand/chapter/closed-captions/",
+        "domain": "pressbooks.bccampus.ca",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "How to use PowerPoint captions and subtitles to present more ...",
+        "url": "https://www.youtube.com/watch?v=lnwQr3jNcTg",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How do I enable subtitles in PowerPoint?",
+      "Why are my subtitles not appearing?",
+      "How to get subtitles on a video that doesn't have them?",
+      "How do I turn subtitles back on?"
+    ],
+    "relatedQueries": [
+      "Powerpoint video subtitles not showing windows 10",
+      "Powerpoint video subtitles not showing 2021",
+      "Why subtitles are not working on Netflix",
+      "How to add subtitles in PowerPoint",
+      "PowerPoint subtitle examples",
+      "Why subtitles are not working in YouTube",
+      "PowerPoint online",
+      "Microsoft PowerPoint"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

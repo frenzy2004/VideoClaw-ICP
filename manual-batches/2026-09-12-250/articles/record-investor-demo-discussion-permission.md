@@ -10,7 +10,7 @@
     "investor meeting recording permission",
     "Zoom demo recording consent"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Hypothesis: Recording tutorials may describe the button without a meeting-specific purpose, audience, transition and unrecorded alternative. Competing page bodies have not been audited for this draft.",
   "provenance": {
     "apifyRunId": "UZg3FufDQruZuQbdf",

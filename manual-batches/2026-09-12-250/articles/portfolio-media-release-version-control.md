@@ -10,7 +10,7 @@
     "digital asset version history",
     "approved asset management"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis: Identify the exact released asset and bind approval to that version across the portfolio. Distinct from c3 revision etiquette and from rolling out changes to reusable template structures. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
   "provenance": {
     "apifyRunId": "8SjJ2NKr2HlOOh8Cv",

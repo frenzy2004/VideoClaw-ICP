@@ -1,0 +1,125 @@
+{
+  "id": "vc-manual250-c1-047",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.google.com/youtube/answer/12340300?hl=en-GB",
+      "supports": "Accurate titles, readable thumbnail text, and uncomplicated designs; the storyboard is original synthesis.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.google.com/youtube/answer/72431?hl=en",
+      "supports": "Current custom-thumbnail upload workflow and format-specific requirements; no fixed specifications are asserted.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should a founder thumbnail show a face or the product?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I choose a thumbnail that is not a frame from the video?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How much text should the thumbnail contain?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Create a truthful still-and-title pairing for one original founder video. This is packaging the viewing decision, not benchmark reporting, repurposing formats, or comparing editing tools. No ranking-page comparison or demand conclusion is asserted.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending.",
+    "Mixed-intent query narrowed to initial founder-video preview selection. Distinct from C4-038 controlled thumbnail testing; no experimental performance claim."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-047",
+    "keyword": "how to choose a video thumbnail",
+    "found": true,
+    "query": "how to choose a video thumbnail",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Select thumbnail from current video : r/youtube",
+        "url": "https://www.reddit.com/r/youtube/comments/5aoqs1/select_thumbnail_from_current_video/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Add custom thumbnails on YouTube - Android",
+        "url": "https://support.google.com/youtube/answer/72431?hl=en&co=GENIE.Platform%3DAndroid",
+        "domain": "support.google.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Choose Your Video's Thumbnail",
+        "url": "https://support.wistia.com/en/articles/8283897-choose-your-video-s-thumbnail",
+        "domain": "support.wistia.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "Change Video Thumbnail",
+        "url": "https://www.onlineconverter.com/change-video-thumbnail",
+        "domain": "onlineconverter.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "How do I change thumbnail on MP4 files on my PC? ...",
+        "url": "https://learn.microsoft.com/en-us/answers/questions/4347487/how-do-i-change-thumbnail-on-mp4-files-on-my-pc-wi",
+        "domain": "learn.microsoft.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "How to Upload Video Thumbnails Across Social Media ...",
+        "url": "https://www.leonanimations.com/blogs/video-thumbnails-across-social-media-platforms",
+        "domain": "leonanimations.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "How to change the thumbnail image for my video",
+        "url": "https://help.vimeo.com/hc/en-us/articles/12426471350289-How-to-change-the-thumbnail-image-for-my-video",
+        "domain": "help.vimeo.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "Is there a way to set the thumbnail image on a video?",
+        "url": "https://community.adobe.com/questions-38/is-there-a-way-to-set-the-thumbnail-image-on-a-video-321814",
+        "domain": "community.adobe.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How to select a thumbnail for a video?",
+      "How do I change the thumbnail of a video?",
+      "How does YouTube pick the thumbnail for videos?",
+      "How do I choose a thumbnail from a YouTube video?"
+    ],
+    "relatedQueries": [
+      "How to choose a video thumbnail on pc",
+      "How to choose a video thumbnail for youtube",
+      "How to choose a video thumbnail online",
+      "How to Put thumbnail on YouTube video on phone",
+      "How to choose a video thumbnail free",
+      "How to change video thumbnail on phone gallery",
+      "How to change thumbnail on YouTube mobile app",
+      "How to add thumbnail to YouTube video"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

@@ -64,13 +64,13 @@ frontmatter and SVGs; status remains review, approvals false, no publishedAt,
 
 ## Main execution checklist
 
-- [ ] Validate 40 new distinct intents per campaign against all retained content.
-- [ ] Collect exact US/en organic SERP evidence for the 200 new queries.
-- [ ] Write 200 complete paired article bodies and metadata; assemble incrementally.
-- [ ] Run independent editorial reviews and cross-library duplicate/link checks.
-- [ ] Validate all 250 against native lander code in a remote-free local clone.
-- [ ] Check local rendering, media, canonical/noindex/discovery behavior.
-- [ ] Commit checkpoints, push a separate draft PR, hand over all PR links.
+- [x] Review 40 new editorial intent hypotheses per campaign against retained content; paid demand validation remains pending.
+- [x] Collect exact US/en organic SERP evidence for the 200 new queries.
+- [x] Write 200 complete paired article bodies and metadata; assemble all 250.
+- [x] Run sampled independent editorial reviews and full-library duplicate/link checks.
+- [x] Validate all 250 against native lander code in a remote-free local clone.
+- [x] Check local rendering, media, canonical/noindex/discovery behavior.
+- [x] Commit checkpoints, push draft PR #3; collect all four links in PR-LINKS.md.
 
 Delivery must distinguish 250 review drafts from 250 demand-validated or approved
 posts. Paid keyword access, final editorial/media approval, production publishing

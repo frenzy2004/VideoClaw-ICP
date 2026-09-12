@@ -10,7 +10,7 @@
     "sales objection battlecard",
     "call insights for enablement"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial hypothesis: Extract the objection, clarifying question and supported response into an internal conversation aid. Unlike c4-010's customer case study, this organizes a sales response rather than a customer success narrative; it does not authorize publishing private calls. No ranking-page comparison or demand conclusion is asserted.",
   "provenance": {
     "apifyRunId": "YkY3hZ8cxUobSs1CI",

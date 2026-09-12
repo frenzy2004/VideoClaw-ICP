@@ -28,7 +28,10 @@
     }
   ],
   "competitorGap": "Editorial hypothesis: A concrete queue simulation can distinguish unlimited submissions from the capacity required to meet overlapping deadlines.",
-  "reviewNotes": [],
+  "searchIntentBasis": "Editorial classification: evaluating a video-production purchase, engagement or vendor decision; not verified demand.",
+  "reviewNotes": [
+    "W1 resolved in scratch pair: the four-job event table maps A-D to intake rows and compares one versus two slots. Review releases slots, active edits are not preempted, and urgent work precedes returned revisions and then ready new work. All events and rules are hypothetical, without durations or vendor timing promises."
+  ],
   "serp": {
     "id": "vc-manual250-c3-014",
     "keyword": "how does unlimited video editing work",

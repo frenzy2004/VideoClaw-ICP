@@ -10,7 +10,7 @@
     "repurpose organic video for ads",
     "B2B video ad creative"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial hypothesis: Rebuild context, proof and action for a cold advertising audience that has not followed the original discussion. This is creative adaptation, distinct from choosing production resources or sequencing retargeting audiences. No ranking-page comparison or demand conclusion is asserted.",
   "provenance": {
     "apifyRunId": "YkY3hZ8cxUobSs1CI",

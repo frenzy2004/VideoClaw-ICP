@@ -10,7 +10,7 @@
     "live versus recorded investor demo",
     "hybrid product proof format"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Hypothesis: An inspection-job matrix chooses evidence format without turning into production-resource buying advice or failure recovery. Competing page bodies have not been audited for this draft.",
   "provenance": {
     "apifyRunId": "UZg3FufDQruZuQbdf",

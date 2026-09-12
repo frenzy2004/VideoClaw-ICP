@@ -28,6 +28,7 @@
     }
   ],
   "competitorGap": "Editorial hypothesis: Adapt product terms, examples, audio and destination copy for another language while checking meaning and timing. Distinct from c4-004's caption accessibility review because translation requires semantic and locale decisions. No ranking-page comparison or demand conclusion is asserted.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
   "reviewNotes": [
     "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending.",
     "Semantic and locale adaptation; not a generic caption article, dubbing-vendor comparison, or claim of universal language availability."

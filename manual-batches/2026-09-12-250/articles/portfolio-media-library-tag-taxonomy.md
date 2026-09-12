@@ -10,7 +10,7 @@
     "DAM taxonomy best practices",
     "digital asset tagging"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis: Build a controlled vocabulary for cross-portfolio asset retrieval while preserving company identity. Unlike retained c5-009, the task is classification and search, not visual consistency. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
   "provenance": {
     "apifyRunId": "8SjJ2NKr2HlOOh8Cv",

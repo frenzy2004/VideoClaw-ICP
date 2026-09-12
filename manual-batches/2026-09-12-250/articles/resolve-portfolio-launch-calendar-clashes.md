@@ -10,7 +10,7 @@
     "marketing calendar management",
     "campaign scheduling conflicts"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis: Resolve collisions between separate company launches competing for the same fund-owned distribution slots. Unlike retained c1-006 and c4-008, this reconciles multiple organizations' calendars rather than planning one campaign; unlike c5-034, it does not synchronize one shared embargo. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
   "provenance": {
     "apifyRunId": "8SjJ2NKr2HlOOh8Cv",

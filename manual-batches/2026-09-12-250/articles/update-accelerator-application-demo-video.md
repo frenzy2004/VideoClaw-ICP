@@ -10,7 +10,7 @@
     "replace accelerator demo recording",
     "application product video update"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Hypothesis: A scene replacement manifest separates genuine product changes from cosmetic re-edits and explains delivery consequences. Competing page bodies have not been audited for this draft.",
   "provenance": {
     "apifyRunId": "UZg3FufDQruZuQbdf",
@@ -59,7 +59,7 @@
   },
   "editorialGraphic": {
     "src": "/media/blog/update-accelerator-application-demo-video.svg",
-    "alt": "Compare old behavior with the current product, capture the changed sequence, and deliver a dated update.",
+    "alt": "A fictional assignment scene maps from dispatch-A at 00:18–00:39 to dispatch-B at 00:16–00:34, with dated builds and an update receipt.",
     "width": 1200,
     "height": 675
   },
@@ -100,7 +100,7 @@ Write one plain sentence describing the change. If it takes a paragraph to disti
 
 Use the old recording as an index. Identify the source time range, the behavior it shows, the current behavior, and whether the scene should remain, be replaced, or be retired. This keeps the edit tied to product evidence rather than a desire to make everything look newer.
 
-Here is a fictional example for a dispatch product:
+Here is a fictional example for a dispatch product. This shared case appears elsewhere in the series to isolate different recording problems; here, the job is replacing stale application evidence, not measuring progress or rehearsing a pitch:
 
 | Old scene | What it showed | Current state | Recording decision |
 | --- | --- | --- | --- |

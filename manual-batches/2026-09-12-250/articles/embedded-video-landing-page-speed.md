@@ -10,7 +10,7 @@
     "lazy load video embed",
     "landing page video performance"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial hypothesis: Reduce unnecessary initial loading while keeping the visitor's intended video easy to start. This is page performance triage, distinct from video indexing and file aspect-ratio adaptation. No ranking-page comparison or demand conclusion is asserted.",
   "provenance": {
     "apifyRunId": "YkY3hZ8cxUobSs1CI",

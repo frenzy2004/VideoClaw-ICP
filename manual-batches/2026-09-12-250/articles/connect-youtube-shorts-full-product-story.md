@@ -10,7 +10,7 @@
     "YouTube Shorts related video",
     "Shorts to long form video"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial hypothesis: Give an existing Short a relevant next video and ensure its promise matches the destination. Distinct from cutting Shorts, resizing footage or choosing general campaign CTAs because it implements an in-platform navigation path. No ranking-page comparison or demand conclusion is asserted.",
   "provenance": {
     "apifyRunId": "YkY3hZ8cxUobSs1CI",

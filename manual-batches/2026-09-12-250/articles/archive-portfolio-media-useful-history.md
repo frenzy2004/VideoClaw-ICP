@@ -11,7 +11,7 @@
     "portfolio media archive",
     "historical asset retrieval"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis: Move completed media out of everyday discovery while preserving context and an agreed route to historical assets. Distinct from deleting files, legal retention periods, rights-expiry enforcement and urgent withdrawal. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
   "provenance": {
     "apifyRunId": "8SjJ2NKr2HlOOh8Cv",

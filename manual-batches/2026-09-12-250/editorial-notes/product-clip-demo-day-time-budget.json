@@ -28,7 +28,10 @@
     }
   ],
   "competitorGap": "Hypothesis: A whole-sequence timing equation accounts for transition and result-hold time without duplicating pitch-script advice. Competing page bodies have not been audited for this draft.",
-  "reviewNotes": [],
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "FAQ provenance: these are original editorial questions, not observed PAA. Evidence links ground the cited technical facts or provide relevant background; the article-specific capture, review and delivery procedures are original editorial synthesis, not procedures mandated by those sources."
+  ],
   "serp": {
     "id": "vc-manual250-c2-028",
     "keyword": "product demo video length",

@@ -11,7 +11,7 @@
     "editorial conflict escalation",
     "portfolio media separation"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis: Separate staff assignments, unreleased examples and editorial context when shared teams support competing companies. The output is a practical conflict-escalation exercise, not legal advice about confidentiality or competition. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
   "provenance": {
     "apifyRunId": "8SjJ2NKr2HlOOh8Cv",

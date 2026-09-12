@@ -10,7 +10,7 @@
     "monthly video production contract",
     "video retainer workload"
   ],
-  "searchIntent": "informational",
+  "searchIntent": "commercial",
   "competitorGap": "Editorial hypothesis: A quiet-month and busy-month commitment test can reveal when reserved production capacity fits the buyer's actual workload.",
   "provenance": {
     "apifyRunId": "g9D9OtyGPJA0waGDm",

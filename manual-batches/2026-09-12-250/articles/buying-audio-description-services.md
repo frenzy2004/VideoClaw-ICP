@@ -11,7 +11,7 @@
     "described video delivery",
     "accessibility service procurement"
   ],
-  "searchIntent": "informational",
+  "searchIntent": "commercial",
   "competitorGap": "Editorial hypothesis: An order specimen connects essential visual moments to narration space and the actual player rather than treating captions as a substitute.",
   "provenance": {
     "apifyRunId": "g9D9OtyGPJA0waGDm",

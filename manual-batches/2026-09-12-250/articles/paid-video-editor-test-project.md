@@ -10,7 +10,7 @@
     "video editor audition",
     "evaluate freelance video editor"
   ],
-  "searchIntent": "informational",
+  "searchIntent": "commercial",
   "competitorGap": "Editorial hypothesis: A bounded audition with observable scoring anchors can help buyers distinguish candidate judgment from polished portfolios.",
   "provenance": {
     "apifyRunId": "g9D9OtyGPJA0waGDm",

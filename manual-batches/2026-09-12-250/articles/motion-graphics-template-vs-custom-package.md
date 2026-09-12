@@ -10,7 +10,7 @@
     "custom motion graphics package",
     "editable video template purchase"
   ],
-  "searchIntent": "informational",
+  "searchIntent": "commercial",
   "competitorGap": "Editorial hypothesis: An editability specimen can reveal whether a purchased template supports the buyer's recurring changes without repeated designer intervention.",
   "provenance": {
     "apifyRunId": "g9D9OtyGPJA0waGDm",

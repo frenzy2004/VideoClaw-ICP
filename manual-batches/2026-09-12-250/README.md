@@ -1,15 +1,15 @@
-# VideoClaw manual review expansion: target 250
+# VideoClaw manual review library: 250 articles
 
-Work in progress on `content/manual-review-batch-250`, based on the existing
-fifty-article review branch at `900053a`. Target: **250 total complete articles,
+Authored on `content/manual-review-batch-250`, based on the existing
+fifty-article review branch at `900053a`: **250 complete Markdown review drafts,
 50 per ICP**, comprising the unchanged first fifty and 200 additional drafts.
 
 [Draft PR #3](https://github.com/frenzy2004/VideoClaw-ICP/pull/3) contains this
 expansion and is stacked on [the retained first-50 PR #2](https://github.com/frenzy2004/VideoClaw-ICP/pull/2).
 
-See [INDEX.md](INDEX.md) for the current assembled count and direct Markdown
-links. Counts are incremental; this document does not claim the target is met.
-Only `--final` checks can verify 250 total and 50 per campaign.
+See [INDEX.md](INDEX.md) for all 250 direct Markdown links and the campaign counts.
+The final assembly/content checks verify 250 total and 50 per campaign. See
+[QA.md](QA.md) for the exact native, build and browser verification state.
 
 All articles remain review-only, with every approval false and no publication
 date. Search-result observations do not establish demand. Volume, difficulty and
@@ -25,8 +25,12 @@ schedule or deployment is changed.
 - `inventory.json`, `INDEX.md`: combined library, retaining the first fifty at
   `../2026-09-12-50/`; retained article and graphic hashes are checked.
 - `serp-*.json`: exact US/en query observations from paid Apify runs.
-- `native-contract-report.json`, `content-audit.json`: latest incremental checks,
-  with actual counts; they do not certify unwritten articles.
+- `native-contract-report.json`, `content-audit.json`, `build-audit.json`,
+  `http-audit.json`, `verification-summary.json`: final 250-record checks and
+  their exact verification scope.
+- `reviews/`: independent first-ten reviews in all five campaigns, additional
+  source checks and a correction record. This is sampled independent review,
+  not a claim that every article has publication approval.
 - `source-audit.json`, `source-fallback-checks.json`: transport receipts and
   separately recorded web-reading checks. Failed automatic retrieval stays failed.
 
@@ -44,6 +48,11 @@ with dependencies installed and **no Git remotes**. It reads the lander's own
 schema and copies content into that clone only. Do not point it at production.
 For completion, append `--final` to each command. Then run the clone's native
 checks, lint, preview build and local HTTP/browser audits.
+
+The native library rereads/parses the complete collection on each lookup. Do not
+run its 250-record production-visibility check concurrently with the static
+build on a constrained machine; the combined load produced page-generation
+timeouts in the first local attempt. Final build results are recorded in QA.
 
 Author scratch inputs in `drafts/` are ignored; assembled `articles/` are the
 complete deliverable and can be edited directly during review. `assemble.ts`

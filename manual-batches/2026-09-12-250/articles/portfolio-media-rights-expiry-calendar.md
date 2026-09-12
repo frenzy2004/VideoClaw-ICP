@@ -10,7 +10,7 @@
     "asset expiration management",
     "media rights tracking"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis: Schedule media review or expiry actions from dates and permitted uses already confirmed by the company or rights owner. This implements supplied instructions across destinations rather than interpreting licences or deciding whether a use is lawful. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
   "provenance": {
     "apifyRunId": "8SjJ2NKr2HlOOh8Cv",

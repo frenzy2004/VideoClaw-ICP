@@ -11,7 +11,7 @@
     "founder bylined article",
     "contributed article outline"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: help a founder build and test a specific argument before approaching an editor with a bylined article proposal.",
   "provenance": {
     "apifyRunId": "TU557kwZekJRkYg0z",

@@ -10,7 +10,7 @@
     "podcast episode description",
     "B2B podcast notes"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial hypothesis: Package an existing episode for listener selection and reference retrieval using an accurate description, guest context and resource links. This is episode metadata, not another long-video-to-clips article. No ranking-page comparison or demand conclusion is asserted.",
   "provenance": {
     "apifyRunId": "YkY3hZ8cxUobSs1CI",

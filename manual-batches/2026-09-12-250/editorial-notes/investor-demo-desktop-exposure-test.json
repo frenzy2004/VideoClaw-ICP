@@ -1,0 +1,108 @@
+{
+  "id": "vc-manual250-c2-044",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0060596",
+      "supports": "The desktop app offers whole-screen and application-window sharing; computer sound sharing is a separate option.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.apple.com/en-lamr/guide/mac-help/mchl613dc43f/mac",
+      "supports": "Focus allows notification exceptions and schedules, which must be considered during a demonstration.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Is turning on Focus enough to hide every interruption?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does sharing one window prevent every kind of exposure?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should I test with real private messages or files?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: Notification advice may omit the actual navigation path through autocomplete, account menus and file pickers outside the intended product evidence. Competing page bodies have not been audited for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "FAQs are editorial questions, not observed PAA. Source links provide factual or contextual grounding; the article-specific worksheets and procedural recommendations are original editorial synthesis."
+  ],
+  "serp": {
+    "id": "vc-manual250-c2-044",
+    "keyword": "hide notifications when screen sharing",
+    "found": true,
+    "query": "hide notifications when screen sharing",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Any way to globally disable notifications while sharing ...",
+        "url": "https://www.reddit.com/r/TeamsAdmins/comments/1s1zr5i/any_way_to_globally_disable_notifications_while/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "How to Disable Notifications During Screen Share (2026)",
+        "url": "https://contextblur.app/blog/disable-notifications-during-screen-share",
+        "domain": "contextblur.app",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "How to automatically disable notifications during screen ...",
+        "url": "https://superuser.com/questions/1786673/how-to-automatically-disable-notifications-during-screen-sharing-on-windows-10",
+        "domain": "superuser.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "The Ultimate Guide to Turning Off Notifications When Screen ...",
+        "url": "https://blog.airsquirrels.com/ultimate-guide-to-turning-off-notifications-when-screen-mirroring-ios-android-mac-windows-and-chrome-os",
+        "domain": "blog.airsquirrels.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "How to Hide Notifications While Sharing Your Screen in a ...",
+        "url": "https://www.howtogeek.com/714118/how-to-hide-notifications-while-sharing-your-screen-in-a-video-call/",
+        "domain": "howtogeek.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "How to stop screen share notification",
+        "url": "https://community.zoom.com/meetings-2/how-to-stop-screen-share-notification-26642",
+        "domain": "community.zoom.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "How to mute notifications while mirroring your phone screen",
+        "url": "https://thenextweb.com/news/how-to-mute-notifications-while-mirroring-your-phone-screen",
+        "domain": "thenextweb.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How to hide notifications while Screen sharing?",
+      "How can I hide notifications while I'm presenting?",
+      "Are notifications silenced when Screen sharing?",
+      "Does Screen sharing show your notifications?"
+    ],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

@@ -10,7 +10,7 @@
     "accelerator progress product video",
     "before after demo recording"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Hypothesis: A repeatable paired-capture protocol separates implemented product progress from presentation polish. Competing page bodies have not been audited for this draft.",
   "provenance": {
     "apifyRunId": "UZg3FufDQruZuQbdf",

@@ -10,7 +10,7 @@
     "private investor video link",
     "investor demo access test"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Hypothesis: Private-sharing advice may explain settings without an observed six-path recipient test for a single investor recording. Competing page bodies have not been audited for this draft.",
   "provenance": {
     "apifyRunId": "UZg3FufDQruZuQbdf",

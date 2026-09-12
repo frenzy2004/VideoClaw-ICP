@@ -11,7 +11,7 @@
     "startup roadmap disclaimer",
     "roadmap status definitions"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: Provide an original status dictionary and worked card revision that keeps planning uncertainty beside the relevant item.",
   "provenance": {
     "apifyRunId": "TU557kwZekJRkYg0z",

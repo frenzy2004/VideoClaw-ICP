@@ -28,6 +28,7 @@
     }
   ],
   "competitorGap": "Hypothesis: Recording tutorials may describe the button without a meeting-specific purpose, audience, transition and unrecorded alternative. Competing page bodies have not been audited for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
   "reviewNotes": [
     "FAQs are editorial, not PAA or legal advice. Zoom supports notification mechanics only. The permission card, alternative and distribution review are original operational recommendations, not a legal sufficiency test. KB0068228 returned an unrelated Chinese page title but its full English body was 'Modifying recording notification prompts' and supported the cited statement; recheck rendered title during final link QA."
   ],

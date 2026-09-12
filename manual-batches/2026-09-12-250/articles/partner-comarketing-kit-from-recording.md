@@ -10,7 +10,7 @@
     "partner video content kit",
     "joint webinar promotion assets"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial hypothesis: Package a shared offer with complementary partner introductions, useful excerpts and destination-specific copy. This concerns a single commercial partnership, not c5's multi-company portfolio operating system. No ranking-page comparison or demand conclusion is asserted.",
   "provenance": {
     "apifyRunId": "YkY3hZ8cxUobSs1CI",

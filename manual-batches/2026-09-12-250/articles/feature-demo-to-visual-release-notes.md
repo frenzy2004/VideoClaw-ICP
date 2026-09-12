@@ -10,7 +10,7 @@
     "feature update video",
     "visual product release notes"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial hypothesis: Explain a specific change to an already familiar product by contrasting the previous behavior with the new behavior and its availability. Distinct from a startup launch video, launch calendar or first-use tutorial. No ranking-page comparison or demand conclusion is asserted.",
   "provenance": {
     "apifyRunId": "YkY3hZ8cxUobSs1CI",

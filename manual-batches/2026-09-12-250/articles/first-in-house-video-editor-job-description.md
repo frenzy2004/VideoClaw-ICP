@@ -11,7 +11,7 @@
     "in house editor role scope",
     "video editor vacancy brief"
   ],
-  "searchIntent": "informational",
+  "searchIntent": "commercial",
   "competitorGap": "Editorial hypothesis: A vacancy package defines workload and managerial support after the hire decision, rather than bundling production, strategy and every creative specialty into one role.",
   "provenance": {
     "apifyRunId": "g9D9OtyGPJA0waGDm",

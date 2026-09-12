@@ -10,7 +10,7 @@
     "audio restoration quote",
     "repair clipped interview audio"
   ],
-  "searchIntent": "informational",
+  "searchIntent": "commercial",
   "competitorGap": "Editorial hypothesis: A representative repair sample and stop rule can turn uncertain audio salvage into a bounded purchase decision.",
   "provenance": {
     "apifyRunId": "g9D9OtyGPJA0waGDm",

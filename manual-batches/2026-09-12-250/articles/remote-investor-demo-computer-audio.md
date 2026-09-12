@@ -10,7 +10,7 @@
     "Zoom product demo sound",
     "share computer audio investor meeting"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Hypothesis: An isolated recipient test distinguishes digital product sound from microphone pickup and validates route changes. Competing page bodies have not been audited for this draft.",
   "provenance": {
     "apifyRunId": "UZg3FufDQruZuQbdf",

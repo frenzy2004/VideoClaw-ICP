@@ -10,7 +10,7 @@
     "repurpose video as audio podcast",
     "audio first video adaptation"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial hypothesis: Make an existing recording understandable without its pictures by replacing visual dependencies and restructuring audio transitions. This differs from podcast metadata and from extracting short clips. No ranking-page comparison or demand conclusion is asserted.",
   "provenance": {
     "apifyRunId": "YkY3hZ8cxUobSs1CI",

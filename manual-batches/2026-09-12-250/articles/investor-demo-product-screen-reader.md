@@ -10,7 +10,7 @@
     "screen reader investor demo",
     "keyboard product demo recording"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Hypothesis: Screen-reader guidance may omit an investor-facing capture script that distinguishes expected announcements from the actual product output. Competing page bodies have not been audited for this draft.",
   "provenance": {
     "apifyRunId": "UZg3FufDQruZuQbdf",

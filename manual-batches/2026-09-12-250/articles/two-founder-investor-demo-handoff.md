@@ -10,7 +10,7 @@
     "two presenter investor demo",
     "cofounder product demo handoff"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Hypothesis: A three-role handoff score resolves control collisions without becoming another pitch script. Competing page bodies have not been audited for this draft.",
   "provenance": {
     "apifyRunId": "UZg3FufDQruZuQbdf",

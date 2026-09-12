@@ -10,7 +10,7 @@
     "mobile app demo projector setup",
     "phone to event screen demo"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Hypothesis: A phone-to-event-screen signal-path record tests the actual app, orientation and operator cues rather than a booth loop. Competing page bodies have not been audited for this draft.",
   "provenance": {
     "apifyRunId": "UZg3FufDQruZuQbdf",

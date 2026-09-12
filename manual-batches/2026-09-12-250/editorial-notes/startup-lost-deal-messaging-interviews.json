@@ -1,0 +1,111 @@
+{
+  "id": "vc-manual250-c1-050",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.clozd.com/blog/win-loss-101-what-to-ask-buyers-in-win-loss-interviews",
+      "supports": "Open, unbiased questions and flexible follow-ups; the invitation and fictional decision timeline are original.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.clozd.com/blog/a-framework-for-creating-the-right-win-loss-analysis-questions",
+      "supports": "Broad buying context followed by topic-specific questions; no vendor outcome statistics are used.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should the founder conduct lost-deal interviews personally?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How can I tell whether messaging or the product caused the problem?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can a few lost-deal interviews justify rewriting our messaging?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Reconstruct a completed buying decision to find message gaps, false expectations, and real reasons for choosing an alternative. This is retrospective research with non-buyers, distinct from early problem discovery, message comprehension testing, and testimonial interviews. No ranking-page comparison or demand conclusion is asserted.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending.",
+    "Mixed-intent win-loss query is narrowed to retrospective completed-decision research for founder messaging. Not early discovery, testimonial collection, sales-library coverage, or an attempt to reopen the sale. All sample findings and company details are explicitly fictional."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-050",
+    "keyword": "win loss interviews for startup messaging",
+    "found": true,
+    "query": "win loss interviews for startup messaging",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Eight Win-Loss Analysis Best Practices",
+        "url": "https://www.pragmaticinstitute.com/resources/articles/product/eight-win-loss-analysis-best-practices/",
+        "domain": "pragmaticinstitute.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "Win/Loss Analysis",
+        "url": "https://demandspring.com/glossary/win-loss-analysis/",
+        "domain": "demandspring.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Win/Loss Analysis: The Complete Guide",
+        "url": "https://competeiq.io/win-loss-analysis",
+        "domain": "competeiq.io",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "10 Win/Loss Analysis Best Practices to Turn Customer ...",
+        "url": "https://www.deeto.com/blog-post/win-loss-analysis-best-practices",
+        "domain": "deeto.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "How to conduct effective win-loss interviews",
+        "url": "https://www.productmarketingalliance.com/how-to-conduct-win-loss-interviews/",
+        "domain": "productmarketingalliance.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "What Is a Win/Loss Analysis?",
+        "url": "https://www.askelephant.ai/blog/what-is-a-win-loss-analysis",
+        "domain": "askelephant.ai",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "How to Use Perspective AI for Win/Loss Analysis & ...",
+        "url": "https://getperspective.ai/docs/use-cases/win-loss-analysis-guide",
+        "domain": "getperspective.ai",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "The Ultimate Product Marketing Win-Loss Playbook",
+        "url": "https://www.clozd.com/blog/product-marketing-win-loss-playbook",
+        "domain": "clozd.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

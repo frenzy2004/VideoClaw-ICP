@@ -10,7 +10,7 @@
     "virtual office hours",
     "office hours booking"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis: Allocate existing advisory appointments through prerequisites, slot lengths, waitlists and cancellation rules. This solves appointment utilization, not workshop teaching, mentor-webinar repurposing or vendor selection. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
   "provenance": {
     "apifyRunId": "8SjJ2NKr2HlOOh8Cv",

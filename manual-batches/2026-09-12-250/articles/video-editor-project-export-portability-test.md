@@ -11,7 +11,7 @@
     "editing software lock in",
     "XML AAF project transfer"
   ],
-  "searchIntent": "informational",
+  "searchIntent": "commercial",
   "competitorGap": "Editorial hypothesis: A destination-tested interchange specimen distinguishes successful file export from a project another editor can modify without hidden reconstruction.",
   "provenance": {
     "apifyRunId": "g9D9OtyGPJA0waGDm",

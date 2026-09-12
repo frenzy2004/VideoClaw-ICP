@@ -11,7 +11,7 @@
     "directed narration session",
     "voice actor selection"
   ],
-  "searchIntent": "informational",
+  "searchIntent": "commercial",
   "competitorGap": "Editorial hypothesis: A bounded pronunciation-and-emphasis audition makes performance differences observable without turning speculative auditions into unpaid production.",
   "provenance": {
     "apifyRunId": "g9D9OtyGPJA0waGDm",

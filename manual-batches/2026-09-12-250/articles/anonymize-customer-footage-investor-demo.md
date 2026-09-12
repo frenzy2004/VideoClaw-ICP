@@ -10,7 +10,7 @@
     "remove customer data from demo video",
     "anonymize investor screen recording"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Hypothesis: A scene-level exposure map connects privacy edits to preserved product evidence rather than treating blur as anonymity. Competing page bodies have not been audited for this draft.",
   "provenance": {
     "apifyRunId": "UZg3FufDQruZuQbdf",
@@ -59,7 +59,7 @@
   },
   "editorialGraphic": {
     "src": "/media/blog/anonymize-customer-footage-investor-demo.svg",
-    "alt": "Identify permitted use, map identifying context, choose treatment and inspect the complete delivered asset.",
+    "alt": "Confirm permitted use; map identifying picture, voice and text; treat or recapture; inspect the complete delivery.",
     "width": 1200,
     "height": 675
   },

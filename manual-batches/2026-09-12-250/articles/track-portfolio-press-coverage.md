@@ -11,7 +11,7 @@
     "portfolio clipping register",
     "press mention deduplication"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis: Create a company-resolved record of actual press mentions, separating original reporting, reposts and false matches. Unlike retained c5-010's program evaluation, this establishes reliable coverage records before interpretation; unlike c5-032, it operates after publication. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
   "provenance": {
     "apifyRunId": "8SjJ2NKr2HlOOh8Cv",

@@ -11,7 +11,7 @@
     "team editing licenses",
     "editor account administration"
   ],
-  "searchIntent": "informational",
+  "searchIntent": "commercial",
   "competitorGap": "Editorial hypothesis: A person-to-entitlement map separates editing, review, administration and departure needs instead of assuming every collaborator needs the same subscription.",
   "provenance": {
     "apifyRunId": "g9D9OtyGPJA0waGDm",

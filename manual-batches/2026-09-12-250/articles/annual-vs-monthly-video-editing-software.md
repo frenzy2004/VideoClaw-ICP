@@ -11,7 +11,7 @@
     "annual paid monthly cancellation",
     "video subscription billing terms"
   ],
-  "searchIntent": "informational",
+  "searchIntent": "commercial",
   "competitorGap": "Editorial hypothesis: A commitment calendar separates billing frequency from contract length and tests stop-work scenarios without inventing vendor prices.",
   "provenance": {
     "apifyRunId": "g9D9OtyGPJA0waGDm",

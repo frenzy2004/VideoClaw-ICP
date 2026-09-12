@@ -10,7 +10,7 @@
     "video indexing report",
     "video is not on a watch page"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial hypothesis: Diagnose whether the page and video meet Google's video indexing requirements, then prepare concrete corrections. Distinct from choosing marketing metrics, clipping material or writing a transcript article. No ranking-page comparison or demand conclusion is asserted.",
   "provenance": {
     "apifyRunId": "YkY3hZ8cxUobSs1CI",

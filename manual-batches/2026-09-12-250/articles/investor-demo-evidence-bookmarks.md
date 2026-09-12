@@ -10,7 +10,7 @@
     "investor demo video bookmarks",
     "product evidence replay index"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Hypothesis: A question-driven replay index includes context and return points instead of generic feature chapters. Competing page bodies have not been audited for this draft.",
   "provenance": {
     "apifyRunId": "UZg3FufDQruZuQbdf",

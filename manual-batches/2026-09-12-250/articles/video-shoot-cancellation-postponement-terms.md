@@ -11,7 +11,7 @@
     "video shoot cancellation costs",
     "reschedule booking terms"
   ],
-  "searchIntent": "informational",
+  "searchIntent": "commercial",
   "competitorGap": "Editorial hypothesis: A cancel-versus-postpone table reconciles separate supplier commitments, notice deadlines and rescheduling credits without inventing standard fees.",
   "provenance": {
     "apifyRunId": "g9D9OtyGPJA0waGDm",

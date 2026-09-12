@@ -10,7 +10,7 @@
     "AI investor demo repeated trials",
     "honest AI product video"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Hypothesis: A recorded trial ledger exposes selection and interventions without misrepresenting a small demo set as a reliability benchmark. Competing page bodies have not been audited for this draft.",
   "provenance": {
     "apifyRunId": "UZg3FufDQruZuQbdf",

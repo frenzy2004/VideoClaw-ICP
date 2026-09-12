@@ -10,7 +10,7 @@
     "outdated content audit",
     "content update workflow"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis: Trace a company change to dependent media and select update, annotate or retire actions. Unlike a new launch plan, this maintains a network of previously published assets. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
   "provenance": {
     "apifyRunId": "8SjJ2NKr2HlOOh8Cv",

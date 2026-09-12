@@ -11,7 +11,7 @@
     "music subscription cancellation",
     "business soundtrack license"
   ],
-  "searchIntent": "informational",
+  "searchIntent": "commercial",
   "competitorGap": "Editorial hypothesis: A dated coverage timeline distinguishes a downloaded track from permission for specific publications and future edits.",
   "provenance": {
     "apifyRunId": "g9D9OtyGPJA0waGDm",

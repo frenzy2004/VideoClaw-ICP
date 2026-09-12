@@ -11,7 +11,7 @@
     "startup customer council",
     "customer advisory board agenda"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: A filled invitation package connects a specific participant's experience to a bounded advisory commitment and shows the response members receive afterward.",
   "provenance": {
     "apifyRunId": "TU557kwZekJRkYg0z",

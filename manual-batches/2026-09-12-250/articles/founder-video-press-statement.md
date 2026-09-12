@@ -11,7 +11,7 @@
     "founder recorded statement",
     "press statement script"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: Pair an original statement script with an excerpt-integrity test and a dated source handoff.",
   "provenance": {
     "apifyRunId": "TU557kwZekJRkYg0z",

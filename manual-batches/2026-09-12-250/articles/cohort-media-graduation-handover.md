@@ -11,7 +11,7 @@
     "cohort media closeout",
     "company media delivery manifest"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis: Close a cohort's media service by delivering each company's approved package and documenting remaining shared responsibilities. Unlike a staff departure or an alumni-community program, the output is a company-by-company exit transfer. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
   "provenance": {
     "apifyRunId": "8SjJ2NKr2HlOOh8Cv",

@@ -11,7 +11,7 @@
     "AI voice account ownership",
     "synthetic narration consent"
   ],
-  "searchIntent": "informational",
+  "searchIntent": "commercial",
   "competitorGap": "Editorial hypothesis: A permission-chain worksheet separates the speaker's agreement, platform verification, business access and treatment of already generated recordings.",
   "provenance": {
     "apifyRunId": "g9D9OtyGPJA0waGDm",

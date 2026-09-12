@@ -10,7 +10,7 @@
     "GA4 video engagement events",
     "GA4 YouTube embed tracking"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial hypothesis: Determine whether the embed supports the expected automatic events and verify actual playback-event collection. Distinct from UTM tagging, which measures incoming links, and from choosing a video KPI. No ranking-page comparison or demand conclusion is asserted.",
   "provenance": {
     "apifyRunId": "YkY3hZ8cxUobSs1CI",

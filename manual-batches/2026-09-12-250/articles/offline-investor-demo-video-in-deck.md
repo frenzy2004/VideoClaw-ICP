@@ -10,7 +10,7 @@
     "offline PowerPoint demo video",
     "embed investor video in deck"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Hypothesis: A dependency map and cold disconnected test distinguish truly local playback from thumbnails, links and cached sessions. Competing page bodies have not been audited for this draft.",
   "provenance": {
     "apifyRunId": "UZg3FufDQruZuQbdf",

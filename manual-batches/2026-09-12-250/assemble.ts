@@ -6,7 +6,7 @@ import { z } from 'zod';
 import { renderEditorialSvg } from '../../lib/autoblogger/content-bundle';
 import { MEDIA_ALLOWLIST } from '../../lib/autoblogger/runtime';
 import type { CampaignId } from '../../lib/autoblogger/domain';
-import { mergeInventory, selectEvidence } from './batch-utils';
+import { mergeInventory, selectEvidence, manualSearchIntent } from './batch-utils';
 import { containsSecretLikeValue } from '../../lib/autoblogger/secrets';
 
 const root=resolve(import.meta.dirname);
@@ -53,7 +53,7 @@ for(const topic of topics) {
   const productMedia={src:product.src,poster:product.poster,alt:product.alt,caption:product.caption,width:product.width,height:product.height};
   const date='2026-09-12';
   const data={id:topic.id,campaign:topic.campaign,icp:topic.icp,customerTrigger:topic.customerTrigger,funnelStage:topic.funnelStage,
-    primaryKeyword:topic.keyword,secondaryKeywords:metadata.secondaryKeywords,searchIntent:topic.funnelStage==='consideration'?'commercial':'informational',
+    primaryKeyword:topic.keyword,secondaryKeywords:metadata.secondaryKeywords,searchIntent:manualSearchIntent(topic.campaign),
     competitorGap:metadata.competitorGap,provenance:{apifyRunId:evidence.runId,apifyDatasetId:evidence.datasetId,query:topic.keyword,locale:'en-US',capturedAt:evidence.observedAt.slice(0,10)},
     title:topic.title,description:metadata.description,slug:topic.slug,canonicalPath:`/blog/${topic.slug}`,sources:metadata.sources,faqs:metadata.faqs,
     productMedia,editorialGraphic:{src:`/media/blog/${topic.slug}.svg`,alt:metadata.editorialGraphic.alt,width:1200,height:675},
@@ -72,7 +72,7 @@ for(const topic of topics) {
   await Promise.all(['articles','media','editorial-notes'].map(dir=>mkdir(resolve(root,dir),{recursive:true})));
   await writeFile(resolve(root,'articles',topic.slug+'.md'),markdown);
   await writeFile(resolve(root,'media',topic.slug+'.svg'),svg+'\n');
-  await writeFile(resolve(root,'editorial-notes',topic.slug+'.json'),JSON.stringify({id:topic.id,kind:'manually_curated_review_draft',sourceNotes:metadata.sourceNotes,faqEvidence,competitorGap:metadata.competitorGap,reviewNotes:metadata.reviewNotes??[],serp:evidence,paidMetrics:'provider-pending'},null,2)+'\n');
+  await writeFile(resolve(root,'editorial-notes',topic.slug+'.json'),JSON.stringify({id:topic.id,kind:'manually_curated_review_draft',sourceNotes:metadata.sourceNotes,faqEvidence,competitorGap:metadata.competitorGap,searchIntentBasis:topic.campaign==='video-production-comparison'?'Editorial classification: evaluating a video-production purchase, engagement or vendor decision; not verified demand.':'Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.',reviewNotes:metadata.reviewNotes??[],serp:evidence,paidMetrics:'provider-pending'},null,2)+'\n');
   output.push({id:topic.id,campaign:topic.campaign,title:topic.title,keyword:topic.keyword,slug:topic.slug,words,articleSha256:hash(markdown),graphicSha256:hash(svg+'\n'),sourceCount:metadata.sources.length,faqEvidence,reviewStatus:'review',warnings:[...(words<850?['short_article_requires_editorial_review']:[]),...(topic.title.length>65?['long_title_review_serp_display']:[])]});
 }
 const items=mergeInventory(retained.map((item:Record<string,unknown>)=>({...item,sourceBatch:'2026-09-12-50'})),output.map(item=>({...item,sourceBatch:'2026-09-12-250'})),process.argv.includes('--final')?{campaigns:[...new Set(topics.map(topic=>topic.campaign))],perCampaign:50}:undefined);

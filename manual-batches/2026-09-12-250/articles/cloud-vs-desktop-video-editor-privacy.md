@@ -11,7 +11,7 @@
     "video editor data handling",
     "cloud editing security questions"
   ],
-  "searchIntent": "informational",
+  "searchIntent": "commercial",
   "competitorGap": "Editorial hypothesis: A feature-level data-path map tests the actual configuration rather than assuming desktop branding means local-only processing.",
   "provenance": {
     "apifyRunId": "g9D9OtyGPJA0waGDm",

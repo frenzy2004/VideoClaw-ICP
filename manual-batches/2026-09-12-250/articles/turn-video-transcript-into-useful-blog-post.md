@@ -10,7 +10,7 @@
     "video transcript editing",
     "video to article workflow"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial hypothesis: Reconstruct spoken material into an argument a reader can follow, identifying missing explanations and preserving attribution. Unlike retained c4-001's webinar campaign plan or c4-002's clipping procedure, the output is an edited written article. No ranking-page comparison or demand conclusion is asserted.",
   "provenance": {
     "apifyRunId": "YkY3hZ8cxUobSs1CI",

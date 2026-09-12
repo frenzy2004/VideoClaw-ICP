@@ -11,7 +11,7 @@
     "portfolio cost worksheet",
     "shared production cost attribution"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis: Apportion an already-incurred shared media cost using explicit allocation rules and traceable inputs. Unlike c3-008's production budget, this reconciles shared consumption and does not set vendor rates. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
   "provenance": {
     "apifyRunId": "8SjJ2NKr2HlOOh8Cv",

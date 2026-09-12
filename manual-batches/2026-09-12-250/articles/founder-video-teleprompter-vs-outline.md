@@ -11,7 +11,7 @@
     "reading a script naturally",
     "teleprompter or outline"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: Compare delivery aids against the same customer message, with explicit accuracy and recovery tests rather than software recommendations.",
   "provenance": {
     "apifyRunId": "TU557kwZekJRkYg0z",

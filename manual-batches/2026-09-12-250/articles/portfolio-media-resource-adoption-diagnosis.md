@@ -11,7 +11,7 @@
     "media resource engagement",
     "resource adoption diagnosis"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis: Diagnose awareness, relevance, usability and usefulness barriers among existing users, then choose a bounded improvement. Unlike retained c5-010's program evaluation, this ends in a specific adoption intervention. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
   "provenance": {
     "apifyRunId": "8SjJ2NKr2HlOOh8Cv",

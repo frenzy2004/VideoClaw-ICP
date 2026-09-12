@@ -10,7 +10,7 @@
     "webinar FAQ extraction",
     "recorded customer questions"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial hypothesis: Separate repeated questions, conditional answers and unresolved questions to build an answer page for prospective customers. This is FAQ extraction and answer qualification, not retained c4-001's overall webinar campaign. No ranking-page comparison or demand conclusion is asserted.",
   "provenance": {
     "apifyRunId": "YkY3hZ8cxUobSs1CI",

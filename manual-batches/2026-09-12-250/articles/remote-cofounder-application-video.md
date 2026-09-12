@@ -10,7 +10,7 @@
     "remote founder video recording",
     "cofounder video call application"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Hypothesis: A remote take sheet addresses recording layout and conversational handoffs without becoming another pitch script. Competing page bodies have not been audited for this draft.",
   "provenance": {
     "apifyRunId": "UZg3FufDQruZuQbdf",

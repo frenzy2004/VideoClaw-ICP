@@ -11,7 +11,7 @@
     "filming additional insured evidence",
     "vendor coverage questions"
   ],
-  "searchIntent": "informational",
+  "searchIntent": "commercial",
   "competitorGap": "Editorial hypothesis: A requirement-to-evidence sheet reconciles named parties, endorsements and filming scope without treating a certificate as a coverage determination.",
   "provenance": {
     "apifyRunId": "g9D9OtyGPJA0waGDm",

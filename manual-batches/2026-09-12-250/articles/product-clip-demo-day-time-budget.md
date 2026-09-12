@@ -10,7 +10,7 @@
     "demo day video time budget",
     "product clip presentation timing"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Hypothesis: A whole-sequence timing equation accounts for transition and result-hold time without duplicating pitch-script advice. Competing page bodies have not been audited for this draft.",
   "provenance": {
     "apifyRunId": "UZg3FufDQruZuQbdf",

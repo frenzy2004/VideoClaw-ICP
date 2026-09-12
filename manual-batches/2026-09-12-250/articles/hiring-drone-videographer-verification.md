@@ -10,7 +10,7 @@
     "drone videographer hiring checklist",
     "commercial aerial footage supplier"
   ],
-  "searchIntent": "informational",
+  "searchIntent": "commercial",
   "competitorGap": "Editorial hypothesis: A location-specific operator evidence packet can connect creative requirements with credential and authorization questions before booking.",
   "provenance": {
     "apifyRunId": "g9D9OtyGPJA0waGDm",

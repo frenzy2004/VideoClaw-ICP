@@ -11,7 +11,7 @@
     "outdated translated content",
     "multilingual resource maintenance"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis: Propagate source changes through existing resource translations and prevent stale guidance appearing current. Distinct from translating or repurposing a GTM video. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
   "provenance": {
     "apifyRunId": "8SjJ2NKr2HlOOh8Cv",

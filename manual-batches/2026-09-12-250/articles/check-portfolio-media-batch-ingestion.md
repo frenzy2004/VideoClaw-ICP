@@ -11,7 +11,7 @@
     "media batch acceptance",
     "company asset intake checklist"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis: Accept, return or hold new media submissions using a batch receipt and company-specific completeness checks. Unlike c5-026 migration, this handles recurring new contributions; unlike c3 outsourcing handoff, the sender is a portfolio company supplying its own media. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
   "provenance": {
     "apifyRunId": "8SjJ2NKr2HlOOh8Cv",

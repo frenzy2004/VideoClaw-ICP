@@ -11,7 +11,7 @@
     "shared template version drift",
     "template dependency register"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis: Release a template change and identify which company copies require adoption, migration or retirement. Unlike brand guidelines, this handles dependency changes and rollout; unlike asset versioning, the change affects future outputs. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
   "provenance": {
     "apifyRunId": "8SjJ2NKr2HlOOh8Cv",

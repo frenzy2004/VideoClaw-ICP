@@ -10,7 +10,7 @@
     "prototype demo labels",
     "working vs simulated investor video"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Hypothesis: A scene status map identifies mixed implementation boundaries without relying on one vague prototype disclaimer. Competing page bodies have not been audited for this draft.",
   "provenance": {
     "apifyRunId": "UZg3FufDQruZuQbdf",

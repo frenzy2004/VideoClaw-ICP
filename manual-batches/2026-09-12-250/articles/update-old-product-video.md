@@ -10,7 +10,7 @@
     "refresh old product demo",
     "replace outdated video segment"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial hypothesis: Locate and replace stale segments, then check continuity, destinations and measurement consequences. This is a single-asset repair job, distinct from c5 portfolio lifecycle systems and from recording a new tutorial. No ranking-page comparison or demand conclusion is asserted.",
   "provenance": {
     "apifyRunId": "YkY3hZ8cxUobSs1CI",

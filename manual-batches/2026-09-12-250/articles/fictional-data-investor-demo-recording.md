@@ -10,7 +10,7 @@
     "fictional product demo data",
     "sample investor demo dataset"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Hypothesis: A relational filming-data recipe preserves cross-screen meaning while separating fictional props from customer evidence. Competing page bodies have not been audited for this draft.",
   "provenance": {
     "apifyRunId": "UZg3FufDQruZuQbdf",

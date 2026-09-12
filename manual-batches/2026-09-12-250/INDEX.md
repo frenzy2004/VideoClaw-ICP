@@ -1,12 +1,12 @@
-# Manual review library: 232 of 250 articles
+# Manual review library: 250 of 250 articles
 
-Target: fifty per ICP. Original fifty are retained unchanged; 182 additional articles assembled. These are unpublished editorial drafts, not demand-validated or team-approved posts. All volume, difficulty and CPC values remain provider-pending.
+Target: fifty per ICP. Original fifty are retained unchanged; 200 additional articles assembled. These are unpublished editorial drafts, not demand-validated or team-approved posts. All volume, difficulty and CPC values remain provider-pending.
 
 | ICP campaign | Complete drafts | Target |
 |---|---:|---:|
-| newly-funded-founder | 41 | 50 |
-| accelerator-demo-day-founder | 43 | 50 |
-| video-production-comparison | 48 | 50 |
+| newly-funded-founder | 50 | 50 |
+| accelerator-demo-day-founder | 50 | 50 |
+| video-production-comparison | 50 | 50 |
 | gtm-content-repurposing-buyer | 50 | 50 |
 | portfolio-media-platform | 50 | 50 |
 
@@ -93,9 +93,18 @@ Target: fifty per ICP. Original fifty are retained unchanged; 182 additional art
 | vc-manual250-c1-039 | [Record a Vertical Founder Video on Your Phone](../2026-09-12-250/articles/record-vertical-founder-video-phone.md) | how to record a vertical video on your phone | 1096 | review |
 | vc-manual250-c1-040 | [Make a Partnership Announcement Useful to Customers](../2026-09-12-250/articles/startup-partnership-announcement-customer-value.md) | startup partnership announcement | 1062 | review |
 | vc-manual250-c1-041 | [Invite Customers to Your First Advisory Board](../2026-09-12-250/articles/startup-customer-advisory-board-invitation.md) | startup customer advisory board invitation | 1147 | review |
+| vc-manual250-c1-042 | [Host a Founder AMA Around Real Customer Questions](../2026-09-12-250/articles/founder-ama-customer-questions.md) | how to host a founder AMA | 1149 | review |
+| vc-manual250-c1-043 | [Explain a Launch Delay in a Founder Video](../2026-09-12-250/articles/founder-launch-delay-video.md) | product launch delay video message | 1150 | review |
+| vc-manual250-c1-044 | [Record a Conference Talk That Teaches Without a Live Room](../2026-09-12-250/articles/founder-recorded-conference-talk.md) | how to record a conference presentation video | 1151 | review |
+| vc-manual250-c1-045 | [Make a Founder Thank-You Video Feel Personal](../2026-09-12-250/articles/founder-customer-thank-you-video.md) | customer thank you video | 1143 | review |
+| vc-manual250-c1-046 | [Prepare a Show HN Post People Can Actually Try](../2026-09-12-250/articles/startup-show-hn-tryable-product-post.md) | how to launch a startup on Show HN | 1171 | review |
+| vc-manual250-c1-047 | [Choose a Founder Video Thumbnail That Matches the Message](../2026-09-12-250/articles/founder-video-thumbnail.md) | how to choose a video thumbnail | 1210 | review |
+| vc-manual250-c1-048 | [Prepare Your Startup’s First Industry Analyst Briefing](../2026-09-12-250/articles/startup-industry-analyst-briefing.md) | how to prepare an analyst briefing for a startup | 1238 | review |
+| vc-manual250-c1-049 | [Record a Natural Voiceover for a Founder Video](../2026-09-12-250/articles/founder-video-voiceover-delivery.md) | how to record a natural voiceover | 1251 | review |
+| vc-manual250-c1-050 | [Use Lost-Deal Interviews to Repair Startup Messaging](../2026-09-12-250/articles/startup-lost-deal-messaging-interviews.md) | win loss interviews for startup messaging | 1260 | review |
 | vc-manual250-c2-011 | [Match Accelerator Application Videos to the Right Fields](../2026-09-12-250/articles/accelerator-application-video-field-map.md) | accelerator application video requirements | 1135 | review |
 | vc-manual250-c2-012 | [Record an Application Video With Remote Cofounders](../2026-09-12-250/articles/remote-cofounder-application-video.md) | YC application video founders different locations | 1137 | review |
-| vc-manual250-c2-013 | [Update an Application Demo When the Product Changes](../2026-09-12-250/articles/update-accelerator-application-demo-video.md) | update accelerator application demo video | 1170 | review |
+| vc-manual250-c2-013 | [Update an Application Demo When the Product Changes](../2026-09-12-250/articles/update-accelerator-application-demo-video.md) | update accelerator application demo video | 1198 | review |
 | vc-manual250-c2-014 | [Find Where Investors Lose the Thread in Your Demo](../2026-09-12-250/articles/investor-demo-video-comprehension-test.md) | how to get feedback on a product demo | 1111 | review |
 | vc-manual250-c2-015 | [Show Accelerator Progress With Paired Demo Recordings](../2026-09-12-250/articles/accelerator-progress-paired-demo-recordings.md) | before and after product demo | 1112 | review |
 | vc-manual250-c2-016 | [Correct an Investor Video Without Leaving Conflicting Claims](../2026-09-12-250/articles/correct-investor-video-visible-claims.md) | correct a mistake in a video | 1060 | review |
@@ -126,10 +135,17 @@ Target: fifty per ICP. Original fifty are retained unchanged; 182 additional art
 | vc-manual250-c2-041 | [Check Demo Video Compatibility on the Event Computer](../2026-09-12-250/articles/demo-video-event-computer-compatibility.md) | video format for PowerPoint on Mac and Windows | 1061 | review |
 | vc-manual250-c2-042 | [Hand Your Demo Clip to the Event AV Operator](../2026-09-12-250/articles/demo-day-founder-video-av-cue-sheet.md) | video playback cue sheet | 1069 | review |
 | vc-manual250-c2-043 | [Keep Presenter Notes Out of the Investor's View](../2026-09-12-250/articles/investor-demo-private-presenter-view.md) | hide presenter notes when sharing screen | 1067 | review |
+| vc-manual250-c2-044 | [Keep Private Desktop Content Out of an Investor Demo](../2026-09-12-250/articles/investor-demo-desktop-exposure-test.md) | hide notifications when screen sharing | 1062 | review |
+| vc-manual250-c2-045 | [Keep an Uncut Proof Take Behind Your Investor Demo](../2026-09-12-250/articles/uncut-investor-demo-proof-take.md) | uncut product demo | 1054 | review |
+| vc-manual250-c2-046 | [Review Round Details Before Posting a Demo Day Video](../2026-09-12-250/articles/public-demo-day-video-round-details.md) | can I post my demo day pitch video publicly | 1096 | review |
+| vc-manual250-c2-047 | [Make Demo Subtitles Survive Event Playback](../2026-09-12-250/articles/demo-subtitles-event-playback-delivery.md) | PowerPoint video subtitles not showing | 1135 | review |
+| vc-manual250-c2-048 | [Balance Narration and Product Sound in an Investor Demo](../2026-09-12-250/articles/investor-demo-narration-product-sound-mix.md) | balance voiceover and background audio | 1104 | review |
+| vc-manual250-c2-049 | [Capture a Voice Product Demo From Command to Result](../2026-09-12-250/articles/voice-product-investor-demo-recording.md) | record voice assistant demo | 1121 | review |
+| vc-manual250-c2-050 | [Fix Flicker When Filming a Prototype for Investors](../2026-09-12-250/articles/prototype-display-flicker-investor-demo.md) | screen flickering when recording video | 1158 | review |
 | vc-manual250-c3-011 | [How to Run a Paid Video Editor Test Project](../2026-09-12-250/articles/paid-video-editor-test-project.md) | paid video editor test project | 1148 | review |
 | vc-manual250-c3-012 | [How to Evaluate a Video Production Portfolio](../2026-09-12-250/articles/evaluate-video-production-portfolio.md) | how to evaluate a video production portfolio | 1128 | review |
 | vc-manual250-c3-013 | [Video Production Retainer vs Project: Which Fits?](../2026-09-12-250/articles/video-production-retainer-vs-project.md) | video production retainer vs project | 1143 | review |
-| vc-manual250-c3-014 | [Unlimited Video Editing: Check the Queue Before Buying](../2026-09-12-250/articles/unlimited-video-editing-queue-capacity.md) | how does unlimited video editing work | 1130 | review |
+| vc-manual250-c3-014 | [Unlimited Video Editing: Check the Queue Before Buying](../2026-09-12-250/articles/unlimited-video-editing-queue-capacity.md) | how does unlimited video editing work | 1335 | review |
 | vc-manual250-c3-015 | [Rent or Buy Camera Equipment for Business Videos?](../2026-09-12-250/articles/rent-or-buy-camera-equipment-business-video.md) | rent or buy camera equipment for business videos | 1091 | review |
 | vc-manual250-c3-016 | [Rent a Video Studio or Film in Your Office?](../2026-09-12-250/articles/video-studio-rental-vs-office-filming.md) | rent a video studio or film in the office | 1130 | review |
 | vc-manual250-c3-017 | [Choose Remote Recording Software Your Editor Can Use](../2026-09-12-250/articles/choose-remote-video-recording-software.md) | how to choose remote video recording software | 1089 | review |
@@ -164,6 +180,8 @@ Target: fifty per ICP. Original fifty are retained unchanged; 182 additional art
 | vc-manual250-c3-046 | [Write a Realistic Job Description for Your First Editor](../2026-09-12-250/articles/first-in-house-video-editor-job-description.md) | first in house video editor job description | 1039 | review |
 | vc-manual250-c3-047 | [Annual or Monthly Video Editing Software: Read the Terms](../2026-09-12-250/articles/annual-vs-monthly-video-editing-software.md) | annual vs monthly video editing software subscription | 1014 | review |
 | vc-manual250-c3-048 | [Choose a File Transfer Service for Original Video Footage](../2026-09-12-250/articles/choose-large-video-file-transfer-service.md) | best way to send large video files to an editor | 1029 | review |
+| vc-manual250-c3-049 | [How Many AI Video Credits Do You Actually Need?](../2026-09-12-250/articles/estimate-ai-video-credit-plan.md) | how many AI video credits do I need | 1021 | review |
+| vc-manual250-c3-050 | [Should You Renew Your Video Production Partner?](../2026-09-12-250/articles/renew-video-production-partner-review.md) | how to evaluate video production agency performance | 1070 | review |
 | vc-manual250-c4-011 | [Turn a Video Transcript Into a Useful Blog Post](../2026-09-12-250/articles/turn-video-transcript-into-useful-blog-post.md) | turn video transcript into blog post | 1110 | review |
 | vc-manual250-c4-012 | [Extract Clear Product Stills From Existing Video](../2026-09-12-250/articles/extract-clear-product-stills-from-video.md) | how to extract high quality stills from video | 1111 | review |
 | vc-manual250-c4-013 | [Edit a Recorded Panel So Each Speaker Is Easy to Follow](../2026-09-12-250/articles/edit-recorded-panel-multiple-speakers.md) | how to edit a panel discussion video | 1143 | review |
@@ -172,7 +190,7 @@ Target: fifty per ICP. Original fifty are retained unchanged; 182 additional art
 | vc-manual250-c4-016 | [Turn Sales Call Insights Into Objection Battlecards](../2026-09-12-250/articles/sales-call-insights-objection-battlecards.md) | create sales battlecards from sales calls | 1119 | review |
 | vc-manual250-c4-017 | [Build a Useful Follow-Up From a Recorded Sales Demo](../2026-09-12-250/articles/recorded-sales-demo-follow-up.md) | product demo follow up video email | 1102 | review |
 | vc-manual250-c4-018 | [Build a Buying Committee Content Pack From Existing Assets](../2026-09-12-250/articles/buying-committee-content-pack.md) | content for B2B buying committee | 1116 | review |
-| vc-manual250-c4-019 | [Build a Nurture Sequence From Content You Already Have](../2026-09-12-250/articles/nurture-sequence-from-existing-content.md) | lead nurturing email sequence using existing content | 1115 | review |
+| vc-manual250-c4-019 | [Build a Nurture Sequence From Content You Already Have](../2026-09-12-250/articles/nurture-sequence-from-existing-content.md) | lead nurturing email sequence using existing content | 1411 | review |
 | vc-manual250-c4-020 | [Turn Expert Recordings Into a Newsletter Worth Reading](../2026-09-12-250/articles/expert-recordings-to-newsletter.md) | repurpose video content for email newsletter | 1125 | review |
 | vc-manual250-c4-021 | [Use Existing Content to Re-Engage Stalled B2B Leads](../2026-09-12-250/articles/existing-content-reengage-stalled-leads.md) | re engagement email content for B2B leads | 1095 | review |
 | vc-manual250-c4-022 | [Turn a Customer QBR Into a Renewal Recap](../2026-09-12-250/articles/customer-qbr-to-renewal-recap.md) | customer QBR recap video | 1082 | review |

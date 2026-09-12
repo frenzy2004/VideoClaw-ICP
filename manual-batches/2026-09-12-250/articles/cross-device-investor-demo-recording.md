@@ -10,7 +10,7 @@
     "cross device product demo video",
     "record phone and desktop demo together"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Hypothesis: A two-lane event sheet separates content identity, synchronization and readable presentation of the same product run. Competing page bodies have not been audited for this draft.",
   "provenance": {
     "apifyRunId": "UZg3FufDQruZuQbdf",

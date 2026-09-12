@@ -11,7 +11,7 @@
     "exclusive press story",
     "embargo agreement"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: make the scope and timing decision concrete through scenarios rather than treating an embargo label as automatic agreement.",
   "provenance": {
     "apifyRunId": "TU557kwZekJRkYg0z",

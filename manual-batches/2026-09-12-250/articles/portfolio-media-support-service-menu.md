@@ -10,7 +10,7 @@
     "marketing request types",
     "portfolio support services"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis: Define requestable services, prerequisites and exclusions for an existing portfolio media program. Unlike retained c5-002's broad support model, the deliverable is a founder-facing service catalog, not a staffing or vendor decision. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
   "provenance": {
     "apifyRunId": "8SjJ2NKr2HlOOh8Cv",

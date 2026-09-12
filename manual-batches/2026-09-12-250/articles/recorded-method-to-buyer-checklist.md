@@ -10,7 +10,7 @@
     "recorded workshop to checklist",
     "buyer action checklist template"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial hypothesis: Convert instructional advice into observable actions, decisions and completion criteria for the buyer. This produces an application aid, distinct from c4-007's tutorial video and c5's founder content workshop. No ranking-page comparison or demand conclusion is asserted.",
   "provenance": {
     "apifyRunId": "YkY3hZ8cxUobSs1CI",

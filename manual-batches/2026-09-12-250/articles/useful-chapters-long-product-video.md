@@ -10,7 +10,7 @@
     "product video chapters",
     "YouTube timestamp labels"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial hypothesis: Build a navigation layer over an intact video using meaningful section names and valid timestamps. This differs from c4-002 because the recording remains whole and the output is an index rather than extracted clips. No ranking-page comparison or demand conclusion is asserted.",
   "provenance": {
     "apifyRunId": "YkY3hZ8cxUobSs1CI",

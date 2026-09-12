@@ -11,7 +11,7 @@
     "video editing hardware purchase",
     "actual footage benchmark"
   ],
-  "searchIntent": "informational",
+  "searchIntent": "commercial",
   "competitorGap": "Editorial hypothesis: A workload-specific acceptance run replaces unsupported computer rankings with buyer-defined waiting limits and comparable observations.",
   "provenance": {
     "apifyRunId": "g9D9OtyGPJA0waGDm",

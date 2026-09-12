@@ -10,7 +10,7 @@
     "slides to process explainer",
     "visual process video storyboard"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial hypothesis: Translate an existing conceptual process into a sequence of visual states, showing relationships and changes instead of reading slide bullets. Distinct from c1's startup explainer script and c4-005's resizing of finished footage. No ranking-page comparison or demand conclusion is asserted.",
   "provenance": {
     "apifyRunId": "YkY3hZ8cxUobSs1CI",

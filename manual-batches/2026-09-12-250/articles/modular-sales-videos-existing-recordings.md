@@ -10,7 +10,7 @@
     "modular sales video content",
     "reusable video modules"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial hypothesis: Make existing video segments interchangeable by defining self-contained openings, endings and transition requirements, then assemble several coherent sales cuts. Distinct from c4-016's written battlecards, c4-017's recap of one meeting and c4-018's packet of separate assets because this produces reusable edit modules and newly assembled videos. No ranking-page comparison or demand conclusion is asserted.",
   "provenance": {
     "apifyRunId": "YkY3hZ8cxUobSs1CI",

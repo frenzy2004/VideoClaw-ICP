@@ -1,0 +1,124 @@
+{
+  "id": "vc-manual250-c1-044",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://wistia.com/blog/presentation-videos",
+      "supports": "Inspected practical guidance on combining presentation visuals and a speaker recording. The teaching timeline and exercise are original synthesis.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.w3.org/WAI/media/av/planning/",
+      "supports": "Inspected media planning guidance addresses captions, transcripts, meaningful visual information, and accessibility during planning rather than only after recording.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "How should a prerecorded conference talk differ from a live talk?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should the founder stay on screen throughout the presentation?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Are automatic captions enough for delivery?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: A filled teaching timeline and an answerable exercise test whether an accepted talk works without audience interaction, rather than treating recording as slide capture alone.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "Exact US/en SERP evidence is being collected separately; keyword volume, difficulty, and CPC are unknown."
+  ],
+  "serp": {
+    "id": "vc-manual250-c1-044",
+    "keyword": "how to record a conference presentation video",
+    "found": true,
+    "query": "how to record a conference presentation video",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:24.102Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How to Record a Presentation",
+        "url": "https://www.echorivera.com/blog/7-basic-steps-record-lectures",
+        "domain": "echorivera.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "How to Record a Conference Video Submission at Home?",
+        "url": "https://www.youtube.com/watch?v=8XoVgqKG5eU",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 3,
+        "title": "Free Video Presentation Maker",
+        "url": "https://www.canva.com/create/video-presentations/",
+        "domain": "canva.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Record a presentation",
+        "url": "https://support.microsoft.com/en-us/powerpoint/training/record-a-presentation",
+        "domain": "support.microsoft.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Creating a Video Presentation for a Virtual Conference",
+        "url": "https://urc.ucdavis.edu/video-presentations",
+        "domain": "urc.ucdavis.edu",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "How to Record a Conference Presentation with the Best ...",
+        "url": "https://www.linkedin.com/advice/3/you-need-record-conference-presentation-ttpve",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 7,
+        "title": "How To Record a Quality PowerPoint Presentation",
+        "url": "https://www.loom.com/powerpoint-presentation",
+        "domain": "loom.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Record a PowerPoint Presentation Video with Webcam ...",
+        "url": "https://www.atlassian.com/blog/loom/how-to-video-record-yourself-presenting-a-powerpoint",
+        "domain": "atlassian.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How do I record a video of a presentation?",
+      "What is the 5 5 5 rule in presentations?",
+      "How can I record a PowerPoint presentation as a video?",
+      "Can I record a video of myself presenting a PowerPoint?"
+    ],
+    "relatedQueries": [
+      "How to record a conference presentation video in powerpoint",
+      "How to record a conference presentation video online",
+      "How to record a conference presentation video online free",
+      "How to record a conference presentation video for students",
+      "How to record a conference presentation video free",
+      "Record PowerPoint presentation with audio and video",
+      "How to make a video presentation with PowerPoint",
+      "Canva presentation video recording"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

@@ -10,7 +10,7 @@
     "product demo text too small",
     "readable investor screen recording"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Hypothesis: A critical-detail map ties framing and recipient tests to the precise screen evidence investors need to inspect. Competing page bodies have not been audited for this draft.",
   "provenance": {
     "apifyRunId": "UZg3FufDQruZuQbdf",

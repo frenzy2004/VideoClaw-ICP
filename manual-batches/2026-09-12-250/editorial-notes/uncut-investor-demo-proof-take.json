@@ -1,0 +1,120 @@
+{
+  "id": "vc-manual250-c2-045",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.apple.com/my/final-cut-pro/specs/",
+      "supports": "Final Cut Pro lists project and source-timecode display, useful for distinguishing the two time references.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.apple.com/en-ie/guide/final-cut-pro/verc1fabc30/mac",
+      "supports": "Clips from one take can be synchronized.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Does an uncut recording prove the whole product works?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can synchronized camera angles count as the same run?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should I send the raw take whenever an investor asks?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: Uncut-demo advice may omit a scene-to-source edit decision list and the limits of what uninterrupted capture can establish. Competing page bodies have not been audited for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "FAQs are editorial questions, not observed PAA. Source links provide factual or contextual grounding; the article-specific worksheets and procedural recommendations are original editorial synthesis."
+  ],
+  "serp": {
+    "id": "vc-manual250-c2-045",
+    "keyword": "uncut product demo",
+    "found": true,
+    "query": "uncut product demo",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Uncut video | Nusrat Jannat Rubi",
+        "url": "https://www.facebook.com/nusratjannatrubi2/videos/uncut-video/866207102797149/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 2,
+        "title": "New at Intercom uncut: Watch our entire virtual launch event",
+        "url": "https://www.intercom.com/blog/videos/new-at-intercom-event/",
+        "domain": "intercom.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "Uncut trend and vision talk with Shaun McGrath - Access Hair ...",
+        "url": "https://www.facebook.com/Offthewallindustries/videos/uncut-trend-and-vision-talk-with-shaun-mcgrath-access-hair-and-seb-shaun-finally/2024715031541392/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 4,
+        "title": "Before the Butcher gets virtual with online product demos",
+        "url": "https://www.fooddive.com/news/before-the-butcher-gets-virtual-with-online-product-demos/576472/",
+        "domain": "fooddive.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Uncut - The Multipurpose Joomla Template - Demo",
+        "url": "https://uncut.windstripedesign.ro/demo/",
+        "domain": "uncut.windstripedesign.ro",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Product Video",
+        "url": "https://uncutstudio.it/en/product-video/",
+        "domain": "uncutstudio.it",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Subscription - will you help you see my Slow uncut drawing demo",
+        "url": "https://www.facebook.com/OilPastelMasterpiece/posts/subscription-will-you-help-you-see-my-slow-uncut-drawing-demo/1041640378833801/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 8,
+        "title": "Odro Uncut",
+        "url": "https://www.odro.co.uk/who-we-are/odro-uncut/",
+        "domain": "odro.co.uk",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What does \"uncut video\" mean?",
+      "What is a product demo?",
+      "What is product unboxing?",
+      "What is a demo video?"
+    ],
+    "relatedQueries": [
+      "Uncut product demo github",
+      "Youtube uncut product demo",
+      "I can study course free",
+      "Learning to"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

@@ -10,7 +10,7 @@
     "content syndication or repurposing",
     "video content reuse decision"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial hypothesis: Choose between republication and a materially adapted derivative, then prepare a destination-specific content brief. This is a reuse decision for a single article, not a co-marketing kit or a generic distribution calendar. No ranking-page comparison or demand conclusion is asserted.",
   "provenance": {
     "apifyRunId": "YkY3hZ8cxUobSs1CI",

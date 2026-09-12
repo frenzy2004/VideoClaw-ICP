@@ -11,7 +11,7 @@
     "press request routing",
     "portfolio press contacts"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis: Triage incoming press requests, identify authorized company contacts and track response ownership. Distinct from writing a founder press kit or pitching stories to reporters. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
   "provenance": {
     "apifyRunId": "8SjJ2NKr2HlOOh8Cv",

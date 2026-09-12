@@ -10,7 +10,7 @@
     "trade show demo video",
     "silent booth video"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial hypothesis: Assemble a continuous booth presentation that remains understandable when a visitor joins mid-loop and cannot hear narration. Distinct from c2 stage pitches and from simply resizing social clips. No ranking-page comparison or demand conclusion is asserted.",
   "provenance": {
     "apifyRunId": "YkY3hZ8cxUobSs1CI",

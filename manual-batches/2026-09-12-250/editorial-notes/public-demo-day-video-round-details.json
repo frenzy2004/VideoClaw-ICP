@@ -1,0 +1,107 @@
+{
+  "id": "vc-manual250-c2-046",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.sec.gov/resources-small-businesses/capital-raising-building-blocks/general-solicitation",
+      "supports": "General solicitation is fact-specific; the SEC describes conditional treatment for qualifying Demo Day events.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.sec.gov/rules/final/2020/33-10884.pdf",
+      "supports": "The adopting release, pages 83–85 and rule text on pages 342–343, limits the intended scope of offering-related Demo Day communications and online participation.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Can I assume a Demo Day pitch is safe to publish publicly?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Is deleting the fundraising slide enough?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does a product-only excerpt automatically resolve the issue?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: Demo Day promotion advice may omit a recording-specific packet covering spoken language, captions, thumbnails and the change in audience. Competing page bodies have not been audited for this draft.",
+  "searchIntentBasis": "Editorial classification: completing a practical communications/content procedure; funnel stage does not make it a commercial query. Not a measured SERP-intent conclusion.",
+  "reviewNotes": [
+    "All FAQs are editorial questions, not observed PAA or legal advice. SEC's general-solicitation page was inspected in full, including its conditional Demo Day explanation; the 2020 adopting release's Demo Day discussion and rule-text passages were inspected. The packet is original editorial synthesis and does not determine an exemption, legal sufficiency or whether any specific recording may be published. The current SEC page links to its small-entity guide, whose Demo Days section was also inspected as corroborating context but is not quoted."
+  ],
+  "serp": {
+    "id": "vc-manual250-c2-046",
+    "keyword": "can I post my demo day pitch video publicly",
+    "found": true,
+    "query": "can I post my demo day pitch video publicly",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:37:37.242Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Demo video for pitch deck? : r/startups",
+        "url": "https://www.reddit.com/r/startups/comments/s3hpw9/demo_video_for_pitch_deck/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "YC W20 Online-Only Demo Day | Hacker News",
+        "url": "https://news.ycombinator.com/item?id=22506013",
+        "domain": "news.ycombinator.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Demo Day? Don't. One of my portfolio company founders…",
+        "url": "https://medium.com/angularventures/demo-day-dont-56834273c476",
+        "domain": "medium.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "A Founder's Guide to Demo Day: How to Get Funded",
+        "url": "https://startupfundraising.com/library/articles/how-to-crush-it-with-your-pitch-deck-on-demo-day",
+        "domain": "startupfundraising.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Demo Day Pitch Guide: How to Win Over Investors",
+        "url": "https://goodcombinator.ai/blog/demo-day-pitch-guide",
+        "domain": "goodcombinator.ai",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Maximizing Deal Flow: Investor Tips for Startup Demo Days",
+        "url": "https://qubit.capital/blog/investor-demo-day-tips",
+        "domain": "qubit.capital",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Demo Day Pitching, Part 1: Common Problems",
+        "url": "https://www.codingvc.com/p/demo-day-pitching-part-1-common-problems",
+        "domain": "codingvc.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Is YC demo day public?",
+      "Does a pitch deck get investor attention?",
+      "How do I submit a pitch deck?"
+    ],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

@@ -10,7 +10,7 @@
     "reset investor demo account",
     "product demo starting state"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Hypothesis: A layered reset recipe distinguishes server data from browser sessions and verifies readiness without consuming the scenario. Competing page bodies have not been audited for this draft.",
   "provenance": {
     "apifyRunId": "UZg3FufDQruZuQbdf",

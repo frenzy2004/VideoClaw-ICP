@@ -10,7 +10,7 @@
     "product video localization workflow",
     "localize software demo video"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial hypothesis: Adapt product terms, examples, audio and destination copy for another language while checking meaning and timing. Distinct from c4-004's caption accessibility review because translation requires semantic and locale decisions. No ranking-page comparison or demand conclusion is asserted.",
   "provenance": {
     "apifyRunId": "YkY3hZ8cxUobSs1CI",

@@ -10,7 +10,7 @@
     "review queue management",
     "content approval workflow"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis: Control work entering review and resolve aging blockers before starting more assets. Unlike retained c3-005 on feedback rounds, this addresses queue flow across independent companies. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
   "provenance": {
     "apifyRunId": "8SjJ2NKr2HlOOh8Cv",

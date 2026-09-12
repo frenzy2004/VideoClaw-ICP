@@ -10,7 +10,7 @@
     "video campaign UTM naming",
     "repurposed content link tracking"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial hypothesis: Create consistent campaign URLs that distinguish source, placement and creative variant without pretending that clicks prove revenue. Unlike c4-009's broad metrics guide, this supplies an implementation convention and link QA procedure. No ranking-page comparison or demand conclusion is asserted.",
   "provenance": {
     "apifyRunId": "YkY3hZ8cxUobSs1CI",

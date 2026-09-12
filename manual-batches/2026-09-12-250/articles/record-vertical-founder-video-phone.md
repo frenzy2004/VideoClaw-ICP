@@ -11,7 +11,7 @@
     "portrait talking head recording",
     "vertical video recording setup"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis, pending competing-page inspection: Walk through original portrait capture from a hand-held baseline to a stable repeatable setup, without cropping existing footage.",
   "provenance": {
     "apifyRunId": "TU557kwZekJRkYg0z",

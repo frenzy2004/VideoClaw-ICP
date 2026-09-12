@@ -10,7 +10,7 @@
     "investor demo comprehension test",
     "product video feedback worksheet"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Hypothesis: A timestamped divergence log turns viewer misunderstanding into specific capture or editing decisions. Competing page bodies have not been audited for this draft.",
   "provenance": {
     "apifyRunId": "UZg3FufDQruZuQbdf",

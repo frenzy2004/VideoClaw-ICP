@@ -11,7 +11,7 @@
     "first draft versus final delivery",
     "editing service guarantee"
   ],
-  "searchIntent": "informational",
+  "searchIntent": "commercial",
   "competitorGap": "Editorial hypothesis: A promised-clock worksheet makes the starting event, paused time and final deliverable explicit before a buyer relies on an advertised turnaround.",
   "provenance": {
     "apifyRunId": "g9D9OtyGPJA0waGDm",

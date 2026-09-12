@@ -10,7 +10,7 @@
     "unlimited editing subscription capacity",
     "video editing request queue"
   ],
-  "searchIntent": "informational",
+  "searchIntent": "commercial",
   "competitorGap": "Editorial hypothesis: A concrete queue simulation can distinguish unlimited submissions from the capacity required to meet overlapping deadlines.",
   "provenance": {
     "apifyRunId": "g9D9OtyGPJA0waGDm",
@@ -117,7 +117,20 @@ Ask the provider to mark which jobs fit the plan and estimate the active work re
 
 Put the jobs into a simple sequence using the provider's stated concurrency. With one active slot, only one job occupies the editing lane at a time. With two slots, two independent jobs may proceed, but dependencies can still prevent useful parallel work.
 
-For a fictional illustration, call the jobs A, B, C, and D. A reaches review while B is ready. Ask whether B can start immediately or whether A continues to occupy the slot until approved. Then suppose A returns with changes while B is underway. Which job takes priority?
+For this fictional event sequence, map A to the short explanation, B to the longer interview, C to the urgent correction, and D to the new commission. Assume review releases a slot, active edits are not interrupted, and each free slot takes C first, then returned revisions, then ready new work in intake order. D lacks an approved script. These are example rules, not vendor promises; events do not represent equal time intervals.
+
+| Event | One editing slot | Two editing slots |
+| --- | --- | --- |
+| A and B are ready; D is blocked | A starts; B waits | A and B start |
+| A enters review; C arrives ready before the next pickup | C starts; B waits | C starts alongside B |
+| A returns with changes | A's revision queues behind active C, ahead of B | A's revision queues; C and B continue |
+| C enters review | A's revision starts; B still waits | A's revision starts alongside B |
+| C and revised A are approved; the two-slot B reaches review | B starts | B awaits approval; both slots are free |
+| D's script is approved | D waits behind active B | D starts while B is reviewed |
+| B completes review and is approved | D starts | D finishes editing and enters review |
+| D completes review and is approved | D finishes editing, passes review, and all four are delivered | All four are delivered |
+
+The second slot advances B and D in this assumed sequence, but cannot approve D's script or review any draft. If review instead occupies a slot, redraw the sequence: waiting approvals may erase the apparent concurrency benefit.
 
 Do not invent durations to make the plan look efficient. Use the vendor's job-specific estimates or observations from a trial. If you need a provisional duration, label it as your planning assumption and show how the result changes when it is longer.
 

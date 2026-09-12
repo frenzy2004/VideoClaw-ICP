@@ -11,7 +11,7 @@
     "non-attributed founder lessons",
     "private meeting note review"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis: Evaluate whether an authorized written lesson can be shared without direct or indirect identification. Unlike deciding whether to record a roundtable, this transforms and tests a specific note after the conversation. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
   "provenance": {
     "apifyRunId": "8SjJ2NKr2HlOOh8Cv",

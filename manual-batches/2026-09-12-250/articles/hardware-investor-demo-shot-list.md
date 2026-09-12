@@ -10,7 +10,7 @@
     "hardware demo shot list",
     "prototype investor video capture"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Hypothesis: A same-run physical evidence shot plan preserves scale, continuity and operator work across wide and close views. Competing page bodies have not been audited for this draft.",
   "provenance": {
     "apifyRunId": "UZg3FufDQruZuQbdf",

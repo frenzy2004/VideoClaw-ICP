@@ -10,7 +10,7 @@
     "video transcript search",
     "search inside videos"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Editorial opportunity hypothesis: Create and test a time-linked transcript index across approved recordings so a founder can locate a specific explanation. Unlike retained c4 clipping tasks, no derivative clips are produced; unlike c5-029, the search target is a moment inside a recording rather than a portal resource. Competing page bodies and exact-query SERPs have not been assessed for this draft.",
   "provenance": {
     "apifyRunId": "8SjJ2NKr2HlOOh8Cv",

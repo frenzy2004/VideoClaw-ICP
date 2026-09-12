@@ -10,7 +10,7 @@
     "backend investor demo video",
     "infrastructure product demonstration"
   ],
-  "searchIntent": "commercial",
+  "searchIntent": "informational",
   "competitorGap": "Hypothesis: A three-layer evidence storyboard makes invisible product work inspectable without presenting illustration as execution. Competing page bodies have not been audited for this draft.",
   "provenance": {
     "apifyRunId": "UZg3FufDQruZuQbdf",

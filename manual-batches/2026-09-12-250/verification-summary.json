@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-09-12 04:09:25 UTC",
+  "batchArticles": 250,
+  "newArticles": 200,
+  "retainedArticles": 50,
+  "campaignCounts": {
+    "newly-funded-founder": 50,
+    "accelerator-demo-day-founder": 50,
+    "video-production-comparison": 50,
+    "gtm-content-repurposing-buyer": 50,
+    "portfolio-media-platform": 50
+  },
+  "bodyWords": 283028,
+  "worker": {
+    "tests": 3002,
+    "testFiles": 70,
+    "passed": true,
+    "lint": "pass",
+    "typecheck": "pass",
+    "build": "pass",
+    "manualHelperTests": 14
+  },
+  "native": {
+    "base": "b6b0833c78443b44b12bf6d33f05baa7ac8427d3",
+    "contractArticles": 250,
+    "totalArticles": 253,
+    "publishedArticles": 0,
+    "blogTests": 32,
+    "appUpdateChecks": 16,
+    "gatewayChecks": 10,
+    "acquisition": "pass",
+    "lint": "pass",
+    "build": "pass",
+    "generatedRoutes": 275,
+    "configurationUnchanged": true,
+    "initialConcurrentAttempt": "stopped_after_page_generation_timeouts",
+    "serialRetry": "passed_without_timeout_or_gate_changes"
+  },
+  "http": {
+    "articles": 250,
+    "mediaAssets": 256,
+    "internalDestinations": 256,
+    "all200": true,
+    "unknown404": true,
+    "previewNoindex": true
+  },
+  "browser": {
+    "viewports": [
+      1280,
+      390
+    ],
+    "sampleSlugs": [
+      "startup-lost-deal-messaging-interviews",
+      "prototype-display-flicker-investor-demo",
+      "unlimited-video-editing-queue-capacity",
+      "nurture-sequence-from-existing-content",
+      "portfolio-media-library-tag-taxonomy"
+    ],
+    "indexCards": 253,
+    "sampleOverflow": false,
+    "loadedGraphics": true,
+    "videoControls": true,
+    "playsInline": true,
+    "autoplay": false,
+    "videoPlaybackAdvanced": 3,
+    "videoPlaybackErrors": 0,
+    "audioAudited": false,
+    "keyboardFocusVisible": true,
+    "consoleMessages": 0,
+    "pageErrors": 0,
+    "all250VisuallyReviewed": false,
+    "lighthouseScore": null
+  },
+  "editorial": {
+    "independentFullArticleReviews": 54,
+    "teamApproval": false,
+    "faqObservedPaa": 36,
+    "faqEditorial": 714,
+    "paidMetrics": "provider-pending",
+    "newQuerySerpObservations": 200,
+    "sourceAuditHistoricalUrls": 288,
+    "automaticBodyRetrievals": 172,
+    "automaticRetrievalFailures": 116,
+    "currentNewArticleSourceUrls": 286,
+    "currentSourceAutomaticFailures": 115,
+    "automaticFailuresRelabeled": false
+  },
+  "boundaries": {
+    "retainedHashesUnchanged": true,
+    "originalLanderUnchanged": true,
+    "workerRuntimeUnchanged": true,
+    "workerStateUnchanged": true,
+    "productionChanges": false,
+    "deployed": false,
+    "published": false,
+    "scheduleActivated": false
+  }
+}
