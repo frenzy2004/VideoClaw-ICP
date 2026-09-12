@@ -1,0 +1,133 @@
+{
+  "id": "vc-manual50-c5-007",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.ycombinator.com/about",
+      "supports": "YC describes ongoing office hours for past cohorts and alumni communities organized around shared interests.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.wenger-trayner.com/introduction-to-communities-of-practice/",
+      "supports": "The authors distinguish a community of practice through shared domain, ongoing interaction and a developing shared practice.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What is a startup accelerator program?",
+      "basis": "observed_paa",
+      "query": "startup accelerator alumni community",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7"
+    },
+    {
+      "question": "What videos are useful for accelerator alumni?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How can a remote alumni community encourage participation?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: a request-to-lesson-to-follow-up workflow may help alumni coordinators connect recorded content to actual member needs. Original-query directory and community results were observed; competitor page bodies were not reviewed.",
+  "reviewNotes": [
+    "Original-query SERP record inspected: vc-manual50-c5-007; relevant accelerator-definition PAA retained. National, regional, and remote community participation are addressed. No claim is made that the cited programs use this proposed video workflow."
+  ],
+  "serp": {
+    "id": "vc-manual50-c5-007",
+    "keyword": "startup accelerator alumni community",
+    "found": true,
+    "query": "startup accelerator alumni community",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:49:53.581Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Alumni - Global directory list - Google for Startups",
+        "url": "https://startup.google.com/alumni/directory/",
+        "domain": "startup.google.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Alumni Community",
+        "url": "https://www.vitaaccelerator.it/alumni-community",
+        "domain": "vitaaccelerator.it",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Manage your alumni network",
+        "url": "https://thefounderhood.com/solutions/manage-alumni",
+        "domain": "thefounderhood.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Alumni Association of Glion Launches the second edition ...",
+        "url": "https://www.sommet-education.com/news/detail/article/alumni-association-of-glion-launches-the-second-edition-of-the-glion-alumni-accelerator-program-to-boost-hospitality-innovation-1",
+        "domain": "sommet-education.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Alumni Startup Accelerator Program",
+        "url": "https://www.desaiaccelerator.com/startup-accelerator",
+        "domain": "desaiaccelerator.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "The Campus Founders Alumni Network is live 🥳 If you ...",
+        "url": "https://www.instagram.com/p/DZITIdFDFq4/",
+        "domain": "instagram.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 7,
+        "title": "Accelerator",
+        "url": "https://foundersnetwork.com/accelerator/",
+        "domain": "foundersnetwork.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Join the EIT Alumni Startup Days!",
+        "url": "https://alumni.eitdigital.eu/article/join-eit-alumni-startup-days",
+        "domain": "alumni.eitdigital.eu",
+        "resultType": "article"
+      },
+      {
+        "position": 9,
+        "title": "How to support startups after graduation",
+        "url": "https://blog.dealum.com/how-to-support-startups-after-graduation-and-why-should-accelerators-do-it/",
+        "domain": "blog.dealum.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is the best startup accelerator in the world?",
+      "Who has the largest alumni association in the world?",
+      "What is a startup accelerator program?",
+      "Who are some notable startup founders from IIT?"
+    ],
+    "relatedQueries": [
+      "Startup accelerator alumni community list",
+      "Google alumni association",
+      "Accelerator programs for startups 2026",
+      "Alumni Directory Stanford",
+      "Africa startup accelerator",
+      "Google for startups Accelerator",
+      "Google for Startups Accelerator Africa",
+      "Alumni directory meaning"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

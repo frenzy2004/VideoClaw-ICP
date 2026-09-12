@@ -1,0 +1,127 @@
+{
+  "id": "vc-manual50-c1-002",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.ycombinator.com/blog/practical-design-user-observation",
+      "supports": "The author recommends a focused observation goal, active listening, and separate leader and recorder responsibilities.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.linkedin.com/business/marketing/blog/content-marketing/creating-a-thought-leadership-marketing-plan",
+      "supports": "LinkedIn distinguishes individual and corporate perspectives and connects thought-leadership goals with tactics and measures.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What is founder-led marketing?",
+      "basis": "observed_paa",
+      "query": "founder led marketing",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7"
+    },
+    {
+      "question": "How often should a founder record marketing videos?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can someone else write and edit a founder's videos?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: operationalize founder input with a video production card, review stopping criteria, and an absence plan. HubSpot's inspected article already covers buyer focus, notes, batching, and preserving founder perspective; no claim of an empty topic gap is made.",
+  "reviewNotes": [
+    "Observed FAQ matches c1-002 peopleAlsoAsk exactly in serp-evidence.json; run VMTK8QQ0C4Cf7WZXf, dataset MexeNaX1RsSZJmAZ7.",
+    "Competitor body inspected: https://www.hubspot.com/startups/resources/sales-and-marketing/founder-led-content-strategy. Its time and performance claims are not repeated.",
+    "The weekly schedule and fictional production card are original editorial recommendations."
+  ],
+  "serp": {
+    "id": "vc-manual50-c1-002",
+    "keyword": "founder led marketing",
+    "found": true,
+    "query": "founder led marketing",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:49:53.581Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Founder-Led Marketing Is Not a Strategy, It's a Survival Tactic",
+        "url": "https://www.linkedin.com/pulse/founder-led-marketing-strategy-its-survival-tactic-emmelie-de-la-cruz-ranae",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 2,
+        "title": "Founder-Led Marketing: A Guide to Engaging Your Founder",
+        "url": "https://cxl.com/blog/founder-led-marketing/",
+        "domain": "cxl.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "How to Build a Founder-Led Content Strategy in 2026",
+        "url": "https://www.hubspot.com/startups/resources/sales-and-marketing/founder-led-content-strategy",
+        "domain": "hubspot.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "This Strategy Drives Startup Success: Founder-Led ...",
+        "url": "https://www.forbes.com/sites/cherieluo/2024/10/31/this-strategy-drives-startup-success-founder-led-marketing/",
+        "domain": "forbes.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Founder-Led Marketing Strategy: Examples & Growth Tactics",
+        "url": "https://superscale.ai/learn/founder-led-marketing-complete-strategy/",
+        "domain": "superscale.ai",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "99% of Startups Fail—The 1% Use This Founder-Led ...",
+        "url": "https://www.theclueless.company/blog/founder-led-marketing/",
+        "domain": "theclueless.company",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Top Founder-Led Marketing Success Stories",
+        "url": "https://revboss.com/blog/top-founder-led-marketing-success-stories",
+        "domain": "revboss.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "What is founder-led marketing?",
+        "url": "https://maxiality.com/what-is-founder-led-marketing/",
+        "domain": "maxiality.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is founder-led marketing?",
+      "What is a founder-led business?",
+      "What is the 3-3-3 rule in marketing?",
+      "Who is better, CEO or founder?"
+    ],
+    "relatedQueries": [
+      "Founder led marketing strategy",
+      "Founder-led marketing examples",
+      "Founder-led brand",
+      "Founder-led content",
+      "Founder led meaning",
+      "Founder led marketing linkedin",
+      "Founder content"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

@@ -1,0 +1,128 @@
+{
+  "id": "vc-manual50-c4-005",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.google.com/youtube/answer/6375112?hl=en",
+      "supports": "YouTube's computer player uses a standard 16:9 ratio and adapts to other ratios; the page advises against adding padding directly for that player.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.w3.org/WAI/media/av/description/",
+      "supports": "Description conveys essential visual information, including meaningful screen text; integrated description can be included in main narration.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What is the best video size for social media?",
+      "basis": "observed_paa",
+      "query": "resize video for social media",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7"
+    },
+    {
+      "question": "Should I crop a wide video or keep the entire frame?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Why do captions need another review after resizing?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: a shot-level meaning inventory and crop/fit/rebuild worksheet can complement the resizing-tool intent represented by https://www.canva.com/features/video-resize/ and https://www.adobe.com/express/feature/video/resize. Those observed competitor bodies were not inspected; no feature comparison is asserted.",
+  "reviewNotes": [
+    "Observed FAQ wording comes from serp-evidence.json, record vc-manual50-c4-005.",
+    "The article gives no unverified Instagram or TikTok specifications; YouTube guidance is explicitly scoped to its player.",
+    "The shot worksheet is fictional and does not describe an automatic product feature."
+  ],
+  "serp": {
+    "id": "vc-manual50-c4-005",
+    "keyword": "resize video for social media",
+    "found": true,
+    "query": "resize video for social media",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:49:53.581Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "One-click Video Resize Online",
+        "url": "https://www.canva.com/features/video-resize/",
+        "domain": "canva.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Free Video Resizer: Resize Your Videos Online",
+        "url": "https://www.adobe.com/express/feature/video/resize",
+        "domain": "adobe.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Video Resizer Online",
+        "url": "https://clideo.com/resize-video",
+        "domain": "clideo.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Online Video Resizer: Resize Videos For Free",
+        "url": "https://www.kapwing.com/tools/resize",
+        "domain": "kapwing.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Online Video Resizer - Resize Videos For Free",
+        "url": "https://videobolt.net/simple-video-tools/resize",
+        "domain": "videobolt.net",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Resize Your Videos for Instagram Online",
+        "url": "https://www.adobe.com/express/feature/video/resize/instagram",
+        "domain": "adobe.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Online Video Resizer: Adjust Aspect Ratio & Dimensions & ...",
+        "url": "https://vimeo.com/features/video-editor/resize-video",
+        "domain": "vimeo.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 8,
+        "title": "Free Social Media Video Resizer - Renderly",
+        "url": "https://renderly.video/tools/video-resizer",
+        "domain": "renderly.video",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How can I resize my video to fit Instagram?",
+      "What is the best video size for social media?",
+      "Why won't my video fit on Instagram?",
+      "How can I resize my video to fit TikTok?"
+    ],
+    "relatedQueries": [
+      "Resize video for social media free",
+      "Resize video online free",
+      "Video resizer",
+      "Resize video for social media online free",
+      "Resize video for social media online",
+      "Convert video to 9:16 online free",
+      "Resize video for social media app",
+      "Resize video MB"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

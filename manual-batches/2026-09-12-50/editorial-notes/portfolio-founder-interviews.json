@@ -1,0 +1,128 @@
+{
+  "id": "vc-manual50-c5-005",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.gov.uk/service-manual/user-research/using-in-depth-interviews",
+      "supports": "The service research guide recommends discussion guides, open neutral questions, follow-ups and concrete examples.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://oralhistory.org/best-practices/",
+      "supports": "Oral-history guidance recommends documenting informed consent, intended uses and review expectations before recording.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What are some good interview questions for a founder?",
+      "basis": "observed_paa",
+      "query": "portfolio founder interviews",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7"
+    },
+    {
+      "question": "Should founders receive questions before recording?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How can a portfolio interview avoid becoming promotional?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: a question set organized around decisions, follow-ups, and an evidence log can help portfolio editors produce distinct stories. Original-query SERPs included VC job interviews and founder media; no competing interview article bodies were examined.",
+  "reviewNotes": [
+    "Original-query SERP record inspected: vc-manual50-c5-005; exact relevant founder-question PAA retained. Interview guidance sources are adapted to editorial work, not presented as startup-specific outcome studies. All practice dialogue is fictional.",
+    "Manual source inspection: live web open on 2026-09-12 returned the Oral History Best Practices page as readable HTML (227 indexed lines); the body and consent passage at lines 96-110 were inspected, including intended uses and pre-recording agreement. This is manual browsing evidence only. The parent automatic retrieval returned no usable body and remains failed in its audit receipt; automatic retrieval is not marked passed here.",
+    "Refined query founder interview questions inspected in serp-refined-evidence.json, run 1TRKQT0t6mrbtBkVz, dataset sxgEp2jc602xi3TP6. Refined PAA focused on general job interviewing; the relevant founder-question wording from the original dataset is retained with its original provenance."
+  ],
+  "serp": {
+    "id": "vc-manual50-c5-005",
+    "keyword": "founder interview questions",
+    "found": true,
+    "query": "founder interview questions",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:52:49.425Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "1TRKQT0t6mrbtBkVz",
+    "datasetId": "sxgEp2jc602xi3TP6",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Startup Interview Questions: 8 Things Founders Will Ask You",
+        "url": "https://www.goskills.com/career-development/resources/startup-interview-questions",
+        "domain": "goskills.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "Interviewing a founder... need help with questions.",
+        "url": "https://www.reddit.com/r/EntrepreneurRideAlong/comments/17mjty7/interviewing_a_founder_need_help_with_questions/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Interviewing at a startup? Ask these questions before you ...",
+        "url": "https://www.linkedin.com/pulse/interviewing-startup-ask-questions-before-you-join-bibi-careau--1l4ec",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 4,
+        "title": "The 239 interview questions technical startup founders should ...",
+        "url": "https://blog.squadra.vc/articles/the-239-interview-questions-technical-startup-founders-should-ask-every-candidate",
+        "domain": "blog.squadra.vc",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "My Top Founder Interview Questions That Fly Under The ...",
+        "url": "https://cupofzhou.com/my-top-founder-interview-questions-that-fly-under-the-radar/",
+        "domain": "cupofzhou.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "What are the best questions to ask the founders when you ...",
+        "url": "https://www.quora.com/What-are-the-best-questions-to-ask-the-founders-when-youre-interviewing-with-a-start-up-in-healthcare-IT",
+        "domain": "quora.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "The Best Job Interview Question To Ask A CEO Founder",
+        "url": "https://www.youtube.com/watch?v=tjc2g-NGrKc",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 8,
+        "title": "125 CEO Interview Questions",
+        "url": "https://www.donnaschilder.com/blog/ceo-interview-questions/",
+        "domain": "donnaschilder.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What are the 5 C's of interviewing?",
+      "What is the 30-60-90 rule in an interview?",
+      "What are the 5 main interview questions?",
+      "What are the 5 hardest interview questions?"
+    ],
+    "relatedQueries": [
+      "Startup founder interview questions",
+      "Startup interview questions and answers",
+      "Questions to ask a startup before joining",
+      "Interview questions to ask startups",
+      "CEO interview questions and answers",
+      "Interview with ceo of startup",
+      "Behavioral interview questions startup",
+      "Startup technical interview"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

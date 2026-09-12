@@ -1,0 +1,121 @@
+{
+  "id": "vc-manual50-c4-007",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://learn.microsoft.com/en-us/style-guide/procedures-instructions/writing-step-by-step-instructions",
+      "supports": "Microsoft recommends numbered procedures, clear action locations, separate instructions and steps that complete the procedure.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.w3.org/WAI/media/av/description/",
+      "supports": "Description conveys essential visual information, including meaningful screen text; integrated description can be included in main narration.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "How can I create a tutorial video?",
+      "basis": "observed_paa",
+      "query": "how to make software tutorial videos",
+      "runId": "1TRKQT0t6mrbtBkVz",
+      "datasetId": "sxgEp2jc602xi3TP6"
+    },
+    {
+      "question": "What should a software tutorial script include?",
+      "basis": "editorial"
+    },
+    {
+      "question": "When should a software tutorial video be updated?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: a reproducibility-focused script and learner test can add practical value beside the refined SERP results https://www.ispringsolutions.com/blog/how-to-make-tutorial-video and https://www.techsmith.com/blog/instructional-videos/. Those competitor bodies were not inspected; no missing-content or product-ranking claim is made.",
+  "reviewNotes": [
+    "Primary query is the revised how to make software tutorial videos; title and slug are unchanged.",
+    "Observed FAQ wording comes from serp-refined-evidence.json, record vc-manual50-c4-007, run 1TRKQT0t6mrbtBkVz, dataset sxgEp2jc602xi3TP6.",
+    "The script uses a fictional application. No screen-recording software ranking, integration or AI capability is asserted."
+  ],
+  "serp": {
+    "id": "vc-manual50-c4-007",
+    "keyword": "how to make software tutorial videos",
+    "found": true,
+    "query": "how to make software tutorial videos",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:52:49.425Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "1TRKQT0t6mrbtBkVz",
+    "datasetId": "sxgEp2jc602xi3TP6",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "What is the best tools for creating video tutorials?",
+        "url": "https://www.reddit.com/r/SmallYTChannel/comments/1h9i233/what_is_the_best_tools_for_creating_video/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "How to Make a Video Tutorial: A Step-by-Step Guide",
+        "url": "https://www.ispringsolutions.com/blog/how-to-make-tutorial-video",
+        "domain": "ispringsolutions.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "Free Tutorial Video Maker | Create DIY, How-To Videos",
+        "url": "https://animoto.com/video-maker/tutorial-videos",
+        "domain": "animoto.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "10 Best Video Tutorial Softwares for 2026 (Tested by ...",
+        "url": "https://leadde.ai/blog/best-video-tutorial-softwares",
+        "domain": "leadde.ai",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "How to Make Instructional Videos: Step-by-Step Guide",
+        "url": "https://www.techsmith.com/blog/instructional-videos/",
+        "domain": "techsmith.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Tutorial Video Maker - AI Avatars | Screen Recording",
+        "url": "https://www.vmaker.com/create-tutorial-videos",
+        "domain": "vmaker.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "How to: Make Video Tutorials",
+        "url": "https://www.youtube.com/playlist?list=PLmoC3HVFtXYj7h5hD6OjrS0oZuqRozf4H",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What software can I use to create tutorial videos?",
+      "How can I create a tutorial video?",
+      "How can I create my own training videos?",
+      "Can I use AI to create tutorial videos?"
+    ],
+    "relatedQueries": [
+      "How to make software tutorial videos on pc",
+      "How to make software tutorial videos free",
+      "How to make software tutorial videos on laptop",
+      "How to make an instructional video with screen recording",
+      "Tutorial video examples",
+      "Create video tutorials",
+      "How to create tutorial videos for YouTube",
+      "Video tutorial app"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

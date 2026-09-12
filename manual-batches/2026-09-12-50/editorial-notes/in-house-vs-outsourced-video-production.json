@@ -1,0 +1,130 @@
+{
+  "id": "vc-manual50-c3-002",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.bls.gov/ooh/media-and-communication/film-and-video-editors-and-camera-operators.htm",
+      "supports": "The occupational profile distinguishes editing and camera work and describes collaboration with production roles.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.bls.gov/news.release/ecec.htm",
+      "supports": "BLS distinguishes wages and salaries from benefit categories; figures are not a startup-specific loaded-cost markup.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Is outsourcing cheaper than in-house?",
+      "basis": "observed_paa",
+      "query": "in house vs outsourced video production",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7"
+    },
+    {
+      "question": "What video responsibilities should stay inside the startup?",
+      "basis": "editorial"
+    },
+    {
+      "question": "When should a startup reconsider its production model?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: a workload history, responsibility map, and matching cost boundaries may make staffing decisions more concrete than broad pros-and-cons lists. Competitor bodies were not inspected.",
+  "reviewNotes": [
+    "SERP row vc-manual50-c3-002 checked. Cost FAQ is exact observed PAA from the shared Apify dataset; the other FAQs are editorial.",
+    "RouteBoard is fictional. Workload horizon, staffing logic, retained responsibilities, and cost comparison are original recommendations. No classification or tax advice is supplied."
+  ],
+  "serp": {
+    "id": "vc-manual50-c3-002",
+    "keyword": "in house vs outsourced video production",
+    "found": true,
+    "query": "in house vs outsourced video production",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:49:53.581Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "In-House Video Production vs. Outsourcing",
+        "url": "https://www.vidyard.com/blog/in-house-video-production-vs-outsourcing/",
+        "domain": "vidyard.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "In-House vs. Outsourcing: Video Production Pros & Cons",
+        "url": "https://ivorymedia.com.au/inhouse-vs-outsourced-video-production/",
+        "domain": "ivorymedia.com.au",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Video Production vs In-House: Which Is Better for Your ...",
+        "url": "https://www.mangomedia.ie/blog/video-production-vs-in-house",
+        "domain": "mangomedia.ie",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "In-House vs Outsourced Video Production",
+        "url": "https://shootsta.com/compare/in-house-vs-outsourced-video",
+        "domain": "shootsta.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "7 Benefits of Hiring an In-House Videographer vs Outsourcing",
+        "url": "https://www.impactplus.com/learn/benefits-of-hiring-in-house-videographer",
+        "domain": "impactplus.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "In-House vs Outsourced Video Production: Pros and Cons ...",
+        "url": "https://pinetree-media.com/blog/choosing-between-in-house-and-outsourced-video-production-pros-and-cons.php",
+        "domain": "pinetree-media.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Exploring the Pros and Cons of In-House vs. Outsourced ...",
+        "url": "https://hauntedbasement.video/blog/in-house-vs-outsourced-video-production",
+        "domain": "hauntedbasement.video",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "In-House vs. Agency: Which One is Better For Your Video ...",
+        "url": "https://www.wipster.io/blog/in-house-vs.-agency-which-one-is-better-for-your-video-production-and-why",
+        "domain": "wipster.io",
+        "resultType": "article"
+      },
+      {
+        "position": 9,
+        "title": "Should you create video content in-house or outsource?",
+        "url": "https://www.linkedin.com/pulse/should-you-create-video-content-in-house-outsource-jonty-egginton",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is the difference between in-house and outsourcing?",
+      "Is outsourcing a dying concept?",
+      "Is outsourcing cheaper than in-house?",
+      "What are the different types of video production?"
+    ],
+    "relatedQueries": [
+      "In house vs outsourced video production reddit",
+      "In house vs outsourced video production salary",
+      "In house vs outsourced video production pros and cons",
+      "In house vs outsourced video production cost"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

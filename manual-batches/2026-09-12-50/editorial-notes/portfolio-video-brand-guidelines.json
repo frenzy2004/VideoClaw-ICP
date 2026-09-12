@@ -1,0 +1,116 @@
+{
+  "id": "vc-manual50-c5-009",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://identity.ucsf.edu/photography-video/video-standards",
+      "supports": "UCSF's own video standards cover briefing, visual style, accessibility, readable text and publication checks.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html",
+      "supports": "WCAG text-contrast guidance specifies 4.5:1 for ordinary text, with exceptions including qualifying large text and logotypes.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.w3.org/WAI/media/av/captions/",
+      "supports": "Automatically generated captions require accuracy verification and generally editing before meeting user needs.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Which video rules should be consistent across a portfolio?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should all portfolio videos use the same visual template?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can automatic captions satisfy the brand review?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: shared-versus-company ownership and contrasting-asset tests can extend single-organization video standards for a portfolio program. UCSF's video standards body was inspected as one concrete source; no claim is made about all competing guides.",
+  "reviewNotes": [
+    "Original-query SERP record inspected: vc-manual50-c5-009; no PAA observed. UCSF body inspected as an institutional example only; no local geographic focus or copied visual style is intended. Utah source could not be retrieved and is not cited. Source comparison is limited to the one inspected standards page."
+  ],
+  "serp": {
+    "id": "vc-manual50-c5-009",
+    "keyword": "video brand guidelines",
+    "found": true,
+    "query": "video brand guidelines",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:49:53.581Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Video Guidelines – Brand",
+        "url": "https://brand.utah.edu/branding/video-guidelines/",
+        "domain": "brand.utah.edu",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Brand Guidelines Projects :: Photos, videos, logos ...",
+        "url": "https://www.behance.net/search/projects/brand%20guidelines",
+        "domain": "behance.net",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "How to Create and Implement Video Branding Guidelines",
+        "url": "https://www.linkedin.com/business/marketing/blog/content-marketing/how-to-create-and-implement-branding-guidelines",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 4,
+        "title": "Video branding guide",
+        "url": "https://www.parks.vic.gov.au/about-us/our-brand/applying-our-brand/video-branding-guide",
+        "domain": "parks.vic.gov.au",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Video Standards",
+        "url": "https://identity.ucsf.edu/photography-video/video-standards",
+        "domain": "identity.ucsf.edu",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "How to Create a Video Style Guide | 20 Brand Examples",
+        "url": "https://www.vyond.com/blog/how-to-create-a-video-style-guide/",
+        "domain": "vyond.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Video Brand Guidelines & Consulting",
+        "url": "https://www.casualfilms.com/video-brand-guidelines",
+        "domain": "casualfilms.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": [
+      "Video brand guidelines pdf",
+      "Video brand guidelines template",
+      "Video brand guidelines examples",
+      "Brand guidelines template",
+      "Brand guidelines examples PDF",
+      "Video guidelines pdf",
+      "Famous brand guidelines",
+      "Brand guideline website"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

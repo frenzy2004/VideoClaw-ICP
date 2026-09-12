@@ -1,0 +1,113 @@
+{
+  "id": "vc-manual50-c4-010",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.ftc.gov/business-guidance/resources/advertising-faqs-guide-small-business",
+      "supports": "Advertisers need support for express and implied claims before running ads; customer statements do not necessarily substantiate objectively evaluable claims.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
+      "supports": "Specific-results endorsements can imply expected results; generic variability disclaimers do not necessarily remove that implication.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What should a video case study include?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can a case study work without numerical results?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Who should review the final case study video?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: a claim-evidence worksheet and evidence-led script can complement template-shopping intent represented by https://www.canva.com/templates/s/case-study/ and https://www.capcut.com/explore/case-study-template/7497647064081287184. These observed result bodies were not inspected, so their editorial coverage is not characterized.",
+  "reviewNotes": [
+    "No PAA questions were observed for vc-manual50-c4-010; all FAQs are editorial.",
+    "The equipment-service team is fictional. The worksheet withholds an unverified faster-work claim and asserts no customer results.",
+    "FTC guidance is used for general advertising substantiation and presentation principles, not individualized legal advice or a compliance certification."
+  ],
+  "serp": {
+    "id": "vc-manual50-c4-010",
+    "keyword": "video case study template",
+    "found": true,
+    "query": "video case study template",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:49:53.581Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Case Study Editable Video Templates",
+        "url": "https://elements.envato.com/video-templates/case+study?srsltid=AfmBOop9a3uYVheuxOf9IEO9BlzKE3QHN8Xts8D-WotR03qYJTkqRhb7",
+        "domain": "elements.envato.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Free and customizable case study templates",
+        "url": "https://www.canva.com/templates/s/case-study/",
+        "domain": "canva.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Case-study Template Projects",
+        "url": "https://www.behance.net/search/projects/case-study%20template",
+        "domain": "behance.net",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Free Case Study Templates to Impress",
+        "url": "https://www.capcut.com/explore/case-study-template/7497647064081287184",
+        "domain": "capcut.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "High-Quality Case Study Video Template",
+        "url": "https://www.vidyard.com/video/video-marketing-templates-high-quality-case-study-template/",
+        "domain": "vidyard.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Free Case Study Templates | Adobe Express",
+        "url": "https://www.adobe.com/express/templates/case-study",
+        "domain": "adobe.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "3 Ready-to-Use Case Study Video Templates",
+        "url": "https://www.contentbeta.com/blog/case-study-video-template/",
+        "domain": "contentbeta.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": [
+      "Video case study template word",
+      "Video case study template free",
+      "Video case study template free download",
+      "Video case study template ppt",
+      "Free case study templates",
+      "Video case study template powerpoint",
+      "Free case study template Word",
+      "Canva case Study template"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

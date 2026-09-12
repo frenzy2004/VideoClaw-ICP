@@ -1,0 +1,120 @@
+{
+  "id": "vc-manual50-c3-006",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://helpx.adobe.com/premiere/desktop/edit-projects/edit-video-using-text-based-editing/overview-of-text-based-editing.html",
+      "supports": "Adobe documents transcript-based edits changing associated timeline clips and further refinement directly on the timeline.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf",
+      "supports": "NIST AI 600-1, action MS-2.5-001, cautions against extrapolating capabilities from narrow, non-systematic, anecdotal assessments.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.w3.org/WAI/media/av/captions/",
+      "supports": "Automatically generated captions require confirmation of full accuracy to meet user needs and accessibility requirements.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Are AI video editors any good?",
+      "basis": "observed_paa",
+      "query": "AI video editor vs traditional video editor",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7"
+    },
+    {
+      "question": "Does traditional editing exclude AI assistance?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should an AI editing comparison measure?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: a task-allocation map and same-input trial may help readers evaluate approved results and correction effort beyond feature lists. Competing page bodies were not inspected.",
+  "reviewNotes": [
+    "SERP row vc-manual50-c3-006 checked. First FAQ exactly matches observed PAA from run VMTK8QQ0C4Cf7WZXf, dataset MexeNaX1RsSZJmAZ7. Other questions are editorial.",
+    "Task map and comparison protocol are original recommendations. The onboarding and interview assignments are fictional, with no trial results, tool ranking, or savings estimate asserted."
+  ],
+  "serp": {
+    "id": "vc-manual50-c3-006",
+    "keyword": "AI video editor vs traditional video editor",
+    "found": true,
+    "query": "AI video editor vs traditional video editor",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:49:53.581Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Ai video generation vs traditional editing - what's real vs ...",
+        "url": "https://www.reddit.com/r/VideoEditors/comments/1o31lvt/ai_video_generation_vs_traditional_editing_whats/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "AI Video Generation vs Traditional Video Editing",
+        "url": "https://www.adobe.com/in/products/firefly/discover/ai-video-creation-vs-traditional-editing.html",
+        "domain": "adobe.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "What makes AI video creation different from traditional ...",
+        "url": "https://lumen5.com/learn/what-makes-ai-video-creation-different-from-traditional-video-editing-faq/",
+        "domain": "lumen5.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "AI Video Editor vs. Traditional Video Editing: Why Talking ...",
+        "url": "https://www.odysser.com/blog/ai-video-editor-vs-traditional",
+        "domain": "odysser.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Comparing AI Video Generators vs Traditional Editing",
+        "url": "https://syllaby.io/blog/ai-video-generators-vs-traditional-editing/",
+        "domain": "syllaby.io",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "AI Video Editing vs Freelance Editor Costs in 2026",
+        "url": "https://www.videotto.com/blog/ai-video-editing-vs-freelance-editor-cost",
+        "domain": "videotto.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "AI Video Services vs Traditional Video Editing: Which Is Better?",
+        "url": "https://youtubevideoeditingservices.com/ai-video-services-vs-traditional-video-editing/",
+        "domain": "youtubevideoeditingservices.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Are AI video editors any good?",
+      "Is AI replacing video editors?",
+      "What is the difference between an AI video and an original video?",
+      "What does the 80/20 rule mean in video editing?"
+    ],
+    "relatedQueries": [
+      "Ai video editor vs traditional video editor reddit",
+      "Ai video editor vs traditional video editor free",
+      "Ai video editor vs traditional video editor cost"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

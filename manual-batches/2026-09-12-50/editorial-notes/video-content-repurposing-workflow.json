@@ -1,0 +1,115 @@
+{
+  "id": "vc-manual50-c4-003",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.w3.org/WAI/media/av/planning/",
+      "supports": "W3C recommends including accessibility in project requirements and planning it during media production.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.google.com/analytics/answer/10917952?hl=en",
+      "supports": "Campaign parameters identify referral traffic and campaigns; utm_content distinguishes creatives.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Who should own a video repurposing workflow?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should be included in a repurposing handoff?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How should a team evaluate a new repurposing process?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: linked source, asset and publication records plus explicit handoff acceptance rules can add operational detail beside observed results https://repurpose.io/ and https://dfirst.ai/blog/content-repurpose/. Their page bodies were not inspected; no comparative capability or coverage claim is made.",
+  "reviewNotes": [
+    "Handoff roles, record design and acceptance rules are original editorial recommendations, not software features.",
+    "No PAA questions were observed for vc-manual50-c4-003; all FAQs are editorial."
+  ],
+  "serp": {
+    "id": "vc-manual50-c4-003",
+    "keyword": "video content repurposing workflow",
+    "found": true,
+    "query": "video content repurposing workflow",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:49:53.581Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "#1 automated content repurposing & distribution platform.",
+        "url": "https://repurpose.io/",
+        "domain": "repurpose.io",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "How to Repurpose Content with AI: A Step-by-Step Workflow",
+        "url": "https://dfirst.ai/blog/content-repurpose/",
+        "domain": "dfirst.ai",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "Repurposing Content for Social Media: Make Video Work ...",
+        "url": "https://captions.ai/blog/make-your-videos-work-harder",
+        "domain": "captions.ai",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "9 Best Content Repurposing Tools for Video and Social ...",
+        "url": "https://www.socialrevver.com/blog/content-repurposing-tools",
+        "domain": "socialrevver.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "How to Repurpose Video Content: A 2026 Workflow",
+        "url": "https://quso.ai/blog/how-to-repurpose-video-content",
+        "domain": "quso.ai",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Content Repurposing Strategy: A Measured Clip Workflow",
+        "url": "https://recapo.ai/blog/content-repurposing-strategy/",
+        "domain": "recapo.ai",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "The Best Content Repurposing Tools (and What They Actually ...",
+        "url": "https://aiforcontentmarketing.ai/the-best-content-repurposing-tools-and-what-they-actually-do/",
+        "domain": "aiforcontentmarketing.ai",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Video Content Repurposing: 1 Video, 10 Formats",
+        "url": "https://octospark.ai/blog/video-content-repurposing-guide-10-formats/",
+        "domain": "octospark.ai",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": [
+      "Video content repurposing workflow template",
+      "Video content repurposing workflow free",
+      "Repurpose io lifetime deal",
+      "rePurpose program"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

@@ -1,0 +1,1114 @@
+{
+  "schemaVersion": 1,
+  "kind": "manual_editorial_batch",
+  "provenance": {
+    "actorId": "apify/google-search-scraper",
+    "runId": "1TRKQT0t6mrbtBkVz",
+    "datasetId": "sxgEp2jc602xi3TP6",
+    "observedAt": "2026-09-11T20:52:49.425Z"
+  },
+  "records": [
+    {
+      "id": "vc-manual50-c1-001",
+      "keyword": "how to announce startup funding",
+      "found": true,
+      "query": "how to announce startup funding",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:52:49.425Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "1TRKQT0t6mrbtBkVz",
+      "datasetId": "sxgEp2jc602xi3TP6",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Funding Announcement Press Releases [How to do, ...",
+          "url": "https://prlab.co/blog/funding-announcement-press-releases/",
+          "domain": "prlab.co",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "How to Handle a Startup Funding Announcement",
+          "url": "http://www.firebrand.marketing/2024/08/how-to-announce-startup-funding/",
+          "domain": "firebrand.marketing",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Should Startups Announce Their Funding? | by Mark Suster",
+          "url": "https://medium.com/both-sides-of-the-table/should-startups-announce-their-funding-3f6ff2b4f2d7",
+          "domain": "medium.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "How to announce a funding round of your dev tool startup",
+          "url": "https://www.markepear.dev/blog/announce-funding-round",
+          "domain": "markepear.dev",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "How to make your fundraise announcement count",
+          "url": "https://www.linkedin.com/posts/rohitkaul1_the-funding-amount-is-not-even-the-most-important-activity-7313538775110819840-5Wvq",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 6,
+          "title": "How to Announce Startup Funding Through a Press Release",
+          "url": "https://digitalpressrelease.in/how-to-announce-startup-funding-through-a-press-release/",
+          "domain": "digitalpressrelease.in",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "How to make a funding announcement go viral - On Background",
+          "url": "https://onbackgroundintel.substack.com/p/how-to-make-a-funding-announcement",
+          "domain": "onbackgroundintel.substack.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Funding Round Announcement Emails: 10+ Examples",
+          "url": "https://userlist.com/blog/startup-round-announcement-emails/",
+          "domain": "userlist.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is a good message to announce a new business opening?",
+        "How to politely ask for funding?",
+        "How to present a startup idea to investors?",
+        "How to reach out to investors for funding?"
+      ],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual50-c1-008",
+      "keyword": "how to make a recruitment video",
+      "found": true,
+      "query": "how to make a recruitment video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:52:49.425Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "1TRKQT0t6mrbtBkVz",
+      "datasetId": "sxgEp2jc602xi3TP6",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How to make a recruitment video that works",
+          "url": "https://www.assessfirst.com/en/blog/how-to-make-a-recruitment-video-that-works",
+          "domain": "assessfirst.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "Create Recruitment Videos Online for Free with Templates",
+          "url": "https://www.flexclip.com/create/recruitment-video.html",
+          "domain": "flexclip.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "10 Recruitment Video Ideas That Attract Better Candidates ...",
+          "url": "https://leadde.ai/blog/recruitment-video-ideas",
+          "domain": "leadde.ai",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "3 AI video templates to create standout recruitment videos",
+          "url": "https://storykit.io/blog/recruitment-videos",
+          "domain": "storykit.io",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Recruitment Video Examples & Complete Guide for 2026",
+          "url": "https://vidcruiter.com/video-interviewing/recruitment-videos/",
+          "domain": "vidcruiter.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "9 Practices to Create Great Recruitment Videos",
+          "url": "https://www.shineinterview.com/9-practices-to-create-great-recruitment-videos/",
+          "domain": "shineinterview.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Recruitment Video Maker with Easy Video Templates",
+          "url": "https://playplay.com/create/recruitment-video",
+          "domain": "playplay.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "9 Ways to Feature Your Recruitment Video",
+          "url": "https://www.indeed.com/hire/c/info/recruiting-videos",
+          "domain": "indeed.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How can I create a recruitment video?",
+        "What are the 5 C's of recruitment?",
+        "How to create a recruitment video for TikTok?",
+        "How to create a video for an interview?"
+      ],
+      "relatedQueries": [
+        "How to make a recruitment video template",
+        "How to make a recruitment video on youtube",
+        "How to make a recruitment video free",
+        "Frat rush video template"
+      ]
+    },
+    {
+      "id": "vc-manual50-c2-003",
+      "keyword": "startup demo day checklist",
+      "found": true,
+      "query": "startup demo day checklist",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:52:49.425Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "1TRKQT0t6mrbtBkVz",
+      "datasetId": "sxgEp2jc602xi3TP6",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "From Demo Day to First Meeting: My Demo Day Checklist",
+          "url": "https://cupofzhou.com/from-demo-day-to-first-meeting-my-demo-day-checklist/",
+          "domain": "cupofzhou.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Startup Demo Day Tips And Advice On Nailing the ...",
+          "url": "https://www.linkedin.com/pulse/startup-demo-day-tips-advice-nailing-presentation-kyle-wong",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 3,
+          "title": "Preparing for Demo Day at a Startup Accelerator",
+          "url": "https://journals.openedition.org/rac/35120",
+          "domain": "journals.openedition.org",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Maximizing Deal Flow: Investor Tips for Startup Demo Days",
+          "url": "https://qubit.capital/blog/investor-demo-day-tips",
+          "domain": "qubit.capital",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "What is a Demo Day? A Complete Guide for Startup ...",
+          "url": "https://www.converve.com/event-networking-blog/what-is-a-demo-day-organisers-guide",
+          "domain": "converve.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "How to Prepare for Demo Day: The Complete Founder's ...",
+          "url": "https://rehearsr.com/blog/how-to-prepare-for-demo-day",
+          "domain": "rehearsr.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "13 Ways To Pull Off A Killer Demo Day Presentation",
+          "url": "https://www.onstartups.com/tabid/3339/bid/48317/13-Ways-To-Pull-Off-A-Killer-Demo-Day-Presentation.aspx",
+          "domain": "onstartups.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "GITA Startup Demo Day Agenda | PDF",
+          "url": "https://www.scribd.com/document/245523257/Agenda-Demo-Day",
+          "domain": "scribd.com",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "What Is Demo Day? A Complete Guide for Startup Founders",
+          "url": "https://demodaycheck.vercel.app/blog/what-is-demo-day",
+          "domain": "demodaycheck.vercel.app",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Startup demo day checklist pdf",
+        "Startup demo day checklist 2022",
+        "Startup demo day checklist 2021"
+      ]
+    },
+    {
+      "id": "vc-manual50-c2-004",
+      "keyword": "startup investor update video",
+      "found": true,
+      "query": "startup investor update video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:52:49.425Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "1TRKQT0t6mrbtBkVz",
+      "datasetId": "sxgEp2jc602xi3TP6",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How to write the perfect investor update. Here's a full ...",
+          "url": "https://www.instagram.com/reel/DRSsYw8D95m/",
+          "domain": "instagram.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 2,
+          "title": "Build Stronger Investor Relationships with Video Updates",
+          "url": "https://visible.vc/blog/video-in-investor-updates/",
+          "domain": "visible.vc",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "How to Write an Effective Investor Update | Tips & Templates",
+          "url": "https://carta.com/learn/private-funds/management/portfolio-management/investor-updates/",
+          "domain": "carta.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Investor Update Videos for Startups: The Complete 2026 ...",
+          "url": "https://www.kometmedia.com/blogs/investor-update-videos-for-startups",
+          "domain": "kometmedia.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "The Best Investor Update Templates",
+          "url": "https://www.capboard.io/en/investor-relations/best-investor-update-templates",
+          "domain": "capboard.io",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "The Importance of Investor Updates for Tech Startups",
+          "url": "https://abergseyeview.com/investor-updates-guide-template",
+          "domain": "abergseyeview.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "How To Write An Effective Investor Update For Your Startup",
+          "url": "https://www.digitalocean.com/resources/articles/investor-update",
+          "domain": "digitalocean.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What does an investor update look like?",
+        "What are the 7 stages of startup?",
+        "What is the best YouTube channel for startups?",
+        "How do I pitch my startup idea to investors effectively?"
+      ],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual50-c2-007",
+      "keyword": "startup pitch rehearsal",
+      "found": true,
+      "query": "startup pitch rehearsal",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:52:49.425Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "1TRKQT0t6mrbtBkVz",
+      "datasetId": "sxgEp2jc602xi3TP6",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Investor Pitch Rehearsal Techniques That Build Confidence",
+          "url": "https://qubit.capital/blog/rehearse-pitch-presentation",
+          "domain": "qubit.capital",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "Pitch Practice",
+          "url": "https://www.startups.com/lexicon/pitch-practice",
+          "domain": "startups.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Startup Pitch Practice — Rehearse With AI Feedback",
+          "url": "https://echopitch.io/startup-pitch-practice",
+          "domain": "echopitch.io",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "How to practice and rehearse your investor pitch",
+          "url": "https://goldeneggcheck.com/en/how-to-practice-and-rehearse-your-investor-pitch/",
+          "domain": "goldeneggcheck.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "How to prepare for startup pitch for investors",
+          "url": "https://www.reddit.com/r/startups/comments/p03e44/how_to_prepare_for_startup_pitch_for_investors/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Taking the Stage and Pitching Like a Pro on Your First Try",
+          "url": "https://medium.com/startup-grind/taking-the-startup-stage-and-pitching-like-a-pro-on-your-first-try-8941da239a75",
+          "domain": "medium.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "10 Steps to Perfect Your Startup Pitch",
+          "url": "https://www.gsb.stanford.edu/insights/10-steps-perfect-your-startup-pitch",
+          "domain": "gsb.stanford.edu",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "Startup Pitch Practice - Some Advice on Receiving Feedback",
+          "url": "https://www.linkedin.com/pulse/startup-pitch-practice-some-advice-receiving-shaun",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is a startup pitch?",
+        "What are the 7 stages of startup?",
+        "How to pitch a startup presentation?",
+        "What is the 10/20/30 rule for pitch decks?"
+      ],
+      "relatedQueries": [
+        "Startup pitch rehearsal template",
+        "Startup pitch rehearsal example"
+      ]
+    },
+    {
+      "id": "vc-manual50-c2-008",
+      "keyword": "investor follow up email after demo day",
+      "found": true,
+      "query": "investor follow up email after demo day",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:52:49.425Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "1TRKQT0t6mrbtBkVz",
+      "datasetId": "sxgEp2jc602xi3TP6",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "7 Investor Follow-Up Email Templates for Founders",
+          "url": "https://www.evalyze.ai/blog/7-investor-follow-up-emails",
+          "domain": "evalyze.ai",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "How to Track Investor Follow-ups After Demo Day",
+          "url": "https://www.converve.com/event-networking-blog/track-investor-follow-ups-after-demo-day",
+          "domain": "converve.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Follow-Up Techniques For After A Sales Demo",
+          "url": "https://www.linkedin.com/top-content/sales/mastering-the-art-of-follow-up/follow-up-techniques-for-after-a-sales-demo/",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 4,
+          "title": "Investor Outreach Emails: Templates That Get Replies",
+          "url": "https://qubit.capital/blog/investor-outreach-email-template",
+          "domain": "qubit.capital",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "How soon after sending out an initial email to investors do I ...",
+          "url": "https://www.quora.com/How-soon-after-sending-out-an-initial-email-to-investors-do-I-follow-up-with-a-phone-call",
+          "domain": "quora.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "How to Follow-Up After an Investor Meeting - Ash Rust - Medium",
+          "url": "https://ashrust.medium.com/how-to-follow-up-after-an-investor-meeting-a15da5e4163f",
+          "domain": "ashrust.medium.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "29 Investor, Fundraising & Startup Email Templates for ...",
+          "url": "https://blog.foundersuite.com/29-investor-fundraising-startup-email-templates-for-founders/",
+          "domain": "blog.foundersuite.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Post-Demo Follow-Up Email Templates That Actually Convert",
+          "url": "https://www.apollo.io/templates/post-demo-follow-up-email-templates",
+          "domain": "apollo.io",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "Email Follow-Up After an Investor Meeting | First Follow-Up",
+          "url": "https://www.basetemplates.com/investor-email-templates/email-follow-up-after-an-investor-meeting-first-follow-up",
+          "domain": "basetemplates.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What should I include in an email follow-up after a meeting?",
+        "How do you politely send a follow-up email?",
+        "How do you professionally say follow up after no response sample?",
+        "How to follow up after an introduction email?"
+      ],
+      "relatedQueries": [
+        "Investor follow up email after demo day template",
+        "Investor follow up email after demo day sample",
+        "Investor follow up email after demo day example",
+        "Investor follow up email after demo day subject",
+        "Email to investor for funding sample",
+        "How to follow up with investors",
+        "Investor outreach email"
+      ]
+    },
+    {
+      "id": "vc-manual50-c4-007",
+      "keyword": "how to make software tutorial videos",
+      "found": true,
+      "query": "how to make software tutorial videos",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:52:49.425Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "1TRKQT0t6mrbtBkVz",
+      "datasetId": "sxgEp2jc602xi3TP6",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "What is the best tools for creating video tutorials?",
+          "url": "https://www.reddit.com/r/SmallYTChannel/comments/1h9i233/what_is_the_best_tools_for_creating_video/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "How to Make a Video Tutorial: A Step-by-Step Guide",
+          "url": "https://www.ispringsolutions.com/blog/how-to-make-tutorial-video",
+          "domain": "ispringsolutions.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "Free Tutorial Video Maker | Create DIY, How-To Videos",
+          "url": "https://animoto.com/video-maker/tutorial-videos",
+          "domain": "animoto.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "10 Best Video Tutorial Softwares for 2026 (Tested by ...",
+          "url": "https://leadde.ai/blog/best-video-tutorial-softwares",
+          "domain": "leadde.ai",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "How to Make Instructional Videos: Step-by-Step Guide",
+          "url": "https://www.techsmith.com/blog/instructional-videos/",
+          "domain": "techsmith.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Tutorial Video Maker - AI Avatars | Screen Recording",
+          "url": "https://www.vmaker.com/create-tutorial-videos",
+          "domain": "vmaker.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "How to: Make Video Tutorials",
+          "url": "https://www.youtube.com/playlist?list=PLmoC3HVFtXYj7h5hD6OjrS0oZuqRozf4H",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What software can I use to create tutorial videos?",
+        "How can I create a tutorial video?",
+        "How can I create my own training videos?",
+        "Can I use AI to create tutorial videos?"
+      ],
+      "relatedQueries": [
+        "How to make software tutorial videos on pc",
+        "How to make software tutorial videos free",
+        "How to make software tutorial videos on laptop",
+        "How to make an instructional video with screen recording",
+        "Tutorial video examples",
+        "Create video tutorials",
+        "How to create tutorial videos for YouTube",
+        "Video tutorial app"
+      ]
+    },
+    {
+      "id": "vc-manual50-c5-001",
+      "keyword": "startup accelerator marketing strategy",
+      "found": true,
+      "query": "startup accelerator marketing strategy",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:52:49.425Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "1TRKQT0t6mrbtBkVz",
+      "datasetId": "sxgEp2jc602xi3TP6",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How To Create A Marketing Plan For A Startup (Part 1) | Blog",
+          "url": "https://www.ohblimey.com/blog/how-to-create-a-marketing-plan-for-your-early-stage-startup-part-1",
+          "domain": "ohblimey.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "Creative Marketing Strategies to Drive Business Growth in ...",
+          "url": "https://esj.eastasouth-institute.com/index.php/esmb/article/view/348",
+          "domain": "esj.eastasouth-institute.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "Top Marketing Strategies for Accelerators 2026",
+          "url": "https://www.acceleratorapp.co/en/blogs/marketing-strategies-to-get-the-best-startups-for-your-accelerator/",
+          "domain": "acceleratorapp.co",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Startup Marketing Strategy: Key Steps to Grow Your Business",
+          "url": "https://masschallenge.org/articles/startup-marketing/",
+          "domain": "masschallenge.org",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "10 Powerful Ways Word of Mouth Boosts Accelerator ...",
+          "url": "https://www.linkedin.com/pulse/10-powerful-ways-word-mouth-boosts-accelerator-marketing-mrc2f",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 6,
+          "title": "Startup Marketing Accelerator Program",
+          "url": "https://incubatemybrand.com/startup-marketing-accelerator-program",
+          "domain": "incubatemybrand.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Small Business Accelerators",
+          "url": "https://zealfutures.com.au/study-areas/small-business-accelerators",
+          "domain": "zealfutures.com.au",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Startup Programs, Courses & Accelerators",
+          "url": "https://launchvic.org/programs/",
+          "domain": "launchvic.org",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "The Marketing Accelerator | Up Club",
+          "url": "https://www.up-world.co/the-marketing-accelerator",
+          "domain": "up-world.co",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is the 3-3-3 rule for marketing?",
+        "What is the 80/20 rule for startups?",
+        "What is the 70/20/10 rule in marketing?",
+        "What are the 7 stages of startup?"
+      ],
+      "relatedQueries": [
+        "Startup accelerator marketing strategy template",
+        "Startup accelerator marketing strategy pdf",
+        "Startup accelerator marketing strategy example"
+      ]
+    },
+    {
+      "id": "vc-manual50-c5-003",
+      "keyword": "how to film startup demo day",
+      "found": true,
+      "query": "how to film startup demo day",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:52:49.425Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "1TRKQT0t6mrbtBkVz",
+      "datasetId": "sxgEp2jc602xi3TP6",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How to Create a Killer Demo for your Deep Tech Startup",
+          "url": "https://medium.com/behavioral-signals-ai/how-to-create-a-killer-demo-for-your-deep-tech-startup-63f5cd5cd478",
+          "domain": "medium.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "What's the best tool to build a simple video to demo my ...",
+          "url": "https://www.reddit.com/r/startups/comments/1gb0vw6/whats_the_best_tool_to_build_a_simple_video_to/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Startup Product Demo Video: Lead With the Problem, Not ...",
+          "url": "https://www.flowjam.com/blog/startup-product-demo-video",
+          "domain": "flowjam.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Startup Demo Day Tips And Advice On Nailing the ...",
+          "url": "https://www.linkedin.com/pulse/startup-demo-day-tips-advice-nailing-presentation-kyle-wong",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 5,
+          "title": "How to Prepare for Demo Day: A Founder's Guide",
+          "url": "https://www.startupscience.io/articles/how-to-prepare-for-demo-day",
+          "domain": "startupscience.io",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "How to Design a Demo That Sells (Even in a Loom Video)",
+          "url": "https://geeksforgrowth.com/blog/how-to-design-a-demo-that-sells-even-in-a-loom-video/",
+          "domain": "geeksforgrowth.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "How to Prepare for a Startup Demo Day",
+          "url": "https://demoday.la/how-to-prepare-for-a-startup-demo-day/",
+          "domain": "demoday.la",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is the best way to record a demo?",
+        "How to film a demo video?",
+        "What software can I use to record demo videos?",
+        "How to give a good product demo?"
+      ],
+      "relatedQueries": [
+        "How to film startup demo day reddit",
+        "How to film startup demo day online",
+        "Startup demo video",
+        "Loom",
+        "Product demo videos",
+        "Screenstudio",
+        "Supademo",
+        "App demo video"
+      ]
+    },
+    {
+      "id": "vc-manual50-c5-004",
+      "keyword": "startup mentor webinar",
+      "found": true,
+      "query": "startup mentor webinar",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:52:49.425Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "1TRKQT0t6mrbtBkVz",
+      "datasetId": "sxgEp2jc602xi3TP6",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Watch Online Startup Events, from the Founder Institute",
+          "url": "https://fi.co/webinars",
+          "domain": "fi.co",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Webinar tools for educating and equipping startup founders",
+          "url": "https://myownconference.com/use-cases/webinars-for-startups",
+          "domain": "myownconference.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Startupbootcamp for Mentors",
+          "url": "https://startupbootcamp.org/mentors",
+          "domain": "startupbootcamp.org",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Business Mentor - webinars",
+          "url": "https://www.madrimasd.org/businessmentor/entity/webinars",
+          "domain": "madrimasd.org",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Webinars",
+          "url": "https://www.startuptree.co/webinars/",
+          "domain": "startuptree.co",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Small business webinars",
+          "url": "https://www.mbmentors.org/webinars",
+          "domain": "mbmentors.org",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Best Entrepreneur Learning & Mentoring Course - 2026",
+          "url": "https://entrepreneurseminar.com/",
+          "domain": "entrepreneurseminar.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Mentor Hours | Web Summit | November 9-12, 2026",
+          "url": "https://websummit.com/startups/mentor-hours/",
+          "domain": "websummit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "Founders Network • Startup mentorship, peer to peer forums ...",
+          "url": "https://foundersnetwork.com/",
+          "domain": "foundersnetwork.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Startup mentor webinar free",
+        "Find mentor for startup",
+        "Mentor startups",
+        "Personal growth mentor",
+        "Plug and Play mentors",
+        "Become a paid mentor",
+        "Mentor platform",
+        "Business mentor online"
+      ]
+    },
+    {
+      "id": "vc-manual50-c5-005",
+      "keyword": "founder interview questions",
+      "found": true,
+      "query": "founder interview questions",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:52:49.425Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "1TRKQT0t6mrbtBkVz",
+      "datasetId": "sxgEp2jc602xi3TP6",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Startup Interview Questions: 8 Things Founders Will Ask You",
+          "url": "https://www.goskills.com/career-development/resources/startup-interview-questions",
+          "domain": "goskills.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "Interviewing a founder... need help with questions.",
+          "url": "https://www.reddit.com/r/EntrepreneurRideAlong/comments/17mjty7/interviewing_a_founder_need_help_with_questions/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Interviewing at a startup? Ask these questions before you ...",
+          "url": "https://www.linkedin.com/pulse/interviewing-startup-ask-questions-before-you-join-bibi-careau--1l4ec",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 4,
+          "title": "The 239 interview questions technical startup founders should ...",
+          "url": "https://blog.squadra.vc/articles/the-239-interview-questions-technical-startup-founders-should-ask-every-candidate",
+          "domain": "blog.squadra.vc",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "My Top Founder Interview Questions That Fly Under The ...",
+          "url": "https://cupofzhou.com/my-top-founder-interview-questions-that-fly-under-the-radar/",
+          "domain": "cupofzhou.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "What are the best questions to ask the founders when you ...",
+          "url": "https://www.quora.com/What-are-the-best-questions-to-ask-the-founders-when-youre-interviewing-with-a-start-up-in-healthcare-IT",
+          "domain": "quora.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "The Best Job Interview Question To Ask A CEO Founder",
+          "url": "https://www.youtube.com/watch?v=tjc2g-NGrKc",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 8,
+          "title": "125 CEO Interview Questions",
+          "url": "https://www.donnaschilder.com/blog/ceo-interview-questions/",
+          "domain": "donnaschilder.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What are the 5 C's of interviewing?",
+        "What is the 30-60-90 rule in an interview?",
+        "What are the 5 main interview questions?",
+        "What are the 5 hardest interview questions?"
+      ],
+      "relatedQueries": [
+        "Startup founder interview questions",
+        "Startup interview questions and answers",
+        "Questions to ask a startup before joining",
+        "Interview questions to ask startups",
+        "CEO interview questions and answers",
+        "Interview with ceo of startup",
+        "Behavioral interview questions startup",
+        "Startup technical interview"
+      ]
+    },
+    {
+      "id": "vc-manual50-c5-006",
+      "keyword": "venture capital portfolio newsletter",
+      "found": true,
+      "query": "venture capital portfolio newsletter",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:52:49.425Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "1TRKQT0t6mrbtBkVz",
+      "datasetId": "sxgEp2jc602xi3TP6",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Venture capital newsletter",
+          "url": "https://business.gov.au/grants-and-programs/venture-capital/venture-capital-newsletter",
+          "domain": "business.gov.au",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "30 Best Venture Capital Newsletters You Should Know",
+          "url": "https://growthequityinterviewguide.com/venture-capital/how-to-get-into-venture-capital/venture-capital-newsletters",
+          "domain": "growthequityinterviewguide.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Venture Capital - WSJ Pro - WSJ.com",
+          "url": "https://www.wsj.com/pro/venture-capital",
+          "domain": "wsj.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Looking for VC newsletter recommendations",
+          "url": "https://www.reddit.com/r/venturecapital/comments/18khwr1/looking_for_vc_newsletter_recommendations/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Newsletter Articles",
+          "url": "https://www.newprivatemarkets.com/content_types/newsletter/",
+          "domain": "newprivatemarkets.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Three Newsletters Every VC Should Have",
+          "url": "https://www.hustlefund.vc/post/three-newsletters-every-vc-should-have",
+          "domain": "hustlefund.vc",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "5 Venture Capital Newsletters to Help Boost Your Skills",
+          "url": "https://medium.com/@goingvc/5-venture-capital-newsletters-to-help-boost-your-skills-b26f9758b61b",
+          "domain": "medium.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Private Markets Newsletter",
+          "url": "https://www.linkedin.com/pulse/private-markets-newsletter-evalueserve-tmd9f",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 9,
+          "title": "VC Thought for the Week - Venture University",
+          "url": "https://venture-university.eu/newsletter",
+          "domain": "venture-university.eu",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Venture capital portfolio newsletter free",
+        "Venture capital portfolio newsletter pdf",
+        "Australian Venture Summit 2026",
+        "Venture capital Journal",
+        "Best growth equity newsletters",
+        "Strictly VC newsletter",
+        "Best vc substack",
+        "Venture Capital news daily"
+      ]
+    },
+    {
+      "id": "vc-manual50-c5-008",
+      "keyword": "content creation workshop for startup founders",
+      "found": true,
+      "query": "content creation workshop for startup founders",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:52:49.425Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "1TRKQT0t6mrbtBkVz",
+      "datasetId": "sxgEp2jc602xi3TP6",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Fully Funded Content Creator Skills Bootcamp",
+          "url": "https://www.another-avenue.co.uk/content-creator-bootcamp",
+          "domain": "another-avenue.co.uk",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Content Creation Training Workshops — SHARE",
+          "url": "https://sharecontent.co.uk/sharetraining",
+          "domain": "sharecontent.co.uk",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Founder Launch",
+          "url": "https://creativehq.co.nz/build-for-founders/founder-launch/",
+          "domain": "creativehq.co.nz",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Startup Workshops",
+          "url": "https://www.baystartup.de/en/startups/startup-workshops",
+          "domain": "baystartup.de",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "the Forge Creator Bootcamp",
+          "url": "https://creators.forgebylevelup.com/",
+          "domain": "creators.forgebylevelup.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Content Creation Bootcamp",
+          "url": "https://workshop.sarahcordiner.com/contentcreationbootcamp",
+          "domain": "workshop.sarahcordiner.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Startup School",
+          "url": "https://startup.google.com/programs/startup-school/",
+          "domain": "startup.google.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Founder Workshops",
+          "url": "https://www.venturemechanics.com/event/founder-workshops",
+          "domain": "venturemechanics.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Is content creation still worth it in 2026?",
+        "What are the 7 steps of content creation?",
+        "What is the best platform to start content creation?",
+        "Which course is best for content creation?"
+      ],
+      "relatedQueries": [
+        "Content creation workshop for startup founders free",
+        "Best content creation workshop for startup founders",
+        "Startup advice",
+        "Startup competitions 2026",
+        "Kiwi startup",
+        "Liam sutton startup aotearoa"
+      ]
+    }
+  ]
+}

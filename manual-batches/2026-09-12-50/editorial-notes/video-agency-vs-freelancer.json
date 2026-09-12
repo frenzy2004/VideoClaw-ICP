@@ -1,0 +1,120 @@
+{
+  "id": "vc-manual50-c3-001",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.bls.gov/ooh/media-and-communication/film-and-video-editors-and-camera-operators.htm",
+      "supports": "Editors arrange recorded footage and collaborate with producers and directors; used only for occupational context.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.bls.gov/ooh/entertainment-and-sports/producers-and-directors.htm",
+      "supports": "Producer duties include crew, production oversight, scheduling, budgets, and postproduction.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What are the key differences between a freelancer and an agency?",
+      "basis": "observed_paa",
+      "query": "video agency vs freelancer",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7"
+    },
+    {
+      "question": "Can one provider handle both a launch film and recurring product videos?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should a paid video partner trial include?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: a named-responsibility worksheet and separate launch-versus-recurring-work example may help buyers beyond generic model comparisons. Competing page bodies were not inspected for this article.",
+  "reviewNotes": [
+    "Checked this article's SERP row vc-manual50-c3-001; the first FAQ exactly matches observed PAA in run VMTK8QQ0C4Cf7WZXf, dataset MexeNaX1RsSZJmAZ7. Other FAQs are editorial.",
+    "HarborDesk is fictional. Worksheet, trial protocol, and selection criteria are original editorial recommendations; no comparative test was run."
+  ],
+  "serp": {
+    "id": "vc-manual50-c3-001",
+    "keyword": "video agency vs freelancer",
+    "found": true,
+    "query": "video agency vs freelancer",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:49:53.581Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Should you hire a video agency, freelancer or ...",
+        "url": "https://www.linkedin.com/pulse/should-you-hire-video-agency-freelancer-produce-pros-cons-dane-monsc",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 2,
+        "title": "Video Editing Agency vs Freelancer: Which to Pick",
+        "url": "https://www.pixel8production.com/blog/video-editing-agency-vs-freelancer",
+        "domain": "pixel8production.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "Agency vs. Freelancer: Which Is Right for You?",
+        "url": "https://www.upwork.com/resources/agency-vs-freelance",
+        "domain": "upwork.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "Agency Model vs. Production Company Route?",
+        "url": "https://www.reddit.com/r/videography/comments/1lyi81u/from_freelancer_to_something_bigger_agency_model/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Video Production Agency vs Freelancer: Cost & Quality",
+        "url": "https://fxproductionscanada.com/video-production-agency-vs-freelancer-cost-quality/",
+        "domain": "fxproductionscanada.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Freelancer vs. Long-Form Video Agency in Los Angeles",
+        "url": "https://adjustproduction.com/freelancer-vs-long-form-video-agency-in-los-angeles-which-is-better-for-your-business/",
+        "domain": "adjustproduction.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Agency vs Freelancer: Which Should Your Business Hire?",
+        "url": "https://prolinker.com/blog/agency-vs-freelancer",
+        "domain": "prolinker.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What are the key differences between a freelancer and an agency?",
+      "Is AI replacing freelancers?",
+      "Do video editors make a lot of money?",
+      "Is Upwork still worth it in 2026?"
+    ],
+    "relatedQueries": [
+      "Video agency vs freelancer reddit",
+      "Video agency vs freelancer salary",
+      "Video agency vs freelancer cost",
+      "Upwork as a freelancer",
+      "What is agency in upwork",
+      "Freelancer agency account",
+      "Agency profile Upwork",
+      "Upwork Agency Plus"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

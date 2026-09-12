@@ -1,0 +1,126 @@
+{
+  "id": "vc-manual50-c5-006",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://mailchimp.com/help/use-video-content-blocks/",
+      "supports": "Mailchimp explains that most email clients do not support embedded video and its email block links a thumbnail to a video URL.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.apple.com/legal/privacy/data/en/mail-privacy-protection/",
+      "supports": "With Protect Mail Activity enabled, remote content downloads in the background regardless of engagement.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What should a portfolio company newsletter include?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should a newsletter embed video or link to it?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Are newsletter open rates a reliable measure of readership?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: an issue-level worksheet connecting company updates to reader actions may address the portfolio operator's job more directly than general newsletter galleries. Original-query results were ambiguous; competing page bodies were not reviewed.",
+  "reviewNotes": [
+    "Original-query SERP record inspected: vc-manual50-c5-006; no PAA observed. Refined primary query is venture capital portfolio newsletter. Mailchimp example documents email behavior and is not an endorsement or VideoClaw integration claim.",
+    "Refined-query record inspected in serp-refined-evidence.json, run 1TRKQT0t6mrbtBkVz, dataset sxgEp2jc602xi3TP6. No PAA observed in the refined record either; all three questions remain editorial."
+  ],
+  "serp": {
+    "id": "vc-manual50-c5-006",
+    "keyword": "venture capital portfolio newsletter",
+    "found": true,
+    "query": "venture capital portfolio newsletter",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:52:49.425Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "1TRKQT0t6mrbtBkVz",
+    "datasetId": "sxgEp2jc602xi3TP6",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Venture capital newsletter",
+        "url": "https://business.gov.au/grants-and-programs/venture-capital/venture-capital-newsletter",
+        "domain": "business.gov.au",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "30 Best Venture Capital Newsletters You Should Know",
+        "url": "https://growthequityinterviewguide.com/venture-capital/how-to-get-into-venture-capital/venture-capital-newsletters",
+        "domain": "growthequityinterviewguide.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Venture Capital - WSJ Pro - WSJ.com",
+        "url": "https://www.wsj.com/pro/venture-capital",
+        "domain": "wsj.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Looking for VC newsletter recommendations",
+        "url": "https://www.reddit.com/r/venturecapital/comments/18khwr1/looking_for_vc_newsletter_recommendations/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Newsletter Articles",
+        "url": "https://www.newprivatemarkets.com/content_types/newsletter/",
+        "domain": "newprivatemarkets.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Three Newsletters Every VC Should Have",
+        "url": "https://www.hustlefund.vc/post/three-newsletters-every-vc-should-have",
+        "domain": "hustlefund.vc",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "5 Venture Capital Newsletters to Help Boost Your Skills",
+        "url": "https://medium.com/@goingvc/5-venture-capital-newsletters-to-help-boost-your-skills-b26f9758b61b",
+        "domain": "medium.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Private Markets Newsletter",
+        "url": "https://www.linkedin.com/pulse/private-markets-newsletter-evalueserve-tmd9f",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 9,
+        "title": "VC Thought for the Week - Venture University",
+        "url": "https://venture-university.eu/newsletter",
+        "domain": "venture-university.eu",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": [
+      "Venture capital portfolio newsletter free",
+      "Venture capital portfolio newsletter pdf",
+      "Australian Venture Summit 2026",
+      "Venture capital Journal",
+      "Best growth equity newsletters",
+      "Strictly VC newsletter",
+      "Best vc substack",
+      "Venture Capital news daily"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

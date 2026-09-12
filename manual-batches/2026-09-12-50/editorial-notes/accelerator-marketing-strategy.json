@@ -1,0 +1,129 @@
+{
+  "id": "vc-manual50-c5-001",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.techstars.com/accelerator-hub",
+      "supports": "Techstars describes a three-month program with mentorship, workshops and access to a network.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.w3.org/WAI/media/av/planning/",
+      "supports": "Accessibility needs and responsibilities should be included when planning and producing media.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What is an example of an accelerator?",
+      "basis": "observed_paa",
+      "query": "accelerator marketing strategy",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7"
+    },
+    {
+      "question": "Should every company contribute a public video?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should an accelerator film first?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: an audience-to-assignment charter could help accelerator operators turn program marketing into useful founder work. Observed original-query SERPs mixed accelerator recruitment and unrelated marketing courses; competing page bodies were not reviewed.",
+  "reviewNotes": [
+    "Original-query SERP record inspected: vc-manual50-c5-001, run VMTK8QQ0C4Cf7WZXf. PAA provenance is the named dataset; other FAQs are editorial. National and remote-program scope.",
+    "Refined query startup accelerator marketing strategy inspected in serp-refined-evidence.json, run 1TRKQT0t6mrbtBkVz, dataset sxgEp2jc602xi3TP6. Its PAA questions about broad marketing rules and startup stages do not fit this media-program guide. The relevant original-query accelerator example remains explicitly attributed to the original dataset."
+  ],
+  "serp": {
+    "id": "vc-manual50-c5-001",
+    "keyword": "startup accelerator marketing strategy",
+    "found": true,
+    "query": "startup accelerator marketing strategy",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:52:49.425Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "1TRKQT0t6mrbtBkVz",
+    "datasetId": "sxgEp2jc602xi3TP6",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How To Create A Marketing Plan For A Startup (Part 1) | Blog",
+        "url": "https://www.ohblimey.com/blog/how-to-create-a-marketing-plan-for-your-early-stage-startup-part-1",
+        "domain": "ohblimey.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "Creative Marketing Strategies to Drive Business Growth in ...",
+        "url": "https://esj.eastasouth-institute.com/index.php/esmb/article/view/348",
+        "domain": "esj.eastasouth-institute.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "Top Marketing Strategies for Accelerators 2026",
+        "url": "https://www.acceleratorapp.co/en/blogs/marketing-strategies-to-get-the-best-startups-for-your-accelerator/",
+        "domain": "acceleratorapp.co",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "Startup Marketing Strategy: Key Steps to Grow Your Business",
+        "url": "https://masschallenge.org/articles/startup-marketing/",
+        "domain": "masschallenge.org",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "10 Powerful Ways Word of Mouth Boosts Accelerator ...",
+        "url": "https://www.linkedin.com/pulse/10-powerful-ways-word-mouth-boosts-accelerator-marketing-mrc2f",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 6,
+        "title": "Startup Marketing Accelerator Program",
+        "url": "https://incubatemybrand.com/startup-marketing-accelerator-program",
+        "domain": "incubatemybrand.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Small Business Accelerators",
+        "url": "https://zealfutures.com.au/study-areas/small-business-accelerators",
+        "domain": "zealfutures.com.au",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Startup Programs, Courses & Accelerators",
+        "url": "https://launchvic.org/programs/",
+        "domain": "launchvic.org",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "The Marketing Accelerator | Up Club",
+        "url": "https://www.up-world.co/the-marketing-accelerator",
+        "domain": "up-world.co",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is the 3-3-3 rule for marketing?",
+      "What is the 80/20 rule for startups?",
+      "What is the 70/20/10 rule in marketing?",
+      "What are the 7 stages of startup?"
+    ],
+    "relatedQueries": [
+      "Startup accelerator marketing strategy template",
+      "Startup accelerator marketing strategy pdf",
+      "Startup accelerator marketing strategy example"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

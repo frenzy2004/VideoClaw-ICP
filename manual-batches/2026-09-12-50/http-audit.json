@@ -1,0 +1,463 @@
+{
+  "checkedAt": "2026-09-12T01:40:43.757Z",
+  "origin": "http://127.0.0.1:3004",
+  "articleCount": 50,
+  "mediaAssets": 56,
+  "unknownSlug404": true,
+  "download200": true,
+  "previewSitemapExcludesDrafts": true,
+  "previewRobotsDisallowAll": true,
+  "previewLlmsExcludesDrafts": true,
+  "checks": [
+    {
+      "slug": "announce-startup-funding-with-video",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "founder-led-marketing-video-routine",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "startup-launch-video-plan",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "founder-story-video-interview",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "startup-press-kit-video-assets",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "product-launch-content-calendar",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "customer-testimonial-video-questions",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "startup-recruitment-video",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "startup-explainer-video-script",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "founder-linkedin-content-strategy",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "demo-day-pitch-story",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "startup-demo-video-workflow",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "demo-day-preparation-checklist",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "investor-update-video",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "investor-pitch-questions",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "record-product-demo-for-pitch",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "pitch-rehearsal-recording-routine",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "demo-day-follow-up-email",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "demo-day-social-media-plan",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "pitch-deck-vs-pitch-video",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "video-agency-vs-freelancer",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "in-house-vs-outsourced-video-production",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "freelance-video-editor-rates",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "video-production-brief-template",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "video-revision-process",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "ai-video-editor-vs-traditional-editor",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "video-editor-vs-motion-designer",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "video-production-budget",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "outsourcing-video-editing-checklist",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "ai-video-editing-limitations",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "repurpose-webinar-content",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "turn-long-videos-into-short-clips",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "video-content-repurposing-workflow",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "video-captions-accessibility",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "resize-video-for-social-media",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "customer-onboarding-video",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "software-tutorial-video",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "video-content-calendar",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "video-marketing-metrics",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "video-case-study-template",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "accelerator-marketing-strategy",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "venture-capital-portfolio-marketing",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "demo-day-event-video",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "accelerator-mentor-webinar",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "portfolio-founder-interviews",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "portfolio-company-newsletter",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "startup-accelerator-alumni-community",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "founder-content-workshop",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "portfolio-video-brand-guidelines",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    },
+    {
+      "slug": "accelerator-media-program-metrics",
+      "status": 200,
+      "canonical": true,
+      "noindex": true,
+      "h1Count": 1,
+      "downloadLink": true,
+      "indexLink": true
+    }
+  ]
+}

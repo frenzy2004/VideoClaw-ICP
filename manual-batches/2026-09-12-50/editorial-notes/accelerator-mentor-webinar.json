@@ -1,0 +1,126 @@
+{
+  "id": "vc-manual50-c5-004",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.techstars.com/blog/founder-advice/mentor-manifesto",
+      "supports": "Techstars asks mentors to distinguish opinion from fact, respect confidentiality and guide company decisions without controlling them.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.w3.org/WAI/media/av/transcripts/",
+      "supports": "Basic transcripts convey relevant audio; descriptive transcripts also convey necessary visual information.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "How long should a startup mentor webinar be?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should a mentor webinar's Q&A be published?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should accompany a reusable webinar clip?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: a lesson-extraction worksheet that preserves context and exceptions may help program leads move beyond a recording archive. Original-query results mixed career and startup programs; competing page bodies were not reviewed.",
+  "reviewNotes": [
+    "Original-query SERP record inspected: vc-manual50-c5-004; no PAA observed. Refined query is startup mentor webinar. Fictional exercise and lesson structure are original editorial tools.",
+    "Refined-query record inspected in serp-refined-evidence.json, run 1TRKQT0t6mrbtBkVz, dataset sxgEp2jc602xi3TP6. No PAA observed in the refined record either; all three questions remain editorial."
+  ],
+  "serp": {
+    "id": "vc-manual50-c5-004",
+    "keyword": "startup mentor webinar",
+    "found": true,
+    "query": "startup mentor webinar",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:52:49.425Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "1TRKQT0t6mrbtBkVz",
+    "datasetId": "sxgEp2jc602xi3TP6",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Watch Online Startup Events, from the Founder Institute",
+        "url": "https://fi.co/webinars",
+        "domain": "fi.co",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Webinar tools for educating and equipping startup founders",
+        "url": "https://myownconference.com/use-cases/webinars-for-startups",
+        "domain": "myownconference.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Startupbootcamp for Mentors",
+        "url": "https://startupbootcamp.org/mentors",
+        "domain": "startupbootcamp.org",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Business Mentor - webinars",
+        "url": "https://www.madrimasd.org/businessmentor/entity/webinars",
+        "domain": "madrimasd.org",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Webinars",
+        "url": "https://www.startuptree.co/webinars/",
+        "domain": "startuptree.co",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Small business webinars",
+        "url": "https://www.mbmentors.org/webinars",
+        "domain": "mbmentors.org",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Best Entrepreneur Learning & Mentoring Course - 2026",
+        "url": "https://entrepreneurseminar.com/",
+        "domain": "entrepreneurseminar.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Mentor Hours | Web Summit | November 9-12, 2026",
+        "url": "https://websummit.com/startups/mentor-hours/",
+        "domain": "websummit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "Founders Network • Startup mentorship, peer to peer forums ...",
+        "url": "https://foundersnetwork.com/",
+        "domain": "foundersnetwork.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": [
+      "Startup mentor webinar free",
+      "Find mentor for startup",
+      "Mentor startups",
+      "Personal growth mentor",
+      "Plug and Play mentors",
+      "Become a paid mentor",
+      "Mentor platform",
+      "Business mentor online"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

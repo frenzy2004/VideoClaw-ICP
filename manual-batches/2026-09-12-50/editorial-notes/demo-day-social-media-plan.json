@@ -1,0 +1,121 @@
+{
+  "id": "vc-manual50-c2-009",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.ycombinator.com/blog/a-guide-to-pitching-funding-and-launch-stories/",
+      "supports": "Original practitioner guidance by Leo Schwartz recommends coordinating social and company publication with agreed announcement timing; it is not an accelerator endorsement policy.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.w3.org/WAI/media/av/captions/",
+      "supports": "Defines captions as conveying speech and relevant non-speech audio and explains that automatic captions need accuracy verification.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What should a startup post before Demo Day?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I turn the stage pitch into social clips?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How should I measure Demo Day social content?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: an audience-led calendar with clip-context and response ownership checks offers useful founder guidance. Observed listings were inspected; competing event and social-content bodies were not audited.",
+  "reviewNotes": [
+    "serp-evidence.json record vc-manual50-c2-009 contained no observed PAA; all three FAQs are editorial.",
+    "Calendar, audience card, clip card, and measurement suggestions are original recommendations. No platform-specific performance benchmark, endorsement, or posting guarantee is claimed.",
+    "The YC-hosted launch source is cited narrowly for publication coordination, not its historical pricing, outcome statistics, or promotional claims."
+  ],
+  "serp": {
+    "id": "vc-manual50-c2-009",
+    "keyword": "demo day social media",
+    "found": true,
+    "query": "demo day social media",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:49:53.581Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Demo Day 2026",
+        "url": "https://dm.lmc.gatech.edu/events_menu/demo-day-2025/",
+        "domain": "dm.lmc.gatech.edu",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Demo Days - Spring 2026 Sponsor Marketing Kit",
+        "url": "https://www.atia.org/atdemodaysmarketingkit/",
+        "domain": "atia.org",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "First-ever National Demo Day",
+        "url": "https://www.thedailystar.net/next-step/news/first-ever-national-demo-day-1400713",
+        "domain": "thedailystar.net",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "We will be waiting to meet you at NATIONAL DEMO DAY ...",
+        "url": "https://www.facebook.com/alightinzenbd/posts/we-will-be-waiting-to-meet-you-at-national-demo-day-2026-8th-april-4-6-pmbanglad/122267658962173511/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 5,
+        "title": "Global Demo day",
+        "url": "https://fintechmarketingcommunity.com/global-demo-day",
+        "domain": "fintechmarketingcommunity.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "What is a Demo Day? A Complete Guide for Startup ...",
+        "url": "https://www.converve.com/event-networking-blog/what-is-a-demo-day-organisers-guide",
+        "domain": "converve.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Fast Forward Demo Day 2026",
+        "url": "https://www.youtube.com/watch?v=LWgG2_ZUaDA",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 8,
+        "title": "ATD Demo Day",
+        "url": "https://www.td.org/atd-demo-day",
+        "domain": "td.org",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "Preparing for Demo Day at a Startup Accelerator",
+        "url": "https://journals.openedition.org/rac/35120",
+        "domain": "journals.openedition.org",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": [
+      "Demo day social media 2022",
+      "Online digital media masters"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

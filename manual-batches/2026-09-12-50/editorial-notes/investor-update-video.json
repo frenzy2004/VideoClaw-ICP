@@ -1,0 +1,111 @@
+{
+  "id": "vc-manual50-c2-004",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.techstars.com/blog/founder-advice/dont-waste-the-slow-days",
+      "supports": "Proposes a concise investor update that includes progress, challenges, and specific asks.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.w3.org/WAI/media/av/planning/",
+      "supports": "Recommends planning captions, transcripts, and other accessibility features alongside media production.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What does an investor update look like?",
+      "basis": "observed_paa",
+      "query": "startup investor update video",
+      "runId": "1TRKQT0t6mrbtBkVz",
+      "datasetId": "sxgEp2jc602xi3TP6"
+    },
+    {
+      "question": "How often should I send an investor update video?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should I show when progress is slower than planned?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: a comparable before-and-after worksheet with explicit evidence limits offers practical value for startup updates. Refined SERP listings were inspected; competing article bodies were not audited.",
+  "reviewNotes": [
+    "Updated primary query startup investor update video confirmed in topics.json and serp-refined-evidence.json, record vc-manual50-c2-004, run 1TRKQT0t6mrbtBkVz.",
+    "First FAQ wording is observed PAA in the refined record; remaining FAQs are editorial. The inspection startup and worksheet example are fictional."
+  ],
+  "serp": {
+    "id": "vc-manual50-c2-004",
+    "keyword": "startup investor update video",
+    "found": true,
+    "query": "startup investor update video",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:52:49.425Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "1TRKQT0t6mrbtBkVz",
+    "datasetId": "sxgEp2jc602xi3TP6",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How to write the perfect investor update. Here's a full ...",
+        "url": "https://www.instagram.com/reel/DRSsYw8D95m/",
+        "domain": "instagram.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 2,
+        "title": "Build Stronger Investor Relationships with Video Updates",
+        "url": "https://visible.vc/blog/video-in-investor-updates/",
+        "domain": "visible.vc",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "How to Write an Effective Investor Update | Tips & Templates",
+        "url": "https://carta.com/learn/private-funds/management/portfolio-management/investor-updates/",
+        "domain": "carta.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Investor Update Videos for Startups: The Complete 2026 ...",
+        "url": "https://www.kometmedia.com/blogs/investor-update-videos-for-startups",
+        "domain": "kometmedia.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "The Best Investor Update Templates",
+        "url": "https://www.capboard.io/en/investor-relations/best-investor-update-templates",
+        "domain": "capboard.io",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "The Importance of Investor Updates for Tech Startups",
+        "url": "https://abergseyeview.com/investor-updates-guide-template",
+        "domain": "abergseyeview.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "How To Write An Effective Investor Update For Your Startup",
+        "url": "https://www.digitalocean.com/resources/articles/investor-update",
+        "domain": "digitalocean.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What does an investor update look like?",
+      "What are the 7 stages of startup?",
+      "What is the best YouTube channel for startups?",
+      "How do I pitch my startup idea to investors effectively?"
+    ],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

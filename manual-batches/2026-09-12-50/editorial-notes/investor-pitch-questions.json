@@ -1,0 +1,125 @@
+{
+  "id": "vc-manual50-c2-005",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://sequoiacap.com/article/writing-a-business-plan",
+      "supports": "Pitch-planning prompts include customer pain, alternatives, market potential, business model, and team.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://toolkit.techstars.com/master-your-pitch",
+      "supports": "Recommends collecting recurring questions, practicing answers, and following up honestly when an answer is unknown.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What do investors ask in a pitch?",
+      "basis": "observed_paa",
+      "query": "investor pitch questions",
+      "runId": "7FYXmPNQGfKKxOPHt",
+      "datasetId": "X8mLiehDsNnyYdZzy"
+    },
+    {
+      "question": "What should I say when I do not know an investor's answer?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can a product demo answer every investor question?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: answer cards that connect investor questions to evidence boundaries and appropriate assets offer an applied alternative to a question list. Supplemental SERP listings were inspected; competing page bodies were not audited.",
+  "reviewNotes": [
+    "Replaces obsolete one-minute-startup-pitch topic as requested. Exact keyword investor pitch questions confirmed in topics.json.",
+    "First FAQ wording observed in serp-vc-manual50-c2-005.json, run 7FYXmPNQGfKKxOPHt, dataset X8mLiehDsNnyYdZzy. Other FAQs are editorial.",
+    "Answer cards and routing tables are original editorial recommendations. Dispatch-product example is fictional."
+  ],
+  "serp": {
+    "id": "vc-manual50-c2-005",
+    "keyword": "investor pitch questions",
+    "found": true,
+    "query": "investor pitch questions",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:50:49.597Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "7FYXmPNQGfKKxOPHt",
+    "datasetId": "X8mLiehDsNnyYdZzy",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "30 Questions Angel Investors Will Ask You",
+        "url": "https://www.liveplan.com/blog/funding/angel-investor-questions?srsltid=AfmBOopJRDmpc79zmc_wMM3ocK5aXHgDtU6RItdm5XSGlT6Qj8hEPorK",
+        "domain": "liveplan.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "Questions to Ask During a Pitch Meeting",
+        "url": "https://www.hustlefund.vc/post/questions-to-ask-during-a-pitch-meeting",
+        "domain": "hustlefund.vc",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Pitch Deck Guide: The Four Questions Investors Score",
+        "url": "https://ainna.ai/resources/faq/pitch-deck-guide-faq",
+        "domain": "ainna.ai",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "How to prepare for the most common startup pitch questions",
+        "url": "https://www.rho.co/blog/common-pitch-questions",
+        "domain": "rho.co",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Potential questions from investors - MaRS Startup Toolkit",
+        "url": "https://learn.marsdd.com/article/potential-questions-from-investors/",
+        "domain": "learn.marsdd.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Top 10 pitch questions investors ask (from actual investors)",
+        "url": "https://seedlegals.com/resources/questions-investors-ask/",
+        "domain": "seedlegals.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "1st Meeting With An Investor? 126 Questions You Should ...",
+        "url": "https://www.startupmag.co.uk/investors/investor-questions/",
+        "domain": "startupmag.co.uk",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "What Investors Look For & Questions They Will Ask",
+        "url": "https://www.svb.com/startup-insights/startup-strategy/what-investors-look-for-povs-from-the-other-side-of-the-table/",
+        "domain": "svb.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What do investors ask in a pitch?",
+      "What are some good ideas for pitching to investors?",
+      "What are some good questions to ask during a pitch meeting?",
+      "What are some good investment questions?"
+    ],
+    "relatedQueries": [
+      "Investor pitch questions pdf",
+      "Startup investor pitch questions",
+      "Investor pitch questions and answers",
+      "What questions do investors ask startups",
+      "Pitch deck questions"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

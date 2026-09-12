@@ -1,0 +1,4242 @@
+{
+  "schemaVersion": 1,
+  "kind": "manual_editorial_batch",
+  "provenance": {
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "observedAt": "2026-09-11T20:49:53.581Z"
+  },
+  "records": [
+    {
+      "id": "vc-manual50-c1-001",
+      "keyword": "startup funding announcement",
+      "found": true,
+      "query": "startup funding announcement",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Tech Funding News | Global technology startup funding news",
+          "url": "https://techfundingnews.com/",
+          "domain": "techfundingnews.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Funding news and analysis",
+          "url": "https://techcrunch.com/tag/funding/",
+          "domain": "techcrunch.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "The Strategic Significance of Startup Funding ...",
+          "url": "https://www.linkedin.com/pulse/strategic-significance-startup-funding-announcements-exitsmena-cxgof",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 4,
+          "title": "All Startup Opportunities // 28DIGITAL",
+          "url": "https://28digital.eu/all-startup-opportunities/",
+          "domain": "28digital.eu",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "How to Handle a Startup Funding Announcement",
+          "url": "http://www.firebrand.marketing/2024/08/how-to-announce-startup-funding/",
+          "domain": "firebrand.marketing",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Crunchbase | Private Company Data & Predictive Intelligence",
+          "url": "https://www.crunchbase.com/",
+          "domain": "crunchbase.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Startup Funding Announcement",
+          "url": "https://www.instagram.com/popular/startup-funding-announcement/",
+          "domain": "instagram.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 8,
+          "title": "Tech Startup Funding Rounds: Last 30 Days, Updated ...",
+          "url": "https://www.techbible.ai/learn/tech-startup-funding-rounds",
+          "domain": "techbible.ai",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "List of Funded Pre-Seed Stage Startups (2026)",
+          "url": "https://fundraiseinsider.com/blog/pre-seed-startups/",
+          "domain": "fundraiseinsider.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Which startup got funding recently?",
+        "Is 1% equity in a startup good?",
+        "Is it true that 90% of startups fail?",
+        "What are the most recent startup news?"
+      ],
+      "relatedQueries": [
+        "Tech funding news",
+        "Startup funding tracker",
+        "Recent startup funding",
+        "Recent Series A funding",
+        "Startup funding list",
+        "Crunchbase",
+        "Recent funding rounds",
+        "Tech funding news editor"
+      ]
+    },
+    {
+      "id": "vc-manual50-c1-002",
+      "keyword": "founder led marketing",
+      "found": true,
+      "query": "founder led marketing",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Founder-Led Marketing Is Not a Strategy, It's a Survival Tactic",
+          "url": "https://www.linkedin.com/pulse/founder-led-marketing-strategy-its-survival-tactic-emmelie-de-la-cruz-ranae",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 2,
+          "title": "Founder-Led Marketing: A Guide to Engaging Your Founder",
+          "url": "https://cxl.com/blog/founder-led-marketing/",
+          "domain": "cxl.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "How to Build a Founder-Led Content Strategy in 2026",
+          "url": "https://www.hubspot.com/startups/resources/sales-and-marketing/founder-led-content-strategy",
+          "domain": "hubspot.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "This Strategy Drives Startup Success: Founder-Led ...",
+          "url": "https://www.forbes.com/sites/cherieluo/2024/10/31/this-strategy-drives-startup-success-founder-led-marketing/",
+          "domain": "forbes.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Founder-Led Marketing Strategy: Examples & Growth Tactics",
+          "url": "https://superscale.ai/learn/founder-led-marketing-complete-strategy/",
+          "domain": "superscale.ai",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "99% of Startups Fail—The 1% Use This Founder-Led ...",
+          "url": "https://www.theclueless.company/blog/founder-led-marketing/",
+          "domain": "theclueless.company",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Top Founder-Led Marketing Success Stories",
+          "url": "https://revboss.com/blog/top-founder-led-marketing-success-stories",
+          "domain": "revboss.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "What is founder-led marketing?",
+          "url": "https://maxiality.com/what-is-founder-led-marketing/",
+          "domain": "maxiality.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is founder-led marketing?",
+        "What is a founder-led business?",
+        "What is the 3-3-3 rule in marketing?",
+        "Who is better, CEO or founder?"
+      ],
+      "relatedQueries": [
+        "Founder led marketing strategy",
+        "Founder-led marketing examples",
+        "Founder-led brand",
+        "Founder-led content",
+        "Founder led meaning",
+        "Founder led marketing linkedin",
+        "Founder content"
+      ]
+    },
+    {
+      "id": "vc-manual50-c1-003",
+      "keyword": "startup launch video",
+      "found": true,
+      "query": "startup launch video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How do YC startups create such amazing launch Videos?",
+          "url": "https://www.reddit.com/r/ycombinator/comments/1kregka/how_do_yc_startups_create_such_amazing_launch/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "How to Make a Viral Launch Video - speedrun",
+          "url": "https://speedrun.substack.com/p/how-to-make-a-viral-launch-video",
+          "domain": "speedrun.substack.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Study 10 successful founder launch videos for your startup",
+          "url": "https://www.linkedin.com/posts/awesomic_10-founder-launch-videos-every-startup-activity-7386658913284177920-iHQW",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 4,
+          "title": "Launch Gallery — Startup & Product Launch Videos",
+          "url": "https://launchgallery.video/",
+          "domain": "launchgallery.video",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "The Best StartUp Videos That Launched Companies",
+          "url": "https://www.yansmedia.com/blog/25-best-startup-videos",
+          "domain": "yansmedia.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "12 Best Founder Video Examples That Build Trust (2026)",
+          "url": "https://vidico.com/news/best-startup-videos/",
+          "domain": "vidico.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Collection of the best Startup Launch Videos",
+          "url": "https://www.producthunt.com/products/startup-launch-videos",
+          "domain": "producthunt.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "YC Startups Nail Their Launch Video. You Can Do It Too, ...",
+          "url": "https://www.whatastory.agency/blog/yc-startups-nail-their-launch-video",
+          "domain": "whatastory.agency",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Startup launch video template",
+        "Startup launch video maker",
+        "Startup launch video ideas",
+        "Startup launch video examples",
+        "Best startup launch videos",
+        "YC startup launch videos",
+        "Cluely launch video",
+        "Ycombinator video"
+      ]
+    },
+    {
+      "id": "vc-manual50-c1-004",
+      "keyword": "founder story video",
+      "found": true,
+      "query": "founder story video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Founder Story Videos",
+          "url": "https://www.vidops.io/founders-stories",
+          "domain": "vidops.io",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "12 Best Founder Video Examples That Build Trust (2026)",
+          "url": "https://vidico.com/news/best-startup-videos/",
+          "domain": "vidico.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "What is a Founder's Story Video and Why Does Your ...",
+          "url": "https://www.cumberlandcreative.co/what-is-a-founders-story-video-and-why-does-your-company-need-one/",
+          "domain": "cumberlandcreative.co",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Founder Videos • 400+ reels on Instagram",
+          "url": "https://www.instagram.com/popular/founder-videos/",
+          "domain": "instagram.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 5,
+          "title": "Founder Stories in 60 Seconds",
+          "url": "https://www.youtube.com/playlist?list=PL0QWRtTjmh8ymOm5qg9p7A8BGFVAnVgyB",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 6,
+          "title": "What is a Founders video and why do I need one?",
+          "url": "https://www.flaunter.com/blog/what-is-a-founders-video-and-why-do-i-need-one",
+          "domain": "flaunter.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Founder's Story | When Technology Starts with Purpose",
+          "url": "https://www.youtube.com/watch?v=6IVEbdx2gMI",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 8,
+          "title": "Founder's Story | Podcast on Spotify",
+          "url": "https://open.spotify.com/show/2wTAsSoy4L4qIE8sMewvjo",
+          "domain": "open.spotify.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Can you give me some examples of founder stories?",
+        "Who is better, CEO or founder?",
+        "What is the #1 most viewed video?",
+        "Who is behind the founders podcast?"
+      ],
+      "relatedQueries": [
+        "Best founder story video",
+        "Video founder by video",
+        "Video founder by image",
+        "Startup video download",
+        "Video Finder",
+        "Video startup",
+        "Videos co",
+        "Video company"
+      ]
+    },
+    {
+      "id": "vc-manual50-c1-005",
+      "keyword": "startup press kit",
+      "found": true,
+      "query": "startup press kit",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Press kit: aprenda o que é e 7 passos simples para fazer o ...",
+          "url": "https://www.cortex-intelligence.com/blog/press-kit",
+          "domain": "cortex-intelligence.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "Building a Press Kit for Your Startup - The Founder Nation",
+          "url": "https://www.thefoundernation.com/building-a-press-kit-for-your-startup/",
+          "domain": "thefoundernation.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Media Kit Examples for Startups: Make a Strong Impression",
+          "url": "https://presspitchai.com/blog/media-kit-examples-startups",
+          "domain": "presspitchai.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "The Startup's Guide To Setting Up A Press / Media Page",
+          "url": "https://www.linkedin.com/posts/advancedintegritysolutions_14-press-kit-examples-the-startups-guide-activity-7296190229961494530-5z-p",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 5,
+          "title": "How to Create A Professional Press Kit For Your Startup",
+          "url": "https://presskithero.com/press-kit",
+          "domain": "presskithero.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Press kit Criativo: 7 Exemplos Para sua Empresa Sair na Mídia",
+          "url": "https://www.tramaweb.com.br/press-kit-criativo-7-exemplos/",
+          "domain": "tramaweb.com.br",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Press Kit Example - What to Include + Real Samples for 2026",
+          "url": "https://easyprwire.com/blog/press-kit-example?srsltid=AfmBOoq0RKlzXemxNgJ7TtfXLen16ZRzD0ixXyuERfPSD4JdKBeNRwQh",
+          "domain": "easyprwire.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "The 11-Step Guide to Crafting the Perfect Media Kit for Startups",
+          "url": "https://www.entrepreneur.com/growing-a-business/the-ultimate-11-step-guide-to-crafting-the-perfect-media/456678",
+          "domain": "entrepreneur.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Startup press kit template",
+        "Startup press kit pdf",
+        "Startup press kit examples",
+        "Startup press kit free",
+        "Best startup press kit",
+        "Press kit para influenciadores",
+        "Press kit exemplos",
+        "Press kit dj"
+      ]
+    },
+    {
+      "id": "vc-manual50-c1-006",
+      "keyword": "product launch content calendar",
+      "found": true,
+      "query": "product launch content calendar",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Product Launch Calendar",
+          "url": "https://www.pinterest.com/ideas/product-launch-calendar/941883861744/",
+          "domain": "pinterest.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Social media calendar: Free templates and how-to guide",
+          "url": "https://www.canva.com/sheets/social-media-calendar/",
+          "domain": "canva.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Product Launch Calendar - Free Product Template",
+          "url": "https://stackby.com/templates/product-launch-calendar",
+          "domain": "stackby.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Top 10 Content Calendar Templates for Product Marketing ...",
+          "url": "https://www.notion.com/templates/collections/top-10-content-calendar-templates-for-product-marketing-managers?srsltid=AfmBOooS-8rCFi-v0RacXFtJ5IEdL4yxMuc9JxQ09olS_AX-CiQUijTx",
+          "domain": "notion.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Designing Your Content Marketing Editorial Calendar ...",
+          "url": "https://nytlicensing.com/latest/methods/designing-content-marketing-editorial-calendar/",
+          "domain": "nytlicensing.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Content Calendar: Definition, Examples & Uses",
+          "url": "https://www.launchnotes.com/glossary/content-calendar-in-product-management-and-operations",
+          "domain": "launchnotes.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Content Marketing Strategy: Plan Your Content Calendar In ...",
+          "url": "https://www.blogmarketingacademy.com/annual-content-marketing-calendar/",
+          "domain": "blogmarketingacademy.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "CoSchedule: The Social Media Calendar That Does It All",
+          "url": "https://coschedule.com/",
+          "domain": "coschedule.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Product launch content calendar template",
+        "Product launch content calendar template free",
+        "Product launch content calendar free",
+        "Product launch content calendar pdf",
+        "Simple social media calendar template",
+        "Social media calendar platform",
+        "Hootsuite social media calendar template",
+        "Social media calendar websites"
+      ]
+    },
+    {
+      "id": "vc-manual50-c1-007",
+      "keyword": "customer testimonial video questions",
+      "found": true,
+      "query": "customer testimonial video questions",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "36 Best Client Video Testimonial Questions [+ Example ...",
+          "url": "https://thriveagency.com/news/36-best-questions-to-ask-for-client-video-testimonials-examples/",
+          "domain": "thriveagency.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "5 Killer Questions to Ask for Customer Video Testimonials",
+          "url": "https://capsule.video/blog/customer-video-testimonials",
+          "domain": "capsule.video",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "10 Great Interview Questions for Testimonial Videos",
+          "url": "https://www.stagedge.com/blog/10-great-questions-testimonial-interview-videos",
+          "domain": "stagedge.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Testimonial Questions Reps Need to Ask Their Customers",
+          "url": "https://blog.hubspot.com/service/testimonial-questions",
+          "domain": "blog.hubspot.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "25 Questions To Ask for High-Quality Customer Testimonials",
+          "url": "https://www.indeed.com/career-advice/career-development/questions-for-testimonials",
+          "domain": "indeed.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Customer Testimonial Videos That Convert: 10 Inspirational ...",
+          "url": "https://creativa.com.au/customer-testimonial-videos-that-convert-10-inspirational-examples/",
+          "domain": "creativa.com.au",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Best [25+] Questions for Video Testimonials: The 2024 Guide",
+          "url": "https://usetrust.io/blog/best-questions-for-video-testimonials/",
+          "domain": "usetrust.io",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What are some good questions to ask when interviewing for a testimonial video?",
+        "What are the best questions to ask for testimonials?",
+        "What is a testimonial video example?",
+        "How to do a video testimonial?"
+      ],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual50-c1-008",
+      "keyword": "startup recruitment video",
+      "found": true,
+      "query": "startup recruitment video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Recruitment Video Production Services",
+          "url": "https://vidico.com/services/recruitment-video-production/",
+          "domain": "vidico.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "How To Find Startup Jobs",
+          "url": "https://www.youtube.com/watch?v=2DwvNo9_o7g",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 3,
+          "title": "The Hub | Find your next exciting startup job",
+          "url": "https://thehub.io/",
+          "domain": "thehub.io",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Startup Jobs – Developer, designer, marketing, sales jobs ...",
+          "url": "https://startup.jobs/",
+          "domain": "startup.jobs",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "The Startup Hiring Framework Founders Need | Sahil Khanna",
+          "url": "https://www.youtube.com/watch?v=g5GGXvkV5Wg&vl=en",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 6,
+          "title": "11 recruitment videos for inspiration (+ how to make your ...",
+          "url": "https://biteable.com/blog/recruitment-video-ideas-inspiration/",
+          "domain": "biteable.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Recruitment Video Examples & Complete Guide for 2026",
+          "url": "https://vidcruiter.com/video-interviewing/recruitment-videos/",
+          "domain": "vidcruiter.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "WorkinStartups.com: Startup Jobs | Number 1 Start up Job Site",
+          "url": "https://workinstartups.com/",
+          "domain": "workinstartups.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What are the 5 C's of recruitment?",
+        "How can I create a recruitment video?",
+        "What is the best YouTube channel for startups?",
+        "What is the best platform for recruitment?"
+      ],
+      "relatedQueries": [
+        "Startup video",
+        "Y combinator sam altman how to succeed with a startup",
+        "Y Combinator startup ideas",
+        "The 7 most powerful moats for AI startups",
+        "How to Start a Startup podcast",
+        "Understanding startups",
+        "AI recruitment tools",
+        "Startup terms"
+      ]
+    },
+    {
+      "id": "vc-manual50-c1-009",
+      "keyword": "startup explainer video script",
+      "found": true,
+      "query": "startup explainer video script",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How to write the perfect script for any explainer video",
+          "url": "https://www.reddit.com/r/startups/comments/8ctd0b/how_to_write_the_perfect_script_for_any_explainer/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "How to Write an Explainer Video Script",
+          "url": "https://leadde.ai/blog/write-explainer-video-script",
+          "domain": "leadde.ai",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "Explainer video script? No problem | by Róisín O'Toole",
+          "url": "https://uxplanet.org/explainer-video-script-no-problem-7080876a8af3",
+          "domain": "uxplanet.org",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "5 Parts Every Explainer Video Script Needs",
+          "url": "https://grumomedia.com/5-parts-every-explainer-video-script-needs/",
+          "domain": "grumomedia.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Free Online Explainer Video Maker",
+          "url": "https://www.canva.com/create/explainer-videos/",
+          "domain": "canva.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "5 Steps to Crafting High-Impact Explainer Video Scripts",
+          "url": "https://www.punchystudio.com.au/blog/5-steps-to-crafting-explainer-video-scripts/",
+          "domain": "punchystudio.com.au",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Explainer video scripts examples - VoiceTalks",
+          "url": "https://voice123.com/blog/voice-over-scripts/explainer-video-scripts/",
+          "domain": "voice123.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "Free AI Explainer Video Script Generator",
+          "url": "https://app.gravitywrite.com/tools/explainer-video-script",
+          "domain": "app.gravitywrite.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Startup explainer video script template",
+        "Startup explainer video script example",
+        "Explainer videos for business",
+        "Powtoon explainer video",
+        "Adobe Express explainer video",
+        "How to make 2D explainer video",
+        "Biteable explainer video",
+        "Audio to explainer video ai"
+      ]
+    },
+    {
+      "id": "vc-manual50-c1-010",
+      "keyword": "founder LinkedIn content strategy",
+      "found": true,
+      "query": "founder LinkedIn content strategy",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How to Build a Founder-Led Content Strategy in 2026",
+          "url": "https://www.hubspot.com/startups/resources/sales-and-marketing/founder-led-content-strategy",
+          "domain": "hubspot.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "Successful Founder-Led LinkedIn Page Strategies",
+          "url": "https://www.linkedin.com/top-content/marketing/linkedin-marketing-guide/successful-founder-led-linkedin-page-strategies/",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 3,
+          "title": "The Ultimate Founder-Led LinkedIn Guide",
+          "url": "https://www.mrrunlocked.com/p/founder-led-linkedin-guide",
+          "domain": "mrrunlocked.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "What is your LinkedIn content creation strategy?",
+          "url": "https://www.reddit.com/r/linkedin/comments/1ic9kbt/what_is_your_linkedin_content_creation_strategy/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "How To Develop A 6-Figure Content Strategy | Chris ...",
+          "url": "https://www.linkedin.com/posts/donnellychris_how-to-develop-a-6-figure-content-strategy-activity-7283466984418160641-4NPU",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 6,
+          "title": "9 Steps to a LinkedIn Content Strategy That Took Us to $1 ...",
+          "url": "https://www.lemlist.com/blog/linkedin-content-strategy",
+          "domain": "lemlist.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Matt Barker - How to create a LinkedIn content strategy",
+          "url": "https://www.linkedin.com/posts/mattjbarker1_if-youre-stuck-building-your-linkedin-content-activity-7340950710248767488-R7Rg",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 8,
+          "title": "LinkedIn Content Strategy: The 10-Step System Used by ...",
+          "url": "https://www.supergrow.ai/blog/linkedin-content-strategy",
+          "domain": "supergrow.ai",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Founder linkedin content strategy reddit",
+        "Founder linkedin content strategy template",
+        "Founder linkedin content strategy example",
+        "Founder linkedin content strategy pdf",
+        "Founder-led content 2026",
+        "Founder-led content examples",
+        "RB2B LinkedIn",
+        "LinkedIn Adam"
+      ]
+    },
+    {
+      "id": "vc-manual50-c2-001",
+      "keyword": "demo day pitch",
+      "found": true,
+      "query": "demo day pitch",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "A Guide to Demo Day Presentations",
+          "url": "https://www.ycombinator.com/blog/guide-to-demo-day-pitches/",
+          "domain": "ycombinator.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "What is a Startup Demo Day? Template and Example",
+          "url": "https://slidebean.com/blog/startup-demo-day-pitch-deck",
+          "domain": "slidebean.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "A great demo day pitch | PDF",
+          "url": "https://www.slideshare.net/slideshow/a-great-demo-day-pitch/47347335",
+          "domain": "slideshare.net",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Pitch Smarter with Demo Day Pro | Startup Pitch Platform",
+          "url": "https://demoday.pro/",
+          "domain": "demoday.pro",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "What Investors Look For At Demo Day",
+          "url": "https://www.antler.co/blog/what-investors-look-for-in-startup-pitch",
+          "domain": "antler.co",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "The Ultimate Cheat Sheet for a Winning Demo Day",
+          "url": "https://www.linkedin.com/pulse/ultimate-cheat-sheet-winning-demo-day-competition-pitch-donna-griffit",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 7,
+          "title": "How to create a 3-minute demo day pitch deck",
+          "url": "https://vip.graphics/demo-day-pitch-formula/?srsltid=AfmBOooeCP4n6ACz6qVPTqz5UVyAFTXg5RkMg73n3E3vqFXi1QTzsXa5",
+          "domain": "vip.graphics",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "What is a Demo Day? A Complete Guide for Startup ...",
+          "url": "https://www.converve.com/event-networking-blog/what-is-a-demo-day-organisers-guide",
+          "domain": "converve.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What does \"demo day\" mean?",
+        "What are some good pitch ideas?",
+        "What is the 10/20/30 rule for pitch decks?",
+        "How to pitch your startup in 30 seconds?"
+      ],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual50-c2-002",
+      "keyword": "startup demo video",
+      "found": true,
+      "query": "startup demo video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Startup Product Demo Video: Lead With the Problem, Not ...",
+          "url": "https://www.flowjam.com/blog/startup-product-demo-video",
+          "domain": "flowjam.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "Product Explainer & Demo Videos",
+          "url": "https://www.youtube.com/playlist?list=PLvr0s6WLGo2YDydmzll9WNdVP5zuXi5me",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 3,
+          "title": "10 Best Product Demo Video Examples (That You Can ...",
+          "url": "https://www.synthesia.io/post/product-demo-video-examples",
+          "domain": "synthesia.io",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "13 Demo Video Examples & Best Practices (2026) | ngram.com",
+          "url": "https://www.ngram.com/blog/demo-video-examples",
+          "domain": "ngram.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Underrated startup demos",
+          "url": "https://thisiskp.com/essays/underrated-startup-demos/",
+          "domain": "thisiskp.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "What's the best tool to build a simple video to demo my ...",
+          "url": "https://www.reddit.com/r/startups/comments/1gb0vw6/whats_the_best_tool_to_build_a_simple_video_to/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "SaaS Product Demo Videos That Convert: Best Practices",
+          "url": "https://hyltonmediagroup.com/blog/product-demo-video-best-practices-for-saas-startups",
+          "domain": "hyltonmediagroup.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "Supademo: AI Interactive Product Demos",
+          "url": "https://supademo.com/",
+          "domain": "supademo.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Startup demo video template",
+        "Startup demo video reddit",
+        "Startup demo video ideas",
+        "Startup demo video free",
+        "Startup demo video examples",
+        "Product demo video examples",
+        "Best product demo videos",
+        "Saas product demo video examples"
+      ]
+    },
+    {
+      "id": "vc-manual50-c2-003",
+      "keyword": "demo day checklist",
+      "found": true,
+      "query": "demo day checklist",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Your New Build Home Demonstration: The Complete ...",
+          "url": "https://www.new-builds.co.uk/blog/new-build-home-demonstration-guide",
+          "domain": "new-builds.co.uk",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "Home demo today! Any hints and tips on what to ask or ...",
+          "url": "https://www.facebook.com/groups/newbuildhomesuk/posts/1105119244735439/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 3,
+          "title": "What to expect during your home demonstration",
+          "url": "https://livelyprofessionalservices.co.uk/what-to-check-and-expect-during-your-home-demonstration/",
+          "domain": "livelyprofessionalservices.co.uk",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Demo Day Prep has Moved - Demo Day Checklist",
+          "url": "https://sites.google.com/2u.com/virtualdemodayprep/demo-day-checklist",
+          "domain": "sites.google.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Your Pre-Reno Checklist: What to Do Before Demo Day",
+          "url": "https://my-home-renovations.com/2025/08/01/%F0%9F%93%8B-your-pre-reno-checklist-what-to-do-before-demo-day/",
+          "domain": "my-home-renovations.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "10 Things To Tick Off Before Demo Day",
+          "url": "https://www.homedemolitions.com.au/10-things-to-tick-off-before-demo-day/",
+          "domain": "homedemolitions.com.au",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Moving Into A New Build Home In 2026",
+          "url": "https://hoa.org.uk/advice/guides-for-homeowners/i-am-buying/moving-into-a-new-build-home/",
+          "domain": "hoa.org.uk",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Interior Demolition Checklist: 10 Steps Before Demo Day",
+          "url": "https://demoprep.ca/interior-demolition-checklist-homeowners/",
+          "domain": "demoprep.ca",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "New home demonstration checklist",
+        "What is a home demo in music"
+      ]
+    },
+    {
+      "id": "vc-manual50-c2-004",
+      "keyword": "investor update video",
+      "found": true,
+      "query": "investor update video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Investor Updates 2026",
+          "url": "https://www.youtube.com/playlist?list=PL6xV_Cz51HtObRsajK97B70bdo9-YkC_L",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 2,
+          "title": "Investor Update Videos - CVC Income & Growth",
+          "url": "https://ig.cvc.com/investor-information/investor-calls/",
+          "domain": "ig.cvc.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Investor Update | November 2025",
+          "url": "https://www.youtube.com/watch?v=n_FLNAo8iys",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 4,
+          "title": "Build Stronger Investor Relationships with Video Updates",
+          "url": "https://visible.vc/blog/video-in-investor-updates/",
+          "domain": "visible.vc",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "How to Write an Effective Investor Update | Tips & Templates",
+          "url": "https://carta.com/learn/private-funds/management/portfolio-management/investor-updates/",
+          "domain": "carta.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Video Gallery - Investor Relations",
+          "url": "https://www.dewa.gov.ae/en/investor-relations/media-centre/video-gallery",
+          "domain": "dewa.gov.ae",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Investor update video template — microsite",
+          "url": "https://microsite.com.au/templates/investor-update",
+          "domain": "microsite.com.au",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "How to write the perfect investor update. Here's a full ...",
+          "url": "https://www.instagram.com/reel/DRSsYw8D95m/",
+          "domain": "instagram.com",
+          "resultType": "video_or_social"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Can I watch stock market news on YouTube?",
+        "Who are the top 10 investors?",
+        "What is an investor presentation?",
+        "What is the 10% investor rule?"
+      ],
+      "relatedQueries": [
+        "Investor update video today",
+        "Investor update video youtube"
+      ]
+    },
+    {
+      "id": "vc-manual50-c2-005",
+      "keyword": "one minute startup pitch",
+      "found": true,
+      "query": "one minute startup pitch",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "The One Minute Startup Pitch Template",
+          "url": "https://fi.co/insight/the-one-minute-startup-pitch-template",
+          "domain": "fi.co",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "The Perfect One Minute Pitch - Omar Billeh - Medium",
+          "url": "https://omarbilleh.medium.com/the-perfect-one-minute-pitch-fec035568350",
+          "domain": "omarbilleh.medium.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "The one minute pitch that gets investors to say YES",
+          "url": "https://www.linkedin.com/posts/yrebryk_the-one-minute-pitch-that-gets-investors-activity-7322608565574090753-BI9Q",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 4,
+          "title": "A 3-minute pitch to investors at a pitch competition... Impossible ...",
+          "url": "https://www.linkedin.com/posts/davidbeckettpresentationcoach_a-3-minute-pitch-to-investors-at-a-pitch-activity-7287125392111357952-hUaE",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 5,
+          "title": "What to Say in Your 1, 5, 10, or 20-Minute Elevator Pitch",
+          "url": "https://www.liveplan.com/blog/funding/different-pitch-times?srsltid=AfmBOooXzWsHVHiJ0mFG5pzu6uRBO6TgiycmTyTe8PoFUX07402JapXa",
+          "domain": "liveplan.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "How to do a 1 minute pitch at Startup Weekend | PDF",
+          "url": "https://www.slideshare.net/slideshow/1-minute-pitch-at-sw/26191302",
+          "domain": "slideshare.net",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "One Minute Pitch Template for Startup Founders",
+          "url": "https://startupfundraising.com/visuals/one-minute-pitch-template-6aeb29",
+          "domain": "startupfundraising.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How do I pitch my startup?",
+        "What is a good pitch example?",
+        "How to pitch your startup in 30 seconds?",
+        "What is a 2 minute elevator pitch?"
+      ],
+      "relatedQueries": [
+        "One minute startup pitch template",
+        "One minute pitch",
+        "1 minute pitch examples",
+        "One minute startup pitch example",
+        "One minute pitch template",
+        "1 minute pitch about yourself",
+        "1 minute elevator pitch examples for students",
+        "One sentence pitch generator"
+      ]
+    },
+    {
+      "id": "vc-manual50-c2-006",
+      "keyword": "record a product demo",
+      "found": true,
+      "query": "record a product demo",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Create Product Demo Videos",
+          "url": "https://screen.studio/create/product-demo-videos",
+          "domain": "screen.studio",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Screen Recorder For Product Demos",
+          "url": "https://www.tella.com/record/screen-recorder-product-demo",
+          "domain": "tella.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Product demo video maker",
+          "url": "https://clipchamp.com/en/demo-video/",
+          "domain": "clipchamp.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "How to create a cool demo video for your SaaS: a step-by- ...",
+          "url": "https://www.reddit.com/r/SaaS/comments/17p6eoa/how_to_create_a_cool_demo_video_for_your_saas_a/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Record Clear Product Demos videos with Loom",
+          "url": "https://www.atlassian.com/software/loom/resources/guides/use-cases/product-demo",
+          "domain": "atlassian.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "New Product Demos",
+          "url": "https://www.loom.com/community/product-demo",
+          "domain": "loom.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Best Demo Recording Software for Product Demos in 2026",
+          "url": "https://www.howdygo.com/blog/demo-recording-software",
+          "domain": "howdygo.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "Supademo: AI Interactive Product Demos",
+          "url": "https://supademo.com/",
+          "domain": "supademo.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is the best way to record a demo?",
+        "What is the best software to record product demos?",
+        "What is the best tool to create product demos?",
+        "How to do a product demo?"
+      ],
+      "relatedQueries": [
+        "Record a product demo online",
+        "Record a product demo free",
+        "Product demo video maker free",
+        "Product demo video examples",
+        "Create product demo videos",
+        "How to make demo video for teaching",
+        "Product demo video maker AI free",
+        "Product demo video with AI"
+      ]
+    },
+    {
+      "id": "vc-manual50-c2-007",
+      "keyword": "pitch rehearsal",
+      "found": true,
+      "query": "pitch rehearsal",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Working Memory for Phonological and Pitch Information ...",
+          "url": "https://www.jstage.jst.go.jp/article/jcss/19/1/19_122/_article/-char/en",
+          "domain": "jstage.jst.go.jp",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "The three-minute pitch: A rehearsal guide - unsensible*",
+          "url": "https://unsensible.com/resources/the-three-minute-pitch-a-rehearsal-guide",
+          "domain": "unsensible.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "Investor Pitch Rehearsal Techniques That Build Confidence",
+          "url": "https://qubit.capital/blog/rehearse-pitch-presentation",
+          "domain": "qubit.capital",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Pitch Practice",
+          "url": "https://www.startups.com/lexicon/pitch-practice",
+          "domain": "startups.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Rehearsing a VC Pitch Isn't the Same as Proving ...",
+          "url": "https://subconscious.ai/blog/buyers/rehearsing-vc-pitch-isnt-same-proving-numbers-behind",
+          "domain": "subconscious.ai",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Speech, Pitch & Meeting Rehearsal",
+          "url": "https://lathamflow.com/speech-pitch-meeting-rehearsal/",
+          "domain": "lathamflow.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Practice makes perfect: Why rehearsal wins pitches",
+          "url": "https://strategicproposals.com/category-white-papers/entry/practice-makes-perfect-why-rehearsal-wins-pitches",
+          "domain": "strategicproposals.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Rehearsal game: Pass the Pitch rules and examples",
+          "url": "https://www.facebook.com/groups/332336906914762/posts/2798200370328391/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What are the three types of rehearsal?",
+        "How do I prepare for a pitch?",
+        "What are the two main types of rehearsal?",
+        "What does rehearsal mean in music?"
+      ],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual50-c2-008",
+      "keyword": "demo day follow up email",
+      "found": true,
+      "query": "demo day follow up email",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Follow-Up Techniques For After A Sales Demo",
+          "url": "https://www.linkedin.com/top-content/sales/mastering-the-art-of-follow-up/follow-up-techniques-for-after-a-sales-demo/",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 2,
+          "title": "How to write a killer demo follow-up email (with examples)",
+          "url": "https://www.karumi.ai/blog/how-to-write-a-killer-demo-follow-up-email",
+          "domain": "karumi.ai",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "13 Demo Follow-Up Email Templates to Close More Deals",
+          "url": "https://www.revenueflow.com/blog/demo-follow-up-templates",
+          "domain": "revenueflow.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Post-Demo Follow-Up Email Templates That Actually Convert",
+          "url": "https://www.apollo.io/templates/post-demo-follow-up-email-templates",
+          "domain": "apollo.io",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "How to Follow Up After The Demo",
+          "url": "https://klue.com/blog/how-to-follow-up-after-a-demo-email-template",
+          "domain": "klue.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "24 Best Follow Up Email Examples in 2025",
+          "url": "https://skrapp.io/blog/follow-up-email/",
+          "domain": "skrapp.io",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Demo Follow-Up Email: 9 Templates That Close Deals ...",
+          "url": "https://www.puppydog.io/blog/demo-follow-up-email-templates",
+          "domain": "puppydog.io",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "Demo Follow-Up Email: 7 Templates That Get Replies",
+          "url": "https://demoshake.com/blog/how-to-write-a-demo-email-follow-up",
+          "domain": "demoshake.com",
+          "resultType": "article"
+        },
+        {
+          "position": 9,
+          "title": "How to Craft a SaaS Demo Follow-up Email That Converts ...",
+          "url": "https://www.navattic.com/blog/follow-up-email",
+          "domain": "navattic.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How do I politely send a follow-up email?",
+        "Can you provide a sample follow-up email after a meeting?",
+        "How do you say follow up in an email professionally?",
+        "How do I professionally say I will follow up?"
+      ],
+      "relatedQueries": [
+        "Demo day follow up email sample",
+        "Demo day follow up email after no response"
+      ]
+    },
+    {
+      "id": "vc-manual50-c2-009",
+      "keyword": "demo day social media",
+      "found": true,
+      "query": "demo day social media",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Demo Day 2026",
+          "url": "https://dm.lmc.gatech.edu/events_menu/demo-day-2025/",
+          "domain": "dm.lmc.gatech.edu",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Demo Days - Spring 2026 Sponsor Marketing Kit",
+          "url": "https://www.atia.org/atdemodaysmarketingkit/",
+          "domain": "atia.org",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "First-ever National Demo Day",
+          "url": "https://www.thedailystar.net/next-step/news/first-ever-national-demo-day-1400713",
+          "domain": "thedailystar.net",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "We will be waiting to meet you at NATIONAL DEMO DAY ...",
+          "url": "https://www.facebook.com/alightinzenbd/posts/we-will-be-waiting-to-meet-you-at-national-demo-day-2026-8th-april-4-6-pmbanglad/122267658962173511/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 5,
+          "title": "Global Demo day",
+          "url": "https://fintechmarketingcommunity.com/global-demo-day",
+          "domain": "fintechmarketingcommunity.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "What is a Demo Day? A Complete Guide for Startup ...",
+          "url": "https://www.converve.com/event-networking-blog/what-is-a-demo-day-organisers-guide",
+          "domain": "converve.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Fast Forward Demo Day 2026",
+          "url": "https://www.youtube.com/watch?v=LWgG2_ZUaDA",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 8,
+          "title": "ATD Demo Day",
+          "url": "https://www.td.org/atd-demo-day",
+          "domain": "td.org",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "Preparing for Demo Day at a Startup Accelerator",
+          "url": "https://journals.openedition.org/rac/35120",
+          "domain": "journals.openedition.org",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Demo day social media 2022",
+        "Online digital media masters"
+      ]
+    },
+    {
+      "id": "vc-manual50-c2-010",
+      "keyword": "pitch deck vs pitch video",
+      "found": true,
+      "query": "pitch deck vs pitch video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How to Make a Pitch Deck (Examples and Tips)",
+          "url": "https://www.canva.com/presentations/pitch-deck/",
+          "domain": "canva.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "What's better for pitching an investor, slide deck or video?",
+          "url": "https://www.quora.com/Whats-better-for-pitching-an-investor-slide-deck-or-video",
+          "domain": "quora.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Let's face it, it's time to upgrade the Pitch Deck to a Pitch Video",
+          "url": "https://www.startuphacks.vc/blog/2016/09/27/lets-face-it-it-is-time-to-upgrade-the-pitch-deck-to-pitch-video",
+          "domain": "startuphacks.vc",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "What is a Pitch Deck? Meaning, Example, and Guide",
+          "url": "https://slidebean.com/blog/what-is-a-pitch-deck-presentation-meaning",
+          "domain": "slidebean.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "How to Use Video in Your Pitch Deck: The Definitive Guide",
+          "url": "https://startupfundraising.com/library/articles/how-to-embed-a-video-in-a-pitch-deck",
+          "domain": "startupfundraising.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Pitch decks vs video pitches: which one is more effective?",
+          "url": "https://www.linkedin.com/posts/sabooashish_pitch-decks-vs-video-pitches-%F0%9D%98%81%F0%9D%97%B5%F0%9D%97%B2%F0%9D%97%BF%F0%9D%97%B2-activity-7396600840981098496-fYPj",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 7,
+          "title": "Ask a VC: what is a good pitch deck? - Medium",
+          "url": "https://rodrigo.medium.com/ask-a-vc-what-is-a-good-pitch-deck-790f7077fb95",
+          "domain": "rodrigo.medium.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Why corporate videos are the new investor pitch deck",
+          "url": "https://mahne.com/why-corporate-videos-are-the-new-investor-pitch-deck/",
+          "domain": "mahne.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is the difference between a pitch deck and a pitch deck?",
+        "Is a pitch deck just a PowerPoint?",
+        "What is the 10/20/30 rule for pitch deck?",
+        "What is the purpose of a pitch deck?"
+      ],
+      "relatedQueries": [
+        "Pitch deck vs pitch video template",
+        "Pitch deck vs pitch video examples",
+        "Pitch deck video",
+        "Pitch deck template",
+        "Pitch deck PDF free download",
+        "Pitch deck vs proposal",
+        "Pitch deck examples",
+        "Best pitch deck"
+      ]
+    },
+    {
+      "id": "vc-manual50-c3-001",
+      "keyword": "video agency vs freelancer",
+      "found": true,
+      "query": "video agency vs freelancer",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Should you hire a video agency, freelancer or ...",
+          "url": "https://www.linkedin.com/pulse/should-you-hire-video-agency-freelancer-produce-pros-cons-dane-monsc",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 2,
+          "title": "Video Editing Agency vs Freelancer: Which to Pick",
+          "url": "https://www.pixel8production.com/blog/video-editing-agency-vs-freelancer",
+          "domain": "pixel8production.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "Agency vs. Freelancer: Which Is Right for You?",
+          "url": "https://www.upwork.com/resources/agency-vs-freelance",
+          "domain": "upwork.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Agency Model vs. Production Company Route?",
+          "url": "https://www.reddit.com/r/videography/comments/1lyi81u/from_freelancer_to_something_bigger_agency_model/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Video Production Agency vs Freelancer: Cost & Quality",
+          "url": "https://fxproductionscanada.com/video-production-agency-vs-freelancer-cost-quality/",
+          "domain": "fxproductionscanada.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Freelancer vs. Long-Form Video Agency in Los Angeles",
+          "url": "https://adjustproduction.com/freelancer-vs-long-form-video-agency-in-los-angeles-which-is-better-for-your-business/",
+          "domain": "adjustproduction.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Agency vs Freelancer: Which Should Your Business Hire?",
+          "url": "https://prolinker.com/blog/agency-vs-freelancer",
+          "domain": "prolinker.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What are the key differences between a freelancer and an agency?",
+        "Is AI replacing freelancers?",
+        "Do video editors make a lot of money?",
+        "Is Upwork still worth it in 2026?"
+      ],
+      "relatedQueries": [
+        "Video agency vs freelancer reddit",
+        "Video agency vs freelancer salary",
+        "Video agency vs freelancer cost",
+        "Upwork as a freelancer",
+        "What is agency in upwork",
+        "Freelancer agency account",
+        "Agency profile Upwork",
+        "Upwork Agency Plus"
+      ]
+    },
+    {
+      "id": "vc-manual50-c3-002",
+      "keyword": "in house vs outsourced video production",
+      "found": true,
+      "query": "in house vs outsourced video production",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "In-House Video Production vs. Outsourcing",
+          "url": "https://www.vidyard.com/blog/in-house-video-production-vs-outsourcing/",
+          "domain": "vidyard.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "In-House vs. Outsourcing: Video Production Pros & Cons",
+          "url": "https://ivorymedia.com.au/inhouse-vs-outsourced-video-production/",
+          "domain": "ivorymedia.com.au",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Video Production vs In-House: Which Is Better for Your ...",
+          "url": "https://www.mangomedia.ie/blog/video-production-vs-in-house",
+          "domain": "mangomedia.ie",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "In-House vs Outsourced Video Production",
+          "url": "https://shootsta.com/compare/in-house-vs-outsourced-video",
+          "domain": "shootsta.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "7 Benefits of Hiring an In-House Videographer vs Outsourcing",
+          "url": "https://www.impactplus.com/learn/benefits-of-hiring-in-house-videographer",
+          "domain": "impactplus.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "In-House vs Outsourced Video Production: Pros and Cons ...",
+          "url": "https://pinetree-media.com/blog/choosing-between-in-house-and-outsourced-video-production-pros-and-cons.php",
+          "domain": "pinetree-media.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Exploring the Pros and Cons of In-House vs. Outsourced ...",
+          "url": "https://hauntedbasement.video/blog/in-house-vs-outsourced-video-production",
+          "domain": "hauntedbasement.video",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "In-House vs. Agency: Which One is Better For Your Video ...",
+          "url": "https://www.wipster.io/blog/in-house-vs.-agency-which-one-is-better-for-your-video-production-and-why",
+          "domain": "wipster.io",
+          "resultType": "article"
+        },
+        {
+          "position": 9,
+          "title": "Should you create video content in-house or outsource?",
+          "url": "https://www.linkedin.com/pulse/should-you-create-video-content-in-house-outsource-jonty-egginton",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is the difference between in-house and outsourcing?",
+        "Is outsourcing a dying concept?",
+        "Is outsourcing cheaper than in-house?",
+        "What are the different types of video production?"
+      ],
+      "relatedQueries": [
+        "In house vs outsourced video production reddit",
+        "In house vs outsourced video production salary",
+        "In house vs outsourced video production pros and cons",
+        "In house vs outsourced video production cost"
+      ]
+    },
+    {
+      "id": "vc-manual50-c3-003",
+      "keyword": "freelance video editor rates",
+      "found": true,
+      "query": "freelance video editor rates",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Good freelance editing rates? : r/videography",
+          "url": "https://www.reddit.com/r/videography/comments/o6skhj/good_freelance_editing_rates/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Video Editor Hourly Rates | Cost to Hire Video Editor",
+          "url": "https://www.upwork.com/hire/video-editors/cost/",
+          "domain": "upwork.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "A Video Editor in 2025 makes HOW MUCH?!?!",
+          "url": "https://www.youtube.com/watch?v=1Y3QDrmyCuo",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 4,
+          "title": "Video Editing Pricing Guide 2026: Freelance Rates That ...",
+          "url": "https://pixflow.net/blog/freelance-video-editing-rates/",
+          "domain": "pixflow.net",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Video Editor Rates Guide: Average Hourly Rates & Cost ...",
+          "url": "https://www.twine.net/blog/video-editor-rates-guide/",
+          "domain": "twine.net",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Video Editing Charges in India: Explore The Rate List",
+          "url": "https://medium.com/@anshuljain00964/video-editing-charges-in-india-explore-the-rate-list-93da4f193f14",
+          "domain": "medium.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "How Much Does a Video Editor Cost?",
+          "url": "https://www.fiverr.com/resources/guides/video-animation/video-editor-cost",
+          "domain": "fiverr.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "r/editors Wiki: Video Editor Rate Guide",
+          "url": "https://www.reddit.com/r/editors/wiki/index/ratesv2/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "How to Price Your Video Editing Services in 2025 (Step-By-Step)",
+          "url": "https://www.youtube.com/watch?v=DwUpsOLPyIs",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is the 3:2:1 rule in video editing?",
+        "How much to charge for 1 minute video edit?",
+        "How much does a 2 minute video cost?",
+        "What does the 80/20 rule mean in video editing?"
+      ],
+      "relatedQueries": [
+        "Freelance video editor rates per month",
+        "Video editing rates per minute in india",
+        "Freelance video editor rates reddit",
+        "Video editing freelance rates in India",
+        "10-minute video editing charges in India",
+        "30 sec video editing charges in India",
+        "Fiverr video editing price",
+        "YouTube video editor rates"
+      ]
+    },
+    {
+      "id": "vc-manual50-c3-004",
+      "keyword": "video production brief template",
+      "found": true,
+      "query": "video production brief template",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "The Best Creative Brief Template For Video Agencies [Free ...",
+          "url": "https://www.studiobinder.com/blog/best-creative-brief-template-video-agencies-free-download/",
+          "domain": "studiobinder.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "Video Creative Brief Template (Free Download)",
+          "url": "https://www.goldcast.io/blog-post/video-creative-brief-template",
+          "domain": "goldcast.io",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "How to Write a Creative Brief (Example and Templates)",
+          "url": "https://www.canva.com/docs/creative-briefs/",
+          "domain": "canva.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Video brief template | Everything you need to include - Definition",
+          "url": "https://www.thisisdefinition.com/resources/video-brief-template",
+          "domain": "thisisdefinition.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "How to Write the Perfect Production Brief (Template included)",
+          "url": "https://www.twogiraffes.com.au/blog-post/how-to-write-the-perfect-production-brief/",
+          "domain": "twogiraffes.com.au",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Revitalize Your Videos With Our Corporate Video Brief ...",
+          "url": "https://www.brafton.com/blog/video-marketing/corporate-video-brief-example/",
+          "domain": "brafton.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Everything Starts with a Brief (+ VIDEO BRIEF TEMPLATE)",
+          "url": "https://esgfilms.eu/everything-starts-with-a-brief-video-brief-template/",
+          "domain": "esgfilms.eu",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Improve collaboration with this free video brief template",
+          "url": "https://www.ziflow.com/blog/video-brief-template",
+          "domain": "ziflow.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Video production brief template pdf",
+        "Video production brief template word",
+        "Video production brief template free download",
+        "Video brief template Word",
+        "Video production brief template free",
+        "Creative brief template",
+        "Video brief template free",
+        "Media brief template"
+      ]
+    },
+    {
+      "id": "vc-manual50-c3-005",
+      "keyword": "video revision process",
+      "found": true,
+      "query": "video revision process",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Video Proofing",
+          "url": "https://reviewstudio.com/video-review-proofing-feedback-tool-lp/",
+          "domain": "reviewstudio.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Video Review and Approval Workflow: A Practical Guide",
+          "url": "https://fast.io/resources/video-review-and-approval/",
+          "domain": "fast.io",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "Video Collaboration Tools & Review Platform",
+          "url": "https://vimeo.com/features/video-collaboration",
+          "domain": "vimeo.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 4,
+          "title": "Streamlining Your Video Editing Workflow: Tips and Tricks ...",
+          "url": "https://medium.com/@emuesiri/streamlining-your-video-editing-workflow-tips-and-tricks-from-a-pro-76888d75bd83",
+          "domain": "medium.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "How to Provide Effective Feedback On Video Projects",
+          "url": "https://www.dropbox.com/resources/feedback-on-video",
+          "domain": "dropbox.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "What is video review? A complete guide for creative teams",
+          "url": "https://krock.io/blog/what-is-video-review/",
+          "domain": "krock.io",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "The Art of Post-Production: A Guide to Video Editing and ...",
+          "url": "https://www.yourfilm.com.au/blog/the-art-of-post-production-a-guide-to-video-editing-and-the-revisions-process/",
+          "domain": "yourfilm.com.au",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "3 Keys to a Successful Video Review Process",
+          "url": "https://www.matternow.com/blog/keys-to-a-successful-video-review-process/",
+          "domain": "matternow.com",
+          "resultType": "article"
+        },
+        {
+          "position": 9,
+          "title": "Streamlining the Review and Approval Workflow for Video ...",
+          "url": "https://www.avid.com/resource-center/streamlining-the-review-and-approval-workflow-for-video-post-production",
+          "domain": "avid.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What are the 5 stages of video editing?",
+        "What is the 3:2:1 rule in video editing?",
+        "What does the 80/20 rule mean in video editing?",
+        "What are the steps involved in the video edit process?"
+      ],
+      "relatedQueries": [
+        "Youtube video revision process",
+        "Video revision process step by step",
+        "Video revision process pdf",
+        "How to edit video professionally",
+        "Video feedback Examples",
+        "Video collaboration online",
+        "Video review example",
+        "How to edit videos on mobile"
+      ]
+    },
+    {
+      "id": "vc-manual50-c3-006",
+      "keyword": "AI video editor vs traditional video editor",
+      "found": true,
+      "query": "AI video editor vs traditional video editor",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Ai video generation vs traditional editing - what's real vs ...",
+          "url": "https://www.reddit.com/r/VideoEditors/comments/1o31lvt/ai_video_generation_vs_traditional_editing_whats/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "AI Video Generation vs Traditional Video Editing",
+          "url": "https://www.adobe.com/in/products/firefly/discover/ai-video-creation-vs-traditional-editing.html",
+          "domain": "adobe.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "What makes AI video creation different from traditional ...",
+          "url": "https://lumen5.com/learn/what-makes-ai-video-creation-different-from-traditional-video-editing-faq/",
+          "domain": "lumen5.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "AI Video Editor vs. Traditional Video Editing: Why Talking ...",
+          "url": "https://www.odysser.com/blog/ai-video-editor-vs-traditional",
+          "domain": "odysser.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Comparing AI Video Generators vs Traditional Editing",
+          "url": "https://syllaby.io/blog/ai-video-generators-vs-traditional-editing/",
+          "domain": "syllaby.io",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "AI Video Editing vs Freelance Editor Costs in 2026",
+          "url": "https://www.videotto.com/blog/ai-video-editing-vs-freelance-editor-cost",
+          "domain": "videotto.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "AI Video Services vs Traditional Video Editing: Which Is Better?",
+          "url": "https://youtubevideoeditingservices.com/ai-video-services-vs-traditional-video-editing/",
+          "domain": "youtubevideoeditingservices.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Are AI video editors any good?",
+        "Is AI replacing video editors?",
+        "What is the difference between an AI video and an original video?",
+        "What does the 80/20 rule mean in video editing?"
+      ],
+      "relatedQueries": [
+        "Ai video editor vs traditional video editor reddit",
+        "Ai video editor vs traditional video editor free",
+        "Ai video editor vs traditional video editor cost"
+      ]
+    },
+    {
+      "id": "vc-manual50-c3-007",
+      "keyword": "video editor vs motion designer",
+      "found": true,
+      "query": "video editor vs motion designer",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "what is difference between an video editor and a motion ...",
+          "url": "https://www.reddit.com/r/VideoEditing/comments/1m77qyh/what_is_difference_between_an_video_editor_and_a/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Video Editors vs Motion Designers: Separate Roles, Better ...",
+          "url": "https://www.linkedin.com/posts/ahmadrj_respectthecraft-videoediting-motiondesign-activity-7414224381951877121-WNv-",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 3,
+          "title": "Video Editor vs Motion Designer: Should Editors Do ...",
+          "url": "https://www.terrahenderson.com/blog/editor-vs-motion-designer",
+          "domain": "terrahenderson.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Should You Learn Motion Graphics Or Video Editing First",
+          "url": "https://medium.com/@vikikrisna/should-you-learn-motion-graphics-or-video-editing-first-83b9cd123dfe",
+          "domain": "medium.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Which is better, to be a video editor or a graphic designer?",
+          "url": "https://www.quora.com/Which-is-better-to-be-a-video-editor-or-a-graphic-designer",
+          "domain": "quora.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Video Editing VS Motion Graphics: Difference",
+          "url": "https://www.tgcindia.com/blog-details/video-editing-vs-motion-graphics-difference",
+          "domain": "tgcindia.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Should you learn video editing, motion graphics, or both?",
+          "url": "https://www.miracamp.com/learn/video-editing/learning-motion-graphics",
+          "domain": "miracamp.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is the difference between a motion designer and a video editor?",
+        "Will motion designers be replaced by AI?",
+        "Is AI replacing video editors?",
+        "Is a motion designer the same as an animator?"
+      ],
+      "relatedQueries": [
+        "Video editor vs motion designer reddit",
+        "Video editor vs motion designer for beginners"
+      ]
+    },
+    {
+      "id": "vc-manual50-c3-008",
+      "keyword": "video production budget",
+      "found": true,
+      "query": "video production budget",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Video Production Cost: What You'll Actually Pay in 2026",
+          "url": "https://vidico.com/news/video-production-cost/",
+          "domain": "vidico.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "FREE Film Budget Template for Video Production",
+          "url": "https://www.studiobinder.com/blog/downloads/film-budget-template/",
+          "domain": "studiobinder.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "How to Budget for Your Video Production: Melbourne Edition",
+          "url": "https://vpagency.com.au/how-to-budget-for-your-video-production-melbourne-edition/",
+          "domain": "vpagency.com.au",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "How Much Does Corporate Video Production Cost in ...",
+          "url": "https://ivorymedia.com.au/corporate-video-production-cost-australia/",
+          "domain": "ivorymedia.com.au",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "What Goes Into a Video Production Budget",
+          "url": "https://amvisuals.com.au/what-goes-into-a-video-production-budget/",
+          "domain": "amvisuals.com.au",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Downloadable Video Production Budget Template",
+          "url": "https://clutch.co/resources/how-to-create-a-video-production-budget",
+          "domain": "clutch.co",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Video Budget Template: Creating Yours and Determining Costs ...",
+          "url": "https://www.youtube.com/watch?v=I2XlR0BIIVU",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 8,
+          "title": "How Much Should a Business Budget for Video Production?",
+          "url": "https://unrealmedia.com.au/blog/video-production/how-much-should-a-business-budget-for-video-production/",
+          "domain": "unrealmedia.com.au",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Is $2 million a big budget for a movie?",
+        "How much should a 3 minute video cost?",
+        "What is a good budget for a videographer?",
+        "How much should I charge for a 5 minute video?"
+      ],
+      "relatedQueries": [
+        "Video production budget template",
+        "Video production budget template excel",
+        "Video production budget pdf",
+        "Video production budget template free",
+        "Film production budget template",
+        "Theatre production budget template",
+        "Film budget template PDF",
+        "Production budget sheet Template"
+      ]
+    },
+    {
+      "id": "vc-manual50-c3-009",
+      "keyword": "outsourcing video editing",
+      "found": true,
+      "query": "outsourcing video editing",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Practicality of outsourcing video editing to a freelancer",
+          "url": "https://www.reddit.com/r/youtubers/comments/11o26m4/practicality_of_outsourcing_video_editing_to_a/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Outsourced Video Editors | Build your video editor teams",
+          "url": "https://awaydigitalteams.com/our-services/video-editor/",
+          "domain": "awaydigitalteams.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Video Editing Outsourcing: Why, How & Where to Find",
+          "url": "https://girlpowertalk.com/video-editing-outsourcing-all-you-need-to-know/",
+          "domain": "girlpowertalk.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Why You Should Outsource Video Editing and How to Do It",
+          "url": "https://www.hirewithnear.com/blog/outsource-video-editing",
+          "domain": "hirewithnear.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Video Editing Outsourcing: Boost Your Content Quality",
+          "url": "https://lathire.com/video-editing-outsourcing/",
+          "domain": "lathire.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "How Outsourcing Will Help You Grow on YouTube",
+          "url": "https://aliabdaal.com/youtube/how-outsourcing-will-help-you-grow-on-youtube/",
+          "domain": "aliabdaal.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Outsourcing Video Editing Services: A Complete Guide on ...",
+          "url": "https://www.videohusky.com/outsourcing-video-editing-services/",
+          "domain": "videohusky.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is the 3:2:1 rule in video editing?",
+        "How much should I pay someone to edit a video?",
+        "Can I freelance as a video editor?",
+        "How to get foreign clients for video editing?"
+      ],
+      "relatedQueries": [
+        "Outsourcing video editing reddit",
+        "Outsourcing video editing jobs",
+        "Outsource video editing philippines",
+        "Fiverr",
+        "Video editing subscription",
+        "Upwork"
+      ]
+    },
+    {
+      "id": "vc-manual50-c3-010",
+      "keyword": "AI video editing limitations",
+      "found": true,
+      "query": "AI video editing limitations",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "The Pros and Cons of AI Video Editing",
+          "url": "https://cutback.video/blog/ai-video-editing-pros-and-cons",
+          "domain": "cutback.video",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "What are the limitations of video generation AI ...",
+          "url": "https://www.reddit.com/r/AI_Agents/comments/1txgssb/what_are_the_limitations_of_video_generation_ai/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "What Are the Limitations of Current AI Video Generation?",
+          "url": "https://www.roboneo.com/blog/limitations-of-ai-video-generation",
+          "domain": "roboneo.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "The Promise, the Pitfalls and the Price: How AI Video ...",
+          "url": "https://crewscontrol.com/blog-central/the-promise-the-pitfalls-and-the-price-how-ai-video-generation-really-differs-from-traditional-video-editing/",
+          "domain": "crewscontrol.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "8 Reasons AI Video Editing Still Requires a Specialist",
+          "url": "https://www.lemonlight.com/blog/8-reasons-ai-video-editing-still-requires-a-specialist/",
+          "domain": "lemonlight.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "AI Video Editing Mistakes to Avoid in 2026",
+          "url": "https://try.wideframe.com/blog/ai-video-editing-mistakes-to-avoid",
+          "domain": "try.wideframe.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "What are the limits of AI in creating realistic videos? Any ...",
+          "url": "https://www.quora.com/What-are-the-limits-of-AI-in-creating-realistic-videos-Any-other-information-about-AI-is-highly-appreciated",
+          "domain": "quora.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "How to Navigate AI Video Generation Limitations in 2026",
+          "url": "https://is4.ai/blog/our-blog-1/ai-video-generation-limitations-traditional-methods-2026-357",
+          "domain": "is4.ai",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What are the limitations of AI videos?",
+        "Is AI good for video editing?",
+        "Can I let AI edit my video?",
+        "Will AI make video editors obsolete?"
+      ],
+      "relatedQueries": [
+        "Ai video editing limitations reddit",
+        "Ai video editing limitations ios",
+        "AI video generator",
+        "Free AI video generator",
+        "Grok AI",
+        "Invideo AI",
+        "Kling AI"
+      ]
+    },
+    {
+      "id": "vc-manual50-c4-001",
+      "keyword": "repurpose webinar content",
+      "found": true,
+      "query": "repurpose webinar content",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How To Repurpose Your Webinar Series Content",
+          "url": "https://www.on24.com/blog/how-to-repurpose-your-webinar-series-content/",
+          "domain": "on24.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "4 ways to repurpose your webinar",
+          "url": "https://partnerships.nature.com/resources/blog/4-ways-to-repurpose-your-custom-webcast/",
+          "domain": "partnerships.nature.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "Repurpose webinar content into 10+ content sharables",
+          "url": "https://www.parmonic.com/repurpose/repurpose-webinar-content",
+          "domain": "parmonic.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "11 Ways to Repurpose Webinar Content [Guide for AI ...",
+          "url": "https://univid.io/blog/repurpose-webinar-ai/",
+          "domain": "univid.io",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Repurposing Webinar Content: Strategies & Snippets",
+          "url": "https://www.affirma.com/blog/repurposing-webinar-content/",
+          "domain": "affirma.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "How to repurpose webinars into social clips (with AI)",
+          "url": "https://livestorm.co/blog/repurpose-webinars-into-social-clips",
+          "domain": "livestorm.co",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Repurpose Webinar Content With AI",
+          "url": "https://help.goldcast.io/en_US/webinars-powered-by-smart-event-technology/25825662946971-repurpose-webinar-content-with-ai",
+          "domain": "help.goldcast.io",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "10 Smart Ways to Repurpose Webinars into Great Content",
+          "url": "https://www.goto.com/blog/10-smart-ways-repurpose-webinars-great-content",
+          "domain": "goto.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How to repurpose webinar content?",
+        "What does it mean to repurpose content?",
+        "How do you repurpose content?",
+        "Are webinars still effective in 2026?"
+      ],
+      "relatedQueries": [
+        "Repurpose webinar content examples",
+        "Repurpose webinar content pdf"
+      ]
+    },
+    {
+      "id": "vc-manual50-c4-002",
+      "keyword": "turn long videos into short clips",
+      "found": true,
+      "query": "turn long videos into short clips",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Free Long to Short Video Converter",
+          "url": "https://wayin.ai/tools/long-video-to-short-video/",
+          "domain": "wayin.ai",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "AI Video to Shorts Converter",
+          "url": "https://www.canva.com/features/long-video-to-short-video-AI/",
+          "domain": "canva.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "AI Long to Short Video Converter",
+          "url": "https://www.flexclip.com/tools/ai-long-video-to-short-video/",
+          "domain": "flexclip.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Long Video to Short Video AI - Auto Cut Clips Fast",
+          "url": "https://www.opus.pro/tools/long-video-to-short-video-ai",
+          "domain": "opus.pro",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Free Long Video to Short Video AI Converter",
+          "url": "https://www.vmaker.com/tools/long-video-to-short-video-ai",
+          "domain": "vmaker.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Long Video to Short Video : Free AI Clips in Minutes",
+          "url": "https://www.heygen.com/tool/long-video-to-short-video",
+          "domain": "heygen.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Transform Long Video to Short Clips - AI Tools",
+          "url": "https://www.capcut.com/tools/ai-long-video-to-short-video",
+          "domain": "capcut.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "AI Video Generator (Free): Get Shorts From Long Videos",
+          "url": "https://vizard.ai/tools/ai-clips-generator",
+          "domain": "vizard.ai",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "QuickReel: #1 AI video clipping & editing tool",
+          "url": "https://www.quickreel.io/",
+          "domain": "quickreel.io",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Turn long videos into short clips online free",
+        "Turn long videos into short clips online",
+        "Convert long video to short video for free",
+        "Long video to short video CapCut",
+        "Free long video to short video AI",
+        "AI long video to short",
+        "Long video to short video AI free without watermark",
+        "YouTube long video to short video AI free"
+      ]
+    },
+    {
+      "id": "vc-manual50-c4-003",
+      "keyword": "video content repurposing workflow",
+      "found": true,
+      "query": "video content repurposing workflow",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "#1 automated content repurposing & distribution platform.",
+          "url": "https://repurpose.io/",
+          "domain": "repurpose.io",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "How to Repurpose Content with AI: A Step-by-Step Workflow",
+          "url": "https://dfirst.ai/blog/content-repurpose/",
+          "domain": "dfirst.ai",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "Repurposing Content for Social Media: Make Video Work ...",
+          "url": "https://captions.ai/blog/make-your-videos-work-harder",
+          "domain": "captions.ai",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "9 Best Content Repurposing Tools for Video and Social ...",
+          "url": "https://www.socialrevver.com/blog/content-repurposing-tools",
+          "domain": "socialrevver.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "How to Repurpose Video Content: A 2026 Workflow",
+          "url": "https://quso.ai/blog/how-to-repurpose-video-content",
+          "domain": "quso.ai",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Content Repurposing Strategy: A Measured Clip Workflow",
+          "url": "https://recapo.ai/blog/content-repurposing-strategy/",
+          "domain": "recapo.ai",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "The Best Content Repurposing Tools (and What They Actually ...",
+          "url": "https://aiforcontentmarketing.ai/the-best-content-repurposing-tools-and-what-they-actually-do/",
+          "domain": "aiforcontentmarketing.ai",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Video Content Repurposing: 1 Video, 10 Formats",
+          "url": "https://octospark.ai/blog/video-content-repurposing-guide-10-formats/",
+          "domain": "octospark.ai",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Video content repurposing workflow template",
+        "Video content repurposing workflow free",
+        "Repurpose io lifetime deal",
+        "rePurpose program"
+      ]
+    },
+    {
+      "id": "vc-manual50-c4-004",
+      "keyword": "video captions accessibility",
+      "found": true,
+      "query": "video captions accessibility",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Captions/Subtitles | Web Accessibility Initiative (WAI)",
+          "url": "https://www.w3.org/WAI/media/av/captions/",
+          "domain": "w3.org",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Provide captions and descriptions of video",
+          "url": "https://accessibility.huit.harvard.edu/provide-captions-and-descriptions-video",
+          "domain": "accessibility.huit.harvard.edu",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Captions and Transcripts | Section508. ...",
+          "url": "https://www.section508.gov/create/captions-transcripts/",
+          "domain": "section508.gov",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Caption Video Content for Accessibility",
+          "url": "https://cesupport.finalsite.com/hc/en-us/articles/14919694365581-Caption-Video-Content-for-Accessibility",
+          "domain": "cesupport.finalsite.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Video accessibility: Captioning, subtitles and transcripts",
+          "url": "https://www.dundee.ac.uk/guides/video-accessibility-captioning-subtitles-and-transcripts",
+          "domain": "dundee.ac.uk",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Open Vs. Closed Captions: Which Is More Accessible?",
+          "url": "https://www.boia.org/blog/open-vs.-closed-captions-which-is-more-accessible",
+          "domain": "boia.org",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Video Accessibility",
+          "url": "https://www.accessibility.org.au/policy/video-accessibility/",
+          "domain": "accessibility.org.au",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Captions, Transcripts, and Audio Descriptions",
+          "url": "https://webaim.org/techniques/captions/",
+          "domain": "webaim.org",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What are the ADA guidelines for closed captioning?",
+        "Why do people with ADHD like closed captions?",
+        "What is CC1, CC2, CC3, CC4 closed captioned?",
+        "How to make videos ADA compliant?"
+      ],
+      "relatedQueries": [
+        "Video captions accessibility online",
+        "Accessibility captions instagram",
+        "Open captions accessibility",
+        "Video accessibility checklist",
+        "Closed captions examples",
+        "What are captions",
+        "Open captions vs closed captions",
+        "Captions vs subtitles"
+      ]
+    },
+    {
+      "id": "vc-manual50-c4-005",
+      "keyword": "resize video for social media",
+      "found": true,
+      "query": "resize video for social media",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "One-click Video Resize Online",
+          "url": "https://www.canva.com/features/video-resize/",
+          "domain": "canva.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Free Video Resizer: Resize Your Videos Online",
+          "url": "https://www.adobe.com/express/feature/video/resize",
+          "domain": "adobe.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Video Resizer Online",
+          "url": "https://clideo.com/resize-video",
+          "domain": "clideo.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Online Video Resizer: Resize Videos For Free",
+          "url": "https://www.kapwing.com/tools/resize",
+          "domain": "kapwing.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Online Video Resizer - Resize Videos For Free",
+          "url": "https://videobolt.net/simple-video-tools/resize",
+          "domain": "videobolt.net",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Resize Your Videos for Instagram Online",
+          "url": "https://www.adobe.com/express/feature/video/resize/instagram",
+          "domain": "adobe.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Online Video Resizer: Adjust Aspect Ratio & Dimensions & ...",
+          "url": "https://vimeo.com/features/video-editor/resize-video",
+          "domain": "vimeo.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 8,
+          "title": "Free Social Media Video Resizer - Renderly",
+          "url": "https://renderly.video/tools/video-resizer",
+          "domain": "renderly.video",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How can I resize my video to fit Instagram?",
+        "What is the best video size for social media?",
+        "Why won't my video fit on Instagram?",
+        "How can I resize my video to fit TikTok?"
+      ],
+      "relatedQueries": [
+        "Resize video for social media free",
+        "Resize video online free",
+        "Video resizer",
+        "Resize video for social media online free",
+        "Resize video for social media online",
+        "Convert video to 9:16 online free",
+        "Resize video for social media app",
+        "Resize video MB"
+      ]
+    },
+    {
+      "id": "vc-manual50-c4-006",
+      "keyword": "customer onboarding video",
+      "found": true,
+      "query": "customer onboarding video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "A practical guide to customer onboarding videos",
+          "url": "https://www.vidyard.com/blog/customer-onboarding-videos/",
+          "domain": "vidyard.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "Customer Onboarding Videos | Velo - usevelo.ai",
+          "url": "https://usevelo.ai/use-cases/customer-onboarding-video/",
+          "domain": "usevelo.ai",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Client Onboarding Video: Engage New Customers in 5 steps",
+          "url": "https://www.pitchy.io/blog/communications-video/corporate-video-5-steps-for-a-successful-customer-onboarding",
+          "domain": "pitchy.io",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "22 Best Customer Onboarding Videos - EVER!",
+          "url": "https://wyzowl.com/best-customer-onboarding-videos/",
+          "domain": "wyzowl.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "21 Best Customer Onboarding Videos For SaaS",
+          "url": "https://medium.com/@userpilot/21-best-customer-onboarding-videos-for-saas-bf33a2b02380",
+          "domain": "medium.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "The Complete Guide to Customer Onboarding Videos",
+          "url": "https://sundaysky.com/ebook/complete-guide-to-customers-onboarding-videos-ebook/",
+          "domain": "sundaysky.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Scale Customer Onboarding Without Scaling Your Team",
+          "url": "https://www.heygen.com/business/customer-success",
+          "domain": "heygen.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "How To Setup A Full Client Onboarding Process (TEMPLATE)",
+          "url": "https://www.youtube.com/watch?v=s9K_V0B4jao",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is an onboarding video?",
+        "What are the 5 stages of the onboarding process?",
+        "What are the 5 C's of effective onboarding?",
+        "What are the 5 pillars of onboarding?"
+      ],
+      "relatedQueries": [
+        "Customer onboarding video example",
+        "Customer onboarding video template",
+        "Customer onboarding video script"
+      ]
+    },
+    {
+      "id": "vc-manual50-c4-007",
+      "keyword": "software tutorial video",
+      "found": true,
+      "query": "software tutorial video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "12 Best Video Tutorial Software in 2026 [Tested]",
+          "url": "https://supademo.com/blog/best-video-tutorial-software",
+          "domain": "supademo.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "What is the best tools for creating video tutorials?",
+          "url": "https://www.reddit.com/r/SmallYTChannel/comments/1h9i233/what_is_the_best_tools_for_creating_video/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "8 Best Video Tutorial Software for Beginners (FREE Tools)",
+          "url": "https://videomule.ai/blog/best-video-tutorial-software",
+          "domain": "videomule.ai",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "A Guide to Software Training Videos (With or Without AI)",
+          "url": "https://www.synthesia.io/post/software-training-videos",
+          "domain": "synthesia.io",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "How to Make Instructional Videos: Step-by-Step Guide",
+          "url": "https://www.techsmith.com/blog/instructional-videos/",
+          "domain": "techsmith.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "10 Best Video Tutorial Softwares for 2026 (Tested by ...",
+          "url": "https://leadde.ai/blog/best-video-tutorial-softwares",
+          "domain": "leadde.ai",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "guidde・Magically create video documentation with AI",
+          "url": "https://www.guidde.com/",
+          "domain": "guidde.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "🎞 TUTORIALES DE VÍDEO Y SOFTWARE CREATIVO",
+          "url": "https://www.youtube.com/playlist?list=PLiE4qqPEGkevFhq2X4OvK1gPM3ru53TzH",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What software can I use to make tutorial videos?",
+        "What is a tutorial video?",
+        "What is the best software to create training videos?",
+        "What software should I use to make a video?"
+      ],
+      "relatedQueries": [
+        "Software tutorial video template",
+        "Software tutorial video for beginners",
+        "Software tutorial video maker",
+        "Software tutorial video free",
+        "Software tutorial video download",
+        "Tutorial video examples",
+        "Tutorial software example",
+        "Video tutorial app"
+      ]
+    },
+    {
+      "id": "vc-manual50-c4-008",
+      "keyword": "video content calendar",
+      "found": true,
+      "query": "video content calendar",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Content Calendar templates",
+          "url": "https://www.notion.com/templates/category/content-calendar?srsltid=AfmBOopa3fYD4kqXNHW06OEaDMz62IjvbbhjaR6OejBDfoNyk4CUPcaA",
+          "domain": "notion.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "32 of the Best Free Content Calendar Templates",
+          "url": "https://blog.socialmediastrategiessummit.com/free-content-calendar-templates/",
+          "domain": "blog.socialmediastrategiessummit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Your Complete Guide to Creating a Video Content ...",
+          "url": "https://www.switcherstudio.com/blog/video-content-calendar",
+          "domain": "switcherstudio.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Video Content Calendar Template in Excel, Google Sheets",
+          "url": "https://www.template.net/editable/355328/video-content-calendar",
+          "domain": "template.net",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "10 Proven Steps For Creating An Effective Video Content ...",
+          "url": "https://firework.com/blog/content-calendar-video-marketing",
+          "domain": "firework.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Free social media content scheduler",
+          "url": "https://www.adobe.com/express/feature/content-scheduler/social-media",
+          "domain": "adobe.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Free Social Media Calendar Template for Marketing Teams ...",
+          "url": "https://asana.com/templates/social-media-calendar",
+          "domain": "asana.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Social Media Planning & Scheduling Tool | Canva Pro",
+          "url": "https://www.canva.com/pro/content-planner/",
+          "domain": "canva.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How to create a video content calendar?",
+        "What is the best free content calendar for social media?",
+        "What should be in a content calendar?",
+        "What is the best app for content calendar management?"
+      ],
+      "relatedQueries": [
+        "Video content calendar template",
+        "Video content calendar template free",
+        "Content calendar template",
+        "Video content calendar free",
+        "Free content calendar template",
+        "Content calendar template Google Sheets",
+        "Social media content calendar template",
+        "Notion content calendar"
+      ]
+    },
+    {
+      "id": "vc-manual50-c4-009",
+      "keyword": "video marketing metrics",
+      "found": true,
+      "query": "video marketing metrics",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "The 8 Most Important Video Marketing KPIs to Track Your ...",
+          "url": "https://crewscontrol.com/blog-central/the-8-most-important-video-marketing-kpis-to-track-your-performance/",
+          "domain": "crewscontrol.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Video marketing metrics and KPIs",
+          "url": "https://www.intraconmarketingsolutions.com/en/insights/metrics-kpi-video-marketing/",
+          "domain": "intraconmarketingsolutions.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "Video Marketing Metrics: What They Are, How to Measure ...",
+          "url": "https://www.sona.com/blog/video-marketing-metrics-what-they-are-how-to-measure-and-why-they-matter/",
+          "domain": "sona.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "6 Video Marketing Metrics & Why They Matter",
+          "url": "https://www.vyond.com/blog/video-marketing-metrics-why-they-matter/",
+          "domain": "vyond.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Key Video Marketing Metrics of 2026: What to Watch",
+          "url": "https://animoto.com/blog/video-marketing/key-video-marketing-metrics",
+          "domain": "animoto.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "How To Measure Your Video Marketing Success And ...",
+          "url": "https://www.forbes.com/councils/forbesagencycouncil/2025/02/14/how-to-measure-your-video-marketing-success-and-performance/",
+          "domain": "forbes.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Top 10 Video Marketing Metrics You Should Actually Track",
+          "url": "https://www.adverity.com/blog/top-10-video-marketing-metrics-you-should-actually-track",
+          "domain": "adverity.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "Video Marketing Metrics Every B2B SaaS Team Should Track",
+          "url": "https://thehigherpitch.com/blogs/video-marketing-success-metrics-b2b-saas/",
+          "domain": "thehigherpitch.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is the 3-3-3 rule in marketing?",
+        "What are some good marketing metrics?",
+        "How to measure the success of video marketing?",
+        "What is the 70/20/10 rule in marketing?"
+      ],
+      "relatedQueries": [
+        "Video marketing metrics pdf",
+        "Video marketing metrics examples"
+      ]
+    },
+    {
+      "id": "vc-manual50-c4-010",
+      "keyword": "video case study template",
+      "found": true,
+      "query": "video case study template",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Case Study Editable Video Templates",
+          "url": "https://elements.envato.com/video-templates/case+study?srsltid=AfmBOop9a3uYVheuxOf9IEO9BlzKE3QHN8Xts8D-WotR03qYJTkqRhb7",
+          "domain": "elements.envato.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Free and customizable case study templates",
+          "url": "https://www.canva.com/templates/s/case-study/",
+          "domain": "canva.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Case-study Template Projects",
+          "url": "https://www.behance.net/search/projects/case-study%20template",
+          "domain": "behance.net",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Free Case Study Templates to Impress",
+          "url": "https://www.capcut.com/explore/case-study-template/7497647064081287184",
+          "domain": "capcut.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "High-Quality Case Study Video Template",
+          "url": "https://www.vidyard.com/video/video-marketing-templates-high-quality-case-study-template/",
+          "domain": "vidyard.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Free Case Study Templates | Adobe Express",
+          "url": "https://www.adobe.com/express/templates/case-study",
+          "domain": "adobe.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "3 Ready-to-Use Case Study Video Templates",
+          "url": "https://www.contentbeta.com/blog/case-study-video-template/",
+          "domain": "contentbeta.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Video case study template word",
+        "Video case study template free",
+        "Video case study template free download",
+        "Video case study template ppt",
+        "Free case study templates",
+        "Video case study template powerpoint",
+        "Free case study template Word",
+        "Canva case Study template"
+      ]
+    },
+    {
+      "id": "vc-manual50-c5-001",
+      "keyword": "accelerator marketing strategy",
+      "found": true,
+      "query": "accelerator marketing strategy",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Top Marketing Strategies for Accelerators 2026",
+          "url": "https://www.acceleratorapp.co/en/blogs/marketing-strategies-to-get-the-best-startups-for-your-accelerator/",
+          "domain": "acceleratorapp.co",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "Marketing Accelerator",
+          "url": "https://marketingaccelerator.com/",
+          "domain": "marketingaccelerator.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Marketing strategy as a growth accelerator for your business",
+          "url": "https://www.iodigital.com/en/insights/whitepapers/marketing-strategy-as-a-growth-accelerator-for-your-business",
+          "domain": "iodigital.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Digital Marketing Strategy and Analytics Career Accelerator",
+          "url": "https://www.lse.ac.uk/study-at-lse/executive-education/programmes/digital-marketing-strategy-and-analytics",
+          "domain": "lse.ac.uk",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Accelerator Marketing: 5 Effective Tips and Strategies",
+          "url": "https://madavi.co/blog/accelerator-marketing-5-effective-tips-and-strategies",
+          "domain": "madavi.co",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Accelerator Branding Strategies for Startup Growth",
+          "url": "https://www.linkedin.com/top-content/marketing/brand-growth-and-development/accelerator-branding-strategies-for-startup-growth/",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 7,
+          "title": "Marketing Agency for Accelerator Startups: What Founders ...",
+          "url": "https://www.stackmatix.com/blog/marketing-agency-for-accelerator-startups",
+          "domain": "stackmatix.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "Marketing Accelerator Program",
+          "url": "https://marketingpartners.ie/marketing-accelerator/",
+          "domain": "marketingpartners.ie",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "What Is a Business Accelerator?",
+          "url": "https://www.salesforce.com/blog/small-business/business-accelerator-smb-growth-technology/",
+          "domain": "salesforce.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is the 3-3-3 rule in marketing?",
+        "What are the 5 main marketing strategies?",
+        "What are the top 5 startup accelerators?",
+        "What is an example of an accelerator?"
+      ],
+      "relatedQueries": [
+        "LSE digital marketing strategy Analytics Career Accelerator price",
+        "Lse digital marketing career accelerator review",
+        "LSE marketing course",
+        "LSE digital marketing career Accelerator reddit",
+        "Lse Marketing Master",
+        "LSE marketing BSc",
+        "Ic Strategic Marketing",
+        "Online marketing courses"
+      ]
+    },
+    {
+      "id": "vc-manual50-c5-002",
+      "keyword": "venture capital portfolio marketing",
+      "found": true,
+      "query": "venture capital portfolio marketing",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Venture Capital Marketing: Bridging Startups, Markets, & ...",
+          "url": "https://growthequityinterviewguide.com/venture-capital/venture-capital-industry/venture-capital-marketing",
+          "domain": "growthequityinterviewguide.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Venture Capital Marketing: How the Best VC Firms Do It",
+          "url": "https://www.everythingstartups.com/article/venture-capital-marketing-how-the-best-vc-firms-do-it",
+          "domain": "everythingstartups.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "The ultimate guide to portfolio management for VC firms - Affinity",
+          "url": "https://www.affinity.co/guides/the-ultimate-guide-to-portfolio-management-for-vc-firms",
+          "domain": "affinity.co",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "[Ep. 1] The Rise of Platform in VC: Marketing & ...",
+          "url": "https://medium.com/@daryllimwd/ep-1-the-rise-of-platform-in-vc-marketing-communication-d218e82bdd4e",
+          "domain": "medium.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Venture Capital Marketing in 2026 - FinTech Scale Engine",
+          "url": "https://finudio.com/sectors/venture-capital-marketing/",
+          "domain": "finudio.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "The Basics of Venture Capital Portfolio Construction and ...",
+          "url": "https://www.angellist.com/learn/portfolio-construction",
+          "domain": "angellist.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Portfolio Management for Venture Capital Investments",
+          "url": "https://maxiomassetmanagement.com/blog/portfolio-management-for-venture-capital-investments/",
+          "domain": "maxiomassetmanagement.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "Venture Capital Marketing | Scale Your Firm & Portfolio",
+          "url": "https://azariangrowthagency.com/industries/private-markets/venture-capital-firms/",
+          "domain": "azariangrowthagency.com",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "Optimizing VC Portfolio Performance: Advanced Strategies ...",
+          "url": "https://rundit.com/blog/optimizing-vc-portfolio-performance-advanced-strategies/",
+          "domain": "rundit.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is a venture capital portfolio?",
+        "Is VC a high paying job?",
+        "Why is VC so hard to get into?",
+        "What is the dark side of venture capital?"
+      ],
+      "relatedQueries": [
+        "Venture capital portfolio marketing strategy",
+        "Venture capital portfolio marketing examples",
+        "Venture capital portfolio marketing pdf",
+        "Venture capital portfolio management",
+        "Andreessen Horowitz"
+      ]
+    },
+    {
+      "id": "vc-manual50-c5-003",
+      "keyword": "demo day event video",
+      "found": true,
+      "query": "demo day event video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Demo Day Events",
+          "url": "https://www.youtube.com/playlist?list=PLbMZj2MrUb5w6NuqyswHHeOBWmuC3Odsv",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 2,
+          "title": "Así fue el Demo Day 2026, la gran final del Torneo de ...",
+          "url": "https://www.facebook.com/ulpianosuarez/videos/as%C3%AD-fue-el-demo-day-2026-la-gran-final-del-torneo-de-emprendedoresgracias-a-cada/27019338494354967/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 3,
+          "title": "El DEMO DAY exalta la las startups con mayor posibilidad de ...",
+          "url": "https://www.youtube.com/watch?v=VujCXeP76Ds",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 4,
+          "title": "Demo Day 2026",
+          "url": "https://www.youtube.com/watch?v=7CfHBZChS-k",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 5,
+          "title": "What is a Demo Day? A Complete Guide for Startup ...",
+          "url": "https://www.converve.com/event-networking-blog/what-is-a-demo-day-organisers-guide",
+          "domain": "converve.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "¿Sabes qué es un Demo Day? #DemoDay ...",
+          "url": "https://www.instagram.com/reel/DQ_mTGMDCgN/",
+          "domain": "instagram.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 7,
+          "title": "Founders Inc Demo Day",
+          "url": "https://www.youtube.com/watch?v=XwQigpQGsKY",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 8,
+          "title": "Demo Day | Glosario Startupeable",
+          "url": "https://startupeable.com/glosario/demo-day/",
+          "domain": "startupeable.com",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "Start-Up Chile - What is Demo Day",
+          "url": "https://www.linkedin.com/posts/start-up-chile_what-is-demo-day-activity-7497653957834727426-jr3N",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual50-c5-004",
+      "keyword": "accelerator mentor webinar",
+      "found": true,
+      "query": "accelerator mentor webinar",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Webinars at AcceleratorApp",
+          "url": "https://www.acceleratorapp.co/en/webinar/",
+          "domain": "acceleratorapp.co",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Ipreneur Accelerator — Programs & How to Apply",
+          "url": "https://www.startupgrantsindia.com/providers/ipreneur-accelerator",
+          "domain": "startupgrantsindia.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Career Accelerator Program | 2Hours",
+          "url": "https://premiumlearnings.com/career-accelerator-program-2hours/?utm_source=ytshort&utm_medium=youtube",
+          "domain": "premiumlearnings.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Action Accelerator",
+          "url": "https://www.oneyoungworld.com/action-accelerator",
+          "domain": "oneyoungworld.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Startup Accelerators - MentorEase Mentoring Software",
+          "url": "https://www.mentorease.com/startup-accelerators/",
+          "domain": "mentorease.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Program",
+          "url": "https://www.ddaccelerator.com/program",
+          "domain": "ddaccelerator.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Accelerator Mentors | Google for Developers",
+          "url": "https://developers.google.com/community/accelerators/mentors",
+          "domain": "developers.google.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Career Accelerator Webinars",
+          "url": "https://mtsociety.memberclicks.net/career-accelerator-webinars",
+          "domain": "mtsociety.memberclicks.net",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "Startupbootcamp for Mentors",
+          "url": "https://startupbootcamp.org/mentors",
+          "domain": "startupbootcamp.org",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual50-c5-005",
+      "keyword": "portfolio founder interviews",
+      "found": true,
+      "query": "portfolio founder interviews",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "My Top Founder Interview Questions That Fly Under The ...",
+          "url": "https://cupofzhou.com/my-top-founder-interview-questions-that-fly-under-the-radar/",
+          "domain": "cupofzhou.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "How to ace the Portfolio question in a VC interview??? - Medium",
+          "url": "https://jaysri-vc.medium.com/acing-the-vc-interview-94f73a0dd89c",
+          "domain": "jaysri-vc.medium.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Founder Institute Global Portfolio of Graduates",
+          "url": "https://fi.co/graduates",
+          "domain": "fi.co",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "7 Founder Interviews to Study for Growth in 2026 | BAMF",
+          "url": "https://bamf.com/founder-interviews/",
+          "domain": "bamf.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Any advice for \"Walk us through your portfolio\"?",
+          "url": "https://www.reddit.com/r/userexperience/comments/af9bo0/any_advice_for_walk_us_through_your_portfolio/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Founder Stories — Portfolio Career Podcast",
+          "url": "https://www.portfoliocareerpodcast.com/founder-stories",
+          "domain": "portfoliocareerpodcast.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Founder Interviews",
+          "url": "https://crowdwise.org/forums/forum/founder-interviews/",
+          "domain": "crowdwise.org",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Founder Interviews",
+          "url": "https://www.youtube.com/playlist?list=PLVuTYEshOKw7vO1LgcwyNuhI-omMkDwFR",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is the 30-60-90 rule in an interview?",
+        "What are some good interview questions for a founder?",
+        "What are portfolio founders?",
+        "What is the biggest red flag to hear when being interviewed?"
+      ],
+      "relatedQueries": [
+        "Portfolio founder interviews reddit",
+        "Portfolio founder interviews youtube",
+        "Portfolio founder interviews questions",
+        "Founders Institute acceptance rate",
+        "Founder Institute San Diego",
+        "Founder institute info session",
+        "Founder institute faq",
+        "Founder Institute events"
+      ]
+    },
+    {
+      "id": "vc-manual50-c5-006",
+      "keyword": "portfolio company newsletter",
+      "found": true,
+      "query": "portfolio company newsletter",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Top 10 Must-Read Operating Partner Newsletters",
+          "url": "https://growthequityinterviewguide.com/private-equity/private-equity-operations/operating-partner-newsletters",
+          "domain": "growthequityinterviewguide.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Corporate Newsletter Projects",
+          "url": "https://www.behance.net/search/projects/corporate%20newsletter",
+          "domain": "behance.net",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Setting up a newsletter for your private equity firm",
+          "url": "https://www.privateequitymarketeer.com/the-marketeers-playbook/setting-up-a-newsletter-for-your-private-equity-firm",
+          "domain": "privateequitymarketeer.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "2+ Portfolio Newsletter Templates",
+          "url": "https://www.templatemonster.com/portfolio-newsletter-templates/?srsltid=AfmBOorzPcrpl2j1E_QrtRAsjqVhYrHCOAvR30eVFxVHKTDqHye3zrb0",
+          "domain": "templatemonster.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Creating Investment Newsletters",
+          "url": "https://www.linkedin.com/top-content/writing/writing-for-finance-industry/creating-investment-newsletters/",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 6,
+          "title": "16 Newsletter Examples (And Why They Work)",
+          "url": "https://www.wix.com/blog/newsletter-examples",
+          "domain": "wix.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Best way to showcase newsletter designs in portfolio",
+          "url": "https://www.reddit.com/r/graphic_design/comments/1tqb5ya/best_way_to_showcase_newsletter_designs_in/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Newsletters",
+          "url": "https://valuentum.com/newsletters/",
+          "domain": "valuentum.com",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "Newsletter Portfolio - D-Mack Media",
+          "url": "https://www.dmackmedia.com/portfolio/newsletter-portfolio.html",
+          "domain": "dmackmedia.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Portfolio company newsletter examples",
+        "Portfolio company newsletter template",
+        "Company newsletter examples",
+        "Corporate newsletter samples PDF",
+        "Corporate newsletter design",
+        "Road to carry newsletter",
+        "Creative newsletter",
+        "Behance Newsletter Design"
+      ]
+    },
+    {
+      "id": "vc-manual50-c5-007",
+      "keyword": "startup accelerator alumni community",
+      "found": true,
+      "query": "startup accelerator alumni community",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Alumni - Global directory list - Google for Startups",
+          "url": "https://startup.google.com/alumni/directory/",
+          "domain": "startup.google.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Alumni Community",
+          "url": "https://www.vitaaccelerator.it/alumni-community",
+          "domain": "vitaaccelerator.it",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Manage your alumni network",
+          "url": "https://thefounderhood.com/solutions/manage-alumni",
+          "domain": "thefounderhood.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Alumni Association of Glion Launches the second edition ...",
+          "url": "https://www.sommet-education.com/news/detail/article/alumni-association-of-glion-launches-the-second-edition-of-the-glion-alumni-accelerator-program-to-boost-hospitality-innovation-1",
+          "domain": "sommet-education.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Alumni Startup Accelerator Program",
+          "url": "https://www.desaiaccelerator.com/startup-accelerator",
+          "domain": "desaiaccelerator.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "The Campus Founders Alumni Network is live 🥳 If you ...",
+          "url": "https://www.instagram.com/p/DZITIdFDFq4/",
+          "domain": "instagram.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 7,
+          "title": "Accelerator",
+          "url": "https://foundersnetwork.com/accelerator/",
+          "domain": "foundersnetwork.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Join the EIT Alumni Startup Days!",
+          "url": "https://alumni.eitdigital.eu/article/join-eit-alumni-startup-days",
+          "domain": "alumni.eitdigital.eu",
+          "resultType": "article"
+        },
+        {
+          "position": 9,
+          "title": "How to support startups after graduation",
+          "url": "https://blog.dealum.com/how-to-support-startups-after-graduation-and-why-should-accelerators-do-it/",
+          "domain": "blog.dealum.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is the best startup accelerator in the world?",
+        "Who has the largest alumni association in the world?",
+        "What is a startup accelerator program?",
+        "Who are some notable startup founders from IIT?"
+      ],
+      "relatedQueries": [
+        "Startup accelerator alumni community list",
+        "Google alumni association",
+        "Accelerator programs for startups 2026",
+        "Alumni Directory Stanford",
+        "Africa startup accelerator",
+        "Google for startups Accelerator",
+        "Google for Startups Accelerator Africa",
+        "Alumni directory meaning"
+      ]
+    },
+    {
+      "id": "vc-manual50-c5-008",
+      "keyword": "founder content workshop",
+      "found": true,
+      "query": "founder content workshop",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Content Workshop",
+          "url": "https://www.linkedin.com/company/contentwriterworkshop",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 2,
+          "title": "A Founder-Focused Workshop with Elaine Chung - NextGEN",
+          "url": "https://nextgengvl.org/how-to-grow-what-youve-built-a-founder-focused-workshop-with-elaine-chung/",
+          "domain": "nextgengvl.org",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "About Us",
+          "url": "https://contentworkshop.com/about/",
+          "domain": "contentworkshop.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Founder Workshops",
+          "url": "https://www.venturemechanics.com/event/founder-workshops",
+          "domain": "venturemechanics.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "How to Run a Strategy-Focused Content Workshop",
+          "url": "https://contentmarketinginstitute.com/content-marketing-strategy/how-to-run-a-strategy-focused-content-workshop",
+          "domain": "contentmarketinginstitute.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Future Founders Workshops | Future ...",
+          "url": "https://www.futurefounders.com/future-founders-workshops/",
+          "domain": "futurefounders.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Content Creation Workshop 2025: Blogging, Vlogging ...",
+          "url": "https://sarahcordiner.com/content-creation-workshop-2025/",
+          "domain": "sarahcordiner.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Workshops for founders | HUMANBRAND",
+          "url": "https://www.humanbrand.com/blog/social-media-marketing/workshops-for-founders/",
+          "domain": "humanbrand.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Founder content workshop free",
+        "Fractl linkedin"
+      ]
+    },
+    {
+      "id": "vc-manual50-c5-009",
+      "keyword": "video brand guidelines",
+      "found": true,
+      "query": "video brand guidelines",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Video Guidelines – Brand",
+          "url": "https://brand.utah.edu/branding/video-guidelines/",
+          "domain": "brand.utah.edu",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Brand Guidelines Projects :: Photos, videos, logos ...",
+          "url": "https://www.behance.net/search/projects/brand%20guidelines",
+          "domain": "behance.net",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "How to Create and Implement Video Branding Guidelines",
+          "url": "https://www.linkedin.com/business/marketing/blog/content-marketing/how-to-create-and-implement-branding-guidelines",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 4,
+          "title": "Video branding guide",
+          "url": "https://www.parks.vic.gov.au/about-us/our-brand/applying-our-brand/video-branding-guide",
+          "domain": "parks.vic.gov.au",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Video Standards",
+          "url": "https://identity.ucsf.edu/photography-video/video-standards",
+          "domain": "identity.ucsf.edu",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "How to Create a Video Style Guide | 20 Brand Examples",
+          "url": "https://www.vyond.com/blog/how-to-create-a-video-style-guide/",
+          "domain": "vyond.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Video Brand Guidelines & Consulting",
+          "url": "https://www.casualfilms.com/video-brand-guidelines",
+          "domain": "casualfilms.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Video brand guidelines pdf",
+        "Video brand guidelines template",
+        "Video brand guidelines examples",
+        "Brand guidelines template",
+        "Brand guidelines examples PDF",
+        "Video guidelines pdf",
+        "Famous brand guidelines",
+        "Brand guideline website"
+      ]
+    },
+    {
+      "id": "vc-manual50-c5-010",
+      "keyword": "accelerator program metrics",
+      "found": true,
+      "query": "accelerator program metrics",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-11T20:49:53.581Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Measuring Accelerator Performance: Potential Metrics and ...",
+          "url": "https://www.kauffman.org/wp-content/uploads/2021/07/Kauffman_Issue-Brief_Measuring-Accelerator-Performance_2020.pdf",
+          "domain": "kauffman.org",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "The Role of Metrics in Designing an Accelerator Programme",
+          "url": "https://www.linkedin.com/pulse/measuring-what-matters-role-metrics-designing-kelechi-achinonu-jffme",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 3,
+          "title": "Measuring Startup Accelerator Program Performance",
+          "url": "https://www.startupblink.com/blog/measuring-startup-accelerator-program-performance/",
+          "domain": "startupblink.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "KPIs for Digital Accelerators: A Critical Review",
+          "url": "https://www.researchgate.net/publication/393408960_KPIs_for_Digital_Accelerators_A_Critical_Review",
+          "domain": "researchgate.net",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Accelerator Program Metrics Made Simple | Built for Impact",
+          "url": "https://www.startupsystems.io/challenge-page/acceleratorprogrammetrics",
+          "domain": "startupsystems.io",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Accelerator: A Success-Fee Analytics Build",
+          "url": "https://kissmetrics.io/accelerator",
+          "domain": "kissmetrics.io",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Key Metrics Top Accelerators Use to Select Winning Startups",
+          "url": "https://contestiva.io/blog/key-metrics-top-accelerators-use-to-select-winning-startups",
+          "domain": "contestiva.io",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "Tracking KPIs in accelerator programs: How to measure ...",
+          "url": "https://www.acterio.com/resources/tracking-kpis-in-accelerator-programs",
+          "domain": "acterio.com",
+          "resultType": "article"
+        },
+        {
+          "position": 9,
+          "title": "Solving the problem of accelerator metrics",
+          "url": "https://medium.com/swlh/solving-the-problem-of-accelerator-metrics-5f6712798f88",
+          "domain": "medium.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What are the top 5 startup accelerators?",
+        "What are program metrics?",
+        "What are some important KPIs for startups?",
+        "How does an accelerator program work?"
+      ],
+      "relatedQueries": []
+    }
+  ]
+}

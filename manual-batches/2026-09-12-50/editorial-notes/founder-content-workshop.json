@@ -1,0 +1,122 @@
+{
+  "id": "vc-manual50-c5-008",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.cmu.edu/teaching/assessment/basics/alignment.html",
+      "supports": "The Eberly Center recommends aligning learning objectives, instructional activities and assessment.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.nsf.gov/funding/initiatives/i-corps/about-teams",
+      "supports": "NSF describes immersive entrepreneurial instruction to help scientists and engineers evaluate commercial opportunity.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What should founders leave a content workshop with?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How long should a founder content workshop last?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can founders attend without a finished product?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: a timed drafting agenda and observable completion states could help cohort facilitators turn a content workshop into usable work. Original-query results mixed an agency name and event listings; competitor page bodies were not examined.",
+  "reviewNotes": [
+    "Original-query SERP record inspected: vc-manual50-c5-008; no PAA observed. Refined query is content creation workshop for startup founders. Agenda and completion states are original examples, not source-derived timing benchmarks.",
+    "Refined-query record inspected in serp-refined-evidence.json, run 1TRKQT0t6mrbtBkVz, dataset sxgEp2jc602xi3TP6. Its general creator-platform and course-selection PAA do not fit a cohort facilitator's workshop task; all three task-specific questions remain editorial."
+  ],
+  "serp": {
+    "id": "vc-manual50-c5-008",
+    "keyword": "content creation workshop for startup founders",
+    "found": true,
+    "query": "content creation workshop for startup founders",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:52:49.425Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "1TRKQT0t6mrbtBkVz",
+    "datasetId": "sxgEp2jc602xi3TP6",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Fully Funded Content Creator Skills Bootcamp",
+        "url": "https://www.another-avenue.co.uk/content-creator-bootcamp",
+        "domain": "another-avenue.co.uk",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Content Creation Training Workshops — SHARE",
+        "url": "https://sharecontent.co.uk/sharetraining",
+        "domain": "sharecontent.co.uk",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Founder Launch",
+        "url": "https://creativehq.co.nz/build-for-founders/founder-launch/",
+        "domain": "creativehq.co.nz",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Startup Workshops",
+        "url": "https://www.baystartup.de/en/startups/startup-workshops",
+        "domain": "baystartup.de",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "the Forge Creator Bootcamp",
+        "url": "https://creators.forgebylevelup.com/",
+        "domain": "creators.forgebylevelup.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Content Creation Bootcamp",
+        "url": "https://workshop.sarahcordiner.com/contentcreationbootcamp",
+        "domain": "workshop.sarahcordiner.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Startup School",
+        "url": "https://startup.google.com/programs/startup-school/",
+        "domain": "startup.google.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Founder Workshops",
+        "url": "https://www.venturemechanics.com/event/founder-workshops",
+        "domain": "venturemechanics.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Is content creation still worth it in 2026?",
+      "What are the 7 steps of content creation?",
+      "What is the best platform to start content creation?",
+      "Which course is best for content creation?"
+    ],
+    "relatedQueries": [
+      "Content creation workshop for startup founders free",
+      "Best content creation workshop for startup founders",
+      "Startup advice",
+      "Startup competitions 2026",
+      "Kiwi startup",
+      "Liam sutton startup aotearoa"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

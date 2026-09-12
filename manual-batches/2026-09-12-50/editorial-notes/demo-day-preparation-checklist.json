@@ -1,0 +1,121 @@
+{
+  "id": "vc-manual50-c2-003",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.ycombinator.com/blog/guide-to-demo-day-pitches/",
+      "supports": "Recommends practice with candid feedback and reviewing recordings.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.w3.org/WAI/media/av/planning/",
+      "supports": "Places accessibility in production planning and describes responsibilities for captions, description, transcripts, and playback.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "When should I start preparing for startup Demo Day?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should be on a Demo Day media checklist?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should I prepare for after the pitch?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: an owner-and-completion-test board can connect pitch preparation, media handoff, and follow-up. Refined startup SERP listings were inspected; competing checklist bodies were not audited.",
+  "reviewNotes": [
+    "Updated primary query startup demo day checklist confirmed in topics.json and serp-refined-evidence.json, record vc-manual50-c2-003, run 1TRKQT0t6mrbtBkVz.",
+    "Refined record contained no PAA; all three FAQs are editorial. Checklist states and completion tests are original recommendations."
+  ],
+  "serp": {
+    "id": "vc-manual50-c2-003",
+    "keyword": "startup demo day checklist",
+    "found": true,
+    "query": "startup demo day checklist",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:52:49.425Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "1TRKQT0t6mrbtBkVz",
+    "datasetId": "sxgEp2jc602xi3TP6",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "From Demo Day to First Meeting: My Demo Day Checklist",
+        "url": "https://cupofzhou.com/from-demo-day-to-first-meeting-my-demo-day-checklist/",
+        "domain": "cupofzhou.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Startup Demo Day Tips And Advice On Nailing the ...",
+        "url": "https://www.linkedin.com/pulse/startup-demo-day-tips-advice-nailing-presentation-kyle-wong",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 3,
+        "title": "Preparing for Demo Day at a Startup Accelerator",
+        "url": "https://journals.openedition.org/rac/35120",
+        "domain": "journals.openedition.org",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Maximizing Deal Flow: Investor Tips for Startup Demo Days",
+        "url": "https://qubit.capital/blog/investor-demo-day-tips",
+        "domain": "qubit.capital",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "What is a Demo Day? A Complete Guide for Startup ...",
+        "url": "https://www.converve.com/event-networking-blog/what-is-a-demo-day-organisers-guide",
+        "domain": "converve.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "How to Prepare for Demo Day: The Complete Founder's ...",
+        "url": "https://rehearsr.com/blog/how-to-prepare-for-demo-day",
+        "domain": "rehearsr.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "13 Ways To Pull Off A Killer Demo Day Presentation",
+        "url": "https://www.onstartups.com/tabid/3339/bid/48317/13-Ways-To-Pull-Off-A-Killer-Demo-Day-Presentation.aspx",
+        "domain": "onstartups.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "GITA Startup Demo Day Agenda | PDF",
+        "url": "https://www.scribd.com/document/245523257/Agenda-Demo-Day",
+        "domain": "scribd.com",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "What Is Demo Day? A Complete Guide for Startup Founders",
+        "url": "https://demodaycheck.vercel.app/blog/what-is-demo-day",
+        "domain": "demodaycheck.vercel.app",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": [
+      "Startup demo day checklist pdf",
+      "Startup demo day checklist 2022",
+      "Startup demo day checklist 2021"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

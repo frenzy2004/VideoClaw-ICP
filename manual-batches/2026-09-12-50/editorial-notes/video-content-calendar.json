@@ -1,0 +1,131 @@
+{
+  "id": "vc-manual50-c4-008",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.google.com/youtube/answer/1270709?hl=en",
+      "supports": "YouTube supports scheduling a private video to become public with a selected date, time and time zone.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.google.com/analytics/answer/10917952?hl=en",
+      "supports": "Campaign parameters identify referral traffic and campaigns; utm_content distinguishes creatives.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "How to create a video content calendar?",
+      "basis": "observed_paa",
+      "query": "video content calendar",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7"
+    },
+    {
+      "question": "What should be in a content calendar?",
+      "basis": "observed_paa",
+      "query": "video content calendar",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7"
+    },
+    {
+      "question": "How often should a team publish video?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: a question-led calendar with production dependencies, review capacity and refresh triggers can add useful planning detail beside https://www.switcherstudio.com/blog/video-content-calendar and https://www.template.net/editable/355328/video-content-calendar. These are observed SERP URLs whose bodies were not inspected.",
+  "reviewNotes": [
+    "The two-week calendar is a fictional planning example, not a recommended posting frequency or performance forecast.",
+    "Observed FAQ wording comes from serp-evidence.json, record vc-manual50-c4-008.",
+    "Scheduling and campaign-parameter mechanics are sourced; planning fields and review routines are original editorial advice."
+  ],
+  "serp": {
+    "id": "vc-manual50-c4-008",
+    "keyword": "video content calendar",
+    "found": true,
+    "query": "video content calendar",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:49:53.581Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Content Calendar templates",
+        "url": "https://www.notion.com/templates/category/content-calendar?srsltid=AfmBOopa3fYD4kqXNHW06OEaDMz62IjvbbhjaR6OejBDfoNyk4CUPcaA",
+        "domain": "notion.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "32 of the Best Free Content Calendar Templates",
+        "url": "https://blog.socialmediastrategiessummit.com/free-content-calendar-templates/",
+        "domain": "blog.socialmediastrategiessummit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Your Complete Guide to Creating a Video Content ...",
+        "url": "https://www.switcherstudio.com/blog/video-content-calendar",
+        "domain": "switcherstudio.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "Video Content Calendar Template in Excel, Google Sheets",
+        "url": "https://www.template.net/editable/355328/video-content-calendar",
+        "domain": "template.net",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "10 Proven Steps For Creating An Effective Video Content ...",
+        "url": "https://firework.com/blog/content-calendar-video-marketing",
+        "domain": "firework.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Free social media content scheduler",
+        "url": "https://www.adobe.com/express/feature/content-scheduler/social-media",
+        "domain": "adobe.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Free Social Media Calendar Template for Marketing Teams ...",
+        "url": "https://asana.com/templates/social-media-calendar",
+        "domain": "asana.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Social Media Planning & Scheduling Tool | Canva Pro",
+        "url": "https://www.canva.com/pro/content-planner/",
+        "domain": "canva.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How to create a video content calendar?",
+      "What is the best free content calendar for social media?",
+      "What should be in a content calendar?",
+      "What is the best app for content calendar management?"
+    ],
+    "relatedQueries": [
+      "Video content calendar template",
+      "Video content calendar template free",
+      "Content calendar template",
+      "Video content calendar free",
+      "Free content calendar template",
+      "Content calendar template Google Sheets",
+      "Social media content calendar template",
+      "Notion content calendar"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

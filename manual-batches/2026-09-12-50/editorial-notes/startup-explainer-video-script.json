@@ -1,0 +1,120 @@
+{
+  "id": "vc-manual50-c1-009",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.ycombinator.com/blog/how-to-pitch-your-company/",
+      "supports": "Michael Seibel recommends concise plain-language company descriptions and walking through the user path when the product is difficult to explain.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.w3.org/WAI/media/av/description/",
+      "supports": "W3C explains integrated description, where necessary visual information is included naturally in the main speaker's script, particularly for instructional material.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What should a startup explainer video script include?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How do you decide the length of an explainer script?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I use the sample script for my own startup?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: provide a complete fictional script plus a narration, visual, and verification worksheet that constrains product claims. Relevant competitor URLs were observed in the campaign SERP, but their page bodies were not assessed for this feature.",
+  "reviewNotes": [
+    "c1-009 peopleAlsoAsk is empty in serp-evidence.json; all FAQs are editorial.",
+    "The complete incident-handoff script is explicitly fictional and contains no claims about an available product.",
+    "The three-column script worksheet and revision sequence are original editorial tools."
+  ],
+  "serp": {
+    "id": "vc-manual50-c1-009",
+    "keyword": "startup explainer video script",
+    "found": true,
+    "query": "startup explainer video script",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:49:53.581Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How to write the perfect script for any explainer video",
+        "url": "https://www.reddit.com/r/startups/comments/8ctd0b/how_to_write_the_perfect_script_for_any_explainer/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "How to Write an Explainer Video Script",
+        "url": "https://leadde.ai/blog/write-explainer-video-script",
+        "domain": "leadde.ai",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "Explainer video script? No problem | by Róisín O'Toole",
+        "url": "https://uxplanet.org/explainer-video-script-no-problem-7080876a8af3",
+        "domain": "uxplanet.org",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "5 Parts Every Explainer Video Script Needs",
+        "url": "https://grumomedia.com/5-parts-every-explainer-video-script-needs/",
+        "domain": "grumomedia.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Free Online Explainer Video Maker",
+        "url": "https://www.canva.com/create/explainer-videos/",
+        "domain": "canva.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "5 Steps to Crafting High-Impact Explainer Video Scripts",
+        "url": "https://www.punchystudio.com.au/blog/5-steps-to-crafting-explainer-video-scripts/",
+        "domain": "punchystudio.com.au",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Explainer video scripts examples - VoiceTalks",
+        "url": "https://voice123.com/blog/voice-over-scripts/explainer-video-scripts/",
+        "domain": "voice123.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "Free AI Explainer Video Script Generator",
+        "url": "https://app.gravitywrite.com/tools/explainer-video-script",
+        "domain": "app.gravitywrite.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": [
+      "Startup explainer video script template",
+      "Startup explainer video script example",
+      "Explainer videos for business",
+      "Powtoon explainer video",
+      "Adobe Express explainer video",
+      "How to make 2D explainer video",
+      "Biteable explainer video",
+      "Audio to explainer video ai"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

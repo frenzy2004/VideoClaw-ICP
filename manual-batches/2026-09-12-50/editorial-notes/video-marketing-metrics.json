@@ -1,0 +1,122 @@
+{
+  "id": "vc-manual50-c4-009",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.google.com/youtube/answer/9314415?hl=en",
+      "supports": "Retention dips can mark skipping or abandonment; spikes can reflect rewatching or sharing and may indicate unclear content.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.google.com/analytics/answer/10917952?hl=en",
+      "supports": "Campaign parameters identify referral traffic and campaigns; utm_content distinguishes creatives.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "How to measure the success of video marketing?",
+      "basis": "observed_paa",
+      "query": "video marketing metrics",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7"
+    },
+    {
+      "question": "Does a retention spike mean a video section performed well?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can tagged video links prove that a video caused a sale?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: joining an asset's job, metric denominator, observation window and accepted-production effort can add decision value beside https://crewscontrol.com/blog-central/the-8-most-important-video-marketing-kpis-to-track-your-performance/ and https://www.vyond.com/blog/video-marketing-metrics-why-they-matter/. The result bodies were not inspected, so no verified coverage gap is asserted.",
+  "reviewNotes": [
+    "Observed FAQ wording comes from serp-evidence.json, record vc-manual50-c4-009. Unrelated marketing-rule questions were not adopted.",
+    "No performance benchmarks, revenue attribution results or invented metrics are reported; the example is fictional and has no numerical results.",
+    "Accepted-output and review-effort ratios are original definitions; the body addresses a zero accepted-output denominator."
+  ],
+  "serp": {
+    "id": "vc-manual50-c4-009",
+    "keyword": "video marketing metrics",
+    "found": true,
+    "query": "video marketing metrics",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:49:53.581Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "The 8 Most Important Video Marketing KPIs to Track Your ...",
+        "url": "https://crewscontrol.com/blog-central/the-8-most-important-video-marketing-kpis-to-track-your-performance/",
+        "domain": "crewscontrol.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Video marketing metrics and KPIs",
+        "url": "https://www.intraconmarketingsolutions.com/en/insights/metrics-kpi-video-marketing/",
+        "domain": "intraconmarketingsolutions.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "Video Marketing Metrics: What They Are, How to Measure ...",
+        "url": "https://www.sona.com/blog/video-marketing-metrics-what-they-are-how-to-measure-and-why-they-matter/",
+        "domain": "sona.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "6 Video Marketing Metrics & Why They Matter",
+        "url": "https://www.vyond.com/blog/video-marketing-metrics-why-they-matter/",
+        "domain": "vyond.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Key Video Marketing Metrics of 2026: What to Watch",
+        "url": "https://animoto.com/blog/video-marketing/key-video-marketing-metrics",
+        "domain": "animoto.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "How To Measure Your Video Marketing Success And ...",
+        "url": "https://www.forbes.com/councils/forbesagencycouncil/2025/02/14/how-to-measure-your-video-marketing-success-and-performance/",
+        "domain": "forbes.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Top 10 Video Marketing Metrics You Should Actually Track",
+        "url": "https://www.adverity.com/blog/top-10-video-marketing-metrics-you-should-actually-track",
+        "domain": "adverity.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "Video Marketing Metrics Every B2B SaaS Team Should Track",
+        "url": "https://thehigherpitch.com/blogs/video-marketing-success-metrics-b2b-saas/",
+        "domain": "thehigherpitch.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is the 3-3-3 rule in marketing?",
+      "What are some good marketing metrics?",
+      "How to measure the success of video marketing?",
+      "What is the 70/20/10 rule in marketing?"
+    ],
+    "relatedQueries": [
+      "Video marketing metrics pdf",
+      "Video marketing metrics examples"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

@@ -1,0 +1,129 @@
+{
+  "id": "vc-manual50-c3-010",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf",
+      "supports": "NIST AI 600-1 describes confabulation and recommends empirical capability evaluation; MS-2.5-001 cautions against generalizing from narrow or anecdotal assessments.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.w3.org/WAI/media/av/captions/",
+      "supports": "W3C says automatic captions require confirmation of full accuracy and describes speech plus relevant non-speech audio as caption content.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What are the limitations of AI videos?",
+      "basis": "observed_paa",
+      "query": "AI video editing limitations",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7"
+    },
+    {
+      "question": "Can I let AI edit my video?",
+      "basis": "observed_paa",
+      "query": "AI video editing limitations",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7"
+    },
+    {
+      "question": "How can I tell whether an AI editing result is ready to use?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: a challenge-case worksheet with acceptance conditions and distinct unsupported, unsuitable, and untested outcomes may help buyers beyond broad AI pros-and-cons lists. Competitor bodies were not inspected.",
+  "reviewNotes": [
+    "SERP row vc-manual50-c3-010 checked. First and second FAQ questions exactly match observed PAA in the shared Apify dataset; third is editorial.",
+    "Challenge cases, acceptance conditions, and operating boundaries are original proposed tests, not executed benchmarks. Examples are fictional; no tool-wide defect rate, replacement prediction, or savings claim is made."
+  ],
+  "serp": {
+    "id": "vc-manual50-c3-010",
+    "keyword": "AI video editing limitations",
+    "found": true,
+    "query": "AI video editing limitations",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:49:53.581Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "The Pros and Cons of AI Video Editing",
+        "url": "https://cutback.video/blog/ai-video-editing-pros-and-cons",
+        "domain": "cutback.video",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "What are the limitations of video generation AI ...",
+        "url": "https://www.reddit.com/r/AI_Agents/comments/1txgssb/what_are_the_limitations_of_video_generation_ai/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "What Are the Limitations of Current AI Video Generation?",
+        "url": "https://www.roboneo.com/blog/limitations-of-ai-video-generation",
+        "domain": "roboneo.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "The Promise, the Pitfalls and the Price: How AI Video ...",
+        "url": "https://crewscontrol.com/blog-central/the-promise-the-pitfalls-and-the-price-how-ai-video-generation-really-differs-from-traditional-video-editing/",
+        "domain": "crewscontrol.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "8 Reasons AI Video Editing Still Requires a Specialist",
+        "url": "https://www.lemonlight.com/blog/8-reasons-ai-video-editing-still-requires-a-specialist/",
+        "domain": "lemonlight.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "AI Video Editing Mistakes to Avoid in 2026",
+        "url": "https://try.wideframe.com/blog/ai-video-editing-mistakes-to-avoid",
+        "domain": "try.wideframe.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "What are the limits of AI in creating realistic videos? Any ...",
+        "url": "https://www.quora.com/What-are-the-limits-of-AI-in-creating-realistic-videos-Any-other-information-about-AI-is-highly-appreciated",
+        "domain": "quora.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "How to Navigate AI Video Generation Limitations in 2026",
+        "url": "https://is4.ai/blog/our-blog-1/ai-video-generation-limitations-traditional-methods-2026-357",
+        "domain": "is4.ai",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What are the limitations of AI videos?",
+      "Is AI good for video editing?",
+      "Can I let AI edit my video?",
+      "Will AI make video editors obsolete?"
+    ],
+    "relatedQueries": [
+      "Ai video editing limitations reddit",
+      "Ai video editing limitations ios",
+      "AI video generator",
+      "Free AI video generator",
+      "Grok AI",
+      "Invideo AI",
+      "Kling AI"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}
