@@ -1,0 +1,119 @@
+{
+  "id": "vc-manual50-c1-007",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.gov.uk/service-manual/user-research/using-in-depth-interviews",
+      "supports": "The guide recommends open neutral questions, follow-ups, and concrete stories rather than generalities; its original context is user research.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
+      "supports": "Endorsements must reflect honest opinions; objective claims, unexpected material connections, exceptional results, and advance expectations of benefit require context-sensitive review.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What are some good questions to ask when interviewing for a testimonial video?",
+      "basis": "observed_paa",
+      "query": "customer testimonial video questions",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7"
+    },
+    {
+      "question": "What is a testimonial video example?",
+      "basis": "observed_paa",
+      "query": "customer testimonial video questions",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7"
+    },
+    {
+      "question": "How to do a video testimonial?",
+      "basis": "observed_paa",
+      "query": "customer testimonial video questions",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7"
+    }
+  ],
+  "competitorGap": "Scoped observation: Capsule's inspected customer-video-testimonials article explicitly encourages leading questions and discusses incentives. This article supplies neutral follow-ups, evidence classification, and participation-context review. Broader SERP differentiation remains a hypothesis.",
+  "reviewNotes": [
+    "All three FAQ questions exactly match c1-007 peopleAlsoAsk in serp-evidence.json; run VMTK8QQ0C4Cf7WZXf, dataset MexeNaX1RsSZJmAZ7.",
+    "Competitor body inspected: https://capsule.video/blog/customer-video-testimonials. Its promotional claims and incentive recommendations were not adopted.",
+    "The fictional interview example contains no numerical customer result. GOV.UK research guidance is explicitly adapted to question design.",
+    "FTC statements are general guidance; the body directs context-specific publication questions to the relevant reviewer."
+  ],
+  "serp": {
+    "id": "vc-manual50-c1-007",
+    "keyword": "customer testimonial video questions",
+    "found": true,
+    "query": "customer testimonial video questions",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:49:53.581Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "36 Best Client Video Testimonial Questions [+ Example ...",
+        "url": "https://thriveagency.com/news/36-best-questions-to-ask-for-client-video-testimonials-examples/",
+        "domain": "thriveagency.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "5 Killer Questions to Ask for Customer Video Testimonials",
+        "url": "https://capsule.video/blog/customer-video-testimonials",
+        "domain": "capsule.video",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "10 Great Interview Questions for Testimonial Videos",
+        "url": "https://www.stagedge.com/blog/10-great-questions-testimonial-interview-videos",
+        "domain": "stagedge.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "Testimonial Questions Reps Need to Ask Their Customers",
+        "url": "https://blog.hubspot.com/service/testimonial-questions",
+        "domain": "blog.hubspot.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "25 Questions To Ask for High-Quality Customer Testimonials",
+        "url": "https://www.indeed.com/career-advice/career-development/questions-for-testimonials",
+        "domain": "indeed.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Customer Testimonial Videos That Convert: 10 Inspirational ...",
+        "url": "https://creativa.com.au/customer-testimonial-videos-that-convert-10-inspirational-examples/",
+        "domain": "creativa.com.au",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Best [25+] Questions for Video Testimonials: The 2024 Guide",
+        "url": "https://usetrust.io/blog/best-questions-for-video-testimonials/",
+        "domain": "usetrust.io",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What are some good questions to ask when interviewing for a testimonial video?",
+      "What are the best questions to ask for testimonials?",
+      "What is a testimonial video example?",
+      "How to do a video testimonial?"
+    ],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

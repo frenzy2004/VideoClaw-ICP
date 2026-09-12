@@ -1,0 +1,133 @@
+{
+  "id": "vc-manual50-c2-010",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.ycombinator.com/blog/how-to-raise-a-seed-round/",
+      "supports": "Describes a slide deck that is coherent as a leave-behind for investors.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.ycombinator.com/video/",
+      "supports": "Separates the founder application video from product demo material and specifies founders speaking in the former.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://sequoiacap.com/article/writing-a-business-plan",
+      "supports": "Pitch-planning guidance includes problem, alternatives, business model, team, and vision.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What is the purpose of a pitch deck?",
+      "basis": "observed_paa",
+      "query": "pitch deck vs pitch video",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7"
+    },
+    {
+      "question": "Should I send investors a deck or a video?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can one video serve as an application, pitch, and product demo?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: a recipient-task comparison and shared-facts handoff map offer a neutral way to choose formats. Observed search listings were inspected; competing comparison-page bodies were not audited.",
+  "reviewNotes": [
+    "First FAQ wording observed in serp-evidence.json, record vc-manual50-c2-010, run VMTK8QQ0C4Cf7WZXf. Other FAQs are editorial.",
+    "Format comparison and handoff map are original editorial tools; no claim that one format has a superior conversion rate. Purchasing-startup example is fictional.",
+    "YC application-video requirements are explicitly limited to that application context."
+  ],
+  "serp": {
+    "id": "vc-manual50-c2-010",
+    "keyword": "pitch deck vs pitch video",
+    "found": true,
+    "query": "pitch deck vs pitch video",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:49:53.581Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How to Make a Pitch Deck (Examples and Tips)",
+        "url": "https://www.canva.com/presentations/pitch-deck/",
+        "domain": "canva.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "What's better for pitching an investor, slide deck or video?",
+        "url": "https://www.quora.com/Whats-better-for-pitching-an-investor-slide-deck-or-video",
+        "domain": "quora.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Let's face it, it's time to upgrade the Pitch Deck to a Pitch Video",
+        "url": "https://www.startuphacks.vc/blog/2016/09/27/lets-face-it-it-is-time-to-upgrade-the-pitch-deck-to-pitch-video",
+        "domain": "startuphacks.vc",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "What is a Pitch Deck? Meaning, Example, and Guide",
+        "url": "https://slidebean.com/blog/what-is-a-pitch-deck-presentation-meaning",
+        "domain": "slidebean.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "How to Use Video in Your Pitch Deck: The Definitive Guide",
+        "url": "https://startupfundraising.com/library/articles/how-to-embed-a-video-in-a-pitch-deck",
+        "domain": "startupfundraising.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Pitch decks vs video pitches: which one is more effective?",
+        "url": "https://www.linkedin.com/posts/sabooashish_pitch-decks-vs-video-pitches-%F0%9D%98%81%F0%9D%97%B5%F0%9D%97%B2%F0%9D%97%BF%F0%9D%97%B2-activity-7396600840981098496-fYPj",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 7,
+        "title": "Ask a VC: what is a good pitch deck? - Medium",
+        "url": "https://rodrigo.medium.com/ask-a-vc-what-is-a-good-pitch-deck-790f7077fb95",
+        "domain": "rodrigo.medium.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Why corporate videos are the new investor pitch deck",
+        "url": "https://mahne.com/why-corporate-videos-are-the-new-investor-pitch-deck/",
+        "domain": "mahne.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is the difference between a pitch deck and a pitch deck?",
+      "Is a pitch deck just a PowerPoint?",
+      "What is the 10/20/30 rule for pitch deck?",
+      "What is the purpose of a pitch deck?"
+    ],
+    "relatedQueries": [
+      "Pitch deck vs pitch video template",
+      "Pitch deck vs pitch video examples",
+      "Pitch deck video",
+      "Pitch deck template",
+      "Pitch deck PDF free download",
+      "Pitch deck vs proposal",
+      "Pitch deck examples",
+      "Best pitch deck"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

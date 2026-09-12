@@ -1,0 +1,137 @@
+{
+  "id": "vc-manual50-c2-008",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.ycombinator.com/blog/how-to-raise-a-seed-round/",
+      "supports": "Emphasizes clarity about next steps when leaving investor meetings.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://toolkit.techstars.com/master-your-pitch",
+      "supports": "Recommends acknowledging unknown answers and following up with researched information.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What should I include in an email follow-up after a meeting?",
+      "basis": "observed_paa",
+      "query": "investor follow up email after demo day",
+      "runId": "1TRKQT0t6mrbtBkVz",
+      "datasetId": "sxgEp2jc602xi3TP6"
+    },
+    {
+      "question": "How do you politely send a follow-up email?",
+      "basis": "observed_paa",
+      "query": "investor follow up email after demo day",
+      "runId": "1TRKQT0t6mrbtBkVz",
+      "datasetId": "sxgEp2jc602xi3TP6"
+    },
+    {
+      "question": "Should I include a pitch video in every investor follow-up?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: request-specific email examples tied to evidence ownership and asset selection offer a useful angle. Refined SERP listings were inspected; competing email-template bodies were not audited.",
+  "reviewNotes": [
+    "Updated primary query investor follow up email after demo day confirmed in topics.json and serp-refined-evidence.json, record vc-manual50-c2-008, run 1TRKQT0t6mrbtBkVz.",
+    "First two FAQ questions are exact observed PAA in the refined record. Third FAQ is editorial.",
+    "All three email examples and the request log are original templates with placeholders. No messages were sent and no universal follow-up cadence or response-rate claim is made."
+  ],
+  "serp": {
+    "id": "vc-manual50-c2-008",
+    "keyword": "investor follow up email after demo day",
+    "found": true,
+    "query": "investor follow up email after demo day",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:52:49.425Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "1TRKQT0t6mrbtBkVz",
+    "datasetId": "sxgEp2jc602xi3TP6",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "7 Investor Follow-Up Email Templates for Founders",
+        "url": "https://www.evalyze.ai/blog/7-investor-follow-up-emails",
+        "domain": "evalyze.ai",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "How to Track Investor Follow-ups After Demo Day",
+        "url": "https://www.converve.com/event-networking-blog/track-investor-follow-ups-after-demo-day",
+        "domain": "converve.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Follow-Up Techniques For After A Sales Demo",
+        "url": "https://www.linkedin.com/top-content/sales/mastering-the-art-of-follow-up/follow-up-techniques-for-after-a-sales-demo/",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 4,
+        "title": "Investor Outreach Emails: Templates That Get Replies",
+        "url": "https://qubit.capital/blog/investor-outreach-email-template",
+        "domain": "qubit.capital",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "How soon after sending out an initial email to investors do I ...",
+        "url": "https://www.quora.com/How-soon-after-sending-out-an-initial-email-to-investors-do-I-follow-up-with-a-phone-call",
+        "domain": "quora.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "How to Follow-Up After an Investor Meeting - Ash Rust - Medium",
+        "url": "https://ashrust.medium.com/how-to-follow-up-after-an-investor-meeting-a15da5e4163f",
+        "domain": "ashrust.medium.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "29 Investor, Fundraising & Startup Email Templates for ...",
+        "url": "https://blog.foundersuite.com/29-investor-fundraising-startup-email-templates-for-founders/",
+        "domain": "blog.foundersuite.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Post-Demo Follow-Up Email Templates That Actually Convert",
+        "url": "https://www.apollo.io/templates/post-demo-follow-up-email-templates",
+        "domain": "apollo.io",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "Email Follow-Up After an Investor Meeting | First Follow-Up",
+        "url": "https://www.basetemplates.com/investor-email-templates/email-follow-up-after-an-investor-meeting-first-follow-up",
+        "domain": "basetemplates.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What should I include in an email follow-up after a meeting?",
+      "How do you politely send a follow-up email?",
+      "How do you professionally say follow up after no response sample?",
+      "How to follow up after an introduction email?"
+    ],
+    "relatedQueries": [
+      "Investor follow up email after demo day template",
+      "Investor follow up email after demo day sample",
+      "Investor follow up email after demo day example",
+      "Investor follow up email after demo day subject",
+      "Email to investor for funding sample",
+      "How to follow up with investors",
+      "Investor outreach email"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

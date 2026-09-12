@@ -1,0 +1,121 @@
+{
+  "id": "vc-manual50-c1-006",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.sba.gov/counseling/manage-your-business/",
+      "supports": "The marketing section connects audience, goals, action plans, budget, and measurement, and recommends maintaining the plan.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.producthunt.com/launch",
+      "supports": "The guide says the best launch day is the day the maker is prepared and includes community development beyond launch day.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What should a product launch content calendar include?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Do you need to post a new video every day during a launch?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should change in the calendar if the launch is delayed?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: a two-week sequence that includes internal production days, release dependencies, buyer questions, and a delay plan. The observed SERP includes calendar templates; a Stackby page retrieval was unstable, so no absence claim is made about its full contents.",
+  "reviewNotes": [
+    "c1-006 peopleAlsoAsk is empty in serp-evidence.json; all FAQs are editorial.",
+    "The fourteen-day schedule and dependency rules are original recommendations, not platform timing rules or performance benchmarks.",
+    "Stackby competitor page was opened but a subsequent retrieval failed; competitorGap remains a hypothesis.",
+    "SBA's older marketing-sales URL redirected to the current manage-your-business page; the marketing section was inspected."
+  ],
+  "serp": {
+    "id": "vc-manual50-c1-006",
+    "keyword": "product launch content calendar",
+    "found": true,
+    "query": "product launch content calendar",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:49:53.581Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Product Launch Calendar",
+        "url": "https://www.pinterest.com/ideas/product-launch-calendar/941883861744/",
+        "domain": "pinterest.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Social media calendar: Free templates and how-to guide",
+        "url": "https://www.canva.com/sheets/social-media-calendar/",
+        "domain": "canva.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Product Launch Calendar - Free Product Template",
+        "url": "https://stackby.com/templates/product-launch-calendar",
+        "domain": "stackby.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Top 10 Content Calendar Templates for Product Marketing ...",
+        "url": "https://www.notion.com/templates/collections/top-10-content-calendar-templates-for-product-marketing-managers?srsltid=AfmBOooS-8rCFi-v0RacXFtJ5IEdL4yxMuc9JxQ09olS_AX-CiQUijTx",
+        "domain": "notion.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Designing Your Content Marketing Editorial Calendar ...",
+        "url": "https://nytlicensing.com/latest/methods/designing-content-marketing-editorial-calendar/",
+        "domain": "nytlicensing.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Content Calendar: Definition, Examples & Uses",
+        "url": "https://www.launchnotes.com/glossary/content-calendar-in-product-management-and-operations",
+        "domain": "launchnotes.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Content Marketing Strategy: Plan Your Content Calendar In ...",
+        "url": "https://www.blogmarketingacademy.com/annual-content-marketing-calendar/",
+        "domain": "blogmarketingacademy.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "CoSchedule: The Social Media Calendar That Does It All",
+        "url": "https://coschedule.com/",
+        "domain": "coschedule.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": [
+      "Product launch content calendar template",
+      "Product launch content calendar template free",
+      "Product launch content calendar free",
+      "Product launch content calendar pdf",
+      "Simple social media calendar template",
+      "Social media calendar platform",
+      "Hootsuite social media calendar template",
+      "Social media calendar websites"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

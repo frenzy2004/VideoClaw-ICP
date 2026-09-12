@@ -1,0 +1,129 @@
+{
+  "id": "vc-manual50-c5-010",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.kauffman.org/reports/measuring-accelerator-performance/",
+      "supports": "The report introduction explains that accelerator stakeholders can have different objectives for performance measurement.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.google.com/analytics/answer/9267568?hl=en",
+      "supports": "A collected event can be marked as a key event to measure a business-important action.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.google.com/youtube/answer/9314415?hl=en",
+      "supports": "Retention spikes may reflect rewatching or sharing, including rewatching because a section was unclear; dips indicate skipping or departure.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What are program metrics?",
+      "basis": "observed_paa",
+      "query": "accelerator program metrics",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7"
+    },
+    {
+      "question": "Should an accelerator combine video views across platforms?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How should missing company follow-up be reported?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: a media-service metric dictionary and worked cohort denominator example can connect accelerator reporting to specific operating decisions. Kauffman's report introduction and official analytics pages were inspected; no exhaustive competing-page review is claimed.",
+  "reviewNotes": [
+    "Original-query SERP record inspected: vc-manual50-c5-010; exact program-metrics PAA retained. All cohort figures and calculated percentages are explicitly fictional. Kauffman HTML report introduction was opened and inspected; its oversized PDF failed retrieval and is not claimed as read. No causal financial or business-performance claim is made."
+  ],
+  "serp": {
+    "id": "vc-manual50-c5-010",
+    "keyword": "accelerator program metrics",
+    "found": true,
+    "query": "accelerator program metrics",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:49:53.581Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Measuring Accelerator Performance: Potential Metrics and ...",
+        "url": "https://www.kauffman.org/wp-content/uploads/2021/07/Kauffman_Issue-Brief_Measuring-Accelerator-Performance_2020.pdf",
+        "domain": "kauffman.org",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "The Role of Metrics in Designing an Accelerator Programme",
+        "url": "https://www.linkedin.com/pulse/measuring-what-matters-role-metrics-designing-kelechi-achinonu-jffme",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 3,
+        "title": "Measuring Startup Accelerator Program Performance",
+        "url": "https://www.startupblink.com/blog/measuring-startup-accelerator-program-performance/",
+        "domain": "startupblink.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "KPIs for Digital Accelerators: A Critical Review",
+        "url": "https://www.researchgate.net/publication/393408960_KPIs_for_Digital_Accelerators_A_Critical_Review",
+        "domain": "researchgate.net",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Accelerator Program Metrics Made Simple | Built for Impact",
+        "url": "https://www.startupsystems.io/challenge-page/acceleratorprogrammetrics",
+        "domain": "startupsystems.io",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Accelerator: A Success-Fee Analytics Build",
+        "url": "https://kissmetrics.io/accelerator",
+        "domain": "kissmetrics.io",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Key Metrics Top Accelerators Use to Select Winning Startups",
+        "url": "https://contestiva.io/blog/key-metrics-top-accelerators-use-to-select-winning-startups",
+        "domain": "contestiva.io",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "Tracking KPIs in accelerator programs: How to measure ...",
+        "url": "https://www.acterio.com/resources/tracking-kpis-in-accelerator-programs",
+        "domain": "acterio.com",
+        "resultType": "article"
+      },
+      {
+        "position": 9,
+        "title": "Solving the problem of accelerator metrics",
+        "url": "https://medium.com/swlh/solving-the-problem-of-accelerator-metrics-5f6712798f88",
+        "domain": "medium.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What are the top 5 startup accelerators?",
+      "What are program metrics?",
+      "What are some important KPIs for startups?",
+      "How does an accelerator program work?"
+    ],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

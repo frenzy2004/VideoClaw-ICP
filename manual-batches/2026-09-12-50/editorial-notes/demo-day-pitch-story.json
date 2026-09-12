@@ -1,0 +1,123 @@
+{
+  "id": "vc-manual50-c2-001",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.ycombinator.com/blog/guide-to-demo-day-pitches/",
+      "supports": "Frames Demo Day as earning another meeting; recommends practice and generally discourages embedded video in a live pitch.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://sequoiacap.com/article/writing-a-business-plan",
+      "supports": "Includes customer problems, market potential, alternatives, business model, and team among pitch-planning prompts.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.ycombinator.com/blog/how-to-design-a-better-pitch-deck/",
+      "supports": "Emphasizes legibility and giving each slide one main idea.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What does \"demo day\" mean?",
+      "basis": "observed_paa",
+      "query": "demo day pitch",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7"
+    },
+    {
+      "question": "What should I include in a Demo Day pitch?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should I play a video during a live Demo Day pitch?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: a story-to-evidence worksheet and listener-comprehension test offer a useful applied angle. YC's ranking guide was inspected; other competing page bodies were not audited.",
+  "reviewNotes": [
+    "First FAQ wording observed in serp-evidence.json, record vc-manual50-c2-001, run VMTK8QQ0C4Cf7WZXf. Other FAQs are editorial. faqBasis evidence URLs support answers; local SERP records retain question provenance.",
+    "Story worksheet and comprehension exercise are original editorial recommendations. No promise of fundraising or ranking outcomes."
+  ],
+  "serp": {
+    "id": "vc-manual50-c2-001",
+    "keyword": "demo day pitch",
+    "found": true,
+    "query": "demo day pitch",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:49:53.581Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "A Guide to Demo Day Presentations",
+        "url": "https://www.ycombinator.com/blog/guide-to-demo-day-pitches/",
+        "domain": "ycombinator.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "What is a Startup Demo Day? Template and Example",
+        "url": "https://slidebean.com/blog/startup-demo-day-pitch-deck",
+        "domain": "slidebean.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "A great demo day pitch | PDF",
+        "url": "https://www.slideshare.net/slideshow/a-great-demo-day-pitch/47347335",
+        "domain": "slideshare.net",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Pitch Smarter with Demo Day Pro | Startup Pitch Platform",
+        "url": "https://demoday.pro/",
+        "domain": "demoday.pro",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "What Investors Look For At Demo Day",
+        "url": "https://www.antler.co/blog/what-investors-look-for-in-startup-pitch",
+        "domain": "antler.co",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "The Ultimate Cheat Sheet for a Winning Demo Day",
+        "url": "https://www.linkedin.com/pulse/ultimate-cheat-sheet-winning-demo-day-competition-pitch-donna-griffit",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 7,
+        "title": "How to create a 3-minute demo day pitch deck",
+        "url": "https://vip.graphics/demo-day-pitch-formula/?srsltid=AfmBOooeCP4n6ACz6qVPTqz5UVyAFTXg5RkMg73n3E3vqFXi1QTzsXa5",
+        "domain": "vip.graphics",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "What is a Demo Day? A Complete Guide for Startup ...",
+        "url": "https://www.converve.com/event-networking-blog/what-is-a-demo-day-organisers-guide",
+        "domain": "converve.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What does \"demo day\" mean?",
+      "What are some good pitch ideas?",
+      "What is the 10/20/30 rule for pitch decks?",
+      "How to pitch your startup in 30 seconds?"
+    ],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

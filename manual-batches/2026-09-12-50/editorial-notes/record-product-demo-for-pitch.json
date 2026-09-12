@@ -1,0 +1,128 @@
+{
+  "id": "vc-manual50-c2-006",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.apple.com/en-us/102618",
+      "supports": "Documents Shift-Command-5, screen-capture area controls, microphone selection in Options, and stopping capture; some controls depend on macOS version.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.w3.org/WAI/media/av/captions/",
+      "supports": "Says automatic captions require accuracy confirmation and often editing.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What is the best way to record a demo?",
+      "basis": "observed_paa",
+      "query": "record a product demo",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7"
+    },
+    {
+      "question": "Can I record a product demo with the Mac's built-in tools?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should I narrate while recording or add voiceover later?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: a repeatable reset-and-capture sheet plus final-file review serves founders preparing a specific pitch workflow. SERP listings were inspected; competing tool-page bodies were not audited.",
+  "reviewNotes": [
+    "First FAQ wording observed in serp-evidence.json, record vc-manual50-c2-006, run VMTK8QQ0C4Cf7WZXf. Other FAQs are editorial.",
+    "Apple details apply only to the documented native tools and are not claims about VideoClaw. No claim that microphone capture includes all internal application audio.",
+    "Customer-support product and capture-sheet example are fictional; review sequence is original editorial advice."
+  ],
+  "serp": {
+    "id": "vc-manual50-c2-006",
+    "keyword": "record a product demo",
+    "found": true,
+    "query": "record a product demo",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:49:53.581Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Create Product Demo Videos",
+        "url": "https://screen.studio/create/product-demo-videos",
+        "domain": "screen.studio",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Screen Recorder For Product Demos",
+        "url": "https://www.tella.com/record/screen-recorder-product-demo",
+        "domain": "tella.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Product demo video maker",
+        "url": "https://clipchamp.com/en/demo-video/",
+        "domain": "clipchamp.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "How to create a cool demo video for your SaaS: a step-by- ...",
+        "url": "https://www.reddit.com/r/SaaS/comments/17p6eoa/how_to_create_a_cool_demo_video_for_your_saas_a/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Record Clear Product Demos videos with Loom",
+        "url": "https://www.atlassian.com/software/loom/resources/guides/use-cases/product-demo",
+        "domain": "atlassian.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "New Product Demos",
+        "url": "https://www.loom.com/community/product-demo",
+        "domain": "loom.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Best Demo Recording Software for Product Demos in 2026",
+        "url": "https://www.howdygo.com/blog/demo-recording-software",
+        "domain": "howdygo.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "Supademo: AI Interactive Product Demos",
+        "url": "https://supademo.com/",
+        "domain": "supademo.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is the best way to record a demo?",
+      "What is the best software to record product demos?",
+      "What is the best tool to create product demos?",
+      "How to do a product demo?"
+    ],
+    "relatedQueries": [
+      "Record a product demo online",
+      "Record a product demo free",
+      "Product demo video maker free",
+      "Product demo video examples",
+      "Create product demo videos",
+      "How to make demo video for teaching",
+      "Product demo video maker AI free",
+      "Product demo video with AI"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

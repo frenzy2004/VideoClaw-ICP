@@ -1,0 +1,126 @@
+{
+  "id": "vc-manual50-c1-008",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.opm.gov/policy-data-oversight/assessment-and-selection/other-assessment-methods/realistic-job-previews/",
+      "supports": "OPM describes previews that communicate favorable and difficult job aspects to support candidate self-evaluation; its setting is government recruitment.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.w3.org/WAI/media/av/planning/",
+      "supports": "W3C recommends planning captions, visual description, transcripts, and accessible player responsibilities during media production.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "How can I create a recruitment video?",
+      "basis": "observed_paa",
+      "query": "startup recruitment video",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7"
+    },
+    {
+      "question": "Should a startup recruitment video show difficult aspects of the job?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can a recruitment video replace the job description?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Scoped observation: the inspected AssessFirst result for the refined query discusses automated interviews and promotes an assessment product. This article serves the narrower employer-produced role-preview job with task scenes and expectation checks. No claim is made about all competing results.",
+  "reviewNotes": [
+    "Primary query updated to 'how to make a recruitment video'; existing title, slug, and article scope retained.",
+    "Observed FAQ exactly matches c1-008 in serp-refined-evidence.json; run 1TRKQT0t6mrbtBkVz, dataset sxgEp2jc602xi3TP6.",
+    "Competitor body inspected: https://www.assessfirst.com/en/blog/how-to-make-a-recruitment-video-that-works. No engagement, bias, hiring, or product claims imported.",
+    "OPM is identified as government guidance adapted to communication design; no startup retention benefit is asserted.",
+    "The customer-operations role worksheet is fictional, not a real vacancy."
+  ],
+  "serp": {
+    "id": "vc-manual50-c1-008",
+    "keyword": "how to make a recruitment video",
+    "found": true,
+    "query": "how to make a recruitment video",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:52:49.425Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "1TRKQT0t6mrbtBkVz",
+    "datasetId": "sxgEp2jc602xi3TP6",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How to make a recruitment video that works",
+        "url": "https://www.assessfirst.com/en/blog/how-to-make-a-recruitment-video-that-works",
+        "domain": "assessfirst.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "Create Recruitment Videos Online for Free with Templates",
+        "url": "https://www.flexclip.com/create/recruitment-video.html",
+        "domain": "flexclip.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "10 Recruitment Video Ideas That Attract Better Candidates ...",
+        "url": "https://leadde.ai/blog/recruitment-video-ideas",
+        "domain": "leadde.ai",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "3 AI video templates to create standout recruitment videos",
+        "url": "https://storykit.io/blog/recruitment-videos",
+        "domain": "storykit.io",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Recruitment Video Examples & Complete Guide for 2026",
+        "url": "https://vidcruiter.com/video-interviewing/recruitment-videos/",
+        "domain": "vidcruiter.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "9 Practices to Create Great Recruitment Videos",
+        "url": "https://www.shineinterview.com/9-practices-to-create-great-recruitment-videos/",
+        "domain": "shineinterview.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Recruitment Video Maker with Easy Video Templates",
+        "url": "https://playplay.com/create/recruitment-video",
+        "domain": "playplay.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "9 Ways to Feature Your Recruitment Video",
+        "url": "https://www.indeed.com/hire/c/info/recruiting-videos",
+        "domain": "indeed.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How can I create a recruitment video?",
+      "What are the 5 C's of recruitment?",
+      "How to create a recruitment video for TikTok?",
+      "How to create a video for an interview?"
+    ],
+    "relatedQueries": [
+      "How to make a recruitment video template",
+      "How to make a recruitment video on youtube",
+      "How to make a recruitment video free",
+      "Frat rush video template"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

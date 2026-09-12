@@ -1,0 +1,130 @@
+{
+  "id": "vc-manual50-c5-002",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://a16z.com/enterprise/",
+      "supports": "The Enterprise operating team describes providing portfolio founders with expertise, insights and an expert network.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.nist.gov/privacy-framework",
+      "supports": "NIST describes its Privacy Framework as a voluntary tool for identifying and managing privacy risk.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What is a venture capital portfolio?",
+      "basis": "observed_paa",
+      "query": "venture capital portfolio marketing",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7"
+    },
+    {
+      "question": "How should a small platform team prioritize video requests?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Who approves a portfolio company's video?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: a bounded service menu and per-assignment agreement may answer the operational support question more precisely than broad venture marketing or portfolio-management pages. Original-query SERP titles were inspected, not competitor page bodies.",
+  "reviewNotes": [
+    "Original-query SERP record inspected: vc-manual50-c5-002; observed definition question retained. Service options and fictional worksheet are original recommendations, not vendor commitments."
+  ],
+  "serp": {
+    "id": "vc-manual50-c5-002",
+    "keyword": "venture capital portfolio marketing",
+    "found": true,
+    "query": "venture capital portfolio marketing",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:49:53.581Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Venture Capital Marketing: Bridging Startups, Markets, & ...",
+        "url": "https://growthequityinterviewguide.com/venture-capital/venture-capital-industry/venture-capital-marketing",
+        "domain": "growthequityinterviewguide.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Venture Capital Marketing: How the Best VC Firms Do It",
+        "url": "https://www.everythingstartups.com/article/venture-capital-marketing-how-the-best-vc-firms-do-it",
+        "domain": "everythingstartups.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "The ultimate guide to portfolio management for VC firms - Affinity",
+        "url": "https://www.affinity.co/guides/the-ultimate-guide-to-portfolio-management-for-vc-firms",
+        "domain": "affinity.co",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "[Ep. 1] The Rise of Platform in VC: Marketing & ...",
+        "url": "https://medium.com/@daryllimwd/ep-1-the-rise-of-platform-in-vc-marketing-communication-d218e82bdd4e",
+        "domain": "medium.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Venture Capital Marketing in 2026 - FinTech Scale Engine",
+        "url": "https://finudio.com/sectors/venture-capital-marketing/",
+        "domain": "finudio.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "The Basics of Venture Capital Portfolio Construction and ...",
+        "url": "https://www.angellist.com/learn/portfolio-construction",
+        "domain": "angellist.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Portfolio Management for Venture Capital Investments",
+        "url": "https://maxiomassetmanagement.com/blog/portfolio-management-for-venture-capital-investments/",
+        "domain": "maxiomassetmanagement.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "Venture Capital Marketing | Scale Your Firm & Portfolio",
+        "url": "https://azariangrowthagency.com/industries/private-markets/venture-capital-firms/",
+        "domain": "azariangrowthagency.com",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "Optimizing VC Portfolio Performance: Advanced Strategies ...",
+        "url": "https://rundit.com/blog/optimizing-vc-portfolio-performance-advanced-strategies/",
+        "domain": "rundit.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is a venture capital portfolio?",
+      "Is VC a high paying job?",
+      "Why is VC so hard to get into?",
+      "What is the dark side of venture capital?"
+    ],
+    "relatedQueries": [
+      "Venture capital portfolio marketing strategy",
+      "Venture capital portfolio marketing examples",
+      "Venture capital portfolio marketing pdf",
+      "Venture capital portfolio management",
+      "Andreessen Horowitz"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

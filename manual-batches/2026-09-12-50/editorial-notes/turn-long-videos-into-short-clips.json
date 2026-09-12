@@ -1,0 +1,127 @@
+{
+  "id": "vc-manual50-c4-002",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://support.google.com/youtube/answer/12836917?hl=en",
+      "supports": "The Edit into a Short workflow uses eligible public uploads, permits selecting up to 60 seconds and links the Short to its original video; this is not a universal Shorts upload limit.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.w3.org/WAI/media/av/captions/",
+      "supports": "Captions synchronize speech and meaningful non-speech audio with the video; automatic captions require accuracy confirmation.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "How do I choose where a short clip begins and ends?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can a clip stand alone without the original video?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does YouTube's Edit into a Short limit apply to every Shorts upload?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: a boundary worksheet and stand-alone comprehension test can complement the converter intent visible in https://wayin.ai/tools/long-video-to-short-video/ and https://www.canva.com/features/long-video-to-short-video-AI/. These observed result bodies were not inspected or compared.",
+  "reviewNotes": [
+    "The source-boundary example is fictional; no retention result or automatic editing capability is claimed.",
+    "No PAA questions were observed for vc-manual50-c4-002; all FAQs are editorial.",
+    "The 60-second figure is explicitly restricted to YouTube's documented Edit into a Short workflow."
+  ],
+  "serp": {
+    "id": "vc-manual50-c4-002",
+    "keyword": "turn long videos into short clips",
+    "found": true,
+    "query": "turn long videos into short clips",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:49:53.581Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Free Long to Short Video Converter",
+        "url": "https://wayin.ai/tools/long-video-to-short-video/",
+        "domain": "wayin.ai",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "AI Video to Shorts Converter",
+        "url": "https://www.canva.com/features/long-video-to-short-video-AI/",
+        "domain": "canva.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "AI Long to Short Video Converter",
+        "url": "https://www.flexclip.com/tools/ai-long-video-to-short-video/",
+        "domain": "flexclip.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Long Video to Short Video AI - Auto Cut Clips Fast",
+        "url": "https://www.opus.pro/tools/long-video-to-short-video-ai",
+        "domain": "opus.pro",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Free Long Video to Short Video AI Converter",
+        "url": "https://www.vmaker.com/tools/long-video-to-short-video-ai",
+        "domain": "vmaker.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Long Video to Short Video : Free AI Clips in Minutes",
+        "url": "https://www.heygen.com/tool/long-video-to-short-video",
+        "domain": "heygen.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Transform Long Video to Short Clips - AI Tools",
+        "url": "https://www.capcut.com/tools/ai-long-video-to-short-video",
+        "domain": "capcut.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "AI Video Generator (Free): Get Shorts From Long Videos",
+        "url": "https://vizard.ai/tools/ai-clips-generator",
+        "domain": "vizard.ai",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "QuickReel: #1 AI video clipping & editing tool",
+        "url": "https://www.quickreel.io/",
+        "domain": "quickreel.io",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": [
+      "Turn long videos into short clips online free",
+      "Turn long videos into short clips online",
+      "Convert long video to short video for free",
+      "Long video to short video CapCut",
+      "Free long video to short video AI",
+      "AI long video to short",
+      "Long video to short video AI free without watermark",
+      "YouTube long video to short video AI free"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

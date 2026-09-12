@@ -1,0 +1,117 @@
+{
+  "id": "vc-manual50-c1-001",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.ycombinator.com/blog/how-to-raise-a-seed-round/",
+      "supports": "The guide links capital to building the company and closes by returning founders to company-building work; historical financing numbers and terms are not reused.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.prsa.org/professional-development/prsa-resources/ethics",
+      "supports": "PRSA asks members to communicate accurately, investigate information released on behalf of others, and correct erroneous communications.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should the funding amount lead the video?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should be approved before recording a funding announcement?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does a funding video replace the written announcement?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: a customer-facing video workflow with a fact card, present-day demonstration, and correction log. Inspected PRLab sections cover release structure, financing facts, quotes, and distribution; this is a video-specific extension, not a claim that the entire SERP omits those controls.",
+  "reviewNotes": [
+    "Primary query updated to 'how to announce startup funding' in current topics.json; title and slug retained.",
+    "Checked c1-001 in both SERP evidence files. Refined PAA concerns openings or fundraising outreach, so all three FAQs are editorial.",
+    "Competitor sections inspected: https://prlab.co/blog/funding-announcement-press-releases/ on 2026-09-12. No coverage, pricing, or legal assertions imported.",
+    "Fictional supplier-document worksheet is explicitly labeled. Video/poster placement and native assembly remain with main."
+  ],
+  "serp": {
+    "id": "vc-manual50-c1-001",
+    "keyword": "how to announce startup funding",
+    "found": true,
+    "query": "how to announce startup funding",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:52:49.425Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "1TRKQT0t6mrbtBkVz",
+    "datasetId": "sxgEp2jc602xi3TP6",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Funding Announcement Press Releases [How to do, ...",
+        "url": "https://prlab.co/blog/funding-announcement-press-releases/",
+        "domain": "prlab.co",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "How to Handle a Startup Funding Announcement",
+        "url": "http://www.firebrand.marketing/2024/08/how-to-announce-startup-funding/",
+        "domain": "firebrand.marketing",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Should Startups Announce Their Funding? | by Mark Suster",
+        "url": "https://medium.com/both-sides-of-the-table/should-startups-announce-their-funding-3f6ff2b4f2d7",
+        "domain": "medium.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "How to announce a funding round of your dev tool startup",
+        "url": "https://www.markepear.dev/blog/announce-funding-round",
+        "domain": "markepear.dev",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "How to make your fundraise announcement count",
+        "url": "https://www.linkedin.com/posts/rohitkaul1_the-funding-amount-is-not-even-the-most-important-activity-7313538775110819840-5Wvq",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 6,
+        "title": "How to Announce Startup Funding Through a Press Release",
+        "url": "https://digitalpressrelease.in/how-to-announce-startup-funding-through-a-press-release/",
+        "domain": "digitalpressrelease.in",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "How to make a funding announcement go viral - On Background",
+        "url": "https://onbackgroundintel.substack.com/p/how-to-make-a-funding-announcement",
+        "domain": "onbackgroundintel.substack.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Funding Round Announcement Emails: 10+ Examples",
+        "url": "https://userlist.com/blog/startup-round-announcement-emails/",
+        "domain": "userlist.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is a good message to announce a new business opening?",
+      "How to politely ask for funding?",
+      "How to present a startup idea to investors?",
+      "How to reach out to investors for funding?"
+    ],
+    "relatedQueries": []
+  },
+  "paidMetrics": "provider-pending"
+}

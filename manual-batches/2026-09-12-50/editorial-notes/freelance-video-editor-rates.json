@@ -1,0 +1,145 @@
+{
+  "id": "vc-manual50-c3-003",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.upwork.com/hire/video-editors/cost/",
+      "supports": "Observed September 12, 2026: headline typical range $6–$25/hour; mid-tier $31–$60/hour; senior $61–$150/hour. Footnote scopes rate data to certain historical contracts worldwide; tiers are separately labeled. Page discusses scope-dependent revisions and costs.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.upwork.com/hc/en-us/articles/211068028-How-to-pay-in-your-local-currency",
+      "supports": "Upwork states all listed costs are USD; eligible client payments can be billed in local currency.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.bls.gov/ooh/media-and-communication/film-and-video-editors-and-camera-operators.htm",
+      "supports": "Occupational wage estimates in the profile exclude self-employed workers; they do not establish freelance marketplace rates.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.w3.org/WAI/media/av/planning/",
+      "supports": "Specific accessibility requirements should appear in project requirements and requests for proposals.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "How much to charge for 1 minute video edit?",
+      "basis": "observed_paa",
+      "query": "freelance video editor rates",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7"
+    },
+    {
+      "question": "What does the Upwork hourly range include?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can an employee salary be converted into a freelance editing rate?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "The inspected Upwork cost page provides marketplace ranges and general scope factors. This article adds a blank side-by-side quote worksheet, internal-time columns, and a fictional scope-normalization example. No claim is made about other competing pages.",
+  "reviewNotes": [
+    "Applied parent spotreview: added dated attributed USD marketplace ranges from the opened Upwork page, preserved the worksheet, and removed meta wording about invented quote amounts.",
+    "Upwork headline and broader experience tiers are presented separately. No national average, universal ceiling, endorsement, total price, or package inclusion is inferred. Recheck the page before publication if the research date changes.",
+    "SERP row vc-manual50-c3-003 checked; first FAQ matches observed PAA. Other FAQ questions are editorial."
+  ],
+  "serp": {
+    "id": "vc-manual50-c3-003",
+    "keyword": "freelance video editor rates",
+    "found": true,
+    "query": "freelance video editor rates",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:49:53.581Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Good freelance editing rates? : r/videography",
+        "url": "https://www.reddit.com/r/videography/comments/o6skhj/good_freelance_editing_rates/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Video Editor Hourly Rates | Cost to Hire Video Editor",
+        "url": "https://www.upwork.com/hire/video-editors/cost/",
+        "domain": "upwork.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "A Video Editor in 2025 makes HOW MUCH?!?!",
+        "url": "https://www.youtube.com/watch?v=1Y3QDrmyCuo",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 4,
+        "title": "Video Editing Pricing Guide 2026: Freelance Rates That ...",
+        "url": "https://pixflow.net/blog/freelance-video-editing-rates/",
+        "domain": "pixflow.net",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Video Editor Rates Guide: Average Hourly Rates & Cost ...",
+        "url": "https://www.twine.net/blog/video-editor-rates-guide/",
+        "domain": "twine.net",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Video Editing Charges in India: Explore The Rate List",
+        "url": "https://medium.com/@anshuljain00964/video-editing-charges-in-india-explore-the-rate-list-93da4f193f14",
+        "domain": "medium.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "How Much Does a Video Editor Cost?",
+        "url": "https://www.fiverr.com/resources/guides/video-animation/video-editor-cost",
+        "domain": "fiverr.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "r/editors Wiki: Video Editor Rate Guide",
+        "url": "https://www.reddit.com/r/editors/wiki/index/ratesv2/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 9,
+        "title": "How to Price Your Video Editing Services in 2025 (Step-By-Step)",
+        "url": "https://www.youtube.com/watch?v=DwUpsOLPyIs",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is the 3:2:1 rule in video editing?",
+      "How much to charge for 1 minute video edit?",
+      "How much does a 2 minute video cost?",
+      "What does the 80/20 rule mean in video editing?"
+    ],
+    "relatedQueries": [
+      "Freelance video editor rates per month",
+      "Video editing rates per minute in india",
+      "Freelance video editor rates reddit",
+      "Video editing freelance rates in India",
+      "10-minute video editing charges in India",
+      "30 sec video editing charges in India",
+      "Fiverr video editing price",
+      "YouTube video editor rates"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

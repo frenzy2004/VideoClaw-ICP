@@ -1,0 +1,120 @@
+{
+  "id": "vc-manual50-c1-003",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.ycombinator.com/blog/tips-ship-early-and-often",
+      "supports": "David Mack describes using early internal demonstrations to collect specific feedback before release; no performance results from his account are generalized.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.w3.org/WAI/media/av/planning/",
+      "supports": "W3C treats captions, visual description, transcripts, and media-player accessibility as production planning and responsibility questions.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "How long should a startup launch video be?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does a launch video need the founder on camera?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What if the product is only available to a limited group?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: combine a final-frame-first demonstration plan with a narration-to-evidence storyboard and comprehension review. The campaign SERP contains examples and launch-video advice; competing page bodies for this exact topic were not assessed.",
+  "reviewNotes": [
+    "c1-003 peopleAlsoAsk is empty in serp-evidence.json; all FAQs are editorial.",
+    "The storyboard and timing choices are original recommendations; the product example is fictional.",
+    "The YC launch-library page returned no readable body and was not used as a supporting source; the inspected shipping essay supplies the actual citation."
+  ],
+  "serp": {
+    "id": "vc-manual50-c1-003",
+    "keyword": "startup launch video",
+    "found": true,
+    "query": "startup launch video",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:49:53.581Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How do YC startups create such amazing launch Videos?",
+        "url": "https://www.reddit.com/r/ycombinator/comments/1kregka/how_do_yc_startups_create_such_amazing_launch/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "How to Make a Viral Launch Video - speedrun",
+        "url": "https://speedrun.substack.com/p/how-to-make-a-viral-launch-video",
+        "domain": "speedrun.substack.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Study 10 successful founder launch videos for your startup",
+        "url": "https://www.linkedin.com/posts/awesomic_10-founder-launch-videos-every-startup-activity-7386658913284177920-iHQW",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 4,
+        "title": "Launch Gallery — Startup & Product Launch Videos",
+        "url": "https://launchgallery.video/",
+        "domain": "launchgallery.video",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "The Best StartUp Videos That Launched Companies",
+        "url": "https://www.yansmedia.com/blog/25-best-startup-videos",
+        "domain": "yansmedia.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "12 Best Founder Video Examples That Build Trust (2026)",
+        "url": "https://vidico.com/news/best-startup-videos/",
+        "domain": "vidico.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Collection of the best Startup Launch Videos",
+        "url": "https://www.producthunt.com/products/startup-launch-videos",
+        "domain": "producthunt.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "YC Startups Nail Their Launch Video. You Can Do It Too, ...",
+        "url": "https://www.whatastory.agency/blog/yc-startups-nail-their-launch-video",
+        "domain": "whatastory.agency",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": [
+      "Startup launch video template",
+      "Startup launch video maker",
+      "Startup launch video ideas",
+      "Startup launch video examples",
+      "Best startup launch videos",
+      "YC startup launch videos",
+      "Cluely launch video",
+      "Ycombinator video"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

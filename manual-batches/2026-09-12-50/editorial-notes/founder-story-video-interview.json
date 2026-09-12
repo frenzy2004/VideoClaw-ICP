@@ -1,0 +1,128 @@
+{
+  "id": "vc-manual50-c1-004",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://oralhistory.org/best-practices/",
+      "supports": "OHA recommends preparation and open inquiry, preserving the narrator's perspective, contextualizing excerpts, and avoiding manipulations of meaning.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.ycombinator.com/blog/how-to-pitch-your-company/",
+      "supports": "Michael Seibel describes distinctive insight as grounded in experience, customer conversations, or analysis, and calls for specific, clear explanations.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Can you give me some examples of founder stories?",
+      "basis": "observed_paa",
+      "query": "founder story video",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7"
+    },
+    {
+      "question": "Should a founder memorize the story before filming?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How much editing can a founder interview tolerate?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: connect interview prompts to a paper edit that preserves chronology, certainty, and product-decision context. The campaign SERP lists examples and production services; their full bodies were not reviewed for absence of this workflow.",
+  "reviewNotes": [
+    "Observed example question matches c1-004 peopleAlsoAsk in serp-evidence.json; run VMTK8QQ0C4Cf7WZXf.",
+    "OHA guidance is identified as oral-history practice adapted to a company interview, not a marketing performance study.",
+    "All example narrative details are labeled fictional. Remembered dialogue is not presented as a verified quotation."
+  ],
+  "serp": {
+    "id": "vc-manual50-c1-004",
+    "keyword": "founder story video",
+    "found": true,
+    "query": "founder story video",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:49:53.581Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Founder Story Videos",
+        "url": "https://www.vidops.io/founders-stories",
+        "domain": "vidops.io",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "12 Best Founder Video Examples That Build Trust (2026)",
+        "url": "https://vidico.com/news/best-startup-videos/",
+        "domain": "vidico.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "What is a Founder's Story Video and Why Does Your ...",
+        "url": "https://www.cumberlandcreative.co/what-is-a-founders-story-video-and-why-does-your-company-need-one/",
+        "domain": "cumberlandcreative.co",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Founder Videos • 400+ reels on Instagram",
+        "url": "https://www.instagram.com/popular/founder-videos/",
+        "domain": "instagram.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 5,
+        "title": "Founder Stories in 60 Seconds",
+        "url": "https://www.youtube.com/playlist?list=PL0QWRtTjmh8ymOm5qg9p7A8BGFVAnVgyB",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 6,
+        "title": "What is a Founders video and why do I need one?",
+        "url": "https://www.flaunter.com/blog/what-is-a-founders-video-and-why-do-i-need-one",
+        "domain": "flaunter.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Founder's Story | When Technology Starts with Purpose",
+        "url": "https://www.youtube.com/watch?v=6IVEbdx2gMI",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 8,
+        "title": "Founder's Story | Podcast on Spotify",
+        "url": "https://open.spotify.com/show/2wTAsSoy4L4qIE8sMewvjo",
+        "domain": "open.spotify.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Can you give me some examples of founder stories?",
+      "Who is better, CEO or founder?",
+      "What is the #1 most viewed video?",
+      "Who is behind the founders podcast?"
+    ],
+    "relatedQueries": [
+      "Best founder story video",
+      "Video founder by video",
+      "Video founder by image",
+      "Startup video download",
+      "Video Finder",
+      "Video startup",
+      "Videos co",
+      "Video company"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

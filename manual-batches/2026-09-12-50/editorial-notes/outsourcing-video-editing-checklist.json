@@ -1,0 +1,115 @@
+{
+  "id": "vc-manual50-c3-009",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.ftc.gov/business-guidance/resources/start-security-guide-business",
+      "supports": "FTC guidance covers limiting contractor access to necessary information and overseeing agreed provider safeguards.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://helpx.adobe.com/premiere/desktop/organize-media/create-projects/consolidate-and-archive-projects.html",
+      "supports": "Adobe consolidation can retain used portions of footage, exclude unused clips, and include configured handles; a trimmed project is not automatically a full source archive.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What files should I send when outsourcing video editing?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does a consolidated editing project contain all original footage?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How can a startup check that the final handoff is usable?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: an intake acceptance check plus a practical project-reopen test may improve outsourcing decisions beyond portfolio and hiring advice. Competing page bodies were not inspected.",
+  "reviewNotes": [
+    "SERP row vc-manual50-c3-009 checked. Its observed PAA does not closely address the handoff intent, so all three FAQs are editorial.",
+    "CaseHarbor is fictional. Source manifest, intake checkpoint, reopen test, and continuity sequence are original operational recommendations. No platform integration or transfer capability is attributed to VideoClaw."
+  ],
+  "serp": {
+    "id": "vc-manual50-c3-009",
+    "keyword": "outsourcing video editing",
+    "found": true,
+    "query": "outsourcing video editing",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:49:53.581Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Practicality of outsourcing video editing to a freelancer",
+        "url": "https://www.reddit.com/r/youtubers/comments/11o26m4/practicality_of_outsourcing_video_editing_to_a/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Outsourced Video Editors | Build your video editor teams",
+        "url": "https://awaydigitalteams.com/our-services/video-editor/",
+        "domain": "awaydigitalteams.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Video Editing Outsourcing: Why, How & Where to Find",
+        "url": "https://girlpowertalk.com/video-editing-outsourcing-all-you-need-to-know/",
+        "domain": "girlpowertalk.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Why You Should Outsource Video Editing and How to Do It",
+        "url": "https://www.hirewithnear.com/blog/outsource-video-editing",
+        "domain": "hirewithnear.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Video Editing Outsourcing: Boost Your Content Quality",
+        "url": "https://lathire.com/video-editing-outsourcing/",
+        "domain": "lathire.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "How Outsourcing Will Help You Grow on YouTube",
+        "url": "https://aliabdaal.com/youtube/how-outsourcing-will-help-you-grow-on-youtube/",
+        "domain": "aliabdaal.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Outsourcing Video Editing Services: A Complete Guide on ...",
+        "url": "https://www.videohusky.com/outsourcing-video-editing-services/",
+        "domain": "videohusky.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is the 3:2:1 rule in video editing?",
+      "How much should I pay someone to edit a video?",
+      "Can I freelance as a video editor?",
+      "How to get foreign clients for video editing?"
+    ],
+    "relatedQueries": [
+      "Outsourcing video editing reddit",
+      "Outsourcing video editing jobs",
+      "Outsource video editing philippines",
+      "Fiverr",
+      "Video editing subscription",
+      "Upwork"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

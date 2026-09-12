@@ -1,0 +1,120 @@
+{
+  "id": "vc-manual50-c5-003",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.ycombinator.com/demoday/",
+      "supports": "YC describes Demo Day as presentations to an invite-only audience of investors and media.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.w3.org/WAI/teach-advocate/accessible-presentations/",
+      "supports": "Event guidance includes microphone use, repeating unamplified questions and describing pertinent visuals.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What should a demo day filming brief include?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can the organizer publish every founder pitch?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What is the best way to record a demo?",
+      "basis": "observed_paa",
+      "query": "record a product demo",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: a segment-level capture and release worksheet may serve event organizers better than event-video examples alone. The original-query SERP was heavily video-oriented; competing video bodies and organizer guides were not reviewed.",
+  "reviewNotes": [
+    "Original-query SERP record inspected: vc-manual50-c5-003; no PAA observed there. Filming and editorial recommendations are operational, not securities or legal advice. Refined query is how to film startup demo day.",
+    "Supplemental refined-query record inspected: run 1TRKQT0t6mrbtBkVz, dataset sxgEp2jc602xi3TP6. Exact observed PAA What is the best way to record a demo? is used for the third FAQ; the other two questions remain editorial."
+  ],
+  "serp": {
+    "id": "vc-manual50-c5-003",
+    "keyword": "how to film startup demo day",
+    "found": true,
+    "query": "how to film startup demo day",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:52:49.425Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "1TRKQT0t6mrbtBkVz",
+    "datasetId": "sxgEp2jc602xi3TP6",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How to Create a Killer Demo for your Deep Tech Startup",
+        "url": "https://medium.com/behavioral-signals-ai/how-to-create-a-killer-demo-for-your-deep-tech-startup-63f5cd5cd478",
+        "domain": "medium.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "What's the best tool to build a simple video to demo my ...",
+        "url": "https://www.reddit.com/r/startups/comments/1gb0vw6/whats_the_best_tool_to_build_a_simple_video_to/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Startup Product Demo Video: Lead With the Problem, Not ...",
+        "url": "https://www.flowjam.com/blog/startup-product-demo-video",
+        "domain": "flowjam.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "Startup Demo Day Tips And Advice On Nailing the ...",
+        "url": "https://www.linkedin.com/pulse/startup-demo-day-tips-advice-nailing-presentation-kyle-wong",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 5,
+        "title": "How to Prepare for Demo Day: A Founder's Guide",
+        "url": "https://www.startupscience.io/articles/how-to-prepare-for-demo-day",
+        "domain": "startupscience.io",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "How to Design a Demo That Sells (Even in a Loom Video)",
+        "url": "https://geeksforgrowth.com/blog/how-to-design-a-demo-that-sells-even-in-a-loom-video/",
+        "domain": "geeksforgrowth.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "How to Prepare for a Startup Demo Day",
+        "url": "https://demoday.la/how-to-prepare-for-a-startup-demo-day/",
+        "domain": "demoday.la",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is the best way to record a demo?",
+      "How to film a demo video?",
+      "What software can I use to record demo videos?",
+      "How to give a good product demo?"
+    ],
+    "relatedQueries": [
+      "How to film startup demo day reddit",
+      "How to film startup demo day online",
+      "Startup demo video",
+      "Loom",
+      "Product demo videos",
+      "Screenstudio",
+      "Supademo",
+      "App demo video"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

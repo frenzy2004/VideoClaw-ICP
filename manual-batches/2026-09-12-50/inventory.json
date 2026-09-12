@@ -1,0 +1,1473 @@
+{
+  "schemaVersion": 1,
+  "kind": "manual_review_batch",
+  "count": 50,
+  "productionChanges": false,
+  "scheduledWorkerPilot": false,
+  "items": [
+    {
+      "id": "vc-manual50-c1-001",
+      "campaign": "newly-funded-founder",
+      "title": "How to Announce Startup Funding With a Useful Video",
+      "keyword": "how to announce startup funding",
+      "slug": "announce-startup-funding-with-video",
+      "words": 1250,
+      "articleSha256": "25a2d6925c3124fb2cf1c677a4157d3a22b56058853ef533473d835610b76fe0",
+      "graphicSha256": "f640e71fe5c42104c966204f28ef9a4513739574c820d0161f8c42ff9065cbd3",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Should the funding amount lead the video?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What should be approved before recording a funding announcement?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Does a funding video replace the written announcement?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c1-002",
+      "campaign": "newly-funded-founder",
+      "title": "Founder-Led Marketing: Build a Repeatable Video Routine",
+      "keyword": "founder led marketing",
+      "slug": "founder-led-marketing-video-routine",
+      "words": 1249,
+      "articleSha256": "d00b25917235500b5dd0f17d292052120d2fd5f909ec03a44b4daa74df342f73",
+      "graphicSha256": "6420b7a6b73a12353e00743037cd3326eb4795c3a30ae4f090fdca81e7176dd9",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "What is founder-led marketing?",
+          "basis": "observed_paa",
+          "query": "founder led marketing",
+          "runId": "VMTK8QQ0C4Cf7WZXf",
+          "datasetId": "MexeNaX1RsSZJmAZ7"
+        },
+        {
+          "question": "How often should a founder record marketing videos?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can someone else write and edit a founder's videos?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c1-003",
+      "campaign": "newly-funded-founder",
+      "title": "Startup Launch Video: Plan the Story, Demo and Next Step",
+      "keyword": "startup launch video",
+      "slug": "startup-launch-video-plan",
+      "words": 1221,
+      "articleSha256": "6082a6e9b193829076f9852b7a870b9b9432517ab2dedaa7a83cf3e74009c648",
+      "graphicSha256": "83ad546fddd7efa4b034db727574bbb588d763e0ecb37eebee8552cb8b52629d",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "How long should a startup launch video be?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Does a launch video need the founder on camera?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What if the product is only available to a limited group?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c1-004",
+      "campaign": "newly-funded-founder",
+      "title": "Founder Story Video: Turn an Interview Into a Clear Narrative",
+      "keyword": "founder story video",
+      "slug": "founder-story-video-interview",
+      "words": 1274,
+      "articleSha256": "bc853d509feb6799804eaffa3c8fd3cba9583dedaeb0dd45804873eefa53dcf2",
+      "graphicSha256": "79fd6dad1e68b8ef0380d62be0b7d44ee066245e4cb68d5befe964926ce16d9f",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Can you give me some examples of founder stories?",
+          "basis": "observed_paa",
+          "query": "founder story video",
+          "runId": "VMTK8QQ0C4Cf7WZXf",
+          "datasetId": "MexeNaX1RsSZJmAZ7"
+        },
+        {
+          "question": "Should a founder memorize the story before filming?",
+          "basis": "editorial"
+        },
+        {
+          "question": "How much editing can a founder interview tolerate?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c1-005",
+      "campaign": "newly-funded-founder",
+      "title": "Startup Press Kit: Which Video and Visual Assets to Include",
+      "keyword": "startup press kit",
+      "slug": "startup-press-kit-video-assets",
+      "words": 1251,
+      "articleSha256": "083cc6aee44cffbb34f7820807b2d6ac778f42b2718c35f21e210054472b96f3",
+      "graphicSha256": "4706e1ee57cd6b5eeee01fa15841624c6f4d1d3dfa42b2abc01cf266524f2558",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "What video assets belong in a startup press kit?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Should every video in the kit have a transcript?",
+          "basis": "editorial"
+        },
+        {
+          "question": "How do you stop outdated press-kit assets being reused?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c1-006",
+      "campaign": "newly-funded-founder",
+      "title": "Product Launch Content Calendar: A Two-Week Video Plan",
+      "keyword": "product launch content calendar",
+      "slug": "product-launch-content-calendar",
+      "words": 1243,
+      "articleSha256": "b5a15604e1ba956ee4aa31f12ff8218ee2f57caabb0bcab6e112fbb6570ea789",
+      "graphicSha256": "dc451120d78deedb4f26db29b86c3e596e53cfb77edb382682acb7f0a80fe152",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "What should a product launch content calendar include?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Do you need to post a new video every day during a launch?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What should change in the calendar if the launch is delayed?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c1-007",
+      "campaign": "newly-funded-founder",
+      "title": "Customer Testimonial Video Questions That Get Specific Answers",
+      "keyword": "customer testimonial video questions",
+      "slug": "customer-testimonial-video-questions",
+      "words": 1267,
+      "articleSha256": "fb2a1a17574b0ddd2c189a30f2edd19001eb45a977756a0a06c2e2cdaa179ade",
+      "graphicSha256": "785ce5956939815db2d398ed92911788cc3513fde50c15e4ce0090b07c414434",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "What are some good questions to ask when interviewing for a testimonial video?",
+          "basis": "observed_paa",
+          "query": "customer testimonial video questions",
+          "runId": "VMTK8QQ0C4Cf7WZXf",
+          "datasetId": "MexeNaX1RsSZJmAZ7"
+        },
+        {
+          "question": "What is a testimonial video example?",
+          "basis": "observed_paa",
+          "query": "customer testimonial video questions",
+          "runId": "VMTK8QQ0C4Cf7WZXf",
+          "datasetId": "MexeNaX1RsSZJmAZ7"
+        },
+        {
+          "question": "How to do a video testimonial?",
+          "basis": "observed_paa",
+          "query": "customer testimonial video questions",
+          "runId": "VMTK8QQ0C4Cf7WZXf",
+          "datasetId": "MexeNaX1RsSZJmAZ7"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c1-008",
+      "campaign": "newly-funded-founder",
+      "title": "Startup Recruitment Video: Show the Work, Not Just the Perks",
+      "keyword": "how to make a recruitment video",
+      "slug": "startup-recruitment-video",
+      "words": 1246,
+      "articleSha256": "8a94fd5c9629301906990a4fb19ab9afdf67b72915d43fee2fab2242aecfb49e",
+      "graphicSha256": "9c55f0df584600a3effe4eb036489effcb301c84c9bab1b981eb5262f894818a",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "How can I create a recruitment video?",
+          "basis": "observed_paa",
+          "query": "startup recruitment video",
+          "runId": "VMTK8QQ0C4Cf7WZXf",
+          "datasetId": "MexeNaX1RsSZJmAZ7"
+        },
+        {
+          "question": "Should a startup recruitment video show difficult aspects of the job?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can a recruitment video replace the job description?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c1-009",
+      "campaign": "newly-funded-founder",
+      "title": "Startup Explainer Video Script: From Problem to Product Proof",
+      "keyword": "startup explainer video script",
+      "slug": "startup-explainer-video-script",
+      "words": 1237,
+      "articleSha256": "523294928b5e43f8697e6289eb7f36f3cf8c84da893609f098030bd70c019b8c",
+      "graphicSha256": "66a7069391ac8f9d7c3d2d738f9ff708b721bfa1faa10e6a60ccbba15525bae0",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "What should a startup explainer video script include?",
+          "basis": "editorial"
+        },
+        {
+          "question": "How do you decide the length of an explainer script?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can I use the sample script for my own startup?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c1-010",
+      "campaign": "newly-funded-founder",
+      "title": "A Founder LinkedIn Content Strategy Built Around Useful Video",
+      "keyword": "founder LinkedIn content strategy",
+      "slug": "founder-linkedin-content-strategy",
+      "words": 1268,
+      "articleSha256": "a6b84b34a96dcbca25fae5d238411fde6132a53f3793ce3a85f157206e69a287",
+      "graphicSha256": "b21eabe7ede7ffe3c56784334c5802f6dd09079c44f0787310c7345e45bbf0f6",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "What should a founder post on LinkedIn?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Is there a guaranteed posting schedule for LinkedIn video reach?",
+          "basis": "editorial"
+        },
+        {
+          "question": "How should a founder measure whether the strategy is useful?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c2-001",
+      "campaign": "accelerator-demo-day-founder",
+      "title": "Demo Day Pitch: Build a Story Investors Can Follow",
+      "keyword": "demo day pitch",
+      "slug": "demo-day-pitch-story",
+      "words": 1132,
+      "articleSha256": "f445ca85579cb59f8b56f49b24650b31ba7500723633f5f8b83434524111d0cf",
+      "graphicSha256": "ddd52c8c8a9236b413e4685714db41c53424df8047734afcef593f0e9b0e2fc2",
+      "sourceCount": 3,
+      "faqEvidence": [
+        {
+          "question": "What does \"demo day\" mean?",
+          "basis": "observed_paa",
+          "query": "demo day pitch",
+          "runId": "VMTK8QQ0C4Cf7WZXf",
+          "datasetId": "MexeNaX1RsSZJmAZ7"
+        },
+        {
+          "question": "What should I include in a Demo Day pitch?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Should I play a video during a live Demo Day pitch?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c2-002",
+      "campaign": "accelerator-demo-day-founder",
+      "title": "Startup Demo Video: Show One Valuable Product Workflow",
+      "keyword": "startup demo video",
+      "slug": "startup-demo-video-workflow",
+      "words": 1134,
+      "articleSha256": "c2280658c07f41452d40a516a5178bc3eadfb8f2800d6f8e19ae73b21ce6dca6",
+      "graphicSha256": "4b5dc8d8cd0dc46961ea64cd2a88a9d82a9997049bd047b236aa4e666007ea51",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "How many features should a startup demo video show?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can I use sample data or a prototype in a demo?",
+          "basis": "editorial"
+        },
+        {
+          "question": "How can I tell whether the demo is understandable?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c2-003",
+      "campaign": "accelerator-demo-day-founder",
+      "title": "Demo Day Checklist: Rehearsal, Media and Follow-Up",
+      "keyword": "startup demo day checklist",
+      "slug": "demo-day-preparation-checklist",
+      "words": 1112,
+      "articleSha256": "dc23c1dfdf90f2081cd62a69c05b2670e65824cf16edf8f52243141e61b32995",
+      "graphicSha256": "f8a494f182bd6c9467ce3f490b7ff613e173a3a4b428ca86ea64d29a98f4aaa4",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "When should I start preparing for startup Demo Day?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What should be on a Demo Day media checklist?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What should I prepare for after the pitch?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c2-004",
+      "campaign": "accelerator-demo-day-founder",
+      "title": "Investor Update Video: What to Show Between Meetings",
+      "keyword": "startup investor update video",
+      "slug": "investor-update-video",
+      "words": 1125,
+      "articleSha256": "c8e58e300699424bdbe01f0d1a6ffd2244af47aebe61a1dbf78c5ee55023e9f0",
+      "graphicSha256": "cbde3896147614bbc9de0819ab945affbd2ae3f03a99f9870f315581e2c86471",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "What does an investor update look like?",
+          "basis": "observed_paa",
+          "query": "startup investor update video",
+          "runId": "1TRKQT0t6mrbtBkVz",
+          "datasetId": "sxgEp2jc602xi3TP6"
+        },
+        {
+          "question": "How often should I send an investor update video?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What should I show when progress is slower than planned?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c2-005",
+      "campaign": "accelerator-demo-day-founder",
+      "title": "Investor Pitch Questions: Prepare Answers and Product Evidence",
+      "keyword": "investor pitch questions",
+      "slug": "investor-pitch-questions",
+      "words": 1225,
+      "articleSha256": "4f6aad9a0e7ce0131f914d75905529c7f656d0fd81d1050d9dff3eee8dee127a",
+      "graphicSha256": "b8dc5758bad5fb0e742026caab7557841cd8971087ad86315d108b51e1dcb2b0",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "What do investors ask in a pitch?",
+          "basis": "observed_paa",
+          "query": "investor pitch questions",
+          "runId": "7FYXmPNQGfKKxOPHt",
+          "datasetId": "X8mLiehDsNnyYdZzy"
+        },
+        {
+          "question": "What should I say when I do not know an investor's answer?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can a product demo answer every investor question?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c2-006",
+      "campaign": "accelerator-demo-day-founder",
+      "title": "How to Record a Product Demo Before Your Next Pitch",
+      "keyword": "record a product demo",
+      "slug": "record-product-demo-for-pitch",
+      "words": 1194,
+      "articleSha256": "50c473fa8284d88185a742088de8c3d8596b2cc7781fb556312462d44965cab6",
+      "graphicSha256": "64569c45fcea24a7ef7adb5764d3ae16d0e76d837dfe7390c7b8f96915c12691",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "What is the best way to record a demo?",
+          "basis": "observed_paa",
+          "query": "record a product demo",
+          "runId": "VMTK8QQ0C4Cf7WZXf",
+          "datasetId": "MexeNaX1RsSZJmAZ7"
+        },
+        {
+          "question": "Can I record a product demo with the Mac's built-in tools?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Should I narrate while recording or add voiceover later?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c2-007",
+      "campaign": "accelerator-demo-day-founder",
+      "title": "Pitch Rehearsal: A Recording-Based Practice Routine",
+      "keyword": "startup pitch rehearsal",
+      "slug": "pitch-rehearsal-recording-routine",
+      "words": 1207,
+      "articleSha256": "e92cdefc66eb2708c189d9808a35636296a6745bc4d9b91a90a5db7a1241717c",
+      "graphicSha256": "0cfedf9e71b2f0175f7341d5cff5e4278da26c86b8f4c5acf6bfd949e601c877",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "How to pitch a startup presentation?",
+          "basis": "observed_paa",
+          "query": "startup pitch rehearsal",
+          "runId": "1TRKQT0t6mrbtBkVz",
+          "datasetId": "sxgEp2jc602xi3TP6"
+        },
+        {
+          "question": "How many times should I rehearse my pitch?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What feedback should I ask for after a rehearsal?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c2-008",
+      "campaign": "accelerator-demo-day-founder",
+      "title": "Demo Day Follow-Up Email: Give Investors a Useful Next Step",
+      "keyword": "investor follow up email after demo day",
+      "slug": "demo-day-follow-up-email",
+      "words": 1170,
+      "articleSha256": "c1fb5cf78732feab9d14b3ed43f5666e1463bd3055a51cfca2a46f5e63f2e128",
+      "graphicSha256": "9dafd1b5c3dd4b6dccf2a87a5d91d8fffdb72c0c12f49f8cbb956174ee52ad15",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "What should I include in an email follow-up after a meeting?",
+          "basis": "observed_paa",
+          "query": "investor follow up email after demo day",
+          "runId": "1TRKQT0t6mrbtBkVz",
+          "datasetId": "sxgEp2jc602xi3TP6"
+        },
+        {
+          "question": "How do you politely send a follow-up email?",
+          "basis": "observed_paa",
+          "query": "investor follow up email after demo day",
+          "runId": "1TRKQT0t6mrbtBkVz",
+          "datasetId": "sxgEp2jc602xi3TP6"
+        },
+        {
+          "question": "Should I include a pitch video in every investor follow-up?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c2-009",
+      "campaign": "accelerator-demo-day-founder",
+      "title": "Demo Day Social Media: A Practical Before-and-After Plan",
+      "keyword": "demo day social media",
+      "slug": "demo-day-social-media-plan",
+      "words": 1259,
+      "articleSha256": "2920007ced356e81e733c49e3416fec281744ad2f7d6cb83daca40d2b4fbbd7e",
+      "graphicSha256": "0b9e3143a010c2636ec312ec0eb09339f35726ee4270e243dbd1618403f2f336",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "What should a startup post before Demo Day?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can I turn the stage pitch into social clips?",
+          "basis": "editorial"
+        },
+        {
+          "question": "How should I measure Demo Day social content?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c2-010",
+      "campaign": "accelerator-demo-day-founder",
+      "title": "Pitch Deck vs Pitch Video: Choose the Right Follow-Up Asset",
+      "keyword": "pitch deck vs pitch video",
+      "slug": "pitch-deck-vs-pitch-video",
+      "words": 1178,
+      "articleSha256": "3f7a997427e3789f51e1156acbe9ed2eb9ac7fc809c37fcf61eee23da1253916",
+      "graphicSha256": "ea7eeb093b583ddc5ddf73bef14d5f2f1ee5cdb0353a3cdd928e969ee9eb949a",
+      "sourceCount": 3,
+      "faqEvidence": [
+        {
+          "question": "What is the purpose of a pitch deck?",
+          "basis": "observed_paa",
+          "query": "pitch deck vs pitch video",
+          "runId": "VMTK8QQ0C4Cf7WZXf",
+          "datasetId": "MexeNaX1RsSZJmAZ7"
+        },
+        {
+          "question": "Should I send investors a deck or a video?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can one video serve as an application, pitch, and product demo?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c3-001",
+      "campaign": "video-production-comparison",
+      "title": "Video Agency vs Freelancer: Choose for Your Actual Workload",
+      "keyword": "video agency vs freelancer",
+      "slug": "video-agency-vs-freelancer",
+      "words": 1150,
+      "articleSha256": "7b32f2ae2762bc6a02a08968cd90375099a2873cafdccd18da9d92304e3e5c9d",
+      "graphicSha256": "b18b2a2445247458f4267e2766a5755ce2b9e156b173cda1f18337b46d552605",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "What are the key differences between a freelancer and an agency?",
+          "basis": "observed_paa",
+          "query": "video agency vs freelancer",
+          "runId": "VMTK8QQ0C4Cf7WZXf",
+          "datasetId": "MexeNaX1RsSZJmAZ7"
+        },
+        {
+          "question": "Can one provider handle both a launch film and recurring product videos?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What should a paid video partner trial include?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c3-002",
+      "campaign": "video-production-comparison",
+      "title": "In-House vs Outsourced Video Production: A Startup Decision Guide",
+      "keyword": "in house vs outsourced video production",
+      "slug": "in-house-vs-outsourced-video-production",
+      "words": 1172,
+      "articleSha256": "206a62cb658d9043dd14a3c630d7e86b589923fb6f793b7adc0dd365c5905a98",
+      "graphicSha256": "39ce7447ceee45bf77e0579ca4ae3dad4364f09d0bb29017015dd66ff8bcc13b",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Is outsourcing cheaper than in-house?",
+          "basis": "observed_paa",
+          "query": "in house vs outsourced video production",
+          "runId": "VMTK8QQ0C4Cf7WZXf",
+          "datasetId": "MexeNaX1RsSZJmAZ7"
+        },
+        {
+          "question": "What video responsibilities should stay inside the startup?",
+          "basis": "editorial"
+        },
+        {
+          "question": "When should a startup reconsider its production model?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c3-003",
+      "campaign": "video-production-comparison",
+      "title": "Freelance Video Editor Rates: How to Compare Quotes Fairly",
+      "keyword": "freelance video editor rates",
+      "slug": "freelance-video-editor-rates",
+      "words": 1217,
+      "articleSha256": "28729c0c904527e3aa610217b16c6ad6eb9d5a50c0e09b738c68cf85f24270a0",
+      "graphicSha256": "a49e019ff496a891c1a9e022724ad157a742fafc68ff5ec90d2fc4b0a0fd4685",
+      "sourceCount": 4,
+      "faqEvidence": [
+        {
+          "question": "How much to charge for 1 minute video edit?",
+          "basis": "observed_paa",
+          "query": "freelance video editor rates",
+          "runId": "VMTK8QQ0C4Cf7WZXf",
+          "datasetId": "MexeNaX1RsSZJmAZ7"
+        },
+        {
+          "question": "What does the Upwork hourly range include?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can an employee salary be converted into a freelance editing rate?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c3-004",
+      "campaign": "video-production-comparison",
+      "title": "Video Production Brief Template: Get Comparable Proposals",
+      "keyword": "video production brief template",
+      "slug": "video-production-brief-template",
+      "words": 1162,
+      "articleSha256": "0c76a748fb046ef58d94aca378ad8d754700d4fdfcdce3b28a53c994e80e5b75",
+      "graphicSha256": "ae35238235fca4d1906a35c13561cc2b77b3baa7e4c87a05fa8d685ac3c7e0aa",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "What should a video production brief include?",
+          "basis": "editorial"
+        },
+        {
+          "question": "How detailed should the delivery requirements be?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What if a source recording is not ready when proposals are requested?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c3-005",
+      "campaign": "video-production-comparison",
+      "title": "Video Revision Process: Keep Feedback Clear and Rounds Bounded",
+      "keyword": "video revision process",
+      "slug": "video-revision-process",
+      "words": 1173,
+      "articleSha256": "7c918539cce7c7e1495bec99dcfcd5cf8144d1b391a97c80c0adef9db1029428",
+      "graphicSha256": "f3caa9306af420d7871d09c3924a74fe6eb836edbe78b03bcbf188eb6cb4e3ea",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "What counts as one video revision round?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Who should resolve conflicting video feedback?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Does approval of a rough cut approve the final export?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c3-006",
+      "campaign": "video-production-comparison",
+      "title": "AI Video Editor vs Traditional Editor: Compare the Workflow",
+      "keyword": "AI video editor vs traditional video editor",
+      "slug": "ai-video-editor-vs-traditional-editor",
+      "words": 1113,
+      "articleSha256": "0754b722d12022470ca860ef331cd48beb310f774d36b11a030601f7983a6d64",
+      "graphicSha256": "c7f713a0db3027078f452902258567c6b2c51b105ad90625d805cd3b42e961c7",
+      "sourceCount": 3,
+      "faqEvidence": [
+        {
+          "question": "Are AI video editors any good?",
+          "basis": "observed_paa",
+          "query": "AI video editor vs traditional video editor",
+          "runId": "VMTK8QQ0C4Cf7WZXf",
+          "datasetId": "MexeNaX1RsSZJmAZ7"
+        },
+        {
+          "question": "Does traditional editing exclude AI assistance?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What should an AI editing comparison measure?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c3-007",
+      "campaign": "video-production-comparison",
+      "title": "Video Editor vs Motion Designer: Who Does Your Project Need?",
+      "keyword": "video editor vs motion designer",
+      "slug": "video-editor-vs-motion-designer",
+      "words": 1178,
+      "articleSha256": "624635efb27661c8943f3db041bc8cd4ded3c3f22cb14eddb7a678fb6ab24722",
+      "graphicSha256": "cb3bd57563bbad9336c1f138b9e091c1fcbd3d61685fc9556d307374e1ac53a7",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "What is the difference between a motion designer and a video editor?",
+          "basis": "observed_paa",
+          "query": "video editor vs motion designer",
+          "runId": "VMTK8QQ0C4Cf7WZXf",
+          "datasetId": "MexeNaX1RsSZJmAZ7"
+        },
+        {
+          "question": "Can one person edit the video and create motion graphics?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What should be approved before custom animation begins?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c3-008",
+      "campaign": "video-production-comparison",
+      "title": "Video Production Budget: Separate the Work From the Day Rate",
+      "keyword": "video production budget",
+      "slug": "video-production-budget",
+      "words": 1154,
+      "articleSha256": "87c8ac09eaebe00fea3113b1e680212eb1c98b974518a8f001812ed5a5788ef5",
+      "graphicSha256": "55806d6210fd02b6490ccefacad370949b546b39098da00a135ad7ce565527ce",
+      "sourceCount": 3,
+      "faqEvidence": [
+        {
+          "question": "What is a good budget for a videographer?",
+          "basis": "observed_paa",
+          "query": "video production budget",
+          "runId": "VMTK8QQ0C4Cf7WZXf",
+          "datasetId": "MexeNaX1RsSZJmAZ7"
+        },
+        {
+          "question": "How should a video budget account for unexpected work?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Should internal review time be included in the budget?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c3-009",
+      "campaign": "video-production-comparison",
+      "title": "Outsourcing Video Editing: A Handoff Checklist for Startups",
+      "keyword": "outsourcing video editing",
+      "slug": "outsourcing-video-editing-checklist",
+      "words": 1195,
+      "articleSha256": "b5fbfa6da0d7af0e23984c78f8c2b6481f79a25f25101118dc7d9506ae8b346d",
+      "graphicSha256": "4a5005e91eafffb41f03b9d6b35c349cf6af41f1dc06ce776bf38af22001f855",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "What files should I send when outsourcing video editing?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Does a consolidated editing project contain all original footage?",
+          "basis": "editorial"
+        },
+        {
+          "question": "How can a startup check that the final handoff is usable?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c3-010",
+      "campaign": "video-production-comparison",
+      "title": "AI Video Editing Limitations: What a Buyer Should Test",
+      "keyword": "AI video editing limitations",
+      "slug": "ai-video-editing-limitations",
+      "words": 1178,
+      "articleSha256": "9cbf37a25c6ebd5bac06e120cb808ab862cbaa5c8d626afde726880107046241",
+      "graphicSha256": "55d5cf607ba76871ca9f956add2e417536d58859a55511818ab61d0db4ebfa28",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "What are the limitations of AI videos?",
+          "basis": "observed_paa",
+          "query": "AI video editing limitations",
+          "runId": "VMTK8QQ0C4Cf7WZXf",
+          "datasetId": "MexeNaX1RsSZJmAZ7"
+        },
+        {
+          "question": "Can I let AI edit my video?",
+          "basis": "observed_paa",
+          "query": "AI video editing limitations",
+          "runId": "VMTK8QQ0C4Cf7WZXf",
+          "datasetId": "MexeNaX1RsSZJmAZ7"
+        },
+        {
+          "question": "How can I tell whether an AI editing result is ready to use?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c4-001",
+      "campaign": "gtm-content-repurposing-buyer",
+      "title": "Repurpose Webinar Content Into a Focused Campaign",
+      "keyword": "repurpose webinar content",
+      "slug": "repurpose-webinar-content",
+      "words": 1152,
+      "articleSha256": "127427d648cae649f1568c6e237ed46fdc8cf949c6e1f8752c9cec186f8f00f4",
+      "graphicSha256": "234391ce080dfb77304e4e91452e5297bd1089ab9aa7d1b3864e56dfc4189712",
+      "sourceCount": 3,
+      "faqEvidence": [
+        {
+          "question": "How to repurpose webinar content?",
+          "basis": "observed_paa",
+          "query": "repurpose webinar content",
+          "runId": "VMTK8QQ0C4Cf7WZXf",
+          "datasetId": "MexeNaX1RsSZJmAZ7"
+        },
+        {
+          "question": "What does it mean to repurpose content?",
+          "basis": "observed_paa",
+          "query": "repurpose webinar content",
+          "runId": "VMTK8QQ0C4Cf7WZXf",
+          "datasetId": "MexeNaX1RsSZJmAZ7"
+        },
+        {
+          "question": "How many assets should one webinar produce?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c4-002",
+      "campaign": "gtm-content-repurposing-buyer",
+      "title": "How to Turn Long Videos Into Short Clips That Make Sense",
+      "keyword": "turn long videos into short clips",
+      "slug": "turn-long-videos-into-short-clips",
+      "words": 1146,
+      "articleSha256": "f9173392b60fd0254bc6c73b3a017c4dc29b2693beeb4b09881bc5466259954d",
+      "graphicSha256": "5c4a788ff7901017180e860cba75e9c3232b5525df97cd6e6af8810db32e4ad0",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "How do I choose where a short clip begins and ends?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can a clip stand alone without the original video?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Does YouTube's Edit into a Short limit apply to every Shorts upload?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c4-003",
+      "campaign": "gtm-content-repurposing-buyer",
+      "title": "Video Content Repurposing Workflow: From Source to Distribution",
+      "keyword": "video content repurposing workflow",
+      "slug": "video-content-repurposing-workflow",
+      "words": 1166,
+      "articleSha256": "c7aebfd411ee2c6962f7832200324c9524532bbe3176cd7d1f1eb5f14846413a",
+      "graphicSha256": "b6ac497eb026079398ce7c2e562d56e5e56cfb7e5aee0ea0a1aefdc9766cc4af",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "Who should own a video repurposing workflow?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What should be included in a repurposing handoff?",
+          "basis": "editorial"
+        },
+        {
+          "question": "How should a team evaluate a new repurposing process?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c4-004",
+      "campaign": "gtm-content-repurposing-buyer",
+      "title": "Video Captions and Accessibility: A Practical Review Checklist",
+      "keyword": "video captions accessibility",
+      "slug": "video-captions-accessibility",
+      "words": 1136,
+      "articleSha256": "46eca2df192aa84f24a87f01828281fdda90d8aacd29804037ce90a9e4fe5f3f",
+      "graphicSha256": "f70c50e2d07002568f19957b7a70667ad2433727902f09eea9ccfa3328bba939",
+      "sourceCount": 3,
+      "faqEvidence": [
+        {
+          "question": "Are automatic captions ready to publish without review?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Is a transcript the same thing as captions?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Does adding captions make every video fully accessible?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c4-005",
+      "campaign": "gtm-content-repurposing-buyer",
+      "title": "Resize Video for Social Media Without Losing the Message",
+      "keyword": "resize video for social media",
+      "slug": "resize-video-for-social-media",
+      "words": 1395,
+      "articleSha256": "5232a51e1f3d1d07e31809bad37051b238770e6fb82e2ac65a5779d0049b0ad2",
+      "graphicSha256": "c0418667a489fbefa1fd0068eff30860ae7b020b9ba4a9902d5d3b8544103843",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "What is the best video size for social media?",
+          "basis": "observed_paa",
+          "query": "resize video for social media",
+          "runId": "VMTK8QQ0C4Cf7WZXf",
+          "datasetId": "MexeNaX1RsSZJmAZ7"
+        },
+        {
+          "question": "Should I crop a wide video or keep the entire frame?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Why do captions need another review after resizing?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c4-006",
+      "campaign": "gtm-content-repurposing-buyer",
+      "title": "Customer Onboarding Video: Teach the First Useful Outcome",
+      "keyword": "customer onboarding video",
+      "slug": "customer-onboarding-video",
+      "words": 1173,
+      "articleSha256": "a461c3f2773ac3f639e583945761bfce9fa92448bc4d5765c217b0fc2940e72a",
+      "graphicSha256": "38e86b13458e1df1cbe03490c405d921001eb4214fac50000eeddfdffe0ee45b",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "What is an onboarding video?",
+          "basis": "observed_paa",
+          "query": "customer onboarding video",
+          "runId": "VMTK8QQ0C4Cf7WZXf",
+          "datasetId": "MexeNaX1RsSZJmAZ7"
+        },
+        {
+          "question": "What should the first customer onboarding video teach?",
+          "basis": "editorial"
+        },
+        {
+          "question": "How should I test a customer onboarding video?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c4-007",
+      "campaign": "gtm-content-repurposing-buyer",
+      "title": "Software Tutorial Video: Plan, Record and Test Each Step",
+      "keyword": "how to make software tutorial videos",
+      "slug": "software-tutorial-video",
+      "words": 1186,
+      "articleSha256": "db8d7058d198c6444556196c8f905be53ace6367489741fde98ba45e58f6d475",
+      "graphicSha256": "40632070d1fe88232d110a4aaf30366869045eddb0a725731d2eadf1f2734fd6",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "How can I create a tutorial video?",
+          "basis": "observed_paa",
+          "query": "how to make software tutorial videos",
+          "runId": "1TRKQT0t6mrbtBkVz",
+          "datasetId": "sxgEp2jc602xi3TP6"
+        },
+        {
+          "question": "What should a software tutorial script include?",
+          "basis": "editorial"
+        },
+        {
+          "question": "When should a software tutorial video be updated?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c4-008",
+      "campaign": "gtm-content-repurposing-buyer",
+      "title": "Video Content Calendar: Plan Around Buyer Questions",
+      "keyword": "video content calendar",
+      "slug": "video-content-calendar",
+      "words": 1145,
+      "articleSha256": "003f126b987278bb18bbc7dd0acd18160b6203be0dd85af5f828bc960c616b06",
+      "graphicSha256": "a83a107b1cd86ae05000868411fc4870c2df1f254f31743511447a65496a5378",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "How to create a video content calendar?",
+          "basis": "observed_paa",
+          "query": "video content calendar",
+          "runId": "VMTK8QQ0C4Cf7WZXf",
+          "datasetId": "MexeNaX1RsSZJmAZ7"
+        },
+        {
+          "question": "What should be in a content calendar?",
+          "basis": "observed_paa",
+          "query": "video content calendar",
+          "runId": "VMTK8QQ0C4Cf7WZXf",
+          "datasetId": "MexeNaX1RsSZJmAZ7"
+        },
+        {
+          "question": "How often should a team publish video?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c4-009",
+      "campaign": "gtm-content-repurposing-buyer",
+      "title": "Video Marketing Metrics: Match the Measure to the Job",
+      "keyword": "video marketing metrics",
+      "slug": "video-marketing-metrics",
+      "words": 1174,
+      "articleSha256": "ee9d7ba18cfd7db136f85ae53373b730b7b856e39e0c66bb0fca5f21614ccd19",
+      "graphicSha256": "c8ee5c52758589e5286efb7244a0e39bc6a451ee704de07fe7d2824d7182abc3",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "How to measure the success of video marketing?",
+          "basis": "observed_paa",
+          "query": "video marketing metrics",
+          "runId": "VMTK8QQ0C4Cf7WZXf",
+          "datasetId": "MexeNaX1RsSZJmAZ7"
+        },
+        {
+          "question": "Does a retention spike mean a video section performed well?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can tagged video links prove that a video caused a sale?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c4-010",
+      "campaign": "gtm-content-repurposing-buyer",
+      "title": "Video Case Study Template: Show the Problem, Work and Evidence",
+      "keyword": "video case study template",
+      "slug": "video-case-study-template",
+      "words": 1174,
+      "articleSha256": "5e493f0b09b253e84f3f27c9e1ee3ffcc6deb656fca2ff24b5904fccd138d9d2",
+      "graphicSha256": "e10da81039e65dc9b5880bb2c39bf0ff62927caa89441ab6b9fef91cb5b04a00",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "What should a video case study include?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can a case study work without numerical results?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Who should review the final case study video?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c5-001",
+      "campaign": "portfolio-media-platform",
+      "title": "Accelerator Marketing Strategy: Build a Useful Founder Media Program",
+      "keyword": "startup accelerator marketing strategy",
+      "slug": "accelerator-marketing-strategy",
+      "words": 1182,
+      "articleSha256": "8f3fd7413c5bfceb4a0d19863ccfdd04b9f16a589a9e27ae813350f28e8eb299",
+      "graphicSha256": "af4d89dd5bf97112f9132d275cc1dd06e9e11843baca0101defde74378cde32a",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "What is an example of an accelerator?",
+          "basis": "observed_paa",
+          "query": "accelerator marketing strategy",
+          "runId": "VMTK8QQ0C4Cf7WZXf",
+          "datasetId": "MexeNaX1RsSZJmAZ7"
+        },
+        {
+          "question": "Should every company contribute a public video?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What should an accelerator film first?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [
+        "long_title_review_serp_display"
+      ]
+    },
+    {
+      "id": "vc-manual50-c5-002",
+      "campaign": "portfolio-media-platform",
+      "title": "Venture Capital Portfolio Marketing: A Shared Video Support Model",
+      "keyword": "venture capital portfolio marketing",
+      "slug": "venture-capital-portfolio-marketing",
+      "words": 1184,
+      "articleSha256": "c169b3498916adf41cc6af4537616e0a1d5a95ba894c68f03fb3075a3a98e164",
+      "graphicSha256": "5148b461905a236a92a0c91d1b258273bc4af31fd36abf9412397a58f402f3a8",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "What is a venture capital portfolio?",
+          "basis": "observed_paa",
+          "query": "venture capital portfolio marketing",
+          "runId": "VMTK8QQ0C4Cf7WZXf",
+          "datasetId": "MexeNaX1RsSZJmAZ7"
+        },
+        {
+          "question": "How should a small platform team prioritize video requests?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Who approves a portfolio company's video?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c5-003",
+      "campaign": "portfolio-media-platform",
+      "title": "Demo Day Event Video: Plan Capture, Permissions and Follow-Up",
+      "keyword": "how to film startup demo day",
+      "slug": "demo-day-event-video",
+      "words": 1176,
+      "articleSha256": "8ba50176e7ebcfb9910ccafce5162f3506651326e32b96252326d0cbd40ff7a4",
+      "graphicSha256": "12c3644e3912a29df2a2ebd7d6d77524676831143e3b3345d1e7192129f4185f",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "What should a demo day filming brief include?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can the organizer publish every founder pitch?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What is the best way to record a demo?",
+          "basis": "observed_paa",
+          "query": "record a product demo",
+          "runId": "VMTK8QQ0C4Cf7WZXf",
+          "datasetId": "MexeNaX1RsSZJmAZ7"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c5-004",
+      "campaign": "portfolio-media-platform",
+      "title": "Accelerator Mentor Webinar: Turn One Session Into Reusable Lessons",
+      "keyword": "startup mentor webinar",
+      "slug": "accelerator-mentor-webinar",
+      "words": 1183,
+      "articleSha256": "18eea804ac150bcec6f2dc0fbdedc8c110ee322d880ae81879d04abcf082f771",
+      "graphicSha256": "5f6b397d727cc44c6331127ada8734e56835301d63cf62560bed260361b3cac2",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "How long should a startup mentor webinar be?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Should a mentor webinar's Q&A be published?",
+          "basis": "editorial"
+        },
+        {
+          "question": "What should accompany a reusable webinar clip?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [
+        "long_title_review_serp_display"
+      ]
+    },
+    {
+      "id": "vc-manual50-c5-005",
+      "campaign": "portfolio-media-platform",
+      "title": "Portfolio Founder Interviews: Build a Repeatable Question Set",
+      "keyword": "founder interview questions",
+      "slug": "portfolio-founder-interviews",
+      "words": 1227,
+      "articleSha256": "6a856ea74c0e72752a12b2343ca7bdc9e4fc12ed2264d77987f85e9ef09f0ceb",
+      "graphicSha256": "a70074b50ecb9b65b0ecd059e9323e821130e06cead3a916c63d2a31d767fa09",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "What are some good interview questions for a founder?",
+          "basis": "observed_paa",
+          "query": "portfolio founder interviews",
+          "runId": "VMTK8QQ0C4Cf7WZXf",
+          "datasetId": "MexeNaX1RsSZJmAZ7"
+        },
+        {
+          "question": "Should founders receive questions before recording?",
+          "basis": "editorial"
+        },
+        {
+          "question": "How can a portfolio interview avoid becoming promotional?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c5-006",
+      "campaign": "portfolio-media-platform",
+      "title": "Portfolio Company Newsletter: Make Founder Updates Useful",
+      "keyword": "venture capital portfolio newsletter",
+      "slug": "portfolio-company-newsletter",
+      "words": 1230,
+      "articleSha256": "f2ca55e7907209cfa696e02fe91b765f8302110ac58d4a6f1d8c39f9d567b312",
+      "graphicSha256": "98a7fd03a040a06079f3bcbf56363a98d012e22e09494d316b5f0517b5e21772",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "What should a portfolio company newsletter include?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Should a newsletter embed video or link to it?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Are newsletter open rates a reliable measure of readership?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c5-007",
+      "campaign": "portfolio-media-platform",
+      "title": "Startup Accelerator Alumni Community: Use Video to Share Useful Experience",
+      "keyword": "startup accelerator alumni community",
+      "slug": "startup-accelerator-alumni-community",
+      "words": 1197,
+      "articleSha256": "9026532f6daa5a35a9ade7a64d52cbe3ff080c69caefbeb4b80aeeab612601dd",
+      "graphicSha256": "081402bd4deb07bc458ea083f5d92968c2d96d9fb26b92b83ce7ef0417de0c33",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "What is a startup accelerator program?",
+          "basis": "observed_paa",
+          "query": "startup accelerator alumni community",
+          "runId": "VMTK8QQ0C4Cf7WZXf",
+          "datasetId": "MexeNaX1RsSZJmAZ7"
+        },
+        {
+          "question": "What videos are useful for accelerator alumni?",
+          "basis": "editorial"
+        },
+        {
+          "question": "How can a remote alumni community encourage participation?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": [
+        "long_title_review_serp_display"
+      ]
+    },
+    {
+      "id": "vc-manual50-c5-008",
+      "campaign": "portfolio-media-platform",
+      "title": "Founder Content Workshop: Help a Cohort Leave With a Usable Draft",
+      "keyword": "content creation workshop for startup founders",
+      "slug": "founder-content-workshop",
+      "words": 1230,
+      "articleSha256": "75ffecffa4431855ab6ce513d74737882138c925a47d1fe48a94286cb8f88621",
+      "graphicSha256": "da993ebd52dd5c0f0c59adbf6bd3999535bf81043065fb252b5aeb78238ac748",
+      "sourceCount": 2,
+      "faqEvidence": [
+        {
+          "question": "What should founders leave a content workshop with?",
+          "basis": "editorial"
+        },
+        {
+          "question": "How long should a founder content workshop last?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can founders attend without a finished product?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c5-009",
+      "campaign": "portfolio-media-platform",
+      "title": "Video Brand Guidelines for a Multi-Company Portfolio Program",
+      "keyword": "video brand guidelines",
+      "slug": "portfolio-video-brand-guidelines",
+      "words": 1212,
+      "articleSha256": "19e0871dc2420684effd384bb5eaecb92c067fdaeba3ffbb5c96d795f3376e6f",
+      "graphicSha256": "4551b9e7a1c120e6ea95a5ae0c98363158bf984ce0ebd57bf3247736f6a99021",
+      "sourceCount": 3,
+      "faqEvidence": [
+        {
+          "question": "Which video rules should be consistent across a portfolio?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Should all portfolio videos use the same visual template?",
+          "basis": "editorial"
+        },
+        {
+          "question": "Can automatic captions satisfy the brand review?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    },
+    {
+      "id": "vc-manual50-c5-010",
+      "campaign": "portfolio-media-platform",
+      "title": "Accelerator Program Metrics: Evaluate the Media Support Program",
+      "keyword": "accelerator program metrics",
+      "slug": "accelerator-media-program-metrics",
+      "words": 1255,
+      "articleSha256": "52b88fa10ed692317b4caa7e5ab0447368621b7d4b7526dc2565d6dfe69790e6",
+      "graphicSha256": "6b7cbd8c561ae08036a918d1f8dec561d5657ee13fe66064a8ca586352a28775",
+      "sourceCount": 3,
+      "faqEvidence": [
+        {
+          "question": "What are program metrics?",
+          "basis": "observed_paa",
+          "query": "accelerator program metrics",
+          "runId": "VMTK8QQ0C4Cf7WZXf",
+          "datasetId": "MexeNaX1RsSZJmAZ7"
+        },
+        {
+          "question": "Should an accelerator combine video views across platforms?",
+          "basis": "editorial"
+        },
+        {
+          "question": "How should missing company follow-up be reported?",
+          "basis": "editorial"
+        }
+      ],
+      "reviewStatus": "review",
+      "warnings": []
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "id": "vc-manual50-c1-010",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.linkedin.com/help/linkedin/answer/a10902072",
+      "supports": "LinkedIn says video distribution depends on relevance, quality, and member feedback and can increase or decrease over time.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.linkedin.com/business/talent/blog/talent-acquisition/how-create-videos-for-linkedin-feed",
+      "supports": "LinkedIn recommends one idea per video, an outline of key points, specific examples, and an actionable close; promotional statistics and fixed timing claims are not reused.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What should a founder post on LinkedIn?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Is there a guaranteed posting schedule for LinkedIn video reach?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How should a founder measure whether the strategy is useful?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: turn founder expertise into four distinct video jobs with a conversation plan and decision log. HubSpot's inspected article already covers buyer focus, batching, and perspective; this is an applied video-specific extension, not a claim that basic strategy advice is missing.",
+  "reviewNotes": [
+    "c1-010 peopleAlsoAsk is empty in serp-evidence.json; all FAQs are editorial.",
+    "Competitor body inspected: https://www.hubspot.com/startups/resources/sales-and-marketing/founder-led-content-strategy. Its performance numbers and timing promises are excluded.",
+    "The four-post incident-handoff sequence is fictional and the cadence is an editorial choice, not an algorithm claim.",
+    "No claims of automatic publishing, integrations, supported export formats, or product performance appear in the body."
+  ],
+  "serp": {
+    "id": "vc-manual50-c1-010",
+    "keyword": "founder LinkedIn content strategy",
+    "found": true,
+    "query": "founder LinkedIn content strategy",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:49:53.581Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How to Build a Founder-Led Content Strategy in 2026",
+        "url": "https://www.hubspot.com/startups/resources/sales-and-marketing/founder-led-content-strategy",
+        "domain": "hubspot.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "Successful Founder-Led LinkedIn Page Strategies",
+        "url": "https://www.linkedin.com/top-content/marketing/linkedin-marketing-guide/successful-founder-led-linkedin-page-strategies/",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 3,
+        "title": "The Ultimate Founder-Led LinkedIn Guide",
+        "url": "https://www.mrrunlocked.com/p/founder-led-linkedin-guide",
+        "domain": "mrrunlocked.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "What is your LinkedIn content creation strategy?",
+        "url": "https://www.reddit.com/r/linkedin/comments/1ic9kbt/what_is_your_linkedin_content_creation_strategy/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "How To Develop A 6-Figure Content Strategy | Chris ...",
+        "url": "https://www.linkedin.com/posts/donnellychris_how-to-develop-a-6-figure-content-strategy-activity-7283466984418160641-4NPU",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 6,
+        "title": "9 Steps to a LinkedIn Content Strategy That Took Us to $1 ...",
+        "url": "https://www.lemlist.com/blog/linkedin-content-strategy",
+        "domain": "lemlist.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Matt Barker - How to create a LinkedIn content strategy",
+        "url": "https://www.linkedin.com/posts/mattjbarker1_if-youre-stuck-building-your-linkedin-content-activity-7340950710248767488-R7Rg",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 8,
+        "title": "LinkedIn Content Strategy: The 10-Step System Used by ...",
+        "url": "https://www.supergrow.ai/blog/linkedin-content-strategy",
+        "domain": "supergrow.ai",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": [
+      "Founder linkedin content strategy reddit",
+      "Founder linkedin content strategy template",
+      "Founder linkedin content strategy example",
+      "Founder linkedin content strategy pdf",
+      "Founder-led content 2026",
+      "Founder-led content examples",
+      "RB2B LinkedIn",
+      "LinkedIn Adam"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

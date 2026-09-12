@@ -1,0 +1,120 @@
+{
+  "id": "vc-manual50-c1-005",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://stripe.com/newsroom/information",
+      "supports": "Stripe groups official logos, product screenshots, executive photos, and usage information on its newsroom asset page; no metrics or executive details are reused.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.w3.org/WAI/media/av/transcripts/",
+      "supports": "W3C distinguishes audio transcripts from descriptive transcripts that include essential visual information and recommends easy access from the media.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What video assets belong in a startup press kit?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should every video in the kit have a transcript?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How do you stop outdated press-kit assets being reused?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial opportunity hypothesis: add asset-level context, transcript pairing, external-access testing, and maintenance triggers to a startup press kit. Stripe's first-party asset page was inspected as an organization example; no exhaustive competitor-gap claim is made.",
+  "reviewNotes": [
+    "c1-005 peopleAlsoAsk is empty in serp-evidence.json; all FAQs are editorial.",
+    "Stripe is an observed asset-organization example only; no endorsement, partnership, or copying of its assets is implied.",
+    "Original asset register remains in the body; no external worksheet download is claimed."
+  ],
+  "serp": {
+    "id": "vc-manual50-c1-005",
+    "keyword": "startup press kit",
+    "found": true,
+    "query": "startup press kit",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:49:53.581Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Press kit: aprenda o que é e 7 passos simples para fazer o ...",
+        "url": "https://www.cortex-intelligence.com/blog/press-kit",
+        "domain": "cortex-intelligence.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "Building a Press Kit for Your Startup - The Founder Nation",
+        "url": "https://www.thefoundernation.com/building-a-press-kit-for-your-startup/",
+        "domain": "thefoundernation.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Media Kit Examples for Startups: Make a Strong Impression",
+        "url": "https://presspitchai.com/blog/media-kit-examples-startups",
+        "domain": "presspitchai.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "The Startup's Guide To Setting Up A Press / Media Page",
+        "url": "https://www.linkedin.com/posts/advancedintegritysolutions_14-press-kit-examples-the-startups-guide-activity-7296190229961494530-5z-p",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 5,
+        "title": "How to Create A Professional Press Kit For Your Startup",
+        "url": "https://presskithero.com/press-kit",
+        "domain": "presskithero.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Press kit Criativo: 7 Exemplos Para sua Empresa Sair na Mídia",
+        "url": "https://www.tramaweb.com.br/press-kit-criativo-7-exemplos/",
+        "domain": "tramaweb.com.br",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Press Kit Example - What to Include + Real Samples for 2026",
+        "url": "https://easyprwire.com/blog/press-kit-example?srsltid=AfmBOoq0RKlzXemxNgJ7TtfXLen16ZRzD0ixXyuERfPSD4JdKBeNRwQh",
+        "domain": "easyprwire.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "The 11-Step Guide to Crafting the Perfect Media Kit for Startups",
+        "url": "https://www.entrepreneur.com/growing-a-business/the-ultimate-11-step-guide-to-crafting-the-perfect-media/456678",
+        "domain": "entrepreneur.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": [
+      "Startup press kit template",
+      "Startup press kit pdf",
+      "Startup press kit examples",
+      "Startup press kit free",
+      "Best startup press kit",
+      "Press kit para influenciadores",
+      "Press kit exemplos",
+      "Press kit dj"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

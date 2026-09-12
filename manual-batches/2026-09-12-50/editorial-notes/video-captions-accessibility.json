@@ -1,0 +1,130 @@
+{
+  "id": "vc-manual50-c4-004",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.w3.org/WAI/media/av/captions/",
+      "supports": "Captions synchronize speech and meaningful non-speech audio with the video; automatic captions require accuracy confirmation.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.w3.org/WAI/media/av/transcripts/",
+      "supports": "Basic transcripts convey audio information; descriptive transcripts also convey important visual information and may need additions beyond a caption export.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.w3.org/WAI/media/av/description/",
+      "supports": "Description conveys essential visual information, including meaningful screen text; integrated description can be included in main narration.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Are automatic captions ready to publish without review?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Is a transcript the same thing as captions?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does adding captions make every video fully accessible?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "The observed top result https://www.w3.org/WAI/media/av/captions/ was opened and explains caption meaning, formats and accuracy. This article's distinct editorial contribution is a fictional defect log and exact-version release review; it does not claim W3C omits those broader concerns or certify legal compliance.",
+  "reviewNotes": [
+    "Observed PAA wording for vc-manual50-c4-004 concerned ADA, ADHD and legacy caption channels; those questions were not adopted because they exceed this practical review scope.",
+    "All three FAQs are editorial. No legal-compliance certification or medical claim is made.",
+    "The defect log is fictional; caption and description guidance is paraphrased from the opened W3C pages."
+  ],
+  "serp": {
+    "id": "vc-manual50-c4-004",
+    "keyword": "video captions accessibility",
+    "found": true,
+    "query": "video captions accessibility",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:49:53.581Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Captions/Subtitles | Web Accessibility Initiative (WAI)",
+        "url": "https://www.w3.org/WAI/media/av/captions/",
+        "domain": "w3.org",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Provide captions and descriptions of video",
+        "url": "https://accessibility.huit.harvard.edu/provide-captions-and-descriptions-video",
+        "domain": "accessibility.huit.harvard.edu",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Captions and Transcripts | Section508. ...",
+        "url": "https://www.section508.gov/create/captions-transcripts/",
+        "domain": "section508.gov",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Caption Video Content for Accessibility",
+        "url": "https://cesupport.finalsite.com/hc/en-us/articles/14919694365581-Caption-Video-Content-for-Accessibility",
+        "domain": "cesupport.finalsite.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Video accessibility: Captioning, subtitles and transcripts",
+        "url": "https://www.dundee.ac.uk/guides/video-accessibility-captioning-subtitles-and-transcripts",
+        "domain": "dundee.ac.uk",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Open Vs. Closed Captions: Which Is More Accessible?",
+        "url": "https://www.boia.org/blog/open-vs.-closed-captions-which-is-more-accessible",
+        "domain": "boia.org",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Video Accessibility",
+        "url": "https://www.accessibility.org.au/policy/video-accessibility/",
+        "domain": "accessibility.org.au",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Captions, Transcripts, and Audio Descriptions",
+        "url": "https://webaim.org/techniques/captions/",
+        "domain": "webaim.org",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What are the ADA guidelines for closed captioning?",
+      "Why do people with ADHD like closed captions?",
+      "What is CC1, CC2, CC3, CC4 closed captioned?",
+      "How to make videos ADA compliant?"
+    ],
+    "relatedQueries": [
+      "Video captions accessibility online",
+      "Accessibility captions instagram",
+      "Open captions accessibility",
+      "Video accessibility checklist",
+      "Closed captions examples",
+      "What are captions",
+      "Open captions vs closed captions",
+      "Captions vs subtitles"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

@@ -1,0 +1,131 @@
+{
+  "id": "vc-manual50-c3-005",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://help.vimeo.com/hc/en-us/articles/12426192100113-How-to-use-and-manage-video-review-links",
+      "supports": "Vimeo documents private time-coded review comments and configurable review-link permissions; these do not assign organizational authority.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/captions-prerecorded.html",
+      "supports": "Captions convey dialogue, speaker identity, and meaningful non-speech audio; relevant to final revision criteria.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What counts as one video revision round?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Who should resolve conflicting video feedback?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Does approval of a rough cut approve the final export?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: a comment card, decision-authority rules, and correction-versus-new-work boundary may add practical value beyond review-tool explanations. Competing page bodies were not inspected.",
+  "reviewNotes": [
+    "SERP row vc-manual50-c3-005 checked. Its PAA questions concern broader editing stages or unrelated rules; all three targeted revision FAQs are editorial.",
+    "Review stages, comment syntax, authority routing, and round definitions are proposed operating practices. Example comments and scenario are fictional."
+  ],
+  "serp": {
+    "id": "vc-manual50-c3-005",
+    "keyword": "video revision process",
+    "found": true,
+    "query": "video revision process",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:49:53.581Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Video Proofing",
+        "url": "https://reviewstudio.com/video-review-proofing-feedback-tool-lp/",
+        "domain": "reviewstudio.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Video Review and Approval Workflow: A Practical Guide",
+        "url": "https://fast.io/resources/video-review-and-approval/",
+        "domain": "fast.io",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "Video Collaboration Tools & Review Platform",
+        "url": "https://vimeo.com/features/video-collaboration",
+        "domain": "vimeo.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 4,
+        "title": "Streamlining Your Video Editing Workflow: Tips and Tricks ...",
+        "url": "https://medium.com/@emuesiri/streamlining-your-video-editing-workflow-tips-and-tricks-from-a-pro-76888d75bd83",
+        "domain": "medium.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "How to Provide Effective Feedback On Video Projects",
+        "url": "https://www.dropbox.com/resources/feedback-on-video",
+        "domain": "dropbox.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "What is video review? A complete guide for creative teams",
+        "url": "https://krock.io/blog/what-is-video-review/",
+        "domain": "krock.io",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "The Art of Post-Production: A Guide to Video Editing and ...",
+        "url": "https://www.yourfilm.com.au/blog/the-art-of-post-production-a-guide-to-video-editing-and-the-revisions-process/",
+        "domain": "yourfilm.com.au",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "3 Keys to a Successful Video Review Process",
+        "url": "https://www.matternow.com/blog/keys-to-a-successful-video-review-process/",
+        "domain": "matternow.com",
+        "resultType": "article"
+      },
+      {
+        "position": 9,
+        "title": "Streamlining the Review and Approval Workflow for Video ...",
+        "url": "https://www.avid.com/resource-center/streamlining-the-review-and-approval-workflow-for-video-post-production",
+        "domain": "avid.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What are the 5 stages of video editing?",
+      "What is the 3:2:1 rule in video editing?",
+      "What does the 80/20 rule mean in video editing?",
+      "What are the steps involved in the video edit process?"
+    ],
+    "relatedQueries": [
+      "Youtube video revision process",
+      "Video revision process step by step",
+      "Video revision process pdf",
+      "How to edit video professionally",
+      "Video feedback Examples",
+      "Video collaboration online",
+      "Video review example",
+      "How to edit videos on mobile"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

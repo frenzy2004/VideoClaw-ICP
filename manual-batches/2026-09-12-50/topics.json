@@ -1,0 +1,502 @@
+[
+  {
+    "id": "vc-manual50-c1-001",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "Recent funding round; preparing the next public customer-facing story",
+    "funnelStage": "awareness",
+    "keyword": "how to announce startup funding",
+    "title": "How to Announce Startup Funding With a Useful Video",
+    "slug": "announce-startup-funding-with-video"
+  },
+  {
+    "id": "vc-manual50-c1-002",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "Recent funding round; preparing the next public customer-facing story",
+    "funnelStage": "awareness",
+    "keyword": "founder led marketing",
+    "title": "Founder-Led Marketing: Build a Repeatable Video Routine",
+    "slug": "founder-led-marketing-video-routine"
+  },
+  {
+    "id": "vc-manual50-c1-003",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "Recent funding round; preparing the next public customer-facing story",
+    "funnelStage": "awareness",
+    "keyword": "startup launch video",
+    "title": "Startup Launch Video: Plan the Story, Demo and Next Step",
+    "slug": "startup-launch-video-plan"
+  },
+  {
+    "id": "vc-manual50-c1-004",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "Recent funding round; preparing the next public customer-facing story",
+    "funnelStage": "awareness",
+    "keyword": "founder story video",
+    "title": "Founder Story Video: Turn an Interview Into a Clear Narrative",
+    "slug": "founder-story-video-interview"
+  },
+  {
+    "id": "vc-manual50-c1-005",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "Recent funding round; preparing the next public customer-facing story",
+    "funnelStage": "awareness",
+    "keyword": "startup press kit",
+    "title": "Startup Press Kit: Which Video and Visual Assets to Include",
+    "slug": "startup-press-kit-video-assets"
+  },
+  {
+    "id": "vc-manual50-c1-006",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "Recent funding round; preparing the next public customer-facing story",
+    "funnelStage": "awareness",
+    "keyword": "product launch content calendar",
+    "title": "Product Launch Content Calendar: A Two-Week Video Plan",
+    "slug": "product-launch-content-calendar"
+  },
+  {
+    "id": "vc-manual50-c1-007",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "Recent funding round; preparing the next public customer-facing story",
+    "funnelStage": "awareness",
+    "keyword": "customer testimonial video questions",
+    "title": "Customer Testimonial Video Questions That Get Specific Answers",
+    "slug": "customer-testimonial-video-questions"
+  },
+  {
+    "id": "vc-manual50-c1-008",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "Recent funding round; preparing the next public customer-facing story",
+    "funnelStage": "awareness",
+    "keyword": "how to make a recruitment video",
+    "title": "Startup Recruitment Video: Show the Work, Not Just the Perks",
+    "slug": "startup-recruitment-video"
+  },
+  {
+    "id": "vc-manual50-c1-009",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "Recent funding round; preparing the next public customer-facing story",
+    "funnelStage": "awareness",
+    "keyword": "startup explainer video script",
+    "title": "Startup Explainer Video Script: From Problem to Product Proof",
+    "slug": "startup-explainer-video-script"
+  },
+  {
+    "id": "vc-manual50-c1-010",
+    "campaign": "newly-funded-founder",
+    "icp": "Newly funded US startup founder building media presence and a GTM content plan",
+    "customerTrigger": "Recent funding round; preparing the next public customer-facing story",
+    "funnelStage": "awareness",
+    "keyword": "founder LinkedIn content strategy",
+    "title": "A Founder LinkedIn Content Strategy Built Around Useful Video",
+    "slug": "founder-linkedin-content-strategy"
+  },
+  {
+    "id": "vc-manual50-c2-001",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing for demo day, launch or investor follow-up",
+    "customerTrigger": "Upcoming accelerator demo day or investor presentation",
+    "funnelStage": "awareness",
+    "keyword": "demo day pitch",
+    "title": "Demo Day Pitch: Build a Story Investors Can Follow",
+    "slug": "demo-day-pitch-story"
+  },
+  {
+    "id": "vc-manual50-c2-002",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing for demo day, launch or investor follow-up",
+    "customerTrigger": "Upcoming accelerator demo day or investor presentation",
+    "funnelStage": "awareness",
+    "keyword": "startup demo video",
+    "title": "Startup Demo Video: Show One Valuable Product Workflow",
+    "slug": "startup-demo-video-workflow"
+  },
+  {
+    "id": "vc-manual50-c2-003",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing for demo day, launch or investor follow-up",
+    "customerTrigger": "Upcoming accelerator demo day or investor presentation",
+    "funnelStage": "awareness",
+    "keyword": "startup demo day checklist",
+    "title": "Demo Day Checklist: Rehearsal, Media and Follow-Up",
+    "slug": "demo-day-preparation-checklist"
+  },
+  {
+    "id": "vc-manual50-c2-004",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing for demo day, launch or investor follow-up",
+    "customerTrigger": "Upcoming accelerator demo day or investor presentation",
+    "funnelStage": "awareness",
+    "keyword": "startup investor update video",
+    "title": "Investor Update Video: What to Show Between Meetings",
+    "slug": "investor-update-video"
+  },
+  {
+    "id": "vc-manual50-c2-005",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing for demo day, launch or investor follow-up",
+    "customerTrigger": "Upcoming accelerator demo day or investor presentation",
+    "funnelStage": "awareness",
+    "keyword": "investor pitch questions",
+    "title": "Investor Pitch Questions: Prepare Answers and Product Evidence",
+    "slug": "investor-pitch-questions"
+  },
+  {
+    "id": "vc-manual50-c2-006",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing for demo day, launch or investor follow-up",
+    "customerTrigger": "Upcoming accelerator demo day or investor presentation",
+    "funnelStage": "awareness",
+    "keyword": "record a product demo",
+    "title": "How to Record a Product Demo Before Your Next Pitch",
+    "slug": "record-product-demo-for-pitch"
+  },
+  {
+    "id": "vc-manual50-c2-007",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing for demo day, launch or investor follow-up",
+    "customerTrigger": "Upcoming accelerator demo day or investor presentation",
+    "funnelStage": "awareness",
+    "keyword": "startup pitch rehearsal",
+    "title": "Pitch Rehearsal: A Recording-Based Practice Routine",
+    "slug": "pitch-rehearsal-recording-routine"
+  },
+  {
+    "id": "vc-manual50-c2-008",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing for demo day, launch or investor follow-up",
+    "customerTrigger": "Upcoming accelerator demo day or investor presentation",
+    "funnelStage": "awareness",
+    "keyword": "investor follow up email after demo day",
+    "title": "Demo Day Follow-Up Email: Give Investors a Useful Next Step",
+    "slug": "demo-day-follow-up-email"
+  },
+  {
+    "id": "vc-manual50-c2-009",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing for demo day, launch or investor follow-up",
+    "customerTrigger": "Upcoming accelerator demo day or investor presentation",
+    "funnelStage": "awareness",
+    "keyword": "demo day social media",
+    "title": "Demo Day Social Media: A Practical Before-and-After Plan",
+    "slug": "demo-day-social-media-plan"
+  },
+  {
+    "id": "vc-manual50-c2-010",
+    "campaign": "accelerator-demo-day-founder",
+    "icp": "US accelerator founder preparing for demo day, launch or investor follow-up",
+    "customerTrigger": "Upcoming accelerator demo day or investor presentation",
+    "funnelStage": "awareness",
+    "keyword": "pitch deck vs pitch video",
+    "title": "Pitch Deck vs Pitch Video: Choose the Right Follow-Up Asset",
+    "slug": "pitch-deck-vs-pitch-video"
+  },
+  {
+    "id": "vc-manual50-c3-001",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "Needs a repeatable video workflow and is choosing how to resource production",
+    "funnelStage": "consideration",
+    "keyword": "video agency vs freelancer",
+    "title": "Video Agency vs Freelancer: Choose for Your Actual Workload",
+    "slug": "video-agency-vs-freelancer"
+  },
+  {
+    "id": "vc-manual50-c3-002",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "Needs a repeatable video workflow and is choosing how to resource production",
+    "funnelStage": "consideration",
+    "keyword": "in house vs outsourced video production",
+    "title": "In-House vs Outsourced Video Production: A Startup Decision Guide",
+    "slug": "in-house-vs-outsourced-video-production"
+  },
+  {
+    "id": "vc-manual50-c3-003",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "Needs a repeatable video workflow and is choosing how to resource production",
+    "funnelStage": "consideration",
+    "keyword": "freelance video editor rates",
+    "title": "Freelance Video Editor Rates: How to Compare Quotes Fairly",
+    "slug": "freelance-video-editor-rates"
+  },
+  {
+    "id": "vc-manual50-c3-004",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "Needs a repeatable video workflow and is choosing how to resource production",
+    "funnelStage": "consideration",
+    "keyword": "video production brief template",
+    "title": "Video Production Brief Template: Get Comparable Proposals",
+    "slug": "video-production-brief-template"
+  },
+  {
+    "id": "vc-manual50-c3-005",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "Needs a repeatable video workflow and is choosing how to resource production",
+    "funnelStage": "consideration",
+    "keyword": "video revision process",
+    "title": "Video Revision Process: Keep Feedback Clear and Rounds Bounded",
+    "slug": "video-revision-process"
+  },
+  {
+    "id": "vc-manual50-c3-006",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "Needs a repeatable video workflow and is choosing how to resource production",
+    "funnelStage": "consideration",
+    "keyword": "AI video editor vs traditional video editor",
+    "title": "AI Video Editor vs Traditional Editor: Compare the Workflow",
+    "slug": "ai-video-editor-vs-traditional-editor"
+  },
+  {
+    "id": "vc-manual50-c3-007",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "Needs a repeatable video workflow and is choosing how to resource production",
+    "funnelStage": "consideration",
+    "keyword": "video editor vs motion designer",
+    "title": "Video Editor vs Motion Designer: Who Does Your Project Need?",
+    "slug": "video-editor-vs-motion-designer"
+  },
+  {
+    "id": "vc-manual50-c3-008",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "Needs a repeatable video workflow and is choosing how to resource production",
+    "funnelStage": "consideration",
+    "keyword": "video production budget",
+    "title": "Video Production Budget: Separate the Work From the Day Rate",
+    "slug": "video-production-budget"
+  },
+  {
+    "id": "vc-manual50-c3-009",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "Needs a repeatable video workflow and is choosing how to resource production",
+    "funnelStage": "consideration",
+    "keyword": "outsourcing video editing",
+    "title": "Outsourcing Video Editing: A Handoff Checklist for Startups",
+    "slug": "outsourcing-video-editing-checklist"
+  },
+  {
+    "id": "vc-manual50-c3-010",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "Needs a repeatable video workflow and is choosing how to resource production",
+    "funnelStage": "consideration",
+    "keyword": "AI video editing limitations",
+    "title": "AI Video Editing Limitations: What a Buyer Should Test",
+    "slug": "ai-video-editing-limitations"
+  },
+  {
+    "id": "vc-manual50-c4-001",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "Existing long-form material needs conversion into useful campaign assets",
+    "funnelStage": "decision",
+    "keyword": "repurpose webinar content",
+    "title": "Repurpose Webinar Content Into a Focused Campaign",
+    "slug": "repurpose-webinar-content"
+  },
+  {
+    "id": "vc-manual50-c4-002",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "Existing long-form material needs conversion into useful campaign assets",
+    "funnelStage": "decision",
+    "keyword": "turn long videos into short clips",
+    "title": "How to Turn Long Videos Into Short Clips That Make Sense",
+    "slug": "turn-long-videos-into-short-clips"
+  },
+  {
+    "id": "vc-manual50-c4-003",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "Existing long-form material needs conversion into useful campaign assets",
+    "funnelStage": "decision",
+    "keyword": "video content repurposing workflow",
+    "title": "Video Content Repurposing Workflow: From Source to Distribution",
+    "slug": "video-content-repurposing-workflow"
+  },
+  {
+    "id": "vc-manual50-c4-004",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "Existing long-form material needs conversion into useful campaign assets",
+    "funnelStage": "decision",
+    "keyword": "video captions accessibility",
+    "title": "Video Captions and Accessibility: A Practical Review Checklist",
+    "slug": "video-captions-accessibility"
+  },
+  {
+    "id": "vc-manual50-c4-005",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "Existing long-form material needs conversion into useful campaign assets",
+    "funnelStage": "decision",
+    "keyword": "resize video for social media",
+    "title": "Resize Video for Social Media Without Losing the Message",
+    "slug": "resize-video-for-social-media"
+  },
+  {
+    "id": "vc-manual50-c4-006",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "Existing long-form material needs conversion into useful campaign assets",
+    "funnelStage": "decision",
+    "keyword": "customer onboarding video",
+    "title": "Customer Onboarding Video: Teach the First Useful Outcome",
+    "slug": "customer-onboarding-video"
+  },
+  {
+    "id": "vc-manual50-c4-007",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "Existing long-form material needs conversion into useful campaign assets",
+    "funnelStage": "decision",
+    "keyword": "how to make software tutorial videos",
+    "title": "Software Tutorial Video: Plan, Record and Test Each Step",
+    "slug": "software-tutorial-video"
+  },
+  {
+    "id": "vc-manual50-c4-008",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "Existing long-form material needs conversion into useful campaign assets",
+    "funnelStage": "decision",
+    "keyword": "video content calendar",
+    "title": "Video Content Calendar: Plan Around Buyer Questions",
+    "slug": "video-content-calendar"
+  },
+  {
+    "id": "vc-manual50-c4-009",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "Existing long-form material needs conversion into useful campaign assets",
+    "funnelStage": "decision",
+    "keyword": "video marketing metrics",
+    "title": "Video Marketing Metrics: Match the Measure to the Job",
+    "slug": "video-marketing-metrics"
+  },
+  {
+    "id": "vc-manual50-c4-010",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "Existing long-form material needs conversion into useful campaign assets",
+    "funnelStage": "decision",
+    "keyword": "video case study template",
+    "title": "Video Case Study Template: Show the Problem, Work and Evidence",
+    "slug": "video-case-study-template"
+  },
+  {
+    "id": "vc-manual50-c5-001",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "Needs a repeatable media program for a cohort or portfolio",
+    "funnelStage": "awareness",
+    "keyword": "startup accelerator marketing strategy",
+    "title": "Accelerator Marketing Strategy: Build a Useful Founder Media Program",
+    "slug": "accelerator-marketing-strategy"
+  },
+  {
+    "id": "vc-manual50-c5-002",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "Needs a repeatable media program for a cohort or portfolio",
+    "funnelStage": "awareness",
+    "keyword": "venture capital portfolio marketing",
+    "title": "Venture Capital Portfolio Marketing: A Shared Video Support Model",
+    "slug": "venture-capital-portfolio-marketing"
+  },
+  {
+    "id": "vc-manual50-c5-003",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "Needs a repeatable media program for a cohort or portfolio",
+    "funnelStage": "awareness",
+    "keyword": "how to film startup demo day",
+    "title": "Demo Day Event Video: Plan Capture, Permissions and Follow-Up",
+    "slug": "demo-day-event-video"
+  },
+  {
+    "id": "vc-manual50-c5-004",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "Needs a repeatable media program for a cohort or portfolio",
+    "funnelStage": "awareness",
+    "keyword": "startup mentor webinar",
+    "title": "Accelerator Mentor Webinar: Turn One Session Into Reusable Lessons",
+    "slug": "accelerator-mentor-webinar"
+  },
+  {
+    "id": "vc-manual50-c5-005",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "Needs a repeatable media program for a cohort or portfolio",
+    "funnelStage": "awareness",
+    "keyword": "founder interview questions",
+    "title": "Portfolio Founder Interviews: Build a Repeatable Question Set",
+    "slug": "portfolio-founder-interviews"
+  },
+  {
+    "id": "vc-manual50-c5-006",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "Needs a repeatable media program for a cohort or portfolio",
+    "funnelStage": "awareness",
+    "keyword": "venture capital portfolio newsletter",
+    "title": "Portfolio Company Newsletter: Make Founder Updates Useful",
+    "slug": "portfolio-company-newsletter"
+  },
+  {
+    "id": "vc-manual50-c5-007",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "Needs a repeatable media program for a cohort or portfolio",
+    "funnelStage": "awareness",
+    "keyword": "startup accelerator alumni community",
+    "title": "Startup Accelerator Alumni Community: Use Video to Share Useful Experience",
+    "slug": "startup-accelerator-alumni-community"
+  },
+  {
+    "id": "vc-manual50-c5-008",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "Needs a repeatable media program for a cohort or portfolio",
+    "funnelStage": "awareness",
+    "keyword": "content creation workshop for startup founders",
+    "title": "Founder Content Workshop: Help a Cohort Leave With a Usable Draft",
+    "slug": "founder-content-workshop"
+  },
+  {
+    "id": "vc-manual50-c5-009",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "Needs a repeatable media program for a cohort or portfolio",
+    "funnelStage": "awareness",
+    "keyword": "video brand guidelines",
+    "title": "Video Brand Guidelines for a Multi-Company Portfolio Program",
+    "slug": "portfolio-video-brand-guidelines"
+  },
+  {
+    "id": "vc-manual50-c5-010",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "Needs a repeatable media program for a cohort or portfolio",
+    "funnelStage": "awareness",
+    "keyword": "accelerator program metrics",
+    "title": "Accelerator Program Metrics: Evaluate the Media Support Program",
+    "slug": "accelerator-media-program-metrics"
+  }
+]

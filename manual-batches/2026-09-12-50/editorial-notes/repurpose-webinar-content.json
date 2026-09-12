@@ -1,0 +1,129 @@
+{
+  "id": "vc-manual50-c4-001",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://wistia.com/blog/repurpose-webinar-content",
+      "supports": "The publisher describes repurposing recordings, slides and audience interactions, including embedding a replay in a related article.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.w3.org/WAI/media/av/transcripts/",
+      "supports": "Basic transcripts convey audio information; descriptive transcripts also convey important visual information and may need additions beyond a caption export.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.google.com/analytics/answer/10917952?hl=en",
+      "supports": "Campaign parameters identify referral traffic and campaigns; utm_content distinguishes creatives.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "How to repurpose webinar content?",
+      "basis": "observed_paa",
+      "query": "repurpose webinar content",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7"
+    },
+    {
+      "question": "What does it mean to repurpose content?",
+      "basis": "observed_paa",
+      "query": "repurpose webinar content",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7"
+    },
+    {
+      "question": "How many assets should one webinar produce?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: a decision-led moment map and dependency-aware release worksheet can add concrete value alongside the observed ON24 result https://www.on24.com/blog/how-to-repurpose-your-webinar-series-content/. That competitor body was not inspected, so no missing-coverage claim is asserted.",
+  "reviewNotes": [
+    "The original three-asset recommendation and fictional approval-process moment map are editorial tools, not measured results.",
+    "Observed FAQ wording comes from serp-evidence.json, record vc-manual50-c4-001; no demand estimates or webinar-effectiveness claims are made."
+  ],
+  "serp": {
+    "id": "vc-manual50-c4-001",
+    "keyword": "repurpose webinar content",
+    "found": true,
+    "query": "repurpose webinar content",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:49:53.581Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "How To Repurpose Your Webinar Series Content",
+        "url": "https://www.on24.com/blog/how-to-repurpose-your-webinar-series-content/",
+        "domain": "on24.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "4 ways to repurpose your webinar",
+        "url": "https://partnerships.nature.com/resources/blog/4-ways-to-repurpose-your-custom-webcast/",
+        "domain": "partnerships.nature.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "Repurpose webinar content into 10+ content sharables",
+        "url": "https://www.parmonic.com/repurpose/repurpose-webinar-content",
+        "domain": "parmonic.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "11 Ways to Repurpose Webinar Content [Guide for AI ...",
+        "url": "https://univid.io/blog/repurpose-webinar-ai/",
+        "domain": "univid.io",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Repurposing Webinar Content: Strategies & Snippets",
+        "url": "https://www.affirma.com/blog/repurposing-webinar-content/",
+        "domain": "affirma.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "How to repurpose webinars into social clips (with AI)",
+        "url": "https://livestorm.co/blog/repurpose-webinars-into-social-clips",
+        "domain": "livestorm.co",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Repurpose Webinar Content With AI",
+        "url": "https://help.goldcast.io/en_US/webinars-powered-by-smart-event-technology/25825662946971-repurpose-webinar-content-with-ai",
+        "domain": "help.goldcast.io",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "10 Smart Ways to Repurpose Webinars into Great Content",
+        "url": "https://www.goto.com/blog/10-smart-ways-repurpose-webinars-great-content",
+        "domain": "goto.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How to repurpose webinar content?",
+      "What does it mean to repurpose content?",
+      "How do you repurpose content?",
+      "Are webinars still effective in 2026?"
+    ],
+    "relatedQueries": [
+      "Repurpose webinar content examples",
+      "Repurpose webinar content pdf"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

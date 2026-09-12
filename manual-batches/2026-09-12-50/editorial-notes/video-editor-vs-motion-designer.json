@@ -1,0 +1,114 @@
+{
+  "id": "vc-manual50-c3-007",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.bls.gov/ooh/media-and-communication/film-and-video-editors-and-camera-operators.htm",
+      "supports": "Editors arrange footage recorded by camera operators and work with producers and directors.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.bls.gov/ooh/arts-and-design/multimedia-artists-and-animators.htm",
+      "supports": "The broader animation occupation includes moving images, graphics, visual effects, client review, and storyboards or animatics. It is not a universal definition of freelance motion-design services.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What is the difference between a motion designer and a video editor?",
+      "basis": "observed_paa",
+      "query": "video editor vs motion designer",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7"
+    },
+    {
+      "question": "Can one person edit the video and create motion graphics?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What should be approved before custom animation begins?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: assigning roles scene by scene and defining the editor-designer handoff may better support commissioning decisions than broad job-title comparisons. Competitor bodies were not inspected.",
+  "reviewNotes": [
+    "SERP row vc-manual50-c3-007 checked; first FAQ is exact observed PAA. Other questions are editorial.",
+    "QueueBridge is fictional. The scene worksheet and commissioning workflow are original recommendations. Broad BLS occupational context is not treated as a specification of every provider's skills."
+  ],
+  "serp": {
+    "id": "vc-manual50-c3-007",
+    "keyword": "video editor vs motion designer",
+    "found": true,
+    "query": "video editor vs motion designer",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:49:53.581Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "what is difference between an video editor and a motion ...",
+        "url": "https://www.reddit.com/r/VideoEditing/comments/1m77qyh/what_is_difference_between_an_video_editor_and_a/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Video Editors vs Motion Designers: Separate Roles, Better ...",
+        "url": "https://www.linkedin.com/posts/ahmadrj_respectthecraft-videoediting-motiondesign-activity-7414224381951877121-WNv-",
+        "domain": "linkedin.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 3,
+        "title": "Video Editor vs Motion Designer: Should Editors Do ...",
+        "url": "https://www.terrahenderson.com/blog/editor-vs-motion-designer",
+        "domain": "terrahenderson.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "Should You Learn Motion Graphics Or Video Editing First",
+        "url": "https://medium.com/@vikikrisna/should-you-learn-motion-graphics-or-video-editing-first-83b9cd123dfe",
+        "domain": "medium.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Which is better, to be a video editor or a graphic designer?",
+        "url": "https://www.quora.com/Which-is-better-to-be-a-video-editor-or-a-graphic-designer",
+        "domain": "quora.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Video Editing VS Motion Graphics: Difference",
+        "url": "https://www.tgcindia.com/blog-details/video-editing-vs-motion-graphics-difference",
+        "domain": "tgcindia.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Should you learn video editing, motion graphics, or both?",
+        "url": "https://www.miracamp.com/learn/video-editing/learning-motion-graphics",
+        "domain": "miracamp.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is the difference between a motion designer and a video editor?",
+      "Will motion designers be replaced by AI?",
+      "Is AI replacing video editors?",
+      "Is a motion designer the same as an animator?"
+    ],
+    "relatedQueries": [
+      "Video editor vs motion designer reddit",
+      "Video editor vs motion designer for beginners"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

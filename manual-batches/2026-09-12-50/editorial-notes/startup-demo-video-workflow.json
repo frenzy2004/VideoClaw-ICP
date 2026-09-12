@@ -1,0 +1,119 @@
+{
+  "id": "vc-manual50-c2-002",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://toolkit.techstars.com/master-your-pitch",
+      "supports": "Encourages visual demonstration and separating present product capabilities from future plans.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.w3.org/WAI/media/av/planning/",
+      "supports": "Explains planning captions, descriptions of important visuals, and transcripts according to media content.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "How many features should a startup demo video show?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I use sample data or a prototype in a demo?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How can I tell whether the demo is understandable?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Hypothesis: a workflow-selection table and cause-and-effect storyboard help founders choose what to demonstrate. Observed search results were reviewed as listings; competing page bodies were not audited.",
+  "reviewNotes": [
+    "serp-evidence.json record vc-manual50-c2-002 contained no observed PAA; all three FAQs are editorial.",
+    "Invoice-review company and scenes are explicitly fictional. Selection method and storyboard are original editorial tools."
+  ],
+  "serp": {
+    "id": "vc-manual50-c2-002",
+    "keyword": "startup demo video",
+    "found": true,
+    "query": "startup demo video",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:49:53.581Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Startup Product Demo Video: Lead With the Problem, Not ...",
+        "url": "https://www.flowjam.com/blog/startup-product-demo-video",
+        "domain": "flowjam.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "Product Explainer & Demo Videos",
+        "url": "https://www.youtube.com/playlist?list=PLvr0s6WLGo2YDydmzll9WNdVP5zuXi5me",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 3,
+        "title": "10 Best Product Demo Video Examples (That You Can ...",
+        "url": "https://www.synthesia.io/post/product-demo-video-examples",
+        "domain": "synthesia.io",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "13 Demo Video Examples & Best Practices (2026) | ngram.com",
+        "url": "https://www.ngram.com/blog/demo-video-examples",
+        "domain": "ngram.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "Underrated startup demos",
+        "url": "https://thisiskp.com/essays/underrated-startup-demos/",
+        "domain": "thisiskp.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "What's the best tool to build a simple video to demo my ...",
+        "url": "https://www.reddit.com/r/startups/comments/1gb0vw6/whats_the_best_tool_to_build_a_simple_video_to/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "SaaS Product Demo Videos That Convert: Best Practices",
+        "url": "https://hyltonmediagroup.com/blog/product-demo-video-best-practices-for-saas-startups",
+        "domain": "hyltonmediagroup.com",
+        "resultType": "article"
+      },
+      {
+        "position": 8,
+        "title": "Supademo: AI Interactive Product Demos",
+        "url": "https://supademo.com/",
+        "domain": "supademo.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": [
+      "Startup demo video template",
+      "Startup demo video reddit",
+      "Startup demo video ideas",
+      "Startup demo video free",
+      "Startup demo video examples",
+      "Product demo video examples",
+      "Best product demo videos",
+      "Saas product demo video examples"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

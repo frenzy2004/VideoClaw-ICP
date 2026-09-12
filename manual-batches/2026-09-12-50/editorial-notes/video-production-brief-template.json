@@ -1,0 +1,119 @@
+{
+  "id": "vc-manual50-c3-004",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.w3.org/WAI/media/av/planning/",
+      "supports": "W3C recommends specific accessibility requirements in internal and external project requirements, RFPs, and contracts.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.ftc.gov/business-guidance/resources/start-security-guide-business",
+      "supports": "FTC guidance recommends limiting contractor access to sensitive information unnecessary for the work.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What should a video production brief include?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How detailed should the delivery requirements be?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What if a source recording is not ready when proposals are requested?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: a reusable brief with asset status, acceptance conditions, and proposal assumptions may close practical handoff gaps. No competing page bodies were examined, and this SERP row contains no observed PAA.",
+  "reviewNotes": [
+    "SERP row vc-manual50-c3-004 inspected; peopleAlsoAsk is empty, so all FAQ questions are editorial.",
+    "The brief fields, acceptance test, and FieldRelay example are original editorial content. FieldRelay is fictional; no downloadable worksheet file is promised."
+  ],
+  "serp": {
+    "id": "vc-manual50-c3-004",
+    "keyword": "video production brief template",
+    "found": true,
+    "query": "video production brief template",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:49:53.581Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "The Best Creative Brief Template For Video Agencies [Free ...",
+        "url": "https://www.studiobinder.com/blog/best-creative-brief-template-video-agencies-free-download/",
+        "domain": "studiobinder.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "Video Creative Brief Template (Free Download)",
+        "url": "https://www.goldcast.io/blog-post/video-creative-brief-template",
+        "domain": "goldcast.io",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "How to Write a Creative Brief (Example and Templates)",
+        "url": "https://www.canva.com/docs/creative-briefs/",
+        "domain": "canva.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "Video brief template | Everything you need to include - Definition",
+        "url": "https://www.thisisdefinition.com/resources/video-brief-template",
+        "domain": "thisisdefinition.com",
+        "resultType": "article"
+      },
+      {
+        "position": 5,
+        "title": "How to Write the Perfect Production Brief (Template included)",
+        "url": "https://www.twogiraffes.com.au/blog-post/how-to-write-the-perfect-production-brief/",
+        "domain": "twogiraffes.com.au",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Revitalize Your Videos With Our Corporate Video Brief ...",
+        "url": "https://www.brafton.com/blog/video-marketing/corporate-video-brief-example/",
+        "domain": "brafton.com",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Everything Starts with a Brief (+ VIDEO BRIEF TEMPLATE)",
+        "url": "https://esgfilms.eu/everything-starts-with-a-brief-video-brief-template/",
+        "domain": "esgfilms.eu",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "Improve collaboration with this free video brief template",
+        "url": "https://www.ziflow.com/blog/video-brief-template",
+        "domain": "ziflow.com",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": [
+      "Video production brief template pdf",
+      "Video production brief template word",
+      "Video production brief template free download",
+      "Video brief template Word",
+      "Video production brief template free",
+      "Creative brief template",
+      "Video brief template free",
+      "Media brief template"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

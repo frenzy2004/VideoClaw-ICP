@@ -1,0 +1,123 @@
+{
+  "id": "vc-manual50-c4-006",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://developers.google.com/tech-writing/one/audience",
+      "supports": "Instruction should consider audience roles, prior knowledge and the knowledge needed to perform a task.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/style-guide/procedures-instructions/writing-step-by-step-instructions",
+      "supports": "Microsoft recommends numbered procedures, clear action locations, separate instructions and steps that complete the procedure.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What is an onboarding video?",
+      "basis": "observed_paa",
+      "query": "customer onboarding video",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7"
+    },
+    {
+      "question": "What should the first customer onboarding video teach?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How should I test a customer onboarding video?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: an outcome storyboard tied to prerequisites, recovery paths and observed task completion can add practical value alongside https://www.vidyard.com/blog/customer-onboarding-videos/. That URL was observed in the campaign SERP; its page body was not inspected, so no absence-of-coverage claim is made.",
+  "reviewNotes": [
+    "The request-management product and storyboard are fictional and do not describe VideoClaw capabilities.",
+    "Observed FAQ wording comes from serp-evidence.json, record vc-manual50-c4-006. Employee-onboarding stage questions were not adopted.",
+    "The task-completion test is an original editorial recommendation; no activation or retention improvement is asserted."
+  ],
+  "serp": {
+    "id": "vc-manual50-c4-006",
+    "keyword": "customer onboarding video",
+    "found": true,
+    "query": "customer onboarding video",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:49:53.581Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "A practical guide to customer onboarding videos",
+        "url": "https://www.vidyard.com/blog/customer-onboarding-videos/",
+        "domain": "vidyard.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "Customer Onboarding Videos | Velo - usevelo.ai",
+        "url": "https://usevelo.ai/use-cases/customer-onboarding-video/",
+        "domain": "usevelo.ai",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Client Onboarding Video: Engage New Customers in 5 steps",
+        "url": "https://www.pitchy.io/blog/communications-video/corporate-video-5-steps-for-a-successful-customer-onboarding",
+        "domain": "pitchy.io",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "22 Best Customer Onboarding Videos - EVER!",
+        "url": "https://wyzowl.com/best-customer-onboarding-videos/",
+        "domain": "wyzowl.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "21 Best Customer Onboarding Videos For SaaS",
+        "url": "https://medium.com/@userpilot/21-best-customer-onboarding-videos-for-saas-bf33a2b02380",
+        "domain": "medium.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "The Complete Guide to Customer Onboarding Videos",
+        "url": "https://sundaysky.com/ebook/complete-guide-to-customers-onboarding-videos-ebook/",
+        "domain": "sundaysky.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Scale Customer Onboarding Without Scaling Your Team",
+        "url": "https://www.heygen.com/business/customer-success",
+        "domain": "heygen.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "How To Setup A Full Client Onboarding Process (TEMPLATE)",
+        "url": "https://www.youtube.com/watch?v=s9K_V0B4jao",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "What is an onboarding video?",
+      "What are the 5 stages of the onboarding process?",
+      "What are the 5 C's of effective onboarding?",
+      "What are the 5 pillars of onboarding?"
+    ],
+    "relatedQueries": [
+      "Customer onboarding video example",
+      "Customer onboarding video template",
+      "Customer onboarding video script"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

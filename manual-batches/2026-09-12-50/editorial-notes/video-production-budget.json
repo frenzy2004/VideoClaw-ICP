@@ -1,0 +1,132 @@
+{
+  "id": "vc-manual50-c3-008",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.bls.gov/ooh/entertainment-and-sports/producers-and-directors.htm",
+      "supports": "Producer responsibilities include production and postproduction oversight, scheduling, and budgets.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.w3.org/WAI/media/av/planning/",
+      "supports": "W3C describes accessible-media project requirements and responsibilities across planning, captions, description, and delivery.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.bls.gov/news.release/ecec.htm",
+      "supports": "Employer compensation reporting separates wages and salaries from benefits; broad averages are not company-specific cost markups.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "What is a good budget for a videographer?",
+      "basis": "observed_paa",
+      "query": "video production budget",
+      "runId": "VMTK8QQ0C4Cf7WZXf",
+      "datasetId": "MexeNaX1RsSZJmAZ7"
+    },
+    {
+      "question": "How should a video budget account for unexpected work?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should internal review time be included in the budget?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: blank evidence-backed cost inputs, distinct internal-time columns, and named uncertainty scenarios may help buyers beyond headline production-cost ranges. Competing page bodies were not inspected.",
+  "reviewNotes": [
+    "SERP row vc-manual50-c3-008 checked; first FAQ matches observed PAA. Other FAQs are editorial.",
+    "SignalDock is fictional. Budget categories, baseline scope, scenario method, and approval rules are original guidance. No universal cost, reserve percentage, or savings claim is supplied."
+  ],
+  "serp": {
+    "id": "vc-manual50-c3-008",
+    "keyword": "video production budget",
+    "found": true,
+    "query": "video production budget",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-11T20:49:53.581Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "VMTK8QQ0C4Cf7WZXf",
+    "datasetId": "MexeNaX1RsSZJmAZ7",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Video Production Cost: What You'll Actually Pay in 2026",
+        "url": "https://vidico.com/news/video-production-cost/",
+        "domain": "vidico.com",
+        "resultType": "article"
+      },
+      {
+        "position": 2,
+        "title": "FREE Film Budget Template for Video Production",
+        "url": "https://www.studiobinder.com/blog/downloads/film-budget-template/",
+        "domain": "studiobinder.com",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "How to Budget for Your Video Production: Melbourne Edition",
+        "url": "https://vpagency.com.au/how-to-budget-for-your-video-production-melbourne-edition/",
+        "domain": "vpagency.com.au",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "How Much Does Corporate Video Production Cost in ...",
+        "url": "https://ivorymedia.com.au/corporate-video-production-cost-australia/",
+        "domain": "ivorymedia.com.au",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "What Goes Into a Video Production Budget",
+        "url": "https://amvisuals.com.au/what-goes-into-a-video-production-budget/",
+        "domain": "amvisuals.com.au",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Downloadable Video Production Budget Template",
+        "url": "https://clutch.co/resources/how-to-create-a-video-production-budget",
+        "domain": "clutch.co",
+        "resultType": "article"
+      },
+      {
+        "position": 7,
+        "title": "Video Budget Template: Creating Yours and Determining Costs ...",
+        "url": "https://www.youtube.com/watch?v=I2XlR0BIIVU",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 8,
+        "title": "How Much Should a Business Budget for Video Production?",
+        "url": "https://unrealmedia.com.au/blog/video-production/how-much-should-a-business-budget-for-video-production/",
+        "domain": "unrealmedia.com.au",
+        "resultType": "article"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "Is $2 million a big budget for a movie?",
+      "How much should a 3 minute video cost?",
+      "What is a good budget for a videographer?",
+      "How much should I charge for a 5 minute video?"
+    ],
+    "relatedQueries": [
+      "Video production budget template",
+      "Video production budget template excel",
+      "Video production budget pdf",
+      "Video production budget template free",
+      "Film production budget template",
+      "Theatre production budget template",
+      "Film budget template PDF",
+      "Production budget sheet Template"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}
