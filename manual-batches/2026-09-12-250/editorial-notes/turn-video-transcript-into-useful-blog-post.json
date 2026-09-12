@@ -1,0 +1,118 @@
+{
+  "id": "vc-manual250-c4-011",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://wistia.com/blog/ai-webinar-transcript-content",
+      "supports": "Timestamped idea extraction and checking drafts against source material.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.w3.org/WAI/media/av/transcripts/",
+      "supports": "Transcripts may need visual context as well as spoken information.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Should I publish the transcript as the article?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I clean up a speaker’s quotation?",
+      "basis": "editorial"
+    },
+    {
+      "question": "What if the recording does not answer part of my outline?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Reconstruct spoken material into an argument a reader can follow, identifying missing explanations and preserving attribution. Unlike retained c4-001's webinar campaign plan or c4-002's clipping procedure, the output is an edited written article. No ranking-page comparison or demand conclusion is asserted.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending."
+  ],
+  "serp": {
+    "id": "vc-manual250-c4-011",
+    "keyword": "turn video transcript into blog post",
+    "found": true,
+    "query": "turn video transcript into blog post",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:32:56.760Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "VideoToBlog - Convert Videos to Blog Posts (Free, No Login)",
+        "url": "https://videotoblog.com/",
+        "domain": "videotoblog.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Free AI Tool to Convert YouTube Videos to Blog Posts",
+        "url": "https://www.ryrob.com/youtube-video-blog-post/",
+        "domain": "ryrob.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Turn a YouTube Transcript into Blog Posts and Social ...",
+        "url": "https://transcript.you/blog/turn-youtube-transcript-into-blog-and-social-content",
+        "domain": "transcript.you",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "Convert Any Video to a Blog Post",
+        "url": "https://hintoai.com/tools/video-to-blog",
+        "domain": "hintoai.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Automatically Convert Podcast or Video Scripts to Blog Posts",
+        "url": "https://www.descript.com/ai/turn-into-blog-post",
+        "domain": "descript.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Video to Blog AI: Best YouTube to Blog Post Generator",
+        "url": "https://rightblogger.com/tool/youtube-to-blog-post",
+        "domain": "rightblogger.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "How to Convert YouTube Videos to Blog Posts Using AI",
+        "url": "https://drawne.com/youtube-video-to-blog-post/",
+        "domain": "drawne.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "How To Turn ANY YouTube Video Into A Blog Post In SECONDS!",
+        "url": "https://www.youtube.com/watch?v=KiN0BF-8sWI",
+        "domain": "youtube.com",
+        "resultType": "video_or_social"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": [
+      "Turn video transcript into blog post free",
+      "Video to blog ai free",
+      "Video blog examples",
+      "YouTube video to blog AI free",
+      "My blog video",
+      "Video blog website",
+      "Convert article to video free",
+      "Video transcript AI"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

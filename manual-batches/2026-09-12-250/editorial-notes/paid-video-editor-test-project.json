@@ -1,0 +1,111 @@
+{
+  "id": "vc-manual250-c3-011",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://www.upwork.com/hire/video-editors/how-to-hire/",
+      "supports": "Inspected page body: Upwork recommends assessing editing craft, portfolio fit, and collaboration. No hiring demand, rates, or outcomes are inferred.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://support.upwork.com/hc/en-us/articles/44564821903763-Understanding-milestones-on-fixed-price-contracts",
+      "supports": "Inspected page body: a milestone has a deliverable, payment and due date; Upwork documents funding and approval mechanics specific to its platform.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "How long should an editor test be?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should every shortlisted editor get the same footage?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Can I use the test edit publicly?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: A bounded audition with observable scoring anchors can help buyers distinguish candidate judgment from polished portfolios.",
+  "reviewNotes": [],
+  "serp": {
+    "id": "vc-manual250-c3-011",
+    "keyword": "paid video editor test project",
+    "found": true,
+    "query": "paid video editor test project",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:35:57.310Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "So - I received the classic unpaid Video Editing Request ...",
+        "url": "https://www.reddit.com/r/editors/comments/1m13qmy/so_i_received_the_classic_unpaid_video_editing/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "How to Hire a Video Editor: A Practical Guide",
+        "url": "https://www.moonb.io/blog/how-to-hire-a-video-editor",
+        "domain": "moonb.io",
+        "resultType": "article"
+      },
+      {
+        "position": 3,
+        "title": "How to Test Offshore Video Editors Before Hiring (2026)",
+        "url": "https://remotegrowthpartners.com/blog/how-to-test-an-offshore-video-editor-before-hiring-in-2025",
+        "domain": "remotegrowthpartners.com",
+        "resultType": "article"
+      },
+      {
+        "position": 4,
+        "title": "How to find a professional video editor for an unpaid test ...",
+        "url": "https://www.facebook.com/groups/editingvideofilms/posts/7222503471163728/",
+        "domain": "facebook.com",
+        "resultType": "video_or_social"
+      },
+      {
+        "position": 5,
+        "title": "Video Editing Test Project: How Freelancers Should ...",
+        "url": "https://www.gigxomi.com/blog/video-editing-test-project-how-freelancers-should-approach-it",
+        "domain": "gigxomi.com",
+        "resultType": "article"
+      },
+      {
+        "position": 6,
+        "title": "Video Editing Jobs for September 2026",
+        "url": "https://www.freelancer.com/jobs/video-editing",
+        "domain": "freelancer.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "Video Editor Jobs | Freelance Editing Work",
+        "url": "https://useme.com/en/jobs/category/multimedia,36/video,106/",
+        "domain": "useme.com",
+        "resultType": "other"
+      },
+      {
+        "position": 8,
+        "title": "11 Best Freelance Video Editors for Hire in September 2026",
+        "url": "https://www.toptal.com/marketing/video-editors",
+        "domain": "toptal.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [],
+    "relatedQueries": [
+      "Paid video editor test project reddit",
+      "Paid video editor test project free",
+      "Paid video editor test project example"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

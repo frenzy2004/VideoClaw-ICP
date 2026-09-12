@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "note": "Separate web-reading receipts; automatic transport failures remain unchanged in source-audit.json. This is source-support review, not team approval.",
+  "checks": [
+    {
+      "url": "https://helpx.adobe.com/premiere/desktop/render-and-export/export-files/export-a-still-frame.html",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Frame selection and Export Frame workflow inspected."
+    },
+    {
+      "url": "https://helpx.adobe.com/premiere/desktop/render-and-export/export-files/export-a-still-image.html",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Single-frame image export options inspected; distinct export modes described."
+    },
+    {
+      "url": "https://helpx.adobe.com/ie/premiere/desktop/edit-projects/set-up-multi-camera-sequences-for-editing/create-a-multi-camera-source-sequence.html",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Source-sequence synchronization options inspected."
+    },
+    {
+      "url": "https://helpx.adobe.com/ie/premiere/desktop/edit-projects/set-up-multi-camera-sequences-for-editing/create-and-edit-a-multi-camera-target-sequence.html",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Target sequence creation and multi-camera view controls inspected."
+    },
+    {
+      "url": "https://www.atlassian.com/itsm/service-request-management/service-catalog",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "IT service catalog definition and service offerings inspected; portfolio-media adaptation is editorial, not an Atlassian claim."
+    },
+    {
+      "url": "https://www.atlassian.com/software/jira/templates/marketing-service-management",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Marketing request capture, queues and self-service portal description inspected."
+    },
+    {
+      "url": "https://www.upwork.com/hire/video-editors/how-to-hire/",
+      "method": "web_page_body_review",
+      "checkedAt": "2026-09-12",
+      "support": "Portfolio review, skill and collaboration criteria inspected; no rates or outcome figures imported."
+    }
+  ]
+}

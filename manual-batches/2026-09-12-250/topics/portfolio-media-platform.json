@@ -1,0 +1,846 @@
+[
+  {
+    "id": "vc-manual250-c5-011",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "Founders send open-ended media requests because they cannot tell which support the platform actually offers.",
+    "funnelStage": "consideration",
+    "keyword": "marketing service catalog",
+    "title": "Build a Portfolio Media Support Service Menu",
+    "slug": "portfolio-media-support-service-menu",
+    "distinctIntent": "Define requestable services, prerequisites and exclusions for an existing portfolio media program. Unlike retained c5-002's broad support model, the deliverable is a founder-facing service catalog, not a staffing or vendor decision.",
+    "originalWorksheet": "A six-entry service menu with the request each entry solves, minimum inputs, included output, exclusions, eligibility and escalation route; entries are illustrative, not product promises.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.atlassian.com/itsm/service-request-management/service-catalog",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Defines service catalogs and explicitly includes marketing among non-IT service teams. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      },
+      {
+        "url": "https://www.atlassian.com/software/jira/templates/marketing-service-management",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Describes marketing request types, a service portal and request tracking."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-012",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "Several portfolio companies request support in the same week and relationship pressure is determining queue order.",
+    "funnelStage": "consideration",
+    "keyword": "creative request management",
+    "title": "Prioritize Media Requests Across Portfolio Companies",
+    "slug": "prioritize-portfolio-media-requests",
+    "distinctIntent": "Choose the next company request from a ready backlog using urgency, readiness, blocked dependencies and an explicit tie-break. Distinct from a general portfolio strategy, content calendar or choosing production resources.",
+    "originalWorksheet": "A worked queue of eight fictional company requests with a ranking rationale, readiness hold, tie-break rule and appeal example; no invented productivity benchmarks.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.atlassian.com/software/jira/templates/marketing-service-management",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Describes marketing request types, a service portal and request tracking. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      },
+      {
+        "url": "https://kanbanguides.org/the-kanban-guide/",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Guide defines work in progress and flow management."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-013",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "The platform has limited expert office-hour slots and repeated no-shows leave other companies waiting.",
+    "funnelStage": "consideration",
+    "keyword": "office hours scheduling",
+    "title": "Schedule Portfolio Media Office Hours Without Overbooking",
+    "slug": "portfolio-media-office-hours-scheduling",
+    "distinctIntent": "Allocate existing advisory appointments through prerequisites, slot lengths, waitlists and cancellation rules. This solves appointment utilization, not workshop teaching, mentor-webinar repurposing or vendor selection.",
+    "originalWorksheet": "A two-week illustrative booking grid, cancellation-to-waitlist procedure and slot arithmetic using reader-supplied availability, with a separate private-session option.",
+    "sourceCandidates": [
+      {
+        "url": "https://calendly.com/blog/office-hours/",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Explains office-hours scheduling, appointment types and minimum notice. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      },
+      {
+        "url": "https://founders.firstround.com/template-of-sheet",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. First Round describes its private resource portal, peer questions and mentoring."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-014",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "Many assets are being started while a small pool of company reviewers has an expanding unfinished queue.",
+    "funnelStage": "consideration",
+    "keyword": "content approval bottlenecks",
+    "title": "Unblock Portfolio Media Reviews With Work Limits",
+    "slug": "portfolio-media-review-work-limits",
+    "distinctIntent": "Control work entering review and resolve aging blockers before starting more assets. Unlike retained c3-005 on feedback rounds, this addresses queue flow across independent companies.",
+    "originalWorksheet": "A review-queue simulation showing an initial board, a reader-chosen work limit, a blocked item and the next admissible job; include a before-and-after state sequence.",
+    "sourceCandidates": [
+      {
+        "url": "https://filestage.io/blog/campaign-approval-workflow/",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Discusses approval workflow bottlenecks, ownership and sequencing; speed and revision claims excluded. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      },
+      {
+        "url": "https://kanbanguides.org/the-kanban-guide/",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Guide defines work in progress and flow management."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-015",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "Several companies want the fund's newsletter, social channels and media support during overlapping launches.",
+    "funnelStage": "consideration",
+    "keyword": "shared marketing calendar",
+    "title": "Resolve Launch Clashes Across Portfolio Companies",
+    "slug": "resolve-portfolio-launch-calendar-clashes",
+    "distinctIntent": "Resolve collisions between separate company launches competing for the same fund-owned distribution slots. Unlike retained c1-006 and c4-008, this reconciles multiple organizations' calendars rather than planning one campaign; unlike c5-034, it does not synchronize one shared embargo.",
+    "originalWorksheet": "A three-company collision calendar with fixed and movable dates, shared-channel limits, dependencies and a worked rescheduling decision that explains who must agree.",
+    "sourceCandidates": [
+      {
+        "url": "https://asana.com/templates/marketing-calendar",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Describes a shared marketing calendar with dates, owners and channels. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      },
+      {
+        "url": "https://a16z.com/what-is-new-media-in-2026/",
+        "supports": "Inspected 2026-09-12: first-person account of portfolio media services, owned channels and network coordination; no outcome claims adopted."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-016",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "A new investment closes and the company has no platform contact, portal access or understanding of the support process.",
+    "funnelStage": "awareness",
+    "keyword": "portfolio company onboarding",
+    "title": "Onboard a New Company to Your Portfolio Media System",
+    "slug": "onboard-company-portfolio-media-system",
+    "distinctIntent": "Activate a new company in an already-running media service: establish the company record, contacts, access and first successful request. Unlike founder onboarding videos or funding announcements, the reader operates portfolio infrastructure.",
+    "originalWorksheet": "A company activation map from introduction to first successful request, with a minimal company record and acceptance exercise to confirm the founder can find and use support.",
+    "sourceCandidates": [
+      {
+        "url": "https://pages.visible.vc/hubfs/Investor%20Download%20Content/Guide%20to%20Onboarding%20New%20Companies.pdf",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Publisher's onboarding guide includes portfolio resources, company intake and platform introductions. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      },
+      {
+        "url": "https://www.atlassian.com/software/jira/templates/marketing-service-management",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Describes marketing request types, a service portal and request tracking."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-017",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "A shared folder is convenient for staff but exposes one company's working media to unrelated portfolio users.",
+    "funnelStage": "decision",
+    "keyword": "digital asset management permissions",
+    "title": "Separate Company Access in a Shared Portfolio Media Library",
+    "slug": "separate-company-access-media-library",
+    "distinctIntent": "Design and verify company-specific access boundaries in a shared library. This is information separation across independent companies, not a production handoff checklist or visual brand guideline.",
+    "originalWorksheet": "A role-by-folder access table for two fictional companies, a common resource area and platform staff; include positive and negative access test cases using non-sensitive sample files.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.google.com/a/users/answer/12380484?hl=en",
+        "supports": "Inspected 2026-09-12: explains shared-drive access, inherited permissions and restrictions; temporary restrictions can leave underlying grants intact. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      },
+      {
+        "url": "https://support.bynder.com/hc/en-us/articles/360013931739-Best-Practices-for-Digital-Asset-Management",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Covers asset version control, permissions, library cleanup and training."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-018",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "Photos from a multi-company gathering arrive without reliable names, company affiliations or photographer credits.",
+    "funnelStage": "consideration",
+    "keyword": "photo caption metadata",
+    "title": "Label Portfolio Photos With the Right People and Credits",
+    "slug": "label-portfolio-photos-people-credits",
+    "distinctIntent": "Attach verified people, scene descriptions and supplied credits to a mixed-company photo collection before reuse. Distinct from event filming, interview questions and general asset taxonomy: the job is accurate photo identification and caption assembly.",
+    "originalWorksheet": "A contact-sheet annotation exercise with three fictional scenes, left-to-right identities, event context, photographer credit and unresolved-name holds; include a final caption and its supporting record.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.iptc.org/std/photometadata/specification/IPTC-PhotoMetadata-2025.1.html",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Defines photo description, credit and person-shown metadata; use only supplied and confirmed identities. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      },
+      {
+        "url": "https://www.canto.com/glossary/metadata-management/",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Describes descriptive, structural, administrative and technical asset metadata."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-019",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "Company names, URLs, contacts and operating status differ between the portfolio website and media records.",
+    "funnelStage": "awareness",
+    "keyword": "portfolio company directory",
+    "title": "Keep a Portfolio Company Directory Current",
+    "slug": "maintain-portfolio-company-directory",
+    "distinctIntent": "Maintain evergreen company identity records and propagate verified factual changes to the public directory. This does not create a startup press kit or an investor pitch.",
+    "originalWorksheet": "A directory field dictionary and change journal with source, verified date, old value, new value, redirect destination and an explicit unknown-status state.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.ycombinator.com/blog/the-yc-directory",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. YC describes directory filters for batch, industry and company status; historical counts excluded. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      },
+      {
+        "url": "https://www.canto.com/glossary/metadata-management/",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Describes descriptive, structural, administrative and technical asset metadata."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-020",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "Staff can find files by company folder but cannot find approved examples across companies, audiences or use cases.",
+    "funnelStage": "consideration",
+    "keyword": "digital asset management taxonomy",
+    "title": "Design Tags for a Multi-Company Media Library",
+    "slug": "portfolio-media-library-tag-taxonomy",
+    "distinctIntent": "Build a controlled vocabulary for cross-portfolio asset retrieval while preserving company identity. Unlike retained c5-009, the task is classification and search, not visual consistency.",
+    "originalWorksheet": "A compact tag dictionary with required versus optional fields, synonyms, prohibited ambiguous labels and six example queries mapped to fields across fictional assets.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.bynder.com/hc/en-us/articles/20331272932626-Taxonomy-Tips-for-your-DAM",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Uses taxonomy and asset-search vocabulary; recommends asking users which terms they use. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      },
+      {
+        "url": "https://experienceleague.adobe.com/en/docs/experience-manager-learn/assets/metadata/tagging-and-taxonomy",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Documents creating and applying searchable asset tags."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-021",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "Two similarly named final files circulate and a company approves a version different from the one scheduled.",
+    "funnelStage": "consideration",
+    "keyword": "digital asset management version control",
+    "title": "Make Approved Portfolio Media Versions Unambiguous",
+    "slug": "portfolio-media-release-version-control",
+    "distinctIntent": "Identify the exact released asset and bind approval to that version across the portfolio. Distinct from c3 revision etiquette and from rolling out changes to reusable template structures.",
+    "originalWorksheet": "An asset-ID and version convention, an illustrative release manifest joining file version to approval, and a wrong-version recovery example.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.canto.com/blog/version-control-for-digital-assets/",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Discusses version control for digital assets used by distributed teams and external collaborators. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      },
+      {
+        "url": "https://support.canto.com/hc/en-us/articles/23002260134801-Download-previous-Version-of-an-Asset",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Official instructions describe viewing and downloading previous asset versions."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-022",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "A licensed image or permissioned recording remains in shared collections after its approved-use period ends.",
+    "funnelStage": "consideration",
+    "keyword": "digital asset expiration dates",
+    "title": "Track Expiring Media Rights Across a Portfolio",
+    "slug": "portfolio-media-rights-expiry-calendar",
+    "distinctIntent": "Schedule media review or expiry actions from dates and permitted uses already confirmed by the company or rights owner. This implements supplied instructions across destinations rather than interpreting licences or deciding whether a use is lawful.",
+    "originalWorksheet": "An expiry calendar with asset, company-supplied use restriction, source instruction, time zone, affected destinations and renewal contact; unknown terms stay unresolved.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.canto.com/hc/en-us/articles/23001802813841-Set-Expiration-Dates",
+        "supports": "Inspected 2026-09-12: asset expiry uses the account time zone and removes expired files from Canto portals. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-023",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "The platform wants a recording of a candid peer session, but participants expect private discussion.",
+    "funnelStage": "awareness",
+    "keyword": "Chatham House Rule recording",
+    "title": "Should You Record a Private Portfolio Founder Roundtable?",
+    "slug": "recording-private-portfolio-roundtables",
+    "distinctIntent": "Decide before a closed portfolio meeting whether recording, attribution and later sharing are appropriate. Unlike retained c5-004's reusable mentor webinar, the primary job is selecting the meeting's disclosure mode.",
+    "originalWorksheet": "A facilitation card for choosing an agreed recording and sharing mode, with opening statements and a mid-session pause procedure; distinguish the Chatham House Rule from recording permission and do not prescribe legal consent requirements.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.chathamhouse.org/about-us/chatham-house-rule",
+        "supports": "Inspected 2026-09-12: distinguishes non-attribution from off-the-record discussion and prohibits indirect identification under the Rule. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-024",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "A company withdraws an approved asset already copied to fund channels, partner pages and internal collections.",
+    "funnelStage": "decision",
+    "keyword": "revoke access to shared files",
+    "title": "Recall a Portfolio Media Asset After It Is Withdrawn",
+    "slug": "recall-withdrawn-portfolio-media-assets",
+    "distinctIntent": "Locate and withdraw downstream copies of one already-released asset, recording what cannot be recalled. Distinct from routine licence expiry, editorial revisions and stopping future scheduled posts.",
+    "originalWorksheet": "An asset-to-destination recall map with owner, live URL, replacement, removal confirmation and unresolved external-copy state, plus a fictional recall walkthrough.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.canto.com/hc/en-us/articles/23001802813841-Set-Expiration-Dates",
+        "supports": "Inspected 2026-09-12: asset expiry uses the account time zone and removes expired files from Canto portals. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      },
+      {
+        "url": "https://support.google.com/a/users/answer/12380484?hl=en",
+        "supports": "Inspected 2026-09-12: explains shared-drive access, inherited permissions and restrictions; temporary restrictions can leave underlying grants intact."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-025",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "A portfolio company changes its product or positioning while old screenshots and claims remain in fund-owned resources.",
+    "funnelStage": "consideration",
+    "keyword": "content audit checklist",
+    "title": "Find Portfolio Media Made Stale by a Product Change",
+    "slug": "portfolio-media-product-change-audit",
+    "distinctIntent": "Trace a company change to dependent media and select update, annotate or retire actions. Unlike a new launch plan, this maintains a network of previously published assets.",
+    "originalWorksheet": "A change-impact graph connecting a product fact to company profile, interview excerpt, caption and resource entry, with a dependency-based remediation order.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.canto.com/glossary/metadata-management/",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Describes descriptive, structural, administrative and technical asset metadata. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      },
+      {
+        "url": "https://www.atlassian.com/itsm/knowledge-management/self-service-success",
+        "supports": "Inspected 2026-09-12: recommends searchable resources, stale-content audits, helpfulness feedback and a visible route to human support."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-026",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "The platform is moving an existing library to another approved storage system and needs to preserve records and access.",
+    "funnelStage": "decision",
+    "keyword": "digital asset migration",
+    "title": "Move a Portfolio Media Library Without Losing Context",
+    "slug": "migrate-portfolio-media-library",
+    "distinctIntent": "Reconcile files, metadata, permissions and links during a library move. This is migration execution for an already-chosen destination, not a software or vendor comparison.",
+    "originalWorksheet": "A migration crosswalk and reconciliation sheet for source ID, destination ID, checksum, metadata, access test and broken-link status; include a sample mismatch and rollback condition.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.canto.com/glossary/digital-asset-management-implementation/",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Covers migrating assets, permissions, metadata and user adoption after choosing a DAM. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      },
+      {
+        "url": "https://support.bynder.com/hc/en-us/articles/24265123462418-Guide-to-Uploading-Assets-in-Bynder",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Explains external and mass upload, administrator review and per-asset metadata."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-027",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "Useful advice is buried inside long portfolio recordings whose titles do not reveal the exact question answered.",
+    "funnelStage": "consideration",
+    "keyword": "search video transcripts",
+    "title": "Make Portfolio Learning Recordings Searchable by Moment",
+    "slug": "search-portfolio-recordings-by-moment",
+    "distinctIntent": "Create and test a time-linked transcript index across approved recordings so a founder can locate a specific explanation. Unlike retained c4 clipping tasks, no derivative clips are produced; unlike c5-029, the search target is a moment inside a recording rather than a portal resource.",
+    "originalWorksheet": "A moment index linking question, confirmed transcript phrase, speaker, recording and timestamp, plus retrieval tests with a mistranscribed company name and an ambiguous term.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.panopto.com/features/video-search/",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Describes searching spoken and on-screen words and jumping to a matching moment; no accuracy claims adopted. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      },
+      {
+        "url": "https://www.panopto.com/features/video-editing/",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Describes searchable spoken and displayed words and transcript-related video features; no accuracy guarantee adopted."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-028",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "The same asset exists in company folders, event folders and shared collections with conflicting metadata.",
+    "funnelStage": "consideration",
+    "keyword": "duplicate digital assets",
+    "title": "Merge Duplicate Portfolio Media Files Safely",
+    "slug": "merge-duplicate-portfolio-media-files",
+    "distinctIntent": "Identify genuine duplicates and preserve metadata, permissions and references when consolidating them. Unlike taxonomy design or version control, the output resolves existing competing copies.",
+    "originalWorksheet": "A duplicate-adjudication table with file identity, visible-content match, meaningful variant, metadata union, surviving reference and a recoverable consolidation decision.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.canto.com/hc/en-us/articles/23001624894993-Duplicate-Check-Options",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Documents filename and checksum duplicate checks and adding uploads as versions. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      },
+      {
+        "url": "https://support.canto.com/hc/en-us/articles/23002260134801-Download-previous-Version-of-an-Asset",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Official instructions describe viewing and downloading previous asset versions."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-029",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "Founders ask staff for resources already in the portal because their own search terms produce poor results.",
+    "funnelStage": "consideration",
+    "keyword": "knowledge base search",
+    "title": "Test Whether Founders Can Find Your Media Resources",
+    "slug": "test-findability-portfolio-media-resources",
+    "distinctIntent": "Evaluate resource retrieval using realistic founder tasks and repair labels, navigation or missing content. Distinct from asset tagging: the unit is a user search task, not a stored media file.",
+    "originalWorksheet": "A five-task findability test with expected destination, actual route, search wording, dead end and proposed repair; include a small results table with illustrative observations.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.atlassian.com/itsm/knowledge-management/self-service-success",
+        "supports": "Inspected 2026-09-12: recommends searchable resources, stale-content audits, helpfulness feedback and a visible route to human support. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-030",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "A launched resource hub has low repeat use even though founders know it exists.",
+    "funnelStage": "consideration",
+    "keyword": "digital asset management user adoption",
+    "title": "Find Why Portfolio Media Resources Go Unused",
+    "slug": "portfolio-media-resource-adoption-diagnosis",
+    "distinctIntent": "Diagnose awareness, relevance, usability and usefulness barriers among existing users, then choose a bounded improvement. Unlike retained c5-010's program evaluation, this ends in a specific adoption intervention.",
+    "originalWorksheet": "A barrier interview guide and evidence-to-action matrix separating never-found, found-but-unsuitable and tried-but-unhelpful cases, plus a retest plan.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.canto.com/glossary/digital-asset-management-implementation/",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Covers migrating assets, permissions, metadata and user adoption after choosing a DAM. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      },
+      {
+        "url": "https://www.atlassian.com/itsm/knowledge-management/self-service-success",
+        "supports": "Inspected 2026-09-12: recommends searchable resources, stale-content audits, helpfulness feedback and a visible route to human support."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-031",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "Event organizers and media hosts ask the platform for speakers, but expertise and availability live in staff memory.",
+    "funnelStage": "consideration",
+    "keyword": "speaker bureau database",
+    "title": "Build a Portfolio Speaker Bureau People Can Actually Use",
+    "slug": "portfolio-expert-speaker-bureau",
+    "distinctIntent": "Maintain a permissioned expert roster and match a speaking request to a qualified portfolio operator. Unlike founder interview questions, the job is matching and maintaining the bureau.",
+    "originalWorksheet": "A speaker profile schema and matching card covering demonstrated topics, audiences, previous talk evidence, availability, contact preference and conflicts; include two fictional matching decisions.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.aaespeakers.com/",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. First-party speaker bureau organizes speakers by topics and describes matching speakers to events. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      },
+      {
+        "url": "https://founders.firstround.com/template-of-sheet",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. First Round describes its private resource portal, peer questions and mentoring."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-032",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "A journalist contacts the fund with a deadline and questions that belong to several independent companies.",
+    "funnelStage": "consideration",
+    "keyword": "handling media enquiries",
+    "title": "Route Press Enquiries Across Portfolio Companies",
+    "slug": "route-portfolio-press-enquiries",
+    "distinctIntent": "Triage incoming press requests, identify authorized company contacts and track response ownership. Distinct from writing a founder press kit or pitching stories to reporters.",
+    "originalWorksheet": "A press-enquiry dispatch form, deadline board and escalation example showing fund-level versus company-level questions and who is permitted to answer each.",
+    "sourceCandidates": [
+      {
+        "url": "https://a16z.com/what-is-new-media-in-2026/",
+        "supports": "Inspected 2026-09-12: first-person account of portfolio media services, owned channels and network coordination; no outcome claims adopted. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      },
+      {
+        "url": "https://otc.accessnewswire.com/blog/press-releases-tips/embargoed-press-release",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Newswire guidance discusses embargo labels, timing and handling reporter follow-up."
+      },
+      {
+        "url": "https://www.chathamhouse.org/about-us/contact-us",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Shows distinct routing for press enquiries and an out-of-hours press contact."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-033",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "Two portfolio companies in the same category need platform media help, raising conflicts over shared people, examples and plans.",
+    "funnelStage": "consideration",
+    "keyword": "competing portfolio companies",
+    "title": "Support Competing Portfolio Companies Without Mixing Briefs",
+    "slug": "separate-competing-company-media-work",
+    "distinctIntent": "Separate staff assignments, unreleased examples and editorial context when shared teams support competing companies. The output is a practical conflict-escalation exercise, not legal advice about confidentiality or competition.",
+    "originalWorksheet": "A conflict scenario exercise with a shared-staff assignment map, information permitted across teams, examples requiring replacement and a recusal path; no legal conclusions.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.google.com/a/users/answer/12380484?hl=en",
+        "supports": "Inspected 2026-09-12: explains shared-drive access, inherited permissions and restrictions; temporary restrictions can leave underlying grants intact. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      },
+      {
+        "url": "https://www.chathamhouse.org/about-us/chatham-house-rule",
+        "supports": "Inspected 2026-09-12: distinguishes non-attribution from off-the-record discussion and prohibits indirect identification under the Rule."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-034",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "The fund, a portfolio company and a partner have different release times for the same coordinated announcement.",
+    "funnelStage": "decision",
+    "keyword": "embargoed press release",
+    "title": "Coordinate a Portfolio Announcement Embargo",
+    "slug": "coordinate-portfolio-announcement-embargo",
+    "distinctIntent": "Synchronize an agreed release time and changes across independent publishing parties. Unlike retained c1-001's funding announcement, the operator job is multi-party release control.",
+    "originalWorksheet": "A time-zone release ledger, acknowledgement roster and hold/resume message examples for a fictional three-party release, including what happens when one party changes timing.",
+    "sourceCandidates": [
+      {
+        "url": "https://otc.accessnewswire.com/blog/press-releases-tips/embargoed-press-release",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Newswire guidance discusses embargo labels, timing and handling reporter follow-up. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      },
+      {
+        "url": "https://a16z.com/what-is-new-media-in-2026/",
+        "supports": "Inspected 2026-09-12: first-person account of portfolio media services, owned channels and network coordination; no outcome claims adopted."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-035",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "The same founders dominate fund-owned media because they are the easiest to reach.",
+    "funnelStage": "awareness",
+    "keyword": "editorial content selection",
+    "title": "Choose Portfolio Spotlights With a Coverage Map",
+    "slug": "choose-portfolio-spotlight-coverage",
+    "distinctIntent": "Select companies to feature based on audience usefulness, story readiness and gaps in prior editorial coverage. Distinct from production request priority: this chooses an editorial subject, not the next service ticket.",
+    "originalWorksheet": "A coverage map by company, subject, format and previous appearance, followed by an annotated shortlist that records why ready stories were chosen and promising stories deferred.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.ycombinator.com/blog/the-yc-directory",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. YC describes directory filters for batch, industry and company status; historical counts excluded. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      },
+      {
+        "url": "https://a16z.com/what-is-new-media-in-2026/",
+        "supports": "Inspected 2026-09-12: first-person account of portfolio media services, owned channels and network coordination; no outcome claims adopted."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-036",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "Company marketers repeat the same operational questions and the platform knows peers who have solved them.",
+    "funnelStage": "consideration",
+    "keyword": "peer mentoring matching",
+    "title": "Match Portfolio Marketers for Useful Peer Help",
+    "slug": "match-portfolio-marketing-peer-help",
+    "distinctIntent": "Broker opt-in peer help around a specific media operating problem and capture the resolution privately. Unlike an alumni-community strategy or webinar, this is a question-to-expert matching service.",
+    "originalWorksheet": "A help-request card, two-sided opt-in introduction template and resolution receipt, with a worked match based on firsthand experience rather than seniority.",
+    "sourceCandidates": [
+      {
+        "url": "https://founders.firstround.com/template-of-sheet",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. First Round describes its private resource portal, peer questions and mentoring. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      },
+      {
+        "url": "https://help.togetherplatform.com/hc/en-us/articles/22171219164315-What-is-Colleague-Connect",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Describes peer learning matches based on skills without requiring a seniority gap."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-037",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "Sponsors want evidence that agreed mentions, placements and media assets were delivered across a cohort.",
+    "funnelStage": "consideration",
+    "keyword": "sponsorship fulfillment report",
+    "title": "Track Sponsor Media Commitments Across a Cohort",
+    "slug": "cohort-sponsor-media-fulfillment",
+    "distinctIntent": "Reconcile promised sponsor media benefits with actual delivery and documented exceptions. Unlike event filming or program metrics, the output is a fulfillment record for specific commitments.",
+    "originalWorksheet": "A promised-versus-delivered ledger with agreement reference, placement evidence, company participation, exception and make-good proposal; no implied ROI or fabricated valuations.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.eventbrite.com/blog/sponsorship-roi-ds00/",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Recommends fulfillment evidence against promised sponsor benefits; ROI examples and survey figures excluded. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-038",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "A shared project serves several portfolio companies and the platform must explain how its actual costs are attributed.",
+    "funnelStage": "consideration",
+    "keyword": "shared cost allocation",
+    "title": "Allocate Shared Portfolio Media Costs Transparently",
+    "slug": "allocate-shared-portfolio-media-costs",
+    "distinctIntent": "Apportion an already-incurred shared media cost using explicit allocation rules and traceable inputs. Unlike c3-008's production budget, this reconciles shared consumption and does not set vendor rates.",
+    "originalWorksheet": "A symbolic allocation calculator for direct, equal-share and usage-based components, a reconciliation-to-total check and one clearly fictional example without market-price claims.",
+    "sourceCandidates": [
+      {
+        "url": "https://framework.finops.org/framework/capabilities/allocation/",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Describes fixed, proportional and proxy-based shared-cost allocation; media adaptation is editorial. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-039",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "An English media playbook changes while localized versions in the portfolio portal retain outdated instructions.",
+    "funnelStage": "consideration",
+    "keyword": "managing knowledge base translations",
+    "title": "Keep Portfolio Resource Translations in Sync",
+    "slug": "portfolio-resource-translation-change-tracking",
+    "distinctIntent": "Propagate source changes through existing resource translations and prevent stale guidance appearing current. Distinct from translating or repurposing a GTM video.",
+    "originalWorksheet": "A source-to-locale dependency register with changed section, translation state, reviewer and fallback label, plus a sample update showing only affected sections requiring revision.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.zendesk.com/hc/en-us/articles/4408821505306-Managing-help-center-translations-for-articles",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Official documentation describes marking article translations outdated and managing source language. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-040",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "Mentions of several similarly named portfolio companies and syndicated copies are mixed together in a coverage spreadsheet.",
+    "funnelStage": "consideration",
+    "keyword": "track press coverage",
+    "title": "Track Portfolio Press Coverage Without Double Counting",
+    "slug": "track-portfolio-press-coverage",
+    "distinctIntent": "Create a company-resolved record of actual press mentions, separating original reporting, reposts and false matches. Unlike retained c5-010's program evaluation, this establishes reliable coverage records before interpretation; unlike c5-032, it operates after publication.",
+    "originalWorksheet": "A clipping register with company identity, original URL, publication date, verified excerpt location, coverage type and duplicate-family ID; include four fictional true, duplicate and false-match cases.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.meltwater.com/en/blog/how-to-measure-press-coverage",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Discusses tracking news mentions and press coverage; benchmarks, reach and causal claims excluded. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      },
+      {
+        "url": "https://developers.google.com/search/docs/crawling-indexing/canonicalization-troubleshooting",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Official guidance addresses canonicalization problems and links to syndicated-content handling."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-041",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "A major incident makes scheduled fund and company posts inappropriate, with some queues controlled by other teams.",
+    "funnelStage": "decision",
+    "keyword": "pause scheduled social media posts",
+    "title": "Pause and Restart Portfolio Posts During a Crisis",
+    "slug": "pause-restart-portfolio-media-posts",
+    "distinctIntent": "Coordinate a bounded pause of future posts and a deliberate restart across platform-owned and company-owned channels. Unlike an asset recall, the content has not yet been published.",
+    "originalWorksheet": "A channel control map, pause acknowledgement log and restart decision tree showing who can stop each queue and which pending posts need fresh review.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.hootsuite.com/newsroom/press-releases/hootsuite-hits-the-pause-button",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Historical product announcement describes suspending and resuming scheduled posts; current availability unverified. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-042",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "The platform fixes a reusable template while companies continue using downloaded older editions.",
+    "funnelStage": "consideration",
+    "keyword": "brand template management",
+    "title": "Update Shared Portfolio Templates Without Version Drift",
+    "slug": "roll-out-portfolio-template-changes",
+    "distinctIntent": "Release a template change and identify which company copies require adoption, migration or retirement. Unlike brand guidelines, this handles dependency changes and rollout; unlike asset versioning, the change affects future outputs.",
+    "originalWorksheet": "A template change bulletin, compatibility table and adopter migration sheet mapping old fields to new fields, with a fictional change that invalidates only some company copies.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.bynder.com/hc/en-us/articles/360013873200-Manage-Print-Brand-Templates-and-Presets",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Documents managing templates and presets and updating template versions; media adaptation is editorial. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      },
+      {
+        "url": "https://www.canto.com/blog/version-control-for-digital-assets/",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Discusses version control for digital assets used by distributed teams and external collaborators."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-043",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "A private founder conversation contains a useful lesson but its company details would identify the speaker.",
+    "funnelStage": "consideration",
+    "keyword": "Chatham House Rule meeting notes",
+    "title": "Turn Private Founder Lessons Into Non-Identifying Notes",
+    "slug": "anonymize-portfolio-peer-learning-notes",
+    "distinctIntent": "Evaluate whether an authorized written lesson can be shared without direct or indirect identification. Unlike deciding whether to record a roundtable, this transforms and tests a specific note after the conversation.",
+    "originalWorksheet": "Three fictional before-and-after lesson notes identifying potentially revealing details, plus an example withheld because the speaker would still be recognizable; shared notes require the agreed permission and no anonymity guarantee is made.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.chathamhouse.org/about-us/chatham-house-rule",
+        "supports": "Inspected 2026-09-12: distinguishes non-attribution from off-the-record discussion and prohibits indirect identification under the Rule. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-044",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "Finished campaign files and old releases clutter the active library, but company teams still need a usable history.",
+    "funnelStage": "consideration",
+    "keyword": "digital asset archiving",
+    "title": "Archive Portfolio Media Without Hiding Useful History",
+    "slug": "archive-portfolio-media-useful-history",
+    "distinctIntent": "Move completed media out of everyday discovery while preserving context and an agreed route to historical assets. Distinct from deleting files, legal retention periods, rights-expiry enforcement and urgent withdrawal.",
+    "originalWorksheet": "An active-versus-archive decision table for completed campaigns, superseded releases and source media, with archive labels, discoverability rules and a historical-retrieval exercise; no disposal schedule.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.bynder.com/hc/en-us/articles/360013931059-How-To-Mark-Assets-As-Archived",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Describes archiving assets and limiting access while they are archived; not a legal retention policy. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      },
+      {
+        "url": "https://support.bynder.com/hc/en-us/articles/360013931739-Best-Practices-for-Digital-Asset-Management",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Covers asset version control, permissions, library cleanup and training."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-045",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "Both the fund and the company want to be the primary publisher of the same story.",
+    "funnelStage": "consideration",
+    "keyword": "owned media distribution",
+    "title": "Choose Where a Portfolio Story Should Be Published",
+    "slug": "portfolio-story-publishing-ownership",
+    "distinctIntent": "Assign the originating publisher and amplification roles according to audience, ownership of facts and ability to maintain the story. Unlike a founder LinkedIn strategy, this is a cross-organization publishing decision.",
+    "originalWorksheet": "A channel ownership decision tree and three fictional cases showing company-first, fund-first and separate complementary pieces, including the owner of future corrections.",
+    "sourceCandidates": [
+      {
+        "url": "https://a16z.com/what-is-new-media-in-2026/",
+        "supports": "Inspected 2026-09-12: first-person account of portfolio media services, owned channels and network coordination; no outcome claims adopted. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-046",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "The fund has permission to republish a company article but has not agreed attribution, update handling or search treatment.",
+    "funnelStage": "consideration",
+    "keyword": "content syndication best practices",
+    "title": "Republish Portfolio Articles With Clear Source Attribution",
+    "slug": "republish-portfolio-articles-source-attribution",
+    "distinctIntent": "Record approved handling for an already-authorized second copy of an article: source attribution, permitted edits, update responsibility and a technical indexing handoff. This is an editorial distribution task rather than drafting a licence agreement.",
+    "originalWorksheet": "A republication instruction sheet recording original URL, approved attribution, allowed edits supplied by the company, correction contact and indexing questions for the website owner; no legal terms or ranking promises.",
+    "sourceCandidates": [
+      {
+        "url": "https://developers.google.com/search/docs/crawling-indexing/canonicalization-troubleshooting",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Official guidance addresses canonicalization problems and links to syndicated-content handling. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-047",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "A cohort ends and founders need portable media packages while the accelerator retains only agreed copies.",
+    "funnelStage": "consideration",
+    "keyword": "digital asset handover",
+    "title": "Hand Cohort Media Back to Companies at Graduation",
+    "slug": "cohort-media-graduation-handover",
+    "distinctIntent": "Close a cohort's media service by delivering each company's approved package and documenting remaining shared responsibilities. Unlike a staff departure or an alumni-community program, the output is a company-by-company exit transfer.",
+    "originalWorksheet": "A graduation export manifest with final files, captions, source references, permitted-use notes, outstanding issues and company receipt, plus a portability acceptance test.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.google.com/a/users/answer/7212025?hl=en",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Shared-drive files belong to the organization and persist after members leave. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      },
+      {
+        "url": "https://support.google.com/drive/answer/13045066?hl=en-GB",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Documents shared-drive move restrictions and a CSV of items that cannot move."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-048",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "A portfolio library contains useful recordings but new marketers cannot tell what to watch or apply first.",
+    "funnelStage": "awareness",
+    "keyword": "learning paths",
+    "title": "Build Role-Based Paths Through Portfolio Learning Videos",
+    "slug": "portfolio-learning-video-role-paths",
+    "distinctIntent": "Assemble existing approved learning resources into role- and task-specific sequences with prerequisites and application tasks. Unlike repurposing a mentor webinar, this organizes multiple resources into a learning path.",
+    "originalWorksheet": "Two sample paths for a first marketing hire and a founder managing content, each with entry task, prerequisites, resource sequence, practice assignment and stop condition.",
+    "sourceCandidates": [
+      {
+        "url": "https://founders.firstround.com/template-of-sheet",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. First Round describes its private resource portal, peer questions and mentoring. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      },
+      {
+        "url": "https://www.atlassian.com/itsm/knowledge-management/self-service-success",
+        "supports": "Inspected 2026-09-12: recommends searchable resources, stale-content audits, helpfulness feedback and a visible route to human support."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-049",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "A batch of assets from several companies arrives with missing captions, ambiguous filenames and inconsistent metadata.",
+    "funnelStage": "consideration",
+    "keyword": "bulk upload digital assets",
+    "title": "Check Company Media Batches Before They Enter the Library",
+    "slug": "check-portfolio-media-batch-ingestion",
+    "distinctIntent": "Accept, return or hold new media submissions using a batch receipt and company-specific completeness checks. Unlike c5-026 migration, this handles recurring new contributions; unlike c3 outsourcing handoff, the sender is a portfolio company supplying its own media.",
+    "originalWorksheet": "A batch receipt with expected and received assets, company ID, file role, supplied metadata, playback result and missing companions; include accept, return and hold examples without automatically changing originals.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.bynder.com/hc/en-us/articles/24265123462418-Guide-to-Uploading-Assets-in-Bynder",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Explains external and mass upload, administrator review and per-asset metadata. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      },
+      {
+        "url": "https://support.bynder.com/hc/en-us/articles/20331272932626-Taxonomy-Tips-for-your-DAM",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Uses taxonomy and asset-search vocabulary; recommends asking users which terms they use."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c5-050",
+    "campaign": "portfolio-media-platform",
+    "icp": "US accelerator or VC platform lead coordinating content across portfolio companies",
+    "customerTrigger": "The platform is revising its service menu and has heard only from the most vocal companies.",
+    "funnelStage": "awareness",
+    "keyword": "needs assessment survey",
+    "title": "Ask Portfolio Companies What Media Help They Need",
+    "slug": "portfolio-media-needs-survey",
+    "distinctIntent": "Collect and interpret current media-support needs across the eligible portfolio before allocating program effort. Unlike retained c5-010's outcome evaluation, this studies unmet needs and non-participation.",
+    "originalWorksheet": "A short needs questionnaire, respondent coverage table and question-to-decision map that separates desired help, actual recent tasks and barriers; no survey results or demand metrics invented.",
+    "sourceCandidates": [
+      {
+        "url": "https://analysisfunction.civilservice.gov.uk/policy-store/questionnaire-design-guidance/",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Government guidance covers data-user needs, questionnaire wording and qualitative pretesting. Keyword is an editorial hypothesis from source terminology; exact-query SERPs and volume/KD/CPC remain unverified."
+      },
+      {
+        "url": "https://analysisfunction.civilservice.gov.uk/policy-store/a-user-centred-design-approach-to-surveys/",
+        "supports": "Live-search discovery 2026-09-12; page uninspected. Describes reducing respondent burden and designing survey questions around user needs."
+      }
+    ]
+  }
+]

@@ -1,0 +1,758 @@
+[
+  {
+    "id": "vc-manual250-c4-011",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "A marketing lead has a useful expert recording but the transcript reads poorly as a standalone article.",
+    "funnelStage": "consideration",
+    "keyword": "turn video transcript into blog post",
+    "title": "Turn a Video Transcript Into a Useful Blog Post",
+    "slug": "turn-video-transcript-into-useful-blog-post",
+    "distinctIntent": "Reconstruct spoken material into an argument a reader can follow, identifying missing explanations and preserving attribution. Unlike retained c4-001's webinar campaign plan or c4-002's clipping procedure, the output is an edited written article.",
+    "originalWorksheet": "An argument reconstruction sheet linking each proposed section to a source passage, reader question, missing bridge and verification need, plus a fictional spoken-to-written paragraph example.",
+    "sourceCandidates": [
+      {
+        "url": "https://wistia.com/blog/ai-webinar-transcript-content",
+        "supports": "Page inspected on 2026-09-12. Wistia describes converting transcript ideas into articles, emails and newsletter sections, then checking source accuracy. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-012",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "Marketing needs clear product images for a campaign page or sales deck, and the best available source is existing product footage.",
+    "funnelStage": "consideration",
+    "keyword": "how to extract high quality stills from video",
+    "title": "Extract Clear Product Stills From Existing Video",
+    "slug": "extract-clear-product-stills-from-video",
+    "distinctIntent": "Select and export frames that show a meaningful product state, checking motion blur, interface legibility and context at the intended display size. This creates still images from video, distinct from c4-046's animated GIF loop, c4-038's thumbnail experiment and retained c4-005's video resizing.",
+    "originalWorksheet": "A frame-selection contact sheet with source timestamp, visible product state, motion or transition artifacts, intended display size, crop boundaries and explanatory caption, plus a reject-or-export rubric that does not promise to recover missing detail.",
+    "sourceCandidates": [
+      {
+        "url": "https://helpx.adobe.com/premiere/desktop/render-and-export/export-files/export-a-still-frame.html",
+        "supports": "Discovered through live search and relevant page instructions inspected on 2026-09-12. Adobe documents selecting a precise video frame, exporting an image and retaining timecode in the filename. The product-frame selection rubric is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-013",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "A marketing team has a recorded expert panel with several speakers and camera feeds and needs a coherent on-demand edit.",
+    "funnelStage": "consideration",
+    "keyword": "how to edit a panel discussion video",
+    "title": "Edit a Recorded Panel So Each Speaker Is Easy to Follow",
+    "slug": "edit-recorded-panel-multiple-speakers",
+    "distinctIntent": "Maintain speaker attribution, question-and-answer continuity and understandable disagreement while switching among synchronized recordings. The deliverable is a coherent multi-speaker panel edit, distinct from retained c4-002's standalone clip extraction, c4-015's written FAQ and c2's investor presentation tasks.",
+    "originalWorksheet": "A speaker-turn edit map with moderator question, speaker identity, source feed, audio reference, overlap or interruption, chosen angle and cut boundary, plus a continuity test for whether removing a response changes the discussion's meaning.",
+    "sourceCandidates": [
+      {
+        "url": "https://helpx.adobe.com/ie/premiere/desktop/edit-projects/set-up-multi-camera-sequences-for-editing/create-and-edit-a-multi-camera-target-sequence.html",
+        "supports": "Discovered through live search and relevant page instructions inspected on 2026-09-12. Adobe documents viewing camera feeds together, switching angles, reviewing cuts and adjusting their timing. Speaker attribution and conversational continuity are original editorial criteria."
+      },
+      {
+        "url": "https://helpx.adobe.com/premiere/desktop/edit-projects/set-up-multi-camera-sequences-for-editing/create-a-multi-camera-source-sequence.html",
+        "supports": "Live search on 2026-09-12; relevant full-page instructions uninspected. Adobe's indexed excerpt describes synchronizing and editing footage from multiple cameras and configuring audio settings."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-014",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "A company podcast episode is recorded but its description gives prospective listeners little reason to play it.",
+    "funnelStage": "consideration",
+    "keyword": "how to write podcast show notes",
+    "title": "Write Podcast Show Notes From the Actual Conversation",
+    "slug": "podcast-show-notes-from-conversation",
+    "distinctIntent": "Package an existing episode for listener selection and reference retrieval using an accurate description, guest context and resource links. This is episode metadata, not another long-video-to-clips article.",
+    "originalWorksheet": "An episode notes composer with listener promise, discussion summary, guest identification, named resources and source checks, including a fictional before-and-after description.",
+    "sourceCandidates": [
+      {
+        "url": "https://creators.spotify.com/resources/create/podcast-episode-descriptions",
+        "supports": "Page inspected on 2026-09-12. Spotify explains that episode descriptions help prospective listeners understand the discussion, guests and reasons to listen."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-015",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "An expert session generated useful buyer questions that remain buried in its Q&A recording.",
+    "funnelStage": "consideration",
+    "keyword": "turn webinar questions into FAQ",
+    "title": "Turn Recorded Q&A Into a Buyer FAQ",
+    "slug": "recorded-qa-to-buyer-faq",
+    "distinctIntent": "Separate repeated questions, conditional answers and unresolved questions to build an answer page for prospective customers. This is FAQ extraction and answer qualification, not retained c4-001's overall webinar campaign.",
+    "originalWorksheet": "A question-resolution table containing verbatim question, normalized question, answer timestamp, necessary qualification, unresolved gap and final FAQ wording; repeated questions merge only when their answers match.",
+    "sourceCandidates": [
+      {
+        "url": "https://wistia.com/blog/ai-webinar-transcript-content",
+        "supports": "Page inspected on 2026-09-12. Wistia describes converting transcript ideas into articles, emails and newsletter sections, then checking source accuracy. The proposed worksheet is original editorial synthesis."
+      },
+      {
+        "url": "https://wistia.com/blog/state-of-video-webinar-recap",
+        "supports": "Live search on 2026-09-12; full page uninspected. The live-search excerpt presents a webinar recap through practical questions, including whether to gate on-demand replays; it is a publisher example, not evidence of query demand."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-016",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "Sales representatives repeatedly ask marketing for concise responses to objections already addressed in approved recordings.",
+    "funnelStage": "consideration",
+    "keyword": "create sales battlecards from sales calls",
+    "title": "Turn Sales Call Insights Into Objection Battlecards",
+    "slug": "sales-call-insights-objection-battlecards",
+    "distinctIntent": "Extract the objection, clarifying question and supported response into an internal conversation aid. Unlike c4-010's customer case study, this organizes a sales response rather than a customer success narrative; it does not authorize publishing private calls.",
+    "originalWorksheet": "An objection battlecard with buyer wording, clarifying question, response, source timestamp, relevant proof and circumstances in which the response does not apply.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.gong.io/blog/sales-battle-card-example",
+        "supports": "Page inspected on 2026-09-12. Gong distinguishes competitive talk tracks and relevant examples from generic pitches and feature charts. No claimed win-rate improvement is imported."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-017",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "After a customer demo, a seller needs to recap only the workflows and questions discussed with that prospect.",
+    "funnelStage": "decision",
+    "keyword": "product demo follow up video email",
+    "title": "Build a Useful Follow-Up From a Recorded Sales Demo",
+    "slug": "recorded-sales-demo-follow-up",
+    "distinctIntent": "Assemble a customer-specific recap from an existing demonstration and agreed next steps. This is post-meeting customer follow-up, distinct from c2 investor follow-up and from recording an initial product demo.",
+    "originalWorksheet": "A recap assembly page with buyer priority, exact demo timestamp, resolved question, open question, agreed action and short email introduction; clearly mark material unsuitable for external reuse.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.vidyard.com/wp-content/uploads/video-buyers-journey-using-youtube-and-vidyard-infographic.pdf",
+        "supports": "Live search on 2026-09-12; full page uninspected. The indexed publisher infographic describes helpful video recaps after meetings and sharing video within an account; performance and integration claims remain unverified."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-018",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "A sales champion wants to share existing product evidence with stakeholders who missed the original meeting.",
+    "funnelStage": "decision",
+    "keyword": "content for B2B buying committee",
+    "title": "Build a Buying Committee Content Pack From Existing Assets",
+    "slug": "buying-committee-content-pack",
+    "distinctIntent": "Choose different evidence for an end user, technical evaluator and budget owner within one customer account. This solves internal buyer sharing, not investor pitching, a portfolio media program or general clip distribution.",
+    "originalWorksheet": "A buying-group packet index mapping each stakeholder's decision, relevant existing excerpt, evidence limitation and next question, plus a short champion-forwarding note.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.vidyard.com/wp-content/uploads/video-buyers-journey-using-youtube-and-vidyard-infographic.pdf",
+        "supports": "Live search on 2026-09-12; full page uninspected. The indexed example describes a buyer sharing content with their team and multiple viewers within an account. The stakeholder packet design is an editorial extension."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-019",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "A lead magnet attracts interest but the team lacks a useful educational follow-up sequence.",
+    "funnelStage": "consideration",
+    "keyword": "lead nurturing email sequence using existing content",
+    "title": "Build a Nurture Sequence From Content You Already Have",
+    "slug": "nurture-sequence-from-existing-content",
+    "distinctIntent": "Sequence existing explanations and proof according to what a lead still needs to understand, with entry and exit conditions. Unlike retained c4-008's calendar, this is a behavior-based email path rather than publishing dates.",
+    "originalWorksheet": "A nurture path map with entry topic, knowledge gap, asset excerpt, email promise, next action, branch condition and exit rule, using fictional lead scenarios without response-rate assumptions.",
+    "sourceCandidates": [
+      {
+        "url": "https://blog.hubspot.com/customers/hubspot-lead-nurturing",
+        "supports": "Live search on 2026-09-12; full page uninspected. HubSpot describes its own nurturing stages and use of relevant content after initial lead nurturing."
+      },
+      {
+        "url": "https://www.hubspot.com/hubfs/docs/ebooks/hs062012.pdf",
+        "supports": "Live search on 2026-09-12; full page uninspected. The indexed HubSpot guide explicitly discusses reusing existing email content in nurturing; treat this older source as conceptual guidance."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-020",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "The company newsletter needs an editorial section that helps readers who did not attend an expert session.",
+    "funnelStage": "consideration",
+    "keyword": "repurpose video content for email newsletter",
+    "title": "Turn Expert Recordings Into a Newsletter Worth Reading",
+    "slug": "expert-recordings-to-newsletter",
+    "distinctIntent": "Distill one expert insight into a useful standalone newsletter section with context and a reader takeaway. Distinct from c5's portfolio company update newsletter and from a multi-email nurture sequence.",
+    "originalWorksheet": "A newsletter section recipe with reader tension, selected insight, practical implication, optional source link and editor's connective sentence, illustrated with a fictional issue excerpt.",
+    "sourceCandidates": [
+      {
+        "url": "https://wistia.com/blog/ai-webinar-transcript-content",
+        "supports": "Page inspected on 2026-09-12. Wistia describes converting transcript ideas into articles, emails and newsletter sections, then checking source accuracy. The proposed worksheet is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-021",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "Previously interested leads stopped responding, and new material now addresses a reason they stalled.",
+    "funnelStage": "decision",
+    "keyword": "re engagement email content for B2B leads",
+    "title": "Use Existing Content to Re-Engage Stalled B2B Leads",
+    "slug": "existing-content-reengage-stalled-leads",
+    "distinctIntent": "Choose a credible reason to reopen a dormant conversation based on an actual changed condition or unanswered concern. Unlike ongoing nurturing, this requires a specific new relevance trigger and a stop condition.",
+    "originalWorksheet": "A re-engagement message builder pairing recorded stall reason with new evidence, short excerpt, relevance sentence, low-friction next step and exclusion criteria for leads with no suitable update.",
+    "sourceCandidates": [
+      {
+        "url": "https://blog.hubspot.com/customers/hubspot-lead-nurturing",
+        "supports": "Live search on 2026-09-12; full page uninspected. HubSpot's publisher case describes using relevant content and renewed interest to reconnect with leads who previously did not engage; it does not establish expected response rates."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-022",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "A customer renewal discussion needs a concise account-specific record of progress already discussed in business reviews.",
+    "funnelStage": "decision",
+    "keyword": "customer QBR recap video",
+    "title": "Turn a Customer QBR Into a Renewal Recap",
+    "slug": "customer-qbr-to-renewal-recap",
+    "distinctIntent": "Condense a private account review into agreed outcomes, unresolved gaps and next-period commitments. This is customer continuity evidence, distinct from public c4-010 case studies and c4-006 first-use onboarding.",
+    "originalWorksheet": "A renewal recap storyboard with agreed objective, observed account evidence, customer interpretation, unresolved gap, next commitment and timestamp, leaving unverified outcomes explicitly blank.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.vidyard.com/video-in-motion-benchmark-report/",
+        "supports": "Live search on 2026-09-12; full page uninspected. The live-search excerpt mentions product-update or QBR recaps as post-sale video uses. Its benchmark statistics and attributed performance claims are not used."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-023",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "An existing customer-facing demo contains a newly shipped feature that needs a concise update for current users.",
+    "funnelStage": "consideration",
+    "keyword": "product update video release notes",
+    "title": "Turn a Feature Demo Into Visual Release Notes",
+    "slug": "feature-demo-to-visual-release-notes",
+    "distinctIntent": "Explain a specific change to an already familiar product by contrasting the previous behavior with the new behavior and its availability. Distinct from a startup launch video, launch calendar or first-use tutorial.",
+    "originalWorksheet": "A before/change/now storyboard with affected user, old behavior, changed interaction, availability limits and destination for details, plus a short text release-note companion.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.vidyard.com/business-video-benchmarks/",
+        "supports": "Live search on 2026-09-12; full page uninspected. The indexed publisher report gives announcing new features as an example of business video use; no benchmark numbers or automation capabilities are adopted."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-024",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "Support has recorded a solution to a recurring problem, but customers need to identify which fix applies.",
+    "funnelStage": "consideration",
+    "keyword": "turn support videos into knowledge base articles",
+    "title": "Turn Support Recordings Into Troubleshooting Articles",
+    "slug": "support-recordings-to-troubleshooting-articles",
+    "distinctIntent": "Convert a recorded resolution into symptom-based diagnosis, prerequisites and recovery branches. Unlike c4-007's tutorial, this helps a stuck user select the correct fix rather than learn a normal workflow.",
+    "originalWorksheet": "A symptom-to-fix decision tree with observable symptom, quick check, matching excerpt, recovery step, expected result and escalation branch, built around a fictional support issue.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.intercom.com/help/en/articles/56645-how-to-write-great-help-articles",
+        "supports": "Live search on 2026-09-12; full page uninspected. Intercom's help guidance discusses defining the customer's problem and how an article will help."
+      },
+      {
+        "url": "https://support.zendesk.com/hc/en-us/articles/4408894140826-Getting-started-with-self-service-Part-3-Determining-what-articles-you-need-to-create",
+        "supports": "Live search on 2026-09-12; full page uninspected. Zendesk describes using existing resources to determine needed help articles."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-025",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "Two commercial partners have a joint recording and need materials each can distribute to their own audience.",
+    "funnelStage": "consideration",
+    "keyword": "co marketing content kit template",
+    "title": "Build a Partner Co-Marketing Kit From One Recording",
+    "slug": "partner-comarketing-kit-from-recording",
+    "distinctIntent": "Package a shared offer with complementary partner introductions, useful excerpts and destination-specific copy. This concerns a single commercial partnership, not c5's multi-company portfolio operating system.",
+    "originalWorksheet": "A two-partner content kit with shared audience problem, joint offer, each partner's contribution, approved excerpt menu, editable introductions and common destination details.",
+    "sourceCandidates": [
+      {
+        "url": "https://blog.hubspot.com/blog/tabid/6307/bid/34188/what-in-the-heck-is-co-marketing.aspx?gad=1",
+        "supports": "Live search on 2026-09-12; full page uninspected. HubSpot describes partners jointly promoting a shared offer and sharing promotion results. The portable kit is original synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-026",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "Employees want to share an expert discussion but need a starting point that leaves room for their own perspective.",
+    "funnelStage": "consideration",
+    "keyword": "employee advocacy content examples",
+    "title": "Make an Employee Sharing Kit From Expert Content",
+    "slug": "employee-sharing-kit-from-expert-content",
+    "distinctIntent": "Turn approved expert material into optional prompts employees can personalize meaningfully. This is employee participation in one company's GTM campaign, distinct from c1 founder positioning and c5 portfolio brand guidelines.",
+    "originalWorksheet": "A sharing kit with an excerpt, three role-specific discussion prompts, optional opening lines, a source link and an example showing how an employee adds a firsthand observation.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.linkedin.com/business/marketing/blog/brand/how-to-encourage-employees-to-advocate-for-your-brand-on-social",
+        "supports": "Live search on 2026-09-12; full page uninspected. LinkedIn discusses helping and encouraging employees to share brand-related content; no reach or engagement claim is carried forward."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-027",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "A trade-show team must explain its product on a booth screen using existing footage and unpredictable viewer arrival times.",
+    "funnelStage": "consideration",
+    "keyword": "trade show booth video loop",
+    "title": "Build a Trade Show Video Loop From Existing Demos",
+    "slug": "trade-show-video-loop-existing-demos",
+    "distinctIntent": "Assemble a continuous booth presentation that remains understandable when a visitor joins mid-loop and cannot hear narration. Distinct from c2 stage pitches and from simply resizing social clips.",
+    "originalWorksheet": "A loop seam storyboard with independently understandable segments, readable proof frames, re-entry context, dwell assumptions to test and a physical-booth next step.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.vidyard.com/blog/explainer-videos/",
+        "supports": "Live search on 2026-09-12; full page uninspected. The search excerpt explicitly describes running an explainer video on a loop at a trade-show booth. The modular loop design is editorial guidance."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-028",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "A completed webinar is moving to an evergreen replay page, and marketing must decide where a form belongs.",
+    "funnelStage": "decision",
+    "keyword": "should on demand webinars be gated",
+    "title": "Should You Gate an On-Demand Webinar Replay?",
+    "slug": "should-gate-on-demand-webinar-replay",
+    "distinctIntent": "Decide whether a replay needs unrestricted viewing, an optional form or a registration gate based on the visitor's job and lead follow-up use. This is an access-path decision, not retained c4-001's broader repurposing plan.",
+    "originalWorksheet": "A replay access decision tree and three page wireframes showing what visitors see before viewing, what information is requested and what useful follow-up follows; no conversion-rate forecasts.",
+    "sourceCandidates": [
+      {
+        "url": "https://wistia.com/blog/webinar-formats",
+        "supports": "Live search on 2026-09-12; full page uninspected. Wistia describes hosting and optionally gating on-demand webinars."
+      },
+      {
+        "url": "https://wistia.com/blog/state-of-video-webinar-recap",
+        "supports": "Live search on 2026-09-12; full page uninspected. The search excerpt explicitly raises the practical question of gating on-demand replays; any benchmark claims require separate verification."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-029",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "An embedded campaign video can be watched on the site but does not appear as a video result in search.",
+    "funnelStage": "consideration",
+    "keyword": "video not indexed Google watch page",
+    "title": "Why Your Campaign Video Is Not Indexed by Google",
+    "slug": "campaign-video-not-indexed-google",
+    "distinctIntent": "Diagnose whether the page and video meet Google's video indexing requirements, then prepare concrete corrections. Distinct from choosing marketing metrics, clipping material or writing a transcript article.",
+    "originalWorksheet": "A watch-page diagnostic sheet separating page indexability, video prominence, discoverable media, thumbnail, metadata and observed Search Console reason, with a worked fictional diagnosis.",
+    "sourceCandidates": [
+      {
+        "url": "https://developers.google.com/search/docs/appearance/video",
+        "supports": "Page inspected on 2026-09-12. Google distinguishes indexed watch pages from video indexing and describes dedicated watch pages, video discoverability, thumbnails and Search Console diagnostics."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-030",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "Buyers need to jump directly to relevant sections of an existing long demonstration or expert session.",
+    "funnelStage": "consideration",
+    "keyword": "how to add YouTube chapters timestamps",
+    "title": "Add Useful Chapters to a Long Product Video",
+    "slug": "useful-chapters-long-product-video",
+    "distinctIntent": "Build a navigation layer over an intact video using meaningful section names and valid timestamps. This differs from c4-002 because the recording remains whole and the output is an index rather than extracted clips.",
+    "originalWorksheet": "A chapter map with buyer question, chapter label, start time, boundary rationale and timestamp checks, plus a fictional paste-ready description block.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.google.com/youtube/answer/9884579?hl=en",
+        "supports": "Live search on 2026-09-12; full page uninspected. YouTube documents manual chapter timestamps, ordered labels and chapter eligibility; current details need confirmation when drafting."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-031",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "Short excerpts attract viewers, but the team has not connected them to the complete product explanation on its channel.",
+    "funnelStage": "consideration",
+    "keyword": "link YouTube Shorts to full video",
+    "title": "Connect YouTube Shorts to the Full Product Story",
+    "slug": "connect-youtube-shorts-full-product-story",
+    "distinctIntent": "Give an existing Short a relevant next video and ensure its promise matches the destination. Distinct from cutting Shorts, resizing footage or choosing general campaign CTAs because it implements an in-platform navigation path.",
+    "originalWorksheet": "A Short-to-destination map with teaser promise, unanswered question, related video, opening continuity check and mobile click-path verification procedure.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.google.com/youtube/answer/14075157?hl=en",
+        "supports": "Live search on 2026-09-12; full page uninspected. YouTube explains related-video links in Shorts, advanced-feature access and eligible public or unlisted destinations on the creator's channel."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-032",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "A marketing email includes a video, but recipients cannot play it inside their email client.",
+    "funnelStage": "consideration",
+    "keyword": "how to put video in marketing email",
+    "title": "Put Video in Email With a Reliable Viewing Path",
+    "slug": "video-email-reliable-viewing-path",
+    "distinctIntent": "Design the thumbnail, fallback text and destination so the existing video is reachable when embedded playback is unsupported. Unlike the newsletter and nurture articles, this solves delivery mechanics.",
+    "originalWorksheet": "An email-to-player wireframe and fallback test table covering image loading, alt text, text link, thumbnail click, mobile destination and the expected return path.",
+    "sourceCandidates": [
+      {
+        "url": "https://mailchimp.com/help/add-video-to-an-email/",
+        "supports": "Live search on 2026-09-12; full page uninspected. Mailchimp explains that many email clients strip embedded video and documents linked thumbnails, manual image links and video content blocks."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-033",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "A reused campaign video explains the problem clearly but leaves interested viewers without a relevant next action.",
+    "funnelStage": "decision",
+    "keyword": "where to put call to action in video",
+    "title": "Place a Video CTA Where the Viewer Is Ready to Act",
+    "slug": "video-cta-placement-viewer-readiness",
+    "distinctIntent": "Choose a useful action and place it at a moment when the video has supplied the necessary context. This is a conversion interaction design job, separate from Shorts navigation or generic metric selection.",
+    "originalWorksheet": "A readiness-to-action timeline linking the viewer's unanswered question, evidence just shown, CTA wording, appearance point, landing-page promise and fallback link.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.wistia.com/en/articles/8283756-call-to-action",
+        "supports": "Live search on 2026-09-12; full page uninspected. Wistia documents clickable video calls to action that can appear at different points in playback; its feature is an example, not a VideoClaw capability claim."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-034",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "Adding several repurposed videos made a campaign landing page slow to load on mobile.",
+    "funnelStage": "consideration",
+    "keyword": "speed up landing page with embedded videos",
+    "title": "Keep Embedded Videos From Slowing Your Landing Page",
+    "slug": "embedded-video-landing-page-speed",
+    "distinctIntent": "Reduce unnecessary initial loading while keeping the visitor's intended video easy to start. This is page performance triage, distinct from video indexing and file aspect-ratio adaptation.",
+    "originalWorksheet": "A video-load inventory and before/after observation sheet with embed location, poster behavior, initial requests, click-to-load option and mobile playback checks; measurements remain blank until observed.",
+    "sourceCandidates": [
+      {
+        "url": "https://web.dev/articles/lazy-loading-video?hl=en",
+        "supports": "Live search on 2026-09-12; full page uninspected. Google's web.dev documents deferred video loading and distinctions between video elements and hosted iframe embeds."
+      },
+      {
+        "url": "https://web.dev/learn/performance/video-performance?authuser=2&hl=en",
+        "supports": "Live search on 2026-09-12; full page uninspected. The indexed guidance discusses replacing an immediate embed with a placeholder activated by interaction."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-035",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "A demand-generation team has introductory and proof clips but needs a coherent follow-up for prior video viewers.",
+    "funnelStage": "decision",
+    "keyword": "LinkedIn video retargeting strategy",
+    "title": "Plan a Retargeting Sequence From Existing Video Assets",
+    "slug": "retargeting-sequence-existing-video-assets",
+    "distinctIntent": "Assign a next piece of evidence to a prior viewing context and define audience exclusions and eligibility checks. Unlike a content calendar, this is a conditional paid distribution sequence; the article plans no actual ad spend.",
+    "originalWorksheet": "An audience-to-next-asset table with observed engagement condition, intended next question, proof clip, destination, exclusion and insufficient-audience fallback; leave audience sizes and results unknown.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.linkedin.com/help/linkedin/answer/a427551/retargeting?lang=en-US",
+        "supports": "Live search on 2026-09-12; full page uninspected. LinkedIn documents Matched Audiences retargeting and warns that video views do not directly equal matched member accounts."
+      },
+      {
+        "url": "https://business.linkedin.com/content/dam/lem/business/en/advertise/ads/targeting/retargeting-checklist.pdf",
+        "supports": "Live search on 2026-09-12; full page uninspected. The indexed LinkedIn checklist discusses video-completion segments and testing lookback windows; verify current eligibility before implementation."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-036",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "A useful organic clip is being adapted for an advertisement shown to viewers unfamiliar with the company.",
+    "funnelStage": "consideration",
+    "keyword": "turn organic video into paid ad",
+    "title": "Turn an Organic Video Into a Focused B2B Ad",
+    "slug": "organic-video-to-focused-b2b-ad",
+    "distinctIntent": "Rebuild context, proof and action for a cold advertising audience that has not followed the original discussion. This is creative adaptation, distinct from choosing production resources or sequencing retargeting audiences.",
+    "originalWorksheet": "An organic-to-ad edit specification showing the original context dependency, replacement opening, visible proof, branding moment, offer and action, with a fictional side-by-side script.",
+    "sourceCandidates": [
+      {
+        "url": "https://business.linkedin.com/advertise/ads/sponsored-content/video-ads/tips",
+        "supports": "Live search on 2026-09-12; full page uninspected. LinkedIn's live-search excerpt distinguishes awareness, consideration and conversion creative uses and recommends designing for sound-off viewing. No performance benchmark is adopted."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-037",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "A campaign team has two plausible openings for the same existing video and needs a fair way to learn which works.",
+    "funnelStage": "consideration",
+    "keyword": "A B test video hooks",
+    "title": "Test Two Video Openings Without Changing Everything Else",
+    "slug": "test-two-video-openings",
+    "distinctIntent": "Design a controlled creative experiment in which the opening changes and the remaining video and delivery conditions are held as stable as possible. Distinct from c4-009's metric overview and from c3 tool evaluation.",
+    "originalWorksheet": "A hook experiment card with two opening scripts, fixed elements, audience allocation method, primary observation, observation window and inconclusive-result rule; no arbitrary sample-size or lift promise.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.google.com/youtube/answer/9314415?hl=en",
+        "supports": "Live search on 2026-09-12; full page uninspected. YouTube's retention guidance discusses experimenting with intros and how early content can match viewer expectations. A controlled hook test is the proposed editorial method, not a native YouTube feature claim."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-038",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "An evergreen video needs a better thumbnail, and several candidate designs communicate different promises.",
+    "funnelStage": "consideration",
+    "keyword": "YouTube thumbnail test and compare",
+    "title": "Test Thumbnails for an Existing B2B Video",
+    "slug": "test-thumbnails-existing-b2b-video",
+    "distinctIntent": "Compare visual packaging while preserving the video itself and interpreting inconclusive outcomes honestly. Distinct from testing the opening edit because the intervention occurs before a viewer starts playback.",
+    "originalWorksheet": "A thumbnail hypothesis board with three distinct visual promises, fixed title and video conditions, platform eligibility check, reported result and decision note; never infer a winner from unavailable data.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.google.com/youtube/answer/13861714?hl=en-on",
+        "supports": "Live search on 2026-09-12; full page uninspected. YouTube documents thumbnail comparisons, watch-time-based results and possible inconclusive outcomes; verify the current interface and eligibility while drafting."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-039",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "Several clips promote the same destination, but the team cannot distinguish their inbound visits.",
+    "funnelStage": "consideration",
+    "keyword": "UTM tracking for video campaigns",
+    "title": "Track Repurposed Video Links With Clear UTM Names",
+    "slug": "utm-tracking-repurposed-video-links",
+    "distinctIntent": "Create consistent campaign URLs that distinguish source, placement and creative variant without pretending that clicks prove revenue. Unlike c4-009's broad metrics guide, this supplies an implementation convention and link QA procedure.",
+    "originalWorksheet": "A UTM naming dictionary and link register with campaign, distribution source, medium, asset variant and destination checks, including clearly fictional URLs and a rule against personal data in tags.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.google.com/analytics/answer/10917952",
+        "supports": "Live search on 2026-09-12; full page uninspected. Google documents custom campaign URLs and using utm_content to distinguish different links or creative variations."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-040",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "A website report shows page visits but no playback events for embedded campaign videos.",
+    "funnelStage": "consideration",
+    "keyword": "GA4 video tracking not working",
+    "title": "Check Whether GA4 Is Tracking Your Embedded Video",
+    "slug": "check-ga4-embedded-video-tracking",
+    "distinctIntent": "Determine whether the embed supports the expected automatic events and verify actual playback-event collection. Distinct from UTM tagging, which measures incoming links, and from choosing a video KPI.",
+    "originalWorksheet": "A playback instrumentation test script and expected-versus-observed event ledger covering start, progress and completion, player type, API support, configuration and duplicate-event checks.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.google.com/analytics/answer/9216061?hl=en",
+        "supports": "Live search on 2026-09-12; full page uninspected. Google's indexed enhanced-measurement documentation specifies video events for supported YouTube embeds with JavaScript API support; it does not promise automatic tracking for every player."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-041",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "An already published product explanation loses viewers at a particular point, and marketing must decide what to edit.",
+    "funnelStage": "consideration",
+    "keyword": "why viewers drop off video retention",
+    "title": "Use Retention Dips to Plan a Better Video Edit",
+    "slug": "retention-dips-video-edit-plan",
+    "distinctIntent": "Translate observed retention patterns into testable editorial diagnoses, distinguishing confusion from loss of interest and source-mix effects. Unlike initial clip selection, this revises an existing asset after actual viewing evidence.",
+    "originalWorksheet": "A timestamped edit diagnosis sheet with observed dip or spike, matching scene, competing explanations, proposed change and follow-up observation; a spike alone is not labeled success.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.google.com/youtube/answer/9314415?hl=en",
+        "supports": "Live search on 2026-09-12; full page uninspected. YouTube explains intro, spike and dip patterns and notes that rewatching may reflect unclear content as well as interest."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-042",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "A useful evergreen product video contains one outdated screen or claim while the rest remains accurate.",
+    "funnelStage": "consideration",
+    "keyword": "update old product demo video",
+    "title": "Update an Old Product Video Without Starting Over",
+    "slug": "update-old-product-video",
+    "distinctIntent": "Locate and replace stale segments, then check continuity, destinations and measurement consequences. This is a single-asset repair job, distinct from c5 portfolio lifecycle systems and from recording a new tutorial.",
+    "originalWorksheet": "A segment repair map with stale timestamp, change reason, replacement shot, narration dependency, continuity check and deployment destination; include a decision on whether old and new analytics can be compared.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.wistia.com/en/articles/8274050-replacing-your-media",
+        "supports": "Live search on 2026-09-12; full page uninspected. Wistia documents replacing hosted media and options that affect existing embeds and statistics. These platform-specific choices require verification and are not assumed for other hosts."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-043",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "A US marketing team is reusing a product video for another language and needs its terminology and meaning to survive translation.",
+    "funnelStage": "consideration",
+    "keyword": "localize product marketing videos",
+    "title": "Localize a Product Video Without Losing Its Meaning",
+    "slug": "localize-product-video-meaning",
+    "distinctIntent": "Adapt product terms, examples, audio and destination copy for another language while checking meaning and timing. Distinct from c4-004's caption accessibility review because translation requires semantic and locale decisions.",
+    "originalWorksheet": "A localization packet with approved term glossary, terms to retain, source meaning, translated line, on-screen reference, pronunciation note and bilingual review result.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.google.com/youtube/answer/15569972?hl=en",
+        "supports": "Live search on 2026-09-12; full page uninspected. YouTube documents automatic dubbing and warns that an incorrect original-language setting can cause mistranslation."
+      },
+      {
+        "url": "https://support.google.com/youtube/answer/13338784?hl=en-GB",
+        "supports": "Live search on 2026-09-12; full page uninspected. YouTube describes adding language audio tracks to an existing video; availability and vendor outcome claims require verification."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-044",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "A company wants to distribute a recorded video conversation as an audio episode, but the discussion references visuals.",
+    "funnelStage": "consideration",
+    "keyword": "turn video into audio podcast",
+    "title": "Turn a Video Conversation Into an Audio-First Episode",
+    "slug": "video-conversation-to-audio-episode",
+    "distinctIntent": "Make an existing recording understandable without its pictures by replacing visual dependencies and restructuring audio transitions. This differs from podcast metadata and from extracting short clips.",
+    "originalWorksheet": "A visual-dependency listening audit with timestamp, missing visual context, replacement narration, retained audio and transition edit, followed by an audio-only comprehension test.",
+    "sourceCandidates": [
+      {
+        "url": "https://podcasters.apple.com/support/825-how-to-create-an-episode",
+        "supports": "Live search on 2026-09-12; full page uninspected. Apple documents audio and video episode delivery options for RSS-hosted shows. The audio adaptation procedure is original editorial synthesis, not an Apple-prescribed workflow."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-045",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "An approved product presentation explains a process through dense slides that are difficult to understand in a social feed.",
+    "funnelStage": "consideration",
+    "keyword": "turn presentation slides into explainer video",
+    "title": "Turn Dense Slides Into a Visual Process Explainer",
+    "slug": "dense-slides-to-visual-process-explainer",
+    "distinctIntent": "Translate an existing conceptual process into a sequence of visual states, showing relationships and changes instead of reading slide bullets. Distinct from c1's startup explainer script and c4-005's resizing of finished footage.",
+    "originalWorksheet": "A slide-to-scene translation board with original concept, entity, relationship, change over time, visual state and minimal narration, demonstrated with a fictional multi-step business process.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.vidyard.com/blog/explainer-videos/",
+        "supports": "Live search on 2026-09-12; full page uninspected. The indexed publisher guidance describes using motion graphics to explain information and visualize change. The scene translation board is an original method."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-046",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "A product email or article needs to show one small interaction without asking the reader to open a full demonstration.",
+    "funnelStage": "consideration",
+    "keyword": "turn screen recording into GIF",
+    "title": "Turn a Screen Recording Into a Clear Product GIF",
+    "slug": "screen-recording-to-product-gif",
+    "distinctIntent": "Extract a meaningful micro-interaction and design a legible loop with a useful static fallback. This produces an animated image rather than a video email thumbnail or a resized social clip.",
+    "originalWorksheet": "A start/action/result/reset loop storyboard with a frame budget, readable crop, pause locations, fallback frame and export review, plus a fictional interaction example.",
+    "sourceCandidates": [
+      {
+        "url": "https://helpx.adobe.com/be_en/express/web/video-creation-and-editing/change-file-formats/convert-to-gif.html",
+        "supports": "Live search on 2026-09-12; full page uninspected. Adobe's help page documents converting existing videos to GIFs; loop pacing and product legibility are editorial additions."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-047",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "Sales keeps requesting assets, and marketing needs to identify which buyer questions existing recordings actually answer.",
+    "funnelStage": "awareness",
+    "keyword": "sales content gap analysis",
+    "title": "Find Sales Content Gaps in Your Existing Video Library",
+    "slug": "sales-content-gaps-existing-video-library",
+    "distinctIntent": "Audit question coverage and distinguish an absent answer from an answer that is merely hard to find. Unlike c4-008's calendar or c4-003's production workflow, the output is an evidence-backed gap diagnosis.",
+    "originalWorksheet": "A buyer-question coverage map with available answer timestamp, partial answer, missing evidence, duplicate asset and action of reuse, repair or commission; question counts remain unknown unless observed.",
+    "sourceCandidates": [
+      {
+        "url": "https://blog.hubspot.com/marketing/content-gap-analysis",
+        "supports": "Live search on 2026-09-12; full page uninspected. HubSpot describes systematic content analysis and collecting asset metadata. Its claimed performance improvements are not used."
+      },
+      {
+        "url": "https://www.gong.io/blog/how-to-use-gong-agents-to-plan-execute-and-measure-gtm-plays",
+        "supports": "Live search on 2026-09-12; full page uninspected. Gong describes using conversation material for FAQs, battlecards and messaging. These are publisher use cases, not verified product capabilities or buyer demand."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-048",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "A recorded expert workshop teaches a method, and marketing wants a practical downloadable tool that helps buyers apply it.",
+    "funnelStage": "consideration",
+    "keyword": "turn content into downloadable checklist",
+    "title": "Turn a Recorded Method Into a Buyer Checklist",
+    "slug": "recorded-method-to-buyer-checklist",
+    "distinctIntent": "Convert instructional advice into observable actions, decisions and completion criteria for the buyer. This produces an application aid, distinct from c4-007's tutorial video and c5's founder content workshop.",
+    "originalWorksheet": "A method-to-action extraction grid with source step, reader input, action verb, decision, completion evidence and skip condition, followed by a fictional one-page buyer checklist.",
+    "sourceCandidates": [
+      {
+        "url": "https://wistia.com/blog/ai-webinar-transcript-content",
+        "supports": "Page inspected on 2026-09-12. Wistia recommends extracting useful frameworks and examples with timestamps and avoiding unsupported additions. Converting a recorded method into an actionable buyer checklist is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-049",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "Sales needs several tailored video explanations, but the same problem, product proof and answer segments already exist across approved recordings.",
+    "funnelStage": "consideration",
+    "keyword": "how to create modular video content",
+    "title": "Build Modular Sales Videos From Existing Recordings",
+    "slug": "modular-sales-videos-existing-recordings",
+    "distinctIntent": "Make existing video segments interchangeable by defining self-contained openings, endings and transition requirements, then assemble several coherent sales cuts. Distinct from c4-016's written battlecards, c4-017's recap of one meeting and c4-018's packet of separate assets because this produces reusable edit modules and newly assembled videos.",
+    "originalWorksheet": "A video-module compatibility grid recording each segment's buyer job, required prior context, opening and closing words, visual and audio transitions and incompatible neighbors, followed by two fictional assembly recipes that reuse the same proof module.",
+    "sourceCandidates": [
+      {
+        "url": "https://helpx.adobe.com/premiere/desktop/edit-projects/edit-nested-sequences/about-nested-sequences.html",
+        "supports": "Live search on 2026-09-12; relevant full-page instructions uninspected. Adobe's indexed guidance explains reusing nested sequences across timelines and how changes to a source affect nested instances. The sales-module compatibility rules are original editorial synthesis, not a claim about VideoClaw features."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c4-050",
+    "campaign": "gtm-content-repurposing-buyer",
+    "icp": "US GTM or marketing lead choosing a video and content-repurposing workflow",
+    "customerTrigger": "A publication or partner wants to carry an existing article, and marketing must decide whether to syndicate it or adapt it.",
+    "funnelStage": "consideration",
+    "keyword": "content syndication vs repurposing",
+    "title": "Content Syndication vs Repurposing: Choose the Right Route",
+    "slug": "content-syndication-vs-repurposing-route",
+    "distinctIntent": "Choose between republication and a materially adapted derivative, then prepare a destination-specific content brief. This is a reuse decision for a single article, not a co-marketing kit or a generic distribution calendar.",
+    "originalWorksheet": "A republication-versus-adaptation decision tree with audience overlap, reader task, material to preserve, new value required, attribution and search-handling questions for the destination editor.",
+    "sourceCandidates": [
+      {
+        "url": "https://blog.hubspot.com/marketing/how-to-syndicate-content",
+        "supports": "Live search on 2026-09-12; full page uninspected. HubSpot defines syndication as republication on other websites. Current search handling should be separately verified during writing; no ranking protection is promised."
+      }
+    ]
+  }
+]

@@ -1,0 +1,3371 @@
+{
+  "schemaVersion": 1,
+  "kind": "manual_editorial_batch",
+  "provenance": {
+    "actorId": "apify/google-search-scraper",
+    "runId": "UZg3FufDQruZuQbdf",
+    "datasetId": "cNxnl5rZUSNeVl2DE",
+    "observedAt": "2026-09-12T02:37:37.242Z"
+  },
+  "records": [
+    {
+      "id": "vc-manual250-c2-011",
+      "keyword": "accelerator application video requirements",
+      "found": true,
+      "query": "accelerator application video requirements",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "EIC Accelerator Video Script Template",
+          "url": "https://www.rasph.com/eic-accelerator-video-script-template",
+          "domain": "rasph.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "EIC Accelerator - GUIDE FOR APPLICANTS",
+          "url": "https://eic.ec.europa.eu/document/download/9d96fbf3-4d85-4ad0-9483-c77ce348111d_en?filename=EIC%20Accelerator%20guide%20for%20applicants_WP26.pdf",
+          "domain": "eic.ec.europa.eu",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "EIC Accelerator Application Process Guide",
+          "url": "https://www.emdesk.com/horizon-2020-horizon-europe-basics-guide/eic-accelerator-application-process-step-by-step-guide",
+          "domain": "emdesk.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Techstars Accelerator Application Preview",
+          "url": "https://www.techstars.com/application-preview",
+          "domain": "techstars.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "EIC Accelerator: 5 essential tips for your Video Pitch",
+          "url": "https://evolutioneurope.eu/blog/eic-accelerator-tips-video-pitch/",
+          "domain": "evolutioneurope.eu",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Guide to applying to startup accelerators",
+          "url": "https://mercury.com/blog/applying-to-accelerators",
+          "domain": "mercury.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "How to Join the Techstars Accelerator: A Step-by-Step Guide",
+          "url": "https://pitchbob.io/library/accelerators/how-to-join-the-techstars-accelerator-a-step-by-step-guide-pitchbob-io",
+          "domain": "pitchbob.io",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "HOW TO GET INTO A STARTUP ACCELERATOR // FIVE ...",
+          "url": "https://www.youtube.com/watch?v=zpHOv0LbVtM",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 9,
+          "title": "Accelerator Application Form",
+          "url": "https://member.eonetwork.org/eo-accelerator/accelerator-application-form",
+          "domain": "member.eonetwork.org",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Can a solo founder join an accelerator?",
+        "What are the top 5 startup accelerators?",
+        "Is there a startup accelerator in 2026?",
+        "How does an accelerator make money?"
+      ],
+      "relatedQueries": [
+        "Startup accelerator application video requirements",
+        "EIC Accelerator",
+        "EIC Pre Accelerator",
+        "Techstars accelerator application 2026",
+        "EIC Accelerator short proposal template",
+        "EIC Accelerator 2026 deadlines",
+        "Eic accelerator 2026 call",
+        "EIC Fund investment guidelines"
+      ]
+    },
+    {
+      "id": "vc-manual250-c2-012",
+      "keyword": "YC application video founders different locations",
+      "found": true,
+      "query": "YC application video founders different locations",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "The Application Video",
+          "url": "https://www.ycombinator.com/video",
+          "domain": "ycombinator.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "YC Founder Video : r/ycombinator",
+          "url": "https://www.reddit.com/r/ycombinator/comments/1ikb8om/yc_founder_video/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "How to Write a YC Application: Everything I Learnt Doing It ...",
+          "url": "https://medium.com/@ParthMakwanaPM/how-to-write-a-yc-application-everything-i-learnt-doing-it-for-the-first-time-06eef96fe911",
+          "domain": "medium.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Ultimate YC Application Video Guide for Founders",
+          "url": "https://zyner.io/blog/yc-application-video-guide",
+          "domain": "zyner.io",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Apply to Y Combinator: Step-by-Step Guide for Founders",
+          "url": "https://startupfundraising.com/library/articles/how-to-apply-to-y-combinator",
+          "domain": "startupfundraising.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Are Co-Founders in the Same City Really an Advantage to a ...",
+          "url": "https://news.ycombinator.com/item?id=251853",
+          "domain": "news.ycombinator.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "11 Tips for your 2026 Y-Combinator Application Founder ...",
+          "url": "https://www.nanoflick.com/resources/guides/y-combinator-founder-video",
+          "domain": "nanoflick.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "Y Combinator: Does all the founders need to be present in ...",
+          "url": "https://www.quora.com/Y-Combinator-Does-all-the-founders-need-to-be-present-in-the-video",
+          "domain": "quora.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Is YC still prestigious?",
+        "Does YC give 500k upfront?",
+        "Can I submit multiple YC applications?",
+        "Does YC accept solo founders?"
+      ],
+      "relatedQueries": [
+        "Yc application video founders different locations reddit",
+        "Yc application video founders different locations map",
+        "Successful YC application videos",
+        "YC application video examples",
+        "Yc application demo video",
+        "YC application video tips",
+        "Yc application video game",
+        "YC application deadline"
+      ]
+    },
+    {
+      "id": "vc-manual250-c2-013",
+      "keyword": "update accelerator application demo video",
+      "found": true,
+      "query": "update accelerator application demo video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Program Google for Startup Accelerator",
+          "url": "https://www.youtube.com/watch?v=t5e251YrRng",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 2,
+          "title": "AWS Global Accelerator Hands-on | Multi-Region Load ...",
+          "url": "https://www.youtube.com/watch?v=F3gHpan6s0o",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 3,
+          "title": "Video Accelerator Pro - Apps on Google Play",
+          "url": "https://play.google.com/store/apps/details?id=com.alejo.video_accelerator_pro&hl=en",
+          "domain": "play.google.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "CASSINI Business Accelerator",
+          "url": "https://www.cassini.eu/accelerator/",
+          "domain": "cassini.eu",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Improve Web Performance with AWS Global Accelerator",
+          "url": "https://aws.amazon.com/video/watch/0184486abb6/",
+          "domain": "aws.amazon.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Move your fintech forward with the Visa Accelerator Program",
+          "url": "https://africa.visa.com/en_MW/visa-everywhere/innovation/visa-accelerator.html",
+          "domain": "africa.visa.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Techstars Accelerator Application Preview",
+          "url": "https://www.techstars.com/application-preview",
+          "domain": "techstars.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Mastering the SaaS Accelerator - Mastering the Marketplace",
+          "url": "https://microsoft.github.io/Mastering-the-Marketplace/saas-accelerator/",
+          "domain": "microsoft.github.io",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual250-c2-014",
+      "keyword": "how to get feedback on a product demo",
+      "found": true,
+      "query": "how to get feedback on a product demo",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Your Product Demo Sucks Because It's Focused on ...",
+          "url": "https://review.firstround.com/your-product-demos-suck-because-theyre-focused-on-your-product/",
+          "domain": "review.firstround.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Product demos: a golden opportunity to collect customer ...",
+          "url": "https://www.fizz.co.uk/blog/product-demos-a-golden-opportunity-to-collect-customer-feedback/",
+          "domain": "fizz.co.uk",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "Tips for an Effective Product Demo",
+          "url": "https://www.romanpichler.com/blog/product-demo-tips/",
+          "domain": "romanpichler.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Potential customers are asking me for a product demo. But ...",
+          "url": "https://www.reddit.com/r/startups/comments/xwdvyf/potential_customers_are_asking_me_for_a_product/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "How to deliver an effective product demo",
+          "url": "https://www.productmarketingalliance.com/how-to-deliver-an-effective-product-demo/",
+          "domain": "productmarketingalliance.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "5 Ways to Get More Product Demos (2026)",
+          "url": "https://ventureharbour.com/5-ways-get-product-demos-b2b-enterprise-software-service/",
+          "domain": "ventureharbour.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "What feedback should you ask for after a product demo?",
+          "url": "https://www.linkedin.com/advice/0/what-feedback-should-you-ask-after-product-demo-n7o0c",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 8,
+          "title": "Interactive Product Demos in 2026: What Actually Converts",
+          "url": "https://userpilot.com/blog/interactive-product-demo/",
+          "domain": "userpilot.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How to do a good product demo?",
+        "What are the biggest demo mistakes?",
+        "How to encourage customers to give feedback?",
+        "How to convince a customer to buy a product sample?"
+      ],
+      "relatedQueries": [
+        "How to get feedback on a product demo reddit",
+        "How to get feedback on a product demo without a"
+      ]
+    },
+    {
+      "id": "vc-manual250-c2-015",
+      "keyword": "before and after product demo",
+      "found": true,
+      "query": "before and after product demo",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Product Demos: How to Create Demos That Convert (With ...",
+          "url": "https://knowlify.com/articles/product-demos-complete-guide",
+          "domain": "knowlify.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "How To Nail a Product Demo to an Enterprise Customer",
+          "url": "https://medium.com/@_product/how-to-nail-an-enterprise-product-demo-e40f3c194f2c",
+          "domain": "medium.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "12 Best Product Demo Video Examples in 2026 (With ...",
+          "url": "https://vidico.com/news/best-product-demo-video-examples/",
+          "domain": "vidico.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Have you ever seen a product demo video and be like man",
+          "url": "https://www.linkedin.com/posts/jonathan-liem_have-you-ever-seen-a-product-demo-video-and-activity-7292432750626713601-MJu7",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 5,
+          "title": "WTF Do I do after a demo?? : r/sales",
+          "url": "https://www.reddit.com/r/sales/comments/17459cl/wtf_do_i_do_after_a_demo/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "What To Do Before, During & After A Sales Demo - SalesChakra",
+          "url": "https://saleschakra.com/en/what-to-do-before-during-after-a-sales-demo/",
+          "domain": "saleschakra.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Top Tips for Product Demonstration Videos and Examples ...",
+          "url": "https://www.atlassian.com/blog/loom/product-demonstration",
+          "domain": "atlassian.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How to give a good product demo?",
+        "Can you give me an example of a product demo?",
+        "How do I create a demo?",
+        "What are the types of demo?"
+      ],
+      "relatedQueries": [
+        "Before and after product demo template",
+        "Before and after product demo examples",
+        "Product demo video examples",
+        "Product demo video maker free",
+        "How to record a product demo",
+        "Video demo example",
+        "Best product demo videos",
+        "Interactive demo examples"
+      ]
+    },
+    {
+      "id": "vc-manual250-c2-016",
+      "keyword": "correct a mistake in a video",
+      "found": true,
+      "query": "correct a mistake in a video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Fixing a Mistake in A Video",
+          "url": "https://community.udemy.com/en/discussion/154760/fixing-a-mistake-in-a-video",
+          "domain": "community.udemy.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "How to damage control a mistake in a popular video?",
+          "url": "https://www.reddit.com/r/NewTubers/comments/16wd02s/how_to_damage_control_a_mistake_in_a_popular_video/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "How to correct a wrong video after uploading?",
+          "url": "https://www.facebook.com/groups/31425803023/posts/10159434767003024/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 4,
+          "title": "I made a spelling mistake in a video, how can I fix or cover ...",
+          "url": "https://www.justanswer.com/computer/5qbey-made-spelling-mistake-video-fix-cover.html",
+          "domain": "justanswer.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "7 Most Common Mistakes in Video Editing and How to Fix ...",
+          "url": "https://reviewnprep.com/blog/7-most-common-mistakes-in-video-editing-and-how-to-fix-them/",
+          "domain": "reviewnprep.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "5 video mistakes you can fix in editing",
+          "url": "https://natashalanedesignco.com/5-video-mistakes-you-can-fix-in-editing/",
+          "domain": "natashalanedesignco.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "How to Quickly Fix Small Video Mistakes Without Re- ...",
+          "url": "https://smartmediacutter.com/blog/fix-video-mistakes-without-rerendering/",
+          "domain": "smartmediacutter.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "AI Video Correction | Video Regenerate from Descript",
+          "url": "https://www.descript.com/video-regenerate",
+          "domain": "descript.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How can I edit an existing video?",
+        "How to fix a video error?",
+        "Can mistakes be corrected?",
+        "Can Chatgpt edit a video?"
+      ],
+      "relatedQueries": [
+        "Correct a mistake in a video online",
+        "Correct a mistake in a video iphone",
+        "Correct a mistake in a video online free",
+        "Correct a mistake in a video free",
+        "Descript",
+        "Video editor",
+        "YouTube Studio",
+        "YouTube Corrections feature"
+      ]
+    },
+    {
+      "id": "vc-manual250-c2-017",
+      "keyword": "anonymize data in screen recording",
+      "found": true,
+      "query": "anonymize data in screen recording",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Data anonymization and PII redaction",
+          "url": "https://condens.io/help/security-and-privacy/security-and-privacy-features/data-anonymization/",
+          "domain": "condens.io",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Customer Screen Recording Hiding Sensitive Data",
+          "url": "https://www.reddit.com/r/ProductManagement/comments/13bjdce/customer_screen_recording_hiding_sensitive_data/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Hide Email Address and more while screen recording with ...",
+          "url": "https://www.blurweb.app/use-cases/hide-email-address-and-more-while-screen-recording-with-blurweb-app",
+          "domain": "blurweb.app",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Data Anonymisation: Images and Recordings - NTU LibGuides",
+          "url": "https://libguides.ntu.edu.sg/c.php?g=927336&p=6713432",
+          "domain": "libguides.ntu.edu.sg",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "How to Blur Sensitive Data in Screen Recordings Using ...",
+          "url": "https://www.vmaker.com/blog/blur-sensitive-data-in-screen-recording/",
+          "domain": "vmaker.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "What software blurs student info in screen recordings?",
+          "url": "https://www.facebook.com/groups/higheredlearningcollective/posts/841432826487417/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 7,
+          "title": "Hide Sensitive Information When Screen Sharing: 7 Ways",
+          "url": "https://datablur.app/blog/hide-sensitive-information-screen-share",
+          "domain": "datablur.app",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Can OnlyFans detect screen recording?",
+        "Can screen recording be traced?",
+        "What are the privacy concerns of screen recording?",
+        "How to tell if someone is screen recording you?"
+      ],
+      "relatedQueries": [
+        "How to blur a screen recording on iPhone",
+        "How to blur a screen recording on Android",
+        "Vmaker Recorder",
+        "Screen Studio",
+        "Screen studio highlight",
+        "Camtasia",
+        "ScreenPal",
+        "Loom"
+      ]
+    },
+    {
+      "id": "vc-manual250-c2-018",
+      "keyword": "how to demo a backend product",
+      "found": true,
+      "query": "how to demo a backend product",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How To Present Backend Demos : r/node",
+          "url": "https://www.reddit.com/r/node/comments/x6rvgr/how_to_present_backend_demos/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "How to present backend demos",
+          "url": "https://news.ycombinator.com/item?id=32729784",
+          "domain": "news.ycombinator.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "How To Demo The Backend In An Agile Way?",
+          "url": "https://matthiasorgler.com/articles/how-to-demo-the-backend-in-an-agile-way",
+          "domain": "matthiasorgler.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "How To Present Backend Demos",
+          "url": "https://rxhl.notion.site/How-To-Present-Backend-Demos-861303c09e3e48fcb33a2a6999260e59",
+          "domain": "rxhl.notion.site",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "How to Demo Software Internally",
+          "url": "https://www.sketchdev.io/blog/evolving-the-demo-process",
+          "domain": "sketchdev.io",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "How to create a frontend demo with no backend (AI Mocking)",
+          "url": "https://dev.to/emiliobuilding/how-to-create-a-frontend-demo-with-no-backend-ai-mocking-422n",
+          "domain": "dev.to",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Top 6 Sales Demo Software Tools and How to Choose One",
+          "url": "https://www.atlassian.com/blog/loom/sales-demo-software",
+          "domain": "atlassian.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "Build backends like a senior engineer - Here's how",
+          "url": "https://www.youtube.com/watch?v=RtucdRlGv1o&vl=en-US",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How to do a good product demo?",
+        "What are the top 5 backend languages?",
+        "What is the best tool to create product demos?",
+        "What is the best way to learn backend development?"
+      ],
+      "relatedQueries": [
+        "How to demo a backend product reddit",
+        "How to demo a backend product example",
+        "How to demo a backend product in agile"
+      ]
+    },
+    {
+      "id": "vc-manual250-c2-019",
+      "keyword": "speed up product demo video",
+      "found": true,
+      "query": "speed up product demo video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How to Create Studio-Quality Product Demo Videos Using AI",
+          "url": "https://usemintly.com/blog/how-to-create-studioquality-product-demo-videos-using-ai",
+          "domain": "usemintly.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "Supademo: AI Interactive Product Demos",
+          "url": "https://supademo.com/",
+          "domain": "supademo.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Product Demo Video Maker (Online & Free)",
+          "url": "https://www.veed.io/create/promo-video/product-demo-video-maker",
+          "domain": "veed.io",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "How to Make a Product Demo Video",
+          "url": "https://www.youtube.com/watch?v=Oskk-xipi7Q",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 5,
+          "title": "SaaS Product Demo Videos: 7 Examples + How to Make ...",
+          "url": "https://www.moonb.io/blog/saas-product-demo-video",
+          "domain": "moonb.io",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Top Tips for Product Demonstration Videos and Examples ...",
+          "url": "https://www.atlassian.com/blog/loom/product-demonstration",
+          "domain": "atlassian.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "How to Make a Product Demo Video that Speeds Your Sales",
+          "url": "https://ripmediagroup.com/video-tips/how-to-make-a-product-demo-video-that-speeds-your-sales",
+          "domain": "ripmediagroup.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "10 Best Product Demo Video Examples (That You Can ...",
+          "url": "https://www.synthesia.io/post/product-demo-video-examples",
+          "domain": "synthesia.io",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "10 Best Product Demo Video Examples (That You Can ... - Velo",
+          "url": "https://usevelo.ai/blog/product-demo-video-examples/",
+          "domain": "usevelo.ai",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Speed up product demo video online",
+        "Speed up product demo video free",
+        "Product demo video maker free",
+        "Product demo video maker AI free",
+        "SaaS product demo video maker AI",
+        "Create product demo video",
+        "AI for product demo videos",
+        "Product demo video template"
+      ]
+    },
+    {
+      "id": "vc-manual250-c2-020",
+      "keyword": "screen recording text too small",
+      "found": true,
+      "query": "screen recording text too small",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How to Fix Text Too Small to Read on Your Screen",
+          "url": "https://www.justanswer.com/computer/od1fs-text-size-screen-small-read.html",
+          "domain": "justanswer.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Settings for Screen Recording very small file sizes : r/obs",
+          "url": "https://www.reddit.com/r/obs/comments/1eh14m9/settings_for_screen_recording_very_small_file/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Screen Recording - File size too large! Help..",
+          "url": "https://discussions.apple.com/thread/251467126",
+          "domain": "discussions.apple.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Change the size of text in Windows",
+          "url": "https://support.microsoft.com/en-us/windows/change-the-size-of-text-in-windows-1d5830c3-eee3-8eaa-836b-abcc37d99b9a",
+          "domain": "support.microsoft.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "How Can I Make the Text on My Screen Larger?",
+          "url": "https://www.youtube.com/watch?v=DQX5yg_EK2U",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 6,
+          "title": "Why Are Screen Recordings So Big? 5 Ways to Shrink",
+          "url": "https://www.screenify.studio/blog/2026-04-23-screen-recording-file-too-large",
+          "domain": "screenify.studio",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Text size shows too large or small in Sage software",
+          "url": "https://gb-kb.sage.com/portal/app/portlets/results/view2.jsp?k2dockey=200427112605356",
+          "domain": "gb-kb.sage.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "How to adjust the text size on your device screens because ...",
+          "url": "https://www.popsci.com/diy/how-to-adjust-text-size/",
+          "domain": "popsci.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Why is my screen text so small?",
+        "How do I change the screen recording size?",
+        "How do I put text size back to normal?",
+        "How to increase screen recording volume?"
+      ],
+      "relatedQueries": [
+        "Screen recording text too small android",
+        "Screen recording text too small reddit",
+        "Screen recording text too small windows 10",
+        "Screen recording text too small iphone",
+        "How to change font size on computer screen Windows 10",
+        "Shortcut key to increase font size in Windows 11",
+        "Windows 11 font size too small",
+        "How to change font size on computer screen Windows 11"
+      ]
+    },
+    {
+      "id": "vc-manual250-c2-021",
+      "keyword": "hardware product demo video",
+      "found": true,
+      "query": "hardware product demo video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Hardware Store Product Demos",
+          "url": "https://www.youtube.com/playlist?list=PLsNCkYhxyA6GLSwSAqyDjxMRp94qsp7Ti",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 2,
+          "title": "Hardware Demos: 30 Examples Focused On Product ...",
+          "url": "https://advids.co/blog/30-hardware-demo-video-examples-to-drive-action",
+          "domain": "advids.co",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "10 Product Demo Videos Worth Copying",
+          "url": "https://www.moonb.io/blog/product-demo-videos",
+          "domain": "moonb.io",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Hardware Demo | Videos & Movies on Vimeo",
+          "url": "https://vimeo.com/30927243",
+          "domain": "vimeo.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 5,
+          "title": "12 Best Product Demo Video Examples in 2026 (With ...",
+          "url": "https://vidico.com/news/best-product-demo-video-examples/",
+          "domain": "vidico.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "13 Demo Video Examples & Best Practices (2026) | ngram.com",
+          "url": "https://www.ngram.com/blog/demo-video-examples",
+          "domain": "ngram.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Creating hardware product concept video - what tools to use?",
+          "url": "https://www.reddit.com/r/hwstartups/comments/120bkfg/creating_hardware_product_concept_video_what/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "10 Best Product Demo Video Examples (That You Can ...",
+          "url": "https://www.synthesia.io/post/product-demo-video-examples",
+          "domain": "synthesia.io",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is a product demo video?",
+        "What is the best product demo video?",
+        "How can I create a product demo video?",
+        "What is a demo video?"
+      ],
+      "relatedQueries": [
+        "Hardware product demo video download",
+        "Hardware product demo video free download",
+        "Software product demo video",
+        "SaaS product demo video examples",
+        "SaaS demo video template",
+        "Cool product demo videos",
+        "How to make a product demo video",
+        "SaaS demo video maker"
+      ]
+    },
+    {
+      "id": "vc-manual250-c2-022",
+      "keyword": "share video sound on Zoom",
+      "found": true,
+      "query": "share video sound on Zoom",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Sharing background music or computer audio on Zoom",
+          "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0063608",
+          "domain": "support.zoom.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "Sharing a recorded video with sound during your meeting",
+          "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0064733",
+          "domain": "support.zoom.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "How to Share and Play a Video with Sound During a Zoom ...",
+          "url": "https://mitsloanedtech.mit.edu/support/how-to-share-and-play-a-video-with-sound-during-a-zoom-meeting/",
+          "domain": "mitsloanedtech.mit.edu",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "How to Share and Play a Video with Sound During a Zoom ...",
+          "url": "https://www.chaffey.edu/faculty-staff/csn/docs/quick-tips-2024/quick-tip-november-2024.pdf",
+          "domain": "chaffey.edu",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Zoom: Share Device Sound During Screen Share | IT@UMN",
+          "url": "https://it.umn.edu/services-technologies/how-tos/zoom-share-device-sound-during-screen",
+          "domain": "it.umn.edu",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "How to Share Screen or Share Video with Audio in Zoom",
+          "url": "https://www.youtube.com/watch?v=kuGh3GhMw6w",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 7,
+          "title": "Sharing your screen or desktop on Zoom",
+          "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0060596",
+          "domain": "support.zoom.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Can I share a video on Zoom with sound?",
+        "Why is there no sound when I share a video on Zoom?",
+        "How to share sound while sharing screen?",
+        "Where is the share sound button on Zoom?"
+      ],
+      "relatedQueries": [
+        "How to share video on Zoom with audio on mobile",
+        "How to share sound on Zoom without sharing screen on phone",
+        "Share video sound on zoom android",
+        "How to share YouTube video on Zoom with sound",
+        "How to share video in Zoom meeting in mobile",
+        "How to play a video on Zoom without sharing screen",
+        "Zoom share audio with screen",
+        "How to share sound on Zoom without sharing screen on laptop"
+      ]
+    },
+    {
+      "id": "vc-manual250-c2-023",
+      "keyword": "play video offline in PowerPoint",
+      "found": true,
+      "query": "play video offline in PowerPoint",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Insert a video from YouTube or another site",
+          "url": "https://support.microsoft.com/en-us/powerpoint/training/insert-a-video-from-youtube-or-another-site",
+          "domain": "support.microsoft.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Can embedded YouTube videos play offline in ...",
+          "url": "https://www.facebook.com/groups/lciCyberClubs/posts/452316568701545/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 3,
+          "title": "How to Fix Video Not Playing in PowerPoint",
+          "url": "https://slidemodel.com/how-to-fix-video-not-playing-in-powerpoint/",
+          "domain": "slidemodel.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "How To Embed A Video In PowerPoint From Any Source",
+          "url": "https://www.vyond.com/blog/how-to-add-video-to-powerpoint-presentations/",
+          "domain": "vyond.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Embed YouTube Video in PowerPoint Offline – And He Blogs",
+          "url": "https://andheblogs.andyrush.net/embed-youtube-video-in-powerpoint-offline/",
+          "domain": "andheblogs.andyrush.net",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "How to Embed a Video in PowerPoint and Elevate Your ...",
+          "url": "https://www.atlassian.com/blog/loom/how-to-embed-a-video-powerpoint",
+          "domain": "atlassian.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Why can't I play an MP4 video in PowerPoint?",
+        "How to play YouTube videos offline in PowerPoint?",
+        "How do you embed a video in PowerPoint and have it play automatically?",
+        "Does Microsoft PowerPoint have offline mode?"
+      ],
+      "relatedQueries": [
+        "Play video offline in powerpoint free",
+        "How to embed video in PowerPoint permanently",
+        "How to play video in PowerPoint automatically",
+        "How to embed video in PowerPoint from online",
+        "How to download a YouTube video for PowerPoint offline",
+        "How to add video in ppt from YouTube",
+        "How to add video in PPT in mobile",
+        "How to embed a YouTube video in PowerPoint with start and end time"
+      ]
+    },
+    {
+      "id": "vc-manual250-c2-024",
+      "keyword": "two presenters product demo",
+      "found": true,
+      "query": "two presenters product demo",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "AI Product Demo Video Generator, No Filming Needed",
+          "url": "https://www.heygen.com/tool/product-demo-video-generator",
+          "domain": "heygen.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "How to Prepare A Product Demo Presentation in 10 Steps",
+          "url": "https://www.howdygo.com/blog/how-to-prepare-a-product-demo-presentation",
+          "domain": "howdygo.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "Product demo: what it is and why it matters (2026)",
+          "url": "https://www.karumi.ai/blog/what-is-a-product-demo",
+          "domain": "karumi.ai",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Product demo presentation: Create slides with AI",
+          "url": "https://manus.im/playbook/product-demo-presentation",
+          "domain": "manus.im",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Product Demos That Sell: Types to Know & How to Create One",
+          "url": "https://www.reprise.com/resources/blog/product-demos-complete-guide",
+          "domain": "reprise.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Presenter-Led Demo Videos: How to Make Your Product ...",
+          "url": "https://www.linkedin.com/pulse/presenter-led-demo-videos-how-make-your-product-easier-understand-rwiyf",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 7,
+          "title": "Top Tips for Product Demonstration Videos and Examples ...",
+          "url": "https://www.atlassian.com/blog/loom/product-demonstration",
+          "domain": "atlassian.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "Product Demo Video Maker - Ship Demos in Minutes - ngram",
+          "url": "https://www.ngram.com/use-cases/product-demo-video",
+          "domain": "ngram.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Can you give me an example of a product demo?",
+        "How to give a demo of a product?",
+        "What is the purpose of a product demo?",
+        "How to give a demo presentation?"
+      ],
+      "relatedQueries": [
+        "Two presenters product demo youtube",
+        "Product demo video maker AI free",
+        "Demo presentation examples",
+        "Product demo video maker free",
+        "Demo presentation PPT",
+        "AI video for product demo",
+        "HeyGen demo",
+        "How to create a product demo video"
+      ]
+    },
+    {
+      "id": "vc-manual250-c2-025",
+      "keyword": "show mobile app on projector",
+      "found": true,
+      "query": "show mobile app on projector",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Projector - HD Video Mirroring – Apps on Google Play",
+          "url": "https://play.google.com/store/apps/details?id=com.pnd.shareall&hl=en_IN",
+          "domain": "play.google.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "How to Connect a Smartphone to a Projector?",
+          "url": "https://global.xgimi.com/blogs/tips-tutorials/connect-smartphone-to-projector?srsltid=AfmBOopWM-MH_ytCKJZir2uNoDsfufTNGUvkOLn53OCFu2dpTRpTplk3",
+          "domain": "global.xgimi.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "Projector: Phone to TV Cast – Apps on ...",
+          "url": "https://play.google.com/store/apps/details?id=com.vsray.screen.mirroring.smartview.tv.cast&hl=en_IN",
+          "domain": "play.google.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Cast Easily with Projector App: 7 Tools for iOS Android",
+          "url": "https://www.soundcore.com/blogs/projectors/projector-app",
+          "domain": "soundcore.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "How to Connect Android Phones and Tablets to Projectors ...",
+          "url": "https://www.benq.com/en-in/business/resource/trends/connect-android-phone-to-tv.html?srsltid=AfmBOoqe208qdalqS9OC7PmPDQv6xOq-fYHJV71aytrJ7X3Lu2BI6kO-",
+          "domain": "benq.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Mobile Projector 4K Show Wall for Android - Download",
+          "url": "https://mobile-projector-4k-show-wall.en.softonic.com/android",
+          "domain": "mobile-projector-4k-show-wall.en.softonic.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "How to mirror the Android phone screen to PC/Projector",
+          "url": "https://community.dhis2.org/t/how-to-mirror-the-android-phone-screen-to-pc-projector/35521",
+          "domain": "community.dhis2.org",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How can I display my phone on a projector?",
+        "How do I get apps on my projector?",
+        "How can I mirror my Android screen to a projector?",
+        "How do I mirror my screen to a projector?"
+      ],
+      "relatedQueries": [
+        "Show mobile app on projector android",
+        "Show mobile app on projector samsung",
+        "Show mobile app on projector free",
+        "Show mobile app on projector apk",
+        "Flashlight Video Projector app for Android",
+        "Flashlight projector app",
+        "Phone to wall Projector app free download",
+        "Flashlight projector app on wall"
+      ]
+    },
+    {
+      "id": "vc-manual250-c2-026",
+      "keyword": "add bookmarks to a video",
+      "found": true,
+      "query": "add bookmarks to a video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Add bookmarks to points of interest in audio and video clips",
+          "url": "https://support.microsoft.com/en-us/powerpoint/add-bookmarks-to-points-of-interest-in-audio-and-video-clips",
+          "domain": "support.microsoft.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "How Can I make bookmarks/chapters for a video?",
+          "url": "https://www.reddit.com/r/VideoEditing/comments/153sjdq/how_can_i_make_bookmarkschapters_for_a_video/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "YT Bookmarker - Chrome Web Store",
+          "url": "https://chromewebstore.google.com/detail/yt-bookmarker/docgcaajjlhikhllnlkfmffciiokggag",
+          "domain": "chromewebstore.google.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Add Chapters and Slides to Media in Video on Demand",
+          "url": "https://it.cornell.edu/vod/add-chapters-slides-vod",
+          "domain": "it.cornell.edu",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "How to Create Bookmarks Within Videos",
+          "url": "https://www.youtube.com/watch?v=lyqERGNtETs",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 6,
+          "title": "Media player to add bookmarks at specific times in a video?",
+          "url": "https://softwarerecs.stackexchange.com/questions/11942/media-player-to-add-bookmarks-at-specific-times-in-a-video",
+          "domain": "softwarerecs.stackexchange.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Adding a bookmark to video - VideoPad - Forums",
+          "url": "https://nch.invisionzone.com/topic/86736-adding-a-bookmark-to-video/",
+          "domain": "nch.invisionzone.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "How to Add Bookmarks to Video and Audio in PowerPoint ...",
+          "url": "https://www.howtogeek.com/bookmarks-video-audio-powerpoint/",
+          "domain": "howtogeek.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How do I add a bookmark in a video?",
+        "Can I add bookmarks to a YouTube video?",
+        "How to add bookmarks in VLC?",
+        "How do I add markers in a YouTube video?"
+      ],
+      "relatedQueries": [
+        "Add bookmarks to a video online",
+        "Add bookmarks to a video free",
+        "Add bookmarks to a video online free",
+        "How to bookmark YouTube videos on Android",
+        "How to bookmark YouTube videos with time",
+        "How to bookmark YouTube videos on iPad",
+        "How to bookmark a youtube video on iPhone",
+        "How to add bookmarks to youtube video"
+      ]
+    },
+    {
+      "id": "vc-manual250-c2-027",
+      "keyword": "reset demo account between investor meetings",
+      "found": true,
+      "query": "reset demo account between investor meetings",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Can I change the balance of my demo account?",
+          "url": "https://www.tickmill.com/about/faq/can-i-change-the-balance-of-my-demo-account",
+          "domain": "tickmill.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Demo Trading Account FAQs - Help & Support - City Index",
+          "url": "https://www.cityindex.com/en-uk/help-and-support/fx-faqs-demo-account/",
+          "domain": "cityindex.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "How long does a demo account stay valid on the Vantage ...",
+          "url": "https://global.vantagehelpcenter.com/hc/en-us/articles/14312172816015-How-long-does-a-demo-account-stay-valid-on-the-Vantage-app-and-Can-I-reset-it",
+          "domain": "global.vantagehelpcenter.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "How to reset Demo account",
+          "url": "https://help.3commas.io/en/articles/3638281-how-to-reset-demo-account",
+          "domain": "help.3commas.io",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "How to use a Demo Trading Account Effectively - CFI",
+          "url": "https://cfi.ps/en/ps/blog/trading/how-to-use-a-demo-trading-account-effectively-test-strategies-without-risk",
+          "domain": "cfi.ps",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Demo Trading Account FAQs - Help and Support",
+          "url": "https://www.forex.com/en/help-and-support/demo-trading-accounts/",
+          "domain": "forex.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Reset Demo Account Balance — Options API",
+          "url": "https://developers.deriv.com/docs/options/reset-demo-balance/",
+          "domain": "developers.deriv.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "How to reset account balance in demo account?",
+          "url": "https://helpcenter.puprime.com/hc/en-001/articles/6041915248783-How-to-reset-account-balance-in-demo-account",
+          "domain": "helpcenter.puprime.com",
+          "resultType": "article"
+        },
+        {
+          "position": 9,
+          "title": "Demo trading tips from our analysts - IG UK",
+          "url": "https://www.ig.com/uk/learn-to-trade/ig-academy/tools-for-traders/demo-trading-tips",
+          "domain": "ig.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How to reset MT5 demo account balance?",
+        "How do I reset my demo account on Tradovate?",
+        "How to reset deriv demo account balance?",
+        "Can I withdraw my profit from a demo account?"
+      ],
+      "relatedQueries": [
+        "City Index demo account login",
+        "TradingView",
+        "City Index login"
+      ]
+    },
+    {
+      "id": "vc-manual250-c2-028",
+      "keyword": "product demo video length",
+      "found": true,
+      "query": "product demo video length",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How long was your demo video? : r/ycombinator",
+          "url": "https://www.reddit.com/r/ycombinator/comments/yrebul/how_long_was_your_demo_video/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Product demo video maker",
+          "url": "https://clipchamp.com/en/demo-video/",
+          "domain": "clipchamp.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "What Is a Product Demo Video? Types and Length",
+          "url": "https://trainn.co/glossaries/video-creation/what-is-product-demo-video/",
+          "domain": "trainn.co",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Top Tips for Product Demonstration Videos and Examples ...",
+          "url": "https://www.atlassian.com/blog/loom/product-demonstration",
+          "domain": "atlassian.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "How to Make a Product Demo Video That Converts",
+          "url": "https://www.moonb.io/blog/how-to-make-a-product-demo-video",
+          "domain": "moonb.io",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Product Demo Video Maker - Ship Demos in Minutes - ngram",
+          "url": "https://www.ngram.com/use-cases/product-demo-video",
+          "domain": "ngram.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Product Demo Video for Startups: Script, Length, and ...",
+          "url": "https://www.stackmatix.com/blog/product-demo-video-for-startups",
+          "domain": "stackmatix.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "How long should product demo videos be? - Rally Blog",
+          "url": "https://rally.space/blog/best-length-for-product-demo-videos",
+          "domain": "rally.space",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Is a 3 minute video too long for LinkedIn?",
+        "What is a product demo video?",
+        "Is a 3 minute video a short?",
+        "What is the best length for a promotional video?"
+      ],
+      "relatedQueries": [
+        "Product demo video length reddit",
+        "Product demo video examples",
+        "Product demo video maker free",
+        "Product demo video maker AI free",
+        "How to make demo video for teaching",
+        "YC demo video length",
+        "Product demo video with AI",
+        "How to create a demo video"
+      ]
+    },
+    {
+      "id": "vc-manual250-c2-029",
+      "keyword": "webcam overlay screen recording",
+      "found": true,
+      "query": "webcam overlay screen recording",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Webcam overlay: Mac Screen & Webcam Recording",
+          "url": "https://www.bandicam.com/mac/guide/webcam-overlay/?srsltid=AfmBOorhcgFKnCGNqWhhKXyEF_men31NsDtL-nUHB7qewaZDOZ-majIn",
+          "domain": "bandicam.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "Online screen and camera recorder",
+          "url": "https://clipchamp.com/en/screen-recorder/",
+          "domain": "clipchamp.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Screen Recorder with Webcam Overlay for Mac",
+          "url": "https://creavit.studio/screen-recorder-with-webcam",
+          "domain": "creavit.studio",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "How to Screen Record with Webcam Overlay",
+          "url": "https://www.screenify.studio/record/how-to/record-with-webcam",
+          "domain": "screenify.studio",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Best Screen Recorder with Facecam Overlay (Mac, 2026)",
+          "url": "https://screencharm.com/blog/screen-recorder-with-facecam",
+          "domain": "screencharm.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "How to Record Screen with Webcam Overlay | Debut Video ...",
+          "url": "https://www.youtube.com/watch?v=KdOgyxqjb9E",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 7,
+          "title": "Screen Recorder with Webcam Overlay (2026)",
+          "url": "https://zumie.io/screen-recorder-with-webcam-overlay",
+          "domain": "zumie.io",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How to screen record with overlay?",
+        "What is a webcam overlay?",
+        "How to screen record and record with webcam simultaneously?",
+        "How to make a webcam overlay?"
+      ],
+      "relatedQueries": [
+        "Webcam overlay screen recording free",
+        "Webcam overlay screen recording iphone",
+        "Webcam overlay screen recording online",
+        "Webcam screen recorder online",
+        "Camera screen recorder",
+        "Screen record with webcam windows 11",
+        "Screen recorder with webcam free",
+        "Clipchamp screen recorder with audio"
+      ]
+    },
+    {
+      "id": "vc-manual250-c2-030",
+      "keyword": "record mobile and desktop screen together",
+      "found": true,
+      "query": "record mobile and desktop screen together",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Capture Your Phone Screen In OBS - PC or Mac - No Lag",
+          "url": "https://www.youtube.com/watch?v=UeSSeHpytpk",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 2,
+          "title": "Explain Anything Faster with Screen Recording, Screenshots ...",
+          "url": "https://screenrec.com/",
+          "domain": "screenrec.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Is there a way i can record my PC screen using Android?",
+          "url": "https://www.reddit.com/r/obs/comments/8e35ww/is_there_a_way_i_can_record_my_pc_screen_using/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Free Screen Recorder",
+          "url": "https://www.loom.com/screen-recorder",
+          "domain": "loom.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Record Phone Screen on PC | NO ROOT 2018 Tutorial",
+          "url": "https://www.youtube.com/watch?v=JDICdqKkER0",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 6,
+          "title": "Can i record and how pc screen with phone?",
+          "url": "https://www.facebook.com/groups/PCPROBLEMSOLUTIONS/posts/26564009366606695/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 7,
+          "title": "How to Screen Record on Any Device",
+          "url": "https://www.splashtop.com/blog/screen-recording",
+          "domain": "splashtop.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "How To Do a Screen Recording: Desktop and Mobile",
+          "url": "https://www.atlassian.com/blog/loom/how-to-do-a-screen-recording",
+          "domain": "atlassian.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Can I record both my screen and my Camera at the same time?",
+        "Can I mirror my PC screen to my phone?",
+        "How to record with two screens?",
+        "How do I record my screen and myself at the same time on Windows?"
+      ],
+      "relatedQueries": [
+        "Record mobile and desktop screen together windows 10",
+        "Record mobile and desktop screen together android",
+        "Scrcpy",
+        "View phone screen on PC via USB",
+        "How to record phone screen on PC",
+        "How to record yourself and your screen at the same time Windows 10",
+        "How to record yourself and your screen at the same time iPhone",
+        "Android screen to OBS via USB"
+      ]
+    },
+    {
+      "id": "vc-manual250-c2-031",
+      "keyword": "show AI demo results honestly to investors",
+      "found": true,
+      "query": "show AI demo results honestly to investors",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "On-Demand Webinar: The AI-Powered Investment Firm & Live ...",
+          "url": "https://www.fnz.com/insights/webinar-the-ai-powered-investment-firm-live-demo",
+          "domain": "fnz.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "AI starts to show investment returns",
+          "url": "https://www.youtube.com/watch?v=g-hzHThQF7c",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 3,
+          "title": "Artificial Intelligence for Capital Raising | Top 7 AI Tools ...",
+          "url": "https://www.youtube.com/watch?v=Rolx12IqRpc",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 4,
+          "title": "Demo-AI-driven Investment Strategies for Traditional ...",
+          "url": "https://www.boosted.ai/resources/demo-ai-driven-investment-strategies-for-traditional-investors",
+          "domain": "boosted.ai",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Investor Demo – AI-Driven Prototyping Package",
+          "url": "https://www.reeinvent.com/investor-demo",
+          "domain": "reeinvent.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "AI tools for Investors: What Works, What Doesn't, and What ...",
+          "url": "https://justonelap.com/video-ai-tools-for-investors-what-works-what-doesnt-and-what-to-watch/",
+          "domain": "justonelap.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "How AI Generates Investor-Ready Reports",
+          "url": "https://www.lucid.now/blog/how-ai-generates-investor-ready-reports/",
+          "domain": "lucid.now",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "How to Use Product Demos to Convince Angel Investors",
+          "url": "https://www.hustlefund.vc/post/angel-squad-how-to-use-product-demos-to-convince-angel-investors",
+          "domain": "hustlefund.vc",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "Early AI investor returns earn average human grade",
+          "url": "https://www.reuters.com/commentary/breakingviews/early-ai-investor-returns-earn-average-human-grade-2025-11-07/",
+          "domain": "reuters.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual250-c2-032",
+      "keyword": "sample data for investor product demo",
+      "found": true,
+      "query": "sample data for investor product demo",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Three Keys to Nailing Your Product Demo to Investors",
+          "url": "https://www.linkedin.com/pulse/three-keys-nailing-your-product-demo-investors-brian-ascher",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 2,
+          "title": "Investor-Ready: How to Demo Your Product Like a Pro",
+          "url": "https://phenomenonstudio.com/article/investor-ready-how-to-demo-your-product-like-a-pro/",
+          "domain": "phenomenonstudio.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "Demo for Potential Investor : r/startups",
+          "url": "https://www.reddit.com/r/startups/comments/1ghn5rw/demo_for_potential_investor/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "How to CRUSH Your Demo When Pitching Customers & ...",
+          "url": "https://www.youtube.com/watch?v=drDKvoPKVWo",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 5,
+          "title": "Product Demo Examples",
+          "url": "https://maybeundo.com/examples",
+          "domain": "maybeundo.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "How to Actually Demo Your Data Product | by Megan Rashid",
+          "url": "https://medium.com/design-bootcamp/let-me-screenshare-real-quick-9e4d77012e3",
+          "domain": "medium.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "10 Product Demo Examples That Stand Out & Convert",
+          "url": "https://cxl.com/blog/product-demo-examples/",
+          "domain": "cxl.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "Product demonstrations: How to demo your product for investors",
+          "url": "https://learn.marsdd.com/article/product-demonstrations-how-to-demo-your-product-for-investors/",
+          "domain": "learn.marsdd.com",
+          "resultType": "article"
+        },
+        {
+          "position": 9,
+          "title": "Pitch Deck Examples from 35+ Killer Startups",
+          "url": "https://slidebean.com/pitch-deck-examples",
+          "domain": "slidebean.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Can you give me an example of a product demonstration?",
+        "What are some examples of investor reports?",
+        "Can you give me an example of an investor?",
+        "Can you give me some examples of product videos?"
+      ],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual250-c2-033",
+      "keyword": "label prototype in investor demo video",
+      "found": true,
+      "query": "label prototype in investor demo video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Show your startup: 4 types of demo to make investors see, ...",
+          "url": "https://www.matt-boardman.com/blog//show-your-startup-4-types-of-demo-investors-elevator-pitch",
+          "domain": "matt-boardman.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "How to Build and Demo a Prototype That Impresses Investors",
+          "url": "https://partnershipsbuddy.com/guides/working-prototype",
+          "domain": "partnershipsbuddy.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "Investor Demo – AI-Driven Prototyping Package",
+          "url": "https://www.reeinvent.com/investor-demo",
+          "domain": "reeinvent.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "How to Validate Your App Idea and Pitch to Investors with ...",
+          "url": "https://www.youtube.com/watch?v=lXjkE5E13XU",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 5,
+          "title": "Demo for Potential Investor : r/startups",
+          "url": "https://www.reddit.com/r/startups/comments/1ghn5rw/demo_for_potential_investor/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "How to Make a Demo Video for Your Investor Pitch (No ...",
+          "url": "https://demopolish.com/blog/demo-video-investor-pitch/",
+          "domain": "demopolish.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Designing for the stranger's thumb in prototype testing",
+          "url": "https://www.linkedin.com/posts/moyosore-ibrahim-b10641252_uxdesign-productdesign-investorready-activity-7500797768752467968-fV7g",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 8,
+          "title": "Demo Videos for Investor Pitches in 2026 (2x Close Rate)",
+          "url": "https://demosmith.ai/blog/demo-video-investor-pitch",
+          "domain": "demosmith.ai",
+          "resultType": "article"
+        },
+        {
+          "position": 9,
+          "title": "Animated Product Demo Examples: Four Proof Categories",
+          "url": "https://tapvid.ai/blog/animated-product-demo-examples",
+          "domain": "tapvid.ai",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual250-c2-034",
+      "keyword": "show human intervention in product demo",
+      "found": true,
+      "query": "show human intervention in product demo",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "AI Proves No Human Intervention in Product Demos",
+          "url": "https://www.linkedin.com/posts/kevinsmithai_my-ai-records-its-own-product-demos-now-activity-7490443951057960961-XMhP",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 2,
+          "title": "How to deliver an effective product demo",
+          "url": "https://www.productmarketingalliance.com/how-to-deliver-an-effective-product-demo/",
+          "domain": "productmarketingalliance.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Top Tips for Product Demonstration Videos and Examples ...",
+          "url": "https://www.atlassian.com/blog/loom/product-demonstration",
+          "domain": "atlassian.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "How do you make demo videos or product walkthroughs ...",
+          "url": "https://www.reddit.com/r/ProductManagement/comments/1nftt72/how_do_you_make_demo_videos_or_product/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Product demo: what it is and why it matters (2026)",
+          "url": "https://www.karumi.ai/blog/what-is-a-product-demo",
+          "domain": "karumi.ai",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "The 7-Sentence Product Demo Framework",
+          "url": "https://gtmnow.com/product-demo/",
+          "domain": "gtmnow.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "What is the best product demo on the web?",
+          "url": "https://www.quora.com/What-is-the-best-product-demo-on-the-web",
+          "domain": "quora.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "How to Make an Interactive Product Demo (2026)",
+          "url": "https://www.youtube.com/watch?v=dW63gtNH0JY",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 9,
+          "title": "8 Of The Best Product Demos Ever And Why They're So ...",
+          "url": "https://www.forbes.com/sites/michellegreenwald/2014/06/04/8-of-the-best-product-demos-ever-and-why-theyre-so-effective/",
+          "domain": "forbes.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Can you give me an example of a product demo?",
+        "What are the biggest demo mistakes?",
+        "How to do a good product demo?",
+        "How to demonstrate a product?"
+      ],
+      "relatedQueries": [
+        "Show human intervention in product demo example",
+        "Product demonstration examples",
+        "Product demonstration meaning",
+        "SaaS product demo video examples",
+        "Demo examples",
+        "How to record a product demo",
+        "Best product demos",
+        "Cool product demo videos"
+      ]
+    },
+    {
+      "id": "vc-manual250-c2-035",
+      "keyword": "live vs recorded product demo for investors",
+      "found": true,
+      "query": "live vs recorded product demo for investors",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Three Keys to Nailing Your Product Demo to Investors",
+          "url": "https://www.linkedin.com/pulse/three-keys-nailing-your-product-demo-investors-brian-ascher",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 2,
+          "title": "Product demonstrations: How to demo your product for investors",
+          "url": "https://learn.marsdd.com/article/product-demonstrations-how-to-demo-your-product-for-investors/",
+          "domain": "learn.marsdd.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "The Real Reason Live Demos Don't Belong in Fundraising ...",
+          "url": "https://medium.com/swlh/the-real-reason-live-demos-dont-belong-in-fundraising-pitches-ad70261bd840",
+          "domain": "medium.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "SaaS product demo types – when and where to use them",
+          "url": "https://nerdcow.co.uk/blog/saas-product-demo-types/",
+          "domain": "nerdcow.co.uk",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Live vs Recorded Demos [How to Pick + Best Tools]",
+          "url": "https://www.arcade.software/post/live-vs-recorded-demos",
+          "domain": "arcade.software",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "When pitching a consumer-facing startup to VCs, should ...",
+          "url": "https://www.quora.com/When-pitching-a-consumer-facing-startup-to-VCs-should-a-team-present-a-live-product-demo-or-a-recorded-screencast-demo-What-are-the-pros-and-cons",
+          "domain": "quora.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Live demos vs recorded demos in 2026: 5 factors that ...",
+          "url": "https://www.guideflow.com/blog/live-demos-vs-recorded-demos",
+          "domain": "guideflow.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "Are live demos a good idea for SaaS Sales? - Walnut.io",
+          "url": "https://www.walnut.io/blog/product-demos/are-live-demos-a-good-idea-for-saas-sales/",
+          "domain": "walnut.io",
+          "resultType": "article"
+        },
+        {
+          "position": 9,
+          "title": "How to Move Beyond SaaS Product Demo Videos [Plus ...",
+          "url": "https://www.navattic.com/blog/product-demo-videos",
+          "domain": "navattic.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What are the different types of demos?",
+        "How to do a good product demo?",
+        "What does \"product demo\" mean?",
+        "What are the benefits of using a demo?"
+      ],
+      "relatedQueries": [
+        "Live vs recorded product demo for investors saas",
+        "Live vs recorded product demo for investors reddit",
+        "Live vs recorded product demo for investors example"
+      ]
+    },
+    {
+      "id": "vc-manual250-c2-036",
+      "keyword": "share video privately",
+      "found": true,
+      "query": "share video privately",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Private Video Sharing Platform",
+          "url": "https://jumpshare.com/private-video-sharing",
+          "domain": "jumpshare.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "How to share a private video securely",
+          "url": "https://vimeo.com/blog/post/share-unlisted-videos-with-private-links",
+          "domain": "vimeo.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 3,
+          "title": "What's the best way to share video with a single-use link?",
+          "url": "https://www.reddit.com/r/editors/comments/136uh6u/whats_the_best_way_to_share_video_with_a/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "How to Share Videos Privately in 2026 (7 Free & Fast Ways)",
+          "url": "https://filestage.io/blog/share-videos-privately/",
+          "domain": "filestage.io",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "How and where to upload, store, and share private videos ...",
+          "url": "https://proton.me/blog/private-video",
+          "domain": "proton.me",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Streamable: Upload Video Online - Free Video Hosting",
+          "url": "https://streamable.com/",
+          "domain": "streamable.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "How to Share Videos Privately: 4 Ways to Send Video Online",
+          "url": "https://sproutvideo.com/blog/how-to-share-videos-privately.html",
+          "domain": "sproutvideo.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Is it illegal to share private videos?",
+        "Is there a way to share videos anonymously?",
+        "What happens if you private a video?",
+        "Where can I host a private video for free?"
+      ],
+      "relatedQueries": [
+        "Share video online via link",
+        "Share video privately online",
+        "Upload video and share link free",
+        "Private video sharing platform free",
+        "Share video privately app",
+        "Private video link",
+        "Vimeo private video",
+        "Private video player"
+      ]
+    },
+    {
+      "id": "vc-manual250-c2-037",
+      "keyword": "demo website with screen reader",
+      "found": true,
+      "query": "demo website with screen reader",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Screen Reader Testing Page - For Demos - Digital Accessibility",
+          "url": "https://digitalaccessibility.virginia.edu/screen-reader-testing-page-demos",
+          "domain": "digitalaccessibility.virginia.edu",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Screen Reader Demo for Digital Accessibility",
+          "url": "https://www.youtube.com/watch?v=dEbl5jvLKGQ",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 3,
+          "title": "An Introduction to Screen Readers | Deque Webinars",
+          "url": "https://accessibility.deque.com/live-webinar-introduction-to-screen-readers",
+          "domain": "accessibility.deque.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Screen reader testing: how to test your website's accessibility",
+          "url": "https://www.siteimprove.com/glossary/screen-reader-testing/",
+          "domain": "siteimprove.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Design your site for screen reader accessibility",
+          "url": "https://userway.org/blog/screen-reader/",
+          "domain": "userway.org",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Testing Accessibility with Screen Readers",
+          "url": "https://www.epicweb.dev/testing-accessibility-with-screen-readers",
+          "domain": "epicweb.dev",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Screen reader simulator",
+          "url": "https://silktide.com/toolbar/screen-reader-simulator/",
+          "domain": "silktide.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Web Accessibility Workshop Demo Page - UConn",
+          "url": "https://accessibility.its.uconn.edu/web-accessibility-workshop-demo-page/",
+          "domain": "accessibility.its.uconn.edu",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "Online Screen Reader Testing",
+          "url": "https://assistivlabs.com/use-cases/online-screen-reader-testing",
+          "domain": "assistivlabs.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How to test a website with a screen reader?",
+        "Is there a free screen reader website?",
+        "Can you give me an example of a screen reader?",
+        "How to make NVDA read a webpage?"
+      ],
+      "relatedQueries": [
+        "Free demo website with screen reader",
+        "Demo website with screen reader android",
+        "NVDA screen reader",
+        "Screen reader testing tools",
+        "Screen reader test online",
+        "Screen reader accessibility tool",
+        "Screen reader Demo",
+        "Screen reader for accessibility testing chrome"
+      ]
+    },
+    {
+      "id": "vc-manual250-c2-038",
+      "keyword": "record Zoom meeting with consent",
+      "found": true,
+      "query": "record Zoom meeting with consent",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Providing consent to be recorded",
+          "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0059819",
+          "domain": "support.zoom.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "How to record Zoom meeting without permission?",
+          "url": "https://www.reddit.com/r/screenrecorders/comments/1n0gt0t/how_to_record_zoom_meeting_without_permission/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Enabling or disabling computer recording",
+          "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0063640",
+          "domain": "support.zoom.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "How to Record a Zoom Meeting: 3 Options for 2026",
+          "url": "https://www.read.ai/articles/how-to-record-a-zoom-meeting",
+          "domain": "read.ai",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "How to Record Zoom Meetings With or Without Permission",
+          "url": "https://riverside.com/blog/how-to-record-zoom-meetings",
+          "domain": "riverside.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Recording a Zoom Meeting | Help - Illinois State",
+          "url": "https://help.illinoisstate.edu/technology/support-topics/communication-and-collaboration-tools/zoom/recording-a-zoom-meeting",
+          "domain": "help.illinoisstate.edu",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Customizing the recording consent disclaimer",
+          "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0068402",
+          "domain": "support.zoom.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How do I give consent to be recorded in a Zoom meeting?",
+        "Can I record a Zoom meeting without permission?",
+        "How do I ask permission to record a meeting on Zoom?",
+        "Can you record a meeting without asking permission?"
+      ],
+      "relatedQueries": [
+        "Record zoom meeting with consent reddit",
+        "Record Zoom meeting as participant",
+        "Can you record Zoom meetings for free on phone",
+        "How to record Zoom workplace meeting",
+        "How to record a video on Zoom without a meeting",
+        "Record Zoom meeting with audio on phone",
+        "Zoom record",
+        "How to record Zoom meeting as a participant in laptop"
+      ]
+    },
+    {
+      "id": "vc-manual250-c2-039",
+      "keyword": "compress screen recording without losing quality",
+      "found": true,
+      "query": "compress screen recording without losing quality",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Compress Screen Recording",
+          "url": "https://screenapp.io/features/video-compressor",
+          "domain": "screenapp.io",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Is there a way to reduce the screen recording size by either ...",
+          "url": "https://www.reddit.com/r/mac/comments/1k5484t/is_there_a_way_to_reduce_the_screen_recording/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Video Compressor - Free Video File ...",
+          "url": "https://www.veed.io/tools/video-compressor",
+          "domain": "veed.io",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Video Compressor Online",
+          "url": "https://clideo.com/compress-video",
+          "domain": "clideo.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Screen Recording - File size too large! Help..",
+          "url": "https://discussions.apple.com/thread/251467126",
+          "domain": "discussions.apple.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Free Video Compressor & Resizer Online - Reduce File Size",
+          "url": "https://kommodo.ai/tools/compress",
+          "domain": "kommodo.ai",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Why Are Screen Recordings So Big? 5 Ways to Shrink",
+          "url": "https://www.screenify.studio/blog/2026-04-23-screen-recording-file-too-large",
+          "domain": "screenify.studio",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How do I reduce the file size of a screen recording?",
+        "How to reduce MB of video without losing quality?",
+        "How to compress 200 MB video to 20MB?",
+        "How to shrink file size without losing quality?"
+      ],
+      "relatedQueries": [
+        "Compress screen recording without losing quality reddit",
+        "Compress screen recording without losing quality free",
+        "Compress screen recording without losing quality online",
+        "Compress screen recording without losing quality iphone",
+        "Compress screen recording without losing quality windows 10",
+        "HandBrake",
+        "Compress Screen recording online free",
+        "How to compress screen recording video iphone"
+      ]
+    },
+    {
+      "id": "vc-manual250-c2-040",
+      "keyword": "export narrated PowerPoint as video",
+      "found": true,
+      "query": "export narrated PowerPoint as video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Turn your presentation into a video",
+          "url": "https://support.microsoft.com/en-us/powerpoint/turn-your-presentation-into-a-video",
+          "domain": "support.microsoft.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Exporting a PowerPoint Presentation as a Video",
+          "url": "https://www.ou.edu/cas-online/website/documents/Exporting%20Powerpoint%20as%20Video.pdf",
+          "domain": "ou.edu",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "How to save presentation including recording : r/powerpoint",
+          "url": "https://www.reddit.com/r/powerpoint/comments/1c7ab30/how_to_save_presentation_including_recording/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Save a presentation as a video​ in PowerPoint",
+          "url": "https://support.microsoft.com/en-us/powerpoint/training/save-a-presentation-as-a-video%E2%80%8B-in-powerpoint",
+          "domain": "support.microsoft.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "PowerPoint: Exporting a Video/Audio Narration as an MP4 ...",
+          "url": "https://kb.uwec.edu/articles/powerpoint-exporting-a-video-audio-narration-as-an-mp4-file-windows-and-macos",
+          "domain": "kb.uwec.edu",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Export Your Narrated PowerPoint as a Video - Detroit Mercy ...",
+          "url": "https://cetl.udmercy.edu/knowledge/support/add-and-organize-content/office-365/powerpoint/export-your-narrated-powerpoint-as-a-video",
+          "domain": "cetl.udmercy.edu",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How can I Export a PowerPoint presentation with audio as a video?",
+        "How do I turn a PowerPoint presentation into a video?",
+        "Why can't I save my PowerPoint as an MP4?",
+        "How to save PPT as video in PowerPoint?"
+      ],
+      "relatedQueries": [
+        "Save PowerPoint as video on Mac",
+        "How to save PowerPoint as video with music",
+        "How to save PowerPoint video after recording",
+        "How to record a PowerPoint presentation as a video with audio",
+        "Convert PPT to video with audio online free",
+        "Convert PPT to video online free",
+        "How to convert PPT to video in mobile",
+        "How to make a video presentation with PowerPoint"
+      ]
+    },
+    {
+      "id": "vc-manual250-c2-041",
+      "keyword": "video format for PowerPoint on Mac and Windows",
+      "found": true,
+      "query": "video format for PowerPoint on Mac and Windows",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Video and audio file formats supported in PowerPoint",
+          "url": "https://support.microsoft.com/en-us/powerpoint/video-and-audio-file-formats-supported-in-powerpoint",
+          "domain": "support.microsoft.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Insert and play a video file from your computer",
+          "url": "https://support.microsoft.com/en-us/powerpoint/insert-and-play-a-video-file-from-your-computer",
+          "domain": "support.microsoft.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "powerpoint-video-formats.docx",
+          "url": "https://www.slideshare.net/slideshow/powerpointvideoformatsdocx/256009746",
+          "domain": "slideshare.net",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Converting playable video files from a mac to a PC for ...",
+          "url": "https://www.reddit.com/r/editors/comments/5t8xak/converting_playable_video_files_from_a_mac_to_a/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Best Powerpoint Presentation Video Formats (Quick Guide)",
+          "url": "https://filmora.wondershare.com/video-editing/powerpoint-presentation-video-format.html",
+          "domain": "filmora.wondershare.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "PowerPoint: Exporting a Video/Audio Narration as an MP4 ...",
+          "url": "https://kb.uwec.edu/articles/powerpoint-exporting-a-video-audio-narration-as-an-mp4-file-windows-and-macos",
+          "domain": "kb.uwec.edu",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Video in PowerPoint: What Works and What Won't",
+          "url": "https://adventmedia.us/about/insights/video-in-powerpoint",
+          "domain": "adventmedia.us",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "How to prepare PowerPoint on Mac for live-AV",
+          "url": "https://www.presentationtools.com/mac-for-powerpoint/",
+          "domain": "presentationtools.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Which video format is compatible with PowerPoint?",
+        "How to change PPT to MP4 on Mac?",
+        "Does PowerPoint play MP4 videos?",
+        "How to put video in PowerPoint Mac?"
+      ],
+      "relatedQueries": [
+        "Free video format for powerpoint on mac and windows",
+        "How to add video to PowerPoint for all slides",
+        "PowerPoint video format converter online",
+        "How to embed video in PowerPoint from online",
+        "PowerPoint cannot insert a video from the selected file",
+        "How to insert video in powerpoint 64 bit codec",
+        "Extension of PowerPoint 2010",
+        "How to play video in PowerPoint automatically"
+      ]
+    },
+    {
+      "id": "vc-manual250-c2-042",
+      "keyword": "video playback cue sheet",
+      "found": true,
+      "query": "video playback cue sheet",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "What tools can be used to create music cue sheets ...",
+          "url": "https://www.facebook.com/groups/BCPANY/posts/3924388427805808/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 2,
+          "title": "what is a cue sheet and why do i need it : r/musichoarder",
+          "url": "https://www.reddit.com/r/musichoarder/comments/1m7tg6k/what_is_a_cue_sheet_and_why_do_i_need_it/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "CuePilot | Home",
+          "url": "https://www.cuepilot.com/",
+          "domain": "cuepilot.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Replayer: MP3 music playback with timed cues",
+          "url": "https://replayer.app/",
+          "domain": "replayer.app",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "What is a Production Cue Sheet? - Shoflo Blog",
+          "url": "https://blog.shoflo.tv/what-is-a-production-cue-sheet",
+          "domain": "blog.shoflo.tv",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Stage Cue | Professional Video Playback for Live Events",
+          "url": "https://stagecue.app/",
+          "domain": "stagecue.app",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Theatre Cue Player",
+          "url": "https://theatrecueplayer.app/",
+          "domain": "theatrecueplayer.app",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Cue sheet (computing)",
+          "url": "https://en.wikipedia.org/wiki/Cue_sheet_(computing)",
+          "domain": "en.wikipedia.org",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Is it cue sheet or queue sheet?",
+        "What is a cue sheet?",
+        "How to create a cue sheet?",
+        "How to generate a cue file?"
+      ],
+      "relatedQueries": [
+        "Video playback cue sheet download",
+        "Best video playback cue sheet",
+        "Video playback cue sheet free",
+        "What is a cue sheet in film",
+        "Cue sheet format",
+        "Cue sheet Template Excel",
+        "What is a cue sheet in theatre",
+        "What is a cue sheet in music"
+      ]
+    },
+    {
+      "id": "vc-manual250-c2-043",
+      "keyword": "hide presenter notes when sharing screen",
+      "found": true,
+      "query": "hide presenter notes when sharing screen",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How do I screen share Powerpoint in presenter view ...",
+          "url": "https://www.reddit.com/r/Zoom/comments/jfjely/how_do_i_screen_share_powerpoint_in_presenter/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Start the presentation and see your notes in Presenter view",
+          "url": "https://support.microsoft.com/en-us/powerpoint/training/start-the-presentation-and-see-your-notes-in-presenter-view",
+          "domain": "support.microsoft.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Screen sharing a PowerPoint presentation",
+          "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0068635",
+          "domain": "support.zoom.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Use PowerPoint Presenter View in Zoom with Only One Screen",
+          "url": "https://tech.medicine.wsu.edu/technology/powerpoint/presenter-view-zoom/",
+          "domain": "tech.medicine.wsu.edu",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Hide Notes Pane when sharing Powerpoint slide in Teams",
+          "url": "https://learn.microsoft.com/en-us/answers/questions/4387264/hide-notes-pane-when-sharing-powerpoint-slide-in-t",
+          "domain": "learn.microsoft.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "How to use PowerPoint presenter view without showing ...",
+          "url": "https://www.facebook.com/groups/teachpsych/posts/10158957613864349/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 7,
+          "title": "How to share my screen of PowerPoint in Cisco WebEx but ...",
+          "url": "https://www.quora.com/How-can-I-share-my-screen-of-PowerPoint-in-Cisco-WebEx-but-hide-my-notes-I-want-to-have-my-notes-just-for-me-to-read-from",
+          "domain": "quora.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How to hide speaker notes when presenting?",
+        "How to share a presentation without notes?",
+        "How to hide presenter notes on Microsoft Teams?",
+        "Can an audience see presenter notes in PowerPoint?"
+      ],
+      "relatedQueries": [
+        "Hide presenter notes when sharing screen powerpoint",
+        "How to use Presenter View on Zoom without showing notes",
+        "How to view notes in PowerPoint while presenting without others seeing",
+        "How to view notes in powerpoint while presenting on zoom",
+        "How to use presenter view on Zoom without showing notes Google Slides",
+        "How to use Presenter View on Zoom without showing notes Mac",
+        "How to hide notes in PowerPoint while presenting in Teams",
+        "How to screen share PowerPoint on Zoom without showing notes"
+      ]
+    },
+    {
+      "id": "vc-manual250-c2-044",
+      "keyword": "hide notifications when screen sharing",
+      "found": true,
+      "query": "hide notifications when screen sharing",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Any way to globally disable notifications while sharing ...",
+          "url": "https://www.reddit.com/r/TeamsAdmins/comments/1s1zr5i/any_way_to_globally_disable_notifications_while/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "How to Disable Notifications During Screen Share (2026)",
+          "url": "https://contextblur.app/blog/disable-notifications-during-screen-share",
+          "domain": "contextblur.app",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "How to automatically disable notifications during screen ...",
+          "url": "https://superuser.com/questions/1786673/how-to-automatically-disable-notifications-during-screen-sharing-on-windows-10",
+          "domain": "superuser.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "The Ultimate Guide to Turning Off Notifications When Screen ...",
+          "url": "https://blog.airsquirrels.com/ultimate-guide-to-turning-off-notifications-when-screen-mirroring-ios-android-mac-windows-and-chrome-os",
+          "domain": "blog.airsquirrels.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "How to Hide Notifications While Sharing Your Screen in a ...",
+          "url": "https://www.howtogeek.com/714118/how-to-hide-notifications-while-sharing-your-screen-in-a-video-call/",
+          "domain": "howtogeek.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "How to stop screen share notification",
+          "url": "https://community.zoom.com/meetings-2/how-to-stop-screen-share-notification-26642",
+          "domain": "community.zoom.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "How to mute notifications while mirroring your phone screen",
+          "url": "https://thenextweb.com/news/how-to-mute-notifications-while-mirroring-your-phone-screen",
+          "domain": "thenextweb.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How to hide notifications while Screen sharing?",
+        "How can I hide notifications while I'm presenting?",
+        "Are notifications silenced when Screen sharing?",
+        "Does Screen sharing show your notifications?"
+      ],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual250-c2-045",
+      "keyword": "uncut product demo",
+      "found": true,
+      "query": "uncut product demo",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Uncut video | Nusrat Jannat Rubi",
+          "url": "https://www.facebook.com/nusratjannatrubi2/videos/uncut-video/866207102797149/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 2,
+          "title": "New at Intercom uncut: Watch our entire virtual launch event",
+          "url": "https://www.intercom.com/blog/videos/new-at-intercom-event/",
+          "domain": "intercom.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "Uncut trend and vision talk with Shaun McGrath - Access Hair ...",
+          "url": "https://www.facebook.com/Offthewallindustries/videos/uncut-trend-and-vision-talk-with-shaun-mcgrath-access-hair-and-seb-shaun-finally/2024715031541392/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 4,
+          "title": "Before the Butcher gets virtual with online product demos",
+          "url": "https://www.fooddive.com/news/before-the-butcher-gets-virtual-with-online-product-demos/576472/",
+          "domain": "fooddive.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Uncut - The Multipurpose Joomla Template - Demo",
+          "url": "https://uncut.windstripedesign.ro/demo/",
+          "domain": "uncut.windstripedesign.ro",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Product Video",
+          "url": "https://uncutstudio.it/en/product-video/",
+          "domain": "uncutstudio.it",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Subscription - will you help you see my Slow uncut drawing demo",
+          "url": "https://www.facebook.com/OilPastelMasterpiece/posts/subscription-will-you-help-you-see-my-slow-uncut-drawing-demo/1041640378833801/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 8,
+          "title": "Odro Uncut",
+          "url": "https://www.odro.co.uk/who-we-are/odro-uncut/",
+          "domain": "odro.co.uk",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What does \"uncut video\" mean?",
+        "What is a product demo?",
+        "What is product unboxing?",
+        "What is a demo video?"
+      ],
+      "relatedQueries": [
+        "Uncut product demo github",
+        "Youtube uncut product demo",
+        "I can study course free",
+        "Learning to"
+      ]
+    },
+    {
+      "id": "vc-manual250-c2-046",
+      "keyword": "can I post my demo day pitch video publicly",
+      "found": true,
+      "query": "can I post my demo day pitch video publicly",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Demo video for pitch deck? : r/startups",
+          "url": "https://www.reddit.com/r/startups/comments/s3hpw9/demo_video_for_pitch_deck/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "YC W20 Online-Only Demo Day | Hacker News",
+          "url": "https://news.ycombinator.com/item?id=22506013",
+          "domain": "news.ycombinator.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Demo Day? Don't. One of my portfolio company founders…",
+          "url": "https://medium.com/angularventures/demo-day-dont-56834273c476",
+          "domain": "medium.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "A Founder's Guide to Demo Day: How to Get Funded",
+          "url": "https://startupfundraising.com/library/articles/how-to-crush-it-with-your-pitch-deck-on-demo-day",
+          "domain": "startupfundraising.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Demo Day Pitch Guide: How to Win Over Investors",
+          "url": "https://goodcombinator.ai/blog/demo-day-pitch-guide",
+          "domain": "goodcombinator.ai",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Maximizing Deal Flow: Investor Tips for Startup Demo Days",
+          "url": "https://qubit.capital/blog/investor-demo-day-tips",
+          "domain": "qubit.capital",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Demo Day Pitching, Part 1: Common Problems",
+          "url": "https://www.codingvc.com/p/demo-day-pitching-part-1-common-problems",
+          "domain": "codingvc.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Is YC demo day public?",
+        "Does a pitch deck get investor attention?",
+        "How do I submit a pitch deck?"
+      ],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual250-c2-047",
+      "keyword": "PowerPoint video subtitles not showing",
+      "found": true,
+      "query": "PowerPoint video subtitles not showing",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Subtitles Not Working - Microsoft Q&A",
+          "url": "https://learn.microsoft.com/en-us/answers/questions/5425005/subtitles-not-working",
+          "domain": "learn.microsoft.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "How to add live subtitles to PowerPoint (and a test ...",
+          "url": "https://www.echorivera.com/blog/demo-ppt-subtitles",
+          "domain": "echorivera.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "PowerPoint: Turning on subtitles - Ask Athena",
+          "url": "https://lits.knowledgeowl.com/help/software-how-to-4626",
+          "domain": "lits.knowledgeowl.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Present with real-time, automatic captions or subtitles in ...",
+          "url": "https://support.microsoft.com/en-us/powerpoint/present-with-real-time-automatic-captions-or-subtitles-in-powerpoint",
+          "domain": "support.microsoft.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "My PPT doesn't have a subtitles section- how do I get one? ...",
+          "url": "https://www.justanswer.com/computer/tfe8e-ppt-doesn-t-subtitles-section-one.html",
+          "domain": "justanswer.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Need captions/subtitles for recorded audio to be exported ...",
+          "url": "https://www.reddit.com/r/powerpoint/comments/1f25wr6/need_captionssubtitles_for_recorded_audio_to_be/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Missing audio or video subtitles – Digital Accessibility On- ...",
+          "url": "https://pressbooks.bccampus.ca/a11yondemand/chapter/closed-captions/",
+          "domain": "pressbooks.bccampus.ca",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "How to use PowerPoint captions and subtitles to present more ...",
+          "url": "https://www.youtube.com/watch?v=lnwQr3jNcTg",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How do I enable subtitles in PowerPoint?",
+        "Why are my subtitles not appearing?",
+        "How to get subtitles on a video that doesn't have them?",
+        "How do I turn subtitles back on?"
+      ],
+      "relatedQueries": [
+        "Powerpoint video subtitles not showing windows 10",
+        "Powerpoint video subtitles not showing 2021",
+        "Why subtitles are not working on Netflix",
+        "How to add subtitles in PowerPoint",
+        "PowerPoint subtitle examples",
+        "Why subtitles are not working in YouTube",
+        "PowerPoint online",
+        "Microsoft PowerPoint"
+      ]
+    },
+    {
+      "id": "vc-manual250-c2-048",
+      "keyword": "balance voiceover and background audio",
+      "found": true,
+      "query": "balance voiceover and background audio",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How do you balance voice, sound effects, and background ...",
+          "url": "https://www.reddit.com/r/NewTubers/comments/1e9qu4a/how_do_you_balance_voice_sound_effects_and/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Balancing Voiceover with Background Music | AUDIO TUTORIAL",
+          "url": "https://www.youtube.com/watch?v=o58yLGiDASM",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 3,
+          "title": "What's the best way to balance voice and music?",
+          "url": "https://community.adobe.com/questions-729/what-s-the-best-way-to-balance-voice-and-music-1391233",
+          "domain": "community.adobe.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Simple Audio Workflow: Balance Voice & Music for Clean ...",
+          "url": "https://www.youtube.com/watch?v=fK4iQnEoJwA",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 5,
+          "title": "Adjusting the Audio Balance",
+          "url": "https://product.vyond.com/adjusting-the-audio-balance/",
+          "domain": "product.vyond.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Mastering Audio Balance: Keep Background Music in Check",
+          "url": "https://thinkbrandedmedia.com/blog/tips-for-perfect-audio-balance-preventing-background-music-from-overpowering-dialogue/",
+          "domain": "thinkbrandedmedia.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "How to Balance Background Music and Voice for a Better ...",
+          "url": "https://hoangbaokhoa.com/en/how-to-balance-background-music-and-voice-for-a-better-livestream-b2545.php?srsltid=AfmBOopWF4nJbarUvb9X7NvaAROJnVFHTfuoK98gwkZHK2SQByr4WrF_",
+          "domain": "hoangbaokhoa.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "How to Balance Music and Vocals in Premiere Pro",
+          "url": "https://www.youtube.com/watch?v=6mplsgCegtY",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 9,
+          "title": "How to Perfectly Blend Background Music with Dialogue ...",
+          "url": "https://www.instagram.com/reel/DUTjyY1AhXK/",
+          "domain": "instagram.com",
+          "resultType": "video_or_social"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How to mix background music and voice?",
+        "How do I fix my audio balance?",
+        "Why can I hear background music but not voices on my TV?",
+        "What does balance do in audio settings?"
+      ],
+      "relatedQueries": [
+        "Balance voiceover and background audio online",
+        "Audacity",
+        "Auphonic"
+      ]
+    },
+    {
+      "id": "vc-manual250-c2-049",
+      "keyword": "record voice assistant demo",
+      "found": true,
+      "query": "record voice assistant demo",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Product Demos AI Voices | ElevenLabs Voice Library",
+          "url": "https://elevenlabs.io/voice-library/product-demos",
+          "domain": "elevenlabs.io",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "voice - How to record a google assistant demo?",
+          "url": "https://stackoverflow.com/questions/49592229/how-to-record-a-google-assistant-demo",
+          "domain": "stackoverflow.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Crossing the uncanny valley of conversational voice | Sesame",
+          "url": "https://www.sesame.com/blog/crossing-the-uncanny-valley-of-voice",
+          "domain": "sesame.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Record Voiceover",
+          "url": "https://docs.supademo.com/customize/voiceovers/record-voiceover",
+          "domain": "docs.supademo.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "AI Voice Recorder with Transcription Online",
+          "url": "https://felo.ai/tools/ai-voice-recorder-transcription",
+          "domain": "felo.ai",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Live Demo · AI Voice Assistant - NRB Consulting",
+          "url": "https://nrbconsulting.co.uk/ai-voice-assistant-demo",
+          "domain": "nrbconsulting.co.uk",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Voice Recorder For All Platforms | Wondershare DemoCreator",
+          "url": "https://democreator.wondershare.com/voice-recorder.html",
+          "domain": "democreator.wondershare.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "AI Voice Assistant Demo: Instant Voice Cloning with Zoidberg",
+          "url": "https://www.linkedin.com/videos/p0px_i-finally-recorded-a-quick-demo-showing-off-activity-7436929610803613696-IJva",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual250-c2-050",
+      "keyword": "screen flickering when recording video",
+      "found": true,
+      "query": "screen flickering when recording video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:37.242Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "UZg3FufDQruZuQbdf",
+      "datasetId": "cNxnl5rZUSNeVl2DE",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "why do screens/lights flicker in videos taken by phone or ...",
+          "url": "https://www.reddit.com/r/explainlikeimfive/comments/vecw40/eli5_why_do_screenslights_flicker_in_videos_taken/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "How to Stop an LED Display Flickering on Camera",
+          "url": "https://divoom.com/blogs/setup-ideas/stop-led-display-flickering-on-camera?srsltid=AfmBOorD8CU9IdXr4IRlquy1xxRcXAu9G8_BGQXJoS4BJfjatFqpzd8x",
+          "domain": "divoom.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "Why does the recorded screen video flicker when I ... - Zowie",
+          "url": "https://zowie.benq.com/en-in/support/faq/product/explanation/zowiemonitor-faq-kn-00001.html",
+          "domain": "zowie.benq.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "How do people video record iPad and computer screen so ...",
+          "url": "https://www.quora.com/How-do-people-video-record-iPad-and-computer-screen-so-well-not-screen-capture-with-a-camera-but-when-I-do-it-I-get-the-video-flickering",
+          "domain": "quora.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "How to fix glitching and flickering screen?",
+          "url": "https://learn.microsoft.com/en-us/answers/questions/3976035/how-to-fix-glitching-and-flickering-screen",
+          "domain": "learn.microsoft.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "How to Stop Light Flickering in Your Videos",
+          "url": "https://borisfx.com/blog/how-to-stop-light-flickering-in-your-videos/",
+          "domain": "borisfx.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "In camera flicker when recording projected video screen",
+          "url": "https://forum.dataton.com/topic/42643-in-camera-flicker-when-recording-projected-video-screen/",
+          "domain": "forum.dataton.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How to remove flicker while recording video?",
+        "Why is my screen flickering when watching videos?",
+        "Why do screens flicker in videos?",
+        "How to stop flickering in iPhone while recording video?"
+      ],
+      "relatedQueries": [
+        "Screen flickering when recording video reddit",
+        "Screen flickering when recording video on phone",
+        "Screen flickering when recording video samsung",
+        "Screen flickering when recording video iphone",
+        "Screen flickering when recording video android",
+        "How to stop light flickering in video iPhone",
+        "How to fix camera flickering android",
+        "Why do screens flicker on camera"
+      ]
+    }
+  ]
+}

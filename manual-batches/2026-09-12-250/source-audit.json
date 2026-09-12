@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "kind": "source_transport_audit_not_editorial_approval",
+  "articlesAvailable": 8,
+  "receipts": [
+    {
+      "url": "https://creators.spotify.com/resources/create/podcast-episode-descriptions",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:34:28.958Z",
+      "finalUrl": "https://creators.spotify.com/resources/create/podcast-episode-descriptions",
+      "httpStatus": 200,
+      "bodySha256": "034585a021eb76849bcc1fafcb475e2ac3c7d6caf6660f886282addb40e65aa8",
+      "extractedWords": 25
+    },
+    {
+      "url": "https://helpx.adobe.com/ie/premiere/desktop/edit-projects/set-up-multi-camera-sequences-for-editing/create-a-multi-camera-source-sequence.html",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T02:34:28.708Z",
+      "error": "Error: Source body evidence requires a successful response."
+    },
+    {
+      "url": "https://helpx.adobe.com/ie/premiere/desktop/edit-projects/set-up-multi-camera-sequences-for-editing/create-and-edit-a-multi-camera-target-sequence.html",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T02:34:28.775Z",
+      "error": "Error: Source body evidence requires a successful response."
+    },
+    {
+      "url": "https://helpx.adobe.com/premiere/desktop/render-and-export/export-files/export-a-still-frame.html",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T02:34:28.711Z",
+      "error": "Error: Source body evidence requires a successful response."
+    },
+    {
+      "url": "https://helpx.adobe.com/premiere/desktop/render-and-export/export-files/export-a-still-image.html",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T02:34:28.700Z",
+      "error": "Error: Source body evidence requires a successful response."
+    },
+    {
+      "url": "https://kanbanguides.org/the-kanban-guide/",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:34:29.291Z",
+      "finalUrl": "https://kanbanguides.org/the-kanban-guide/",
+      "httpStatus": 200,
+      "bodySha256": "654b41c079d23b4b88f88b512edbb87c8943f9425fd1bc4534d48f14801f1b6b",
+      "extractedWords": 1234
+    },
+    {
+      "url": "https://podcasters.apple.com/support/825-how-to-create-an-episode",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:34:29.172Z",
+      "finalUrl": "https://podcasters.apple.com/support/825-how-to-create-an-episode",
+      "httpStatus": 200,
+      "bodySha256": "274423c22a035f50f1c8995bf433701421a2720c5adc8bbfe26a9adfd209664a",
+      "extractedWords": 278
+    },
+    {
+      "url": "https://support.upwork.com/hc/en-us/articles/44564821903763-Understanding-milestones-on-fixed-price-contracts",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:34:28.609Z",
+      "finalUrl": "https://support.upwork.com/hc/en-us/articles/44564821903763-Understanding-milestones-on-fixed-price-contracts",
+      "httpStatus": 200,
+      "bodySha256": "6d1dd12b789cf3f13399695d60495c42b5efaa7f90c949980149cd18f35daa2c",
+      "extractedWords": 556
+    },
+    {
+      "url": "https://wistia.com/blog/ai-webinar-transcript-content",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:34:28.583Z",
+      "finalUrl": "https://wistia.com/blog/ai-webinar-transcript-content",
+      "httpStatus": 200,
+      "bodySha256": "385175ec69f294ac6afc4443988d7d9ba63e00adaa1d90021a9f50115e0c5576",
+      "extractedWords": 583
+    },
+    {
+      "url": "https://www.atlassian.com/itsm/service-request-management/service-catalog",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T02:34:29.395Z",
+      "error": "Error: Source response body exceeds the byte limit."
+    },
+    {
+      "url": "https://www.atlassian.com/software/jira/templates/marketing-service-management",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T02:34:29.307Z",
+      "error": "Error: Source response body exceeds the byte limit."
+    },
+    {
+      "url": "https://www.bls.gov/ooh/media-and-communication/film-and-video-editors-and-camera-operators.htm",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:34:28.602Z",
+      "finalUrl": "https://www.bls.gov/ooh/media-and-communication/film-and-video-editors-and-camera-operators.htm",
+      "httpStatus": 200,
+      "bodySha256": "a71dccea09f8acd9b64b6bcca270a0c3caeda4b1edcb0592f0b6f6a7886d08a7",
+      "extractedWords": 69
+    },
+    {
+      "url": "https://www.upwork.com/hire/video-editors/how-to-hire/",
+      "status": "automatic_retrieval_unavailable",
+      "checkedAt": "2026-09-12T02:34:28.534Z",
+      "error": "Error: Source body evidence requires a successful response."
+    },
+    {
+      "url": "https://www.w3.org/WAI/media/av/transcripts/",
+      "status": "body_retrieved",
+      "checkedAt": "2026-09-12T02:34:28.690Z",
+      "finalUrl": "https://www.w3.org/WAI/media/av/transcripts/",
+      "httpStatus": 200,
+      "bodySha256": "66874304e38fa73498a3c4958b2309cd4255cc276133fb5c7b10e6f2e42828b0",
+      "extractedWords": 824
+    }
+  ]
+}

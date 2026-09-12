@@ -1,0 +1,3400 @@
+{
+  "schemaVersion": 1,
+  "kind": "manual_editorial_batch",
+  "provenance": {
+    "actorId": "apify/google-search-scraper",
+    "runId": "g9D9OtyGPJA0waGDm",
+    "datasetId": "ZbFX6X6AVLdt20rOQ",
+    "observedAt": "2026-09-12T02:35:57.310Z"
+  },
+  "records": [
+    {
+      "id": "vc-manual250-c3-011",
+      "keyword": "paid video editor test project",
+      "found": true,
+      "query": "paid video editor test project",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "So - I received the classic unpaid Video Editing Request ...",
+          "url": "https://www.reddit.com/r/editors/comments/1m13qmy/so_i_received_the_classic_unpaid_video_editing/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "How to Hire a Video Editor: A Practical Guide",
+          "url": "https://www.moonb.io/blog/how-to-hire-a-video-editor",
+          "domain": "moonb.io",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "How to Test Offshore Video Editors Before Hiring (2026)",
+          "url": "https://remotegrowthpartners.com/blog/how-to-test-an-offshore-video-editor-before-hiring-in-2025",
+          "domain": "remotegrowthpartners.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "How to find a professional video editor for an unpaid test ...",
+          "url": "https://www.facebook.com/groups/editingvideofilms/posts/7222503471163728/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 5,
+          "title": "Video Editing Test Project: How Freelancers Should ...",
+          "url": "https://www.gigxomi.com/blog/video-editing-test-project-how-freelancers-should-approach-it",
+          "domain": "gigxomi.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Video Editing Jobs for September 2026",
+          "url": "https://www.freelancer.com/jobs/video-editing",
+          "domain": "freelancer.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Video Editor Jobs | Freelance Editing Work",
+          "url": "https://useme.com/en/jobs/category/multimedia,36/video,106/",
+          "domain": "useme.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "11 Best Freelance Video Editors for Hire in September 2026",
+          "url": "https://www.toptal.com/marketing/video-editors",
+          "domain": "toptal.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Paid video editor test project reddit",
+        "Paid video editor test project free",
+        "Paid video editor test project example"
+      ]
+    },
+    {
+      "id": "vc-manual250-c3-012",
+      "keyword": "how to evaluate a video production portfolio",
+      "found": true,
+      "query": "how to evaluate a video production portfolio",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How to compare & evaluate video production proposals",
+          "url": "https://www.linkedin.com/pulse/how-compare-evaluate-video-production-proposals-steve-platt",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 2,
+          "title": "Video Production Firm: Evaluating Portfolios - SID Video",
+          "url": "https://www.soundideavideoproduction.co.za/2024/09/17/video-production-firm-evaluating-portfolios/",
+          "domain": "soundideavideoproduction.co.za",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "How to Evaluate a Video Editor's Portfolio Before Hiring",
+          "url": "https://hiretalent.ph/blog/evaluate-video-editor-portfolio",
+          "domain": "hiretalent.ph",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Video Editor Portfolio Guide with Real Examples",
+          "url": "https://vimeo.com/blog/post/video-editor-portfolio",
+          "domain": "vimeo.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 5,
+          "title": "Tips for Reviewing a Video Portfolio",
+          "url": "https://www.theblueowlproject.com/post/what-to-look-for-in-a-video-editing-portfolio",
+          "domain": "theblueowlproject.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "What Makes a Great Video Portfolio",
+          "url": "https://clideo.com/resources/what-makes-a-great-video-portfolio",
+          "domain": "clideo.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "A Step-by-Step Guide to Building a Film Portfolio as a Film ...",
+          "url": "https://www.sae.edu/gbr/insights/a-step-by-step-guide-to-building-a-film-portfolio-as-a-film-student/",
+          "domain": "sae.edu",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "How to Create a Professional Media Portfolio That Stands ...",
+          "url": "https://audiovisuallab.co.za/journal/professional-media-portfolio-guide/",
+          "domain": "audiovisuallab.co.za",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is the 3:2:1 rule in video editing?",
+        "What to include in a video portfolio?",
+        "What does the 80/20 rule mean in video editing?",
+        "How does a video editor portfolio look like?"
+      ],
+      "relatedQueries": [
+        "How to evaluate a video production portfolio sample",
+        "How to evaluate a video production portfolio example"
+      ]
+    },
+    {
+      "id": "vc-manual250-c3-013",
+      "keyword": "video production retainer vs project",
+      "found": true,
+      "query": "video production retainer vs project",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Video production retainer: Everything you need to know",
+          "url": "https://www.twostory.com.au/video-production-retainer/",
+          "domain": "twostory.com.au",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "What is a video production retainer and how does it work?",
+          "url": "https://www.kenzostudio.uk/insights-articles/what-is-a-video-production-retainer-and-how-does-it-work",
+          "domain": "kenzostudio.uk",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Video Retainer Packages: Scope & Monthly Output",
+          "url": "https://www.kpicreatives.com/systems/content-systems/video-retainer-packages",
+          "domain": "kpicreatives.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Scale Your Content With a Video Production Retainer ...",
+          "url": "https://www.simply-thrilled.com/post/video-production-retainer-contract",
+          "domain": "simply-thrilled.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Monthly Retainer for Video Content: How much should I ...",
+          "url": "https://www.reddit.com/r/videography/comments/12irtsa/monthly_retainer_for_video_content_how_much/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Video Retainer vs Project: Which to Choose",
+          "url": "https://www.madebydot.com/glossary/retainer-vs-project/",
+          "domain": "madebydot.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Video production retainer pricing: is it worth it?",
+          "url": "https://crftvideo.com/video-production-retainer/",
+          "domain": "crftvideo.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What are retainers in videography?",
+        "What are the four stages of video production?",
+        "What is a retainer vs hourly rate?",
+        "Is AI going to replace videographers?"
+      ],
+      "relatedQueries": [
+        "Video production retainer vs project cost",
+        "Video production retainer vs project price"
+      ]
+    },
+    {
+      "id": "vc-manual250-c3-014",
+      "keyword": "how does unlimited video editing work",
+      "found": true,
+      "query": "how does unlimited video editing work",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "The Best Unlimited Video Editing Services (UPDATED 2026)",
+          "url": "https://www.hatchwise.com/best-unlimited-video-editing-services",
+          "domain": "hatchwise.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Unlimited Video Editing Services (2026)",
+          "url": "https://flocksy.com/unlimited-video-editing/",
+          "domain": "flocksy.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Visugu: Unlimited Video Editing | Video Editing Subscription ...",
+          "url": "https://visugu.com/",
+          "domain": "visugu.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Top 7 Unlimited Video Editing Companies in 2026",
+          "url": "https://www.capturevideoandmarketing.com/blog-news/top-7-unlimited-video-editing-companies-in-2025",
+          "domain": "capturevideoandmarketing.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "What Is Unlimited Video Editing? (Is It Worth It?)",
+          "url": "https://samfusion.com/unlimited-video-editing/",
+          "domain": "samfusion.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Unlimited Video Editing Service for B2B (24h Turnaround)",
+          "url": "https://contentbuck.com/unlimited-video-editing",
+          "domain": "contentbuck.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "9 Best Unlimited Video Editing Services",
+          "url": "https://startupresources.io/best-unlimited-video-editing-services/",
+          "domain": "startupresources.io",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What does the 80/20 rule mean in video editing?",
+        "Is 32 GB RAM enough for 4K video editing?",
+        "What is the 3:2:1 rule in video editing?",
+        "Which video editor is 100% free?"
+      ],
+      "relatedQueries": [
+        "Unlimited editing",
+        "Video editing services",
+        "Monthly video editing service",
+        "Video editing services for content creators",
+        "Cheap video editing services",
+        "YouTube editing services",
+        "Video editor package",
+        "Clipmaster editing"
+      ]
+    },
+    {
+      "id": "vc-manual250-c3-015",
+      "keyword": "rent or buy camera equipment for business videos",
+      "found": true,
+      "query": "rent or buy camera equipment for business videos",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Photography and Video Gear, Should You Buy or Rent?",
+          "url": "https://fstoppers.com/business/photography-and-video-gear-should-you-buy-or-rent-377217",
+          "domain": "fstoppers.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Rent Cameras, Lenses, and Video Gear • LensProToGo",
+          "url": "https://www.lensprotogo.com/",
+          "domain": "lensprotogo.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Benefits of renting equipment vs buying for in-house ...",
+          "url": "https://www.reddit.com/r/videography/comments/o2pel4/benefits_of_renting_equipment_vs_buying_for/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Top 7 reputable and affordable video camera rental ...",
+          "url": "https://rightmedia.vn/en/cheap-video-camera-rental-in-ho-chi-minh-city/",
+          "domain": "rightmedia.vn",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "SHOULD YOU RENT OR BUY GEAR? (EP.141)",
+          "url": "https://www.youtube.com/watch?v=i7hHSwdsBWI",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 6,
+          "title": "Renting Vs Buying Camera Equipment",
+          "url": "https://boltproductions.com/blog/renting-vs-buying-camera-equipment/",
+          "domain": "boltproductions.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "How to Build a Camera Rental Business I Wedio",
+          "url": "https://www.facebook.com/WedioGlobal/videos/how-to-build-a-camera-rental-business-i-wedio/7267952586644301/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Is it better to rent or buy a camera?",
+        "What is the best camera for making professional videos?",
+        "What is a good budget camera for videography?",
+        "Can you rent a vlogging camera?"
+      ],
+      "relatedQueries": [
+        "Rent or buy camera equipment for business videos reddit",
+        "Rent or buy camera equipment for business videos online",
+        "Borrow a camera",
+        "Rent DSLR",
+        "Brooklyn camera rental",
+        "NYC film equipment rental",
+        "Canon 100 300 rental",
+        "Rent Fujifilm cameras"
+      ]
+    },
+    {
+      "id": "vc-manual250-c3-016",
+      "keyword": "rent a video studio or film in the office",
+      "found": true,
+      "query": "rent a video studio or film in the office",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Video Studio Rental Miami | Professional Spaces for Film & ...",
+          "url": "https://giggster.com/find/miami--fl/video-studio",
+          "domain": "giggster.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "32 Best Video Studios for Rent Near Me",
+          "url": "https://www.peerspace.com/plan/video-studio",
+          "domain": "peerspace.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Is It Worth It to CREATE Your Own FILM STUDIO or Should You ...",
+          "url": "https://www.youtube.com/watch?v=ZR9GNw12GLU",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 4,
+          "title": "Flex Office Space for Multimedia Companies",
+          "url": "https://m3studiosmiami.com/flex-office-space/",
+          "domain": "m3studiosmiami.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "TOP 10 BEST Video Studio Rental in Miami, FL",
+          "url": "https://www.yelp.com/search?find_desc=Video+Studio+Rental&find_loc=Miami%2C+FL",
+          "domain": "yelp.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Map",
+          "url": "https://www.google.com/search?q=rent+a+video+studio+or+film+in+the+office&sca_esv=84bb5e68fac1764f&hl=en&gl=US&udm=1&lsack=ZLmkarPDIN3kxc8Pyeah4As&sa=X&ved=2ahUKEwizhfnu_-eWAxVdcvEDHUlzCLwQtgN6BAhVEAM",
+          "domain": "google.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Photo & Video Studio Rental in Miami - Storefront",
+          "url": "https://www.thestorefront.com/search/miami/photo-shooting",
+          "domain": "thestorefront.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Why rent a studio every time you need to film?  With the right ...",
+          "url": "https://www.instagram.com/reel/DVyx80qgoAu/",
+          "domain": "instagram.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 9,
+          "title": "Top Video Production Studios For Rent In Miami",
+          "url": "https://bonomotion.com/top-video-production-studios-for-rent-in-miami/",
+          "domain": "bonomotion.com",
+          "resultType": "other"
+        },
+        {
+          "position": 10,
+          "title": "Production Office Facilities / Office Rental in Florida",
+          "url": "https://www.productionhub.com/directory/profiles/production-office-facilities/us/florida",
+          "domain": "productionhub.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How much do recording studios cost to rent?",
+        "How much does a 2 hour studio session cost?",
+        "Is it better to rent or buy a camera?",
+        "How much does it cost to rent a photo studio?"
+      ],
+      "relatedQueries": [
+        "Rent a video studio or film in the office near me",
+        "Rent a video studio or film in the office for a day",
+        "Rent a video studio or film in the office cheap"
+      ]
+    },
+    {
+      "id": "vc-manual250-c3-017",
+      "keyword": "how to choose remote video recording software",
+      "found": true,
+      "query": "how to choose remote video recording software",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "5 Best Remote Video Recording Software in 2026! ...",
+          "url": "https://famewall.io/blog/remote-video-recording-software/",
+          "domain": "famewall.io",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "Collaborative Video Recording Software: How to Choose ...",
+          "url": "https://streamyard.com/blog/collaborative-video-recording-software",
+          "domain": "streamyard.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "Best Video Recording Software [Updated 2023]",
+          "url": "https://squadcast.fm/blog/choosing-the-best-video-recording-software/",
+          "domain": "squadcast.fm",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Best Remote Podcast Recording Platforms? (Riverside vs ...",
+          "url": "https://www.reddit.com/r/podcasting/comments/1jinlwh/best_remote_podcast_recording_platforms_riverside/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "How I Record Remote Podcasts (Best Tools & Settings for ...",
+          "url": "https://www.buzzsprout.com/blog/record-podcast-remotely",
+          "domain": "buzzsprout.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Remote Video Production for Small Businesses",
+          "url": "https://mazloy.com/blog/remote-video-production",
+          "domain": "mazloy.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Recording Software: Guides, Research & Expert Insights",
+          "url": "https://riverside.com/category/recording-software",
+          "domain": "riverside.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "8 Best Remote Podcast Recording Software",
+          "url": "https://saspod.com/blog/post/best-remote-podcast-recording-software",
+          "domain": "saspod.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How to choose the right recording software?",
+        "What is the best software for remote podcast recording?",
+        "Which recording software is best for beginners?",
+        "What is the best software for live streaming recording?"
+      ],
+      "relatedQueries": [
+        "How to choose remote video recording software reddit",
+        "How to choose remote video recording software for pc",
+        "Best remote podcast recording software",
+        "How to record a podcast remotely for free",
+        "Best podcast recording software free",
+        "Zencastr",
+        "Remote audio recording software",
+        "Best way to record a podcast remotely"
+      ]
+    },
+    {
+      "id": "vc-manual250-c3-018",
+      "keyword": "solo videographer vs production crew",
+      "found": true,
+      "query": "solo videographer vs production crew",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Solo Videographer vs. Production Company : r/videography",
+          "url": "https://www.reddit.com/r/videography/comments/1pf5fdh/solo_videographer_vs_production_company/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Do you need one videographer or a full production crew?",
+          "url": "https://westream.uk/do-you-need-one-videographer-or-a-full-crew",
+          "domain": "westream.uk",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Solo Videographer vs Production Company in Dubai (2026)",
+          "url": "https://videography.ae/blog/solo-videographer-vs-production-company-dubai/",
+          "domain": "videography.ae",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Whether you're choosing a solo videographer, or going ...",
+          "url": "https://www.linkedin.com/pulse/whether-youre-choosing-solo-videographer-going-more-production-kelly",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 5,
+          "title": "Videographer vs Video Production Company: Which to Hire?",
+          "url": "https://www.minifridgemedia.com/blog/videographer-vs-video-production-company/",
+          "domain": "minifridgemedia.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Videographer types and pricing: which crew do you ...",
+          "url": "https://www.lv-prod.com/blog/videographer-types-and-pricing-guide/",
+          "domain": "lv-prod.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Videographer vs Video Production Company: What's the ...",
+          "url": "https://bwproductionsllc.com/blog-posts/videographer-vs-video-production-company-whats-the-difference",
+          "domain": "bwproductionsllc.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Pros & cons of starting a one-person production crew",
+          "url": "https://medium.com/@vjnetworkzoomintv/pros-cons-of-starting-a-one-person-production-crew-353c66e1e80d",
+          "domain": "medium.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is the difference between video production and videographer?",
+        "Is AI going to replace videographers?",
+        "What pays more, videography or photography?",
+        "Can you be a self-taught videographer?"
+      ],
+      "relatedQueries": [
+        "Solo videographer vs production crew reddit",
+        "Solo videographer vs production crew cost"
+      ]
+    },
+    {
+      "id": "vc-manual250-c3-019",
+      "keyword": "hire local video crew or fly in production team",
+      "found": true,
+      "query": "hire local video crew or fly in production team",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Hiring Locals vs. Bringing Your Own Team : r/Filmmakers",
+          "url": "https://www.reddit.com/r/Filmmakers/comments/1o2y3j0/hiring_locals_vs_bringing_your_own_team/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Hire a Video & Film Crew in Brazil",
+          "url": "https://www.brazilbaseproductions.com/video-and-film-crew-brazil",
+          "domain": "brazilbaseproductions.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Global Film Crews, Camera Crews & Video Production Staff",
+          "url": "https://crewscontrol.com/services/locations/",
+          "domain": "crewscontrol.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Local Video Production Crew Cost: 2026 Rates & Breakdown",
+          "url": "https://www.teamunitymedia.com/blogs/local-video-production-crew-cost",
+          "domain": "teamunitymedia.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Video Production Crewing | Video Crews | Freelance Camera ...",
+          "url": "https://videoproduction.maslowmedia.com/",
+          "domain": "videoproduction.maslowmedia.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "How to Hire a Video Crew: The Complete Guide for 2026",
+          "url": "https://ineedproduction.com/how-to-hire-a-video-crew/",
+          "domain": "ineedproduction.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Hire a Corporate Videographer in Sao Paulo, Brazil",
+          "url": "https://acrew4u.com/brazil-sao-paulo-camera-crew-hire-and-videographers-2/",
+          "domain": "acrew4u.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Local Film Crew Hire Basics: How to find the right people",
+          "url": "https://indiefilmfactory.com/2026/06/02/local-film-crew-hire/amp/",
+          "domain": "indiefilmfactory.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Who hires the crew on a film?",
+        "What is the hardest job on a film set?",
+        "What is the role of a production crew?",
+        "What are the 7 stages of film production?"
+      ],
+      "relatedQueries": [
+        "Hire local video crew or fly in production team reddit",
+        "Hire local video crew or fly in production team in usa",
+        "Hire local video crew or fly in production team near me",
+        "Is production hub worth it",
+        "Film crew for hire near me",
+        "Film production websites",
+        "Production hub meaning",
+        "Production Hub jobs"
+      ]
+    },
+    {
+      "id": "vc-manual250-c3-020",
+      "keyword": "what to check when hiring a drone videographer",
+      "found": true,
+      "query": "what to check when hiring a drone videographer",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Book Drone Videography Services",
+          "url": "https://dronesaferegister.org.uk/drone-videography",
+          "domain": "dronesaferegister.org.uk",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Don't Hire A Videographer Who Flies A Drone Without ...",
+          "url": "https://kevinlushphotography.com/dont-hire-a-videographer-who-flies-a-drone-without-a-license/",
+          "domain": "kevinlushphotography.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Would drone videography/photography be a good career ...",
+          "url": "https://www.reddit.com/r/drones/comments/17q9ms0/would_drone_videographyphotography_be_a_good/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Drone Services Pricing: An Introductory Guide",
+          "url": "https://www.dronepilotgroundschool.com/drone-services-pricing/",
+          "domain": "dronepilotgroundschool.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "5 Things To Consider Before Hiring A Drone Pilot",
+          "url": "https://www.v1dronemedia.com/hiring-a-drone-pilot?srsltid=AfmBOop8TFeID7l1n3doQUFE_wlfjA1QgIiwma5RAPOKtZR61-EGpzHu",
+          "domain": "v1dronemedia.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "What to look for when hiring a drone professional",
+          "url": "https://www.reiq.com/articles/property-sales/what-to-look-for-when-hiring-a-drone-professional",
+          "domain": "reiq.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Things to Look for when Hiring an Aerial Photographer",
+          "url": "https://www.topshotap.com/what-to-look-for-when-hiring-an-aerial-photographer/",
+          "domain": "topshotap.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How much should I charge for drone videography?",
+        "What is the 1:1 rule for drones?",
+        "What are some tips for getting good drone videography?",
+        "How much money does a drone photographer make?"
+      ],
+      "relatedQueries": [
+        "What to check when hiring a drone videographer near",
+        "What to check when hiring a drone videographer job",
+        "Drone videography near me",
+        "Drone Pilot jobs"
+      ]
+    },
+    {
+      "id": "vc-manual250-c3-021",
+      "keyword": "do I need a sound recordist for a video shoot",
+      "found": true,
+      "query": "do I need a sound recordist for a video shoot",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "could I not hire sound recordist for a simpler shoot?",
+          "url": "https://www.reddit.com/r/Filmmakers/comments/1jqayba/realistically_could_i_not_hire_sound_recordist/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Sound Recordist On A Short Film Shoot - How To Prepare",
+          "url": "https://www.production-expert.com/production-expert-1/2020/6/18/how-to-prepare-for-a-short-film-shoot-as-the-sound-recordist-be-organised",
+          "domain": "production-expert.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "What does everyone use to record audio? I got some ...",
+          "url": "https://www.facebook.com/groups/27648968851/posts/10166827742683852/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 4,
+          "title": "Sound Recording for Video Production | Dream Engine",
+          "url": "https://www.dreamengine.com.au/video-production-process/sound-recordist/",
+          "domain": "dreamengine.com.au",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Production sound mixer",
+          "url": "https://en.wikipedia.org/wiki/Production_sound_mixer",
+          "domain": "en.wikipedia.org",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "The Basic Necessities: A Sound Guide for Production and ...",
+          "url": "https://agnesfilms.com/filmmaking-advice/the-basic-necessities-a-sound-guide-for-production-and-postproduction/",
+          "domain": "agnesfilms.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Sound Recordist",
+          "url": "https://www.actionontheside.tv/film-roles/sound-recordist",
+          "domain": "actionontheside.tv",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Sound recording for videographers",
+          "url": "https://julianlangham.co.uk/sound-recording-for-videographers/",
+          "domain": "julianlangham.co.uk",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What do you need for a video shoot?",
+        "Is a sound recorder necessary?",
+        "Can I record a video without sound?",
+        "What is the best sound recorder for filmmaking?"
+      ],
+      "relatedQueries": [
+        "Studio binder sound recording",
+        "Film sound recording equipment",
+        "How to record audio for short film",
+        "How to record audio for film",
+        "Microphone for video recording",
+        "How is sound recorded in movies",
+        "Sound in video",
+        "How to shoot video"
+      ]
+    },
+    {
+      "id": "vc-manual250-c3-022",
+      "keyword": "audio restoration service or rerecord video",
+      "found": true,
+      "query": "audio restoration service or rerecord video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Audio Restoration Services | Professional Sound Repair",
+          "url": "https://www.thevoiceovergallery.co.uk/sound/audio-restoration-services/",
+          "domain": "thevoiceovergallery.co.uk",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Professional audio restoration services for poor",
+          "url": "https://www.facebook.com/groups/694161962019259/posts/1858974708871306/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 3,
+          "title": "Top Audio Restoration Pros for hire",
+          "url": "https://soundbetter.com/s/restoration",
+          "domain": "soundbetter.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "What Is Audio Restoration? Tips, Tricks, and More",
+          "url": "https://borisfx.com/blog/what-is-audio-restoration-tips-tricks-more/",
+          "domain": "borisfx.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Audio restoration",
+          "url": "https://en.wikipedia.org/wiki/Audio_restoration",
+          "domain": "en.wikipedia.org",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Audio restoration services",
+          "url": "https://www.audio-cleaning-online.com/english/audio-restoration/",
+          "domain": "audio-cleaning-online.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Audio Repair and Restoration — Where Do I Start?",
+          "url": "https://www.thebroadcastbridge.com/content/entry/613/audio-repair-and-restoration-where-do-i-start",
+          "domain": "thebroadcastbridge.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Best Professional Audio Restoration Service (Need it to be ...",
+          "url": "https://www.reddit.com/r/editors/comments/jusmog/best_professional_audio_restoration_service_need/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is the best audio restoration software?",
+        "How can I restore old audio recordings?",
+        "What is the best software for cleaning up audio recordings?",
+        "How do I get my recordings back?"
+      ],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual250-c3-023",
+      "keyword": "is professional color grading worth it for business video",
+      "found": true,
+      "query": "is professional color grading worth it for business video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Does color grading actually impact YouTube growth",
+          "url": "https://www.reddit.com/r/videography/comments/1qdmsy0/does_color_grading_actually_impact_youtube_growth/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Is color grading still worth it?",
+          "url": "https://www.instagram.com/cutroom.productions/reel/DcM6U8QBym6/",
+          "domain": "instagram.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 3,
+          "title": "Is Professional Colour Grading Worth It for Corporate Videos?",
+          "url": "https://www.hasanabdulla.co.uk/2026/08/12/professional-colour-grading-corporate-videos/",
+          "domain": "hasanabdulla.co.uk",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Is color grading an absolute must after you edit your video?",
+          "url": "https://www.facebook.com/groups/ottawafilmmakers/posts/3030390637034755/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 5,
+          "title": "You Don't Need Expensive Gear to Get Pro Color: Try This!",
+          "url": "https://www.youtube.com/watch?v=A7-RnVw_sQo",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 6,
+          "title": "Color Grading for Videographers",
+          "url": "https://www.behindtheshutter.com/color-grading-for-videographers/",
+          "domain": "behindtheshutter.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Color Grading: The Business",
+          "url": "https://icolorist.com/about-the-ica/color-grading-the-business/",
+          "domain": "icolorist.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is the best program for color grading video?",
+        "Is CapCut good for color grading?",
+        "Should I edit or color grade my video first?",
+        "What is the best video format for color grading?"
+      ],
+      "relatedQueries": [
+        "Is professional color grading worth it for business video reddit",
+        "Is professional color grading worth it for business video free"
+      ]
+    },
+    {
+      "id": "vc-manual250-c3-024",
+      "keyword": "2d vs 3d animation for business video",
+      "found": true,
+      "query": "2d vs 3d animation for business video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "2D vs 3D Animation for Modern Business Marketing",
+          "url": "https://hatchstudios.com/2d-vs-3d-animation-which-one-is-better-for-your-business/",
+          "domain": "hatchstudios.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "2D vs 3D Animation: Choose the Right Style for Your ...",
+          "url": "https://justanimations.com/2d-vs-3d-animation/",
+          "domain": "justanimations.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "2D vs 3D: Which Animation Fits Your Brand?",
+          "url": "https://kensa.agency/blog/2d-vs-3d-animation/",
+          "domain": "kensa.agency",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "2D vs 3D Animation: Which Is Best for Your Business Video?",
+          "url": "https://www.interactivv.com/blog/2d-vs-3d-animation-which-is-best-for-your-business-video/",
+          "domain": "interactivv.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "How to Choose Between 2D and 3D Animation for Your ...",
+          "url": "https://ripmediagroup.com/3d-animation/how-to-choose-between-2d-and-3d-animation-for-your-marketing-videos",
+          "domain": "ripmediagroup.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "2D vs 3D Animation: Which is Best for Your Business ...",
+          "url": "https://eilandigital.com/newsletter/2d-vs-3d-animation/",
+          "domain": "eilandigital.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "2D vs. 3D Animation: Which Is Better for Business?",
+          "url": "https://levitatemedia.com/learn/2d-vs-3d-animation",
+          "domain": "levitatemedia.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "2D vs 3D Animation: Which One Should Your Business ...",
+          "url": "https://www.prayananimation.com/blog/2d-vs-3d-animation-which-one-should-your-business-choose/",
+          "domain": "prayananimation.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Is 2D animation better than 3D animation?",
+        "Why did Disney quit 2D?",
+        "Is 2D animation in demand?",
+        "Is it cheaper to do 2D or 3D animation?"
+      ],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual250-c3-025",
+      "keyword": "motion graphics templates vs custom animation",
+      "found": true,
+      "query": "motion graphics templates vs custom animation",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Custom animation vs templates in social ads",
+          "url": "https://www.reddit.com/r/AfterEffects/comments/1raaf4v/custom_animation_vs_templates_in_social_ads_whats/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Free motion graphics templates",
+          "url": "https://jitter.video/templates/",
+          "domain": "jitter.video",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "How to Use Motion Graphics Templates for Faster Animation",
+          "url": "https://www.linkedin.com/advice/3/how-can-you-speed-up-your-animation-workflow-motion-graphics-apu6c",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 4,
+          "title": "Is it better for beginners to use templates in their motion ...",
+          "url": "https://www.quora.com/Is-it-better-for-beginners-to-use-templates-in-their-motion-graphics-projects",
+          "domain": "quora.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Motion Graphics Templates",
+          "url": "https://motionarray.com/motion-graphics-templates/",
+          "domain": "motionarray.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Custom Animation vs Template Animation: Which is Best ...",
+          "url": "https://splitarts.com/blog/custom-animation-vs-template-animation/",
+          "domain": "splitarts.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Phân Biệt Animation vs Motion Graphics: Tương Đồng ...",
+          "url": "https://www.deedeestudio.net/post/animation-vs-motion-graphics",
+          "domain": "deedeestudio.net",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Animation vs Motion Graphics: Which to Choose?",
+          "url": "https://hatchstudios.com/animation-vs-motion-graphics-which-one-should-your-business-choose/",
+          "domain": "hatchstudios.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Are motion graphics and animation the same?",
+        "Which is better, animation or graphic design?",
+        "Will AI replace motion graphic designers?",
+        "What are the four main types of animation?"
+      ],
+      "relatedQueries": [
+        "Motion graphics templates vs custom animation reddit",
+        "Free motion graphics templates vs custom animation",
+        "Motion graphics templates vs custom animation free download",
+        "Gfx Animation",
+        "Free SaaS video templates",
+        "Profile animation maker",
+        "Motion designer website",
+        "Template for logo animation"
+      ]
+    },
+    {
+      "id": "vc-manual250-c3-026",
+      "keyword": "stock footage vs custom video shoot",
+      "found": true,
+      "query": "stock footage vs custom video shoot",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Stock footage or your own video? How to make the right choice",
+          "url": "https://videodesign.com/en-ch/stock-footage-vs-custom-wann-sich-eigene-aufnahmen-lohnen-und-wann-nicht/",
+          "domain": "videodesign.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Stock Footage - Tips & Guide to Commercial Demand",
+          "url": "https://help.author.envato.com/hc/en-us/articles/360035608712-Stock-Footage-Tips-Guide-to-Commercial-Demand",
+          "domain": "help.author.envato.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "Custom Video Production: Brand-Safe Proof Stock Lacks",
+          "url": "https://www.visionair.com.au/video-production-vs-stock-video-which-should-you-choose/",
+          "domain": "visionair.com.au",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Stock Video vs. Custom Footage: When to Use Each for ...",
+          "url": "https://www.stockphotosecrets.com/questions-answers/stock-video-or-custom-footage-shutterstock.html",
+          "domain": "stockphotosecrets.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Stock Footage Vs Custom Footage for Videos",
+          "url": "https://www.facebook.com/fb-answers/stock-footage-vs-custom-footage-for-videos/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 6,
+          "title": "When (and How) to Use Stock Footage in Video Production",
+          "url": "https://fastcutvideo.com.au/when-and-how-to-use-stock-footage-in-video-production/",
+          "domain": "fastcutvideo.com.au",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "How to Shoot Stock Video | Adobe Creative Cloud",
+          "url": "https://www.youtube.com/watch?v=DzS-yEn40eA",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 8,
+          "title": "Stock Footage vs. Custom Filming: Making the Right Choice",
+          "url": "https://www.kcvideoclub.com/tips/stock-footage-vs-custom-filming-making-the-right-choice",
+          "domain": "kcvideoclub.com",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "5 Tips on Shooting Successful Stock Videos",
+          "url": "https://blog.depositphotos.com/5-tips-on-shooting-successful-stock-videos.html",
+          "domain": "blog.depositphotos.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is stock video footage?",
+        "How can I use stock footage legally?",
+        "What are the different types of stock footage?",
+        "Is stock footage copyright free?"
+      ],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual250-c3-027",
+      "keyword": "stock footage license for client videos",
+      "found": true,
+      "query": "stock footage license for client videos",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "What Legal Terms Should I Consider When Using Stock ...",
+          "url": "https://www.reddit.com/r/VideoEditing/comments/1eon68w/what_legal_terms_should_i_consider_when_using/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Can using stock footage in a video lead to copyright strikes ...",
+          "url": "https://www.facebook.com/groups/FCPXUsers/posts/7527702667341172/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 3,
+          "title": "Filmsupply: License Premium Cinematic Stock Footage",
+          "url": "https://www.filmsupply.com/",
+          "domain": "filmsupply.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Using stock media in client projects: How to avoid licensing ...",
+          "url": "https://www.storyblocks.com/resources/blog/how-to-license-stock-media-for-client-work",
+          "domain": "storyblocks.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Stock Video Licenses: We've Got You Covered",
+          "url": "https://blog.pond5.com/28339-licensing-free-stock-videos/",
+          "domain": "blog.pond5.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Best stock footage sites for commercial use in 2026",
+          "url": "https://elements.envato.com/learn/best-stock-footage-sites-commercial-use?srsltid=AfmBOooEABJggoyKVaTKLkViiXCxw-xjOuQOWWz9AFin8W0fOoxkxUmn",
+          "domain": "elements.envato.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "15 Best Stock Video Sites in 2026 | Premium Stock Footage",
+          "url": "https://www.studiobinder.com/blog/best-stock-video-sites-that-will-make-your-clients-happy/",
+          "domain": "studiobinder.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "Taking stock of your stock footage",
+          "url": "https://www.videomaker.com/article/c09/18785-taking-stock-of-your-stock-footage/",
+          "domain": "videomaker.com",
+          "resultType": "article"
+        },
+        {
+          "position": 9,
+          "title": "Royalty Stock Footage and Video ...",
+          "url": "https://artlist.io/stock-footage",
+          "domain": "artlist.io",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Stock footage license for client videos reddit",
+        "Stock footage license for client videos free",
+        "Stock footage license for client videos online",
+        "Stock footage license for client videos cost",
+        "Film stock footage free",
+        "How to buy movie license for youtube",
+        "Footage from movies",
+        "Pexels"
+      ]
+    },
+    {
+      "id": "vc-manual250-c3-028",
+      "keyword": "music subscription license for business videos",
+      "found": true,
+      "query": "music subscription license for business videos",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Musicbed: Music Licensing for Video, Film & Advertising",
+          "url": "https://www.musicbed.com/",
+          "domain": "musicbed.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Music Vine: Music Licensing For Video Production And Film",
+          "url": "https://musicvine.com/",
+          "domain": "musicvine.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "The Mainstream Music Platform Built for YouTube Creators",
+          "url": "https://lickd.co/",
+          "domain": "lickd.co",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Simple Music License For Small Business Videos By ...",
+          "url": "https://www.foximusic.com/music-for-small-business-videos-simple-royalty-free-licensing-foximusic/",
+          "domain": "foximusic.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Licensing",
+          "url": "https://www.bmi.com/licensing",
+          "domain": "bmi.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Royalty Free Music for Video Creators",
+          "url": "https://artlist.io/royalty-free-music",
+          "domain": "artlist.io",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Music licenses for online videos : r/musicbusiness",
+          "url": "https://www.reddit.com/r/musicbusiness/comments/1ueoc0e/music_licenses_for_online_videos/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How to license music for commercial use?",
+        "Can I legally play Spotify in my business?",
+        "How to use licensed music in videos?",
+        "Can I purchase a song to use in a video?"
+      ],
+      "relatedQueries": [
+        "Music subscription license for business videos review",
+        "Music subscription license for business videos cost",
+        "Buy music license for commercial use",
+        "Best music licensing sites for filmmakers",
+        "Mainstream music licensing for YouTube",
+        "Musicbed submit music",
+        "Music licensing for film and TV",
+        "How to buy copyright music for YouTube"
+      ]
+    },
+    {
+      "id": "vc-manual250-c3-029",
+      "keyword": "custom music vs stock music for video",
+      "found": true,
+      "query": "custom music vs stock music for video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Custom Music or Stock Music? The Smart Way to Choose",
+          "url": "https://www.nathanfieldsmusic.com/blog/custom-vs-stock-music-video-project",
+          "domain": "nathanfieldsmusic.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "Custom vs Stock Music in SaaS: What the Data Shows - Fonetik",
+          "url": "https://thisisfonetik.com/custom-vs-stock-music-in-saas-what-the-data-shows/",
+          "domain": "thisisfonetik.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Why custom music beats stock music every time (for ...",
+          "url": "https://timbermusicsupply.com/stuff-to-know/2025/4/1/why-custom-music-beats-stock-music-every-time-for-filmmakers-who-care",
+          "domain": "timbermusicsupply.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "The Benefits of Using Stock Music in Video Production",
+          "url": "https://motioncue.com/stock-music-in-video-production/",
+          "domain": "motioncue.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Anyone else sick of stock music? : r/videography",
+          "url": "https://www.reddit.com/r/videography/comments/1feyso0/anyone_else_sick_of_stock_music/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "What Kind of Music Do You Need? Library, Custom, and ...",
+          "url": "https://www.antfood.com/labs/what-kind-of-music-do-you-need",
+          "domain": "antfood.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Soundstripe: Royalty Free Music for Video, Film, TV & Ads",
+          "url": "https://www.soundstripe.com/",
+          "domain": "soundstripe.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Is stock music copyrighted?",
+        "What famous song has no copyright?",
+        "Is it legal to use copyrighted music in personal videos?",
+        "How to add music to a video without losing quality?"
+      ],
+      "relatedQueries": [
+        "Custom music vs stock music for video reddit",
+        "Custom music vs stock music for video free",
+        "Custom music vs stock music for video download"
+      ]
+    },
+    {
+      "id": "vc-manual250-c3-030",
+      "keyword": "how to choose a voice actor for a business video",
+      "found": true,
+      "query": "how to choose a voice actor for a business video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "9 Tips for Choosing a Voice Over Talent",
+          "url": "https://peopleproductions.com/people-productions-insights/how-to-choose-a-video-voice-over/",
+          "domain": "peopleproductions.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "How to choose the right Voice Over Artist for your campaign",
+          "url": "https://www.linkedin.com/pulse/how-choose-right-voice-over-artist-your-campaign-posy-brewer",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 3,
+          "title": "Hire Voice Actors and Voice Over Talent",
+          "url": "https://www.voices.com/voice-actors",
+          "domain": "voices.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Why Hire a Professional Voice Actor for Your Business?",
+          "url": "https://www.thevoicerealm.com/blog/why-hire-a-professional-voice-actor-for-your-business/",
+          "domain": "thevoicerealm.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "How to Find and Hire the Right Voice Actor for Your Business",
+          "url": "https://robertstarling.com/how-to-find-and-hire-the-right-voice-actor-for-your-business/",
+          "domain": "robertstarling.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "How to choose the perfect voice for your video",
+          "url": "https://murf.ai/blog/how-to-choose-voice-for-video",
+          "domain": "murf.ai",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "How to Find Talent for Corporate Video Voice Over",
+          "url": "https://www.outspokenvoices.com/blog/how-to-find-talent-for-corporate-video-voice-over",
+          "domain": "outspokenvoices.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "Getting Started As A Voice Actor | Spotlight",
+          "url": "https://www.spotlight.com/news-and-advice/the-essentials/getting-started-as-a-voice-actor/",
+          "domain": "spotlight.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Where can I get voice actors for a commercial?",
+        "How much to charge for 3 hours of voice acting?",
+        "What do professional voice actors use to record?",
+        "How much does it cost to hire a voice actor?"
+      ],
+      "relatedQueries": [
+        "How to choose a voice actor for a business video online",
+        "How to choose a voice actor for a business video free",
+        "Voice over for advertisements",
+        "How to make money from voice acting",
+        "Voice over actor rates",
+        "How much do voice actors get paid per line",
+        "English voice actor",
+        "Indonesian voice actors"
+      ]
+    },
+    {
+      "id": "vc-manual250-c3-031",
+      "keyword": "AI voice cloning consent for business videos",
+      "found": true,
+      "query": "AI voice cloning consent for business videos",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "AI Voice Cloning: Clone Your Voice in Minutes",
+          "url": "https://elevenlabs.io/voice-cloning",
+          "domain": "elevenlabs.io",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Free AI Voice Cloning: Clone Your Voice in Minutes",
+          "url": "https://invideo.io/tools/ai-voice-cloning/",
+          "domain": "invideo.io",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Free AI Voice Cloning : Clone Any Voice in 175+ Languages",
+          "url": "https://www.heygen.com/tool/ai-voice-cloning",
+          "domain": "heygen.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "AI Voice Cloning Regulation: Legal Updates and Concerns",
+          "url": "https://www.resemble.ai/resources/ai-voice-cloning-regulation-legal-updates-concerns",
+          "domain": "resemble.ai",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "AI voice cloning should empower businesses, not put them ...",
+          "url": "https://www.facebook.com/respeecher/posts/ai-voice-cloning-should-empower-businesses-not-put-them-at-riskusing-ai-generate/1209777624488815/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 6,
+          "title": "I'm a Voice Over Artist, a previous client has AI cloned my ...",
+          "url": "https://www.reddit.com/r/COPYRIGHT/comments/17jw0ob/im_a_voice_over_artist_a_previous_client_has_ai/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "How to Clone Your Voice with AI",
+          "url": "https://www.youtube.com/watch?v=AiRksVoiUAI",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 8,
+          "title": "Is AI Voice Cloning Legal? Consent, Rights & Risks",
+          "url": "https://vaniv.studio/en/blog/voice-cloning-law-ethics/",
+          "domain": "vaniv.studio",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Can AI clone a voice from a video?",
+        "How to protect against AI voice cloning?",
+        "What does AI voice cloning mean?",
+        "Can you replicate someone's voice with AI?"
+      ],
+      "relatedQueries": [
+        "Ai voice cloning consent for business videos reddit",
+        "Ai voice cloning consent for business videos free",
+        "Voice cloning AI free",
+        "Voice cloning AI free unlimited",
+        "Voice cloning free",
+        "Free AI voice cloning text to speech",
+        "AI voice cloning singing free",
+        "Hindi voice cloning AI free"
+      ]
+    },
+    {
+      "id": "vc-manual250-c3-032",
+      "keyword": "how to choose a video dubbing service",
+      "found": true,
+      "query": "how to choose a video dubbing service",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Localize content across 90+ languages with AI dubbing",
+          "url": "https://elevenlabs.io/dubbing-studio",
+          "domain": "elevenlabs.io",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "AI Dubbing: Dub videos into any language for free",
+          "url": "https://www.canva.com/features/ai-dubbing/",
+          "domain": "canva.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "AI Dubbing - Free Video Dubbing Tool (140+ Languages)",
+          "url": "https://www.synthesia.io/features/ai-dubbing",
+          "domain": "synthesia.io",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Recommendations for the best AI dubbing service : r/artificial",
+          "url": "https://www.reddit.com/r/artificial/comments/1q3ut4t/recommendations_for_the_best_ai_dubbing_service/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "AI Dubbing for video localization - Adobe Firefly",
+          "url": "https://www.adobe.com/products/firefly/features/ai-dubbing.html",
+          "domain": "adobe.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Best Video Dubbing Service: Top 5 AI Localization ...",
+          "url": "https://www.rask.ai/blog/top-5-ai-dubbing-services-rask-ais-voiceclones-language-update",
+          "domain": "rask.ai",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Video Localization Services: Subtitles, Dubbing and ...",
+          "url": "https://translated.com/resources/video-localization-services-guide",
+          "domain": "translated.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "7 Top Online Tools for Dubbing Videos with AI Translations",
+          "url": "https://vimeo.com/ko/blog/post/tools-for-video-dubbing",
+          "domain": "vimeo.com",
+          "resultType": "video_or_social"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is the best video dubbing software?",
+        "Is it legal to use AI to dub videos?",
+        "What is the best app for dubbing videos?",
+        "Where can I dub videos for free?"
+      ],
+      "relatedQueries": [
+        "Video dubbing online free",
+        "Best video dubbing online free",
+        "AI video dubbing free unlimited",
+        "Free AI video dubbing",
+        "Automatic video dubbing",
+        "Free AI video dubbing Speechify",
+        "Video dubbing AI free download",
+        "YouTube video dubbing AI free"
+      ]
+    },
+    {
+      "id": "vc-manual250-c3-033",
+      "keyword": "how to choose audio description services",
+      "found": true,
+      "query": "how to choose audio description services",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Audio Description for shows and movies",
+          "url": "https://help.netflix.com/en/node/25079",
+          "domain": "help.netflix.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "I started using audio description on Netflix and what a ...",
+          "url": "https://www.facebook.com/groups/5305113754/posts/10165799900698755/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 3,
+          "title": "is there a way to disable audio description when i start ...",
+          "url": "https://www.reddit.com/r/netflix/comments/135553a/is_there_a_way_to_disable_audio_description_when/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Audio Description Resource Guide",
+          "url": "https://www.loc.gov/nls/services-and-resources/informational-publications/audio-description-resource-guide/",
+          "domain": "loc.gov",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "How to turn on audio description on Netflix",
+          "url": "https://www.youtube.com/watch?v=D7KEg6GqBt0",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 6,
+          "title": "Audio description for videos | Digital Accessibility​ Services",
+          "url": "https://accessibility.huit.harvard.edu/audio-description",
+          "domain": "accessibility.huit.harvard.edu",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "How To Turn On Audio Description",
+          "url": "https://www.myvision.org.uk/how-to-turn-on-audio-description/",
+          "domain": "myvision.org.uk",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "The Ultimate Guide to Audio Description",
+          "url": "https://www.3playmedia.com/popular-topics/audio-description/",
+          "domain": "3playmedia.com",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "Change Audio Language and Description on Prime Video",
+          "url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=GQ4468BXX9PLQADD",
+          "domain": "amazon.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What are the different types of audio descriptions?",
+        "Why is Netflix narrating everything?",
+        "Can anyone go to an audio described performance?",
+        "How do I get my TV to stop narrating the show?"
+      ],
+      "relatedQueries": [
+        "How to choose audio description services reddit",
+        "How to choose audio description services on tv",
+        "How to choose audio description services netflix",
+        "How to choose audio description services on roku",
+        "Netflix Audio Description won t turn off",
+        "Netflix Audio Description turn off",
+        "How to turn on audio description on netflix",
+        "How to turn off Audio Description on Netflix smart TV"
+      ]
+    },
+    {
+      "id": "vc-manual250-c3-034",
+      "keyword": "how to choose a computer for video editing",
+      "found": true,
+      "query": "how to choose a computer for video editing",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "I don't know what I'm doing, I need the right computer for ...",
+          "url": "https://www.reddit.com/r/davinciresolve/comments/1gz259o/i_dont_know_what_im_doing_i_need_the_right/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "The best desktop PCs for video editors that money can buy",
+          "url": "https://www.creativebloq.com/features/best-computer-for-video-editing",
+          "domain": "creativebloq.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "The Best Laptops for Video Editing We've Tested in 2026",
+          "url": "https://www.pcmag.com/picks/the-best-laptops-for-video-editing",
+          "domain": "pcmag.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Choosing A Computer for Video Editing",
+          "url": "https://www.desktop-documentaries.com/computer-for-video-editing.html",
+          "domain": "desktop-documentaries.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "How to Choose Computers for Video Editing and Production",
+          "url": "https://www.lenovo.com/au/en/knowledgebase/how-to-choose-computers-for-video-editing-and-production/?srsltid=AfmBOorNAidEy0W0bhlB0eULZH8QkRb9jPa7ytXur_d_whQ_2gBuaGLq",
+          "domain": "lenovo.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Best video editing computer 2026: Pro PC picks for ...",
+          "url": "https://www.techradar.com/news/best-video-editing-computer",
+          "domain": "techradar.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Best Video Editing Computers UK: Specs & Buying Guide",
+          "url": "https://box.co.uk/blog/best-computer-video-editing-specs-setup-buying-guide",
+          "domain": "box.co.uk",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What kind of computer should I get for video editing?",
+        "What does the 80/20 rule mean in video editing?",
+        "Which computer is best for video editing?",
+        "What is the 3:2:1 rule in video editing?"
+      ],
+      "relatedQueries": [
+        "Best desktop computer for video editing on a budget",
+        "How to choose a computer for video editing reddit",
+        "How to choose a computer for video editing laptop",
+        "How to choose a computer for video editing for beginners",
+        "How to choose a computer for video editing gaming",
+        "4K video editing PC",
+        "Best desktop PC for video editing",
+        "Best laptop PC for video editing"
+      ]
+    },
+    {
+      "id": "vc-manual250-c3-035",
+      "keyword": "individual vs team video editing software license",
+      "found": true,
+      "query": "individual vs team video editing software license",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Professional video editing software | Adobe Premiere",
+          "url": "https://www.adobe.com/products/premiere.html",
+          "domain": "adobe.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Which editing tool is best for collaboration? : r/VideoEditors",
+          "url": "https://www.reddit.com/r/VideoEditors/comments/1g07u04/which_editing_tool_is_best_for_collaboration/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "12 Best Collaborative Video Editing Software Picks (2025)",
+          "url": "https://playpause.io/blogs/collaborative-video-editing-software",
+          "domain": "playpause.io",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "What is the best video editing software for small teams?",
+          "url": "https://www.dropbox.com/resources/what-is-the-best-video-editing-software",
+          "domain": "dropbox.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Best video editing software for collaboration?",
+          "url": "https://www.facebook.com/groups/563297302882280/posts/907162168495790/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 6,
+          "title": "7 Best Video Editing Tools for Teams",
+          "url": "https://viasocket.com/discovery/blog/wu4rt7/video-and-audio-editing-software/7-best-video-editing-tools-for-teams",
+          "domain": "viasocket.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Best Video Editing Software in 2026 (Beginner to Pro)",
+          "url": "https://www.youtube.com/watch?v=mjYy5AL38rw",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 8,
+          "title": "Collaborative video editing software",
+          "url": "https://www.lucidlink.com/solutions/collaborative-video-editing",
+          "domain": "lucidlink.com",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "The 7 Best Collaborative Video Editing Tools",
+          "url": "https://vimeo.com/blog/post/collaborative-video-editing-tools",
+          "domain": "vimeo.com",
+          "resultType": "video_or_social"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Is there a collaborative video editing software?",
+        "What does the 80/20 rule mean in video editing?",
+        "What is a good one-time payment video editing software?",
+        "Which video editing software offers a lifetime license?"
+      ],
+      "relatedQueries": [
+        "Individual vs team video editing software license reddit",
+        "Individual vs team video editing software license free",
+        "Collaborative video editing software free",
+        "Adobe Premiere",
+        "Adobe Premiere Pro free download",
+        "Adobe Premiere video editor",
+        "Best video editing software for beginners",
+        "Adobe premiere pro yearly price"
+      ]
+    },
+    {
+      "id": "vc-manual250-c3-036",
+      "keyword": "cloud vs desktop video editor privacy",
+      "found": true,
+      "query": "cloud vs desktop video editor privacy",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Desktop AI Video Editors vs Cloud AI Editors",
+          "url": "https://try.wideframe.com/blog/desktop-ai-video-editors-vs-cloud-ai-video-editors",
+          "domain": "try.wideframe.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "Privacy-friendly opensource video editor ? : r/privacytoolsIO",
+          "url": "https://www.reddit.com/r/privacytoolsIO/comments/b4k2fb/privacyfriendly_opensource_video_editor/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Should you be editing your video in the cloud? 4 types of ...",
+          "url": "https://www.epiphan.com/blog/cloud-video-editing-platforms/?srsltid=AfmBOoq4BxLX-TGLbUTAmkgN0_62Gv1uFRfEJ-W32keqTjgJ8gJXBX8q",
+          "domain": "epiphan.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Cloud video editing: how to collaborate faster from anywhere",
+          "url": "https://www.lucidlink.com/blog/cloud-video-editing",
+          "domain": "lucidlink.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Privacy-Focused Video Editing Alternatives",
+          "url": "https://basilai.app/privacy-app-alternatives/video-editing/",
+          "domain": "basilai.app",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "The Benefits of Video Editing Off Of the Cloud",
+          "url": "https://www.promax.com/blog/video-editing-off-of-the-cloud",
+          "domain": "promax.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "'Is it safer to use client-side browser tools for photo editing ...",
+          "url": "https://www.quora.com/Is-it-safer-to-use-client-side-browser-tools-for-photo-editing-instead-of-cloud-based-editors-to-protect-data-privacy",
+          "domain": "quora.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Traditional Vs Online Video Editing Software | Which is Better?",
+          "url": "https://www.youtube.com/watch?v=wtbirZb5_Xc",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 9,
+          "title": "Is it safe to upload videos in cloud tools like video editors?",
+          "url": "https://security.stackexchange.com/questions/213442/is-it-safe-to-upload-videos-in-cloud-tools-like-video-editors",
+          "domain": "security.stackexchange.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Which is the safest video editing app?",
+        "What does the 80/20 rule mean in video editing?",
+        "Is cloud storage good for video editing?",
+        "Should I get a laptop or desktop for video editing?"
+      ],
+      "relatedQueries": [
+        "Cloud vs desktop video editor privacy reddit",
+        "Free cloud video editing",
+        "Blackmagic Cloud",
+        "Cloud editing video",
+        "Cloud editing app",
+        "DaVinci Resolve",
+        "Clipchamp",
+        "Best cloud video Editor"
+      ]
+    },
+    {
+      "id": "vc-manual250-c3-037",
+      "keyword": "who owns raw footage and video project files",
+      "found": true,
+      "query": "who owns raw footage and video project files",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Who owns the rights to the footage I shoot? : r/videography",
+          "url": "https://www.reddit.com/r/videography/comments/sle6l6/who_owns_the_rights_to_the_footage_i_shoot/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Raw Video Footage Ownership in Production",
+          "url": "https://spoton.productions/who-owns-the-raw-video-footage/",
+          "domain": "spoton.productions",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Who Owns the Raw Footage? Video Rights, Explained",
+          "url": "https://www.createandelate.com/blog/who-owns-the-raw-footage/",
+          "domain": "createandelate.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Who Owns the Footage After a Video Production? | DOT",
+          "url": "https://www.madebydot.com/insights/footage-ownership-and-buyouts/",
+          "domain": "madebydot.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Who Owns Video Footage? Copyright and Usage Explained",
+          "url": "https://www.joncontivisuals.com/blog/copyright-usage-raw-footage",
+          "domain": "joncontivisuals.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Raw Footage vs Project Files: Who Owns What?",
+          "url": "https://www.linkedin.com/posts/jeff-siebert-bananabones_we-get-this-question-from-time-to-time-activity-7369342225102708738-wYsT",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 7,
+          "title": "Who owns raw footage?",
+          "url": "https://video.stackexchange.com/questions/3481/who-owns-raw-footage",
+          "domain": "video.stackexchange.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "If you make videos for a living and an agency asks for 'raw ...",
+          "url": "https://www.quora.com/If-you-make-videos-for-a-living-and-an-agency-asks-for-raw-files-should-you-hand-them-over",
+          "domain": "quora.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How much to sell raw footage for?",
+        "Do videographers give out raw footage?",
+        "Which video has no copyright?",
+        "What is raw video footage called?"
+      ],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual250-c3-038",
+      "keyword": "video editing software project export compatibility",
+      "found": true,
+      "query": "video editing software project export compatibility",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Are video editing software compatible with each other?",
+          "url": "https://www.reddit.com/r/VideoEditing/comments/o58ltw/are_video_editing_software_compatible_with_each/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Transfer project from one application to another",
+          "url": "https://video.stackexchange.com/questions/15156/transfer-project-from-one-application-to-another",
+          "domain": "video.stackexchange.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "How to Export Video in VSDC",
+          "url": "https://www.videosoftdev.com/how-to-export-project",
+          "domain": "videosoftdev.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Easily Switch Up RESOLVE & PREMIERE - Export Projects to ...",
+          "url": "https://www.youtube.com/watch?v=vcwe7o7A_W4",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 5,
+          "title": "VideoPad Video Editor",
+          "url": "https://www.nchsoftware.com/videopad/index.html?srsltid=AfmBOopsWJQIiqPNVHkPTOlLhzzT76pY4VJFnRPgYsAqdGAy3MvAZKv4",
+          "domain": "nchsoftware.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Best Open Source Video Editor SDKs: 2026 Roundup",
+          "url": "https://img.ly/blog/best-open-source-video-editor-sdks-2025-roundup/",
+          "domain": "img.ly",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Best Video Editing Software with Data Import and Export",
+          "url": "https://www.capterra.com/video-editing-software/features/data-import-export/",
+          "domain": "capterra.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "A Guide to Choosing the Right Video Editing Software for ...",
+          "url": "https://www.afritechedu.com/blog/a-guide-to-choosing-the-right-video-editing-software-for-your-project",
+          "domain": "afritechedu.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Is 32 GB RAM enough for 4K video editing?",
+        "What is export in video editing?",
+        "Which device is best for video editing projects?",
+        "What does the 80/20 rule mean in video editing?"
+      ],
+      "relatedQueries": [
+        "Video editing software project export compatibility windows 10",
+        "Video editing software project export compatibility download",
+        "DaVinci Resolve",
+        "LosslessCut"
+      ]
+    },
+    {
+      "id": "vc-manual250-c3-039",
+      "keyword": "video production payment milestones",
+      "found": true,
+      "query": "video production payment milestones",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Using Milestone Payments to Get Paid More Reliably",
+          "url": "https://mixinglight.com/color-grading-tutorials/getting-paid-more-reliably-as-a-creative-professional-with-milestone-payments/",
+          "domain": "mixinglight.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Essential Video Production Contracts: What Y...",
+          "url": "https://www.ecgprod.com/necessary-video-production-contracts/",
+          "domain": "ecgprod.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "What To Look for In Video Production Contracts",
+          "url": "https://www.jlbmedia.com/blog/what-to-look-for-in-video-production-contracts",
+          "domain": "jlbmedia.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Business Software for Videographers",
+          "url": "https://www.maroo.us/solutions/videographers",
+          "domain": "maroo.us",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "8 Steps to Create a Great Video Production Contract",
+          "url": "https://mesuite.com/blog/how-to-create-a-video-production-contract/",
+          "domain": "mesuite.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Video production costs: how to spend less and do more",
+          "url": "https://www.lucidlink.com/blog/video-production-cost",
+          "domain": "lucidlink.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Digital marketing agency deposits: How much, and when?",
+          "url": "https://sakasandcompany.com/project-milestones-and-deposits/",
+          "domain": "sakasandcompany.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Is production funding the shoot before getting paid the norm?",
+          "url": "https://www.reddit.com/r/advertising/comments/1k11ruq/is_production_funding_the_shoot_before_getting/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What are the five stages of video production?",
+        "How much should I charge for video production?",
+        "How much should I charge for a 5 minute video?",
+        "How much to charge for a 30 second video edit?"
+      ],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual250-c3-040",
+      "keyword": "video production cancellation and postponement fees",
+      "found": true,
+      "query": "video production cancellation and postponement fees",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Cancellation Fees? : r/videography",
+          "url": "https://www.reddit.com/r/videography/comments/nr1xvi/cancellation_fees/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Cancellation and Rescheduling Fees",
+          "url": "https://www.providfilms.com/cancellation-and-rescheduling-fees/",
+          "domain": "providfilms.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Cancellation & Postponement Policy",
+          "url": "https://trivisionstudios.com/cancellation-postponement-policy/",
+          "domain": "trivisionstudios.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Terms & Conditions",
+          "url": "https://www.flytecreativemedia.co.uk/terms-conditions/",
+          "domain": "flytecreativemedia.co.uk",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Terms & Conditions",
+          "url": "http://www.thevisualsteam.com/terms",
+          "domain": "thevisualsteam.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Video Production Terms and Conditions - MPA",
+          "url": "https://themediaplanningagency.com.au/video-production-terms-and-conditions/",
+          "domain": "themediaplanningagency.com.au",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Video Production Terms and Conditions",
+          "url": "https://www.gkmedia.ie/terms-conditions",
+          "domain": "gkmedia.ie",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Cancellation, Rescheduling & Deposits | PortlandVideoPro",
+          "url": "https://www.portlandvideoproduction.com/policy",
+          "domain": "portlandvideoproduction.com",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "How to Calculate Cancellation and Postponement Fees for ...",
+          "url": "https://www.splinde.io/blog/how-to-calculate-cancellation-and-postponement-fees-for-swiss-film-crew-(2026-guide)",
+          "domain": "splinde.io",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How much should you charge for a cancellation fee?",
+        "Is it illegal to charge a cancelation fee on a subscription?",
+        "Do I legally have to pay a cancellation fee?",
+        "Is it illegal for Adobe to charge a cancellation fee?"
+      ],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual250-c3-041",
+      "keyword": "video production company certificate of insurance",
+      "found": true,
+      "query": "video production company certificate of insurance",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Film & Video Production Insurance: Get Free Quotes",
+          "url": "https://www.insureon.com/photography-video-business-insurance/production-studios",
+          "domain": "insureon.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Producer's Guide: Certificates of Insurance in Film",
+          "url": "https://www.wrapbook.com/blog/producers-guide-certificates-of-insurance-film",
+          "domain": "wrapbook.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "Film & Video Production Insurance",
+          "url": "https://www.thimble.com/industry/photo-video-business-insurance/film-producer",
+          "domain": "thimble.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Production Insurance? : r/Filmmakers",
+          "url": "https://www.reddit.com/r/Filmmakers/comments/1c5lpsu/production_insurance/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Insurance Requirements - California Film Commission - CA.gov",
+          "url": "https://film.ca.gov/state-permits/insurance-requirements/",
+          "domain": "film.ca.gov",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Business Insurance for Film & Video Production Company",
+          "url": "https://www.techinsurance.com/photography-video-insurance/video-production-studio",
+          "domain": "techinsurance.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Videographer Insurance Starting at $12/Month | FFI",
+          "url": "https://www.fullframeinsurance.com/videographer-insurance",
+          "domain": "fullframeinsurance.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "How to Buy Video Production Insurance",
+          "url": "https://www.videouniversity.com/articles/how-to-buy-video-production-insurance/",
+          "domain": "videouniversity.com",
+          "resultType": "article"
+        },
+        {
+          "position": 9,
+          "title": "Production Insurance",
+          "url": "https://www.frontrowinsurance.com/production-insurance/",
+          "domain": "frontrowinsurance.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Video production company certificate of insurance sample",
+        "Video production company certificate of insurance requirements",
+        "Video production company certificate of insurance cost",
+        "Video production company certificate of insurance california",
+        "Film production insurance",
+        "Short term film production insurance",
+        "Film production insurance companies",
+        "Thimble film insurance"
+      ]
+    },
+    {
+      "id": "vc-manual250-c3-042",
+      "keyword": "video editing turnaround time guarantee",
+      "found": true,
+      "query": "video editing turnaround time guarantee",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "What is considered a quick turnaround in video editing? & ...",
+          "url": "https://www.reddit.com/r/editors/comments/xm5uwt/what_is_considered_a_quick_turnaround_in_video/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "How Long Does It Take to Edit a Video?",
+          "url": "https://www.tastyedits.com/how-long-does-it-take-to-edit-a-video/",
+          "domain": "tastyedits.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Video Editing Turnaround Times: What Is Normal in 2026",
+          "url": "https://increditors.com/video-editing-turnaround-times-what-to-expect-from-agencies/",
+          "domain": "increditors.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Fast Turnaround Video Editing",
+          "url": "https://www.openhousepictures.co.uk/fast-turnaround-video-editing",
+          "domain": "openhousepictures.co.uk",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Best Video Editing Services in 2026: Fast, Easy, and ...",
+          "url": "https://www.awesomic.com/blog/video-editing-services",
+          "domain": "awesomic.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Turnaround time estimates - Help Center - beCreatives",
+          "url": "https://help.becreatives.co/turnaround-time-estimates",
+          "domain": "help.becreatives.co",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Video Editing Turnaround Time: What 9 Agencies Publish",
+          "url": "https://echopulse.media/blog/video-editing-turnaround-time",
+          "domain": "echopulse.media",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "Video Editing Turnaround Time: What Is Realistic for ...",
+          "url": "https://www.gigxomi.com/blog/video-editing-turnaround-time-what-is-realistic-for-different-projects",
+          "domain": "gigxomi.com",
+          "resultType": "article"
+        },
+        {
+          "position": 9,
+          "title": "Unlimited Video Editing Subscription | 14 Day Free Trial",
+          "url": "https://www.mtmagency.in/unlimited-video-editing",
+          "domain": "mtmagency.in",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is the 3:2:1 rule in video editing?",
+        "What does the 80/20 rule mean in video editing?",
+        "How long should it take to edit a 1 hour video?",
+        "How long should it take to edit a 3 minute video?"
+      ],
+      "relatedQueries": [
+        "Video editing turnaround time guarantee reddit",
+        "Video editing turnaround time guarantee free",
+        "Best video editing turnaround time guarantee"
+      ]
+    },
+    {
+      "id": "vc-manual250-c3-043",
+      "keyword": "hiring a video editor in a different time zone",
+      "found": true,
+      "query": "hiring a video editor in a different time zone",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "The Top Countries to Hire Video Editors Overseas Depend ...",
+          "url": "https://www.linkedin.com/pulse/top-countries-hire-video-editors-overseas-depend-how-you-ruffini-kqo1f",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 2,
+          "title": "How hard is it to get a remote full time employment in a 1st ...",
+          "url": "https://www.reddit.com/r/editors/comments/1dvfah3/how_hard_is_it_to_get_a_remote_full_time/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Hire Remote Video Editors",
+          "url": "https://dailyremote.com/hire/video-editors",
+          "domain": "dailyremote.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Video Editor Jobs Remote : Opportunities and Challenges",
+          "url": "https://www.ituonline.com/blogs/video-editor-jobs-remote/",
+          "domain": "ituonline.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "How to Hire a Remote Video Editor 2023 (Step by Step)",
+          "url": "https://www.youtube.com/watch?v=IDruowt8NdE",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 6,
+          "title": "How do remote video editors typically collaborate with ...",
+          "url": "https://www.ziprecruiter.com/e/video-editor-worldwide-remote-how-do-remote-video-editors-typically-collaborate-with-creative-teams-spread-across-different-time-zones",
+          "domain": "ziprecruiter.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Digital nomads* Hi! Any idea where to find remote video ...",
+          "url": "https://www.facebook.com/groups/169551720401370/posts/1798341447522381/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 8,
+          "title": "EU-based remote video editor, available for US/EU time ...",
+          "url": "https://yt.careers/talent/QE7h4dqw",
+          "domain": "yt.careers",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "Top Countries to Hire Video Editors Overseas",
+          "url": "https://www.hireoverseas.com/blogs/top-countries-to-hire-video-editors-overseas",
+          "domain": "hireoverseas.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What does the 80/20 rule mean in video editing?",
+        "What is the 3:2:1 rule in video editing?",
+        "How much should I pay a video editor per hour?",
+        "Is AI replacing video editors?"
+      ],
+      "relatedQueries": [
+        "Hiring a video editor in a different time zone reddit",
+        "Hiring a video editor in a different time zone salary"
+      ]
+    },
+    {
+      "id": "vc-manual250-c3-044",
+      "keyword": "backup video editor continuity plan",
+      "found": true,
+      "query": "backup video editor continuity plan",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Backup and Business Continuity Overview",
+          "url": "https://support.lucidlink.com/hc/en-us/articles/31125415209997-Backup-and-Business-Continuity-Overview",
+          "domain": "support.lucidlink.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "IT Disaster Recovery Plan",
+          "url": "https://www.ready.gov/business/emergency-plans/recovery-plan",
+          "domain": "ready.gov",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "What do you use to backup your edits? : r/editors",
+          "url": "https://www.reddit.com/r/editors/comments/vu87wm/what_do_you_use_to_backup_your_edits/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Best way to backup video editing project?",
+          "url": "https://www.facebook.com/groups/FCPXUsers/posts/24561523786865794/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 5,
+          "title": "Data Backup, Disaster Recovery, & Business Continuity",
+          "url": "https://www.vc3.com/guide/data-backup-disaster-recovery",
+          "domain": "vc3.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Continuity Plan - an overview | ScienceDirect Topics",
+          "url": "https://www.sciencedirect.com/topics/computer-science/continuity-plan",
+          "domain": "sciencedirect.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Business Continuity Backups",
+          "url": "https://eshop.macsales.com/blog/63440-business-continuity-backups/?srsltid=AfmBOop13aq4lWYawpnVSTACpEc0mxv3HqWtQvyhCVTe72Cf2tqlPuPL",
+          "domain": "eshop.macsales.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "Use backup and business continuity planning to protect data",
+          "url": "https://www.techtarget.com/data-technologies/tip/Use-backup-and-business-continuity-planning-to-protect-data",
+          "domain": "techtarget.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is the 3/2/1 rule for backing up?",
+        "What is the difference between DRP and BCP?",
+        "How often should a DRP be updated?",
+        "What's a good backup plan?"
+      ],
+      "relatedQueries": [
+        "Backup video editor continuity plan template",
+        "Backup video editor continuity plan example",
+        "IT disaster Recovery Plan PDF",
+        "Disaster recovery plan template",
+        "Simple disaster recovery plan example",
+        "Business continuity and disaster recovery plan example",
+        "Disaster Recovery and business Continuity Plan PDF",
+        "LucidLink backup"
+      ]
+    },
+    {
+      "id": "vc-manual250-c3-045",
+      "keyword": "video editor employee or independent contractor",
+      "found": true,
+      "query": "video editor employee or independent contractor",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "$21-$48/hr Independent Contractor Video Editor Jobs",
+          "url": "https://www.ziprecruiter.com/Jobs/Independent-Contractor-Video-Editor",
+          "domain": "ziprecruiter.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Independent contractor vs. film crew vs. employee",
+          "url": "https://creativecow.net/forums/thread/independent-contractor-vs-film-crew-vs-employee/",
+          "domain": "creativecow.net",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Employee or Independent Contractor!?",
+          "url": "https://www.quantsolutions.co/employeeorindependentcontractor/",
+          "domain": "quantsolutions.co",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "[Question] Are professional video editors generally ...",
+          "url": "https://www.reddit.com/r/editors/comments/qr9nxf/question_are_professional_video_editors_generally/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Q: What is an independent contractor video editor?",
+          "url": "https://www.ziprecruiter.com/e/independent-contractor-video-editor-what-are-independent-contractor-video-editors",
+          "domain": "ziprecruiter.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Video Editor Freelance Jobs: Work Remote & Earn Online",
+          "url": "https://www.upwork.com/freelance-jobs/video-editing/",
+          "domain": "upwork.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Freelancer vs Employee in Film: What the Law Actually Says",
+          "url": "https://thoolie.com/2025/08/21/freelancer-vs-employee-filmmaking/?srsltid=AfmBOoo-75xi4UV6-qpDo0L8OYPxi6KtxWv0zPHoSB-UKHY_c4IXGQfZ",
+          "domain": "thoolie.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Can I freelance as a video editor?",
+        "Which is better, independent contractor or employee?",
+        "Is AI replacing video editors?",
+        "How much should I charge as a freelance video editor?"
+      ],
+      "relatedQueries": [
+        "Video editor employee or independent contractor reddit",
+        "Video editor employee or independent contractor salary",
+        "Video editor employee or independent contractor quiz"
+      ]
+    },
+    {
+      "id": "vc-manual250-c3-046",
+      "keyword": "first in house video editor job description",
+      "found": true,
+      "query": "first in house video editor job description",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "\"Editor\" job description.// : r/editors",
+          "url": "https://www.reddit.com/r/editors/comments/p6xa8u/editor_job_description/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Video Editor Job Description [Updated for 2026]",
+          "url": "https://www.indeed.com/hire/job-description/video-editor",
+          "domain": "indeed.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Free Video Editor Job Description Templates",
+          "url": "https://firsthr.app/templates/hiring/video-editor-job-description",
+          "domain": "firsthr.app",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Becoming a film/video editor | Salary, skills, requirements",
+          "url": "https://www.prospects.ac.uk/job-profiles/film-video-editor/",
+          "domain": "prospects.ac.uk",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Video Editor Job Description: Editing Footage, Not Design",
+          "url": "https://www.linkedin.com/posts/keke-beatz-558823260_hiring-a-video-editor-heres-what-you-need-activity-7437612236283744256-hg_R",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 6,
+          "title": "How to become a Video Editor - Skills & Job Description",
+          "url": "https://ph.jobstreet.com/career-advice/role/video-editor",
+          "domain": "ph.jobstreet.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Video Editor Job Description (+2025 Template)",
+          "url": "https://trytalenthackers.com/blog/template/video-editor-job-description/",
+          "domain": "trytalenthackers.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "FASTEST Way to Become a Video Editor and ACTUALLY Get ...",
+          "url": "https://www.youtube.com/watch?v=FxPF-WYwYUo",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What are the job responsibilities of a video editor?",
+        "What does the 80/20 rule mean in video editing?",
+        "What is the 3:2:1 rule in video editing?",
+        "Is AI replacing video editors?"
+      ],
+      "relatedQueries": [
+        "First in house video editor job description resume",
+        "First in house video editor job description reddit",
+        "First in house video editor job description and salary",
+        "Video editor description for freelancer",
+        "Video editor job description resume",
+        "Social media video editor job description",
+        "Video editor job description and salary",
+        "Video editor job description sample"
+      ]
+    },
+    {
+      "id": "vc-manual250-c3-047",
+      "keyword": "annual vs monthly video editing software subscription",
+      "found": true,
+      "query": "annual vs monthly video editing software subscription",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Do you think every video editing software will require a ...",
+          "url": "https://www.reddit.com/r/editors/comments/1otlrwu/do_you_think_every_video_editing_software_will/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Professional video editing software | Adobe Premiere",
+          "url": "https://www.adobe.com/products/premiere.html",
+          "domain": "adobe.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "How much I spend A MONTH on subscriptions (as a freelance ...",
+          "url": "https://www.youtube.com/watch?v=JG7Tz7jzkOY",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 4,
+          "title": "What are some good video editing softwares that don't ...",
+          "url": "https://www.quora.com/What-are-some-good-video-editing-softwares-that-don-t-require-monthly-subscriptions-but-arent-too-expensive",
+          "domain": "quora.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "What video editing software is easy to use and has a one- ...",
+          "url": "https://www.facebook.com/groups/727414274424726/posts/2120496608449812/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 6,
+          "title": "What are Adobe's video editing software? Introducing the ...",
+          "url": "https://note.com/adobe_design/n/nd3a970814fe5?hl=en",
+          "domain": "note.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Best Video Editing Subscription Services 2026",
+          "url": "https://shootsta.com/best-video-editing-subscription-services",
+          "domain": "shootsta.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Video Editing Subscription vs Software - Pixel8 Production",
+          "url": "https://www.pixel8production.com/blog/video-editing-subscription-vs-software",
+          "domain": "pixel8production.com",
+          "resultType": "article"
+        },
+        {
+          "position": 9,
+          "title": "Best Video Editing Software 2026: Tested Picks - Tech Insider",
+          "url": "https://tech-insider.org/ca/best-video-editing-software/",
+          "domain": "tech-insider.org",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What does the 80/20 rule mean in video editing?",
+        "What is the 3:2:1 rule in video editing?",
+        "What are the subscription options for video editing services?",
+        "Is DaVinci Resolve a one-time payment?"
+      ],
+      "relatedQueries": [
+        "Annual vs monthly video editing software subscription reddit",
+        "Annual vs monthly video editing software subscription cost",
+        "Annual vs monthly video editing software subscription free",
+        "Annual vs monthly video editing software subscription for pc",
+        "Adobe Premiere Pro price per month",
+        "Adobe premiere pro yearly price",
+        "Adobe Premiere video editor",
+        "Adobe Premiere Pro free download"
+      ]
+    },
+    {
+      "id": "vc-manual250-c3-048",
+      "keyword": "best way to send large video files to an editor",
+      "found": true,
+      "query": "best way to send large video files to an editor",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "What's the best way to send source files to a remote video ...",
+          "url": "https://www.reddit.com/r/videography/comments/u9kym5/whats_the_best_way_to_send_source_files_to_a/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "How to Send Large Files for Video Editing: A Simple Guide ...",
+          "url": "https://www.jimgrootes.com/how-to-send-large-files-for-video-editing-a-simple-guide-for-clients-and-creators/",
+          "domain": "jimgrootes.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Fast, Easy Large File Transfer For Content Creators",
+          "url": "https://masv.io/industry/content-creators",
+          "domain": "masv.io",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "What's the best way to send and receive large video files ...",
+          "url": "https://www.quora.com/Whats-the-best-way-to-send-and-receive-large-video-files-Im-planning-on-editing-videos-for-a-few-clients-I-dont-want-them-to-have-to-spend-money-on-a-service-that-allows-for-this-and-I-dont-want-them-to-see-each",
+          "domain": "quora.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "How Do YouTubers Send Files to Their Editors?",
+          "url": "https://www.guru.com/blog/how-do-youtubers-send-files-to-their-editors/",
+          "domain": "guru.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "What is the best way to send large video files to an editor?",
+          "url": "https://www.facebook.com/groups/109019229448565/posts/2010507662633036/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 7,
+          "title": "Securely Send Long Videos Without a Compressor",
+          "url": "https://www.dropbox.com/features/share/send-long-videos",
+          "domain": "dropbox.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "The file transfer tool video editors actually use",
+          "url": "https://wetransfer.com/resources/comparison/best-file-transfer-for-video-editors",
+          "domain": "wetransfer.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How do I send video files that are too large?",
+        "What is the best way to transfer large video files?",
+        "How do I upload a video if it's too big?",
+        "How to transfer 20 GB video?"
+      ],
+      "relatedQueries": [
+        "Best way to send large video files to an editor online",
+        "Best way to send large video files to an editor free",
+        "Google Drive",
+        "WeTransfer",
+        "Dropbox",
+        "Best way to send footage to an editor",
+        "How do youtubers send videos to editors",
+        "CapCut"
+      ]
+    },
+    {
+      "id": "vc-manual250-c3-049",
+      "keyword": "how many AI video credits do I need",
+      "found": true,
+      "query": "how many AI video credits do I need",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How many credits does each video generation use?",
+          "url": "https://www.reddit.com/r/runwayml/comments/1g4oz07/how_many_credits_does_each_video_generation_use/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Manage your AI credits with Google One",
+          "url": "https://support.google.com/googleone/answer/16287445?hl=en",
+          "domain": "support.google.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "How do credits work?",
+          "url": "https://help.runwayml.com/hc/en-us/articles/15124877443219-How-do-credits-work",
+          "domain": "help.runwayml.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "What are AI Credits?",
+          "url": "https://powtoonsupport.powtoon.com/hc/en-gb/articles/27363184001169-What-are-AI-Credits",
+          "domain": "powtoonsupport.powtoon.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Generative credits FAQ | Creative Cloud",
+          "url": "https://helpx.adobe.com/creative-cloud/apps/generative-ai/generative-credits-faq.html",
+          "domain": "helpx.adobe.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Which AI Tools Cost the Most? AI Credit Breakdown",
+          "url": "https://www.youtube.com/shorts/TRqB6xN-SCw",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 7,
+          "title": "How AI credits work",
+          "url": "https://help.figma.com/hc/en-us/articles/33459875669015-How-AI-credits-work",
+          "domain": "help.figma.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How many credits to make an AI video?",
+        "Is 3,000 AI credits a lot?",
+        "How many Google AI Studio credits do I have?",
+        "How many Canva AI credits do you get?"
+      ],
+      "relatedQueries": [
+        "How many ai video credits do i need reddit",
+        "How many ai credits do i have google",
+        "How many Adobe generative credits do I have",
+        "Google Flow credits per video",
+        "AI credits activity",
+        "What can you do with 1000 Google AI credits",
+        "Top up AI credits Google",
+        "1000 monthly ai credits how many videos"
+      ]
+    },
+    {
+      "id": "vc-manual250-c3-050",
+      "keyword": "how to evaluate video production agency performance",
+      "found": true,
+      "query": "how to evaluate video production agency performance",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:35:57.310Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "g9D9OtyGPJA0waGDm",
+      "datasetId": "ZbFX6X6AVLdt20rOQ",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "7 steps to Choose the Right Video Production Agency",
+          "url": "https://www.pitchy.io/blog/video-production/7-steps-to-choose-the-right-video-production-agency",
+          "domain": "pitchy.io",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "What to look for when hiring a video production agency?",
+          "url": "https://www.facebook.com/groups/bluecollarmillionaire/posts/1532274458906357/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 3,
+          "title": "Video Production Company Reviews: What You Need to ...",
+          "url": "https://www.2pointagency.com/glossary/video-production-company-reviews-what-you-need-to-know-before-choosing-the-right-service/",
+          "domain": "2pointagency.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "What To Look for in a Marketing Video Production Company",
+          "url": "https://charter.film/blog/what-to-look-for-in-a-video-production-company",
+          "domain": "charter.film",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Video Performance Metrics: How to Evaluate a...",
+          "url": "https://www.ecgprod.com/video-performance-metrics-evaluate-and-improve/",
+          "domain": "ecgprod.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "What Marketers Want: A Comparison of Expectations and ...",
+          "url": "https://winwinvideos.com/blog/what-marketers-want-a-comparison-of-expectations-and-realities-in-video-production-agencies/",
+          "domain": "winwinvideos.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "How to Evaluate Video Production Vendors",
+          "url": "https://www.zemma.co/blog/how-to-evaluate-video-production-vendors",
+          "domain": "zemma.co",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "Top Video Production Companies - Sep 2026 Rankings",
+          "url": "https://clutch.co/agencies/video-production",
+          "domain": "clutch.co",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": []
+    }
+  ]
+}

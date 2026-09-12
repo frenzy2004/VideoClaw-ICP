@@ -1,0 +1,117 @@
+{
+  "id": "vc-manual250-c4-012",
+  "kind": "manually_curated_review_draft",
+  "sourceNotes": [
+    {
+      "url": "https://helpx.adobe.com/premiere/desktop/render-and-export/export-files/export-a-still-frame.html",
+      "supports": "Selecting and exporting a precise frame, with timecode available in naming.",
+      "kind": "primary"
+    },
+    {
+      "url": "https://helpx.adobe.com/premiere/desktop/render-and-export/export-files/export-a-still-image.html",
+      "supports": "Image-format selection and single-frame export controls.",
+      "kind": "primary"
+    }
+  ],
+  "faqEvidence": [
+    {
+      "question": "Can I make a blurry product frame sharp by exporting it larger?",
+      "basis": "editorial"
+    },
+    {
+      "question": "Should the still show the click or the result?",
+      "basis": "editorial"
+    },
+    {
+      "question": "How much should I crop?",
+      "basis": "editorial"
+    }
+  ],
+  "competitorGap": "Editorial hypothesis: Select and export frames that show a meaningful product state, checking motion blur, interface legibility and context at the intended display size. This creates still images from video, distinct from c4-046's animated GIF loop, c4-038's thumbnail experiment and retained c4-005's video resizing. No ranking-page comparison or demand conclusion is asserted.",
+  "reviewNotes": [
+    "Review draft; exact US/en SERP integration belongs to main. FAQ questions are editorial. Volume, KD and CPC remain provider-pending.",
+    "Mixed exact-query intent: frame extraction may attract general editing readers; keep examples centered on GTM product footage."
+  ],
+  "serp": {
+    "id": "vc-manual250-c4-012",
+    "keyword": "how to extract high quality stills from video",
+    "found": true,
+    "query": "how to extract high quality stills from video",
+    "country": "US",
+    "language": "en",
+    "device": "DESKTOP",
+    "page": 1,
+    "observedAt": "2026-09-12T02:32:56.760Z",
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "organicResults": [
+      {
+        "position": 1,
+        "title": "Suggestions for capturing still images from video",
+        "url": "https://www.reddit.com/r/VideoEditing/comments/walgow/suggestions_for_capturing_still_images_from_video/",
+        "domain": "reddit.com",
+        "resultType": "other"
+      },
+      {
+        "position": 2,
+        "title": "Extract Your Best Frames From a Video Online for Free",
+        "url": "https://mixilab.com/toolkit/extract-photo-from-video",
+        "domain": "mixilab.com",
+        "resultType": "other"
+      },
+      {
+        "position": 3,
+        "title": "Video Frame Extractor",
+        "url": "https://frame-extractor.com/en",
+        "domain": "frame-extractor.com",
+        "resultType": "other"
+      },
+      {
+        "position": 4,
+        "title": "How To Get High-Resolution Stills From Your Video Footage",
+        "url": "https://alphauniverse.com/stories/how-to-get-high-resolution-stills-from-your-video-footage/",
+        "domain": "alphauniverse.com",
+        "resultType": "other"
+      },
+      {
+        "position": 5,
+        "title": "Capture Still from Video - Klip",
+        "url": "https://outklip.com/capturestill",
+        "domain": "outklip.com",
+        "resultType": "other"
+      },
+      {
+        "position": 6,
+        "title": "Extract Image from Video",
+        "url": "https://www.onlineconverter.com/extract-image-from-video",
+        "domain": "onlineconverter.com",
+        "resultType": "other"
+      },
+      {
+        "position": 7,
+        "title": "5 Methods to Take a High-Quality Photo from a Video",
+        "url": "https://www.flexclip.com/learn/take-photo-from-video.html",
+        "domain": "flexclip.com",
+        "resultType": "other"
+      }
+    ],
+    "peopleAlsoAsk": [
+      "How can I extract high-quality photos from a video?",
+      "How to get high quality screenshots from video?",
+      "How to extract an image from a video without losing quality?",
+      "How can I export frames from a video in high quality?"
+    ],
+    "relatedQueries": [
+      "How to extract high quality stills from video online free",
+      "How to extract high quality stills from video online",
+      "How to extract high quality stills from video free",
+      "How to capture a picture from a video on iPhone",
+      "Extract images from video URL",
+      "How to get high quality stills from video davinci resolve",
+      "How to take a high-quality still image from video Premiere Pro",
+      "How to extract all frames from video"
+    ]
+  },
+  "paidMetrics": "provider-pending"
+}

@@ -1,0 +1,3343 @@
+{
+  "schemaVersion": 1,
+  "kind": "manual_editorial_batch",
+  "provenance": {
+    "actorId": "apify/google-search-scraper",
+    "runId": "YkY3hZ8cxUobSs1CI",
+    "datasetId": "Ny1Qxp4ptrjMm0EPn",
+    "observedAt": "2026-09-12T02:32:56.760Z"
+  },
+  "records": [
+    {
+      "id": "vc-manual250-c4-011",
+      "keyword": "turn video transcript into blog post",
+      "found": true,
+      "query": "turn video transcript into blog post",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "VideoToBlog - Convert Videos to Blog Posts (Free, No Login)",
+          "url": "https://videotoblog.com/",
+          "domain": "videotoblog.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Free AI Tool to Convert YouTube Videos to Blog Posts",
+          "url": "https://www.ryrob.com/youtube-video-blog-post/",
+          "domain": "ryrob.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Turn a YouTube Transcript into Blog Posts and Social ...",
+          "url": "https://transcript.you/blog/turn-youtube-transcript-into-blog-and-social-content",
+          "domain": "transcript.you",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Convert Any Video to a Blog Post",
+          "url": "https://hintoai.com/tools/video-to-blog",
+          "domain": "hintoai.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Automatically Convert Podcast or Video Scripts to Blog Posts",
+          "url": "https://www.descript.com/ai/turn-into-blog-post",
+          "domain": "descript.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Video to Blog AI: Best YouTube to Blog Post Generator",
+          "url": "https://rightblogger.com/tool/youtube-to-blog-post",
+          "domain": "rightblogger.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "How to Convert YouTube Videos to Blog Posts Using AI",
+          "url": "https://drawne.com/youtube-video-to-blog-post/",
+          "domain": "drawne.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "How To Turn ANY YouTube Video Into A Blog Post In SECONDS!",
+          "url": "https://www.youtube.com/watch?v=KiN0BF-8sWI",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Turn video transcript into blog post free",
+        "Video to blog ai free",
+        "Video blog examples",
+        "YouTube video to blog AI free",
+        "My blog video",
+        "Video blog website",
+        "Convert article to video free",
+        "Video transcript AI"
+      ]
+    },
+    {
+      "id": "vc-manual250-c4-012",
+      "keyword": "how to extract high quality stills from video",
+      "found": true,
+      "query": "how to extract high quality stills from video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Suggestions for capturing still images from video",
+          "url": "https://www.reddit.com/r/VideoEditing/comments/walgow/suggestions_for_capturing_still_images_from_video/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Extract Your Best Frames From a Video Online for Free",
+          "url": "https://mixilab.com/toolkit/extract-photo-from-video",
+          "domain": "mixilab.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Video Frame Extractor",
+          "url": "https://frame-extractor.com/en",
+          "domain": "frame-extractor.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "How To Get High-Resolution Stills From Your Video Footage",
+          "url": "https://alphauniverse.com/stories/how-to-get-high-resolution-stills-from-your-video-footage/",
+          "domain": "alphauniverse.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Capture Still from Video - Klip",
+          "url": "https://outklip.com/capturestill",
+          "domain": "outklip.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Extract Image from Video",
+          "url": "https://www.onlineconverter.com/extract-image-from-video",
+          "domain": "onlineconverter.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "5 Methods to Take a High-Quality Photo from a Video",
+          "url": "https://www.flexclip.com/learn/take-photo-from-video.html",
+          "domain": "flexclip.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How can I extract high-quality photos from a video?",
+        "How to get high quality screenshots from video?",
+        "How to extract an image from a video without losing quality?",
+        "How can I export frames from a video in high quality?"
+      ],
+      "relatedQueries": [
+        "How to extract high quality stills from video online free",
+        "How to extract high quality stills from video online",
+        "How to extract high quality stills from video free",
+        "How to capture a picture from a video on iPhone",
+        "Extract images from video URL",
+        "How to get high quality stills from video davinci resolve",
+        "How to take a high-quality still image from video Premiere Pro",
+        "How to extract all frames from video"
+      ]
+    },
+    {
+      "id": "vc-manual250-c4-013",
+      "keyword": "how to edit a panel discussion video",
+      "found": true,
+      "query": "how to edit a panel discussion video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How To Structure A Panel Discussion",
+          "url": "https://www.youtube.com/watch?v=jNJqUbVjNNU",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 2,
+          "title": "How to Moderate a Panel Discussion—Virtually",
+          "url": "https://www.toastmasters.org/magazine/magazine-issues/2020/june/how-to-moderate-a-panel-discussion-virtually",
+          "domain": "toastmasters.org",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Tips for filming a panel discussion at a conference?",
+          "url": "https://www.reddit.com/r/videography/comments/13evi5p/tips_for_filming_a_panel_discussion_at_a/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "What Makes a Great Panel Discussion Video?",
+          "url": "https://www.motlowpromedia.com/blog/panel-discussion-video",
+          "domain": "motlowpromedia.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "How to Moderate a Panel Discussion",
+          "url": "https://www.youtube.com/playlist?list=PLTaLDJfFoTHTf8TzZ-7gzjZ7Yw3fNCKUR",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 6,
+          "title": "The Ultimate Playlist of Panel Moderator and Panelist ...",
+          "url": "https://www.powerfulpanels.com/the-ultimate-playlist-of-panel-moderator-and-panelist-quick-video-tips/",
+          "domain": "powerfulpanels.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "A moderator's guide to panel discussions",
+          "url": "https://vimeo.com/blog/post/panel-discussion-guide",
+          "domain": "vimeo.com",
+          "resultType": "video_or_social"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How to format a panel discussion?",
+        "How to edit video recordings?",
+        "What are some fun questions I can ask panelists?",
+        "How to edit a video in a professional way?"
+      ],
+      "relatedQueries": [
+        "How to edit a panel discussion video online",
+        "Panel discussion example",
+        "Moderate a panel discussion Toastmasters evaluation"
+      ]
+    },
+    {
+      "id": "vc-manual250-c4-014",
+      "keyword": "how to write podcast show notes",
+      "found": true,
+      "query": "how to write podcast show notes",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "The power of show notes to draw an audience",
+          "url": "https://www.deadsetstudios.com/news/how-to-write-great-podcast-show-notes",
+          "domain": "deadsetstudios.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "How to write show notes for a podcast?",
+          "url": "https://www.facebook.com/groups/BuzzsproutCommunity/posts/25179091988350611/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 3,
+          "title": "Best practices for writing show notes? : r/podcasting",
+          "url": "https://www.reddit.com/r/podcasting/comments/srih6f/best_practices_for_writing_show_notes/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "How to Write Podcast Show Notes [5 Best Templates 2026]",
+          "url": "https://www.buzzsprout.com/blog/podcast-show-notes",
+          "domain": "buzzsprout.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Podcast Show Notes Template: How to Write ...",
+          "url": "https://www.sweetfishmedia.com/blog/podcast-show-notes-template",
+          "domain": "sweetfishmedia.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "How to Write Podcast Show Notes That Drive Business ...",
+          "url": "https://www.podcaststudioglasgow.com/podcast-studio-glasgow-blog/podcast-show-notes-what-they-are-how-to-write-them-and-why-they-matter-for-seo",
+          "domain": "podcaststudioglasgow.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "5 Time-Saving Steps for Creating Quality Podcast Show ...",
+          "url": "https://www.captivate.fm/learn-podcasting/podcast-show-notes",
+          "domain": "captivate.fm",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "How to Write Podcast Show Notes",
+          "url": "https://blog.podbean.com/how-to-write-podcast-show-notes/",
+          "domain": "blog.podbean.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What are show notes for a podcast?",
+        "How to make notes into a podcast?",
+        "How do I find show notes for a podcast?",
+        "What is a good closing statement for a podcast?"
+      ],
+      "relatedQueries": [
+        "How to write podcast show notes template",
+        "How to write podcast show notes reddit",
+        "How to write podcast show notes examples",
+        "Where to find podcast show notes",
+        "Podcast show notes template PDF",
+        "What are show notes",
+        "Shownotes or show notes",
+        "Podcast notes pdf"
+      ]
+    },
+    {
+      "id": "vc-manual250-c4-015",
+      "keyword": "turn webinar questions into FAQ",
+      "found": true,
+      "query": "turn webinar questions into FAQ",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Turn Webinar Q&A into FAQ Pages",
+          "url": "https://indiegtm.com/tools/faq-page-from-webinar/",
+          "domain": "indiegtm.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Using Q and A in a Zoom webinar",
+          "url": "https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0064380",
+          "domain": "support.zoom.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "How to host the perfect webinar Q&A [GUIDE]",
+          "url": "https://univid.io/blog/how-to-host-perfect-digital-webinar-qa/",
+          "domain": "univid.io",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Use webinars for Q&A sessions",
+          "url": "https://www.webinargeek.com/use-cases/q-and-a",
+          "domain": "webinargeek.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Organizing questions and answers in webinars",
+          "url": "https://insights.tt-s.com/en/organizing-questions-and-answers-in-webinars",
+          "domain": "insights.tt-s.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "5 Ways to Repurpose Webinars in 2026",
+          "url": "https://www.youtube.com/watch?v=NCBavTwIK6w",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 7,
+          "title": "Webinar Q&A Best Practices Guide - M365 FM Podcast",
+          "url": "https://www.m365.fm/blog/mastering-qa-in-webinars-for-greater-engagement/",
+          "domain": "m365.fm",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "Question and answer (Q&A) sessions in meetings and ...",
+          "url": "https://help.webex.com/en-us/article/nakt8px/Question-and-answer-(Q&A)-sessions-in-meetings-and-webinars",
+          "domain": "help.webex.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Turn webinar questions into faq template",
+        "Zoom webinar best practices",
+        "Zoom webinar trial",
+        "Zoom webinar participant video",
+        "How to host a paid webinar on Zoom",
+        "Zoom webinar can they see me",
+        "Hosting zoom webinar tutorial",
+        "What is a webinar on Zoom"
+      ]
+    },
+    {
+      "id": "vc-manual250-c4-016",
+      "keyword": "create sales battlecards from sales calls",
+      "found": true,
+      "query": "create sales battlecards from sales calls",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How to Create Effective Sales Battlecards That Win Deals ...",
+          "url": "https://klue.com/topics/create-effective-sales-battlecards",
+          "domain": "klue.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "How to Create Sales Battle Cards that Win Deals",
+          "url": "https://www.dialpad.com/blog/sales-battle-cards/",
+          "domain": "dialpad.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "What is a sales battle card?",
+          "url": "https://business.linkedin.com/sell/resources/sales-terms/battle-card",
+          "domain": "business.linkedin.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Sales Battlecards: Examples To Inspire B2B Sellers",
+          "url": "https://www.highspot.com/blog/sales-battlecards/",
+          "domain": "highspot.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Ace Your Sales Pitch with Battlecards: Here's How To ...",
+          "url": "https://www.kompyte.com/blog/create-sales-battlecards",
+          "domain": "kompyte.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Sales Battle Cards with Real-Time Competitive Insights",
+          "url": "https://www.contify.com/resources/blog/transforming-sales-battlecards-with-cutting-edge-technology/",
+          "domain": "contify.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "7 Free Sales Battlecard Templates for B2B Sales Teams",
+          "url": "https://www.sybill.ai/blogs/free-sales-battlecard-templates",
+          "domain": "sybill.ai",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "Sales Battlecards with AI: How, Why, & When to Use Them",
+          "url": "https://www.copy.ai/blog/sales-battlecards",
+          "domain": "copy.ai",
+          "resultType": "article"
+        },
+        {
+          "position": 9,
+          "title": "What are Sales Battlecards?",
+          "url": "https://www.mindtickle.com/blog/what-are-sales-battlecards-and-how-can-your-sales-team-benefit-from-them/",
+          "domain": "mindtickle.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What are some effective battlecards for sales?",
+        "How to create a battle card?",
+        "What to say on a sales call?"
+      ],
+      "relatedQueries": [
+        "Sales battlecard template",
+        "Battle cards marketing",
+        "Sales battlecard template free",
+        "Product battlecard",
+        "Battlecard template ppt",
+        "Battle cards game",
+        "Crayon battlecards",
+        "Competitor battlecard template"
+      ]
+    },
+    {
+      "id": "vc-manual250-c4-017",
+      "keyword": "product demo follow up video email",
+      "found": true,
+      "query": "product demo follow up video email",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How to write a killer demo follow-up email (with examples)",
+          "url": "https://www.karumi.ai/blog/how-to-write-a-killer-demo-follow-up-email",
+          "domain": "karumi.ai",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "Follow-Up Techniques For After A Sales Demo",
+          "url": "https://www.linkedin.com/top-content/sales/mastering-the-art-of-follow-up/follow-up-techniques-for-after-a-sales-demo/",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 3,
+          "title": "Sales Demo Followup Video Maker - Close Deals Faster",
+          "url": "https://www.ngram.com/use-cases/sales-demo-followup",
+          "domain": "ngram.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Demo Follow-Up Email: 9 Templates That Close Deals ...",
+          "url": "https://www.puppydog.io/blog/demo-follow-up-email-templates",
+          "domain": "puppydog.io",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "The Sales Demo Follow Up Email Template",
+          "url": "https://www.mrrunlocked.com/p/the-sales-demo-follow-up-email-template",
+          "domain": "mrrunlocked.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Why Sales Teams Should Create Follow-Up Video Demos",
+          "url": "https://www.leadfeeder.com/blog/sales-prospecting/create-follow-up-video-demos/",
+          "domain": "leadfeeder.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "How To Write a Demo Follow-up Email (7+ Bonus Templates)",
+          "url": "https://www.klenty.com/blog/follow-up-email-after-a-demo/",
+          "domain": "klenty.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "Demo Follow-up Email Guide: Templates and Tips",
+          "url": "https://supademo.com/blog/demo-follow-up-email",
+          "domain": "supademo.com",
+          "resultType": "article"
+        },
+        {
+          "position": 9,
+          "title": "5 Examples of Interactive Demo Email Follow Ups",
+          "url": "https://www.navattic.com/blog/interactive-demo-email-follows-ups",
+          "domain": "navattic.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Product demo follow up video email template",
+        "Product demo follow up video email sample",
+        "Product demo follow up video email example",
+        "Product demo follow up video email subject"
+      ]
+    },
+    {
+      "id": "vc-manual250-c4-018",
+      "keyword": "content for B2B buying committee",
+      "found": true,
+      "query": "content for B2B buying committee",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "B2B Buying: How Top CSOs and CMOs Optimize the Journey",
+          "url": "https://www.gartner.com/en/sales/insights/b2b-buying-journey",
+          "domain": "gartner.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "B2B Buying Committee Content Strategy",
+          "url": "https://wpvip.com/blog/b2b-buying-committee-content-strategy/",
+          "domain": "wpvip.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "​Buying Committee: Definition, Examples & Use Cases - Saber",
+          "url": "https://www.saber.app/glossary/buying-committee",
+          "domain": "saber.app",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Mapping the B2B Buying Committee: 10 Roles, Strategies, ...",
+          "url": "https://tractioncomplete.com/articles/mapping-the-b2b-buying-committee/",
+          "domain": "tractioncomplete.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Navigating the Rise of the Buying Committee in B2B Sales",
+          "url": "https://www.madisonlogic.com/blog/navigating-the-fall-of-the-individual-buyer-and-the-rise-of-the-buying-committee/",
+          "domain": "madisonlogic.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Buyer Persona and Buying Committee in B2B Marketing",
+          "url": "https://www.trespimedios.co/en/blogs-trespi/buyer-persona-and-buying-committee-in-b2b-marketing",
+          "domain": "trespimedios.co",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "6 strategies for engaging the buying group through account ...",
+          "url": "https://www.demandbase.com/faq/b2b-buying-committee/",
+          "domain": "demandbase.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "The B2B Buying Committee Problem",
+          "url": "https://contrastedmarketing.com/blog/b2b-buying-committee-problem/",
+          "domain": "contrastedmarketing.com",
+          "resultType": "article"
+        },
+        {
+          "position": 9,
+          "title": "How Best Answer Content Strategy Wins B2B Buying ...",
+          "url": "https://www.toprankmarketing.com/blog/buying-committee-best-answer/",
+          "domain": "toprankmarketing.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is the rule of 7 in B2B?",
+        "What are the 8 steps of the B2B buying process?",
+        "What are some examples of B2B content marketing?",
+        "What are the four C's of B2B marketing?"
+      ],
+      "relatedQueries": [
+        "Free content for b2b buying committee",
+        "Gartner B2B buying journey",
+        "B2B buying process",
+        "Gartner b2b buying journey 2026",
+        "B2b buying behaviour",
+        "The new B2B buying journey",
+        "B2b buying how top csos and cmos optimize the journey",
+        "B2B customer journey McKinsey"
+      ]
+    },
+    {
+      "id": "vc-manual250-c4-019",
+      "keyword": "lead nurturing email sequence using existing content",
+      "found": true,
+      "query": "lead nurturing email sequence using existing content",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How to Create Killer Lead Nurturing Emails (+Examples!)",
+          "url": "https://www.wordstream.com/blog/lead-nurturing-emails",
+          "domain": "wordstream.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "11 great examples of lead nurturing emails",
+          "url": "https://business.adobe.com/blog/basics/lead-nurturing-emails",
+          "domain": "business.adobe.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "The ultimate lead nurturing guide for 2026 (strategy & ...",
+          "url": "https://www.zendesk.com/blog/sales/lead-management-101-everything-need-know-get-started/ultimate-guide-lead-nurturing/",
+          "domain": "zendesk.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "How to Write an Email Nurture Sequence: A Guide for Marketers",
+          "url": "https://woodpecker.co/blog/email-nurture-sequence/",
+          "domain": "woodpecker.co",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "12 Lead Nurturing Email Examples to Create a Winning ...",
+          "url": "https://www.sendlane.com/blog/lead-nurturing-email-examples",
+          "domain": "sendlane.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Convert more leads with email nurture campaigns",
+          "url": "https://www.youtube.com/watch?v=c42AaJn2xfI",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 7,
+          "title": "Email Lead Nurturing: Sequences, Examples & Best ...",
+          "url": "https://martal.ca/email-lead-nurturing/",
+          "domain": "martal.ca",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "9 Effective Nurture Email Campaign Examples",
+          "url": "https://www.mailerlite.com/blog/nurture-email-campaign-sequence",
+          "domain": "mailerlite.com",
+          "resultType": "article"
+        },
+        {
+          "position": 9,
+          "title": "How to Write Lead Nurturing Email Sequences That Convert?",
+          "url": "https://fluentcrm.com/blog/writing-effective-lead-nurturing-email-sequences/",
+          "domain": "fluentcrm.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is the recommended email sequence for lead nurturing?",
+        "What is the 12 second rule for emails?",
+        "Can you provide some examples of lead nurturing emails?",
+        "What are the 5 C's of email etiquette?"
+      ],
+      "relatedQueries": [
+        "Lead nurturing email sequence using existing content sample",
+        "Lead nurturing email sequence using existing content example",
+        "B2B lead nurturing email examples",
+        "Nurture email example",
+        "Email nurture campaign best practices",
+        "Building an effective lead nurturing system",
+        "Lead nurturing software",
+        "Promotional email"
+      ]
+    },
+    {
+      "id": "vc-manual250-c4-020",
+      "keyword": "repurpose video content for email newsletter",
+      "found": true,
+      "query": "repurpose video content for email newsletter",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "A newsletter video maker that ships in 15 minutes every send",
+          "url": "https://www.ngram.com/use-cases/newsletter-video",
+          "domain": "ngram.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "How to Create Video Content for Email Marketing Campaigns",
+          "url": "https://www.reframex.ai/how-to-create-video-content-for-email-marketing-campaigns/",
+          "domain": "reframex.ai",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Video Content for Newsletters: Turn Clips Into Subscribers",
+          "url": "https://recapo.ai/blog/video-content-for-newsletter-creators/",
+          "domain": "recapo.ai",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "How to Start Using Video in Email Marketing",
+          "url": "https://www.twilio.com/en-us/blog/insights/video-email-marketing",
+          "domain": "twilio.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Newsletter Video Maker: Turn Emails into Video Summaries",
+          "url": "https://tapvid.ai/feature/newsletter-video",
+          "domain": "tapvid.ai",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Videos in Email Marketing: Why They Work and How to ...",
+          "url": "https://wistia.com/blog/video-in-emails",
+          "domain": "wistia.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "How To Turn A YouTube Video Into A Banger Email ...",
+          "url": "https://writewithai.substack.com/p/how-to-turn-a-youtube-video-into",
+          "domain": "writewithai.substack.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Repurpose video content for email newsletter template",
+        "Repurpose video content for email newsletter free"
+      ]
+    },
+    {
+      "id": "vc-manual250-c4-021",
+      "keyword": "re engagement email content for B2B leads",
+      "found": true,
+      "query": "re engagement email content for B2B leads",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Top 10 B2B Re-Engagement Email Examples & Subject ...",
+          "url": "https://almohmedia.com/blog/top-10-re-engagement-email-marketing-examples-with-subject-lines-for-you-next-email-campaign/",
+          "domain": "almohmedia.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "12 Re-Engagement Email Campaign Examples (+29 ...",
+          "url": "https://automizy.com/blog/re-engagement-email-campaigns/",
+          "domain": "automizy.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "Integrating Reengagement Strategies into Your B2B Email ...",
+          "url": "https://www.linkedin.com/pulse/integrating-reengagement-strategies-your-b2b-email-mark-xdxwe",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 4,
+          "title": "6-Step Effective Re-Engagement Email Guide",
+          "url": "https://www.pipedrive.com/en/blog/re-engagement-email",
+          "domain": "pipedrive.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Run a re-engagement email marketing campaign",
+          "url": "https://knowledge.hubspot.com/marketing-email/run-a-re-engagement-email-marketing-campaign",
+          "domain": "knowledge.hubspot.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Re-engagement email in B2B - Customer Impact",
+          "url": "https://www.customerimpact.be/en/blog/re-engagement-email-campaign/",
+          "domain": "customerimpact.be",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "5 B2B Re-engagement Emails to Win Back Subscribers",
+          "url": "https://www.campaignwizard.io/blog/5-b2b-reengagement-emails-to-win-back-subscribers",
+          "domain": "campaignwizard.io",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "16 Re-engagement Email Examples and Best Practices",
+          "url": "https://www.getresponse.com/blog/re-engagement-email",
+          "domain": "getresponse.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is the 30/30/50 rule for cold emails?",
+        "What are some examples of effective re-engagement emails?",
+        "What is the 80/20 rule in email marketing?",
+        "What is the rule of 7 in B2B?"
+      ],
+      "relatedQueries": [
+        "Re engagement email content for b2b leads template",
+        "Re engagement email content for b2b leads sample",
+        "Re engagement email content for b2b leads example",
+        "'Re engagement email examples",
+        "Email marketing 're engagement strategy",
+        "HubSpot 're engagement campaign",
+        "Rē engagement or rē engagement",
+        "Re engagement of employees"
+      ]
+    },
+    {
+      "id": "vc-manual250-c4-022",
+      "keyword": "customer QBR recap video",
+      "found": true,
+      "query": "customer QBR recap video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Improve the Customer Experience with Quick Renewal Recap ...",
+          "url": "https://www.youtube.com/watch?v=nmxe94gqEEU&vl=en",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 2,
+          "title": "QBRs Explained: Run Effective Quarterly Reviews",
+          "url": "https://www.youtube.com/watch?v=Jw-hDwr3mYM",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 3,
+          "title": "The Essential Guide to Quarterly Business Reviews (QBRs)",
+          "url": "https://www.gainsight.com/essential-guide/quarterly-business-reviews-qbrs/",
+          "domain": "gainsight.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "How to Build a QBR Deck Step-by-Step (Customer Success ...",
+          "url": "https://www.youtube.com/watch?v=K7jl0eCmMoo",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 5,
+          "title": "Video for Customer Success",
+          "url": "https://www.vidyard.com/video-for-customer-success/",
+          "domain": "vidyard.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Tailor your QBR to the customer's business goals",
+          "url": "https://www.linkedin.com/learning/customer-success-acing-your-quarterly-business-review/tailor-your-qbr-to-the-customer-s-business-goals",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 7,
+          "title": "AI Video Creator for Customer Success | ngram.com",
+          "url": "https://www.ngram.com/solutions/customer-success-teams",
+          "domain": "ngram.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "How to Crush a Mock QBR in a Customer Success Interview",
+          "url": "https://www.youtube.com/watch?v=9KS2V2pDXdE",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 9,
+          "title": "Quarterly Business Review (QBR)",
+          "url": "https://www.vyond.com/showcase/video/quarterly-business-review-qbr/",
+          "domain": "vyond.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How can I create a recap video?",
+        "What are customer QBRs?",
+        "How to do a QBR presentation?",
+        "What is a recap video?"
+      ],
+      "relatedQueries": [
+        "Customer qbr recap video template",
+        "Customer qbr recap video reddit"
+      ]
+    },
+    {
+      "id": "vc-manual250-c4-023",
+      "keyword": "product update video release notes",
+      "found": true,
+      "query": "product update video release notes",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Turning release notes into short product update videos ...",
+          "url": "https://www.reddit.com/r/ProductManagement/comments/1qc6d01/turning_release_notes_into_short_product_update/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Video Product Release Notes",
+          "url": "https://www.youtube.com/playlist?list=PLEBxNMZ7Mu3-enjSX39kOdFIitl5ABHNj",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 3,
+          "title": "How to Write Release Notes Your Users Will Actually Read",
+          "url": "https://www.productplan.com/learn/release-notes-best-practices",
+          "domain": "productplan.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Product Updates / Release Notes for Studio and VX",
+          "url": "https://support.brandlive.com/hc/en-us/sections/360002801151-Product-Updates-Release-Notes-for-Studio-and-VX",
+          "domain": "support.brandlive.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "How to Write Great Product Release Notes: A Guide",
+          "url": "https://www.launchnotes.com/release-notes/how-to-write",
+          "domain": "launchnotes.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "What's New in Granicus: Release Notes",
+          "url": "https://support.granicus.com/s/article/Release-Notes",
+          "domain": "support.granicus.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "How To Announce Product Updates In 2026 (and why Less ...",
+          "url": "https://userpilot.com/blog/product-updates-guide/",
+          "domain": "userpilot.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "Release notes tool for product changes updates",
+          "url": "https://www.getbeamer.com/release-notes",
+          "domain": "getbeamer.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Product update video release notes reddit",
+        "Product update video release notes github",
+        "Product update video release notes android",
+        "Release notes template",
+        "Release notes examples PDF",
+        "Best release notes examples",
+        "Slack release notes",
+        "Software release notes template Word"
+      ]
+    },
+    {
+      "id": "vc-manual250-c4-024",
+      "keyword": "turn support videos into knowledge base articles",
+      "found": true,
+      "query": "turn support videos into knowledge base articles",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Videos to Knowledge Base Articles - KB Documentation Tool",
+          "url": "https://www.docsie.io/solutions/videos-to-knowledge-base-articles/",
+          "domain": "docsie.io",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Step 3: Create your knowledge base articles",
+          "url": "https://www.youtube.com/watch?v=CPJyxvWKEUY",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 3,
+          "title": "Creating Knowledge Base Videos: Tips, Tools, and Examples",
+          "url": "https://www.helpscout.com/blog/video-knowledge-base/",
+          "domain": "helpscout.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "AI-powered knowledge base for faster self-service",
+          "url": "https://www.zendesk.com/service/knowledge-base/",
+          "domain": "zendesk.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Generate Knowledge Base Articles from Videos",
+          "url": "https://www.brainfishai.com/changelog/generate-knowledge-base-articles-from-videos",
+          "domain": "brainfishai.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Knowledge Base Videos & IT Support",
+          "url": "https://www.tutorial.ai/solutions/knowledge-base-videos/",
+          "domain": "tutorial.ai",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "How to Use Videos in Knowledge Base Articles for Better CX",
+          "url": "https://blog.happyfox.com/using-videos-in-your-knowledge-base-articles/",
+          "domain": "blog.happyfox.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "The Video Knowledge Base Loop",
+          "url": "https://www.cincopa.com/learn/video-knowledge-base-loop",
+          "domain": "cincopa.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual250-c4-025",
+      "keyword": "co marketing content kit template",
+      "found": true,
+      "query": "co marketing content kit template",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Free and customizable media kit templates",
+          "url": "https://www.canva.com/media-kits/templates/",
+          "domain": "canva.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Free Download: Content Marketing Planning Kit",
+          "url": "https://offers.hubspot.com/content-planning-template",
+          "domain": "offers.hubspot.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "How to Build a Killer Marketing Kit (with free template!)",
+          "url": "https://www.canny-creative.com/blog/build-marketing-kit-with-template/",
+          "domain": "canny-creative.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Marketing Kit designs, themes, templates and ...",
+          "url": "https://dribbble.com/tags/marketing-kit",
+          "domain": "dribbble.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "The 61 Best Free Content Marketing Templates to Drive ...",
+          "url": "https://www.smartsheet.com/free-content-marketing-templates?srsltid=AfmBOorXNzOgtVKV11YQCvaIyeiOu6JZPyrFWXQMkDJ6v5XsHH9ifZ23",
+          "domain": "smartsheet.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "18 Content Marketing Templates to Supercharge Your ...",
+          "url": "https://rachelandreago.com/content-marketing-templates/",
+          "domain": "rachelandreago.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Marketing content plan template Vectors",
+          "url": "https://www.magnific.com/vectors/marketing-content-plan-template",
+          "domain": "magnific.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Top 9 Media Kit Templates for Digital Marketers",
+          "url": "https://www.notion.com/templates/collections/top-9-media-kit-templates-for-digital-marketers?srsltid=AfmBOoo7WqUKo4Jmlj7dk7mOJYkHly0XXT3xlHw6L9lHFl7pOQZiSMA_",
+          "domain": "notion.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual250-c4-026",
+      "keyword": "employee advocacy content examples",
+      "found": true,
+      "query": "employee advocacy content examples",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "15 Employee Advocacy Examples To Guide Your Own ...",
+          "url": "https://www.aihr.com/blog/employee-advocacy-examples/",
+          "domain": "aihr.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "7 Inspiring Employee Advocacy Examples With ...",
+          "url": "https://www.supergrow.ai/blog/employee-advocacy-examples",
+          "domain": "supergrow.ai",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "Employee Advocacy Examples | Get inspired by our ...",
+          "url": "https://www.ambassify.com/resources/employee-advocacy-examples",
+          "domain": "ambassify.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "TOP 10 Employee Advocacy Examples for 2025",
+          "url": "https://business-explained.com/blog/top-10-employee-advocacy-examples-real-world-success-stories/",
+          "domain": "business-explained.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "8 Employee Advocacy Examples to Power Your Brand",
+          "url": "https://www.linkedin.com/posts/andreaslanz_8-employee-advocacy-examples-to-power-your-activity-7186661319855472640-ajtt",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 6,
+          "title": "Employee Advocacy - Examples, Benefits & Tips",
+          "url": "https://www.hays.com.au/employer-insights/recruitment-information/employee-advocacy",
+          "domain": "hays.com.au",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Employee Advocacy Examples: 8 Companies Winning on ...",
+          "url": "https://connectsafely.ai/articles/employee-advocacy-examples-linkedin-2026",
+          "domain": "connectsafely.ai",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "What are the best employee advocacy program examples?",
+          "url": "https://blog.hootsuite.com/employee-advocacy-program-examples/",
+          "domain": "blog.hootsuite.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What are the 7 pillars of advocacy?",
+        "Can you give me an example of advocacy?",
+        "What are some good advocacy topics?",
+        "What is an example of employee advocacy?"
+      ],
+      "relatedQueries": [
+        "Employee advocacy examples",
+        "Examples of advocacy in community",
+        "Employee advocacy program",
+        "Advocacy examples for students",
+        "Employee advocacy tools",
+        "Starbucks employee advocacy",
+        "Employee Advocacy Sprout Social",
+        "Adobe employee advocacy"
+      ]
+    },
+    {
+      "id": "vc-manual250-c4-027",
+      "keyword": "trade show booth video loop",
+      "found": true,
+      "query": "trade show booth video loop",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Trade Show Video Production",
+          "url": "https://vulcanmedia.com/service/tradeshow-videos/",
+          "domain": "vulcanmedia.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Trade Show Booth Stock Video Footage for Free Download",
+          "url": "https://www.vecteezy.com/free-videos/trade-show-booth",
+          "domain": "vecteezy.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Trade Show Loop Video | Indianapolis, Indiana & nearby",
+          "url": "https://radbotvideo.com/company-trade-show-booth-loop-video/",
+          "domain": "radbotvideo.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Trade Show Video Best Practices: 8 Top Tips",
+          "url": "https://cardinalexpo.com/blog/trade-show-video-best-practices/",
+          "domain": "cardinalexpo.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Trade Show Video Loop Guidelines - Texas Pictures",
+          "url": "https://www.texas-pictures.com/tradeshow_loops.html",
+          "domain": "texas-pictures.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "AI Trade Show Loop Video Generator",
+          "url": "https://morphic.com/resources/videos/trade-show-loop-video-videos",
+          "domain": "morphic.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Trade Show Videos",
+          "url": "https://epipheo.com/services/trade-show-video/",
+          "domain": "epipheo.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Trade Show Booth Video Production",
+          "url": "https://www.blackboxproductions.tv/service-trade-show-videos",
+          "domain": "blackboxproductions.tv",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Trade show booth video loop youtube",
+        "Trade show booth video loop free",
+        "Trade show booth video loop free download",
+        "Trade show booth video loop download"
+      ]
+    },
+    {
+      "id": "vc-manual250-c4-028",
+      "keyword": "should on demand webinars be gated",
+      "found": true,
+      "query": "should on demand webinars be gated",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Gated vs ungated webinar replays? : r/DigitalMarketing",
+          "url": "https://www.reddit.com/r/DigitalMarketing/comments/1qklh9t/gated_vs_ungated_webinar_replays/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Gated vs Ungated Content: What B2B Data Shows",
+          "url": "https://lead-spot.net/research/gated-vs-ungated-content-why-high-value-gated-assets-still-win-big-in-b2b-demand-gen/",
+          "domain": "lead-spot.net",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "How to Craft an Effective On-Demand Webinar Strategy",
+          "url": "https://www.on24.com/blog/how-to-craft-an-effective-on-demand-webinar-strategy/",
+          "domain": "on24.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Gated vs Ungated Content in B2B Demand Generation",
+          "url": "https://aviddemand.com/blog/gated-vs-ungated-content-in-b2b-demand-generation/",
+          "domain": "aviddemand.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Webinars for Demand Generation: Tips and Tricks | WorkCast",
+          "url": "https://info.workcast.com/blog/webinars-for-demand-generation-tips-and-tricks-workcast",
+          "domain": "info.workcast.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Should You Gate Your Content? Pros & Cons Guide",
+          "url": "https://foundryco.com/blog/to-gate-or-not-to-gate-the-gated-content-showdown/",
+          "domain": "foundryco.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Gated Content vs Non Gated Content : Which is better?",
+          "url": "https://www.b2bmarketingworld.com/content-marketing/gated-content-vs-non-gated-content/",
+          "domain": "b2bmarketingworld.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Gated Content vs Ungated Content: Pick your GTM side ...",
+          "url": "https://www.revenuehero.io/blog/gated-content-vs-ungated-content",
+          "domain": "revenuehero.io",
+          "resultType": "article"
+        },
+        {
+          "position": 9,
+          "title": "What are ungated replays and on-demand - eWebinar Help",
+          "url": "https://ewebinar.com/help/ungated-replays-and-on-demand",
+          "domain": "ewebinar.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Are webinars still effective in 2026?",
+        "What does \"on-demand webinar\" mean?",
+        "What are the disadvantages of webinars?",
+        "What are some popular on-demand webinar platforms?"
+      ],
+      "relatedQueries": [
+        "Should on demand webinars be gated reddit",
+        "Should on demand webinars be gated debate"
+      ]
+    },
+    {
+      "id": "vc-manual250-c4-029",
+      "keyword": "video not indexed Google watch page",
+      "found": true,
+      "query": "video not indexed Google watch page",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Video is not on a watch page, I have tried all the option but ...",
+          "url": "https://www.reddit.com/r/Wordpress/comments/1lggsfn/video_is_not_on_a_watch_page_i_have_tried_all_the/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Video indexing report - Search Console Help",
+          "url": "https://support.google.com/webmasters/answer/9495631?hl=en",
+          "domain": "support.google.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "How-to Fix Video Is NOT on a Watch Page Video Indexing ...",
+          "url": "https://www.rankya.com/google-search-console/how-to-fix-video-is-not-on-a-watch-page-issue/",
+          "domain": "rankya.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Google Search Console: “Video isn't on a watch page”",
+          "url": "https://help.raptive.com/hc/en-us/articles/50861204619547-Google-Search-Console-Video-isn-t-on-a-watch-page",
+          "domain": "help.raptive.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Fix : Video is not the main content of the page / Google Search ...",
+          "url": "https://www.youtube.com/watch?v=XgxE2RDrtP0",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 6,
+          "title": "3 Reasons Your Videos Were Dropped From Google's Index",
+          "url": "https://www.contentpowered.com/blog/video-dropped-googles-index/",
+          "domain": "contentpowered.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "How to fix video page indexing error",
+          "url": "https://www.facebook.com/groups/DumbSEOQuestions/posts/7827971720570411/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How to fix Google page indexing issues?",
+        "Why is my page not indexed by Google?",
+        "How can I fix a page that is \"Crawled - Currently Not Indexed\"?",
+        "How do I force Google to index a page?"
+      ],
+      "relatedQueries": [
+        "Video not indexed google watch page reddit",
+        "Video is not on a watch page",
+        "Video indexing ai",
+        "Google Search Console Video isn t on a watch page",
+        "Google video watch page",
+        "How to index YouTube video on Google",
+        "Video indexing Google",
+        "Google Search Console videos"
+      ]
+    },
+    {
+      "id": "vc-manual250-c4-030",
+      "keyword": "how to add YouTube chapters timestamps",
+      "found": true,
+      "query": "how to add YouTube chapters timestamps",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Video Chapters - YouTube Help",
+          "url": "https://support.google.com/youtube/answer/9884579?hl=en",
+          "domain": "support.google.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "How do I add chapters to a video? : r/NewTubers",
+          "url": "https://www.reddit.com/r/NewTubers/comments/1erlwj5/how_do_i_add_chapters_to_a_video/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "How to Add Chapters to YouTube Videos (And Why Your ...",
+          "url": "https://wistia.com/blog/youtube-chapters",
+          "domain": "wistia.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "How to add chapters on YouTube videos and why you ...",
+          "url": "https://www.tubebuddy.com/blog/video-chapters/",
+          "domain": "tubebuddy.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "How and why to add chapters to your YouTube videos",
+          "url": "https://www.churchofengland.org/resources/digital-labs/blogs/how-and-why-add-chapters-your-youtube-videos",
+          "domain": "churchofengland.org",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "How To Add Timestamps To Your YouTube Videos",
+          "url": "https://www.bluecompass.com/blog/youtube-video-chapters-how-to-add-timestamps-to-youtube-videos",
+          "domain": "bluecompass.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How do I add chapters to my YouTube video?",
+        "Why are my YouTube chapter timestamps not working?",
+        "How many views do you need to make $10,000 a month on YouTube?",
+        "How do I add a time stamp to a YouTube video?"
+      ],
+      "relatedQueries": [
+        "YouTube timestamp comment",
+        "How to add chapters to YouTube video",
+        "How to add timestamps to YouTube video",
+        "How to add chapters to YouTube video without description",
+        "YouTube chapter timestamp Generator",
+        "How to add timestamps in YouTube description",
+        "YouTube chapters Generator",
+        "Timestamps YouTube"
+      ]
+    },
+    {
+      "id": "vc-manual250-c4-031",
+      "keyword": "link YouTube Shorts to full video",
+      "found": true,
+      "query": "link YouTube Shorts to full video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How do you link a \"Full Video\" from a YouTube Short?",
+          "url": "https://www.reddit.com/r/NewTubers/comments/16owqjy/how_do_you_link_a_full_video_from_a_youtube_short/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Add a related video to your YouTube Shorts",
+          "url": "https://support.google.com/youtube/answer/14075157?hl=en",
+          "domain": "support.google.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "YouTube Option to Link Shorts Clips to Longer Video ...",
+          "url": "https://metricool.com/youtube-previews-new-option-to-link-shorts-to-longer-videos/",
+          "domain": "metricool.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "How to convert YouTube Shorts views into long-form ...",
+          "url": "https://blog.youtube/creator-and-artist-stories/youtube-related-videos-traffic-guide/",
+          "domain": "blog.youtube",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Free Long to Short Video Converter",
+          "url": "https://wayin.ai/tools/long-video-to-short-video/",
+          "domain": "wayin.ai",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Free AI Video to Shorts Converter | YouTube to Shorts",
+          "url": "https://www.choppity.com/tools/youtube-to-shorts-converter/",
+          "domain": "choppity.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Convert YouTube Shorts to Video | Free YouTube Shorts ...",
+          "url": "https://www.youtube-for.com/",
+          "domain": "youtube-for.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How do I link a YouTube short to a full video?",
+        "How many views do I need to make $10,000 a month on YouTube?",
+        "How can I convert a YouTube link to a short link?",
+        "How do I change a YouTube Shorts video to a normal video?"
+      ],
+      "relatedQueries": [
+        "Full video link",
+        "Youtube shorts link free",
+        "How to link a short to a long form video",
+        "Related video YouTube Shorts",
+        "How to add related video in YouTube Shorts",
+        "YouTube Short videos link",
+        "Related videos YouTube",
+        "YouTube link to short video AI free"
+      ]
+    },
+    {
+      "id": "vc-manual250-c4-032",
+      "keyword": "how to put video in marketing email",
+      "found": true,
+      "query": "how to put video in marketing email",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How to Embed Video in Your Email Marketing Campaigns",
+          "url": "https://www.litmus.com/blog/video-in-email",
+          "domain": "litmus.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "The Right Way to Use Video in Email Marketing - Validity Blog",
+          "url": "https://www.validity.com/blog/the-right-way-to-use-video-in-email-marketing/",
+          "domain": "validity.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "Embedding video in email : r/marketing",
+          "url": "https://www.reddit.com/r/marketing/comments/1hfqwrq/embedding_video_in_email/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "How to Use Videos in Your Email Marketing Strategy",
+          "url": "https://vimeo.com/blog/post/video-in-email-marketing",
+          "domain": "vimeo.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 5,
+          "title": "Your Guide to Embedding Video in Email Marketing",
+          "url": "https://www.campaignmonitor.com/resources/guides/video-in-email/",
+          "domain": "campaignmonitor.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Video Email Marketing: Use Video to Boost Engagement",
+          "url": "https://www.vidyard.com/blog/video-email-marketing/",
+          "domain": "vidyard.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Videos in Email Marketing: Why They Work and How to ...",
+          "url": "https://wistia.com/blog/video-in-emails",
+          "domain": "wistia.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Can I insert a video in an email?",
+        "Why won't a video attach to an email?",
+        "Can I include a video in a Mailchimp email?",
+        "How do I submit a video in an email?"
+      ],
+      "relatedQueries": [
+        "How to put video in marketing email examples",
+        "How to put video in marketing email gmail",
+        "Insert video into email Outlook",
+        "How to embed video in email gmail",
+        "How to insert mp4 video in Outlook email body",
+        "Compress video for email",
+        "Can you embed video in email",
+        "How to add video in email"
+      ]
+    },
+    {
+      "id": "vc-manual250-c4-033",
+      "keyword": "where to put call to action in video",
+      "found": true,
+      "query": "where to put call to action in video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "7 Video Call to Action Examples That Actually Work",
+          "url": "https://playplay.com/blog/video-cta-examples/",
+          "domain": "playplay.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "Add videos to your calls-to-action (CTAs)",
+          "url": "https://knowledge.hubspot.com/ctas/add-video-to-your-cta",
+          "domain": "knowledge.hubspot.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Writing Calls to Action that Get Clicks (+ Examples)",
+          "url": "https://animoto.com/blog/video-marketing/call-to-action-examples",
+          "domain": "animoto.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "How to Add a Video CTA to Increase Conversions",
+          "url": "https://wistia.com/blog/using-video-ctas",
+          "domain": "wistia.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "How to Add Call to Action on YouTube Video",
+          "url": "https://www.youtube.com/playlist?list=PLiTbG2ZOkJNdVujd9-26g_H7dPQZzhoQ8",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 6,
+          "title": "How to End Your Video with Action: Strong CTA Examples",
+          "url": "https://www.vidyard.com/blog/end-video-strong-call-action-examples/",
+          "domain": "vidyard.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is a call to action in a video?",
+        "Where should a CTA be placed on a website?",
+        "How do I add CTA to TikTok?",
+        "What is a CTA in video editing?"
+      ],
+      "relatedQueries": [
+        "Where to put call to action in video reddit",
+        "Video cta examples",
+        "CTA video template",
+        "Call to action video",
+        "Youtube cta examples",
+        "50 powerful call to action phrases",
+        "How to add call to action on YouTube video",
+        "Call to action advertising examples"
+      ]
+    },
+    {
+      "id": "vc-manual250-c4-034",
+      "keyword": "speed up landing page with embedded videos",
+      "found": true,
+      "query": "speed up landing page with embedded videos",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Using Videos on Your Website Without Slowing it Down",
+          "url": "https://www.kualo.com/knowledgebase/perf-speed/using-videos-on-your-website-without-slowing-it-down",
+          "domain": "kualo.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Embedding a YouTube video drops mobile PageSpeed ...",
+          "url": "https://www.reddit.com/r/webdev/comments/19ewd78/embedding_a_youtube_video_drops_mobile_pagespeed/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Speed up your website by loading video faster",
+          "url": "https://www.youtube.com/watch?v=n7rR9fdjWJE",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 4,
+          "title": "How to make landing page load faster - Images & Videos",
+          "url": "https://forum.squarespace.com/topic/319590-how-to-make-landing-page-load-faster/",
+          "domain": "forum.squarespace.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Speed Up Loading of Embedded Videos (not Lazy Loading)",
+          "url": "https://travis.media/blog/speed-up-loading-embedded-videos/",
+          "domain": "travis.media",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "How to get embedded videos to load faster",
+          "url": "https://www.quora.com/How-do-you-get-embedded-videos-to-load-faster",
+          "domain": "quora.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Does Embedding Videos Affect Website Speed?",
+          "url": "https://www.beknown.nyc/insights/does-embedding-videos-affect-website-speed",
+          "domain": "beknown.nyc",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "How can I speed up page load time with YouTube embeds?",
+          "url": "https://community.shopify.com/t/how-can-i-speed-up-page-load-time-with-youtube-embeds/60379",
+          "domain": "community.shopify.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How to speed up an embedded video?",
+        "How to make videos load faster on a website?",
+        "How do I change a video to 2x speed?",
+        "How can I speed up an existing video?"
+      ],
+      "relatedQueries": [
+        "Speed up landing page with embedded videos reddit",
+        "Speed up landing page with embedded videos online",
+        "Speed up landing page with embedded videos github",
+        "Speed up landing page with embedded videos free",
+        "Speed up landing page with embedded videos download",
+        "Youtube video embed online",
+        "Lite-youtube embed",
+        "Video embedder"
+      ]
+    },
+    {
+      "id": "vc-manual250-c4-035",
+      "keyword": "LinkedIn video retargeting strategy",
+      "found": true,
+      "query": "LinkedIn video retargeting strategy",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Create a video audience with Matched Audiences",
+          "url": "https://www.linkedin.com/help/lms/answer/a427086",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 2,
+          "title": "Retargeting Strategies for Linkedin Ads",
+          "url": "https://www.linkedin.com/top-content/marketing/linkedin-content-and-ads/retargeting-strategies-for-linkedin-ads/",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 3,
+          "title": "Best practices for video ads | LinkedIn Ad Tips",
+          "url": "https://business.linkedin.com/advertise/ads/sponsored-content/video-ads/tips",
+          "domain": "business.linkedin.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "LinkedIn Retargeting Guide for High Intent Audiences",
+          "url": "https://www.interteammarketing.com/blog/linkedin-retargeting-guide",
+          "domain": "interteammarketing.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "How to Retarget Video Views With LinkedIn Ads",
+          "url": "https://www.socialmediaexaminer.com/how-to-retarget-video-views-with-linkedin-ads/",
+          "domain": "socialmediaexaminer.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "LinkedIn Video Ads: Best Practices, Benchmarks & ...",
+          "url": "https://zenabm.com/blog/linkedin-video-ads-best-practices",
+          "domain": "zenabm.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "LinkedIn Retargeting Strategies: How to Re-Engage B2B ...",
+          "url": "https://donemaker.com/linkedin-retargeting-strategies-how-to-re-engage/",
+          "domain": "donemaker.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "What is retargeting? | LinkedIn Marketing Solutions",
+          "url": "https://business.linkedin.com/advertise/resources/marketing-terms/retargeting",
+          "domain": "business.linkedin.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is the 3/2/1 rule on LinkedIn?",
+        "Can you do retargeting on LinkedIn?",
+        "What is the 4-1-1 rule on LinkedIn?",
+        "What is the 95-5 rule on LinkedIn?"
+      ],
+      "relatedQueries": [
+        "Linkedin video retargeting strategy reddit",
+        "Linkedin video retargeting strategy example",
+        "LinkedIn video ads",
+        "LinkedIn video ad specs",
+        "LinkedIn retargeting",
+        "LinkedIn video best practices 2026",
+        "LinkedIn video ad examples",
+        "Linkedin video ideas"
+      ]
+    },
+    {
+      "id": "vc-manual250-c4-036",
+      "keyword": "turn organic video into paid ad",
+      "found": true,
+      "query": "turn organic video into paid ad",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How to Turn Organic Content Into Ads",
+          "url": "https://www.linkedin.com/top-content/marketing/linkedin-content-and-ads/how-to-turn-organic-content-into-ads/",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 2,
+          "title": "Social Media Video Ads vs. Boosting Organic Content",
+          "url": "https://www.cloudcampaign.com/blog/social-media-video-ads-vs-boosting-organic-content",
+          "domain": "cloudcampaign.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "How do you balance organic & paid efforts for conversions ...",
+          "url": "https://www.reddit.com/r/marketing/comments/1egvlat/how_do_you_balance_organic_paid_efforts_for/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Use organic as PROOF! Why?? 👇👇 Many people pay for ...",
+          "url": "https://www.facebook.com/61564760404568/videos/use-organic-as-proof-why-many-people-pay-for-an-ad-as-soon-as-they-post-however-/1963396547831979/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 5,
+          "title": "Organic vs. Paid Ads: You Need Both",
+          "url": "https://fiercecreative.agency/blog/organic-vs-paid-ads-you-need-both",
+          "domain": "fiercecreative.agency",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Organic Video Content to Impact your Marketing Funnel",
+          "url": "https://www.thebelfortgroup.com/unleashing-the-power-of-organic-video-content-to-impact-your-marketing-funnel/",
+          "domain": "thebelfortgroup.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "HOW TO USE ORGANIC AND PAID Social Video",
+          "url": "https://www.brightcove.com/blog/how-use-organic-and-paid-social-video-more-marketing-impact",
+          "domain": "brightcove.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Is it legal to use AI to generate ads?",
+        "How much does a 30 second YouTube ad cost?",
+        "What's the difference between organic and paid ads?",
+        "How to make a paid ad?"
+      ],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual250-c4-037",
+      "keyword": "A B test video hooks",
+      "found": true,
+      "query": "A B test video hooks",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How Do You Test Video Hooks on Meta Ads?",
+          "url": "https://roaspig.com/blog/hook-testing-video-ads-meta",
+          "domain": "roaspig.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "How Do I A/B Test Video Hooks?",
+          "url": "https://www.nemovideo.com/blog/how-do-i-ab-test-video-hooks",
+          "domain": "nemovideo.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "A/B Test Your Way to Viral: A Guide to Experimenting with ...",
+          "url": "https://contra.com/p/QLgPPQYc-ab-test-your-way-to-viral-a-guide-to-experimenting-with-reels",
+          "domain": "contra.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Using AI to A/B Test Short-Form Video Hooks",
+          "url": "https://www.clicks.video/blog/using-ai-to-a-b-test-short-form-video-hooks-what-actually-works",
+          "domain": "clicks.video",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "I A/B Tested 50 Videos: Same Content, Different Hooks",
+          "url": "https://www.reddit.com/r/tiktok_reversing/comments/1newyax/i_ab_tested_50_videos_same_content_different/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "9 Creative Variables to Test In The Opening Hook of Your ...",
+          "url": "https://disruptivedigital.agency/9-creative-variables-to-test-in-the-opening-hook-of-your-meta-and-tiktok-video-ads/",
+          "domain": "disruptivedigital.agency",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "How to Test TikTok Hooks Without Wasting Videos",
+          "url": "https://www.conbersa.ai/learn/how-to-test-tiktok-hooks",
+          "domain": "conbersa.ai",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "How to use A/B testing to improve your videoe",
+          "url": "https://www.plainlyvideos.com/blog/a-b-testing-to-improve-your-video",
+          "domain": "plainlyvideos.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Ab test video hooks tiktok",
+        "Ab test video hooks free"
+      ]
+    },
+    {
+      "id": "vc-manual250-c4-038",
+      "keyword": "YouTube thumbnail test and compare",
+      "found": true,
+      "query": "YouTube thumbnail test and compare",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "A/B test titles & thumbnails - YouTube Help",
+          "url": "https://support.google.com/youtube/answer/16391400?hl=en",
+          "domain": "support.google.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "YouTube Thumbnail Tester & Previewer",
+          "url": "https://www.testmythumbnails.com/",
+          "domain": "testmythumbnails.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Is Youtube's New \"Test & Compare Thumbnails\" Useful For ...",
+          "url": "https://www.reddit.com/r/PartneredYoutube/comments/1ddwppc/is_youtubes_new_test_compare_thumbnails_useful/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "YouTube Thumbnail Tester — Free Preview Tool",
+          "url": "https://kolfind.com/thumbnail-tester",
+          "domain": "kolfind.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "YouTube Thumbnail Checker: Free Score, A/B Compare & ...",
+          "url": "https://creaticalc.com/youtube-thumbnail-checker",
+          "domain": "creaticalc.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "YouTube's New Thumbnail Test & Compare Feature",
+          "url": "https://www.magiclinks.com/blog/what-creators-need-to-know-youtubes-thumbnail-test-and-compare",
+          "domain": "magiclinks.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Thumbnail Test - Run A/B Tests for YouTube Videos",
+          "url": "https://thumbnailtest.com/",
+          "domain": "thumbnailtest.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "YouTube Thumbnail Preview and Tester Tool",
+          "url": "https://www.tubebuddy.com/thumbnail-preview",
+          "domain": "tubebuddy.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Youtube thumbnail test and compare online free",
+        "Youtube thumbnail test and compare online",
+        "Youtube thumbnail test and compare reddit",
+        "Youtube thumbnail test and compare free",
+        "Youtube thumbnail test and compare app",
+        "YouTube thumbnail analyzer free",
+        "A/B test YouTube thumbnails free",
+        "YouTube thumbnail rating checker"
+      ]
+    },
+    {
+      "id": "vc-manual250-c4-039",
+      "keyword": "UTM tracking for video campaigns",
+      "found": true,
+      "query": "UTM tracking for video campaigns",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "UTM Campaign Tracking Guidelines for 2025 - Spectacle",
+          "url": "https://www.spectaclehq.com/blog/utm-tracking-campaign-guidelines-2025",
+          "domain": "spectaclehq.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "Add UTM tracking to your videoasks",
+          "url": "https://www.videoask.com/help/tracking/5161744432148-add-utm-tracking-to-your-videoasks",
+          "domain": "videoask.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Campaign Level UTM Tracking for Video ...",
+          "url": "https://www.reddit.com/r/PPC/comments/1gvcxcf/campaign_level_utm_tracking_for_video_campaigns/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "URL builders: Collect campaign data with custom URLs",
+          "url": "https://support.google.com/analytics/answer/10917952?hl=en",
+          "domain": "support.google.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Utm Parameter Best Practices For Campaigns: A Guide",
+          "url": "https://www.cometly.com/post/utm-parameter-best-practices-for-campaigns",
+          "domain": "cometly.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "The Art of UTM Tagging for Video Marketing Success",
+          "url": "https://abmatic.ai/blog/art-of-utm-tagging-for-video-marketing-success",
+          "domain": "abmatic.ai",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "UTM Tracking Best Practices",
+          "url": "https://www.innovationvisual.com/knowledge-hub/knowledge/utm-tracking-best-practices",
+          "domain": "innovationvisual.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Utm tracking for video campaigns reddit",
+        "Utm tracking for video campaigns template",
+        "UTM tracking Google Analytics",
+        "Google UTM builder",
+        "Campaign UTM builder",
+        "Campaign URL builder",
+        "UTM campaign",
+        "UTM tracking link"
+      ]
+    },
+    {
+      "id": "vc-manual250-c4-040",
+      "keyword": "GA4 video tracking not working",
+      "found": true,
+      "query": "GA4 video tracking not working",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "GTM is not able to track events in ga4 or you can say ...",
+          "url": "https://support.google.com/analytics/thread/384285265/gtm-is-not-able-to-track-events-in-ga4-or-you-can-say-gtm-is-not-sending-data-to-ga4?hl=en",
+          "domain": "support.google.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Track Videos with Google Analytics 4 and Google Tag ...",
+          "url": "https://www.analyticsmania.com/post/track-videos-with-google-analytics-4-and-google-tag-manager/",
+          "domain": "analyticsmania.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Google Analytics 4 not working? Here is how to fix it.",
+          "url": "https://optimizesmart.com/blog/google-analytics-4-not-working-here-is-how-to-fix-it/",
+          "domain": "optimizesmart.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Google Analytics 4 Not Tracking? Replace the Data Stream",
+          "url": "https://www.pixelyoursite.com/ga4-replace-stream",
+          "domain": "pixelyoursite.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "GA4 Troubleshooting: Common Issues & How to Solve Them",
+          "url": "https://www.linkedin.com/pulse/ga4-troubleshooting-common-issues-how-solve-them-asik-mia-c4tac",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 6,
+          "title": "GA4 Video Tracking Guide: YouTube, Vimeo & HTML5",
+          "url": "https://incisiveranking.com/the-guide-to-video-tracking-with-ga4-and-gtm/?srsltid=AfmBOoqFNIihz8x7UllXOpcmBeSb0ZZBPzqBTbfxWBg3peQOk5iBn-CO",
+          "domain": "incisiveranking.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Can't track Vimeo event on GA4 as it won't trigger",
+          "url": "https://www.reddit.com/r/GoogleAnalytics/comments/15slo6d/cant_track_vimeo_event_on_ga4_as_it_wont_trigger/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Is Google Analytics not working today?",
+        "Why isn't my Google Ads conversion tracking working?",
+        "How to track events in GA4?",
+        "How to track LLM traffic in GA4?"
+      ],
+      "relatedQueries": [
+        "Ga4 video tracking not working android",
+        "Google Analytics",
+        "Google Tag Manager",
+        "Html5 video tracking google tag manager",
+        "YouTube video tracking",
+        "Vimeo tracking Google Tag Manager",
+        "Vimeo video tracking",
+        "GA4 site search"
+      ]
+    },
+    {
+      "id": "vc-manual250-c4-041",
+      "keyword": "why viewers drop off video retention",
+      "found": true,
+      "query": "why viewers drop off video retention",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Why do you think about half of viewers drop off in the first ...",
+          "url": "https://www.reddit.com/r/NewTubers/comments/1f6uu26/discussion_why_do_you_think_about_half_of_viewers/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Understanding Audience Retention",
+          "url": "https://wistia.com/blog/understanding-audience-retention",
+          "domain": "wistia.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "Why Viewers Drop After 30 Seconds on YouTube",
+          "url": "https://narrationbox.com/blog/why-viewers-drop-off-after-30-seconds-youtube",
+          "domain": "narrationbox.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "YouTube Audience Retention: 9 Fixes for Viewer Drop-Off",
+          "url": "https://www.overseeros.com/blog/youtube-audience-retention-9-fixes-viewer-drop-off",
+          "domain": "overseeros.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "How to Stop Viewers Clicking Away in the First 30 Seconds",
+          "url": "https://youseo.app/en/blogs/how-to-stop-viewers-clicking-away-in-the-first-30-seconds",
+          "domain": "youseo.app",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "How Video Length Affects Viewer Retention",
+          "url": "https://longstories.ai/blog/video-length-viewer-retention",
+          "domain": "longstories.ai",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Why Video Viewers Stay Or Leave?",
+          "url": "https://noticetheelephant.com/why-video-viewers-stay-or-leave/",
+          "domain": "noticetheelephant.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Is 50% retention good on TikTok?",
+        "Is 2000 views in 1 day good?",
+        "What is the average viewer retention on YouTube?",
+        "Why do my YouTube views drop off?"
+      ],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual250-c4-042",
+      "keyword": "update old product demo video",
+      "found": true,
+      "query": "update old product demo video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "10 Best Product Demo Video Makers & Production Tools ...",
+          "url": "https://www.howdygo.com/blog/product-demo-video-production",
+          "domain": "howdygo.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "Product Demo Video: 9 Steps to Create One",
+          "url": "https://www.colossyan.com/posts/demo-video/",
+          "domain": "colossyan.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "10 Best Product Demo Video Examples (That You Can ... - Velo",
+          "url": "https://usevelo.ai/blog/product-demo-video-examples/",
+          "domain": "usevelo.ai",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "How to Create Software Demo Videos, with 8 Examples",
+          "url": "https://vimeo.com/blog/post/software-video-demos",
+          "domain": "vimeo.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 5,
+          "title": "Top Tips for Product Demonstration Videos and Examples ...",
+          "url": "https://www.atlassian.com/blog/loom/product-demonstration",
+          "domain": "atlassian.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "10 Product Demo Videos Worth Copying",
+          "url": "https://www.moonb.io/blog/product-demo-videos",
+          "domain": "moonb.io",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Product Demo Videos",
+          "url": "https://www.youtube.com/playlist?list=PL0y2jFkSskZi3-OKKibO61EY9MH8WTXje",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 8,
+          "title": "5 Examples of Amazing Product Demo Videos for Every ...",
+          "url": "https://goconsensus.com/blog/5-examples-of-amazing-product-demo-videos-for-every-type-of-product-html",
+          "domain": "goconsensus.com",
+          "resultType": "article"
+        },
+        {
+          "position": 9,
+          "title": "How do you make demo videos or product walkthroughs ...",
+          "url": "https://www.reddit.com/r/ProductManagement/comments/1nftt72/how_do_you_make_demo_videos_or_product/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Update old product demo video youtube",
+        "Update old product demo video free",
+        "Update old product demo video download",
+        "Product demo video maker",
+        "Demo video download",
+        "How to create a demo video for software",
+        "Loom",
+        "Screen Studio"
+      ]
+    },
+    {
+      "id": "vc-manual250-c4-043",
+      "keyword": "localize product marketing videos",
+      "found": true,
+      "query": "localize product marketing videos",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "What Is Video Localization? A Strategic Guide for Global ...",
+          "url": "https://www.rws.com/blog/what-is-video-localization/",
+          "domain": "rws.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "How to Localize Product Videos for International Markets",
+          "url": "https://vidocu.ai/blog/how-to-localize-product-videos-for-international-markets",
+          "domain": "vidocu.ai",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "How to Localize Marketing Videos With AI",
+          "url": "https://lipdub.ai/blog/marketing-video-localization",
+          "domain": "lipdub.ai",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "How to best localize your marketing videos - VoiceTalks",
+          "url": "https://voice123.com/blog/marketing-trends-tactics/how-to-best-localize-your-marketing-videos/",
+          "domain": "voice123.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Maximizing impact with localized video: your complete guide",
+          "url": "https://www.acclaro.com/resources/maximizing-impact-with-localized-video-your-complete-guide",
+          "domain": "acclaro.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Top 8 reasons why companies should localize their ...",
+          "url": "https://blog.andovar.com/top-8-reasons-why-companies-should-localize-their-marketing-videos",
+          "domain": "blog.andovar.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "5 Steps to Successful Video Localization",
+          "url": "https://www.transperfect.com/blog/5-steps-successful-video-localization",
+          "domain": "transperfect.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "Product localization: How to truly make it work",
+          "url": "https://lokalise.com/blog/product-localization/",
+          "domain": "lokalise.com",
+          "resultType": "article"
+        },
+        {
+          "position": 9,
+          "title": "Localize Marketing Videos Globally in 7 Clear Steps",
+          "url": "https://www.vozo.ai/blogs/video-localization/localize-marketing-videos-international-campaigns",
+          "domain": "vozo.ai",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is localization marketing?",
+        "What kind of videos attract viewers?",
+        "What are some of the best marketing videos?",
+        "What app can I use to create marketing videos?"
+      ],
+      "relatedQueries": [
+        "Localize product marketing videos youtube",
+        "Synthesia localization"
+      ]
+    },
+    {
+      "id": "vc-manual250-c4-044",
+      "keyword": "turn video into audio podcast",
+      "found": true,
+      "query": "turn video into audio podcast",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Converting my video into audio for podcast?",
+          "url": "https://www.reddit.com/r/podcast/comments/wyyka9/converting_my_video_into_audio_for_podcast/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Free AI Podcast Generator | Instant Podcast from Any Content",
+          "url": "https://monica.im/ai-podcast",
+          "domain": "monica.im",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "AI Podcast Generator – Turn Any Content into a Podcast Free",
+          "url": "https://notegpt.io/ai-podcast-generator",
+          "domain": "notegpt.io",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Convert audio to video",
+          "url": "https://podcast.adobe.com/en/convert-audio-to-video-with-adobe-podcast",
+          "domain": "podcast.adobe.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "How to turn your video into audio for podcast in 2024",
+          "url": "https://www.churchofengland.org/how-turn-your-video-audio-podcast-2024",
+          "domain": "churchofengland.org",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "AI Podcast Video Generator: Create AI Video Podcasts",
+          "url": "https://www.visionstory.ai/features/video-podcast",
+          "domain": "visionstory.ai",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Convert Podcast to Video Online | AI-Powered Tool",
+          "url": "https://exemplary.ai/podcast-to-video",
+          "domain": "exemplary.ai",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Can ChatGPT create a podcast audio?",
+        "Is there a way to convert video into audio?",
+        "Can AI convert anything into a podcast?",
+        "Which app is best for converting video to audio?"
+      ],
+      "relatedQueries": [
+        "Turn video into audio podcast free",
+        "Convert audio podcast to video free",
+        "Turn notes into podcast free",
+        "AI podcast video Generator free",
+        "Podcast AI",
+        "AI podcast generator",
+        "Free AI podcast generator",
+        "Turn PDF into podcast free"
+      ]
+    },
+    {
+      "id": "vc-manual250-c4-045",
+      "keyword": "turn presentation slides into explainer video",
+      "found": true,
+      "query": "turn presentation slides into explainer video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Convert PPT to Video with AI Narration",
+          "url": "https://www.heygen.com/en-in/tool/powerpoint-to-video",
+          "domain": "heygen.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "PPT to Video Converter - Fast, Simple and AI-Powered",
+          "url": "https://pictory.ai/ppt-to-video",
+          "domain": "pictory.ai",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "PPT to Video Converter - Free PowerPoint to MP4 with AI",
+          "url": "https://slidespeak.co/free-tools/convert-powerpoint-to-video-ai",
+          "domain": "slidespeak.co",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "FREE PowerPoint to Video Converter with AI",
+          "url": "https://www.synthesia.io/powerpoint-to-video",
+          "domain": "synthesia.io",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Convert PowerPoint To Video With AI",
+          "url": "https://www.automate.video/",
+          "domain": "automate.video",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "PPT to Video - Create Explainer Videos",
+          "url": "https://kpainter.ai/ppt-to-video",
+          "domain": "kpainter.ai",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Convert PPT to video for free",
+          "url": "https://www.canva.com/features/ppt-to-video-converter/",
+          "domain": "canva.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "PPT to Video Converter – Turn Boring PPTs into Stunning ...",
+          "url": "https://www.animaker.com/ppt-to-video",
+          "domain": "animaker.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How can I convert my PowerPoint slides to a video?",
+        "Is there an AI that can create explainer videos?",
+        "Can I turn a PowerPoint slideshow into a video?",
+        "How to turn PowerPoint into video with narration?"
+      ],
+      "relatedQueries": [
+        "Turn presentation slides into explainer video online free",
+        "Turn presentation slides into explainer video free",
+        "PPT to video",
+        "Convert PPT to video online free",
+        "Convert PPT to video with audio online free",
+        "PowerPoint to video AI free",
+        "How to convert ppt to video with voice over",
+        "Free AI tool to convert PPT to video with audio"
+      ]
+    },
+    {
+      "id": "vc-manual250-c4-046",
+      "keyword": "turn screen recording into GIF",
+      "found": true,
+      "query": "turn screen recording into GIF",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Free Video to GIF Converter | Adobe Express",
+          "url": "https://www.adobe.com/express/feature/video/convert/video-to-gif",
+          "domain": "adobe.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Create GIFs from Your Screen Recordings",
+          "url": "https://www.veed.io/tools/screen-recorder/screen-to-gif",
+          "domain": "veed.io",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Free Video to GIF Converter: Convert MP4 to GIF online",
+          "url": "https://www.canva.com/features/mp4-to-gif-converter/",
+          "domain": "canva.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Chrome Capture - Screenshot & GIF",
+          "url": "https://chromewebstore.google.com/detail/chrome-capture-screenshot/ggaabchcecdbomdcnbahdfddfikjmphe",
+          "domain": "chromewebstore.google.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "MP4 video to GIF converter",
+          "url": "https://ezgif.com/video-to-gif",
+          "domain": "ezgif.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "How to Make a Screen Recording GIF in Microsoft PowerPoint ...",
+          "url": "https://www.youtube.com/watch?v=GR8vSYE_G0A",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 7,
+          "title": "Save Screen Recording as GIF : r/Windows11",
+          "url": "https://www.reddit.com/r/Windows11/comments/1foq4lw/save_screen_recording_as_gif/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Free Gif Screen Recorder",
+          "url": "https://www.loom.com/products/gif-screen-recorder",
+          "domain": "loom.com",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "N-Tech",
+          "url": "https://nicke.tech/n-studio?migrated=true",
+          "domain": "nicke.tech",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Turn video into GIF iPhone",
+        "Turn screen recording into gif free",
+        "Turn screen recording into gif online free",
+        "Turn screen recording into gif online",
+        "Compress GIF",
+        "Video to GIF converter",
+        "Screen to GIF",
+        "Free convert video to GIF"
+      ]
+    },
+    {
+      "id": "vc-manual250-c4-047",
+      "keyword": "sales content gap analysis",
+      "found": true,
+      "query": "sales content gap analysis",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Content gap analysis: A step-by-step guide",
+          "url": "https://www.semrush.com/blog/content-gap-analysis/",
+          "domain": "semrush.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "Content Gap Analysis",
+          "url": "https://www.linkedin.com/top-content/writing/writing-for-seo-success/content-gap-analysis/",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 3,
+          "title": "How to Avoid Gaps in Your Content Strategy",
+          "url": "https://www.searchstax.com/blog/content-gap-analysis/",
+          "domain": "searchstax.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "How To Do a Content Gap Analysis",
+          "url": "https://www.brafton.com/blog/strategy/content-gap-analysis/",
+          "domain": "brafton.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Content Gap Analysis: The Complete Guide",
+          "url": "https://backlinko.com/hub/seo/content-gap",
+          "domain": "backlinko.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "What is a Content Gap Analysis?",
+          "url": "https://neilpatel.com/blog/content-gaps/",
+          "domain": "neilpatel.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Content Gap by Ahrefs: Find Keywords via Competitor ...",
+          "url": "https://ahrefs.com/content-gap",
+          "domain": "ahrefs.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Understanding Content Gap Analysis For Small Businesses",
+          "url": "https://www.jetspace.work/understanding-content-gap-analysis-for-small-businesses",
+          "domain": "jetspace.work",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How to do a content gap analysis?",
+        "What are the 5 quality gaps in the Gap Model?",
+        "What are the four types of gap analysis?",
+        "What should be included in a gap analysis?"
+      ],
+      "relatedQueries": [
+        "Sales content gap analysis template",
+        "Content gap analysis tool",
+        "Content gap analysis tool free",
+        "What is content gap in YouTube",
+        "Content gap TikTok",
+        "YouTube content gap finder",
+        "SEO gap analysis",
+        "Keyword gap analysis"
+      ]
+    },
+    {
+      "id": "vc-manual250-c4-048",
+      "keyword": "turn content into downloadable checklist",
+      "found": true,
+      "query": "turn content into downloadable checklist",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Checklist - Free Online Checklist App & Checklist Maker",
+          "url": "https://checklist.com/",
+          "domain": "checklist.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Free Checklist Maker - Create Checklists Online",
+          "url": "https://www.canva.com/create/checklists/",
+          "domain": "canva.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Free AI Content Checklist Generator",
+          "url": "https://www.template.net/ai-checklist-generator/content",
+          "domain": "template.net",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Free AI Checklist Generator | Create Checklists Fast",
+          "url": "https://quillbot.com/ai-writing-tools/ai-checklist-generator",
+          "domain": "quillbot.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Free AI Checklist Generator",
+          "url": "https://venngage.com/ai-tools/checklist-generator",
+          "domain": "venngage.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "How to Create a Digital PDF Checklist in Canva",
+          "url": "https://www.youtube.com/watch?v=Nq9Knz8QtHQ",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 7,
+          "title": "Convert PDF to Checklist Free with AI",
+          "url": "https://www.taskade.com/convert/pdf/pdf-to-checklist",
+          "domain": "taskade.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "AI PDF Checklist Generator | Extract Action Plans",
+          "url": "https://products.documentize.ai/check-list",
+          "domain": "products.documentize.ai",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Checklist template",
+        "Checklist online",
+        "Checklist maker",
+        "Free online checklist",
+        "Free editable Checklist Template Word",
+        "Checklist generator free",
+        "Checklist maker free printable",
+        "Text to checklist"
+      ]
+    },
+    {
+      "id": "vc-manual250-c4-049",
+      "keyword": "how to create modular video content",
+      "found": true,
+      "query": "how to create modular video content",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How to Create Modular Content (with Examples)",
+          "url": "https://www.seoptimer.com/blog/modular-content/",
+          "domain": "seoptimer.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "How To Use The Modular Content Strategy Step-By-Step",
+          "url": "https://www.youtube.com/watch?v=cNK5LE6AViQ",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 3,
+          "title": "Modular Content Strategy: Definition, Benefits & Examples",
+          "url": "https://www.storyblok.com/mp/modular-content-strategy",
+          "domain": "storyblok.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "The power of modular content: turn one shoot into endless ...",
+          "url": "https://www.adpipe.com/resources/the-power-of-modular-content",
+          "domain": "adpipe.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "The enterprise guide to modular content: Scaling ...",
+          "url": "https://www.coremedia.com/blog/the-enterprise-guide-to-modular-content-scaling-personalized-experiences",
+          "domain": "coremedia.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "How modular content creates the building blocks of ...",
+          "url": "https://www.linkedin.com/pulse/how-modular-content-creates-building-blocks-andrew-lomas-6tm3e",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 7,
+          "title": "Why your brand needs modular content",
+          "url": "https://www.contentful.com/blog/modular-content/",
+          "domain": "contentful.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "How Can Brands Get More Video Content Without ...",
+          "url": "https://www.lemonlight.com/blog/how-can-brands-get-more-video-content-without-increasing-costs/",
+          "domain": "lemonlight.com",
+          "resultType": "article"
+        },
+        {
+          "position": 9,
+          "title": "Modular Content Marketing: 5 Steps To Create Reusable ...",
+          "url": "https://www.clintmally.com/courses/modular-content-marketing",
+          "domain": "clintmally.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is the best way to create video content?",
+        "What is modular content?",
+        "How to create a modular design?",
+        "What are the 7 steps in creating a content strategy?"
+      ],
+      "relatedQueries": [
+        "How to create modular video content for youtube",
+        "How to create modular video content example"
+      ]
+    },
+    {
+      "id": "vc-manual250-c4-050",
+      "keyword": "content syndication vs repurposing",
+      "found": true,
+      "query": "content syndication vs repurposing",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:32:56.760Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "YkY3hZ8cxUobSs1CI",
+      "datasetId": "Ny1Qxp4ptrjMm0EPn",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "5 Benefits of Content Syndication for Your Business",
+          "url": "https://www.theinsightcollective.com/insights/benefits-of-content-syndication",
+          "domain": "theinsightcollective.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "Content Syndication vs. Content Repurposing",
+          "url": "https://www.martechcube.com/content-syndication-vs-content-repurposing/",
+          "domain": "martechcube.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "What is Content Syndication – B2B Marketing Glossary | INFUSE",
+          "url": "https://infuse.com/glossary/content-syndication/",
+          "domain": "infuse.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "How to repurpose existing content for syndication to a ...",
+          "url": "https://www.dwmedia.com/blog/how-to-repurpose-existing-content-for-syndication-to-a-small-audience/",
+          "domain": "dwmedia.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Decoding Content Strategies: Content Marketing vs. ...",
+          "url": "https://www.linkedin.com/pulse/decoding-content-strategies-marketing-vs-syndication-tripathy-nkmgf",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 6,
+          "title": "Content Syndication vs. Guest Blogging: What to Choose",
+          "url": "https://contentsyndication.org/content-syndication-vs-guest-blogging/",
+          "domain": "contentsyndication.org",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Content Syndication and SEO",
+          "url": "https://c-k.com/content-syndication-and-seo-why-reposting-exact-content-across-multiple-websites-is-a-bad-practice-and-can-result-in-penalties-from-google/",
+          "domain": "c-k.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Content Syndication: What It Is, and How It Can Work for B2B",
+          "url": "https://www.paved.com/blog/content-syndication-what-it-is-and-how-it-can-work-for-b2b/",
+          "domain": "paved.com",
+          "resultType": "article"
+        },
+        {
+          "position": 9,
+          "title": "Content Syndication: Complete Process and Examples",
+          "url": "https://learn.g2.com/content-syndication",
+          "domain": "learn.g2.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Is content syndication still effective?",
+        "Can you give me an example of content syndication?",
+        "What are the three C's of content creation?",
+        "What does \"content repurposing\" mean?"
+      ],
+      "relatedQueries": [
+        "Content syndication vs repurposing b2b marketing",
+        "Content syndication vs repurposing examples",
+        "Content syndication vs repurposing b2b"
+      ]
+    }
+  ]
+}

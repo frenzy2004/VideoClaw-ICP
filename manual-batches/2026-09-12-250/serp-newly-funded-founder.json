@@ -1,0 +1,3377 @@
+{
+  "schemaVersion": 1,
+  "kind": "manual_editorial_batch",
+  "provenance": {
+    "actorId": "apify/google-search-scraper",
+    "runId": "TU557kwZekJRkYg0z",
+    "datasetId": "3sCWjMJYyH6XO5JuS",
+    "observedAt": "2026-09-12T02:37:24.102Z"
+  },
+  "records": [
+    {
+      "id": "vc-manual250-c1-011",
+      "keyword": "how to pitch a startup story to journalists",
+      "found": true,
+      "query": "how to pitch a startup story to journalists",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Crafting Effective News Story Pitches for Busy Journalists",
+          "url": "https://www.linkedin.com/posts/rosietaylor_advice-on-how-to-pitch-news-stories-these-activity-7426934270105006080-Zh7e",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 2,
+          "title": "7 Tips for Founders on Pitching Their Startups to Journalists",
+          "url": "https://longjump.vc/updates/7-tips-for-founders-on-pitching-their-startups-to-journalists",
+          "domain": "longjump.vc",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "How to pitch journalists as a startup founder - Omoniyi Faith",
+          "url": "https://faithomoniyi.medium.com/how-to-pitch-journalists-as-a-startup-founder-c4f3e37e1d4f",
+          "domain": "faithomoniyi.medium.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Beginner: How do you pitch to a journalist?",
+          "url": "https://www.reddit.com/r/PublicRelations/comments/1benhc3/beginner_how_do_you_pitch_to_a_journalist/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Pitching a Story",
+          "url": "https://ruralhealth.und.edu/communication/pitching",
+          "domain": "ruralhealth.und.edu",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Guide to Media Pitching",
+          "url": "https://muckrack.com/resources/guides/media-pitching",
+          "domain": "muckrack.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "How to Get Press for Your Startup",
+          "url": "https://chrisneumann.com/archives/how-to-get-press-for-your-startup",
+          "domain": "chrisneumann.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How to pitch a startup idea?",
+        "What are the four C's in journalism?",
+        "What does ### mean in journalism?",
+        "Will the news pay you for a story?"
+      ],
+      "relatedQueries": [
+        "How to pitch a startup story to journalists example",
+        "How to pitch a startup story to journalists free",
+        "Story pitch examples journalism",
+        "How to pitch as a freelance journalist",
+        "Media pitch examples",
+        "How to write a pitch to a journalist",
+        "How to write an email pitch to a journalist",
+        "How to pitch an article to a magazine"
+      ]
+    },
+    {
+      "id": "vc-manual250-c1-012",
+      "keyword": "how to build a media list for a startup",
+      "found": true,
+      "query": "how to build a media list for a startup",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How do I create a media list? : r/PublicRelations",
+          "url": "https://www.reddit.com/r/PublicRelations/comments/1ip4vvt/how_do_i_create_a_media_list/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Media List 101: Build Yours Like a Pro (With Template ...",
+          "url": "https://www.cision.com/resources/articles/build-media-list-template-examples/",
+          "domain": "cision.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "How to Build a Killer Media List: Best Tools & Examples for ...",
+          "url": "https://prowly.com/magazine/media-list-building/",
+          "domain": "prowly.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "5 Tips for Building a PR Media List to Get Press for Your ...",
+          "url": "https://eucalyptmedia.com/blog/entry/5-tips-for-building-a-pr-media-list-to-get-press-for-your-startup",
+          "domain": "eucalyptmedia.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "How to: build a business media list",
+          "url": "https://www.mediahq.com/blog/how-to-build-a-business-media-list",
+          "domain": "mediahq.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Media Contact Lists: My Template And How To Use It",
+          "url": "http://www.hailleygriffis.com/guide-pr-media-list/",
+          "domain": "hailleygriffis.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "The Art of Building a Media List",
+          "url": "https://umarcomm.umn.edu/blog/2020/01/10/art-building-media-list",
+          "domain": "umarcomm.umn.edu",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "How to Build a Media List for Your Startup (Without an Agency ...",
+          "url": "https://blog.onepitch.co/build-media-list-startup",
+          "domain": "blog.onepitch.co",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How do I create a media list?",
+        "What does a media list look like?",
+        "What does ### mean in journalism?",
+        "What are the four C's in journalism?"
+      ],
+      "relatedQueries": [
+        "How to build a media list for a startup template",
+        "How to build a media list for a startup pdf",
+        "How to build a media list for a startup reddit",
+        "How to build a media list for a startup online",
+        "How to build a media list for a startup free",
+        "Media list template",
+        "What is a media list in PR",
+        "How to create a media list"
+      ]
+    },
+    {
+      "id": "vc-manual250-c1-013",
+      "keyword": "press embargo vs exclusive",
+      "found": true,
+      "query": "press embargo vs exclusive",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "The use of Embargoes and Exclusives in PR",
+          "url": "https://mavenagency.com/news-insights/insights/utilizing-embargoes-and-exclusives-in-pr/",
+          "domain": "mavenagency.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "Embargo vs. Exclusive: What You Need to Know",
+          "url": "https://www.erprgroup.com/erpr-group-blog/embargo-vs-exclusive-what-you-need-to-know",
+          "domain": "erprgroup.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "News embargo",
+          "url": "https://en.wikipedia.org/wiki/News_embargo",
+          "domain": "en.wikipedia.org",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Sarah Wheaton - My weekly rant to PR people",
+          "url": "https://www.linkedin.com/posts/sarah-wheaton-248b943_my-weekly-rant-to-pr-people-embargoes-and-activity-7368347646496784384-ZLIz",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 5,
+          "title": "How to Use Embargos & Exclusives in PR",
+          "url": "https://www.prnewswire.com/resources/articles/embargoes-exclusives-in-pr/",
+          "domain": "prnewswire.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "7 embargo rules from a journalist who hates them (hi, it's me!)",
+          "url": "https://jonisweet.substack.com/p/how-to-use-embargoes-in-pr",
+          "domain": "jonisweet.substack.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "How to use embargoes: our essential guide",
+          "url": "https://roxhillmedia.com/resources/pr-insights/how-to-use-embargoes/",
+          "domain": "roxhillmedia.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "Exclusive vs Embargoed Preview: A Crucial Distinction in PR",
+          "url": "https://storiesout.com/en/press-relations-blog/lexicon/exclusive-vs-embargoed-preview-pr/",
+          "domain": "storiesout.com",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "Exclusive v. Embargo: Which One Do You Use?",
+          "url": "https://plat4orm.com/blog/exclusive-v-embargo-which-one-do-you-use/",
+          "domain": "plat4orm.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What does a press embargo mean?",
+        "What is the difference between an embargo and an exclusive in PR?",
+        "What does an embargoed press release look like?",
+        "What is the embargo section of a press conference?"
+      ],
+      "relatedQueries": [
+        "Press embargo vs exclusive reddit",
+        "Press release Notes",
+        "Press release in public relations",
+        "Press release article",
+        "Press report"
+      ]
+    },
+    {
+      "id": "vc-manual250-c1-014",
+      "keyword": "media interview preparation for startup founders",
+      "found": true,
+      "query": "media interview preparation for startup founders",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How to Nail Media Interviews as a Startup Founder",
+          "url": "https://www.linkedin.com/posts/andrewmarshallpeterson_how-to-nail-media-interviews-as-a-startup-activity-7324225618101854208-epUg",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 2,
+          "title": "How To Prepare for a Media Interview as a Startup Founder",
+          "url": "https://www.speedinvest.com/knowledge/how-to-prepare-for-a-media-interview-as-a-startup-founder",
+          "domain": "speedinvest.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Interviewing at a startup",
+          "url": "https://www.ycombinator.com/library/F2-interviewing-at-a-startup",
+          "domain": "ycombinator.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "The 239 interview questions technical startup founders should ...",
+          "url": "https://blog.squadra.vc/articles/the-239-interview-questions-technical-startup-founders-should-ask-every-candidate",
+          "domain": "blog.squadra.vc",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "What should one ask in an interview with a pre-series ...",
+          "url": "https://www.reddit.com/r/ExperiencedDevs/comments/s6a8wa/what_should_one_ask_in_an_interview_with_a/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "A Cheatsheet to Ace Your Startup Job Interview! | Maroon Oak",
+          "url": "https://www.maroonoak.com/cheatsheet-to-ace-your-startup-job-interview/",
+          "domain": "maroonoak.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Art of the Interview: 3 Questions Startup Founders Love",
+          "url": "https://gothamghostwriters.com/art-of-the-interview-questions-for-startup-founders/",
+          "domain": "gothamghostwriters.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "How to prepare for interviews at startups vs large companies",
+          "url": "https://www.linkedin.com/posts/jordancarver_big-differences-between-interview-prep-for-activity-7381690335019769856-awpa",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is the 30-60-90 rule in an interview?",
+        "What are some good interview questions for startup founders?",
+        "What are the 5 C's of interviewing?",
+        "What is the 80/20 rule in interviewing?"
+      ],
+      "relatedQueries": [
+        "Best media interview preparation for startup founders",
+        "Questions to ask a startup founder in an interview",
+        "Startup coding interview questions",
+        "Interview startup",
+        "Taro interview prep",
+        "Are startup interviews easier",
+        "Questions for startups",
+        "Questions to ask a startup before joining"
+      ]
+    },
+    {
+      "id": "vc-manual250-c1-015",
+      "keyword": "how to ask a journalist for a correction",
+      "found": true,
+      "query": "how to ask a journalist for a correction",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How Do You Ask a Journalist for a Correction?",
+          "url": "https://www.notified.com/blog/how-do-you-ask-a-journalist-for-a-correction",
+          "domain": "notified.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "Should you ask a journalist for a correction?",
+          "url": "https://www.linkedin.com/posts/warrenweeksmedia_should-we-ask-a-journalist-for-a-correction-activity-7320454326684897313-sfcy",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 3,
+          "title": "Asking a journalist for a correction 101 | PRmoment.com",
+          "url": "https://www.prmoment.com/pr-insight/asking-a-journalist-for-a-correction-101",
+          "domain": "prmoment.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Media Tip: How to Ask a Journalist for a Correction",
+          "url": "https://www.jaffepr.com/blog/media-corrections-when-ask",
+          "domain": "jaffepr.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Advice on requesting a correction from a major news outlet",
+          "url": "https://www.reddit.com/r/Journalism/comments/1s9nshe/advice_on_requesting_a_correction_from_a_major/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "A PR pro's guide to requesting corrections from journalists",
+          "url": "https://www.prweek.com/article/1892012/pr-pros-guide-requesting-corrections-journalists",
+          "domain": "prweek.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "When, if ever, should you ask a journalist for a correction?",
+          "url": "https://honner.com.au/insights/when-if-ever-should-you-ask-a-journalist-for-a-correction/",
+          "domain": "honner.com.au",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "How to Ask for Media Corrections",
+          "url": "https://www.rep-ink.com/inksights/what-to-do-when-the-media-gets-it-wrong/",
+          "domain": "rep-ink.com",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "How to Ask Journalists for Corrections Without Burning Bridges",
+          "url": "https://jonisweet.substack.com/p/how-to-ask-journalists-for-corrections",
+          "domain": "jonisweet.substack.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How to politely ask for correction?",
+        "How do I contact a journalist about a story?",
+        "What is it called when a newspaper corrects a mistake?",
+        "What are good questions to ask a journalist?"
+      ],
+      "relatedQueries": [
+        "How to ask a journalist for a correction sample",
+        "How to ask a journalist for a correction email",
+        "How to ask a journalist for a correction pdf",
+        "How to ask a journalist for a correction letter",
+        "How to ask a journalist for a correction examples"
+      ]
+    },
+    {
+      "id": "vc-manual250-c1-016",
+      "keyword": "how to pitch a contributed article",
+      "found": true,
+      "query": "how to pitch a contributed article",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How To Pitch an Article to A Magazine with No Experience",
+          "url": "https://bettermarketing.pub/how-to-pitch-an-article-to-a-magazine-with-no-experience-71b8386a645b",
+          "domain": "bettermarketing.pub",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Best practices for pitching contributed articles to the media",
+          "url": "https://www.trueventures.com/blog/best-practices-pitching-contributed-articles",
+          "domain": "trueventures.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "Can someone explain to me how to pitch an article like I'm ...",
+          "url": "https://www.reddit.com/r/freelanceWriters/comments/1ix7w8g/can_someone_explain_to_me_how_to_pitch_an_article/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "8 Tips for Pitching Articles to Editors",
+          "url": "https://www.linkedin.com/pulse/8-tips-pitching-articles-editors-damon-garn-ey5lc",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 5,
+          "title": "How To Pitch an Article (With Helpful Tips and Example)",
+          "url": "https://www.indeed.com/career-advice/career-development/how-to-pitch-an-article",
+          "domain": "indeed.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Freelance contributors: how to offer us a contribution",
+          "url": "https://www.theguardian.com/info/1999/nov/22/contributors-guide-and-contacts",
+          "domain": "theguardian.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "5 Best Practices for Writing Article Pitches: How to Email Pitch",
+          "url": "https://www.interodigital.com/blog/5-secrets-for-writing-successful-article-pitches/",
+          "domain": "interodigital.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "The $40000 Article Pitch",
+          "url": "https://writingcooperative.com/the-40-000-article-pitch-33f6284141dd",
+          "domain": "writingcooperative.com",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "How to Write a Contributed Article that Gets Published in ...",
+          "url": "https://blog.propllr.com/how-to-write-a-contributed-article-that-gets-published",
+          "domain": "blog.propllr.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How do I pitch an article?",
+        "How much does the Guardian pay for an article?",
+        "How much should I charge for a 500 word article?",
+        "What is a good pitch example?"
+      ],
+      "relatedQueries": [
+        "How to pitch a contributed article template",
+        "How to pitch a contributed article sample",
+        "How to pitch a contributed article example",
+        "Article pitch examples",
+        "Magazine article pitch examples",
+        "How to pitch an article to a magazine",
+        "Article pitch template",
+        "How to write a pitch for an article"
+      ]
+    },
+    {
+      "id": "vc-manual250-c1-017",
+      "keyword": "how to pitch yourself as a podcast guest",
+      "found": true,
+      "query": "how to pitch yourself as a podcast guest",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Advice on pitching myself as a podcast guest",
+          "url": "https://www.reddit.com/r/smallbusiness/comments/1npfqrs/advice_on_pitching_myself_as_a_podcast_guest/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "5 Tips for Pitching a Guest for a Podcast - The OnePitch Tea",
+          "url": "https://blog.onepitch.co/5-tips-for-pitching-a-guest-for-a-podcast",
+          "domain": "blog.onepitch.co",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "10 Step Guide to How to Write the Perfect Podcast Guest ...",
+          "url": "https://philfraser.co.uk/perfect-podcast-guest-pitch-email/",
+          "domain": "philfraser.co.uk",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "How to Pitch Yourself as a Podcast Guest (and Actually Get ...",
+          "url": "https://www.linkedin.com/pulse/how-pitch-yourself-podcast-guest-actually-get-booked-sara-lohse-afc--dlipc",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 5,
+          "title": "How To Pitch Yourself For A Podcast",
+          "url": "https://jasminestar.com/how-to-pitch-yourself-for-a-podcast/",
+          "domain": "jasminestar.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "How to Pitch a Podcast That You Want to Be a Guest On",
+          "url": "https://www.podmatch.com/blog/how-to-pitch-a-podcast-that-you-want-to-be-a-guest-on",
+          "domain": "podmatch.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "How To Pitch Podcasts And Be A Great Podcast Guest With ...",
+          "url": "https://www.thecreativepenn.com/2025/06/23/how-to-pitch-podcasts-and-be-a-great-podcast-guest-with-matty-dalrymple/",
+          "domain": "thecreativepenn.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "7 Steps to Write a Podcast Pitch That Gets You Booked",
+          "url": "https://www.cision.com/resources/articles/podcast-pitch/",
+          "domain": "cision.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Do you get paid for being a guest on a podcast?",
+        "Is it too late to start a podcast in 2026?",
+        "How much does a podcast with 5000 listeners make?",
+        "How do you pitch your podcast?"
+      ],
+      "relatedQueries": [
+        "How to pitch yourself as a podcast guest sample",
+        "How to pitch yourself as a podcast guest examples",
+        "How to pitch yourself as a podcast guest pdf",
+        "How to pitch yourself as a podcast guest reddit",
+        "Podcast guest pitch template",
+        "Podcast pitch examples",
+        "Podcast pitch template",
+        "Podcast email examples"
+      ]
+    },
+    {
+      "id": "vc-manual250-c1-018",
+      "keyword": "conference talk proposal for startup founders",
+      "found": true,
+      "query": "conference talk proposal for startup founders",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How To Write CfP Submissions That Get Your Tech ...",
+          "url": "https://www.lenareinhard.com/articles/how-to-write-cfp-submissions-that-get-your-tech-conference-talk-accepte",
+          "domain": "lenareinhard.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "Conference Talk Proposal Examples",
+          "url": "https://thoughtbot.com/blog/conference-talk-proposal-examples",
+          "domain": "thoughtbot.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "Craft A Conference Talk Proposal That Sparks Joy - Anvil Works",
+          "url": "https://anvil.works/blog/conference-talks-that-spark-joy",
+          "domain": "anvil.works",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "How to propose a talk for a conference - Medium",
+          "url": "https://mkoerbi.medium.com/how-to-propose-a-talk-for-a-conference-e1401308fb4f",
+          "domain": "mkoerbi.medium.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Crafting Compelling Conference Proposals from Concept to ...",
+          "url": "https://www.youtube.com/watch?v=ihgk5xWXorU",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 6,
+          "title": "Tips for submitting a proposal for a conference talk",
+          "url": "https://elixirforum.com/t/tips-for-submitting-a-proposal-for-a-conference-talk/23085",
+          "domain": "elixirforum.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "How to Prepare for Startup Conferences",
+          "url": "https://www.reddit.com/r/startups/comments/6ze9kd/how_to_prepare_for_startup_conferences/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "How to find an expert to prepare for investor meetings ...",
+          "url": "https://www.facebook.com/groups/LeanStartupCircleEgypt/posts/3749622041946026/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What are 5 things all proposals should include?",
+        "What are some good topics for a conference?",
+        "What are some good ideas for an event proposal?",
+        "What are the 7 parts of a project proposal template?"
+      ],
+      "relatedQueries": [
+        "Conference talk proposal for startup founders template",
+        "Conference talk proposal for startup founders sample",
+        "Conference talk proposal for startup founders example"
+      ]
+    },
+    {
+      "id": "vc-manual250-c1-019",
+      "keyword": "startup founder bio examples",
+      "found": true,
+      "query": "startup founder bio examples",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How to write a founder's bio for a startup if I don't have any ...",
+          "url": "https://www.quora.com/How-do-I-write-a-founders-bio-for-a-startup-if-I-dont-have-any-previous-experience-in-the-industry",
+          "domain": "quora.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Professional Bio Examples: 29 Work Bios I Keep in My ...",
+          "url": "https://blog.hubspot.com/marketing/professional-bio-examples",
+          "domain": "blog.hubspot.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "How to Build an Effective Startup Founder Profile",
+          "url": "https://writrox.com/startup-founder-profile/",
+          "domain": "writrox.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "25 Small Business Bio Examples That Build Trust and ...",
+          "url": "https://www.mobilocard.com/post/small-business-bio-examples?srsltid=AfmBOorT84fwC_8dCHrNAaU8dMi14npRXz8281Csu1MeOtDFjy7xjj_B",
+          "domain": "mobilocard.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "5 great entrepreneur biographies to inspire your startup",
+          "url": "https://medium.com/@cdgrams/5-great-entrepreneur-biographies-to-inspire-your-startup-70f4b2478f41",
+          "domain": "medium.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "9 Instagram Bio Ideas for Business",
+          "url": "https://www.socialmediaexaminer.com/9-instagram-bio-ideas-for-business/",
+          "domain": "socialmediaexaminer.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "5 Professional Short Bio Examples + How to Write One",
+          "url": "https://selfpublishing.com/short-bio-examples/",
+          "domain": "selfpublishing.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Top 50 startup founders in India | Jatin Saini | 202 comments",
+          "url": "https://www.linkedin.com/posts/jatin-saini_top-50-startup-founders-in-india-activity-7333330429460017152-MY4x",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What are good bio examples?",
+        "What are some good bio ideas for entrepreneurs?",
+        "What is a 3 line bio?",
+        "What is the best short bio?"
+      ],
+      "relatedQueries": [
+        "Simple short bio example yourself",
+        "Startup founder bio examples for instagram",
+        "Short professional bio examples",
+        "Bio about myself examples",
+        "Simple short bio example yourself for Instagram",
+        "Simple short bio example yourself for work",
+        "Sales bio examples",
+        "Simple short bio example yourself for social media"
+      ]
+    },
+    {
+      "id": "vc-manual250-c1-020",
+      "keyword": "how to respond to journalist source requests",
+      "found": true,
+      "query": "how to respond to journalist source requests",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How to reply to journalist call-for-sources to guarantee ...",
+          "url": "https://www.truesix.co/blog/how-to-reply-to-journalist-call-for-sources-to-guarantee-the-best-results",
+          "domain": "truesix.co",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "How to handle Media Request: A Guide for Startups",
+          "url": "https://www.wordsandpixels.co/startup-school/how-to-handle-a-request-from-a-journalist",
+          "domain": "wordsandpixels.co",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "5 tips for replying to journalist requests - Vuelio",
+          "url": "https://www.vuelio.com/uk/blog/5-tips-for-replying-to-journalist-requests/",
+          "domain": "vuelio.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "How to respond to journalist requests and gain coverage",
+          "url": "https://www.responsesource.com/blog/respond-journalist-requests-gain-coverage-guide-small-businesses/",
+          "domain": "responsesource.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Best Practices: The No-Surprises Rule, a Fair and Full ...",
+          "url": "https://ethicsandjournalism.org/resources/best-practices/best-practices-the-no-surprises-rule-a-fair-and-full-opportunity-to-respond/",
+          "domain": "ethicsandjournalism.org",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Responding to media requests – the basics",
+          "url": "https://dotstar.media/responding-to-media-requests-the-basics/",
+          "domain": "dotstar.media",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Journalist Requests: How to Find Them and Respond for ...",
+          "url": "https://www.buzzstream.com/blog/journalist-requests/",
+          "domain": "buzzstream.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "What's a tactful way to respond to a source who asks to see ...",
+          "url": "https://www.reddit.com/r/Journalism/comments/1cowlda/whats_a_tactful_way_to_respond_to_a_source_who/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "Responding to Media Inquiries",
+          "url": "https://www.wartburg.edu/marketing/media-inquiries/",
+          "domain": "wartburg.edu",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How to give a perfect reply?",
+        "What is the right of response in journalism?",
+        "How do journalists get their sources?",
+        "What are the 7 elements of newsworthiness?"
+      ],
+      "relatedQueries": [
+        "How to respond to journalist source requests sample",
+        "How to respond to journalist source requests email"
+      ]
+    },
+    {
+      "id": "vc-manual250-c1-021",
+      "keyword": "how to get comfortable on camera",
+      "found": true,
+      "query": "how to get comfortable on camera",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "[Question] How did you finally get comfortable in front of a ...",
+          "url": "https://www.reddit.com/r/youtubers/comments/bkh0lb/question_how_did_you_finally_get_comfortable_in/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "3 tips to help get comfortable on camera",
+          "url": "https://launchthedamnthing.com/blog/3-tips-to-get-comfortable-on-camera",
+          "domain": "launchthedamnthing.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "How to get comfortable in front of a video camera",
+          "url": "https://lindaugelow.com/video-camera-comfortable/",
+          "domain": "lindaugelow.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "How to Get More Comfortable on Camera",
+          "url": "https://www.techsmith.com/blog/get-comfortable-on-camera/",
+          "domain": "techsmith.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "15 Tips to Get More Comfortable on Camera",
+          "url": "https://www.servemethesky.com/blog/get-comfortable-on-camera",
+          "domain": "servemethesky.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "How to Make People Comfortable In Front of the Camera",
+          "url": "https://www.impactplus.com/learn/how-to-make-people-comfortable-on-camera",
+          "domain": "impactplus.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Getting Comfortable On Screen | Online Teaching",
+          "url": "https://onlineteaching.umich.edu/articles/getting-comfortable-on-screen/",
+          "domain": "onlineteaching.umich.edu",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How to look comfortable on camera?",
+        "How to not feel awkward on camera?",
+        "Why am I so uncomfortable in front of a camera?",
+        "Why do I look bad in front camera but good in mirror?"
+      ],
+      "relatedQueries": [
+        "How to get comfortable on camera reddit",
+        "30 Day talking to camera Challenge"
+      ]
+    },
+    {
+      "id": "vc-manual250-c1-022",
+      "keyword": "teleprompter vs bullet points for video",
+      "found": true,
+      "query": "teleprompter vs bullet points for video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Do you memorize lines or use a teleprompter? : r/NewTubers",
+          "url": "https://www.reddit.com/r/NewTubers/comments/18h0i60/do_you_memorize_lines_or_use_a_teleprompter/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Script vs Teleprompter vs Outline - THE Method That Feels ...",
+          "url": "https://vidpromom.com/script-vs-teleprompter-vs-outline-the-method-that-feels-natural-ep-67/",
+          "domain": "vidpromom.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "How to write a script for a teleprompter?",
+          "url": "https://teleprompterpad.com/blogs/article/how-to-write-teleprompter-script?srsltid=AfmBOoo8g8pwhAHOjmDisdfJVJETL3kBZi1kN61KAe8sQZ1JEAibjC2Q",
+          "domain": "teleprompterpad.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Teleprompter vs Memorizing Scripts: Which Works Better?",
+          "url": "https://evelize.com/blog/teleprompter-vs-memorizing-scripts-which-works-better",
+          "domain": "evelize.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Four Tips for Using a Teleprompter",
+          "url": "https://positivelightmedia.com/four-tips-for-using-a-teleprompter/",
+          "domain": "positivelightmedia.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Should You Use a Teleprompter? A Practical Decision Guide",
+          "url": "https://solprompter.com/blog/should-you-use-a-teleprompter/",
+          "domain": "solprompter.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Teleprompter vs Bullet Points: Which Is Better for Video?",
+          "url": "https://birdcue.com/blog/teleprompter-vs-bullet-points",
+          "domain": "birdcue.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "Should I use a teleprompter, or should I memorize my script ...",
+          "url": "https://www.instagram.com/p/C4qJlWviBfc/",
+          "domain": "instagram.com",
+          "resultType": "video_or_social"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Do most YouTubers use a teleprompter?",
+        "Does Donald Trump use a teleprompter for his speeches?",
+        "What are the drawbacks of using a prompter?",
+        "What to use instead of a teleprompter?"
+      ],
+      "relatedQueries": [
+        "Teleprompter vs bullet points for video script",
+        "Teleprompter vs bullet points for video free",
+        "Teleprompter vs bullet points for video reddit",
+        "Teleprompter for YouTube videos",
+        "Using a teleprompter",
+        "Teleprompter reddit",
+        "What does a teleprompter do",
+        "Is a teleprompter worth it"
+      ]
+    },
+    {
+      "id": "vc-manual250-c1-023",
+      "keyword": "home office lighting for video recording",
+      "found": true,
+      "query": "home office lighting for video recording",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Struggling with home office lighting for video calls",
+          "url": "https://www.reddit.com/r/homeoffice/comments/1qcssi7/struggling_with_home_office_lighting_for_video/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Video Conference Lighting for Zoom with Stand, 30 Modes ...",
+          "url": "https://www.amazon.com/LitONES-Conference-Adjustable-Brightness-Versatile/dp/B0CBWW3YLR",
+          "domain": "amazon.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "The best lighting for video conferencing, according to experts",
+          "url": "https://blog.webex.com/collaboration/video-conferencing/best-lighting/",
+          "domain": "blog.webex.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "The 2 Best Ring Lights of 2026 | Reviews by Wirecutter",
+          "url": "https://www.nytimes.com/wirecutter/reviews/best-ring-lights/",
+          "domain": "nytimes.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Best lights for Zoom calls in 2026",
+          "url": "https://www.digitalcameraworld.com/buying-guides/best-lights-for-zoom-calls",
+          "domain": "digitalcameraworld.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Zoom & Video Conference Lighting Kit",
+          "url": "https://lumecube.com/products/video-conference-lighting-kit-for-remote-workers?srsltid=AfmBOopGSt8mXQyeauvNxCn8Ax7GQXa4POlrYJIu6d11pGCrk7tgrIzW",
+          "domain": "lumecube.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Camera Lighting For Podcasting",
+          "url": "https://www.bestbuy.com/site/shop/camera-lighting-for-podcasting",
+          "domain": "bestbuy.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Best Lighting for Video Calls, Streaming & Home Office in ...",
+          "url": "https://www.standesk.eu/post/best-lighting-for-video-calls-streaming-home-office",
+          "domain": "standesk.eu",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What kind of lighting is best for video recording at home?",
+        "What is the best light for video recording?",
+        "What is the best lighting for home office video calls?",
+        "What is the 5'7\" lighting rule?"
+      ],
+      "relatedQueries": [
+        "Home office lighting for video recording iphone",
+        "Home office lighting for video recording reddit",
+        "Best home office lighting for video recording",
+        "Best lighting for video conferencing at home",
+        "Best desk light for video calls",
+        "Best lighting for video calls with glasses",
+        "Lume Cube Video Conference Lighting Kit",
+        "Video Conference Light for Laptop"
+      ]
+    },
+    {
+      "id": "vc-manual250-c1-024",
+      "keyword": "how to reduce echo when recording video",
+      "found": true,
+      "query": "how to reduce echo when recording video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Tricks to eliminate echo when recording voice overs?",
+          "url": "https://www.reddit.com/r/instructionaldesign/comments/y0ng14/tricks_to_eliminate_echo_when_recording_voice/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Echo & Reverb Remover: Studio Sound from Empty Room ...",
+          "url": "https://cleanvoice.ai/echo-reverb-remover/",
+          "domain": "cleanvoice.ai",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "AI Echo Remover for Video Online Free ｜ Vmake Labs",
+          "url": "https://vmake.ai/remove-echo-from-video",
+          "domain": "vmake.ai",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Remove Echo from Audio & Video Online Free",
+          "url": "https://voicecleaner.ai/echo-remover",
+          "domain": "voicecleaner.ai",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "How do I get rid of echo in a video?",
+          "url": "https://www.facebook.com/groups/252535418553355/posts/1781345509005664/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 6,
+          "title": "Remove Echo from Audio Online | AI Dereverb",
+          "url": "https://www.cleanaudio.io/remove-echo-from-audio",
+          "domain": "cleanaudio.io",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Reduce Voice ECHO and Amplify VOLUME of Audio with ...",
+          "url": "https://www.youtube.com/watch?v=zGZp-k1FVT0",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 8,
+          "title": "How to Remove Echo from Your Audio Using EchoRemover",
+          "url": "https://borisfx.com/blog/how-to-remove-echo-from-audio-using-echoremover/",
+          "domain": "borisfx.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How can I reduce echo in my video?",
+        "How to remove echo from audio recording?",
+        "How do I turn off echoing?",
+        "How to reduce echo sound?"
+      ],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual250-c1-025",
+      "keyword": "where to look when recording a video",
+      "found": true,
+      "query": "where to look when recording a video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Where to look when making a video?! : r/NewTubers",
+          "url": "https://www.reddit.com/r/NewTubers/comments/nzh003/where_to_look_when_making_a_video/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "ZipTip – How to “look them in the eye” when recording videos",
+          "url": "https://www.zipperhq.com/2020/11/13/ziptip-how-to-maintain-better-eye-contact/",
+          "domain": "zipperhq.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Where to Look When You Record Yourself",
+          "url": "https://hundredfoldvideo.com/blog/where-to-look-when-you-record-yourself",
+          "domain": "hundredfoldvideo.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Where Should I Look When Talking On Camera?",
+          "url": "https://www.proudbusinessproductions.com/blog/2020/1/18/where-should-i-look-when-talking-on-camera",
+          "domain": "proudbusinessproductions.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Replying to @Ally Rooker Where you should look when filming ...",
+          "url": "https://www.tiktok.com/@thekeirajones/video/7273921927599656234?lang=en",
+          "domain": "tiktok.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 6,
+          "title": "What can I do during recording to make my video look better?",
+          "url": "https://teaching.pitt.edu/resources/what-can-i-do-during-recording-to-make-my-video-look-better/",
+          "domain": "teaching.pitt.edu",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "When recording a video, where should you look?",
+        "Where to look at your phone when taking a selfie?",
+        "Do you look how you look in the mirror or back camera?",
+        "Do you look into the camera or the screen pictures?"
+      ],
+      "relatedQueries": [
+        "Where to look when recording a video iphone",
+        "Where to look when recording a video on phone",
+        "Where to look when recording a video reddit",
+        "Make eyes look at camera in video",
+        "Descript",
+        "Look AT this video 👀",
+        "NVIDIA Broadcast",
+        "Riverside fm eye contact"
+      ]
+    },
+    {
+      "id": "vc-manual250-c1-026",
+      "keyword": "how to frame a talking head video",
+      "found": true,
+      "query": "how to frame a talking head video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "The Ultimate Guide to Talking Head Videos for Beginners",
+          "url": "https://www.youtube.com/watch?v=Qqt0hBDTzCo",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 2,
+          "title": "Talking head videos don't have to be boring! When it comes ...",
+          "url": "https://www.instagram.com/reel/DVEPAMoCSdr/?hl=en",
+          "domain": "instagram.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 3,
+          "title": "Architecting a Talking-Head Studio - Medium",
+          "url": "https://piethein.medium.com/architecting-a-talking-head-studio-a7a4ebbab9a3",
+          "domain": "piethein.medium.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "How do you create talking head videos?",
+          "url": "https://www.reddit.com/r/content_marketing/comments/1ooylsb/how_do_you_create_talking_head_videos/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "How to Make a Talking Head Video",
+          "url": "https://www.backstage.com/magazine/article/how-to-make-a-talking-head-video-78858/",
+          "domain": "backstage.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Film Yourself 101: How to Create a Talking Head Video",
+          "url": "https://www.skillshare.com/en/classes/film-yourself-101-how-to-create-a-talking-head-video/1306789744?srsltid=AfmBOor0ut0V5EOMfrj-yamNCO92SpFjM9OhIt15PwSmsVJeC87XQZCg",
+          "domain": "skillshare.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "How to frame a talking head | Shoot Marketing Video Like a Pro",
+          "url": "https://www.youtube.com/watch?v=3_0WNu-Vo0A",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 8,
+          "title": "How to Film Talking Head Videos That People *Actually* Watch",
+          "url": "https://www.youtube.com/watch?v=aLPqVr5zdmA&vl=en-US",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How to make a talking head video interesting?",
+        "What is the best camera for talking head videos?",
+        "What is the best aperture for a talking head video?",
+        "What is the talking head video format?"
+      ],
+      "relatedQueries": [
+        "How to frame a talking head video on iphone",
+        "Talking head video example",
+        "Talking head video editing",
+        "How to create a talking head video in CapCut",
+        "How to make a talking head video",
+        "Talking head video background",
+        "Talking head videos",
+        "Talking head video assets"
+      ]
+    },
+    {
+      "id": "vc-manual250-c1-027",
+      "keyword": "how to film a two person interview",
+      "found": true,
+      "query": "how to film a two person interview",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Help please - how to light a two person interview",
+          "url": "https://www.reddit.com/r/videography/comments/ypphry/help_please_how_to_light_a_two_person_interview/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "How to shoot a 2-person interview",
+          "url": "https://help.shootsta.com/en/articles/setting-up-for-a-2-person-interview",
+          "domain": "help.shootsta.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "How to Set Up a 2 Person Interview: Cameras, Audio, and ...",
+          "url": "https://store.hollyland.com/blogs/creator-hub/set-up-a-2-person-interview?srsltid=AfmBOorkdActJwJxff0EI2pAdtfHXQklULgxELDjZ5cnvScDojXLiF05",
+          "domain": "store.hollyland.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "How to Prepare for a Corporate Video 2 Person Interview ...",
+          "url": "https://beverlyboy.com/corporate-video-production/how-to-prepare-for-a-corporate-video-2-person-interview-setup/",
+          "domain": "beverlyboy.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Technique for Two-Person Interview With a Single Camera ...",
+          "url": "https://www.dvinfo.net/forum/high-definition-video-editing-solutions/64458-technique-two-person-interview-single-camera.html",
+          "domain": "dvinfo.net",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "How to Shoot a Two Person Interview With One Camera",
+          "url": "https://www.youtube.com/watch?v=IC2CtezhZ6c",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is the 30-60-90 rule in an interview?",
+        "What is the 80/20 rule in interviewing?",
+        "What are the 5 C's of interviewing?",
+        "What is the best lighting setup for a 2-person interview?"
+      ],
+      "relatedQueries": [
+        "How to film a two person interview reddit",
+        "Two person interview setup",
+        "Two person interview lighting setup",
+        "3 camera 2 person interview setup",
+        "How to film two people talking",
+        "Filming an interview with two cameras",
+        "Multi camera interview setup",
+        "2-person podcast lighting setup"
+      ]
+    },
+    {
+      "id": "vc-manual250-c1-028",
+      "keyword": "how to shoot b roll for a founder video",
+      "found": true,
+      "query": "how to shoot b roll for a founder video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "20 Essential B-Roll Shots Every Business Owner Needs ...",
+          "url": "https://medium.com/@khushboorajpal16/20-essential-b-roll-shots-every-business-owner-needs-repeat-these-forever-ec7a80e4d420",
+          "domain": "medium.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "How to Shoot Cinematic B Roll for Beginners",
+          "url": "https://www.youtube.com/watch?v=gTwXyinkshw",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 3,
+          "title": "How To Shoot B-Roll - Transom",
+          "url": "https://transom.org/2014/shooting-b-roll/",
+          "domain": "transom.org",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "How do you structure B-roll so it actually makes sense?",
+          "url": "https://www.reddit.com/r/videography/comments/1trzpig/how_do_you_structure_broll_so_it_actually_makes/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "B-Roll: The Secret Sauce of Any Great Video",
+          "url": "https://www.techsmith.com/blog/b-roll-secret-sauce-great-video/",
+          "domain": "techsmith.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "save this for b-roll ideas!🎥 . . . . #explore #contentcreation ...",
+          "url": "https://www.instagram.com/reel/DYevjRGsYWU/",
+          "domain": "instagram.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 7,
+          "title": "How to Shoot B-Roll for Travel Videos",
+          "url": "https://pascalbasel.com/how-to-shoot-b-roll-for-travel-videos/",
+          "domain": "pascalbasel.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "5 Tips for Shooting Better B-roll",
+          "url": "https://www.bitesite.ca/blog/5-tips-for-shooting-better-b-roll",
+          "domain": "bitesite.ca",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How to get good B-roll footage?",
+        "How do I add a B-roll to a video?",
+        "What does the 80/20 rule mean in video editing?",
+        "What are some engaging ideas for B-roll footage?"
+      ],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual250-c1-029",
+      "keyword": "newsjacking for startups",
+      "found": true,
+      "query": "newsjacking for startups",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Newsjacking of Startup World | The Valuation Wars",
+          "url": "https://www.linkedin.com/pulse/newsjacking-startup-world-valuation-wars-vamsi-bhogi",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 2,
+          "title": "What Is Newsjacking for Startup Growth? - Viral-Impact",
+          "url": "https://www.viral-impact.com/knowledge/what-is-newsjacking-and-how-do-startups-use-it",
+          "domain": "viral-impact.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Is any small/solo business using newsjacking to raise ...",
+          "url": "https://www.reddit.com/r/startups/comments/16jdyon/is_any_smallsolo_business_using_newsjacking_to/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "How to Capture Audiences & Business Growth with ...",
+          "url": "https://blog.growthinstitute.com/marketing/newsjacking",
+          "domain": "blog.growthinstitute.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "4 Easy Ways for Startups to Get Media Coverage - Inc. Magazine",
+          "url": "https://www.inc.com/jeff-haden/4-easy-ways-for-startups-to-get-media-coverage.html",
+          "domain": "inc.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Newsjacking",
+          "url": "https://www.newsjacking.com/",
+          "domain": "newsjacking.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Newsjacking, or Reaching the Media via Search Engines",
+          "url": "https://www.youtube.com/watch?v=wd1j7eO-liQ",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 8,
+          "title": "What Is Newsjacking | Sprinklr Glossary",
+          "url": "https://www.sprinklr.com/social-media-glossary/newsjacking/",
+          "domain": "sprinklr.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is the 80/20 rule for startups?",
+        "Can you provide an example of newsjacking?",
+        "Is it true that 90% of startups fail?",
+        "What are the best sources for startup news?"
+      ],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual250-c1-030",
+      "keyword": "how to record a video press statement",
+      "found": true,
+      "query": "how to record a video press statement",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "What is a video press release?",
+          "url": "https://www.maxim-pr.co.uk/news/what-is-a-video-press-release",
+          "domain": "maxim-pr.co.uk",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "How can I add a video to a press release? – Support",
+          "url": "https://help.mynewsdesk.com/faq/add-video-to-press-release/",
+          "domain": "help.mynewsdesk.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "How to Optimize Video for Your Press Release",
+          "url": "https://www.businesswire.com/resources-education/videos/optimize-videos-press-release",
+          "domain": "businesswire.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Why you should turn every press release into a video",
+          "url": "https://storykit.io/blog/why-you-should-turn-every-press-release-into-a-video",
+          "domain": "storykit.io",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Create Press Release Videos with Templates | Free & Online",
+          "url": "https://www.flexclip.com/create/press-release-video.html",
+          "domain": "flexclip.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "2360 Press Release Stock Video Footage",
+          "url": "https://www.shutterstock.com/video/search/press-release",
+          "domain": "shutterstock.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Creating a press release: How-tos, templates, and tips",
+          "url": "https://www.canva.com/docs/press-releases/",
+          "domain": "canva.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Press Release – Example Learn how to write a ...",
+          "url": "https://www.facebook.com/EnglishWithRaniMam/posts/press-release-examplelearn-how-to-write-a-press-release-to-inform-the-public-abo/1257016793205885/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How can I record a video message?",
+        "What are the 5 W's in a press release?",
+        "Where can I submit a press release for free?",
+        "How much does it cost to have a press release written?"
+      ],
+      "relatedQueries": [
+        "Write a press release",
+        "Press release video",
+        "Sample press release format",
+        "Draft press release",
+        "Press release Style guide",
+        "APA press release format",
+        "Best practices for writing press releases",
+        "Press release writing practice"
+      ]
+    },
+    {
+      "id": "vc-manual250-c1-031",
+      "keyword": "startup pivot announcement video",
+      "found": true,
+      "query": "startup pivot announcement video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Startup Experts Reveal Their Favorite Pivot Stories",
+          "url": "https://www.youtube.com/watch?v=DmehFuCMtvc",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 2,
+          "title": "What Is a Startup Pivot? Types, Examples, and When to ...",
+          "url": "https://www.startupscience.io/articles/startup-pivot",
+          "domain": "startupscience.io",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "How Do I Pivot My Startup?",
+          "url": "https://www.youtube.com/watch?v=1bmrMl8wFRk",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 4,
+          "title": "Pivot Till It Hurts: Making Mobile Video Profitable – Pocket ...",
+          "url": "https://www.disruptingjapan.com/pivot-till-hurts-making-mobile-video-profitable-pocket-supernova/",
+          "domain": "disruptingjapan.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "How to pivot your startup idea without killing it",
+          "url": "https://www.linkedin.com/posts/ashmaurya_the-pivot-paradox-did-you-know-23-of-activity-7303117907385888770-H_7E",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 6,
+          "title": "The art of the pivot, part 2: How, why and when to pivot",
+          "url": "https://www.lennysnewsletter.com/p/the-art-of-the-pivot-part-2-how-why",
+          "domain": "lennysnewsletter.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "SaaS Startup Pivoting: A Step-by-Step Guide for Founders ...",
+          "url": "https://www.gtmxventures.com/blog/how-to-pivot-your-saas-startup",
+          "domain": "gtmxventures.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is a pivot strategy in a startup?",
+        "What are the 7 stages of startup?",
+        "Who owns Pivot?",
+        "What is pivot strategy?"
+      ],
+      "relatedQueries": [
+        "How to pivot a startup",
+        "When to pivot"
+      ]
+    },
+    {
+      "id": "vc-manual250-c1-032",
+      "keyword": "how to announce a company rebrand to customers",
+      "found": true,
+      "query": "how to announce a company rebrand to customers",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How to Announce a Rebrand Without Losing Customers",
+          "url": "https://brandedagency.com/blog/how-to-announce-a-rebrand",
+          "domain": "brandedagency.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "6 Rebranding Announcement Examples for Social Media",
+          "url": "https://wearesculpt.com/blog/rebranding-examples/",
+          "domain": "wearesculpt.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "How to do a rebranding announcement?",
+          "url": "https://wearemotto.com/blog/how-to-do-a-rebranding-announcement",
+          "domain": "wearemotto.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Rebranding Announcement Design",
+          "url": "https://www.pinterest.com/ideas/rebranding-announcement-design/948153490925/",
+          "domain": "pinterest.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Rebranding: definition, how-tos, and examples",
+          "url": "https://www.canva.com/learn/rebranding/",
+          "domain": "canva.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "How to Announce Rebranding on Social Media",
+          "url": "https://www.smashbrand.com/articles/how-to-announce-rebranding-on-social-media/",
+          "domain": "smashbrand.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Rebranding Your Business: Step-By-Step Guide, Benefits",
+          "url": "https://www.business.com/articles/how-to-announce-rebranding/",
+          "domain": "business.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "10+ Rebranding & Redesign Announcement Email Examples",
+          "url": "https://userlist.com/blog/rebranding-announcement-emails/",
+          "domain": "userlist.com",
+          "resultType": "article"
+        },
+        {
+          "position": 9,
+          "title": "Rebranding Announcement: How to Write One (2025)",
+          "url": "https://www.shopify.com/blog/rebranding-announcement",
+          "domain": "shopify.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "Can you provide an example of a rebranding announcement?",
+        "How do I write a company name change announcement to my customers?",
+        "How to rebrand without losing customers?",
+        "What's another term for rebranding?"
+      ],
+      "relatedQueries": [
+        "How to announce a company rebrand to customers template",
+        "How to announce a company rebrand to customers sample",
+        "How to announce a company rebrand to customers examples",
+        "Rebranding announcement examples",
+        "How to announce a company rebrand to customers on instagram",
+        "How to announce a company rebrand to customers email",
+        "Rebrand announcement Social Media post",
+        "Rebranding announcement post"
+      ]
+    },
+    {
+      "id": "vc-manual250-c1-033",
+      "keyword": "founder update video for customers",
+      "found": true,
+      "query": "founder update video for customers",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Founder Investor Update Video Maker - Send Yours ... - ngram",
+          "url": "https://www.ngram.com/use-cases/founder-investor-update",
+          "domain": "ngram.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "How to Write Investor Updates + Startup Metrics (CAC, LTV, ...",
+          "url": "https://www.youtube.com/watch?v=dgz-Ud4fq6w",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 3,
+          "title": "Create Videos for Start-ups, Products and Founders in ...",
+          "url": "https://www.heygen.com/en-in/founders",
+          "domain": "heygen.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "The Right Way to Update Your Investors (Most Founders Miss ...",
+          "url": "https://www.youtube.com/watch?v=8fMNao6kHfs",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 5,
+          "title": "How to Use Video Updates to Improve the Client Journey",
+          "url": "https://www.socialmediaexaminer.com/how-to-use-video-updates-to-improve-the-client-journey/",
+          "domain": "socialmediaexaminer.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Best Investor Update Tool? 8 Ranked for Founders (2026)",
+          "url": "https://valueaddvc.com/blog/top-8-investor-update-tools-for-founders-what-each-does-and-which-is-worth-paying-for",
+          "domain": "valueaddvc.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "How to Get Your First 10 Customers With Zero Budget",
+          "url": "https://www.youtube.com/watch?v=FsOaXL6KLAI",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 8,
+          "title": "A practical guide to customer onboarding videos",
+          "url": "https://www.vidyard.com/blog/customer-onboarding-videos/",
+          "domain": "vidyard.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": [
+        "Youtube founder update video for customers",
+        "Free founder update video for customers",
+        "Best founder update video for customers"
+      ]
+    },
+    {
+      "id": "vc-manual250-c1-034",
+      "keyword": "public roadmap for startups",
+      "found": true,
+      "query": "public roadmap for startups",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Public Product Roadmap in 2023 | Railsware Blog",
+          "url": "https://railsware.com/blog/public-roadmap/",
+          "domain": "railsware.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "15 Best Public Roadmap Examples for SaaS in 2026",
+          "url": "https://www.featurebase.app/blog/public-roadmap-examples",
+          "domain": "featurebase.app",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "The Startup Roadmap - SCORE",
+          "url": "https://www.score.org/startup-roadmap/",
+          "domain": "score.org",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Startup Roadmap: 9 Steps to Repeatable, Scalable and ...",
+          "url": "https://www.forentrepreneurs.com/startup-roadmap/",
+          "domain": "forentrepreneurs.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Tability's Public Start Up Roadmap",
+          "url": "https://trello.com/templates/product-management/tabilitys-public-start-up-roadmap-tixmANrR",
+          "domain": "trello.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Startup Roadmap Example — A Strategic Approach",
+          "url": "https://www.jibility.com/blog/startup-strategy-roadmap",
+          "domain": "jibility.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Public Roadmap for Startups",
+          "url": "https://www.featul.com/use-cases/startup-roadmap",
+          "domain": "featul.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "The Startup Product Roadmap",
+          "url": "https://atomicobject.com/client-resources/startup-product-roadmap",
+          "domain": "atomicobject.com",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "What Is a Public Product Roadmap and When Should You ...",
+          "url": "https://www.savio.io/blog/what-is-a-public-product-roadmap-and-when-should-you-use-one/",
+          "domain": "savio.io",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is the 80/20 rule for startups?",
+        "Is it true that 90% of startups fail?",
+        "What are the 7 stages of startup?",
+        "What is a startup roadmap?"
+      ],
+      "relatedQueries": [
+        "Public roadmap for startups template",
+        "Free public roadmap for startups",
+        "Public roadmap for startups pdf",
+        "Startup roadmap template",
+        "Startup Roadmap pdf",
+        "Startup business roadmap",
+        "Public roadmap tool",
+        "Score startup roadmap"
+      ]
+    },
+    {
+      "id": "vc-manual250-c1-035",
+      "keyword": "how to record a company apology video",
+      "found": true,
+      "query": "how to record a company apology video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How to Make a Small Business Owner Apology Video",
+          "url": "https://www.facebook.com/fb-answers/how-to-make-a-small-business-owner-apology-video/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 2,
+          "title": "The Art of the Corporate Apology Video - Padilla",
+          "url": "https://padillaco.com/post/the-art-of-the-corporate-apology-video",
+          "domain": "padillaco.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "So sorry, now please watch: Identifying image repair ...",
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0363811122000819",
+          "domain": "sciencedirect.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "4 Steps for Creating an Authentic Video Apology - Inc. Magazine",
+          "url": "https://www.inc.com/entrepreneurs-organization/4-steps-for-creating-an-authentic-video-apology.html",
+          "domain": "inc.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Free Online Apology Video Generator | Templates & AI Tools",
+          "url": "https://www.flexclip.com/create/apology-video.html",
+          "domain": "flexclip.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Apology videos and the art of saying sorry",
+          "url": "https://www.mediafirst.co.uk/blog/apology-videos-and-the-art-of-saying-sorry",
+          "domain": "mediafirst.co.uk",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Why is it so hard to make an apology video without getting ...",
+          "url": "https://www.quora.com/Why-is-it-so-hard-to-make-an-apology-video-without-getting-cancelled-How-will-you-apologize-to-fans-without-being-cancelled",
+          "domain": "quora.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Create an Apology Video with a Sorry Template",
+          "url": "https://www.capcut.com/explore/sorry-template",
+          "domain": "capcut.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How to make a proper apology video?",
+        "Do apology videos work?",
+        "How to render a sincere apology?",
+        "What are the 5 R's of an apology?"
+      ],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual250-c1-036",
+      "keyword": "new employee welcome video from CEO",
+      "found": true,
+      "query": "new employee welcome video from CEO",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "CEO welcome",
+          "url": "https://www.youtube.com/playlist?list=PLazI-EoELc92wD62vvj-Kx945Qyj4tEvE",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 2,
+          "title": "7 Inspiring Employee Onboarding Video Examples",
+          "url": "https://www.idomoo.com/blog/7-inspiring-employee-onboarding-video-examples/",
+          "domain": "idomoo.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "How to make the PERFECT onboarding welcome video ... - Blog",
+          "url": "https://blog.talentech.com/en/how-to-make-the-perfect-onboarding-welcome-video-for-new-hires",
+          "domain": "blog.talentech.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "President Noelle's Welcome Video for New Employee",
+          "url": "https://www.youtube.com/watch?v=u_HLcHsZi5E",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 5,
+          "title": "How to Make Induction Videos More Welcoming for New Hires",
+          "url": "https://channel1.com.au/how-to-make-induction-videos-more-welcoming-for-new-hires/",
+          "domain": "channel1.com.au",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Inspiring Employee Onboarding Videos: Top 15 Examples",
+          "url": "https://www.guidde.com/blog/employee-onboarding-video",
+          "domain": "guidde.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "13 Great Employee Onboarding Videos Examples",
+          "url": "https://playplay.com/blog/employee-introduction-videos/",
+          "domain": "playplay.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is an onboarding video?",
+        "What is the first thing a new CEO should do?",
+        "How do I welcome a new employee?",
+        "What is a good welcome message for a new employee?"
+      ],
+      "relatedQueries": [
+        "New employee welcome video from ceo youtube",
+        "New employee welcome video from ceo funny",
+        "New employee welcome video from ceo 2021",
+        "Corporate welcome video",
+        "CEO videos on youtube"
+      ]
+    },
+    {
+      "id": "vc-manual250-c1-037",
+      "keyword": "how to communicate product limitations",
+      "found": true,
+      "query": "how to communicate product limitations",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How to Explain Product or Service Limitations to Clients",
+          "url": "https://www.linkedin.com/advice/0/how-do-you-explain-limitations-your-product-service-2zsnc",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 2,
+          "title": "How to Communicate Product Changes To Your Users",
+          "url": "https://uservoice.com/blog/communicate-product-changes",
+          "domain": "uservoice.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "What do you find is the most effective form of ...",
+          "url": "https://www.reddit.com/r/marketing/comments/1hplmw1/what_do_you_find_is_the_most_effective_form_of/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "How to communicate product value to potential customers",
+          "url": "https://canny.io/blog/communicate-product-value/",
+          "domain": "canny.io",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Blog: 5 Tips for Efficient Product Communication",
+          "url": "https://www.atamya.com/en/blog/product-communication/",
+          "domain": "atamya.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "How to communicate complex products - by Rory Woodbridge",
+          "url": "https://productmarketer.substack.com/p/how-to-write-about-complex-things",
+          "domain": "productmarketer.substack.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "How to Communicate with Customers During a Product Crisis",
+          "url": "https://jasonevanish.com/2019/05/20/calming-the-angry-elephant-how-to-communicate-with-customers-during-a-product-crisis/",
+          "domain": "jasonevanish.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Five simple ways to improve your product communications",
+          "url": "https://medium.com/growth-explorers/five-simple-ways-to-improve-your-product-communications-f8cb52946249",
+          "domain": "medium.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is the 2 2 2 rule in sales?",
+        "What is the best way to communicate the benefits of a product?",
+        "What are 5 ways to communicate effectively?",
+        "What are the 7 steps of product launch?"
+      ],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual250-c1-038",
+      "keyword": "how to record a remote video interview",
+      "found": true,
+      "query": "how to record a remote video interview",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "What is everyone using to record remote interviews?",
+          "url": "https://www.reddit.com/r/podcasting/comments/1ifanit/what_is_everyone_using_to_record_remote_interviews/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Best way to record remote interviews?",
+          "url": "https://www.facebook.com/groups/13344770373/posts/10170047928385374/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 3,
+          "title": "Recording an Interview - Media & Design Center",
+          "url": "https://guides.lib.unc.edu/media-design-center/recordinterview",
+          "domain": "guides.lib.unc.edu",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "How to Record a Video Interview: Equipment, Setup, and ...",
+          "url": "https://store.hollyland.com/blogs/creator-hub/record-a-video-interview?srsltid=AfmBOoqf1EGT-fEFUJfzvv8SCdRQKocOMkziFoTwQJzXHjsNex2NyucV",
+          "domain": "store.hollyland.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "What to Know When Filming Remote Interviews",
+          "url": "https://www.vidyard.com/blog/filming-remote-interviews/",
+          "domain": "vidyard.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "How to Record a Video Interview",
+          "url": "https://www.sparkhire.com/video-interviews/how-to-record/",
+          "domain": "sparkhire.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Record a Video Interview: Step-by-Step Guide for ...",
+          "url": "https://riverside.com/blog/record-video-interview",
+          "domain": "riverside.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "How To Record a Remote Podcast Interview using OBS and ...",
+          "url": "https://www.youtube.com/watch?v=qIRUw88_5Bg",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How do I record a video interview?",
+        "What is the 30-60-90 rule in an interview?",
+        "What are common mistakes to avoid during a remote interview?",
+        "Are you allowed to record virtual interviews?"
+      ],
+      "relatedQueries": [
+        "How to record a remote video interview on iphone",
+        "How to record a remote video interview reddit",
+        "How to record a remote video interview on phone",
+        "How to record a remote video interview for free",
+        "Zencastr",
+        "How to record an interview on your phone",
+        "Remote video podcast recording",
+        "Remote video recording"
+      ]
+    },
+    {
+      "id": "vc-manual250-c1-039",
+      "keyword": "how to record a vertical video on your phone",
+      "found": true,
+      "query": "how to record a vertical video on your phone",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Should You Record Videos Vertical Or Horizontal When ...",
+          "url": "https://www.youtube.com/watch?v=dDpZbCf2ZXE",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 2,
+          "title": "An app that lets you record both horizontal and vertical video at ...",
+          "url": "https://www.facebook.com/michsoledesign/videos/an-app-that-lets-you-record-both-horizontal-and-vertical-video-at-the-same-time-/3648612311943883/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 3,
+          "title": "Guide: How to Record Vertical Video on PC without a Watermark",
+          "url": "https://recorder.minitool.com/screen-record/record-vertical-video.html",
+          "domain": "recorder.minitool.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "How do you change a normal video into a short/phone ...",
+          "url": "https://www.reddit.com/r/NewTubers/comments/k6oflo/how_do_you_change_a_normal_video_into_a/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Vertical Video 101: The Ultimate Guide",
+          "url": "https://firework.com/blog/vertical-video",
+          "domain": "firework.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Is it possible to shoot landscape video while phone ...",
+          "url": "https://www.facebook.com/groups/ATMakers/posts/1654075718337194/",
+          "domain": "facebook.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 7,
+          "title": "Why vertical videos make a difference in your content",
+          "url": "https://www.descript.com/blog/article/why-vertical-videos-make-a-difference-in-your-content",
+          "domain": "descript.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How do I record a video vertically?",
+        "Is vertical 16:9 or 9:16?",
+        "How do I make my video vertical?",
+        "Can I take a vertical video and make it horizontal?"
+      ],
+      "relatedQueries": [
+        "How to record a vertical video on your phone samsung",
+        "How to record a vertical video on your phone iphone",
+        "How to record a vertical video on your phone for free",
+        "How to make vertical video in iMovie on Mac",
+        "How to record a vertical video on mac",
+        "Make iMovie vertical on iPhone",
+        "How to make vertical videos",
+        "iMovie change aspect ratio on iPhone"
+      ]
+    },
+    {
+      "id": "vc-manual250-c1-040",
+      "keyword": "startup partnership announcement",
+      "found": true,
+      "query": "startup partnership announcement",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "DPIIT collaborates with Cashfree Payments to strengthen ...",
+          "url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2296491&reg=3&lang=1",
+          "domain": "pib.gov.in",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Partnership",
+          "url": "https://www.startupindia.gov.in/content/sih/en/partnership.html",
+          "domain": "startupindia.gov.in",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Govt signs strategic MoUs with key industry leaders to ...",
+          "url": "https://newsonair.gov.in/govt-signs-five-mous-to-strengthen-indias-startup-ecosystem/",
+          "domain": "newsonair.gov.in",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "India Expands Startup Support Through Strategic Industry ...",
+          "url": "https://opengovasia.com/india-expands-startup-support-through-strategic-industry-partnerships/?c=in",
+          "domain": "opengovasia.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Startup Policy Forum | Partnerships",
+          "url": "https://www.indiaspf.org/partnerships",
+          "domain": "indiaspf.org",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "Partnership | Partner With Us",
+          "url": "https://www.startupindia.gov.in/sih/partnership-with-us",
+          "domain": "startupindia.gov.in",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "MeityStartupHub",
+          "url": "https://msh.meity.gov.in/",
+          "domain": "msh.meity.gov.in",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Press Release",
+          "url": "https://www.startupindia.gov.in/content/sih/en/startup-scheme/press-release.html",
+          "domain": "startupindia.gov.in",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "Samsung R&D Institutes in India Invite Startups to Co- ...",
+          "url": "https://news.samsung.com/in/samsung-rd-institutes-in-india-invite-startups-to-co-create-the-future-of-mobile-innovation",
+          "domain": "news.samsung.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual250-c1-041",
+      "keyword": "startup customer advisory board invitation",
+      "found": true,
+      "query": "startup customer advisory board invitation",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Customer Advisory Board Guide for Startups",
+          "url": "https://www.crv.com/content/customer-advisory-board",
+          "domain": "crv.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Start Up on the Right Foot — Build a Customer Advisory ...",
+          "url": "https://review.firstround.com/start-up-on-the-right-foot-build-a-customer-advisory-board/",
+          "domain": "review.firstround.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "CUSTOMER ADVISORY BOARD INVITATION",
+          "url": "https://aw23.showroom.rains.com/guide/B142AE999635/Customer-Advisory-Board-Invitation",
+          "domain": "aw23.showroom.rains.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "How to Start a Customer Advisory Board",
+          "url": "https://uservoice.com/blog/cab-best-practices",
+          "domain": "uservoice.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Customer Advisory Board - why startups need it",
+          "url": "https://www.linkedin.com/pulse/customer-advisory-board-why-startups-need-andy-stinnes-fooke",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 6,
+          "title": "The Customer Advisory Board: A Founder's Guide",
+          "url": "https://startupfundraising.com/library/articles/the-customer-advisory-board",
+          "domain": "startupfundraising.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Invitation To Join Customer Advisory Board Email",
+          "url": "https://mailsoftly.com/email-templates/invitation-to-join-customer-advisory-board-email",
+          "domain": "mailsoftly.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "How do you ask someone to be on your advisory board ...",
+          "url": "https://www.quora.com/How-do-you-ask-someone-to-be-on-your-advisory-board-for-a-new-startup",
+          "domain": "quora.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": []
+    },
+    {
+      "id": "vc-manual250-c1-042",
+      "keyword": "how to host a founder AMA",
+      "found": true,
+      "query": "how to host a founder AMA",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "r/startups AMA Guide: Hosting a Successful Ask Me Anything",
+          "url": "https://www.reddit.com/r/startups/wiki/ama/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Hosting a Reddit AMA (best practices)",
+          "url": "https://medium.com/@brianmaurer/hosting-a-reddit-ama-best-practices-83209148ed40",
+          "domain": "medium.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "5 Steps To Running A Smooth AMA On Social Media",
+          "url": "https://justdrivemedia.com/blog/5-steps-to-running-a-smooth-ama-on-social-media",
+          "domain": "justdrivemedia.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "15 Tips For Hosting An AMA Session For Your Business",
+          "url": "https://www.forbes.com/councils/forbescommunicationscouncil/2022/06/07/15-tips-for-hosting-an-ama-session-for-your-business/",
+          "domain": "forbes.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "How to Host a Successful Reddit AMA (That WON'T Sink ...",
+          "url": "https://contentfac.com/how-to-host-a-successful-reddit-ama-that-wont-sink-your-brand/",
+          "domain": "contentfac.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "AMA - How to raise VC",
+          "url": "https://www.entrepreneursforimpact.com/ama-how-to-raise-vc",
+          "domain": "entrepreneursforimpact.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "What is an AMA and how do I host one? - Reddit Help",
+          "url": "https://support.reddithelp.com/hc/en-us/articles/115002427523-What-is-an-AMA-and-how-do-I-host-one",
+          "domain": "support.reddithelp.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "Here's How to Host a SUCCESSFUL Reddit AMA!",
+          "url": "https://www.youtube.com/watch?v=zyvesOR2kDo",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 9,
+          "title": "Reddit AMA Playbook for B2B Founders: How to Run an ...",
+          "url": "https://www.conbersa.ai/learn/reddit-ama-playbook-for-founders",
+          "domain": "conbersa.ai",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is a live AMA?",
+        "What does \"AMA session\" mean?",
+        "What is \"Ask Me Anything\" on Reddit?"
+      ],
+      "relatedQueries": [
+        "How to host a founder ama reddit",
+        "How to host an AMA on Reddit"
+      ]
+    },
+    {
+      "id": "vc-manual250-c1-043",
+      "keyword": "product launch delay video message",
+      "found": true,
+      "query": "product launch delay video message",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "4 Steps to a Successful Product Launch Video",
+          "url": "https://editshare.com/post/4-steps-to-a-successful-product-launch-video/",
+          "domain": "editshare.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Delayed product introduction",
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0167923612001248",
+          "domain": "sciencedirect.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "Product Launch Video: 10 Examples & Ideas",
+          "url": "https://dmakproductions.com/blog/product-launch-video/",
+          "domain": "dmakproductions.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "10 Best AI-Powered Product Launch Video Examples in 2026",
+          "url": "https://www.arcade.software/post/product-launch-video-examples",
+          "domain": "arcade.software",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "60 Product Launch Message Examples for Your Next Big ...",
+          "url": "https://textus.com/blog/product-launch-message-examples",
+          "domain": "textus.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Launch Delayed? Resources to Help You Prepare for the ...",
+          "url": "https://responsory.com/blog/launch-delayed-resources-to-help-you-be-prepared-for-the-right-time/",
+          "domain": "responsory.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Product Launch Delay: Communicate Without Panic",
+          "url": "https://www.linkedin.com/advice/0/your-product-launch-delayed-how-can-you-communicate-4e7se",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 8,
+          "title": "Launch Messages: 26 In-App & Email Examples for 2026",
+          "url": "https://userpilot.com/blog/launch-messages/",
+          "domain": "userpilot.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is a good message to launch a new product?",
+        "How do I announce a product launch?",
+        "What are the 7 steps of product launch?",
+        "How do I write a press release for a new product launch?"
+      ],
+      "relatedQueries": [
+        "Product launch delay video message youtube",
+        "Product reveal video",
+        "Best launch videos"
+      ]
+    },
+    {
+      "id": "vc-manual250-c1-044",
+      "keyword": "how to record a conference presentation video",
+      "found": true,
+      "query": "how to record a conference presentation video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How to Record a Presentation",
+          "url": "https://www.echorivera.com/blog/7-basic-steps-record-lectures",
+          "domain": "echorivera.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "How to Record a Conference Video Submission at Home?",
+          "url": "https://www.youtube.com/watch?v=8XoVgqKG5eU",
+          "domain": "youtube.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 3,
+          "title": "Free Video Presentation Maker",
+          "url": "https://www.canva.com/create/video-presentations/",
+          "domain": "canva.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Record a presentation",
+          "url": "https://support.microsoft.com/en-us/powerpoint/training/record-a-presentation",
+          "domain": "support.microsoft.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Creating a Video Presentation for a Virtual Conference",
+          "url": "https://urc.ucdavis.edu/video-presentations",
+          "domain": "urc.ucdavis.edu",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "How to Record a Conference Presentation with the Best ...",
+          "url": "https://www.linkedin.com/advice/3/you-need-record-conference-presentation-ttpve",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 7,
+          "title": "How To Record a Quality PowerPoint Presentation",
+          "url": "https://www.loom.com/powerpoint-presentation",
+          "domain": "loom.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "Record a PowerPoint Presentation Video with Webcam ...",
+          "url": "https://www.atlassian.com/blog/loom/how-to-video-record-yourself-presenting-a-powerpoint",
+          "domain": "atlassian.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How do I record a video of a presentation?",
+        "What is the 5 5 5 rule in presentations?",
+        "How can I record a PowerPoint presentation as a video?",
+        "Can I record a video of myself presenting a PowerPoint?"
+      ],
+      "relatedQueries": [
+        "How to record a conference presentation video in powerpoint",
+        "How to record a conference presentation video online",
+        "How to record a conference presentation video online free",
+        "How to record a conference presentation video for students",
+        "How to record a conference presentation video free",
+        "Record PowerPoint presentation with audio and video",
+        "How to make a video presentation with PowerPoint",
+        "Canva presentation video recording"
+      ]
+    },
+    {
+      "id": "vc-manual250-c1-045",
+      "keyword": "customer thank you video",
+      "found": true,
+      "query": "customer thank you video",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "6 Thank You Video Examples (+ 4 Video Scripts You Can ...",
+          "url": "https://www.bonjoro.com/blog/post/6-thank-you-video-examples-and-scripts-you-can-use",
+          "domain": "bonjoro.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "Client thank you video creator",
+          "url": "https://www.visla.us/use-cases/client-thank-you-video",
+          "domain": "visla.us",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Customizable Thank You Video Templates",
+          "url": "https://invideo.io/templates/thank-you/",
+          "domain": "invideo.io",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "Free Thank You Video Maker for Businesses & Brands",
+          "url": "https://vimeo.com/create/corporate/thank-you",
+          "domain": "vimeo.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 5,
+          "title": "The Ultimate Guide to Thank You Videos with Examples",
+          "url": "https://sproutvideo.com/blog/the-ultimate-guide-to-saying-thank-you-in-your-videos.html",
+          "domain": "sproutvideo.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "Thank You Note Business Stock Videos",
+          "url": "https://www.gettyimages.com/videos/thank-you-note-business",
+          "domain": "gettyimages.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "5 Thank You Video Messages to Send to Clients and ...",
+          "url": "https://bombbomb.com/thank-you-video-messages-to-send/",
+          "domain": "bombbomb.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is a good video appreciation message?",
+        "How do you professionally thank a customer?",
+        "What is the best video about gratitude?",
+        "What to say in a thank you video?"
+      ],
+      "relatedQueries": [
+        "Free customer thank you video",
+        "Customer thank you video template",
+        "Thank you video animation",
+        "Customer thank you video funny",
+        "Thank you for making this beautiful video",
+        "Thank you video ideas",
+        "Thank you video download",
+        "Thank you video meme"
+      ]
+    },
+    {
+      "id": "vc-manual250-c1-046",
+      "keyword": "how to launch a startup on Show HN",
+      "found": true,
+      "query": "how to launch a startup on Show HN",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Show HN: I built a tool to launch all your startup ideas ...",
+          "url": "https://news.ycombinator.com/item?id=44870563",
+          "domain": "news.ycombinator.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "How to launch a dev tool on Hacker News",
+          "url": "https://www.markepear.dev/blog/dev-tool-hacker-news-launch",
+          "domain": "markepear.dev",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "How to Submit to Hacker News (Show HN) (DR 91, 2026)",
+          "url": "https://ideaproof.io/launch-directories/hacker-news-show-hn",
+          "domain": "ideaproof.io",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "How to launch a startup on Hacker News - Just Ship It",
+          "url": "https://newsletter.marclou.com/p/how-to-launch-a-startup-on-hacker-news",
+          "domain": "newsletter.marclou.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "Hacker News Posting Guide: Rules, Show HN, and Timing",
+          "url": "https://syften.com/blog/hacker-news-marketing/",
+          "domain": "syften.com",
+          "resultType": "article"
+        },
+        {
+          "position": 6,
+          "title": "How to Launch on Hacker News and Get Traction (2026)",
+          "url": "https://okara.ai/blog/how-to-launch-on-hacker-news",
+          "domain": "okara.ai",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "Has anyone successfully launched on HackerNews? (I will ...",
+          "url": "https://www.reddit.com/r/startups/comments/1kn4aux/has_anyone_successfully_launched_on_hackernews_i/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "How to crush your Hacker News launch",
+          "url": "https://dev.to/dfarrell/how-to-crush-your-hacker-news-launch-10jk",
+          "domain": "dev.to",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "Side question. Why not do a Launch HN instead of Show ...",
+          "url": "https://news.ycombinator.com/item?id=43109280",
+          "domain": "news.ycombinator.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How do I launch my startup?",
+        "How to come up with a startup idea?",
+        "How do I post on Hacker News?",
+        "How to manage a start-up business?"
+      ],
+      "relatedQueries": [
+        "How to launch a startup on show hn reddit",
+        "Hacker news",
+        "How to launch on Hacker News",
+        "Product Hunt",
+        "How to sell your micro startup",
+        "Indie Hackers"
+      ]
+    },
+    {
+      "id": "vc-manual250-c1-047",
+      "keyword": "how to choose a video thumbnail",
+      "found": true,
+      "query": "how to choose a video thumbnail",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Select thumbnail from current video : r/youtube",
+          "url": "https://www.reddit.com/r/youtube/comments/5aoqs1/select_thumbnail_from_current_video/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "Add custom thumbnails on YouTube - Android",
+          "url": "https://support.google.com/youtube/answer/72431?hl=en&co=GENIE.Platform%3DAndroid",
+          "domain": "support.google.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Choose Your Video's Thumbnail",
+          "url": "https://support.wistia.com/en/articles/8283897-choose-your-video-s-thumbnail",
+          "domain": "support.wistia.com",
+          "resultType": "article"
+        },
+        {
+          "position": 4,
+          "title": "Change Video Thumbnail",
+          "url": "https://www.onlineconverter.com/change-video-thumbnail",
+          "domain": "onlineconverter.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "How do I change thumbnail on MP4 files on my PC? ...",
+          "url": "https://learn.microsoft.com/en-us/answers/questions/4347487/how-do-i-change-thumbnail-on-mp4-files-on-my-pc-wi",
+          "domain": "learn.microsoft.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "How to Upload Video Thumbnails Across Social Media ...",
+          "url": "https://www.leonanimations.com/blogs/video-thumbnails-across-social-media-platforms",
+          "domain": "leonanimations.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "How to change the thumbnail image for my video",
+          "url": "https://help.vimeo.com/hc/en-us/articles/12426471350289-How-to-change-the-thumbnail-image-for-my-video",
+          "domain": "help.vimeo.com",
+          "resultType": "article"
+        },
+        {
+          "position": 8,
+          "title": "Is there a way to set the thumbnail image on a video?",
+          "url": "https://community.adobe.com/questions-38/is-there-a-way-to-set-the-thumbnail-image-on-a-video-321814",
+          "domain": "community.adobe.com",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How to select a thumbnail for a video?",
+        "How do I change the thumbnail of a video?",
+        "How does YouTube pick the thumbnail for videos?",
+        "How do I choose a thumbnail from a YouTube video?"
+      ],
+      "relatedQueries": [
+        "How to choose a video thumbnail on pc",
+        "How to choose a video thumbnail for youtube",
+        "How to choose a video thumbnail online",
+        "How to Put thumbnail on YouTube video on phone",
+        "How to choose a video thumbnail free",
+        "How to change video thumbnail on phone gallery",
+        "How to change thumbnail on YouTube mobile app",
+        "How to add thumbnail to YouTube video"
+      ]
+    },
+    {
+      "id": "vc-manual250-c1-048",
+      "keyword": "how to prepare an analyst briefing for a startup",
+      "found": true,
+      "query": "how to prepare an analyst briefing for a startup",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "My Tips For Crushing Your Analyst Briefings And Wowing ...",
+          "url": "https://www.forrester.com/blogs/my-tips-for-crushing-your-analyst-briefings-and-wowing-the-analyst/",
+          "domain": "forrester.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "Analyst Briefings 101: How to Drive Value for Your ...",
+          "url": "https://www.arinsights.com/resource/analyst-briefings-101-how-to-drive-value-for-your-business-and-analysts",
+          "domain": "arinsights.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "Nailing Your Introductory Analyst Briefing",
+          "url": "https://www.linkedin.com/pulse/nailing-your-introductory-analyst-briefing-robert-karel-y4ugc",
+          "domain": "linkedin.com",
+          "resultType": "video_or_social"
+        },
+        {
+          "position": 4,
+          "title": "Analyst Briefing Best Practices: 6 Steps to Success",
+          "url": "https://altitudemarketing.com/blog/analyst-briefing-best-practices/",
+          "domain": "altitudemarketing.com",
+          "resultType": "article"
+        },
+        {
+          "position": 5,
+          "title": "Analyst Briefing Preparation Guide for Growth Teams",
+          "url": "https://prime-techpr.com/brand-awareness/analyst-briefing-preparation-guide/",
+          "domain": "prime-techpr.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "A guide to analyst relations for startups",
+          "url": "https://www.craigkerstiens.com/2015/07/25/a-guide-to-analyst-relations-for-startups/",
+          "domain": "craigkerstiens.com",
+          "resultType": "other"
+        },
+        {
+          "position": 7,
+          "title": "Build a Strong Analyst Relations Foundation",
+          "url": "https://www.infotech.com/research/ss/build-a-strong-analyst-relations-foundation",
+          "domain": "infotech.com",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "How to structure an analyst briefing? - IIAR",
+          "url": "https://analystrelations.org/2011/10/31/how-to-structure-a-briefing/",
+          "domain": "analystrelations.org",
+          "resultType": "other"
+        },
+        {
+          "position": 9,
+          "title": "Advice for your first analyst briefing, from the analysts ...",
+          "url": "https://www.starsight.biz/2023/08/10/top-briefing-tips-from-analysts/",
+          "domain": "starsight.biz",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "What is Gartner's Vendor Briefing?",
+        "What is a vendor briefing?",
+        "What exactly does an analyst do?",
+        "What are the steps in the business analysis process?"
+      ],
+      "relatedQueries": [
+        "How to prepare an analyst briefing for a startup example",
+        "How to prepare an analyst briefing for a startup interview",
+        "Forrester briefing request"
+      ]
+    },
+    {
+      "id": "vc-manual250-c1-049",
+      "keyword": "how to record a natural voiceover",
+      "found": true,
+      "query": "how to record a natural voiceover",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "How to sound more natural when doing Voice-Overs?",
+          "url": "https://www.reddit.com/r/youtubers/comments/1ejvyd3/how_to_sound_more_natural_when_doing_voiceovers/",
+          "domain": "reddit.com",
+          "resultType": "other"
+        },
+        {
+          "position": 2,
+          "title": "How to Record a Voice Over: Complete Guide",
+          "url": "https://www.techsmith.com/blog/voice-over/",
+          "domain": "techsmith.com",
+          "resultType": "article"
+        },
+        {
+          "position": 3,
+          "title": "AI Voice Generator | Create Voiceovers with Ultra-Realistic ...",
+          "url": "https://www.naturalreaders.com/commercial/",
+          "domain": "naturalreaders.com",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "AI Voice Generator: Text to Speech Online",
+          "url": "https://www.canva.com/features/ai-voice-generator/",
+          "domain": "canva.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "How I Create Pro Voice-Overs in Minutes (Using AI & My ...",
+          "url": "https://www.jimgrootes.com/how-i-create-pro-voice-overs-in-minutes-using-ai-my-own-voice/",
+          "domain": "jimgrootes.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "How to Record Voiceovers with Tips from Professional ...",
+          "url": "https://sproutvideo.com/blog/how-to-create-a-professional-voiceover-on-the-cheap.html",
+          "domain": "sproutvideo.com",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "AI Voice Generator - Create Realistic Voiceovers for FREE",
+          "url": "https://www.synthesia.io/features/ai-voice-generator",
+          "domain": "synthesia.io",
+          "resultType": "other"
+        }
+      ],
+      "peopleAlsoAsk": [
+        "How do you record your own voiceover?",
+        "What is the best way to record my voice over?",
+        "What do I need to record voice overs at home?",
+        "How do I record a live conversation?"
+      ],
+      "relatedQueries": [
+        "Best way to record voiceover on iPhone",
+        "How to record a voice over for a video",
+        "How to do a voiceover on iPhone",
+        "Voice over tips for Beginners",
+        "How to voice over a video on Android",
+        "How to do a voiceover TikTok",
+        "How to do a voiceover on YouTube",
+        "Natural Reader Commercial login"
+      ]
+    },
+    {
+      "id": "vc-manual250-c1-050",
+      "keyword": "win loss interviews for startup messaging",
+      "found": true,
+      "query": "win loss interviews for startup messaging",
+      "country": "US",
+      "language": "en",
+      "device": "DESKTOP",
+      "page": 1,
+      "observedAt": "2026-09-12T02:37:24.102Z",
+      "actorId": "apify/google-search-scraper",
+      "runId": "TU557kwZekJRkYg0z",
+      "datasetId": "3sCWjMJYyH6XO5JuS",
+      "organicResults": [
+        {
+          "position": 1,
+          "title": "Eight Win-Loss Analysis Best Practices",
+          "url": "https://www.pragmaticinstitute.com/resources/articles/product/eight-win-loss-analysis-best-practices/",
+          "domain": "pragmaticinstitute.com",
+          "resultType": "article"
+        },
+        {
+          "position": 2,
+          "title": "Win/Loss Analysis",
+          "url": "https://demandspring.com/glossary/win-loss-analysis/",
+          "domain": "demandspring.com",
+          "resultType": "other"
+        },
+        {
+          "position": 3,
+          "title": "Win/Loss Analysis: The Complete Guide",
+          "url": "https://competeiq.io/win-loss-analysis",
+          "domain": "competeiq.io",
+          "resultType": "other"
+        },
+        {
+          "position": 4,
+          "title": "10 Win/Loss Analysis Best Practices to Turn Customer ...",
+          "url": "https://www.deeto.com/blog-post/win-loss-analysis-best-practices",
+          "domain": "deeto.com",
+          "resultType": "other"
+        },
+        {
+          "position": 5,
+          "title": "How to conduct effective win-loss interviews",
+          "url": "https://www.productmarketingalliance.com/how-to-conduct-win-loss-interviews/",
+          "domain": "productmarketingalliance.com",
+          "resultType": "other"
+        },
+        {
+          "position": 6,
+          "title": "What Is a Win/Loss Analysis?",
+          "url": "https://www.askelephant.ai/blog/what-is-a-win-loss-analysis",
+          "domain": "askelephant.ai",
+          "resultType": "article"
+        },
+        {
+          "position": 7,
+          "title": "How to Use Perspective AI for Win/Loss Analysis & ...",
+          "url": "https://getperspective.ai/docs/use-cases/win-loss-analysis-guide",
+          "domain": "getperspective.ai",
+          "resultType": "other"
+        },
+        {
+          "position": 8,
+          "title": "The Ultimate Product Marketing Win-Loss Playbook",
+          "url": "https://www.clozd.com/blog/product-marketing-win-loss-playbook",
+          "domain": "clozd.com",
+          "resultType": "article"
+        }
+      ],
+      "peopleAlsoAsk": [],
+      "relatedQueries": []
+    }
+  ]
+}

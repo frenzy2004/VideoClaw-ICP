@@ -1,0 +1,794 @@
+[
+  {
+    "id": "vc-manual250-c3-011",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "Two human editors look suitable on paper and the founder needs evidence before awarding recurring work.",
+    "funnelStage": "decision",
+    "keyword": "paid video editor test project",
+    "title": "How to Run a Paid Video Editor Test Project",
+    "slug": "paid-video-editor-test-project",
+    "distinctIntent": "Select between individual editor candidates through a bounded paid audition. The retained production brief requests proposals; this job evaluates actual candidate work after shortlisting, without repeating the retained AI-versus-human comparison.",
+    "originalWorksheet": "Proposed audition kit: a short synthetic source pack with redundant takes and one continuity problem, a candidate decision-notes form, and blind scoring anchors for story selection, intelligibility, and recovery from ambiguous instructions. Payment and time limits remain reader-entered.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.upwork.com/freelance-jobs/apply/Video-Editor-Software-Demo-Master-Short-Edits_~022098069591607061325/",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. An individual buyer posting describes a paid segment test before later milestones. Evidence of one buyer's requested process only, not market demand or a recommended rate."
+      },
+      {
+        "url": "https://www.upwork.com/hire/video-editors/how-to-hire/",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. Upwork identifies technical proficiency, story judgment, and collaboration as candidate evaluation areas. The proposed audition rubric is original editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-012",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "A vendor shortlist consists of attractive showreels, but the founder cannot tell who did the work or whether it matches the commission.",
+    "funnelStage": "consideration",
+    "keyword": "how to evaluate a video production portfolio",
+    "title": "How to Evaluate a Video Production Portfolio",
+    "slug": "evaluate-video-production-portfolio",
+    "distinctIntent": "Build a defensible shortlist from existing portfolio evidence before paying for a test. Separate candidate contribution and comparable constraints from showreel polish; the retained agency-versus-freelancer article chooses a resource model rather than authenticating samples.",
+    "originalWorksheet": "Proposed three-sample evidence cards recording the full film, the candidate's exact role, supplied versus created assets, production constraints, and unanswered attribution questions; conclude with an evidence-based shortlist note.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.upwork.com/hire/video-editors/how-to-hire/",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. The hiring guide recommends portfolio review for range, style, and fit. Attribution cards are proposed synthesis, not findings about any vendor."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-013",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "A shortlisted production partner offers both one-off projects and a monthly commitment.",
+    "funnelStage": "decision",
+    "keyword": "video production retainer vs project",
+    "title": "Video Production Retainer vs Project: Which Fits?",
+    "slug": "video-production-retainer-vs-project",
+    "distinctIntent": "Choose the commitment structure for a known partner under uneven workload. This concerns reserved capacity, rollover, and idle months rather than retained articles about provider type, general budgets, or editor day rates.",
+    "originalWorksheet": "Proposed six-month commitment stress test using the reader's likely, quiet, and busy months; map eligible work, unused allocation, rollover expiry, and minimum spend to the same actual proposals without default savings assumptions.",
+    "sourceCandidates": [
+      {
+        "url": "https://vidico.com/news/video-retainer-packages/",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. Vidico describes its own monthly retainer and unused-budget rollover. Its market-wide price ranges, savings percentages, and client outcomes are not adopted as evidence."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-014",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "An unlimited editing service sounds sufficient, but several projects will need work at the same time.",
+    "funnelStage": "decision",
+    "keyword": "how does unlimited video editing work",
+    "title": "Unlimited Video Editing: Check the Queue Before Buying",
+    "slug": "unlimited-video-editing-queue-capacity",
+    "distinctIntent": "Determine whether an unlimited-request subscription can serve simultaneous jobs. The work product models concurrency and blocking, distinct from choosing a retainer commitment or organizing feedback rounds in the retained revision article.",
+    "originalWorksheet": "Proposed request-queue simulation with four reader-supplied jobs, active-slot limits, revision occupancy, excluded tasks, and acceptance events; compare one versus additional service slots using observed or quoted durations only.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.videohusky.com/",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. Video Husky distinguishes unlimited submissions from an editor working on one video at a time. Advertised turnaround and performance percentages are vendor claims, not independently measured outcomes."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-015",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "The founder has recurring filming dates and is deciding whether to own a camera kit or rent it.",
+    "funnelStage": "consideration",
+    "keyword": "rent or buy camera equipment for business videos",
+    "title": "Rent or Buy Camera Equipment for Business Videos?",
+    "slug": "rent-or-buy-camera-equipment-business-video",
+    "distinctIntent": "Make an equipment acquisition decision for known shoot dates. Unlike the retained total production budget, this compares ownership, rental logistics, residual value, and utilization for one defined kit.",
+    "originalWorksheet": "Proposed kit-level rent-or-own crossover calculation with actual rental periods, delivery days, accessories, protection costs, maintenance, resale assumption, and booked shoot days; include a rental trial before purchase and no preset break-even frequency.",
+    "sourceCandidates": [
+      {
+        "url": "https://help.lensrentals.com/26505-other-questions/204151-do-you-sell-used-equipment",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. Lensrentals describes used-equipment sales and purchasing equipment from a rental through Keeper; supports concrete acquisition alternatives, not a savings benchmark."
+      },
+      {
+        "url": "https://www.lensrentals.com/",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. The rental provider describes shipping, a selected rental period, and return shipping, supporting logistics inputs to the proposed calculation."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-016",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "The office may be too noisy or disruptive for a planned shoot, and a studio rental is under consideration.",
+    "funnelStage": "consideration",
+    "keyword": "rent a video studio or film in the office",
+    "title": "Rent a Video Studio or Film in Your Office?",
+    "slug": "video-studio-rental-vs-office-filming",
+    "distinctIntent": "Choose and verify a filming location as a purchased resource. It does not teach founder storytelling or camera setup; it resolves whether the office or an equipped rental can support the contracted session.",
+    "originalWorksheet": "Proposed paired site-survey sheets for sound interruption, usable recording windows, power, access, setup and strike time, included equipment, and operator support; record a short room-noise sample at each candidate space before deciding.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.peerspace.com/pages/listings/6723e5598687373c1ca21d07",
+        "supports": "Live search excerpt inspected 2026-09-12; full listing uninspected. This host's sound-stage listing separates studio rental from gear and staff. It is evidence of that listing's stated inclusions only; confirm availability and terms before booking."
+      },
+      {
+        "url": "https://www.peerspace.com/pages/listings/66aeb9ec2e10626459938c0f",
+        "supports": "Live search excerpt inspected 2026-09-12; full listing uninspected. A different host lists an engineer and recording equipment as included, illustrating why package inclusions need verification. No general studio pricing is inferred."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-017",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "An external editor needs clean remote recordings and the founder must choose a capture platform before inviting participants.",
+    "funnelStage": "decision",
+    "keyword": "how to choose remote video recording software",
+    "title": "Choose Remote Recording Software Your Editor Can Use",
+    "slug": "choose-remote-video-recording-software",
+    "distinctIntent": "Choose capture software by the source files and recovery options an editor will receive. This is software procurement, separate from the retained pitch-recording tutorial and c4's practical repurposing workflow.",
+    "originalWorksheet": "Proposed two-participant purchase test with an intentional connection interruption, separate-track export inventory, alignment check, incomplete-upload recovery observation, and plan-entitlement questions; record results without a vendor ranking in advance.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.riverside.com/hc/en-us/articles/5260131045917-Video-and-audio-file-formats-Overview",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. Riverside distinguishes locally recorded separate tracks, combined edits, and internet-dependent cloud recordings."
+      },
+      {
+        "url": "https://support.riverside.com/hc/en-us/articles/19508681766557-What-is-a-partial-high-quality-track",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. The help article documents incomplete tracks and cloud-recording fallback limitations, supporting recovery questions before purchase."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-018",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "One videographer and a larger production crew have proposed different staffing for the same shoot.",
+    "funnelStage": "consideration",
+    "keyword": "solo videographer vs production crew",
+    "title": "Solo Videographer or Production Crew: Size the Shoot",
+    "slug": "solo-videographer-vs-production-crew",
+    "distinctIntent": "Determine the minimum feasible simultaneous on-set staffing. The retained agency-versus-freelancer article compares organizational models; this assigns capture duties under actual physical constraints, regardless of who employs the crew.",
+    "originalWorksheet": "Proposed minute-by-minute shoot concurrency map marking camera operation, audio monitoring, lighting changes, participant direction, and media handling; flag duties that one person cannot perform simultaneously and request coverage for those conflicts.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.bls.gov/ooh/media-and-communication/film-and-video-editors-and-camera-operators.htm",
+        "supports": "Primary page opened and duties inspected 2026-09-12. BLS distinguishes capturing footage, selecting equipment, collaborating with directors, and editing; it does not prescribe startup crew sizes."
+      },
+      {
+        "url": "https://www.bls.gov/ooh/media-and-communication/broadcast-and-sound-engineering-technicians.htm",
+        "supports": "Primary duties section inspected 2026-09-12. BLS identifies setup, monitoring, recording, and synchronization responsibilities; the proposed concurrency map is editorial synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-019",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "A single-company shoot is in another city and the founder can hire there or send the usual crew.",
+    "funnelStage": "consideration",
+    "keyword": "hire local video crew or fly in production team",
+    "title": "Hire a Local Video Crew or Fly Your Team In?",
+    "slug": "local-video-crew-vs-traveling-team",
+    "distinctIntent": "Choose a geographic sourcing arrangement for one remote shoot. This concerns travel dependencies, local access, and continuity of creative direction, not c5's shared media programs across portfolio companies.",
+    "originalWorksheet": "Proposed two-route travel-and-coverage plan comparing local scout availability, remote direction, gear sourcing, travel buffer, baggage dependencies, and who can act if transport fails; attach actual route quotes without assumed travel savings.",
+    "sourceCandidates": [
+      {
+        "url": "https://shootsta.com/video-types/commercial",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. Shootsta describes a local-crew network with separate editing support. This establishes an offered sourcing model; its speed, reach, and savings claims are not independent comparisons."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-020",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "A production quote includes aerial footage and the founder must select a qualified operator for a specific US location.",
+    "funnelStage": "decision",
+    "keyword": "what to check when hiring a drone videographer",
+    "title": "Hiring a Drone Videographer: What to Verify",
+    "slug": "hiring-drone-videographer-verification",
+    "distinctIntent": "Qualify an aerial-capture supplier and request location-specific feasibility evidence. No retained topic covers this specialist purchase; it is not an event-filming plan or an investor-demo task.",
+    "originalWorksheet": "Proposed operator verification packet with pilot identity, certificate and recency evidence, proposed flight location and date, authorization questions, weather decision owner, and ground-footage substitute; leave legal determinations to current FAA rules and the qualified operator.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.faa.gov/uas/commercial_operators/become_a_drone_pilot",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. FAA describes the Remote Pilot Certificate and knowledge-recency requirements for Part 107 operation. This alone does not establish permission for a particular flight."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-021",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "A planned recording involves moving speakers or difficult acoustics, and sound support is an optional line in the quote.",
+    "funnelStage": "consideration",
+    "keyword": "do I need a sound recordist for a video shoot",
+    "title": "Does Your Video Shoot Need a Sound Recordist?",
+    "slug": "when-to-hire-sound-recordist",
+    "distinctIntent": "Decide whether to commission dedicated production sound before capture. Unlike the overall crew-sizing article, this specifies an audio service and its deliverables; unlike audio repair, the footage does not yet exist.",
+    "originalWorksheet": "Proposed audio-risk survey linking speaker movement, room noise, microphone channels, monitoring, and backup recording to a recordist scope; request a sample sound report and isolated-track delivery specification.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.bls.gov/ooh/media-and-communication/broadcast-and-sound-engineering-technicians.htm",
+        "supports": "Primary duties section inspected 2026-09-12. BLS describes operating and monitoring sound equipment, recording speech, and synchronizing audio; no universal staffing threshold is supplied."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-022",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "An important recording has noisy or clipped dialogue and the founder must buy repair work or book a new recording.",
+    "funnelStage": "decision",
+    "keyword": "audio restoration service or rerecord video",
+    "title": "Pay for Audio Repair or Record the Video Again?",
+    "slug": "audio-repair-service-vs-rerecording",
+    "distinctIntent": "Make a salvage-versus-replacement purchasing decision on existing damaged audio. This does not teach software cleanup or repeat the retained broad article on AI editing limitations.",
+    "originalWorksheet": "Proposed paid repair-sample protocol using the worst, typical, and clean sections; compare intelligibility and introduced artifacts through a blind listening sheet, then set a repair-spend ceiling against an actual rerecording quote.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.izotope.com/en/learn/how-to-clean-up-audio-from-phone-or-zoom-recording",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. iZotope discusses different repair tools for clipping and intermittent noise. Tool capability is not evidence that a particular recording can be restored."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-023",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "The cut is usable but footage from different cameras does not match, and a separate grading quote is being considered.",
+    "funnelStage": "decision",
+    "keyword": "is professional color grading worth it for business video",
+    "title": "When to Pay for Professional Video Color Grading",
+    "slug": "when-to-pay-professional-video-color-grading",
+    "distinctIntent": "Approve or reject a specialist finishing purchase by testing actual image problems. This is not the retained editor-versus-motion-designer role comparison or portfolio-wide brand governance.",
+    "originalWorksheet": "Proposed six-shot grading evaluation contact sheet with mixed-camera pairs, skin tones, highlight detail, and a specified viewing condition; record what the quoted grade fixes, leaves unchanged, or cannot recover before buying the full finish.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.blackmagicdesign.com/products/davinciresolve/color",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. Blackmagic documents shot matching, scopes, and color management. These define testable finishing tasks but do not prove a paid service's quality."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-024",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "Animation suppliers propose flat graphics and a 3D treatment for the same business concept.",
+    "funnelStage": "consideration",
+    "keyword": "2d vs 3d animation for business video",
+    "title": "2D vs 3D Animation: Choose Before Hiring a Studio",
+    "slug": "2d-vs-3d-animation-studio-selection",
+    "distinctIntent": "Choose the animation medium and required production capabilities before commissioning a studio. The retained explainer article develops a script; this resolves spatial representation, asset creation, and update dependencies.",
+    "originalWorksheet": "Proposed scene-to-medium routing board that tests whether each scene needs depth, rotation, cutaways, character performance, or simple relationship graphics; add model, rig, lighting, and render dependencies to the proposed commission.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.adobe.com/uk/express/learn/blog/how-is-3d-animation-made",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. Adobe contrasts flat 2D imagery with 3D modeling, rigging, lighting, and rendering. Its broad time and cost comparisons are not adopted as quote benchmarks."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-025",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "Repeated title and graphic needs make the founder consider a ready-made template or a commissioned editable package.",
+    "funnelStage": "decision",
+    "keyword": "motion graphics templates vs custom animation",
+    "title": "Motion Graphics Templates or a Custom Animation Package?",
+    "slug": "motion-graphics-template-vs-custom-package",
+    "distinctIntent": "Choose whether to license a reusable template or commission an editable motion system. This buys an asset with changeable controls rather than choosing a job title, writing brand guidelines, or planning channel variants.",
+    "originalWorksheet": "Proposed editability acceptance specimen with long and short names, missing images, alternate colors, text overflow, exposed controls, and required fonts; price the missing capabilities using the vendor's actual customization quote.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.adobe.com/learn/after-effects/web/motion-graphics-brand-package?ntd=1",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. Adobe describes graphics packages and exposing selected elements for editing in Premiere through Motion Graphics templates."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-026",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "A proposed shoot contains some generic scenes and some scenes that must show the actual business.",
+    "funnelStage": "consideration",
+    "keyword": "stock footage vs custom video shoot",
+    "title": "Stock Footage or a Custom Shoot: Decide Scene by Scene",
+    "slug": "stock-footage-vs-custom-video-shoot",
+    "distinctIntent": "Determine which footage needs to be commissioned and which can be sourced. This is a shot acquisition decision, distinct from selecting a stock license after choosing to buy library footage and from the retained launch-story plan.",
+    "originalWorksheet": "Proposed shot sourcing map with actual-product proof, identifiable people or places, continuity needs, usable stock preview, and shoot-only gaps; produce a reduced capture order with no claim that stock illustrates the real customer or team.",
+    "sourceCandidates": [
+      {
+        "url": "https://stock.adobe.com/license-terms",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. Adobe distinguishes licensed asset uses and restrictions on editorial-only material; source choice must account for permitted use, not appearance alone."
+      },
+      {
+        "url": "https://www.bls.gov/ooh/media-and-communication/film-and-video-editors-and-camera-operators.htm",
+        "supports": "Primary duties section inspected 2026-09-12. Camera operators capture material and select filming equipment, supporting the distinction between commissioned capture and licensed existing footage."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-027",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "A vendor proposes library clips licensed through its account and the founder needs to know what the company may use later.",
+    "funnelStage": "decision",
+    "keyword": "stock footage license for client videos",
+    "title": "Stock Footage Licenses: Check Client and Commercial Use",
+    "slug": "stock-footage-license-client-commercial-use",
+    "distinctIntent": "Select a footage license and buyer-of-record arrangement that fits a specific commission. It addresses third-party footage entitlements rather than the broad outsourcing handoff or copyright in newly created work.",
+    "originalWorksheet": "Proposed license-to-use matching form recording asset ID, licensor, purchaser, client transfer, contractor access, editorial restrictions, and requested reuse; finish with a buy, clarify, or replace decision for each candidate clip.",
+    "sourceCandidates": [
+      {
+        "url": "https://stock.adobe.com/license-terms",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. Adobe describes client transfer, restrictions on standalone redistribution, enhanced licenses for video, and editorial-only use. Applies to its license, not all libraries."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-028",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "A freelancer's music subscription may not cover the company's intended advertising and future publication dates.",
+    "funnelStage": "decision",
+    "keyword": "music subscription license for business videos",
+    "title": "Choose a Music License for Business and Client Videos",
+    "slug": "music-license-business-client-videos",
+    "distinctIntent": "Buy the appropriate library-music entitlement for named channels and publication dates. It is distinct from purchasing visual stock and from commissioning original music; the reader leaves with a coverage choice rather than a soundtrack tutorial.",
+    "originalWorksheet": "Proposed music coverage timeline connecting account holder, client identity, paid versus organic placement, planned publication, subscription end, and later new edits; request written clarification wherever the planned use exceeds the cited plan terms.",
+    "sourceCandidates": [
+      {
+        "url": "https://help.epidemicsound.com/hc/en-us/articles/26247236323858-Pro-plan",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. Epidemic Sound describes client and digital-ad coverage and excluded uses for its Pro plan. No assumption that every subscription offers equivalent coverage."
+      },
+      {
+        "url": "https://www.epidemicsound.com/solutions/",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. The provider links continued clearance to content published during an active subscription; detailed current license terms still require inspection before an article makes a use-specific conclusion."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-029",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "Available music tracks do not fit the desired timing or distinctiveness and the founder is considering a composer.",
+    "funnelStage": "consideration",
+    "keyword": "custom music vs stock music for video",
+    "title": "Custom Music or Stock Music: When to Hire a Composer",
+    "slug": "custom-music-vs-stock-music-video",
+    "distinctIntent": "Decide whether to commission a new score and define what the composer must supply. The music-license article selects an existing catalog entitlement; this purchase concerns compositional fit, exclusivity questions, stems, and alternate cues.",
+    "originalWorksheet": "Proposed composer commission sheet with timecoded emotional cues, dialogue space, exact ending requirements, stem and alternate-mix deliverables, and separately requested composition and recording rights; compare an actual stock preview against a proposed custom treatment.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.copyright.gov/engage/musicians/",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. The Copyright Office explains that musical compositions and sound recordings are separate protected works that may be owned and licensed separately. Commission specifications are original synthesis."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-030",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "Several voice actors sound credible, but the script has unusual product names and a specific delivery style.",
+    "funnelStage": "decision",
+    "keyword": "how to choose a voice actor for a business video",
+    "title": "Choose a Voice Actor With a Useful Audition",
+    "slug": "choose-voice-actor-business-video-audition",
+    "distinctIntent": "Select narration talent and decide whether a directed recording session is needed. It evaluates vocal performance and pronunciation, not the editor-candidate assembly test or a founder's own pitch delivery.",
+    "originalWorksheet": "Proposed short audition script with product pronunciation, a contrast sentence, and a timed ending; pair it with a listening ballot for intelligibility, emphasis, and direction-following, then specify session and pickup needs without using audition audio in the final video.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.voices.com/help/knowledge/faq/live-directed-sessions",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. Voices describes live direction and quoting the session alongside narration and licensing requirements."
+      },
+      {
+        "url": "https://www.voices.com/company/terms-and-policies/client-on-platform-policy",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. The platform restricts unpaid or unauthorized use of talent auditions and other audio. This is a platform policy, not a universal narration contract."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-031",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "A supplier offers a reusable synthetic voice and the founder needs to establish who can create, share, and use it.",
+    "funnelStage": "decision",
+    "keyword": "AI voice cloning consent for business videos",
+    "title": "Buying an AI Voice: Check Consent and Account Control",
+    "slug": "buying-ai-voice-consent-account-control",
+    "distinctIntent": "Qualify a synthetic-voice sourcing arrangement before providing voice recordings. This is about identity verification, permission scope, and account control, not the retained test of AI editing quality or a narration performance audition.",
+    "originalWorksheet": "Proposed voice-permission chain diagram connecting speaker, verification account, sharing mechanism, business user, permitted scripts, term, and withdrawal process; include separate questions for model access and already generated recordings.",
+    "sourceCandidates": [
+      {
+        "url": "https://elevenlabs.io/docs/help-center/product/voices/voice-cloning/can-i-create-a-professional-voice-clone-of-someone-elses-voice",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. ElevenLabs says its Professional Voice Clone must be created and verified by the speaker, who may then share it. This is product-specific and does not establish every legal right to use the voice."
+      },
+      {
+        "url": "https://www.voices.com/company/terms-and-policies/terms-of-service",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. Voices describes AI voice settings and license-dependent work products, supporting questions about permissions beyond model availability."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-032",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "The founder is hiring a dubbing service for a language nobody on the internal team can fully review.",
+    "funnelStage": "decision",
+    "keyword": "how to choose a video dubbing service",
+    "title": "Choose a Video Dubbing Service You Can Verify",
+    "slug": "choose-video-dubbing-service",
+    "distinctIntent": "Procure a localization supplier with a credible independent linguistic review path. It does not teach c4's execution of multilingual content repurposing; the output is a supplier qualification and sample acceptance decision.",
+    "originalWorksheet": "Proposed bilingual procurement sample pack containing a terminology list, pronunciation questions, timestamps for meaning-sensitive phrases, independent reviewer annotations, and a correction-responsibility map separating translation, voice, and synchronization defects.",
+    "sourceCandidates": [
+      {
+        "url": "https://experience.3playmedia.com/platform/dubbing/",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. 3Play describes linguist involvement, translation quality review, and speech-boundary synchronization in its dubbing service. Marketing claims about retention or superiority are not adopted."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-033",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "A buyer requires description of visual information and existing production quotes include only captions.",
+    "funnelStage": "decision",
+    "keyword": "how to choose audio description services",
+    "title": "Buying Audio Description: Compare the Actual Deliverables",
+    "slug": "buying-audio-description-services",
+    "distinctIntent": "Commission a distinct accessibility service that describes visual information through audio. The retained caption checklist addresses text access to sound; this buys description scripting, narration, and a compatible delivery format.",
+    "originalWorksheet": "Proposed audio-description order specimen linking essential visual moments to available dialogue gaps, requested description script, voice option, mixed or separate track, target player, and a short listener acceptance session.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.3playmedia.com/platform/audio-description/",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. The provider describes scripting visual information, human or synthetic narration, and mixing a description track. Its compliance and cost claims are not independent validation."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-034",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "A new editor needs a computer and the founder is choosing between a minimum-spec machine and a more capable workstation.",
+    "funnelStage": "decision",
+    "keyword": "how to choose a computer for video editing",
+    "title": "Choose an Editing Computer Using Your Actual Footage",
+    "slug": "choose-video-editing-computer-actual-footage",
+    "distinctIntent": "Specify and purchase editing hardware for a known workload. This is a representative-media fit decision, not the retained annual production budget or a generic hardware leaderboard.",
+    "originalWorksheet": "Proposed hardware acceptance run using the reader's actual codec, resolution, effects, and concurrent camera streams; log playback drops, proxy-creation time, export duration, memory pressure, and media-drive needs against a reader-set acceptable wait.",
+    "sourceCandidates": [
+      {
+        "url": "https://helpx.adobe.com/premiere/desktop/get-started/technical-requirements/adobe-premiere-pro-technical-requirements.html",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. Adobe separates minimum HD requirements from recommended higher-resolution specifications and identifies memory, GPU, storage, and network considerations. No measured computer performance is claimed."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-035",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "The company is paying for editing software as team members join, leave, or change assignments.",
+    "funnelStage": "decision",
+    "keyword": "individual vs team video editing software license",
+    "title": "Individual or Team Editing Licenses: Who Needs a Seat?",
+    "slug": "individual-vs-team-video-editing-licenses",
+    "distinctIntent": "Choose the software licensing and administration arrangement for one company's production staff. This purchases seats and ownership controls, separate from choosing an editor, calculating all production expenses, or managing a VC portfolio platform.",
+    "originalWorksheet": "Proposed person-to-entitlement map showing who edits, who only reviews, who administers billing, who owns business assets, and what happens when an editor leaves; compare only features and reassignment rights confirmed for each plan.",
+    "sourceCandidates": [
+      {
+        "url": "https://helpx.adobe.com/business/teams/users-and-licenses/manage-users/assign-licenses.html",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. Adobe documents assigning named users to team product licenses through administration tools."
+      },
+      {
+        "url": "https://helpx.adobe.com/business/teams/users-and-licenses/manage-users/manage-team-in-the-creative-cloud-desktop-app.html",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. Adobe documents license reassignment and adding seats under stated team-plan conditions. Individual-plan restrictions must be checked before a final comparison."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-036",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "Unreleased screens or sensitive recordings would be uploaded to a proposed cloud editing service.",
+    "funnelStage": "decision",
+    "keyword": "cloud vs desktop video editor privacy",
+    "title": "Cloud or Desktop Video Editing for Sensitive Footage?",
+    "slug": "cloud-vs-desktop-video-editor-privacy",
+    "distinctIntent": "Choose an editing product and configuration by where footage, transcripts, and optional AI processing go. This addresses data handling in the purchase decision rather than the retained outsourcing file checklist or general AI craft limitations; desktop branding alone is not treated as proof of local processing.",
+    "originalWorksheet": "Proposed feature-level data-route comparison for ingest, transcription, enhancement, review, and deletion, with fields for processor, location evidence, training setting, required upload, and a keep-local alternative; produce a conditional purchase recommendation.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.descript.com/blog/article/ai-compliance-security-enterprise-video-editor",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. Descript describes cloud storage, transcription sharing settings, and provider dependencies. These are first-party statements needing policy confirmation, not independent security assurance."
+      },
+      {
+        "url": "https://www.ftc.gov/business-guidance/resources/start-security-guide-business",
+        "supports": "Primary service-provider section inspected 2026-09-12. FTC recommends explicit security requirements and verifying provider practices, including an example concerning sensitive transcription files."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-037",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "The production contract offers a finished video, but the founder also expects raw footage and editable projects.",
+    "funnelStage": "decision",
+    "keyword": "who owns raw footage and video project files",
+    "title": "Who Owns the Raw Footage and Video Project Files?",
+    "slug": "raw-footage-video-project-file-ownership",
+    "distinctIntent": "Define the rights and delivery entitlements being purchased before signature. The retained outsourcing handoff organizes files supplied to an editor; this distinguishes possession, copyright, project delivery, and third-party rights in the commissioned output.",
+    "originalWorksheet": "Proposed layered purchase schedule for raw footage, final master, editable project, commissioned graphics, and licensed assets; separately ask for delivery, allowed edits, copyright basis, exclusions, and timing, with questions for counsel rather than a universal ownership clause.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.copyright.gov/title17/92chap2.html",
+        "supports": "Primary section 202 inspected 2026-09-12. US copyright law distinguishes ownership of copyright from ownership of the object embodying the work; receiving a copy is not itself a transfer of copyright. Contract-specific conclusions require further review."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-038",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "A proposed editing platform promises project export, but the company's next supplier may use different software.",
+    "funnelStage": "decision",
+    "keyword": "video editing software project export compatibility",
+    "title": "Test Project Portability Before Buying a Video Editor",
+    "slug": "video-editor-project-export-portability-test",
+    "distinctIntent": "Evaluate software interoperability before committing to its editing environment. This technical purchase test differs from legal file ownership and from the retained human handoff checklist: owning and delivering files does not prove another editor can interpret their effects.",
+    "originalWorksheet": "Proposed small round-trip test sequence containing cuts, nested clips, title text, speed changes, audio automation, and transitions; compare the reimported result against a reference export and record what survives, changes, or must be rebuilt.",
+    "sourceCandidates": [
+      {
+        "url": "https://helpx.adobe.com/premiere/desktop/render-and-export/export-files/export-a-project-as-a-final-cut-pro-xml-file.html",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. Adobe documents limited effect translation, conversion logs, and possible audio or transition differences when exporting Final Cut Pro XML."
+      },
+      {
+        "url": "https://helpx.adobe.com/premiere/desktop/render-and-export/export-files/export-aaf-files.html",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. Adobe describes AAF exchange and supported or untested importer boundaries, supporting an actual compatibility test instead of relying on format names."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-039",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "A selected vendor requires staged payment and the founder must agree what each payment buys.",
+    "funnelStage": "decision",
+    "keyword": "video production payment milestones",
+    "title": "Set Video Production Payment Milestones Around Evidence",
+    "slug": "video-production-payment-milestones",
+    "distinctIntent": "Negotiate payment release events for a fixed-scope commission. This manages cash exposure and delivered evidence rather than comparing market rates or drafting the retained creative production brief.",
+    "originalWorksheet": "Proposed milestone payment ladder linking funded amount, tangible deliverable, review deadline, authorized approver, unresolved exceptions, and remaining exposure; use blanks for amounts and show a worked sequence without invented prices.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.upwork.com/hc/en-us/articles/44564821903763-Understanding-milestones-on-fixed-price-contracts",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. Upwork documents funded milestones, deliverables, approval, and a platform-specific review period. Its escrow mechanics must not be generalized to off-platform agreements."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-040",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "A shoot date depends on participant availability or weather and the founder is about to reserve crew and space.",
+    "funnelStage": "decision",
+    "keyword": "video production cancellation and postponement fees",
+    "title": "Video Shoot Cancellation Terms to Set Before Booking",
+    "slug": "video-shoot-cancellation-postponement-terms",
+    "distinctIntent": "Allocate the commercial consequences of cancelling or moving a shoot. This is a reservation and contract decision, separate from a general production budget, a deadline service commitment, or insurance coverage.",
+    "originalWorksheet": "Proposed cancel-versus-postpone scenario table with notice time, committed crew and location costs, reusable preparation, reschedule credit, weather decision deadline, and written change authority; populate fees from the actual contracts only.",
+    "sourceCandidates": [
+      {
+        "url": "https://aicp.com/assets/editor/Standard_Commercial_Production_Agreement_08.02.2021.pdf",
+        "supports": "Discovered in live search 2026-09-12; PDF uninspected beyond its search excerpt. The dated AICP model agreement expressly addresses cancellation and postponement. Candidate for contract structure, not proof of current universal terms or enforceability."
+      },
+      {
+        "url": "https://www.peerspace.com/pages/listings/673b8c62deb5e4e570671012",
+        "supports": "Live search excerpt inspected 2026-09-12; full listing uninspected. A US studio listing includes a cancellation policy, illustrating that the location reservation may carry its own separate terms. No policy is generalized to other bookings."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-041",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "A location or rental house asks for insurance evidence and the proposed vendor says it is already covered.",
+    "funnelStage": "decision",
+    "keyword": "video production company certificate of insurance",
+    "title": "Video Production Insurance: Verify the Vendor's Coverage",
+    "slug": "video-production-vendor-insurance-evidence",
+    "distinctIntent": "Check that the purchased production arrangement can satisfy named location and equipment insurance requirements. It addresses evidence, named parties, dates, and scope rather than choosing cancellation terms or building a general vendor checklist.",
+    "originalWorksheet": "Proposed coverage-request reconciliation sheet comparing the location's and rental house's written requirements with certificate holder, insured entity, filming dates, requested endorsements, broker confirmation, and unresolved gaps; avoid diagnosing coverage from the certificate alone.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.wrapbook.com/blog/producers-guide-certificates-of-insurance-film",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. Production services provider Wrapbook explains certificate fields and recipient-specific requirements. Coverage conclusions still depend on the policy and broker, not the article."
+      },
+      {
+        "url": "https://cdn.film.ca.gov/wp-content/uploads/2025/09/2025-2026-City-of-Monrovia-Fee-Schedule.pdf",
+        "supports": "Discovered in live search 2026-09-12; PDF uninspected beyond its excerpt. A dated city schedule includes filming insurance and endorsement requirements. This is a jurisdiction-specific example requiring freshness checks, not a national rule."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-042",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "A provider advertises fast delivery, but the founder needs a usable final file by a fixed business deadline.",
+    "funnelStage": "decision",
+    "keyword": "video editing turnaround time guarantee",
+    "title": "Video Editing Turnaround: What Is Actually Guaranteed?",
+    "slug": "video-editing-turnaround-guarantee",
+    "distinctIntent": "Translate an advertised turnaround into a verifiable delivery commitment before purchasing. It concerns clock boundaries and deadline feasibility, not c2's demo-day contingency or the retained guidance on giving revision feedback.",
+    "originalWorksheet": "Proposed promised-clock diagram marking accepted intake, business-hour start, first draft, client waiting, final correction, export, and delivery; pair it with vendor-specific questions on exclusions and escalation, leaving all durations and remedies unfilled until agreed.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.videohusky.com/",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. Video Husky distinguishes first-draft turnaround and later revisions. The page is evidence of its advertised offer, not a tested guarantee or a category-wide delivery norm."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-043",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "An overseas editing service is on the shortlist, but its working day barely overlaps the founder's review hours.",
+    "funnelStage": "consideration",
+    "keyword": "hiring a video editor in a different time zone",
+    "title": "Hiring an Editor in Another Time Zone: Check the Overlap",
+    "slug": "hiring-video-editor-different-time-zone",
+    "distinctIntent": "Decide whether a supplier's staffed hours fit required real-time collaboration. The turnaround article defines delivery promises; this compares recurring overlap, daylight-saving changes, and decision availability before hiring.",
+    "originalWorksheet": "Proposed dated seven-day overlap grid using the reader's and supplier's named time zones, review availability, holidays, daylight-saving transitions, and escalation windows; simulate one blocked question to expose the next available joint decision slot.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.videohusky.com/best-video-editing-service/",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. Video Husky publishes Philippines-based weekday working hours and time-zone examples. Confirm current coverage directly; calculate actual dated offsets rather than copying the page's table."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-044",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "The only editor who knows the work is becoming unavailable, and the founder needs credible backup capacity.",
+    "funnelStage": "decision",
+    "keyword": "backup video editor continuity plan",
+    "title": "Choose a Backup Editor Who Can Actually Resume the Work",
+    "slug": "backup-video-editor-continuity-test",
+    "distinctIntent": "Procure and qualify substitute human capacity through a restart drill. The retained handoff checklist transfers inputs to a primary editor; software portability tests format translation; this tests whether another named person can reconstruct the current job without the incumbent.",
+    "originalWorksheet": "Proposed cold-start exercise: a backup candidate receives the authorized project package, identifies the current cut, resolves a seeded missing dependency, and produces one small requested change; capture assistance required, elapsed restart time, availability, and a backup activation agreement.",
+    "sourceCandidates": [
+      {
+        "url": "https://helpx.adobe.com/premiere/desktop/render-and-export/export-files/export-a-project-as-a-final-cut-pro-xml-file.html",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. Adobe documents linked-media and translation dependencies that can affect a replacement editor. The human restart drill and backup selection method are proposed editorial work products."
+      },
+      {
+        "url": "https://www.upwork.com/hire/video-editors/how-to-hire/",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. Upwork discusses candidate technical fit and collaboration. It does not prove any candidate's backup availability or successful restart."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-045",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "A long-term freelance editing arrangement now involves company-directed hours, methods, and ongoing training.",
+    "funnelStage": "decision",
+    "keyword": "video editor employee or independent contractor",
+    "title": "Video Editor: Employee or Independent Contractor?",
+    "slug": "video-editor-employee-independent-contractor",
+    "distinctIntent": "Prepare the actual working-relationship facts for a classification review before extending the engagement. The retained in-house-versus-outsourced article chooses a production model; this addresses whether a chosen contractual label fits the relationship under applicable rules.",
+    "originalWorksheet": "Proposed non-diagnostic facts packet recording who sets methods and hours, supplies tools, trains, bears expenses, and controls ongoing work, with separate federal-tax and state/employment-law review questions; do not produce an automated classification verdict.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.irs.gov/businesses/small-businesses-self-employed/employee-common-law-employee",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. IRS discusses behavioral control, financial control, and relationship facts for federal tax classification; labels alone are not determinative. This is not a complete federal labor-law or state-law test."
+      },
+      {
+        "url": "https://www.irs.gov/businesses/small-businesses-self-employed/behavioral-control",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. IRS addresses instruction, evaluation, and training as behavioral-control evidence. A final article needs fresh applicable jurisdictional sources."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-046",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "The founder has decided to recruit an internal editor but the proposed job description bundles filming, editing, strategy, and channel management.",
+    "funnelStage": "decision",
+    "keyword": "first in house video editor job description",
+    "title": "Write a Realistic Job Description for Your First Editor",
+    "slug": "first-in-house-video-editor-job-description",
+    "distinctIntent": "Turn an approved hiring decision into a viable role specification. The retained in-house comparison decides whether to hire, and editor-versus-motion-designer distinguishes crafts; this defines workload, manager, outcomes, and explicit support needs for one opening.",
+    "originalWorksheet": "Proposed vacancy package with a weekly task inventory, core versus occasional duties, named support for non-core work, first-month outcomes, manager commitments, and a short candidate screening form; no fabricated salary or utilization threshold.",
+    "sourceCandidates": [
+      {
+        "url": "https://www.bls.gov/ooh/media-and-communication/film-and-video-editors-and-camera-operators.htm",
+        "supports": "Primary duties section inspected 2026-09-12. BLS describes editing, footage organization, equipment decisions, and collaboration. The bounded startup job description is proposed synthesis rather than an official occupation standard."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-047",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "An editing software checkout shows a monthly amount, but production work may stop before the year ends.",
+    "funnelStage": "decision",
+    "keyword": "annual vs monthly video editing software subscription",
+    "title": "Annual or Monthly Video Editing Software: Read the Terms",
+    "slug": "annual-vs-monthly-video-editing-software",
+    "distinctIntent": "Choose the billing commitment for editing software under uncertain usage. This concerns prepaid versus annual-paid-monthly versus month-to-month cancellation exposure, not human retainer capacity, seat administration, or general production budgeting.",
+    "originalWorksheet": "Proposed software commitment calendar with start date, refund window, contract end, renewal, stop-work scenarios, actual termination terms, and resulting cash exposure; compare using the reader's checkout prices without assumed discounts.",
+    "sourceCandidates": [
+      {
+        "url": "https://helpx.adobe.com/account/individual/terms-policies-and-regulations/adobe-subscription-terms.html?linkId=100000269739380",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. Adobe distinguishes annual-paid-monthly, prepaid annual, and month-to-month plans and identifies US cancellation consequences. Examples and current checkout terms need verification; no quoted prices are treated as benchmarks."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-048",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "An external editor needs a large original-media package and ordinary sharing links are proving awkward.",
+    "funnelStage": "decision",
+    "keyword": "best way to send large video files to an editor",
+    "title": "Choose a File Transfer Service for Original Video Footage",
+    "slug": "choose-large-video-file-transfer-service",
+    "distinctIntent": "Select a transfer service for delivering one company's original media to a production supplier. The retained handoff checklist defines what to send; this tests transport capability, original-file delivery, and access friction, not c5's portfolio asset library.",
+    "originalWorksheet": "Proposed transport trial with one large file and a nested project folder: compare byte counts or checksums, folder preservation, interrupted-transfer recovery, recipient access, original-versus-preview download, and actual transfer cost or limits.",
+    "sourceCandidates": [
+      {
+        "url": "https://help.frame.io/en/articles/9101026-uploading-your-media",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. Frame.io documents folder preservation, original-file storage alongside viewing encodes, and browser versus transfer-app limits. Its speed claim is not adopted as measured comparative performance."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-049",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "A generative video plan is priced in credits and the founder cannot tell which allowance matches the planned work.",
+    "funnelStage": "decision",
+    "keyword": "how many AI video credits do I need",
+    "title": "How Many AI Video Credits Do You Actually Need?",
+    "slug": "estimate-ai-video-credit-plan",
+    "distinctIntent": "Choose a metered generation plan using model-specific consumption and locally observed usable output. The retained video budget covers production cost categories, while AI limitations covers quality; this models expiring allowances, purchased credits, and retry demand for a purchase.",
+    "originalWorksheet": "Proposed credit ledger recording model, generation duration, quoted credit rate, actual attempts, accepted seconds, resets, and rollover; compare a subscription with separate credit purchases using reader-entered trial observations and no assumed acceptance rate.",
+    "sourceCandidates": [
+      {
+        "url": "https://help.runwayml.com/hc/en-us/articles/23987639973267-Will-unused-credits-carry-over-after-my-billing-day",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. Runway distinguishes monthly plan credits from purchased credits and describes plan-specific rollover and consumption order. It does not establish accepted-output yield."
+      },
+      {
+        "url": "https://help.runwayml.com/hc/en-us/articles/52067870667411-Max-plan-details",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. The plan description says different models consume credits differently and links to a credit guide. Actual model rates must be inspected before populating a calculation."
+      }
+    ]
+  },
+  {
+    "id": "vc-manual250-c3-050",
+    "campaign": "video-production-comparison",
+    "icp": "US founder comparing video agencies, freelancers, internal teams and AI tools",
+    "customerTrigger": "A video partner's renewal date is approaching and the founder needs a defensible keep, renegotiate, or replace decision.",
+    "funnelStage": "decision",
+    "keyword": "how to evaluate video production agency performance",
+    "title": "Should You Renew Your Video Production Partner?",
+    "slug": "renew-video-production-partner-review",
+    "distinctIntent": "Make a supplier renewal decision from contracted service evidence and changing needs. The retained c4 metrics article assesses video marketing outcomes; this evaluates delivered scope, reliability, internal effort, and unresolved obligations without attributing sales results to the production vendor.",
+    "originalWorksheet": "Proposed renewal memo using a sample of completed commissions: compare promised and accepted deliverables, missed commitments with cause, internal management time, unresolved issues, and next-period capability needs; end with explicit terms to keep, renegotiate, or retest.",
+    "sourceCandidates": [
+      {
+        "url": "https://support.upwork.com/hc/en-us/articles/44564821903763-Understanding-milestones-on-fixed-price-contracts",
+        "supports": "Live search excerpt inspected 2026-09-12; full page uninspected. Upwork documents deliverables, dates, and approval evidence at milestones; these are candidate records for a retrospective, not a validated agency-performance scoring model."
+      },
+      {
+        "url": "https://www.ftc.gov/business-guidance/resources/start-security-guide-business",
+        "supports": "Primary service-provider section inspected 2026-09-12. FTC recommends monitoring whether providers meet security requirements. Supports only the security-obligation part of renewal review; the overall renewal method is original editorial synthesis."
+      }
+    ]
+  }
+]

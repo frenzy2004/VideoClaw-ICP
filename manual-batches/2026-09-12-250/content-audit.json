@@ -1,0 +1,498 @@
+{
+  "kind": "manual_batch_content_checks",
+  "checkedAt": "2026-09-12T02:36:34.770Z",
+  "articles": 60,
+  "campaigns": {
+    "newly-funded-founder": 10,
+    "accelerator-demo-day-founder": 10,
+    "video-production-comparison": 14,
+    "gtm-content-repurposing-buyer": 16,
+    "portfolio-media-platform": 10
+  },
+  "totalBodyWords": 71125,
+  "nearDuplicateMethod": "8-word shingle containment >=12%; not a plagiarism or intent-uniqueness guarantee",
+  "nearDuplicates": [],
+  "productionChanges": false,
+  "records": [
+    {
+      "slug": "announce-startup-funding-with-video",
+      "bodyWords": 1250,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "25a2d6925c3124fb2cf1c677a4157d3a22b56058853ef533473d835610b76fe0",
+      "graphicSha256": "f640e71fe5c42104c966204f28ef9a4513739574c820d0161f8c42ff9065cbd3"
+    },
+    {
+      "slug": "founder-led-marketing-video-routine",
+      "bodyWords": 1249,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "d00b25917235500b5dd0f17d292052120d2fd5f909ec03a44b4daa74df342f73",
+      "graphicSha256": "6420b7a6b73a12353e00743037cd3326eb4795c3a30ae4f090fdca81e7176dd9"
+    },
+    {
+      "slug": "startup-launch-video-plan",
+      "bodyWords": 1221,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "6082a6e9b193829076f9852b7a870b9b9432517ab2dedaa7a83cf3e74009c648",
+      "graphicSha256": "83ad546fddd7efa4b034db727574bbb588d763e0ecb37eebee8552cb8b52629d"
+    },
+    {
+      "slug": "founder-story-video-interview",
+      "bodyWords": 1274,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "bc853d509feb6799804eaffa3c8fd3cba9583dedaeb0dd45804873eefa53dcf2",
+      "graphicSha256": "79fd6dad1e68b8ef0380d62be0b7d44ee066245e4cb68d5befe964926ce16d9f"
+    },
+    {
+      "slug": "startup-press-kit-video-assets",
+      "bodyWords": 1251,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "083cc6aee44cffbb34f7820807b2d6ac778f42b2718c35f21e210054472b96f3",
+      "graphicSha256": "4706e1ee57cd6b5eeee01fa15841624c6f4d1d3dfa42b2abc01cf266524f2558"
+    },
+    {
+      "slug": "product-launch-content-calendar",
+      "bodyWords": 1243,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "b5a15604e1ba956ee4aa31f12ff8218ee2f57caabb0bcab6e112fbb6570ea789",
+      "graphicSha256": "dc451120d78deedb4f26db29b86c3e596e53cfb77edb382682acb7f0a80fe152"
+    },
+    {
+      "slug": "customer-testimonial-video-questions",
+      "bodyWords": 1267,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "fb2a1a17574b0ddd2c189a30f2edd19001eb45a977756a0a06c2e2cdaa179ade",
+      "graphicSha256": "785ce5956939815db2d398ed92911788cc3513fde50c15e4ce0090b07c414434"
+    },
+    {
+      "slug": "startup-recruitment-video",
+      "bodyWords": 1246,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "8a94fd5c9629301906990a4fb19ab9afdf67b72915d43fee2fab2242aecfb49e",
+      "graphicSha256": "9c55f0df584600a3effe4eb036489effcb301c84c9bab1b981eb5262f894818a"
+    },
+    {
+      "slug": "startup-explainer-video-script",
+      "bodyWords": 1237,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "523294928b5e43f8697e6289eb7f36f3cf8c84da893609f098030bd70c019b8c",
+      "graphicSha256": "66a7069391ac8f9d7c3d2d738f9ff708b721bfa1faa10e6a60ccbba15525bae0"
+    },
+    {
+      "slug": "founder-linkedin-content-strategy",
+      "bodyWords": 1268,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "a6b84b34a96dcbca25fae5d238411fde6132a53f3793ce3a85f157206e69a287",
+      "graphicSha256": "b21eabe7ede7ffe3c56784334c5802f6dd09079c44f0787310c7345e45bbf0f6"
+    },
+    {
+      "slug": "demo-day-pitch-story",
+      "bodyWords": 1132,
+      "sources": 3,
+      "faqs": 3,
+      "articleSha256": "f445ca85579cb59f8b56f49b24650b31ba7500723633f5f8b83434524111d0cf",
+      "graphicSha256": "ddd52c8c8a9236b413e4685714db41c53424df8047734afcef593f0e9b0e2fc2"
+    },
+    {
+      "slug": "startup-demo-video-workflow",
+      "bodyWords": 1134,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "c2280658c07f41452d40a516a5178bc3eadfb8f2800d6f8e19ae73b21ce6dca6",
+      "graphicSha256": "4b5dc8d8cd0dc46961ea64cd2a88a9d82a9997049bd047b236aa4e666007ea51"
+    },
+    {
+      "slug": "demo-day-preparation-checklist",
+      "bodyWords": 1112,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "dc23c1dfdf90f2081cd62a69c05b2670e65824cf16edf8f52243141e61b32995",
+      "graphicSha256": "f8a494f182bd6c9467ce3f490b7ff613e173a3a4b428ca86ea64d29a98f4aaa4"
+    },
+    {
+      "slug": "investor-update-video",
+      "bodyWords": 1125,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "c8e58e300699424bdbe01f0d1a6ffd2244af47aebe61a1dbf78c5ee55023e9f0",
+      "graphicSha256": "cbde3896147614bbc9de0819ab945affbd2ae3f03a99f9870f315581e2c86471"
+    },
+    {
+      "slug": "investor-pitch-questions",
+      "bodyWords": 1225,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "4f6aad9a0e7ce0131f914d75905529c7f656d0fd81d1050d9dff3eee8dee127a",
+      "graphicSha256": "b8dc5758bad5fb0e742026caab7557841cd8971087ad86315d108b51e1dcb2b0"
+    },
+    {
+      "slug": "record-product-demo-for-pitch",
+      "bodyWords": 1194,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "50c473fa8284d88185a742088de8c3d8596b2cc7781fb556312462d44965cab6",
+      "graphicSha256": "64569c45fcea24a7ef7adb5764d3ae16d0e76d837dfe7390c7b8f96915c12691"
+    },
+    {
+      "slug": "pitch-rehearsal-recording-routine",
+      "bodyWords": 1207,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "e92cdefc66eb2708c189d9808a35636296a6745bc4d9b91a90a5db7a1241717c",
+      "graphicSha256": "0cfedf9e71b2f0175f7341d5cff5e4278da26c86b8f4c5acf6bfd949e601c877"
+    },
+    {
+      "slug": "demo-day-follow-up-email",
+      "bodyWords": 1170,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "c1fb5cf78732feab9d14b3ed43f5666e1463bd3055a51cfca2a46f5e63f2e128",
+      "graphicSha256": "9dafd1b5c3dd4b6dccf2a87a5d91d8fffdb72c0c12f49f8cbb956174ee52ad15"
+    },
+    {
+      "slug": "demo-day-social-media-plan",
+      "bodyWords": 1259,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "2920007ced356e81e733c49e3416fec281744ad2f7d6cb83daca40d2b4fbbd7e",
+      "graphicSha256": "0b9e3143a010c2636ec312ec0eb09339f35726ee4270e243dbd1618403f2f336"
+    },
+    {
+      "slug": "pitch-deck-vs-pitch-video",
+      "bodyWords": 1178,
+      "sources": 3,
+      "faqs": 3,
+      "articleSha256": "3f7a997427e3789f51e1156acbe9ed2eb9ac7fc809c37fcf61eee23da1253916",
+      "graphicSha256": "ea7eeb093b583ddc5ddf73bef14d5f2f1ee5cdb0353a3cdd928e969ee9eb949a"
+    },
+    {
+      "slug": "video-agency-vs-freelancer",
+      "bodyWords": 1150,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "7b32f2ae2762bc6a02a08968cd90375099a2873cafdccd18da9d92304e3e5c9d",
+      "graphicSha256": "b18b2a2445247458f4267e2766a5755ce2b9e156b173cda1f18337b46d552605"
+    },
+    {
+      "slug": "in-house-vs-outsourced-video-production",
+      "bodyWords": 1172,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "206a62cb658d9043dd14a3c630d7e86b589923fb6f793b7adc0dd365c5905a98",
+      "graphicSha256": "39ce7447ceee45bf77e0579ca4ae3dad4364f09d0bb29017015dd66ff8bcc13b"
+    },
+    {
+      "slug": "freelance-video-editor-rates",
+      "bodyWords": 1217,
+      "sources": 4,
+      "faqs": 3,
+      "articleSha256": "28729c0c904527e3aa610217b16c6ad6eb9d5a50c0e09b738c68cf85f24270a0",
+      "graphicSha256": "a49e019ff496a891c1a9e022724ad157a742fafc68ff5ec90d2fc4b0a0fd4685"
+    },
+    {
+      "slug": "video-production-brief-template",
+      "bodyWords": 1162,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "0c76a748fb046ef58d94aca378ad8d754700d4fdfcdce3b28a53c994e80e5b75",
+      "graphicSha256": "ae35238235fca4d1906a35c13561cc2b77b3baa7e4c87a05fa8d685ac3c7e0aa"
+    },
+    {
+      "slug": "video-revision-process",
+      "bodyWords": 1173,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "7c918539cce7c7e1495bec99dcfcd5cf8144d1b391a97c80c0adef9db1029428",
+      "graphicSha256": "f3caa9306af420d7871d09c3924a74fe6eb836edbe78b03bcbf188eb6cb4e3ea"
+    },
+    {
+      "slug": "ai-video-editor-vs-traditional-editor",
+      "bodyWords": 1113,
+      "sources": 3,
+      "faqs": 3,
+      "articleSha256": "0754b722d12022470ca860ef331cd48beb310f774d36b11a030601f7983a6d64",
+      "graphicSha256": "c7f713a0db3027078f452902258567c6b2c51b105ad90625d805cd3b42e961c7"
+    },
+    {
+      "slug": "video-editor-vs-motion-designer",
+      "bodyWords": 1178,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "624635efb27661c8943f3db041bc8cd4ded3c3f22cb14eddb7a678fb6ab24722",
+      "graphicSha256": "cb3bd57563bbad9336c1f138b9e091c1fcbd3d61685fc9556d307374e1ac53a7"
+    },
+    {
+      "slug": "video-production-budget",
+      "bodyWords": 1154,
+      "sources": 3,
+      "faqs": 3,
+      "articleSha256": "87c8ac09eaebe00fea3113b1e680212eb1c98b974518a8f001812ed5a5788ef5",
+      "graphicSha256": "55806d6210fd02b6490ccefacad370949b546b39098da00a135ad7ce565527ce"
+    },
+    {
+      "slug": "outsourcing-video-editing-checklist",
+      "bodyWords": 1195,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "b5fbfa6da0d7af0e23984c78f8c2b6481f79a25f25101118dc7d9506ae8b346d",
+      "graphicSha256": "4a5005e91eafffb41f03b9d6b35c349cf6af41f1dc06ce776bf38af22001f855"
+    },
+    {
+      "slug": "ai-video-editing-limitations",
+      "bodyWords": 1178,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "9cbf37a25c6ebd5bac06e120cb808ab862cbaa5c8d626afde726880107046241",
+      "graphicSha256": "55d5cf607ba76871ca9f956add2e417536d58859a55511818ab61d0db4ebfa28"
+    },
+    {
+      "slug": "repurpose-webinar-content",
+      "bodyWords": 1152,
+      "sources": 3,
+      "faqs": 3,
+      "articleSha256": "127427d648cae649f1568c6e237ed46fdc8cf949c6e1f8752c9cec186f8f00f4",
+      "graphicSha256": "234391ce080dfb77304e4e91452e5297bd1089ab9aa7d1b3864e56dfc4189712"
+    },
+    {
+      "slug": "turn-long-videos-into-short-clips",
+      "bodyWords": 1146,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "f9173392b60fd0254bc6c73b3a017c4dc29b2693beeb4b09881bc5466259954d",
+      "graphicSha256": "5c4a788ff7901017180e860cba75e9c3232b5525df97cd6e6af8810db32e4ad0"
+    },
+    {
+      "slug": "video-content-repurposing-workflow",
+      "bodyWords": 1166,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "c7aebfd411ee2c6962f7832200324c9524532bbe3176cd7d1f1eb5f14846413a",
+      "graphicSha256": "b6ac497eb026079398ce7c2e562d56e5e56cfb7e5aee0ea0a1aefdc9766cc4af"
+    },
+    {
+      "slug": "video-captions-accessibility",
+      "bodyWords": 1136,
+      "sources": 3,
+      "faqs": 3,
+      "articleSha256": "46eca2df192aa84f24a87f01828281fdda90d8aacd29804037ce90a9e4fe5f3f",
+      "graphicSha256": "f70c50e2d07002568f19957b7a70667ad2433727902f09eea9ccfa3328bba939"
+    },
+    {
+      "slug": "resize-video-for-social-media",
+      "bodyWords": 1395,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "5232a51e1f3d1d07e31809bad37051b238770e6fb82e2ac65a5779d0049b0ad2",
+      "graphicSha256": "c0418667a489fbefa1fd0068eff30860ae7b020b9ba4a9902d5d3b8544103843"
+    },
+    {
+      "slug": "customer-onboarding-video",
+      "bodyWords": 1173,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "a461c3f2773ac3f639e583945761bfce9fa92448bc4d5765c217b0fc2940e72a",
+      "graphicSha256": "38e86b13458e1df1cbe03490c405d921001eb4214fac50000eeddfdffe0ee45b"
+    },
+    {
+      "slug": "software-tutorial-video",
+      "bodyWords": 1186,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "db8d7058d198c6444556196c8f905be53ace6367489741fde98ba45e58f6d475",
+      "graphicSha256": "40632070d1fe88232d110a4aaf30366869045eddb0a725731d2eadf1f2734fd6"
+    },
+    {
+      "slug": "video-content-calendar",
+      "bodyWords": 1145,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "003f126b987278bb18bbc7dd0acd18160b6203be0dd85af5f828bc960c616b06",
+      "graphicSha256": "a83a107b1cd86ae05000868411fc4870c2df1f254f31743511447a65496a5378"
+    },
+    {
+      "slug": "video-marketing-metrics",
+      "bodyWords": 1174,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "ee9d7ba18cfd7db136f85ae53373b730b7b856e39e0c66bb0fca5f21614ccd19",
+      "graphicSha256": "c8ee5c52758589e5286efb7244a0e39bc6a451ee704de07fe7d2824d7182abc3"
+    },
+    {
+      "slug": "video-case-study-template",
+      "bodyWords": 1174,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "5e493f0b09b253e84f3f27c9e1ee3ffcc6deb656fca2ff24b5904fccd138d9d2",
+      "graphicSha256": "e10da81039e65dc9b5880bb2c39bf0ff62927caa89441ab6b9fef91cb5b04a00"
+    },
+    {
+      "slug": "accelerator-marketing-strategy",
+      "bodyWords": 1182,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "8f3fd7413c5bfceb4a0d19863ccfdd04b9f16a589a9e27ae813350f28e8eb299",
+      "graphicSha256": "af4d89dd5bf97112f9132d275cc1dd06e9e11843baca0101defde74378cde32a"
+    },
+    {
+      "slug": "venture-capital-portfolio-marketing",
+      "bodyWords": 1184,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "c169b3498916adf41cc6af4537616e0a1d5a95ba894c68f03fb3075a3a98e164",
+      "graphicSha256": "5148b461905a236a92a0c91d1b258273bc4af31fd36abf9412397a58f402f3a8"
+    },
+    {
+      "slug": "demo-day-event-video",
+      "bodyWords": 1176,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "8ba50176e7ebcfb9910ccafce5162f3506651326e32b96252326d0cbd40ff7a4",
+      "graphicSha256": "12c3644e3912a29df2a2ebd7d6d77524676831143e3b3345d1e7192129f4185f"
+    },
+    {
+      "slug": "accelerator-mentor-webinar",
+      "bodyWords": 1183,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "18eea804ac150bcec6f2dc0fbdedc8c110ee322d880ae81879d04abcf082f771",
+      "graphicSha256": "5f6b397d727cc44c6331127ada8734e56835301d63cf62560bed260361b3cac2"
+    },
+    {
+      "slug": "portfolio-founder-interviews",
+      "bodyWords": 1227,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "6a856ea74c0e72752a12b2343ca7bdc9e4fc12ed2264d77987f85e9ef09f0ceb",
+      "graphicSha256": "a70074b50ecb9b65b0ecd059e9323e821130e06cead3a916c63d2a31d767fa09"
+    },
+    {
+      "slug": "portfolio-company-newsletter",
+      "bodyWords": 1230,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "f2ca55e7907209cfa696e02fe91b765f8302110ac58d4a6f1d8c39f9d567b312",
+      "graphicSha256": "98a7fd03a040a06079f3bcbf56363a98d012e22e09494d316b5f0517b5e21772"
+    },
+    {
+      "slug": "startup-accelerator-alumni-community",
+      "bodyWords": 1197,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "9026532f6daa5a35a9ade7a64d52cbe3ff080c69caefbeb4b80aeeab612601dd",
+      "graphicSha256": "081402bd4deb07bc458ea083f5d92968c2d96d9fb26b92b83ce7ef0417de0c33"
+    },
+    {
+      "slug": "founder-content-workshop",
+      "bodyWords": 1230,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "75ffecffa4431855ab6ce513d74737882138c925a47d1fe48a94286cb8f88621",
+      "graphicSha256": "da993ebd52dd5c0f0c59adbf6bd3999535bf81043065fb252b5aeb78238ac748"
+    },
+    {
+      "slug": "portfolio-video-brand-guidelines",
+      "bodyWords": 1212,
+      "sources": 3,
+      "faqs": 3,
+      "articleSha256": "19e0871dc2420684effd384bb5eaecb92c067fdaeba3ffbb5c96d795f3376e6f",
+      "graphicSha256": "4551b9e7a1c120e6ea95a5ae0c98363158bf984ce0ebd57bf3247736f6a99021"
+    },
+    {
+      "slug": "accelerator-media-program-metrics",
+      "bodyWords": 1255,
+      "sources": 3,
+      "faqs": 3,
+      "articleSha256": "52b88fa10ed692317b4caa7e5ab0447368621b7d4b7526dc2565d6dfe69790e6",
+      "graphicSha256": "6b7cbd8c561ae08036a918d1f8dec561d5657ee13fe66064a8ca586352a28775"
+    },
+    {
+      "slug": "paid-video-editor-test-project",
+      "bodyWords": 1148,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "a2b1a0da26b2e62baef622ebac92e37c6257ec3caed410d3ad613de84affe375",
+      "graphicSha256": "2bd2a1125f93b3878903f78e361d83012aadbf38a228f6e3630710b38db344dd"
+    },
+    {
+      "slug": "evaluate-video-production-portfolio",
+      "bodyWords": 1128,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "8ef3034cc58998ad93a562a3ec348afcafeface3890735133ec7d6a4c9d310a2",
+      "graphicSha256": "80402c3c3874565aa36d089768e3b006245cd7b28f03d68f817a430b838f6f3f"
+    },
+    {
+      "slug": "video-production-retainer-vs-project",
+      "bodyWords": 1143,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "7bbe0e3721edb5534d63ec94a7dcdbe527dc80215c865d1a071c4099006eb6af",
+      "graphicSha256": "f5503c8d222a8346cde4492deb7d23c5290def6712b9cbf126327f081b8972af"
+    },
+    {
+      "slug": "unlimited-video-editing-queue-capacity",
+      "bodyWords": 1130,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "56a885c8b6eeea9bc07f00afba0f314d1343f953a3af8ac613a580cca9b73555",
+      "graphicSha256": "9200573024c4afe8e6cbf9b99f1786467234e0655eb50640a8a778a8d99d9059"
+    },
+    {
+      "slug": "turn-video-transcript-into-useful-blog-post",
+      "bodyWords": 1110,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "eaa21c41b46349e99c982d88812280cc629960ac6f0afa49985edadea2385a78",
+      "graphicSha256": "d16c7f7094655bebe2a4555622a6e6507895a466cc00f59ade162ef1369fdf4d"
+    },
+    {
+      "slug": "extract-clear-product-stills-from-video",
+      "bodyWords": 1111,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "a40c09eb9c1a771956dbfd36be71caf25c6624b428bcc82eb40c156545fafbce",
+      "graphicSha256": "4408e571f97d9c673ea2c7c350932a304b2728e0a3a8bbb5ac9c620c6dbaba18"
+    },
+    {
+      "slug": "edit-recorded-panel-multiple-speakers",
+      "bodyWords": 1143,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "b2ca766713a490bf81f383acb3fffdea6a22211236681c3c5f6c444fda5fffb9",
+      "graphicSha256": "ece6b331a78d8d3c7a28a09a573b5981f616d92cb3fe8d4ef50afff677b5e060"
+    },
+    {
+      "slug": "podcast-show-notes-from-conversation",
+      "bodyWords": 1134,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "127d6692925da5679726894b18f5b99e7aa4d48e8ba02961a41e91ab99fd304a",
+      "graphicSha256": "9313739080081c345a4fd148400eb60ec269e38840591a27cccfccae52d221ac"
+    },
+    {
+      "slug": "recorded-qa-to-buyer-faq",
+      "bodyWords": 1102,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "b8b1d7d2f7461a734d4d596a5e0b717ea6f3de57b7566effba2e193b859f59bf",
+      "graphicSha256": "7dff7a69d91e7cda1c1093a0475ed314ac248e1288dc09346b354346c80279d4"
+    },
+    {
+      "slug": "sales-call-insights-objection-battlecards",
+      "bodyWords": 1119,
+      "sources": 2,
+      "faqs": 3,
+      "articleSha256": "3faafd65be603add2acc91b9f2990aee06d8ef66d16f33cd1ad28399c7871c53",
+      "graphicSha256": "58d4b9095ed554d4ac3547a70c197170762ef2dbc7202d010b79d68f7f7ef077"
+    }
+  ]
+}
